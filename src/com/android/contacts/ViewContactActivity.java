@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2007 The Android Open Source Project
+ * Copyright (c) 2009, Code Aurora Forum. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -241,6 +242,13 @@ public class ViewContactActivity extends ListActivity
     protected void onResume() {
         super.onResume();
         mObserverRegistered = true;
+        // Recreating the mCursor Object if it is null otherwise requery the
+        // same mCursor Object. 
+        if (mCursor == null) {
+           mCursor = mResolver.query(mUri, CONTACT_PROJECTION, null, null, null);
+        } else {
+           mCursor.requery();
+        }
         mCursor.registerContentObserver(mObserver);
         dataChanged();
     }

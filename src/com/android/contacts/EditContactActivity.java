@@ -126,6 +126,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     
     // Dialog IDs
     final static int DELETE_CONFIRMATION_DIALOG = 2;
+    final static int DELETE_CONFIRMATION_DIALOG_SIM = 3;
     
     // Section IDs
     final static int SECTION_PHONES = 3;
@@ -139,8 +140,11 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     public static final int MENU_ITEM_SAVE = 1;
     public static final int MENU_ITEM_DONT_SAVE = 2;
     public static final int MENU_ITEM_DELETE = 3;
+    public static final int MENU_ITEM_SAVE_SIM = 4;
+    public static final int MENU_ITEM_DELETE_SIM = 5;
     public static final int MENU_ITEM_PHOTO = 6;
     
+    private static boolean  saveSIM = false;
     /** Used to represent an invalid type for a contact entry */
     private static final int INVALID_TYPE = -1;
     
@@ -322,6 +326,19 @@ public final class EditContactActivity extends Activity implements View.OnClickL
             finish();
         }
     };
+
+    private DialogInterface.OnClickListener mDeleteSimContactDialogListener =
+            new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int button) {
+             final String name = mNameView.getText().toString();
+             EditEntry entry = ContactEntryAdapter.getEntry(mSections, 0, false);
+             String data = entry.getData();
+             String where ="tag =" + name + "AND" + "number =" + data;
+             mResolver.delete(Uri.parse("content://sim/adn"), where, null);
+             finish();
+        }
+    };
+
 
     private boolean mMobilePhoneAdded = false;
     private boolean mPrimaryEmailAdded = false;
@@ -535,51 +552,74 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
-            case KeyEvent.KEYCODE_BACK: {
-                doSaveAction();
-                return true;
-            }
+           case KeyEvent.KEYCODE_BACK: {
+               if(saveSIM == false)
+                 doSaveAction();
+               else
+                 finish();
+               return true;
+           }
         }
         return super.onKeyDown(keyCode, event);
     }
-    
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        menu.add(0, MENU_ITEM_SAVE, 0, R.string.menu_done)
-                .setIcon(android.R.drawable.ic_menu_save)
-                .setAlphabeticShortcut('\n');
-        menu.add(0, MENU_ITEM_DONT_SAVE, 0, R.string.menu_doNotSave)
-                .setIcon(android.R.drawable.ic_menu_close_clear_cancel)
-                .setAlphabeticShortcut('q');
-        if (!mInsert) {
-            menu.add(0, MENU_ITEM_DELETE, 0, R.string.menu_deleteContact)
-                    .setIcon(android.R.drawable.ic_menu_delete);
-        }
-
-        mPhotoMenuItem = menu.add(0, MENU_ITEM_PHOTO, 0, null);
-        // Updates the state of the menu item
-        setPhotoPresent(mPhotoPresent);
-
-        return true;
-    }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case MENU_ITEM_SAVE:
+       public boolean onCreateOptionsMenu(Menu menu) {
+          super.onCreateOptionsMenu(menu);
+
+          menu.add(0, MENU_ITEM_SAVE, 0, R.string.menu_done)
+             .setIcon(android.R.drawable.ic_menu_save)
+             .setAlphabeticShortcut('\n');
+
+          menu.add(0, MENU_ITEM_SAVE_SIM, 0, R.string.menu_saveSim)
+             .setIcon(android.R.drawable.ic_menu_save);
+
+          if (!mInsert) {
+             menu.add(0, MENU_ITEM_DELETE, 0, R.string.menu_deleteContact)
+                .setIcon(android.R.drawable.ic_menu_delete);
+
+             menu.add(0, MENU_ITEM_DELETE_SIM, 0, R.string.menu_deleteContactSim)
+                .setIcon(android.R.drawable.ic_menu_delete);
+          }
+
+          menu.add(0, MENU_ITEM_DONT_SAVE, 0, R.string.menu_doNotSave)
+             .setIcon(android.R.drawable.ic_menu_close_clear_cancel)
+             .setAlphabeticShortcut('q');
+
+          mPhotoMenuItem = menu.add(0, MENU_ITEM_PHOTO, 0, null);
+          // Updates the state of the menu item
+          setPhotoPresent(mPhotoPresent);
+
+          return true;
+       }
+
+    @Override
+       public boolean onOptionsItemSelected(MenuItem item) {
+          saveSIM = false;
+          switch (item.getItemId()) {
+             case MENU_ITEM_SAVE:
                 doSaveAction();
                 return true;
-    
+
+            case MENU_ITEM_SAVE_SIM:
+                doSaveSIMAction();
+                saveSIM=true;
+                return true;
+
             case MENU_ITEM_DONT_SAVE:
                 doRevertAction();
                 return true;
-    
+
             case MENU_ITEM_DELETE:
                 // Get confirmation
                 showDialog(DELETE_CONFIRMATION_DIALOG);
                 return true;
-    
+
+            case MENU_ITEM_DELETE_SIM:
+                // Get confirmation
+                showDialog(DELETE_CONFIRMATION_DIALOG_SIM);
+                return true;
+
             case MENU_ITEM_PHOTO:
                 if (!mPhotoPresent) {
                     doPickPhotoAction();
@@ -591,7 +631,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
 
         return false;
     }
-    
+
     /**
      * Try guessing the next-best type of {@link EditEntry} to insert into the
      * given list. We walk down the precedence list until we find a type that
@@ -613,7 +653,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                 return type;
             }
         }
-        
+
         // Otherwise default to last item
         return precedenceList[precedenceList.length - 1];
     }
@@ -670,7 +710,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                 break;
             }
         }
-        
+
         // Rebuild the views if needed
         if (entry != null) {
             buildViews();
@@ -715,7 +755,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         mPhotoChanged = true;
         setPhotoPresent(false);
     }
-    
+
     private void doPickRingtone(EditEntry entry) {
         Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
         // Allow user to pick 'Default'
@@ -789,6 +829,16 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                         .setPositiveButton(android.R.string.ok, mDeleteContactDialogListener)
                         .setCancelable(false)
                         .create();
+
+            case DELETE_CONFIRMATION_DIALOG_SIM:
+                return new AlertDialog.Builder(EditContactActivity.this)
+                        .setTitle(R.string.deleteConfirmation_title)
+                        .setMessage(R.string.deleteConfirmation)
+                        .setNegativeButton(android.R.string.cancel, null)
+                        .setPositiveButton(android.R.string.ok, mDeleteSimContactDialogListener)
+                        .setCancelable(false)
+                        .create();
+
         }
         return super.onCreateDialog(id);
     }
@@ -882,6 +932,31 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         finish();
     }
     
+    private void doSaveSIMAction() {
+       // create the new contact on SIM
+       ContentValues values = new ContentValues();
+       String data,number;
+       Uri result;
+       int i;
+       final String name = mNameView.getText().toString();
+       if (name != null && TextUtils.isGraphic(name)) {
+          EditEntry entry = ContactEntryAdapter.getEntry(mSections, 0, false);
+          data = entry.getData();
+          String[] data_str = data.split ("\\-");
+          number = data_str[0];
+          for (i=1; i < data_str.length; i++){
+             number =number +  data_str[i];
+          }
+          values.put("tag", name);
+          values.put("number",number);
+          result = mResolver.insert(Uri.parse("content://sim/adn"), values);
+          if (result != null)
+             Toast.makeText(this, R.string.save_to_sim_done, Toast.LENGTH_LONG).show();
+          else
+             Toast.makeText(this, R.string.save_to_sim_failed, Toast.LENGTH_LONG).show();
+       }
+    }
+
     /**
      * Save the various fields to the existing contact.
      */

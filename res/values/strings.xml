@@ -79,8 +79,14 @@
     <!-- Menu item used to edit a specific contact -->
     <string name="menu_editContact">Edit contact</string>
 
+    <!-- Menu item used to copy to SIM memory a specific contact -->
+    <string name="menu_copyContactSim">Copy to SIM</string>
+
     <!-- Menu item used to delete a specific contact -->
     <string name="menu_deleteContact">Delete contact</string>
+
+    <!-- Menu item used to delete a specific contact from Sim memory -->
+    <string name="menu_deleteContactSim">Delete from SIM</string>
 
     <!-- Menu item used to call a specific contact when viewing the details of that contact. -->
     <string name="menu_call">Call</string>
@@ -106,6 +112,12 @@
 
     <!-- Menu item to indicate you are done editing a contact and want to save the changes you've made -->
     <string name="menu_done">Done</string>
+
+    <!-- Menu item to indicate you are done saving a new contact on SIM -->
+    <string name="menu_saveSim">Save to SIM</string>
+
+    <string name="save_to_sim_done">Exported contact name and dial number to SIM</string>
+    <string name="save_to_sim_failed">Error exporting contact to SIM</string>
 
     <!-- Menu item to indicate you want to stop editing a contact and NOT save the changes you've made -->
     <string name="menu_doNotSave">Revert</string>

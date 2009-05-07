@@ -125,6 +125,7 @@ public class ViewContactActivity extends ListActivity
     public static final int MENU_ITEM_DELETE = 1;
     public static final int MENU_ITEM_MAKE_DEFAULT = 2;
     public static final int MENU_ITEM_SHOW_BARCODE = 3;
+    public static final int MENU_ITEM_COPY_SIM = 4;
 
     private Uri mUri;
     private ContentResolver mResolver;
@@ -338,6 +339,11 @@ public class ViewContactActivity extends ListActivity
                 .setIcon(android.R.drawable.ic_menu_edit)
                 .setIntent(new Intent(Intent.ACTION_EDIT, mUri))
                 .setAlphabeticShortcut('e');
+
+        menu.add(0,MENU_ITEM_COPY_SIM, 0, R.string.menu_copyContactSim)
+                .setIcon(android.R.drawable.ic_menu_edit)
+                .setAlphabeticShortcut('n');
+
         menu.add(0, MENU_ITEM_DELETE, 0, R.string.menu_deleteContact)
                 .setIcon(android.R.drawable.ic_menu_delete);
 
@@ -414,6 +420,32 @@ public class ViewContactActivity extends ListActivity
                 showDialog(DIALOG_CONFIRM_DELETE);
                 return true;
             }
+            case MENU_ITEM_COPY_SIM: {
+                //Copy the phone contact to SIM
+                ContentValues values = new ContentValues();
+                String data,number;
+                Uri result;
+                int i;
+                final String name = mNameView.getText().toString();
+                if (name != null && TextUtils.isGraphic(name)) {
+                    ViewEntry entry =  ContactEntryAdapter.getEntry(mSections, 0, false);
+                    data = entry.data;
+                    String[] data_str = data.split ("\\-");
+                    number = data_str[0];
+                    for (i=1; i < data_str.length; i++) {
+                        number =number +  data_str[i];
+                    }
+                    values.put("tag", name);
+                    values.put("number",number);
+                    result = mResolver.insert(Uri.parse("content://sim/adn"), values);
+                    if (result != null)
+                        Toast.makeText(this, R.string.save_to_sim_done, Toast.LENGTH_LONG).show();
+                    else
+                        Toast.makeText(this, R.string.save_to_sim_failed, Toast.LENGTH_LONG).show();
+                    }
+                return true;
+            }
+
             case MENU_ITEM_SHOW_BARCODE:
                 if (mCursor.moveToFirst()) {
                     Intent intent = new Intent(SHOW_BARCODE_INTENT);

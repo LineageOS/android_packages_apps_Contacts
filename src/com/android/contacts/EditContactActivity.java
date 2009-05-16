@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2007 The Android Open Source Project
- *
+ * Copyright (C) 2009, Code Aurora Forum. All rights reserved
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -330,15 +330,19 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     private DialogInterface.OnClickListener mDeleteSimContactDialogListener =
             new DialogInterface.OnClickListener() {
         public void onClick(DialogInterface dialog, int button) {
-             final String name = mNameView.getText().toString();
-             EditEntry entry = ContactEntryAdapter.getEntry(mSections, 0, false);
-             String data = entry.getData();
-             String where ="tag =" + name + "AND" + "number =" + data;
-             mResolver.delete(Uri.parse("content://sim/adn"), where, null);
-             finish();
+            final String name = mNameView.getText().toString();
+            EditEntry entry = ContactEntryAdapter.getEntry(mSections, 0, false);
+            String data = entry.getData();
+            if(TextUtils.isEmpty(name)  || TextUtils.isEmpty(data)) {
+               Log.e(TAG,"number or name cannot be Null");
+            }
+            else {
+               String where ="tag =" + name + "AND" + "number =" + data;
+               mResolver.delete(Uri.parse("content://sim/adn"), where, null);
+            }
+            finish();
         }
     };
-
 
     private boolean mMobilePhoneAdded = false;
     private boolean mPrimaryEmailAdded = false;
@@ -939,12 +943,16 @@ public final class EditContactActivity extends Activity implements View.OnClickL
        Uri result;
        int i;
        final String name = mNameView.getText().toString();
-       if (name != null && TextUtils.isGraphic(name)) {
-          EditEntry entry = ContactEntryAdapter.getEntry(mSections, 0, false);
-          data = entry.getData();
+       EditEntry entry = ContactEntryAdapter.getEntry(mSections, 0, false);
+       data = entry.getData();
+       if(TextUtils.isEmpty(name) || TextUtils.isEmpty(data)) {
+             Toast.makeText(this, R.string.sim_entry_null, Toast.LENGTH_LONG).show();
+             return;
+       }
+       if (TextUtils.isGraphic(name)) {
           String[] data_str = data.split ("\\-");
           number = data_str[0];
-          for (i=1; i < data_str.length; i++){
+          for (i=1; i < data_str.length; i++) {
              number =number +  data_str[i];
           }
           values.put("tag", name);

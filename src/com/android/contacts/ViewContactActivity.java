@@ -427,8 +427,12 @@ public class ViewContactActivity extends ListActivity
                 Uri result;
                 int i;
                 final String name = mNameView.getText().toString();
-                if (name != null && TextUtils.isGraphic(name)) {
-                    ViewEntry entry =  ContactEntryAdapter.getEntry(mSections, 0, false);
+                ViewEntry entry =  ContactEntryAdapter.getEntry(mSections, 0, false);
+                if(TextUtils.isEmpty(name) || (entry == null)) {
+                    Toast.makeText(this, R.string.sim_entry_null, Toast.LENGTH_LONG).show();
+                    return true;
+                }
+                if (TextUtils.isGraphic(name)) {
                     data = entry.data;
                     String[] data_str = data.split ("\\-");
                     number = data_str[0];

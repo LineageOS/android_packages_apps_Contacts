@@ -428,7 +428,7 @@ public class ViewContactActivity extends ListActivity
                 int i;
                 final String name = mNameView.getText().toString();
                 ViewEntry entry =  ContactEntryAdapter.getEntry(mSections, 0, false);
-                if(TextUtils.isEmpty(name) || (entry == null)) {
+                if(TextUtils.isEmpty(name) || (entry == null) || TextUtils.isEmpty(entry.data)) {
                     Toast.makeText(this, R.string.sim_entry_null, Toast.LENGTH_LONG).show();
                     return true;
                 }

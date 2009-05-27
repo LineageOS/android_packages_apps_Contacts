@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2006 The Android Open Source Project
+     Copyright (c) 2009, Code Aurora Forum. All rights reserved.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -58,6 +59,9 @@
         />
 
     </LinearLayout>
+
+    <!-- Keypad section -->
+    <include layout="@layout/dialpad" />
 
     <!-- "Dialpad chooser" UI, shown only when the user brings up the
          Dialer while a call is already in progress.

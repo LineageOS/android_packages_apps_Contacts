@@ -441,7 +441,7 @@ public class ViewContactActivity extends ListActivity
                     }
                     values.put("tag", name);
                     values.put("number",number);
-                    result = mResolver.insert(Uri.parse("content://sim/adn"), values);
+                    result = mResolver.insert(Uri.parse("content://icc/adn"), values);
                     if (result != null)
                         Toast.makeText(this, R.string.save_to_sim_done, Toast.LENGTH_LONG).show();
                     else

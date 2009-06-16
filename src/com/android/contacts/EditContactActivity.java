@@ -338,7 +338,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
             }
             else {
                String where ="tag =" + name + "AND" + "number =" + data;
-               mResolver.delete(Uri.parse("content://sim/adn"), where, null);
+               mResolver.delete(Uri.parse("content://icc/adn"), where, null);
             }
             finish();
         }
@@ -957,7 +957,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
           }
           values.put("tag", name);
           values.put("number",number);
-          result = mResolver.insert(Uri.parse("content://sim/adn"), values);
+          result = mResolver.insert(Uri.parse("content://icc/adn"), values);
           if (result != null)
              Toast.makeText(this, R.string.save_to_sim_done, Toast.LENGTH_LONG).show();
           else

@@ -1728,10 +1728,18 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         if (focusChild != null) {
             focusChild.requestFocus();
             if (focusChild instanceof EditText) {
+                // Index ends beyond data length.
+                if (entry.requestCursor > entry.data.length()) {
+                    entry.requestCursor = entry.data.length();
+                }
+                // Index starts before 0. Set the cursor offset of the selection text.
+                if (entry.requestCursor < 0) {
+                    entry.requestCursor = ((EditText) focusChild).getSelectionStart();
+                }
                 ((EditText) focusChild).setSelection(entry.requestCursor);
             }
         }
-        
+
         // Reset requested focus values
         entry.requestFocusId = View.NO_ID;
         entry.requestCursor = 0;

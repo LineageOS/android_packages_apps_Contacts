@@ -177,11 +177,13 @@ public class ViewContactActivity extends ListActivity
         }
         switch (view.getId()) {
             case R.id.star: {
-                int oldStarredState = mCursor.getInt(CONTACT_STARRED_COLUMN);
-                ContentValues values = new ContentValues(1);
-                values.put(People.STARRED, oldStarredState == 1 ? 0 : 1);
-                getContentResolver().update(mUri, values, null, null);
-                break;
+                if (mCursor.getCount() > 0) {
+                    int oldStarredState = mCursor.getInt(CONTACT_STARRED_COLUMN);
+                    ContentValues values = new ContentValues(1);
+                    values.put(People.STARRED, oldStarredState == 1 ? 0 : 1);
+                    getContentResolver().update(mUri, values, null, null);
+                    break;
+                }
             }
         }
     }

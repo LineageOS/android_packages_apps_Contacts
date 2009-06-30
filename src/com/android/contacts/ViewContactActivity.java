@@ -122,6 +122,7 @@ public class ViewContactActivity extends ListActivity
 
     private static final int DIALOG_CONFIRM_DELETE = 1;
 
+    public static final int MENU_ITEM_SHOW_INTENT = 0;
     public static final int MENU_ITEM_DELETE = 1;
     public static final int MENU_ITEM_MAKE_DEFAULT = 2;
     public static final int MENU_ITEM_SHOW_BARCODE = 3;
@@ -516,6 +517,30 @@ public class ViewContactActivity extends ListActivity
                 getContentResolver().update(mUri, values, null, null);
                 dataChanged();
                 return true;
+            }
+            case MENU_ITEM_SHOW_INTENT: {
+                AdapterView.AdapterContextMenuInfo info;
+                try {
+                    info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+                } catch (ClassCastException e) {
+                    Log.e(TAG, "bad menuInfo", e);
+                    break;
+                }
+
+                ViewEntry entry = ContactEntryAdapter.getEntry(mSections, info.position,
+                        SHOW_SEPARATORS);
+                if (entry != null) {
+                        Intent intent = entry.intent;
+                        if (intent != null) {
+                        try {
+                            startActivity(intent);
+                        } catch (ActivityNotFoundException e) {
+                            Log.e(TAG, "No activity found for intent: " + intent);
+                            signalError();
+                            }
+                        }
+                 }
+                 return true;
             }
         }
         return super.onContextItemSelected(item);

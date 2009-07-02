@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2008 The Android Open Source Project
-     Copyright (c) 2009, Code Aurora Forum. All rights reserved.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,9 +14,11 @@
      limitations under the License.
 -->
 
-<resources>
-    <!-- The EditText for entries in the EditContactActivity -->
-    <item type="id" name="data" />
-    <item type="id" name="panelHandle" />
-    <item type="id" name="panelContent" />
-</resources>
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/device_headset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4sp"
+            android:layout_gravity="center_vertical"
+            android:visibility="gone"
+            android:src="@android:drawable/stat_sys_headset" />

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2007 The Android Open Source Project
+     Copyright (c) 2009, Code Aurora Forum. All rights reserved.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
-  
+
           http://www.apache.org/licenses/LICENSE-2.0
-  
+
      Unless required by applicable law or agreed to in writing, software
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,10 +16,68 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:panel="http://schemas.android.com/apk/res/com.android.contacts"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
 >
+
+    <com.android.contacts.bluetooth.Panel
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/topPanel"
+            android:paddingBottom="0dip"
+            android:visibility="gone"
+            panel:position="top"
+            panel:animationDuration="1000"
+            android:background="#FF000000"
+            panel:openedHandle="@drawable/top_switcher_expanded_background"
+            panel:closedHandle="@drawable/top_switcher_collapsed_background"
+    >
+            <Button
+                android:id="@+id/panelHandle"
+                android:background="#00000000"
+                android:layout_width="fill_parent"
+                android:layout_height="33dip"
+                android:gravity="center_horizontal"
+            />
+            <LinearLayout
+                android:id="@+id/panelContent"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#666666"
+            >
+                <TextView
+                        android:id="@+id/progressText"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/transfer_progress"
+                        android:textSize="16dip"
+                        android:padding="4dip"
+                        android:textColor="#fff"
+                        android:textStyle="bold"
+                        android:background="#666666"
+                    />
+                <ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:id="@+id/progress"
+                    android:layout_width="fill_parent"
+                    android:layout_height="25dip"
+                    android:background="#688"
+                />
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:id="@+id/cancelButton"
+                        android:text="@string/cancel_transfer"
+                        android:textStyle="bold"
+                        android:textSize="12dip"
+                    />
+            </LinearLayout>
+    </com.android.contacts.bluetooth.Panel>
 
     <LinearLayout android:id="@+id/banner"
         android:layout_width="fill_parent"
@@ -51,7 +110,7 @@
     </LinearLayout>
 
     <FrameLayout
-        android:layout_width="fill_parent" 
+        android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="1"
     >

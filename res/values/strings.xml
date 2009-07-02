@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2006 The Android Open Source Project
-     Copyright (C) 2009, Code Aurora Forum. All rights reserved
+     Copyright (c) 2009, Code Aurora Forum. All rights reserved.
+
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
-  
+
           http://www.apache.org/licenses/LICENSE-2.0
-  
+
      Unless required by applicable law or agreed to in writing, software
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,6 +16,34 @@
 -->
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Bluetooth related strings  -->
+    <string name="transfer_progress"><xliff:g id="progress_text">%s</xliff:g></string>
+    <string name="transfer_complete">Transfer Completed</string>
+    <string name="cancel_tx_rx_transfer">Bluetooth Send and Receive Cancelled</string>
+    <string name="cancel_tx_transfer">Bluetooth Send Cancelled</string>
+    <string name="cancel_rx_transfer">Bluetooth Receive Cancelled</string>
+    <string name="sending_progress_one">Sending Contact <xliff:g id="send_progress_one_text">%s</xliff:g></string>
+    <string name="sending_progress_more">Sending <xliff:g id="send_progress_more_text">%s</xliff:g> contacts </string>
+    <string name="get_progress_one">Receiving Contact </string>
+    <string name="get_progress_more">Receiving <xliff:g id="rx_progress_more_text">%s</xliff:g> contacts </string>
+    <string name="receive_contact_done">Received Contact :  <xliff:g id="receive_sontact_text">%s</xliff:g></string>
+    <string name="cancel_transfer">Cancel</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_pull">Pull contacts</string>
+    <string name="menu_send_mms">Send using MMS</string>
+    <string name="menu_send_bt">Send using Bluetooth</string>
+    <string name="menu_get_bt">Get using Bluetooth</string>
+    <string name="bluetooth_device_picker_title">Select a Device</string>
+    <!--Bluetooth settings screen, text that appears in heading bar when scanning for devices -->
+    <string name="progress_scanning">Scanning</string>
+    <!-- Bluetooth settings screen, menu item to scan for nearby bluetooth devices -->
+    <string name="bluetooth_scan_for_devices">Scan for devices</string>
+    <!-- Title for BT error dialogs. -->
+    <string name="bluetooth_error_title">Attention</string>
+    <!-- Message for the error dialog when BT connecting operation fails generically. -->
+    <string name="bluetooth_connecting_error_message">There was a problem connecting to <xliff:g id="device_name">%1$s</xliff:g>.</string>
+
     <!-- Title for the activity that shows contacts.  This is the name
          used in the Launcher icon. -->
     <string name="contactsList">Contacts</string>
@@ -222,7 +251,7 @@
 
     <!-- The menu item that leads to the settings for contact syncing -->
     <string name="syncGroupPreference">Edit sync groups</string>
-    
+
     <!-- The menu item that launches the SIM card import activity -->
     <string name="importFromSim">Import contacts</string>
 
@@ -253,7 +282,7 @@
     <!-- Title for group selection dialog. The dialog contains a list of contact groups that the
          user can pick from, indicating they only want to see the contacts in that group. -->
     <string name="select_group_title">Groups</string>
-    
+
     <!-- The text displayed when the contacts list is empty while displaying a single group of contacts -->
     <string name="groupEmpty">Your \"<xliff:g id="groupName">%s</xliff:g>\" group is empty.</string>
 
@@ -265,16 +294,16 @@
 
     <!-- The name of the system "My Contacts" group. This should be kept in sync with the web UI -->
     <string name="groupNameMyContacts">My Contacts</string>
-    
+
     <!-- The group type that displays only contacts with phone numbers -->
     <string name="groupNameWithPhones">Contacts with phone numbers</string>
-    
+
     <!-- The group type that displays "Starred in Android" contacts -->
     <string name="starredInAndroid">Starred in Android</string>
-    
+
     <!-- Toast displayed when a contact is created -->
     <string name="contactCreatedToast">Contact created.</string>
-    
+
     <!-- Toast displayed when a contact is saved -->
     <string name="contactSavedToast">Contact saved.</string>
 
@@ -364,7 +393,7 @@
 
     <!-- String used to display calls from private numbers in the call log -->
     <string name="private_num">Private number</string>
-    
+
     <!-- String used to display calls from pay phone in the call log -->
     <string name="payphone">Pay phone</string>
 
@@ -393,7 +422,7 @@
         \n<li><font fgcolor="#ffffffff"><b>New contact</b></font> to create a new contact from scratch\n</li>
         \n<li><font fgcolor="#ffffffff"><b>Import contacts</b></font> to add contacts from your SIM card\n</li>"
     </string>
-    
+
     <!-- Displayed full screen when the user has no contacts and they are displaying the My Contacts group, and contact syncing is enabled -->
     <string name="noContactsHelpTextWithSync">"You don't have any contacts.\n\nTo add contacts, press <font fgcolor="#ffffffff"><b>Menu</b></font> and select:\n
         \n<li><font fgcolor="#ffffffff"><b>Edit sync groups</b></font> to add from a new or existing Google account\n</li>
@@ -411,7 +440,7 @@
     <string name="liveFolder_favorites_label">Starred</string>
 
     <!-- Live folder label for all contacts with phone numbers -->
-    <string name="liveFolder_phones_label">Phones</string>    
+    <string name="liveFolder_phones_label">Phones</string>
 
     <!-- Item label: jump to the in-call DTMF dialpad.
          (Part of a list of options shown in the dialer when another call
@@ -439,7 +468,7 @@
 
     <!-- Title for incoming call details screen -->
     <string name="type_incoming">Incoming call</string>
-    
+
     <!-- Title for outgoing call details screen -->
     <string name="type_outgoing">Outgoing call</string>
 
@@ -481,13 +510,13 @@
 
     <!-- Description for incoming calls going to voice mail vs. not -->
     <string name="actionIncomingCall">Incoming calls</string>
-    
+
     <!-- Detail text for incoming calls going to voice mail -->
     <string name="detailIncomingCallsGoToVoicemail">Will be sent directly to voicemail</string>
 
     <!-- Description of what the contact specific ringtone is set to -->
     <string name="detailsRingtone">Set to <xliff:g id="ringtone_name" example="Flutey Phone">%s</xliff:g></string>
-    
+
     <!-- Action string for calling back a number in the call log -->
     <string name="callBack">Call back</string>
 

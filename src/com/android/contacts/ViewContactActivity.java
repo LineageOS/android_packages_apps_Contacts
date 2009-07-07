@@ -71,7 +71,6 @@ import android.os.Handler;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
-import android.os.SystemProperties;
 import android.provider.Contacts;
 import android.provider.Im;
 import android.provider.Contacts.ContactMethods;
@@ -85,7 +84,6 @@ import android.view.ContextMenu;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -99,21 +97,17 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Bluetooth Transfer related import */
-import com.android.contacts.bluetooth.BluetoothObexTransfer;
-import com.android.contacts.bluetooth.BluetoothDevicePicker;
-
 /**
  * Displays the details of a specific contact.
  */
-public class ViewContactActivity extends ListActivity
+public class ViewContactActivity extends ListActivity 
         implements View.OnCreateContextMenuListener, View.OnClickListener,
         DialogInterface.OnClickListener {
     private static final String TAG = "ViewContact";
     private static final String SHOW_BARCODE_INTENT = "com.google.zxing.client.android.ENCODE";
 
     private static final boolean SHOW_SEPARATORS = false;
-
+    
     private static final String[] PHONE_KEYS = {
         Contacts.Intents.Insert.PHONE,
         Contacts.Intents.Insert.SECONDARY_PHONE,
@@ -133,11 +127,6 @@ public class ViewContactActivity extends ListActivity
     public static final int MENU_ITEM_MAKE_DEFAULT = 2;
     public static final int MENU_ITEM_SHOW_BARCODE = 3;
     public static final int MENU_ITEM_COPY_SIM = 4;
-    public static final int MENU_ITEM_SEND_BT = 5;
-
-    public static final int MENU_GROUP_BT = 1;
-
-    private static final int SUBACTIVITY_PICK_BT_DEVICE = 1;
 
     private Uri mUri;
     private ContentResolver mResolver;
@@ -155,15 +144,7 @@ public class ViewContactActivity extends ListActivity
 
     private Cursor mCursor;
     private boolean mObserverRegistered;
-
-    /**
-     * For transfering contact over Bluetooth
-     */
-    private BluetoothObexTransfer mBluetoothObexTransfer = null;
-
-    public final boolean StandAloneUITesting = true;
-    public final boolean noSdCardTesting = true;
-
+    
     private ContentObserver mObserver = new ContentObserver(new Handler()) {
         @Override
         public boolean deliverSelfNotifications() {
@@ -259,13 +240,6 @@ public class ViewContactActivity extends ListActivity
         mShowSmsLinksForAllPhones = true;
 
         mCursor = mResolver.query(mUri, CONTACT_PROJECTION, null, null, null);
-
-        /**
-         * For transfering contact over Bluetooth
-         */
-        if (SystemProperties.getBoolean("ro.qualcomm.proprietary_obex", false)) {
-            mBluetoothObexTransfer = new BluetoothObexTransfer(ViewContactActivity.this);
-        }
     }
 
     @Override
@@ -273,7 +247,7 @@ public class ViewContactActivity extends ListActivity
         super.onResume();
         mObserverRegistered = true;
         // Recreating the mCursor Object if it is null otherwise requery the
-        // same mCursor Object.
+        // same mCursor Object. 
         if (mCursor == null) {
            mCursor = mResolver.query(mUri, CONTACT_PROJECTION, null, null, null);
         } else {
@@ -305,9 +279,6 @@ public class ViewContactActivity extends ListActivity
                 mObserverRegistered = false;
             }
             mCursor.close();
-        }
-        if(mBluetoothObexTransfer != null) {
-            mBluetoothObexTransfer.onDestroy();
         }
     }
 
@@ -379,20 +350,6 @@ public class ViewContactActivity extends ListActivity
         menu.add(0, MENU_ITEM_DELETE, 0, R.string.menu_deleteContact)
                 .setIcon(android.R.drawable.ic_menu_delete);
 
-        /**
-         * Add menu for transfering contact over Bluetooth
-         */
-        SubMenu sub = menu.addSubMenu(MENU_GROUP_BT, 0 , 0, R.string.menu_share);
-        sub.setIcon(android.R.drawable.ic_menu_share);
-        sub.add(MENU_GROUP_BT,MENU_ITEM_SEND_BT,0, R.string.menu_send_bt);
-
-        boolean bluetoothEnabled = false;
-        if (mBluetoothObexTransfer != null) {
-           bluetoothEnabled = mBluetoothObexTransfer.isEnabled();
-        }
-        menu.setGroupEnabled(MENU_GROUP_BT, bluetoothEnabled);
-        menu.setGroupVisible(MENU_GROUP_BT, bluetoothEnabled);
-
         return true;
     }
 
@@ -409,17 +366,6 @@ public class ViewContactActivity extends ListActivity
         } else {
             menu.removeItem(MENU_ITEM_SHOW_BARCODE);
         }
-
-        /**
-         * Add menu for transfering contact over Bluetooth
-         */
-        boolean bluetoothEnabled = false;
-        if (mBluetoothObexTransfer != null) {
-           bluetoothEnabled = mBluetoothObexTransfer.isEnabled();
-        }
-        menu.setGroupEnabled(MENU_GROUP_BT, bluetoothEnabled);
-        menu.setGroupVisible(MENU_GROUP_BT, bluetoothEnabled);
-
         return true;
     }
 
@@ -516,7 +462,7 @@ public class ViewContactActivity extends ListActivity
                     if (!TextUtils.isEmpty(name)) {
                         // Correctly handle when section headers are hidden
                         int sepAdjust = SHOW_SEPARATORS ? 1 : 0;
-
+                        
                         bundle.putString(Contacts.Intents.Insert.NAME, name);
                         // The 0th ViewEntry in each ArrayList below is a separator item
                         int entriesToAdd = Math.min(mPhoneEntries.size() - sepAdjust, PHONE_KEYS.length);
@@ -548,26 +494,10 @@ public class ViewContactActivity extends ListActivity
                     }
                 }
                 break;
-
-            case MENU_ITEM_SEND_BT: {
-                if (mBluetoothObexTransfer != null) {
-                    if (mBluetoothObexTransfer.isEnabled()) {
-                        Intent intent = new Intent(this, BluetoothDevicePicker.class);
-                        intent.setAction(BluetoothDevicePicker.ACTION_SELECT_BLUETOOTH_DEVICE);
-                        intent.setData(mUri);
-                        try {
-                            startActivityForResult(intent, SUBACTIVITY_PICK_BT_DEVICE);
-                        } catch (ActivityNotFoundException e) {
-                            Log.e(TAG, "No Activity for : " + BluetoothDevicePicker.ACTION_SELECT_BLUETOOTH_DEVICE, e);
-                        }
-                    }
-                }
-                return true;
-            } // MENU_ITEM_SEND_BT
         }
         return super.onOptionsItemSelected(item);
     }
-
+    
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -656,26 +586,6 @@ public class ViewContactActivity extends ListActivity
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        switch (requestCode) {
-            case SUBACTIVITY_PICK_BT_DEVICE:
-                if (resultCode == RESULT_OK && data != null) {
-                    /* Initiate the transfer */
-                    if( mBluetoothObexTransfer != null) {
-                        /* obtain the Server name and Address */
-                        String devAddress = data.getStringExtra(BluetoothDevicePicker.ADDRESS);
-                        String devName = data.getStringExtra(BluetoothDevicePicker.NAME);
-                        mBluetoothObexTransfer.sendContact(mUri, devAddress);
-                    }
-                }//if(result Ok)
-                break;
-            }
-
-    } /* onActivityResult */
-
-    @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         ViewEntry entry = ViewAdapter.getEntry(mSections, position, SHOW_SEPARATORS);
         if (entry != null) {
@@ -707,7 +617,7 @@ public class ViewContactActivity extends ListActivity
      */
     private void buildSeparators() {
         ViewEntry separator;
-
+        
         separator = new ViewEntry();
         separator.kind = ViewEntry.KIND_SEPARATOR;
         separator.data = getString(R.string.listSeparatorCallNumber);
@@ -745,7 +655,7 @@ public class ViewContactActivity extends ListActivity
     }
 
     private Uri constructImToUrl(String host, String data) {
-        // don't encode the url, because the Activity Manager can't find using the encoded url
+	    // don't encode the url, because the Activity Manager can't find using the encoded url
         StringBuilder buf = new StringBuilder("imto://");
         buf.append(host);
         buf.append('/');
@@ -755,7 +665,7 @@ public class ViewContactActivity extends ListActivity
 
     /**
      * Build up the entries to display on the screen.
-     *
+     * 
      * @param personCursor the URI for the contact being displayed
      */
     private final void buildEntries(Cursor personCursor) {
@@ -790,7 +700,7 @@ public class ViewContactActivity extends ListActivity
                 }
 
                 mNumPhoneNumbers++;
-
+                
                 // Add a phone number entry
                 final ViewEntry entry = new ViewEntry();
                 final CharSequence displayLabel = Phones.getDisplayLabel(this, type, label);
@@ -1024,7 +934,7 @@ public class ViewContactActivity extends ListActivity
             entry.actionIcon = R.drawable.sym_note;
             mOtherEntries.add(entry);
         }
-
+        
         // Build the ringtone entry
         String ringtoneStr = personCursor.getString(CONTACT_CUSTOM_RINGTONE_COLUMN);
         if (!TextUtils.isEmpty(ringtoneStr)) {
@@ -1068,7 +978,7 @@ public class ViewContactActivity extends ListActivity
             return getString(actionResId, type.toString());
         }
     }
-
+    
     /**
      * A basic structure with the data for a contact entry in the list.
      */
@@ -1088,18 +998,18 @@ public class ViewContactActivity extends ListActivity
             public TextView data;
             public ImageView actionIcon;
             public ImageView presenceIcon;
-
+            
             // Need to keep track of this too
             ViewEntry entry;
         }
-
+        
         ViewAdapter(Context context, ArrayList<ArrayList<ViewEntry>> sections) {
             super(context, sections, SHOW_SEPARATORS);
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            ViewEntry entry = getEntry(mSections, position, false);
+            ViewEntry entry = getEntry(mSections, position, false); 
             View v;
 
             // Handle separators specially

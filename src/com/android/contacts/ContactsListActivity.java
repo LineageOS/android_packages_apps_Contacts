@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2007 The Android Open Source Project
+ * Copyright (c) 2009, Code Aurora Forum. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +21,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.SearchManager;
+import android.content.ActivityNotFoundException;
 import android.content.AsyncQueryHandler;
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -46,6 +48,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.os.RemoteException;
+import android.os.SystemProperties;
 import android.preference.PreferenceManager;
 import android.provider.Contacts;
 import android.provider.Contacts.ContactMethods;
@@ -65,6 +68,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -83,6 +87,14 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Locale;
 
+/** Bluetooth Transfer related import */
+import android.app.Dialog;
+import android.os.Handler;
+import android.os.Message;
+import android.app.ProgressDialog;
+import com.android.contacts.bluetooth.BluetoothObexTransfer;
+import com.android.contacts.bluetooth.BluetoothDevicePicker;
+
 /**
  * Displays a list of contacts. Usually is embedded into the ContactsActivity.
  */
@@ -94,7 +106,7 @@ public final class ContactsListActivity extends ListActivity
 
     private static final String LIST_STATE_KEY = "liststate";
     private static final String FOCUS_KEY = "focused";
-    
+
     static final int MENU_ITEM_VIEW_CONTACT = 1;
     static final int MENU_ITEM_CALL = 2;
     static final int MENU_ITEM_EDIT_BEFORE_CALL = 3;
@@ -111,8 +123,17 @@ public final class ContactsListActivity extends ListActivity
     public static final int MENU_IMPORT_CONTACTS = 12;
     public static final int MENU_EXPORT_CONTACTS = 13;
 
+    static final int MENU_ITEM_SEND_BT = 14;
+    static final int MENU_ITEM_GET_BT  = 15;
+    static final int MENU_GROUP_BT = 1;
+
+    private static final int DIALOG_BT_PROGRESS = 1;
+    private static final int DIALOG_BT_PROGRESS_INDETERMINATE = 2;
+
     private static final int SUBACTIVITY_NEW_CONTACT = 1;
-    
+    private static final int SUBACTIVITY_PICK_SEND_BT_DEVICE = 2;
+    private static final int SUBACTIVITY_PICK_GET_BT_DEVICE = 3;
+
     /** Mask for picker mode */
     static final int MODE_MASK_PICKER = 0x80000000;
     /** Mask for no presence mode */
@@ -157,7 +178,7 @@ public final class ContactsListActivity extends ListActivity
     static final int DEFAULT_MODE = MODE_ALL_CONTACTS;
 
     /**
-     * The type of data to display in the main contacts list. 
+     * The type of data to display in the main contacts list.
      */
     static final String PREF_DISPLAY_TYPE = "display_system_group";
 
@@ -177,13 +198,13 @@ public final class ContactsListActivity extends ListActivity
      * is {@link #DISPLAY_TYPE_SYSTEM_GROUP} then this will be the system id.
      * If {@link #PREF_DISPLAY_TYPE} is {@link #DISPLAY_TYPE_USER_GROUP} then this will
      * be the group name.
-     */ 
+     */
     static final String PREF_DISPLAY_INFO = "display_group";
 
-    
+
     static final String NAME_COLUMN = People.DISPLAY_NAME;
     static final String SORT_STRING = People.SORT_STRING;
-    
+
     static final String[] CONTACTS_PROJECTION = new String[] {
         People._ID, // 0
         NAME_COLUMN, // 1
@@ -196,7 +217,7 @@ public final class ContactsListActivity extends ListActivity
         People.PRESENCE_STATUS, // 8
         SORT_STRING, // 9
     };
-    
+
     static final String[] SIMPLE_CONTACTS_PROJECTION = new String[] {
         People._ID, // 0
         NAME_COLUMN, // 1
@@ -251,7 +272,7 @@ public final class ContactsListActivity extends ListActivity
 
     static final int PHONES_PERSON_ID_INDEX = 6;
     static final int SIMPLE_CONTACTS_PERSON_ID_INDEX = 0;
-    
+
     static final int DISPLAY_GROUP_INDEX_ALL_CONTACTS = 0;
     static final int DISPLAY_GROUP_INDEX_ALL_CONTACTS_WITH_PHONES = 1;
     static final int DISPLAY_GROUP_INDEX_MY_CONTACTS = 2;
@@ -264,7 +285,7 @@ public final class ContactsListActivity extends ListActivity
     };
     private static final int GROUPS_COLUMN_INDEX_SYSTEM_ID = 0;
     private static final int GROUPS_COLUMN_INDEX_NAME = 1;
-    
+
     static final String GROUP_WITH_PHONES = "android_smartgroup_phone";
 
     ContactItemListAdapter mAdapter;
@@ -280,7 +301,7 @@ public final class ContactsListActivity extends ListActivity
 
     private int mDisplayGroupOriginalSelection;
     private int mDisplayGroupCurrentSelection;
-    
+
     private QueryHandler mQueryHandler;
     private String mQuery;
     private Uri mGroupFilterUri;
@@ -303,7 +324,7 @@ public final class ContactsListActivity extends ListActivity
 
     private String mShortcutAction;
     private boolean mDefaultMode = false;
-    
+
     /**
      * Internal query type when in mode {@link #MODE_QUERY_PICK_TO_VIEW}.
      */
@@ -312,13 +333,13 @@ public final class ContactsListActivity extends ListActivity
     private static final int QUERY_MODE_NONE = -1;
     private static final int QUERY_MODE_MAILTO = 1;
     private static final int QUERY_MODE_TEL = 2;
-    
+
     /**
      * Data to use when in mode {@link #MODE_QUERY_PICK_TO_VIEW}. Usually
      * provided by scheme-specific part of incoming {@link Intent#getData()}.
      */
     private String mQueryData;
-    
+
     private Handler mHandler = new Handler();
 
     private class ImportTypeSelectedListener implements DialogInterface.OnClickListener {
@@ -346,6 +367,13 @@ public final class ContactsListActivity extends ListActivity
         }
     }
 
+    /**
+     * For transfering contact over Bluetooth
+     */
+    private BluetoothObexTransfer mBluetoothObexTransfer = null;
+
+    public final boolean StandAloneUITesting = true;
+
     private class DeleteClickListener implements DialogInterface.OnClickListener {
         private Uri mUri;
 
@@ -357,7 +385,7 @@ public final class ContactsListActivity extends ListActivity
             getContentResolver().delete(mUri, null, null);
         }
     }
-    
+
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -370,10 +398,10 @@ public final class ContactsListActivity extends ListActivity
         if (title != null) {
             setTitle(title);
         }
-        
+
         final String action = intent.getAction();
         mMode = MODE_UNKNOWN;
-        
+
         setContentView(R.layout.contacts_list_content);
 
         if (UI.LIST_DEFAULT.equals(action)) {
@@ -446,7 +474,7 @@ public final class ContactsListActivity extends ListActivity
                 finish();
                 return;
             }
-            
+
             // See if search request has extras to specify query
             if (intent.hasExtra(Insert.EMAIL)) {
                 mMode = MODE_QUERY_PICK_TO_VIEW;
@@ -499,7 +527,7 @@ public final class ContactsListActivity extends ListActivity
         list.setOnCreateContextMenuListener(this);
         if ((mMode & MODE_MASK_NO_FILTER) != MODE_MASK_NO_FILTER) {
             list.setTextFilterEnabled(true);
-        }        
+        }
 
         if ((mMode & MODE_MASK_CREATE_NEW) != 0) {
             // Add the header for creating a new contact
@@ -512,7 +540,7 @@ public final class ContactsListActivity extends ListActivity
 
         // Set the proper empty string
         setEmptyText();
-        
+
         mAdapter = new ContactItemListAdapter(this);
         setListAdapter(mAdapter);
 
@@ -538,6 +566,13 @@ public final class ContactsListActivity extends ListActivity
             mSyncEnabled = false;
         } finally {
             resolver.releaseProvider(provider);
+        }
+
+        /**
+         * For transfering contact over Bluetooth
+         */
+        if (SystemProperties.getBoolean("ro.qualcomm.proprietary_obex", false)) {
+            mBluetoothObexTransfer = new BluetoothObexTransfer(ContactsListActivity.this, mTransferProgressCallback);
         }
     }
 
@@ -578,7 +613,7 @@ public final class ContactsListActivity extends ListActivity
 
     /**
      * Builds the URIs to query when displaying a user group
-     * 
+     *
      * @param groupName the group being displayed
      */
     private void buildUserGroupUris(String groupName) {
@@ -589,8 +624,8 @@ public final class ContactsListActivity extends ListActivity
 
     /**
      * Builds the URIs to query when displaying a system group
-     * 
-     * @param systemId the system group's ID 
+     *
+     * @param systemId the system group's ID
      */
     private void buildSystemGroupUris(String systemId) {
         mGroupFilterUri = Uri.parse("content://contacts/groups/system_id/" + systemId
@@ -604,7 +639,7 @@ public final class ContactsListActivity extends ListActivity
     private void setDefaultMode() {
         // Load the preferences
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        
+
         // Lookup the group to display
         mDisplayType = prefs.getInt(PREF_DISPLAY_TYPE, DISPLAY_TYPE_UNKNOWN);
         switch (mDisplayType) {
@@ -674,7 +709,7 @@ public final class ContactsListActivity extends ListActivity
 
         boolean runQuery = true;
         Activity parent = getParent();
-        
+
         // Do this before setting the filter. The filter thread relies
         // on some state that is initialized in setDefaultMode
         if (mDefaultMode) {
@@ -682,7 +717,7 @@ public final class ContactsListActivity extends ListActivity
             // in the preferences activity while we weren't running
             setDefaultMode();
         }
-        
+
         // See if we were invoked with a filter
         if (parent != null && parent instanceof DialtactsActivity) {
             String filterText = ((DialtactsActivity) parent).getAndClearFilterText();
@@ -702,7 +737,7 @@ public final class ContactsListActivity extends ListActivity
         }
         mJustCreated = false;
     }
-    
+
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -717,7 +752,15 @@ public final class ContactsListActivity extends ListActivity
             ((ContactItemListAdapter) getListAdapter()).onContentChanged();
         }
     }
-    
+
+    @Override
+    protected void onDestroy() {
+       super.onDestroy();
+       if(mBluetoothObexTransfer != null) {
+          mBluetoothObexTransfer.onDestroy();
+       }
+    }
+
     private void updateGroup() {
         if (mDefaultMode) {
             setDefaultMode();
@@ -792,7 +835,7 @@ public final class ContactsListActivity extends ListActivity
                     .setIcon(com.android.internal.R.drawable.ic_menu_refresh)
                     .setIntent(syncIntent);
         }
-        
+
         // Contacts import (SIM/SDCard)
         menu.add(0, MENU_IMPORT_CONTACTS, 0, R.string.importFromSim)
                 .setIcon(R.drawable.ic_menu_import_contact);
@@ -803,7 +846,31 @@ public final class ContactsListActivity extends ListActivity
                     .setIcon(R.drawable.ic_menu_export_contact);
         }*/
 
+        // Bluetooth transfer
+        SubMenu sub = menu.addSubMenu(MENU_GROUP_BT, 0 , 0, R.string.menu_pull);
+        sub.setIcon(android.R.drawable.ic_menu_share);
+        sub.add(MENU_GROUP_BT,MENU_ITEM_GET_BT,0, R.string.menu_get_bt);
+
+        boolean bluetoothEnabled = false;
+        if (mBluetoothObexTransfer != null) {
+           bluetoothEnabled = mBluetoothObexTransfer.isBluetoothEnabled();
+        }
+        menu.setGroupEnabled(MENU_GROUP_BT, bluetoothEnabled);
+        menu.setGroupVisible(MENU_GROUP_BT, bluetoothEnabled);
+
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+       super.onPrepareOptionsMenu(menu);
+       boolean bluetoothEnabled = false;
+       if (mBluetoothObexTransfer != null) {
+          bluetoothEnabled = mBluetoothObexTransfer.isBluetoothEnabled();
+       }
+       menu.setGroupEnabled(MENU_GROUP_BT, bluetoothEnabled);
+       menu.setGroupVisible(MENU_GROUP_BT, bluetoothEnabled);
+       return true;
     }
 
     /*
@@ -847,7 +914,7 @@ public final class ContactsListActivity extends ListActivity
             mDisplayGroupCurrentSelection = which;
         }
     }
-    
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -856,9 +923,9 @@ public final class ContactsListActivity extends ListActivity
                     .setTitle(R.string.select_group_title)
                     .setPositiveButton(android.R.string.ok, this)
                     .setNegativeButton(android.R.string.cancel, null);
-                
+
                 setGroupEntries(builder);
-                
+
                 builder.show();
                 return true;
 
@@ -881,6 +948,19 @@ public final class ContactsListActivity extends ListActivity
                     dialogBuilder.show();
                 } else {
                     doImportFromSim();
+                }
+
+            case MENU_ITEM_GET_BT:
+                if (mBluetoothObexTransfer != null) {
+                    if (mBluetoothObexTransfer.isBluetoothEnabled()) {
+                        Intent intent = new Intent(this, BluetoothDevicePicker.class);
+                        intent.setAction(BluetoothDevicePicker.ACTION_SELECT_BLUETOOTH_DEVICE);
+                        try {
+                            startActivityForResult(intent, SUBACTIVITY_PICK_GET_BT_DEVICE);
+                        } catch (ActivityNotFoundException e) {
+                            Log.e(TAG, "No Activity for : " + BluetoothDevicePicker.ACTION_SELECT_BLUETOOTH_DEVICE, e);
+                        }
+                    }
                 }
                 return true;
 
@@ -907,7 +987,7 @@ public final class ContactsListActivity extends ListActivity
         VCardExporter exporter = new VCardExporter(ContactsListActivity.this, mHandler);
         exporter.startExportVCardToSdCard();
     }*/
-    
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
             Intent data) {
@@ -918,6 +998,25 @@ public final class ContactsListActivity extends ListActivity
                     returnPickerResult(null, data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME),
                             data.getData(), 0);
                 }
+                break;
+
+            case SUBACTIVITY_PICK_SEND_BT_DEVICE:
+            case SUBACTIVITY_PICK_GET_BT_DEVICE:
+                if (resultCode == RESULT_OK && data != null) {
+                    /* Initiate the transfer */
+                    if( mBluetoothObexTransfer != null) {
+                        // obtain the Server name and Address
+                        String devAddress = data.getStringExtra(BluetoothDevicePicker.ADDRESS);
+                        String devName = data.getStringExtra(BluetoothDevicePicker.NAME);
+                        Uri uri = data.getData();
+                        if(requestCode == SUBACTIVITY_PICK_SEND_BT_DEVICE) {
+                            mBluetoothObexTransfer.sendContact(uri, devAddress);
+                        } else if(requestCode == SUBACTIVITY_PICK_GET_BT_DEVICE) {
+                            mBluetoothObexTransfer.getContact(devAddress);
+                        }
+                    }
+                }//if(result Ok)
+                break;
         }
     }
 
@@ -982,6 +1081,13 @@ public final class ContactsListActivity extends ListActivity
         menu.add(0, MENU_ITEM_EDIT, 0, R.string.menu_editContact)
                 .setIntent(new Intent(Intent.ACTION_EDIT, personUri));
         menu.add(0, MENU_ITEM_DELETE, 0, R.string.menu_deleteContact);
+
+        // Bluetooth Transfer
+        if (mBluetoothObexTransfer != null) {
+           if (mBluetoothObexTransfer.isBluetoothEnabled()) {
+              menu.add(0,MENU_ITEM_SEND_BT,0, R.string.menu_send_bt);
+           }
+        }
     }
 
     @Override
@@ -1019,6 +1125,23 @@ public final class ContactsListActivity extends ListActivity
                     .setNegativeButton(android.R.string.cancel, null)
                     .setPositiveButton(android.R.string.ok, new DeleteClickListener(uri))
                     .show();
+                return true;
+            }
+            case MENU_ITEM_SEND_BT: {
+                Uri uri = ContentUris.withAppendedId(People.CONTENT_URI,
+                        cursor.getLong(ID_COLUMN_INDEX));
+                if (mBluetoothObexTransfer != null) {
+                    if (mBluetoothObexTransfer.isBluetoothEnabled()) {
+                        Intent intent = new Intent(this, BluetoothDevicePicker.class);
+                        intent.setAction(BluetoothDevicePicker.ACTION_SELECT_BLUETOOTH_DEVICE);
+                        intent.setData(uri);
+                        try {
+                            startActivityForResult(intent, SUBACTIVITY_PICK_SEND_BT_DEVICE);
+                        } catch (ActivityNotFoundException e) {
+                            Log.e(TAG, "No Activity for : " + BluetoothDevicePicker.ACTION_SELECT_BLUETOOTH_DEVICE, e);
+                        }
+                    }
+                }
                 return true;
             }
         }
@@ -1097,7 +1220,7 @@ public final class ContactsListActivity extends ListActivity
                         ContentUris.withAppendedId(People.CONTENT_URI, personId));
                 startActivity(intent);
                 finish();
-            } else if (mMode == MODE_PICK_CONTACT 
+            } else if (mMode == MODE_PICK_CONTACT
                     || mMode == MODE_PICK_OR_CREATE_CONTACT) {
                 Uri uri = ContentUris.withAppendedId(People.CONTENT_URI, id);
                 if (mShortcutAction != null) {
@@ -1130,9 +1253,132 @@ public final class ContactsListActivity extends ListActivity
         }
     }
 
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+        case DIALOG_BT_PROGRESS:
+        case DIALOG_BT_PROGRESS_INDETERMINATE:
+            return createBluetoothProgressDialog(id);
+        }
+        return null;
+    }
+    /*************************************
+      Bluetooth transfer related UI - Start
+      ************************************ */
+    /** Dialog that displays the progress of the Put/Get */
+    private ProgressDialog mProgressDialog=null;
+    private int mProgressDlgId ;
+    private BluetoothObexTransfer.TransferProgressCallback mTransferProgressCallback = new BluetoothObexTransfer.TransferProgressCallback () {
+
+       public void onStart(boolean showCancelProgress) {
+          if(mBluetoothObexTransfer != null)
+          {
+             if (showCancelProgress) {
+                showDialog(DIALOG_BT_PROGRESS);
+             }
+             else
+             {
+                showDialog(DIALOG_BT_PROGRESS_INDETERMINATE);
+             }
+             if(mProgressHandler != null) {
+                mProgressHandler.sendEmptyMessage(0);
+             }
+          }
+       }
+
+       public void onUpdate() {
+           if(mProgressHandler != null) {
+              mProgressHandler.sendEmptyMessage(0);
+           }
+       }
+
+       public void onComplete() {
+           if(mProgressHandler != null) {
+              mProgressHandler.sendEmptyMessage(0);
+           }
+       }
+    };
+
+    private Handler mProgressHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (mProgressDialog != null) {
+               if(mBluetoothObexTransfer.isTransferinProgress()) {
+                  mProgressDialog.setTitle(mBluetoothObexTransfer.getActiveRemoteOPPServerName());
+                  mProgressDialog.setMessage(mBluetoothObexTransfer.getTransferFileMessage());
+                  if (! mProgressDialog.isIndeterminate()) {
+                     mProgressDialog.setMax((int)mBluetoothObexTransfer.getTotalBytes());
+                     mProgressDialog.setProgress((int)mBluetoothObexTransfer.getDoneBytes());
+                  }
+                  mProgressHandler.sendEmptyMessageDelayed(0, 200);
+               }
+               else
+               {
+                  removeDialog(mProgressDlgId);
+                  mProgressDialog=null;
+               }
+            }
+        }
+    };
+
+    private Dialog createBluetoothProgressDialog(int id) {
+       Dialog dlg = null;
+       if(mBluetoothObexTransfer != null)
+       {
+           mProgressDlgId = id;
+          /* If the transfer completed even before the progress dialog is launched,
+             no need to open the transfer progress
+             */
+          if(mBluetoothObexTransfer.isTransferinProgress()) {
+             mProgressDialog = new ProgressDialog(ContactsListActivity.this);
+
+             mProgressDialog.setTitle(mBluetoothObexTransfer.getActiveRemoteOPPServerName());
+             mProgressDialog.setMessage(mBluetoothObexTransfer.getTransferFileMessage());
+             mProgressDialog.setIcon(R.drawable.ic_bluetooth);
+             if(mProgressDlgId == DIALOG_BT_PROGRESS)
+             {
+                mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+
+                mProgressDialog.setMax((int)mBluetoothObexTransfer.getTotalBytes());
+                mProgressDialog.setProgress((int)mBluetoothObexTransfer.getDoneBytes());
+                mProgressDialog.setButton(DialogInterface.BUTTON_POSITIVE,
+                                          getText(R.string.cancel_transfer),
+                    new DialogInterface.OnClickListener() {
+                   @Override
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                      if(mBluetoothObexTransfer != null)
+                      {
+                         mBluetoothObexTransfer.progressCanceled();
+                      }
+                    }
+                }
+                );
+                mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                   @Override
+                   public void onCancel(DialogInterface dialog) {
+                      if(mBluetoothObexTransfer != null)
+                      {
+                         mBluetoothObexTransfer.progressCanceled();
+                      }
+                   }
+                }
+                );
+             }
+             else {
+                mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+             }
+          }
+       }
+       return mProgressDialog;
+    }
+    /*************************************
+      Bluetooth transfer related UI - End
+      ************************************ */
+
     private void returnPickerResult(Cursor c, String name, Uri uri, long id) {
         final Intent intent = new Intent();
-    
+
         if (mShortcutAction != null) {
             Intent shortcutIntent;
             if (Intent.ACTION_VIEW.equals(mShortcutAction)) {
@@ -1162,11 +1408,11 @@ public final class ContactsListActivity extends ListActivity
                 // Make the URI a direct tel: URI so that it will always continue to work
                 Uri phoneUri = Uri.fromParts(scheme, number, null);
                 shortcutIntent = new Intent(mShortcutAction, phoneUri);
-                
+
                 Uri personUri = ContentUris.withAppendedId(People.CONTENT_URI, id);
                 intent.putExtra(Intent.EXTRA_SHORTCUT_ICON,
                         generatePhoneNumberIcon(personUri, type, resid));
-                
+
             }
             shortcutIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
@@ -1278,7 +1524,7 @@ public final class ContactsListActivity extends ListActivity
             return null;
         }
     }
-    
+
     String[] getProjection() {
         switch (mMode) {
             case MODE_GROUP:
@@ -1320,10 +1566,10 @@ public final class ContactsListActivity extends ListActivity
             return NAME_COLUMN + " COLLATE LOCALIZED ASC";
         }
     }
-    
+
     void startQuery() {
         mAdapter.setLoading(true);
-        
+
         // Cancel any pending queries
         mQueryHandler.cancelOperation(QUERY_TOKEN);
 
@@ -1356,7 +1602,7 @@ public final class ContactsListActivity extends ListActivity
                         getSortOrder(CONTACTS_PROJECTION));
                 break;
             }
-            
+
             case MODE_QUERY_PICK_TO_VIEW: {
                 if (mQueryMode == QUERY_MODE_MAILTO) {
                     // Find all contacts with the given search string as either
@@ -1367,7 +1613,7 @@ public final class ContactsListActivity extends ListActivity
                     mQueryHandler.startQuery(QUERY_TOKEN, null,
                             uri, SIMPLE_CONTACTS_PROJECTION, null, null,
                             getSortOrder(CONTACTS_PROJECTION));
-                    
+
                 } else if (mQueryMode == QUERY_MODE_TEL) {
                     mQueryPersonIdIndex = PHONES_PERSON_ID_INDEX;
                     mQueryHandler.startQuery(QUERY_TOKEN, null,
@@ -1377,7 +1623,7 @@ public final class ContactsListActivity extends ListActivity
                 }
                 break;
             }
-            
+
             case MODE_STARRED:
                 mQueryHandler.startQuery(QUERY_TOKEN, null, People.CONTENT_URI,
                         CONTACTS_PROJECTION,
@@ -1413,7 +1659,7 @@ public final class ContactsListActivity extends ListActivity
 
     /**
      * Called from a background thread to do the filter and return the resulting cursor.
-     * 
+     *
      * @param filter the text that was entered to filter on
      * @return a cursor with the results of the filter
      */
@@ -1455,7 +1701,7 @@ public final class ContactsListActivity extends ListActivity
                 return resolver.query(getPeopleFilterUri(filter), CONTACTS_PROJECTION,
                         People.TIMES_CONTACTED + " > 0", null,
                         People.TIMES_CONTACTED + " DESC, " + getSortOrder(CONTACTS_PROJECTION));
-                
+
             }
 
             case MODE_STREQUENT: {
@@ -1555,12 +1801,12 @@ public final class ContactsListActivity extends ListActivity
             // Add All Contacts
             groups.add(DISPLAY_GROUP_INDEX_ALL_CONTACTS, getString(R.string.showAllGroups));
             prefStrings.add("");
-            
+
             // Add Contacts with phones
             groups.add(DISPLAY_GROUP_INDEX_ALL_CONTACTS_WITH_PHONES,
                     getString(R.string.groupNameWithPhones));
             prefStrings.add(GROUP_WITH_PHONES);
-            
+
             int currentIndex = DISPLAY_GROUP_INDEX_ALL_CONTACTS;
             while (cursor.moveToNext()) {
                 String systemId = cursor.getString(GROUPS_COLUMN_INDEX_SYSTEM_ID);
@@ -1614,9 +1860,9 @@ public final class ContactsListActivity extends ListActivity
             final ContactsListActivity activity = mActivity.get();
             if (activity != null && !activity.isFinishing()) {
                 activity.mAdapter.setLoading(false);
-                activity.getListView().clearTextFilter();                
+                activity.getListView().clearTextFilter();
                 activity.mAdapter.changeCursor(cursor);
-                
+
                 // Now that the cursor is populated again, it's possible to restore the list state
                 if (activity.mListState != null) {
                     activity.mList.onRestoreInstanceState(activity.mListState);
@@ -1643,7 +1889,7 @@ public final class ContactsListActivity extends ListActivity
         public ImageView photoView;
     }
 
-    private final class ContactItemListAdapter extends ResourceCursorAdapter 
+    private final class ContactItemListAdapter extends ResourceCursorAdapter
             implements SectionIndexer {
         private SectionIndexer mIndexer;
         private String mAlphabet;
@@ -1656,9 +1902,9 @@ public final class ContactsListActivity extends ListActivity
 
         public ContactItemListAdapter(Context context) {
             super(context, R.layout.contacts_list_item, null, false);
-            
+
             mAlphabet = context.getString(com.android.internal.R.string.fast_scroll_alphabet);
-            
+
             mUnknownNameText = context.getText(android.R.string.unknownName);
             switch (mMode) {
                 case MODE_PICK_POSTAL:
@@ -1670,7 +1916,7 @@ public final class ContactsListActivity extends ListActivity
                             Contacts.KIND_PHONE);
                     break;
             }
-            
+
             if ((mMode & MODE_MASK_SHOW_PHOTOS) == MODE_MASK_SHOW_PHOTOS) {
                 mDisplayPhotos = true;
                 setViewResource(R.layout.contacts_list_item_photo);
@@ -1685,11 +1931,11 @@ public final class ContactsListActivity extends ListActivity
                 return new AlphabetIndexer(cursor, NAME_COLUMN_INDEX, mAlphabet);
             }
         }
-        
+
         /**
          * Callback on the UI thread when the content observer on the backing cursor fires.
          * Instead of calling requery we need to do an async query so that the requery doesn't
-         * block the UI thread for a long time. 
+         * block the UI thread for a long time.
          */
         @Override
         protected void onContentChanged() {
@@ -1703,7 +1949,7 @@ public final class ContactsListActivity extends ListActivity
                 startQuery();
             }
         }
-        
+
         public void setLoading(boolean loading) {
             mLoading = loading;
         }
@@ -1743,7 +1989,7 @@ public final class ContactsListActivity extends ListActivity
             // Handle the separator specially
             if (position == mFrequentSeparatorPos) {
                 LayoutInflater inflater =
-                        (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE); 
+                        (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 TextView view = (TextView) inflater.inflate(R.layout.list_separator, parent, false);
                 view.setText(R.string.favoritesFrquentSeparator);
                 return view;
@@ -1752,7 +1998,7 @@ public final class ContactsListActivity extends ListActivity
             if (!mCursor.moveToPosition(getRealPosition(position))) {
                 throw new IllegalStateException("couldn't move cursor to position " + position);
             }
-            
+
             View v;
             if (convertView == null) {
                 v = newView(mContext, mCursor, parent);
@@ -1781,8 +2027,8 @@ public final class ContactsListActivity extends ListActivity
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
             final ContactListItemCache cache = (ContactListItemCache) view.getTag();
-            
-            // Set the name           
+
+            // Set the name
             cursor.copyStringToBuffer(NAME_COLUMN_INDEX, cache.nameBuffer);
             int size = cache.nameBuffer.sizeCopied;
             if (size != 0) {
@@ -1790,7 +2036,7 @@ public final class ContactsListActivity extends ListActivity
             } else {
                 cache.nameView.setText(mUnknownNameText);
             }
-            
+
             // Bail out early if using a specific SEARCH query mode, usually for
             // matching a specific E-mail or phone number. Any contact details
             // shown would be identical, and columns might not even be present
@@ -1801,7 +2047,7 @@ public final class ContactsListActivity extends ListActivity
                 cache.presenceView.setVisibility(View.GONE);
                 return;
             }
-            
+
             // Set the phone number
             TextView numberView = cache.numberView;
             TextView labelView = cache.labelView;
@@ -1915,7 +2161,7 @@ public final class ContactsListActivity extends ListActivity
                 mBitmapCache.clear();
             }
         }
-        
+
         private void updateIndexer(Cursor cursor) {
             if (mIndexer == null) {
                 mIndexer = getNewIndexer(cursor);
@@ -1935,7 +2181,7 @@ public final class ContactsListActivity extends ListActivity
                 }
             }
         }
-        
+
         /**
          * Run the query on a helper thread. Beware that this code does not run
          * on the main UI thread!
@@ -1944,7 +2190,7 @@ public final class ContactsListActivity extends ListActivity
         public Cursor runQueryOnBackgroundThread(CharSequence constraint) {
             return doFilter(constraint.toString());
         }
-        
+
         public Object [] getSections() {
             if (mMode == MODE_STREQUENT) {
                 return new String[] { " " };
@@ -1995,7 +2241,7 @@ public final class ContactsListActivity extends ListActivity
                 return super.getCount();
             }
         }
-        
+
         private int getRealPosition(int pos) {
             if (mFrequentSeparatorPos == ListView.INVALID_POSITION) {
                 // No separator, identity map
@@ -2007,17 +2253,17 @@ public final class ContactsListActivity extends ListActivity
                 // After the separator, remove 1 from the pos to get the real underlying pos
                 return pos - 1;
             }
-            
+
         }
-        
+
         @Override
         public Object getItem(int pos) {
             return super.getItem(getRealPosition(pos));
         }
-        
+
         @Override
         public long getItemId(int pos) {
-            return super.getItemId(getRealPosition(pos)); 
+            return super.getItemId(getRealPosition(pos));
         }
     }
 }

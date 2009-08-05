@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2006 The Android Open Source Project
+     Copyright (c) 2009, Code Aurora Forum. All rights reserved.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -18,6 +19,8 @@
         package="com.android.contacts"
         android:sharedUserId="android.uid.shared"
 >
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.CALL_PRIVILEGED" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
@@ -366,6 +369,11 @@
                 <action android:name="android.intent.action.CREATE_LIVE_FOLDER" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".bluetooth.BluetoothDevicePicker"
+                  android:label="@string/bluetooth_device_picker_title"
+                  android:theme="@android:style/Theme.NoTitleBar">
         </activity>
 
         <activity android:name=".ImportVCardActivity"

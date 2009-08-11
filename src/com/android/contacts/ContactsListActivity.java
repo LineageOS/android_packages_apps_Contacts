@@ -840,11 +840,10 @@ public final class ContactsListActivity extends ListActivity
         menu.add(0, MENU_IMPORT_CONTACTS, 0, R.string.importFromSim)
                 .setIcon(R.drawable.ic_menu_import_contact);
 
-        /* Temporarily commented out
         if (getResources().getBoolean(R.bool.config_allow_export_to_sdcard)) {
             menu.add(0, MENU_EXPORT_CONTACTS, 0, R.string.export_contact_list)
                     .setIcon(R.drawable.ic_menu_export_contact);
-        }*/
+        }
 
         // Bluetooth transfer
         SubMenu sub = menu.addSubMenu(MENU_GROUP_BT, 0 , 0, R.string.menu_pull);
@@ -964,8 +963,8 @@ public final class ContactsListActivity extends ListActivity
                 }
                 return true;
 
-            /*case MENU_EXPORT_CONTACTS:
-                handleExportContacts();*/
+            case MENU_EXPORT_CONTACTS:
+                handleExportContacts();
         }
         return false;
     }
@@ -982,12 +981,11 @@ public final class ContactsListActivity extends ListActivity
         startActivity(intent);
     }
 
-    /*
     private void handleExportContacts() {
         VCardExporter exporter = new VCardExporter(ContactsListActivity.this, mHandler);
         exporter.startExportVCardToSdCard();
-    }*/
-
+    }
+    
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
             Intent data) {
@@ -1408,8 +1406,10 @@ public final class ContactsListActivity extends ListActivity
                 // Make the URI a direct tel: URI so that it will always continue to work
                 Uri phoneUri = Uri.fromParts(scheme, number, null);
                 shortcutIntent = new Intent(mShortcutAction, phoneUri);
-
-                Uri personUri = ContentUris.withAppendedId(People.CONTENT_URI, id);
+                
+                // Find the People._ID for this phone number
+                final long personId = c.getLong(PHONES_PERSON_ID_INDEX);
+                Uri personUri = ContentUris.withAppendedId(People.CONTENT_URI, personId);
                 intent.putExtra(Intent.EXTRA_SHORTCUT_ICON,
                         generatePhoneNumberIcon(personUri, type, resid));
 

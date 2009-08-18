@@ -31,6 +31,7 @@ import android.syncml.pim.vcard.ContactStruct;
 import android.syncml.pim.vcard.VCardComposer;
 import android.syncml.pim.vcard.VCardException;
 import android.syncml.pim.vcard.VCardParser;
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.ByteArrayInputStream;
@@ -38,7 +39,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-import android.text.TextUtils;
 
 
 /**
@@ -50,6 +50,7 @@ import android.text.TextUtils;
  */
 public class VCardManager {
    static private final String TAG = "VCardManager";
+   static private final String UNKOWN_NAME_STRING = "Unknown";
    static private final boolean V = false;
    static private final boolean ADD_CONTACT_TO_MYCONTACTSGROUP = true;
 
@@ -119,10 +120,10 @@ public class VCardManager {
     *
     * @return the Name
     */
-   public String getName() {
-       Log.v(TAG, "getName");
-      return(String) mPeople.get(Contacts.People.NAME);
-   }
+    public String getName() {
+        Log.v(TAG, "getName");
+        return(String) mPeople.get(Contacts.People.NAME);
+    }
 
    /**
     * Save content to content provider.
@@ -135,12 +136,9 @@ public class VCardManager {
           *  Create the Contact in the data base
           */
          Uri uri;
-         if (ADD_CONTACT_TO_MYCONTACTSGROUP)
-         {
+         if (ADD_CONTACT_TO_MYCONTACTSGROUP) {
              uri = Contacts.People.createPersonInMyContactsGroup(mResolver, mPeople);
-         }
-         else
-         {
+         } else {
              uri = mResolver.insert(Contacts.People.CONTENT_URI, mPeople);
          }
          /**
@@ -174,41 +172,42 @@ public class VCardManager {
     *
     * @return None
     */
-   private void parse(String data) {
-      VCardParser mParser = new VCardParser();
-      VDataBuilder builder = new VDataBuilder();
+    private void parse(String data) {
+        VCardParser parser = new VCardParser();
+        VDataBuilder builder = new VDataBuilder();
 
-      mContactMethodList = new ArrayList<ContentValues>();
-      mPhoneList = new ArrayList<ContentValues>();
-      mOrganizationList = new ArrayList<ContentValues>();
-      mPeople = new ContentValues();
+        mContactMethodList = new ArrayList<ContentValues>();
+        mPhoneList = new ArrayList<ContentValues>();
+        mOrganizationList = new ArrayList<ContentValues>();
+        mPeople = new ContentValues();
 
-      if (data != null) {
-         /* Try to parse with the original VCard parser implementation */
-         try {
-            mParser.parse(data, builder);
-         } catch (VCardException e) {
-             /* If the VCard parser threw an exception, try to parse all the fields that can be parsed and
-              * ignore the rest, without aborting the parsing.
-              */
-            LocalVCardParser_V21 mParser21 = new LocalVCardParser_V21();
+        if (data != null) {
+            /* Try to parse with the original VCard parser implementation */
             try {
-               mParser21.parse(new ByteArrayInputStream(data.getBytes()), "US-ASCII", builder);
-             } catch (VCardException e1) {
-                 Log.e(TAG, e1.getMessage(), e1);
-             }
-           catch (IOException e1) {
-                 Log.e(TAG, e1.getMessage(), e1);
-           }
-         } catch (IOException e) {
-            Log.e(TAG, e.getMessage(), e);
-         }
+                parser.parse(data, builder);
+            } catch (VCardException e) {
+                /* If the VCard parser threw an exception, try to parse all the
+                 * fields that can be parsed and
+                 * ignore the rest, without aborting the parsing.
+                 */
+                LocalVCardParser_V21 parser21 = new LocalVCardParser_V21();
+                try {
+                    parser21.parse(new ByteArrayInputStream(data.getBytes()),
+                            "US-ASCII", builder);
+                } catch (VCardException e1) {
+                    Log.e(TAG, e1.getMessage(), e1);
+                } catch (IOException e1) {
+                    Log.e(TAG, e1.getMessage(), e1);
+                }
+            } catch (IOException e) {
+                Log.e(TAG, e.getMessage(), e);
+            }
 
-         for (VNode vnode : builder.vNodeList) {
-            setContactsValue(vnode);
-         }
-      }
-   }
+            for (VNode vnode : builder.vNodeList) {
+                setContactsValue(vnode);
+            }
+        }
+    }
 
    /**
     * Parse each node in the vCard String into local member
@@ -524,7 +523,11 @@ public class VCardManager {
 
                if (isPrimary != 0) {
                   if (contactStruct.name == null || TextUtils.isEmpty(contactStruct.name)) {
-                      contactStruct.name = data;
+                      if (data == null || TextUtils.isEmpty(data)) {
+                          contactStruct.name = UNKOWN_NAME_STRING;
+                      } else {
+                          contactStruct.name = data;
+                      }
                   }
                }
                if (V) {
@@ -577,6 +580,11 @@ public class VCardManager {
       // Generate vCard data.
       try {
          VCardComposer composer = new VCardComposer();
+
+         if (contactStruct.name == null || TextUtils.isEmpty(contactStruct.name)) {
+            contactStruct.name = UNKOWN_NAME_STRING;
+         }
+
          return composer.createVCard(contactStruct,
                                      VCardParser.VERSION_VCARD21_INT);
       } catch (VCardException e) {

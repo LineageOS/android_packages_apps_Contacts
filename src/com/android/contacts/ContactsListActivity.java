@@ -1343,7 +1343,6 @@ public final class ContactsListActivity extends ListActivity
                 mProgressDialog.setButton(DialogInterface.BUTTON_POSITIVE,
                                           getText(R.string.cancel_transfer),
                     new DialogInterface.OnClickListener() {
-                   @Override
                     public void onClick(DialogInterface dialog, int whichButton) {
                       if(mBluetoothObexTransfer != null)
                       {
@@ -1353,7 +1352,6 @@ public final class ContactsListActivity extends ListActivity
                 }
                 );
                 mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                   @Override
                    public void onCancel(DialogInterface dialog) {
                       if(mBluetoothObexTransfer != null)
                       {

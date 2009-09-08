@@ -262,6 +262,7 @@ public class RecentCallsListActivity extends ListActivity
         public void stopRequestProcessing() {
             mDone = true;
             if (mCallerIdThread != null) mCallerIdThread.interrupt();
+            mHandler.removeMessages(START_THREAD);
         }
 
         public void clearCache() {

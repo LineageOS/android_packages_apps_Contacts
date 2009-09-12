@@ -18,34 +18,10 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- Bluetooth related strings  -->
-    <string name="transfer_progress"><xliff:g id="progress_text">%s</xliff:g></string>
-    <string name="transfer_complete">Transfer Completed</string>
-    <string name="cancel_tx_rx_transfer">Bluetooth Send and Receive Canceled</string>
-    <string name="cancel_tx_transfer">Bluetooth Send Canceled</string>
-    <string name="cancel_rx_transfer">Bluetooth Receive Canceled</string>
-    <string name="sending_progress_one">Sending Contact <xliff:g id="send_progress_one_text">%s</xliff:g></string>
-    <string name="sending_progress_more">Sending <xliff:g id="send_progress_more_text">%s</xliff:g> contacts </string>
-    <string name="get_progress_one">Receiving Business Card </string>
-    <string name="get_progress_more">Receiving <xliff:g id="rx_progress_more_text">%s</xliff:g> Business Cards </string>
-    <string name="receive_contact_done">Received Business Card for Contact : <xliff:g id="receive_sontact_text">%s</xliff:g></string>
-    <string name="opp_sending_failed">Error in sending <xliff:g id="send_failed_text">%s</xliff:g> to <xliff:g id="device_name">%s</xliff:g></string>
-    <string name="opp_get_failed">Error in receiving Contact from <xliff:g id="device_name">%s</xliff:g></string>
-
-    <string name="cancel_transfer">Cancel</string>
     <string name="menu_share">Share</string>
     <string name="menu_pull">Pull contacts</string>
     <string name="menu_send_bt">Send using Bluetooth</string>
     <string name="menu_get_bt">Get using Bluetooth</string>
-
-    <string name="bluetooth_device_picker_title">Select a Device</string>
-    <!--Bluetooth settings screen, text that appears in heading bar when scanning for devices -->
-    <string name="progress_scanning">Scanning</string>
-    <!-- Bluetooth settings screen, menu item to scan for nearby bluetooth devices -->
-    <string name="bluetooth_scan_for_devices">Scan for devices</string>
-    <!-- Title for BT error dialogs. -->
-    <string name="bluetooth_error_title">Attention</string>
-    <!-- Message for the error dialog when BT connecting operation fails generically. -->
-    <string name="bluetooth_connecting_error_message">There was a problem connecting to <xliff:g id="device_name">%1$s</xliff:g>.</string>
 
     <!-- Title for the activity that shows contacts.  This is the name
          used in the Launcher icon. -->

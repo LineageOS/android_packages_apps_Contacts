@@ -371,11 +371,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".bluetooth.BluetoothDevicePicker"
-                  android:label="@string/bluetooth_device_picker_title"
-                  android:theme="@android:style/Theme.NoTitleBar">
-        </activity>
-
         <activity android:name=".ImportVCardActivity"
             android:theme="@style/BackgroundOnly" />
 

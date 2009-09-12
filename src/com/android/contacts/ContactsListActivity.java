@@ -81,6 +81,7 @@ import android.widget.ListView;
 import android.widget.ResourceCursorAdapter;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
@@ -88,12 +89,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 /** Bluetooth Transfer related import */
-import android.app.Dialog;
-import android.os.Handler;
-import android.os.Message;
-import android.app.ProgressDialog;
-import com.android.contacts.bluetooth.BluetoothObexTransfer;
-import com.android.contacts.bluetooth.BluetoothDevicePicker;
+import android.bluetooth.BluetoothDevice;
 
 /**
  * Displays a list of contacts. Usually is embedded into the ContactsActivity.
@@ -127,12 +123,20 @@ public final class ContactsListActivity extends ListActivity
     static final int MENU_ITEM_GET_BT  = 15;
     static final int MENU_GROUP_BT = 1;
 
-    private static final int DIALOG_BT_PROGRESS = 1;
-    private static final int DIALOG_BT_PROGRESS_INDETERMINATE = 2;
-
     private static final int SUBACTIVITY_NEW_CONTACT = 1;
-    private static final int SUBACTIVITY_PICK_SEND_BT_DEVICE = 2;
-    private static final int SUBACTIVITY_PICK_GET_BT_DEVICE = 3;
+
+    /**
+     * For transfering contact over Bluetooth
+     */
+    private BluetoothDevice mBluetooth = null;
+
+    public static final String PACKAGE_BLUETOOTH_TRANSFER = "com.quicinc.bluetooth";
+    public static final String COMPONENT_BLUETOOTH_TRANSFER = "com.quicinc.bluetooth.BluetoothDevicePicker";
+    public static final String PROFILE = "com.quicinc.bluetooth.intent.PROFILE";
+    public static final String PROFILE_OPP = "com.quicinc.bluetooth.intent.PROFILE.OPP";
+
+    public static final String ACTION_PUSH_BUSINESS_CARD = "com.quicinc.bluetooth.ACTION_PUSH_BUSINESS_CARD";
+    public static final String ACTION_PULL_BUSINESS_CARD = "com.quicinc.bluetooth.ACTION_PULL_BUSINESS_CARD";
 
     /** Mask for picker mode */
     static final int MODE_MASK_PICKER = 0x80000000;
@@ -367,13 +371,6 @@ public final class ContactsListActivity extends ListActivity
         }
     }
 
-    /**
-     * For transfering contact over Bluetooth
-     */
-    private BluetoothObexTransfer mBluetoothObexTransfer = null;
-
-    public final boolean StandAloneUITesting = true;
-
     private class DeleteClickListener implements DialogInterface.OnClickListener {
         private Uri mUri;
 
@@ -572,7 +569,7 @@ public final class ContactsListActivity extends ListActivity
          * For transfering contact over Bluetooth
          */
         if (SystemProperties.getBoolean("ro.qualcomm.proprietary_obex", false)) {
-            mBluetoothObexTransfer = new BluetoothObexTransfer(ContactsListActivity.this, mTransferProgressCallback);
+           mBluetooth = (BluetoothDevice) getSystemService(Context.BLUETOOTH_SERVICE);
         }
     }
 
@@ -753,14 +750,6 @@ public final class ContactsListActivity extends ListActivity
         }
     }
 
-    @Override
-    protected void onDestroy() {
-       super.onDestroy();
-       if(mBluetoothObexTransfer != null) {
-          mBluetoothObexTransfer.onDestroy();
-       }
-    }
-
     private void updateGroup() {
         if (mDefaultMode) {
             setDefaultMode();
@@ -845,14 +834,16 @@ public final class ContactsListActivity extends ListActivity
                     .setIcon(R.drawable.ic_menu_export_contact);
         }
 
-        // Bluetooth transfer
+        /**
+         * Add menu for transfering contact over Bluetooth
+         */
         SubMenu sub = menu.addSubMenu(MENU_GROUP_BT, 0 , 0, R.string.menu_pull);
         sub.setIcon(android.R.drawable.ic_menu_share);
         sub.add(MENU_GROUP_BT,MENU_ITEM_GET_BT,0, R.string.menu_get_bt);
 
         boolean bluetoothEnabled = false;
-        if (mBluetoothObexTransfer != null) {
-           bluetoothEnabled = mBluetoothObexTransfer.isBluetoothEnabled();
+        if (mBluetooth != null) {
+           bluetoothEnabled = mBluetooth.isEnabled();
         }
         menu.setGroupEnabled(MENU_GROUP_BT, bluetoothEnabled);
         menu.setGroupVisible(MENU_GROUP_BT, bluetoothEnabled);
@@ -864,8 +855,8 @@ public final class ContactsListActivity extends ListActivity
     public boolean onPrepareOptionsMenu(Menu menu) {
        super.onPrepareOptionsMenu(menu);
        boolean bluetoothEnabled = false;
-       if (mBluetoothObexTransfer != null) {
-          bluetoothEnabled = mBluetoothObexTransfer.isBluetoothEnabled();
+       if (mBluetooth != null) {
+          bluetoothEnabled = mBluetooth.isEnabled();
        }
        menu.setGroupEnabled(MENU_GROUP_BT, bluetoothEnabled);
        menu.setGroupVisible(MENU_GROUP_BT, bluetoothEnabled);
@@ -932,6 +923,10 @@ public final class ContactsListActivity extends ListActivity
                 startSearch(null, false, null, false);
                 return true;
 
+            case MENU_ITEM_GET_BT:
+                doBluetoothDeviceTransfer(ACTION_PULL_BUSINESS_CARD, null);
+                return true;
+
             case MENU_IMPORT_CONTACTS:
                 if (getResources().getBoolean(R.bool.config_allow_import_from_sdcard)) {
                     ImportTypeSelectedListener listener =
@@ -947,19 +942,6 @@ public final class ContactsListActivity extends ListActivity
                     dialogBuilder.show();
                 } else {
                     doImportFromSim();
-                }
-
-            case MENU_ITEM_GET_BT:
-                if (mBluetoothObexTransfer != null) {
-                    if (mBluetoothObexTransfer.isBluetoothEnabled()) {
-                        Intent intent = new Intent(this, BluetoothDevicePicker.class);
-                        intent.setAction(BluetoothDevicePicker.ACTION_SELECT_BLUETOOTH_DEVICE);
-                        try {
-                            startActivityForResult(intent, SUBACTIVITY_PICK_GET_BT_DEVICE);
-                        } catch (ActivityNotFoundException e) {
-                            Log.e(TAG, "No Activity for : " + BluetoothDevicePicker.ACTION_SELECT_BLUETOOTH_DEVICE, e);
-                        }
-                    }
                 }
                 return true;
 
@@ -981,11 +963,29 @@ public final class ContactsListActivity extends ListActivity
         startActivity(intent);
     }
 
+    private void doBluetoothDeviceTransfer(String action, Uri uri) {
+       if (SystemProperties.getBoolean("ro.qualcomm.proprietary_obex", false)) {
+          if (mBluetooth != null) {
+              if (mBluetooth.isEnabled()) {
+                  Intent intent = new Intent(action);
+                  intent.setData(uri);
+                  intent.putExtra(PROFILE, PROFILE_OPP);
+                  intent.setClassName ("com.quicinc.bluetooth", "com.quicinc.bluetooth.BluetoothDevicePicker");
+                  try {
+                      startActivity(intent);
+                  } catch (ActivityNotFoundException e) {
+                      Log.e(TAG, "No Activity for : " + action, e);
+                  }
+              }
+          }
+       }
+    }
+
     private void handleExportContacts() {
         VCardExporter exporter = new VCardExporter(ContactsListActivity.this, mHandler);
         exporter.startExportVCardToSdCard();
     }
-    
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
             Intent data) {
@@ -996,25 +996,6 @@ public final class ContactsListActivity extends ListActivity
                     returnPickerResult(null, data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME),
                             data.getData(), 0);
                 }
-                break;
-
-            case SUBACTIVITY_PICK_SEND_BT_DEVICE:
-            case SUBACTIVITY_PICK_GET_BT_DEVICE:
-                if (resultCode == RESULT_OK && data != null) {
-                    /* Initiate the transfer */
-                    if( mBluetoothObexTransfer != null) {
-                        // obtain the Server name and Address
-                        String devAddress = data.getStringExtra(BluetoothDevicePicker.ADDRESS);
-                        String devName = data.getStringExtra(BluetoothDevicePicker.NAME);
-                        Uri uri = data.getData();
-                        if(requestCode == SUBACTIVITY_PICK_SEND_BT_DEVICE) {
-                            mBluetoothObexTransfer.sendContact(uri, devAddress);
-                        } else if(requestCode == SUBACTIVITY_PICK_GET_BT_DEVICE) {
-                            mBluetoothObexTransfer.getContact(devAddress);
-                        }
-                    }
-                }//if(result Ok)
-                break;
         }
     }
 
@@ -1080,9 +1061,11 @@ public final class ContactsListActivity extends ListActivity
                 .setIntent(new Intent(Intent.ACTION_EDIT, personUri));
         menu.add(0, MENU_ITEM_DELETE, 0, R.string.menu_deleteContact);
 
-        // Bluetooth Transfer
-        if (mBluetoothObexTransfer != null) {
-           if (mBluetoothObexTransfer.isBluetoothEnabled()) {
+        /**
+         * Add menu for transfering contact over Bluetooth
+         */
+        if (mBluetooth != null) {
+           if (mBluetooth.isEnabled()) {
               menu.add(0,MENU_ITEM_SEND_BT,0, R.string.menu_send_bt);
            }
         }
@@ -1128,16 +1111,12 @@ public final class ContactsListActivity extends ListActivity
             case MENU_ITEM_SEND_BT: {
                 Uri uri = ContentUris.withAppendedId(People.CONTENT_URI,
                         cursor.getLong(ID_COLUMN_INDEX));
-                if (mBluetoothObexTransfer != null) {
-                    if (mBluetoothObexTransfer.isBluetoothEnabled()) {
-                        Intent intent = new Intent(this, BluetoothDevicePicker.class);
-                        intent.setAction(BluetoothDevicePicker.ACTION_SELECT_BLUETOOTH_DEVICE);
-                        intent.setData(uri);
-                        try {
-                            startActivityForResult(intent, SUBACTIVITY_PICK_SEND_BT_DEVICE);
-                        } catch (ActivityNotFoundException e) {
-                            Log.e(TAG, "No Activity for : " + BluetoothDevicePicker.ACTION_SELECT_BLUETOOTH_DEVICE, e);
-                        }
+                String name = cursor.getString(com.android.contacts.ContactEntryAdapter.CONTACT_NAME_COLUMN);
+                if (!TextUtils.isEmpty(name)) {
+                    doBluetoothDeviceTransfer(ACTION_PUSH_BUSINESS_CARD, uri);
+                } else {
+                    if (TextUtils.isEmpty(name)) {
+                        Toast.makeText(this, R.string.sim_entry_null, Toast.LENGTH_LONG).show();
                     }
                 }
                 return true;
@@ -1251,127 +1230,6 @@ public final class ContactsListActivity extends ListActivity
         }
     }
 
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-        case DIALOG_BT_PROGRESS:
-        case DIALOG_BT_PROGRESS_INDETERMINATE:
-            return createBluetoothProgressDialog(id);
-        }
-        return null;
-    }
-    /*************************************
-      Bluetooth transfer related UI - Start
-      ************************************ */
-    /** Dialog that displays the progress of the Put/Get */
-    private ProgressDialog mProgressDialog=null;
-    private int mProgressDlgId ;
-    private BluetoothObexTransfer.TransferProgressCallback mTransferProgressCallback = new BluetoothObexTransfer.TransferProgressCallback () {
-
-       public void onStart(boolean showCancelProgress) {
-          if(mBluetoothObexTransfer != null)
-          {
-             if (showCancelProgress) {
-                showDialog(DIALOG_BT_PROGRESS);
-             }
-             else
-             {
-                showDialog(DIALOG_BT_PROGRESS_INDETERMINATE);
-             }
-             if(mProgressHandler != null) {
-                mProgressHandler.sendEmptyMessage(0);
-             }
-          }
-       }
-
-       public void onUpdate() {
-           if(mProgressHandler != null) {
-              mProgressHandler.sendEmptyMessage(0);
-           }
-       }
-
-       public void onComplete() {
-           if(mProgressHandler != null) {
-              mProgressHandler.sendEmptyMessage(0);
-           }
-       }
-    };
-
-    private Handler mProgressHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (mProgressDialog != null) {
-               if(mBluetoothObexTransfer.isTransferinProgress()) {
-                  mProgressDialog.setTitle(mBluetoothObexTransfer.getActiveRemoteOPPServerName());
-                  mProgressDialog.setMessage(mBluetoothObexTransfer.getTransferFileMessage());
-                  if (! mProgressDialog.isIndeterminate()) {
-                     mProgressDialog.setMax((int)mBluetoothObexTransfer.getTotalBytes());
-                     mProgressDialog.setProgress((int)mBluetoothObexTransfer.getDoneBytes());
-                  }
-                  mProgressHandler.sendEmptyMessageDelayed(0, 200);
-               }
-               else
-               {
-                  removeDialog(mProgressDlgId);
-                  mProgressDialog=null;
-               }
-            }
-        }
-    };
-
-    private Dialog createBluetoothProgressDialog(int id) {
-       Dialog dlg = null;
-       if(mBluetoothObexTransfer != null)
-       {
-           mProgressDlgId = id;
-          /* If the transfer completed even before the progress dialog is launched,
-             no need to open the transfer progress
-             */
-          if(mBluetoothObexTransfer.isTransferinProgress()) {
-             mProgressDialog = new ProgressDialog(ContactsListActivity.this);
-
-             mProgressDialog.setTitle(mBluetoothObexTransfer.getActiveRemoteOPPServerName());
-             mProgressDialog.setMessage(mBluetoothObexTransfer.getTransferFileMessage());
-             mProgressDialog.setIcon(R.drawable.ic_bluetooth);
-             if(mProgressDlgId == DIALOG_BT_PROGRESS)
-             {
-                mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-
-                mProgressDialog.setMax((int)mBluetoothObexTransfer.getTotalBytes());
-                mProgressDialog.setProgress((int)mBluetoothObexTransfer.getDoneBytes());
-                mProgressDialog.setButton(DialogInterface.BUTTON_POSITIVE,
-                                          getText(R.string.cancel_transfer),
-                    new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                      if(mBluetoothObexTransfer != null)
-                      {
-                         mBluetoothObexTransfer.progressCanceled();
-                      }
-                    }
-                }
-                );
-                mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                   public void onCancel(DialogInterface dialog) {
-                      if(mBluetoothObexTransfer != null)
-                      {
-                         mBluetoothObexTransfer.progressCanceled();
-                      }
-                   }
-                }
-                );
-             }
-             else {
-                mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-             }
-          }
-       }
-       return mProgressDialog;
-    }
-    /*************************************
-      Bluetooth transfer related UI - End
-      ************************************ */
-
     private void returnPickerResult(Cursor c, String name, Uri uri, long id) {
         final Intent intent = new Intent();
 
@@ -1404,7 +1262,7 @@ public final class ContactsListActivity extends ListActivity
                 // Make the URI a direct tel: URI so that it will always continue to work
                 Uri phoneUri = Uri.fromParts(scheme, number, null);
                 shortcutIntent = new Intent(mShortcutAction, phoneUri);
-                
+
                 // Find the People._ID for this phone number
                 final long personId = c.getLong(PHONES_PERSON_ID_INDEX);
                 Uri personUri = ContentUris.withAppendedId(People.CONTENT_URI, personId);

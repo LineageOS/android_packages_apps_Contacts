@@ -178,8 +178,8 @@ public final class ContactsListActivity extends ListActivity
     static final int MODE_QUERY = 60 | MODE_MASK_NO_FILTER;
     /** Run a search query in PICK mode, but that still launches to VIEW */
     static final int MODE_QUERY_PICK_TO_VIEW = 65 | MODE_MASK_NO_FILTER | MODE_MASK_PICKER;
-
-    static final int DEFAULT_MODE = MODE_ALL_CONTACTS;
+    //Geesun
+    static final int DEFAULT_MODE = MODE_ALL_CONTACTS|MODE_MASK_SHOW_PHOTOS;
 
     /**
      * The type of data to display in the main contacts list.
@@ -1973,6 +1973,13 @@ public final class ContactsListActivity extends ListActivity
                             photo = BitmapFactory.decodeByteArray(photoData, 0,
                                     photoData.length);
                             mBitmapCache.put(pos, new SoftReference<Bitmap>(photo));
+                            //Geesun
+                            if(photo == null){
+                                int id = cursor.getInt(ID_COLUMN_INDEX);
+                                Uri uri = ContentUris.withAppendedId(People.CONTENT_URI, id);
+                                photo = People.loadContactPhoto(context, uri, R.drawable.ic_contact_list_picture, null);
+
+                            }
                         } catch (OutOfMemoryError e) {
                             // Not enough memory for the photo, use the default one instead
                             photo = null;

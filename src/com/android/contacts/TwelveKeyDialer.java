@@ -89,10 +89,9 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     private Object mToneGeneratorLock = new Object();
     private Drawable mDigitsBackground;
     private Drawable mDigitsEmptyBackground;
-    private Drawable mDeleteBackground;
-    private Drawable mDeleteEmptyBackground;
-    private View mDigitsAndBackspace;
     private View mDialpad;
+    private View mVoicemailDialAndDeleteRow;
+
     private ListView mDialpadChooser;
     private DialpadChooserAdapter mDialpadChooserAdapter;
 
@@ -145,14 +144,9 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
 
         // Set the proper background for the dial input area
         if (mDigits.length() != 0) {
-            mDelete.setBackgroundDrawable(mDeleteBackground);
             mDigits.setBackgroundDrawable(mDigitsBackground);
-            mDigits.setCompoundDrawablesWithIntrinsicBounds(
-                    getResources().getDrawable(R.drawable.ic_dial_number), null, null, null);
         } else {
-            mDelete.setBackgroundDrawable(mDeleteEmptyBackground);
             mDigits.setBackgroundDrawable(mDigitsEmptyBackground);
-            mDigits.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
         }
     }
 
@@ -166,13 +160,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         // Load up the resources for the text field and delete button
         Resources r = getResources();
         mDigitsBackground = r.getDrawable(R.drawable.btn_dial_textfield_active);
-        //mDigitsBackground.setDither(true);
         mDigitsEmptyBackground = r.getDrawable(R.drawable.btn_dial_textfield);
-        //mDigitsEmptyBackground.setDither(true);
-        mDeleteBackground = r.getDrawable(R.drawable.btn_dial_delete_active);
-        //mDeleteBackground.setDither(true);
-        mDeleteEmptyBackground = r.getDrawable(R.drawable.btn_dial_delete);
-        //mDeleteEmptyBackground.setDither(true);
 
         mDigits = (EditText) findViewById(R.id.digits);
         mDigits.setKeyListener(DialerKeyListener.getInstance());
@@ -186,13 +174,16 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
             setupKeypad();
         }
 
-        view = findViewById(R.id.backspace);
+        mVoicemailDialAndDeleteRow = findViewById(R.id.voicemailAndDialAndDelete);
+
+        view = mVoicemailDialAndDeleteRow.findViewById(R.id.deleteButton);
         view.setOnClickListener(this);
         view.setOnLongClickListener(this);
         mDelete = view;
 
-        mDigitsAndBackspace = (View) findViewById(R.id.digitsAndBackspace);
         mDialpad = (View) findViewById(R.id.dialpad);  // This is null in landscape mode
+
+        mDigits.setInputType(android.text.InputType.TYPE_NULL);
 
         // Set up the "dialpad chooser" UI; see showDialpadChooser().
         mDialpadChooser = (ListView) findViewById(R.id.dialpadChooser);
@@ -612,7 +603,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
                 keyPressed(KeyEvent.KEYCODE_STAR);
                 return;
             }
-            case R.id.backspace: {
+            case R.id.deleteButton: {
                 keyPressed(KeyEvent.KEYCODE_DEL);
                 return;
             }
@@ -627,7 +618,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         final Editable digits = mDigits.getText();
         int id = view.getId();
         switch (id) {
-            case R.id.backspace: {
+            case R.id.deleteButton: {
                 digits.clear();
                 return true;
             }
@@ -748,7 +739,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     private void showDialpadChooser(boolean enabled) {
         if (enabled) {
             // Log.i(TAG, "Showing dialpad chooser!");
-            mDigitsAndBackspace.setVisibility(View.GONE);
+            mDigits.setVisibility(View.GONE);
             if (mDialpad != null) mDialpad.setVisibility(View.GONE);
             mDialpadChooser.setVisibility(View.VISIBLE);
 
@@ -760,7 +751,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
             }
         } else {
             // Log.i(TAG, "Displaying normal Dialer UI.");
-            mDigitsAndBackspace.setVisibility(View.VISIBLE);
+            mDigits.setVisibility(View.VISIBLE);
             if (mDialpad != null) mDialpad.setVisibility(View.VISIBLE);
             mDialpadChooser.setVisibility(View.GONE);
         }

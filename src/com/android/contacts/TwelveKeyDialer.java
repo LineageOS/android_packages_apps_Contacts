@@ -91,6 +91,8 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     private Drawable mDigitsEmptyBackground;
     private View mDialpad;
     private View mVoicemailDialAndDeleteRow;
+    private View mVoicemailButton;
+    private View mDialButton;
 
     private ListView mDialpadChooser;
     private DialpadChooserAdapter mDialpadChooserAdapter;
@@ -175,6 +177,18 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         }
 
         mVoicemailDialAndDeleteRow = findViewById(R.id.voicemailAndDialAndDelete);
+
+        initVoicemailButton();
+
+        // Check whether we should show the onscreen "Dial" button.
+        mDialButton = mVoicemailDialAndDeleteRow.findViewById(R.id.dialButton);
+
+//      if (r.getBoolean(R.bool.config_show_onscreen_dial_button)) {
+            mDialButton.setOnClickListener(this);
+//      } else {
+//          mDialButton.setVisibility(View.GONE); // It's VISIBLE by default
+//          mDialButton = null;
+//      }
 
         view = mVoicemailDialAndDeleteRow.findViewById(R.id.deleteButton);
         view.setOnClickListener(this);
@@ -607,8 +621,18 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
                 keyPressed(KeyEvent.KEYCODE_DEL);
                 return;
             }
-            case R.id.digits: {
+            case R.id.dialButton: {
                 placeCall();
+                return;
+            }
+            case R.id.voicemailButton: {
+                callVoicemail();
+                return;
+            }
+            case R.id.digits: {
+                if (mDigits.length() != 0) {
+                    mDigits.setCursorVisible(true);
+                }
                 return;
             }
         }
@@ -932,4 +956,21 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         }
         return phoneInUse;
     }
+
+    private void initVoicemailButton() {
+        boolean hasVoicemail = false;
+        try {
+            hasVoicemail = TelephonyManager.getDefault().getVoiceMailNumber() != null;
+        } catch (SecurityException se) {
+            // Possibly no READ_PHONE_STATE privilege.
+        }
+
+        mVoicemailButton = mVoicemailDialAndDeleteRow.findViewById(R.id.voicemailButton);
+        if (hasVoicemail) {
+            mVoicemailButton.setOnClickListener(this);
+        } else {
+            mVoicemailButton.setEnabled(false);
+        }
+    }
+
 }

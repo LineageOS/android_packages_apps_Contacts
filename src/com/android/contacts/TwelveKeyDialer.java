@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.ComponentName;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -170,6 +171,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         mDigits.setKeyListener(DialerKeyListener.getInstance());
         mDigits.setOnClickListener(this);
         mDigits.setOnKeyListener(this);
+        mDigits.setCursorVisible(false);
         maybeAddNumberFormatting();
 
         // Check for the presence of the keypad
@@ -378,7 +380,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     @Override
     protected void onResume() {
         super.onResume();
-        
+
         // retrieve the DTMF tone play back setting.
         mDTMFToneEnabled = Settings.System.getInt(getContentResolver(),
                 Settings.System.DTMF_TONE_WHEN_DIALING, 1) == 1;
@@ -443,7 +445,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
             // have a window token yet in onCreate / onNewIntent
             InputMethodManager inputMethodManager = (InputMethodManager)
                     getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(mDigits.getWindowToken(), 0);            
+            inputMethodManager.hideSoftInputFromWindow(mDigits.getWindowToken(), 0);
         }
     }
 

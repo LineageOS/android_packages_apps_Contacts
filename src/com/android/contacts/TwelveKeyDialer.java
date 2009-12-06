@@ -21,6 +21,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.content.ComponentName;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -34,6 +35,7 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
+import android.os.Vibrator;
 import android.provider.Contacts.Intents.Insert;
 import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
@@ -662,10 +664,18 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     }
 
     void callVoicemail() {
-        Intent intent = new Intent(Intent.ACTION_CALL_PRIVILEGED,
-                Uri.fromParts("voicemail", "", null));
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        ComponentName component = new ComponentName("com.oz.mobile.android.voicemail.application", "com.oz.mobile.android.voicemail.ui.InboxUILayout");
+        intent.setComponent(component);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            intent = new Intent(Intent.ACTION_CALL_PRIVILEGED,
+                    Uri.fromParts("voicemail", "", null));
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
         mDigits.getText().clear();
         finish();
     }

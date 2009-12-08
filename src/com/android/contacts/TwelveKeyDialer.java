@@ -667,7 +667,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
 
     void callVoicemail() {
         Intent intent = new Intent(Intent.ACTION_MAIN);
-        ComponentName component = new ComponentName("com.oz.mobile.android.voicemail.application", "com.oz.mobile.android.voicemail.ui.InboxUILayout");
+        ComponentName component = new ComponentName("com.oz.mobile.android.voicemail.application", "com.oz.mobile.android.voicemail.application.application");
         intent.setComponent(component);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         try {

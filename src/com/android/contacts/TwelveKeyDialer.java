@@ -1022,6 +1022,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     
     //Wysie_Soh: add to contacts button / voicemail depending on what is set
     private void initVoicemailButton() {
+    	Log.d("Testing", "1");
     	mVoicemailButton = (ImageButton)mVoicemailDialAndDeleteRow.findViewById(R.id.voicemailButton);
     	leftButtonType = DialerSettings.getLeftButtonType(this);
     	

@@ -87,7 +87,6 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     private static final int TONE_RELATIVE_VOLUME = 50;
 
     private EditText mDigits;
-    private View mDelete;
     private MenuItem mAddToContactMenuItem, mPreferences;
     private ToneGenerator mToneGenerator;
     private Object mToneGeneratorLock = new Object();
@@ -95,8 +94,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     private Drawable mDigitsEmptyBackground;
     private View mDialpad;
     private View mVoicemailDialAndDeleteRow;
-    private ImageButton mVoicemailButton;
-    private View mDialButton;
+    private ImageButton mVoicemailButton, mDialButton, mDelete;
 
     private ListView mDialpadChooser;
     private DialpadChooserAdapter mDialpadChooserAdapter;
@@ -187,19 +185,19 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         mVoicemailDialAndDeleteRow = findViewById(R.id.voicemailAndDialAndDelete);        
 
         // Check whether we should show the onscreen "Dial" button.
-        mDialButton = mVoicemailDialAndDeleteRow.findViewById(R.id.dialButton);
+        mDialButton = (ImageButton)mVoicemailDialAndDeleteRow.findViewById(R.id.dialButton);
 
 //      if (r.getBoolean(R.bool.config_show_onscreen_dial_button)) {
             mDialButton.setOnClickListener(this);
+            mDialButton.setOnLongClickListener(this);
 //      } else {
 //          mDialButton.setVisibility(View.GONE); // It's VISIBLE by default
 //          mDialButton = null;
 //      }
 
-        view = mVoicemailDialAndDeleteRow.findViewById(R.id.deleteButton);
-        view.setOnClickListener(this);
-        view.setOnLongClickListener(this);
-        mDelete = view;
+        mDelete = (ImageButton)mVoicemailDialAndDeleteRow.findViewById(R.id.deleteButton);
+        mDelete.setOnClickListener(this);
+        mDelete.setOnLongClickListener(this);
 
         mDialpad = (View) findViewById(R.id.dialpad);  // This is null in landscape mode
 
@@ -216,6 +214,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         //Wysie_Soh: I shifted this down, otherwise the "Add" button won't be activated when trying to add a number directly (say, from a message).
         //In other words, DialtactsActivity is called directly, and Dialer is initiated with a number already present.
         initVoicemailButton();
+        checkForNumber();
 
         // If the mToneGenerator creation fails, just continue without it.  It is
         // a local audio signal, and is not as important as the dtmf tone itself.
@@ -453,7 +452,8 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     
     //Wysie_Soh: Handle update of dialer after exiting settings
     private void updateDialer() {
-    	initVoicemailButton();   	
+    	initVoicemailButton();
+    	checkForNumber();
     }
 
     @Override
@@ -674,22 +674,29 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         
         //Wysie_Soh
         //Set the "voicemail"/add button to be enabled/disabled according to if any number is displayed   
-        if (leftButtonType.equals(DialerSettings.ADDCONTACTS)) {
-    		checkForNumber();
-    	}
+        checkForNumber();
     }
 
     public boolean onLongClick(View view) {
-        final Editable digits = mDigits.getText();
+        Editable digits = mDigits.getText();
         int id = view.getId();
         switch (id) {
             case R.id.deleteButton: {
                 digits.clear();
-                //Wysie_Soh: Set "add" button to disabled since digits are all cleared
-                if (leftButtonType.equals(DialerSettings.ADDCONTACTS)) {
-                	mVoicemailButton.setEnabled(false);
-            	}                
+                checkForNumber();              
                 return true;
+            }
+            case R.id.dialButton: {
+            	Intent intent = new Intent(Intent.ACTION_VOICE_COMMAND);
+            	intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            	
+            	try {
+                        startActivity(intent);
+                        return true;
+                } catch (ActivityNotFoundException e) {
+                	return false;
+                }
+
             }
             case R.id.one: {
                 if (digits.length() == 0) {
@@ -702,7 +709,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
             }
             case R.id.zero: {
                 keyPressed(KeyEvent.KEYCODE_PLUS);
-                return true;
+                return true;o
             }
         }
         return false;
@@ -1022,14 +1029,12 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     
     //Wysie_Soh: add to contacts button / voicemail depending on what is set
     private void initVoicemailButton() {
-    	Log.d("Testing", "1");
     	mVoicemailButton = (ImageButton)mVoicemailDialAndDeleteRow.findViewById(R.id.voicemailButton);
     	leftButtonType = DialerSettings.getLeftButtonType(this);
     	
     	if (leftButtonType.equals(DialerSettings.ADDCONTACTS)) {
     		mVoicemailButton.setImageResource(R.drawable.ic_add_contacts);
     		mVoicemailButton.setOnClickListener(this);
-    		checkForNumber();
     	}
     	else if (leftButtonType.startsWith(DialerSettings.VOICEMAIL)) {
     		mVoicemailButton.setImageResource(R.drawable.ic_dial_action_voice_mail);
@@ -1040,8 +1045,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     	        } else {
     	        	mVoicemailButton.setEnabled(false);
     	        }
-    	}
-        	
+    	}        	
     }
     
     private boolean hasVoicemail() {
@@ -1062,11 +1066,15 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     //Wysie_Soh: Method to check if there's any number entered
     private void checkForNumber() {
     	CharSequence digits = mDigits.getText();
-        if (digits == null || !TextUtils.isGraphic(digits)) {
-            mVoicemailButton.setEnabled(false);    
+        if (digits == null || !TextUtils.isGraphic(digits)) {            
+            if (leftButtonType.equals(DialerSettings.ADDCONTACTS))
+            	mVoicemailButton.setEnabled(false);
+            	mDelete.setEnabled(false);
         } else {
             // Put the current digits string into an intent
             mVoicemailButton.setEnabled(true);
+            mDelete.setEnabled(true); //Wysie_Soh: Known bug: mDelete will go into pressed state upon entering any digit after a long-press on mDelete.
+            mDelete.clearFocus();
         }
     }
 

@@ -736,4 +736,14 @@
 
     <!-- The string used to describe Contacts as a searchable item within system search settings. -->
     <string name="search_settings_description">Names of your contacts</string>
+    
+    <!-- Wysie_Soh: Preferences strings -->
+    <string name="dialersettingsui">Dialer settings</string>
+    <string name="prefs_left_button_title">Choose an action for the left button</string>    
+    <string name="prefs_left_button_prompt">Left button action</string>
+    <string name="prefs_voicemailapp">Choose a voicemail application</string>
+    <string name="prefs_voicemailapp_prompt">Voicemail application</string>
+    <string name="prefs_sensor">Enable sensor-based rotation</string>
+    <string name="prefs_warning">Dialer will close after you are done. Please launch it again.</string>
+    
 </resources>

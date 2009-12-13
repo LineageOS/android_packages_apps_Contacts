@@ -709,7 +709,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
             }
             case R.id.zero: {
                 keyPressed(KeyEvent.KEYCODE_PLUS);
-                return true;o
+                return true;
             }
         }
         return false;
@@ -1074,7 +1074,6 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
             // Put the current digits string into an intent
             mVoicemailButton.setEnabled(true);
             mDelete.setEnabled(true); //Wysie_Soh: Known bug: mDelete will go into pressed state upon entering any digit after a long-press on mDelete.
-            mDelete.clearFocus();
         }
     }
 

@@ -87,7 +87,6 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     private static final int TONE_RELATIVE_VOLUME = 50;
 
     private EditText mDigits;
-    private View mDelete;
     private MenuItem mAddToContactMenuItem, mPreferences;
     private ToneGenerator mToneGenerator;
     private Object mToneGeneratorLock = new Object();
@@ -95,8 +94,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     private Drawable mDigitsEmptyBackground;
     private View mDialpad;
     private View mVoicemailDialAndDeleteRow;
-    private ImageButton mVoicemailButton;
-    private View mDialButton;
+    private ImageButton mVoicemailButton, mDialButton, mDelete;
 
     private ListView mDialpadChooser;
     private DialpadChooserAdapter mDialpadChooserAdapter;
@@ -187,7 +185,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         mVoicemailDialAndDeleteRow = findViewById(R.id.voicemailAndDialAndDelete);        
 
         // Check whether we should show the onscreen "Dial" button.
-        mDialButton = mVoicemailDialAndDeleteRow.findViewById(R.id.dialButton);
+        mDialButton = (ImageButton)mVoicemailDialAndDeleteRow.findViewById(R.id.dialButton);
 
 //      if (r.getBoolean(R.bool.config_show_onscreen_dial_button)) {
             mDialButton.setOnClickListener(this);
@@ -195,11 +193,10 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
 //          mDialButton.setVisibility(View.GONE); // It's VISIBLE by default
 //          mDialButton = null;
 //      }
-
-        view = mVoicemailDialAndDeleteRow.findViewById(R.id.deleteButton);
-        view.setOnClickListener(this);
-        view.setOnLongClickListener(this);
-        mDelete = view;
+	
+        mDelete = (ImageButton)mVoicemailDialAndDeleteRow.findViewById(R.id.deleteButton);
+        mDelete.setOnClickListener(this);
+        mDelete.setOnLongClickListener(this);
 
         mDialpad = (View) findViewById(R.id.dialpad);  // This is null in landscape mode
 
@@ -674,9 +671,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         
         //Wysie_Soh
         //Set the "voicemail"/add button to be enabled/disabled according to if any number is displayed   
-        if (leftButtonType.equals(DialerSettings.ADDCONTACTS)) {
-    		checkForNumber();
-    	}
+	toggleActionRow();
     }
 
     public boolean onLongClick(View view) {
@@ -686,9 +681,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
             case R.id.deleteButton: {
                 digits.clear();
                 //Wysie_Soh: Set "add" button to disabled since digits are all cleared
-                if (leftButtonType.equals(DialerSettings.ADDCONTACTS)) {
-                	mVoicemailButton.setEnabled(false);
-            	}                
+                toggleActionRow();            
                 return true;
             }
             case R.id.one: {
@@ -1028,7 +1021,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     	if (leftButtonType.equals(DialerSettings.ADDCONTACTS)) {
     		mVoicemailButton.setImageResource(R.drawable.ic_add_contacts);
     		mVoicemailButton.setOnClickListener(this);
-    		checkForNumber();
+    		toggleActionRow();
     	}
     	else if (leftButtonType.startsWith(DialerSettings.VOICEMAIL)) {
     		mVoicemailButton.setImageResource(R.drawable.ic_dial_action_voice_mail);
@@ -1059,13 +1052,29 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     }
     
     //Wysie_Soh: Method to check if there's any number entered
-    private void checkForNumber() {
+    private boolean hasNumber() {
     	CharSequence digits = mDigits.getText();
         if (digits == null || !TextUtils.isGraphic(digits)) {
-            mVoicemailButton.setEnabled(false);    
+            return false;
         } else {
-            // Put the current digits string into an intent
+            return true;
+        }
+    }
+    
+    //Wysie_Soh: Method will enable/disable add contacts, dial and delete button depending on whether a number is entered
+    //Knownbug: mDelete still be selected for some reason sometimes
+    private void toggleActionRow() {
+        if (hasNumber()) {
             mVoicemailButton.setEnabled(true);
+            mDelete.setEnabled(true);
+            mDialButton.setEnabled(true);
+        } else {
+            
+            if (leftButtonType.equals(DialerSettings.ADDCONTACTS))
+            	mVoicemailButton.setEnabled(false);
+            
+            mDialButton.setEnabled(false);
+            mDelete.setEnabled(false);
         }
     }
 

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="10dip"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:text="@string/prefs_left_button_title"
+    />
+
+    <Spinner 
+        android:id="@+id/actionspinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:drawSelectorOnTop="true"
+        android:prompt="@string/prefs_left_button_prompt"
+    />
+    
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:text="@string/prefs_voicemailapp"
+    />    
+    
+    <Spinner 
+        android:id="@+id/voicemailapps"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:drawSelectorOnTop="true"
+        android:prompt="@string/prefs_voicemailapp_prompt"
+    />
+    
+    <CheckBox
+    	android:id="@+id/sensor_checkbox"
+    	android:text="@string/prefs_sensor"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content" />
+
+</LinearLayout>
+

@@ -30,9 +30,9 @@ import android.content.pm.ResolveInfo;
 
 import android.util.Log;
 
-public class DialerPreferences extends PreferenceActivity implements Preference.OnPreferenceChangeListener {
+public class ContactsPreferences extends PreferenceActivity implements Preference.OnPreferenceChangeListener {
 
-    private static final String TAG = "DialerPreferences";
+    private static final String TAG = "ContactsPreferences";
 
     private ListPreference mVMButton;
     private ListPreference mVMHandler;
@@ -42,7 +42,7 @@ public class DialerPreferences extends PreferenceActivity implements Preference.
         super.onCreate(savedInstanceState);
 
         // Load the preferences from an XML resource
-        addPreferencesFromResource(R.xml.dialer_preferences);
+        addPreferencesFromResource(R.xml.contacts_preferences);
 
         mVMButton = (ListPreference) findPreference("vm_button");
         mVMHandler = (ListPreference) findPreference("vm_handler");

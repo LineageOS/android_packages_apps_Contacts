@@ -49,7 +49,7 @@
             </intent-filter>
         </activity>
         
-        <activity android:name="DialerPreferences">
+        <activity android:name="ContactsPreferences">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />

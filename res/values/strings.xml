@@ -743,4 +743,6 @@
     
     <string name="menu_preferences">Settings</string>
     
+    <string name="title_dialer_category">Dialer</string>
+    
 </resources>

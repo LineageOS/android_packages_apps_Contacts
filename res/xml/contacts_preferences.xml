@@ -17,21 +17,25 @@
 <!-- This is a primitive example showing the different types of preferences available. -->
 <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android">
+        
+    <PreferenceCategory android:title="@string/title_dialer_category">
 
-    <ListPreference
-        android:key="vm_button"
-        android:title="@string/title_vm_button"
-        android:dialogTitle="@string/title_vm_button"
-        android:entries="@array/entries_vm_button"
-        android:entryValues="@array/entryvalues_numbers"
-        android:defaultValue="0" />
+        <ListPreference
+            android:key="vm_button"
+            android:title="@string/title_vm_button"
+            android:dialogTitle="@string/title_vm_button"
+            android:entries="@array/entries_vm_button"
+            android:entryValues="@array/entryvalues_numbers"
+            android:defaultValue="0" />
 
-    <ListPreference
-        android:key="vm_handler"
-        android:title="@string/title_vm_handler"
-        android:dialogTitle="@string/title_vm_handler"
-        android:entries="@array/entries_vm_handler"
-        android:entryValues="@array/entryvalues_numbers"
-        android:defaultValue="0" />
+        <ListPreference
+            android:key="vm_handler"
+            android:title="@string/title_vm_handler"
+            android:dialogTitle="@string/title_vm_handler"
+            android:entries="@array/entries_vm_handler"
+            android:entryValues="@array/entryvalues_numbers"
+            android:defaultValue="0" />
+            
+    </PreferenceCategory>
         
 </PreferenceScreen>

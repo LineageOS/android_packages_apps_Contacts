@@ -25,6 +25,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.preference.PreferenceManager;
 import android.provider.CallLog;
 import android.provider.Contacts;
 import android.provider.CallLog.Calls;
@@ -34,6 +35,7 @@ import android.view.KeyEvent;
 import android.view.Window;
 import android.widget.TabHost;
 import com.android.internal.telephony.ITelephony;
+
 
 /**
  * The dialer activity that has one tab with the virtual 12key dialer,
@@ -65,6 +67,8 @@ public class DialtactsActivity extends TabActivity implements TabHost.OnTabChang
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+
+        PreferenceManager.setDefaultValues(this, R.xml.contacts_preferences, false);
 
         final Intent intent = getIntent();
         fixIntent(intent);

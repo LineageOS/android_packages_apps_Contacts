@@ -103,7 +103,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     private ImageButton mVoicemailButton;
     private ImageButton mOneButton;
     private View mDialButton;
-    private SharedPreferences mDialerPreferences;
+    private SharedPreferences mContactsPreferences;
 
     private ListView mDialpadChooser;
     private DialpadChooserAdapter mDialpadChooserAdapter;
@@ -167,8 +167,8 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        PreferenceManager.setDefaultValues(this, R.xml.dialer_preferences, false);
-        mDialerPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        mContactsPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
 
         // Set the content view
         setContentView(getContentViewResource());
@@ -483,7 +483,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
                 .setIcon(android.R.drawable.ic_menu_add);
         mSettingsMenuItem = menu.add(0, 0, 0, R.string.menu_preferences)
                 .setIcon(android.R.drawable.ic_menu_preferences);
-        Intent i = new Intent(this, DialerPreferences.class);
+        Intent i = new Intent(this, ContactsPreferences.class);
         mSettingsMenuItem.setIntent(i);
         return true;
     }
@@ -497,7 +497,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
 
         CharSequence digits = mDigits.getText();
         if (digits == null || !TextUtils.isGraphic(digits) ||
-                mDialerPreferences.getString("vm_button", "0").equals("1")) {
+                mContactsPreferences.getString("vm_button", "0").equals("1")) {
             mAddToContactMenuItem.setVisible(false);
         } else {
             // Put the current digits string into an intent
@@ -681,7 +681,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     }
 
     void handleVoicemail(int src) {
-        int vmButton = Integer.parseInt(mDialerPreferences.getString("vm_button", "0"));
+        int vmButton = Integer.parseInt(mContactsPreferences.getString("vm_button", "0"));
         if (src == 0) {
             if (vmButton == 0) {
                 callVoicemail();
@@ -697,7 +697,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
 
     void callVoicemail() {
         Intent intent;
-        String vmHandler = mDialerPreferences.getString("vm_handler", "0");
+        String vmHandler = mContactsPreferences.getString("vm_handler", "0");
         if (vmHandler.equals("0")) {
             intent = new Intent(Intent.ACTION_CALL_PRIVILEGED,
                         Uri.fromParts("voicemail", "", null));
@@ -1024,7 +1024,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
 //         } else {
 //             mVoicemailButton.setEnabled(false);
 //         }
-        int vmButton = Integer.parseInt(mDialerPreferences.getString("vm_button", "0"));
+        int vmButton = Integer.parseInt(mContactsPreferences.getString("vm_button", "0"));
         if (vmButton == 0) {
             mVoicemailButton.setImageResource(R.drawable.ic_dial_action_voice_mail);
             mOneButton.setImageResource(R.drawable.dial_num_1_no_vm);

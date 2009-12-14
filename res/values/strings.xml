@@ -737,7 +737,7 @@
     <!-- The string used to describe Contacts as a searchable item within system search settings. -->
     <string name="search_settings_description">Names of your contacts</string>
     
-    <!-- Wysie_Soh: Preferences strings -->
+    <!-- Wysie_Soh: Dialer preferences strings -->
     <string name="dialersettingsui">Dialer settings</string>
     <string name="prefs_left_button_title">Choose an action for the left button</string>    
     <string name="prefs_left_button_prompt">Left button action</string>
@@ -745,5 +745,11 @@
     <string name="prefs_voicemailapp_prompt">Voicemail application</string>
     <string name="prefs_sensor">Enable sensor-based rotation</string>
     <string name="prefs_warning">Dialer will close after you are done. Please launch it again.</string>
+    
+    <!-- Wysie_Soh: Total incoming/outgoing dialog -->
+    <string name="totalcalllog">Total incoming/outgoing duration</string>
+    <string name="total_incoming">Incoming</string>
+    <string name="total_outgoing">Outgoing</string>
+    <string name="total_button_ok">Ok</string>
     
 </resources>

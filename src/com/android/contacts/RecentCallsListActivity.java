@@ -63,6 +63,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ResourceCursorAdapter;
 import android.widget.TextView;
+import android.app.Dialog;
+import android.widget.Button;
+import android.view.View.OnClickListener;
 
 import com.android.internal.telephony.CallerInfo;
 import com.android.internal.telephony.ITelephony;
@@ -118,9 +121,13 @@ public class RecentCallsListActivity extends ListActivity
     private static final int MENU_ITEM_DELETE = 1;
     private static final int MENU_ITEM_DELETE_ALL = 2;
     private static final int MENU_ITEM_VIEW_CONTACTS = 3;
+    private static final int MENU_ITEM_TOTAL_CALL_LOG = 4;
 
     private static final int QUERY_TOKEN = 53;
     private static final int UPDATE_TOKEN = 54;
+    
+    private static int totalIncoming = 0;
+     private static int totalOutgoing = 0;
 
     RecentCallsAdapter mAdapter;
     private QueryHandler mQueryHandler;
@@ -708,7 +715,8 @@ public class RecentCallsListActivity extends ListActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, MENU_ITEM_DELETE_ALL, 0, R.string.recentCalls_deleteAll)
-                .setIcon(android.R.drawable.ic_menu_close_clear_cancel);
+                .setIcon(android.R.drawable.ic_menu_close_clear_cancel);   
+        menu.add(0, MENU_ITEM_TOTAL_CALL_LOG, 0, "Total Incoming/Outgoing").setIcon(R.drawable.ic_tab_recent);
         return true;
     }
 
@@ -788,7 +796,13 @@ public class RecentCallsListActivity extends ListActivity
                 startQuery();
                 return true;
             }
-
+            case MENU_ITEM_TOTAL_CALL_LOG: {
+            	//Intent totalCallLog = new Intent(this, TotalCallLog.class);
+            	//setIntent(totalCallLog);
+            	//startActivity(totalCallLog);
+            	showTotalCallLog();
+            	return true;
+            }
             case MENU_ITEM_VIEW_CONTACTS: {
                 Intent intent = new Intent(Intent.ACTION_VIEW, People.CONTENT_URI);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -943,4 +957,60 @@ public class RecentCallsListActivity extends ListActivity
         intent.setData(ContentUris.withAppendedId(CallLog.Calls.CONTENT_URI, id));
         startActivity(intent);
     }
+    
+    private void showTotalCallLog() {
+    	final Dialog dialog = new Dialog(this);
+    	dialog.setContentView(R.layout.total_call_log);
+    	dialog.setTitle("Total Duration");
+    	dialog.show();
+    	
+    	calcTotalTime();
+    	
+    	TextView incoming = (TextView)dialog.findViewById(R.id.total_in);
+        incoming.setText(formatSecToMin(totalIncoming));
+        TextView outgoing = (TextView)dialog.findViewById(R.id.total_out);
+        outgoing.setText(formatSecToMin(totalOutgoing));
+
+        Button buttonOK = (Button)dialog.findViewById(R.id.buttonOK);
+        buttonOK.setOnClickListener(new OnClickListener() {
+        	public void onClick(View v) {
+               		dialog.dismiss();
+         	}
+        });
+    }
+    
+    private String formatSecToMin(int s) {
+    	int min = s / 60;
+    	int sec = s % 60;
+    	String res = min + " mins " + sec + " secs";
+    	return res;
+    }
+    
+    private void calcTotalTime() {
+    	totalIncoming = 0;
+    	totalOutgoing = 0;
+    	Cursor c = getContentResolver().query(android .provider.CallLog.Calls.CONTENT_URI, null, null, null,
+    		android.provider.CallLog.Calls.DEFAULT_SORT_ORDER) ;
+    	startManagingCursor(c);
+    	
+    	int typeColumn = c.getColumnIndex(android.provider.CallLog.Calls.TYPE);
+    	int durationColumn = c.getColumnIndex(android.provider.CallLog.Calls.DURATION);
+    	
+    	if(c.moveToFirst()) {
+    		do {
+                    int callType = c.getInt(typeColumn);
+                    int callDuration = c.getInt(durationColumn);
+                    
+                    switch(callType){
+                         case android.provider.CallLog.Calls.INCOMING_TYPE:
+                              totalIncoming += callDuration;
+                              break;
+                         case android.provider.CallLog.Calls.OUTGOING_TYPE:
+                              totalOutgoing += callDuration;
+                              break;
+                    }
+               } while(c.moveToNext());
+	}
+   }	
+
 }

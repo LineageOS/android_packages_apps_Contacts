@@ -491,7 +491,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     public boolean onCreateOptionsMenu(Menu menu) {
         mAddToContactMenuItem = menu.add(0, 0, 0, R.string.recentCalls_addToContact).setIcon(android.R.drawable.ic_menu_add);
         mSmsMenuItem = menu.add(0, 1, 0, "SMS / MMS").setIcon(R.drawable.ic_menu_smsmms);
-	mPreferences = menu.add(0, 1, 0, "Preferences").setIcon(android.R.drawable.ic_menu_preferences);
+	mPreferences = menu.add(0, 2, 0, "Preferences").setIcon(android.R.drawable.ic_menu_preferences);
 
         return true;
     }

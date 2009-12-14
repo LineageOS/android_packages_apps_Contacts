@@ -66,6 +66,8 @@ import android.widget.TextView;
 import android.app.Dialog;
 import android.widget.Button;
 import android.view.View.OnClickListener;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 
 import com.android.internal.telephony.CallerInfo;
 import com.android.internal.telephony.ITelephony;
@@ -790,10 +792,7 @@ public class RecentCallsListActivity extends ListActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MENU_ITEM_DELETE_ALL: {
-                getContentResolver().delete(Calls.CONTENT_URI, null, null);
-                //TODO The change notification should do this automatically, but it isn't working
-                // right now. Remove this when the change notification is working properly.
-                startQuery();
+                clearCallLog();
                 return true;
             }
             case MENU_ITEM_TOTAL_CALL_LOG: {
@@ -956,6 +955,29 @@ public class RecentCallsListActivity extends ListActivity
         Intent intent = new Intent(this, CallDetailActivity.class);
         intent.setData(ContentUris.withAppendedId(CallLog.Calls.CONTENT_URI, id));
         startActivity(intent);
+    }
+    
+    //Wysie_Soh: Dialog to confirm if user wants to clear call log    
+    private void clearCallLog() {
+    	AlertDialog.Builder alert = new AlertDialog.Builder(this);
+    	alert.setTitle("Clear call log");
+    	alert.setMessage("Are you sure you want to clear all call records?");
+    	
+    	alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+    		public void onClick(DialogInterface dialog, int whichButton) {
+    			getContentResolver().delete(Calls.CONTENT_URI, null, null);
+                	//TODO The change notification should do this automatically, but it isn't working
+                	// right now. Remove this when the change notification is working properly.
+                	startQuery();
+    		}
+    	});
+    	
+    	alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+    		public void onClick(DialogInterface dialog, int whichButton) {
+    			// Canceled.
+    	}});
+    	
+    	alert.show();
     }
     
     private void showTotalCallLog() {

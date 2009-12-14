@@ -1,0 +1,83 @@
+package com.android.contacts;
+
+import android.app.Activity;
+import android.app.Dialog;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabaseCorruptException;
+import android.database.sqlite.SQLiteDiskIOException;
+import android.database.sqlite.SQLiteFullException;
+
+public class TotalCallLog extends Activity {
+
+     private static int totalIncoming;
+     private static int totalOutgoing;
+
+     @Override
+     public void onCreate(Bundle savedInstanceState) {
+          super.onCreate(savedInstanceState);
+
+          Dialog dialog = new Dialog(this);
+          dialog.setContentView(R.layout.total_call_log);
+          dialog.setTitle("Total Incoming/Outgoing Duration");
+          dialog.show();
+          
+          /*
+          calcTotalTime();
+          
+          
+          TextView incoming = (TextView)dialog.findViewById(R.id.total_in);
+          incoming.setText("1234");
+          TextView outgoing = (TextView)dialog.findViewById(R.id.total_out);
+          outgoing.setText("5678");
+          */
+
+          Button buttonOK = (Button)dialog.findViewById(R.id.buttonOK);
+          buttonOK.setOnClickListener(new OKListener(dialog));
+     }
+
+     private class OKListener implements OnClickListener {
+
+          private Dialog dialog;
+
+          public OKListener(Dialog dialog) {
+               this.dialog = dialog;
+          }
+
+          public void onClick(View v) {
+               dialog.dismiss();
+          }
+     }
+     
+    private void calcTotalTime() {
+    	Cursor c = getContentResolver().query(android .provider.CallLog.Calls.CONTENT_URI, null, null, null,
+    		android.provider.CallLog.Calls.DEFAULT_SORT_ORDER) ;
+    	startManagingCursor(c);
+    	
+    	int typeColumn = c.getColumnIndex(android.provider.CallLog.Calls.TYPE);
+    	int durationColumn = c.getColumnIndex(android.provider.CallLog.Calls.DURATION);
+    	
+    	if(c.moveToFirst()) {
+    		do {
+                    int callType = c.getInt(typeColumn);
+                    int callDuration = c.getInt(durationColumn);
+                    
+                    switch(callType){
+                         case android.provider.CallLog.Calls.INCOMING_TYPE:
+                              totalIncoming += callDuration;
+                              break;
+                         case android.provider.CallLog.Calls.OUTGOING_TYPE:
+                              totalOutgoing += callDuration;
+                              break;
+                    }
+               } while(c.moveToNext());
+	}
+	
+	//Log.d("OUTGOING", "" + totalOutgoing);
+	//Log.d("INCOMING", "" + totalIncoming);    	
+    }
+} 

@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.content.ComponentName;
 import android.content.pm.ActivityInfo;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -37,6 +38,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.provider.Contacts.Intents.Insert;
 import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
@@ -62,6 +64,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -85,17 +88,22 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     /** The DTMF tone volume relative to other sounds in the stream */
     private static final int TONE_RELATIVE_VOLUME = 50;
 
+    public static final int INSERT_ID = Menu.FIRST;
+
     private EditText mDigits;
     private View mDelete;
     private MenuItem mAddToContactMenuItem;
+    private MenuItem mSettingsMenuItem;
     private ToneGenerator mToneGenerator;
     private Object mToneGeneratorLock = new Object();
     private Drawable mDigitsBackground;
     private Drawable mDigitsEmptyBackground;
     private View mDialpad;
     private View mVoicemailDialAndDeleteRow;
-    private View mVoicemailButton;
+    private ImageButton mVoicemailButton;
+    private ImageButton mOneButton;
     private View mDialButton;
+    private SharedPreferences mDialerPreferences;
 
     private ListView mDialpadChooser;
     private DialpadChooserAdapter mDialpadChooserAdapter;
@@ -159,6 +167,9 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
+        PreferenceManager.setDefaultValues(this, R.xml.dialer_preferences, false);
+        mDialerPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
         // Set the content view
         setContentView(getContentViewResource());
 
@@ -181,8 +192,6 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         }
 
         mVoicemailDialAndDeleteRow = findViewById(R.id.voicemailAndDialAndDelete);
-
-        initVoicemailButton();
 
         // Check whether we should show the onscreen "Dial" button.
         mDialButton = mVoicemailDialAndDeleteRow.findViewById(R.id.dialButton);
@@ -434,6 +443,8 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
             // be visible if the phone is idle!
             showDialpadChooser(false);
         }
+
+        initVoicemailButton();
     }
 
     @Override
@@ -470,7 +481,10 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     public boolean onCreateOptionsMenu(Menu menu) {
         mAddToContactMenuItem = menu.add(0, 0, 0, R.string.recentCalls_addToContact)
                 .setIcon(android.R.drawable.ic_menu_add);
-
+        mSettingsMenuItem = menu.add(0, 0, 0, R.string.menu_preferences)
+                .setIcon(android.R.drawable.ic_menu_preferences);
+        Intent i = new Intent(this, DialerPreferences.class);
+        mSettingsMenuItem.setIntent(i);
         return true;
     }
 
@@ -482,7 +496,8 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         }
 
         CharSequence digits = mDigits.getText();
-        if (digits == null || !TextUtils.isGraphic(digits)) {
+        if (digits == null || !TextUtils.isGraphic(digits) ||
+                mDialerPreferences.getString("vm_button", "0").equals("1")) {
             mAddToContactMenuItem.setVisible(false);
         } else {
             // Put the current digits string into an intent
@@ -515,7 +530,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
                 long timeDiff = SystemClock.uptimeMillis() - event.getDownTime(); 
                 if (timeDiff >= ViewConfiguration.getLongPressTimeout()) {
                     // Long press detected, call voice mail
-                    callVoicemail();
+                    handleVoicemail(1);
                 }
                 return true;
             }
@@ -630,7 +645,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
                 return;
             }
             case R.id.voicemailButton: {
-                callVoicemail();
+                handleVoicemail(0);
                 return;
             }
             case R.id.digits: {
@@ -652,7 +667,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
             }
             case R.id.one: {
                 if (digits.length() == 0) {
-                    callVoicemail();
+                    handleVoicemail(1);
                     return true;
                 }
                 return false;
@@ -665,21 +680,44 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         return false;
     }
 
-    void callVoicemail() {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        ComponentName component = new ComponentName("com.oz.mobile.android.voicemail.application", "com.oz.mobile.android.voicemail.application.application");
-        intent.setComponent(component);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        try {
-            startActivity(intent);
-        } catch (ActivityNotFoundException e) {
-            intent = new Intent(Intent.ACTION_CALL_PRIVILEGED,
-                    Uri.fromParts("voicemail", "", null));
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+    void handleVoicemail(int src) {
+        int vmButton = Integer.parseInt(mDialerPreferences.getString("vm_button", "0"));
+        if (src == 0) {
+            if (vmButton == 0) {
+                callVoicemail();
+            } else if (vmButton == 1) {
+                addContact();
+            }
+        } else if (src == 1) {
+            if (vmButton == 1) {
+                callVoicemail();
+            }
         }
+    }
+
+    void callVoicemail() {
+        Intent intent;
+        String vmHandler = mDialerPreferences.getString("vm_handler", "0");
+        if (vmHandler.equals("0")) {
+            intent = new Intent(Intent.ACTION_CALL_PRIVILEGED,
+                        Uri.fromParts("voicemail", "", null));
+        } else {
+            String[] cmp = vmHandler.split("/");
+            intent = new Intent(Intent.ACTION_MAIN);
+            Log.d(TAG, vmHandler);
+            ComponentName component = new ComponentName(cmp[0], cmp[0] + cmp[1]);
+            intent.setComponent(component);
+        }
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
         mDigits.getText().clear();
-        finish();
+    }
+
+    void addContact() {
+        Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
+        intent.putExtra(Insert.PHONE, mDigits.getText());
+        intent.setType(People.CONTENT_ITEM_TYPE);
+        startActivity(intent);
     }
 
     void placeCall() {
@@ -971,18 +1009,28 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
 
     private void initVoicemailButton() {
         boolean hasVoicemail = false;
+        
         try {
             hasVoicemail = TelephonyManager.getDefault().getVoiceMailNumber() != null;
         } catch (SecurityException se) {
             // Possibly no READ_PHONE_STATE privilege.
         }
-
-        mVoicemailButton = mVoicemailDialAndDeleteRow.findViewById(R.id.voicemailButton);
-        if (hasVoicemail) {
-            mVoicemailButton.setOnClickListener(this);
+        
+        mVoicemailButton = (ImageButton) mVoicemailDialAndDeleteRow.findViewById(R.id.voicemailButton);
+        mOneButton = (ImageButton) findViewById(R.id.one);
+        
+//         if (hasVoicemail) {
+             mVoicemailButton.setOnClickListener(this);
+//         } else {
+//             mVoicemailButton.setEnabled(false);
+//         }
+        int vmButton = Integer.parseInt(mDialerPreferences.getString("vm_button", "0"));
+        if (vmButton == 0) {
+            mVoicemailButton.setImageResource(R.drawable.ic_dial_action_voice_mail);
+            mOneButton.setImageResource(R.drawable.dial_num_1_no_vm);
         } else {
-            mVoicemailButton.setEnabled(false);
+            mVoicemailButton.setImageResource(R.drawable.ic_dial_action_add_contact);
+            mOneButton.setImageResource(R.drawable.dial_num_1);
         }
     }
-
 }

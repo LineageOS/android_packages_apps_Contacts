@@ -736,4 +736,11 @@
 
     <!-- The string used to describe Contacts as a searchable item within system search settings. -->
     <string name="search_settings_description">Names of your contacts</string>
+    
+    <string name="title_vm_button">Left Action Button</string>
+    
+    <string name="title_vm_handler">Voicemail Handler</string>
+    
+    <string name="menu_preferences">Settings</string>
+    
 </resources>

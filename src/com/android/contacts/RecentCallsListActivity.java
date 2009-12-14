@@ -17,6 +17,7 @@
 package com.android.contacts;
 
 import android.app.ListActivity;
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.AsyncQueryHandler;
 import android.content.ContentUris;
@@ -46,6 +47,7 @@ import android.telephony.TelephonyManager;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.KeyEvent;
@@ -123,6 +125,7 @@ public class RecentCallsListActivity extends ListActivity
     RecentCallsAdapter mAdapter;
     private QueryHandler mQueryHandler;
     String mVoiceMailNumber;
+    Context context;
 
     static final class ContactInfo {
         public long personId;
@@ -490,10 +493,19 @@ public class RecentCallsListActivity extends ListActivity
             long date = c.getLong(DATE_COLUMN_INDEX);
 
             // Set the date/time field by mixing relative and absolute times.
-            int flags = DateUtils.FORMAT_ABBREV_RELATIVE;
+            //int flags = DateUtils.FORMAT_ABBREV_RELATIVE;
+            int flags = 0;            
+            flags |= android.text.format.DateUtils.FORMAT_SHOW_DATE;
+            flags |= android.text.format.DateUtils.FORMAT_SHOW_TIME;
+            flags |= android.text.format.DateUtils.FORMAT_ABBREV_ALL;
 
-            views.dateView.setText(DateUtils.getRelativeTimeSpanString(date,
-                    System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS, flags));
+            //views.dateView.setText(DateUtils.getRelativeTimeSpanString(date, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS, flags));
+            //views.dateView.setText(DateUtils.formatDateTime(context, date, flags));
+            
+            if (DateFormat.is24HourFormat(context))
+            	views.dateView.setText(DateFormat.format("MMM dd, kk:mm", date));
+            else
+            	views.dateView.setText(DateFormat.format("MMM dd, h:mmaa", date));
 
             // Set the icon
             switch (type) {
@@ -579,6 +591,8 @@ public class RecentCallsListActivity extends ListActivity
 
         // Typing here goes to the dialer
         setDefaultKeyMode(DEFAULT_KEYS_DIALER);
+        
+        context = this;
 
         mAdapter = new RecentCallsAdapter();
         getListView().setOnCreateContextMenuListener(this);

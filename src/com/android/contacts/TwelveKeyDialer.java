@@ -66,6 +66,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ImageButton;
+import android.view.MenuItem.OnMenuItemClickListener;
 
 import com.android.internal.telephony.ITelephony;
 
@@ -87,7 +88,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     private static final int TONE_RELATIVE_VOLUME = 50;
 
     private EditText mDigits;
-    private MenuItem mAddToContactMenuItem, mPreferences;
+    private MenuItem mAddToContactMenuItem, mSmsMenuItem, mPreferences;
     private ToneGenerator mToneGenerator;
     private Object mToneGeneratorLock = new Object();
     private Drawable mDigitsBackground;
@@ -488,7 +489,8 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        mAddToContactMenuItem = menu.add(0, 0, 0, R.string.recentCalls_addToContact).setIcon(android.R.drawable.ic_menu_add);	
+        mAddToContactMenuItem = menu.add(0, 0, 0, R.string.recentCalls_addToContact).setIcon(android.R.drawable.ic_menu_add);
+        mSmsMenuItem = menu.add(0, 1, 0, "SMS / MMS").setIcon(R.drawable.badge_action_sms);
 	mPreferences = menu.add(0, 1, 0, "Preferences").setIcon(android.R.drawable.ic_menu_preferences);
 
         return true;
@@ -517,6 +519,20 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         //Wysie_Soh: Preferences intent
         Intent dialPrefs = new Intent(this, DialerSettingsUI.class);
         mPreferences.setIntent(dialPrefs);
+        
+        
+        if (digits == null || !TextUtils.isGraphic(digits) || leftButtonType.equals(DialerSettings.SMS)) {
+        	mSmsMenuItem.setVisible(false);
+        }
+        else {
+        	mSmsMenuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+        		public boolean onMenuItemClick(MenuItem item) {
+				smsToNumber((mDigits.getText()).toString());
+				return true;
+			}
+		});
+		mSmsMenuItem.setVisible(true);
+	}
         
         return true;
     }
@@ -662,6 +678,9 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
             	else if (leftButtonType.equals(DialerSettings.VOICEMAIL)) {
             		callVoicemail();
             	}
+            	else if (leftButtonType.equals(DialerSettings.SMS)) {
+            		smsToNumber((mDigits.getText()).toString());
+            	}
             	break;
             }
             case R.id.digits: {
@@ -713,6 +732,14 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
             }
         }
         return false;
+    }
+    
+    //Wysie_Soh
+    void smsToNumber(String number) {
+    	Intent sendIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms://"));
+    	sendIntent.putExtra("address", number);
+    	sendIntent.putExtra("sms_body", "");
+    	startActivity(sendIntent); 
     }
     
     //Wysie_Soh    
@@ -1031,21 +1058,24 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     private void initVoicemailButton() {
     	mVoicemailButton = (ImageButton)mVoicemailDialAndDeleteRow.findViewById(R.id.voicemailButton);
     	leftButtonType = DialerSettings.getLeftButtonType(this);
+    	mVoicemailButton.setOnClickListener(this);
     	
     	if (leftButtonType.equals(DialerSettings.ADDCONTACTS)) {
-    		mVoicemailButton.setImageResource(R.drawable.ic_add_contacts);
-    		mVoicemailButton.setOnClickListener(this);
+    		mVoicemailButton.setImageResource(R.drawable.ic_add_contacts);    		
     	}
-    	else if (leftButtonType.startsWith(DialerSettings.VOICEMAIL)) {
+    	else if (leftButtonType.equals(DialerSettings.VOICEMAIL)) { //Wysie_Soh: startsWith changed to equals
     		mVoicemailButton.setImageResource(R.drawable.ic_dial_action_voice_mail);
     		
     	        if (hasVoicemail()) {
-    	        	mVoicemailButton.setOnClickListener(this);
     	        	mVoicemailButton.setEnabled(true);
     	        } else {
     	        	mVoicemailButton.setEnabled(false);
+    	        	mVoicemailButton.setOnClickListener(null);
     	        }
-    	}        	
+    	}
+    	else if (leftButtonType.equals(DialerSettings.SMS)) {
+    		mVoicemailButton.setImageResource(R.drawable.badge_action_sms);
+    	}
     }
     
     private boolean hasVoicemail() {
@@ -1067,7 +1097,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     private void checkForNumber() {
     	CharSequence digits = mDigits.getText();
         if (digits == null || !TextUtils.isGraphic(digits)) {            
-            if (leftButtonType.equals(DialerSettings.ADDCONTACTS))
+            if (leftButtonType.equals(DialerSettings.ADDCONTACTS) || leftButtonType.equals(DialerSettings.SMS))
             	mVoicemailButton.setEnabled(false);
             	mDelete.setEnabled(false);
         } else {

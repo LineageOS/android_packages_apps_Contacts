@@ -169,7 +169,6 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
 
         mContactsPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
-
         // Set the content view
         setContentView(getContentViewResource());
 

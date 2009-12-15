@@ -28,6 +28,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabaseCorruptException;
 import android.database.sqlite.SQLiteDiskIOException;
 import android.database.sqlite.SQLiteFullException;
+import android.database.sqlite.SQLiteException;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -124,6 +125,8 @@ public class RecentCallsListActivity extends ListActivity
     private static final int MENU_ITEM_DELETE_ALL = 2;
     private static final int MENU_ITEM_VIEW_CONTACTS = 3;
     private static final int MENU_ITEM_TOTAL_CALL_LOG = 4;
+    private static final int MENU_ITEM_DELETE_ALL_NAME = 5; //Delete all instances of a particular user
+    private static final int MENU_ITEM_DELETE_ALL_NUMBER = 6; //Delete all instances of a particular number
 
     private static final int QUERY_TOKEN = 53;
     private static final int UPDATE_TOKEN = 54;
@@ -786,6 +789,12 @@ public class RecentCallsListActivity extends ListActivity
                     .setIntent(intent);
         }
         menu.add(0, MENU_ITEM_DELETE, 0, R.string.recentCalls_removeFromRecentList);
+        
+        if (contactInfoPresent) {
+        	menu.add(0, MENU_ITEM_DELETE_ALL_NAME, 0, "Remove all " + info.name);
+        }
+        
+        menu.add(0, MENU_ITEM_DELETE_ALL_NUMBER, 0, "Remove all " + number);
     }
 
     @Override
@@ -821,7 +830,7 @@ public class RecentCallsListActivity extends ListActivity
         } catch (ClassCastException e) {
             Log.e(TAG, "bad menuInfoIn", e);
             return false;
-        }
+        }         
 
         switch (item.getItemId()) {
             case MENU_ITEM_DELETE: {
@@ -832,9 +841,50 @@ public class RecentCallsListActivity extends ListActivity
                 }
                 return true;
             }
+            case MENU_ITEM_DELETE_ALL_NAME: {
+            	Cursor cursor = (Cursor)mAdapter.getItem(menuInfo.position);
+            	String number = cursor.getString(NUMBER_COLUMN_INDEX);
+            	
+            	if (number.equals(CallerInfo.UNKNOWN_NUMBER)) {
+            		number = getString(R.string.unknown);
+            	} else if (number.equals(CallerInfo.PRIVATE_NUMBER)) {
+            		number = getString(R.string.private_num);
+            	} else if (number.equals(CallerInfo.PAYPHONE_NUMBER)) {
+            		number = getString(R.string.payphone);
+            	} else if (number.equals(mVoiceMailNumber)) {
+            		number = getString(R.string.voicemail);
+            	}
+            	
+            	ContactInfo info = mAdapter.getContactInfo(number);
+	        clearCallLogInstances(CallLog.Calls.CACHED_NAME, info.name, info.name);
+	        return true;
+            }
+            case MENU_ITEM_DELETE_ALL_NUMBER: {
+            	Cursor cursor = (Cursor)mAdapter.getItem(menuInfo.position);
+            	String number = cursor.getString(NUMBER_COLUMN_INDEX);
+            	String label = null;
+            	
+            	if (number.equals(CallerInfo.UNKNOWN_NUMBER)) {
+            		label = getString(R.string.unknown);
+            	} else if (number.equals(CallerInfo.PRIVATE_NUMBER)) {
+            		label = getString(R.string.private_num);
+            	} else if (number.equals(CallerInfo.PAYPHONE_NUMBER)) {
+            		label = getString(R.string.payphone);
+            	} else if (number.equals(mVoiceMailNumber)) {
+            		label = getString(R.string.voicemail);
+            	}
+            	else {
+            		label = number;
+            	}
+            	clearCallLogInstances(CallLog.Calls.NUMBER, number, label);
+            	return true;
+            }
+            
         }
         return super.onContextItemSelected(item);
     }
+    
+    
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -955,6 +1005,34 @@ public class RecentCallsListActivity extends ListActivity
         Intent intent = new Intent(this, CallDetailActivity.class);
         intent.setData(ContentUris.withAppendedId(CallLog.Calls.CONTENT_URI, id));
         startActivity(intent);
+    }
+    
+    private void clearCallLogInstances(String type, String value, String label) { // Clear all instances of a user OR number
+    	final String t = type;
+    	final String v = value;
+    	AlertDialog.Builder alert = new AlertDialog.Builder(this);
+    	alert.setTitle("Clear call log");
+    	alert.setMessage("Are you sure you want to clear all call records of " + label + "?"); //Text, eg. show "Private" instead of -1 :P
+    	
+    	alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+    		public void onClick(DialogInterface dialog, int whichButton) {
+    			try  {
+    				getContentResolver().delete(Calls.CONTENT_URI, t + "='" + v + "'", null);
+    				//TODO The change notification should do this automatically, but it isn't working
+    				// right now. Remove this when the change notification is working properly.
+    				startQuery();
+    			} catch (SQLiteException sqle) {
+    				//Nothing :P
+    			}
+    		}
+    	});
+    	
+    	alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+    		public void onClick(DialogInterface dialog, int whichButton) {
+    			// Canceled.
+    	}});
+    	
+    	alert.show();
     }
     
     //Wysie_Soh: Dialog to confirm if user wants to clear call log    

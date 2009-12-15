@@ -729,6 +729,11 @@ public class ViewContactActivity extends ListActivity
         separator.kind = ViewEntry.KIND_SEPARATOR;
         separator.data = getString(R.string.listSeparatorMapAddress);
         mPostalEntries.add(separator);
+        
+        separator = new ViewEntry();
+        separator.kind = ViewEntry.KIND_SEPARATOR;
+        separator.data = getString(R.string.listSeparatorNaviAddress);
+        mPostalEntries.add(separator);
 
         separator = new ViewEntry();
         separator.kind = ViewEntry.KIND_SEPARATOR;
@@ -876,11 +881,13 @@ public class ViewContactActivity extends ListActivity
                         entry2.label = "Navigate to";
                         entry2.data = data;
                         entry2.maxLines = 4;
+                        entry2.actionIcon = R.drawable.sym_action_navi;
                         Intent i = startNavigation(data);
                         
-                        if (i != null)
+                        if (i != null) {
                         	entry2.intent = i;
                         	mNavigationEntries.add(entry2);
+                        }
                         break;
 
                     case Contacts.KIND_IM: {
@@ -1225,14 +1232,17 @@ public class ViewContactActivity extends ListActivity
         	i.addFlags(0x10800000);
         	i.setClassName("com.google.android.apps.m4ps", "com.google.android.maps.driveabout.app.NavigationActivity");
         	
-        	if (isIntentAvailable(i))
+        	if (isIntentAvailable(i)) {
         		return i;
+        	}
         	else {
         		i.setClassName("com.google.android.apps.maps", "com.google.android.maps.driveabout.app.NavigationActivity");
-        		if (isIntentAvailable(i))
+        		if (isIntentAvailable(i)) {
         			return i;
-        		else
+        		}
+        		else {
         			return null;
+        		}
         	}
         }
 }

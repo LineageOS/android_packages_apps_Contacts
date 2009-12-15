@@ -326,6 +326,8 @@
 
     <!-- Separator in the contact details list describing that the items below it will open maps with the given address -->
     <string name="listSeparatorMapAddress">Map address</string>
+    
+    <string name="listSeparatorNaviAddress">Navigate to address</string>
 
     <!-- Section header in the Edit Contacts screen for map addresses -->
     <string name="listSeparatorMapAddress_edit">Postal addresses</string>

@@ -17,12 +17,15 @@
 package com.android.contacts;
 
 import android.app.ListActivity;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.AsyncQueryHandler;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabaseCorruptException;
 import android.database.sqlite.SQLiteDiskIOException;
@@ -36,6 +39,7 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.Contacts.People;
@@ -45,6 +49,7 @@ import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -123,6 +128,8 @@ public class RecentCallsListActivity extends ListActivity
     RecentCallsAdapter mAdapter;
     private QueryHandler mQueryHandler;
     String mVoiceMailNumber;
+    Context context;
+    SharedPreferences mPreferences;
 
     static final class ContactInfo {
         public long personId;
@@ -489,11 +496,19 @@ public class RecentCallsListActivity extends ListActivity
             int type = c.getInt(CALL_TYPE_COLUMN_INDEX);
             long date = c.getLong(DATE_COLUMN_INDEX);
 
-            // Set the date/time field by mixing relative and absolute times.
-            int flags = DateUtils.FORMAT_ABBREV_RELATIVE;
+            if (mPreferences.getBoolean("cl_relative_time", true)) {
+                // Set the date/time field by mixing relative and absolute times.
+                int flags = DateUtils.FORMAT_ABBREV_RELATIVE;
 
-            views.dateView.setText(DateUtils.getRelativeTimeSpanString(date,
-                    System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS, flags));
+                views.dateView.setText(DateUtils.getRelativeTimeSpanString(date,
+                        System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS, flags));
+            } else {
+                if (DateFormat.is24HourFormat(context)) {
+                    views.dateView.setText(DateFormat.format("MMM dd, kk:mm", date));
+                } else {
+                    views.dateView.setText(DateFormat.format("MMM dd, h:mmaa", date));
+                }
+            }
 
             // Set the icon
             switch (type) {
@@ -579,6 +594,10 @@ public class RecentCallsListActivity extends ListActivity
 
         // Typing here goes to the dialer
         setDefaultKeyMode(DEFAULT_KEYS_DIALER);
+
+        context = this;
+
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         mAdapter = new RecentCallsAdapter();
         getListView().setOnCreateContextMenuListener(this);
@@ -695,6 +714,10 @@ public class RecentCallsListActivity extends ListActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, MENU_ITEM_DELETE_ALL, 0, R.string.recentCalls_deleteAll)
                 .setIcon(android.R.drawable.ic_menu_close_clear_cancel);
+        MenuItem mSettingsMenuItem = menu.add(0, 0, 0, R.string.menu_preferences)
+                .setIcon(android.R.drawable.ic_menu_preferences);
+        Intent i = new Intent(this, ContactsPreferences.class);
+        mSettingsMenuItem.setIntent(i);
         return true;
     }
 
@@ -768,10 +791,7 @@ public class RecentCallsListActivity extends ListActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MENU_ITEM_DELETE_ALL: {
-                getContentResolver().delete(Calls.CONTENT_URI, null, null);
-                //TODO The change notification should do this automatically, but it isn't working
-                // right now. Remove this when the change notification is working properly.
-                startQuery();
+                clearCallLog();
                 return true;
             }
 
@@ -929,4 +949,34 @@ public class RecentCallsListActivity extends ListActivity
         intent.setData(ContentUris.withAppendedId(CallLog.Calls.CONTENT_URI, id));
         startActivity(intent);
     }
+
+    private void clearCallLog() {
+        if (mPreferences.getBoolean("cl_ask_before_clear", false)) {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle("Clear call log");
+            alert.setMessage("Are you sure you want to clear all call records?");
+      
+            alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                            getContentResolver().delete(Calls.CONTENT_URI, null, null);
+                            //TODO The change notification should do this automatically, but it isn't working
+                            // right now. Remove this when the change notification is working properly.
+                            startQuery();
+                    }
+            });
+        
+            alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                            // Canceled.
+            }});
+        
+            alert.show();
+        } else {
+            getContentResolver().delete(Calls.CONTENT_URI, null, null);
+            //TODO The change notification should do this automatically, but it isn't working
+            // right now. Remove this when the change notification is working properly.
+            startQuery();
+        }
+    }
+
 }

@@ -1084,10 +1084,15 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     	try {
     		String num = TelephonyManager.getDefault().getVoiceMailNumber();
     		
-    		if (!(num.equals("") || num == null))
+    		//Wysie_Soh: Bugfix for 1.52. Important. Caused FCs on many people cause num.equals was called first
+    		//resulting in a nullpointerexception. added the exception handler as well, but it's not actually needed
+    		//since we now check for num == null first :).
+    		if (!(num == null || num.equals(""))) 
     			hasVoicemail = true;
     	} catch (SecurityException se) {
     		// Possibly no READ_PHONE_STATE privilege.
+    	} catch (NullPointerException e) {
+    		//
     	}
     	
     	return hasVoicemail;
@@ -1099,11 +1104,11 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         if (digits == null || !TextUtils.isGraphic(digits)) {            
             if (leftButtonType.equals(DialerSettings.ADDCONTACTS) || leftButtonType.equals(DialerSettings.SMS))
             	mVoicemailButton.setEnabled(false);
-            	mDelete.setEnabled(false);
+            	//mDelete.setEnabled(false);
         } else {
             // Put the current digits string into an intent
             mVoicemailButton.setEnabled(true);
-            mDelete.setEnabled(true); //Wysie_Soh: Known bug: mDelete will go into pressed state upon entering any digit after a long-press on mDelete.
+            //mDelete.setEnabled(true); //Wysie_Soh: Known bug: mDelete will go into pressed state upon entering any digit after a long-press on mDelete.
         }
     }
 

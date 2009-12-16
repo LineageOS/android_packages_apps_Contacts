@@ -343,9 +343,10 @@ public final class ContactsListActivity extends ListActivity
      * Data to use when in mode {@link #MODE_QUERY_PICK_TO_VIEW}. Usually
      * provided by scheme-specific part of incoming {@link Intent#getData()}.
      */
-    private String mQueryData;
+    private String mQueryData;    
 
     private Handler mHandler = new Handler();
+    private SharedPreferences prefs;
 
     private class ImportTypeSelectedListener implements DialogInterface.OnClickListener {
         public static final int IMPORT_FROM_SIM = 0;
@@ -387,6 +388,8 @@ public final class ContactsListActivity extends ListActivity
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        
+        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         // Resolve the intent
         final Intent intent = getIntent();
@@ -848,6 +851,9 @@ public final class ContactsListActivity extends ListActivity
         }
         menu.setGroupEnabled(MENU_GROUP_BT, bluetoothEnabled);
         menu.setGroupVisible(MENU_GROUP_BT, bluetoothEnabled);
+        
+        Intent i = new Intent(this, ContactsPreferences.class);
+        menu.add(0, 0, 0, R.string.menu_preferences).setIcon(android.R.drawable.ic_menu_preferences).setIntent(i);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -1757,7 +1763,8 @@ public final class ContactsListActivity extends ListActivity
         public CharArrayBuffer numberBuffer = new CharArrayBuffer(128);
         public ImageView presenceView;
         public ImageView photoView;
-        //public View callView; //ToDo: Not working
+        public View dividerView;
+        public View callView;
     }
 
     private final class ContactItemListAdapter extends ResourceCursorAdapter
@@ -1772,7 +1779,7 @@ public final class ContactsListActivity extends ListActivity
         private int mFrequentSeparatorPos = ListView.INVALID_POSITION;
 
         public ContactItemListAdapter(Context context) {
-            super(ContactsListActivity.this, R.layout.contacts_list_item, null, false);
+            super(context, R.layout.contacts_list_item, null, false);
 
             mAlphabet = context.getString(com.android.internal.R.string.fast_scroll_alphabet);
 
@@ -1890,20 +1897,17 @@ public final class ContactsListActivity extends ListActivity
 
         @Override
         public View newView(Context context, Cursor cursor, ViewGroup parent) {
-            final View view = super.newView(context, cursor, parent);
+            final View view = super.newView(context, cursor, parent);            
 
             final ContactListItemCache cache = new ContactListItemCache();
             cache.nameView = (TextView) view.findViewById(R.id.name);
             cache.labelView = (TextView) view.findViewById(R.id.label);
             cache.numberView = (TextView) view.findViewById(R.id.number);
             cache.presenceView = (ImageView) view.findViewById(R.id.presence);
-            cache.photoView = (ImageView) view.findViewById(R.id.photo);
-            //cache.callView = view.findViewById(R.id.call_icon);
-            
-            /*
-            if (cache.callView == null)
-            	Log.d("NULL: CALLVIEW", "Why?");
-            */
+            cache.photoView = (ImageView) view.findViewById(R.id.photo);            
+            cache.dividerView = view.findViewById(R.id.divider);
+            cache.callView = view.findViewById(R.id.call_icon);
+            cache.callView.setOnClickListener(this);           
             
             view.setTag(cache);
 
@@ -1912,13 +1916,9 @@ public final class ContactsListActivity extends ListActivity
 
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
-            final ContactListItemCache cache = (ContactListItemCache) view.getTag();
-            
-            //String number = cursor.getString(NUMBER_COLUMN_INDEX);
-            //cache.callView.setTag(number);            
-            //cache.callView.setVisibility(View.VISIBLE);
-           
+            final ContactListItemCache cache = (ContactListItemCache) view.getTag();     
 
+           
             // Set the name
             cursor.copyStringToBuffer(NAME_COLUMN_INDEX, cache.nameBuffer);
             int size = cache.nameBuffer.sizeCopied;
@@ -1942,15 +1942,34 @@ public final class ContactsListActivity extends ListActivity
             // Set the phone number
             TextView numberView = cache.numberView;
             TextView labelView = cache.labelView;
+            View divView = null;
+            View callView = null;
+            
+            divView = cache.dividerView;
+            callView = cache.callView;
+            
             cursor.copyStringToBuffer(NUMBER_COLUMN_INDEX, cache.numberBuffer);
             size = cache.numberBuffer.sizeCopied;
+            
             if (size != 0) {
-                numberView.setText(cache.numberBuffer.data, 0, size);
+                numberView.setText(cache.numberBuffer.data, 0, size);                              
                 numberView.setVisibility(View.VISIBLE);
-                labelView.setVisibility(View.VISIBLE);
+                labelView.setVisibility(View.VISIBLE);                
+                if (prefs.getBoolean("contacts_show_dial_button", true)) {
+                	callView.setTag(new String(cache.numberBuffer.data, 0, size)); //Wysie_Soh: Set tag to green dial button
+                	callView.setVisibility(View.VISIBLE);
+                	divView.setVisibility(View.VISIBLE);
+                }
+                else {
+                	callView.setTag(null); //Wysie_Soh: Set tag to green dial button
+                	callView.setVisibility(View.GONE);
+                	divView.setVisibility(View.GONE);
+                }
             } else {
                 numberView.setVisibility(View.GONE);
-                labelView.setVisibility(View.GONE);
+                labelView.setVisibility(View.GONE); 
+                callView.setVisibility(View.GONE);
+                divView.setVisibility(View.GONE);
             }
 
             // Set the label

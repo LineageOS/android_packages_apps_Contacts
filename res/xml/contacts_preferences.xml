@@ -46,10 +46,17 @@
             android:summaryOff="@string/summaryoff_cl_ask_before_clear"
             android:defaultValue="false" />
     </PreferenceCategory>
+    <PreferenceCategory android:title="@string/title_contacts_category">
+        <CheckBoxPreference
+            android:key="contacts_show_dial_button"
+            android:title="@string/title_contacts_show_dial_button"
+            android:summary="@string/summary_contacts_show_dial_button"
+            android:defaultValue="true" />
+    </PreferenceCategory>
     <PreferenceCategory android:title="@string/title_misc_category">
         <CheckBoxPreference
             android:key="misc_sensor_rotation"
             android:title="@string/title_sensor_rotation"
             android:defaultValue="false" />
-    </PreferenceCategory>
+    </PreferenceCategory>   
 </PreferenceScreen>

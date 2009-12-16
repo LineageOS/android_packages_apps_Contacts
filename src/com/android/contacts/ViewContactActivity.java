@@ -145,6 +145,7 @@ public class ViewContactActivity extends ListActivity
     /* package */ ArrayList<ViewEntry> mSmsEntries = new ArrayList<ViewEntry>();
     /* package */ ArrayList<ViewEntry> mEmailEntries = new ArrayList<ViewEntry>();
     /* package */ ArrayList<ViewEntry> mPostalEntries = new ArrayList<ViewEntry>();
+    /* package */ ArrayList<ViewEntry> mNavigationEntries = new ArrayList<ViewEntry>();
     /* package */ ArrayList<ViewEntry> mImEntries = new ArrayList<ViewEntry>();
     /* package */ ArrayList<ViewEntry> mOrganizationEntries = new ArrayList<ViewEntry>();
     /* package */ ArrayList<ViewEntry> mOtherEntries = new ArrayList<ViewEntry>();
@@ -254,6 +255,7 @@ public class ViewContactActivity extends ListActivity
         mSections.add(mEmailEntries);
         mSections.add(mImEntries);
         mSections.add(mPostalEntries);
+        mSections.add(mNavigationEntries);
         mSections.add(mOrganizationEntries);
         mSections.add(mOtherEntries);
 
@@ -865,6 +867,18 @@ public class ViewContactActivity extends ListActivity
                         entry.intent = new Intent(Intent.ACTION_VIEW, uri);
                         entry.actionIcon = R.drawable.sym_action_map;
                         mPostalEntries.add(entry);
+                        
+                        ViewEntry navEntry = new ViewEntry();
+                        navEntry.label = buildActionString(R.string.actionNav,
+                                ContactMethods.getDisplayLabel(this, kind, type, label), true);
+                        navEntry.data = data;
+                        navEntry.maxLines = 4;
+                        navEntry.actionIcon = R.drawable.sym_action_navi;
+                        Intent i = startNavigation(data);
+                        if (i != null) {
+                            navEntry.intent = i;
+                            mNavigationEntries.add(navEntry);
+                        }
                         break;
 
                     case Contacts.KIND_IM: {
@@ -1188,6 +1202,32 @@ public class ViewContactActivity extends ListActivity
                 textView.setSingleLine(false);
                 textView.setMaxLines(maxLines);
                 textView.setEllipsize(null);
+            }
+        }
+    }
+    
+    public boolean isIntentAvailable(Intent intent) {
+        final PackageManager packageManager = this.getPackageManager();
+        List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        return list.size() > 0;
+    }
+    
+    public Intent startNavigation(String address) {
+        address = address.replace('#', ' ');
+        Intent i = new Intent();
+        i.setAction(Intent.ACTION_VIEW);
+        i.setData(Uri.parse("http://maps.google.com/maps?myl=saddr&daddr=" + address + "&dirflg=d&nav=1"));
+        i.addFlags(0x10800000);
+        i.setClassName("com.google.android.apps.m4ps", "com.google.android.maps.driveabout.app.NavigationActivity");
+        
+        if (isIntentAvailable(i)) {
+            return i;
+        } else {
+            i.setClassName("com.google.android.apps.maps", "com.google.android.maps.driveabout.app.NavigationActivity");
+            if (isIntentAvailable(i)) {
+                return i;
+            } else {
+                return null;
             }
         }
     }

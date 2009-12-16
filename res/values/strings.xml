@@ -739,19 +739,39 @@
     <!-- The string used to describe Contacts as a searchable item within system search settings. -->
     <string name="search_settings_description">Names of your contacts</string>
     
-    <!-- Wysie_Soh: Dialer preferences strings -->
-    <string name="dialersettingsui">Dialer settings</string>
-    <string name="prefs_left_button_title">Choose an action for the left button</string>    
-    <string name="prefs_left_button_prompt">Left button action</string>
-    <string name="prefs_voicemailapp">Choose a voicemail application</string>
-    <string name="prefs_voicemailapp_prompt">Voicemail application</string>
-    <string name="prefs_sensor">Enable sensor-based rotation</string>
-    <string name="prefs_warning">Dialer will close after you are done. Please launch it again.</string>
+    <!-- Wysie_Soh: Contacts menu (across all 4, ie. Dialer, Contacts, Call log, Favourites -->    
+    <string name="menu_preferences">Preferences</string>
+    
+    <!-- Wysie_Soh: Dialer menu -->
+    <string name="dialer_menu_sms">SMS/MMS</string>
+    
+    <!-- Wysie_Soh: Call log menu -->
+    <string name="call_log_menu_total_duration">Total Incoming/Outgoing</string>
     
     <!-- Wysie_Soh: Total incoming/outgoing dialog -->
     <string name="totalcalllog">Total incoming/outgoing duration</string>
     <string name="total_incoming">Incoming</string>
     <string name="total_outgoing">Outgoing</string>
     <string name="total_button_ok">Ok</string>
+    
+    <!-- Wysie_Soh: Preferences strings (based on ChainsDD's code) -->
+    <string name="title_dialer_category">Dialer</string>
+    <string name="title_vm_button">Left action button</string>    
+    <string name="title_vm_handler">Voicemail handler</string>
+    
+    <string name="title_call_log_category">Call log</string>    
+    <string name="title_cl_relative_time">Relative times</string>
+    <string name="summaryon_cl_relative_time">Use relative times in call log</string>
+    <string name="summaryoff_cl_relative_time">Use exact times in call log</string>      
+    <string name="title_cl_ask_before_clear">Ask before clearing</string>
+    <string name="summaryon_cl_ask_before_clear">Ask before clearing call log</string>
+    <string name="summaryoff_cl_ask_before_clear">Call logs will be cleared without asking</string>
+    
+    <string name="title_misc_category">Miscellaneous</string>
+    <string name="title_sensor_rotation">Enable sensor rotation</string>    
+    
+    <!-- Wysie_Soh: Call log strings -->  
+    <string name="alert_clear_call_log_title">Clear call log</string>
+    <string name="alert_clear_call_log_message">Are you sure you want to clear all call records?</string>
     
 </resources>

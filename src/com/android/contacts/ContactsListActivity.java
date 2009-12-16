@@ -82,6 +82,7 @@ import android.widget.ResourceCursorAdapter;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.android.contacts.ui.widget.DontPressWithParentImageView;
 
 import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
@@ -1048,8 +1049,17 @@ public final class ContactsListActivity extends ListActivity
                             Uri.fromParts("sms", cursor.getString(NUMBER_COLUMN_INDEX), null)));
         }
         
-        // Wysie_Soh: Navigate to contact
+        /* TODO? Wysie_Soh: Navigate to contact
+        final ContentResolver resolver = getContentResolver();
+        Uri moreUri = ContentUris.withAppendedId(People.ContactMethods.CONTENT_DIRECTORY, id);
+        Cursor navCursor = resolver.query(moreUri, CONTACT_METHODS_PROJECTION, ContactMethods.KIND + "=" + Contacts.KIND_POSTAL, null, null);
         
+        /*        
+        mQueryHandler.query(QUERY_TOKEN, null, ContactMethods.CONTENT_URI,
+                        CONTACT_METHODS_PROJECTION,
+                        ContactMethods.KIND + "=" + Contacts.KIND_POSTAL, null,
+                        getSortOrder(CONTACT_METHODS_PROJECTION));
+        */
 
         // Star toggling
         int starState = cursor.getInt(STARRED_COLUMN_INDEX);
@@ -1166,7 +1176,6 @@ public final class ContactsListActivity extends ListActivity
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         // Hide soft keyboard, if visible
-        Log.d("HELLO", "Testing");
         InputMethodManager inputMethodManager = (InputMethodManager)
                 getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(mList.getWindowToken(), 0);
@@ -1748,10 +1757,11 @@ public final class ContactsListActivity extends ListActivity
         public CharArrayBuffer numberBuffer = new CharArrayBuffer(128);
         public ImageView presenceView;
         public ImageView photoView;
+        //public View callView; //ToDo: Not working
     }
 
     private final class ContactItemListAdapter extends ResourceCursorAdapter
-            implements SectionIndexer {
+            implements SectionIndexer, View.OnClickListener {
         private SectionIndexer mIndexer;
         private String mAlphabet;
         private boolean mLoading = true;
@@ -1762,7 +1772,7 @@ public final class ContactsListActivity extends ListActivity
         private int mFrequentSeparatorPos = ListView.INVALID_POSITION;
 
         public ContactItemListAdapter(Context context) {
-            super(context, R.layout.contacts_list_item, null, false);
+            super(ContactsListActivity.this, R.layout.contacts_list_item, null, false);
 
             mAlphabet = context.getString(com.android.internal.R.string.fast_scroll_alphabet);
 
@@ -1869,6 +1879,14 @@ public final class ContactsListActivity extends ListActivity
             bindView(v, mContext, mCursor);
             return v;
         }
+        
+        public void onClick(View view) {
+            String number = (String) view.getTag();
+            if (!TextUtils.isEmpty(number)) {
+                Uri telUri = Uri.fromParts("tel", number, null);
+                startActivity(new Intent(Intent.ACTION_CALL_PRIVILEGED, telUri));
+            }
+        }
 
         @Override
         public View newView(Context context, Cursor cursor, ViewGroup parent) {
@@ -1880,6 +1898,13 @@ public final class ContactsListActivity extends ListActivity
             cache.numberView = (TextView) view.findViewById(R.id.number);
             cache.presenceView = (ImageView) view.findViewById(R.id.presence);
             cache.photoView = (ImageView) view.findViewById(R.id.photo);
+            //cache.callView = view.findViewById(R.id.call_icon);
+            
+            /*
+            if (cache.callView == null)
+            	Log.d("NULL: CALLVIEW", "Why?");
+            */
+            
             view.setTag(cache);
 
             return view;
@@ -1888,6 +1913,11 @@ public final class ContactsListActivity extends ListActivity
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
             final ContactListItemCache cache = (ContactListItemCache) view.getTag();
+            
+            //String number = cursor.getString(NUMBER_COLUMN_INDEX);
+            //cache.callView.setTag(number);            
+            //cache.callView.setVisibility(View.VISIBLE);
+           
 
             // Set the name
             cursor.copyStringToBuffer(NAME_COLUMN_INDEX, cache.nameBuffer);

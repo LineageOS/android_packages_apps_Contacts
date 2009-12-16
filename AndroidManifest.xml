@@ -327,8 +327,7 @@
                 <action android:name="android.intent.action.ATTACH_DATA" />
                 <data android:mimeType="image/*" />
                 <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            />
+            </intent-filter>       
         </activity>        
 
         <!-- Activity used to select the groups that should be synced -->
@@ -376,7 +375,12 @@
             android:theme="@style/BackgroundOnly" />
             
 	<!-- Wysie_Soh: Custom Intents -->
-	<activity android:name="DialerSettingsUI" android:label="@string/dialersettingsui" />
+	<activity android:name="ContactsPreferences">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
     </application>
 </manifest>

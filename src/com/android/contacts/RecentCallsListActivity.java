@@ -24,6 +24,7 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabaseCorruptException;
 import android.database.sqlite.SQLiteDiskIOException;
@@ -38,6 +39,7 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.Contacts.People;
@@ -138,6 +140,7 @@ public class RecentCallsListActivity extends ListActivity
     private QueryHandler mQueryHandler;
     String mVoiceMailNumber;
     Context context;
+    private SharedPreferences prefs;
 
     static final class ContactInfo {
         public long personId;
@@ -504,20 +507,31 @@ public class RecentCallsListActivity extends ListActivity
             int type = c.getInt(CALL_TYPE_COLUMN_INDEX);
             long date = c.getLong(DATE_COLUMN_INDEX);
 
-            // Set the date/time field by mixing relative and absolute times.
-            //int flags = DateUtils.FORMAT_ABBREV_RELATIVE;
+            //Set the date/time field by mixing relative and absolute times.
+            /* Wysie_Soh: Old code
+            int flags = DateUtils.FORMAT_ABBREV_RELATIVE;
             int flags = 0;            
             flags |= android.text.format.DateUtils.FORMAT_SHOW_DATE;
             flags |= android.text.format.DateUtils.FORMAT_SHOW_TIME;
             flags |= android.text.format.DateUtils.FORMAT_ABBREV_ALL;
 
-            //views.dateView.setText(DateUtils.getRelativeTimeSpanString(date, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS, flags));
-            //views.dateView.setText(DateUtils.formatDateTime(context, date, flags));
+            views.dateView.setText(DateUtils.getRelativeTimeSpanString(date, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS, flags));
+            views.dateView.setText(DateUtils.formatDateTime(context, date, flags));
+            */
             
-            if (DateFormat.is24HourFormat(context))
-            	views.dateView.setText(DateFormat.format("MMM dd, kk:mm", date));
-            else
-            	views.dateView.setText(DateFormat.format("MMM dd, h:mmaa", date));
+            if (prefs.getBoolean("cl_relative_time", true)) {
+                // Set the date/time field by mixing relative and absolute times.
+                int flags = DateUtils.FORMAT_ABBREV_RELATIVE;
+
+                views.dateView.setText(DateUtils.getRelativeTimeSpanString(date,
+                        System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS, flags));
+            } else {
+                if (DateFormat.is24HourFormat(context)) {
+                    views.dateView.setText(DateFormat.format("MMM dd, kk:mm", date));
+                } else {
+                    views.dateView.setText(DateFormat.format("MMM dd, h:mmaa", date));
+                }
+            }
 
             // Set the icon
             switch (type) {
@@ -598,7 +612,8 @@ public class RecentCallsListActivity extends ListActivity
     @Override
     protected void onCreate(Bundle state) {
         super.onCreate(state);
-
+        
+        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         setContentView(R.layout.recent_calls);
 
         // Typing here goes to the dialer
@@ -721,7 +736,11 @@ public class RecentCallsListActivity extends ListActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, MENU_ITEM_DELETE_ALL, 0, R.string.recentCalls_deleteAll)
                 .setIcon(android.R.drawable.ic_menu_close_clear_cancel);   
-        menu.add(0, MENU_ITEM_TOTAL_CALL_LOG, 0, "Total Incoming/Outgoing").setIcon(R.drawable.ic_tab_recent);
+        menu.add(0, MENU_ITEM_TOTAL_CALL_LOG, 0, R.string.call_log_menu_total_duration).setIcon(R.drawable.ic_tab_recent);
+        
+        Intent i = new Intent(this, ContactsPreferences.class);
+        menu.add(0, 0, 0, R.string.menu_preferences).setIcon(android.R.drawable.ic_menu_preferences).setIntent(i);
+        
         return true;
     }
 
@@ -1010,52 +1029,62 @@ public class RecentCallsListActivity extends ListActivity
     private void clearCallLogInstances(String type, String value, String label) { // Clear all instances of a user OR number
     	final String t = type;
     	final String v = value;
-    	AlertDialog.Builder alert = new AlertDialog.Builder(this);
-    	alert.setTitle("Clear call log");
-    	alert.setMessage("Are you sure you want to clear all call records of " + label + "?"); //Text, eg. show "Private" instead of -1 :P
     	
-    	alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-    		public void onClick(DialogInterface dialog, int whichButton) {
-    			try  {
-    				getContentResolver().delete(Calls.CONTENT_URI, t + "='" + v + "'", null);
-    				//TODO The change notification should do this automatically, but it isn't working
-    				// right now. Remove this when the change notification is working properly.
-    				startQuery();
-    			} catch (SQLiteException sqle) {
-    				//Nothing :P
+    	if (prefs.getBoolean("cl_ask_before_clear", false)) {
+    		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+    		alert.setTitle("Clear call log");
+    		alert.setMessage("Are you sure you want to clear all call records of " + label + "?"); //Text, eg. show "Private" instead of -1 :P
+    		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+    			public void onClick(DialogInterface dialog, int whichButton) {
+    				deleteCallLog(t + "='" + v + "'", null);
     			}
-    		}
-    	});
-    	
-    	alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+    		});
+    		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
     		public void onClick(DialogInterface dialog, int whichButton) {
     			// Canceled.
-    	}});
+    		}});
+    		alert.show();
+    	}
+    	else {
+    		deleteCallLog(t + "='" + v + "'", null);
+    	}
     	
-    	alert.show();
+    }
+    
+    private void deleteCallLog(String where, String[] selArgs) {
+    	try  {
+    		getContentResolver().delete(Calls.CONTENT_URI, where, null);
+    		//TODO The change notification should do this automatically, but it isn't working
+    		// right now. Remove this when the change notification is working properly.
+    		startQuery();
+    	} catch (SQLiteException sqle) {
+    		//Nothing :P
+    	}
     }
     
     //Wysie_Soh: Dialog to confirm if user wants to clear call log    
     private void clearCallLog() {
-    	AlertDialog.Builder alert = new AlertDialog.Builder(this);
-    	alert.setTitle("Clear call log");
-    	alert.setMessage("Are you sure you want to clear all call records?");
-    	
-    	alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-    		public void onClick(DialogInterface dialog, int whichButton) {
-    			getContentResolver().delete(Calls.CONTENT_URI, null, null);
-                	//TODO The change notification should do this automatically, but it isn't working
-                	// right now. Remove this when the change notification is working properly.
-                	startQuery();
-    		}
-    	});
-    	
-    	alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-    		public void onClick(DialogInterface dialog, int whichButton) {
-    			// Canceled.
-    	}});
-    	
-    	alert.show();
+        if (prefs.getBoolean("cl_ask_before_clear", false)) {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle(R.string.alert_clear_call_log_title);
+            alert.setMessage(R.string.alert_clear_call_log_message);
+      
+            alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                            deleteCallLog(null, null);
+                    }
+            });
+        
+            alert.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                            // Canceled.
+            }});
+        
+            alert.show();
+        } else {
+            deleteCallLog(null, null);
+        }
     }
     
     private void showTotalCallLog() {

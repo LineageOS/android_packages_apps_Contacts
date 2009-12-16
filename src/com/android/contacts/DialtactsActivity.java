@@ -25,6 +25,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.preference.PreferenceManager;
 import android.provider.CallLog;
 import android.provider.Contacts;
 import android.provider.CallLog.Calls;
@@ -62,10 +63,13 @@ public class DialtactsActivity extends TabActivity implements TabHost.OnTabChang
     private TabHost mTabHost;
     private String mFilterText;    
     private Uri mDialUri;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        
+        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         final Intent intent = getIntent();
         fixIntent(intent);
@@ -89,7 +93,7 @@ public class DialtactsActivity extends TabActivity implements TabHost.OnTabChang
             setupFilterText(intent);
         }
         
-        if(DialerSettings.getSensorRotation(this)) {
+        if(prefs.getBoolean("misc_sensor_rotation", false)) {
             this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         }        
     }
@@ -111,7 +115,7 @@ public class DialtactsActivity extends TabActivity implements TabHost.OnTabChang
     protected void onResume() {
     	super.onResume();
     	
-    	if(DialerSettings.getSensorRotation(this)) {
+    	if(prefs.getBoolean("misc_sensor_rotation", false)) {
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         }
         else {

@@ -55,6 +55,7 @@
         android:layout_centerVertical="true"
         android:gravity="center"
         android:scaleType="centerInside"
+        android:layout_alignWithParentIfMissing="true"
     />
 
     <ImageView android:id="@+id/photo"

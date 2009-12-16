@@ -1026,10 +1026,14 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         int vmButton = Integer.parseInt(mContactsPreferences.getString("vm_button", "0"));
         if (vmButton == 0) {
             mVoicemailButton.setImageResource(R.drawable.ic_dial_action_voice_mail);
-            mOneButton.setImageResource(R.drawable.dial_num_1_no_vm);
+            if (mOneButton != null) {
+                mOneButton.setImageResource(R.drawable.dial_num_1_no_vm);
+            }
         } else {
             mVoicemailButton.setImageResource(R.drawable.ic_dial_action_add_contact);
-            mOneButton.setImageResource(R.drawable.dial_num_1);
+            if (mOneButton != null) {
+                mOneButton.setImageResource(R.drawable.dial_num_1);
+            }
         }
     }
 }

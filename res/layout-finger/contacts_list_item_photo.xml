@@ -47,13 +47,12 @@
     />
 
     <ImageView android:id="@+id/presence"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_width="32dip"
+        android:layout_height="32dip"
         android:layout_toLeftOf="@id/divider"
-        android:layout_marginLeft="5dip"
+        android:layout_marginLeft="1dip"
+        android:layout_marginRight="1dip"
         android:layout_centerVertical="true"
-
         android:gravity="center"
         android:scaleType="centerInside"
     />

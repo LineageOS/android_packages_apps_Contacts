@@ -40,6 +40,8 @@
         <item>T-mobile Visual Voicemail/com.oz.mobile.android.voicemail.application/.application</item>
         <item>Google Voice/com.google.android.apps.googlevoice/.SplashActivity</item>
         <item>YouMail/com.loadedbanana.android.youmail/.activity.MessageList</item>
+        <item>HulloMail/com.hullomail.android.messaging.us/.HulloMail</item>
+        <item>PF Voicemail/com.phonefusion.voicemailplus.android/.VoicemailPlus</item>
     </string-array>
     
 </resources>

@@ -503,6 +503,9 @@
 
     <!-- Action string for viewing an address on a map. -->
     <string name="actionMap">View <xliff:g id="type" example="home">%s</xliff:g> address</string>
+    
+    <!-- Action string for navigating to an address. -->
+    <string name="actionNav">Navigate to <xliff:g id="type" example="home">%s</xliff:g> address</string>
 
     <!-- Description for incoming calls going to voice mail vs. not -->
     <string name="actionIncomingCall">Incoming calls</string>
@@ -752,6 +755,9 @@
     <string name="summaryoff_cl_relative_time">Use exact times in call log</string>
     
     <string name="title_cl_ask_before_clear">Ask Before Clearing</string>
-    <string name ="summary_cl_ask_before_clear">Ask before clearing call log</string>
+    <string name="summary_cl_ask_before_clear">Ask before clearing call log</string>
+    
+    <string name="alert_clear_call_log_title">Clear call log</string>
+    <string name="alert_clear_call_log_message">Are you sure you want to clear all call records?</string>
     
 </resources>

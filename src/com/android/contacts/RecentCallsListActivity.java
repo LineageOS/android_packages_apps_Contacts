@@ -953,10 +953,10 @@ public class RecentCallsListActivity extends ListActivity
     private void clearCallLog() {
         if (mPreferences.getBoolean("cl_ask_before_clear", false)) {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.setTitle("Clear call log");
-            alert.setMessage("Are you sure you want to clear all call records?");
+            alert.setTitle(R.string.alert_clear_call_log_title);
+            alert.setMessage(R.string.alert_clear_call_log_message);
       
-            alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                             getContentResolver().delete(Calls.CONTENT_URI, null, null);
                             //TODO The change notification should do this automatically, but it isn't working
@@ -965,7 +965,7 @@ public class RecentCallsListActivity extends ListActivity
                     }
             });
         
-            alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            alert.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                             // Canceled.
             }});

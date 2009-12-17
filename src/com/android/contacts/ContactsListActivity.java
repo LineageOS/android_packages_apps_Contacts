@@ -35,6 +35,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.CharArrayBuffer;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -119,6 +120,7 @@ public final class ContactsListActivity extends ListActivity
     public static final int MENU_DISPLAY_GROUP = 11;
     public static final int MENU_IMPORT_CONTACTS = 12;
     public static final int MENU_EXPORT_CONTACTS = 13;
+    public static final int MENU_CLEAR_FREQ_CONTACTS = 14;
 
     static final int MENU_ITEM_SEND_BT = 14;
     static final int MENU_ITEM_GET_BT  = 15;
@@ -330,6 +332,7 @@ public final class ContactsListActivity extends ListActivity
 
     private String mShortcutAction;
     private boolean mDefaultMode = false;
+    private boolean mFavTab = false;
 
     /**
      * Internal query type when in mode {@link #MODE_QUERY_PICK_TO_VIEW}.
@@ -426,6 +429,7 @@ public final class ContactsListActivity extends ListActivity
             mMode = MODE_FREQUENT;
         } else if (UI.LIST_STREQUENT_ACTION.equals(action)) {
             mMode = MODE_STREQUENT;
+            mFavTab = true;
         } else if (UI.LIST_CONTACTS_WITH_PHONES_ACTION.equals(action)) {
             mMode = MODE_WITH_PHONES;
         } else if (Intent.ACTION_PICK.equals(action)) {
@@ -856,8 +860,13 @@ public final class ContactsListActivity extends ListActivity
         menu.setGroupEnabled(MENU_GROUP_BT, bluetoothEnabled);
         menu.setGroupVisible(MENU_GROUP_BT, bluetoothEnabled);
         
+        //Wysie_Soh: Clear frequently called
+        if (mFavTab) {
+	        menu.add(0, MENU_CLEAR_FREQ_CONTACTS, 0, R.string.fav_clear_freq).setIcon(android.R.drawable.ic_menu_close_clear_cancel);
+        }
+        //Preferences
         Intent i = new Intent(this, ContactsPreferences.class);
-        menu.add(0, 0, 0, R.string.menu_preferences).setIcon(android.R.drawable.ic_menu_preferences).setIntent(i);
+        menu.add(0, 0, 0, R.string.menu_preferences).setIcon(android.R.drawable.ic_menu_preferences).setIntent(i);       
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -958,6 +967,11 @@ public final class ContactsListActivity extends ListActivity
 
             case MENU_EXPORT_CONTACTS:
                 handleExportContacts();
+                
+            case MENU_CLEAR_FREQ_CONTACTS:
+            	clearFrequentlyCalled();
+            	return true;
+            	
         }
         return false;
     }
@@ -1518,9 +1532,16 @@ public final class ContactsListActivity extends ListActivity
                 break;
 
             case MODE_STREQUENT:
-                mQueryHandler.startQuery(QUERY_TOKEN, null,
-                        Uri.withAppendedPath(People.CONTENT_URI, "strequent"), STREQUENT_PROJECTION,
-                        null, null, null);
+            	if (ePrefs.getBoolean("favourites_hide_freq_called", false)) {
+	            	mQueryHandler.startQuery(QUERY_TOKEN, null, People.CONTENT_URI,
+        	                CONTACTS_PROJECTION,
+        	                People.STARRED + "=1", null, getSortOrder(CONTACTS_PROJECTION));
+        	}
+        	else {
+	                mQueryHandler.startQuery(QUERY_TOKEN, null,
+        	                Uri.withAppendedPath(People.CONTENT_URI, "strequent"), STREQUENT_PROJECTION,
+        	                null, null, null);
+        	}
                 break;
 
             case MODE_PICK_PHONE:
@@ -2187,4 +2208,40 @@ public final class ContactsListActivity extends ListActivity
             return super.getItemId(getRealPosition(pos));
         }
     }
+    
+    //Wysie_Soh: It does not actually delete, but rather, set the TIMES_Contacted to 0 for everyone. 
+    /* Not working for some reason: http://code.google.com/p/android/issues/detail?id=3495
+    private void clearFrequentlyCalled() {
+    	//Uri uri = ContentUris.withAppendedId(People.CONTENT_URI, recNo);
+    	ContentValues values = new ContentValues();
+	values.put(Contacts.PeopleColumns.TIMES_CONTACTED, "0");
+    	
+    	try  {
+    		getContentResolver().update(People.CONTENT_URI, values, null, null);
+    		//TODO The change notification should do this automatically, but it isn't working
+    		// right now. Remove this when the change notification is working properly.
+    		startQuery();
+    	} catch (SQLiteException sqle) {
+    		//Nothing :P
+    	}
+    }
+    */
+    
+    private void clearFrequentlyCalled() {
+	ContentValues values = new ContentValues();
+	values.put(People.TIMES_CONTACTED, "0");
+	
+	String[] PROJECTION = new String[] { People._ID };
+	
+    	Cursor c = getContentResolver().query(People.CONTENT_URI, PROJECTION, People.TIMES_CONTACTED + " > 0", null, null);    	
+    	if(c.moveToFirst()) {
+    		do {
+                    getContentResolver().update(ContentUris.withAppendedId(People.CONTENT_URI, c.getLong(0)),
+                    	values, null, null);
+                    Log.d("HERE", "WE GO");
+               } while(c.moveToNext());
+	}
+    } 
+
+    
 }

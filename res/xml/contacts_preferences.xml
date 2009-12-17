@@ -65,6 +65,13 @@
             android:summary="@string/summary_contacts_show_pic"
             android:defaultValue="true" />
     </PreferenceCategory>
+    <PreferenceCategory android:title="@string/title_favourites_category">
+        <CheckBoxPreference
+            android:key="favourites_hide_freq_called"
+            android:title="@string/title_favourites_hide_freq_call"
+            android:summary="@string/summary_favourites_hide_freq_call"
+            android:defaultValue="false" />
+    </PreferenceCategory>    
     <PreferenceCategory android:title="@string/title_misc_category">
         <CheckBoxPreference
             android:key="misc_sensor_rotation"

@@ -754,6 +754,9 @@
     <string name="total_outgoing">Outgoing</string>
     <string name="total_button_ok">Ok</string>
     
+    <!-- Favourites menu -->
+    <string name="fav_clear_freq">Clear Frequently Called</string>
+    
     <!-- Wysie_Soh: Preferences strings (based on ChainsDD's code) -->
     <string name="title_dialer_category">Dialer</string>
     <string name="title_vm_button">Left action button</string>    
@@ -774,6 +777,10 @@
     <string name="summary_contacts_show_pic">Please restart Contacts/Dialer to see the changes</string>
     <string name="title_contacts_show_dial_button">Show dial button</string>
     <string name="summary_contacts_show_dial_button">Show a dial button for contacts with numbers</string>
+    
+    <string name="title_favourites_category">Favourites</string>
+    <string name="title_favourites_hide_freq_call">Hide frequently called</string>
+    <string name="summary_favourites_hide_freq_call">The actual data is not cleared, but hidden.</string>
     
     <string name="title_misc_category">Miscellaneous</string>
     <string name="title_sensor_rotation">Enable sensor rotation</string>    

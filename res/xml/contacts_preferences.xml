@@ -52,6 +52,11 @@
             android:title="@string/title_contacts_show_dial_button"
             android:summary="@string/summary_contacts_show_dial_button"
             android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="contacts_show_pic"
+            android:title="@string/title_contacts_show_pic"
+            android:summary="@string/summary_contacts_show_pic"
+            android:defaultValue="true" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/title_misc_category">
         <CheckBoxPreference

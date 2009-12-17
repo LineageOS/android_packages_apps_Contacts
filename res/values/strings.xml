@@ -768,6 +768,8 @@
     <string name="summaryoff_cl_ask_before_clear">Call logs will be cleared without asking</string>
     
     <string name="title_contacts_category">Contacts</string>
+    <string name="title_contacts_show_pic">Show contact pictures</string>
+    <string name="summary_contacts_show_pic">Please restart Contacts/Dialer to see the changes</string>
     <string name="title_contacts_show_dial_button">Show dial button</string>
     <string name="summary_contacts_show_dial_button">Show a dial button for contacts with numbers</string>
     

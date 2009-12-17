@@ -180,7 +180,9 @@ public final class ContactsListActivity extends ListActivity
     /** Run a search query in PICK mode, but that still launches to VIEW */
     static final int MODE_QUERY_PICK_TO_VIEW = 65 | MODE_MASK_NO_FILTER | MODE_MASK_PICKER;
     //Geesun
-    static final int DEFAULT_MODE = MODE_ALL_CONTACTS|MODE_MASK_SHOW_PHOTOS;
+    static final int DEFAULT_MODE = MODE_ALL_CONTACTS|MODE_MASK_SHOW_PHOTOS;    
+    //Wysie_Soh
+    static final int DEFAULT_NO_PICTURES_MODE = MODE_ALL_CONTACTS;
 
     /**
      * The type of data to display in the main contacts list.
@@ -205,7 +207,6 @@ public final class ContactsListActivity extends ListActivity
      * be the group name.
      */
     static final String PREF_DISPLAY_INFO = "display_group";
-
 
     static final String NAME_COLUMN = People.DISPLAY_NAME;
     static final String SORT_STRING = People.SORT_STRING;
@@ -346,7 +347,7 @@ public final class ContactsListActivity extends ListActivity
     private String mQueryData;    
 
     private Handler mHandler = new Handler();
-    private SharedPreferences prefs;
+    private SharedPreferences ePrefs;
 
     private class ImportTypeSelectedListener implements DialogInterface.OnClickListener {
         public static final int IMPORT_FROM_SIM = 0;
@@ -389,7 +390,7 @@ public final class ContactsListActivity extends ListActivity
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         
-        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        ePrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());   
 
         // Resolve the intent
         final Intent intent = getIntent();
@@ -519,7 +520,10 @@ public final class ContactsListActivity extends ListActivity
         }
 
         if (mMode == MODE_UNKNOWN) {
-            mMode = DEFAULT_MODE;
+            if (ePrefs.getBoolean("contacts_show_pic", true))
+            	mMode = DEFAULT_MODE;
+            else
+                mMode = DEFAULT_NO_PICTURES_MODE;
         }
 
         // Setup the UI
@@ -1779,7 +1783,7 @@ public final class ContactsListActivity extends ListActivity
         private int mFrequentSeparatorPos = ListView.INVALID_POSITION;
 
         public ContactItemListAdapter(Context context) {
-            super(context, R.layout.contacts_list_item, null, false);
+            super(context, R.layout.contacts_list_item, null, false);        
 
             mAlphabet = context.getString(com.android.internal.R.string.fast_scroll_alphabet);
 
@@ -1816,7 +1820,7 @@ public final class ContactsListActivity extends ListActivity
          * block the UI thread for a long time.
          */
         @Override
-        protected void onContentChanged() {
+        protected void onContentChanged() {               
             CharSequence constraint = getListView().getTextFilter();
             if (!TextUtils.isEmpty(constraint)) {
                 // Reset the filter state then start an async filter operation
@@ -1955,7 +1959,7 @@ public final class ContactsListActivity extends ListActivity
                 numberView.setText(cache.numberBuffer.data, 0, size);                              
                 numberView.setVisibility(View.VISIBLE);
                 labelView.setVisibility(View.VISIBLE);                
-                if (prefs.getBoolean("contacts_show_dial_button", true)) {
+                if (ePrefs.getBoolean("contacts_show_dial_button", true)) {
                 	callView.setTag(new String(cache.numberBuffer.data, 0, size)); //Wysie_Soh: Set tag to green dial button
                 	callView.setVisibility(View.VISIBLE);
                 	divView.setVisibility(View.VISIBLE);

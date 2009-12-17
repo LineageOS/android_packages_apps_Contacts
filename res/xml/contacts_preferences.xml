@@ -38,6 +38,13 @@
             android:title="@string/title_cl_relative_time"
             android:summaryOn="@string/summaryon_cl_relative_time"
             android:summaryOff="@string/summaryoff_cl_relative_time"
+            android:disableDependentsState="true"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="cl_show_seconds"
+            android:title="@string/title_cl_show_seconds"
+            android:summary="@string/summary_cl_show_seconds"
+            android:dependency="cl_relative_time"
             android:defaultValue="true" />
         <CheckBoxPreference
             android:key="cl_ask_before_clear"

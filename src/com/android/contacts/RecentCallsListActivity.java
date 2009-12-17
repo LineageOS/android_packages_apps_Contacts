@@ -526,11 +526,20 @@ public class RecentCallsListActivity extends ListActivity
                 views.dateView.setText(DateUtils.getRelativeTimeSpanString(date,
                         System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS, flags));
             } else {
+            	String format = null;
                 if (DateFormat.is24HourFormat(context)) {
-                    views.dateView.setText(DateFormat.format("MMM dd, kk:mm", date));
+                    if (prefs.getBoolean("cl_show_seconds", true))
+                    	format = "MMM dd, kk:mm:ss";
+                    else
+                    	format = "MMM dd, kk:mm";
                 } else {
-                    views.dateView.setText(DateFormat.format("MMM dd, h:mmaa", date));
+                    if (prefs.getBoolean("cl_show_seconds", true))
+                    	format = "MMM dd, h:mm:ss aa";
+                    else
+                    	format = "MMM dd, h:mm aa";                  	
                 }
+                
+                views.dateView.setText(DateFormat.format(format, date));                         
             }
 
             // Set the icon

@@ -762,7 +762,9 @@
     <string name="title_call_log_category">Call log</string>    
     <string name="title_cl_relative_time">Relative times</string>
     <string name="summaryon_cl_relative_time">Use relative times in call log</string>
-    <string name="summaryoff_cl_relative_time">Use exact times in call log</string>      
+    <string name="summaryoff_cl_relative_time">Use exact times in call log</string>
+    <string name="title_cl_show_seconds">Show seconds</string>
+    <string name="summary_cl_show_seconds">Show seconds when using exact times</string>          
     <string name="title_cl_ask_before_clear">Ask before clearing</string>
     <string name="summaryon_cl_ask_before_clear">Ask before clearing call log</string>
     <string name="summaryoff_cl_ask_before_clear">Call logs will be cleared without asking</string>

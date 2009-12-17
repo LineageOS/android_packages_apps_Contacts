@@ -30,7 +30,6 @@
         android:paddingLeft="14dip"
         android:paddingRight="14dip"
         android:layout_alignParentRight="true"
-
         android:gravity="center_vertical"
         android:src="@android:drawable/sym_action_call"
         android:background="@drawable/call_background"
@@ -42,7 +41,7 @@
         android:layout_marginTop="5dip"
         android:layout_marginBottom="5dip"
         android:layout_toLeftOf="@id/call_icon"
-        android:layout_marginLeft="11dip"
+        android:layout_marginLeft="6dip"
         android:background="@drawable/divider_vertical_dark"
     />
 
@@ -51,7 +50,7 @@
         android:layout_height="32dip"
         android:layout_toLeftOf="@id/divider"
         android:layout_marginLeft="1dip"
-        android:layout_marginRight="1dip"
+        android:layout_marginRight="5dip"
         android:layout_centerVertical="true"
         android:gravity="center"
         android:scaleType="centerInside"
@@ -64,7 +63,6 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="8dip"
-
         android:gravity="center"
         android:scaleType="fitCenter"
         android:background="@drawable/contact_picture_border_in_list"
@@ -106,6 +104,7 @@
         android:layout_alignParentTop="true"
         android:layout_above="@id/label"
         android:layout_alignWithParentIfMissing="true"
+        android:layout_marginBottom="1dip"
 
         android:singleLine="true"
         android:ellipsize="marquee"

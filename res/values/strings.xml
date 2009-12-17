@@ -759,8 +759,11 @@
     
     <!-- Wysie_Soh: Preferences strings (based on ChainsDD's code) -->
     <string name="title_dialer_category">Dialer</string>
-    <string name="title_vm_button">Left action button</string>    
+    <string name="title_vm_button">Left action button (LAB)</string>    
     <string name="title_vm_handler">Voicemail handler</string>
+    <string name="title_disable_num_check">Disable number checks</string>
+    <string name="summaryon_disable_num_check">Left action button (LAB) and menu will always be enabled</string>
+    <string name="summaryoff_disable_num_check">LAB and menu will be enabled only if at least one number is entered (except voicemail)</string>
     
     <string name="title_call_log_category">Call log</string>    
     <string name="title_cl_relative_time">Relative times</string>

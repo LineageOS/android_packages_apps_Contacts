@@ -22,7 +22,8 @@
     android:layout_gravity="center_horizontal"
     android:layout_marginTop="6dip"
     android:layout_weight="1"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    >
 
     <!-- Onscreen "Voicemail" button.
          The width is 75 (from the mocks) + 12 of padding from the

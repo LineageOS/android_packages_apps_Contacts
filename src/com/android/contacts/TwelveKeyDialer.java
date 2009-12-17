@@ -506,8 +506,12 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         }
 
         CharSequence digits = mDigits.getText();
-        //Wysie_Soh: If the left button is set to add to contacts, there is no need to show it in preferences.
-        if (digits == null || !TextUtils.isGraphic(digits) || prefs.getString("vm_button", "0").equals("0")) {
+        
+        
+        //Wysie_Soh
+        //If digits are empty and disable number check is not enabled OR left button is set to addtocontact, hide addtocontact from menu
+        if (((digits == null || !TextUtils.isGraphic(digits)) && !prefs.getBoolean("dial_disable_num_check", false))
+        	|| prefs.getString("vm_button", "0").equals("0")) {
             mAddToContactMenuItem.setVisible(false);
         } else {
             // Put the current digits string into an intent
@@ -520,10 +524,12 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         
         //Wysie_Soh: Preferences intent
         Intent dialPrefs = new Intent(this, ContactsPreferences.class);
-        mPreferences.setIntent(dialPrefs);
+        mPreferences.setIntent(dialPrefs);        
         
-        
-        if (digits == null || !TextUtils.isGraphic(digits) || prefs.getString("vm_button", "0").equals("1")) {
+        //Wysie_Soh
+        //If digits are empty and disable number check is not enabled OR left button is set to sms, hide sms from menu
+        if (((digits == null || !TextUtils.isGraphic(digits)) && !prefs.getBoolean("dial_disable_num_check", false))
+        	|| prefs.getString("vm_button", "0").equals("1")) {
         	mSmsMenuItem.setVisible(false);
         }
         else {
@@ -1126,17 +1132,18 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     
     //Wysie_Soh: Method to check if there's any number entered
     private void checkForNumber() {
-    	CharSequence digits = mDigits.getText();
-        if (digits == null || !TextUtils.isGraphic(digits)) {            
-            if (prefs.getString("vm_button", "0").equals("0") || prefs.getString("vm_button", "0").equals("1"))
-            	mVoicemailButton.setEnabled(false);
-            	//mDelete.setEnabled(false);
-        } else {
-            // Put the current digits string into an intent
-            mVoicemailButton.setEnabled(true);
-            //Wysie_Soh: Known bug: mDelete will go into pressed state upon entering any digit after a long-press on mDelete.
-            //mDelete.setEnabled(true);
-        }
+    		CharSequence digits = mDigits.getText();
+    		if ((digits == null || !TextUtils.isGraphic(digits)) && !prefs.getBoolean("dial_disable_num_check", false)) {
+    			if (prefs.getString("vm_button", "0").equals("0") || prefs.getString("vm_button", "0").equals("1")) {
+            			mVoicemailButton.setEnabled(false);
+            			//mDelete.setEnabled(false);
+            		}
+        	} else {
+            		// Put the current digits string into an intent
+         		mVoicemailButton.setEnabled(true);
+            		//Wysie_Soh: Known bug: mDelete will go into pressed state upon entering any digit after a long-press on mDelete.
+            		//mDelete.setEnabled(true);
+        	}
     }
 
 }

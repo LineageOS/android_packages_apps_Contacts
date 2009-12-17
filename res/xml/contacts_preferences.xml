@@ -31,6 +31,12 @@
             android:dialogTitle="@string/title_vm_handler"
             android:entryValues="@array/entryvalues_numbers"
             android:defaultValue="0" />
+        <CheckBoxPreference
+            android:key="dial_disable_num_check"
+            android:title="@string/title_disable_num_check"
+            android:summaryOn="@string/summaryon_disable_num_check"
+            android:summaryOff="@string/summaryoff_disable_num_check"
+            android:defaultValue="false" />            
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/title_call_log_category">
         <CheckBoxPreference

@@ -1041,7 +1041,7 @@ public class RecentCallsListActivity extends ListActivity
     	
     	if (prefs.getBoolean("cl_ask_before_clear", false)) {
     		AlertDialog.Builder alert = new AlertDialog.Builder(this);
-    		alert.setTitle("Clear call log");
+    		alert.setTitle(R.string.alert_clear_call_log_title);
     		alert.setMessage("Are you sure you want to clear all call records of " + label + "?"); //Text, eg. show "Private" instead of -1 :P
     		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
     			public void onClick(DialogInterface dialog, int whichButton) {

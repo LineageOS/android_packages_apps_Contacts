@@ -781,6 +781,9 @@
     <string name="title_favourites_category">Favourites</string>
     <string name="title_favourites_hide_freq_call">Hide frequently called</string>
     <string name="summary_favourites_hide_freq_call">The actual data is not cleared, but hidden.</string>
+    <string name="title_favs_ask_before_clear">Ask before clearing</string>
+    <string name="summaryon_favs_ask_before_clear">Ask before clearing frequently called</string>
+    <string name="summaryoff_favs_ask_before_clear">Frequently called entries will be cleared without asking</string>    
     
     <string name="title_misc_category">Miscellaneous</string>
     <string name="title_sensor_rotation">Enable sensor rotation</string>    
@@ -788,5 +791,9 @@
     <!-- Wysie_Soh: Call log strings -->  
     <string name="alert_clear_call_log_title">Clear call log</string>
     <string name="alert_clear_call_log_message">Are you sure you want to clear all call records?</string>
+    
+    <!-- Wysie_Soh: Frequently called strings -->
+    <string name="alert_clear_freq_called">Clear frequently called</string>
+    <string name="alert_clear_freq_called_msg">Are you sure you want to clear all frequently called entries?</string>
     
 </resources>

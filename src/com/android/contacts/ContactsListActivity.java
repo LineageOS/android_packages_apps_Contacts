@@ -969,7 +969,24 @@ public final class ContactsListActivity extends ListActivity
                 handleExportContacts();
                 
             case MENU_CLEAR_FREQ_CONTACTS:
-            	clearFrequentlyCalled();
+            	if (ePrefs.getBoolean("favourites_ask_before_clear", false)) {
+            		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            		alert.setTitle(R.string.alert_clear_freq_called);
+            		alert.setMessage(R.string.alert_clear_freq_called_msg);
+            		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int whichButton) {
+    					clearFrequentlyCalled();
+    				}
+    			});
+	    		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+		    		public void onClick(DialogInterface dialog, int whichButton) {
+    				// Canceled.
+    			}});
+	    		alert.show();
+            	}
+            	else {
+            		clearFrequentlyCalled();
+            	}            	
             	return true;
             	
         }

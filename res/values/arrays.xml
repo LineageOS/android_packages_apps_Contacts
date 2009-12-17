@@ -17,8 +17,9 @@
 <resources>
 
     <string-array name="entries_vm_button">
-        <item>Voicemail</item>
         <item>Add to Contacts</item>
+        <item>SMS/MMS</item>
+        <item>Voicemail</item>
     </string-array>
     
     <string-array name="entries_vm_handler">

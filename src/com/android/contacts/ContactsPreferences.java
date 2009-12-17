@@ -45,7 +45,7 @@ public class ContactsPreferences extends PreferenceActivity implements Preferenc
         addPreferencesFromResource(R.xml.contacts_preferences);
 
         mVMButton = (ListPreference) findPreference("vm_button");
-        mVMHandler = (ListPreference) findPreference("vm_handler");
+        mVMHandler = (ListPreference) findPreference("vm_handler");        
 
         mVMButton.setOnPreferenceChangeListener(this);
         mVMHandler.setOnPreferenceChangeListener(this);
@@ -61,7 +61,7 @@ public class ContactsPreferences extends PreferenceActivity implements Preferenc
         return true;
     }
 
-    private void updatePrefs(Preference preference, Object newValue) {
+    private void updatePrefs(Preference preference, Object newValue) {    
         ListPreference p = (ListPreference) findPreference(preference.getKey());
         try {
             p.setSummary(p.getEntries()[p.findIndexOfValue((String) newValue)]);

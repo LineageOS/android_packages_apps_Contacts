@@ -145,7 +145,7 @@ public class ViewContactActivity extends ListActivity
     /* package */ ArrayList<ViewEntry> mSmsEntries = new ArrayList<ViewEntry>();
     /* package */ ArrayList<ViewEntry> mEmailEntries = new ArrayList<ViewEntry>();
     /* package */ ArrayList<ViewEntry> mPostalEntries = new ArrayList<ViewEntry>();
-    /* package */ ArrayList<ViewEntry> mNavigationEntries = new ArrayList<ViewEntry>();
+    /* Wysie_Soh */ ArrayList<ViewEntry> mNavigationEntries = new ArrayList<ViewEntry>();
     /* package */ ArrayList<ViewEntry> mImEntries = new ArrayList<ViewEntry>();
     /* package */ ArrayList<ViewEntry> mOrganizationEntries = new ArrayList<ViewEntry>();
     /* package */ ArrayList<ViewEntry> mOtherEntries = new ArrayList<ViewEntry>();
@@ -217,10 +217,12 @@ public class ViewContactActivity extends ListActivity
     private int mNoPhotoResource;
     private CheckBox mStarView;
     private boolean mShowSmsLinksForAllPhones;
+    private Context _context;
 
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        _context = this;
 
         setContentView(R.layout.view_contact);
         getListView().setOnCreateContextMenuListener(this);
@@ -727,6 +729,11 @@ public class ViewContactActivity extends ListActivity
         separator.kind = ViewEntry.KIND_SEPARATOR;
         separator.data = getString(R.string.listSeparatorMapAddress);
         mPostalEntries.add(separator);
+        
+        separator = new ViewEntry();
+        separator.kind = ViewEntry.KIND_SEPARATOR;
+        separator.data = getString(R.string.listSeparatorNaviAddress);
+        mPostalEntries.add(separator);
 
         separator = new ViewEntry();
         separator.kind = ViewEntry.KIND_SEPARATOR;
@@ -846,7 +853,8 @@ public class ViewContactActivity extends ListActivity
                 ViewEntry entry = new ViewEntry();
                 entry.id = id;
                 entry.uri = uri;
-                entry.kind = kind;
+                entry.kind = kind;                
+                
 
                 switch (kind) {
                     case Contacts.KIND_EMAIL:
@@ -865,19 +873,20 @@ public class ViewContactActivity extends ListActivity
                         entry.data = data;
                         entry.maxLines = 4;
                         entry.intent = new Intent(Intent.ACTION_VIEW, uri);
-                        entry.actionIcon = R.drawable.sym_action_map;
+                        entry.actionIcon = R.drawable.sym_action_map;                        
                         mPostalEntries.add(entry);
                         
-                        ViewEntry navEntry = new ViewEntry();
-                        navEntry.label = buildActionString(R.string.actionNav,
-                                ContactMethods.getDisplayLabel(this, kind, type, label), true);
-                        navEntry.data = data;
-                        navEntry.maxLines = 4;
-                        navEntry.actionIcon = R.drawable.sym_action_navi;
+                        //Wysie_Soh: Navigation portion
+                        ViewEntry entry2 = new ViewEntry();                        
+                        entry2.label = "Navigate to";
+                        entry2.data = data;
+                        entry2.maxLines = 4;
+                        entry2.actionIcon = R.drawable.sym_action_navi;
                         Intent i = startNavigation(data);
+                        
                         if (i != null) {
-                            navEntry.intent = i;
-                            mNavigationEntries.add(navEntry);
+                        	entry2.intent = i;
+                        	mNavigationEntries.add(entry2);
                         }
                         break;
 
@@ -1204,31 +1213,36 @@ public class ViewContactActivity extends ListActivity
                 textView.setEllipsize(null);
             }
         }
-    }
-    
-    public boolean isIntentAvailable(Intent intent) {
-        final PackageManager packageManager = this.getPackageManager();
-        List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
-        return list.size() > 0;
-    }
-    
-    public Intent startNavigation(String address) {
-        address = address.replace('#', ' ');
-        Intent i = new Intent();
-        i.setAction(Intent.ACTION_VIEW);
-        i.setData(Uri.parse("http://maps.google.com/maps?myl=saddr&daddr=" + address + "&dirflg=d&nav=1"));
-        i.addFlags(0x10800000);
-        i.setClassName("com.google.android.apps.m4ps", "com.google.android.maps.driveabout.app.NavigationActivity");
-        
-        if (isIntentAvailable(i)) {
-            return i;
-        } else {
-            i.setClassName("com.google.android.apps.maps", "com.google.android.maps.driveabout.app.NavigationActivity");
-            if (isIntentAvailable(i)) {
-                return i;
-            } else {
-                return null;
-            }
+
+    }    
+
+        public boolean isIntentAvailable(Intent intent) {
+        	final PackageManager packageManager = _context.getPackageManager();
+        	List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        	return list.size() > 0;
         }
-    }
+        
+        //Wysie_Soh: Navigation code. Adapted from rac2030's NavStarter.
+        //http://code.google.com/p/andrac/source/browse/trunk/NavWidget/src/ch/racic/android/gnav/NavSearch.java
+        public Intent startNavigation(String address) {
+        	address = address.replace('#', ' ');
+        	Intent i = new Intent();
+        	i.setAction(Intent.ACTION_VIEW);
+        	i.setData(Uri.parse("http://maps.google.com/maps?myl=saddr&daddr=" + address + "&dirflg=d&nav=1"));
+        	i.addFlags(0x10800000);
+        	i.setClassName("com.google.android.apps.m4ps", "com.google.android.maps.driveabout.app.NavigationActivity");
+        	
+        	if (isIntentAvailable(i)) {
+        		return i;
+        	}
+        	else {
+        		i.setClassName("com.google.android.apps.maps", "com.google.android.maps.driveabout.app.NavigationActivity");
+        		if (isIntentAvailable(i)) {
+        			return i;
+        		}
+        		else {
+        			return null;
+        		}
+        	}
+        }
 }

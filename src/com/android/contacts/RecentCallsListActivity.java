@@ -18,6 +18,7 @@ package com.android.contacts;
 
 import android.app.ListActivity;
 import android.app.AlertDialog;
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.AsyncQueryHandler;
 import android.content.ContentUris;
@@ -30,6 +31,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabaseCorruptException;
 import android.database.sqlite.SQLiteDiskIOException;
 import android.database.sqlite.SQLiteFullException;
+import android.database.sqlite.SQLiteException;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -51,6 +53,7 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.KeyEvent;
@@ -66,6 +69,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ResourceCursorAdapter;
 import android.widget.TextView;
+import android.app.Dialog;
+import android.widget.Button;
+import android.view.View.OnClickListener;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 
 import com.android.internal.telephony.CallerInfo;
 import com.android.internal.telephony.ITelephony;
@@ -121,15 +129,21 @@ public class RecentCallsListActivity extends ListActivity
     private static final int MENU_ITEM_DELETE = 1;
     private static final int MENU_ITEM_DELETE_ALL = 2;
     private static final int MENU_ITEM_VIEW_CONTACTS = 3;
+    private static final int MENU_ITEM_TOTAL_CALL_LOG = 4;
+    private static final int MENU_ITEM_DELETE_ALL_NAME = 5; //Delete all instances of a particular user
+    private static final int MENU_ITEM_DELETE_ALL_NUMBER = 6; //Delete all instances of a particular number
 
     private static final int QUERY_TOKEN = 53;
     private static final int UPDATE_TOKEN = 54;
+    
+    private static int totalIncoming = 0;
+     private static int totalOutgoing = 0;
 
     RecentCallsAdapter mAdapter;
     private QueryHandler mQueryHandler;
     String mVoiceMailNumber;
     Context context;
-    SharedPreferences mPreferences;
+    private SharedPreferences prefs;
 
     static final class ContactInfo {
         public long personId;
@@ -496,18 +510,39 @@ public class RecentCallsListActivity extends ListActivity
             int type = c.getInt(CALL_TYPE_COLUMN_INDEX);
             long date = c.getLong(DATE_COLUMN_INDEX);
 
-            if (mPreferences.getBoolean("cl_relative_time", true)) {
+            //Set the date/time field by mixing relative and absolute times.
+            /* Wysie_Soh: Old code
+            int flags = DateUtils.FORMAT_ABBREV_RELATIVE;
+            int flags = 0;            
+            flags |= android.text.format.DateUtils.FORMAT_SHOW_DATE;
+            flags |= android.text.format.DateUtils.FORMAT_SHOW_TIME;
+            flags |= android.text.format.DateUtils.FORMAT_ABBREV_ALL;
+
+            views.dateView.setText(DateUtils.getRelativeTimeSpanString(date, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS, flags));
+            views.dateView.setText(DateUtils.formatDateTime(context, date, flags));
+            */
+            
+            if (prefs.getBoolean("cl_relative_time", true)) {
                 // Set the date/time field by mixing relative and absolute times.
                 int flags = DateUtils.FORMAT_ABBREV_RELATIVE;
 
                 views.dateView.setText(DateUtils.getRelativeTimeSpanString(date,
                         System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS, flags));
             } else {
+            	String format = null;
                 if (DateFormat.is24HourFormat(context)) {
-                    views.dateView.setText(DateFormat.format("MMM dd, kk:mm", date));
+                    if (prefs.getBoolean("cl_show_seconds", true))
+                    	format = "MMM dd, kk:mm:ss";
+                    else
+                    	format = "MMM dd, kk:mm";
                 } else {
-                    views.dateView.setText(DateFormat.format("MMM dd, h:mmaa", date));
+                    if (prefs.getBoolean("cl_show_seconds", true))
+                    	format = "MMM dd, h:mm:ss aa";
+                    else
+                    	format = "MMM dd, h:mm aa";                  	
                 }
+                
+                views.dateView.setText(DateFormat.format(format, date));                         
             }
 
             // Set the icon
@@ -589,15 +624,16 @@ public class RecentCallsListActivity extends ListActivity
     @Override
     protected void onCreate(Bundle state) {
         super.onCreate(state);
-
+        
+        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         setContentView(R.layout.recent_calls);
 
         // Typing here goes to the dialer
         setDefaultKeyMode(DEFAULT_KEYS_DIALER);
-
+        
         context = this;
 
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        context = this;
 
         mAdapter = new RecentCallsAdapter();
         getListView().setOnCreateContextMenuListener(this);
@@ -713,11 +749,12 @@ public class RecentCallsListActivity extends ListActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, MENU_ITEM_DELETE_ALL, 0, R.string.recentCalls_deleteAll)
-                .setIcon(android.R.drawable.ic_menu_close_clear_cancel);
-        MenuItem mSettingsMenuItem = menu.add(0, 0, 0, R.string.menu_preferences)
-                .setIcon(android.R.drawable.ic_menu_preferences);
+                .setIcon(android.R.drawable.ic_menu_close_clear_cancel);   
+        menu.add(0, MENU_ITEM_TOTAL_CALL_LOG, 0, R.string.call_log_menu_total_duration).setIcon(R.drawable.ic_tab_recent);
+        
         Intent i = new Intent(this, ContactsPreferences.class);
-        mSettingsMenuItem.setIntent(i);
+        menu.add(0, 0, 0, R.string.menu_preferences).setIcon(android.R.drawable.ic_menu_preferences).setIntent(i);
+        
         return true;
     }
 
@@ -785,6 +822,12 @@ public class RecentCallsListActivity extends ListActivity
                     .setIntent(intent);
         }
         menu.add(0, MENU_ITEM_DELETE, 0, R.string.recentCalls_removeFromRecentList);
+        
+        if (contactInfoPresent) {
+        	menu.add(0, MENU_ITEM_DELETE_ALL_NAME, 0, "Remove all " + info.name);
+        }
+        
+        menu.add(0, MENU_ITEM_DELETE_ALL_NUMBER, 0, "Remove all " + number);
     }
 
     @Override
@@ -794,7 +837,13 @@ public class RecentCallsListActivity extends ListActivity
                 clearCallLog();
                 return true;
             }
-
+            case MENU_ITEM_TOTAL_CALL_LOG: {
+            	//Intent totalCallLog = new Intent(this, TotalCallLog.class);
+            	//setIntent(totalCallLog);
+            	//startActivity(totalCallLog);
+            	showTotalCallLog();
+            	return true;
+            }
             case MENU_ITEM_VIEW_CONTACTS: {
                 Intent intent = new Intent(Intent.ACTION_VIEW, People.CONTENT_URI);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -814,7 +863,7 @@ public class RecentCallsListActivity extends ListActivity
         } catch (ClassCastException e) {
             Log.e(TAG, "bad menuInfoIn", e);
             return false;
-        }
+        }         
 
         switch (item.getItemId()) {
             case MENU_ITEM_DELETE: {
@@ -825,9 +874,50 @@ public class RecentCallsListActivity extends ListActivity
                 }
                 return true;
             }
+            case MENU_ITEM_DELETE_ALL_NAME: {
+            	Cursor cursor = (Cursor)mAdapter.getItem(menuInfo.position);
+            	String number = cursor.getString(NUMBER_COLUMN_INDEX);
+            	
+            	if (number.equals(CallerInfo.UNKNOWN_NUMBER)) {
+            		number = getString(R.string.unknown);
+            	} else if (number.equals(CallerInfo.PRIVATE_NUMBER)) {
+            		number = getString(R.string.private_num);
+            	} else if (number.equals(CallerInfo.PAYPHONE_NUMBER)) {
+            		number = getString(R.string.payphone);
+            	} else if (number.equals(mVoiceMailNumber)) {
+            		number = getString(R.string.voicemail);
+            	}
+            	
+            	ContactInfo info = mAdapter.getContactInfo(number);
+	        clearCallLogInstances(CallLog.Calls.CACHED_NAME, info.name, info.name);
+	        return true;
+            }
+            case MENU_ITEM_DELETE_ALL_NUMBER: {
+            	Cursor cursor = (Cursor)mAdapter.getItem(menuInfo.position);
+            	String number = cursor.getString(NUMBER_COLUMN_INDEX);
+            	String label = null;
+            	
+            	if (number.equals(CallerInfo.UNKNOWN_NUMBER)) {
+            		label = getString(R.string.unknown);
+            	} else if (number.equals(CallerInfo.PRIVATE_NUMBER)) {
+            		label = getString(R.string.private_num);
+            	} else if (number.equals(CallerInfo.PAYPHONE_NUMBER)) {
+            		label = getString(R.string.payphone);
+            	} else if (number.equals(mVoiceMailNumber)) {
+            		label = getString(R.string.voicemail);
+            	}
+            	else {
+            		label = number;
+            	}
+            	clearCallLogInstances(CallLog.Calls.NUMBER, number, label);
+            	return true;
+            }
+            
         }
         return super.onContextItemSelected(item);
     }
+    
+    
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -949,19 +1039,54 @@ public class RecentCallsListActivity extends ListActivity
         intent.setData(ContentUris.withAppendedId(CallLog.Calls.CONTENT_URI, id));
         startActivity(intent);
     }
+    
+    private void clearCallLogInstances(String type, String value, String label) { // Clear all instances of a user OR number
+    	final String t = type;
+    	final String v = value;
+    	
+    	if (prefs.getBoolean("cl_ask_before_clear", false)) {
+    		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+    		alert.setTitle(R.string.alert_clear_call_log_title);
+    		alert.setMessage("Are you sure you want to clear all call records of " + label + "?"); //Text, eg. show "Private" instead of -1 :P
+    		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+    			public void onClick(DialogInterface dialog, int whichButton) {
+    				deleteCallLog(t + "='" + v + "'", null);
+    			}
+    		});
+    		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
+    		public void onClick(DialogInterface dialog, int whichButton) {
+    			// Canceled.
+    		}});
+    		alert.show();
+    	}
+    	else {
+    		deleteCallLog(t + "='" + v + "'", null);
+    	}
+    	
+    }
+    
+    private void deleteCallLog(String where, String[] selArgs) {
+    	try  {
+    		getContentResolver().delete(Calls.CONTENT_URI, where, null);
+    		//TODO The change notification should do this automatically, but it isn't working
+    		// right now. Remove this when the change notification is working properly.
+    		startQuery();
+    	} catch (SQLiteException sqle) {
+    		//Nothing :P
+    	}
+    }
+    
+    //Wysie_Soh: Dialog to confirm if user wants to clear call log    
     private void clearCallLog() {
-        if (mPreferences.getBoolean("cl_ask_before_clear", false)) {
+        if (prefs.getBoolean("cl_ask_before_clear", false)) {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setTitle(R.string.alert_clear_call_log_title);
             alert.setMessage(R.string.alert_clear_call_log_message);
       
             alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                            getContentResolver().delete(Calls.CONTENT_URI, null, null);
-                            //TODO The change notification should do this automatically, but it isn't working
-                            // right now. Remove this when the change notification is working properly.
-                            startQuery();
+                            deleteCallLog(null, null);
                     }
             });
         
@@ -972,11 +1097,63 @@ public class RecentCallsListActivity extends ListActivity
         
             alert.show();
         } else {
-            getContentResolver().delete(Calls.CONTENT_URI, null, null);
-            //TODO The change notification should do this automatically, but it isn't working
-            // right now. Remove this when the change notification is working properly.
-            startQuery();
+            deleteCallLog(null, null);
         }
     }
+    
+    private void showTotalCallLog() {
+    	final Dialog dialog = new Dialog(this);
+    	dialog.setContentView(R.layout.total_call_log);
+    	dialog.setTitle("Total Duration");
+    	dialog.show();
+    	
+    	calcTotalTime();
+    	
+    	TextView incoming = (TextView)dialog.findViewById(R.id.total_in);
+        incoming.setText(formatSecToMin(totalIncoming));
+        TextView outgoing = (TextView)dialog.findViewById(R.id.total_out);
+        outgoing.setText(formatSecToMin(totalOutgoing));
+
+        Button buttonOK = (Button)dialog.findViewById(R.id.buttonOK);
+        buttonOK.setOnClickListener(new OnClickListener() {
+        	public void onClick(View v) {
+               		dialog.dismiss();
+         	}
+        });
+    }
+    
+    private String formatSecToMin(int s) {
+    	int min = s / 60;
+    	int sec = s % 60;
+    	String res = min + " mins " + sec + " secs";
+    	return res;
+    }
+    
+    private void calcTotalTime() {
+    	totalIncoming = 0;
+    	totalOutgoing = 0;
+    	Cursor c = getContentResolver().query(android .provider.CallLog.Calls.CONTENT_URI, null, null, null,
+    		android.provider.CallLog.Calls.DEFAULT_SORT_ORDER) ;
+    	startManagingCursor(c);
+    	
+    	int typeColumn = c.getColumnIndex(android.provider.CallLog.Calls.TYPE);
+    	int durationColumn = c.getColumnIndex(android.provider.CallLog.Calls.DURATION);
+    	
+    	if(c.moveToFirst()) {
+    		do {
+                    int callType = c.getInt(typeColumn);
+                    int callDuration = c.getInt(durationColumn);
+                    
+                    switch(callType){
+                         case android.provider.CallLog.Calls.INCOMING_TYPE:
+                              totalIncoming += callDuration;
+                              break;
+                         case android.provider.CallLog.Calls.OUTGOING_TYPE:
+                              totalOutgoing += callDuration;
+                              break;
+                    }
+               } while(c.moveToNext());
+	}
+   }	
 
 }

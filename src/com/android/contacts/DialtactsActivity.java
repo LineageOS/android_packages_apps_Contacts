@@ -35,6 +35,7 @@ import android.view.KeyEvent;
 import android.view.Window;
 import android.widget.TabHost;
 import com.android.internal.telephony.ITelephony;
+import android.content.pm.ActivityInfo;
 
 
 /**
@@ -43,7 +44,7 @@ import com.android.internal.telephony.ITelephony;
  * are embedded using intents.
  */
 public class DialtactsActivity extends TabActivity implements TabHost.OnTabChangeListener {
-    private static final String TAG = "Dailtacts";
+    private static final String TAG = "Dialtacts";
     private static final String FAVORITES_ENTRY_COMPONENT =
             "com.android.contacts.DialtactsFavoritesEntryActivity";
 
@@ -63,10 +64,13 @@ public class DialtactsActivity extends TabActivity implements TabHost.OnTabChang
     private TabHost mTabHost;
     private String mFilterText;    
     private Uri mDialUri;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        
+        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         PreferenceManager.setDefaultValues(this, R.xml.contacts_preferences, false);
 
@@ -91,6 +95,10 @@ public class DialtactsActivity extends TabActivity implements TabHost.OnTabChang
                 && icicle == null) {
             setupFilterText(intent);
         }
+        
+        if(prefs.getBoolean("misc_sensor_rotation", false)) {
+            this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+        }        
     }
 
     @Override
@@ -103,6 +111,18 @@ public class DialtactsActivity extends TabActivity implements TabHost.OnTabChang
                     .edit();
             editor.putBoolean(PREF_FAVORITES_AS_CONTACTS, currentTabIndex == TAB_INDEX_FAVORITES);
             editor.commit();
+        }
+    }
+    
+    @Override
+    protected void onResume() {
+    	super.onResume();
+    	
+    	if(prefs.getBoolean("misc_sensor_rotation", false)) {
+		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+        }
+        else {
+        	this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         }
     }
     

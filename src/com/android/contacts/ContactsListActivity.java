@@ -35,6 +35,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.CharArrayBuffer;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -82,6 +83,7 @@ import android.widget.ResourceCursorAdapter;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.android.contacts.ui.widget.DontPressWithParentImageView;
 
 import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
@@ -118,6 +120,7 @@ public final class ContactsListActivity extends ListActivity
     public static final int MENU_DISPLAY_GROUP = 11;
     public static final int MENU_IMPORT_CONTACTS = 12;
     public static final int MENU_EXPORT_CONTACTS = 13;
+    public static final int MENU_CLEAR_FREQ_CONTACTS = 14;
 
     static final int MENU_ITEM_SEND_BT = 14;
     static final int MENU_ITEM_GET_BT  = 15;
@@ -179,7 +182,9 @@ public final class ContactsListActivity extends ListActivity
     /** Run a search query in PICK mode, but that still launches to VIEW */
     static final int MODE_QUERY_PICK_TO_VIEW = 65 | MODE_MASK_NO_FILTER | MODE_MASK_PICKER;
     //Geesun
-    static final int DEFAULT_MODE = MODE_ALL_CONTACTS|MODE_MASK_SHOW_PHOTOS;
+    static final int DEFAULT_MODE = MODE_ALL_CONTACTS|MODE_MASK_SHOW_PHOTOS;    
+    //Wysie_Soh
+    static final int DEFAULT_NO_PICTURES_MODE = MODE_ALL_CONTACTS;
 
     /**
      * The type of data to display in the main contacts list.
@@ -204,7 +209,6 @@ public final class ContactsListActivity extends ListActivity
      * be the group name.
      */
     static final String PREF_DISPLAY_INFO = "display_group";
-
 
     static final String NAME_COLUMN = People.DISPLAY_NAME;
     static final String SORT_STRING = People.SORT_STRING;
@@ -328,6 +332,7 @@ public final class ContactsListActivity extends ListActivity
 
     private String mShortcutAction;
     private boolean mDefaultMode = false;
+    private boolean mFavTab = false;
 
     /**
      * Internal query type when in mode {@link #MODE_QUERY_PICK_TO_VIEW}.
@@ -342,9 +347,10 @@ public final class ContactsListActivity extends ListActivity
      * Data to use when in mode {@link #MODE_QUERY_PICK_TO_VIEW}. Usually
      * provided by scheme-specific part of incoming {@link Intent#getData()}.
      */
-    private String mQueryData;
+    private String mQueryData;    
 
     private Handler mHandler = new Handler();
+    private SharedPreferences ePrefs;
 
     private class ImportTypeSelectedListener implements DialogInterface.OnClickListener {
         public static final int IMPORT_FROM_SIM = 0;
@@ -386,6 +392,8 @@ public final class ContactsListActivity extends ListActivity
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        
+        ePrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());   
 
         // Resolve the intent
         final Intent intent = getIntent();
@@ -421,6 +429,7 @@ public final class ContactsListActivity extends ListActivity
             mMode = MODE_FREQUENT;
         } else if (UI.LIST_STREQUENT_ACTION.equals(action)) {
             mMode = MODE_STREQUENT;
+            mFavTab = true;
         } else if (UI.LIST_CONTACTS_WITH_PHONES_ACTION.equals(action)) {
             mMode = MODE_WITH_PHONES;
         } else if (Intent.ACTION_PICK.equals(action)) {
@@ -515,7 +524,10 @@ public final class ContactsListActivity extends ListActivity
         }
 
         if (mMode == MODE_UNKNOWN) {
-            mMode = DEFAULT_MODE;
+            if (ePrefs.getBoolean("contacts_show_pic", true))
+            	mMode = DEFAULT_MODE;
+            else
+                mMode = DEFAULT_NO_PICTURES_MODE;
         }
 
         // Setup the UI
@@ -847,6 +859,14 @@ public final class ContactsListActivity extends ListActivity
         }
         menu.setGroupEnabled(MENU_GROUP_BT, bluetoothEnabled);
         menu.setGroupVisible(MENU_GROUP_BT, bluetoothEnabled);
+        
+        //Wysie_Soh: Clear frequently called
+        if (mFavTab) {
+	        menu.add(0, MENU_CLEAR_FREQ_CONTACTS, 0, R.string.fav_clear_freq).setIcon(android.R.drawable.ic_menu_close_clear_cancel);
+        }
+        //Preferences
+        Intent i = new Intent(this, ContactsPreferences.class);
+        menu.add(0, 0, 0, R.string.menu_preferences).setIcon(android.R.drawable.ic_menu_preferences).setIntent(i);       
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -947,6 +967,28 @@ public final class ContactsListActivity extends ListActivity
 
             case MENU_EXPORT_CONTACTS:
                 handleExportContacts();
+                
+            case MENU_CLEAR_FREQ_CONTACTS:
+            	if (ePrefs.getBoolean("favourites_ask_before_clear", false)) {
+            		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            		alert.setTitle(R.string.alert_clear_freq_called);
+            		alert.setMessage(R.string.alert_clear_freq_called_msg);
+            		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int whichButton) {
+    					clearFrequentlyCalled();
+    				}
+    			});
+	    		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+		    		public void onClick(DialogInterface dialog, int whichButton) {
+    				// Canceled.
+    			}});
+	    		alert.show();
+            	}
+            	else {
+            		clearFrequentlyCalled();
+            	}            	
+            	return true;
+            	
         }
         return false;
     }
@@ -1047,6 +1089,18 @@ public final class ContactsListActivity extends ListActivity
                     .setIntent(new Intent(Intent.ACTION_SENDTO,
                             Uri.fromParts("sms", cursor.getString(NUMBER_COLUMN_INDEX), null)));
         }
+        
+        /* TODO? Wysie_Soh: Navigate to contact
+        final ContentResolver resolver = getContentResolver();
+        Uri moreUri = ContentUris.withAppendedId(People.ContactMethods.CONTENT_DIRECTORY, id);
+        Cursor navCursor = resolver.query(moreUri, CONTACT_METHODS_PROJECTION, ContactMethods.KIND + "=" + Contacts.KIND_POSTAL, null, null);
+        
+        /*        
+        mQueryHandler.query(QUERY_TOKEN, null, ContactMethods.CONTENT_URI,
+                        CONTACT_METHODS_PROJECTION,
+                        ContactMethods.KIND + "=" + Contacts.KIND_POSTAL, null,
+                        getSortOrder(CONTACT_METHODS_PROJECTION));
+        */
 
         // Star toggling
         int starState = cursor.getInt(STARRED_COLUMN_INDEX);
@@ -1363,6 +1417,7 @@ public final class ContactsListActivity extends ListActivity
 
         return icon;
     }
+    
 
     /**
      * Returns the icon for the phone call action.
@@ -1494,9 +1549,16 @@ public final class ContactsListActivity extends ListActivity
                 break;
 
             case MODE_STREQUENT:
-                mQueryHandler.startQuery(QUERY_TOKEN, null,
-                        Uri.withAppendedPath(People.CONTENT_URI, "strequent"), STREQUENT_PROJECTION,
-                        null, null, null);
+            	if (ePrefs.getBoolean("favourites_hide_freq_called", false)) {
+	            	mQueryHandler.startQuery(QUERY_TOKEN, null, People.CONTENT_URI,
+        	                CONTACTS_PROJECTION,
+        	                People.STARRED + "=1", null, getSortOrder(CONTACTS_PROJECTION));
+        	}
+        	else {
+	                mQueryHandler.startQuery(QUERY_TOKEN, null,
+        	                Uri.withAppendedPath(People.CONTENT_URI, "strequent"), STREQUENT_PROJECTION,
+        	                null, null, null);
+        	}
                 break;
 
             case MODE_PICK_PHONE:
@@ -1743,10 +1805,12 @@ public final class ContactsListActivity extends ListActivity
         public CharArrayBuffer numberBuffer = new CharArrayBuffer(128);
         public ImageView presenceView;
         public ImageView photoView;
+        public View dividerView;
+        public View callView;
     }
 
     private final class ContactItemListAdapter extends ResourceCursorAdapter
-            implements SectionIndexer {
+            implements SectionIndexer, View.OnClickListener {
         private SectionIndexer mIndexer;
         private String mAlphabet;
         private boolean mLoading = true;
@@ -1757,7 +1821,7 @@ public final class ContactsListActivity extends ListActivity
         private int mFrequentSeparatorPos = ListView.INVALID_POSITION;
 
         public ContactItemListAdapter(Context context) {
-            super(context, R.layout.contacts_list_item, null, false);
+            super(context, R.layout.contacts_list_item, null, false);        
 
             mAlphabet = context.getString(com.android.internal.R.string.fast_scroll_alphabet);
 
@@ -1794,7 +1858,7 @@ public final class ContactsListActivity extends ListActivity
          * block the UI thread for a long time.
          */
         @Override
-        protected void onContentChanged() {
+        protected void onContentChanged() {               
             CharSequence constraint = getListView().getTextFilter();
             if (!TextUtils.isEmpty(constraint)) {
                 // Reset the filter state then start an async filter operation
@@ -1864,17 +1928,29 @@ public final class ContactsListActivity extends ListActivity
             bindView(v, mContext, mCursor);
             return v;
         }
+        
+        public void onClick(View view) {
+            String number = (String) view.getTag();
+            if (!TextUtils.isEmpty(number)) {
+                Uri telUri = Uri.fromParts("tel", number, null);
+                startActivity(new Intent(Intent.ACTION_CALL_PRIVILEGED, telUri));
+            }
+        }
 
         @Override
         public View newView(Context context, Cursor cursor, ViewGroup parent) {
-            final View view = super.newView(context, cursor, parent);
+            final View view = super.newView(context, cursor, parent);            
 
             final ContactListItemCache cache = new ContactListItemCache();
             cache.nameView = (TextView) view.findViewById(R.id.name);
             cache.labelView = (TextView) view.findViewById(R.id.label);
             cache.numberView = (TextView) view.findViewById(R.id.number);
             cache.presenceView = (ImageView) view.findViewById(R.id.presence);
-            cache.photoView = (ImageView) view.findViewById(R.id.photo);
+            cache.photoView = (ImageView) view.findViewById(R.id.photo);            
+            cache.dividerView = view.findViewById(R.id.divider);
+            cache.callView = view.findViewById(R.id.call_icon);
+            cache.callView.setOnClickListener(this);           
+            
             view.setTag(cache);
 
             return view;
@@ -1882,8 +1958,9 @@ public final class ContactsListActivity extends ListActivity
 
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
-            final ContactListItemCache cache = (ContactListItemCache) view.getTag();
+            final ContactListItemCache cache = (ContactListItemCache) view.getTag();     
 
+           
             // Set the name
             cursor.copyStringToBuffer(NAME_COLUMN_INDEX, cache.nameBuffer);
             int size = cache.nameBuffer.sizeCopied;
@@ -1907,15 +1984,34 @@ public final class ContactsListActivity extends ListActivity
             // Set the phone number
             TextView numberView = cache.numberView;
             TextView labelView = cache.labelView;
+            View divView = null;
+            View callView = null;
+            
+            divView = cache.dividerView;
+            callView = cache.callView;
+            
             cursor.copyStringToBuffer(NUMBER_COLUMN_INDEX, cache.numberBuffer);
             size = cache.numberBuffer.sizeCopied;
+            
             if (size != 0) {
-                numberView.setText(cache.numberBuffer.data, 0, size);
+                numberView.setText(cache.numberBuffer.data, 0, size);                              
                 numberView.setVisibility(View.VISIBLE);
-                labelView.setVisibility(View.VISIBLE);
+                labelView.setVisibility(View.VISIBLE);                
+                if (ePrefs.getBoolean("contacts_show_dial_button", true)) {
+                	callView.setTag(new String(cache.numberBuffer.data, 0, size)); //Wysie_Soh: Set tag to green dial button
+                	callView.setVisibility(View.VISIBLE);
+                	divView.setVisibility(View.VISIBLE);
+                }
+                else {
+                	callView.setTag(null); //Wysie_Soh: Set tag to green dial button
+                	callView.setVisibility(View.GONE);
+                	divView.setVisibility(View.GONE);
+                }
             } else {
                 numberView.setVisibility(View.GONE);
-                labelView.setVisibility(View.GONE);
+                labelView.setVisibility(View.GONE); 
+                callView.setVisibility(View.GONE);
+                divView.setVisibility(View.GONE);
             }
 
             // Set the label
@@ -2129,4 +2225,40 @@ public final class ContactsListActivity extends ListActivity
             return super.getItemId(getRealPosition(pos));
         }
     }
+    
+    //Wysie_Soh: It does not actually delete, but rather, set the TIMES_Contacted to 0 for everyone. 
+    /* Not working for some reason: http://code.google.com/p/android/issues/detail?id=3495
+    private void clearFrequentlyCalled() {
+    	//Uri uri = ContentUris.withAppendedId(People.CONTENT_URI, recNo);
+    	ContentValues values = new ContentValues();
+	values.put(Contacts.PeopleColumns.TIMES_CONTACTED, "0");
+    	
+    	try  {
+    		getContentResolver().update(People.CONTENT_URI, values, null, null);
+    		//TODO The change notification should do this automatically, but it isn't working
+    		// right now. Remove this when the change notification is working properly.
+    		startQuery();
+    	} catch (SQLiteException sqle) {
+    		//Nothing :P
+    	}
+    }
+    */
+    
+    private void clearFrequentlyCalled() {
+	ContentValues values = new ContentValues();
+	values.put(People.TIMES_CONTACTED, "0");
+	
+	String[] PROJECTION = new String[] { People._ID };
+	
+    	Cursor c = getContentResolver().query(People.CONTENT_URI, PROJECTION, People.TIMES_CONTACTED + " > 0", null, null);    	
+    	if(c.moveToFirst()) {
+    		do {
+                    getContentResolver().update(ContentUris.withAppendedId(People.CONTENT_URI, c.getLong(0)),
+                    	values, null, null);
+                    Log.d("HERE", "WE GO");
+               } while(c.moveToNext());
+	}
+    } 
+
+    
 }

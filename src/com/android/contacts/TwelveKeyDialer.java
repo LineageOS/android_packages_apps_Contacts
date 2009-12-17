@@ -48,6 +48,7 @@ import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -68,8 +69,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import android.widget.ImageButton;
+import android.view.MenuItem.OnMenuItemClickListener;
 import com.android.internal.telephony.ITelephony;
+import android.content.res.Configuration;
 
 /**
  * Dialer activity that displays the typical twelve key interface.
@@ -91,19 +94,15 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     public static final int INSERT_ID = Menu.FIRST;
 
     private EditText mDigits;
-    private View mDelete;
-    private MenuItem mAddToContactMenuItem;
-    private MenuItem mSettingsMenuItem;
+    private MenuItem mAddToContactMenuItem, mSmsMenuItem, mPreferences;
     private ToneGenerator mToneGenerator;
     private Object mToneGeneratorLock = new Object();
     private Drawable mDigitsBackground;
     private Drawable mDigitsEmptyBackground;
     private View mDialpad;
     private View mVoicemailDialAndDeleteRow;
-    private ImageButton mVoicemailButton;
-    private ImageButton mOneButton;
-    private View mDialButton;
-    private SharedPreferences mContactsPreferences;
+    private ImageButton mVoicemailButton, mDialButton, mDelete;
+    private SharedPreferences prefs;
 
     private ListView mDialpadChooser;
     private DialpadChooserAdapter mDialpadChooserAdapter;
@@ -114,7 +113,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     /** Identifier for the "Add Call" intent extra. */
     static final String ADD_CALL_MODE_KEY = "add_call_mode";
     /** Indicates if we are opening this dialer to add a call from the InCallScreen. */
-    private boolean mIsAddCallMode;
+    private boolean mIsAddCallMode;    
 
     PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
             /**
@@ -166,8 +165,8 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-
-        mContactsPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        
+        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         // Set the content view
         setContentView(getContentViewResource());
@@ -190,22 +189,22 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
             setupKeypad();
         }
 
-        mVoicemailDialAndDeleteRow = findViewById(R.id.voicemailAndDialAndDelete);
+        mVoicemailDialAndDeleteRow = findViewById(R.id.voicemailAndDialAndDelete);        
 
         // Check whether we should show the onscreen "Dial" button.
-        mDialButton = mVoicemailDialAndDeleteRow.findViewById(R.id.dialButton);
+        mDialButton = (ImageButton)mVoicemailDialAndDeleteRow.findViewById(R.id.dialButton);
 
 //      if (r.getBoolean(R.bool.config_show_onscreen_dial_button)) {
             mDialButton.setOnClickListener(this);
+            mDialButton.setOnLongClickListener(this);
 //      } else {
 //          mDialButton.setVisibility(View.GONE); // It's VISIBLE by default
 //          mDialButton = null;
 //      }
 
-        view = mVoicemailDialAndDeleteRow.findViewById(R.id.deleteButton);
-        view.setOnClickListener(this);
-        view.setOnLongClickListener(this);
-        mDelete = view;
+        mDelete = (ImageButton)mVoicemailDialAndDeleteRow.findViewById(R.id.deleteButton);
+        mDelete.setOnClickListener(this);
+        mDelete.setOnLongClickListener(this);
 
         mDialpad = (View) findViewById(R.id.dialpad);  // This is null in landscape mode
 
@@ -218,6 +217,11 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         if (!resolveIntent() && icicle != null) {
             super.onRestoreInstanceState(icicle);
         }
+        
+        //Wysie_Soh: I shifted this down, otherwise the "Add" button won't be activated when trying to add a number directly (say, from a message).
+        //In other words, DialtactsActivity is called directly, and Dialer is initiated with a number already present.
+        initVoicemailButton();
+        checkForNumber();
 
         // If the mToneGenerator creation fails, just continue without it.  It is
         // a local audio signal, and is not as important as the dtmf tone itself.
@@ -363,10 +367,17 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     }
     
     private void setupKeypad() {
-        // Setup the listeners for the buttons
-        View view = findViewById(R.id.one);
-        view.setOnClickListener(this);
-        view.setOnLongClickListener(this);
+        // Setup the listeners for the buttons        
+        ImageButton dialOne = (ImageButton)findViewById(R.id.one);
+        dialOne.setOnClickListener(this);
+        dialOne.setOnLongClickListener(this);
+        
+        if (hasVoicemail()) {
+        	dialOne.setImageResource(R.drawable.dial_num_1_with_vm);
+        }
+        else {
+        	dialOne.setImageResource(R.drawable.dial_num_1_no_vm);
+        }
 
         findViewById(R.id.two).setOnClickListener(this);
         findViewById(R.id.three).setOnClickListener(this);
@@ -378,7 +389,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         findViewById(R.id.nine).setOnClickListener(this);
         findViewById(R.id.star).setOnClickListener(this);
 
-        view = findViewById(R.id.zero);
+        View view = findViewById(R.id.zero);
         view.setOnClickListener(this);
         view.setOnLongClickListener(this);
 
@@ -442,8 +453,14 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
             // be visible if the phone is idle!
             showDialpadChooser(false);
         }
-
-        initVoicemailButton();
+        
+        updateDialer();        
+    }
+    
+    //Wysie_Soh: Handle update of dialer after exiting settings
+    private void updateDialer() {
+    	initVoicemailButton();
+    	checkForNumber();
     }
 
     @Override
@@ -478,12 +495,10 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        mAddToContactMenuItem = menu.add(0, 0, 0, R.string.recentCalls_addToContact)
-                .setIcon(android.R.drawable.ic_menu_add);
-        mSettingsMenuItem = menu.add(0, 0, 0, R.string.menu_preferences)
-                .setIcon(android.R.drawable.ic_menu_preferences);
-        Intent i = new Intent(this, ContactsPreferences.class);
-        mSettingsMenuItem.setIntent(i);
+        mAddToContactMenuItem = menu.add(0, 0, 0, R.string.recentCalls_addToContact).setIcon(android.R.drawable.ic_menu_add);
+        mSmsMenuItem = menu.add(0, 1, 0, R.string.dialer_menu_sms).setIcon(R.drawable.ic_menu_smsmms);
+	mPreferences = menu.add(0, 2, 0, R.string.menu_preferences).setIcon(android.R.drawable.ic_menu_preferences);
+
         return true;
     }
 
@@ -495,8 +510,8 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         }
 
         CharSequence digits = mDigits.getText();
-        if (digits == null || !TextUtils.isGraphic(digits) ||
-                mContactsPreferences.getString("vm_button", "0").equals("1")) {
+        //Wysie_Soh: If the left button is set to add to contacts, there is no need to show it in preferences.
+        if (digits == null || !TextUtils.isGraphic(digits) || prefs.getString("vm_button", "0").equals("0")) {
             mAddToContactMenuItem.setVisible(false);
         } else {
             // Put the current digits string into an intent
@@ -506,6 +521,25 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
             mAddToContactMenuItem.setIntent(intent);
             mAddToContactMenuItem.setVisible(true);
         }
+        
+        //Wysie_Soh: Preferences intent
+        Intent dialPrefs = new Intent(this, ContactsPreferences.class);
+        mPreferences.setIntent(dialPrefs);
+        
+        
+        if (digits == null || !TextUtils.isGraphic(digits) || prefs.getString("vm_button", "0").equals("1")) {
+        	mSmsMenuItem.setVisible(false);
+        }
+        else {
+        	mSmsMenuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+        		public boolean onMenuItemClick(MenuItem item) {
+				smsToNumber((mDigits.getText()).toString());
+				return true;
+			}
+		});
+		mSmsMenuItem.setVisible(true);
+	}
+        
         return true;
     }
 
@@ -529,7 +563,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
                 long timeDiff = SystemClock.uptimeMillis() - event.getDownTime(); 
                 if (timeDiff >= ViewConfiguration.getLongPressTimeout()) {
                     // Long press detected, call voice mail
-                    handleVoicemail(1);
+                    callVoicemail();
                 }
                 return true;
             }
@@ -578,96 +612,123 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
             case R.id.one: {
                 playTone(ToneGenerator.TONE_DTMF_1);
                 keyPressed(KeyEvent.KEYCODE_1);
-                return;
+                break;
             }
             case R.id.two: {
                 playTone(ToneGenerator.TONE_DTMF_2);
                 keyPressed(KeyEvent.KEYCODE_2);
-                return;
+                break;
             }
             case R.id.three: {
                 playTone(ToneGenerator.TONE_DTMF_3);
                 keyPressed(KeyEvent.KEYCODE_3);
-                return;
+                break;
             }
             case R.id.four: {
                 playTone(ToneGenerator.TONE_DTMF_4);
                 keyPressed(KeyEvent.KEYCODE_4);
-                return;
+                break;
             }
             case R.id.five: {
                 playTone(ToneGenerator.TONE_DTMF_5);
                 keyPressed(KeyEvent.KEYCODE_5);
-                return;
+                break;
             }
             case R.id.six: {
                 playTone(ToneGenerator.TONE_DTMF_6);
                 keyPressed(KeyEvent.KEYCODE_6);
-                return;
+                break;
             }
             case R.id.seven: {
                 playTone(ToneGenerator.TONE_DTMF_7);
                 keyPressed(KeyEvent.KEYCODE_7);
-                return;
+                break;
             }
             case R.id.eight: {
                 playTone(ToneGenerator.TONE_DTMF_8);
                 keyPressed(KeyEvent.KEYCODE_8);
-                return;
+                break;
             }
             case R.id.nine: {
                 playTone(ToneGenerator.TONE_DTMF_9);
                 keyPressed(KeyEvent.KEYCODE_9);
-                return;
+                break;
             }
             case R.id.zero: {
                 playTone(ToneGenerator.TONE_DTMF_0);
                 keyPressed(KeyEvent.KEYCODE_0);
-                return;
+                break;
             }
             case R.id.pound: {
                 playTone(ToneGenerator.TONE_DTMF_P);
                 keyPressed(KeyEvent.KEYCODE_POUND);
-                return;
+                break;
             }
             case R.id.star: {
                 playTone(ToneGenerator.TONE_DTMF_S);
                 keyPressed(KeyEvent.KEYCODE_STAR);
-                return;
+                break;
             }
             case R.id.deleteButton: {
                 keyPressed(KeyEvent.KEYCODE_DEL);
-                return;
+                break;
             }
             case R.id.dialButton: {
                 placeCall();
-                return;
+                break;
             }
             case R.id.voicemailButton: {
-                handleVoicemail(0);
-                return;
+            	if (prefs.getString("vm_button", "0").equals("0")) {
+            		addToContacts();
+            	}
+            	else if (prefs.getString("vm_button", "0").equals("1")) {
+            		smsToNumber((mDigits.getText()).toString());
+            	}
+            	else if (prefs.getString("vm_button", "0").equals("2")) {
+            		callVoicemail();
+            	}
+            	break;
             }
             case R.id.digits: {
                 if (mDigits.length() != 0) {
                     mDigits.setCursorVisible(true);
                 }
-                return;
+                break;
             }
         }
+        
+        //Wysie_Soh
+        //Set the "voicemail"/add button to be enabled/disabled according to if any number is displayed   
+        checkForNumber();
     }
 
     public boolean onLongClick(View view) {
-        final Editable digits = mDigits.getText();
+        Editable digits = mDigits.getText();
         int id = view.getId();
         switch (id) {
             case R.id.deleteButton: {
                 digits.clear();
+                checkForNumber();              
                 return true;
+            }
+            case R.id.dialButton: {
+            	Intent intent = new Intent(Intent.ACTION_VOICE_COMMAND);
+            	intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            	
+            	try {
+                        startActivity(intent);
+                        return true;
+                } catch (ActivityNotFoundException e) {
+                	return false;
+                }
+
             }
             case R.id.one: {
                 if (digits.length() == 0) {
-                    handleVoicemail(1);
-                    return true;
+                    if (hasVoicemail()) {
+                    	callVoicemail();
+                    	return true;
+                    }
                 }
                 return false;
             }
@@ -678,25 +739,53 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         }
         return false;
     }
-
-    void handleVoicemail(int src) {
-        int vmButton = Integer.parseInt(mContactsPreferences.getString("vm_button", "0"));
-        if (src == 0) {
-            if (vmButton == 0) {
-                callVoicemail();
-            } else if (vmButton == 1) {
-                addContact();
-            }
-        } else if (src == 1) {
-            if (vmButton == 1) {
-                callVoicemail();
-            }
+    
+    //Wysie_Soh
+    void smsToNumber(String number) {
+    	Intent sendIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms://"));
+    	sendIntent.putExtra("address", number);
+    	sendIntent.putExtra("sms_body", "");
+    	startActivity(sendIntent); 
+    }
+    
+    //Wysie_Soh    
+    void addToContacts() {
+    	// Put the current digits string into an intent
+    	Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
+    	intent.putExtra(Insert.PHONE, mDigits.getText());
+    	intent.setType(People.CONTENT_ITEM_TYPE);
+    	startActivity(intent);
+    }
+    
+    /*
+    void callVoicemail() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        ComponentName component = new ComponentName(DialerSettings.getLeftButtonIntentPkg(this), DialerSettings.getLeftButtonIntentCls(this));
+        intent.setComponent(component);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            intent = new Intent(Intent.ACTION_CALL_PRIVILEGED, Uri.fromParts("voicemail", "", null));
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        mDigits.getText().clear();
     }
 
+    void addContact() {
+        Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
+        intent.putExtra(Insert.PHONE, mDigits.getText());
+        intent.setType(People.CONTENT_ITEM_TYPE);
+        startActivity(intent);
+    }
+    */
+    
     void callVoicemail() {
         Intent intent;
-        String vmHandler = mContactsPreferences.getString("vm_handler", "0");
+        String vmHandler = prefs.getString("vm_handler", "0");
         if (vmHandler.equals("0")) {
             intent = new Intent(Intent.ACTION_CALL_PRIVILEGED,
                         Uri.fromParts("voicemail", "", null));
@@ -710,13 +799,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         mDigits.getText().clear();
-    }
-
-    void addContact() {
-        Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
-        intent.putExtra(Insert.PHONE, mDigits.getText());
-        intent.setType(People.CONTENT_ITEM_TYPE);
-        startActivity(intent);
+        //finish();
     }
 
     void placeCall() {
@@ -1005,35 +1088,66 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         }
         return phoneInUse;
     }
-
+    
+    //Wysie_Soh: add to contacts button / voicemail depending on what is set
     private void initVoicemailButton() {
-        boolean hasVoicemail = false;
-        
-        try {
-            hasVoicemail = TelephonyManager.getDefault().getVoiceMailNumber() != null;
-        } catch (SecurityException se) {
-            // Possibly no READ_PHONE_STATE privilege.
-        }
-        
-        mVoicemailButton = (ImageButton) mVoicemailDialAndDeleteRow.findViewById(R.id.voicemailButton);
-        mOneButton = (ImageButton) findViewById(R.id.one);
-        
-//         if (hasVoicemail) {
-             mVoicemailButton.setOnClickListener(this);
-//         } else {
-//             mVoicemailButton.setEnabled(false);
-//         }
-        int vmButton = Integer.parseInt(mContactsPreferences.getString("vm_button", "0"));
-        if (vmButton == 0) {
-            mVoicemailButton.setImageResource(R.drawable.ic_dial_action_voice_mail);
-            if (mOneButton != null) {
-                mOneButton.setImageResource(R.drawable.dial_num_1_no_vm);
-            }
+    	mVoicemailButton = (ImageButton)mVoicemailDialAndDeleteRow.findViewById(R.id.voicemailButton);
+    	mVoicemailButton.setOnClickListener(this);
+    	
+    	if (prefs.getString("vm_button", "0").equals("0")) {
+    		mVoicemailButton.setImageResource(R.drawable.ic_add_contacts);    		
+    	}
+    	else if (prefs.getString("vm_button", "0").equals("1")) { //Wysie_Soh: startsWith changed to equals
+    	        mVoicemailButton.setImageResource(R.drawable.ic_dial_action_sms);
+    	}
+    	else if (prefs.getString("vm_button", "0").equals("2")) {
+    		mVoicemailButton.setImageResource(R.drawable.ic_dial_action_voice_mail);
+    		
+    	        if (hasVoicemail()) {
+    	        	mVoicemailButton.setEnabled(true);
+    	        } else {
+    	        	mVoicemailButton.setEnabled(false);
+    	        	mVoicemailButton.setOnClickListener(null);
+    	        }
+    	}
+    }
+    
+    private int getScreenOrientation() {
+    	 return getResources().getConfiguration().orientation;
+    }
+    
+    private boolean hasVoicemail() {
+    	boolean hasVoicemail = false;    		
+    	
+    	try {
+    		String num = TelephonyManager.getDefault().getVoiceMailNumber();
+    		
+    		//Wysie_Soh: Bugfix for 1.52. Important. Caused FCs on many people cause num.equals was called first
+    		//resulting in a nullpointerexception. added the exception handler as well, but it's not actually needed
+    		//since we now check for num == null first :).
+    		if (!(num == null || num.equals(""))) 
+    			hasVoicemail = true;
+    	} catch (SecurityException se) {
+    		// Possibly no READ_PHONE_STATE privilege.
+    	} catch (NullPointerException e) {
+    		//
+    	}
+    	
+    	return hasVoicemail;
+    }
+    
+    //Wysie_Soh: Method to check if there's any number entered
+    private void checkForNumber() {
+    	CharSequence digits = mDigits.getText();
+        if (digits == null || !TextUtils.isGraphic(digits)) {            
+            if (prefs.getString("vm_button", "0").equals("0") || prefs.getString("vm_button", "0").equals("1"))
+            	mVoicemailButton.setEnabled(false);
+            	//mDelete.setEnabled(false);
         } else {
-            mVoicemailButton.setImageResource(R.drawable.ic_dial_action_add_contact);
-            if (mOneButton != null) {
-                mOneButton.setImageResource(R.drawable.dial_num_1);
-            }
+            // Put the current digits string into an intent
+            mVoicemailButton.setEnabled(true);
+            //Wysie_Soh: Known bug: mDelete will go into pressed state upon entering any digit after a long-press on mDelete.
+            //mDelete.setEnabled(true);
         }
     }
 }

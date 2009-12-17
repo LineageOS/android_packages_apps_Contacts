@@ -326,6 +326,8 @@
 
     <!-- Separator in the contact details list describing that the items below it will open maps with the given address -->
     <string name="listSeparatorMapAddress">Map address</string>
+    
+    <string name="listSeparatorNaviAddress">Navigate to address</string>
 
     <!-- Section header in the Edit Contacts screen for map addresses -->
     <string name="listSeparatorMapAddress_edit">Postal addresses</string>
@@ -740,24 +742,61 @@
     <!-- The string used to describe Contacts as a searchable item within system search settings. -->
     <string name="search_settings_description">Names of your contacts</string>
     
-    <string name="title_vm_button">Left Action Button</string>
+    <!-- Wysie_Soh: Contacts menu (across all 4, ie. Dialer, Contacts, Call log, Favourites -->    
+    <string name="menu_preferences">Preferences</string>
     
-    <string name="title_vm_handler">Voicemail Handler</string>
+    <!-- Wysie_Soh: Dialer menu -->
+    <string name="dialer_menu_sms">SMS/MMS</string>
     
-    <string name="menu_preferences">Settings</string>
+    <!-- Wysie_Soh: Call log menu -->
+    <string name="call_log_menu_total_duration">Total Incoming/Outgoing</string>
     
+    <!-- Wysie_Soh: Total incoming/outgoing dialog -->
+    <string name="totalcalllog">Total incoming/outgoing duration</string>
+    <string name="total_incoming">Incoming</string>
+    <string name="total_outgoing">Outgoing</string>
+    <string name="total_button_ok">Ok</string>
+    
+    <!-- Favourites menu -->
+    <string name="fav_clear_freq">Clear Frequently Called</string>
+    
+    <!-- Wysie_Soh: Preferences strings (based on ChainsDD's code) -->
     <string name="title_dialer_category">Dialer</string>
+    <string name="title_vm_button">Left action button</string>    
+    <string name="title_vm_handler">Voicemail handler</string>
     
-    <string name="title_call_log_category">Call Log</string>
-    
-    <string name="title_cl_relative_time">Relative Times</string>
+    <string name="title_call_log_category">Call log</string>    
+    <string name="title_cl_relative_time">Relative times</string>
     <string name="summaryon_cl_relative_time">Use relative times in call log</string>
     <string name="summaryoff_cl_relative_time">Use exact times in call log</string>
+    <string name="title_cl_show_seconds">Show seconds</string>
+    <string name="summary_cl_show_seconds">Show seconds when using exact times</string>          
+    <string name="title_cl_ask_before_clear">Ask before clearing</string>
+    <string name="summaryon_cl_ask_before_clear">Ask before clearing call log</string>
+    <string name="summaryoff_cl_ask_before_clear">Call logs will be cleared without asking</string>
     
-    <string name="title_cl_ask_before_clear">Ask Before Clearing</string>
-    <string name="summary_cl_ask_before_clear">Ask before clearing call log</string>
+    <string name="title_contacts_category">Contacts</string>
+    <string name="title_contacts_show_pic">Show contact pictures</string>
+    <string name="summary_contacts_show_pic">Please restart Contacts/Dialer to see the changes</string>
+    <string name="title_contacts_show_dial_button">Show dial button</string>
+    <string name="summary_contacts_show_dial_button">Show a dial button for contacts with numbers</string>
     
+    <string name="title_favourites_category">Favourites</string>
+    <string name="title_favourites_hide_freq_call">Hide frequently called</string>
+    <string name="summary_favourites_hide_freq_call">The actual data is not cleared, but hidden.</string>
+    <string name="title_favs_ask_before_clear">Ask before clearing</string>
+    <string name="summaryon_favs_ask_before_clear">Ask before clearing frequently called</string>
+    <string name="summaryoff_favs_ask_before_clear">Frequently called entries will be cleared without asking</string>    
+    
+    <string name="title_misc_category">Miscellaneous</string>
+    <string name="title_sensor_rotation">Enable sensor rotation</string>    
+    
+    <!-- Wysie_Soh: Call log strings -->  
     <string name="alert_clear_call_log_title">Clear call log</string>
     <string name="alert_clear_call_log_message">Are you sure you want to clear all call records?</string>
+    
+    <!-- Wysie_Soh: Frequently called strings -->
+    <string name="alert_clear_freq_called">Clear frequently called</string>
+    <string name="alert_clear_freq_called_msg">Are you sure you want to clear all frequently called entries?</string>
     
 </resources>

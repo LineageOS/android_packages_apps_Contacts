@@ -27,14 +27,14 @@
     <!-- Onscreen "Voicemail" button.
          The width is 75 (from the mocks) + 12 of padding from the
          9patch, total is 87.
+         Wysie_Soh: Removed "src" since it may either be add contacts or voicemail
     -->
     <ImageButton android:id="@+id/voicemailButton"
         android:layout_width="87dip"
         android:layout_height="50dip"
         android:layout_gravity="center_vertical"
-        android:state_enabled="false"
-        android:background="@drawable/btn_dial_voicemail"
-        android:src="@drawable/ic_dial_action_voice_mail" />
+        android:state_enabled="true"
+        android:background="@drawable/btn_dial_voicemail" />
 
     <!-- Onscreen "Dial" button, used on all platforms by
          default. Its usage can be disabled using resources (see
@@ -43,7 +43,7 @@
         android:layout_width="116dip"
         android:layout_height="50dip"
         android:layout_gravity="center_vertical"
-        android:state_enabled="false"
+        android:state_enabled="true"
         android:background="@drawable/btn_dial_action"
         android:src="@drawable/ic_dial_action_call" />
 
@@ -55,7 +55,7 @@
         android:layout_width="87dip"
         android:layout_height="50dip"
         android:layout_gravity="center_vertical"
-        android:state_enabled="false"
+        android:state_enabled="true"
         android:background="@drawable/btn_dial_delete"
         android:src="@drawable/ic_dial_action_delete" />
 </LinearLayout>

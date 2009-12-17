@@ -31,7 +31,6 @@
         <ImageButton android:id="@+id/one"
             android:layout_width="88dp"
             android:layout_height="50dp"
-            android:src="@drawable/dial_num_1_no_vm"
             android:background="@drawable/btn_dial"
             android:soundEffectsEnabled="false"
             android:contentDescription="@string/description_image_button_one"

@@ -17,7 +17,7 @@
 <!-- This is a primitive example showing the different types of preferences available. -->
 <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/title_dialer_category">
+    <PreferenceCategory android:title="@string/dialerIconLabel">
         <ListPreference
             android:key="vm_button"
             android:title="@string/title_vm_button"
@@ -38,7 +38,7 @@
             android:summaryOff="@string/summaryoff_disable_num_check"
             android:defaultValue="false" />            
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/title_call_log_category">
+    <PreferenceCategory android:title="@string/recentCallsIconLabel">
         <CheckBoxPreference
             android:key="cl_relative_time"
             android:title="@string/title_cl_relative_time"
@@ -59,7 +59,7 @@
             android:summaryOff="@string/summaryoff_cl_ask_before_clear"
             android:defaultValue="false" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/title_contacts_category">
+    <PreferenceCategory android:title="@string/contactsIconLabel">
         <CheckBoxPreference
             android:key="contacts_show_dial_button"
             android:title="@string/title_contacts_show_dial_button"
@@ -71,7 +71,7 @@
             android:summary="@string/summary_contacts_show_pic"
             android:defaultValue="true" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/title_favourites_category">
+    <PreferenceCategory android:title="@string/contactsFavoritesLabel">
         <CheckBoxPreference
             android:key="favourites_hide_freq_called"
             android:title="@string/title_favourites_hide_freq_call"

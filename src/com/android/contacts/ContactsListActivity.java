@@ -333,6 +333,9 @@ public final class ContactsListActivity extends ListActivity
     private String mShortcutAction;
     private boolean mDefaultMode = false;
     private boolean mFavTab = false;
+    
+    //MenuItem for Clear Freq. Called
+    private MenuItem mClearFreqCalled;
 
     /**
      * Internal query type when in mode {@link #MODE_QUERY_PICK_TO_VIEW}.
@@ -862,7 +865,8 @@ public final class ContactsListActivity extends ListActivity
         
         //Wysie_Soh: Clear frequently called
         if (mFavTab) {
-	        menu.add(0, MENU_CLEAR_FREQ_CONTACTS, 0, R.string.fav_clear_freq).setIcon(android.R.drawable.ic_menu_close_clear_cancel);
+	       mClearFreqCalled = menu.add(0, MENU_CLEAR_FREQ_CONTACTS, 0, R.string.fav_clear_freq).setIcon
+	       			(android.R.drawable.ic_menu_close_clear_cancel);
         }
         //Preferences
         Intent i = new Intent(this, ContactsPreferences.class);
@@ -880,6 +884,14 @@ public final class ContactsListActivity extends ListActivity
        }
        menu.setGroupEnabled(MENU_GROUP_BT, bluetoothEnabled);
        menu.setGroupVisible(MENU_GROUP_BT, bluetoothEnabled);
+       
+       if (mFavTab) {       
+	       if (ePrefs.getBoolean("favourites_hide_freq_called", false))
+       			mClearFreqCalled.setVisible(false);
+       		else
+       			mClearFreqCalled.setVisible(true);
+       }
+       
        return true;
     }
 

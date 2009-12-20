@@ -1095,10 +1095,12 @@ public class ViewContactActivity extends ListActivity
    
         Cursor groupCursor = mResolver.query(GroupMembership.CONTENT_URI, GROUP_MEMBERSHIP_PROJECTION,
         	GroupMembership.PERSON_ID + "='" + personId + "'", null, null);
-        Cursor cur = null;        
+        Cursor cur = null;
         
-        if (groupCursor.moveToFirst()) {
-        	do {
+        groupNamesArray.clear();
+        
+        if (groupCursor != null) {
+        	while (groupCursor.moveToNext()) {
         		cur = mResolver.query(Groups.CONTENT_URI, GROUPS_PROJECTION,
         			Contacts.Groups._ID + "='" + groupCursor.getString(groupCursor.getColumnIndex(GroupMembership.GROUP_ID)) + "'",
         			null, null);
@@ -1107,14 +1109,10 @@ public class ViewContactActivity extends ListActivity
         				groupNamesArray.add(cur.getString(cur.getColumnIndex(Groups.NAME)));
         			}
         		}
-        		
-        	} while (groupCursor.moveToNext());        
-        	
+        	}
         	cur.close();
-        	
-        	//sort group names by alphabetical ascending order
-        	java.util.Collections.sort(groupNamesArray);
-        	
+        	groupCursor.close();        	
+        	java.util.Collections.sort(groupNamesArray);        	
         	StringBuilder groups = new StringBuilder();
         	
         	for (int i = 0; i < groupNamesArray.size(); i++) {
@@ -1124,16 +1122,15 @@ public class ViewContactActivity extends ListActivity
         			groups.append("\n" + groupNamesArray.get(i));
         	}
         	
+        	//Log.d("Testing", groups.toString());
+        	
         	ViewEntry entry = new ViewEntry();
         	entry.label = getString(R.string.view_contact_groups);
         	entry.data = groups.toString();
         	entry.actionIcon = com.android.internal.R.drawable.ic_menu_allfriends;
         	entry.maxLines = 10;
-		mGroupEntries.add(entry);
+		mGroupEntries.add(entry);        	
         }
-        
-        groupCursor.close();
-        
     }
 
     String buildActionString(int actionResId, CharSequence type, boolean lowerCase) {

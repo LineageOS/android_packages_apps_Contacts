@@ -985,12 +985,12 @@ public final class ContactsListActivity extends ListActivity
             		AlertDialog.Builder alert = new AlertDialog.Builder(this);
             		alert.setTitle(R.string.alert_clear_freq_called);
             		alert.setMessage(R.string.alert_clear_freq_called_msg);
-            		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            		alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int whichButton) {
     					clearFrequentlyCalled();
     				}
     			});
-	    		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+	    		alert.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
 		    		public void onClick(DialogInterface dialog, int whichButton) {
     				// Canceled.
     			}});

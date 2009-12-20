@@ -70,6 +70,7 @@ import android.provider.Contacts;
 import android.provider.Contacts.ContactMethods;
 import android.provider.Contacts.Intents.Insert;
 import android.provider.Contacts.Groups;
+import android.provider.Contacts.GroupMembership;
 import android.provider.Contacts.Organizations;
 import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
@@ -105,7 +106,7 @@ import java.util.ArrayList;
  * background while this activity is running, the updates will be overwritten.
  */
 public final class EditContactActivity extends Activity implements View.OnClickListener,
-        TextWatcher, View.OnFocusChangeListener {
+        TextWatcher, View.OnFocusChangeListener, DialogInterface.OnMultiChoiceClickListener, DialogInterface.OnClickListener {
     private static final String TAG = "EditContactActivity";
 
     private static final int STATE_UNKNOWN = 0;
@@ -192,6 +193,8 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     /* package */ static final int MSG_ADD_PHONE = 3;
     /* package */ static final int MSG_ADD_EMAIL = 4;
     /* package */ static final int MSG_ADD_POSTAL = 5;
+    
+    private Context context;
 
     private static final int[] TYPE_PRECEDENCE_PHONES = new int[] {
             Phones.TYPE_MOBILE, Phones.TYPE_HOME, Phones.TYPE_WORK, Phones.TYPE_OTHER
@@ -350,6 +353,8 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        
+        context = this;
 
         mResolver = getContentResolver();
 
@@ -1556,8 +1561,35 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                 R.string.listSeparatorOrganizations, SECTION_ORG);
         buildViewsForSection(layout, mNoteEntries,
                 R.string.label_notes, SECTION_NOTE);
+                
+        buildGroupView(layout, R.string.listSeparatorGroup);
         
         buildOtherViews(layout, mOtherEntries);
+    }
+
+	    
+    private void buildGroupView(final LinearLayout layout, int separatorResource) {
+    	View divider = mInflater.inflate(R.layout.edit_divider, layout, false);
+    	layout.addView(divider);
+    	
+    	ViewGroup header = (ViewGroup) mInflater.inflate(R.layout.edit_separator_group, layout, false);    	    	
+    	TextView text = (TextView)header.findViewById(R.id.text);
+    	text.setText(getText(separatorResource));
+    	header.setOnFocusChangeListener(this);
+    	
+    	header.setOnClickListener(new View.OnClickListener() {
+    		public void onClick(View v) {
+    			AlertDialog.Builder builder = new AlertDialog.Builder(context)
+                    	.setTitle(R.string.select_group_title)
+                    	.setPositiveButton(android.R.string.ok, null)
+                    	.setNegativeButton(android.R.string.cancel, null);
+                    	
+                    	setGroupEntries(builder);
+                	builder.show();
+    		}    		
+    	});
+    	
+    	layout.addView(header);
     }
 
 
@@ -2289,5 +2321,86 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         // Because we're emulating a ListView, we need to setSelected() for
         // views as they are focused.
         v.setSelected(hasFocus);
+    }
+    
+    private void setGroupEntries(AlertDialog.Builder builder) {
+        final String[] GROUPS_PROJECTION = new String[] {
+        	Groups.SYSTEM_ID, // 0
+        	Groups.NAME, // 1
+    	};
+    	
+    	CharSequence[] groupsCharSeq;
+    	Cursor cursor;
+        cursor = getContentResolver().query(Groups.CONTENT_URI, GROUPS_PROJECTION,
+                    null, null, Groups.DEFAULT_SORT_ORDER);
+    	try {
+            ArrayList<CharSequence> groups = new ArrayList<CharSequence>();
+            ArrayList<CharSequence> prefStrings = new ArrayList<CharSequence>();
+            
+            if (cursor.moveToFirst()) {
+            	while (cursor.moveToNext()) {            
+	                String name = cursor.getString(cursor.getColumnIndex(Groups.NAME));
+        	        groups.add(name);                
+        	}
+       	    }
+            
+            groupsCharSeq = groups.toArray(new CharSequence[groups.size()]);
+            
+            ArrayList<CharSequence> currentMembership = new ArrayList<CharSequence>();            
+                        
+            long personId = ContentUris.parseId(mUri);
+            final String[] GROUP_MEMBERSHIP_PROJECTION = new String[] {
+        	GroupMembership.GROUP_ID,
+        	GroupMembership.PERSON_ID
+       	    };
+            
+            Cursor groupCursor = getContentResolver().query(GroupMembership.CONTENT_URI, GROUP_MEMBERSHIP_PROJECTION,
+        	GroupMembership.PERSON_ID + "='" + personId + "'", null, null);
+            Cursor cur = null;
+            
+             if (groupCursor != null) {
+        	while (groupCursor.moveToNext()) {
+        		cur = mResolver.query(Groups.CONTENT_URI, GROUPS_PROJECTION,
+        			Contacts.Groups._ID + "='" + groupCursor.getString(groupCursor.getColumnIndex(GroupMembership.GROUP_ID)) + "'",
+        			null, null);
+        		if (cur != null) {
+        			if (cur.moveToFirst()) {
+        				currentMembership.add(cur.getString(cur.getColumnIndex(Groups.NAME)));
+        			}
+        		}
+        	}
+        	cur.close();
+        	groupCursor.close();
+    	
+             }
+             
+             boolean[] checkedValues = new boolean[groups.size()];
+             
+             for (boolean b : checkedValues)
+             	b = false;
+             	
+             for (int i = 0; i < currentMembership.size(); i++) {
+             	int j = groups.indexOf(currentMembership.get(i));
+             	if (j != -1)
+             		checkedValues[j] = true;
+             }            
+            
+            builder.setMultiChoiceItems(groupsCharSeq, checkedValues, this);
+            
+        } finally {
+            cursor.close();
+        }
+    }
+    
+    public void onClick(DialogInterface dialogInterface, int which) {
+    	if (which == DialogInterface.BUTTON_POSITIVE) {
+
+        } else {            
+        	dialogInterface.dismiss();
+        }
+    }
+    
+    public void onClick(DialogInterface dialogInterface, int which, boolean isChecked) {
+
     }
 }

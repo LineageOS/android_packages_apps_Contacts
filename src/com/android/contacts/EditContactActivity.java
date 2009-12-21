@@ -16,6 +16,7 @@
 
 package com.android.contacts;
 
+
 import static com.android.contacts.ContactEntryAdapter.CONTACT_CUSTOM_RINGTONE_COLUMN;
 import static com.android.contacts.ContactEntryAdapter.CONTACT_NAME_COLUMN;
 import static com.android.contacts.ContactEntryAdapter.CONTACT_NOTES_COLUMN;
@@ -101,17 +102,20 @@ import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
+
 /**
  * Activity for editing or inserting a contact. Note that if the contact data changes in the
  * background while this activity is running, the updates will be overwritten.
  */
 public final class EditContactActivity extends Activity implements View.OnClickListener,
-        TextWatcher, View.OnFocusChangeListener, DialogInterface.OnMultiChoiceClickListener, DialogInterface.OnClickListener {
+        TextWatcher, View.OnFocusChangeListener {
     private static final String TAG = "EditContactActivity";
 
     private static final int STATE_UNKNOWN = 0;
+
     /** Editing an existing contact */
     private static final int STATE_EDIT = 1;
+
     /** The full insert mode */
     private static final int STATE_INSERT = 2;
 
@@ -120,15 +124,15 @@ public final class EditContactActivity extends Activity implements View.OnClickL
 
     /** The launch code when picking a ringtone */
     private static final int RINGTONE_PICKED = 3023;
-    
+
     // These correspond to the string array in resources for picker "other" items
     final static int OTHER_ORGANIZATION = 0;
     final static int OTHER_NOTE = 1;
-    
+
     // Dialog IDs
     final static int DELETE_CONFIRMATION_DIALOG = 2;
     final static int DELETE_CONFIRMATION_DIALOG_SIM = 3;
-    
+
     // Section IDs
     final static int SECTION_PHONES = 3;
     final static int SECTION_EMAIL = 4;
@@ -144,11 +148,12 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     public static final int MENU_ITEM_SAVE_SIM = 4;
     public static final int MENU_ITEM_DELETE_SIM = 5;
     public static final int MENU_ITEM_PHOTO = 6;
-    
+
     private static boolean  saveSIM = false;
+
     /** Used to represent an invalid type for a contact entry */
     private static final int INVALID_TYPE = -1;
-    
+
     /** The default type for a phone that is added via an intent */
     private static final int DEFAULT_PHONE_TYPE = Phones.TYPE_MOBILE;
 
@@ -161,10 +166,11 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     private int mState; // saved across instances
     private boolean mInsert; // saved across instances
     private Uri mUri; // saved across instances
+
     /** In insert mode this is the photo */
     private Bitmap mPhoto; // saved across instances
     private boolean mPhotoChanged = false; // saved across instances
-    
+
     private EditText mNameView;
     private ImageView mPhotoImageView;
     private ViewGroup mContentView;
@@ -172,116 +178,154 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     private LayoutInflater mInflater;
     private MenuItem mPhotoMenuItem;
     private boolean mPhotoPresent = false;
-    private EditText mPhoneticNameView;  // invisible in some locales, but always present
+    private EditText mPhoneticNameView; // invisible in some locales, but always present
 
     /** Flag marking this contact as changed, meaning we should write changes back. */
     private boolean mContactChanged = false;
 
     // These are accessed by inner classes. They're package scoped to make access more efficient.
     /* package */ ContentResolver mResolver;
+
     /* package */ ArrayList<EditEntry> mPhoneEntries = new ArrayList<EditEntry>();
+
     /* package */ ArrayList<EditEntry> mEmailEntries = new ArrayList<EditEntry>();
+
     /* package */ ArrayList<EditEntry> mImEntries = new ArrayList<EditEntry>();
+
     /* package */ ArrayList<EditEntry> mPostalEntries = new ArrayList<EditEntry>();
+
     /* package */ ArrayList<EditEntry> mOrgEntries = new ArrayList<EditEntry>();
+
     /* package */ ArrayList<EditEntry> mNoteEntries = new ArrayList<EditEntry>();
+
     /* package */ ArrayList<EditEntry> mOtherEntries = new ArrayList<EditEntry>();
+
     /* package */ ArrayList<ArrayList<EditEntry>> mSections = new ArrayList<ArrayList<EditEntry>>();
-    
+
     /* package */ static final int MSG_DELETE = 1;
+
     /* package */ static final int MSG_CHANGE_LABEL = 2;
+
     /* package */ static final int MSG_ADD_PHONE = 3;
+
     /* package */ static final int MSG_ADD_EMAIL = 4;
+
     /* package */ static final int MSG_ADD_POSTAL = 5;
-    
-    private Context context;
+
+    // Wysie_Soh: Stores the list of groups selected (possibly uncommitted changes)
+    private ArrayList<CharSequence> selectedGroups = new ArrayList<CharSequence>();
+
+    // Wysie_Soh: Stores the list of groups available
+    private ArrayList<CharSequence> groups = new ArrayList<CharSequence>();
+
+    // Wysie_Soh: Stores the current memberships of groups the person is in
+    private ArrayList<CharSequence> currentMembership = new ArrayList<CharSequence>();
+
+    private Context _context;
 
     private static final int[] TYPE_PRECEDENCE_PHONES = new int[] {
-            Phones.TYPE_MOBILE, Phones.TYPE_HOME, Phones.TYPE_WORK, Phones.TYPE_OTHER
+        Phones.TYPE_MOBILE, Phones.TYPE_HOME, Phones.TYPE_WORK,
+        Phones.TYPE_OTHER
     };
     private static final int[] TYPE_PRECEDENCE_METHODS = new int[] {
-            ContactMethods.TYPE_HOME, ContactMethods.TYPE_WORK, ContactMethods.TYPE_OTHER
+        ContactMethods.TYPE_HOME, ContactMethods.TYPE_WORK,
+        ContactMethods.TYPE_OTHER
     };
     private static final int[] TYPE_PRECEDENCE_IM = new int[] {
-            ContactMethods.PROTOCOL_GOOGLE_TALK, ContactMethods.PROTOCOL_AIM,
-            ContactMethods.PROTOCOL_MSN, ContactMethods.PROTOCOL_YAHOO,
-            ContactMethods.PROTOCOL_JABBER
+        ContactMethods.PROTOCOL_GOOGLE_TALK, ContactMethods.PROTOCOL_AIM,
+        ContactMethods.PROTOCOL_MSN, ContactMethods.PROTOCOL_YAHOO,
+        ContactMethods.PROTOCOL_JABBER
     };
     private static final int[] TYPE_PRECEDENCE_ORG = new int[] {
-            Organizations.TYPE_WORK, Organizations.TYPE_OTHER
+        Organizations.TYPE_WORK, Organizations.TYPE_OTHER
+    };
+
+    private static final String[] GROUPS_PROJECTION = new String[] {
+        Groups.SYSTEM_ID, // 0
+        Groups.NAME, // 1
+        Contacts.Groups._ID // 2
+    };
+    private static final String[] GROUP_MEMBERSHIP_PROJECTION = new String[] {
+        GroupMembership.GROUP_ID, // 0
+        GroupMembership.PERSON_ID // 1
     };
 
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.photoImage: {
-                doPickPhotoAction();
-                break;
-            }
-            
-            case R.id.checkable: {
-                CheckBox checkBox = (CheckBox) v.findViewById(R.id.checkbox);
-                checkBox.toggle();
-                
-                EditEntry entry = findEntryForView(v);
-                entry.data = checkBox.isChecked() ? "1" : "0";
-                
-                mContactChanged = true;
-                break;
-            }
-            
-            case R.id.entry_ringtone: {
-                EditEntry entry = findEntryForView(v);
-                doPickRingtone(entry);
-                break;
-            }
-            
-            case R.id.separator: {
-                // Someone clicked on a section header, so handle add action
-                int sectionType = (Integer) v.getTag();
-                doAddAction(sectionType);
-                break;
+        case R.id.photoImage: {
+            doPickPhotoAction();
+            break;
+        }
+
+        case R.id.checkable: {
+            CheckBox checkBox = (CheckBox) v.findViewById(R.id.checkbox);
+
+            checkBox.toggle();
+
+            EditEntry entry = findEntryForView(v);
+
+            entry.data = checkBox.isChecked() ? "1" : "0";
+
+            mContactChanged = true;
+            break;
+        }
+
+        case R.id.entry_ringtone: {
+            EditEntry entry = findEntryForView(v);
+
+            doPickRingtone(entry);
+            break;
+        }
+
+        case R.id.separator: {
+            // Someone clicked on a section header, so handle add action
+            int sectionType = (Integer) v.getTag();
+
+            doAddAction(sectionType);
+            break;
+        }
+
+        case R.id.saveButton:
+            doSaveAction();
+            break;
+
+        case R.id.discardButton:
+            doRevertAction();
+            break;
+
+        case R.id.delete: {
+            EditEntry entry = findEntryForView(v);
+
+            if (entry != null) {
+                // Clear the text and hide the view so it gets saved properly
+                ((TextView) entry.view.findViewById(R.id.data)).setText(null);
+                entry.view.setVisibility(View.GONE);
+                entry.isDeleted = true;
             }
 
-            case R.id.saveButton:
-                doSaveAction();
-                break;
+            // Force rebuild of views because section headers might need to change
+            buildViews();
+            break;
+        }
 
-            case R.id.discardButton:
-                doRevertAction();
-                break;
+        case R.id.label: {
+            EditEntry entry = findEntryForView(v);
 
-            case R.id.delete: {
-                EditEntry entry = findEntryForView(v);
-                if (entry != null) {
-                    // Clear the text and hide the view so it gets saved properly
-                    ((TextView) entry.view.findViewById(R.id.data)).setText(null);
-                    entry.view.setVisibility(View.GONE);
-                    entry.isDeleted = true;
-                }
-                
-                // Force rebuild of views because section headers might need to change
-                buildViews();
-                break;
+            if (entry != null) {
+                String[] labels = getLabelsForKind(this, entry.kind);
+                LabelPickedListener listener = new LabelPickedListener(entry,
+                        labels);
+
+                new AlertDialog.Builder(EditContactActivity.this).setItems(labels, listener).setTitle(R.string.selectLabel).show();
             }
-
-            case R.id.label: {
-                EditEntry entry = findEntryForView(v);
-                if (entry != null) {
-                    String[] labels = getLabelsForKind(this, entry.kind);
-                    LabelPickedListener listener = new LabelPickedListener(entry, labels);
-                    new AlertDialog.Builder(EditContactActivity.this)
-                            .setItems(labels, listener)
-                            .setTitle(R.string.selectLabel)
-                            .show();
-                }
-                break;
-            }
+            break;
+        }
         }
     }
 
     private void setPhotoPresent(boolean present) {
         mPhotoPresent = present;
-        
+
         // Correctly scale the contact photo if present, otherwise just center
         // the photo placeholder icon.
         if (mPhotoPresent) {
@@ -290,7 +334,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
             mPhotoImageView.setImageResource(R.drawable.ic_menu_add_picture);
             mPhotoImageView.setScaleType(ImageView.ScaleType.CENTER);
         }
-        
+
         if (mPhotoMenuItem != null) {
             if (present) {
                 mPhotoMenuItem.setTitle(R.string.removePicture);
@@ -301,17 +345,20 @@ public final class EditContactActivity extends Activity implements View.OnClickL
             }
         }
     }
-    
+
     private EditEntry findEntryForView(View v) {
         // Try to find the entry for this view
         EditEntry entry = null;
+
         do {
             Object tag = v.getTag();
+
             if (tag != null && tag instanceof EditEntry) {
                 entry = (EditEntry) tag;
                 break;
             } else {
                 ViewParent parent = v.getParent();
+
                 if (parent != null && parent instanceof View) {
                     v = (View) parent;
                 } else {
@@ -322,26 +369,25 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         return entry;
     }
 
-    private DialogInterface.OnClickListener mDeleteContactDialogListener =
-            new DialogInterface.OnClickListener() {
+    private DialogInterface.OnClickListener mDeleteContactDialogListener = new DialogInterface.OnClickListener() {
         public void onClick(DialogInterface dialog, int button) {
             mResolver.delete(mUri, null, null);
             finish();
         }
     };
 
-    private DialogInterface.OnClickListener mDeleteSimContactDialogListener =
-            new DialogInterface.OnClickListener() {
+    private DialogInterface.OnClickListener mDeleteSimContactDialogListener = new DialogInterface.OnClickListener() {
         public void onClick(DialogInterface dialog, int button) {
             final String name = mNameView.getText().toString();
             EditEntry entry = ContactEntryAdapter.getEntry(mSections, 0, false);
             String data = entry.getData();
-            if(TextUtils.isEmpty(name)  || TextUtils.isEmpty(data)) {
-               Log.e(TAG,"number or name cannot be Null");
-            }
-            else {
-               String where ="tag =" + name + "AND" + "number =" + data;
-               mResolver.delete(Uri.parse("content://icc/adn"), where, null);
+
+            if (TextUtils.isEmpty(name) || TextUtils.isEmpty(data)) {
+                Log.e(TAG, "number or name cannot be Null");
+            } else {
+                String where = "tag =" + name + "AND" + "number =" + data;
+
+                mResolver.delete(Uri.parse("content://icc/adn"), where, null);
             }
             finish();
         }
@@ -353,8 +399,8 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        
-        context = this;
+
+        _context = this;
 
         mResolver = getContentResolver();
 
@@ -363,17 +409,18 @@ public final class EditContactActivity extends Activity implements View.OnClickL
 
         // Load the UI
         mInflater = getLayoutInflater();
-        mContentView = (ViewGroup)mInflater.inflate(R.layout.edit_contact, null);
+        mContentView = (ViewGroup) mInflater.inflate(R.layout.edit_contact, null);
         setContentView(mContentView);
-        
+
         mLayout = (LinearLayout) findViewById(R.id.list);
         mNameView = (EditText) findViewById(R.id.name);
         mPhotoImageView = (ImageView) findViewById(R.id.photoImage);
         mPhotoImageView.setOnClickListener(this);
         mPhoneticNameView = (EditText) findViewById(R.id.phonetic_name);
-        
+
         // Setup the bottom buttons
         View view = findViewById(R.id.saveButton);
+
         view.setOnClickListener(this);
         view = findViewById(R.id.discardButton);
         view.setOnClickListener(this);
@@ -382,6 +429,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         mState = STATE_UNKNOWN;
         Intent intent = getIntent();
         String action = intent.getAction();
+
         mUri = intent.getData();
         if (mUri != null) {
             if (action.equals(Intent.ACTION_EDIT)) {
@@ -426,23 +474,26 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         mSections.add(mNoteEntries);
         mSections.add(mOtherEntries);
     }
-    
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        
+
         // To store current focus between config changes, follow focus down the
         // view tree, keeping track of any parents with EditEntry tags
         View focusedChild = mContentView.getFocusedChild();
         EditEntry focusedEntry = null;
+
         while (focusedChild != null) {
             Object tag = focusedChild.getTag();
+
             if (tag instanceof EditEntry) {
                 focusedEntry = (EditEntry) tag;
             }
-            
+
             // Keep going deeper until child isn't a group
             if (focusedChild instanceof ViewGroup) {
                 View deeperFocus = ((ViewGroup) focusedChild).getFocusedChild();
+
                 if (deeperFocus != null) {
                     focusedChild = deeperFocus;
                 } else {
@@ -452,14 +503,15 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                 break;
             }
         }
-        
+
         if (focusedChild != null) {
             int requestFocusId = focusedChild.getId();
             int requestCursor = 0;
+
             if (focusedChild instanceof EditText) {
                 requestCursor = ((EditText) focusedChild).getSelectionStart();
             }
-            
+
             // Store focus values in EditEntry if found, otherwise store as
             // generic values
             if (focusedEntry != null) {
@@ -470,7 +522,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                 outState.putInt("requestCursor", requestCursor);
             }
         }
-        
+
         outState.putParcelableArrayList("phoneEntries", mPhoneEntries);
         outState.putParcelableArrayList("emailEntries", mEmailEntries);
         outState.putParcelableArrayList("imEntries", mImEntries);
@@ -484,7 +536,8 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         outState.putString("name", mNameView.getText().toString());
         outState.putParcelable("photo", mPhoto);
         outState.putBoolean("photoChanged", mPhotoChanged);
-        outState.putString("phoneticName", mPhoneticNameView.getText().toString());
+        outState.putString("phoneticName",
+                mPhoneticNameView.getText().toString());
         outState.putBoolean("contactChanged", mContactChanged);
     }
 
@@ -517,14 +570,16 @@ public final class EditContactActivity extends Activity implements View.OnClickL
 
         // Now that everything is restored, build the view
         buildViews();
-        
+
         // Try restoring any generally requested focus
         int requestFocusId = inState.getInt("requestFocusId", View.NO_ID);
         View focusedChild = mContentView.findViewById(requestFocusId);
+
         if (focusedChild != null) {
             focusedChild.requestFocus();
             if (focusedChild instanceof EditText) {
                 int requestCursor = inState.getInt("requestCursor", 0);
+
                 ((EditText) focusedChild).setSelection(requestCursor);
             }
         }
@@ -537,105 +592,108 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         }
 
         switch (requestCode) {
-            case PHOTO_PICKED_WITH_DATA: {
-                final Bundle extras = data.getExtras();
-                if (extras != null) {
-                    Bitmap photo = extras.getParcelable("data");
-                    mPhoto = photo;
-                    mPhotoChanged = true;
-                    mPhotoImageView.setImageBitmap(photo);
-                    setPhotoPresent(true);
-                }
-                break;
-            }
+        case PHOTO_PICKED_WITH_DATA: {
+            final Bundle extras = data.getExtras();
 
-            case RINGTONE_PICKED: {
-                Uri pickedUri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
-                handleRingtonePicked(pickedUri);
-                mContactChanged = true;
-                break;
+            if (extras != null) {
+                Bitmap photo = extras.getParcelable("data");
+
+                mPhoto = photo;
+                mPhotoChanged = true;
+                mPhotoImageView.setImageBitmap(photo);
+                setPhotoPresent(true);
             }
+            break;
+        }
+
+        case RINGTONE_PICKED: {
+            Uri pickedUri = data.getParcelableExtra(
+                    RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+
+            handleRingtonePicked(pickedUri);
+            mContactChanged = true;
+            break;
+        }
         }
     }
-    
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
-           case KeyEvent.KEYCODE_BACK: {
-               if(saveSIM == false)
-                 doSaveAction();
-               else
-                 finish();
-               return true;
-           }
+        case KeyEvent.KEYCODE_BACK: {
+            if (saveSIM == false) {
+                doSaveAction();
+            } else {
+                finish();
+            }
+            return true;
+        }
         }
         return super.onKeyDown(keyCode, event);
     }
 
     @Override
-       public boolean onCreateOptionsMenu(Menu menu) {
-          super.onCreateOptionsMenu(menu);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
 
-          menu.add(0, MENU_ITEM_SAVE, 0, R.string.menu_done)
-             .setIcon(android.R.drawable.ic_menu_save)
-             .setAlphabeticShortcut('\n');
+        menu.add(0, MENU_ITEM_SAVE, 0, R.string.menu_done).setIcon(android.R.drawable.ic_menu_save).setAlphabeticShortcut(
+                '\n');
 
-          menu.add(0, MENU_ITEM_SAVE_SIM, 0, R.string.menu_saveSim)
-             .setIcon(android.R.drawable.ic_menu_save);
+        menu.add(0, MENU_ITEM_SAVE_SIM, 0, R.string.menu_saveSim).setIcon(
+                android.R.drawable.ic_menu_save);
 
-          if (!mInsert) {
-             menu.add(0, MENU_ITEM_DELETE, 0, R.string.menu_deleteContact)
-                .setIcon(android.R.drawable.ic_menu_delete);
+        if (!mInsert) {
+            menu.add(0, MENU_ITEM_DELETE, 0, R.string.menu_deleteContact).setIcon(
+                    android.R.drawable.ic_menu_delete);
 
-             menu.add(0, MENU_ITEM_DELETE_SIM, 0, R.string.menu_deleteContactSim)
-                .setIcon(android.R.drawable.ic_menu_delete);
-          }
+            menu.add(0, MENU_ITEM_DELETE_SIM, 0, R.string.menu_deleteContactSim).setIcon(
+                    android.R.drawable.ic_menu_delete);
+        }
 
-          menu.add(0, MENU_ITEM_DONT_SAVE, 0, R.string.menu_doNotSave)
-             .setIcon(android.R.drawable.ic_menu_close_clear_cancel)
-             .setAlphabeticShortcut('q');
+        menu.add(0, MENU_ITEM_DONT_SAVE, 0, R.string.menu_doNotSave).setIcon(android.R.drawable.ic_menu_close_clear_cancel).setAlphabeticShortcut(
+                'q');
 
-          mPhotoMenuItem = menu.add(0, MENU_ITEM_PHOTO, 0, null);
-          // Updates the state of the menu item
-          setPhotoPresent(mPhotoPresent);
+        mPhotoMenuItem = menu.add(0, MENU_ITEM_PHOTO, 0, null);
+        // Updates the state of the menu item
+        setPhotoPresent(mPhotoPresent);
 
-          return true;
-       }
+        return true;
+    }
 
     @Override
-       public boolean onOptionsItemSelected(MenuItem item) {
-          saveSIM = false;
-          switch (item.getItemId()) {
-             case MENU_ITEM_SAVE:
-                doSaveAction();
-                return true;
+    public boolean onOptionsItemSelected(MenuItem item) {
+        saveSIM = false;
+        switch (item.getItemId()) {
+        case MENU_ITEM_SAVE:
+            doSaveAction();
+            return true;
 
-            case MENU_ITEM_SAVE_SIM:
-                doSaveSIMAction();
-                saveSIM=true;
-                return true;
+        case MENU_ITEM_SAVE_SIM:
+            doSaveSIMAction();
+            saveSIM = true;
+            return true;
 
-            case MENU_ITEM_DONT_SAVE:
-                doRevertAction();
-                return true;
+        case MENU_ITEM_DONT_SAVE:
+            doRevertAction();
+            return true;
 
-            case MENU_ITEM_DELETE:
-                // Get confirmation
-                showDialog(DELETE_CONFIRMATION_DIALOG);
-                return true;
+        case MENU_ITEM_DELETE:
+            // Get confirmation
+            showDialog(DELETE_CONFIRMATION_DIALOG);
+            return true;
 
-            case MENU_ITEM_DELETE_SIM:
-                // Get confirmation
-                showDialog(DELETE_CONFIRMATION_DIALOG_SIM);
-                return true;
+        case MENU_ITEM_DELETE_SIM:
+            // Get confirmation
+            showDialog(DELETE_CONFIRMATION_DIALOG_SIM);
+            return true;
 
-            case MENU_ITEM_PHOTO:
-                if (!mPhotoPresent) {
-                    doPickPhotoAction();
-                } else {
-                    doRemovePhotoAction();
-                }
-                return true;
+        case MENU_ITEM_PHOTO:
+            if (!mPhotoPresent) {
+                doPickPhotoAction();
+            } else {
+                doRemovePhotoAction();
+            }
+            return true;
         }
 
         return false;
@@ -649,13 +707,15 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     private int guessNextType(ArrayList<EditEntry> entries, int[] precedenceList) {
         // Keep track of the types we've seen already
         SparseBooleanArray existAlready = new SparseBooleanArray(entries.size());
+
         for (int i = entries.size() - 1; i >= 0; i--) {
             EditEntry entry = entries.get(i);
+
             if (!entry.isDeleted) {
                 existAlready.put(entry.type, true);
             }
         }
-        
+
         // Pick the first item we haven't seen
         for (int type : precedenceList) {
             if (!existAlready.get(type, false)) {
@@ -669,55 +729,69 @@ public final class EditContactActivity extends Activity implements View.OnClickL
 
     private void doAddAction(int sectionType) {
         EditEntry entry = null;
+
         switch (sectionType) {
-            case SECTION_PHONES: {
-                // Try figuring out which type to insert next
-                int nextType = guessNextType(mPhoneEntries, TYPE_PRECEDENCE_PHONES);
-                entry = EditEntry.newPhoneEntry(EditContactActivity.this,
-                        Uri.withAppendedPath(mUri, People.Phones.CONTENT_DIRECTORY),
-                        nextType);
-                mPhoneEntries.add(entry);
-                break;
-            }
-            case SECTION_EMAIL: {
-                // Try figuring out which type to insert next
-                int nextType = guessNextType(mEmailEntries, TYPE_PRECEDENCE_METHODS);
-                entry = EditEntry.newEmailEntry(EditContactActivity.this,
-                        Uri.withAppendedPath(mUri, People.ContactMethods.CONTENT_DIRECTORY),
-                        nextType);
-                mEmailEntries.add(entry);
-                break;
-            }
-            case SECTION_IM: {
-                // Try figuring out which type to insert next
-                int nextType = guessNextType(mImEntries, TYPE_PRECEDENCE_IM);
-                entry = EditEntry.newImEntry(EditContactActivity.this,
-                        Uri.withAppendedPath(mUri, People.ContactMethods.CONTENT_DIRECTORY),
-                        nextType);
-                mImEntries.add(entry);
-                break;
-            }
-            case SECTION_POSTAL: {
-                int nextType = guessNextType(mPostalEntries, TYPE_PRECEDENCE_METHODS);
-                entry = EditEntry.newPostalEntry(EditContactActivity.this,
-                        Uri.withAppendedPath(mUri, People.ContactMethods.CONTENT_DIRECTORY),
-                        nextType);
-                mPostalEntries.add(entry);
-                break;
-            }
-            case SECTION_ORG: {
-                int nextType = guessNextType(mOrgEntries, TYPE_PRECEDENCE_ORG);
-                entry = EditEntry.newOrganizationEntry(EditContactActivity.this,
-                        Uri.withAppendedPath(mUri, Organizations.CONTENT_DIRECTORY),
-                        nextType);
-                mOrgEntries.add(entry);
-                break;
-            }
-            case SECTION_NOTE: {
-                entry = EditEntry.newNotesEntry(EditContactActivity.this, null, mUri);
-                mNoteEntries.add(entry);
-                break;
-            }
+        case SECTION_PHONES: {
+            // Try figuring out which type to insert next
+            int nextType = guessNextType(mPhoneEntries, TYPE_PRECEDENCE_PHONES);
+
+            entry = EditEntry.newPhoneEntry(EditContactActivity.this,
+                    Uri.withAppendedPath(mUri, People.Phones.CONTENT_DIRECTORY),
+                    nextType);
+            mPhoneEntries.add(entry);
+            break;
+        }
+
+        case SECTION_EMAIL: {
+            // Try figuring out which type to insert next
+            int nextType = guessNextType(mEmailEntries, TYPE_PRECEDENCE_METHODS);
+
+            entry = EditEntry.newEmailEntry(EditContactActivity.this,
+                    Uri.withAppendedPath(mUri,
+                    People.ContactMethods.CONTENT_DIRECTORY),
+                    nextType);
+            mEmailEntries.add(entry);
+            break;
+        }
+
+        case SECTION_IM: {
+            // Try figuring out which type to insert next
+            int nextType = guessNextType(mImEntries, TYPE_PRECEDENCE_IM);
+
+            entry = EditEntry.newImEntry(EditContactActivity.this,
+                    Uri.withAppendedPath(mUri,
+                    People.ContactMethods.CONTENT_DIRECTORY),
+                    nextType);
+            mImEntries.add(entry);
+            break;
+        }
+
+        case SECTION_POSTAL: {
+            int nextType = guessNextType(mPostalEntries, TYPE_PRECEDENCE_METHODS);
+
+            entry = EditEntry.newPostalEntry(EditContactActivity.this,
+                    Uri.withAppendedPath(mUri,
+                    People.ContactMethods.CONTENT_DIRECTORY),
+                    nextType);
+            mPostalEntries.add(entry);
+            break;
+        }
+
+        case SECTION_ORG: {
+            int nextType = guessNextType(mOrgEntries, TYPE_PRECEDENCE_ORG);
+
+            entry = EditEntry.newOrganizationEntry(EditContactActivity.this,
+                    Uri.withAppendedPath(mUri, Organizations.CONTENT_DIRECTORY),
+                    nextType);
+            mOrgEntries.add(entry);
+            break;
+        }
+
+        case SECTION_NOTE: {
+            entry = EditEntry.newNotesEntry(EditContactActivity.this, null, mUri);
+            mNoteEntries.add(entry);
+            break;
+        }
         }
 
         // Rebuild the views if needed
@@ -726,6 +800,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
             mContactChanged = true;
 
             View dataView = entry.view.findViewById(R.id.data);
+
             if (dataView == null) {
                 entry.view.requestFocus();
             } else {
@@ -740,6 +815,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
 
     private void doPickPhotoAction() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
+
         // TODO: get these values from constants somewhere
         intent.setType("image/*");
         intent.putExtra("crop", "true");
@@ -751,11 +827,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
             intent.putExtra("return-data", true);
             startActivityForResult(intent, PHOTO_PICKED_WITH_DATA);
         } catch (ActivityNotFoundException e) {
-            new AlertDialog.Builder(EditContactActivity.this)
-                .setTitle(R.string.errorDialogTitle)
-                .setMessage(R.string.photoPickerNotFoundText)
-                .setPositiveButton(android.R.string.ok, null)
-                .show();
+            new AlertDialog.Builder(EditContactActivity.this).setTitle(R.string.errorDialogTitle).setMessage(R.string.photoPickerNotFoundText).setPositiveButton(android.R.string.ok, null).show();
         }
     }
 
@@ -767,106 +839,107 @@ public final class EditContactActivity extends Activity implements View.OnClickL
 
     private void doPickRingtone(EditEntry entry) {
         Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+
         // Allow user to pick 'Default'
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
         // Show only ringtones
-        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_RINGTONE);
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,
+                RingtoneManager.TYPE_RINGTONE);
         // Don't show 'Silent'
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
-        
+
         Uri ringtoneUri;
+
         if (entry.data != null) {
             ringtoneUri = Uri.parse(entry.data);
         } else {
             // Otherwise pick default ringtone Uri so that something is selected.
-            ringtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+            ringtoneUri = RingtoneManager.getDefaultUri(
+                    RingtoneManager.TYPE_RINGTONE);
         }
-        
+
         // Put checkmark next to the current ringtone for this contact
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, ringtoneUri);
         // Launch!
         startActivityForResult(intent, RINGTONE_PICKED);
     }
-    
+
     private void handleRingtonePicked(Uri pickedUri) {
         EditEntry entry = getOtherEntry(People.CUSTOM_RINGTONE);
+
         if (entry == null) {
             Log.w(TAG, "Ringtone picked but could not find ringtone entry");
             return;
         }
-        
+
         if (pickedUri == null || RingtoneManager.isDefault(pickedUri)) {
             entry.data = null;
         } else {
             entry.data = pickedUri.toString();
         }
-        
+
         updateRingtoneView(entry);
     }
 
     private void updateRingtoneView(EditEntry entry) {
         String ringtoneName;
+
         if (entry.data == null) {
             ringtoneName = getString(R.string.default_ringtone);
         } else {
             Uri ringtoneUri = Uri.parse(entry.data);
             Ringtone ringtone = RingtoneManager.getRingtone(this, ringtoneUri);
+
             if (ringtone == null) {
                 Log.w(TAG, "ringtone's URI doesn't resolve to a Ringtone");
                 return;
             }
             ringtoneName = ringtone.getTitle(this);
         }
-        
+
         updateDataView(entry, ringtoneName);
     }
-    
+
     private void updateDataView(EditEntry entry, String text) {
         TextView dataView = (TextView) entry.view.findViewById(R.id.data);
+
         dataView.setText(text);
     }
-    
+
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
-            case DELETE_CONFIRMATION_DIALOG:
-                return new AlertDialog.Builder(EditContactActivity.this)
-                        .setTitle(R.string.deleteConfirmation_title)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setMessage(R.string.deleteConfirmation)
-                        .setNegativeButton(android.R.string.cancel, null)
-                        .setPositiveButton(android.R.string.ok, mDeleteContactDialogListener)
-                        .setCancelable(false)
-                        .create();
+        case DELETE_CONFIRMATION_DIALOG:
+            return new AlertDialog.Builder(EditContactActivity.this).setTitle(R.string.deleteConfirmation_title).setIcon(android.R.drawable.ic_dialog_alert).setMessage(R.string.deleteConfirmation).setNegativeButton(android.R.string.cancel, null).setPositiveButton(android.R.string.ok, mDeleteContactDialogListener).setCancelable(false).create();
 
-            case DELETE_CONFIRMATION_DIALOG_SIM:
-                return new AlertDialog.Builder(EditContactActivity.this)
-                        .setTitle(R.string.deleteConfirmation_title)
-                        .setMessage(R.string.deleteConfirmation)
-                        .setNegativeButton(android.R.string.cancel, null)
-                        .setPositiveButton(android.R.string.ok, mDeleteSimContactDialogListener)
-                        .setCancelable(false)
-                        .create();
+        case DELETE_CONFIRMATION_DIALOG_SIM:
+            return new AlertDialog.Builder(EditContactActivity.this).setTitle(R.string.deleteConfirmation_title).setMessage(R.string.deleteConfirmation).setNegativeButton(android.R.string.cancel, null).setPositiveButton(android.R.string.ok, mDeleteSimContactDialogListener).setCancelable(false).create();
 
         }
         return super.onCreateDialog(id);
     }
-    
+
     static String[] getLabelsForKind(Context context, int kind) {
         final Resources resources = context.getResources();
+
         switch (kind) {
-            case Contacts.KIND_PHONE:
-                return resources.getStringArray(android.R.array.phoneTypes);
-            case Contacts.KIND_EMAIL:
-                return resources.getStringArray(android.R.array.emailAddressTypes);
-            case Contacts.KIND_POSTAL:
-                return resources.getStringArray(android.R.array.postalAddressTypes);
-            case Contacts.KIND_IM:
-                return resources.getStringArray(android.R.array.imProtocols);
-            case Contacts.KIND_ORGANIZATION:
-                return resources.getStringArray(android.R.array.organizationTypes);
-            case EditEntry.KIND_CONTACT:
-                return resources.getStringArray(R.array.otherLabels);
+        case Contacts.KIND_PHONE:
+            return resources.getStringArray(android.R.array.phoneTypes);
+
+        case Contacts.KIND_EMAIL:
+            return resources.getStringArray(android.R.array.emailAddressTypes);
+
+        case Contacts.KIND_POSTAL:
+            return resources.getStringArray(android.R.array.postalAddressTypes);
+
+        case Contacts.KIND_IM:
+            return resources.getStringArray(android.R.array.imProtocols);
+
+        case Contacts.KIND_ORGANIZATION:
+            return resources.getStringArray(android.R.array.organizationTypes);
+
+        case EditEntry.KIND_CONTACT:
+            return resources.getStringArray(R.array.otherLabels);
         }
         return null;
     }
@@ -881,93 +954,96 @@ public final class EditContactActivity extends Activity implements View.OnClickL
             return labelPosition + 1;
         }
     }
-    
+
     private EditEntry getOtherEntry(String column) {
         for (int i = mOtherEntries.size() - 1; i >= 0; i--) {
             EditEntry entry = mOtherEntries.get(i);
+
             if (isOtherEntry(entry, column)) {
                 return entry;
             }
         }
         return null;
     }
-    
+
     private static boolean isOtherEntry(EditEntry entry, String column) {
-        return entry != null && entry.column != null && entry.column.equals(column);
+        return entry != null && entry.column != null
+                && entry.column.equals(column);
     }
-    
+
     private void createCustomPicker(final EditEntry entry, final ArrayList<EditEntry> addTo) {
         final EditText label = new EditText(this);
-        label.setKeyListener(TextKeyListener.getInstance(false, Capitalize.WORDS));
-        label.requestFocus();
-        new AlertDialog.Builder(this)
-                .setView(label)
-                .setTitle(R.string.customLabelPickerTitle)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        entry.setLabel(EditContactActivity.this, ContactMethods.TYPE_CUSTOM,
-                                label.getText().toString());
-                        mContactChanged = true;
 
-                        if (addTo != null) {
-                            addTo.add(entry);
-                            buildViews();
-                            entry.view.requestFocus(View.FOCUS_DOWN);
-                        }
-                    }
-                })
-                .setNegativeButton(android.R.string.cancel, null)
-                .show();
+        label.setKeyListener(
+                TextKeyListener.getInstance(false, Capitalize.WORDS));
+        label.requestFocus();
+        new AlertDialog.Builder(this).setView(label).setTitle(R.string.customLabelPickerTitle).setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                entry.setLabel(EditContactActivity.this, ContactMethods.TYPE_CUSTOM, label.getText().toString());
+                mContactChanged = true;
+
+                if (addTo != null) {
+                    addTo.add(entry);
+                    buildViews();
+                    entry.view.requestFocus(View.FOCUS_DOWN);
+                }
+            }
+        }).setNegativeButton(android.R.string.cancel, null).show();
     }
-    
+
     /**
      * Saves or creates the contact based on the mode, and if sucessful finishes the activity.
      */
     private void doSaveAction() {
         // Save or create the contact if needed
         switch (mState) {
-            case STATE_EDIT:
-                save();
-                break;
+        case STATE_EDIT:
+            save();
+            saveGroups();
+            break;
 
-            case STATE_INSERT:
-                create();
-                break;
+        case STATE_INSERT:
+            create();
+            saveGroups();
+            break;
 
-            default:
-                Log.e(TAG, "Unknown state in doSaveOrCreate: " + mState);
-                break;
+        default:
+            Log.e(TAG, "Unknown state in doSaveOrCreate: " + mState);
+            break;
         }
         finish();
     }
-    
+
     private void doSaveSIMAction() {
-       // create the new contact on SIM
-       ContentValues values = new ContentValues();
-       String data,number;
-       Uri result;
-       int i;
-       final String name = mNameView.getText().toString();
-       EditEntry entry = ContactEntryAdapter.getEntry(mSections, 0, false);
-       data = entry.getData();
-       if(TextUtils.isEmpty(name) || TextUtils.isEmpty(data)) {
-             Toast.makeText(this, R.string.sim_entry_null, Toast.LENGTH_LONG).show();
-             return;
-       }
-       if (TextUtils.isGraphic(name)) {
-          String[] data_str = data.split ("\\-");
-          number = data_str[0];
-          for (i=1; i < data_str.length; i++) {
-             number =number +  data_str[i];
-          }
-          values.put("tag", name);
-          values.put("number",number);
-          result = mResolver.insert(Uri.parse("content://icc/adn"), values);
-          if (result != null)
-             Toast.makeText(this, R.string.save_to_sim_done, Toast.LENGTH_LONG).show();
-          else
-             Toast.makeText(this, R.string.save_to_sim_failed, Toast.LENGTH_LONG).show();
-       }
+        // create the new contact on SIM
+        ContentValues values = new ContentValues();
+        String data, number;
+        Uri result;
+        int i;
+        final String name = mNameView.getText().toString();
+        EditEntry entry = ContactEntryAdapter.getEntry(mSections, 0, false);
+
+        data = entry.getData();
+        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(data)) {
+            Toast.makeText(this, R.string.sim_entry_null, Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (TextUtils.isGraphic(name)) {
+            String[] data_str = data.split("\\-");
+
+            number = data_str[0];
+            for (i = 1; i < data_str.length; i++) {
+                number = number + data_str[i];
+            }
+            values.put("tag", name);
+            values.put("number", number);
+            result = mResolver.insert(Uri.parse("content://icc/adn"), values);
+            if (result != null) {
+                Toast.makeText(this, R.string.save_to_sim_done, Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, R.string.save_to_sim_failed, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     /**
@@ -980,6 +1056,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
 
         // Handle the name and send to voicemail specially
         final String name = mNameView.getText().toString();
+
         if (name != null && TextUtils.isGraphic(name)) {
             numValues++;
         }
@@ -991,26 +1068,31 @@ public final class EditContactActivity extends Activity implements View.OnClickL
             // Only write the photo if it's changed, since we don't initially load mPhoto
             if (mPhoto != null) {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
                 mPhoto.compress(Bitmap.CompressFormat.JPEG, 75, stream);
-                Contacts.People.setPhotoData(mResolver, mUri, stream.toByteArray());
+                Contacts.People.setPhotoData(mResolver, mUri,
+                        stream.toByteArray());
             } else {
                 Contacts.People.setPhotoData(mResolver, mUri, null);
             }
         }
 
         int entryCount = ContactEntryAdapter.countEntries(mSections, false);
+
         for (int i = 0; i < entryCount; i++) {
             EditEntry entry = ContactEntryAdapter.getEntry(mSections, i, false);
             int kind = entry.kind;
+
             data = entry.getData();
             boolean empty = data == null || !TextUtils.isGraphic(data);
+
             if (kind == EditEntry.KIND_CONTACT) {
                 values.clear();
                 if (!empty) {
                     values.put(entry.column, data);
                     mResolver.update(entry.uri, values, null, null);
-                    if (!People.CUSTOM_RINGTONE.equals(entry.column) &&
-                            !People.SEND_TO_VOICEMAIL.equals(entry.column)) {
+                    if (!People.CUSTOM_RINGTONE.equals(entry.column)
+                            && !People.SEND_TO_VOICEMAIL.equals(entry.column)) {
                         numValues++;
                     }
                 } else {
@@ -1026,8 +1108,8 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                     } else {
                         mResolver.insert(entry.uri, values);
                     }
-                    if (!People.CUSTOM_RINGTONE.equals(entry.column) &&
-                            !People.SEND_TO_VOICEMAIL.equals(entry.column)) {
+                    if (!People.CUSTOM_RINGTONE.equals(entry.column)
+                            && !People.SEND_TO_VOICEMAIL.equals(entry.column)) {
                         numValues++;
                     }
                 } else if (entry.id != 0) {
@@ -1063,6 +1145,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
 
         // Create the contact itself
         final String name = mNameView.getText().toString();
+
         if (name != null && TextUtils.isGraphic(name)) {
             numValues++;
         }
@@ -1073,25 +1156,34 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         Uri contactUri = People.createPersonInMyContactsGroup(mResolver, values);
 
         // Add the contact to the group that is being displayed in the contact list
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
+                this);
         int displayType = prefs.getInt(ContactsListActivity.PREF_DISPLAY_TYPE,
                 ContactsListActivity.DISPLAY_TYPE_UNKNOWN);
+
         if (displayType == ContactsListActivity.DISPLAY_TYPE_USER_GROUP) {
-            String displayGroup = prefs.getString(ContactsListActivity.PREF_DISPLAY_INFO,
-                    null);
+            String displayGroup = prefs.getString(
+                    ContactsListActivity.PREF_DISPLAY_INFO, null);
+
             if (!TextUtils.isEmpty(displayGroup)) {
-                People.addToGroup(mResolver, ContentUris.parseId(contactUri), displayGroup);
+                People.addToGroup(mResolver, ContentUris.parseId(contactUri),
+                        displayGroup);
             }
         } else {
             // Check to see if we're not syncing everything and if so if My Contacts is synced.
             // If it isn't then the created contact can end up not in any groups that are
             // currently synced and end up getting removed from the phone, which is really bad.
-            boolean syncingEverything = !"0".equals(Contacts.Settings.getSetting(mResolver, null,
+            boolean syncingEverything = !"0".equals(
+                    Contacts.Settings.getSetting(mResolver, null,
                     Contacts.Settings.SYNC_EVERYTHING));
+
             if (!syncingEverything) {
                 boolean syncingMyContacts = false;
-                Cursor c = mResolver.query(Groups.CONTENT_URI, new String[] { Groups.SHOULD_SYNC },
-                        Groups.SYSTEM_ID + "=?", new String[] { Groups.GROUP_MY_CONTACTS }, null);
+                Cursor c = mResolver.query(Groups.CONTENT_URI,
+                        new String[] { Groups.SHOULD_SYNC },
+                        Groups.SYSTEM_ID + "=?",
+                        new String[] { Groups.GROUP_MY_CONTACTS }, null);
+
                 if (c != null) {
                     try {
                         if (c.moveToFirst()) {
@@ -1106,12 +1198,15 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                     // Not syncing My Contacts, so find a group that is being synced and stick
                     // the contact in there. We sort the list so at least all contacts
                     // will appear in the same group.
-                    c = mResolver.query(Groups.CONTENT_URI, new String[] { Groups._ID },
-                            Groups.SHOULD_SYNC + "!=0", null, Groups.DEFAULT_SORT_ORDER);
+                    c = mResolver.query(Groups.CONTENT_URI,
+                            new String[] { Groups._ID },
+                            Groups.SHOULD_SYNC + "!=0", null,
+                            Groups.DEFAULT_SORT_ORDER);
                     if (c != null) {
                         try {
                             if (c.moveToFirst()) {
-                                People.addToGroup(mResolver, ContentUris.parseId(contactUri),
+                                People.addToGroup(mResolver,
+                                        ContentUris.parseId(contactUri),
                                         c.getLong(0));
                             }
                         } finally {
@@ -1125,23 +1220,29 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         // Handle the photo
         if (mPhoto != null) {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
             mPhoto.compress(Bitmap.CompressFormat.JPEG, 75, stream);
-            Contacts.People.setPhotoData(getContentResolver(), contactUri, stream.toByteArray());
+            Contacts.People.setPhotoData(getContentResolver(), contactUri,
+                    stream.toByteArray());
         }
 
         // Create the contact methods
         int entryCount = ContactEntryAdapter.countEntries(mSections, false);
+
         for (int i = 0; i < entryCount; i++) {
             EditEntry entry = ContactEntryAdapter.getEntry(mSections, i, false);
+
             if (entry.kind != EditEntry.KIND_CONTACT) {
                 values.clear();
                 if (entry.toValues(values)) {
                     // Only create the entry if there is data
                     entry.uri = mResolver.insert(
-                            Uri.withAppendedPath(contactUri, entry.contentDirectory), values);
+                            Uri.withAppendedPath(contactUri,
+                            entry.contentDirectory),
+                            values);
                     entry.id = ContentUris.parseId(entry.uri);
-                    if (!People.CUSTOM_RINGTONE.equals(entry.column) &&
-                            !People.SEND_TO_VOICEMAIL.equals(entry.column)) {
+                    if (!People.CUSTOM_RINGTONE.equals(entry.column)
+                            && !People.SEND_TO_VOICEMAIL.equals(entry.column)) {
                         numValues++;
                     }
                 }
@@ -1152,8 +1253,8 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                 if (data != null && TextUtils.isGraphic(data)) {
                     values.put(entry.column, data);
                     mResolver.update(contactUri, values, null, null);
-                    if (!People.CUSTOM_RINGTONE.equals(entry.column) &&
-                            !People.SEND_TO_VOICEMAIL.equals(entry.column)) {
+                    if (!People.CUSTOM_RINGTONE.equals(entry.column)
+                            && !People.SEND_TO_VOICEMAIL.equals(entry.column)) {
                         numValues++;
                     }
                 }
@@ -1165,9 +1266,9 @@ public final class EditContactActivity extends Activity implements View.OnClickL
             setResult(RESULT_CANCELED);
         } else {
             mUri = contactUri;
-            Intent resultIntent = new Intent()
-                    .setData(mUri)
-                    .putExtra(Intent.EXTRA_SHORTCUT_NAME, name);
+            Intent resultIntent = new Intent().setData(mUri).putExtra(
+                    Intent.EXTRA_SHORTCUT_NAME, name);
+
             setResult(RESULT_OK, resultIntent);
             Toast.makeText(this, R.string.contactCreatedToast, Toast.LENGTH_SHORT).show();
         }
@@ -1179,7 +1280,9 @@ public final class EditContactActivity extends Activity implements View.OnClickL
      * @param extras the extras used to start this activity, may be null
      */
     private void buildEntriesForEdit(Bundle extras) {
-        Cursor personCursor = mResolver.query(mUri, CONTACT_PROJECTION, null, null, null);
+        Cursor personCursor = mResolver.query(mUri, CONTACT_PROJECTION, null,
+                null, null);
+
         if (personCursor == null) {
             Log.e(TAG, "invalid contact uri: " + mUri);
             finish();
@@ -1193,6 +1296,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
 
         // Clear out the old entries
         int numSections = mSections.size();
+
         for (int i = 0; i < numSections; i++) {
             mSections.get(i).clear();
         }
@@ -1211,24 +1315,32 @@ public final class EditContactActivity extends Activity implements View.OnClickL
             setPhotoPresent(true);
             mPhotoImageView.setImageBitmap(mPhoto);
         }
-        
+
         // Organizations
-        Uri organizationsUri = Uri.withAppendedPath(mUri, Organizations.CONTENT_DIRECTORY);
-        Cursor organizationsCursor = mResolver.query(organizationsUri, ORGANIZATIONS_PROJECTION,
-                null, null, null);
+        Uri organizationsUri = Uri.withAppendedPath(mUri,
+                Organizations.CONTENT_DIRECTORY);
+        Cursor organizationsCursor = mResolver.query(organizationsUri,
+                ORGANIZATIONS_PROJECTION, null, null, null);
 
         if (organizationsCursor != null) {
             while (organizationsCursor.moveToNext()) {
                 int type = organizationsCursor.getInt(ORGANIZATIONS_TYPE_COLUMN);
-                String label = organizationsCursor.getString(ORGANIZATIONS_LABEL_COLUMN);
-                String company = organizationsCursor.getString(ORGANIZATIONS_COMPANY_COLUMN);
-                String title = organizationsCursor.getString(ORGANIZATIONS_TITLE_COLUMN);
+                String label = organizationsCursor.getString(
+                        ORGANIZATIONS_LABEL_COLUMN);
+                String company = organizationsCursor.getString(
+                        ORGANIZATIONS_COMPANY_COLUMN);
+                String title = organizationsCursor.getString(
+                        ORGANIZATIONS_TITLE_COLUMN);
                 long id = organizationsCursor.getLong(ORGANIZATIONS_ID_COLUMN);
-                Uri uri = ContentUris.withAppendedId(Organizations.CONTENT_URI, id);
+                Uri uri = ContentUris.withAppendedId(Organizations.CONTENT_URI,
+                        id);
 
                 // Add an organization entry
-                entry = EditEntry.newOrganizationEntry(this, label, type, company, title, uri, id);
-                entry.isPrimary = organizationsCursor.getLong(ORGANIZATIONS_ISPRIMARY_COLUMN) != 0;
+                entry = EditEntry.newOrganizationEntry(this, label, type,
+                        company, title, uri, id);
+                entry.isPrimary = organizationsCursor.getLong(
+                        ORGANIZATIONS_ISPRIMARY_COLUMN)
+                                != 0;
                 mOrgEntries.add(entry);
             }
             organizationsCursor.close();
@@ -1236,8 +1348,8 @@ public final class EditContactActivity extends Activity implements View.OnClickL
 
         // Notes
         if (!personCursor.isNull(CONTACT_NOTES_COLUMN)) {
-            entry = EditEntry.newNotesEntry(this, personCursor.getString(CONTACT_NOTES_COLUMN),
-                    mUri);
+            entry = EditEntry.newNotesEntry(this,
+                    personCursor.getString(CONTACT_NOTES_COLUMN), mUri);
             mNoteEntries.add(entry);
         }
 
@@ -1245,22 +1357,24 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         entry = EditEntry.newRingtoneEntry(this,
                 personCursor.getString(CONTACT_CUSTOM_RINGTONE_COLUMN), mUri);
         mOtherEntries.add(entry);
-        
+
         // Send to voicemail
         entry = EditEntry.newSendToVoicemailEntry(this,
                 personCursor.getString(CONTACT_SEND_TO_VOICEMAIL_COLUMN), mUri);
         mOtherEntries.add(entry);
 
         // Phonetic name
-        mPhoneticNameView.setText(personCursor.getString(CONTACT_PHONETIC_NAME_COLUMN));
+        mPhoneticNameView.setText(
+                personCursor.getString(CONTACT_PHONETIC_NAME_COLUMN));
         mPhoneticNameView.addTextChangedListener(this);
 
         personCursor.close();
 
         // Build up the phone entries
-        Uri phonesUri = Uri.withAppendedPath(mUri, People.Phones.CONTENT_DIRECTORY);
-        Cursor phonesCursor = mResolver.query(phonesUri, PHONES_PROJECTION,
-                null, null, null);
+        Uri phonesUri = Uri.withAppendedPath(mUri,
+                People.Phones.CONTENT_DIRECTORY);
+        Cursor phonesCursor = mResolver.query(phonesUri, PHONES_PROJECTION, null,
+                null, null);
 
         if (phonesCursor != null) {
             while (phonesCursor.moveToNext()) {
@@ -1268,11 +1382,13 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                 String label = phonesCursor.getString(PHONES_LABEL_COLUMN);
                 String number = phonesCursor.getString(PHONES_NUMBER_COLUMN);
                 long id = phonesCursor.getLong(PHONES_ID_COLUMN);
-                boolean isPrimary = phonesCursor.getLong(PHONES_ISPRIMARY_COLUMN) != 0;
+                boolean isPrimary = phonesCursor.getLong(PHONES_ISPRIMARY_COLUMN)
+                        != 0;
                 Uri uri = ContentUris.withAppendedId(phonesUri, id);
 
                 // Add a phone number entry
-                entry = EditEntry.newPhoneEntry(this, label, type, number, uri, id);
+                entry = EditEntry.newPhoneEntry(this, label, type, number, uri,
+                        id);
                 entry.isPrimary = isPrimary;
                 mPhoneEntries.add(entry);
 
@@ -1286,8 +1402,10 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         }
 
         // Build the contact method entries
-        Uri methodsUri = Uri.withAppendedPath(mUri, People.ContactMethods.CONTENT_DIRECTORY);
-        Cursor methodsCursor = mResolver.query(methodsUri, METHODS_PROJECTION, null, null, null);
+        Uri methodsUri = Uri.withAppendedPath(mUri,
+                People.ContactMethods.CONTENT_DIRECTORY);
+        Cursor methodsCursor = mResolver.query(methodsUri, METHODS_PROJECTION,
+                null, null, null);
 
         if (methodsCursor != null) {
             while (methodsCursor.moveToNext()) {
@@ -1297,48 +1415,54 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                 String auxData = methodsCursor.getString(METHODS_AUX_DATA_COLUMN);
                 int type = methodsCursor.getInt(METHODS_TYPE_COLUMN);
                 long id = methodsCursor.getLong(METHODS_ID_COLUMN);
-                boolean isPrimary = methodsCursor.getLong(METHODS_ISPRIMARY_COLUMN) != 0;
+                boolean isPrimary = methodsCursor.getLong(
+                        METHODS_ISPRIMARY_COLUMN)
+                                != 0;
                 Uri uri = ContentUris.withAppendedId(methodsUri, id);
 
                 switch (kind) {
-                    case Contacts.KIND_EMAIL: {
-                        entry = EditEntry.newEmailEntry(this, label, type, data, uri, id);
-                        entry.isPrimary = isPrimary;
-                        mEmailEntries.add(entry);
-    
-                        if (isPrimary) {
-                            mPrimaryEmailAdded = true;
-                        }
-                        break;
-                    }
+                case Contacts.KIND_EMAIL: {
+                    entry = EditEntry.newEmailEntry(this, label, type, data, uri,
+                            id);
+                    entry.isPrimary = isPrimary;
+                    mEmailEntries.add(entry);
 
-                    case Contacts.KIND_POSTAL: {
-                        entry = EditEntry.newPostalEntry(this, label, type, data, uri, id);
-                        entry.isPrimary = isPrimary;
-                        mPostalEntries.add(entry);
-                        break;
+                    if (isPrimary) {
+                        mPrimaryEmailAdded = true;
                     }
+                    break;
+                }
 
-                    case Contacts.KIND_IM: {
-                        Object protocolObj = ContactMethods.decodeImProtocol(auxData);
-                        if (protocolObj == null) {
-                            // Invalid IM protocol, log it then ignore.
-                            Log.e(TAG, "Couldn't decode IM protocol: " + auxData);
-                            continue;
+                case Contacts.KIND_POSTAL: {
+                    entry = EditEntry.newPostalEntry(this, label, type, data,
+                            uri, id);
+                    entry.isPrimary = isPrimary;
+                    mPostalEntries.add(entry);
+                    break;
+                }
+
+                case Contacts.KIND_IM: {
+                    Object protocolObj = ContactMethods.decodeImProtocol(auxData);
+
+                    if (protocolObj == null) {
+                        // Invalid IM protocol, log it then ignore.
+                        Log.e(TAG, "Couldn't decode IM protocol: " + auxData);
+                        continue;
+                    } else {
+                        if (protocolObj instanceof Number) {
+                            int protocol = ((Number) protocolObj).intValue();
+
+                            entry = EditEntry.newImEntry(this,
+                                    getLabelsForKind(this, Contacts.KIND_IM)[protocol],
+                                    protocol, data, uri, id);
                         } else {
-                            if (protocolObj instanceof Number) {
-                                int protocol = ((Number) protocolObj).intValue();
-                                entry = EditEntry.newImEntry(this,
-                                        getLabelsForKind(this, Contacts.KIND_IM)[protocol], protocol, 
-                                        data, uri, id);
-                            } else {
-                                entry = EditEntry.newImEntry(this, protocolObj.toString(), -1, data,
-                                        uri, id);
-                            }
-                            mImEntries.add(entry);
+                            entry = EditEntry.newImEntry(this,
+                                    protocolObj.toString(), -1, data, uri, id);
                         }
-                        break;
+                        mImEntries.add(entry);
                     }
+                    break;
+                }
                 }
             }
 
@@ -1360,7 +1484,8 @@ public final class EditContactActivity extends Activity implements View.OnClickL
 
         if (!mPrimaryEmailAdded) {
             entry = EditEntry.newEmailEntry(this,
-                    Uri.withAppendedPath(mUri, People.ContactMethods.CONTENT_DIRECTORY),
+                    Uri.withAppendedPath(mUri,
+                    People.ContactMethods.CONTENT_DIRECTORY),
                     DEFAULT_EMAIL_TYPE);
             entry.isPrimary = true;
             mEmailEntries.add(entry);
@@ -1377,6 +1502,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     private void buildEntriesForInsert(Bundle extras) {
         // Clear out the old entries
         int numSections = mSections.size();
+
         for (int i = 0; i < numSections; i++) {
             mSections.get(i).clear();
         }
@@ -1407,7 +1533,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         // Ringtone
         entry = EditEntry.newRingtoneEntry(this, null, mUri);
         mOtherEntries.add(entry);
-        
+
         // Send to voicemail
         entry = EditEntry.newSendToVoicemailEntry(this, "0", mUri);
         mOtherEntries.add(entry);
@@ -1418,12 +1544,14 @@ public final class EditContactActivity extends Activity implements View.OnClickL
 
         // Read the name from the bundle
         CharSequence name = extras.getCharSequence(Insert.NAME);
+
         if (name != null && TextUtils.isGraphic(name)) {
             mNameView.setText(name);
         }
 
         // Read the phonetic name from the bundle
         CharSequence phoneticName = extras.getCharSequence(Insert.PHONETIC_NAME);
+
         if (!TextUtils.isEmpty(phoneticName)) {
             mPhoneticNameView.setText(phoneticName);
         }
@@ -1431,13 +1559,14 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         // Postal entries from extras
         CharSequence postal = extras.getCharSequence(Insert.POSTAL);
         int postalType = extras.getInt(Insert.POSTAL_TYPE, INVALID_TYPE);
+
         if (!TextUtils.isEmpty(postal) && postalType == INVALID_TYPE) {
             postalType = DEFAULT_POSTAL_TYPE;
         }
 
         if (postalType != INVALID_TYPE) {
-            entry = EditEntry.newPostalEntry(this, null, postalType, postal.toString(),
-                    methodsUri, 0);
+            entry = EditEntry.newPostalEntry(this, null, postalType,
+                    postal.toString(), methodsUri, 0);
             entry.isPrimary = extras.getBoolean(Insert.POSTAL_ISPRIMARY);
             mPostalEntries.add(entry);
         }
@@ -1445,33 +1574,36 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         // Email entries from extras
         addEmailFromExtras(extras, methodsUri, Insert.EMAIL, Insert.EMAIL_TYPE,
                 Insert.EMAIL_ISPRIMARY);
-        addEmailFromExtras(extras, methodsUri, Insert.SECONDARY_EMAIL, Insert.SECONDARY_EMAIL_TYPE,
-                null);
-        addEmailFromExtras(extras, methodsUri, Insert.TERTIARY_EMAIL, Insert.TERTIARY_EMAIL_TYPE,
-                null);
-   
+        addEmailFromExtras(extras, methodsUri, Insert.SECONDARY_EMAIL,
+                Insert.SECONDARY_EMAIL_TYPE, null);
+        addEmailFromExtras(extras, methodsUri, Insert.TERTIARY_EMAIL,
+                Insert.TERTIARY_EMAIL_TYPE, null);
+
         // Phone entries from extras
         addPhoneFromExtras(extras, phonesUri, Insert.PHONE, Insert.PHONE_TYPE,
                 Insert.PHONE_ISPRIMARY);
-        addPhoneFromExtras(extras, phonesUri, Insert.SECONDARY_PHONE, Insert.SECONDARY_PHONE_TYPE,
-                null);
-        addPhoneFromExtras(extras, phonesUri, Insert.TERTIARY_PHONE, Insert.TERTIARY_PHONE_TYPE,
-                null);
+        addPhoneFromExtras(extras, phonesUri, Insert.SECONDARY_PHONE,
+                Insert.SECONDARY_PHONE_TYPE, null);
+        addPhoneFromExtras(extras, phonesUri, Insert.TERTIARY_PHONE,
+                Insert.TERTIARY_PHONE_TYPE, null);
 
         // IM entries from extras
         CharSequence imHandle = extras.getCharSequence(Insert.IM_HANDLE);
         CharSequence imProtocol = extras.getCharSequence(Insert.IM_PROTOCOL);
-   
+
         if (imHandle != null && imProtocol != null) {
-            Object protocolObj = ContactMethods.decodeImProtocol(imProtocol.toString());
+            Object protocolObj = ContactMethods.decodeImProtocol(
+                    imProtocol.toString());
+
             if (protocolObj instanceof Number) {
                 int protocol = ((Number) protocolObj).intValue();
+
                 entry = EditEntry.newImEntry(this,
-                        getLabelsForKind(this, Contacts.KIND_IM)[protocol], protocol, 
-                        imHandle.toString(), methodsUri, 0);
+                        getLabelsForKind(this, Contacts.KIND_IM)[protocol],
+                        protocol, imHandle.toString(), methodsUri, 0);
             } else {
-                entry = EditEntry.newImEntry(this, protocolObj.toString(), -1, imHandle.toString(),
-                        methodsUri, 0);
+                entry = EditEntry.newImEntry(this, protocolObj.toString(), -1,
+                        imHandle.toString(), methodsUri, 0);
             }
             entry.isPrimary = extras.getBoolean(Insert.IM_ISPRIMARY);
             mImEntries.add(entry);
@@ -1481,11 +1613,12 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     private void addEmailFromExtras(Bundle extras, Uri methodsUri, String emailField,
             String typeField, String primaryField) {
         CharSequence email = extras.getCharSequence(emailField);
-        
+
         // Correctly handle String in typeField as TYPE_CUSTOM 
         int emailType = INVALID_TYPE;
         String customLabel = null;
-        if(extras.get(typeField) instanceof String) {
+
+        if (extras.get(typeField) instanceof String) {
             emailType = ContactMethods.TYPE_CUSTOM;
             customLabel = extras.getString(typeField);
         } else {
@@ -1498,9 +1631,12 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         }
 
         if (emailType != INVALID_TYPE) {
-            EditEntry entry = EditEntry.newEmailEntry(this, customLabel, emailType, email.toString(),
-                    methodsUri, 0);
-            entry.isPrimary = (primaryField == null) ? false : extras.getBoolean(primaryField);
+            EditEntry entry = EditEntry.newEmailEntry(this, customLabel,
+                    emailType, email.toString(), methodsUri, 0);
+
+            entry.isPrimary = (primaryField == null)
+                    ? false
+                    : extras.getBoolean(primaryField);
             mEmailEntries.add(entry);
 
             // Keep track of which primary types have been added
@@ -1513,25 +1649,29 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     private void addPhoneFromExtras(Bundle extras, Uri phonesUri, String phoneField,
             String typeField, String primaryField) {
         CharSequence phoneNumber = extras.getCharSequence(phoneField);
-        
+
         // Correctly handle String in typeField as TYPE_CUSTOM 
         int phoneType = INVALID_TYPE;
         String customLabel = null;
-        if(extras.get(typeField) instanceof String) {
+
+        if (extras.get(typeField) instanceof String) {
             phoneType = Phones.TYPE_CUSTOM;
             customLabel = extras.getString(typeField);
         } else {
             phoneType = extras.getInt(typeField, INVALID_TYPE);
         }
-        
+
         if (!TextUtils.isEmpty(phoneNumber) && phoneType == INVALID_TYPE) {
             phoneType = DEFAULT_PHONE_TYPE;
         }
 
         if (phoneType != INVALID_TYPE) {
-            EditEntry entry = EditEntry.newPhoneEntry(this, customLabel, phoneType,
-                    phoneNumber.toString(), phonesUri, 0);
-            entry.isPrimary = (primaryField == null) ? false : extras.getBoolean(primaryField);
+            EditEntry entry = EditEntry.newPhoneEntry(this, customLabel,
+                    phoneType, phoneNumber.toString(), phonesUri, 0);
+
+            entry.isPrimary = (primaryField == null)
+                    ? false
+                    : extras.getBoolean(primaryField);
             mPhoneEntries.add(entry);
 
             // Keep track of which primary types have been added
@@ -1547,8 +1687,9 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     private void buildViews() {
         // Remove existing views
         final LinearLayout layout = mLayout;
+
         layout.removeAllViews();
-        
+
         buildViewsForSection(layout, mPhoneEntries,
                 R.string.listSeparatorCallNumber_edit, SECTION_PHONES);
         buildViewsForSection(layout, mEmailEntries,
@@ -1559,39 +1700,39 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                 R.string.listSeparatorMapAddress_edit, SECTION_POSTAL);
         buildViewsForSection(layout, mOrgEntries,
                 R.string.listSeparatorOrganizations, SECTION_ORG);
-        buildViewsForSection(layout, mNoteEntries,
-                R.string.label_notes, SECTION_NOTE);
-                
+        buildViewsForSection(layout, mNoteEntries, R.string.label_notes,
+                SECTION_NOTE);
+
         buildGroupView(layout, R.string.listSeparatorGroup);
-        
+
         buildOtherViews(layout, mOtherEntries);
     }
 
-	    
     private void buildGroupView(final LinearLayout layout, int separatorResource) {
-    	View divider = mInflater.inflate(R.layout.edit_divider, layout, false);
-    	layout.addView(divider);
-    	
-    	ViewGroup header = (ViewGroup) mInflater.inflate(R.layout.edit_separator_group, layout, false);    	    	
-    	TextView text = (TextView)header.findViewById(R.id.text);
-    	text.setText(getText(separatorResource));
-    	header.setOnFocusChangeListener(this);
-    	
-    	header.setOnClickListener(new View.OnClickListener() {
-    		public void onClick(View v) {
-    			AlertDialog.Builder builder = new AlertDialog.Builder(context)
-                    	.setTitle(R.string.select_group_title)
-                    	.setPositiveButton(android.R.string.ok, null)
-                    	.setNegativeButton(android.R.string.cancel, null);
-                    	
-                    	setGroupEntries(builder);
-                	builder.show();
-    		}    		
-    	});
-    	
-    	layout.addView(header);
-    }
+        View divider = mInflater.inflate(R.layout.edit_divider, layout, false);
 
+        layout.addView(divider);
+
+        ViewGroup header = (ViewGroup) mInflater.inflate(
+                R.layout.edit_separator_group, layout, false);    	    	
+        TextView text = (TextView) header.findViewById(R.id.text);
+
+        text.setText(getText(separatorResource));
+        header.setOnFocusChangeListener(this);
+
+        header.setOnClickListener(
+                new View.OnClickListener() {
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(_context).setTitle(R.string.select_group_title).setPositiveButton(android.R.string.ok, confirmGroupChangesListener).setNegativeButton(
+                        android.R.string.cancel, confirmGroupChangesListener);
+
+                setGroupEntries(builder);
+                builder.show();
+            }    		
+        });
+
+        layout.addView(header);
+    }
 
     /**
      * Builds the views for a specific section.
@@ -1601,84 +1742,99 @@ public final class EditContactActivity extends Activity implements View.OnClickL
      */
     private void buildViewsForSection(final LinearLayout layout, ArrayList<EditEntry> section,
             int separatorResource, int sectionType) {
-        
+
         View divider = mInflater.inflate(R.layout.edit_divider, layout, false);
+
         layout.addView(divider);
-        
+
         // Count up undeleted children
         int activeChildren = 0;
+
         for (int i = section.size() - 1; i >= 0; i--) {
             EditEntry entry = section.get(i);
+
             if (!entry.isDeleted) {
                 activeChildren++;
             }
         }
-        
+
         // Build the correct group header based on undeleted children
         ViewGroup header;
+
         if (activeChildren == 0) {
-            header = (ViewGroup) mInflater.inflate(R.layout.edit_separator_alone, layout, false);
+            header = (ViewGroup) mInflater.inflate(R.layout.edit_separator_alone,
+                    layout, false);
         } else {
-            header = (ViewGroup) mInflater.inflate(R.layout.edit_separator, layout, false);
+            header = (ViewGroup) mInflater.inflate(R.layout.edit_separator,
+                    layout, false);
         }
 
         // Because we're emulating a ListView, we need to handle focus changes
         // with some additional logic.
         header.setOnFocusChangeListener(this);
-        
+
         TextView text = (TextView) header.findViewById(R.id.text);
+
         text.setText(getText(separatorResource));
-        
+
         // Force TextView to always default color if we have children.  This makes sure
         // we don't change color when parent is pressed.
         if (activeChildren > 0) {
             ColorStateList stateList = text.getTextColors();
+
             text.setTextColor(stateList.getDefaultColor());
         }
 
         View addView = header.findViewById(R.id.separator);
+
         addView.setTag(Integer.valueOf(sectionType));
         addView.setOnClickListener(this);
-        
+
         // Build views for the current section
         for (EditEntry entry : section) {
             entry.activity = this; // this could be null from when the state is restored
             if (!entry.isDeleted) {
                 View view = buildViewForEntry(entry);
+
                 header.addView(view);
             }
         }
-        
+
         layout.addView(header);
     }
-    
+
     private void buildOtherViews(final LinearLayout layout, ArrayList<EditEntry> section) {
         // Build views for the current section, putting a divider between each one
         for (EditEntry entry : section) {
-            View divider = mInflater.inflate(R.layout.edit_divider, layout, false);
+            View divider = mInflater.inflate(R.layout.edit_divider, layout,
+                    false);
+
             layout.addView(divider);
 
             entry.activity = this; // this could be null from when the state is restored
             View view = buildViewForEntry(entry);
+
             view.setOnClickListener(this);
             layout.addView(view);
         }
-        
+
         View divider = mInflater.inflate(R.layout.edit_divider, layout, false);
+
         layout.addView(divider);
     }
-    
+
     /**
      * Builds a view to display an EditEntry.
      * 
      * @param entry the entry to display
      * @return a view that will display the given entry
      */
+    
     /* package */ View buildViewForEntry(final EditEntry entry) {
         // Look for any existing entered text, and save it if found
         if (entry.view != null && entry.syncDataWithView) {
-            String enteredText = ((TextView) entry.view.findViewById(R.id.data))
-                    .getText().toString();
+            String enteredText = ((TextView) entry.view.findViewById(R.id.data)).getText().toString();
+
             if (!TextUtils.isEmpty(enteredText)) {
                 entry.data = enteredText;
             }
@@ -1691,20 +1847,24 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         // Because we're emulating a ListView, we might need to handle focus changes
         // with some additional logic.
         if (entry.kind == Contacts.KIND_ORGANIZATION) {
-            view = mInflater.inflate(R.layout.edit_contact_entry_org, parent, false);
+            view = mInflater.inflate(R.layout.edit_contact_entry_org, parent,
+                    false);
         } else if (isOtherEntry(entry, People.CUSTOM_RINGTONE)) {
-            view = mInflater.inflate(R.layout.edit_contact_entry_ringtone, parent, false);
+            view = mInflater.inflate(R.layout.edit_contact_entry_ringtone,
+                    parent, false);
             view.setOnFocusChangeListener(this);
         } else if (isOtherEntry(entry, People.SEND_TO_VOICEMAIL)) {
-            view = mInflater.inflate(R.layout.edit_contact_entry_voicemail, parent, false);
+            view = mInflater.inflate(R.layout.edit_contact_entry_voicemail,
+                    parent, false);
             view.setOnFocusChangeListener(this);
         } else if (!entry.isStaticLabel) {
             view = mInflater.inflate(R.layout.edit_contact_entry, parent, false);
         } else {
-            view = mInflater.inflate(R.layout.edit_contact_entry_static_label, parent, false);
+            view = mInflater.inflate(R.layout.edit_contact_entry_static_label,
+                    parent, false);
         }
         entry.view = view;
-        
+
         // Set the entry as the tag so we can find it again later given just the view
         view.setTag(entry);
 
@@ -1714,7 +1874,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         // Bind data
         TextView data = (TextView) view.findViewById(R.id.data);
         TextView data2 = (TextView) view.findViewById(R.id.data2);
-        
+
         if (data instanceof Button) {
             data.setOnClickListener(this);
         }
@@ -1731,7 +1891,9 @@ public final class EditContactActivity extends Activity implements View.OnClickL
             data2.setText(entry.data2);
         }
         data.setHint(entry.hint);
-        if (data2 != null) data2.setHint(entry.hint2);
+        if (data2 != null) {
+            data2.setHint(entry.hint2);
+        }
         if (entry.lines > 1) {
             data.setLines(entry.lines);
             data.setMaxLines(entry.maxLines);
@@ -1741,22 +1903,26 @@ public final class EditContactActivity extends Activity implements View.OnClickL
             }
         }
         int contentType = entry.contentType;
+
         if (contentType != EditorInfo.TYPE_NULL) {
             data.setInputType(contentType);
             if (data2 != null) {
                 data2.setInputType(contentType);
             }
-            if ((contentType&EditorInfo.TYPE_MASK_CLASS)
+            if ((contentType & EditorInfo.TYPE_MASK_CLASS)
                     == EditorInfo.TYPE_CLASS_PHONE) {
-                data.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+                data.addTextChangedListener(
+                        new PhoneNumberFormattingTextWatcher());
                 if (data2 != null) {
-                    data2.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+                    data2.addTextChangedListener(
+                            new PhoneNumberFormattingTextWatcher());
                 }
             }
         }
-        
+
         // Give focus to children as requested, possibly after a configuration change
         View focusChild = view.findViewById(entry.requestFocusId);
+
         if (focusChild != null) {
             focusChild.requestFocus();
             if (focusChild instanceof EditText) {
@@ -1786,8 +1952,11 @@ public final class EditContactActivity extends Activity implements View.OnClickL
 
         // Hook up the delete button
         View delete = view.findViewById(R.id.delete);
-        if (delete != null) delete.setOnClickListener(this);
-        
+
+        if (delete != null) {
+            delete.setOnClickListener(this);
+        }
+
         return view;
     }
 
@@ -1797,13 +1966,14 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         } else if (isOtherEntry(entry, People.SEND_TO_VOICEMAIL)) {
             CheckBox checkBox = (CheckBox) entry.view.findViewById(R.id.checkbox);
             boolean sendToVoicemail = false;
+
             if (entry.data != null) {
                 sendToVoicemail = (Integer.valueOf(entry.data) == 1);
             }
             checkBox.setChecked(sendToVoicemail);
         }
     }
-    
+
     /**
      * Handles the results from the label change picker.
      */
@@ -1820,10 +1990,12 @@ public final class EditContactActivity extends Activity implements View.OnClickL
             // TODO: Use a managed dialog
             if (mEntry.kind != Contacts.KIND_IM) {
                 final int type = getTypeFromLabelPosition(mLabels, which);
+
                 if (type == ContactMethods.TYPE_CUSTOM) {
                     createCustomPicker(mEntry, null);
                 } else {
-                    mEntry.setLabel(EditContactActivity.this, type, mLabels[which]);
+                    mEntry.setLabel(EditContactActivity.this, type,
+                            mLabels[which]);
                     mContactChanged = true;
                 }
             } else {
@@ -1832,6 +2004,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
             }
         }
     }
+
 
     /**
      * A basic structure with the data for a contact entry in the list.
@@ -1849,6 +2022,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         public String data2;
         public int contentType;
         public int type;
+
         /**
          * If 0 or 1, setSingleLine will be called. If negative, setSingleLine
          * will not be called.
@@ -1872,8 +2046,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
          */
         public int requestCursor = 0;
 
-        private EditEntry() {
-            // only used by CREATOR
+        private EditEntry() {// only used by CREATOR
         }
 
         public EditEntry(EditContactActivity activity) {
@@ -1917,8 +2090,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
             super.writeToParcel(parcel);
         }
 
-        public static final Parcelable.Creator<EditEntry> CREATOR =
-            new Parcelable.Creator<EditEntry>() {
+        public static final Parcelable.Creator<EditEntry> CREATOR = new Parcelable.Creator<EditEntry>() {
             public EditEntry createFromParcel(Parcel in) {
                 EditEntry entry = new EditEntry();
 
@@ -1935,13 +2107,13 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                 entry.isDeleted = in.readInt() == 1;
                 entry.isStaticLabel = in.readInt() == 1;
                 entry.syncDataWithView = in.readInt() == 1;
-                
+
                 // Read out the fields from Entry
                 entry.readFromParcel(in);
 
                 return entry;
             }
-            
+
             public EditEntry[] newArray(int size) {
                 return new EditEntry[size];
             }
@@ -1954,37 +2126,40 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                 bindLabel(context);
             }
         }
-        
+
         public void bindLabel(Context context) {
             TextView v = (TextView) view.findViewById(R.id.label);
+
             if (isStaticLabel) {
                 v.setText(label);
                 return;
             }
 
             switch (kind) {
-                case Contacts.KIND_PHONE: {
-                    v.setText(Phones.getDisplayLabel(context, type, label));
-                    break;
-                }
+            case Contacts.KIND_PHONE: {
+                v.setText(Phones.getDisplayLabel(context, type, label));
+                break;
+            }
 
-                case Contacts.KIND_IM: {
-                    v.setText(getLabelsForKind(activity, kind)[type]);
-                    break;
-                }
-                
-                case Contacts.KIND_ORGANIZATION: {
-                    v.setText(Organizations.getDisplayLabel(activity, type, label));
-                    break;
-                }
+            case Contacts.KIND_IM: {
+                v.setText(getLabelsForKind(activity, kind)[type]);
+                break;
+            }
 
-                default: {
-                    v.setText(Contacts.ContactMethods.getDisplayLabel(context, kind, type, label));
-                    if (kind == Contacts.KIND_POSTAL) {
-                        v.setMaxLines(3);
-                    }
-                    break;
+            case Contacts.KIND_ORGANIZATION: {
+                v.setText(Organizations.getDisplayLabel(activity, type, label));
+                break;
+            }
+
+            default: {
+                v.setText(
+                        Contacts.ContactMethods.getDisplayLabel(context, kind,
+                        type, label));
+                if (kind == Contacts.KIND_POSTAL) {
+                    v.setMaxLines(3);
                 }
+                break;
+            }
             }
             v.setOnClickListener(activity);
         }
@@ -1996,6 +2171,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         public String getData() {
             if (view != null && syncDataWithView) {
                 CharSequence text = ((TextView) view.findViewById(R.id.data)).getText();
+
                 if (text != null) {
                     return text.toString();
                 }
@@ -2017,76 +2193,78 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         public boolean toValues(ContentValues values) {
             boolean success = false;
             String labelString = null;
+
             // Save the type and label
             if (view != null) {
                 // Read the possibly updated label from the text field
                 labelString = ((TextView) view.findViewById(R.id.label)).getText().toString();
             }
             switch (kind) {
-                case Contacts.KIND_PHONE:
-                    if (type != Phones.TYPE_CUSTOM) {
-                        labelString = null;
-                    }
-                    values.put(Phones.LABEL, labelString);
-                    values.put(Phones.TYPE, type);
-                    break;
+            case Contacts.KIND_PHONE:
+                if (type != Phones.TYPE_CUSTOM) {
+                    labelString = null;
+                }
+                values.put(Phones.LABEL, labelString);
+                values.put(Phones.TYPE, type);
+                break;
 
-                case Contacts.KIND_EMAIL:
-                    if (type != ContactMethods.TYPE_CUSTOM) {
-                        labelString = null;
-                    }
-                    values.put(ContactMethods.LABEL, labelString);
-                    values.put(ContactMethods.KIND, kind);
-                    values.put(ContactMethods.TYPE, type);
-                    break;
+            case Contacts.KIND_EMAIL:
+                if (type != ContactMethods.TYPE_CUSTOM) {
+                    labelString = null;
+                }
+                values.put(ContactMethods.LABEL, labelString);
+                values.put(ContactMethods.KIND, kind);
+                values.put(ContactMethods.TYPE, type);
+                break;
 
-                case Contacts.KIND_IM:
-                    values.put(ContactMethods.KIND, kind);
-                    values.put(ContactMethods.TYPE, ContactMethods.TYPE_OTHER);
-                    values.putNull(ContactMethods.LABEL);
-                    if (type != -1) {
-                        values.put(ContactMethods.AUX_DATA,
-                                ContactMethods.encodePredefinedImProtocol(type));
-                    } else {
-                        values.put(ContactMethods.AUX_DATA,
-                                ContactMethods.encodeCustomImProtocol(label.toString()));
-                    }
-                    break;
+            case Contacts.KIND_IM:
+                values.put(ContactMethods.KIND, kind);
+                values.put(ContactMethods.TYPE, ContactMethods.TYPE_OTHER);
+                values.putNull(ContactMethods.LABEL);
+                if (type != -1) {
+                    values.put(ContactMethods.AUX_DATA,
+                            ContactMethods.encodePredefinedImProtocol(type));
+                } else {
+                    values.put(ContactMethods.AUX_DATA,
+                            ContactMethods.encodeCustomImProtocol(
+                            label.toString()));
+                }
+                break;
 
-                case Contacts.KIND_POSTAL:
-                    if (type != ContactMethods.TYPE_CUSTOM) {
-                        labelString = null;
-                    }
-                    values.put(ContactMethods.LABEL, labelString);
-                    values.put(ContactMethods.KIND, kind);
-                    values.put(ContactMethods.TYPE, type);
-                    break;
+            case Contacts.KIND_POSTAL:
+                if (type != ContactMethods.TYPE_CUSTOM) {
+                    labelString = null;
+                }
+                values.put(ContactMethods.LABEL, labelString);
+                values.put(ContactMethods.KIND, kind);
+                values.put(ContactMethods.TYPE, type);
+                break;
 
-                case Contacts.KIND_ORGANIZATION:
-                    if (type != ContactMethods.TYPE_CUSTOM) {
-                        labelString = null;
-                    }
-                    values.put(ContactMethods.LABEL, labelString);
-                    values.put(ContactMethods.TYPE, type);
-                    // Save the title
-                    if (view != null) {
-                        // Read the possibly updated data from the text field
-                        data2 = ((TextView) view.findViewById(R.id.data2)).getText().toString();
-                    }
-                    if (!TextUtils.isGraphic(data2)) {
-                        values.putNull(Organizations.TITLE);
-                    } else {
-                        values.put(Organizations.TITLE, data2.toString());
-                        success = true;
-                    }
-                    break;
+            case Contacts.KIND_ORGANIZATION:
+                if (type != ContactMethods.TYPE_CUSTOM) {
+                    labelString = null;
+                }
+                values.put(ContactMethods.LABEL, labelString);
+                values.put(ContactMethods.TYPE, type);
+                // Save the title
+                if (view != null) {
+                    // Read the possibly updated data from the text field
+                    data2 = ((TextView) view.findViewById(R.id.data2)).getText().toString();
+                }
+                if (!TextUtils.isGraphic(data2)) {
+                    values.putNull(Organizations.TITLE);
+                } else {
+                    values.put(Organizations.TITLE, data2.toString());
+                    success = true;
+                }
+                break;
 
-                default:
-                    Log.w(TAG, "unknown kind " + kind);
-                    values.put(ContactMethods.LABEL, labelString);
-                    values.put(ContactMethods.KIND, kind);
-                    values.put(ContactMethods.TYPE, type);
-                    break;
+            default:
+                Log.w(TAG, "unknown kind " + kind);
+                values.put(ContactMethods.LABEL, labelString);
+                values.put(ContactMethods.KIND, kind);
+                values.put(ContactMethods.TYPE, type);
+                break;
             }
 
             // Only set the ISPRIMARY flag if part of the incoming data.  This is because the
@@ -2124,7 +2302,9 @@ public final class EditContactActivity extends Activity implements View.OnClickL
          */
         public static final EditEntry newOrganizationEntry(EditContactActivity activity,
                 String label, int type, String company, String title, Uri uri, long id) {
-            EditEntry entry = new EditEntry(activity, label, type, company, uri, id);
+            EditEntry entry = new EditEntry(activity, label, type, company, uri,
+                    id);
+
             entry.hint = activity.getString(R.string.ghostData_company);
             entry.hint2 = activity.getString(R.string.ghostData_title);
             entry.data2 = title;
@@ -2142,6 +2322,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         public static final EditEntry newNotesEntry(EditContactActivity activity,
                 String data, Uri uri) {
             EditEntry entry = new EditEntry(activity);
+
             entry.label = activity.getString(R.string.label_notes);
             entry.hint = activity.getString(R.string.ghostData_notes);
             entry.data = data;
@@ -2164,6 +2345,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         public static final EditEntry newRingtoneEntry(EditContactActivity activity,
                 String data, Uri uri) {
             EditEntry entry = new EditEntry(activity);
+
             entry.label = activity.getString(R.string.label_ringtone);
             entry.data = data;
             entry.uri = uri;
@@ -2181,6 +2363,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         public static final EditEntry newSendToVoicemailEntry(EditContactActivity activity,
                 String data, Uri uri) {
             EditEntry entry = new EditEntry(activity);
+
             entry.label = activity.getString(R.string.actionIncomingCall);
             entry.data = data;
             entry.uri = uri;
@@ -2207,6 +2390,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                 String label, int type, String data, Uri uri,
                 long id) {
             EditEntry entry = new EditEntry(activity, label, type, data, uri, id);
+
             entry.hint = activity.getString(R.string.ghostData_phone);
             entry.column = People.Phones.NUMBER;
             entry.contentDirectory = People.Phones.CONTENT_DIRECTORY;
@@ -2230,6 +2414,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                 String label, int type, String data, Uri uri,
                 long id) {
             EditEntry entry = new EditEntry(activity, label, type, data, uri, id);
+
             entry.hint = activity.getString(R.string.ghostData_email);
             entry.column = ContactMethods.DATA;
             entry.contentDirectory = People.ContactMethods.CONTENT_DIRECTORY;
@@ -2260,6 +2445,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         public static final EditEntry newPostalEntry(EditContactActivity activity,
                 String label, int type, String data, Uri uri, long id) {
             EditEntry entry = new EditEntry(activity, label, type, data, uri, id);
+
             entry.hint = activity.getString(R.string.ghostData_postal);
             entry.column = ContactMethods.DATA;
             entry.contentDirectory = People.ContactMethods.CONTENT_DIRECTORY;
@@ -2293,7 +2479,9 @@ public final class EditContactActivity extends Activity implements View.OnClickL
          */
         public static final EditEntry newImEntry(EditContactActivity activity,
                 String label, int protocol, String data, Uri uri, long id) {
-            EditEntry entry = new EditEntry(activity, label, protocol, data, uri, id);
+            EditEntry entry = new EditEntry(activity, label, protocol, data, uri,
+                    id);
+
             entry.hint = activity.getString(R.string.ghostData_im);
             entry.column = ContactMethods.DATA;
             entry.contentDirectory = People.ContactMethods.CONTENT_DIRECTORY;
@@ -2309,98 +2497,174 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         mContactChanged = true;
     }
 
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        // Do nothing; editing handled by afterTextChanged()
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {// Do nothing; editing handled by afterTextChanged()
     }
 
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-        // Do nothing; editing handled by afterTextChanged()
+    public void onTextChanged(CharSequence s, int start, int before, int count) {// Do nothing; editing handled by afterTextChanged()
     }
-    
+
     public void onFocusChange(View v, boolean hasFocus) {
         // Because we're emulating a ListView, we need to setSelected() for
         // views as they are focused.
         v.setSelected(hasFocus);
     }
-    
+
     private void setGroupEntries(AlertDialog.Builder builder) {
-        final String[] GROUPS_PROJECTION = new String[] {
-        	Groups.SYSTEM_ID, // 0
-        	Groups.NAME, // 1
-    	};
-    	
-    	CharSequence[] groupsCharSeq;
-    	Cursor cursor;
-        cursor = getContentResolver().query(Groups.CONTENT_URI, GROUPS_PROJECTION,
-                    null, null, Groups.DEFAULT_SORT_ORDER);
-    	try {
-            ArrayList<CharSequence> groups = new ArrayList<CharSequence>();
-            ArrayList<CharSequence> prefStrings = new ArrayList<CharSequence>();
-            
-            if (cursor.moveToFirst()) {
-            	while (cursor.moveToNext()) {            
-	                String name = cursor.getString(cursor.getColumnIndex(Groups.NAME));
-        	        groups.add(name);                
-        	}
-       	    }
-            
-            groupsCharSeq = groups.toArray(new CharSequence[groups.size()]);
-            
-            ArrayList<CharSequence> currentMembership = new ArrayList<CharSequence>();            
-                        
-            long personId = ContentUris.parseId(mUri);
-            final String[] GROUP_MEMBERSHIP_PROJECTION = new String[] {
-        	GroupMembership.GROUP_ID,
-        	GroupMembership.PERSON_ID
-       	    };
-            
-            Cursor groupCursor = getContentResolver().query(GroupMembership.CONTENT_URI, GROUP_MEMBERSHIP_PROJECTION,
-        	GroupMembership.PERSON_ID + "='" + personId + "'", null, null);
-            Cursor cur = null;
-            
-             if (groupCursor != null) {
-        	while (groupCursor.moveToNext()) {
-        		cur = mResolver.query(Groups.CONTENT_URI, GROUPS_PROJECTION,
-        			Contacts.Groups._ID + "='" + groupCursor.getString(groupCursor.getColumnIndex(GroupMembership.GROUP_ID)) + "'",
-        			null, null);
-        		if (cur != null) {
-        			if (cur.moveToFirst()) {
-        				currentMembership.add(cur.getString(cur.getColumnIndex(Groups.NAME)));
-        			}
-        		}
-        	}
-        	cur.close();
-        	groupCursor.close();
-    	
-             }
-             
-             boolean[] checkedValues = new boolean[groups.size()];
-             
-             for (boolean b : checkedValues)
-             	b = false;
-             	
-             for (int i = 0; i < currentMembership.size(); i++) {
-             	int j = groups.indexOf(currentMembership.get(i));
-             	if (j != -1)
-             		checkedValues[j] = true;
-             }            
-            
-            builder.setMultiChoiceItems(groupsCharSeq, checkedValues, this);
-            
-        } finally {
-            cursor.close();
+        CharSequence[] groupsCharSeq = null;           
+        boolean[] checkedValues = null;
+
+        if (selectedGroups.size() > 0) {
+
+            groupsCharSeq = groups.toArray(
+                    new CharSequence[groups.size()]);
+
+            checkedValues = new boolean[groups.size()];
+
+            for (boolean b : checkedValues) {
+                b = false;
+            }
+
+            for (int i = 0; i < selectedGroups.size(); i++) {
+                int j = groups.indexOf(selectedGroups.get(i));
+
+                if (j != -1) {
+                    checkedValues[j] = true;
+                }
+            }            
+
+            builder.setMultiChoiceItems(groupsCharSeq, checkedValues,
+                    confirmGroupSelectionListener); 
+        } else {
+            Cursor cursor = mResolver.query(Groups.CONTENT_URI, GROUPS_PROJECTION, null,
+                    null, Groups.DEFAULT_SORT_ORDER);
+            try {
+                groups = new ArrayList<CharSequence>();
+
+                if (cursor.moveToFirst()) {
+                    while (cursor.moveToNext()) {            
+                        String name = cursor.getString(
+                                cursor.getColumnIndex(Groups.NAME));
+
+                        groups.add(name);                
+                    }
+                }
+
+                groupsCharSeq = groups.toArray(new CharSequence[groups.size()]);
+                long personId = ContentUris.parseId(mUri);
+
+                Cursor groupCursor = mResolver.query(GroupMembership.CONTENT_URI,
+                        GROUP_MEMBERSHIP_PROJECTION,
+                        GroupMembership.PERSON_ID + "='" + personId + "'", null,
+                        null);
+                Cursor cur = null;
+
+                if (groupCursor != null) {
+                    while (groupCursor.moveToNext()) {
+                        cur = mResolver.query(Groups.CONTENT_URI,
+                                GROUPS_PROJECTION,
+                                Contacts.Groups._ID + "='"
+                                + groupCursor.getString(
+                                groupCursor.getColumnIndex(
+                                        GroupMembership.GROUP_ID))
+                                        + "'",
+                                        null,
+                                        null);
+                        if (cur != null) {
+                            if (cur.moveToFirst()) {
+                                currentMembership.add(
+                                        cur.getString(
+                                                cur.getColumnIndex(Groups.NAME)));
+                            }
+                        }
+                    }
+                    cur.close();
+                    groupCursor.close();
+                }
+
+                checkedValues = new boolean[groups.size()];
+
+                for (boolean b : checkedValues) {
+                    b = false;
+                }
+
+                for (int i = 0; i < currentMembership.size(); i++) {
+                    int j = groups.indexOf(currentMembership.get(i));
+
+                    if (j != -1) {
+                        checkedValues[j] = true;
+                        selectedGroups.add(groups.get(j));
+                    }
+                }
+            } finally {
+                cursor.close();
+            }
+
+            builder.setMultiChoiceItems(groupsCharSeq, checkedValues,
+                    confirmGroupSelectionListener);           
+
         }
     }
-    
-    public void onClick(DialogInterface dialogInterface, int which) {
-    	if (which == DialogInterface.BUTTON_POSITIVE) {
 
-        } else {            
-        	dialogInterface.dismiss();
+    private DialogInterface.OnClickListener confirmGroupChangesListener = new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialogInterface, int which) {
+            if (which == DialogInterface.BUTTON_POSITIVE) {
+                dialogInterface.dismiss();
+            } else {
+                selectedGroups.clear();
+                selectedGroups = (ArrayList) currentMembership.clone();                        
+                dialogInterface.dismiss();
+            }
         }
-    }
-    
-    public void onClick(DialogInterface dialogInterface, int which, boolean isChecked) {
+    };
 
+    private DialogInterface.OnMultiChoiceClickListener confirmGroupSelectionListener = new DialogInterface.OnMultiChoiceClickListener() {
+        public void onClick(DialogInterface dialogInterface, int which, boolean isChecked) {
+            if (isChecked) {
+                selectedGroups.add(groups.get(which));
+            } else {
+                selectedGroups.remove(groups.get(which));
+            }
+
+        }
+
+    };
+
+    private void saveGroups() {
+
+        long personId = ContentUris.parseId(mUri);
+        
+        //Wysie_Soh: Remove all group memberships               
+        Cursor c = getContentResolver().query(GroupMembership.CONTENT_URI,
+                GROUP_MEMBERSHIP_PROJECTION,
+                GroupMembership.PERSON_ID + "='" + personId + "'", null, null);
+                            
+        if (c.moveToFirst()) {
+            do {                
+                /*int i = mResolver.delete(
+                        ContentUris.withAppendedId(GroupMembership.CONTENT_URI, c.getLong(0)),
+                        null,
+                        null);*/
+            } while (c.moveToNext());
+        }
+        
+        c.close();
+        
+        //Wysie_Soh: Added all selectedGroups
+        for (int i = 0; i < selectedGroups.size(); i++) {        
+            Cursor cursor = mResolver.query(Groups.CONTENT_URI,
+                        GROUPS_PROJECTION, 
+                        Contacts.Groups.NAME + "='" + selectedGroups.get(i) + "'", null, null);
+            
+            if (cursor != null) {
+                while (cursor.moveToNext()) {
+                    People.addToGroup(mResolver, personId, cursor.getLong(cursor.getColumnIndex(Contacts.Groups._ID)));
+                }
+                
+                cursor.close();
+            }            
+        }        
+
+        People.addToMyContactsGroup(mResolver, personId);
     }
+
 }

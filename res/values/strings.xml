@@ -773,6 +773,8 @@
     <string name="title_digits_color_focused">Digits color (focused)</string>
     <string name="title_digits_color_pressed">Digits color (pressed)</string>
     <string name="title_choose_color">Choose a color</string>
+    <string name="title_use_custom_color">Use custom digits colors</string>
+    <string name="summaryon_custom_color">Supported formats: #RRGGBB or #AARRGGBB. Input the # as well.</string>
     
     <string name="title_call_log_category">Call log</string>    
     <string name="title_cl_relative_time">Relative times</string>

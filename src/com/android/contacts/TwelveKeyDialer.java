@@ -1162,10 +1162,26 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         	}
     }
     
-    private void setDigitsColor() {
-        int colorFocused = Integer.parseInt(prefs.getString("focused_digit_color", "-16777216"));
-        int colorPressed = Integer.parseInt(prefs.getString("pressed_digit_color", "-16777216"));
-        int colorUnselected = Integer.parseInt(prefs.getString("unselected_digit_color", "-1"));
+    private void setDigitsColor() {        
+        int colorFocused = -16777216;
+        int colorPressed = -16777216;
+        int colorUnselected = -1;
+        
+        if (prefs.getBoolean("dial_digit_use_custom_color", false)) {
+            try {
+                colorFocused = Color.parseColor(prefs.getString("focused_digit_color_custom", "-16777216"));
+                colorPressed = Color.parseColor(prefs.getString("pressed_digit_color_custom", "-16777216"));
+                colorUnselected = Color.parseColor(prefs.getString("unselected_digit_color_custom", "-1"));
+            }
+            catch (IllegalArgumentException e) {
+                //Do nothing
+            }            
+        }
+        else {
+            colorFocused = Integer.parseInt(prefs.getString("focused_digit_color", "-16777216"));
+            colorPressed = Integer.parseInt(prefs.getString("pressed_digit_color", "-16777216"));
+            colorUnselected = Integer.parseInt(prefs.getString("unselected_digit_color", "-1"));
+        }
     
         mDigits.setTextColor(new ColorStateList(
                      new int[][] {

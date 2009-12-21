@@ -20,6 +20,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.ListPreference;
+import android.preference.CheckBoxPreference;
 import android.preference.PreferenceActivity;
 import android.content.ComponentName;
 import android.content.pm.PackageManager;
@@ -30,13 +31,15 @@ import android.content.pm.ResolveInfo;
 
 import android.util.Log;
 
-public class ContactsPreferences extends PreferenceActivity implements Preference.OnPreferenceChangeListener {
+public class ContactsPreferences extends PreferenceActivity implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
     private static final String TAG = "ContactsPreferences";
 
     private ListPreference mVMButton;
     private ListPreference mVMHandler;
     private ListPreference colorFocused, colorPressed, colorUnselected;
+    private CheckBoxPreference useCustomColor;
+    //private EditTextPreference customColorFocused, customColorPressed, customColorUnselected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,17 +49,18 @@ public class ContactsPreferences extends PreferenceActivity implements Preferenc
         addPreferencesFromResource(R.xml.contacts_preferences);
 
         mVMButton = (ListPreference) findPreference("vm_button");
-        mVMHandler = (ListPreference) findPreference("vm_handler");
-        
+        mVMHandler = (ListPreference) findPreference("vm_handler");       
         colorFocused = (ListPreference) findPreference("focused_digit_color");
         colorPressed = (ListPreference) findPreference("pressed_digit_color");
         colorUnselected = (ListPreference) findPreference("unselected_digit_color");
+        useCustomColor = (CheckBoxPreference) findPreference("dial_digit_use_custom_color");
 
         mVMButton.setOnPreferenceChangeListener(this);
         mVMHandler.setOnPreferenceChangeListener(this);
         colorFocused.setOnPreferenceChangeListener(this);
         colorPressed.setOnPreferenceChangeListener(this);
         colorUnselected.setOnPreferenceChangeListener(this);
+        useCustomColor.setOnPreferenceClickListener(this);
 
         loadHandlers();
 
@@ -64,17 +68,41 @@ public class ContactsPreferences extends PreferenceActivity implements Preferenc
         updatePrefs(mVMHandler, mVMHandler.getValue());
         updatePrefs(colorFocused, colorFocused.getValue());
         updatePrefs(colorPressed, colorPressed.getValue());
-        updatePrefs(colorUnselected, colorUnselected.getValue());
+        updatePrefs(colorUnselected, colorUnselected.getValue());        
+        updatePrefs(useCustomColor);
     }
-
+    
+    public boolean onPreferenceClick(Preference preference) {
+        updatePrefs(preference);
+        
+        return true;
+    }
+    
+    private void updatePrefs(Preference preference) {
+        if (preference.getKey().equals("dial_digit_use_custom_color")) {
+            CheckBoxPreference p = (CheckBoxPreference) findPreference(preference.getKey());
+            if (p.isChecked()) {
+                colorFocused.setEnabled(false);
+                colorPressed.setEnabled(false);
+                colorUnselected.setEnabled(false);
+            }
+            else {
+                colorFocused.setEnabled(true);
+                colorPressed.setEnabled(true);
+                colorUnselected.setEnabled(true);
+            }            
+        }
+    }
+    
     public boolean onPreferenceChange (Preference preference, Object newValue) {
         updatePrefs(preference, newValue);
         return true;
     }
 
-    private void updatePrefs(Preference preference, Object newValue) {    
+    private void updatePrefs(Preference preference, Object newValue) {  
         ListPreference p = (ListPreference) findPreference(preference.getKey());
-        try {
+        
+        try {       
             p.setSummary(p.getEntries()[p.findIndexOfValue((String) newValue)]);
         } catch (ArrayIndexOutOfBoundsException e) {
             if (p.getKey().equals("vm_button") || p.getKey().equals("vm_handler")) {

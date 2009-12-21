@@ -2267,7 +2267,6 @@ public final class ContactsListActivity extends ListActivity
     		do {
                     getContentResolver().update(ContentUris.withAppendedId(People.CONTENT_URI, c.getLong(0)),
                     	values, null, null);
-                    Log.d("HERE", "WE GO");
                } while(c.moveToNext());
 	}
     } 

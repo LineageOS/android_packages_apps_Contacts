@@ -2512,7 +2512,8 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     private void setGroupEntries(AlertDialog.Builder builder) {
         CharSequence[] groupsCharSeq = null;           
         boolean[] checkedValues = null;
-
+        
+        // If selected groups already has something inside, we use it
         if (selectedGroups.size() > 0) {
 
             groupsCharSeq = groups.toArray(
@@ -2550,6 +2551,8 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                 }
 
                 groupsCharSeq = groups.toArray(new CharSequence[groups.size()]);
+                
+                if (!(mState == STATE_INSERT)) {
                 long personId = ContentUris.parseId(mUri);
 
                 Cursor groupCursor = mResolver.query(GroupMembership.CONTENT_URI,
@@ -2580,12 +2583,15 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                     cur.close();
                     groupCursor.close();
                 }
+                }
 
                 checkedValues = new boolean[groups.size()];
 
                 for (boolean b : checkedValues) {
                     b = false;
                 }
+                
+                if (!(mState == STATE_INSERT)) {
 
                 for (int i = 0; i < currentMembership.size(); i++) {
                     int j = groups.indexOf(currentMembership.get(i));
@@ -2594,6 +2600,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                         checkedValues[j] = true;
                         selectedGroups.add(groups.get(j));
                     }
+                }
                 }
             } finally {
                 cursor.close();
@@ -2630,26 +2637,26 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     };
 
     private void saveGroups() {
-
         long personId = ContentUris.parseId(mUri);
         
-        //Wysie_Soh: Remove all group memberships               
-        Cursor c = getContentResolver().query(GroupMembership.CONTENT_URI,
+        //Wysie_Soh: Remove all group memberships (not working)
+        Cursor c = mResolver.query(GroupMembership.CONTENT_URI,
                 GROUP_MEMBERSHIP_PROJECTION,
                 GroupMembership.PERSON_ID + "='" + personId + "'", null, null);
                             
         if (c.moveToFirst()) {
-            do {                
-                /*int i = mResolver.delete(
-                        ContentUris.withAppendedId(GroupMembership.CONTENT_URI, c.getLong(0)),
-                        null,
-                        null);*/
-            } while (c.moveToNext());
-        }
+            while (c.moveToNext()) {                
+                int i = mResolver.delete(ContentUris.withAppendedId(
+                GroupMembership.CONTENT_URI, c.getLong(0)),
+                        GroupMembership.PERSON_ID + "='" + personId + "'",
+                        null);
+                Log.d("ROWS DEL", "" + i);
+            }
+            
+            c.close();
+        }        
         
-        c.close();
-        
-        //Wysie_Soh: Added all selectedGroups
+        //Wysie_Soh: Added all selectedGroups (working)
         for (int i = 0; i < selectedGroups.size(); i++) {        
             Cursor cursor = mResolver.query(Groups.CONTENT_URI,
                         GROUPS_PROJECTION, 

@@ -99,6 +99,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /** Bluetooth Transfer related import */
@@ -1111,7 +1112,8 @@ public class ViewContactActivity extends ListActivity
         		}
         	}
         	cur.close();
-        	groupCursor.close();        	
+        	groupCursor.close();
+        	removeDuplicates(groupNamesArray);
         	java.util.Collections.sort(groupNamesArray);        	
         	StringBuilder groups = new StringBuilder();
         	
@@ -1132,6 +1134,13 @@ public class ViewContactActivity extends ListActivity
 		mGroupEntries.add(entry);        	
         }
     }
+    
+    private void removeDuplicates(ArrayList al) {
+        HashSet h = new HashSet(al);
+        al.clear();
+        al.addAll(h);
+  }
+
 
     String buildActionString(int actionResId, CharSequence type, boolean lowerCase) {
         // If there is no type just display an empty string

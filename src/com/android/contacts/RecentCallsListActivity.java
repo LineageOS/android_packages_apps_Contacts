@@ -519,7 +519,7 @@ public class RecentCallsListActivity extends ListActivity
             views.dateView.setText(DateUtils.formatDateTime(context, date, flags));
             */
             
-            if (prefs.getBoolean("cl_relative_time", true)) {
+            if (prefs.getBoolean("cl_relative_time", false)) {
                 // Set the date/time field by mixing relative and absolute times.
                 int flags = DateUtils.FORMAT_ABBREV_RELATIVE;
 

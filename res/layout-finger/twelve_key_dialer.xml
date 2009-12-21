@@ -30,13 +30,14 @@
         android:scrollHorizontally="true"
         android:textSize="33sp"
         android:freezesText="true"
-        android:background="@drawable/btn_dial_textfield"
-        android:textColor="@color/dialer_button_text"
+        android:background="@drawable/btn_dial_textfield"        
         android:focusableInTouchMode="true"
         android:editable="true"
         android:cursorVisible="false"
         android:layout_weight="0"
     />
+    <!-- Wysie_Soh: Commented out since text color is now a variable -->
+    <!-- android:textColor="@color/dialer_button_text" -->
 
     <!-- Keypad section -->
     <include layout="@layout/dialpad" />

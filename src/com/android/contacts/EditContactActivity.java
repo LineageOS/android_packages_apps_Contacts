@@ -250,6 +250,8 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         GroupMembership.PERSON_ID, // 1
         GroupMembership._ID //2
     };
+    
+    private boolean contactCreated;
 
     public void onClick(View v) {
         switch (v.getId()) {
@@ -1054,6 +1056,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         ContentValues values = new ContentValues();
         String data;
         int numValues = 0;
+        contactCreated = false;
 
         // Handle the name and send to voicemail specially
         final String name = mNameView.getText().toString();
@@ -1128,6 +1131,8 @@ public final class EditContactActivity extends Activity implements View.OnClickL
             // Add the entry to the my contacts group if it isn't there already
             People.addToMyContactsGroup(mResolver, ContentUris.parseId(mUri));
             setResult(RESULT_OK, new Intent().setData(mUri));
+            
+            contactCreated = true;
 
             // Only notify user if we actually changed contact
             if (mContactChanged || mPhotoChanged) {
@@ -1143,6 +1148,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         ContentValues values = new ContentValues();
         String data;
         int numValues = 0;
+        contactCreated = false;
 
         // Create the contact itself
         final String name = mNameView.getText().toString();
@@ -1271,6 +1277,9 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                     Intent.EXTRA_SHORTCUT_NAME, name);
 
             setResult(RESULT_OK, resultIntent);
+            
+            contactCreated = true;
+            
             Toast.makeText(this, R.string.contactCreatedToast, Toast.LENGTH_SHORT).show();
         }
     }
@@ -2643,6 +2652,9 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     };
 
     private void saveGroups() {
+        if (!contactCreated)
+            return;
+    
         long personId = ContentUris.parseId(mUri);
         
         //Wysie_Soh: Remove all group memberships
@@ -2656,20 +2668,32 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                 GroupMembership.CONTENT_URI, c.getLong(2)),
                         GroupMembership.PERSON_ID + "='" + personId + "'",
                         null);
-            }
-            
+            }            
             c.close();
-        }        
+            
+            if (!(mState == STATE_INSERT)) {
+                ContentValues values = new ContentValues(1);
+                values.put(People.STARRED, 0);            
+                mResolver.update(getIntent().getData(), values, null, null);
+            }
+        } 
         
-        //Wysie_Soh: Added all selectedGroups (working)
+        //Wysie_Soh: Add all selectedGroups (working)
         for (int i = 0; i < selectedGroups.size(); i++) {        
             Cursor cursor = mResolver.query(Groups.CONTENT_URI,
                         GROUPS_PROJECTION, 
                         Contacts.Groups.NAME + "='" + selectedGroups.get(i) + "'", null, null);
-            
+                        
             if (cursor != null) {
+                if ((selectedGroups.get(i)).equals(Groups.GROUP_ANDROID_STARRED)) {
+                     ContentValues values = new ContentValues();
+                      values.put(People.STARRED, 1);
+                     mResolver.update(getIntent().getData(), values, null, null);
+                 }
+                 else {
                 while (cursor.moveToNext()) {
                     People.addToGroup(mResolver, personId, cursor.getLong(cursor.getColumnIndex(Contacts.Groups._ID)));
+                }
                 }
                 
                 cursor.close();

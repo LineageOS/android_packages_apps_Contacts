@@ -36,7 +36,28 @@
             android:title="@string/title_disable_num_check"
             android:summaryOn="@string/summaryon_disable_num_check"
             android:summaryOff="@string/summaryoff_disable_num_check"
-            android:defaultValue="false" />            
+            android:defaultValue="false" />
+        <ListPreference
+            android:key="focused_digit_color"
+            android:title="@string/title_digits_color_focused"
+            android:dialogTitle="@string/title_choose_color"
+            android:entries="@array/digits_colors"
+            android:entryValues="@array/digits_colors_values"
+            android:defaultValue="-16777216" />
+        <ListPreference
+            android:key="pressed_digit_color"
+            android:title="@string/title_digits_color_pressed"
+            android:dialogTitle="@string/title_choose_color"
+            android:entries="@array/digits_colors"
+            android:entryValues="@array/digits_colors_values"
+            android:defaultValue="-16777216" />
+        <ListPreference
+            android:key="unselected_digit_color"
+            android:title="@string/title_digits_color_unselected"
+            android:dialogTitle="@string/title_choose_color"
+            android:entries="@array/digits_colors"
+            android:entryValues="@array/digits_colors_values"
+            android:defaultValue="-1" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/recentCallsIconLabel">
         <CheckBoxPreference
@@ -45,7 +66,7 @@
             android:summaryOn="@string/summaryon_cl_relative_time"
             android:summaryOff="@string/summaryoff_cl_relative_time"
             android:disableDependentsState="true"
-            android:defaultValue="true" />
+            android:defaultValue="false" />
         <CheckBoxPreference
             android:key="cl_show_seconds"
             android:title="@string/title_cl_show_seconds"

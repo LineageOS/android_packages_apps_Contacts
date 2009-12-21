@@ -340,6 +340,8 @@
 
     <!-- Section header in the Edit Contacts screen for other options, such as setting ringtone -->
     <string name="listSeparatorOtherInformation_edit">Other options</string>
+    
+    <string name="listSeparatorGroup">Group(s)</string>    
 
     <!-- Section header in the Edit Contacts screen for the "Add more items" button -->
     <string name="listSeparatorMore_edit">More</string>
@@ -767,6 +769,10 @@
     <string name="title_disable_num_check">Disable number checks</string>
     <string name="summaryon_disable_num_check">Left action button (LAB) and menu will always be enabled</string>
     <string name="summaryoff_disable_num_check">LAB and menu will be enabled only if at least one number is entered (except voicemail)</string>
+    <string name="title_digits_color_unselected">Digits color (not selected)</string>
+    <string name="title_digits_color_focused">Digits color (focused)</string>
+    <string name="title_digits_color_pressed">Digits color (pressed)</string>
+    <string name="title_choose_color">Choose a color</string>
     
     <string name="title_call_log_category">Call log</string>    
     <string name="title_cl_relative_time">Relative times</string>
@@ -801,5 +807,10 @@
     <!-- Wysie_Soh: Frequently called strings -->
     <string name="alert_clear_freq_called">Clear frequently called</string>
     <string name="alert_clear_freq_called_msg">Are you sure you want to clear all frequently called entries?</string>
+    
+    
+    <!-- Wysie_Soh: View contact strings -->
+    <string name="view_contact_navigate">Navigate to</string>
+    <string name="view_contact_groups">Groups</string>
     
 </resources>

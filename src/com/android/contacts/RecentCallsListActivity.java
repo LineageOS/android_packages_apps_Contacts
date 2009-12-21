@@ -522,7 +522,7 @@ public class RecentCallsListActivity extends ListActivity
             views.dateView.setText(DateUtils.formatDateTime(context, date, flags));
             */
             
-            if (prefs.getBoolean("cl_relative_time", true)) {
+            if (prefs.getBoolean("cl_relative_time", false)) {
                 // Set the date/time field by mixing relative and absolute times.
                 int flags = DateUtils.FORMAT_ABBREV_RELATIVE;
 
@@ -1048,12 +1048,12 @@ public class RecentCallsListActivity extends ListActivity
     		AlertDialog.Builder alert = new AlertDialog.Builder(this);
     		alert.setTitle(R.string.alert_clear_call_log_title);
     		alert.setMessage("Are you sure you want to clear all call records of " + label + "?"); //Text, eg. show "Private" instead of -1 :P
-    		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+    		alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
     			public void onClick(DialogInterface dialog, int whichButton) {
     				deleteCallLog(t + "='" + v + "'", null);
     			}
     		});
-    		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+    		alert.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
 
     		public void onClick(DialogInterface dialog, int whichButton) {
     			// Canceled.

@@ -36,6 +36,7 @@ public class ContactsPreferences extends PreferenceActivity implements Preferenc
 
     private ListPreference mVMButton;
     private ListPreference mVMHandler;
+    private ListPreference colorFocused, colorPressed, colorUnselected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,15 +46,25 @@ public class ContactsPreferences extends PreferenceActivity implements Preferenc
         addPreferencesFromResource(R.xml.contacts_preferences);
 
         mVMButton = (ListPreference) findPreference("vm_button");
-        mVMHandler = (ListPreference) findPreference("vm_handler");        
+        mVMHandler = (ListPreference) findPreference("vm_handler");
+        
+        colorFocused = (ListPreference) findPreference("focused_digit_color");
+        colorPressed = (ListPreference) findPreference("pressed_digit_color");
+        colorUnselected = (ListPreference) findPreference("unselected_digit_color");
 
         mVMButton.setOnPreferenceChangeListener(this);
         mVMHandler.setOnPreferenceChangeListener(this);
+        colorFocused.setOnPreferenceChangeListener(this);
+        colorPressed.setOnPreferenceChangeListener(this);
+        colorUnselected.setOnPreferenceChangeListener(this);
 
         loadHandlers();
 
         updatePrefs(mVMButton, mVMButton.getValue());
         updatePrefs(mVMHandler, mVMHandler.getValue());
+        updatePrefs(colorFocused, colorFocused.getValue());
+        updatePrefs(colorPressed, colorPressed.getValue());
+        updatePrefs(colorUnselected, colorUnselected.getValue());
     }
 
     public boolean onPreferenceChange (Preference preference, Object newValue) {
@@ -66,7 +77,15 @@ public class ContactsPreferences extends PreferenceActivity implements Preferenc
         try {
             p.setSummary(p.getEntries()[p.findIndexOfValue((String) newValue)]);
         } catch (ArrayIndexOutOfBoundsException e) {
-            p.setValue("0");
+            if (p.getKey().equals("vm_button") || p.getKey().equals("vm_handler")) {
+                p.setValue("0");
+            }
+            else if (p.getKey().equals("focused_digit_color") || p.getKey().equals("pressed_digit_color")) {
+                p.setValue("-16777216");
+            }
+            else if (p.getKey().equals("unselected_digit_color")) {
+                p.setValue("-1");
+            }
             updatePrefs(p, p.getValue());
         }
     }

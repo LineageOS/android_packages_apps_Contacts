@@ -75,6 +75,8 @@ import android.os.SystemProperties;
 import android.provider.Contacts;
 import android.provider.Im;
 import android.provider.Contacts.ContactMethods;
+import android.provider.Contacts.Groups;
+import android.provider.Contacts.GroupMembership;
 import android.provider.Contacts.Organizations;
 import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
@@ -97,6 +99,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /** Bluetooth Transfer related import */
@@ -150,6 +153,9 @@ public class ViewContactActivity extends ListActivity
     /* package */ ArrayList<ViewEntry> mOrganizationEntries = new ArrayList<ViewEntry>();
     /* package */ ArrayList<ViewEntry> mOtherEntries = new ArrayList<ViewEntry>();
     /* package */ ArrayList<ArrayList<ViewEntry>> mSections = new ArrayList<ArrayList<ViewEntry>>();
+    /* Wysie_Soh */ ArrayList<ViewEntry> mGroupEntries = new ArrayList<ViewEntry>();
+    
+    /* Wysie_Soh */ ArrayList<String> groupNamesArray = new ArrayList<String>(); //Global variable, might use it for dialog or something in future
 
     private Cursor mCursor;
     private boolean mObserverRegistered;
@@ -260,6 +266,7 @@ public class ViewContactActivity extends ListActivity
         mSections.add(mNavigationEntries);
         mSections.add(mOrganizationEntries);
         mSections.add(mOtherEntries);
+        mSections.add(mGroupEntries);
 
         //TODO Read this value from a preference
         mShowSmsLinksForAllPhones = true;
@@ -733,7 +740,7 @@ public class ViewContactActivity extends ListActivity
         separator = new ViewEntry();
         separator.kind = ViewEntry.KIND_SEPARATOR;
         separator.data = getString(R.string.listSeparatorNaviAddress);
-        mPostalEntries.add(separator);
+        mNavigationEntries.add(separator);
 
         separator = new ViewEntry();
         separator.kind = ViewEntry.KIND_SEPARATOR;
@@ -744,6 +751,11 @@ public class ViewContactActivity extends ListActivity
         separator.kind = ViewEntry.KIND_SEPARATOR;
         separator.data = getString(R.string.listSeparatorOtherInformation);
         mOtherEntries.add(separator);
+        
+        separator = new ViewEntry();
+        separator.kind = ViewEntry.KIND_SEPARATOR;
+        separator.data = getString(R.string.listSeparatorGroup);
+        mGroupEntries.add(separator);
     }
 
     private Uri constructImToUrl(String host, String data) {
@@ -754,7 +766,7 @@ public class ViewContactActivity extends ListActivity
         buf.append(data);
         return Uri.parse(buf.toString());
     }
-
+    
     /**
      * Build up the entries to display on the screen.
      *
@@ -878,7 +890,7 @@ public class ViewContactActivity extends ListActivity
                         
                         //Wysie_Soh: Navigation portion
                         ViewEntry entry2 = new ViewEntry();                        
-                        entry2.label = "Navigate to";
+                        entry2.label = getString(R.string.view_contact_navigate);
                         entry2.data = data;
                         entry2.maxLines = 4;
                         entry2.actionIcon = R.drawable.sym_action_navi;
@@ -1070,7 +1082,68 @@ public class ViewContactActivity extends ListActivity
             entry.actionIcon = R.drawable.sym_send_to_voicemail;
             mOtherEntries.add(entry);
         }
+        
+        //Wysie_Soh: Group entries stuffs
+        final String[] GROUP_MEMBERSHIP_PROJECTION = new String[] {
+        	GroupMembership.GROUP_ID,
+        	GroupMembership.PERSON_ID
+        };        
+        
+        final String[] GROUPS_PROJECTION = new String[] {
+        	Groups.SYSTEM_ID, // 0
+        	Groups.NAME, // 1
+        };
+   
+        Cursor groupCursor = mResolver.query(GroupMembership.CONTENT_URI, GROUP_MEMBERSHIP_PROJECTION,
+        	GroupMembership.PERSON_ID + "='" + personId + "'", null, null);
+        Cursor cur = null;
+        
+        groupNamesArray.clear();
+        
+        if (groupCursor != null) {
+        	while (groupCursor.moveToNext()) {
+        		cur = mResolver.query(Groups.CONTENT_URI, GROUPS_PROJECTION,
+        			Contacts.Groups._ID + "='" + groupCursor.getString(groupCursor.getColumnIndex(GroupMembership.GROUP_ID)) + "'",
+        			null, null);
+        		if (cur != null) {
+        			if (cur.moveToFirst()) {
+        				groupNamesArray.add(cur.getString(cur.getColumnIndex(Groups.NAME)));
+        			}
+        			cur.close();
+        		}
+        	}
+        	groupCursor.close();
+        	
+        	//Wysie_Soh: For some reason some group names will be duplicated, which is always fixed after a sync.
+        	//We remove duplicates for purely aesthetic reasons
+        	removeDuplicates(groupNamesArray);
+        	java.util.Collections.sort(groupNamesArray);        	
+        	StringBuilder groups = new StringBuilder();
+        	
+        	for (int i = 0; i < groupNamesArray.size(); i++) {
+        		if (i == 0)
+        			groups.append(groupNamesArray.get(i));
+        		else
+        			groups.append("\n" + groupNamesArray.get(i));
+        	}
+        	
+        	//Log.d("Testing", groups.toString());
+        	
+        	ViewEntry entry = new ViewEntry();
+        	entry.label = getString(R.string.view_contact_groups);
+        	entry.data = groups.toString();
+        	entry.actionIcon = com.android.internal.R.drawable.ic_menu_allfriends;
+        	entry.maxLines = 10;
+		mGroupEntries.add(entry);        	
+        }
     }
+    
+    private void removeDuplicates(ArrayList al) {
+        HashSet h = new HashSet(al);
+        al.clear();
+        al.addAll(h);
+  }
+
 
     String buildActionString(int actionResId, CharSequence type, boolean lowerCase) {
         // If there is no type just display an empty string

@@ -20,10 +20,12 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.ComponentName;
 import android.content.pm.ActivityInfo;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -181,6 +183,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         mDigits.setOnClickListener(this);
         mDigits.setOnKeyListener(this);
         mDigits.setCursorVisible(false);
+        setDigitsColor();
         maybeAddNumberFormatting();
 
         // Check for the presence of the keypad
@@ -461,6 +464,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     private void updateDialer() {
     	initVoicemailButton();
     	checkForNumber();
+    	setDigitsColor();
     }
 
     @Override
@@ -1157,4 +1161,21 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
             		//mDelete.setEnabled(true);
         	}
     }
+    
+    private void setDigitsColor() {
+        int colorFocused = Integer.parseInt(prefs.getString("focused_digit_color", "-16777216"));
+        int colorPressed = Integer.parseInt(prefs.getString("pressed_digit_color", "-16777216"));
+        int colorUnselected = Integer.parseInt(prefs.getString("unselected_digit_color", "-1"));
+    
+        mDigits.setTextColor(new ColorStateList(
+                     new int[][] {
+                             new int[] { android.R.attr.state_focused },
+                             new int[] { android.R.attr.state_pressed },
+                             new int[0]},
+                     
+                             new int[] { colorFocused, colorPressed, colorUnselected }
+                     ));
+        mDigits.setCursorVisible(false);
+    }
+
 }

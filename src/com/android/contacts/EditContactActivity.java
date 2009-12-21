@@ -247,7 +247,8 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     };
     private static final String[] GROUP_MEMBERSHIP_PROJECTION = new String[] {
         GroupMembership.GROUP_ID, // 0
-        GroupMembership.PERSON_ID // 1
+        GroupMembership.PERSON_ID, // 1
+        GroupMembership._ID //2
     };
 
     public void onClick(View v) {
@@ -1718,6 +1719,10 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         TextView text = (TextView) header.findViewById(R.id.text);
 
         text.setText(getText(separatorResource));
+        
+        ImageView iv = (ImageView)header.findViewById(R.id.groupIcon);
+        iv.setImageResource(com.android.internal.R.drawable.ic_menu_allfriends);
+        
         header.setOnFocusChangeListener(this);
 
         header.setOnClickListener(
@@ -2578,10 +2583,11 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                                         cur.getString(
                                                 cur.getColumnIndex(Groups.NAME)));
                             }
+                            cur.close();
                         }
                     }
-                    cur.close();
                     groupCursor.close();
+                    
                 }
                 }
 
@@ -2639,7 +2645,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     private void saveGroups() {
         long personId = ContentUris.parseId(mUri);
         
-        //Wysie_Soh: Remove all group memberships (not working)
+        //Wysie_Soh: Remove all group memberships
         Cursor c = mResolver.query(GroupMembership.CONTENT_URI,
                 GROUP_MEMBERSHIP_PROJECTION,
                 GroupMembership.PERSON_ID + "='" + personId + "'", null, null);
@@ -2647,10 +2653,9 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         if (c.moveToFirst()) {
             while (c.moveToNext()) {                
                 int i = mResolver.delete(ContentUris.withAppendedId(
-                GroupMembership.CONTENT_URI, c.getLong(0)),
+                GroupMembership.CONTENT_URI, c.getLong(2)),
                         GroupMembership.PERSON_ID + "='" + personId + "'",
                         null);
-                Log.d("ROWS DEL", "" + i);
             }
             
             c.close();
@@ -2670,8 +2675,8 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                 cursor.close();
             }            
         }        
-
-        People.addToMyContactsGroup(mResolver, personId);
+        //Wysie_Soh: Commented out, the default Edit/Create will always add to My Contacts anyway.
+        //People.addToMyContactsGroup(mResolver, personId);
     }
 
 }

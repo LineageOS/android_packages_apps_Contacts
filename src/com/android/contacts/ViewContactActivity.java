@@ -1109,10 +1109,13 @@ public class ViewContactActivity extends ListActivity
         			if (cur.moveToFirst()) {
         				groupNamesArray.add(cur.getString(cur.getColumnIndex(Groups.NAME)));
         			}
+        			cur.close();
         		}
         	}
-        	cur.close();
         	groupCursor.close();
+        	
+        	//Wysie_Soh: For some reason some group names will be duplicated, which is always fixed after a sync.
+        	//We remove duplicates for purely aesthetic reasons
         	removeDuplicates(groupNamesArray);
         	java.util.Collections.sort(groupNamesArray);        	
         	StringBuilder groups = new StringBuilder();

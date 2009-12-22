@@ -55,6 +55,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
@@ -468,6 +469,9 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         }
         
         loadCurrentMembership();
+        
+        //Wysie_Soh: Testing purposes (Emulate keyboard slide-out/orientation change)
+        //this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
     }
 
     private void setupSections() {
@@ -1943,14 +1947,19 @@ public final class EditContactActivity extends Activity implements View.OnClickL
             focusChild.requestFocus();
             if (focusChild instanceof EditText) {
                 // Index ends beyond data length.
-                if (entry.requestCursor > entry.data.length()) {
-                    entry.requestCursor = entry.data.length();
+                try {
+                    if (entry.requestCursor > entry.data.length()) {
+                        entry.requestCursor = entry.data.length();
+                    }
+                    // Index starts before 0. Set the cursor offset of the selection text.
+                    if (entry.requestCursor < 0) {
+                        entry.requestCursor = ((EditText) focusChild).getSelectionStart();
+                    }
+                    ((EditText) focusChild).setSelection(entry.requestCursor);
                 }
-                // Index starts before 0. Set the cursor offset of the selection text.
-                if (entry.requestCursor < 0) {
+                catch (NullPointerException e) { //Wysie_Soh: If nothing is entered into the field yet, entry.data.length() will be null.
                     entry.requestCursor = ((EditText) focusChild).getSelectionStart();
                 }
-                ((EditText) focusChild).setSelection(entry.requestCursor);
             }
         }
 

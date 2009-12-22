@@ -28,14 +28,17 @@
         android:paddingRight="5dip"
         android:gravity="center_vertical"
     >
-
+    
+        
+        <!--Wysie_Soh: Default width and height is 78 -->
+        <!-- android:scaleType="fitCenter" -->
         <ImageView android:id="@+id/photo"
             style="?android:attr/imageWellStyle"
             android:layout_width="78dip"
             android:layout_height="78dip"
             android:layout_marginRight="7dip"
             android:layout_marginLeft="2dip"
-            android:scaleType="fitCenter"
+            android:scaleType="fitXY"
             android:background="@drawable/btn_contact_picture"
         />
 

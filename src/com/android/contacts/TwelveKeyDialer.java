@@ -1150,9 +1150,9 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         	}
     }
     
-    private void setDigitsColor() {        
-        int colorFocused = -16777216;
+    private void setDigitsColor() {
         int colorPressed = -16777216;
+        int colorFocused = -16777216;
         int colorUnselected = -1;
         
         if (prefs.getBoolean("dial_digit_use_custom_color", false)) {
@@ -1173,11 +1173,11 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     
         mDigits.setTextColor(new ColorStateList(
                      new int[][] {
-                             new int[] { android.R.attr.state_focused },
                              new int[] { android.R.attr.state_pressed },
+                             new int[] { android.R.attr.state_focused },
                              new int[0]},
                      
-                             new int[] { colorFocused, colorPressed, colorUnselected }
+                             new int[] { colorPressed, colorFocused, colorUnselected }
                      ));
         mDigits.setCursorVisible(false);
     }

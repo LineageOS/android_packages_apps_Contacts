@@ -2565,73 +2565,9 @@ public final class EditContactActivity extends Activity implements View.OnClickL
 
             builder.setMultiChoiceItems(groupsCharSeq, checkedValues,
                     confirmGroupSelectionListener);  
-        
-        // If selected groups already has something inside, we use it
-        /*
-        if (selectedGroups.size() > 0) {
-
-            groupsCharSeq = groups.toArray(
-                    new CharSequence[groups.size()]);
-
-            checkedValues = new boolean[groups.size()];
-
-            for (boolean b : checkedValues) {
-                b = false;
-            }
-
-            for (int i = 0; i < selectedGroups.size(); i++) {
-                int j = groups.indexOf(selectedGroups.get(i));
-
-                if (j != -1) {
-                    checkedValues[j] = true;
-                }
-            }            
-
-            builder.setMultiChoiceItems(groupsCharSeq, checkedValues,
-                    confirmGroupSelectionListener); 
-        } else {
-            Cursor cursor = mResolver.query(Groups.CONTENT_URI, GROUPS_PROJECTION, null,
-                    null, Groups.DEFAULT_SORT_ORDER);
-            try {
-                if (cursor.moveToFirst()) {
-                    while (cursor.moveToNext()) {            
-                        String name = cursor.getString(
-                                cursor.getColumnIndex(Groups.NAME));
-
-                        groups.add(name);                
-                    }
-                }
-
-                groupsCharSeq = groups.toArray(new CharSequence[groups.size()]);                
-
-                checkedValues = new boolean[groups.size()];
-
-                for (boolean b : checkedValues) {
-                    b = false;
-                }
-                
-                if (!(mState == STATE_INSERT)) {
-
-                    for (int i = 0; i < currentMembership.size(); i++) {
-                      int j = groups.indexOf(currentMembership.get(i));
-
-                        if (j != -1) {
-                            checkedValues[j] = true;
-                            selectedGroups.add(groups.get(j));
-                        }
-                    }
-                }
-            } finally {
-                cursor.close();
-            }
-
-            builder.setMultiChoiceItems(groupsCharSeq, checkedValues,
-                    confirmGroupSelectionListener);           
-
-        }
-        */
     }
     
+    //Wysie_Soh: Load person's current membership into currentMembership ArrayList    
     private void loadCurrentMembership() {
         if (!(mState == STATE_INSERT)) {
             long personId = ContentUris.parseId(mUri);

@@ -55,6 +55,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
@@ -466,6 +467,11 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         } else {
             setTitle(getResources().getText(R.string.editContact_title_insert));
         }
+        
+        loadCurrentMembership();
+        
+        //Wysie_Soh: Testing purposes (Emulate keyboard slide-out/orientation change)
+        //this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
     }
 
     private void setupSections() {
@@ -1941,14 +1947,19 @@ public final class EditContactActivity extends Activity implements View.OnClickL
             focusChild.requestFocus();
             if (focusChild instanceof EditText) {
                 // Index ends beyond data length.
-                if (entry.requestCursor > entry.data.length()) {
-                    entry.requestCursor = entry.data.length();
+                try {
+                    if (entry.requestCursor > entry.data.length()) {
+                        entry.requestCursor = entry.data.length();
+                    }
+                    // Index starts before 0. Set the cursor offset of the selection text.
+                    if (entry.requestCursor < 0) {
+                        entry.requestCursor = ((EditText) focusChild).getSelectionStart();
+                    }
+                    ((EditText) focusChild).setSelection(entry.requestCursor);
                 }
-                // Index starts before 0. Set the cursor offset of the selection text.
-                if (entry.requestCursor < 0) {
+                catch (NullPointerException e) { //Wysie_Soh: If nothing is entered into the field yet, entry.data.length() will be null.
                     entry.requestCursor = ((EditText) focusChild).getSelectionStart();
                 }
-                ((EditText) focusChild).setSelection(entry.requestCursor);
             }
         }
 
@@ -2527,34 +2538,9 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         CharSequence[] groupsCharSeq = null;           
         boolean[] checkedValues = null;
         
-        // If selected groups already has something inside, we use it
-        if (selectedGroups.size() > 0) {
-
-            groupsCharSeq = groups.toArray(
-                    new CharSequence[groups.size()]);
-
-            checkedValues = new boolean[groups.size()];
-
-            for (boolean b : checkedValues) {
-                b = false;
-            }
-
-            for (int i = 0; i < selectedGroups.size(); i++) {
-                int j = groups.indexOf(selectedGroups.get(i));
-
-                if (j != -1) {
-                    checkedValues[j] = true;
-                }
-            }            
-
-            builder.setMultiChoiceItems(groupsCharSeq, checkedValues,
-                    confirmGroupSelectionListener); 
-        } else {
-            Cursor cursor = mResolver.query(Groups.CONTENT_URI, GROUPS_PROJECTION, null,
-                    null, Groups.DEFAULT_SORT_ORDER);
+            Cursor cursor = mResolver.query(Groups.CONTENT_URI, GROUPS_PROJECTION, null, null, Groups.DEFAULT_SORT_ORDER);
+            
             try {
-                groups = new ArrayList<CharSequence>();
-
                 if (cursor.moveToFirst()) {
                     while (cursor.moveToNext()) {            
                         String name = cursor.getString(
@@ -2564,41 +2550,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                     }
                 }
 
-                groupsCharSeq = groups.toArray(new CharSequence[groups.size()]);
-                
-                if (!(mState == STATE_INSERT)) {
-                long personId = ContentUris.parseId(mUri);
-
-                Cursor groupCursor = mResolver.query(GroupMembership.CONTENT_URI,
-                        GROUP_MEMBERSHIP_PROJECTION,
-                        GroupMembership.PERSON_ID + "='" + personId + "'", null,
-                        null);
-                Cursor cur = null;
-
-                if (groupCursor != null) {
-                    while (groupCursor.moveToNext()) {
-                        cur = mResolver.query(Groups.CONTENT_URI,
-                                GROUPS_PROJECTION,
-                                Contacts.Groups._ID + "='"
-                                + groupCursor.getString(
-                                groupCursor.getColumnIndex(
-                                        GroupMembership.GROUP_ID))
-                                        + "'",
-                                        null,
-                                        null);
-                        if (cur != null) {
-                            if (cur.moveToFirst()) {
-                                currentMembership.add(
-                                        cur.getString(
-                                                cur.getColumnIndex(Groups.NAME)));
-                            }
-                            cur.close();
-                        }
-                    }
-                    groupCursor.close();
-                    
-                }
-                }
+                groupsCharSeq = groups.toArray(new CharSequence[groups.size()]);                
 
                 checkedValues = new boolean[groups.size()];
 
@@ -2608,23 +2560,48 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                 
                 if (!(mState == STATE_INSERT)) {
 
-                for (int i = 0; i < currentMembership.size(); i++) {
-                    int j = groups.indexOf(currentMembership.get(i));
+                    for (int i = 0; i < selectedGroups.size(); i++) {
+                      int j = groups.indexOf(selectedGroups.get(i));
 
-                    if (j != -1) {
-                        checkedValues[j] = true;
-                        selectedGroups.add(groups.get(j));
+                        if (j != -1) {
+                            checkedValues[j] = true;
+                        }
                     }
-                }
                 }
             } finally {
                 cursor.close();
             }
 
             builder.setMultiChoiceItems(groupsCharSeq, checkedValues,
-                    confirmGroupSelectionListener);           
-
-        }
+                    confirmGroupSelectionListener);  
+    }
+    
+    //Wysie_Soh: Load person's current membership into currentMembership ArrayList    
+    private void loadCurrentMembership() {
+        if (!(mState == STATE_INSERT)) {
+            long personId = ContentUris.parseId(mUri);
+            
+            Cursor groupCursor = mResolver.query(GroupMembership.CONTENT_URI, GROUP_MEMBERSHIP_PROJECTION,
+                                GroupMembership.PERSON_ID + "='" + personId + "'", null, null);
+            Cursor cur = null;
+            
+            if (groupCursor != null) {
+                while (groupCursor.moveToNext()) {
+                    cur = mResolver.query(Groups.CONTENT_URI, GROUPS_PROJECTION, Contacts.Groups._ID + "='" 
+                            + groupCursor.getString(groupCursor.getColumnIndex(GroupMembership.GROUP_ID))
+                            + "'", null, null);
+                    
+                    if (cur != null) {
+                        if (cur.moveToFirst()) {
+                            currentMembership.add(cur.getString(cur.getColumnIndex(Groups.NAME)));
+                        }
+                            cur.close();
+                        }
+                }
+                groupCursor.close();
+            }
+        }        
+        selectedGroups = (ArrayList) currentMembership.clone();      
     }
 
     private DialogInterface.OnClickListener confirmGroupChangesListener = new DialogInterface.OnClickListener() {

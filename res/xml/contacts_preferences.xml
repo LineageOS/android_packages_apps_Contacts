@@ -38,45 +38,49 @@
             android:summaryOn="@string/summaryon_disable_num_check"
             android:summaryOff="@string/summaryoff_disable_num_check"
             android:defaultValue="false" />
-        <ListPreference
-            android:key="focused_digit_color"
-            android:title="@string/title_digits_color_focused"
-            android:dialogTitle="@string/title_choose_color"
-            android:entries="@array/digits_colors"
-            android:entryValues="@array/digits_colors_values"
-            android:defaultValue="-16777216" />
-        <ListPreference
-            android:key="pressed_digit_color"
-            android:title="@string/title_digits_color_pressed"
-            android:dialogTitle="@string/title_choose_color"
-            android:entries="@array/digits_colors"
-            android:entryValues="@array/digits_colors_values"
-            android:defaultValue="-16777216" />
-        <ListPreference
-            android:key="unselected_digit_color"
-            android:title="@string/title_digits_color_unselected"
-            android:dialogTitle="@string/title_choose_color"
-            android:entries="@array/digits_colors"
-            android:entryValues="@array/digits_colors_values"
-            android:defaultValue="-1" />
-        <CheckBoxPreference
-            android:key="dial_digit_use_custom_color"
-            android:title="@string/title_use_custom_color"
-            android:defaultValue="false"
-            android:summary="@string/summaryon_custom_color"
-            android:disableDependentsState="false" />
-        <EditTextPreference
-            android:key="focused_digit_color_custom"
-            android:title="@string/title_digits_color_focused"
-            android:dependency="dial_digit_use_custom_color" />
-        <EditTextPreference
-            android:key="pressed_digit_color_custom"
-            android:title="@string/title_digits_color_pressed"
-            android:dependency="dial_digit_use_custom_color" />
-        <EditTextPreference
-            android:key="unselected_digit_color_custom"
-            android:title="@string/title_digits_color_unselected"
-            android:dependency="dial_digit_use_custom_color" />
+        <PreferenceScreen
+            android:key="dial_digits_color"
+            android:title="@string/title_change_digits_color">  
+                <ListPreference
+                    android:key="pressed_digit_color"
+                    android:title="@string/title_digits_color_pressed"
+                    android:dialogTitle="@string/title_choose_color"
+                    android:entries="@array/digits_colors"
+                    android:entryValues="@array/digits_colors_values"
+                    android:defaultValue="-16777216" />
+                <ListPreference
+                    android:key="focused_digit_color"
+                    android:title="@string/title_digits_color_focused"
+                    android:dialogTitle="@string/title_choose_color"
+                    android:entries="@array/digits_colors"
+                    android:entryValues="@array/digits_colors_values"
+                    android:defaultValue="-16777216" />
+                <ListPreference
+                    android:key="unselected_digit_color"
+                    android:title="@string/title_digits_color_unselected"
+                    android:dialogTitle="@string/title_choose_color"
+                    android:entries="@array/digits_colors"
+                    android:entryValues="@array/digits_colors_values"
+                    android:defaultValue="-1" />
+                <CheckBoxPreference
+                    android:key="dial_digit_use_custom_color"
+                    android:title="@string/title_use_custom_color"
+                    android:defaultValue="false"
+                    android:summary="@string/summaryon_custom_color"
+                    android:disableDependentsState="false" />
+                <EditTextPreference
+                    android:key="pressed_digit_color_custom"
+                    android:title="@string/title_digits_color_pressed"
+                    android:dependency="dial_digit_use_custom_color" />
+                <EditTextPreference
+                    android:key="focused_digit_color_custom"
+                    android:title="@string/title_digits_color_focused"
+                    android:dependency="dial_digit_use_custom_color" />
+                <EditTextPreference
+                    android:key="unselected_digit_color_custom"
+                    android:title="@string/title_digits_color_unselected"
+                    android:dependency="dial_digit_use_custom_color" />
+        </PreferenceScreen>
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/recentCallsIconLabel">
         <CheckBoxPreference
@@ -110,6 +114,14 @@
             android:title="@string/title_contacts_show_pic"
             android:summary="@string/summary_contacts_show_pic"
             android:defaultValue="true" />
+        <ListPreference
+            android:key="contacts_view_contact_pic_size"
+            android:title="@string/title_contacts_view_pic_size"
+            android:summary="@string/summary_contacts_view_pic_size"
+            android:dialogTitle="@string/title_contacts_choose_pic_size"
+            android:entries="@array/view_contact_pic_sizes"
+            android:entryValues="@array/view_contact_pic_sizes_values"
+            android:defaultValue="78" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/contactsFavoritesLabel">
         <CheckBoxPreference
@@ -131,6 +143,25 @@
             android:key="misc_sensor_rotation"
             android:title="@string/title_sensor_rotation"
             android:defaultValue="false" />
-    </PreferenceCategory>
+        <PreferenceScreen
+            android:key="misc_about"
+            android:title="@string/title_about"> 
+          <Preference
+                android:key="about_name"
+                android:title="@string/title_about_name"
+                android:summary="@string/summary_about_name"
+                android:enabled="false" />
+            <Preference
+                android:key="about_version"
+                android:title="@string/title_about_version"
+                android:summary="@string/summary_about_version"
+                android:enabled="false" />
+            <Preference
+                android:key="about_credits"
+                android:title="@string/title_about_credits"
+                android:summary="@string/summary_about_credits"
+                android:enabled="false" />
+        </PreferenceScreen>
+    </PreferenceCategory>    
     
 </PreferenceScreen>

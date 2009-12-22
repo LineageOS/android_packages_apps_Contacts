@@ -776,6 +776,8 @@
     <string name="title_use_custom_color">Use custom digits colors</string>
     <string name="summaryon_custom_color">Supported formats: #RRGGBB or #AARRGGBB. Input the # as well.</string>
     
+    <string name="title_change_digits_color">Change digits color</string>
+    
     <string name="title_call_log_category">Call log</string>    
     <string name="title_cl_relative_time">Relative times</string>
     <string name="summaryon_cl_relative_time">Use relative times in call log</string>
@@ -788,9 +790,12 @@
     
     <string name="title_contacts_category">Contacts</string>
     <string name="title_contacts_show_pic">Show contact pictures</string>
-    <string name="summary_contacts_show_pic">Please restart Contacts/Dialer to see the changes</string>
+    <string name="summary_contacts_show_pic">Affects Favs as well. Restart Contacts/Dialer to see changes</string>
     <string name="title_contacts_show_dial_button">Show dial button</string>
     <string name="summary_contacts_show_dial_button">Show a dial button for contacts with numbers</string>
+    <string name="title_contacts_view_pic_size">View contact picture size</string>
+    <string name="summary_contacts_view_pic_size">Affects Favs as well. Sets size of picture when viewing contact</string>
+    <string name="title_contacts_choose_pic_size">Choose a size</string>
     
     <string name="title_favourites_category">Favourites</string>
     <string name="title_favourites_hide_freq_call">Hide frequently called</string>
@@ -800,7 +805,15 @@
     <string name="summaryoff_favs_ask_before_clear">Frequently called entries will be cleared without asking</string>    
     
     <string name="title_misc_category">Miscellaneous</string>
-    <string name="title_sensor_rotation">Enable sensor rotation</string>    
+    <string name="title_sensor_rotation">Enable sensor rotation</string>
+    
+    <string name="title_about">About</string>
+    <string name="title_about_name">Mod Name</string>
+    <string name="summary_about_name">Wysie Contacts</string>
+    <string name="title_about_version">Version</string>
+    <string name="summary_about_version">1.94</string>
+    <string name="title_about_credits">Credits</string>
+    <string name="summary_about_credits">ChainsDD and the rest of XDA! :)</string>
     
     <!-- Wysie_Soh: Call log strings -->  
     <string name="alert_clear_call_log_title">Clear call log</string>

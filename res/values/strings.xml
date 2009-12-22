@@ -787,9 +787,12 @@
     
     <string name="title_contacts_category">Contacts</string>
     <string name="title_contacts_show_pic">Show contact pictures</string>
-    <string name="summary_contacts_show_pic">Please restart Contacts/Dialer to see the changes</string>
+    <string name="summary_contacts_show_pic">Affects Favs as well. Restart Contacts/Dialer to see changes</string>
     <string name="title_contacts_show_dial_button">Show dial button</string>
     <string name="summary_contacts_show_dial_button">Show a dial button for contacts with numbers</string>
+    <string name="title_contacts_view_pic_size">View contact picture size</string>
+    <string name="summary_contacts_view_pic_size">Affects Favs as well. Sets size of picture when viewing contact</string>
+    <string name="title_contacts_choose_pic_size">Choose a size</string>
     
     <string name="title_favourites_category">Favourites</string>
     <string name="title_favourites_hide_freq_call">Hide frequently called</string>
@@ -805,7 +808,7 @@
     <string name="title_about_name">Mod Name</string>
     <string name="summary_about_name">Wysie Contacts</string>
     <string name="title_about_version">Version</string>
-    <string name="summary_about_version">1.93</string>
+    <string name="summary_about_version">1.94</string>
     <string name="title_about_credits">Credits</string>
     <string name="summary_about_credits">ChainsDD and the rest of XDA! :)</string>
     

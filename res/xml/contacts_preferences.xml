@@ -113,6 +113,14 @@
             android:title="@string/title_contacts_show_pic"
             android:summary="@string/summary_contacts_show_pic"
             android:defaultValue="true" />
+        <ListPreference
+            android:key="contacts_view_contact_pic_size"
+            android:title="@string/title_contacts_view_pic_size"
+            android:summary="@string/summary_contacts_view_pic_size"
+            android:dialogTitle="@string/title_contacts_choose_pic_size"
+            android:entries="@array/view_contact_pic_sizes"
+            android:entryValues="@array/view_contact_pic_sizes_values"
+            android:defaultValue="78" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/contactsFavoritesLabel">
         <CheckBoxPreference

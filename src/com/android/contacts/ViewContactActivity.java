@@ -60,6 +60,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
+import android.content.SharedPreferences;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
@@ -72,6 +73,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.os.SystemProperties;
+import android.preference.PreferenceManager;
 import android.provider.Contacts;
 import android.provider.Im;
 import android.provider.Contacts.ContactMethods;
@@ -97,6 +99,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.LinearLayout.LayoutParams;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -158,7 +161,9 @@ public class ViewContactActivity extends ListActivity
     /* Wysie_Soh */ ArrayList<String> groupNamesArray = new ArrayList<String>(); //Global variable, might use it for dialog or something in future
 
     private Cursor mCursor;
-    private boolean mObserverRegistered;
+    private boolean mObserverRegistered;    
+    
+    private SharedPreferences ePrefs;
 
     /**
      * For transfering contact over Bluetooth
@@ -229,6 +234,8 @@ public class ViewContactActivity extends ListActivity
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         _context = this;
+        
+        ePrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         setContentView(R.layout.view_contact);
         getListView().setOnCreateContextMenuListener(this);
@@ -237,7 +244,7 @@ public class ViewContactActivity extends ListActivity
         mPhoneticNameView = (TextView) findViewById(R.id.phonetic_name);
         mPhotoView = (ImageView) findViewById(R.id.photo);
         mStarView = (CheckBox) findViewById(R.id.star);
-        mStarView.setOnClickListener(this);
+        mStarView.setOnClickListener(this);                    
 
         // Set the photo with a random "no contact" image
         long now = SystemClock.elapsedRealtime();
@@ -356,9 +363,14 @@ public class ViewContactActivity extends ListActivity
             // Load the photo
             mPhotoView.setImageBitmap(People.loadContactPhoto(this, mUri, mNoPhotoResource,
                     null /* use the default options */));
+            
+            int size = Integer.parseInt(ePrefs.getString("contacts_view_contact_pic_size", "78"));
+            
+            //Wysie_Soh: Set contact picture size
+            mPhotoView.setLayoutParams(new LayoutParams(size, size));
 
             // Set the star
-            mStarView.setChecked(mCursor.getInt(CONTACT_STARRED_COLUMN) == 1 ? true : false);
+            mStarView.setChecked(mCursor.getInt(CONTACT_STARRED_COLUMN) == 1 ? true : false);            
 
             // Build up the contact entries
             buildEntries(mCursor);

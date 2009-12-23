@@ -38,7 +38,7 @@
         android:layout_marginTop="5dip"
         android:layout_marginBottom="5dip"
         android:layout_toLeftOf="@id/call_icon"
-        android:layout_marginLeft="6dip"
+        android:layout_marginLeft="2dip"
         android:background="@drawable/divider_vertical_dark"
     />
 
@@ -48,35 +48,50 @@
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@id/divider"
         android:layout_alignWithParentIfMissing="true"
-        android:layout_marginRight="5dip"
+        android:layout_marginRight="9dip"
     />
-
+    
+    <!-- Wysie_Soh: Default values
+    android:layout_marginBottom="4dip"
+    -->
     <TextView android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/divider"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="8dip"
+        android:layout_marginBottom="4dip"
         android:layout_alignWithParentIfMissing="true"
         android:layout_marginRight="5dip"
 
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:singleLine="true"
     />
+    
+    <ImageView android:id="@+id/photo"
+        android:layout_width="54dip"
+        android:layout_height="54dip"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="8dip"
+        android:gravity="center"
+        android:scaleType="fitCenter"
+        android:background="@drawable/contact_picture_border_in_list"
+    />
 
     <TextView android:id="@+id/label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_toRightOf="@id/photo"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="8dip"
         android:layout_marginTop="-10dip"
+        android:layout_alignWithParentIfMissing="true"
 
         android:singleLine="true"
         android:ellipsize="marquee"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textStyle="bold"
-    />
+    />    
 
     <TextView android:id="@+id/number"
         android:layout_width="wrap_content"
@@ -95,8 +110,8 @@
     <TextView android:id="@+id/line1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/photo"
         android:layout_toLeftOf="@+id/call_type_icon"
         android:layout_above="@id/label"
         android:layout_alignWithParentIfMissing="true"

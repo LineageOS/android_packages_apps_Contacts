@@ -183,8 +183,6 @@ public final class ContactsListActivity extends ListActivity
     static final int MODE_QUERY_PICK_TO_VIEW = 65 | MODE_MASK_NO_FILTER | MODE_MASK_PICKER;
     //Geesun
     static final int DEFAULT_MODE = MODE_ALL_CONTACTS|MODE_MASK_SHOW_PHOTOS;    
-    //Wysie_Soh
-    static final int DEFAULT_NO_PICTURES_MODE = MODE_ALL_CONTACTS;
 
     /**
      * The type of data to display in the main contacts list.
@@ -1845,8 +1843,6 @@ public final class ContactsListActivity extends ListActivity
                             Contacts.KIND_PHONE);
                     break;
             }
-            
-                            Log.d("WYSIE", "MOD MOD MOD");
 
             if ((mMode & MODE_MASK_SHOW_PHOTOS) == MODE_MASK_SHOW_PHOTOS) {
                 mDisplayPhotos = true;
@@ -2083,11 +2079,10 @@ public final class ContactsListActivity extends ListActivity
                                     photoData.length);
                             mBitmapCache.put(pos, new SoftReference<Bitmap>(photo));
                             //Geesun
-                            if(photo == null){
+                            if(photo == null) {
                                 int id = cursor.getInt(ID_COLUMN_INDEX);
                                 Uri uri = ContentUris.withAppendedId(People.CONTENT_URI, id);
                                 photo = People.loadContactPhoto(context, uri, R.drawable.ic_contact_list_picture, null);
-
                             }
                         } catch (OutOfMemoryError e) {
                             // Not enough memory for the photo, use the default one instead

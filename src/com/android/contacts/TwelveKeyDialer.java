@@ -732,7 +732,14 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
             case R.id.one: {
                 if (digits.length() == 0) {
                     if (hasVoicemail()) {
-                    	callVoicemail();
+                        if (prefs.getBoolean("vm_use_1_for_regular_vm", false)) {
+                            Intent intent = new Intent(Intent.ACTION_CALL_PRIVILEGED, Uri.fromParts("voicemail", "", null));
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }
+                        else {
+                        	callVoicemail();
+                        }
                     	return true;
                     }
                 }

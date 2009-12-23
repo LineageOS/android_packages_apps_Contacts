@@ -32,6 +32,12 @@
             android:entryValues="@array/entryvalues_numbers"
             android:defaultValue="0" />
         <CheckBoxPreference
+            android:key="vm_use_1_for_regular_vm"
+            android:title="@string/title_use_1_for_reg_vm"
+            android:summaryOn="@string/summaryon_use_1_for_reg_vm"
+            android:summaryOff="@string/summaryoff_use_1_for_reg_vm"
+            android:defaultValue="false" />
+        <CheckBoxPreference
             android:key="dial_disable_num_check"
             android:title="@string/title_disable_num_check"
             android:summaryOn="@string/summaryon_disable_num_check"
@@ -119,7 +125,6 @@
         <CheckBoxPreference
             android:key="contacts_show_pic"
             android:title="@string/title_contacts_show_pic"
-            android:summary="@string/summary_contacts_show_pic"
             android:defaultValue="true" />
         <ListPreference
             android:key="contacts_view_contact_pic_size"

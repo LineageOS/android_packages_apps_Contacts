@@ -766,6 +766,10 @@
     <string name="title_disable_num_check">Disable number checks</string>
     <string name="summaryon_disable_num_check">Left action button (LAB) and menu will always be enabled</string>
     <string name="summaryoff_disable_num_check">LAB and menu will be enabled only if at least one number is entered (except voicemail)</string>
+    <string name="title_use_1_for_reg_vm">Use 1 for regular voicemail</string>
+    <string name="summaryon_use_1_for_reg_vm">Key 1 will be used for regular voicemail</string>
+    <string name="summaryoff_use_1_for_reg_vm">Key 1 will follow voicemail handler</string>
+    
     <string name="title_digits_color_unselected">Digits color (not selected)</string>
     <string name="title_digits_color_focused">Digits color (focused)</string>
     <string name="title_digits_color_pressed">Digits color (pressed)</string>
@@ -775,7 +779,7 @@
     
     <string name="title_change_digits_color">Change digits color</string>
     
-    <string name="title_call_log_category">Call log</string>    
+    <string name="title_call_log_category">Call log</string>
     <string name="title_cl_relative_time">Relative times</string>
     <string name="summaryon_cl_relative_time">Use relative times in call log</string>
     <string name="summaryoff_cl_relative_time">Use exact times in call log</string>
@@ -787,7 +791,6 @@
     
     <string name="title_contacts_category">Contacts</string>
     <string name="title_contacts_show_pic">Show contact pictures</string>
-    <string name="summary_contacts_show_pic">Affects Favs as well. Restart Contacts/Dialer to see changes</string>
     <string name="title_contacts_show_dial_button">Show dial button</string>
     <string name="summary_contacts_show_dial_button">Show a dial button for contacts with numbers</string>
     <string name="title_contacts_view_pic_size">View contact picture size</string>

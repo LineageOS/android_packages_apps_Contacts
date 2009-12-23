@@ -217,7 +217,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     private ArrayList<CharSequence> selectedGroups = new ArrayList<CharSequence>();
 
     // Wysie_Soh: Stores the list of groups available
-    private ArrayList<CharSequence> groups = new ArrayList<CharSequence>();
+    private ArrayList<CharSequence> groups;
 
     // Wysie_Soh: Stores the current memberships of groups the person is in
     private ArrayList<CharSequence> currentMembership = new ArrayList<CharSequence>();
@@ -2538,6 +2538,9 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         CharSequence[] groupsCharSeq = null;           
         boolean[] checkedValues = null;
         
+        //Wysie_Soh: Groups has not been instantiated yet
+        if (groups == null) {
+            groups = new ArrayList<CharSequence>();        
             Cursor cursor = mResolver.query(Groups.CONTENT_URI, GROUPS_PROJECTION, null, null, Groups.DEFAULT_SORT_ORDER);
             
             try {
@@ -2550,30 +2553,29 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                     }
                 }
 
-                groupsCharSeq = groups.toArray(new CharSequence[groups.size()]);                
-
-                checkedValues = new boolean[groups.size()];
-
-                for (boolean b : checkedValues) {
-                    b = false;
-                }
-                
-                if (!(mState == STATE_INSERT)) {
-
-                    for (int i = 0; i < selectedGroups.size(); i++) {
-                      int j = groups.indexOf(selectedGroups.get(i));
-
-                        if (j != -1) {
-                            checkedValues[j] = true;
-                        }
-                    }
-                }
             } finally {
                 cursor.close();
             }
-
-            builder.setMultiChoiceItems(groupsCharSeq, checkedValues,
-                    confirmGroupSelectionListener);  
+        }
+        
+        groupsCharSeq = groups.toArray(new CharSequence[groups.size()]);
+        checkedValues = new boolean[groups.size()];
+        
+        for (boolean b : checkedValues) {
+            b = false;
+        }
+        
+        if (!(mState == STATE_INSERT)) {
+            for (int i = 0; i < selectedGroups.size(); i++) {
+                int j = groups.indexOf(selectedGroups.get(i));
+                
+                if (j != -1) {
+                    checkedValues[j] = true;
+                }
+            }
+        }
+        
+        builder.setMultiChoiceItems(groupsCharSeq, checkedValues, confirmGroupSelectionListener);  
     }
     
     //Wysie_Soh: Load person's current membership into currentMembership ArrayList    

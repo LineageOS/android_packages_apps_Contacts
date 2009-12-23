@@ -331,6 +331,8 @@ public final class ContactsListActivity extends ListActivity
     private String mShortcutAction;
     private boolean mDefaultMode = false;
     private boolean mFavTab = false;
+    private boolean mDisplaySectionHeaders = true;
+    private boolean mContactsTab = false;
     
     //MenuItem for Clear Freq. Called
     private MenuItem mClearFreqCalled;
@@ -430,7 +432,6 @@ public final class ContactsListActivity extends ListActivity
             mMode = MODE_FREQUENT;
         } else if (UI.LIST_STREQUENT_ACTION.equals(action)) {
             mMode = MODE_STREQUENT;
-            mFavTab = true;
         } else if (UI.LIST_CONTACTS_WITH_PHONES_ACTION.equals(action)) {
             mMode = MODE_WITH_PHONES;
         } else if (Intent.ACTION_PICK.equals(action)) {
@@ -526,6 +527,7 @@ public final class ContactsListActivity extends ListActivity
         
         if (mMode == MODE_UNKNOWN) {
             	mMode = DEFAULT_MODE;
+            	mContactsTab = true;
         }
 
         // Setup the UI
@@ -581,6 +583,7 @@ public final class ContactsListActivity extends ListActivity
         if (SystemProperties.getBoolean("ro.qualcomm.proprietary_obex", false)) {
            mBluetooth = (BluetoothDevice) getSystemService(Context.BLUETOOTH_SERVICE);
         }
+
     }
 
     private void setEmptyText() {
@@ -1804,6 +1807,11 @@ public final class ContactsListActivity extends ListActivity
     }
 
     final static class ContactListItemCache {
+        //Wysie_Soh: Sections stuff
+        public View header;
+        public TextView headerText;
+        public View divider;
+        
         public TextView nameView;
         public CharArrayBuffer nameBuffer = new CharArrayBuffer(128);
         public TextView labelView;
@@ -1826,6 +1834,8 @@ public final class ContactsListActivity extends ListActivity
         private boolean mDisplayPhotos = false;
         private SparseArray<SoftReference<Bitmap>> mBitmapCache = null;
         private int mFrequentSeparatorPos = ListView.INVALID_POSITION;
+        
+        private int[] mSectionPositions;
 
         public ContactItemListAdapter(Context context) {
             super(context, R.layout.contacts_list_item, null, false);        
@@ -1837,6 +1847,12 @@ public final class ContactsListActivity extends ListActivity
                 case MODE_PICK_POSTAL:
                     mLocalizedLabels = EditContactActivity.getLabelsForKind(mContext,
                             Contacts.KIND_POSTAL);
+                    mDisplaySectionHeaders = false;
+                    mContactsTab = false;
+                    break;
+                case MODE_PICK_PHONE:
+                    mDisplaySectionHeaders = false;
+                    mContactsTab = false;
                     break;
                 default:
                     mLocalizedLabels = EditContactActivity.getLabelsForKind(mContext,
@@ -1849,6 +1865,11 @@ public final class ContactsListActivity extends ListActivity
                 setViewResource(R.layout.contacts_list_item_photo);
                 mBitmapCache = new SparseArray<SoftReference<Bitmap>>();
             }
+            if (mMode == MODE_STREQUENT || mMode == MODE_FREQUENT) {
+                mDisplaySectionHeaders = false;
+                mFavTab = true;
+            }
+
         }
 
         private SectionIndexer getNewIndexer(Cursor cursor) {
@@ -1911,7 +1932,7 @@ public final class ContactsListActivity extends ListActivity
             if (!mDataValid) {
                 throw new IllegalStateException(
                         "this should only be called when the cursor is valid");
-            }
+            }      
 
             // Handle the separator specially
             if (position == mFrequentSeparatorPos) {
@@ -1922,7 +1943,8 @@ public final class ContactsListActivity extends ListActivity
                 return view;
             }
 
-            if (!mCursor.moveToPosition(getRealPosition(position))) {
+            int realPosition = getRealPosition(position);
+            if (!mCursor.moveToPosition(realPosition)) {
                 throw new IllegalStateException("couldn't move cursor to position " + position);
             }
 
@@ -1932,8 +1954,44 @@ public final class ContactsListActivity extends ListActivity
             } else {
                 v = convertView;
             }
+            
+            //Wysie_Soh: if mMode == MODE_STREQUENT or MODE_FREQUENT, mDisplaySectionHeaders is already set to false
+            if (!(mMode == MODE_STREQUENT || mMode == MODE_FREQUENT)) {
+                mDisplaySectionHeaders = ePrefs.getBoolean("contacts_show_alphabetical_separators", true);
+            }        
+            
             bindView(v, mContext, mCursor);
+            bindSectionHeader(v, realPosition, mDisplaySectionHeaders);
+            
             return v;
+        }
+        
+        private void bindSectionHeader(View view, int position, boolean displaySectionHeaders) {
+            final ContactListItemCache cache = (ContactListItemCache) view.getTag();
+            if (!displaySectionHeaders) {
+                cache.header.setVisibility(View.GONE);
+                cache.divider.setVisibility(View.VISIBLE);
+            } else {
+                final int section = getSectionForPosition(position);
+                if (getPositionForSection(section) == position) {
+                    String title = mIndexer.getSections()[section].toString().trim();
+                    if (!TextUtils.isEmpty(title)) {
+                        cache.headerText.setText(title);
+                        cache.header.setVisibility(View.VISIBLE);
+                    } else {
+                        cache.header.setVisibility(View.GONE);
+                    }
+                } else {
+                    cache.header.setVisibility(View.GONE);
+                }
+
+                // move the divider for the last item in a section
+                if (getPositionForSection(section + 1) - 1 == position) {
+                    cache.divider.setVisibility(View.GONE);
+                } else {
+                    cache.divider.setVisibility(View.VISIBLE);
+                }
+            }
         }
         
         public void onClick(View view) {
@@ -1956,7 +2014,12 @@ public final class ContactsListActivity extends ListActivity
             cache.photoView = (ImageView) view.findViewById(R.id.photo);            
             cache.dividerView = view.findViewById(R.id.divider);
             cache.callView = view.findViewById(R.id.call_icon);
-            cache.callView.setOnClickListener(this);           
+            cache.callView.setOnClickListener(this);
+            
+            //Wysie_Soh: Sections
+            cache.header = view.findViewById(R.id.header);
+            cache.headerText = (TextView)view.findViewById(R.id.header_text);
+            cache.divider = view.findViewById(R.id.list_divider);
             
             view.setTag(cache);
 
@@ -2004,7 +2067,7 @@ public final class ContactsListActivity extends ListActivity
                 numberView.setText(cache.numberBuffer.data, 0, size);                              
                 numberView.setVisibility(View.VISIBLE);
                 labelView.setVisibility(View.VISIBLE);                
-                if ((ePrefs.getBoolean("contacts_show_dial_button", true) && !mFavTab) ||
+                if ((ePrefs.getBoolean("contacts_show_dial_button", true) && mContactsTab) ||
                     (ePrefs.getBoolean("favs_show_dial_button", true) && mFavTab)) {
                 	callView.setTag(new String(cache.numberBuffer.data, 0, size)); //Wysie_Soh: Set tag to green dial button
                 	callView.setVisibility(View.VISIBLE);
@@ -2059,7 +2122,7 @@ public final class ContactsListActivity extends ListActivity
             }
 
             // Set the photo, if requested
-            if (mDisplayPhotos && ((ePrefs.getBoolean("contacts_show_pic", true) && !mFavTab) ||
+            if (mDisplayPhotos && ((ePrefs.getBoolean("contacts_show_pic", true) && mContactsTab) ||
                 (ePrefs.getBoolean("favs_show_pic", true) && mFavTab))) {
                 Bitmap photo = null;
 
@@ -2101,7 +2164,13 @@ public final class ContactsListActivity extends ListActivity
                 cache.photoView.setVisibility(View.VISIBLE);
             }
             else {
-                cache.photoView.setVisibility(View.GONE);
+                // cache.photoView will be null in certain mModes.
+                try {
+                    cache.photoView.setVisibility(View.GONE);
+                }
+                catch (NullPointerException e) {
+                    // Do nothing.
+                }
             }
         }
 
@@ -2152,6 +2221,15 @@ public final class ContactsListActivity extends ListActivity
                     }
                 }
             }
+            
+            int sectionCount = mIndexer.getSections().length;
+            if (mSectionPositions == null || mSectionPositions.length != sectionCount) {
+                mSectionPositions = new int[sectionCount];
+            }
+            for (int i = 0; i < sectionCount; i++) {
+                mSectionPositions[i] = ListView.INVALID_POSITION;
+            }
+            
         }
 
         /**
@@ -2172,8 +2250,12 @@ public final class ContactsListActivity extends ListActivity
         }
 
         public int getPositionForSection(int sectionIndex) {
-            if (mMode == MODE_STREQUENT) {
-                return 0;
+            if (mMode == MODE_STARRED) {
+                return -1;
+            }
+
+            if (sectionIndex < 0 || sectionIndex >= mSectionPositions.length) {
+                return -1;
             }
 
             if (mIndexer == null) {
@@ -2185,14 +2267,41 @@ public final class ContactsListActivity extends ListActivity
                 mIndexer = getNewIndexer(cursor);
             }
 
-            return mIndexer.getPositionForSection(sectionIndex);
+            int position = mSectionPositions[sectionIndex];
+            if (position == ListView.INVALID_POSITION) {
+                position = mSectionPositions[sectionIndex] =
+                        mIndexer.getPositionForSection(sectionIndex);
+            }
+
+            return position;
         }
 
         public int getSectionForPosition(int position) {
-            // Note: JapaneseContactListIndexer depends on the fact
-            // this method always returns 0. If you change this,
-            // please care it too.
-            return 0;
+            // The current implementations of SectionIndexers (specifically the Japanese indexer)
+            // only work in one direction: given a section they can calculate the position.
+            // Here we are using that existing functionality to do the reverse mapping. We are
+            // performing binary search in the mSectionPositions array, which itself is populated
+            // lazily using the "forward" mapping supported by the indexer.
+
+            int start = 0;
+            int end = mSectionPositions.length;
+            while (start != end) {
+
+                // We are making the binary search slightly asymmetrical, because the
+                // user is more likely to be scrolling the list from the top down.
+                int pivot = start + (end - start) / 4;
+
+                int value = getPositionForSection(pivot);
+                if (value <= position) {
+                    start = pivot + 1;
+                } else {
+                    end = pivot;
+                }
+            }
+
+            // The variable "start" cannot be 0, as long as the indexer is implemented properly
+            // and actually maps position = 0 to section = 0
+            return start - 1;
         }
 
         @Override

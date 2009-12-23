@@ -525,12 +525,9 @@ public final class ContactsListActivity extends ListActivity
             finish();
             return;
         }
-
+        
         if (mMode == MODE_UNKNOWN) {
-            if (ePrefs.getBoolean("contacts_show_pic", true))
             	mMode = DEFAULT_MODE;
-            else
-                mMode = DEFAULT_NO_PICTURES_MODE;
         }
 
         // Setup the UI
@@ -1848,6 +1845,8 @@ public final class ContactsListActivity extends ListActivity
                             Contacts.KIND_PHONE);
                     break;
             }
+            
+                            Log.d("WYSIE", "MOD MOD MOD");
 
             if ((mMode & MODE_MASK_SHOW_PHOTOS) == MODE_MASK_SHOW_PHOTOS) {
                 mDisplayPhotos = true;
@@ -2009,7 +2008,8 @@ public final class ContactsListActivity extends ListActivity
                 numberView.setText(cache.numberBuffer.data, 0, size);                              
                 numberView.setVisibility(View.VISIBLE);
                 labelView.setVisibility(View.VISIBLE);                
-                if (ePrefs.getBoolean("contacts_show_dial_button", true)) {
+                if ((ePrefs.getBoolean("contacts_show_dial_button", true) && !mFavTab) ||
+                    (ePrefs.getBoolean("favs_show_dial_button", true) && mFavTab)) {
                 	callView.setTag(new String(cache.numberBuffer.data, 0, size)); //Wysie_Soh: Set tag to green dial button
                 	callView.setVisibility(View.VISIBLE);
                 	divView.setVisibility(View.VISIBLE);
@@ -2063,7 +2063,8 @@ public final class ContactsListActivity extends ListActivity
             }
 
             // Set the photo, if requested
-            if (mDisplayPhotos) {
+            if (mDisplayPhotos && ((ePrefs.getBoolean("contacts_show_pic", true) && !mFavTab) ||
+                (ePrefs.getBoolean("favs_show_pic", true) && mFavTab))) {
                 Bitmap photo = null;
 
                 // Look for the cached bitmap
@@ -2101,6 +2102,11 @@ public final class ContactsListActivity extends ListActivity
                 } else {
                     cache.photoView.setImageResource(R.drawable.ic_contact_list_picture);
                 }
+                
+                cache.photoView.setVisibility(View.VISIBLE);
+            }
+            else {
+                cache.photoView.setVisibility(View.GONE);
             }
         }
 

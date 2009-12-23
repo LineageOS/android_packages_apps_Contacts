@@ -83,6 +83,14 @@
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/recentCallsIconLabel">
         <CheckBoxPreference
+            android:key="cl_show_dial_button"
+            android:title="@string/title_contacts_show_dial_button"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="cl_show_pic"
+            android:title="@string/title_contacts_show_pic"
+            android:defaultValue="false" />  
+        <CheckBoxPreference
             android:key="cl_relative_time"
             android:title="@string/title_cl_relative_time"
             android:summaryOn="@string/summaryon_cl_relative_time"
@@ -100,7 +108,7 @@
             android:title="@string/title_cl_ask_before_clear"
             android:summaryOn="@string/summaryon_cl_ask_before_clear"
             android:summaryOff="@string/summaryoff_cl_ask_before_clear"
-            android:defaultValue="false" />
+            android:defaultValue="false" /> 
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/contactsIconLabel">
         <CheckBoxPreference
@@ -124,6 +132,14 @@
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/contactsFavoritesLabel">
         <CheckBoxPreference
+            android:key="favs_show_dial_button"
+            android:title="@string/title_contacts_show_dial_button"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="favs_show_pic"
+            android:title="@string/title_contacts_show_pic"
+            android:defaultValue="true" />
+        <CheckBoxPreference
             android:key="favourites_hide_freq_called"
             android:title="@string/title_favourites_hide_freq_call"
             android:summary="@string/summary_favourites_hide_freq_call"
@@ -134,8 +150,8 @@
             android:title="@string/title_favs_ask_before_clear"
             android:summaryOn="@string/summaryon_favs_ask_before_clear"
             android:summaryOff="@string/summaryoff_favs_ask_before_clear"
-	    android:dependency="favourites_hide_freq_called"
-            android:defaultValue="false" />            
+	        android:dependency="favourites_hide_freq_called"
+            android:defaultValue="false" />
     </PreferenceCategory>    
     <PreferenceCategory android:title="@string/title_misc_category">
         <CheckBoxPreference

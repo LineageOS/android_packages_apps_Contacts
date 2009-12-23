@@ -159,6 +159,7 @@ public class RecentCallsListActivity extends ListActivity
         TextView numberView;
         TextView dateView;
         ImageView iconView;
+        View dividerView;
         View callView;
     }
 
@@ -407,6 +408,7 @@ public class RecentCallsListActivity extends ListActivity
             views.numberView = (TextView) view.findViewById(R.id.number);
             views.dateView = (TextView) view.findViewById(R.id.date);
             views.iconView = (ImageView) view.findViewById(R.id.call_type_icon);
+            views.dividerView = view.findViewById(R.id.divider);
             views.callView = view.findViewById(R.id.call_icon);
             views.callView.setOnClickListener(this);
 
@@ -540,6 +542,15 @@ public class RecentCallsListActivity extends ListActivity
                 }
                 
                 views.dateView.setText(DateFormat.format(format, date));                         
+            }
+            
+            if (prefs.getBoolean("cl_show_dial_button", true)) {
+                views.dividerView.setVisibility(View.VISIBLE);
+                views.callView.setVisibility(View.VISIBLE);
+            }
+            else {
+                views.dividerView.setVisibility(View.GONE);
+                views.callView.setVisibility(View.GONE);
             }
 
             // Set the icon

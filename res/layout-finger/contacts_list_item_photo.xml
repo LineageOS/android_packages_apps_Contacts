@@ -41,7 +41,7 @@
         android:layout_marginTop="5dip"
         android:layout_marginBottom="5dip"
         android:layout_toLeftOf="@id/call_icon"
-        android:layout_marginLeft="6dip"
+        android:layout_marginLeft="2dip"
         android:background="@drawable/divider_vertical_dark"
     />
 
@@ -50,7 +50,7 @@
         android:layout_height="32dip"
         android:layout_toLeftOf="@id/divider"
         android:layout_marginLeft="1dip"
-        android:layout_marginRight="5dip"
+        android:layout_marginRight="9dip"
         android:layout_centerVertical="true"
         android:gravity="center"
         android:scaleType="centerInside"
@@ -75,6 +75,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="8dip"
         android:layout_marginTop="-10dip"
+        android:layout_alignWithParentIfMissing="true"
 
         android:singleLine="true"
         android:ellipsize="marquee"

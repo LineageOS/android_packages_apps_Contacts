@@ -32,6 +32,8 @@ import android.database.sqlite.SQLiteDatabaseCorruptException;
 import android.database.sqlite.SQLiteDiskIOException;
 import android.database.sqlite.SQLiteFullException;
 import android.database.sqlite.SQLiteException;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -55,6 +57,7 @@ import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.ContextMenu;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -82,6 +85,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Locale;
 import java.lang.ref.WeakReference;
+import java.lang.ref.SoftReference;
 
 /**
  * Displays a list of call log entries.
@@ -162,7 +166,9 @@ public class RecentCallsListActivity extends ListActivity
         TextView numberView;
         TextView dateView;
         ImageView iconView;
+        View dividerView;
         View callView;
+        ImageView photoView;
     }
 
     static final class CallerInfoQuery {
@@ -204,10 +210,13 @@ public class RecentCallsListActivity extends ListActivity
         private Thread mCallerIdThread;
 
         private CharSequence[] mLabelArray;
+        private SparseArray<SoftReference<Bitmap>> mBitmapCache = null;
 
         private Drawable mDrawableIncoming;
         private Drawable mDrawableOutgoing;
         private Drawable mDrawableMissed;
+        
+        private long personId;
 
         public void onClick(View view) {
             String number = (String) view.getTag();
@@ -253,6 +262,9 @@ public class RecentCallsListActivity extends ListActivity
             mDrawableMissed = getResources().getDrawable(
                     R.drawable.ic_call_log_list_missed_call);
             mLabelArray = getResources().getTextArray(com.android.internal.R.array.phoneTypes);
+            
+            mBitmapCache = new SparseArray<SoftReference<Bitmap>>();
+            
         }
 
         void setLoading(boolean loading) {
@@ -410,8 +422,11 @@ public class RecentCallsListActivity extends ListActivity
             views.numberView = (TextView) view.findViewById(R.id.number);
             views.dateView = (TextView) view.findViewById(R.id.date);
             views.iconView = (ImageView) view.findViewById(R.id.call_type_icon);
+            views.iconView.setOnClickListener(this);
+            views.dividerView = view.findViewById(R.id.divider);
             views.callView = view.findViewById(R.id.call_icon);
             views.callView.setOnClickListener(this);
+            views.photoView = (ImageView) view.findViewById(R.id.photo);
 
             view.setTag(views);
 
@@ -430,7 +445,17 @@ public class RecentCallsListActivity extends ListActivity
             String callerNumberLabel = c.getString(CALLER_NUMBERLABEL_COLUMN_INDEX);
 
             // Store away the number so we can call it directly if you click on the call icon
-            views.callView.setTag(number);
+            views.iconView.setTag(number);
+            
+            if (!prefs.getBoolean("cl_show_dial_button", true)) {
+                views.callView.setTag(number);
+                views.iconView.setOnClickListener(this);
+            }
+            else {
+                views.callView.setTag(null);
+                views.iconView.setOnClickListener(null);
+            }
+                
 
             // Lookup contacts with this number
             ContactInfo info = mContactInfo.get(number);
@@ -544,6 +569,15 @@ public class RecentCallsListActivity extends ListActivity
                 
                 views.dateView.setText(DateFormat.format(format, date));                         
             }
+            
+            if (prefs.getBoolean("cl_show_dial_button", true)) {
+                views.dividerView.setVisibility(View.VISIBLE);
+                views.callView.setVisibility(View.VISIBLE);
+            }
+            else {
+                views.dividerView.setVisibility(View.GONE);
+                views.callView.setVisibility(View.GONE);
+            }
 
             // Set the icon
             switch (type) {
@@ -565,6 +599,65 @@ public class RecentCallsListActivity extends ListActivity
                 mFirst = true;
                 mPreDrawListener = this;
                 view.getViewTreeObserver().addOnPreDrawListener(this);
+            }
+            
+            
+            // Set the photo, if requested
+            if (prefs.getBoolean("cl_show_pic", true)) {          
+                Cursor phonesCursor = RecentCallsListActivity.this.getContentResolver().query(
+                                        Uri.withAppendedPath(Phones.CONTENT_FILTER_URL,
+                                        Uri.encode(number)), PHONES_PROJECTION, null, null, null);
+                
+                int personId = -1;
+                                        
+                if (phonesCursor != null) {
+                    if (phonesCursor.moveToFirst()) {
+                        personId = phonesCursor.getInt(PERSON_ID_COLUMN_INDEX);
+                    }
+                    phonesCursor.close();
+                }
+                            
+                Bitmap photo = null;
+                SoftReference<Bitmap> ref = mBitmapCache.get(personId);
+                if (ref != null) {
+                    photo = ref.get();
+                }
+
+                if (photo == null && personId != -1) {
+                    try {
+                        //int id = c.getInt(ID_COLUMN_INDEX);
+                        Uri uri = ContentUris.withAppendedId(People.CONTENT_URI, personId);
+                        photo = People.loadContactPhoto(context, uri, R.drawable.ic_contact_list_picture, null);
+                        mBitmapCache.put(personId, new SoftReference<Bitmap>(photo));
+                    } catch (OutOfMemoryError e) {
+                        // Not enough memory for the photo, use the default one instead
+                        photo = null;
+                    } catch (IllegalArgumentException ile) {
+                        photo = null;
+                    }
+                }
+
+                // Bind the photo, or use the fallback no photo resource
+                if (photo != null) {
+                    views.photoView.setImageBitmap(photo);
+                } else {
+                    views.photoView.setImageResource(R.drawable.ic_contact_list_picture);
+                }
+                
+                views.photoView.setVisibility(View.VISIBLE);
+            }
+            else {
+                views.photoView.setVisibility(View.GONE);
+            }            
+        }
+        
+        @Override
+        public void changeCursor(Cursor cursor) {
+            super.changeCursor(cursor);
+
+            // Clear the photo bitmap cache, if there is one
+            if (mBitmapCache != null) {
+                mBitmapCache.clear();
             }
         }
     }

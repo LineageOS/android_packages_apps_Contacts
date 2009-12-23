@@ -183,8 +183,6 @@ public final class ContactsListActivity extends ListActivity
     static final int MODE_QUERY_PICK_TO_VIEW = 65 | MODE_MASK_NO_FILTER | MODE_MASK_PICKER;
     //Geesun
     static final int DEFAULT_MODE = MODE_ALL_CONTACTS|MODE_MASK_SHOW_PHOTOS;    
-    //Wysie_Soh
-    static final int DEFAULT_NO_PICTURES_MODE = MODE_ALL_CONTACTS;
 
     /**
      * The type of data to display in the main contacts list.
@@ -525,12 +523,9 @@ public final class ContactsListActivity extends ListActivity
             finish();
             return;
         }
-
+        
         if (mMode == MODE_UNKNOWN) {
-            if (ePrefs.getBoolean("contacts_show_pic", true))
             	mMode = DEFAULT_MODE;
-            else
-                mMode = DEFAULT_NO_PICTURES_MODE;
         }
 
         // Setup the UI
@@ -2009,7 +2004,8 @@ public final class ContactsListActivity extends ListActivity
                 numberView.setText(cache.numberBuffer.data, 0, size);                              
                 numberView.setVisibility(View.VISIBLE);
                 labelView.setVisibility(View.VISIBLE);                
-                if (ePrefs.getBoolean("contacts_show_dial_button", true)) {
+                if ((ePrefs.getBoolean("contacts_show_dial_button", true) && !mFavTab) ||
+                    (ePrefs.getBoolean("favs_show_dial_button", true) && mFavTab)) {
                 	callView.setTag(new String(cache.numberBuffer.data, 0, size)); //Wysie_Soh: Set tag to green dial button
                 	callView.setVisibility(View.VISIBLE);
                 	divView.setVisibility(View.VISIBLE);
@@ -2063,7 +2059,8 @@ public final class ContactsListActivity extends ListActivity
             }
 
             // Set the photo, if requested
-            if (mDisplayPhotos) {
+            if (mDisplayPhotos && ((ePrefs.getBoolean("contacts_show_pic", true) && !mFavTab) ||
+                (ePrefs.getBoolean("favs_show_pic", true) && mFavTab))) {
                 Bitmap photo = null;
 
                 // Look for the cached bitmap
@@ -2082,11 +2079,10 @@ public final class ContactsListActivity extends ListActivity
                                     photoData.length);
                             mBitmapCache.put(pos, new SoftReference<Bitmap>(photo));
                             //Geesun
-                            if(photo == null){
+                            if(photo == null) {
                                 int id = cursor.getInt(ID_COLUMN_INDEX);
                                 Uri uri = ContentUris.withAppendedId(People.CONTENT_URI, id);
                                 photo = People.loadContactPhoto(context, uri, R.drawable.ic_contact_list_picture, null);
-
                             }
                         } catch (OutOfMemoryError e) {
                             // Not enough memory for the photo, use the default one instead
@@ -2101,6 +2097,11 @@ public final class ContactsListActivity extends ListActivity
                 } else {
                     cache.photoView.setImageResource(R.drawable.ic_contact_list_picture);
                 }
+                
+                cache.photoView.setVisibility(View.VISIBLE);
+            }
+            else {
+                cache.photoView.setVisibility(View.GONE);
             }
         }
 

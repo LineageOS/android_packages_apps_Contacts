@@ -331,6 +331,7 @@ public final class ContactsListActivity extends ListActivity
     private String mShortcutAction;
     private boolean mDefaultMode = false;
     private boolean mFavTab = false;
+    private boolean mContactsTab = false;
     
     //MenuItem for Clear Freq. Called
     private MenuItem mClearFreqCalled;
@@ -526,6 +527,7 @@ public final class ContactsListActivity extends ListActivity
         
         if (mMode == MODE_UNKNOWN) {
             	mMode = DEFAULT_MODE;
+            	mContactsTab = true;
         }
 
         // Setup the UI
@@ -581,6 +583,9 @@ public final class ContactsListActivity extends ListActivity
         if (SystemProperties.getBoolean("ro.qualcomm.proprietary_obex", false)) {
            mBluetooth = (BluetoothDevice) getSystemService(Context.BLUETOOTH_SERVICE);
         }
+        
+        currPos = 0;
+        prevPos = -1;
     }
 
     private void setEmptyText() {
@@ -1911,7 +1916,7 @@ public final class ContactsListActivity extends ListActivity
             if (!mDataValid) {
                 throw new IllegalStateException(
                         "this should only be called when the cursor is valid");
-            }
+            }      
 
             // Handle the separator specially
             if (position == mFrequentSeparatorPos) {
@@ -1933,6 +1938,7 @@ public final class ContactsListActivity extends ListActivity
                 v = convertView;
             }
             bindView(v, mContext, mCursor);
+            
             return v;
         }
         
@@ -2004,7 +2010,7 @@ public final class ContactsListActivity extends ListActivity
                 numberView.setText(cache.numberBuffer.data, 0, size);                              
                 numberView.setVisibility(View.VISIBLE);
                 labelView.setVisibility(View.VISIBLE);                
-                if ((ePrefs.getBoolean("contacts_show_dial_button", true) && !mFavTab) ||
+                if ((ePrefs.getBoolean("contacts_show_dial_button", true) && mContactsTab) ||
                     (ePrefs.getBoolean("favs_show_dial_button", true) && mFavTab)) {
                 	callView.setTag(new String(cache.numberBuffer.data, 0, size)); //Wysie_Soh: Set tag to green dial button
                 	callView.setVisibility(View.VISIBLE);
@@ -2059,7 +2065,7 @@ public final class ContactsListActivity extends ListActivity
             }
 
             // Set the photo, if requested
-            if (mDisplayPhotos && ((ePrefs.getBoolean("contacts_show_pic", true) && !mFavTab) ||
+            if (mDisplayPhotos && ((ePrefs.getBoolean("contacts_show_pic", true) && mContactsTab) ||
                 (ePrefs.getBoolean("favs_show_pic", true) && mFavTab))) {
                 Bitmap photo = null;
 
@@ -2101,7 +2107,13 @@ public final class ContactsListActivity extends ListActivity
                 cache.photoView.setVisibility(View.VISIBLE);
             }
             else {
-                cache.photoView.setVisibility(View.GONE);
+                // cache.photoView will be null in certain mModes.
+                try {
+                    cache.photoView.setVisibility(View.GONE);
+                }
+                catch (NullPointerException e) {
+                    // Do nothing.
+                }
             }
         }
 
@@ -2152,6 +2164,7 @@ public final class ContactsListActivity extends ListActivity
                     }
                 }
             }
+            
         }
 
         /**

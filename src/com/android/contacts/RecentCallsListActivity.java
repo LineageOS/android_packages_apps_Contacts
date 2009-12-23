@@ -442,14 +442,14 @@ public class RecentCallsListActivity extends ListActivity
             String callerNumberLabel = c.getString(CALLER_NUMBERLABEL_COLUMN_INDEX);
 
             // Store away the number so we can call it directly if you click on the call icon
-            views.iconView.setTag(number);
+            views.callView.setTag(number);
             
             if (!prefs.getBoolean("cl_show_dial_button", true)) {
-                views.callView.setTag(number);
+                views.iconView.setTag(number);
                 views.iconView.setOnClickListener(this);
             }
             else {
-                views.callView.setTag(null);
+                views.iconView.setTag(null);
                 views.iconView.setOnClickListener(null);
             }
                 

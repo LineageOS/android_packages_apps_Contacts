@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+          http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+
+    <string-array name="entries_vm_button">
+        <item>Ajouter aux contacts</item>
+        <item>SMS/MMS</item>
+        <item>Boîte vocale</item>
+    </string-array>
+    
+    <string-array name="entries_vm_handler">
+        <item>Aucun (appeler no. boîte vocale)</item>
+        <item>Boîte vocale visuelle T-Mobile</item>
+        <item>Google Voice</item>
+        <item>Youmail</item>
+    </string-array>
+    
+    <string-array name="entryvalues_numbers">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    
+    <string-array name="digits_colors">
+        <item>Noir</item>
+        <item>Bleu</item>
+        <item>Cyan</item>
+        <item>Gris foncé</item>
+        <item>Gris</item>
+        <item>Vert</item>
+        <item>Gris pâle</item>
+        <item>Magenta</item>
+        <item>Rouge</item>
+        <item>Blanc</item>
+        <item>Jaune</item>
+   </string-array>
+   
+   <string-array name="digits_colors_values">
+        <item>-16777216</item>
+        <item>-16776961</item>
+        <item>-16711681</item>
+        <item>-12303292</item>
+        <item>-7829368</item>
+        <item>-16711936</item>
+        <item>-3355444</item>
+        <item>-65281</item>
+        <item>-65536</item>
+        <item>-1</item>
+        <item>-256</item>
+  </string-array>
+        
+    <string-array name="vm_handlers">
+        <item>Boîte vocale visuelle T-Mobile/com.oz.mobile.android.voicemail.application/.application</item>
+        <item>Google Voice/com.google.android.apps.googlevoice/.SplashActivity</item>
+        <item>YouMail/com.loadedbanana.android.youmail/.activity.MessageList</item>
+        <item>HulloMail/com.hullomail.android.messaging.us/.HulloMail</item>
+        <item>PF Voicemail/com.phonefusion.voicemailplus.android/.VoicemailPlus</item>
+    </string-array>
+    
+    <string-array name="view_contact_pic_sizes">
+        <item>Petites (Par défaut)</item>
+        <item>Moyennes</item>
+        <item>Grandes</item>
+        <item>Très grandes</item>
+    </string-array>
+    
+    <string-array name="view_contact_pic_sizes_values">
+        <item>78</item>
+        <item>100</item>
+        <item>116</item>
+        <item>128</item>
+    </string-array>
+</resources>

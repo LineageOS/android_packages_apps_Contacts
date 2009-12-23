@@ -796,6 +796,9 @@
     <string name="title_contacts_view_pic_size">View contact picture size</string>
     <string name="summary_contacts_view_pic_size">Affects Favs as well. Sets size of picture when viewing contact</string>
     <string name="title_contacts_choose_pic_size">Choose a size</string>
+    <string name="title_contacts_show_separators">Show alphabetical separators</string>
+    <string name="summaryon_contacts_show_separators">Alphabetical separators will be shown in the contacts list</string>
+    <string name="summaryoff_contacts_show_separators">Alphabetical separators will be hidden in the contacts list</string>
     
     <string name="title_favourites_category">Favourites</string>
     <string name="title_favourites_hide_freq_call">Hide frequently called</string>
@@ -811,7 +814,7 @@
     <string name="title_about_name">Mod Name</string>
     <string name="summary_about_name">Wysie Contacts</string>
     <string name="title_about_version">Version</string>
-    <string name="summary_about_version">1.96</string>
+    <string name="summary_about_version">2.0</string>
     <string name="title_about_credits">Credits</string>
     <string name="summary_about_credits">ChainsDD and the rest of XDA! :)</string>
     

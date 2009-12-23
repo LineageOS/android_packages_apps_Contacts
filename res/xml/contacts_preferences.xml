@@ -134,6 +134,12 @@
             android:entries="@array/view_contact_pic_sizes"
             android:entryValues="@array/view_contact_pic_sizes_values"
             android:defaultValue="78" />
+        <CheckBoxPreference
+            android:key="contacts_show_alphabetical_separators"
+            android:title="@string/title_contacts_show_separators"
+            android:summaryOn="@string/summaryon_contacts_show_separators"
+            android:summaryOff="@string/summaryoff_contacts_show_separators"
+            android:defaultValue="true" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/contactsFavoritesLabel">
         <CheckBoxPreference

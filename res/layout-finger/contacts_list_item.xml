@@ -17,6 +17,16 @@
  */
 -->
 
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+>
+    <include
+        android:id="@+id/header"
+        layout="@layout/list_section"
+    />
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
@@ -102,3 +112,10 @@
     />
 
 </RelativeLayout>
+
+    <View android:id="@+id/list_divider"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@*android:drawable/divider_horizontal_dark_opaque"
+    />  
+</LinearLayout>

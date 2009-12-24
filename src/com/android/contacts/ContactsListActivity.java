@@ -1851,6 +1851,8 @@ public final class ContactsListActivity extends ListActivity
                     mContactsTab = false;
                     break;
                 case MODE_PICK_PHONE:
+                	 mLocalizedLabels = EditContactActivity.getLabelsForKind(mContext,
+                             Contacts.KIND_PHONE);
                     mDisplaySectionHeaders = false;
                     mContactsTab = false;
                     break;

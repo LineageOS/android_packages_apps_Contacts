@@ -1975,6 +1975,7 @@ public final class ContactsListActivity extends ListActivity
             return v;
         }
         
+        //Wysie_Soh: cache.divider makes the line between each contact thicker, investigating
         private void bindSectionHeader(View view, int position, boolean displaySectionHeaders) {
             final ContactListItemCache cache = (ContactListItemCache) view.getTag();
             if (!displaySectionHeaders) {

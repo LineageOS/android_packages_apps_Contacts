@@ -47,6 +47,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.os.Parcelable;
 import android.os.RemoteException;
 import android.os.SystemProperties;
@@ -1833,8 +1834,7 @@ public final class ContactsListActivity extends ListActivity
         private CharSequence[] mLocalizedLabels;
         private boolean mDisplayPhotos = false;
         private SparseArray<SoftReference<Bitmap>> mBitmapCache = null;
-        private int mFrequentSeparatorPos = ListView.INVALID_POSITION;
-        
+        private int mFrequentSeparatorPos = ListView.INVALID_POSITION;        
         private int[] mSectionPositions;
 
         public ContactItemListAdapter(Context context) {
@@ -1851,6 +1851,8 @@ public final class ContactsListActivity extends ListActivity
                     mContactsTab = false;
                     break;
                 case MODE_PICK_PHONE:
+                    mLocalizedLabels = EditContactActivity.getLabelsForKind(mContext,
+                            Contacts.KIND_PHONE);
                     mDisplaySectionHeaders = false;
                     mContactsTab = false;
                     break;
@@ -1956,9 +1958,16 @@ public final class ContactsListActivity extends ListActivity
             }
             
             //Wysie_Soh: if mMode == MODE_STREQUENT or MODE_FREQUENT, mDisplaySectionHeaders is already set to false
-            if (!(mMode == MODE_STREQUENT || mMode == MODE_FREQUENT)) {
+            //Doing so means that the section separators will be shown in all other mModes. If I'm not wrong,
+            //The default Eclair Contacts only shows the section separators in "Contacts" tab mode.
+            //if (!(mMode == MODE_STREQUENT || mMode == MODE_FREQUENT)) {
+            //    mDisplaySectionHeaders = ePrefs.getBoolean("contacts_show_alphabetical_separators", true);
+            //}
+            
+            //Wysie_Soh: Decide whether to display headers or not based on preferences            
+            if (mContactsTab) {
                 mDisplaySectionHeaders = ePrefs.getBoolean("contacts_show_alphabetical_separators", true);
-            }        
+            }            
             
             bindView(v, mContext, mCursor);
             bindSectionHeader(v, realPosition, mDisplaySectionHeaders);

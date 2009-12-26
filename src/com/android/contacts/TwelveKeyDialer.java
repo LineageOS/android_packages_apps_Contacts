@@ -74,6 +74,7 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import com.android.internal.telephony.ITelephony;
 import android.content.res.Configuration;
 
+
 /**
  * Dialer activity that displays the typical twelve key interface.
  */
@@ -100,7 +101,8 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     private View mDialpad;
     private View mVoicemailDialAndDeleteRow;
     private ImageButton mVoicemailButton, mDialButton, mDelete;
-    private SharedPreferences prefs;
+    private SharedPreferences prefs;    
+    private Vibrator vibrator; 
 
     private ListView mDialpadChooser;
     private DialpadChooserAdapter mDialpadChooserAdapter;
@@ -221,6 +223,9 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         //In other words, DialtactsActivity is called directly, and Dialer is initiated with a number already present.
         initVoicemailButton();
         checkForNumber();
+        
+        //Wysie_Soh: Initialize vibrator
+        vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
 
         // If the mToneGenerator creation fails, just continue without it.  It is
         // a local audio signal, and is not as important as the dtmf tone itself.
@@ -614,6 +619,10 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     }
 
     public void onClick(View view) {
+        if (prefs.getBoolean("dial_enable_haptic", false)) {
+            vibrator.vibrate(50);
+        }
+        
         switch (view.getId()) {
             case R.id.one: {
                 playTone(ToneGenerator.TONE_DTMF_1);
@@ -709,6 +718,10 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     }
 
     public boolean onLongClick(View view) {
+        if (prefs.getBoolean("dial_enable_haptic", false)) {
+            vibrator.vibrate(50);
+        }
+        
         Editable digits = mDigits.getText();
         int id = view.getId();
         switch (id) {

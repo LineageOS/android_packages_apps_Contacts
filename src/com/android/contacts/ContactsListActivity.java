@@ -332,7 +332,7 @@ public final class ContactsListActivity extends ListActivity
     private String mShortcutAction;
     private boolean mDefaultMode = false;
     private boolean mFavTab = false;
-    private boolean mDisplaySectionHeaders = true;
+    private boolean mDisplaySectionHeaders = false; //With it set to false, separators will only show in "Contacts" tab, and based on prefs.
     private boolean mContactsTab = false;
     
     //MenuItem for Clear Freq. Called
@@ -1980,7 +1980,10 @@ public final class ContactsListActivity extends ListActivity
             final ContactListItemCache cache = (ContactListItemCache) view.getTag();
             if (!displaySectionHeaders) {
                 cache.header.setVisibility(View.GONE);
-                cache.divider.setVisibility(View.VISIBLE);
+                
+                //Wysie_Soh: AOSP master sets it to View.VISIBLE. I think it's a mistake cause it simply makes the separator between
+                //each contact thicker.
+                cache.divider.setVisibility(View.GONE);
             } else {
                 final int section = getSectionForPosition(position);
                 if (getPositionForSection(section) == position) {
@@ -1996,10 +1999,13 @@ public final class ContactsListActivity extends ListActivity
                 }
 
                 // move the divider for the last item in a section
+                // 
                 if (getPositionForSection(section + 1) - 1 == position) {
-                    cache.divider.setVisibility(View.GONE);
-                } else {
+                    // Wysie_Soh: AOSP master sets it to View.GONE, seems like a mistake
                     cache.divider.setVisibility(View.VISIBLE);
+                } else {
+                    // Wysie_Soh: AOSP master sets it to View.VISIBLE, seems like a mistake
+                    cache.divider.setVisibility(View.GONE);
                 }
             }
         }

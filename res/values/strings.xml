@@ -769,6 +769,7 @@
     <string name="title_use_1_for_reg_vm">Use 1 for regular voicemail</string>
     <string name="summaryon_use_1_for_reg_vm">Key 1 will be used for regular voicemail</string>
     <string name="summaryoff_use_1_for_reg_vm">Key 1 will follow voicemail handler</string>
+    <string name="title_enable_haptic_feedback">Enable haptic feedback</string>
     
     <string name="title_digits_color_unselected">Digits color (not selected)</string>
     <string name="title_digits_color_focused">Digits color (focused)</string>
@@ -814,7 +815,7 @@
     <string name="title_about_name">Mod Name</string>
     <string name="summary_about_name">Wysie Contacts</string>
     <string name="title_about_version">Version</string>
-    <string name="summary_about_version">2.01</string>
+    <string name="summary_about_version">2.1</string>
     <string name="title_about_credits">Credits</string>
     <string name="summary_about_credits">ChainsDD and the rest of XDA! :)</string>
     

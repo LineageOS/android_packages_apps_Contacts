@@ -43,6 +43,10 @@
             android:summaryOn="@string/summaryon_disable_num_check"
             android:summaryOff="@string/summaryoff_disable_num_check"
             android:defaultValue="false" />
+        <CheckBoxPreference
+            android:key="dial_enable_haptic"
+            android:title="@string/title_enable_haptic_feedback"
+            android:defaultValue="false" />
         <PreferenceScreen
             android:key="dial_digits_color"
             android:title="@string/title_change_digits_color">  

@@ -40,6 +40,7 @@
     <string name="menu_showBarcode" msgid="309973637178814132">"Afficher le code-barres"</string>
     <string name="menu_editContact" msgid="3452858480713561396">"Modifier le contact"</string>
     <string name="menu_deleteContact" msgid="1916555454274101750">"Supprimer le contact"</string>
+    <string name="menu_copyContactSim">Copier sur SIM</string>
     <string name="menu_call" msgid="7359207953236681606">"Appel"</string>
     <string name="menu_sendSMS" msgid="5917289601666766617">"Envoyer un SMS/MMS"</string>
     <string name="menu_sendEmail" msgid="7293508859242926187">"Envoyer un e-mail"</string>
@@ -112,6 +113,7 @@
     <string name="listSeparatorOrganizations" msgid="7514083358440762504">"Organisations"</string>
     <string name="listSeparatorOtherInformation" msgid="7844959649638482329">"Autres informations"</string>
     <string name="listSeparatorOtherInformation_edit" msgid="1326921768011367750">"Autres options"</string>
+    <string name="listSeparatorGroup">Groupe(s)</string>
     <string name="listSeparatorMore_edit" msgid="858454837482243176">"Plus"</string>
     <string name="contactsIconLabel" msgid="7666609097606552806">"Contacts"</string>
     <string name="contactsFavoritesLabel" msgid="8417039765586853670">"Favoris"</string>
@@ -246,10 +248,10 @@
     <!-- Wysie_Soh: Preferences strings (based on ChainsDD's code) -->
     <string name="title_dialer_category">Menu Appeler</string>
     <string name="title_vm_button">Bouton d\'action gauche</string>    
-    <string name="title_vm_handler">Application de boîte vocale</string>
+    <string name="title_vm_handler">Application de messagerie vocale</string>
     <string name="title_disable_num_check">Désactiver la vérif. du numéro</string>
     <string name="summaryon_disable_num_check">Le bouton d\'action et le menu seront toujours activés</string>
-    <string name="summaryoff_disable_num_check">Le bouton d\'action et le menu seront activés si un numéro est entré (sauf boîte voc.)</string>
+    <string name="summaryoff_disable_num_check">Le bouton d\'action et le menu seront activés si un numéro est entré (sauf mess. voc.)</string>
     <string name="title_digits_color_unselected">Couleur des chiffres non-sélectionnés</string>
     <string name="title_digits_color_focused">Couleur des chiffres ciblés</string>
     <string name="title_digits_color_pressed">Couleur des chiffres appuyés</string>
@@ -267,7 +269,7 @@
     <string name="summary_cl_show_seconds">Montrer les secondes avec les temps exacts</string>          
     <string name="title_cl_ask_before_clear">Confirmer avant de vider</string>
     <string name="summaryon_cl_ask_before_clear">Confirmer avant de vider le journal</string>
-    <string name="summaryoff_cl_ask_before_clear">Le journal sera vidé dans confirmation</string>
+    <string name="summaryoff_cl_ask_before_clear">Le journal sera vidé sans confirmation</string>
 
     <string name="title_contacts_category">Contacts</string>
     <string name="title_contacts_show_pic">Montrer les images des contacts</string>
@@ -296,17 +298,17 @@
     <string name="title_about_credits">Crédits</string>
     <string name="summary_about_credits">ChainsDD et le reste de XDA! :)</string>
 
-    <!-- Wysie_Soh: Call log strings -->  
     <string name="alert_clear_call_log_title">Vider le journal d\'appels</string>
     <string name="alert_clear_call_log_message">Êtes-vous sûr de vouloir vider la liste d\'appels ?</string>
-
-    <!-- Wysie_Soh: Frequently called strings -->
     <string name="alert_clear_freq_called">Vider fréquemment appelés</string>
     <string name="alert_clear_freq_called_msg">Êtes-vous sûr de vouloir vider la liste des numéros fréquemment appelés ?</string>
-
-
-    <!-- Wysie_Soh: View contact strings -->
     <string name="view_contact_navigate">Aller à</string>
     <string name="view_contact_groups">Groupes</string>
-
+    <string name="title_contacts_show_separators">Montrer les séparateurs alphabétiques</string>
+    <string name="summaryon_contacts_show_separators">Les séparateurs alphabétiques seront montrés dans la liste des contacts</string>
+    <string name="summaryoff_contacts_show_separators">Les séparateurs alphabétiques seront cachés dans la liste des contacts</string>
+    <string name="title_use_1_for_reg_vm">Touche 1 pour mess. voc. par défaut</string>
+    <string name="summaryon_use_1_for_reg_vm">Touche 1 sera utilisée pour la mess. vocale par défaut</string>
+    <string name="summaryoff_use_1_for_reg_vm">Touche 1 sera suivie par l\'application de mess. vocale personnalisée</string>
+    <string name="recentCalls_removeAllFrom">"Suppr. tous de "</string>
 </resources>

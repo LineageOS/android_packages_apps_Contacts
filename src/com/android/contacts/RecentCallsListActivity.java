@@ -917,10 +917,10 @@ public class RecentCallsListActivity extends ListActivity
         menu.add(0, MENU_ITEM_DELETE, 0, R.string.recentCalls_removeFromRecentList);
         
         if (contactInfoPresent) {
-        	menu.add(0, MENU_ITEM_DELETE_ALL_NAME, 0, "Remove all " + info.name);
+        	menu.add(0, MENU_ITEM_DELETE_ALL_NAME, 0, R.string.recentCalls_removeAllFrom + info.name);
         }
         
-        menu.add(0, MENU_ITEM_DELETE_ALL_NUMBER, 0, "Remove all " + number);
+        menu.add(0, MENU_ITEM_DELETE_ALL_NUMBER, 0, R.string.recentCalls_removeAllFrom + number);
     }
 
     @Override

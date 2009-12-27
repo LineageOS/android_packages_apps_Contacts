@@ -834,5 +834,6 @@
     <!-- Wysie_Soh: View contact strings -->
     <string name="view_contact_navigate">Navigate to</string>
     <string name="view_contact_groups">Groups</string>
+    <string name="recentCalls_removeAllFrom">Remove all </string>
     
 </resources>

@@ -917,7 +917,7 @@ public class ViewContactActivity extends ListActivity
                     case Contacts.KIND_IM: {
                         Object protocolObj = ContactMethods.decodeImProtocol(
                                 methodsCursor.getString(METHODS_AUX_DATA_COLUMN));
-                        String host;
+                        String host = null;
                         if (protocolObj instanceof Number) {
                             int protocol = ((Number) protocolObj).intValue();
                             entry.label = buildActionString(R.string.actionChat,
@@ -927,8 +927,12 @@ public class ViewContactActivity extends ListActivity
                                     || protocol == ContactMethods.PROTOCOL_MSN) {
                                 entry.maxLabelLines = 2;
                             }
-                        } else {
-                            String providerName = (String) protocolObj;
+                        }
+                        //Wysie_Soh: 2.11, temp fix for some people whose Contacts are not saved properly (probably some other app)
+                        //Default AOSP code does not have the if part, just else (no checks)
+                        else if (protocolObj != null) {
+                            String providerName = (String) protocolObj;                            
+                            
                             entry.label = buildActionString(R.string.actionChat,
                                     providerName, false);
                             host = providerName.toLowerCase();

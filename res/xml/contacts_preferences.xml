@@ -144,6 +144,16 @@
             android:summaryOn="@string/summaryon_contacts_show_separators"
             android:summaryOff="@string/summaryoff_contacts_show_separators"
             android:defaultValue="true" />
+        <PreferenceScreen
+            android:key="groups_management"
+            android:title="@string/groups_manager_title"> 
+            <CheckBoxPreference
+                android:key="groups_ask_before_del"
+                android:title="@string/title_groups_ask_before_del"
+                android:summaryOn="@string/summaryon_groups_ask_before_del"
+                android:summaryOff="@string/summaryoff_groups_ask_before_del"
+                android:defaultValue="false" />
+        </PreferenceScreen>
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/contactsFavoritesLabel">
         <CheckBoxPreference

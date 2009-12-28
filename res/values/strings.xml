@@ -743,12 +743,13 @@
     
     <!-- Wysie_Soh: Contacts menu (across all 4, ie. Dialer, Contacts, Call log, Favourites -->    
     <string name="menu_preferences">Preferences</string>
+    <string name="contacts_manage_groups">Manage groups</string>
     
     <!-- Wysie_Soh: Dialer menu -->
     <string name="dialer_menu_sms">SMS/MMS</string>
     
     <!-- Wysie_Soh: Call log menu -->
-    <string name="call_log_menu_total_duration">Total Incoming/Outgoing</string>
+    <string name="call_log_menu_total_duration">Total incoming/outgoing</string>
     
     <!-- Wysie_Soh: Total incoming/outgoing dialog -->
     <string name="totalcalllog">Total incoming/outgoing duration</string>
@@ -757,7 +758,7 @@
     <string name="total_button_ok">Ok</string>
     
     <!-- Favourites menu -->
-    <string name="fav_clear_freq">Clear Frequently Called</string>
+    <string name="fav_clear_freq">Clear frequently called</string>
     
     <!-- Wysie_Soh: Preferences strings (based on ChainsDD's code) -->
     <string name="title_dialer_category">Dialer</string>
@@ -801,6 +802,11 @@
     <string name="summaryon_contacts_show_separators">Alphabetical separators will be shown in the contacts list</string>
     <string name="summaryoff_contacts_show_separators">Alphabetical separators will be hidden in the contacts list</string>
     
+    <string name="groups_manager_title">Manage groups preferences</string>    
+    <string name="title_groups_ask_before_del">Ask before deleting</string>
+    <string name="summaryon_groups_ask_before_del">Ask before deleting group</string>
+    <string name="summaryoff_groups_ask_before_del">Groups will be deleted without asking</string>
+    
     <string name="title_favourites_category">Favourites</string>
     <string name="title_favourites_hide_freq_call">Hide frequently called</string>
     <string name="summary_favourites_hide_freq_call">The actual data is not cleared, but hidden.</string>
@@ -815,7 +821,7 @@
     <string name="title_about_name">Mod Name</string>
     <string name="summary_about_name">Wysie Contacts</string>
     <string name="title_about_version">Version</string>
-    <string name="summary_about_version">2.11</string>
+    <string name="summary_about_version">2.2</string>
     <string name="title_about_credits">Credits</string>
     <string name="summary_about_credits">ChainsDD and the rest of XDA! :)</string>
     
@@ -831,5 +837,20 @@
     <!-- Wysie_Soh: View contact strings -->
     <string name="view_contact_navigate">Navigate to</string>
     <string name="view_contact_groups">Groups</string>
+    
+    
+    <!-- Wysie_Soh: Groups management -->
+    <string name="help_title">Usage</string>
+    <string name="help_message">
+    Long-press on group name to rename or delete it. Press menu to add group. This message will not be shown until the next update.
+    </string>
+    
+    <string name="title_groups_manager">Manage groups</string>    
+    <string name="option_create_group">Create group</string>
+    <string name="alert_create_group_message">Enter group name</string>    
+    <string name="context_rename_group">Rename group</string>
+    <string name="context_delete_group">Delete group</string>
+    <string name="alert_rename_group_message">Enter new group name</string>
+    <string name="alert_delete_group_message">Are you sure you want to delete?</string>
     
 </resources>

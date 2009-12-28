@@ -838,6 +838,16 @@ public final class ContactsListActivity extends ListActivity
                     .setIcon(com.android.internal.R.drawable.ic_menu_refresh)
                     .setIntent(syncIntent);
         }
+        
+        //Groups manager
+        Intent i = new Intent(this, GroupsListActivity.class);
+        menu.add(0, 0, 0, R.string.contacts_manage_groups).setIcon(com.android.internal.R.drawable.ic_menu_allfriends).setIntent(i);
+        
+        //Wysie_Soh: Clear frequently called
+        if (mFavTab) {
+	       mClearFreqCalled = menu.add(0, MENU_CLEAR_FREQ_CONTACTS, 0, R.string.fav_clear_freq).setIcon
+	       			(android.R.drawable.ic_menu_close_clear_cancel);
+        }
 
         // Contacts import (SIM/SDCard)
         menu.add(0, MENU_IMPORT_CONTACTS, 0, R.string.importFromSim)
@@ -860,16 +870,11 @@ public final class ContactsListActivity extends ListActivity
            bluetoothEnabled = mBluetooth.isEnabled();
         }
         menu.setGroupEnabled(MENU_GROUP_BT, bluetoothEnabled);
-        menu.setGroupVisible(MENU_GROUP_BT, bluetoothEnabled);
-        
-        //Wysie_Soh: Clear frequently called
-        if (mFavTab) {
-	       mClearFreqCalled = menu.add(0, MENU_CLEAR_FREQ_CONTACTS, 0, R.string.fav_clear_freq).setIcon
-	       			(android.R.drawable.ic_menu_close_clear_cancel);
-        }
+        menu.setGroupVisible(MENU_GROUP_BT, bluetoothEnabled);       
+    
         //Preferences
-        Intent i = new Intent(this, ContactsPreferences.class);
-        menu.add(0, 0, 0, R.string.menu_preferences).setIcon(android.R.drawable.ic_menu_preferences).setIntent(i);       
+        i = new Intent(this, ContactsPreferences.class);
+        menu.add(0, 0, 0, R.string.menu_preferences).setIcon(android.R.drawable.ic_menu_preferences).setIntent(i);      
 
         return super.onCreateOptionsMenu(menu);
     }

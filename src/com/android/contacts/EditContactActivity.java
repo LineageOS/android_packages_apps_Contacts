@@ -2610,6 +2610,8 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         public void onClick(DialogInterface dialogInterface, int which) {
             if (which == DialogInterface.BUTTON_POSITIVE) {
                 dialogInterface.dismiss();
+                currentMembership.clear();
+                currentMembership = (ArrayList) selectedGroups.clone();
             } else {
                 selectedGroups.clear();
                 selectedGroups = (ArrayList) currentMembership.clone();                        

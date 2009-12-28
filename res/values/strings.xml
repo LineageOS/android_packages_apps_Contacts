@@ -378,6 +378,10 @@
 
     <!-- Menu item used to remove all calls from the call log -->
     <string name="recentCalls_deleteAll">Clear call log</string>
+    
+    <string name="recentCalls_deleteAllIncoming">Clear incoming</string>
+    <string name="recentCalls_deleteAllOutgoing">Clear outgoing</string>
+    <string name="recentCalls_deleteAllMissed">Clear missed</string>
 
     <!-- Text displayed when the call log is empty -->
     <string name="recentCalls_empty">Call log is empty.</string>
@@ -821,7 +825,7 @@
     <string name="title_about_name">Mod Name</string>
     <string name="summary_about_name">Wysie Contacts</string>
     <string name="title_about_version">Version</string>
-    <string name="summary_about_version">2.2</string>
+    <string name="summary_about_version">2.21</string>
     <string name="title_about_credits">Credits</string>
     <string name="summary_about_credits">ChainsDD and the rest of XDA! :)</string>
     

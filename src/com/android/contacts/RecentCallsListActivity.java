@@ -133,6 +133,9 @@ public class RecentCallsListActivity extends ListActivity
     private static final int MENU_ITEM_TOTAL_CALL_LOG = 4;
     private static final int MENU_ITEM_DELETE_ALL_NAME = 5; //Delete all instances of a particular user
     private static final int MENU_ITEM_DELETE_ALL_NUMBER = 6; //Delete all instances of a particular number
+    private static final int MENU_ITEM_DELETE_ALL_INCOMING = 7;
+    private static final int MENU_ITEM_DELETE_ALL_OUTGOING = 8;
+    private static final int MENU_ITEM_DELETE_ALL_MISSED = 9;    
 
     private static final int QUERY_TOKEN = 53;
     private static final int UPDATE_TOKEN = 54;
@@ -836,8 +839,10 @@ public class RecentCallsListActivity extends ListActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, MENU_ITEM_DELETE_ALL, 0, R.string.recentCalls_deleteAll)
-                .setIcon(android.R.drawable.ic_menu_close_clear_cancel);   
+        menu.add(0, MENU_ITEM_DELETE_ALL, 0, R.string.recentCalls_deleteAll).setIcon(android.R.drawable.ic_menu_close_clear_cancel);
+        menu.add(0, MENU_ITEM_DELETE_ALL_INCOMING, 0, R.string.recentCalls_deleteAllIncoming).setIcon(android.R.drawable.ic_menu_close_clear_cancel);
+        menu.add(0, MENU_ITEM_DELETE_ALL_OUTGOING, 0, R.string.recentCalls_deleteAllOutgoing).setIcon(android.R.drawable.ic_menu_close_clear_cancel);
+        menu.add(0, MENU_ITEM_DELETE_ALL_MISSED, 0, R.string.recentCalls_deleteAllMissed).setIcon(android.R.drawable.ic_menu_close_clear_cancel);
         menu.add(0, MENU_ITEM_TOTAL_CALL_LOG, 0, R.string.call_log_menu_total_duration).setIcon(R.drawable.ic_tab_recent);
         
         Intent i = new Intent(this, ContactsPreferences.class);
@@ -923,6 +928,18 @@ public class RecentCallsListActivity extends ListActivity
         switch (item.getItemId()) {
             case MENU_ITEM_DELETE_ALL: {
                 clearCallLog();
+                return true;
+            }
+            case MENU_ITEM_DELETE_ALL_INCOMING: {
+                clearCallLogType(Calls.INCOMING_TYPE);
+                return true;
+            }
+            case MENU_ITEM_DELETE_ALL_OUTGOING: {
+                clearCallLogType(Calls.OUTGOING_TYPE);
+                return true;
+            }
+            case MENU_ITEM_DELETE_ALL_MISSED: {
+                clearCallLogType(Calls.MISSED_TYPE);
                 return true;
             }
             case MENU_ITEM_TOTAL_CALL_LOG: {
@@ -1128,9 +1145,7 @@ public class RecentCallsListActivity extends ListActivity
         startActivity(intent);
     }
     
-    private void clearCallLogInstances(String type, String value, String label) { // Clear all instances of a user OR number
-    	final String t = type;
-    	final String v = value;
+    private void clearCallLogInstances(final String type, final String value, String label) { // Clear all instances of a user OR number
     	
     	if (prefs.getBoolean("cl_ask_before_clear", false)) {
     		AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -1138,7 +1153,7 @@ public class RecentCallsListActivity extends ListActivity
     		alert.setMessage("Are you sure you want to clear all call records of " + label + "?"); //Text, eg. show "Private" instead of -1 :P
     		alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
     			public void onClick(DialogInterface dialog, int whichButton) {
-    				deleteCallLog(t + "='" + v + "'", null);
+    				deleteCallLog(type + "='" + value + "'", null);
     			}
     		});
     		alert.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -1149,14 +1164,48 @@ public class RecentCallsListActivity extends ListActivity
     		alert.show();
     	}
     	else {
-    		deleteCallLog(t + "='" + v + "'", null);
+    		deleteCallLog(type + "='" + value + "'", null);
     	}
     	
     }
     
+    private void clearCallLogType(final int type) {
+        String label = null;
+        
+        if (type == Calls.INCOMING_TYPE) {
+            label = "incoming";
+        }
+        else if (type == Calls.OUTGOING_TYPE) {
+            label = "outgoing";    
+        }
+        else if (type == Calls.MISSED_TYPE) {
+            label = "missed";
+        }
+        
+        if (prefs.getBoolean("cl_ask_before_clear", false)) {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle(R.string.alert_clear_call_log_title);
+            alert.setMessage("Are you sure you want to clear all " + label + " call records?");
+            alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                            deleteCallLog(Calls.TYPE + "=" + type, null);
+                    }
+            });        
+            alert.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                            // Canceled.
+            }});        
+            alert.show();
+            
+        }
+        else {
+            deleteCallLog(Calls.TYPE + "=" + type, null);
+        }        
+    }
+    
     private void deleteCallLog(String where, String[] selArgs) {
     	try  {
-    		getContentResolver().delete(Calls.CONTENT_URI, where, null);
+    		getContentResolver().delete(Calls.CONTENT_URI, where, selArgs);
     		//TODO The change notification should do this automatically, but it isn't working
     		// right now. Remove this when the change notification is working properly.
     		startQuery();

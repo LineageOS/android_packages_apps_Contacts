@@ -310,5 +310,5 @@
     <string name="title_use_1_for_reg_vm">Touche 1 pour mess. voc. par défaut</string>
     <string name="summaryon_use_1_for_reg_vm">Touche 1 sera utilisée pour la mess. vocale par défaut</string>
     <string name="summaryoff_use_1_for_reg_vm">Touche 1 sera suivie par l\'application de mess. vocale personnalisée</string>
-    <string name="recentCalls_removeAllFrom">"Suppr. tous de "</string>
+    <string name="recentCalls_removeAllFrom">Suppr. tous de </string>
 </resources>

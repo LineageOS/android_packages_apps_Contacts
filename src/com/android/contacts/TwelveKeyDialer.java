@@ -624,7 +624,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
 
     public void onClick(View view) {
         if (prefs.getBoolean("dial_enable_haptic", false)) {
-            vibrator.vibrate(50);
+            vibrator.vibrate(30);
         }
         
         switch (view.getId()) {

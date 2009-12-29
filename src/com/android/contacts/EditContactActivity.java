@@ -65,6 +65,7 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
@@ -76,6 +77,7 @@ import android.provider.Contacts.GroupMembership;
 import android.provider.Contacts.Organizations;
 import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
+import android.provider.MediaStore;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -92,6 +94,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -102,6 +105,8 @@ import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 
 /**
@@ -122,6 +127,10 @@ public final class EditContactActivity extends Activity implements View.OnClickL
 
     /** The launch code when picking a photo and the raw data is returned */
     private static final int PHOTO_PICKED_WITH_DATA = 3021;
+    
+    private static final int PICK_FROM_CAMERA = 3025;
+    
+    private static final int CROP_FROM_CAMERA = 3027;
 
     /** The launch code when picking a ringtone */
     private static final int RINGTONE_PICKED = 3023;
@@ -129,7 +138,9 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     // These correspond to the string array in resources for picker "other" items
     final static int OTHER_ORGANIZATION = 0;
     final static int OTHER_NOTE = 1;
-
+    
+    private static Uri mImageCaptureUri; 
+ 
     // Dialog IDs
     final static int DELETE_CONFIRMATION_DIALOG = 2;
     final static int DELETE_CONFIRMATION_DIALOG_SIM = 3;
@@ -257,7 +268,12 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
         case R.id.photoImage: {
-            doPickPhotoAction();
+            doAddPhotoAction();
+            
+            //Wysie_Soh: Hide the virtual keyboard. Irritating visual glitch :P. Commented out for now. This somehow causes the keyboard input
+            //to have no effect when the image selection is over :(.
+            //InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            //mgr.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             break;
         }
 
@@ -613,6 +629,53 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                 setPhotoPresent(true);
             }
             break;
+        }        
+        
+        case CROP_FROM_CAMERA: {
+            //Wysie_Soh: After a picture is taken, it will go to PICK_FROM_CAMERA, which will then come here
+            //after the image is cropped.
+            
+            //Wysie_Soh: Delete the temporary file                        
+            File f = new File(mImageCaptureUri.getPath());            
+            if (f.exists()) {
+                f.delete();
+            }
+        
+            final Bundle extras = data.getExtras();
+
+            if (extras != null) {
+                Bitmap photo = extras.getParcelable("data");
+
+                mPhoto = photo;
+                mPhotoChanged = true;
+                mPhotoImageView.setImageBitmap(photo);
+                setPhotoPresent(true);
+            }
+            
+            //InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            //mgr.showSoftInput(mNameView, InputMethodManager.SHOW_IMPLICIT);
+            
+            break;
+        }
+        
+        case PICK_FROM_CAMERA: {
+            //Wysie_Soh: After an image is taken and saved to the location of mImageCaptureUri, come here
+            //and load the crop editor, with the necessary parameters (96x96, 1:1 ratio)
+                    
+            Intent intent = new Intent("com.android.camera.action.CROP");
+            intent.setClassName("com.android.camera", "com.android.camera.CropImage");
+            
+            intent.setData(mImageCaptureUri);
+            intent.putExtra("outputX", 96);
+            intent.putExtra("outputY", 96);
+            intent.putExtra("aspectX", 1);
+            intent.putExtra("aspectY", 1);
+            intent.putExtra("scale", true);
+            intent.putExtra("return-data", true);            
+            startActivityForResult(intent, CROP_FROM_CAMERA);
+            
+            break;
+
         }
 
         case RINGTONE_PICKED: {
@@ -698,7 +761,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
 
         case MENU_ITEM_PHOTO:
             if (!mPhotoPresent) {
-                doPickPhotoAction();
+                doAddPhotoAction();
             } else {
                 doRemovePhotoAction();
             }
@@ -821,6 +884,48 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     private void doRevertAction() {
         finish();
     }
+    
+    private void doAddPhotoAction() {
+        final CharSequence[] items = {"Take a photo", "Select photo from gallery"};        
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select source");        
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                if (item == 0) {
+                    doTakePhotoAction();
+                }
+                else if (item == 1) {
+                    doPickPhotoAction();
+                }
+            }
+        });
+        
+        builder.show();
+    }
+    
+    //Wysie_Soh: Take photo instead of choosing from gallery
+    private void doTakePhotoAction() {
+        // http://2009.hfoss.org/Tutorial:Camera_and_Gallery_Demo
+        // http://stackoverflow.com/questions/1050297/how-to-get-the-url-of-the-captured-image
+        // http://www.damonkohler.com/2009/02/android-recipes.html
+        // http://www.firstclown.us/tag/android/
+        // The one I used to get everything working: http://groups.google.com/group/android-developers/msg/2ab62c12ee99ba30 
+        
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        
+        //Wysie_Soh: Create path for temp file
+        mImageCaptureUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
+                            "tmp_contact_" + String.valueOf(System.currentTimeMillis()) + ".jpg"));
+        
+        intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
+
+        try {
+            intent.putExtra("return-data", true);
+            startActivityForResult(intent, PICK_FROM_CAMERA);
+        } catch (ActivityNotFoundException e) {
+            //Do nothing for now
+        }
+    }   
 
     private void doPickPhotoAction() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
@@ -2545,12 +2650,10 @@ public final class EditContactActivity extends Activity implements View.OnClickL
             
             try {
                 if (cursor.moveToFirst()) {
-                    while (cursor.moveToNext()) {            
-                        String name = cursor.getString(
-                                cursor.getColumnIndex(Groups.NAME));
-
+                    do {            
+                        String name = cursor.getString(cursor.getColumnIndex(Groups.NAME));
                         groups.add(name);                
-                    }
+                    } while (cursor.moveToNext());
                 }
 
             } finally {
@@ -2591,7 +2694,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
                 while (groupCursor.moveToNext()) {
                     cur = mResolver.query(Groups.CONTENT_URI, GROUPS_PROJECTION, Contacts.Groups._ID + "='" 
                             + groupCursor.getString(groupCursor.getColumnIndex(GroupMembership.GROUP_ID))
-                            + "'", null, null);
+                            + "'", null, null);                          
                     
                     if (cur != null) {
                         if (cur.moveToFirst()) {
@@ -2610,6 +2713,8 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         public void onClick(DialogInterface dialogInterface, int which) {
             if (which == DialogInterface.BUTTON_POSITIVE) {
                 dialogInterface.dismiss();
+                currentMembership.clear();
+                currentMembership = (ArrayList) selectedGroups.clone();
             } else {
                 selectedGroups.clear();
                 selectedGroups = (ArrayList) currentMembership.clone();                        

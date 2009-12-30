@@ -613,9 +613,11 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != RESULT_OK) {
             //Delete temp file if it exists
-            File f = new File(mImageCaptureUri.getPath());            
-            if (f.exists()) {
-                f.delete();
+            if (mImageCaptureUri != null) {
+                File f = new File(mImageCaptureUri.getPath());            
+                if (f.exists()) {
+                    f.delete();
+                }
             }
             return;
         }

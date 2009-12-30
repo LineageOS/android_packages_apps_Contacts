@@ -1753,7 +1753,9 @@ public final class ContactsListActivity extends ListActivity
                     if (Groups.GROUP_ANDROID_STARRED.equals(name)) {
                         name = getString(R.string.starredInAndroid);
                     }
+                    
                     groups.add(name);
+                    
                     if (name.equals(mDisplayInfo)) {
                         currentIndex = groups.size() - 1;
                     }
@@ -1763,7 +1765,10 @@ public final class ContactsListActivity extends ListActivity
                             getString(R.string.groupNameMyContacts));
                     if (mDisplayType == DISPLAY_TYPE_SYSTEM_GROUP
                             && Groups.GROUP_MY_CONTACTS.equals(mDisplayInfo)) {
-                        currentIndex = DISPLAY_GROUP_INDEX_MY_CONTACTS;
+                        currentIndex = DISPLAY_GROUP_INDEX_MY_CONTACTS;                        
+                    }
+                    else if (currentIndex >= DISPLAY_GROUP_INDEX_MY_CONTACTS) {
+                        currentIndex += 1; //Wysie_Soh: Since My Contacts is inserted into index 2, it will cause index values from 2 onwards to be affected.
                     }
                     mDisplayGroupsIncludesMyContacts = true;
                 }

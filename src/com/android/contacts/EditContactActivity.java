@@ -270,10 +270,9 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         case R.id.photoImage: {
             doAddPhotoAction();
             
-            //Wysie_Soh: Hide the virtual keyboard. Irritating visual glitch :P. Commented out for now. This somehow causes the keyboard input
-            //to have no effect when the image selection is over :(.
-            //InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            //mgr.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            //Wysie_Soh: Hide the virtual keyboard. Irritating visual glitch :P.
+            InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            mgr.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             break;
         }
 
@@ -613,6 +612,11 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != RESULT_OK) {
+            //Delete temp file if it exists
+            File f = new File(mImageCaptureUri.getPath());            
+            if (f.exists()) {
+                f.delete();
+            }
             return;
         }
 
@@ -687,6 +691,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
             break;
         }
         }
+
     }
 
     @Override

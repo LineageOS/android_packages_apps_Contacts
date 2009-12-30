@@ -130,14 +130,6 @@
             android:key="contacts_show_pic"
             android:title="@string/title_contacts_show_pic"
             android:defaultValue="true" />
-        <ListPreference
-            android:key="contacts_view_contact_pic_size"
-            android:title="@string/title_contacts_view_pic_size"
-            android:summary="@string/summary_contacts_view_pic_size"
-            android:dialogTitle="@string/title_contacts_choose_pic_size"
-            android:entries="@array/view_contact_pic_sizes"
-            android:entryValues="@array/view_contact_pic_sizes_values"
-            android:defaultValue="78" />
         <CheckBoxPreference
             android:key="contacts_show_alphabetical_separators"
             android:title="@string/title_contacts_show_separators"
@@ -145,8 +137,28 @@
             android:summaryOff="@string/summaryoff_contacts_show_separators"
             android:defaultValue="true" />
         <PreferenceScreen
+            android:key="view_contact"
+            android:title="@string/title_view_contact"
+            android:summary="@string/summary_view_contact">
+            <ListPreference
+                android:key="contacts_view_contact_pic_size"
+                android:title="@string/title_contacts_view_pic_size"
+                android:summary="@string/summary_contacts_view_pic_size"
+                android:dialogTitle="@string/title_contacts_choose_pic_size"
+                android:entries="@array/view_contact_pic_sizes"
+                android:entryValues="@array/view_contact_pic_sizes_values"
+                android:defaultValue="78" />
+            <CheckBoxPreference
+                android:key="contacts_show_text_mobile_only"
+                android:title="@string/title_show_text_mobile_only"
+                android:summaryOn="@string/summaryon_show_text_mobile_only"
+                android:summaryOff="@string/summaryoff_show_text_mobile_only"
+                android:defaultValue="false" />                
+        </PreferenceScreen>
+        <PreferenceScreen
             android:key="groups_management"
-            android:title="@string/groups_manager_title"> 
+            android:title="@string/groups_manager_title"
+            android:summary="@string/groups_manager_summary"> 
             <CheckBoxPreference
                 android:key="groups_ask_before_del"
                 android:title="@string/title_groups_ask_before_del"

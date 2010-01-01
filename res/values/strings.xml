@@ -822,7 +822,15 @@
     <string name="summary_favourites_hide_freq_call">The actual data is not cleared, but hidden.</string>
     <string name="title_favs_ask_before_clear">Ask before clearing</string>
     <string name="summaryon_favs_ask_before_clear">Ask before clearing frequently called</string>
-    <string name="summaryoff_favs_ask_before_clear">Frequently called entries will be cleared without asking</string>    
+    <string name="summaryoff_favs_ask_before_clear">Frequently called entries will be cleared without asking</string>
+    
+    <string name="title_all_show_label">Show label</string>
+    <string name="summaryon_all_show_label">Label (Mobile, Home, etc.) will be shown</string>
+    <string name="summaryoff_all_show_label">Label (Mobile, Home, etc.) will be hidden</string>
+    
+    <string name="title_all_show_number">Show number</string>
+    <string name="summaryon_all_show_number">Phone number will be shown</string>
+    <string name="summaryoff_all_show_number">Phone number will be hidden</string>
     
     <string name="title_misc_category">Miscellaneous</string>
     <string name="title_sensor_rotation">Enable sensor rotation</string>
@@ -831,7 +839,7 @@
     <string name="title_about_name">Mod Name</string>
     <string name="summary_about_name">Wysie Contacts</string>
     <string name="title_about_version">Version</string>
-    <string name="summary_about_version">2.32</string>
+    <string name="summary_about_version">2.33</string>
     <string name="title_about_credits">Credits</string>
     <string name="summary_about_credits">ChainsDD and the rest of XDA! :)</string>
     

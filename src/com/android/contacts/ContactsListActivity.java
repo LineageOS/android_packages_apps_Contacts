@@ -80,6 +80,7 @@ import android.widget.AlphabetIndexer;
 import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.ResourceCursorAdapter;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
@@ -2086,13 +2087,24 @@ public final class ContactsListActivity extends ListActivity
             divView = cache.dividerView;
             callView = cache.callView;
             
+            RelativeLayout.LayoutParams newNameLayout = (RelativeLayout.LayoutParams) cache.nameView.getLayoutParams();
+            RelativeLayout.LayoutParams newNumberLayout = (RelativeLayout.LayoutParams) numberView.getLayoutParams();
+            
             cursor.copyStringToBuffer(NUMBER_COLUMN_INDEX, cache.numberBuffer);
             size = cache.numberBuffer.sizeCopied;
             
             if (size != 0) {
-                numberView.setText(cache.numberBuffer.data, 0, size);                              
-                numberView.setVisibility(View.VISIBLE);
-                labelView.setVisibility(View.VISIBLE);                
+                
+                if ((ePrefs.getBoolean("contacts_show_number", true) && mContactsTab) || (ePrefs.getBoolean("favs_show_number", true) && mFavTab)) {
+                    numberView.setText(cache.numberBuffer.data, 0, size);                              
+                    numberView.setVisibility(View.VISIBLE);
+                }
+                else {
+                    numberView.setVisibility(View.GONE);
+                }
+                
+                labelView.setVisibility(View.VISIBLE);
+                
                 if ((ePrefs.getBoolean("contacts_show_dial_button", true) && mContactsTab) ||
                     (ePrefs.getBoolean("favs_show_dial_button", true) && mFavTab)) {
                 	callView.setTag(new String(cache.numberBuffer.data, 0, size)); //Wysie_Soh: Set tag to green dial button
@@ -2112,7 +2124,8 @@ public final class ContactsListActivity extends ListActivity
             }
 
             // Set the label
-            if (!cursor.isNull(TYPE_COLUMN_INDEX)) {
+            if (!cursor.isNull(TYPE_COLUMN_INDEX) && ((ePrefs.getBoolean("contacts_show_label", true) && mContactsTab) ||
+                    (ePrefs.getBoolean("favs_show_label", true) && mFavTab))) {
                 int type = cursor.getInt(TYPE_COLUMN_INDEX);
 
                 if (type != People.Phones.TYPE_CUSTOM) {
@@ -2126,9 +2139,28 @@ public final class ContactsListActivity extends ListActivity
                     // Don't check size, if it's zero just don't show anything
                     labelView.setText(cache.labelBuffer.data, 0, cache.labelBuffer.sizeCopied);
                 }
+                
+                //Wysie_Soh: Set layout rules programmatically                    
+                newNameLayout.addRule(RelativeLayout.ABOVE, R.id.label);
+                newNumberLayout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
+                newNumberLayout.addRule(RelativeLayout.ALIGN_BASELINE, R.id.label);
+                newNumberLayout.setMargins(5, 0, 0, 0);
+                
+                cache.nameView.setLayoutParams(newNameLayout);
+                numberView.setLayoutParams(newNumberLayout);
+                    
             } else {
                 // There is no label, hide the the view
                 labelView.setVisibility(View.GONE);
+                
+                //Wysie_Soh: Set layout rules programmatically                    
+                newNameLayout.addRule(RelativeLayout.ABOVE, R.id.number);
+                newNumberLayout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                newNumberLayout.addRule(RelativeLayout.ALIGN_BASELINE, 0);
+                newNumberLayout.setMargins(0, -10, 0, 8);
+                
+                cache.nameView.setLayoutParams(newNameLayout);
+                numberView.setLayoutParams(newNumberLayout);
             }
 
             // Set the proper icon (star or presence or nothing)

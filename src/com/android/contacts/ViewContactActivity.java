@@ -145,6 +145,7 @@ public class ViewContactActivity extends ListActivity
     
     private static final int MENU_COPY_LABEL = 8;
     private static final int MENU_COPY_DATA = 9;
+    private static final int MENU_COPY_NAME = 7;
 
     private Uri mUri;
     private ContentResolver mResolver;
@@ -244,6 +245,7 @@ public class ViewContactActivity extends ListActivity
         getListView().setOnCreateContextMenuListener(this);
 
         mNameView = (TextView) findViewById(R.id.name);
+        mNameView.setOnCreateContextMenuListener(this);
         mPhoneticNameView = (TextView) findViewById(R.id.phonetic_name);
         mPhotoView = (ImageView) findViewById(R.id.photo);
         mStarView = (CheckBox) findViewById(R.id.star);
@@ -454,6 +456,13 @@ public class ViewContactActivity extends ListActivity
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenuInfo menuInfo) {
+        switch (view.getId()) {
+            case R.id.name: {
+                menu.add(0, MENU_COPY_NAME, 0, "Copy name");
+                return;
+            }
+        }
+    
         AdapterView.AdapterContextMenuInfo info;
         try {
              info = (AdapterView.AdapterContextMenuInfo) menuInfo;
@@ -679,6 +688,11 @@ public class ViewContactActivity extends ListActivity
                         }
                  }
                  return true;
+            }
+            case MENU_COPY_NAME: {
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);                
+                clipboard.setText(mNameView.getText().toString());
+                break;
             }
             case MENU_COPY_LABEL: {
                 AdapterView.AdapterContextMenuInfo info;

@@ -114,11 +114,23 @@
             android:dependency="cl_relative_time"
             android:defaultValue="true" />
         <CheckBoxPreference
+            android:key="cl_show_label"
+            android:title="@string/title_all_show_label"
+            android:summaryOn="@string/summaryon_all_show_label"
+            android:summaryOff="@string/summaryoff_all_show_label"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="cl_show_number"
+            android:title="@string/title_all_show_number"
+            android:summaryOn="@string/summaryon_all_show_number"
+            android:summaryOff="@string/summaryoff_all_show_number"
+            android:defaultValue="true" />
+        <CheckBoxPreference
             android:key="cl_ask_before_clear"
             android:title="@string/title_cl_ask_before_clear"
             android:summaryOn="@string/summaryon_cl_ask_before_clear"
             android:summaryOff="@string/summaryoff_cl_ask_before_clear"
-            android:defaultValue="false" /> 
+            android:defaultValue="false" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/contactsIconLabel">
         <CheckBoxPreference
@@ -129,6 +141,18 @@
         <CheckBoxPreference
             android:key="contacts_show_pic"
             android:title="@string/title_contacts_show_pic"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="contacts_show_label"
+            android:title="@string/title_all_show_label"
+            android:summaryOn="@string/summaryon_all_show_label"
+            android:summaryOff="@string/summaryoff_all_show_label"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="contacts_show_number"
+            android:title="@string/title_all_show_number"
+            android:summaryOn="@string/summaryon_all_show_number"
+            android:summaryOff="@string/summaryoff_all_show_number"
             android:defaultValue="true" />
         <CheckBoxPreference
             android:key="contacts_show_alphabetical_separators"
@@ -175,6 +199,18 @@
         <CheckBoxPreference
             android:key="favs_show_pic"
             android:title="@string/title_contacts_show_pic"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="favs_show_label"
+            android:title="@string/title_all_show_label"
+            android:summaryOn="@string/summaryon_all_show_label"
+            android:summaryOff="@string/summaryoff_all_show_label"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="favs_show_number"
+            android:title="@string/title_all_show_number"
+            android:summaryOn="@string/summaryon_all_show_number"
+            android:summaryOff="@string/summaryoff_all_show_number"
             android:defaultValue="true" />
         <CheckBoxPreference
             android:key="favourites_hide_freq_called"

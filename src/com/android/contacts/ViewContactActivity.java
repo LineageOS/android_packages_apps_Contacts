@@ -83,6 +83,7 @@ import android.provider.Contacts.Organizations;
 import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
 import android.provider.Contacts.Presence;
+import android.text.ClipboardManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -141,6 +142,10 @@ public class ViewContactActivity extends ListActivity
     public static final int MENU_ITEM_SEND_BT = 5;
 
     public static final int MENU_GROUP_BT = 1;
+    
+    private static final int MENU_COPY_LABEL = 8;
+    private static final int MENU_COPY_DATA = 9;
+    private static final int MENU_COPY_NAME = 7;
 
     private Uri mUri;
     private ContentResolver mResolver;
@@ -227,7 +232,6 @@ public class ViewContactActivity extends ListActivity
     private ImageView mPhotoView;
     private int mNoPhotoResource;
     private CheckBox mStarView;
-    private boolean mShowSmsLinksForAllPhones;
     private Context _context;
 
     @Override
@@ -241,6 +245,7 @@ public class ViewContactActivity extends ListActivity
         getListView().setOnCreateContextMenuListener(this);
 
         mNameView = (TextView) findViewById(R.id.name);
+        mNameView.setOnCreateContextMenuListener(this);
         mPhoneticNameView = (TextView) findViewById(R.id.phonetic_name);
         mPhotoView = (ImageView) findViewById(R.id.photo);
         mStarView = (CheckBox) findViewById(R.id.star);
@@ -274,9 +279,6 @@ public class ViewContactActivity extends ListActivity
         mSections.add(mOrganizationEntries);
         mSections.add(mOtherEntries);
         mSections.add(mGroupEntries);
-
-        //TODO Read this value from a preference
-        mShowSmsLinksForAllPhones = true;
 
         mCursor = mResolver.query(mUri, CONTACT_PROJECTION, null, null, null);
 
@@ -454,6 +456,13 @@ public class ViewContactActivity extends ListActivity
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenuInfo menuInfo) {
+        switch (view.getId()) {
+            case R.id.name: {
+                menu.add(0, MENU_COPY_NAME, 0, "Copy name");
+                return;
+            }
+        }
+    
         AdapterView.AdapterContextMenuInfo info;
         try {
              info = (AdapterView.AdapterContextMenuInfo) menuInfo;
@@ -467,27 +476,59 @@ public class ViewContactActivity extends ListActivity
             Log.e(TAG, "bad menuInfo");
             return;
         }
+        
+        String copyLabel = null;
 
         ViewEntry entry = ContactEntryAdapter.getEntry(mSections, info.position, SHOW_SEPARATORS);
         switch (entry.kind) {
             case Contacts.KIND_PHONE: {
                 menu.add(0, 0, 0, R.string.menu_call).setIntent(entry.intent);
                 menu.add(0, 0, 0, R.string.menu_sendSMS).setIntent(entry.auxIntent);
+                copyLabel = "number";
                 if (entry.primaryIcon == -1) {
                     menu.add(0, MENU_ITEM_MAKE_DEFAULT, 0, R.string.menu_makeDefaultNumber);
                 }
                 break;
             }
+            
+            case ViewEntry.KIND_SMS: {
+                copyLabel = "number";
+                break;
+            }
 
             case Contacts.KIND_EMAIL: {
                 menu.add(0, 0, 0, R.string.menu_sendEmail).setIntent(entry.intent);
+                copyLabel = "email address";
+                break;
+            }
+            
+            case Contacts.KIND_IM: {
+                copyLabel = "IM address";
                 break;
             }
 
             case Contacts.KIND_POSTAL: {
                 menu.add(0, 0, 0, R.string.menu_viewAddress).setIntent(entry.intent);
+                copyLabel = "address";
                 break;
             }
+            
+            case Contacts.KIND_ORGANIZATION: {
+                menu.add(0, MENU_COPY_LABEL, 0, "Copy organization");
+                copyLabel = "position";
+                break;
+            }
+            
+            case ViewEntry.KIND_CONTACT: {
+                if ((entry.label).equals(getString(R.string.label_notes))) {
+                    copyLabel = "notes";
+                }
+                break;
+            }
+        }
+        
+        if (copyLabel != null) {            
+            menu.add(0, MENU_COPY_DATA, 0, "Copy " + copyLabel);
         }
     }
 
@@ -648,6 +689,48 @@ public class ViewContactActivity extends ListActivity
                  }
                  return true;
             }
+            case MENU_COPY_NAME: {
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);                
+                clipboard.setText(mNameView.getText().toString());
+                break;
+            }
+            case MENU_COPY_LABEL: {
+                AdapterView.AdapterContextMenuInfo info;
+                try {
+                    info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+                } catch (ClassCastException e) {
+                    Log.e(TAG, "bad menuInfo", e);
+                    break;
+                }
+
+                ViewEntry entry = ContactEntryAdapter.getEntry(mSections, info.position,
+                        SHOW_SEPARATORS);
+                        
+                if (entry != null) {
+                    ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    clipboard.setText(entry.label);
+                 }                 
+                 return true;
+            }
+            case MENU_COPY_DATA: {
+                AdapterView.AdapterContextMenuInfo info;
+                try {
+                    info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+                } catch (ClassCastException e) {
+                    Log.e(TAG, "bad menuInfo", e);
+                    break;
+                }
+
+                ViewEntry entry = ContactEntryAdapter.getEntry(mSections, info.position,
+                        SHOW_SEPARATORS);
+                        
+                if (entry != null) {
+                    ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    clipboard.setText(entry.data);
+                 }                 
+                 return true;
+            }
+            
         }
         return super.onContextItemSelected(item);
     }
@@ -834,7 +917,7 @@ public class ViewContactActivity extends ListActivity
                 entry.actionIcon = android.R.drawable.sym_action_call;
                 mPhoneEntries.add(entry);
 
-                if (type == Phones.TYPE_MOBILE || mShowSmsLinksForAllPhones) {
+                if (type == Phones.TYPE_MOBILE || !ePrefs.getBoolean("contacts_show_text_mobile_only", false)) {
                     // Add an SMS entry
                     ViewEntry smsEntry = new ViewEntry();
                     smsEntry.label = buildActionString(R.string.actionText, displayLabel, true);
@@ -877,9 +960,8 @@ public class ViewContactActivity extends ListActivity
                 ViewEntry entry = new ViewEntry();
                 entry.id = id;
                 entry.uri = uri;
-                entry.kind = kind;                
+                entry.kind = kind;
                 
-
                 switch (kind) {
                     case Contacts.KIND_EMAIL:
                         entry.label = buildActionString(R.string.actionEmail,
@@ -905,6 +987,7 @@ public class ViewContactActivity extends ListActivity
                         entry2.label = getString(R.string.view_contact_navigate);
                         entry2.data = data;
                         entry2.maxLines = 4;
+                        entry2.kind = kind;
                         entry2.actionIcon = R.drawable.sym_action_navi;
                         Intent i = startNavigation(data);
                         
@@ -1053,7 +1136,6 @@ public class ViewContactActivity extends ListActivity
             organizationsCursor.close();
         }
 
-
         // Build the other entries
         String note = personCursor.getString(CONTACT_NOTES_COLUMN);
         if (!TextUtils.isEmpty(note)) {
@@ -1141,16 +1223,14 @@ public class ViewContactActivity extends ListActivity
         			groups.append(groupNamesArray.get(i));
         		else
         			groups.append("\n" + groupNamesArray.get(i));
-        	}
-        	
-        	//Log.d("Testing", groups.toString());
+        	}        	
         	
         	ViewEntry entry = new ViewEntry();
         	entry.label = getString(R.string.view_contact_groups);
         	entry.data = groups.toString();
         	entry.actionIcon = com.android.internal.R.drawable.ic_menu_allfriends;
         	entry.maxLines = 10;
-		mGroupEntries.add(entry);        	
+        	mGroupEntries.add(entry);        	
         }
     }
     

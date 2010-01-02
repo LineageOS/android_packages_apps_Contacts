@@ -77,6 +77,7 @@ import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.widget.RelativeLayout;
 
 import com.android.internal.telephony.CallerInfo;
 import com.android.internal.telephony.ITelephony;
@@ -505,16 +506,46 @@ public class RecentCallsListActivity extends ListActivity
             // Set the text lines
             if (!TextUtils.isEmpty(name)) {
                 views.line1View.setText(name);
-                views.labelView.setVisibility(View.VISIBLE);
+                //views.labelView.setVisibility(View.VISIBLE);
                 CharSequence numberLabel = Phones.getDisplayLabel(context, ntype, label,
                         mLabelArray);
-                views.numberView.setVisibility(View.VISIBLE);
-                views.numberView.setText(formattedNumber);
-                if (!TextUtils.isEmpty(numberLabel)) {
-                    views.labelView.setText(numberLabel);
+                        
+                RelativeLayout.LayoutParams newLine1Layout = (RelativeLayout.LayoutParams) views.line1View.getLayoutParams();
+                RelativeLayout.LayoutParams newNumberLayout = (RelativeLayout.LayoutParams) views.numberView.getLayoutParams();
+
+                if (prefs.getBoolean("cl_show_number", true)) {       
+                    views.numberView.setVisibility(View.VISIBLE);
+                    views.numberView.setText(formattedNumber);
+                }
+                else {
+                    views.numberView.setVisibility(View.GONE);
+                }
+                
+                
+                if (!TextUtils.isEmpty(numberLabel) && prefs.getBoolean("cl_show_label", true)) {
                     views.labelView.setVisibility(View.VISIBLE);
+                    views.labelView.setText(numberLabel);
+                    
+                    //Wysie_Soh: Set layout rules programmatically                    
+                    newLine1Layout.addRule(RelativeLayout.ABOVE, R.id.label);
+                    newNumberLayout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
+                    newNumberLayout.addRule(RelativeLayout.ALIGN_BASELINE, R.id.label);
+                    newNumberLayout.setMargins(5, 0, 0, 0);                    
+                    
+                    views.line1View.setLayoutParams(newLine1Layout);
+                    views.numberView.setLayoutParams(newNumberLayout);
+                    
                 } else {
                     views.labelView.setVisibility(View.GONE);
+                    
+                    //Wysie_Soh: Set layout rules programmatically                    
+                    newLine1Layout.addRule(RelativeLayout.ABOVE, R.id.number);
+                    newNumberLayout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                    newNumberLayout.addRule(RelativeLayout.ALIGN_BASELINE, 0);
+                    newNumberLayout.setMargins(0, -10, 0, 8);                    
+                    
+                    views.line1View.setLayoutParams(newLine1Layout);
+                    views.numberView.setLayoutParams(newNumberLayout);
                 }
             } else {
                 if (number.equals(CallerInfo.UNKNOWN_NUMBER)) {

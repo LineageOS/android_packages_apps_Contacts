@@ -2773,7 +2773,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
         for (int i = 0; i < selectedGroups.size(); i++) {        
             Cursor cursor = mResolver.query(Groups.CONTENT_URI,
                         GROUPS_PROJECTION, 
-                        Contacts.Groups.NAME + "='" + selectedGroups.get(i) + "'", null, null);
+                        Contacts.Groups.NAME + "=?", new String[] { selectedGroups.get(i).toString() } , null);
                         
             if (cursor != null) {
                 if ((selectedGroups.get(i)).equals(Groups.GROUP_ANDROID_STARRED)) {

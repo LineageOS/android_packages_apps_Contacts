@@ -27,52 +27,111 @@
     android:gravity="center_vertical"
 >
 
-    <ImageView android:id="@+id/icon"
-        android:layout_width="32dip"
-        android:layout_height="32dip"
-        android:layout_marginRight="5dip"
-        android:gravity="center"
-        android:scaleType="centerInside"
-    />
-
-    <LinearLayout
-        android:layout_width="0dip"
+    <RelativeLayout android:id="@+id/line_action"
+        android:layout_width="fill_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:paddingLeft="0dip"
+        android:paddingRight="0dip"
+    >
+    
+        <ImageView android:id="@+id/sms_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:paddingLeft="8dip"
+            android:paddingRight="8dip"
+            android:src="@drawable/sym_action_sms"
+            android:background="@android:drawable/list_selector_background"
+            android:layout_alignParentRight="true"
+        />
+        
+        <TextView android:id="@+id/call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="11dip"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/callBack"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="17dip"
+            android:gravity="center_vertical"
+        />
+        
+        <View android:id="@+id/divider1"
+            android:layout_width="1dip"
+            android:layout_marginLeft="4dip"
+            android:layout_height="fill_parent"
+            android:layout_toLeftOf="@id/sms_icon"
+            android:layout_marginRight="4dip"
+            android:background="@drawable/divider_vertical_dark"
+        />
+        
+        <ImageView android:id="@+id/call_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:paddingLeft="8dip"
+            android:paddingRight="8dip"
+            android:gravity="center_vertical"
+            android:layout_toLeftOf="@id/divider1"
+            android:src="@android:drawable/sym_action_call"
+            android:background="@android:drawable/list_selector_background"
+        />
+        
+    </RelativeLayout>
+    
+    <LinearLayout android:id="@+id/line_log"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginLeft="5dip"
-        android:paddingTop="5dip"
-        android:paddingBottom="7dip"
-        android:orientation="vertical"
+        android:minHeight="?android:attr/listPreferredItemHeight"
+        android:orientation="horizontal"
         android:gravity="center_vertical"
     >
-
-        <TextView android:id="@android:id/text1"
+    
+        <ImageView android:id="@+id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:paddingLeft="4dip"
+            android:paddingRight="4dip"
+            android:gravity="center"
+            android:scaleType="centerInside"
         />
-
-
-        <LinearLayout android:id="@+id/line2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-        >
-            <TextView android:id="@+id/label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dip"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="bold"
-            />
         
-            <TextView android:id="@+id/number"
+        <RelativeLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:paddingTop="5dip"
+        >
+        
+            <TextView android:id="@+id/type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="11dip"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textStyle="bold"   
+                android:text="@string/menu_sendTextMessage"
+            />
+            
+            <TextView android:id="@+id/duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="11dip"
+                android:layout_alignParentRight="true"
+                android:layout_alignBaseline="@id/type"
                 android:textAppearance="?android:attr/textAppearanceSmall"
             />
-        </LinearLayout>
+            
+            <TextView android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:singleLine="true"
+                android:layout_marginBottom="8dip"
+                android:layout_marginTop="-8dip"
+                android:layout_marginLeft="11dip"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+            />
 
+        </RelativeLayout>
     </LinearLayout>
-
 </LinearLayout>

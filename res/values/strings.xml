@@ -839,7 +839,7 @@
     <string name="title_about_name">Mod Name</string>
     <string name="summary_about_name">Wysie Contacts</string>
     <string name="title_about_version">Version</string>
-    <string name="summary_about_version">2.34</string>
+    <string name="summary_about_version">2.5 beta</string>
     <string name="title_about_credits">Credits</string>
     <string name="summary_about_credits">ChainsDD and the rest of XDA! :)</string>
     
@@ -851,11 +851,9 @@
     <string name="alert_clear_freq_called">Clear frequently called</string>
     <string name="alert_clear_freq_called_msg">Are you sure you want to clear all frequently called entries?</string>
     
-    
     <!-- Wysie_Soh: View contact strings -->
     <string name="view_contact_navigate">Navigate to</string>
-    <string name="view_contact_groups">Groups</string>
-    
+    <string name="view_contact_groups">Groups</string>    
     
     <!-- Wysie_Soh: Groups management -->
     <string name="help_title">Usage</string>

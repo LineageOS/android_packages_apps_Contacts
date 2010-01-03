@@ -298,7 +298,8 @@ public class GroupsListActivity extends ListActivity {
         public boolean checkGroupExists(String groupName) {
             boolean exists = false;
             
-            Cursor c = resolver.query(Groups.CONTENT_URI, GROUPS_PROJECTION, "UPPER(" + Groups.NAME + ")=UPPER('" + groupName + "')", null, null);
+            Cursor c = resolver.query(Groups.CONTENT_URI, GROUPS_PROJECTION, "UPPER(" + Groups.NAME + ")=?",
+                        new String[] { groupName.toUpperCase() }, null);
             
             if (c.getCount() > 0)
                 exists = true;

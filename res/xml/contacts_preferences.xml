@@ -131,6 +131,19 @@
             android:summaryOn="@string/summaryon_cl_ask_before_clear"
             android:summaryOff="@string/summaryoff_cl_ask_before_clear"
             android:defaultValue="false" />
+        <PreferenceScreen
+            android:key="view_call_log"
+            android:title="@string/title_view_cl"
+            android:summary="@string/summary_view_cl">
+            <ListPreference
+                android:key="cl_view_contact_pic_size"
+                android:title="@string/title_contacts_view_pic_size"
+                android:summary="@string/summary_contacts_view_pic_size"
+                android:dialogTitle="@string/title_contacts_choose_pic_size"
+                android:entries="@array/view_contact_pic_sizes"
+                android:entryValues="@array/view_contact_pic_sizes_values"
+                android:defaultValue="78" />                
+        </PreferenceScreen>            
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/contactsIconLabel">
         <CheckBoxPreference

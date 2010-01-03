@@ -22,27 +22,25 @@
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:orientation="horizontal"
-    android:paddingLeft="9dip"
-    android:paddingRight="5dip"
     android:gravity="center_vertical"
 >
 
     <RelativeLayout android:id="@+id/line_action"
         android:layout_width="fill_parent"
         android:layout_height="?android:attr/listPreferredItemHeight"
-        android:paddingLeft="0dip"
-        android:paddingRight="0dip"
+        android:paddingLeft="5dip"
     >
     
-        <ImageView android:id="@+id/sms_icon"
+        <com.android.contacts.ui.widget.DontPressWithParentImageView android:id="@+id/sms_icon"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:paddingLeft="8dip"
-            android:paddingRight="8dip"
+            android:paddingLeft="14dip"
+            android:paddingRight="14dip"
             android:src="@drawable/sym_action_sms"
-            android:background="@android:drawable/list_selector_background"
+            android:background="@drawable/call_background"
             android:layout_alignParentRight="true"
-        />
+            android:gravity="center_vertical"
+        />      
         
         <TextView android:id="@+id/call"
             android:layout_width="wrap_content"
@@ -56,33 +54,34 @@
         />
         
         <View android:id="@+id/divider1"
-            android:layout_width="1dip"
-            android:layout_marginLeft="4dip"
+            android:layout_width="1px"
             android:layout_height="fill_parent"
+            android:layout_marginBottom="5dip"
             android:layout_toLeftOf="@id/sms_icon"
-            android:layout_marginRight="4dip"
             android:background="@drawable/divider_vertical_dark"
+            android:focusable = "false"
         />
         
-        <ImageView android:id="@+id/call_icon"
+        <com.android.contacts.ui.widget.DontPressWithParentImageView android:id="@+id/call_icon"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:paddingLeft="8dip"
-            android:paddingRight="8dip"
+            android:paddingLeft="14dip"
+            android:paddingRight="14dip"
             android:gravity="center_vertical"
             android:layout_toLeftOf="@id/divider1"
             android:src="@android:drawable/sym_action_call"
-            android:background="@android:drawable/list_selector_background"
+            android:background="@drawable/call_background"
         />
         
     </RelativeLayout>
     
     <LinearLayout android:id="@+id/line_log"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="?android:attr/listPreferredItemHeight"
+        android:layout_height="?android:attr/listPreferredItemHeight"
         android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:background="@android:drawable/list_selector_background"
+        android:paddingLeft="5dip"
     >
     
         <ImageView android:id="@+id/icon"

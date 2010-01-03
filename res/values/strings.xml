@@ -794,6 +794,8 @@
     <string name="title_cl_ask_before_clear">Ask before clearing</string>
     <string name="summaryon_cl_ask_before_clear">Ask before clearing call log</string>
     <string name="summaryoff_cl_ask_before_clear">Call logs will be cleared without asking</string>
+    <string name="title_view_cl">Individual call log</string>
+    <string name="summary_view_cl">Set preferences when viewing an individual's call log</string>
     
     <string name="title_contacts_category">Contacts</string>
     <string name="title_contacts_show_pic">Show contact pictures</string>
@@ -839,7 +841,7 @@
     <string name="title_about_name">Mod Name</string>
     <string name="summary_about_name">Wysie Contacts</string>
     <string name="title_about_version">Version</string>
-    <string name="summary_about_version">2.5 beta</string>
+    <string name="summary_about_version">2.5</string>
     <string name="title_about_credits">Credits</string>
     <string name="summary_about_credits">ChainsDD and the rest of XDA! :)</string>
     

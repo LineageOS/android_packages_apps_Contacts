@@ -522,9 +522,11 @@ public class RecentCallsListActivity extends ListActivity
             if (!prefs.getBoolean("cl_show_dial_button", true)) {
                 views.iconView.setTag(number);
                 views.iconView.setOnClickListener(this);
+                //views.iconView.setBackgroundResource(R.drawable.call_background);
             } else {
                 views.iconView.setTag(null);
                 views.iconView.setOnClickListener(null);
+                //views.iconView.setBackgroundResource(0);
             }
 
             // Lookup contacts with this number
@@ -663,15 +665,15 @@ public class RecentCallsListActivity extends ListActivity
 
                 if (DateFormat.is24HourFormat(context)) {
                     if (prefs.getBoolean("cl_show_seconds", true)) {
-                        format = "MMM dd, kk:mm:ss";
+                        format = "MMM d, kk:mm:ss";
                     } else {
-                        format = "MMM dd, kk:mm";
+                        format = "MMM d, kk:mm";
                     }
                 } else {
                     if (prefs.getBoolean("cl_show_seconds", true)) {
-                        format = "MMM dd, h:mm:ss aa";
+                        format = "MMM d, h:mm:ssaa";
                     } else {
-                        format = "MMM dd, h:mm aa";
+                        format = "MMM d, h:mmaa";
                     }                  	
                 }
                 
@@ -1417,7 +1419,7 @@ public class RecentCallsListActivity extends ListActivity
             alert.setPositiveButton(android.R.string.ok,
                     new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    deleteCallLog(type + "='" + value + "'", null);
+                    deleteCallLog(type + "=?", new String[] { value });
                 }
             });
             alert.setNegativeButton(android.R.string.cancel,
@@ -1428,7 +1430,7 @@ public class RecentCallsListActivity extends ListActivity
             });
             alert.show();
         } else {
-            deleteCallLog(type + "='" + value + "'", null);
+            deleteCallLog(type + "=?", new String[] { value });
         }
     	
     }
@@ -1454,7 +1456,7 @@ public class RecentCallsListActivity extends ListActivity
             alert.setPositiveButton(android.R.string.ok,
                     new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    deleteCallLog(Calls.TYPE + "=" + type, null);
+                    deleteCallLog(Calls.TYPE + "=?", new String[] { Integer.toString(type) });
                 }
             });        
             alert.setNegativeButton(android.R.string.cancel,
@@ -1465,7 +1467,7 @@ public class RecentCallsListActivity extends ListActivity
             alert.show();
             
         } else {
-            deleteCallLog(Calls.TYPE + "=" + type, null);
+            deleteCallLog(Calls.TYPE + "=?", new String[] { Integer.toString(type) });
         }        
     }
     

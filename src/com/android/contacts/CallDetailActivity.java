@@ -27,11 +27,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.provider.CallLog;
 import android.provider.Contacts;
 import android.provider.CallLog.Calls;
@@ -56,6 +57,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,8 +67,7 @@ import java.util.List;
 /**
  * Displays the details of a specific call log entry.
  */
-public class CallDetailActivity extends ListActivity 	
-	 {
+public class CallDetailActivity extends ListActivity implements View.OnCreateContextMenuListener {
     private static final String TAG = "CallDetail";
 
     private TextView mCallType;
@@ -76,9 +77,7 @@ public class CallDetailActivity extends ListActivity
     //Geesun Add
     private int mNoPhotoResource;
     Uri personUri = null ;
-    private ImageView mPhotoView;
-    static String mIpPrefix = null; 
-    
+    private ImageView mPhotoView;    
     
     private String mNumber = null;
     
@@ -111,17 +110,32 @@ public class CallDetailActivity extends ListActivity
     static final int COLUMN_INDEX_TYPE = 2;
     static final int COLUMN_INDEX_LABEL = 3;
     static final int COLUMN_INDEX_NUMBER = 4;
+    
+    private static final int MENU_ITEM_DELETE = 1;
+    private static final int MENU_ITEM_DELETE_ALL = 2;
+    private static final int MENU_ITEM_DELETE_ALL_INCOMING = 3;
+    private static final int MENU_ITEM_DELETE_ALL_OUTGOING = 4;
+    private static final int MENU_ITEM_DELETE_ALL_MISSED = 5;
+    private static final int MENU_ITEM_VIEW_CONTACT = 6;
+    private static final int MENU_ITEM_ADD_CONTACT = 7;
+    
+    private ViewAdapter adapter;
+    private List<ViewEntryData> logs;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
+        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         setContentView(R.layout.call_detail);
 
         mInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         mResources = getResources();    
 
         mPhotoView = (ImageView) findViewById(R.id.photo);
+        
+        getListView().setOnCreateContextMenuListener(this);
           
         // Set the photo with a random "no contact" image
         long now = SystemClock.elapsedRealtime();
@@ -188,12 +202,6 @@ public class CallDetailActivity extends ListActivity
         where.append(Calls.NUMBER);
         where.append(" = '" + number + "'");
         
-        where.append(" or " + Calls.NUMBER);
-        where.append(" = '" + mIpPrefix + number + "'");
-        
-        where.append(" or " + Calls.NUMBER);
-        where.append(" = '" + "+86" + number + "'");
-        
         Cursor callCursor = getContentResolver().query(Calls.CONTENT_URI, CALL_LOG_PROJECTION,where.toString(), null,
         		Calls.DEFAULT_SORT_ORDER);
         
@@ -239,9 +247,13 @@ public class CallDetailActivity extends ListActivity
             } finally {
                 if (phonesCursor != null) phonesCursor.close();
             }
-        }        
+        }
+        
+        int size = Integer.parseInt(prefs.getString("cl_view_contact_pic_size", "78"));
+        //Wysie_Soh: Set contact picture size
+        mPhotoView.setLayoutParams(new LinearLayout.LayoutParams(size, size));
     	
-    	List<ViewEntryData> logs = new ArrayList<ViewEntryData>();
+    	logs = new ArrayList<ViewEntryData>();
     	ViewEntryData firstPlaceHolder = new ViewEntryData();
     	firstPlaceHolder.number = mNumber;
     	logs.add(firstPlaceHolder);
@@ -271,7 +283,7 @@ public class CallDetailActivity extends ListActivity
             }
         }
         
-        ViewAdapter adapter = new ViewAdapter(this, logs);
+        adapter = new ViewAdapter(this, logs);
         setListAdapter(adapter);         
     }
 
@@ -291,8 +303,7 @@ public class CallDetailActivity extends ListActivity
     }
 
     static final class ViewAdapter extends BaseAdapter 
-    	implements View.OnClickListener,
-    	View.OnLongClickListener
+    	implements View.OnClickListener 
     	{
         
         private final List<ViewEntryData> mLogs;
@@ -353,8 +364,6 @@ public class CallDetailActivity extends ListActivity
             	layout.setVisibility(View.VISIBLE);
                 ImageView call_icon = (ImageView) convertView.findViewById(R.id.call_icon);
                 ImageView sms_icon = (ImageView) convertView.findViewById(R.id.sms_icon);
-               
-                //TextView tvSms = (TextView) convertView.findViewById(R.id.send_sms);
                 TextView tvCall = (TextView) convertView.findViewById(R.id.call);
                
                 //Geesun                
@@ -383,13 +392,11 @@ public class CallDetailActivity extends ListActivity
                 
                 
                 call_icon.setTag(callIntent);
-                tvCall.setTag(callIntent);
+                //tvCall.setTag(callIntent);
                 sms_icon.setTag(smsIntent);
-                //tvSms.setTag(smsIntent);                
                 call_icon.setOnClickListener(this);                
                 sms_icon.setOnClickListener(this);
-                //tvSms.setOnClickListener(this);
-                tvCall.setOnClickListener(this); 
+                //tvCall.setOnClickListener(this); 
                 
                 convertView.setTag(null);
                 
@@ -435,8 +442,6 @@ public class CallDetailActivity extends ListActivity
                         break;
                 }                
                 convertView.setTag(entry);
-                convertView.setLongClickable(true);
-                convertView.setOnLongClickListener(this);
             }
             
             return convertView;
@@ -448,79 +453,193 @@ public class CallDetailActivity extends ListActivity
            if(intent != null)
             mContext.startActivity(intent);
 		}
-
-	    private class DeleteClickListener implements DialogInterface.OnClickListener {
-	        private ViewEntryData  mData;
-	        
-	        public DeleteClickListener(ViewEntryData data) {
-	        	mData = data;
-	        }
-
-	        public void onClick(DialogInterface dialog, int which) {
-                StringBuilder where = new StringBuilder();
-                where.append(Calls._ID);
-                where.append(" =  " + mData.id);
-                mContext.getContentResolver().delete(Calls.CONTENT_URI, where.toString(), null);
-                mLogs.remove(mData);
-                if(mLogs.size() != 1)
-                	notifyDataSetChanged();
-                else{
-                	
-                	((Activity) mContext).finish();
-                }
-	        }
-	    }
-	    
-		public boolean onLongClick(View v) {
-			//v.setBackgroundResource(android.R.drawable.list_selector_background);
-			
-			ViewEntryData entryData  =  (ViewEntryData) v.getTag();
-			if(entryData != null){
-
-
-                Uri uri = ContentUris.withAppendedId(CallLog.Calls.CONTENT_URI,
-                		entryData.id);
-                //TODO make this dialog persist across screen rotations
-                new AlertDialog.Builder(mContext)
-                    .setTitle(R.string.deleteConfirmation_title)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setMessage("Wysie?")
-                    .setNegativeButton(android.R.string.cancel, null)
-                    .setPositiveButton(android.R.string.ok, new DeleteClickListener(entryData))
-                    .show();
-			}
-			// TODO Auto-generated method stub
-			return false;
-		}
-		
-    }
-
-    
+    }   
 
     
     public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(0, MENU_ITEM_DELETE_ALL, 0, R.string.recentCalls_deleteAll).setIcon(
+                android.R.drawable.ic_menu_close_clear_cancel);
+                
+        /* Wysie: WIP. Not working for now :(
+        menu.add(0, MENU_ITEM_DELETE_ALL_INCOMING, 0, R.string.recentCalls_deleteAllIncoming).setIcon(
+                android.R.drawable.ic_menu_close_clear_cancel);
+        menu.add(0, MENU_ITEM_DELETE_ALL_OUTGOING, 0, R.string.recentCalls_deleteAllOutgoing).setIcon(
+                android.R.drawable.ic_menu_close_clear_cancel);
+        menu.add(0, MENU_ITEM_DELETE_ALL_MISSED, 0, R.string.recentCalls_deleteAllMissed).setIcon(
+                android.R.drawable.ic_menu_close_clear_cancel);
+        */
+    
         if (personUri != null) {
-            menu.add(0, 0, 0, R.string.menu_viewContact)
-            	.setIcon(R.drawable.sym_action_view_contact); 
-        } else {
-            menu.add(0, 0, 0, R.string.recentCalls_addToContact)
-            .setIcon(R.drawable.sym_action_add);
+            menu.add(0, MENU_ITEM_VIEW_CONTACT, 0, R.string.menu_viewContact)
+            	.setIcon(R.drawable.ic_tab_contacts); 
+        } else if (!(mNumber.equals(CallerInfo.UNKNOWN_NUMBER) ||
+                mNumber.equals(CallerInfo.PRIVATE_NUMBER))) {
+            menu.add(0, MENU_ITEM_ADD_CONTACT, 0, R.string.recentCalls_addToContact)
+            .setIcon(android.R.drawable.ic_menu_add);
         }
 
         return true;
     }
+    
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        if (position == 0) {
+            Intent callIntent = new Intent(Intent.ACTION_CALL_PRIVILEGED,
+                        Uri.fromParts("tel", mNumber, null));
+            startActivity(callIntent);
+        }        
+    }
+    
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (personUri != null) {
+        switch (item.getItemId()) {
+        case MENU_ITEM_DELETE_ALL: {
+            clearCallLog();
+            return true;
+        }
+
+        case MENU_ITEM_DELETE_ALL_INCOMING: {
+            clearCallLogType(Calls.INCOMING_TYPE);
+            return true;
+        }
+
+        case MENU_ITEM_DELETE_ALL_OUTGOING: {
+            clearCallLogType(Calls.OUTGOING_TYPE);
+            return true;
+        }
+
+        case MENU_ITEM_DELETE_ALL_MISSED: {
+            clearCallLogType(Calls.MISSED_TYPE);
+            return true;
+        }
+        case MENU_ITEM_VIEW_CONTACT: {
             Intent viewIntent = new Intent(Intent.ACTION_VIEW, personUri);
             startActivity(viewIntent);
-        } else {
+            return true;
+        }
+        case MENU_ITEM_ADD_CONTACT: {
             Intent createIntent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
             createIntent.setType(People.CONTENT_ITEM_TYPE);
             createIntent.putExtra(Insert.PHONE, mNumber);
             startActivity(createIntent);
+            return true;
         }
-        
-                return true;
+        }
+        return super.onOptionsItemSelected(item);
 
     }
+    
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenuInfo menuInfoIn) {
+        AdapterView.AdapterContextMenuInfo menuInfo;
+        try {
+            menuInfo = (AdapterView.AdapterContextMenuInfo) menuInfoIn;
+        } catch (ClassCastException e) {
+            Log.e(TAG, "bad menuInfoIn", e);
+            return;
+        }
+        if (menuInfo.position == 0) {
+            return;
+        }
+    
+        menu.add(0, MENU_ITEM_DELETE, 0, R.string.recentCalls_removeFromRecentList);
+    }
+    
+	public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        ViewEntryData entryData = (ViewEntryData)adapter.getItem(info.position);
+	
+		switch(item.getItemId()) {		
+		    case MENU_ITEM_DELETE:
+		        getContentResolver().delete(Calls.CONTENT_URI, "Calls._ID=?", new String[] { Long.toString(entryData.id) } );
+                logs.remove(entryData);
+                if(logs.size() != 1) { //1 because the top row is for calling/smsing
+                	adapter.notifyDataSetChanged();
+                }
+                else {                	
+                	finish();
+                }
+                return true;
+		
+		}
+        
+		return super.onContextItemSelected(item);
+	}
+	
+    private void clearCallLog() {        
+        if (prefs.getBoolean("cl_ask_before_clear", false)) {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+            alert.setTitle(R.string.alert_clear_call_log_title);
+            alert.setMessage("Are you sure you want to clear all call records of " + mNumber + "?");
+      
+            alert.setPositiveButton(android.R.string.ok,
+                    new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    getContentResolver().delete(Calls.CONTENT_URI, Calls.NUMBER + "=?",
+                                                new String[] { mNumber });
+                    logs.clear();
+                    finish();
+                }
+            });
+        
+            alert.setNegativeButton(android.R.string.cancel,
+                    new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {// Canceled.
+                }
+            });
+        
+            alert.show();
+        } else {
+            getContentResolver().delete(Calls.CONTENT_URI, Calls.NUMBER + "=?",
+                                        new String[] { mNumber });
+            logs.clear();
+            finish();
+        }
+    }
+
+    private void clearCallLogType(final int type) {
+        String message = null;
+        
+        if (type == Calls.INCOMING_TYPE) {
+            message = "Are you sure you want to clear all incoming call records from " + mNumber + "?" ;            
+        } else if (type == Calls.OUTGOING_TYPE) {
+            message = "Are you sure you want to clear all outgoing call records to " + mNumber + "?" ;
+        } else if (type == Calls.MISSED_TYPE) {
+            message = "Are you sure you want to clear all missed call records from " + mNumber + "?" ;
+        }
+        
+        if (prefs.getBoolean("cl_ask_before_clear", false)) {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+            alert.setTitle(R.string.alert_clear_call_log_title);
+            alert.setMessage(message);
+            alert.setPositiveButton(android.R.string.ok,
+                    new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    getContentResolver().delete(Calls.CONTENT_URI, Calls.TYPE + "=? AND " + Calls.NUMBER + "=?",
+                                                new String[] { Integer.toString(type), mNumber });
+                }
+            });        
+            alert.setNegativeButton(android.R.string.cancel,
+                    new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {// Canceled.
+                }
+            });        
+            alert.show();
+            
+        } else {
+            getContentResolver().delete(Calls.CONTENT_URI, Calls.TYPE + "=? AND " + Calls.NUMBER + "=?",
+                                        new String[] { Integer.toString(type), mNumber });
+        }
+        updateData();
+        if(logs.size() != 1) { //1 because the top row is for calling/smsing
+            adapter.notifyDataSetInvalidated();
+            Log.d("WYSIE", "Data Changed 2");
+        }
+        else {                	
+            finish();
+        }        
+        
+    }
+
 }

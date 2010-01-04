@@ -174,6 +174,7 @@ public class RecentCallsListActivity extends ListActivity
         View dividerView;
         View callView;
         ImageView photoView;
+        TextView countView;
     }
 
 
@@ -196,6 +197,7 @@ public class RecentCallsListActivity extends ListActivity
         public long date;
         public int duration;
         public int count;
+        public int personId;
         RecentCallsInfo() {
             count = 1;
         }
@@ -496,6 +498,7 @@ public class RecentCallsListActivity extends ListActivity
             views.callView = view.findViewById(R.id.call_icon);
             views.callView.setOnClickListener(this);
             views.photoView = (ImageView) view.findViewById(R.id.photo);
+            views.countView = (TextView) view.findViewById(R.id.count);
 
             view.setTag(views);
 
@@ -582,9 +585,12 @@ public class RecentCallsListActivity extends ListActivity
             // Set the text lines
             if (!TextUtils.isEmpty(name)) {
                 if (count != 1) {
-                    views.line1View.setText(name + " (" + count + ")");
+                    views.line1View.setText(name);
+                    views.countView.setText("(" + count + ")");
+                    views.countView.setVisibility(View.VISIBLE);
                 } else {
                     views.line1View.setText(name);
+                    views.countView.setVisibility(View.GONE);
                 }
 	            	
                 CharSequence numberLabel = Phones.getDisplayLabel(context, ntype,
@@ -640,9 +646,12 @@ public class RecentCallsListActivity extends ListActivity
                 }
 	                
                 if (count != 1) {
-                    views.line1View.setText(number + " (" + count + ")");
+                    views.line1View.setText(number);
+                    views.countView.setText("(" + count + ")");
+                    views.countView.setVisibility(View.VISIBLE);
                 } else {
                     views.line1View.setText(number);
+                    views.countView.setVisibility(View.GONE);
                 }
 	                
                 views.numberView.setVisibility(View.GONE);
@@ -829,10 +838,8 @@ public class RecentCallsListActivity extends ListActivity
             }
         }
     }
-
-    public void addItemIntoList(RecentCallsInfo item) {
-        RecentCallsInfo obj;
-    	
+    
+    public void addItemIntoList(RecentCallsInfo item) {    	
         /*
          if(item.number.startsWith(mIpPrefix))
          item.number = item.number.substring(mIpPrefix.length());
@@ -840,23 +847,43 @@ public class RecentCallsListActivity extends ListActivity
          String chinaNum = "+86";		
          if(item.number.startsWith(chinaNum))
          item.number = item.number.substring(chinaNum.length());
-         */
+         */		
 		
         for (int i = 0; i < mListCallLogs.size(); i++) {
-    		
-            if (mListCallLogs.get(i).number.equals(item.number)) {
+            if (PhoneNumberUtils.compare(mListCallLogs.get(i).number, item.number) ||
+                (mListCallLogs.get(i).personId == item.personId && item.personId != -1) ||
+                sloppyPhoneNumComparator(mListCallLogs.get(i).number, item.number)) {
                 if (mListCallLogs.get(i).name == null && item.name != null) {
-                    // Log.e(TAG,"UPdate name");
                     mListCallLogs.get(i).name = item.name;
                     mListCallLogs.get(i).number_label = item.number_label;
                     mListCallLogs.get(i).number_type = item.number_type;
                 }
-    			
+                    			
                 mListCallLogs.get(i).count++;
                 return;
             }
         }
         mListCallLogs.add(item);
+    }
+    
+    
+    //Wysie_Soh: This method is written to make up for the current PhoneNumberUtils.compare
+    //The main issues is for these 2 numbers, say, +6591234567 and 010891234567, they will
+    //be detected as different numbers, although they are the same.
+    //This method simply matches the last 8 digits and returns it as true if the last 7 digits matches.
+    private boolean sloppyPhoneNumComparator(String num1, String num2) {
+        if (num1.length() < 8 || num2.length() < 8)
+            return false;          
+        
+        String number1 = PhoneNumberUtils.stripSeparators(num1);
+        String number2 = PhoneNumberUtils.stripSeparators(num2);        
+        number1 = number1.substring(num1.length() - 8);
+        number2 = number2.substring(num2.length() - 8);       
+
+        if (number1.equals(number2))
+            return true;
+        else
+            return false;
     }
     
     public void getUpdateCallLogsItem(Cursor cursor) {
@@ -870,7 +897,6 @@ public class RecentCallsListActivity extends ListActivity
             do { 
                 RecentCallsInfo item = new RecentCallsInfo();
 
-                ;
                 item.number = cursor.getString(
                         RecentCallsListActivity.NUMBER_COLUMN_INDEX);
                 item.type = cursor.getInt(
@@ -888,13 +914,27 @@ public class RecentCallsListActivity extends ListActivity
                         RecentCallsListActivity.DATE_COLUMN_INDEX);
                 item.duration = cursor.getInt(
                         RecentCallsListActivity.DURATION_COLUMN_INDEX);
+                
+                Cursor phonesCursor = RecentCallsListActivity.this.getContentResolver().query(
+                                        Uri.withAppendedPath(Phones.CONTENT_FILTER_URL,
+                                        Uri.encode(item.number)), PHONES_PROJECTION, null, null, null);
+                
+                item.personId = -1;
+        
+                if (phonesCursor != null) {
+                    if (phonesCursor.moveToFirst()) {
+                        item.personId = phonesCursor.getInt(PERSON_ID_COLUMN_INDEX);
+                    }
+                    phonesCursor.close();
+                }
+                
                 addItemIntoList(item);
-            }while (cursor.moveToNext());		
+            } while (cursor.moveToNext());		
 			
             cursor.close();
         }
-        // Log.e(TAG,"getUpdateCallLogsItem");
-    	
+        // Log.e(TAG,"getUpdateCallLogsItem");      
+              
         mArrayAdapter.notifyDataSetChanged(); 
 		
     }
@@ -1120,9 +1160,9 @@ public class RecentCallsListActivity extends ListActivity
         }
         
         // menu.add(0, MENU_ITEM_DELETE, 0, R.string.recentCalls_removeFromRecentList);  
-        menu.add(0, MENU_ITEM_DELETE_ALL_NUMBER, 0, "Remove all " + number);
+        menu.add(0, MENU_ITEM_DELETE_ALL_NUMBER, 0, getString(R.string.menu_cl_clear_type, number));
         if (contactInfoPresent) {
-            menu.add(0, MENU_ITEM_DELETE_ALL_NAME, 0, "Remove all " + info.name);
+            menu.add(0, MENU_ITEM_DELETE_ALL_NAME, 0, getString(R.string.menu_cl_clear_type, info.name));
         }
     }
 
@@ -1239,6 +1279,7 @@ public class RecentCallsListActivity extends ListActivity
                 label = number;
             }
             clearCallLogInstances(CallLog.Calls.NUMBER, number, label);
+            
             return true;
         }
             
@@ -1407,19 +1448,51 @@ public class RecentCallsListActivity extends ListActivity
         startActivity(intent);
     }
     
-    private void clearCallLogInstances(final String type, final String value, String label) { // Clear all instances of a user OR number
+    //Wysie_Soh: WIP. Attempt to clear numbers more effectively
+    private void clearCallLogNumbers(final String number) {
+        String num = number;
+        Uri callUri = Uri.withAppendedPath(Calls.CONTENT_FILTER_URI, Uri.encode(number));        
+        Cursor callCursor = getContentResolver().query(callUri, CALL_LOG_PROJECTION, null, null, Calls.DEFAULT_SORT_ORDER);
+        		
+        //Wysie_Soh: Loop to find shortest number, and requery.
+        //For some reason, eg. if you have 91234567 and +6591234567 and say, 010891234567
+        //they might not be detected as the same number. This is especially.
+        //Might change to binary search in future.
+        if (callCursor != null && callCursor.moveToFirst()) {
+            do {
+                if (number.length() > callCursor.getString(NUMBER_COLUMN_INDEX).length()) {
+                    num = callCursor.getString(NUMBER_COLUMN_INDEX);
+                }
+            }while(callCursor.moveToNext());
+        }
+                
+        getContentResolver().delete(Calls.CONTENT_URI, CallLog.Calls.NUMBER + " LIKE '%" + num + "'", null);
+        startQuery();
+    }    
+
+    
+    //Wysie_Soh: WIP.
+    //If you have say, 91234567 and +6591234567, and you select the
+    //"Remove all 91234567" option, the +6591234567 will not be cleared.
+    //A more obvious example would be 010891234567 and +6591234567
+    private void clearCallLogInstances(final String type, final String value, final String label) { // Clear all instances of a user OR number
     	
         if (prefs.getBoolean("cl_ask_before_clear", false)) {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
             alert.setTitle(R.string.alert_clear_call_log_title);
-            alert.setMessage(
-                    "Are you sure you want to clear all call records of "
-                            + label + "?"); // Text, eg. show "Private" instead of -1 :P
+            alert.setMessage(getString(R.string.alert_clear_cl_person, label));
             alert.setPositiveButton(android.R.string.ok,
                     new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    deleteCallLog(type + "=?", new String[] { value });
+                    if (type.equals(CallLog.Calls.NUMBER) && !(label.equals(getString(R.string.unknown)) ||
+                        label.equals(getString(R.string.private_num)) || label.equals(getString(R.string.payphone)) ||
+                        label.equals(getString(R.string.voicemail))) && value.length() >= 8) {
+                        clearCallLogNumbers(value);
+                    }
+                    else {
+                        deleteCallLog(type + "=?", new String[] { value });
+                    }
                 }
             });
             alert.setNegativeButton(android.R.string.cancel,
@@ -1430,29 +1503,34 @@ public class RecentCallsListActivity extends ListActivity
             });
             alert.show();
         } else {
-            deleteCallLog(type + "=?", new String[] { value });
+            if (type.equals(CallLog.Calls.NUMBER) && !(label.equals(getString(R.string.unknown)) ||
+                label.equals(getString(R.string.private_num)) || label.equals(getString(R.string.payphone)) ||
+                label.equals(getString(R.string.voicemail)))) {
+                    clearCallLogNumbers(value);
+            }
+            else {
+                deleteCallLog(type + "=?", new String[] { value });
+            }
         }
     	
     }
     
     private void clearCallLogType(final int type) {
-        String label = null;
+        int msg = 0;
         
         if (type == Calls.INCOMING_TYPE) {
-            label = "incoming";
+            msg = R.string.alert_clear_cl_all_incoming;
         } else if (type == Calls.OUTGOING_TYPE) {
-            label = "outgoing";    
+            msg = R.string.alert_clear_cl_all_outgoing;
         } else if (type == Calls.MISSED_TYPE) {
-            label = "missed";
+            msg = R.string.alert_clear_cl_all_missed;
         }
         
         if (prefs.getBoolean("cl_ask_before_clear", false)) {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
             alert.setTitle(R.string.alert_clear_call_log_title);
-            alert.setMessage(
-                    "Are you sure you want to clear all " + label
-                    + " call records?");
+            alert.setMessage(msg);
             alert.setPositiveButton(android.R.string.ok,
                     new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
@@ -1512,7 +1590,7 @@ public class RecentCallsListActivity extends ListActivity
         final Dialog dialog = new Dialog(this);
 
         dialog.setContentView(R.layout.total_call_log);
-        dialog.setTitle("Total Duration");
+        dialog.setTitle(R.string.cl_total_cl);
         dialog.show();
     	
         calcTotalTime();

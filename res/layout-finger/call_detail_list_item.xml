@@ -53,7 +53,7 @@
             android:gravity="center_vertical"
         />
         
-        <View android:id="@+id/divider1"
+        <com.android.contacts.ui.widget.DontPressWithParentImageView android:id="@+id/divider1"
             android:layout_width="1px"
             android:layout_height="fill_parent"
             android:layout_marginBottom="5dip"
@@ -80,17 +80,16 @@
         android:layout_height="?android:attr/listPreferredItemHeight"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:background="@android:drawable/list_selector_background"
-        android:paddingLeft="5dip"
     >
     
-        <ImageView android:id="@+id/icon"
+        <com.android.contacts.ui.widget.DontPressWithParentImageView android:id="@+id/icon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="4dip"
-            android:paddingRight="4dip"
+            android:layout_height="fill_parent"
+            android:paddingLeft="7dip"
+            android:paddingRight="5dip"
             android:gravity="center"
             android:scaleType="centerInside"
+            android:background="@drawable/call_background"
         />
         
         <RelativeLayout 
@@ -98,25 +97,15 @@
             android:layout_height="fill_parent"
             android:paddingTop="5dip"
         >
-        
-            <TextView android:id="@+id/type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="11dip"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="bold"   
-                android:text="@string/menu_sendTextMessage"
-            />
-            
             <TextView android:id="@+id/duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="11dip"
+                android:layout_marginLeft="5dip"
                 android:layout_alignParentRight="true"
-                android:layout_alignBaseline="@id/type"
                 android:textAppearance="?android:attr/textAppearanceSmall"
+                android:singleLine="true"
+                android:ellipsize="marquee"
             />
             
             <TextView android:id="@+id/time"
@@ -127,9 +116,22 @@
                 android:singleLine="true"
                 android:layout_marginBottom="8dip"
                 android:layout_marginTop="-8dip"
-                android:layout_marginLeft="11dip"
+                android:layout_marginLeft="5dip"
                 android:textAppearance="?android:attr/textAppearanceSmall"
             />
+        
+            <TextView android:id="@+id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@id/duration"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="center_vertical|left"            
+                android:singleLine="true"
+                android:ellipsize="marquee"
+            />           
 
         </RelativeLayout>
     </LinearLayout>

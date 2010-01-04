@@ -841,13 +841,23 @@
     <string name="title_about_name">Mod Name</string>
     <string name="summary_about_name">Wysie Contacts</string>
     <string name="title_about_version">Version</string>
-    <string name="summary_about_version">2.5</string>
+    <string name="summary_about_version">2.51</string>
     <string name="title_about_credits">Credits</string>
     <string name="summary_about_credits">ChainsDD and the rest of XDA! :)</string>
     
     <!-- Wysie_Soh: Call log strings -->  
     <string name="alert_clear_call_log_title">Clear call log</string>
     <string name="alert_clear_call_log_message">Are you sure you want to clear all call records?</string>
+    <string name="menu_cl_clear_type">Remove all %s</string>
+    
+    <string name="alert_clear_cl_person">Are you sure you want to clear all call records of %s?</string>
+    <string name="alert_clear_cl_person_incoming">Are you sure you want to clear all incoming call records from %s?</string>
+    <string name="alert_clear_cl_person_outgoing">Are you sure you want to clear all outgoing call records to %s?</string>
+    <string name="alert_clear_cl_person_missed">Are you sure you want to clear all missed call records from %s?</string>
+    
+    <string name="alert_clear_cl_all_incoming">Are you sure you want to clear all incoming call records?</string>
+    <string name="alert_clear_cl_all_outgoing">Are you sure you want to clear all outgoing call records?</string>
+    <string name="alert_clear_cl_all_missed">Are you sure you want to clear all missed call records?</string>
     
     <!-- Wysie_Soh: Frequently called strings -->
     <string name="alert_clear_freq_called">Clear frequently called</string>
@@ -855,7 +865,9 @@
     
     <!-- Wysie_Soh: View contact strings -->
     <string name="view_contact_navigate">Navigate to</string>
-    <string name="view_contact_groups">Groups</string>    
+    <string name="view_contact_groups">Groups</string>
+    <string name="view_call_log">View call log</string>
+    <string name="view_contact_select_cl_number">Select number to view log</string>
     
     <!-- Wysie_Soh: Groups management -->
     <string name="help_title">Usage</string>
@@ -870,5 +882,11 @@
     <string name="context_delete_group">Delete group</string>
     <string name="alert_rename_group_message">Enter new group name</string>
     <string name="alert_delete_group_message">Are you sure you want to delete?</string>
+    
+    <!-- Wysie_Soh: Others -->
+    <!-- Toast for call detail screen when couldn't read the requested details -->
+    <string name="toast_call_detail_error_wysie">No call log found for the requested number</string>
+    <string name="menu_copy_string">Copy \"%s\"</string>
+    <string name="cl_total_cl">Total Duration</string>
     
 </resources>

@@ -41,6 +41,7 @@ import android.provider.Contacts.Phones;
 import android.provider.Contacts.Intents.Insert;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
+import android.text.ClipboardManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -70,7 +71,8 @@ import java.util.List;
 public class CallDetailActivity extends ListActivity implements View.OnCreateContextMenuListener {
     private static final String TAG = "CallDetail";
 
-    private TextView mCallType;
+    //private TextView mCallType;
+    private TextView mCallNumber;
     private ImageView mCallTypeIcon;
     private TextView mCallTime;
     private TextView mCallDuration;
@@ -118,6 +120,9 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
     private static final int MENU_ITEM_DELETE_ALL_MISSED = 5;
     private static final int MENU_ITEM_VIEW_CONTACT = 6;
     private static final int MENU_ITEM_ADD_CONTACT = 7;
+    
+    private static final int MENU_ITEM_CALL = 8;
+    private static final int MENU_COPY_NUM = 9;
     
     private ViewAdapter adapter;
     private List<ViewEntryData> logs;
@@ -186,7 +191,7 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
     	public String number;
     	public long date;
     	public long duration;
-    	public int callType;    	
+    	public int callType;
     }
     /**
      * Update user interface with details of given call.
@@ -196,15 +201,28 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
     private void updateData() {
     	Bundle bundle = getIntent().getExtras();
     	String number = bundle.getString("NUMBER");
-    	//Toast.makeText(this, number, Toast.LENGTH_LONG).show();
-    	
-        StringBuilder where = new StringBuilder();
-        where.append(Calls.NUMBER);
-        where.append(" = '" + number + "'");
+    	//Toast.makeText(this, number, Toast.LENGTH_LONG).show();    	
         
-        Cursor callCursor = getContentResolver().query(Calls.CONTENT_URI, CALL_LOG_PROJECTION,where.toString(), null,
+        Uri callUri = Uri.withAppendedPath(Calls.CONTENT_FILTER_URI, Uri.encode(number));        
+        Cursor callCursor = getContentResolver().query(callUri, CALL_LOG_PROJECTION, null, null,
         		Calls.DEFAULT_SORT_ORDER);
+        		
+        //Wysie_Soh: Loop to find shortest number, and requery.
+        //For some reason, eg. if you have 91234567 and +6591234567 and say, 010891234567
+        //they might not be detected as the same number. This is especially.
+        //Might change to binary search in future.
+        if (callCursor != null && callCursor.moveToFirst()) {
+            do {
+                if (number.length() > callCursor.getString(NUMBER_COLUMN_INDEX).length()) {
+                    number = callCursor.getString(NUMBER_COLUMN_INDEX);
+                }
+            }while(callCursor.moveToNext());
+        }
         
+        //Wysie_Soh:Requery with shortest number found. This will ensure we get all entries.       
+        callUri = Uri.withAppendedPath(Calls.CONTENT_FILTER_URI, Uri.encode(number));
+        callCursor = getContentResolver().query(callUri, CALL_LOG_PROJECTION, null, null,
+        		Calls.DEFAULT_SORT_ORDER);        
         mNumber = number;
         
     	ContentResolver resolver = getContentResolver();
@@ -267,13 +285,14 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
             		data.date = callCursor.getLong(DATE_COLUMN_INDEX);
             		data.duration = callCursor.getLong(DURATION_COLUMN_INDEX);
             		data.callType = callCursor.getInt(CALL_TYPE_COLUMN_INDEX);
+            		data.number = callCursor.getString(NUMBER_COLUMN_INDEX);            		
 	                
             		logs.add(data);	              
             	}while(callCursor.moveToNext());
             } else {
                 // Something went wrong reading in our primary data, so we're going to
                 // bail out and show error to users.
-                Toast.makeText(this, R.string.toast_call_detail_error,
+                Toast.makeText(this, R.string.toast_call_detail_error_wysie,
                         Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -354,6 +373,7 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
         	 long date = entry.date;
         	 long duration = entry.duration;
         	 int callType = entry.callType; 
+        	 final String num = entry.number;
 
             
         	RelativeLayout layout = (RelativeLayout) convertView.findViewById(R.id.line_action);
@@ -404,9 +424,12 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
             	layout.setVisibility(View.GONE);
             	layout_logs.setVisibility(View.VISIBLE);
                 ImageView mCallTypeIcon = (ImageView) convertView.findViewById(R.id.icon);
+                mCallTypeIcon.setOnClickListener(this);
+                mCallTypeIcon.setTag(num);
                 TextView tvTime = (TextView) convertView.findViewById(R.id.time);
                 TextView tvDuration = (TextView) convertView.findViewById(R.id.duration);
-                TextView tvType = (TextView) convertView.findViewById(R.id.type);
+                //TextView tvType = (TextView) convertView.findViewById(R.id.type);
+                TextView tvNum = (TextView) convertView.findViewById(R.id.type);
                 // Pull out string in format [relative], [date]
                 CharSequence dateClause = DateUtils.formatDateRange(mContext, date, date,
                         DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE |
@@ -421,37 +444,50 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
                 	tvDuration.setText(formatDuration(duration));
                 }
     
-                // Set the call type icon and caption                
+                // Set the call type icon          
                 switch (callType) {
                     case Calls.INCOMING_TYPE:
                         mCallTypeIcon.setImageResource(R.drawable.ic_call_log_header_incoming_call);
-                        tvType.setText(R.string.type_incoming);
+                        //tvType.setText(R.string.type_incoming);
                        
                         break;
     
                     case Calls.OUTGOING_TYPE:
                         mCallTypeIcon.setImageResource(R.drawable.ic_call_log_header_outgoing_call);
-                        tvType.setText(R.string.type_outgoing);
+                        //tvType.setText(R.string.type_outgoing);
                         
                         break;
     
                     case Calls.MISSED_TYPE:
                         mCallTypeIcon.setImageResource(R.drawable.ic_call_log_header_missed_call);
-                        tvType.setText(R.string.type_missed);
+                        //tvType.setText(R.string.type_missed);
                         
                         break;
-                }                
+                }
+                
+                tvNum.setText(num);
+                                
                 convertView.setTag(entry);
             }
             
             return convertView;
         }
-
-		public void onClick(View v) {			
-            Intent intent = (Intent) v.getTag();
-
-           if(intent != null)
-            mContext.startActivity(intent);
+        
+        //Wysie_Soh: Only the calltype and the icons in the first row have onclick events. In case of the first row,
+        //try will succeed. Otherwise it will go to catch.
+		public void onClick(View v) {
+		    Intent intent = null;
+		    
+		    try {
+                intent = (Intent) v.getTag();
+            }
+            catch (ClassCastException e) {
+                intent = new Intent(Intent.ACTION_CALL_PRIVILEGED,
+                        Uri.fromParts("tel", (String)v.getTag(), null));
+            }
+            
+            if(intent != null)
+                mContext.startActivity(intent);
 		}
     }   
 
@@ -540,7 +576,12 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
         if (menuInfo.position == 0) {
             return;
         }
-    
+        
+        ViewEntryData entryData = (ViewEntryData)adapter.getItem(menuInfo.position);
+        
+        //Wysie_Soh: WIP
+        menu.add(0, MENU_ITEM_CALL, 0, getString(R.string.recentCalls_callNumber, entryData.number));
+        menu.add(0, MENU_COPY_NUM, 0, getString(R.string.menu_copy_string, entryData.number));
         menu.add(0, MENU_ITEM_DELETE, 0, R.string.recentCalls_removeFromRecentList);
     }
     
@@ -548,7 +589,17 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         ViewEntryData entryData = (ViewEntryData)adapter.getItem(info.position);
 	
-		switch(item.getItemId()) {		
+		switch(item.getItemId()) {
+		    case MENU_ITEM_CALL:
+                Intent callIntent = new Intent(Intent.ACTION_CALL_PRIVILEGED,
+                            Uri.fromParts("tel", entryData.number, null));
+                startActivity(callIntent);
+                return true;
+            case MENU_COPY_NUM:
+                if (entryData != null) {
+                    ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    clipboard.setText(entryData.number);
+                 }
 		    case MENU_ITEM_DELETE:
 		        getContentResolver().delete(Calls.CONTENT_URI, "Calls._ID=?", new String[] { Long.toString(entryData.id) } );
                 logs.remove(entryData);
@@ -570,7 +621,7 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
             alert.setTitle(R.string.alert_clear_call_log_title);
-            alert.setMessage("Are you sure you want to clear all call records of " + mNumber + "?");
+            alert.setMessage(getString(R.string.alert_clear_cl_person, mNumber));
       
             alert.setPositiveButton(android.R.string.ok,
                     new DialogInterface.OnClickListener() {
@@ -601,11 +652,11 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
         String message = null;
         
         if (type == Calls.INCOMING_TYPE) {
-            message = "Are you sure you want to clear all incoming call records from " + mNumber + "?" ;            
+            message = getString(R.string.alert_clear_cl_person_incoming, mNumber);
         } else if (type == Calls.OUTGOING_TYPE) {
-            message = "Are you sure you want to clear all outgoing call records to " + mNumber + "?" ;
+            message = getString(R.string.alert_clear_cl_person_outgoing, mNumber);
         } else if (type == Calls.MISSED_TYPE) {
-            message = "Are you sure you want to clear all missed call records from " + mNumber + "?" ;
+            message = getString(R.string.alert_clear_cl_person_missed, mNumber);
         }
         
         if (prefs.getBoolean("cl_ask_before_clear", false)) {
@@ -634,7 +685,6 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
         updateData();
         if(logs.size() != 1) { //1 because the top row is for calling/smsing
             adapter.notifyDataSetInvalidated();
-            Log.d("WYSIE", "Data Changed 2");
         }
         else {                	
             finish();

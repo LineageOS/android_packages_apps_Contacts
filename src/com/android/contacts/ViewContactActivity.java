@@ -18,6 +18,7 @@
 package com.android.contacts;
 
 import static com.android.contacts.ContactEntryAdapter.CONTACT_CUSTOM_RINGTONE_COLUMN;
+import static com.android.contacts.ContactEntryAdapter.CONTACT_ID_COLUMN;
 import static com.android.contacts.ContactEntryAdapter.CONTACT_NAME_COLUMN;
 import static com.android.contacts.ContactEntryAdapter.CONTACT_NOTES_COLUMN;
 import static com.android.contacts.ContactEntryAdapter.CONTACT_PHONETIC_NAME_COLUMN;
@@ -152,6 +153,7 @@ public class ViewContactActivity extends ListActivity
     private ContentResolver mResolver;
     private ViewAdapter mAdapter;
     private int mNumPhoneNumbers = 0;
+    private long contactId = -1;
 
     /* package */ ArrayList<ViewEntry> mPhoneEntries = new ArrayList<ViewEntry>();
     /* package */ ArrayList<ViewEntry> mSmsEntries = new ArrayList<ViewEntry>();
@@ -352,6 +354,7 @@ public class ViewContactActivity extends ListActivity
         if (mCursor.moveToFirst()) {
             // Set the name
             String name = mCursor.getString(CONTACT_NAME_COLUMN);
+            contactId = mCursor.getLong(CONTACT_ID_COLUMN);
             if (TextUtils.isEmpty(name)) {
                 mNameView.setText(getText(android.R.string.unknownName));
             } else {
@@ -545,19 +548,9 @@ public class ViewContactActivity extends ListActivity
             }
             
             case MENU_ITEM_SHOW_CALL_LOG: {            
-                final CharSequence[] items = (CharSequence[])phoneNumbersArray.toArray(new CharSequence[0]);
-                
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle(getString(R.string.view_contact_select_cl_number));
-                builder.setItems(items, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int item) {
-                        Intent intent = new Intent(_context, CallDetailActivity.class);
-                        intent.putExtra("NUMBER", items[item]);
-                        startActivity(intent);                
-                    }                
-                });
-                
-                builder.show();
+                Intent intent = new Intent(_context, CallDetailActivity.class);
+                intent.putExtra("PERSONID", contactId);
+                startActivity(intent);                
                 
                 return true;
             }

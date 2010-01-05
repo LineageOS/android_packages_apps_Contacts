@@ -197,7 +197,7 @@ public class RecentCallsListActivity extends ListActivity
         public long date;
         public int duration;
         public int count;
-        public int personId;
+        public long personId;
         RecentCallsInfo() {
             count = 1;
         }
@@ -720,22 +720,12 @@ public class RecentCallsListActivity extends ListActivity
             }
             
             // Set the photo, if requested
-            if (prefs.getBoolean("cl_show_pic", true)) {          
-                Cursor phonesCursor = RecentCallsListActivity.this.getContentResolver().query(
-                                        Uri.withAppendedPath(Phones.CONTENT_FILTER_URL,
-                                        Uri.encode(number)), PHONES_PROJECTION, null, null, null);
+            if (prefs.getBoolean("cl_show_pic", true)) {
                 
-                int personId = -1;
-                                        
-                if (phonesCursor != null) {
-                    if (phonesCursor.moveToFirst()) {
-                        personId = phonesCursor.getInt(PERSON_ID_COLUMN_INDEX);
-                    }
-                    phonesCursor.close();
-                }
+                long personId = callsinfo.personId;
                             
                 Bitmap photo = null;
-                SoftReference<Bitmap> ref = mBitmapCache.get(personId);
+                SoftReference<Bitmap> ref = mBitmapCache.get((int)personId);
                 if (ref != null) {
                     photo = ref.get();
                 }
@@ -745,7 +735,7 @@ public class RecentCallsListActivity extends ListActivity
                         //int id = c.getInt(ID_COLUMN_INDEX);
                         Uri uri = ContentUris.withAppendedId(People.CONTENT_URI, personId);
                         photo = People.loadContactPhoto(context, uri, R.drawable.ic_contact_list_picture, null);
-                        mBitmapCache.put(personId, new SoftReference<Bitmap>(photo));
+                        mBitmapCache.put((int)personId, new SoftReference<Bitmap>(photo));
                     } catch (OutOfMemoryError e) {
                         // Not enough memory for the photo, use the default one instead
                         photo = null;
@@ -767,18 +757,7 @@ public class RecentCallsListActivity extends ListActivity
                 views.photoView.setVisibility(View.GONE);
             }            
         }
-        
-        /*        
-        @Override
-        public void changeCursor(Cursor cursor) {
-            super.changeCursor(cursor);
 
-            // Clear the photo bitmap cache, if there is one
-            if (mBitmapCache != null) {
-                mBitmapCache.clear();
-            }
-        }
-        */
     }
 
 
@@ -840,18 +819,10 @@ public class RecentCallsListActivity extends ListActivity
     }
     
     public void addItemIntoList(RecentCallsInfo item) {    	
-        /*
-         if(item.number.startsWith(mIpPrefix))
-         item.number = item.number.substring(mIpPrefix.length());
-         
-         String chinaNum = "+86";		
-         if(item.number.startsWith(chinaNum))
-         item.number = item.number.substring(chinaNum.length());
-         */		
 		
         for (int i = 0; i < mListCallLogs.size(); i++) {
-            if (PhoneNumberUtils.compare(mListCallLogs.get(i).number, item.number) ||
-                (mListCallLogs.get(i).personId == item.personId && item.personId != -1) ||
+            if ((mListCallLogs.get(i).personId == item.personId && item.personId != -1) || 
+                PhoneNumberUtils.compare(mListCallLogs.get(i).number, item.number) || 
                 sloppyPhoneNumComparator(mListCallLogs.get(i).number, item.number)) {
                 if (mListCallLogs.get(i).name == null && item.name != null) {
                     mListCallLogs.get(i).name = item.name;
@@ -923,7 +894,7 @@ public class RecentCallsListActivity extends ListActivity
         
                 if (phonesCursor != null) {
                     if (phonesCursor.moveToFirst()) {
-                        item.personId = phonesCursor.getInt(PERSON_ID_COLUMN_INDEX);
+                        item.personId = phonesCursor.getLong(PERSON_ID_COLUMN_INDEX);
                     }
                     phonesCursor.close();
                 }
@@ -1159,10 +1130,12 @@ public class RecentCallsListActivity extends ListActivity
                     intent);
         }
         
-        // menu.add(0, MENU_ITEM_DELETE, 0, R.string.recentCalls_removeFromRecentList);  
-        menu.add(0, MENU_ITEM_DELETE_ALL_NUMBER, 0, getString(R.string.menu_cl_clear_type, number));
+        // menu.add(0, MENU_ITEM_DELETE, 0, R.string.recentCalls_removeFromRecentList);        
         if (contactInfoPresent) {
             menu.add(0, MENU_ITEM_DELETE_ALL_NAME, 0, getString(R.string.menu_cl_clear_type, info.name));
+        }
+        else {
+            menu.add(0, MENU_ITEM_DELETE_ALL_NUMBER, 0, getString(R.string.menu_cl_clear_type, number));
         }
     }
 
@@ -1443,7 +1416,7 @@ public class RecentCallsListActivity extends ListActivity
         Intent intent = new Intent(this, CallDetailActivity.class);
 
         // intent.setData(ContentUris.withAppendedId(CallLog.Calls.CONTENT_URI, id));
-        
+        intent.putExtra("PERSONID", mListCallLogs.get(position).personId);
         intent.putExtra("NUMBER", mListCallLogs.get(position).number);
         startActivity(intent);
     }

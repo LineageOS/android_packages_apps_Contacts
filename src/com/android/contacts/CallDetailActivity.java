@@ -63,6 +63,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -189,10 +191,32 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
     class ViewEntryData{
     	public long id;
     	public String number;
+    	public String label;
     	public long date;
     	public long duration;
     	public int callType;
     }
+    
+    //Class used to sort
+    class NumberInfo {
+        public String number;
+        public String label;
+        
+        NumberInfo(String n, String l) {
+            number = n;
+            label = l;
+        }
+    }
+    
+    class LogsSortByTime implements Comparator<ViewEntryData>{
+        public int compare(ViewEntryData v1, ViewEntryData v2) {
+            Long l1 = v1.date;
+            Long l2 = v2.date;
+            
+            return l2.compareTo(l1);
+        }
+    }
+    
     /**
      * Update user interface with details of given call.
      * 
@@ -200,33 +224,131 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
      */
     private void updateData() {
     	Bundle bundle = getIntent().getExtras();
-    	String number = bundle.getString("NUMBER");
-    	//Toast.makeText(this, number, Toast.LENGTH_LONG).show();    	
-        
-        Uri callUri = Uri.withAppendedPath(Calls.CONTENT_FILTER_URI, Uri.encode(number));        
-        Cursor callCursor = getContentResolver().query(callUri, CALL_LOG_PROJECTION, null, null,
-        		Calls.DEFAULT_SORT_ORDER);
-        		
-        //Wysie_Soh: Loop to find shortest number, and requery.
-        //For some reason, eg. if you have 91234567 and +6591234567 and say, 010891234567
-        //they might not be detected as the same number. This is especially.
-        //Might change to binary search in future.
-        if (callCursor != null && callCursor.moveToFirst()) {
-            do {
-                if (number.length() > callCursor.getString(NUMBER_COLUMN_INDEX).length()) {
-                    number = callCursor.getString(NUMBER_COLUMN_INDEX);
+    	long personId = bundle.getLong("PERSONID");
+    	ArrayList<NumberInfo> personNumbers = new ArrayList<NumberInfo>();
+    	String displayName = null;
+    	Uri personUri = null;
+    	Uri callUri = null;
+    	Cursor callCursor = null;
+    	logs = new ArrayList<ViewEntryData>();    	
+    	
+    	//Wysie_Soh: If the personId is valid
+    	if (personId != -1) {
+    	    personUri = ContentUris.withAppendedId(People.CONTENT_URI, personId);
+    	    Uri phonesUri = Uri.withAppendedPath(personUri, People.Phones.CONTENT_DIRECTORY);
+            final Cursor phonesCursor = getContentResolver().query(phonesUri, PHONES_PROJECTION, null, null, null);
+            
+            if (phonesCursor != null && phonesCursor.moveToFirst()) {
+                int type = -1;
+                String number = null;
+                String label = null;
+                CharSequence actualLabel = null;
+                do {
+                    if (displayName == null)
+                        displayName = phonesCursor.getString(COLUMN_INDEX_NAME);
+                    type = phonesCursor.getInt(COLUMN_INDEX_TYPE);
+                    number = phonesCursor.getString(COLUMN_INDEX_NUMBER);
+                    label = phonesCursor.getString(COLUMN_INDEX_LABEL);
+                    actualLabel = Phones.getDisplayLabel(this, type, label);
+                    personNumbers.add(new NumberInfo(number, actualLabel.toString()));
+                } while (phonesCursor.moveToNext());
+                
+                phonesCursor.close();
+            }
+            
+            boolean hasCallLog = false;
+            
+            for (NumberInfo i : personNumbers) {
+                callUri = Uri.withAppendedPath(Calls.CONTENT_FILTER_URI, Uri.encode(i.number));
+                callCursor = getContentResolver().query(callUri, CALL_LOG_PROJECTION, null, null, null);
+                
+                try {                
+                    if (callCursor != null && callCursor.moveToFirst()) {
+                        hasCallLog = true;
+                        do {
+                            ViewEntryData data = new ViewEntryData();
+                            data.label = i.label;
+                    		data.id = callCursor.getLong(LOG_COLUMN_INDEX);
+                       		data.date = callCursor.getLong(DATE_COLUMN_INDEX);
+                    		data.duration = callCursor.getLong(DURATION_COLUMN_INDEX);
+                    		data.callType = callCursor.getInt(CALL_TYPE_COLUMN_INDEX);
+                    		data.number = callCursor.getString(NUMBER_COLUMN_INDEX);	                
+                    		logs.add(data);
+                        } while(callCursor.moveToNext());
+                    }
                 }
-            }while(callCursor.moveToNext());
-        }
+                finally {
+                if (callCursor != null)
+                    callCursor.close();
+                }
+            }
+            //Wysie_Soh: No call log found for this personId
+            if (!hasCallLog) {
+                Toast.makeText(this, R.string.toast_call_detail_error_wysie, Toast.LENGTH_SHORT).show();
+                finish();
+            }
+    	}
+    	//Wysie_Soh: If no person found, query by number instead
+    	else {
+    	    String number = bundle.getString("NUMBER");
+    	    callUri = Uri.withAppendedPath(Calls.CONTENT_FILTER_URI, Uri.encode(number));
+    	    callCursor = getContentResolver().query(callUri, CALL_LOG_PROJECTION, null, null, null);
+    	    
+            //Wysie_Soh: Loop to find shortest number.
+            //For some reason, eg. if you have 91234567 and +6591234567 and say, 010891234567
+            //they might not be detected as the same number. This is especially.
+            //Might change to binary search in future.
+            try {
+                if (callCursor != null && callCursor.moveToFirst()) {
+                    do {
+                        if (number.length() > callCursor.getString(NUMBER_COLUMN_INDEX).length()) {
+                            number = callCursor.getString(NUMBER_COLUMN_INDEX);
+                        }
+                    } while(callCursor.moveToNext());
+                }
+            }
+            finally {
+                if (callCursor != null)
+                    callCursor.close();
+            }
+                        
+            //Wysie_Soh:Requery with shortest number found. This will ensure we get all entries.
+            callUri = Uri.withAppendedPath(Calls.CONTENT_FILTER_URI, Uri.encode(number));
+            callCursor = getContentResolver().query(callUri, CALL_LOG_PROJECTION, null, null, Calls.DEFAULT_SORT_ORDER);
+            
+            try {
+                if (callCursor != null && callCursor.moveToFirst()) {
+                    do {
+                		ViewEntryData data = new ViewEntryData();
+	                    // Read call log specifics
+                		data.id = callCursor.getLong(LOG_COLUMN_INDEX);
+                		data.date = callCursor.getLong(DATE_COLUMN_INDEX);
+                		data.duration = callCursor.getLong(DURATION_COLUMN_INDEX);
+                		data.callType = callCursor.getInt(CALL_TYPE_COLUMN_INDEX);
+                		data.number = callCursor.getString(NUMBER_COLUMN_INDEX);            		
+	                
+                		logs.add(data);	              
+                	} while(callCursor.moveToNext());
+                } else {
+                    // Something went wrong reading in our primary data, so we're going to
+                    // bail out and show error to users.
+                    Toast.makeText(this, R.string.toast_call_detail_error_wysie, Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            } finally {
+                if (callCursor != null)
+                    callCursor.close();
+            }
+    	}
+    	
+    	//Sort arraylist here
+    	Collections.sort(logs ,new LogsSortByTime());
+    	    	
+        mNumber = logs.get(0).number;
+        ViewEntryData firstPlaceHolder = new ViewEntryData();
+    	firstPlaceHolder.number = mNumber;
+    	logs.add(0, firstPlaceHolder);
         
-        //Wysie_Soh:Requery with shortest number found. This will ensure we get all entries.       
-        callUri = Uri.withAppendedPath(Calls.CONTENT_FILTER_URI, Uri.encode(number));
-        callCursor = getContentResolver().query(callUri, CALL_LOG_PROJECTION, null, null,
-        		Calls.DEFAULT_SORT_ORDER);        
-        mNumber = number;
-        
-    	ContentResolver resolver = getContentResolver();
-      
     	TextView tvName = (TextView) findViewById(R.id.name);
     	TextView tvNumber = (TextView) findViewById(R.id.number);
     	
@@ -240,68 +362,22 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
             }
             mPhotoView.setImageResource(mNoPhotoResource);
         } else {
-            // Perform a reverse-phonebook lookup to find the PERSON_ID
-            String callLabel = null;
-            
-            Uri phoneUri = Uri.withAppendedPath(Phones.CONTENT_FILTER_URL, Uri.encode(mNumber));
-            Cursor phonesCursor = resolver.query(phoneUri, PHONES_PROJECTION, null, null, null);
-            try {
-                if (phonesCursor != null && phonesCursor.moveToFirst()) {
-                    long personId = phonesCursor.getLong(COLUMN_INDEX_ID);
-                    personUri = ContentUris.withAppendedId(
-                            Contacts.People.CONTENT_URI, personId);
-                    // Load the photo
-                    mPhotoView.setImageBitmap(People.loadContactPhoto(this, personUri, mNoPhotoResource,
-                            null /* use the default options */));
-                    
-                    tvName.setText(phonesCursor.getString(COLUMN_INDEX_NAME));
-                    tvNumber.setText(mNumber);
-                } else {
-                	tvName.setText("("+ getString(R.string.unknown) + ")");
-                	tvNumber.setText(mNumber);// = PhoneNumberUtils.formatNumber(mNumber);
-                	//tvNumber.setVisibility(View.GONE);
-                	mPhotoView.setImageResource(mNoPhotoResource);
-                }
-            } finally {
-                if (phonesCursor != null) phonesCursor.close();
+            if (personId != -1) {
+                mPhotoView.setImageBitmap(People.loadContactPhoto(this, personUri, mNoPhotoResource, null /* use the default options */));
+                tvName.setText(displayName);
+                tvNumber.setText(mNumber);
             }
+            else {
+                tvName.setText("("+ getString(R.string.unknown) + ")");
+                tvNumber.setText(mNumber);// = PhoneNumberUtils.formatNumber(mNumber);
+                mPhotoView.setImageResource(mNoPhotoResource);
+            }            
         }
         
         int size = Integer.parseInt(prefs.getString("cl_view_contact_pic_size", "78"));
         //Wysie_Soh: Set contact picture size
-        mPhotoView.setLayoutParams(new LinearLayout.LayoutParams(size, size));
-    	
-    	logs = new ArrayList<ViewEntryData>();
-    	ViewEntryData firstPlaceHolder = new ViewEntryData();
-    	firstPlaceHolder.number = mNumber;
-    	logs.add(firstPlaceHolder);
-        try {
-            if (callCursor != null && callCursor.moveToFirst()) {
-            	
-            	do {
-            		ViewEntryData data = new ViewEntryData();
-	                // Read call log specifics
-            		data.id = callCursor.getLong(LOG_COLUMN_INDEX);
-            		data.date = callCursor.getLong(DATE_COLUMN_INDEX);
-            		data.duration = callCursor.getLong(DURATION_COLUMN_INDEX);
-            		data.callType = callCursor.getInt(CALL_TYPE_COLUMN_INDEX);
-            		data.number = callCursor.getString(NUMBER_COLUMN_INDEX);            		
-	                
-            		logs.add(data);	              
-            	}while(callCursor.moveToNext());
-            } else {
-                // Something went wrong reading in our primary data, so we're going to
-                // bail out and show error to users.
-                Toast.makeText(this, R.string.toast_call_detail_error_wysie,
-                        Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        } finally {
-            if (callCursor != null) {
-                callCursor.close();
-            }
-        }
-        
+        mPhotoView.setLayoutParams(new LinearLayout.LayoutParams(size, size));    	
+
         adapter = new ViewAdapter(this, logs);
         setListAdapter(adapter);         
     }

@@ -40,17 +40,6 @@
             android:background="@drawable/call_background"
             android:layout_alignParentRight="true"
             android:gravity="center_vertical"
-        />      
-        
-        <TextView android:id="@+id/call"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="11dip"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/callBack"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="17dip"
-            android:gravity="center_vertical"
         />
         
         <com.android.contacts.ui.widget.DontPressWithParentImageView android:id="@+id/divider1"
@@ -72,6 +61,88 @@
             android:src="@android:drawable/sym_action_call"
             android:background="@drawable/call_background"
         />
+        
+    <TextView android:id="@+id/most_recent_num_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dip"
+        android:layout_marginTop="-10dip"
+
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="bold"
+    />
+
+    <TextView android:id="@+id/most_recent_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dip"
+        android:layout_toRightOf="@id/most_recent_num_label"
+        android:layout_alignBaseline="@id/most_recent_num_label"
+        android:layout_toLeftOf="@id/call_icon"
+        android:layout_alignWithParentIfMissing="true"
+
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+    />
+
+    <TextView android:id="@+id/call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/most_recent_num_label"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="1dip"
+
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:gravity="center_vertical|left"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+    />
+        
+        <!--
+        <TextView android:id="@+id/call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="11dip"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/callBack"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="17dip"
+            android:gravity="center_vertical"
+        />
+        
+        <TextView android:id="@+id/most_recent_num_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="11dip"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/title_contacts_category"
+            android:layout_below="@id/call"
+            android:layout_alignLeft="@id/call"
+            android:textStyle="bold"
+        />
+        
+        <TextView android:id="@+id/most_recent_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dip"
+            android:layout_toRightOf="@id/most_recent_num_label"
+            android:layout_below="@id/call"
+            android:layout_alignBaseline="@id/most_recent_num_label"
+            android:layout_alignWithParentIfMissing="true"
+            
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+        />
+        -->       
         
     </RelativeLayout>
     

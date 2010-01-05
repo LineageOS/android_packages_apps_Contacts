@@ -797,6 +797,12 @@
     <string name="title_view_cl">Individual call log</string>
     <string name="summary_view_cl">Set preferences when viewing an individual's call log</string>
     
+    <string name="title_cl_grouping_settings">Group call log settings</string>
+    <string name="title_cl_use_exp_grouping">Group unknown numbers (Experimental)</string>
+    <string name="summary_cl_use_exp_grouping">Slows down performance</string>
+    <string name="title_cl_exp_grouping_num">Number of digits to compare</string>
+    <string name="summary_cl_exp_grouping_num">Higher number = stricter</string>
+    
     <string name="title_contacts_category">Contacts</string>
     <string name="title_contacts_show_pic">Show contact pictures</string>
     <string name="title_contacts_show_dial_button">Show dial button</string>
@@ -841,7 +847,7 @@
     <string name="title_about_name">Mod Name</string>
     <string name="summary_about_name">Wysie Contacts</string>
     <string name="title_about_version">Version</string>
-    <string name="summary_about_version">2.52 BETA</string>
+    <string name="summary_about_version">2.52 BETA 2</string>
     <string name="title_about_credits">Credits</string>
     <string name="summary_about_credits">ChainsDD and the rest of XDA! :)</string>
     

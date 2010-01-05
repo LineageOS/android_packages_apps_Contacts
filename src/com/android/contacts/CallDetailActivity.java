@@ -225,6 +225,7 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
     private void updateData() {
     	Bundle bundle = getIntent().getExtras();
     	long personId = bundle.getLong("PERSONID");
+    	String number = bundle.getString("NUMBER");
     	ArrayList<NumberInfo> personNumbers = new ArrayList<NumberInfo>();
     	String displayName = null;
     	Uri personUri = null;
@@ -240,7 +241,6 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
             
             if (phonesCursor != null && phonesCursor.moveToFirst()) {
                 int type = -1;
-                String number = null;
                 String label = null;
                 CharSequence actualLabel = null;
                 do {
@@ -254,9 +254,7 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
                 } while (phonesCursor.moveToNext());
                 
                 phonesCursor.close();
-            }
-            
-            boolean hasCallLog = false;
+            }            
             
             for (NumberInfo i : personNumbers) {
                 callUri = Uri.withAppendedPath(Calls.CONTENT_FILTER_URI, Uri.encode(i.number));
@@ -264,7 +262,6 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
                 
                 try {                
                     if (callCursor != null && callCursor.moveToFirst()) {
-                        hasCallLog = true;
                         do {
                             ViewEntryData data = new ViewEntryData();
                             data.label = i.label;
@@ -282,15 +279,9 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
                     callCursor.close();
                 }
             }
-            //Wysie_Soh: No call log found for this personId
-            if (!hasCallLog) {
-                Toast.makeText(this, R.string.toast_call_detail_error_wysie, Toast.LENGTH_SHORT).show();
-                finish();
-            }
     	}
     	//Wysie_Soh: If no person found, query by number instead
-    	else {
-    	    String number = bundle.getString("NUMBER");
+    	else {    	    
     	    callUri = Uri.withAppendedPath(Calls.CONTENT_FILTER_URI, Uri.encode(number));
     	    callCursor = getContentResolver().query(callUri, CALL_LOG_PROJECTION, null, null, null);
     	    
@@ -329,59 +320,61 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
 	                
                 		logs.add(data);	              
                 	} while(callCursor.moveToNext());
-                } else {
-                    // Something went wrong reading in our primary data, so we're going to
-                    // bail out and show error to users.
-                    Toast.makeText(this, R.string.toast_call_detail_error_wysie, Toast.LENGTH_SHORT).show();
-                    finish();
                 }
             } finally {
                 if (callCursor != null)
                     callCursor.close();
             }
-    	}
+    	}    	
     	
     	//Sort arraylist here
     	Collections.sort(logs ,new LogsSortByTime());
-    	    	
-        mNumber = logs.get(0).number;
-        ViewEntryData firstPlaceHolder = new ViewEntryData();
-    	firstPlaceHolder.number = mNumber;
-    	logs.add(0, firstPlaceHolder);
-        
-    	TextView tvName = (TextView) findViewById(R.id.name);
-    	TextView tvNumber = (TextView) findViewById(R.id.number);
     	
-    	if (mNumber.equals(CallerInfo.UNKNOWN_NUMBER) ||
-                mNumber.equals(CallerInfo.PRIVATE_NUMBER)) {
-            // List is empty, let the empty view show instead.
-            TextView emptyText = (TextView) findViewById(R.id.emptyText);
-            if (emptyText != null) {
-                emptyText.setText(mNumber.equals(CallerInfo.PRIVATE_NUMBER) 
-                        ? R.string.private_num : R.string.unknown);
-            }
-            mPhotoView.setImageResource(mNoPhotoResource);
-        } else {
-            if (personId != -1) {
-                mPhotoView.setImageBitmap(People.loadContactPhoto(this, personUri, mNoPhotoResource, null /* use the default options */));
-                tvName.setText(displayName);
-                tvNumber.setText(mNumber);
-            }
-            else {
-                tvName.setText("("+ getString(R.string.unknown) + ")");
-                tvNumber.setText(mNumber);// = PhoneNumberUtils.formatNumber(mNumber);
-                mPhotoView.setImageResource(mNoPhotoResource);
-            }            
+    	try {    	    	
+            mNumber = logs.get(0).number;
         }
-        
-        int size = Integer.parseInt(prefs.getString("cl_view_contact_pic_size", "78"));
-        //Wysie_Soh: Set contact picture size
-        mPhotoView.setLayoutParams(new LinearLayout.LayoutParams(size, size));    	
+        catch (IndexOutOfBoundsException e) { //If logs is size 0, no content, exit.
+            Toast.makeText(this, R.string.toast_call_detail_error_wysie, Toast.LENGTH_SHORT).show();
+            this.finish();
+        }       
 
-        adapter = new ViewAdapter(this, logs);
-        setListAdapter(adapter);         
+    	
+    	if (mNumber != null) {
+            ViewEntryData firstPlaceHolder = new ViewEntryData();
+        	firstPlaceHolder.number = mNumber;
+        	firstPlaceHolder.label = logs.get(0).label;
+        	logs.add(0, firstPlaceHolder);
+            
+        	TextView tvName = (TextView) findViewById(R.id.name);
+    	
+    	    if (mNumber.equals(CallerInfo.UNKNOWN_NUMBER) ||
+                    mNumber.equals(CallerInfo.PRIVATE_NUMBER)) {
+                // List is empty, let the empty view show instead.
+                TextView emptyText = (TextView) findViewById(R.id.emptyText);
+                if (emptyText != null) {
+                        emptyText.setText(mNumber.equals(CallerInfo.PRIVATE_NUMBER) 
+                            ? R.string.private_num : R.string.unknown);
+                }
+                mPhotoView.setImageResource(mNoPhotoResource);
+            } else {
+                if (personId != -1) {
+                    mPhotoView.setImageBitmap(People.loadContactPhoto(this, personUri, mNoPhotoResource, null /* use the default options */));
+                    tvName.setText(displayName);
+                }
+                else {
+                    tvName.setText("("+ getString(R.string.unknown) + ")");
+                    mPhotoView.setImageResource(mNoPhotoResource);
+                }            
+            }
+            
+            int size = Integer.parseInt(prefs.getString("cl_view_contact_pic_size", "78"));
+            //Wysie_Soh: Set contact picture size
+            mPhotoView.setLayoutParams(new LinearLayout.LayoutParams(size, size));    	
+    
+            adapter = new ViewAdapter(this, logs);
+            setListAdapter(adapter);
+        }         
     }
-
 
     static final class ViewEntry {
         public int icon = -1;
@@ -450,6 +443,7 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
         	 long duration = entry.duration;
         	 int callType = entry.callType; 
         	 final String num = entry.number;
+        	 final String label = entry.label;
 
             
         	RelativeLayout layout = (RelativeLayout) convertView.findViewById(R.id.line_action);
@@ -461,6 +455,8 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
                 ImageView call_icon = (ImageView) convertView.findViewById(R.id.call_icon);
                 ImageView sms_icon = (ImageView) convertView.findViewById(R.id.sms_icon);
                 TextView tvCall = (TextView) convertView.findViewById(R.id.call);
+                TextView tvNumLabel = (TextView) convertView.findViewById(R.id.most_recent_num_label);
+                TextView tvNum = (TextView) convertView.findViewById(R.id.most_recent_num);
                
                 //Geesun                
                 Intent callIntent = new Intent(Intent.ACTION_CALL_PRIVILEGED,
@@ -485,7 +481,30 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
 		           		tvCall.setText(mContext.getString(R.string.callBack));
 		           		break;
 	           	 }
-                
+	           	 
+                RelativeLayout.LayoutParams newCallLayout = (RelativeLayout.LayoutParams) tvCall.getLayoutParams();
+                RelativeLayout.LayoutParams newNumberLayout = (RelativeLayout.LayoutParams) tvNum.getLayoutParams();
+	           	 	           	 
+	           	if (label != null) {
+	           	    tvNumLabel.setText(label);
+	           	    tvNumLabel.setVisibility(View.VISIBLE);
+                    newCallLayout.addRule(RelativeLayout.ABOVE, R.id.most_recent_num_label);
+                    newNumberLayout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
+                    newNumberLayout.addRule(RelativeLayout.ALIGN_BASELINE, R.id.most_recent_num_label);
+                    newNumberLayout.setMargins(5, 0, 0, 0);
+	           	}
+	           	else {
+	           	    tvNumLabel.setVisibility(View.GONE);
+                    newCallLayout.addRule(RelativeLayout.ABOVE, R.id.most_recent_num);
+                    newNumberLayout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                    newNumberLayout.addRule(RelativeLayout.ALIGN_BASELINE, 0);
+                    newNumberLayout.setMargins(0, -10, 0, 8);
+	           	}
+	           	
+                tvCall.setLayoutParams(newCallLayout);
+                tvNum.setLayoutParams(newNumberLayout);
+	           	
+	           	tvNum.setText(num);
                 
                 call_icon.setTag(callIntent);
                 //tvCall.setTag(callIntent);

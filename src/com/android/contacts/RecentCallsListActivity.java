@@ -121,6 +121,10 @@ public class RecentCallsListActivity extends ListActivity
         Phones.PERSON_ID, Phones.DISPLAY_NAME, Phones.TYPE, Phones.LABEL,
         Phones.NUMBER
     };
+    
+    static final String[] PHONES_ID_PROJECTION = new String[] {
+        Phones.PERSON_ID
+    };
 
     static final int PERSON_ID_COLUMN_INDEX = 0;
     static final int NAME_COLUMN_INDEX = 1;
@@ -147,11 +151,29 @@ public class RecentCallsListActivity extends ListActivity
     ArrayList<RecentCallsInfo> mListCallLogs = null;   
     private SharedPreferences prefs;
     
+    ArrayList<String> numbersCache = null;
+    ArrayList<Integer> numbersCachePosition = null;
+    SparseArray<Integer> personIdCache = null;
+    SparseArray<Long> tempNumList = null;
+    
     private static int totalIncoming = 0;
     private static int totalOutgoing = 0;
     
     private QueryHandler mQueryHandler;
     String mVoiceMailNumber;
+    
+    private static boolean relativeTime;
+    private static boolean is24hour;
+    private static boolean showSeconds;
+    private static final String format24HourSeconds = "MMM d, kk:mm:ss";
+    private static final String format24Hour = "MMM d, kk:mm";
+    private static final String format12HourSeconds = "MMM d, h:mm:ssaa";
+    private static final String format12Hour = "MMM d, h:mmaa";
+    private static boolean showDialButton;
+    private static boolean showContactPic;
+    private static boolean showNumber;
+    private static boolean showLabel;
+    private static boolean useExpGroup;
 
     static final class ContactInfo {
         public long personId;
@@ -235,7 +257,7 @@ public class RecentCallsListActivity extends ListActivity
         private Thread mCallerIdThread;
 
         private CharSequence[] mLabelArray;
-        private SparseArray<SoftReference<Bitmap>> mBitmapCache = null;
+        private SparseArray<SoftReference<Bitmap>> mBitmapCache = null;      
 
         private Drawable mDrawableIncoming;
         private Drawable mDrawableOutgoing;
@@ -318,6 +340,16 @@ public class RecentCallsListActivity extends ListActivity
             } else {
                 v = convertView;
             }
+            
+            relativeTime = prefs.getBoolean("cl_relative_time", false);
+            is24hour = DateFormat.is24HourFormat(mContext);
+            showSeconds = prefs.getBoolean("cl_show_seconds", true);
+            showDialButton = prefs.getBoolean("cl_show_dial_button", true);
+            showContactPic = prefs.getBoolean("cl_show_pic", true);
+            showNumber = prefs.getBoolean("cl_show_number", true);
+            showLabel = prefs.getBoolean("cl_show_label", true);
+            useExpGroup = prefs.getBoolean("cl_use_exp_grouping", false);
+            
             bindView(v, mContext, position);
             return v;
         }
@@ -520,9 +552,9 @@ public class RecentCallsListActivity extends ListActivity
             int count = callsinfo.count;
 
             // Store away the number so we can call it directly if you click on the call icon
-            views.callView.setTag(number);
+            views.callView.setTag(number);            
 	            
-            if (!prefs.getBoolean("cl_show_dial_button", true)) {
+            if (!showDialButton) {
                 views.iconView.setTag(number);
                 views.iconView.setOnClickListener(this);
                 //views.iconView.setBackgroundResource(R.drawable.call_background);
@@ -540,7 +572,7 @@ public class RecentCallsListActivity extends ListActivity
                 // The db request should happen on a non-UI thread
                 info = ContactInfo.EMPTY;
                 mContactInfo.put(number, info);
-                Log.e(TAG, "get infor NULL" + number);
+                //Log.e(TAG, "get infor NULL" + number);
                 enqueueRequest(number, c, callerName, callerNumberType,
                         callerNumberLabel);
 	                
@@ -599,14 +631,14 @@ public class RecentCallsListActivity extends ListActivity
                 RelativeLayout.LayoutParams newLine1Layout = (RelativeLayout.LayoutParams) views.line1View.getLayoutParams();
                 RelativeLayout.LayoutParams newNumberLayout = (RelativeLayout.LayoutParams) views.numberView.getLayoutParams();
 
-                if (prefs.getBoolean("cl_show_number", true)) {       
+                if (showNumber) {       
                     views.numberView.setVisibility(View.VISIBLE);
                     views.numberView.setText(formattedNumber);
                 } else {
                     views.numberView.setVisibility(View.GONE);
                 }                
                 
-                if (!TextUtils.isEmpty(numberLabel) && prefs.getBoolean("cl_show_label", true)) {
+                if (!TextUtils.isEmpty(numberLabel) && showLabel) {
                     views.labelView.setVisibility(View.VISIBLE);
                     views.labelView.setText(numberLabel);
                     
@@ -659,9 +691,9 @@ public class RecentCallsListActivity extends ListActivity
             }
 
             int type = callsinfo.type; // c.getInt(CALL_TYPE_COLUMN_INDEX);
-            long date = callsinfo.date; // c.getLong(DATE_COLUMN_INDEX);
+            long date = callsinfo.date; // c.getLong(DATE_COLUMN_INDEX);            
 	            
-            if (prefs.getBoolean("cl_relative_time", false)) {
+            if (relativeTime) {
                 // Set the date/time field by mixing relative and absolute times.
                 int flags = DateUtils.FORMAT_ABBREV_RELATIVE;
 
@@ -672,24 +704,24 @@ public class RecentCallsListActivity extends ListActivity
             } else {
                 String format = null;
 
-                if (DateFormat.is24HourFormat(context)) {
-                    if (prefs.getBoolean("cl_show_seconds", true)) {
-                        format = "MMM d, kk:mm:ss";
+                if (is24hour) {
+                    if (showSeconds) {
+                        format = format24HourSeconds;
                     } else {
-                        format = "MMM d, kk:mm";
+                        format = format24Hour;
                     }
                 } else {
-                    if (prefs.getBoolean("cl_show_seconds", true)) {
-                        format = "MMM d, h:mm:ssaa";
+                    if (showSeconds) {
+                        format = format12HourSeconds;
                     } else {
-                        format = "MMM d, h:mmaa";
+                        format = format12Hour;
                     }                  	
                 }
                 
                 views.dateView.setText(DateFormat.format(format, date));                         
             }
             
-            if (prefs.getBoolean("cl_show_dial_button", true)) {
+            if (showDialButton) {
                 views.dividerView.setVisibility(View.VISIBLE);
                 views.callView.setVisibility(View.VISIBLE);
             } else {
@@ -720,12 +752,11 @@ public class RecentCallsListActivity extends ListActivity
             }
             
             // Set the photo, if requested
-            if (prefs.getBoolean("cl_show_pic", true)) {
+            if (showContactPic) {
                 
-                long personId = callsinfo.personId;
-                            
-                Bitmap photo = null;
-                SoftReference<Bitmap> ref = mBitmapCache.get((int)personId);
+                int personId = (int)callsinfo.personId;
+                Bitmap photo = null;                
+                SoftReference<Bitmap> ref = mBitmapCache.get(personId);
                 if (ref != null) {
                     photo = ref.get();
                 }
@@ -735,7 +766,7 @@ public class RecentCallsListActivity extends ListActivity
                         //int id = c.getInt(ID_COLUMN_INDEX);
                         Uri uri = ContentUris.withAppendedId(People.CONTENT_URI, personId);
                         photo = People.loadContactPhoto(context, uri, R.drawable.ic_contact_list_picture, null);
-                        mBitmapCache.put((int)personId, new SoftReference<Bitmap>(photo));
+                        mBitmapCache.put(personId, new SoftReference<Bitmap>(photo));
                     } catch (OutOfMemoryError e) {
                         // Not enough memory for the photo, use the default one instead
                         photo = null;
@@ -818,12 +849,55 @@ public class RecentCallsListActivity extends ListActivity
         }
     }
     
-    public void addItemIntoList(RecentCallsInfo item) {    	
-		
+    public void addItemIntoList(RecentCallsInfo item) {
+        int numCacheSize = numbersCache.size();
+        long personId = item.personId;
+        String number = item.number;
+        String name = item.name;
+        RecentCallsInfo info = null;
+        int position = -1;        
+        
+        if (personId == -1) {
+            for (int i = 0; i < numCacheSize; i++) {
+                if (PhoneNumberUtils.compare(numbersCache.get(i), number) || 
+                    (useExpGroup && sloppyPhoneNumComparator(numbersCache.get(i), number))) {
+                    mListCallLogs.get(numbersCachePosition.get(i)).count++;
+                    return;
+                }
+            }
+            
+            mListCallLogs.add(item);
+            numbersCache.add(item.number);
+            numbersCachePosition.add(mListCallLogs.indexOf(item));            
+        }
+        else {
+            try {
+                position = personIdCache.get((int)personId);
+            } catch (NullPointerException e) {
+            }
+            if (position == -1) {
+                mListCallLogs.add(item);
+                personIdCache.put((int)personId, mListCallLogs.indexOf(item));
+            }
+            else {
+                info = mListCallLogs.get(position);
+                if (info.personId == personId) {
+                    if (info.name == null && name != null) {
+                        info.name = name;
+                        info.number_label = item.number_label;
+                        info.number_type = item.number_type;
+                    }                    			
+                    info.count++;
+                }
+            }
+        }
+
+		/*
         for (int i = 0; i < mListCallLogs.size(); i++) {
-            if ((mListCallLogs.get(i).personId == item.personId && item.personId != -1) || 
+            if ((item.personId != -1 && mListCallLogs.get(i).personId == item.personId) || 
                 PhoneNumberUtils.compare(mListCallLogs.get(i).number, item.number) || 
-                sloppyPhoneNumComparator(mListCallLogs.get(i).number, item.number)) {
+                (prefs.getBoolean("cl_use_exp_grouping", false) && sloppyPhoneNumComparator(mListCallLogs.get(i).number, item.number))) {
+                
                 if (mListCallLogs.get(i).name == null && item.name != null) {
                     mListCallLogs.get(i).name = item.name;
                     mListCallLogs.get(i).number_label = item.number_label;
@@ -835,6 +909,7 @@ public class RecentCallsListActivity extends ListActivity
             }
         }
         mListCallLogs.add(item);
+        */
     }
     
     
@@ -843,13 +918,15 @@ public class RecentCallsListActivity extends ListActivity
     //be detected as different numbers, although they are the same.
     //This method simply matches the last 8 digits and returns it as true if the last 7 digits matches.
     private boolean sloppyPhoneNumComparator(String num1, String num2) {
-        if (num1.length() < 8 || num2.length() < 8)
+        int compareLength = Integer.parseInt(prefs.getString("cl_exp_grouping_num", "8"));
+        
+        if (num1.length() < compareLength || num2.length() < compareLength)
             return false;          
         
         String number1 = PhoneNumberUtils.stripSeparators(num1);
         String number2 = PhoneNumberUtils.stripSeparators(num2);        
-        number1 = number1.substring(num1.length() - 8);
-        number2 = number2.substring(num2.length() - 8);       
+        number1 = number1.substring(num1.length() - compareLength);
+        number2 = number2.substring(num2.length() - compareLength);       
 
         if (number1.equals(number2))
             return true;
@@ -859,10 +936,16 @@ public class RecentCallsListActivity extends ListActivity
     
     public void getUpdateCallLogsItem(Cursor cursor) {
         mListCallLogs.clear();
+        numbersCache.clear();
+        numbersCachePosition.clear();
+        personIdCache.clear();
         if (cursor == null) {
             return;
         }
-    	
+        
+        Cursor phonesCursor = null;        
+        int number = -1;
+        
         if (cursor.getCount() != 0) {
             cursor.moveToFirst();
             do { 
@@ -885,29 +968,59 @@ public class RecentCallsListActivity extends ListActivity
                         RecentCallsListActivity.DATE_COLUMN_INDEX);
                 item.duration = cursor.getInt(
                         RecentCallsListActivity.DURATION_COLUMN_INDEX);
-                
-                Cursor phonesCursor = RecentCallsListActivity.this.getContentResolver().query(
-                                        Uri.withAppendedPath(Phones.CONTENT_FILTER_URL,
-                                        Uri.encode(item.number)), PHONES_PROJECTION, null, null, null);
-                
+                        
+                //Wysie_Soh: The following portion of code to retrieve personId
+                //really slows down the performance. However, without it,
+                //call logs will not be grouped by contact, and instead will be grouped
+                //by number (non-ideal). Thus, we make use of a SparseArray to keep
+                //numbers and ids pairs, and avoid querying. This speeds it up significantly,
+                //but it's still slower than default/without querying personId
                 item.personId = -1;
-        
-                if (phonesCursor != null) {
-                    if (phonesCursor.moveToFirst()) {
-                        item.personId = phonesCursor.getLong(PERSON_ID_COLUMN_INDEX);
-                    }
-                    phonesCursor.close();
+                try {
+                    number = Integer.parseInt(numbersOnly(item.number));
+                } catch (NumberFormatException e) {
+                    number = -1;
                 }
                 
+                if (number != -1) {
+                    try {            
+                        item.personId = tempNumList.get(number);
+                    } catch (NullPointerException e) {
+                    }
+                }
+
+                if (item.personId == -1) {                
+                    phonesCursor = getContentResolver().query(
+                                    Uri.withAppendedPath(Phones.CONTENT_FILTER_URL,
+                                    Uri.encode(item.number)), PHONES_ID_PROJECTION, null, null, null);
+                
+                    if (phonesCursor != null && phonesCursor.moveToFirst()) {
+                        item.personId = phonesCursor.getLong(PERSON_ID_COLUMN_INDEX);
+                        if (number != -1)
+                            tempNumList.put(number, item.personId);
+                    }
+                }                    
+
                 addItemIntoList(item);
-            } while (cursor.moveToNext());		
-			
+                
+            } while (cursor.moveToNext());
+            
+            if (phonesCursor != null) {
+                phonesCursor.close();
+            }            
             cursor.close();
+            
         }
-        // Log.e(TAG,"getUpdateCallLogsItem");      
-              
+        // Log.e(TAG,"getUpdateCallLogsItem");
+        numbersCache.clear();
+        numbersCachePosition.clear();
+        personIdCache.clear();              
         mArrayAdapter.notifyDataSetChanged(); 
 		
+    }
+    
+    static String numbersOnly(String s) {
+        return s.replaceAll("[^0-9]","");
     }
 
     @Override
@@ -921,6 +1034,10 @@ public class RecentCallsListActivity extends ListActivity
         setDefaultKeyMode(DEFAULT_KEYS_DIALER);
 
         mListCallLogs = new ArrayList<RecentCallsInfo>();
+        numbersCache =  new ArrayList<String>();
+        numbersCachePosition = new ArrayList<Integer>();
+        personIdCache = new SparseArray<Integer>();
+        tempNumList = new SparseArray<Long>(); //Wysie_Soh: This list is not cleared (on purpose). So resuming is faster.
         
         // mAdapter = new RecentCallsAdapter();
         mArrayAdapter = new RecentCallsArrayAdapter(this,
@@ -1449,6 +1566,7 @@ public class RecentCallsListActivity extends ListActivity
     //"Remove all 91234567" option, the +6591234567 will not be cleared.
     //A more obvious example would be 010891234567 and +6591234567
     private void clearCallLogInstances(final String type, final String value, final String label) { // Clear all instances of a user OR number
+        final int compareLength = Integer.parseInt(prefs.getString("cl_exp_grouping_num", "8"));
     	
         if (prefs.getBoolean("cl_ask_before_clear", false)) {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -1460,7 +1578,7 @@ public class RecentCallsListActivity extends ListActivity
                 public void onClick(DialogInterface dialog, int whichButton) {
                     if (type.equals(CallLog.Calls.NUMBER) && !(label.equals(getString(R.string.unknown)) ||
                         label.equals(getString(R.string.private_num)) || label.equals(getString(R.string.payphone)) ||
-                        label.equals(getString(R.string.voicemail))) && value.length() >= 8) {
+                        label.equals(getString(R.string.voicemail))) && value.length() >= compareLength) {
                         clearCallLogNumbers(value);
                     }
                     else {
@@ -1478,7 +1596,7 @@ public class RecentCallsListActivity extends ListActivity
         } else {
             if (type.equals(CallLog.Calls.NUMBER) && !(label.equals(getString(R.string.unknown)) ||
                 label.equals(getString(R.string.private_num)) || label.equals(getString(R.string.payphone)) ||
-                label.equals(getString(R.string.voicemail)))) {
+                label.equals(getString(R.string.voicemail))) && value.length() >= compareLength) {
                     clearCallLogNumbers(value);
             }
             else {

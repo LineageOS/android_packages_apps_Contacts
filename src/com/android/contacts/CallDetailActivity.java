@@ -29,6 +29,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -41,6 +42,7 @@ import android.provider.Contacts.Phones;
 import android.provider.Contacts.Intents.Insert;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
+import android.text.ClipboardManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -62,15 +64,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Displays the details of a specific call log entry.
  */
-public class CallDetailActivity extends ListActivity implements View.OnCreateContextMenuListener {
+public class CallDetailActivity extends ListActivity implements View.OnCreateContextMenuListener/*, DialogInterface.OnClickListener*/ {
     private static final String TAG = "CallDetail";
 
-    private TextView mCallType;
+    //private TextView mCallType;
+    private TextView mCallNumber;
     private ImageView mCallTypeIcon;
     private TextView mCallTime;
     private TextView mCallDuration;
@@ -80,6 +85,7 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
     private ImageView mPhotoView;    
     
     private String mNumber = null;
+    private static boolean hasAction = true;
     
     /* package */ LayoutInflater mInflater;
     /* package */ Resources mResources;
@@ -112,17 +118,25 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
     static final int COLUMN_INDEX_NUMBER = 4;
     
     private static final int MENU_ITEM_DELETE = 1;
-    private static final int MENU_ITEM_DELETE_ALL = 2;
+    private static final int MENU_ITEM_DELETE_ALL_NAME = 2;
     private static final int MENU_ITEM_DELETE_ALL_INCOMING = 3;
     private static final int MENU_ITEM_DELETE_ALL_OUTGOING = 4;
     private static final int MENU_ITEM_DELETE_ALL_MISSED = 5;
     private static final int MENU_ITEM_VIEW_CONTACT = 6;
     private static final int MENU_ITEM_ADD_CONTACT = 7;
+    private static final int MENU_ITEM_DELETE_ALL_NUMBER = 8;
+    
+    private static final int MENU_ITEM_CALL = 9;
+    private static final int MENU_COPY_NUM = 10;
     
     private ViewAdapter adapter;
     private List<ViewEntryData> logs;
     private SharedPreferences prefs;
-
+    private static String displayName;
+    private static long personId;
+    private static String mVoiceMailNumber;
+    private static boolean isRequery = false;
+    
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -151,11 +165,13 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
             mNoPhotoResource = R.drawable.ic_contact_picture_3;
         }
         
+        mVoiceMailNumber = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getVoiceMailNumber();
     }
     
     @Override
     public void onResume() {
         super.onResume();
+        isRequery = false;
         updateData();
     }
 
@@ -184,10 +200,32 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
     class ViewEntryData{
     	public long id;
     	public String number;
+    	public String label;
     	public long date;
     	public long duration;
-    	public int callType;    	
+    	public int callType;
     }
+    
+    //Class used to sort
+    class NumberInfo {
+        public String number;
+        public String label;
+        
+        NumberInfo(String n, String l) {
+            number = n;
+            label = l;
+        }
+    }
+    
+    class LogsSortByTime implements Comparator<ViewEntryData>{
+        public int compare(ViewEntryData v1, ViewEntryData v2) {
+            Long l1 = v1.date;
+            Long l2 = v2.date;
+            
+            return l2.compareTo(l1);
+        }
+    }
+    
     /**
      * Update user interface with details of given call.
      * 
@@ -195,98 +233,199 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
      */
     private void updateData() {
     	Bundle bundle = getIntent().getExtras();
+    	personId = bundle.getLong("PERSONID");
     	String number = bundle.getString("NUMBER");
-    	//Toast.makeText(this, number, Toast.LENGTH_LONG).show();
+    	ArrayList<NumberInfo> personNumbers = new ArrayList<NumberInfo>();
+    	personUri = null;
+    	Uri callUri = null;
+    	Cursor callCursor = null;
+    	logs = new ArrayList<ViewEntryData>();    	
     	
-        StringBuilder where = new StringBuilder();
-        where.append(Calls.NUMBER);
-        where.append(" = '" + number + "'");
-        
-        Cursor callCursor = getContentResolver().query(Calls.CONTENT_URI, CALL_LOG_PROJECTION,where.toString(), null,
-        		Calls.DEFAULT_SORT_ORDER);
-        
-        mNumber = number;
-        
-    	ContentResolver resolver = getContentResolver();
-      
-    	TextView tvName = (TextView) findViewById(R.id.name);
-    	TextView tvNumber = (TextView) findViewById(R.id.number);
-    	
-    	if (mNumber.equals(CallerInfo.UNKNOWN_NUMBER) ||
-                mNumber.equals(CallerInfo.PRIVATE_NUMBER)) {
-            // List is empty, let the empty view show instead.
-            TextView emptyText = (TextView) findViewById(R.id.emptyText);
-            if (emptyText != null) {
-                emptyText.setText(mNumber.equals(CallerInfo.PRIVATE_NUMBER) 
-                        ? R.string.private_num : R.string.unknown);
-            }
-            mPhotoView.setImageResource(mNoPhotoResource);
-        } else {
-            // Perform a reverse-phonebook lookup to find the PERSON_ID
-            String callLabel = null;
+    	//Wysie_Soh: If the personId is valid
+    	if (personId > 0) {
+    	    personUri = ContentUris.withAppendedId(People.CONTENT_URI, personId);
+    	    Uri phonesUri = Uri.withAppendedPath(personUri, People.Phones.CONTENT_DIRECTORY);
+            final Cursor phonesCursor = getContentResolver().query(phonesUri, PHONES_PROJECTION, null, null, null);
+            displayName = null;
             
-            Uri phoneUri = Uri.withAppendedPath(Phones.CONTENT_FILTER_URL, Uri.encode(mNumber));
-            Cursor phonesCursor = resolver.query(phoneUri, PHONES_PROJECTION, null, null, null);
+            if (phonesCursor != null && phonesCursor.moveToFirst()) {
+                int type = -1;
+                String label = null;
+                CharSequence actualLabel = null;
+                do {
+                    if (displayName == null)
+                        displayName = phonesCursor.getString(COLUMN_INDEX_NAME);
+                    type = phonesCursor.getInt(COLUMN_INDEX_TYPE);
+                    number = phonesCursor.getString(COLUMN_INDEX_NUMBER);
+                    label = phonesCursor.getString(COLUMN_INDEX_LABEL);
+                    actualLabel = Phones.getDisplayLabel(this, type, label);
+                    personNumbers.add(new NumberInfo(number, actualLabel.toString()));
+                } while (phonesCursor.moveToNext());
+                
+                phonesCursor.close();
+            }
+            /*
+            else {
+                //Toast.makeText(this, R.string.toast_call_detail_error_wysie, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Testing 123", Toast.LENGTH_SHORT).show();
+                this.finish();
+                return;
+            }
+            */
+            
+            for (NumberInfo i : personNumbers) {
+                callUri = Uri.withAppendedPath(Calls.CONTENT_FILTER_URI, Uri.encode(i.number));
+                callCursor = getContentResolver().query(callUri, CALL_LOG_PROJECTION, null, null, null);
+                
+                try {                
+                    if (callCursor != null && callCursor.moveToFirst()) {
+                        do {
+                            ViewEntryData data = new ViewEntryData();
+                            data.label = i.label;
+                    		data.id = callCursor.getLong(LOG_COLUMN_INDEX);
+                       		data.date = callCursor.getLong(DATE_COLUMN_INDEX);
+                    		data.duration = callCursor.getLong(DURATION_COLUMN_INDEX);
+                    		data.callType = callCursor.getInt(CALL_TYPE_COLUMN_INDEX);
+                    		data.number = callCursor.getString(NUMBER_COLUMN_INDEX);	                
+                    		logs.add(data);
+                        } while(callCursor.moveToNext());
+                    }
+                }
+                finally {
+                if (callCursor != null)
+                    callCursor.close();
+                }
+            }
+    	}
+    	//Wysie_Soh: If no person found, query by number instead
+    	else {
+    	    int num = 0;
+    	    
+    	    try {
+    	        num = Integer.parseInt(number);
+    	    }
+    	    catch (NumberFormatException e) {
+    	        //Nothing
+    	    }
+    	        	    
+    	    if (num < 0) {
+    	        callCursor = getContentResolver().query(Calls.CONTENT_URI, CALL_LOG_PROJECTION, Calls.NUMBER + "=?", new String[] { number }, null);
+    	    }
+    	    else {    	        	
+        	    callUri = Uri.withAppendedPath(Calls.CONTENT_FILTER_URI, Uri.encode(number));
+        	    callCursor = getContentResolver().query(callUri, CALL_LOG_PROJECTION, null, null, null);
+    	    
+                //Wysie_Soh: Loop to find shortest number.
+                //For some reason, eg. if you have 91234567 and +6591234567 and say, 010891234567
+                //they might not be detected as the same number. This is especially.
+                //Might change to binary search in future.
+                try {
+                    if (callCursor != null && callCursor.moveToFirst()) {
+                        do {
+                            if (number.length() > callCursor.getString(NUMBER_COLUMN_INDEX).length()) {
+                                number = callCursor.getString(NUMBER_COLUMN_INDEX);
+                            }
+                        } while(callCursor.moveToNext());
+                    }
+                }
+                finally {
+                    if (callCursor != null)
+                        callCursor.close();
+                }
+                
+                //Wysie_Soh:Requery with shortest number found. This will ensure we get all entries.
+                callUri = Uri.withAppendedPath(Calls.CONTENT_FILTER_URI, Uri.encode(number));
+                callCursor = getContentResolver().query(callUri, CALL_LOG_PROJECTION, null, null, null);
+            }
+            
             try {
-                if (phonesCursor != null && phonesCursor.moveToFirst()) {
-                    long personId = phonesCursor.getLong(COLUMN_INDEX_ID);
-                    personUri = ContentUris.withAppendedId(
-                            Contacts.People.CONTENT_URI, personId);
-                    // Load the photo
-                    mPhotoView.setImageBitmap(People.loadContactPhoto(this, personUri, mNoPhotoResource,
-                            null /* use the default options */));
-                    
-                    tvName.setText(phonesCursor.getString(COLUMN_INDEX_NAME));
-                    tvNumber.setText(mNumber);
-                } else {
-                	tvName.setText("("+ getString(R.string.unknown) + ")");
-                	tvNumber.setText(mNumber);// = PhoneNumberUtils.formatNumber(mNumber);
-                	//tvNumber.setVisibility(View.GONE);
-                	mPhotoView.setImageResource(mNoPhotoResource);
+                if (callCursor != null && callCursor.moveToFirst()) {
+                    do {
+                		ViewEntryData data = new ViewEntryData();
+	                    // Read call log specifics
+                		data.id = callCursor.getLong(LOG_COLUMN_INDEX);
+                		data.date = callCursor.getLong(DATE_COLUMN_INDEX);
+                		data.duration = callCursor.getLong(DURATION_COLUMN_INDEX);
+                		data.callType = callCursor.getInt(CALL_TYPE_COLUMN_INDEX);
+                		data.number = callCursor.getString(NUMBER_COLUMN_INDEX);            		
+	                
+                		logs.add(data);	              
+                	} while(callCursor.moveToNext());
                 }
             } finally {
-                if (phonesCursor != null) phonesCursor.close();
+                if (callCursor != null)
+                    callCursor.close();
             }
-        }
-        
-        int size = Integer.parseInt(prefs.getString("cl_view_contact_pic_size", "78"));
-        //Wysie_Soh: Set contact picture size
-        mPhotoView.setLayoutParams(new LinearLayout.LayoutParams(size, size));
+    	}    	
     	
-    	logs = new ArrayList<ViewEntryData>();
-    	ViewEntryData firstPlaceHolder = new ViewEntryData();
-    	firstPlaceHolder.number = mNumber;
-    	logs.add(firstPlaceHolder);
-        try {
-            if (callCursor != null && callCursor.moveToFirst()) {
-            	
-            	do {
-            		ViewEntryData data = new ViewEntryData();
-	                // Read call log specifics
-            		data.id = callCursor.getLong(LOG_COLUMN_INDEX);
-            		data.date = callCursor.getLong(DATE_COLUMN_INDEX);
-            		data.duration = callCursor.getLong(DURATION_COLUMN_INDEX);
-            		data.callType = callCursor.getInt(CALL_TYPE_COLUMN_INDEX);
-	                
-            		logs.add(data);	              
-            	}while(callCursor.moveToNext());
-            } else {
-                // Something went wrong reading in our primary data, so we're going to
-                // bail out and show error to users.
-                Toast.makeText(this, R.string.toast_call_detail_error,
-                        Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        } finally {
-            if (callCursor != null) {
-                callCursor.close();
-            }
+    	//Sort arraylist here
+    	Collections.sort(logs ,new LogsSortByTime());
+    	
+    	try {    	    	
+            mNumber = logs.get(0).number;
         }
-        
-        adapter = new ViewAdapter(this, logs);
-        setListAdapter(adapter);         
-    }
+        catch (IndexOutOfBoundsException e) { //If logs is size 0, no content, exit.
+            if (!isRequery) {
+                Toast.makeText(this, R.string.toast_call_detail_error_wysie, Toast.LENGTH_SHORT).show();
+            }
+            //Toast.makeText(this, "Testing 789", Toast.LENGTH_SHORT).show();
+            this.finish();
+            return;
+        }       
 
+    	
+    	if (mNumber != null) {            
+        	TextView tvName = (TextView) findViewById(R.id.name);
+
+    	    if (mNumber.equals(CallerInfo.UNKNOWN_NUMBER) ||
+                    mNumber.equals(CallerInfo.PRIVATE_NUMBER) || mNumber.equals(CallerInfo.PAYPHONE_NUMBER) || mNumber.equals(mVoiceMailNumber)) {
+                // List is empty, let the empty view show instead.
+                //TextView emptyText = (TextView) findViewById(R.id.emptyText);                
+                hasAction = false;               
+                
+                //if (emptyText != null) {
+                    displayName = getString(R.string.unknown);
+                    if (mNumber.equals(CallerInfo.PRIVATE_NUMBER)) {
+                        displayName = getString(R.string.private_num);                            
+                    }
+                    else if (mNumber.equals(CallerInfo.PAYPHONE_NUMBER)) {
+                        displayName = getString(R.string.payphone);                            
+                    }
+                    else if (mNumber.equals(mVoiceMailNumber)) {
+                        displayName = getString(R.string.voicemail);
+                        hasAction = true;
+                    }
+                //}
+                //emptyText.setText(displayName);
+                tvName.setText(displayName);
+                mPhotoView.setImageResource(mNoPhotoResource);                
+            } else {
+                if (personId > 0) {
+                    tvName.setText(displayName);
+                    mPhotoView.setImageBitmap(People.loadContactPhoto(this, personUri, mNoPhotoResource, null /* use the default options */));
+                }
+                else {
+                    tvName.setText("("+ getString(R.string.unknown) + ")");
+                    mPhotoView.setImageResource(mNoPhotoResource);
+                }
+                hasAction = true;
+            }
+            
+            if (hasAction) {
+                ViewEntryData firstPlaceHolder = new ViewEntryData();
+                firstPlaceHolder.number = mNumber;
+                firstPlaceHolder.label = logs.get(0).label;
+                logs.add(0, firstPlaceHolder);
+            }
+            
+            int size = Integer.parseInt(prefs.getString("cl_view_contact_pic_size", "78"));
+            //Wysie_Soh: Set contact picture size
+            mPhotoView.setLayoutParams(new LinearLayout.LayoutParams(size, size));    	
+    
+            adapter = new ViewAdapter(this, logs);
+            setListAdapter(adapter);
+        }         
+    }
 
     static final class ViewEntry {
         public int icon = -1;
@@ -354,17 +493,26 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
         	 long date = entry.date;
         	 long duration = entry.duration;
         	 int callType = entry.callType; 
+        	 String num = entry.number;
+        	 final String label = entry.label;
 
             
         	RelativeLayout layout = (RelativeLayout) convertView.findViewById(R.id.line_action);
             LinearLayout layout_logs = (LinearLayout) convertView.findViewById(R.id.line_log);
             
-            if(position == 0){
+            if(position == 0 && hasAction) {
+                if (num.equals(CallerInfo.PRIVATE_NUMBER) || num.equals(CallerInfo.UNKNOWN_NUMBER) ||
+                    num.equals(CallerInfo.PAYPHONE_NUMBER)) {
+                    layout.setVisibility(View.GONE);
+                } else {
+                    layout.setVisibility(View.VISIBLE);
+                }
             	layout_logs.setVisibility(View.GONE);
-            	layout.setVisibility(View.VISIBLE);
                 ImageView call_icon = (ImageView) convertView.findViewById(R.id.call_icon);
                 ImageView sms_icon = (ImageView) convertView.findViewById(R.id.sms_icon);
                 TextView tvCall = (TextView) convertView.findViewById(R.id.call);
+                TextView tvNumLabel = (TextView) convertView.findViewById(R.id.most_recent_num_label);
+                TextView tvNum = (TextView) convertView.findViewById(R.id.most_recent_num);
                
                 //Geesun                
                 Intent callIntent = new Intent(Intent.ACTION_CALL_PRIVILEGED,
@@ -389,7 +537,40 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
 		           		tvCall.setText(mContext.getString(R.string.callBack));
 		           		break;
 	           	 }
-                
+	           	 
+                RelativeLayout.LayoutParams newCallLayout = (RelativeLayout.LayoutParams) tvCall.getLayoutParams();
+                RelativeLayout.LayoutParams newNumberLayout = (RelativeLayout.LayoutParams) tvNum.getLayoutParams();
+	           	 	           	 
+	           	if (label != null) {
+	           	    tvNumLabel.setText(label);
+	           	    tvNumLabel.setVisibility(View.VISIBLE);
+                    newCallLayout.addRule(RelativeLayout.ABOVE, R.id.most_recent_num_label);
+                    newNumberLayout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
+                    newNumberLayout.addRule(RelativeLayout.ALIGN_BASELINE, R.id.most_recent_num_label);
+                    newNumberLayout.setMargins(5, 0, 0, 0);
+	           	}
+	           	else {
+	           	    tvNumLabel.setVisibility(View.GONE);
+                    newCallLayout.addRule(RelativeLayout.ABOVE, R.id.most_recent_num);
+                    newNumberLayout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                    newNumberLayout.addRule(RelativeLayout.ALIGN_BASELINE, 0);
+                    newNumberLayout.setMargins(0, -10, 0, 8);
+	           	}
+	           	
+                tvCall.setLayoutParams(newCallLayout);
+                tvNum.setLayoutParams(newNumberLayout);
+                            
+                if (num.equals(CallerInfo.PRIVATE_NUMBER)) {
+                    num = mContext.getString(R.string.private_num);
+                }
+                else if (num.equals(CallerInfo.UNKNOWN_NUMBER)) {
+                    num = mContext.getString(R.string.unknown);
+                }
+                else if (num.equals(CallerInfo.PAYPHONE_NUMBER)) {
+                    num = mContext.getString(R.string.payphone);                            
+                }
+	           	
+	           	tvNum.setText(num);
                 
                 call_icon.setTag(callIntent);
                 //tvCall.setTag(callIntent);
@@ -404,13 +585,20 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
             	layout.setVisibility(View.GONE);
             	layout_logs.setVisibility(View.VISIBLE);
                 ImageView mCallTypeIcon = (ImageView) convertView.findViewById(R.id.icon);
+                
+                if (hasAction) {
+                    mCallTypeIcon.setOnClickListener(this);
+                    mCallTypeIcon.setTag(num);
+                }
+                TextView tvLabel = (TextView) convertView.findViewById(R.id.label);
                 TextView tvTime = (TextView) convertView.findViewById(R.id.time);
                 TextView tvDuration = (TextView) convertView.findViewById(R.id.duration);
-                TextView tvType = (TextView) convertView.findViewById(R.id.type);
+                //TextView tvType = (TextView) convertView.findViewById(R.id.type);
+                TextView tvNum = (TextView) convertView.findViewById(R.id.type);
                 // Pull out string in format [relative], [date]
                 CharSequence dateClause = DateUtils.formatDateRange(mContext, date, date,
-                        DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE |
-                        DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_SHOW_YEAR);
+                        DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_WEEKDAY | 
+                        DateUtils.FORMAT_SHOW_YEAR | DateUtils.FORMAT_ABBREV_MONTH | DateUtils.FORMAT_ABBREV_WEEKDAY);
                 tvTime.setText(dateClause);
                 
                 // Set the duration
@@ -421,59 +609,94 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
                 	tvDuration.setText(formatDuration(duration));
                 }
     
-                // Set the call type icon and caption                
+                // Set the call type icon          
                 switch (callType) {
                     case Calls.INCOMING_TYPE:
                         mCallTypeIcon.setImageResource(R.drawable.ic_call_log_header_incoming_call);
-                        tvType.setText(R.string.type_incoming);
+                        //tvType.setText(R.string.type_incoming);
                        
                         break;
     
                     case Calls.OUTGOING_TYPE:
                         mCallTypeIcon.setImageResource(R.drawable.ic_call_log_header_outgoing_call);
-                        tvType.setText(R.string.type_outgoing);
+                        //tvType.setText(R.string.type_outgoing);
                         
                         break;
     
                     case Calls.MISSED_TYPE:
                         mCallTypeIcon.setImageResource(R.drawable.ic_call_log_header_missed_call);
-                        tvType.setText(R.string.type_missed);
+                        //tvType.setText(R.string.type_missed);
                         
                         break;
-                }                
+                }
+                
+                if (num.equals(CallerInfo.PRIVATE_NUMBER)) {
+                    num = mContext.getString(R.string.private_num);
+                }
+                else if (num.equals(CallerInfo.UNKNOWN_NUMBER)) {
+                    num = mContext.getString(R.string.unknown);
+                }
+                else if (num.equals(CallerInfo.PAYPHONE_NUMBER)) {
+                    num = mContext.getString(R.string.payphone);                            
+                }
+                
+                if (entry.label == null) {
+                    tvLabel.setVisibility(View.GONE);
+                }
+                else {
+                    tvLabel.setText(entry.label);
+                    tvLabel.setVisibility(View.VISIBLE);
+                }
+                
+                tvNum.setText(num);
+                                
                 convertView.setTag(entry);
             }
             
             return convertView;
         }
-
-		public void onClick(View v) {			
-            Intent intent = (Intent) v.getTag();
-
-           if(intent != null)
-            mContext.startActivity(intent);
+        
+        //Wysie_Soh: Only the calltype and the icons in the first row have onclick events. In case of the first row,
+        //try will succeed. Otherwise it will go to catch.
+		public void onClick(View v) {
+		    Intent intent = null;
+		    
+		    try {
+                intent = (Intent) v.getTag();
+            }
+            catch (ClassCastException e) {
+                intent = new Intent(Intent.ACTION_CALL_PRIVILEGED,
+                        Uri.fromParts("tel", (String)v.getTag(), null));
+            }
+            
+            if(intent != null)
+                mContext.startActivity(intent);
 		}
     }   
 
     
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, MENU_ITEM_DELETE_ALL, 0, R.string.recentCalls_deleteAll).setIcon(
-                android.R.drawable.ic_menu_close_clear_cancel);
-                
-        /* Wysie: WIP. Not working for now :(
+        if (personId > 0)
+            menu.add(0, MENU_ITEM_DELETE_ALL_NAME, 0, R.string.recentCalls_deleteAll).setIcon(
+                    android.R.drawable.ic_menu_close_clear_cancel);
+        else
+            menu.add(0, MENU_ITEM_DELETE_ALL_NUMBER, 0, R.string.recentCalls_deleteAll).setIcon(
+                    android.R.drawable.ic_menu_close_clear_cancel);  
+
+
         menu.add(0, MENU_ITEM_DELETE_ALL_INCOMING, 0, R.string.recentCalls_deleteAllIncoming).setIcon(
                 android.R.drawable.ic_menu_close_clear_cancel);
         menu.add(0, MENU_ITEM_DELETE_ALL_OUTGOING, 0, R.string.recentCalls_deleteAllOutgoing).setIcon(
                 android.R.drawable.ic_menu_close_clear_cancel);
         menu.add(0, MENU_ITEM_DELETE_ALL_MISSED, 0, R.string.recentCalls_deleteAllMissed).setIcon(
                 android.R.drawable.ic_menu_close_clear_cancel);
-        */
+       
     
         if (personUri != null) {
             menu.add(0, MENU_ITEM_VIEW_CONTACT, 0, R.string.menu_viewContact)
             	.setIcon(R.drawable.ic_tab_contacts); 
         } else if (!(mNumber.equals(CallerInfo.UNKNOWN_NUMBER) ||
-                mNumber.equals(CallerInfo.PRIVATE_NUMBER))) {
+                mNumber.equals(CallerInfo.PRIVATE_NUMBER) || mNumber.equals(CallerInfo.PAYPHONE_NUMBER))) {
             menu.add(0, MENU_ITEM_ADD_CONTACT, 0, R.string.recentCalls_addToContact)
             .setIcon(android.R.drawable.ic_menu_add);
         }
@@ -492,8 +715,25 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
     
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case MENU_ITEM_DELETE_ALL: {
-            clearCallLog();
+        case MENU_ITEM_DELETE_ALL_NAME: {
+            clearCallLogInstances(CallLog.Calls.CACHED_NAME, displayName, displayName); 
+            return true;
+        }
+        case MENU_ITEM_DELETE_ALL_NUMBER: {
+            String label = null;
+            
+            if (mNumber.equals(CallerInfo.UNKNOWN_NUMBER)) {
+                label = getString(R.string.unknown);
+            } else if (mNumber.equals(CallerInfo.PRIVATE_NUMBER)) {
+                label = getString(R.string.private_num);
+            } else if (mNumber.equals(CallerInfo.PAYPHONE_NUMBER)) {
+                label = getString(R.string.payphone);
+            } else if (mNumber.equals(mVoiceMailNumber)) {
+                label = getString(R.string.voicemail);
+            } else {
+                label = mNumber;
+            }
+            clearCallLogInstances(CallLog.Calls.NUMBER, mNumber, label);
             return true;
         }
 
@@ -537,75 +777,173 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
             Log.e(TAG, "bad menuInfoIn", e);
             return;
         }
-        if (menuInfo.position == 0) {
+        if (menuInfo.position == 0 && hasAction) {
             return;
         }
-    
+        
+        ViewEntryData entryData = (ViewEntryData)adapter.getItem(menuInfo.position);
+        
+        //Wysie_Soh: WIP
+        String number = entryData.number;
+        
+        if (!(mNumber.equals(CallerInfo.UNKNOWN_NUMBER) || mNumber.equals(CallerInfo.PRIVATE_NUMBER) 
+            || mNumber.equals(CallerInfo.PAYPHONE_NUMBER))) {
+            menu.add(0, MENU_ITEM_CALL, 0, getString(R.string.recentCalls_callNumber, number));
+            menu.add(0, MENU_COPY_NUM, 0, getString(R.string.menu_copy_string, number));
+        }
         menu.add(0, MENU_ITEM_DELETE, 0, R.string.recentCalls_removeFromRecentList);
+        
+        if (number.equals(CallerInfo.UNKNOWN_NUMBER)) {
+            number = getString(R.string.unknown);
+        } else if (number.equals(CallerInfo.PRIVATE_NUMBER)) {
+            number = getString(R.string.private_num);
+        } else if (number.equals(CallerInfo.PAYPHONE_NUMBER)) {
+            number = getString(R.string.payphone);
+        } else if (number.equals(mVoiceMailNumber)) {
+            number = getString(R.string.voicemail);
+        }
+        
+        menu.add(0, MENU_ITEM_DELETE_ALL_NUMBER, 0, getString(R.string.menu_cl_clear_type, number));
     }
     
 	public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         ViewEntryData entryData = (ViewEntryData)adapter.getItem(info.position);
+        String number = entryData.number;
 	
-		switch(item.getItemId()) {		
-		    case MENU_ITEM_DELETE:
-		        getContentResolver().delete(Calls.CONTENT_URI, "Calls._ID=?", new String[] { Long.toString(entryData.id) } );
-                logs.remove(entryData);
-                if(logs.size() != 1) { //1 because the top row is for calling/smsing
-                	adapter.notifyDataSetChanged();
-                }
-                else {                	
-                	finish();
-                }
+		switch(item.getItemId()) {
+		    case MENU_ITEM_CALL:
+                Intent callIntent = new Intent(Intent.ACTION_CALL_PRIVILEGED,
+                            Uri.fromParts("tel", number, null));
+                startActivity(callIntent);
                 return true;
-		
+            case MENU_COPY_NUM:
+                if (entryData != null) {
+                    ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    clipboard.setText(number);
+                 }
+		    case MENU_ITEM_DELETE:
+		        deleteCallLog("Calls._ID=?", new String[] { Long.toString(entryData.id) } );
+                return true;
+            case MENU_ITEM_DELETE_ALL_NUMBER:
+                String label = null;
+                
+                if (number.equals(CallerInfo.UNKNOWN_NUMBER)) {
+                    label = getString(R.string.unknown);
+                } else if (number.equals(CallerInfo.PRIVATE_NUMBER)) {
+                    label = getString(R.string.private_num);
+                } else if (number.equals(CallerInfo.PAYPHONE_NUMBER)) {
+                    label = getString(R.string.payphone);
+                } else if (number.equals(mVoiceMailNumber)) {
+                    label = getString(R.string.voicemail);
+                } else {
+                    label = number;
+                }
+                clearCallLogInstances(CallLog.Calls.NUMBER, number, label);
+                return true;		
 		}
         
 		return super.onContextItemSelected(item);
 	}
 	
-    private void clearCallLog() {        
+	private String getShortestNumber(final String number) {
+        String num = number;
+        Uri callUri = Uri.withAppendedPath(Calls.CONTENT_FILTER_URI, Uri.encode(number));        
+        Cursor callCursor = getContentResolver().query(callUri, CALL_LOG_PROJECTION, null, null, Calls.DEFAULT_SORT_ORDER);
+        		
+        //Wysie_Soh: Loop to find shortest number, and requery.
+        //For some reason, eg. if you have 91234567 and +6591234567 and say, 010891234567
+        //they might not be detected as the same number. This is especially.
+        //Might change to binary search in future.
+        if (callCursor != null && callCursor.moveToFirst()) {
+            do {
+                if (number.length() > callCursor.getString(NUMBER_COLUMN_INDEX).length()) {
+                    num = callCursor.getString(NUMBER_COLUMN_INDEX);
+                }
+            }while(callCursor.moveToNext());
+        }
+        
+        return num;
+	}
+	
+    private void clearCallLogInstances(final String type, final String value, final String label) { // Clear all instances of a user OR number
+        final int compareLength = Integer.parseInt(prefs.getString("cl_exp_grouping_num", "8"));
+        final boolean useExpGroup = prefs.getBoolean("cl_use_exp_grouping", false);
+        
         if (prefs.getBoolean("cl_ask_before_clear", false)) {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
             alert.setTitle(R.string.alert_clear_call_log_title);
-            alert.setMessage("Are you sure you want to clear all call records of " + mNumber + "?");
-      
+            alert.setMessage(getString(R.string.alert_clear_cl_person, label));
             alert.setPositiveButton(android.R.string.ok,
                     new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    getContentResolver().delete(Calls.CONTENT_URI, Calls.NUMBER + "=?",
-                                                new String[] { mNumber });
-                    logs.clear();
-                    finish();
+                    if (type.equals(CallLog.Calls.NUMBER) && !(label.equals(getString(R.string.unknown)) ||
+                        label.equals(getString(R.string.private_num)) || label.equals(getString(R.string.payphone)) ||
+                        label.equals(getString(R.string.voicemail))) && value.length() >= compareLength && useExpGroup) {
+                        String num = getShortestNumber(value);
+                        deleteCallLog(type + " LIKE '%" + num + "'", null);
+                    }
+                    else {
+                        deleteCallLog(type + "=?", new String[] { value });
+                    }
                 }
             });
-        
-            alert.setNegativeButton(android.R.string.cancel,
-                    new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {// Canceled.
-                }
-            });
-        
+            alert.setNegativeButton(android.R.string.cancel, null);
             alert.show();
         } else {
-            getContentResolver().delete(Calls.CONTENT_URI, Calls.NUMBER + "=?",
-                                        new String[] { mNumber });
-            logs.clear();
-            finish();
+            if (type.equals(CallLog.Calls.NUMBER) && !(label.equals(getString(R.string.unknown)) ||
+                label.equals(getString(R.string.private_num)) || label.equals(getString(R.string.payphone)) ||
+                label.equals(getString(R.string.voicemail))) && value.length() >= compareLength && useExpGroup) {
+                String num = getShortestNumber(value);
+                deleteCallLog(type + " LIKE '%" + num + "'", null);
+            }
+            else {
+                deleteCallLog(type + "=?", new String[] { value });
+            }
+        }
+    }
+    
+    private void deleteCallLog(String where, String[] selArgs) {
+        try {
+            getContentResolver().delete(Calls.CONTENT_URI, where, selArgs);
+            isRequery = true;
+            updateData();
+        } catch (SQLiteException sqle) {// Nothing :P
         }
     }
 
     private void clearCallLogType(final int type) {
-        String message = null;
+        final int compareLength = Integer.parseInt(prefs.getString("cl_exp_grouping_num", "8"));
+        final boolean useExpGroup = prefs.getBoolean("cl_use_exp_grouping", false);
         
-        if (type == Calls.INCOMING_TYPE) {
-            message = "Are you sure you want to clear all incoming call records from " + mNumber + "?" ;            
-        } else if (type == Calls.OUTGOING_TYPE) {
-            message = "Are you sure you want to clear all outgoing call records to " + mNumber + "?" ;
-        } else if (type == Calls.MISSED_TYPE) {
-            message = "Are you sure you want to clear all missed call records from " + mNumber + "?" ;
+        String message = null;        
+
+        if (personId > 0) {
+            if (type == Calls.INCOMING_TYPE) {
+                message = getString(R.string.alert_clear_cl_person_incoming, displayName);
+            } else if (type == Calls.OUTGOING_TYPE) {
+                message = getString(R.string.alert_clear_cl_person_outgoing, displayName);
+            } else if (type == Calls.MISSED_TYPE) {
+                message = getString(R.string.alert_clear_cl_person_missed, displayName);
+            }
+        }
+        else {
+            String label = null;
+            if (mNumber.equals(CallerInfo.UNKNOWN_NUMBER) ||
+                    mNumber.equals(CallerInfo.PRIVATE_NUMBER) || mNumber.equals(CallerInfo.PAYPHONE_NUMBER) || mNumber.equals(mVoiceMailNumber)) {
+                label = displayName;
+            }
+            else {
+                label = mNumber;
+            }
+            if (type == Calls.INCOMING_TYPE) {
+                message = getString(R.string.alert_clear_cl_person_incoming, label);
+            } else if (type == Calls.OUTGOING_TYPE) {
+                message = getString(R.string.alert_clear_cl_person_outgoing, label);
+            } else if (type == Calls.MISSED_TYPE) {
+                message = getString(R.string.alert_clear_cl_person_missed, label);
+            }
         }
         
         if (prefs.getBoolean("cl_ask_before_clear", false)) {
@@ -613,33 +951,47 @@ public class CallDetailActivity extends ListActivity implements View.OnCreateCon
 
             alert.setTitle(R.string.alert_clear_call_log_title);
             alert.setMessage(message);
-            alert.setPositiveButton(android.R.string.ok,
-                    new DialogInterface.OnClickListener() {
+            alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    getContentResolver().delete(Calls.CONTENT_URI, Calls.TYPE + "=? AND " + Calls.NUMBER + "=?",
-                                                new String[] { Integer.toString(type), mNumber });
+                    if (personId > 0) {                
+                        deleteCallLog(Calls.TYPE + "=? AND " + Calls.CACHED_NAME + "=?", new String[] { Integer.toString(type), displayName });
+                    }
+                    else {
+                        if (!(displayName.equals(getString(R.string.unknown)) || displayName.equals(getString(R.string.private_num)) || 
+                            displayName.equals(getString(R.string.payphone)) || displayName.equals(getString(R.string.voicemail))) 
+                            && mNumber.length() >= compareLength && useExpGroup) {
+                            
+                            String num = getShortestNumber(mNumber);
+                            deleteCallLog(Calls.TYPE + "=? AND " + Calls.NUMBER + " LIKE '%" + num + "'", new String[] { Integer.toString(type) });
+                        }
+                        else {      
+                            deleteCallLog(Calls.TYPE + "=? AND " + Calls.NUMBER + "=?", new String[] { Integer.toString(type), mNumber });
+                        }
+                    }
                 }
-            });        
-            alert.setNegativeButton(android.R.string.cancel,
-                    new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {// Canceled.
-                }
-            });        
+            });                
+            alert.setNegativeButton(android.R.string.cancel, null);
             alert.show();
             
         } else {
-            getContentResolver().delete(Calls.CONTENT_URI, Calls.TYPE + "=? AND " + Calls.NUMBER + "=?",
-                                        new String[] { Integer.toString(type), mNumber });
+
+            if (personId > 0) {                
+                deleteCallLog(Calls.TYPE + "=? AND " + Calls.CACHED_NAME + "=?", new String[] { Integer.toString(type), displayName });
+            }
+            else {
+                if (!(displayName.equals(getString(R.string.unknown)) || displayName.equals(getString(R.string.private_num)) || 
+                    displayName.equals(getString(R.string.payphone)) || displayName.equals(getString(R.string.voicemail))) 
+                    && mNumber.length() >= compareLength && useExpGroup) {
+                    
+                    String num = getShortestNumber(mNumber);
+                    deleteCallLog(Calls.TYPE + "=? AND " + Calls.NUMBER + " LIKE '%" + num + "'", new String[] { Integer.toString(type) });
+                }
+                else {      
+                    deleteCallLog(Calls.TYPE + "=? AND " + Calls.NUMBER + "=?", new String[] { Integer.toString(type), mNumber });
+                }
+            }
         }
-        updateData();
-        if(logs.size() != 1) { //1 because the top row is for calling/smsing
-            adapter.notifyDataSetInvalidated();
-            Log.d("WYSIE", "Data Changed 2");
-        }
-        else {                	
-            finish();
-        }        
-        
     }
+      
 
 }

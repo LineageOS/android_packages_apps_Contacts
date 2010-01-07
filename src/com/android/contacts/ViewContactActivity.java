@@ -18,6 +18,7 @@
 package com.android.contacts;
 
 import static com.android.contacts.ContactEntryAdapter.CONTACT_CUSTOM_RINGTONE_COLUMN;
+import static com.android.contacts.ContactEntryAdapter.CONTACT_ID_COLUMN;
 import static com.android.contacts.ContactEntryAdapter.CONTACT_NAME_COLUMN;
 import static com.android.contacts.ContactEntryAdapter.CONTACT_NOTES_COLUMN;
 import static com.android.contacts.ContactEntryAdapter.CONTACT_PHONETIC_NAME_COLUMN;
@@ -134,12 +135,12 @@ public class ViewContactActivity extends ListActivity
 
     private static final int DIALOG_CONFIRM_DELETE = 1;
 
-    public static final int MENU_ITEM_SHOW_INTENT = 0;
     public static final int MENU_ITEM_DELETE = 1;
     public static final int MENU_ITEM_MAKE_DEFAULT = 2;
     public static final int MENU_ITEM_SHOW_BARCODE = 3;
     public static final int MENU_ITEM_COPY_SIM = 4;
     public static final int MENU_ITEM_SEND_BT = 5;
+    public static final int MENU_ITEM_SHOW_CALL_LOG = 6;
 
     public static final int MENU_GROUP_BT = 1;
     
@@ -151,6 +152,8 @@ public class ViewContactActivity extends ListActivity
     private ContentResolver mResolver;
     private ViewAdapter mAdapter;
     private int mNumPhoneNumbers = 0;
+    private long contactId = -1;
+    private static final String CACHEFILENAME = "idCache.dat";
 
     /* package */ ArrayList<ViewEntry> mPhoneEntries = new ArrayList<ViewEntry>();
     /* package */ ArrayList<ViewEntry> mSmsEntries = new ArrayList<ViewEntry>();
@@ -162,7 +165,7 @@ public class ViewContactActivity extends ListActivity
     /* package */ ArrayList<ViewEntry> mOtherEntries = new ArrayList<ViewEntry>();
     /* package */ ArrayList<ArrayList<ViewEntry>> mSections = new ArrayList<ArrayList<ViewEntry>>();
     /* Wysie_Soh */ ArrayList<ViewEntry> mGroupEntries = new ArrayList<ViewEntry>();
-    
+    // Wysie_Soh ArrayList<CharSequence> phoneNumbersArray = new ArrayList<CharSequence>();        
     /* Wysie_Soh */ ArrayList<String> groupNamesArray = new ArrayList<String>(); //Global variable, might use it for dialog or something in future
 
     private Cursor mCursor;
@@ -207,6 +210,7 @@ public class ViewContactActivity extends ListActivity
             mCursor = null;
         }
         getContentResolver().delete(mUri, null, null);
+        deleteFile(CACHEFILENAME);
         finish();
     }
 
@@ -351,6 +355,7 @@ public class ViewContactActivity extends ListActivity
         if (mCursor.moveToFirst()) {
             // Set the name
             String name = mCursor.getString(CONTACT_NAME_COLUMN);
+            contactId = mCursor.getLong(CONTACT_ID_COLUMN);
             if (TextUtils.isEmpty(name)) {
                 mNameView.setText(getText(android.R.string.unknownName));
             } else {
@@ -395,6 +400,8 @@ public class ViewContactActivity extends ListActivity
                 .setIcon(android.R.drawable.ic_menu_edit)
                 .setIntent(new Intent(Intent.ACTION_EDIT, mUri))
                 .setAlphabeticShortcut('e');
+                
+        menu.add(0, MENU_ITEM_SHOW_CALL_LOG, 0, R.string.view_call_log).setIcon(R.drawable.ic_tab_recent);
 
         menu.add(0,MENU_ITEM_COPY_SIM, 0, R.string.menu_copyContactSim)
                 .setIcon(android.R.drawable.ic_menu_edit)
@@ -458,7 +465,7 @@ public class ViewContactActivity extends ListActivity
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenuInfo menuInfo) {
         switch (view.getId()) {
             case R.id.name: {
-                menu.add(0, MENU_COPY_NAME, 0, "Copy name");
+                menu.add(0, MENU_COPY_NAME, 0, getString(R.string.menu_copy_string, mNameView.getText().toString()));
                 return;
             }
         }
@@ -477,14 +484,14 @@ public class ViewContactActivity extends ListActivity
             return;
         }
         
-        String copyLabel = null;
+        boolean hasCopyLabel = false;
 
         ViewEntry entry = ContactEntryAdapter.getEntry(mSections, info.position, SHOW_SEPARATORS);
         switch (entry.kind) {
             case Contacts.KIND_PHONE: {
                 menu.add(0, 0, 0, R.string.menu_call).setIntent(entry.intent);
                 menu.add(0, 0, 0, R.string.menu_sendSMS).setIntent(entry.auxIntent);
-                copyLabel = "number";
+                hasCopyLabel = true;
                 if (entry.primaryIcon == -1) {
                     menu.add(0, MENU_ITEM_MAKE_DEFAULT, 0, R.string.menu_makeDefaultNumber);
                 }
@@ -492,43 +499,43 @@ public class ViewContactActivity extends ListActivity
             }
             
             case ViewEntry.KIND_SMS: {
-                copyLabel = "number";
+                hasCopyLabel = true;
                 break;
             }
 
             case Contacts.KIND_EMAIL: {
                 menu.add(0, 0, 0, R.string.menu_sendEmail).setIntent(entry.intent);
-                copyLabel = "email address";
+                hasCopyLabel = true;
                 break;
             }
             
             case Contacts.KIND_IM: {
-                copyLabel = "IM address";
+                hasCopyLabel = true;
                 break;
             }
 
             case Contacts.KIND_POSTAL: {
                 menu.add(0, 0, 0, R.string.menu_viewAddress).setIntent(entry.intent);
-                copyLabel = "address";
+                hasCopyLabel = true;
                 break;
             }
             
             case Contacts.KIND_ORGANIZATION: {
-                menu.add(0, MENU_COPY_LABEL, 0, "Copy organization");
-                copyLabel = "position";
+                menu.add(0, MENU_COPY_LABEL, 0, getString(R.string.menu_copy_string, entry.label));
+                hasCopyLabel = true;
                 break;
             }
             
             case ViewEntry.KIND_CONTACT: {
                 if ((entry.label).equals(getString(R.string.label_notes))) {
-                    copyLabel = "notes";
+                    hasCopyLabel = true;
                 }
                 break;
             }
         }
         
-        if (copyLabel != null) {            
-            menu.add(0, MENU_COPY_DATA, 0, "Copy " + copyLabel);
+        if (hasCopyLabel) {            
+            menu.add(0, MENU_COPY_DATA, 0, getString(R.string.menu_copy_string, entry.data));
         }
     }
 
@@ -540,6 +547,15 @@ public class ViewContactActivity extends ListActivity
                 showDialog(DIALOG_CONFIRM_DELETE);
                 return true;
             }
+            
+            case MENU_ITEM_SHOW_CALL_LOG: {            
+                Intent intent = new Intent(_context, CallDetailActivity.class);
+                intent.putExtra("PERSONID", contactId);
+                startActivity(intent);                
+                
+                return true;
+            }
+            
             case MENU_ITEM_COPY_SIM: {
                 //Copy the phone contact to SIM
                 ContentValues values = new ContentValues();
@@ -665,34 +681,10 @@ public class ViewContactActivity extends ListActivity
                 dataChanged();
                 return true;
             }
-            case MENU_ITEM_SHOW_INTENT: {
-                AdapterView.AdapterContextMenuInfo info;
-                try {
-                    info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-                } catch (ClassCastException e) {
-                    Log.e(TAG, "bad menuInfo", e);
-                    break;
-                }
-
-                ViewEntry entry = ContactEntryAdapter.getEntry(mSections, info.position,
-                        SHOW_SEPARATORS);
-                if (entry != null) {
-                        Intent intent = entry.intent;
-                        if (intent != null) {
-                        try {
-                            startActivity(intent);
-                        } catch (ActivityNotFoundException e) {
-                            Log.e(TAG, "No activity found for intent: " + intent);
-                            signalError();
-                            }
-                        }
-                 }
-                 return true;
-            }
             case MENU_COPY_NAME: {
                 ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);                
                 clipboard.setText(mNameView.getText().toString());
-                break;
+                return true;
             }
             case MENU_COPY_LABEL: {
                 AdapterView.AdapterContextMenuInfo info;
@@ -873,6 +865,8 @@ public class ViewContactActivity extends ListActivity
         for (int i = 0; i < numSections; i++) {
             mSections.get(i).clear();
         }
+        
+        //phoneNumbersArray.clear();
 
         if (SHOW_SEPARATORS) {
             buildSeparators();
@@ -916,6 +910,8 @@ public class ViewContactActivity extends ListActivity
                 }
                 entry.actionIcon = android.R.drawable.sym_action_call;
                 mPhoneEntries.add(entry);
+                
+                //phoneNumbersArray.add(number);
 
                 if (type == Phones.TYPE_MOBILE || !ePrefs.getBoolean("contacts_show_text_mobile_only", false)) {
                     // Add an SMS entry

@@ -191,6 +191,7 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     private MenuItem mPhotoMenuItem;
     private boolean mPhotoPresent = false;
     private EditText mPhoneticNameView; // invisible in some locales, but always present
+    private static final String CACHEFILENAME = "idCache.dat";
 
     /** Flag marking this contact as changed, meaning we should write changes back. */
     private boolean mContactChanged = false;
@@ -391,6 +392,8 @@ public final class EditContactActivity extends Activity implements View.OnClickL
     private DialogInterface.OnClickListener mDeleteContactDialogListener = new DialogInterface.OnClickListener() {
         public void onClick(DialogInterface dialog, int button) {
             mResolver.delete(mUri, null, null);
+            //Wysie_Soh: Delete call log cache to prevent outdated entries
+            deleteFile(CACHEFILENAME);
             finish();
         }
     };
@@ -408,6 +411,9 @@ public final class EditContactActivity extends Activity implements View.OnClickL
 
                 mResolver.delete(Uri.parse("content://icc/adn"), where, null);
             }
+            
+            //Wysie_Soh: Delete call log cache to prevent outdated entries
+            deleteFile(CACHEFILENAME);
             finish();
         }
     };
@@ -1255,6 +1261,9 @@ public final class EditContactActivity extends Activity implements View.OnClickL
             // Only notify user if we actually changed contact
             if (mContactChanged || mPhotoChanged) {
                 Toast.makeText(this, R.string.contactSavedToast, Toast.LENGTH_SHORT).show();
+                
+                //Wysie_Soh: Delete call log cache since this might affect the logs
+                deleteFile(CACHEFILENAME);
             }
         }
     }

@@ -794,12 +794,16 @@
     <string name="title_cl_ask_before_clear">Ask before clearing</string>
     <string name="summaryon_cl_ask_before_clear">Ask before clearing call log</string>
     <string name="summaryoff_cl_ask_before_clear">Call logs will be cleared without asking</string>
+    <string name="title_cl_always_clear_cache">Always clear number cache</string>
+    <string name="summaryon_cl_always_clear_cache">Ensures call log is always up to date</string>
+    <string name="summaryoff_cl_always_clear_cache">Faster return to call log but info may be outdated if contact info has changed</string>
+    
     <string name="title_view_cl">Individual call log</string>
-    <string name="summary_view_cl">Set preferences when viewing an individual's call log</string>
+    <string name="summary_view_cl">Set preferences when viewing an individual\'s call log</string>
     
     <string name="title_cl_grouping_settings">Group call log settings</string>
     <string name="title_cl_use_exp_grouping">Group unknown numbers (Experimental)</string>
-    <string name="summary_cl_use_exp_grouping">Slows down performance</string>
+    <string name="summary_cl_use_exp_grouping">Attempts to group unsaved numbers together</string>
     <string name="title_cl_exp_grouping_num">Number of digits to compare</string>
     <string name="summary_cl_exp_grouping_num">Higher number = stricter</string>
     
@@ -847,9 +851,9 @@
     <string name="title_about_name">Mod Name</string>
     <string name="summary_about_name">Wysie Contacts</string>
     <string name="title_about_version">Version</string>
-    <string name="summary_about_version">2.52 BETA 2</string>
+    <string name="summary_about_version">2.6</string>
     <string name="title_about_credits">Credits</string>
-    <string name="summary_about_credits">ChainsDD and the rest of XDA! :)</string>
+    <string name="summary_about_credits">ChainsDD, geesun and the rest of XDA! :)</string>
     
     <!-- Wysie_Soh: Call log strings -->  
     <string name="alert_clear_call_log_title">Clear call log</string>
@@ -891,7 +895,7 @@
     
     <!-- Wysie_Soh: Others -->
     <!-- Toast for call detail screen when couldn't read the requested details -->
-    <string name="toast_call_detail_error_wysie">No call log found for the requested number</string>
+    <string name="toast_call_detail_error_wysie">No such contact or no call log found for the requested number</string>
     <string name="menu_copy_string">Copy \"%s\"</string>
     <string name="cl_total_cl">Total Duration</string>
     

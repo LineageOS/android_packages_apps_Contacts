@@ -154,6 +154,7 @@ public class ViewContactActivity extends ListActivity
     private ViewAdapter mAdapter;
     private int mNumPhoneNumbers = 0;
     private long contactId = -1;
+    private static final String CACHEFILENAME = "idCache.dat";
 
     /* package */ ArrayList<ViewEntry> mPhoneEntries = new ArrayList<ViewEntry>();
     /* package */ ArrayList<ViewEntry> mSmsEntries = new ArrayList<ViewEntry>();
@@ -210,6 +211,7 @@ public class ViewContactActivity extends ListActivity
             mCursor = null;
         }
         getContentResolver().delete(mUri, null, null);
+        deleteFile(CACHEFILENAME);
         finish();
     }
 

@@ -336,6 +336,15 @@ public final class ContactsListActivity extends ListActivity
     private boolean mDisplaySectionHeaders = false; //With it set to false, separators will only show in "Contacts" tab, and based on prefs.
     private boolean mContactsTab = false;
     
+    private static boolean showContactsNumber;
+    private static boolean showContactsDialButton;
+    private static boolean showContactsLabel;
+    private static boolean showContactsPic;
+    private static boolean showFavsNumber;
+    private static boolean showFavsDialButton;
+    private static boolean showFavsLabel;
+    private static boolean showFavsPic;
+    
     //MenuItem for Clear Freq. Called
     private MenuItem mClearFreqCalled;
 
@@ -718,7 +727,6 @@ public final class ContactsListActivity extends ListActivity
     @Override
     protected void onResume() {
         super.onResume();
-
         boolean runQuery = true;
         Activity parent = getParent();
 
@@ -1973,12 +1981,21 @@ public final class ContactsListActivity extends ListActivity
             //The default Eclair Contacts only shows the section separators in "Contacts" tab mode.
             //if (!(mMode == MODE_STREQUENT || mMode == MODE_FREQUENT)) {
             //    mDisplaySectionHeaders = ePrefs.getBoolean("contacts_show_alphabetical_separators", true);
-            //}
-            
+            //}           
+
             //Wysie_Soh: Decide whether to display headers or not based on preferences            
             if (mContactsTab) {
                 mDisplaySectionHeaders = ePrefs.getBoolean("contacts_show_alphabetical_separators", true);
-            }            
+            }
+            
+            showContactsNumber = ePrefs.getBoolean("contacts_show_number", true);
+            showContactsDialButton = ePrefs.getBoolean("contacts_show_dial_button", true);
+            showContactsLabel = ePrefs.getBoolean("contacts_show_label", true);
+            showContactsPic = ePrefs.getBoolean("contacts_show_pic", true);
+            showFavsNumber = ePrefs.getBoolean("favs_show_number", true);
+            showFavsDialButton = ePrefs.getBoolean("favs_show_dial_button", true);
+            showFavsLabel = ePrefs.getBoolean("favs_show_label", true);
+            showFavsPic = ePrefs.getBoolean("favs_show_pic", true);
             
             bindView(v, mContext, mCursor);
             bindSectionHeader(v, realPosition, mDisplaySectionHeaders);
@@ -2095,7 +2112,7 @@ public final class ContactsListActivity extends ListActivity
             
             if (size != 0) {
                 
-                if ((ePrefs.getBoolean("contacts_show_number", true) && mContactsTab) || (ePrefs.getBoolean("favs_show_number", true) && mFavTab)) {
+                if ((showContactsNumber && mContactsTab) || (showFavsNumber && mFavTab)) {
                     numberView.setText(cache.numberBuffer.data, 0, size);                              
                     numberView.setVisibility(View.VISIBLE);
                 }
@@ -2105,8 +2122,7 @@ public final class ContactsListActivity extends ListActivity
                 
                 labelView.setVisibility(View.VISIBLE);
                 
-                if ((ePrefs.getBoolean("contacts_show_dial_button", true) && mContactsTab) ||
-                    (ePrefs.getBoolean("favs_show_dial_button", true) && mFavTab)) {
+                if ((showContactsDialButton && mContactsTab) || (showFavsDialButton && mFavTab)) {
                 	callView.setTag(new String(cache.numberBuffer.data, 0, size)); //Wysie_Soh: Set tag to green dial button
                 	callView.setVisibility(View.VISIBLE);
                 	divView.setVisibility(View.VISIBLE);
@@ -2124,8 +2140,8 @@ public final class ContactsListActivity extends ListActivity
             }
 
             // Set the label
-            if (!cursor.isNull(TYPE_COLUMN_INDEX) && ((ePrefs.getBoolean("contacts_show_label", true) && mContactsTab) ||
-                    (ePrefs.getBoolean("favs_show_label", true) && mFavTab))) {
+            if (!cursor.isNull(TYPE_COLUMN_INDEX) && ((showContactsLabel && mContactsTab) ||
+                    (showFavsLabel && mFavTab))) {
                 int type = cursor.getInt(TYPE_COLUMN_INDEX);
 
                 if (type != People.Phones.TYPE_CUSTOM) {
@@ -2180,8 +2196,7 @@ public final class ContactsListActivity extends ListActivity
             }
 
             // Set the photo, if requested
-            if (mDisplayPhotos && ((ePrefs.getBoolean("contacts_show_pic", true) && mContactsTab) ||
-                (ePrefs.getBoolean("favs_show_pic", true) && mFavTab))) {
+            if (mDisplayPhotos && ((showContactsPic && mContactsTab) || (showFavsPic && mFavTab))) {
                 Bitmap photo = null;
 
                 // Look for the cached bitmap

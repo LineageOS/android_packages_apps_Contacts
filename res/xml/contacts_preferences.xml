@@ -131,6 +131,14 @@
             android:summaryOn="@string/summaryon_cl_ask_before_clear"
             android:summaryOff="@string/summaryoff_cl_ask_before_clear"
             android:defaultValue="false" />
+        <!--
+        <CheckBoxPreference
+            android:key="cl_always_clear_cache"
+            android:title="@string/title_cl_always_clear_cache"
+            android:summaryOn="@string/summaryon_cl_always_clear_cache"
+            android:summaryOff="@string/summaryoff_cl_always_clear_cache"
+            android:defaultValue="false" />
+        -->
         <PreferenceScreen
             android:key="cl_grouping_settings"
             android:title="@string/title_cl_grouping_settings">

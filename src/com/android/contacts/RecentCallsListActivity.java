@@ -80,7 +80,15 @@ import android.widget.TextView;
 import com.android.internal.telephony.CallerInfo;
 import com.android.internal.telephony.ITelephony;
 
+import java.io.FileNotFoundException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.Locale;
 import java.lang.ref.SoftReference;
@@ -144,6 +152,8 @@ public class RecentCallsListActivity extends ListActivity
 
     private static final int QUERY_TOKEN = 53;
     private static final int UPDATE_TOKEN = 54;
+    
+    private static final String CACHEFILENAME = "idCache.dat";
 
     // RecentCallsAdapter mAdapter;
     // Geesun
@@ -154,7 +164,10 @@ public class RecentCallsListActivity extends ListActivity
     ArrayList<String> numbersCache = null;
     ArrayList<Integer> numbersCachePosition = null;
     SparseArray<Integer> personIdCache = null;
-    SparseArray<Long> tempNumList = null;
+    //SparseArray<Long> tempNumList = null;
+    Hashtable<String,Long> tempNumList = null;
+    
+    private static final int MAX_INT = Integer.MAX_VALUE;
     
     private static int totalIncoming = 0;
     private static int totalOutgoing = 0;
@@ -174,6 +187,8 @@ public class RecentCallsListActivity extends ListActivity
     private static boolean showNumber;
     private static boolean showLabel;
     private static boolean useExpGroup;
+    
+    private static boolean cacheUpdated;
 
     static final class ContactInfo {
         public long personId;
@@ -855,12 +870,14 @@ public class RecentCallsListActivity extends ListActivity
         String number = item.number;
         String name = item.name;
         RecentCallsInfo info = null;
-        int position = -1;        
+        int position = -1;
+        String currNum = null;
         
         if (personId == -1) {
             for (int i = 0; i < numCacheSize; i++) {
-                if (PhoneNumberUtils.compare(numbersCache.get(i), number) || 
-                    (useExpGroup && sloppyPhoneNumComparator(numbersCache.get(i), number))) {
+                currNum = numbersCache.get(i);
+                if (currNum.equals(number) || PhoneNumberUtils.compare(currNum, number) || 
+                    (useExpGroup && sloppyPhoneNumComparator(currNum, number))) {
                     mListCallLogs.get(numbersCachePosition.get(i)).count++;
                     return;
                 }
@@ -945,7 +962,7 @@ public class RecentCallsListActivity extends ListActivity
         
         Cursor phonesCursor = null;        
         int number = -1;
-        
+        cacheUpdated = false;
         if (cursor.getCount() != 0) {
             cursor.moveToFirst();
             do { 
@@ -972,21 +989,13 @@ public class RecentCallsListActivity extends ListActivity
                 //Wysie_Soh: The following portion of code to retrieve personId
                 //really slows down the performance. However, without it,
                 //call logs will not be grouped by contact, and instead will be grouped
-                //by number (non-ideal). Thus, we make use of a SparseArray to keep
+                //by number (non-ideal). Thus, we make use of a Hashtable to keep
                 //numbers and ids pairs, and avoid querying. This speeds it up significantly,
                 //but it's still slower than default/without querying personId
                 item.personId = -1;
-                try {
-                    number = Integer.parseInt(numbersOnly(item.number));
-                } catch (NumberFormatException e) {
-                    number = -1;
-                }
-                
-                if (number != -1) {
-                    try {            
-                        item.personId = tempNumList.get(number);
-                    } catch (NullPointerException e) {
-                    }
+                try {            
+                    item.personId = tempNumList.get(item.number);
+                } catch (NullPointerException e) {
                 }
 
                 if (item.personId == -1) {                
@@ -996,18 +1005,15 @@ public class RecentCallsListActivity extends ListActivity
                 
                     if (phonesCursor != null && phonesCursor.moveToFirst()) {
                         item.personId = phonesCursor.getLong(PERSON_ID_COLUMN_INDEX);
-                        if (number != -1)
-                            tempNumList.put(number, item.personId);
+                        tempNumList.put(item.number, item.personId);
+                        cacheUpdated = true;                        
+                        phonesCursor.close();
                     }
-                }                    
+                }
 
                 addItemIntoList(item);
                 
-            } while (cursor.moveToNext());
-            
-            if (phonesCursor != null) {
-                phonesCursor.close();
-            }            
+            } while (cursor.moveToNext());        
             cursor.close();
             
         }
@@ -1015,7 +1021,8 @@ public class RecentCallsListActivity extends ListActivity
         numbersCache.clear();
         numbersCachePosition.clear();
         personIdCache.clear();              
-        mArrayAdapter.notifyDataSetChanged(); 
+        mArrayAdapter.notifyDataSetChanged();
+        writeCacheToFile();
 		
     }
     
@@ -1037,8 +1044,8 @@ public class RecentCallsListActivity extends ListActivity
         numbersCache =  new ArrayList<String>();
         numbersCachePosition = new ArrayList<Integer>();
         personIdCache = new SparseArray<Integer>();
-        tempNumList = new SparseArray<Long>(); //Wysie_Soh: This list is not cleared (on purpose). So resuming is faster.
-        
+        //tempNumList = new SparseArray<Long>(); //Wysie_Soh: This list is not cleared (on purpose). So resuming is faster.
+        //tempNumList = new Hashtable<String, Long>();        
         // mAdapter = new RecentCallsAdapter();
         mArrayAdapter = new RecentCallsArrayAdapter(this,
                 R.layout.recent_calls_list_item, mListCallLogs);
@@ -1056,13 +1063,26 @@ public class RecentCallsListActivity extends ListActivity
 
     @Override
     protected void onResume() {
+        loadCacheFromFile();
+        
+        /*
+        mListCallLogs.clear();
+        numbersCache.clear();
+        numbersCachePosition.clear();
+        personIdCache.clear();
+        */
+    
         // The adapter caches looked up numbers, clear it so they will get
-        // looked up again.
-    	
+        // looked up again.    	
         if (mArrayAdapter != null) {
             mArrayAdapter.clearCache();
         }
-
+        
+        /*
+        if (prefs.getBoolean("cl_always_clear_cache", false) && tempNumList != null){
+            tempNumList.clear();
+        }
+        */
         startQuery();
         resetNewCallsFlag();
 
@@ -1740,4 +1760,56 @@ public class RecentCallsListActivity extends ListActivity
             } while (c.moveToNext());
         }
     }
+    
+    //WYSIE TODO: Implement manual delete.
+    
+    //Wysie: The purpose is to save the existing tempNumList hashtable to a binary file
+    //so that upon the next start, we can load from here directly, instead of querying
+    //CONTENT_FILTER_URL which is very slow.
+    private void writeCacheToFile() {
+        if (!cacheUpdated)
+            return;
+        try {
+            FileOutputStream fOut = openFileOutput(CACHEFILENAME, 0);
+            ObjectOutputStream oOut = new ObjectOutputStream(fOut);
+            oOut.writeObject(tempNumList);
+            oOut.close();
+            fOut.close();
+            //Log.d("WYSIE", "FILE SAVE SUCCESS");
+        }
+        catch (FileNotFoundException e) {
+            //Do nothing
+        }
+        catch (IOException e) {
+            //Do nothing
+        }
+    }
+    
+    //Wysie: Load the Hashtable from file. Check EditContactActivity for the line
+    //deleteFile(CACHEFILENAME). The current logic works by ALWAYS deleting the cached/saved file
+    //as long as a contact info has been edited. This ensures that the call logs are always up to date.
+    private void loadCacheFromFile() {
+        try {
+            FileInputStream fIn = openFileInput(CACHEFILENAME);
+            ObjectInputStream oIn = new ObjectInputStream(fIn);
+            tempNumList = (Hashtable<String,Long>)oIn.readObject();
+            oIn.close();
+            fIn.close();
+            //Log.d("WYSIE", "FILE LOAD SUCCESS");
+        }
+        //In case of exceptions, create new tempNumList
+        catch (ClassNotFoundException e) {
+            tempNumList = new Hashtable<String,Long>();
+            //Log.d("WYSIE", "FILE LOAD ERROR");
+        }
+        catch (FileNotFoundException e) {
+            tempNumList = new Hashtable<String,Long>();
+            //Log.d("WYSIE", "FILE LOAD ERROR");        
+        }
+        catch (IOException e) {
+            tempNumList = new Hashtable<String,Long>();
+            //Log.d("WYSIE", "FILE LOAD ERROR");
+        }
+    }
+    
 }

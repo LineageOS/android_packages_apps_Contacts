@@ -1558,8 +1558,7 @@ public class RecentCallsListActivity extends ListActivity
         startActivity(intent);
     }
     
-    //Wysie_Soh: WIP. Attempt to clear numbers more effectively
-    private void clearCallLogNumbers(final String number) {
+	private String getShortestNumber(final String number) {
         String num = number;
         Uri callUri = Uri.withAppendedPath(Calls.CONTENT_FILTER_URI, Uri.encode(number));        
         Cursor callCursor = getContentResolver().query(callUri, CALL_LOG_PROJECTION, null, null, Calls.DEFAULT_SORT_ORDER);
@@ -1575,10 +1574,9 @@ public class RecentCallsListActivity extends ListActivity
                 }
             }while(callCursor.moveToNext());
         }
-                
-        getContentResolver().delete(Calls.CONTENT_URI, CallLog.Calls.NUMBER + " LIKE '%" + num + "'", null);
-        startQuery();
-    }    
+        
+        return num;
+	}
 
     
     //Wysie_Soh: WIP.
@@ -1598,8 +1596,9 @@ public class RecentCallsListActivity extends ListActivity
                 public void onClick(DialogInterface dialog, int whichButton) {
                     if (type.equals(CallLog.Calls.NUMBER) && !(label.equals(getString(R.string.unknown)) ||
                         label.equals(getString(R.string.private_num)) || label.equals(getString(R.string.payphone)) ||
-                        label.equals(getString(R.string.voicemail))) && value.length() >= compareLength) {
-                        clearCallLogNumbers(value);
+                        label.equals(getString(R.string.voicemail))) && value.length() >= compareLength && useExpGroup) {
+                        String num = getShortestNumber(value);
+                        deleteCallLog(type + " LIKE '%" + num + "'", null);
                     }
                     else {
                         deleteCallLog(type + "=?", new String[] { value });
@@ -1616,8 +1615,9 @@ public class RecentCallsListActivity extends ListActivity
         } else {
             if (type.equals(CallLog.Calls.NUMBER) && !(label.equals(getString(R.string.unknown)) ||
                 label.equals(getString(R.string.private_num)) || label.equals(getString(R.string.payphone)) ||
-                label.equals(getString(R.string.voicemail))) && value.length() >= compareLength) {
-                    clearCallLogNumbers(value);
+                label.equals(getString(R.string.voicemail))) && value.length() >= compareLength && useExpGroup) {
+                    String num = getShortestNumber(value);
+                    deleteCallLog(type + " LIKE '%" + num + "'", null);
             }
             else {
                 deleteCallLog(type + "=?", new String[] { value });

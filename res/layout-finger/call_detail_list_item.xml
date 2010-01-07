@@ -188,18 +188,33 @@
                 android:layout_marginBottom="8dip"
                 android:layout_marginTop="-8dip"
                 android:layout_marginLeft="5dip"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textAppearance="?android:attr/textAppearanceMedium"
             />
-        
-            <TextView android:id="@+id/type"
+            
+            <TextView android:id="@+id/label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dip"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:gravity="center_vertical"            
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:textStyle="bold"
+            /> 
+            
+            <TextView android:id="@+id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@id/label"
                 android:layout_toLeftOf="@id/duration"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:gravity="center_vertical|left"            
+                android:layout_alignBaseline="@id/label"
+                android:layout_alignWithParentIfMissing="true"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:gravity="center_vertical"            
                 android:singleLine="true"
                 android:ellipsize="marquee"
             />           

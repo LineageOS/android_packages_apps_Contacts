@@ -135,7 +135,6 @@ public class ViewContactActivity extends ListActivity
 
     private static final int DIALOG_CONFIRM_DELETE = 1;
 
-    public static final int MENU_ITEM_SHOW_INTENT = 0;
     public static final int MENU_ITEM_DELETE = 1;
     public static final int MENU_ITEM_MAKE_DEFAULT = 2;
     public static final int MENU_ITEM_SHOW_BARCODE = 3;
@@ -166,7 +165,7 @@ public class ViewContactActivity extends ListActivity
     /* package */ ArrayList<ViewEntry> mOtherEntries = new ArrayList<ViewEntry>();
     /* package */ ArrayList<ArrayList<ViewEntry>> mSections = new ArrayList<ArrayList<ViewEntry>>();
     /* Wysie_Soh */ ArrayList<ViewEntry> mGroupEntries = new ArrayList<ViewEntry>();
-    /* Wysie_Soh */ ArrayList<CharSequence> phoneNumbersArray = new ArrayList<CharSequence>();        
+    // Wysie_Soh ArrayList<CharSequence> phoneNumbersArray = new ArrayList<CharSequence>();        
     /* Wysie_Soh */ ArrayList<String> groupNamesArray = new ArrayList<String>(); //Global variable, might use it for dialog or something in future
 
     private Cursor mCursor;
@@ -682,34 +681,10 @@ public class ViewContactActivity extends ListActivity
                 dataChanged();
                 return true;
             }
-            case MENU_ITEM_SHOW_INTENT: {
-                AdapterView.AdapterContextMenuInfo info;
-                try {
-                    info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-                } catch (ClassCastException e) {
-                    Log.e(TAG, "bad menuInfo", e);
-                    break;
-                }
-
-                ViewEntry entry = ContactEntryAdapter.getEntry(mSections, info.position,
-                        SHOW_SEPARATORS);
-                if (entry != null) {
-                        Intent intent = entry.intent;
-                        if (intent != null) {
-                        try {
-                            startActivity(intent);
-                        } catch (ActivityNotFoundException e) {
-                            Log.e(TAG, "No activity found for intent: " + intent);
-                            signalError();
-                            }
-                        }
-                 }
-                 return true;
-            }
             case MENU_COPY_NAME: {
                 ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);                
                 clipboard.setText(mNameView.getText().toString());
-                break;
+                return true;
             }
             case MENU_COPY_LABEL: {
                 AdapterView.AdapterContextMenuInfo info;
@@ -891,7 +866,7 @@ public class ViewContactActivity extends ListActivity
             mSections.get(i).clear();
         }
         
-        phoneNumbersArray.clear();
+        //phoneNumbersArray.clear();
 
         if (SHOW_SEPARATORS) {
             buildSeparators();
@@ -936,7 +911,7 @@ public class ViewContactActivity extends ListActivity
                 entry.actionIcon = android.R.drawable.sym_action_call;
                 mPhoneEntries.add(entry);
                 
-                phoneNumbersArray.add(number);
+                //phoneNumbersArray.add(number);
 
                 if (type == Phones.TYPE_MOBILE || !ePrefs.getBoolean("contacts_show_text_mobile_only", false)) {
                     // Add an SMS entry

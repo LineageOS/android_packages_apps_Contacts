@@ -803,7 +803,7 @@
     
     <string name="title_cl_grouping_settings">Group call log settings</string>
     <string name="title_cl_use_exp_grouping">Group unknown numbers (Experimental)</string>
-    <string name="summary_cl_use_exp_grouping">Attempts to group unsaved numbers together</string>
+    <string name="summary_cl_use_exp_grouping">Attempts to group unsaved numbers together. Affects clearing of logs as well.</string>
     <string name="title_cl_exp_grouping_num">Number of digits to compare</string>
     <string name="summary_cl_exp_grouping_num">Higher number = stricter</string>
     
@@ -851,7 +851,7 @@
     <string name="title_about_name">Mod Name</string>
     <string name="summary_about_name">Wysie Contacts</string>
     <string name="title_about_version">Version</string>
-    <string name="summary_about_version">2.6</string>
+    <string name="summary_about_version">2.61</string>
     <string name="title_about_credits">Credits</string>
     <string name="summary_about_credits">ChainsDD, geesun and the rest of XDA! :)</string>
     

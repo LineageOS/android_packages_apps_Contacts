@@ -123,6 +123,8 @@ public final class ContactsListActivity extends ListActivity
     public static final int MENU_IMPORT_CONTACTS = 12;
     public static final int MENU_EXPORT_CONTACTS = 13;
     public static final int MENU_CLEAR_FREQ_CONTACTS = 14;
+    public static final int MENU_SHOW_ALL_CONTACTS = 20;
+    public static final int MENU_SHOW_CONTACTS_WITH_PHONES = 21;
 
     static final int MENU_ITEM_SEND_BT = 14;
     static final int MENU_ITEM_GET_BT  = 15;
@@ -345,8 +347,13 @@ public final class ContactsListActivity extends ListActivity
     private static boolean showFavsLabel;
     private static boolean showFavsPic;
     
+    //Wysie_Soh: Variable to show only contacts with phones when inserting or editing a contact
+    private static boolean showOnlyPhonesEditCreateMode = false;
+    
     //MenuItem for Clear Freq. Called
     private MenuItem mClearFreqCalled;
+    private MenuItem mShowAllContacts;
+    private MenuItem mShowContactsWithPhones;
 
     /**
      * Internal query type when in mode {@link #MODE_QUERY_PICK_TO_VIEW}.
@@ -407,7 +414,10 @@ public final class ContactsListActivity extends ListActivity
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         
-        ePrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());   
+        ePrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        showOnlyPhonesEditCreateMode = prefs.getBoolean("show_only_phones_edit_mode", false);
 
         // Resolve the intent
         final Intent intent = getIntent();
@@ -817,6 +827,14 @@ public final class ContactsListActivity extends ListActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        if (mMode == MODE_INSERT_OR_EDIT_CONTACT) {
+            mShowAllContacts = menu.add(0, MENU_SHOW_ALL_CONTACTS, 0, R.string.menu_show_all)
+                    .setIcon(com.android.internal.R.drawable.ic_menu_allfriends);
+            mShowContactsWithPhones = menu.add(0, MENU_SHOW_CONTACTS_WITH_PHONES, 0, R.string.menu_show_contacts_phones)
+                    .setIcon(com.android.internal.R.drawable.ic_menu_allfriends);
+            return super.onCreateOptionsMenu(menu);
+        }
+        
         // If Contacts was invoked by another Activity simply as a way of
         // picking a contact, don't show the options menu
         if ((mMode & MODE_MASK_PICKER) == MODE_MASK_PICKER) {
@@ -891,6 +909,19 @@ public final class ContactsListActivity extends ListActivity
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
        super.onPrepareOptionsMenu(menu);
+       
+        if (mMode == MODE_INSERT_OR_EDIT_CONTACT) {
+            if (showOnlyPhonesEditCreateMode) {
+                mShowAllContacts.setVisible(true);
+                mShowContactsWithPhones.setVisible(false);
+            }
+            else {
+                mShowAllContacts.setVisible(false);
+                mShowContactsWithPhones.setVisible(true);
+            }
+            return true;
+        }
+       
        boolean bluetoothEnabled = false;
        if (mBluetooth != null) {
           bluetoothEnabled = mBluetooth.isEnabled();
@@ -952,6 +983,7 @@ public final class ContactsListActivity extends ListActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         switch (item.getItemId()) {
             case MENU_DISPLAY_GROUP:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this)
@@ -1013,6 +1045,16 @@ public final class ContactsListActivity extends ListActivity
             		clearFrequentlyCalled();
             	}            	
             	return true;
+            case MENU_SHOW_ALL_CONTACTS:
+                showOnlyPhonesEditCreateMode = false;                
+                prefs.edit().putBoolean("show_only_phones_edit_mode", showOnlyPhonesEditCreateMode).commit();
+                updateGroup();
+                return true;
+            case MENU_SHOW_CONTACTS_WITH_PHONES:
+                showOnlyPhonesEditCreateMode = true;                
+                prefs.edit().putBoolean("show_only_phones_edit_mode", showOnlyPhonesEditCreateMode).commit();
+                updateGroup();
+                return true;
             	
         }
         return false;
@@ -1521,8 +1563,15 @@ public final class ContactsListActivity extends ListActivity
             case MODE_PICK_CONTACT:
             case MODE_PICK_OR_CREATE_CONTACT:
             case MODE_INSERT_OR_EDIT_CONTACT:
-                mQueryHandler.startQuery(QUERY_TOKEN, null, People.CONTENT_URI, CONTACTS_PROJECTION,
+                if (!showOnlyPhonesEditCreateMode) {
+                    mQueryHandler.startQuery(QUERY_TOKEN, null, People.CONTENT_URI, CONTACTS_PROJECTION,
                         null, null, getSortOrder(CONTACTS_PROJECTION));
+                }
+                else {
+                    mQueryHandler.startQuery(QUERY_TOKEN, null, People.CONTENT_URI, CONTACTS_PROJECTION,
+                        People.PRIMARY_PHONE_ID + " IS NOT NULL", null,
+                        getSortOrder(CONTACTS_PROJECTION));
+                }
                 break;
 
             case MODE_WITH_PHONES:

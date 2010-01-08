@@ -22,6 +22,7 @@
         android:layout_width="fill_parent" 
         android:layout_height="fill_parent"
         android:scrollbarStyle="outsideOverlay"
+        android:fastScrollEnabled="true"
     />
     
     <TextView android:id="@android:id/empty"

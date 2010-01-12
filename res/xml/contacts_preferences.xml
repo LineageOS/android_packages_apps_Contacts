@@ -199,6 +199,11 @@
             android:summaryOn="@string/summaryon_contacts_show_separators"
             android:summaryOff="@string/summaryoff_contacts_show_separators"
             android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="contacts_auto_hide_vk"
+            android:title="@string/title_auto_hide_keyboard"
+            android:summary="@string/summary_auto_hide_keyboard"
+            android:defaultValue="false" />
         <PreferenceScreen
             android:key="view_contact"
             android:title="@string/title_view_contact"

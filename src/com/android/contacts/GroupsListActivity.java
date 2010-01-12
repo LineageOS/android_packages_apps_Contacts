@@ -23,6 +23,7 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -32,6 +33,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.Contacts.Groups;
+import android.provider.Contacts.GroupMembership;
+import android.provider.Contacts.People;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -54,6 +57,7 @@ public class GroupsListActivity extends ListActivity {
 
     private static final int RENAME_GROUP_ID = 1;
     private static final int DELETE_GROUP_ID = 2;  
+    private static final int SEND_GROUP_SMS = 3;
 
     private static final String[] GROUPS_PROJECTION = new String[] {
         Groups._ID, // 0
@@ -161,7 +165,7 @@ public class GroupsListActivity extends ListActivity {
         if (cursor == null) {
             // For some reason the requested item isn't available, do nothing
             return;
-        }        
+        }       
 
         String groupName = cursor.getString(cursor.getColumnIndex(Groups.NAME));
         
@@ -173,7 +177,8 @@ public class GroupsListActivity extends ListActivity {
         menu.setHeaderTitle(cursor.getString(cursor.getColumnIndex(Groups.NAME)));
 		
 		menu.add(0, RENAME_GROUP_ID, 0, R.string.context_rename_group);
-        menu.add(0, DELETE_GROUP_ID, 0, R.string.context_delete_group);
+		menu.add(0, DELETE_GROUP_ID, 0, R.string.context_delete_group);	
+        //menu.add(0, SEND_GROUP_SMS, 0, "Send group sms");
     }
 
     @Override
@@ -258,10 +263,59 @@ public class GroupsListActivity extends ListActivity {
                     fillData();
     	        }
 	            return true;
+	            
+            /*
+            case SEND_GROUP_SMS:
+                String numbers = getGroupNumbers(id);
+                Intent smsIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("sms", numbers, null));
+                startActivity(smsIntent);
+                
+                return true;
+            */
+                
 		}
         
 		return super.onContextItemSelected(item);
 	}
+	
+	/*
+    //Wysie_Soh: Group entries stuffs
+    final String[] GROUP_MEMBERSHIP_PROJECTION = new String[] {
+        GroupMembership.GROUP_ID, //0
+        GroupMembership.PERSON_ID //1
+    };
+        
+    final String[] PHONE_NUMBERS_PROJECTION = new String[] {
+        People._ID, //0
+        People.NUMBER //1
+    };
+	
+	private String getGroupNumbers(long groupId) {
+        ContentResolver resolver = getContentResolver();
+        Cursor groupCursor = resolver.query(GroupMembership.CONTENT_URI, GROUP_MEMBERSHIP_PROJECTION,
+        	GroupMembership.GROUP_ID + "='5'", null, null);
+        Cursor cur = null;
+        StringBuilder numbers = new StringBuilder();
+                
+        if (groupCursor != null && groupCursor.moveToFirst()) {
+            Log.d("WYSIE", "HERE 1");
+            do {
+                cur = resolver.query(People.CONTENT_URI, PHONE_NUMBERS_PROJECTION, People._ID + "=?", new String[] { groupCursor.getString(1) }, null);
+                if (cur != null && cur.moveToFirst()) {
+                    Log.d("WYSIE", "HERE 2");
+                    numbers.append(cur.getString(1) + ";");
+                    cur.close();
+                }
+            } while (groupCursor.moveToNext());
+            groupCursor.close();
+        }
+        
+        Log.d("WYSIE", numbers.toString());
+        
+        return numbers.toString();       
+        
+	}
+	*/
 	
 	private void showToast(String message) {
 	    Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);

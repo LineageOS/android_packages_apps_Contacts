@@ -752,6 +752,9 @@
     <string name="menu_preferences">Preferences</string>
     <string name="contacts_manage_groups">Manage groups</string>
     
+    <string name="menu_show_all">Show all groups</string>
+    <string name="menu_show_contacts_phones">Show contacts with phones</string>
+    
     <!-- Wysie_Soh: Dialer menu -->
     <string name="dialer_menu_sms">SMS/MMS</string>
     
@@ -820,6 +823,10 @@
     <string name="title_contacts_show_separators">Show alphabetical separators</string>
     <string name="summaryon_contacts_show_separators">Alphabetical separators will be shown in the contacts list</string>
     <string name="summaryoff_contacts_show_separators">Alphabetical separators will be hidden in the contacts list</string>
+    <string name="title_auto_show_keyboard">Auto-show virtual keyboard</string>
+    <string name="summary_auto_show_keyboard">Virtual keyboard will be shown upon entering Contacts</string>
+    <string name="title_auto_hide_keyboard">Auto-hide keyboard</string>
+    <string name="summary_auto_hide_keyboard">Virtual keyboard will be hidden upon scrolling</string>
     <string name="title_view_contact">View contact</string>
     <string name="summary_view_contact">Set preferences when viewing an individual contact</string>
     <string name="title_show_text_mobile_only">Text action for mobile only</string>
@@ -854,7 +861,7 @@
     <string name="title_about_name">Mod Name</string>
     <string name="summary_about_name">Wysie Contacts</string>
     <string name="title_about_version">Version</string>
-    <string name="summary_about_version">2.61</string>
+    <string name="summary_about_version">2.7</string>
     <string name="title_about_credits">Credits</string>
     <string name="summary_about_credits">ChainsDD, geesun and the rest of XDA! :)</string>
     

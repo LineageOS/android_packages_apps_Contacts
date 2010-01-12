@@ -358,15 +358,6 @@ public class RecentCallsListActivity extends ListActivity
                 v = convertView;
             }
             
-            relativeTime = prefs.getBoolean("cl_relative_time", false);
-            is24hour = DateFormat.is24HourFormat(mContext);
-            showSeconds = prefs.getBoolean("cl_show_seconds", true);
-            showDialButton = prefs.getBoolean("cl_show_dial_button", true);
-            showContactPic = prefs.getBoolean("cl_show_pic", true);
-            showNumber = prefs.getBoolean("cl_show_number", true);
-            showLabel = prefs.getBoolean("cl_show_label", true);
-            useExpGroup = prefs.getBoolean("cl_use_exp_grouping", false);
-            
             bindView(v, mContext, position);
             return v;
         }
@@ -1073,6 +1064,15 @@ public class RecentCallsListActivity extends ListActivity
         numbersCachePosition.clear();
         personIdCache.clear();
         */
+        
+        relativeTime = prefs.getBoolean("cl_relative_time", false);
+        is24hour = DateFormat.is24HourFormat(this);
+        showSeconds = prefs.getBoolean("cl_show_seconds", true);
+        showDialButton = prefs.getBoolean("cl_show_dial_button", true);
+        showContactPic = prefs.getBoolean("cl_show_pic", true);
+        showNumber = prefs.getBoolean("cl_show_number", true);
+        showLabel = prefs.getBoolean("cl_show_label", true);
+        useExpGroup = prefs.getBoolean("cl_use_exp_grouping", false);
     
         // The adapter caches looked up numbers, clear it so they will get
         // looked up again.    	

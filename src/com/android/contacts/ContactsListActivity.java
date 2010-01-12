@@ -66,6 +66,7 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.ContextMenu;
 import android.view.Gravity;
+import android.view.inputmethod.InputMethodManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -74,7 +75,10 @@ import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AlphabetIndexer;
 import android.widget.Filter;
@@ -99,7 +103,7 @@ import android.bluetooth.BluetoothDevice;
  * Displays a list of contacts. Usually is embedded into the ContactsActivity.
  */
 public final class ContactsListActivity extends ListActivity
-        implements View.OnCreateContextMenuListener, DialogInterface.OnClickListener {
+        implements View.OnCreateContextMenuListener, DialogInterface.OnClickListener, ListView.OnScrollListener {
     private static final String TAG = "ContactsListActivity";
 
     private static final boolean ENABLE_ACTION_ICON_OVERLAYS = false;
@@ -123,6 +127,8 @@ public final class ContactsListActivity extends ListActivity
     public static final int MENU_IMPORT_CONTACTS = 12;
     public static final int MENU_EXPORT_CONTACTS = 13;
     public static final int MENU_CLEAR_FREQ_CONTACTS = 14;
+    public static final int MENU_SHOW_ALL_CONTACTS = 20;
+    public static final int MENU_SHOW_CONTACTS_WITH_PHONES = 21;
 
     static final int MENU_ITEM_SEND_BT = 14;
     static final int MENU_ITEM_GET_BT  = 15;
@@ -308,7 +314,7 @@ public final class ContactsListActivity extends ListActivity
     private boolean mDisplayGroupsIncludesMyContacts = false;
 
     private int mDisplayGroupOriginalSelection;
-    private int mDisplayGroupCurrentSelection;
+    private int mDisplayGroupCurrentSelection;    
 
     private QueryHandler mQueryHandler;
     private String mQuery;
@@ -344,9 +350,16 @@ public final class ContactsListActivity extends ListActivity
     private static boolean showFavsDialButton;
     private static boolean showFavsLabel;
     private static boolean showFavsPic;
+    private static boolean autoHideKeyboard;
+    //private static boolean firstTimeShowVK;
+    
+    //Wysie_Soh: Variable to show only contacts with phones when inserting or editing a contact
+    private static boolean showOnlyPhonesEditCreateMode = false;
     
     //MenuItem for Clear Freq. Called
     private MenuItem mClearFreqCalled;
+    private MenuItem mShowAllContacts;
+    private MenuItem mShowContactsWithPhones;
 
     /**
      * Internal query type when in mode {@link #MODE_QUERY_PICK_TO_VIEW}.
@@ -402,12 +415,35 @@ public final class ContactsListActivity extends ListActivity
             getContentResolver().delete(mUri, null, null);
         }
     }
+    
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        //Do nothing
+    }
+    
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+        if (mContactsTab && autoHideKeyboard) {
+            InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            switch (scrollState) {
+            case OnScrollListener.SCROLL_STATE_IDLE:
+                break;
+            case OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
+                mgr.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                break;
+            case OnScrollListener.SCROLL_STATE_FLING:
+                mgr.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                break;
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         
-        ePrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());   
+        ePrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        showOnlyPhonesEditCreateMode = prefs.getBoolean("show_only_phones_edit_mode", false);
 
         // Resolve the intent
         final Intent intent = getIntent();
@@ -548,6 +584,7 @@ public final class ContactsListActivity extends ListActivity
         if ((mMode & MODE_MASK_NO_FILTER) != MODE_MASK_NO_FILTER) {
             list.setTextFilterEnabled(true);
         }
+        list.setOnScrollListener(this);       
 
         if ((mMode & MODE_MASK_CREATE_NEW) != 0) {
             // Add the header for creating a new contact
@@ -723,10 +760,36 @@ public final class ContactsListActivity extends ListActivity
         // Update the empty text view with the proper string, as the group may have changed
         setEmptyText();
     }
+    
+    
 
     @Override
-    protected void onResume() {
+    protected void onResume() {        
         super.onResume();
+        
+        showContactsNumber = ePrefs.getBoolean("contacts_show_number", true);
+        showContactsDialButton = ePrefs.getBoolean("contacts_show_dial_button", true);
+        showContactsLabel = ePrefs.getBoolean("contacts_show_label", true);
+        showContactsPic = ePrefs.getBoolean("contacts_show_pic", true);
+        showFavsNumber = ePrefs.getBoolean("favs_show_number", true);
+        showFavsDialButton = ePrefs.getBoolean("favs_show_dial_button", true);
+        showFavsLabel = ePrefs.getBoolean("favs_show_label", true);
+        showFavsPic = ePrefs.getBoolean("favs_show_pic", true);
+        autoHideKeyboard = ePrefs.getBoolean("contacts_auto_hide_vk", false);
+        if (mContactsTab) {
+            mDisplaySectionHeaders = ePrefs.getBoolean("contacts_show_alphabetical_separators", true);
+            //firstTimeShowVK = true;
+        }
+        
+            
+        //Wysie_Soh: if mMode == MODE_STREQUENT or MODE_FREQUENT, mDisplaySectionHeaders is already set to false
+        //Doing so means that the section separators will be shown in all other mModes. If I'm not wrong,
+        //The default Eclair Contacts only shows the section separators in "Contacts" tab mode.
+        //if (!(mMode == MODE_STREQUENT || mMode == MODE_FREQUENT)) {
+        //    mDisplaySectionHeaders = ePrefs.getBoolean("contacts_show_alphabetical_separators", true);
+        //}           
+        //Wysie_Soh: Decide whether to display headers or not based on preferences
+        
         boolean runQuery = true;
         Activity parent = getParent();
 
@@ -771,6 +834,7 @@ public final class ContactsListActivity extends ListActivity
             // Run the filtered query on the adapter
             ((ContactItemListAdapter) getListAdapter()).onContentChanged();
         }
+
     }
 
     private void updateGroup() {
@@ -795,12 +859,18 @@ public final class ContactsListActivity extends ListActivity
         super.onRestoreInstanceState(icicle);
         // Retrieve list state. This will be applied after the QueryHandler has run
         mListState = icicle.getParcelable(LIST_STATE_KEY);
-        mListHasFocus = icicle.getBoolean(FOCUS_KEY);
+        mListHasFocus = icicle.getBoolean(FOCUS_KEY);       
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        
+        /*        
+        InputMethodManager mgr = (InputMethodManager)
+                getSystemService(Context.INPUT_METHOD_SERVICE);
+        mgr.hideSoftInputFromWindow(mList.getWindowToken(), 0);
+        */
 
         // We don't want the list to display the empty state, since when we resume it will still
         // be there and show up while the new query is happening. After the async query finished
@@ -817,6 +887,14 @@ public final class ContactsListActivity extends ListActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        if (mMode == MODE_INSERT_OR_EDIT_CONTACT) {
+            mShowAllContacts = menu.add(0, MENU_SHOW_ALL_CONTACTS, 0, R.string.menu_show_all)
+                    .setIcon(com.android.internal.R.drawable.ic_menu_allfriends);
+            mShowContactsWithPhones = menu.add(0, MENU_SHOW_CONTACTS_WITH_PHONES, 0, R.string.menu_show_contacts_phones)
+                    .setIcon(com.android.internal.R.drawable.ic_menu_allfriends);
+            return super.onCreateOptionsMenu(menu);
+        }
+        
         // If Contacts was invoked by another Activity simply as a way of
         // picking a contact, don't show the options menu
         if ((mMode & MODE_MASK_PICKER) == MODE_MASK_PICKER) {
@@ -891,6 +969,19 @@ public final class ContactsListActivity extends ListActivity
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
        super.onPrepareOptionsMenu(menu);
+       
+        if (mMode == MODE_INSERT_OR_EDIT_CONTACT) {
+            if (showOnlyPhonesEditCreateMode) {
+                mShowAllContacts.setVisible(true);
+                mShowContactsWithPhones.setVisible(false);
+            }
+            else {
+                mShowAllContacts.setVisible(false);
+                mShowContactsWithPhones.setVisible(true);
+            }
+            return true;
+        }
+       
        boolean bluetoothEnabled = false;
        if (mBluetooth != null) {
           bluetoothEnabled = mBluetooth.isEnabled();
@@ -952,6 +1043,7 @@ public final class ContactsListActivity extends ListActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         switch (item.getItemId()) {
             case MENU_DISPLAY_GROUP:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this)
@@ -1013,6 +1105,16 @@ public final class ContactsListActivity extends ListActivity
             		clearFrequentlyCalled();
             	}            	
             	return true;
+            case MENU_SHOW_ALL_CONTACTS:
+                showOnlyPhonesEditCreateMode = false;                
+                prefs.edit().putBoolean("show_only_phones_edit_mode", showOnlyPhonesEditCreateMode).commit();
+                updateGroup();
+                return true;
+            case MENU_SHOW_CONTACTS_WITH_PHONES:
+                showOnlyPhonesEditCreateMode = true;                
+                prefs.edit().putBoolean("show_only_phones_edit_mode", showOnlyPhonesEditCreateMode).commit();
+                updateGroup();
+                return true;
             	
         }
         return false;
@@ -1242,9 +1344,9 @@ public final class ContactsListActivity extends ListActivity
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         // Hide soft keyboard, if visible
-        InputMethodManager inputMethodManager = (InputMethodManager)
+        InputMethodManager mgr = (InputMethodManager)
                 getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(mList.getWindowToken(), 0);
+        mgr.hideSoftInputFromWindow(mList.getWindowToken(), 0);
 
         if (mMode == MODE_INSERT_OR_EDIT_CONTACT) {
             Intent intent;
@@ -1521,8 +1623,15 @@ public final class ContactsListActivity extends ListActivity
             case MODE_PICK_CONTACT:
             case MODE_PICK_OR_CREATE_CONTACT:
             case MODE_INSERT_OR_EDIT_CONTACT:
-                mQueryHandler.startQuery(QUERY_TOKEN, null, People.CONTENT_URI, CONTACTS_PROJECTION,
+                if (!showOnlyPhonesEditCreateMode) {
+                    mQueryHandler.startQuery(QUERY_TOKEN, null, People.CONTENT_URI, CONTACTS_PROJECTION,
                         null, null, getSortOrder(CONTACTS_PROJECTION));
+                }
+                else {
+                    mQueryHandler.startQuery(QUERY_TOKEN, null, People.CONTENT_URI, CONTACTS_PROJECTION,
+                        People.PRIMARY_PHONE_ID + " IS NOT NULL", null,
+                        getSortOrder(CONTACTS_PROJECTION));
+                }
                 break;
 
             case MODE_WITH_PHONES:
@@ -1890,6 +1999,7 @@ public final class ContactsListActivity extends ListActivity
                 mDisplaySectionHeaders = false;
                 mFavTab = true;
             }
+            
 
         }
 
@@ -1974,31 +2084,18 @@ public final class ContactsListActivity extends ListActivity
                 v = newView(mContext, mCursor, parent);
             } else {
                 v = convertView;
-            }
-            
-            //Wysie_Soh: if mMode == MODE_STREQUENT or MODE_FREQUENT, mDisplaySectionHeaders is already set to false
-            //Doing so means that the section separators will be shown in all other mModes. If I'm not wrong,
-            //The default Eclair Contacts only shows the section separators in "Contacts" tab mode.
-            //if (!(mMode == MODE_STREQUENT || mMode == MODE_FREQUENT)) {
-            //    mDisplaySectionHeaders = ePrefs.getBoolean("contacts_show_alphabetical_separators", true);
-            //}           
-
-            //Wysie_Soh: Decide whether to display headers or not based on preferences            
-            if (mContactsTab) {
-                mDisplaySectionHeaders = ePrefs.getBoolean("contacts_show_alphabetical_separators", true);
-            }
-            
-            showContactsNumber = ePrefs.getBoolean("contacts_show_number", true);
-            showContactsDialButton = ePrefs.getBoolean("contacts_show_dial_button", true);
-            showContactsLabel = ePrefs.getBoolean("contacts_show_label", true);
-            showContactsPic = ePrefs.getBoolean("contacts_show_pic", true);
-            showFavsNumber = ePrefs.getBoolean("favs_show_number", true);
-            showFavsDialButton = ePrefs.getBoolean("favs_show_dial_button", true);
-            showFavsLabel = ePrefs.getBoolean("favs_show_label", true);
-            showFavsPic = ePrefs.getBoolean("favs_show_pic", true);
+            }          
             
             bindView(v, mContext, mCursor);
             bindSectionHeader(v, realPosition, mDisplaySectionHeaders);
+            
+            /*
+            if (mContactsTab && firstTimeShowVK) {
+                InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                mgr.showSoftInput(getListView(), InputMethodManager.SHOW_IMPLICIT);
+                firstTimeShowVK = false;
+            }
+            */
             
             return v;
         }

@@ -869,6 +869,7 @@
     <string name="alert_clear_call_log_title">Clear call log</string>
     <string name="alert_clear_call_log_message">Are you sure you want to clear all call records?</string>
     <string name="menu_cl_clear_type">Remove all %s</string>
+    <string name="recentCalls_removeAllFrom">Remove all </string>
     
     <string name="alert_clear_cl_person">Are you sure you want to clear all call records of %s?</string>
     <string name="alert_clear_cl_person_incoming">Are you sure you want to clear all incoming call records from %s?</string>

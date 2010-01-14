@@ -224,4 +224,171 @@
     <string name="fail_reason_could_not_open_file" msgid="4013520943128739511">"\"<xliff:g id="FILE_NAME">%s</xliff:g>\" konnte nicht geöffnet werden: <xliff:g id="EXACT_REASON">%s</xliff:g>"</string>
     <string name="exporting_contact_list_progress" msgid="560522409559101193">"<xliff:g id="CURRENT_NUMBER">%s</xliff:g> von <xliff:g id="TOTAL_NUMBER">%s</xliff:g> Kontakten"</string>
     <string name="search_settings_description" msgid="2675223022992445813">"Namen Ihrer Kontakte"</string>
+
+    <string name="recentCalls_deleteAllMissed">Verpasste löschen</string>
+    <string name="recentCalls_deleteAllOutgoing">Ausgehende löschen</string>
+    <string name="recentCalls_deleteAllIncoming">Eingehende löschen</string>
+
+    <!-- Wysie_Soh: Contacts menu (across all 4, ie. Dialer, Contacts, Call log, Favourites -->
+    <string name="menu_preferences">Einstellungen</string>
+    <string name="contacts_manage_groups">Gruppen verwalten</string>
+
+    <string name="menu_show_all">Zeige alle Gruppen</string>
+    <string name="menu_show_contacts_phones">Zeige Kontakte mit Rufnummer</string>
+
+    <!-- Wysie_Soh: Dialer menu -->
+    <string name="dialer_menu_sms">SMS/MMS</string>
+
+    <!-- Wysie_Soh: Call log menu -->
+    <string name="call_log_menu_total_duration">Geprächsdauer gesamt</string>
+
+    <!-- Wysie_Soh: Total incoming/outgoing dialog -->
+    <string name="totalcalllog">Dauer total eingehend/ausgehend</string>
+    <string name="total_incoming">Eingehend</string>
+    <string name="total_outgoing">Ausgehend</string>
+    <string name="total_button_ok">Ok</string>
+
+    <!-- Favourites menu -->
+    <string name="fav_clear_freq">Häufig angerufen leeren</string>
+
+    <!-- Wysie_Soh: Preferences strings (based on ChainsDD's code) -->
+    <string name="title_dialer_category">Telefon</string>
+    <string name="title_vm_button">Linke Aktionstaste (LAT)</string>
+    <string name="title_vm_handler">Mailbox Verwaltung</string>
+    <string name="title_disable_num_check">Nummernprüfung ausschalten</string>
+    <string name="summaryon_disable_num_check">Linke Aktionstaste (LAT) und Menü werden dauerhaft aktiviert.</string>
+    <string name="summaryoff_disable_num_check">LAT und Menü werden aktiviert, wenn mindestens eine Nummer eingegeben wurde (ausser Mailbox).</string>
+    <string name="title_use_1_for_reg_vm">1 wählt Mailbox</string>
+    <string name="summaryon_use_1_for_reg_vm">Taste 1 wird für Mailbox genutzt.</string>
+    <string name="summaryoff_use_1_for_reg_vm">Taste 1 entsprechend Mailbox Verwaltung.</string>
+    <string name="title_enable_haptic_feedback">Nutze haptische Rückmeldung</string>
+
+    <string name="title_digits_color_unselected">Farbe der Zahlen (normal)</string>
+    <string name="title_digits_color_focused">Farbe der Zahlen (fokusiert)</string>
+    <string name="title_digits_color_pressed">Farbe der Zahlen (gedrückt)</string>
+    <string name="title_choose_color">Farbe wählen</string>
+    <string name="title_use_custom_color">Nutze eigene Farben für Zahlen</string>
+    <string name="summaryon_custom_color">Unterstützte Formate: #RRGGBB oder #AARRGGBB (mit #).</string>
+
+    <string name="title_change_digits_color">Farbe der Zahlen ändern</string>
+
+    <string name="title_call_log_category">Anrufliste</string>
+    <string name="title_cl_relative_time">Relative Zeiten</string>
+    <string name="summaryon_cl_relative_time">Zeige relative Zeiten in Anrufliste.</string>
+    <string name="summaryoff_cl_relative_time">Zeige exakte Zeiten in Anrufliste.</string>
+    <string name="title_cl_show_seconds">Zeige Sekunden</string>
+    <string name="summary_cl_show_seconds">Zeige Sekunden bei exakten Zeiten.</string>
+    <string name="title_cl_ask_before_clear">Anrufliste löschen bestätigen</string>
+    <string name="summaryon_cl_ask_before_clear">Anrufliste löschen mit Bestätigung.</string>
+    <string name="summaryoff_cl_ask_before_clear">Anrufliste löschen ohne Bestätigung.</string>
+    <string name="title_cl_always_clear_cache">Nummernspeicher immer leeren</string>
+    <string name="summaryon_cl_always_clear_cache">Aktuelle Anrufliste ist immer sichergestellt.</string>
+    <string name="summaryoff_cl_always_clear_cache">Schnellerer Wechsel zur Anrufliste aber evtl. nicht aktuelle Kontaktinformationen nach Änderung.</string>
+
+    <string name="title_view_cl">Individuelle Anruflisten</string>
+    <string name="summary_view_cl">Einstellungen für individuelle Anruflisten.</string>
+
+    <string name="title_cl_grouping_settings">Gruppieren von Ruflisteneinstellungen</string>
+    <string name="title_cl_use_exp_grouping">Gruppieren unbekannter Nummern (experimentell)</string>
+    <string name="summary_cl_use_exp_grouping">Versuche ungespeicherte Nummern zu gruppieren. Betrifft auch Löschen von Anruflisten.</string>
+    <string name="title_cl_exp_grouping_num">Anzahl zu vergleichender Zahlen</string>
+    <string name="summary_cl_exp_grouping_num">Genauer, je größer die Anzahl.</string>
+
+    <string name="title_contacts_category">Kontakte</string>
+    <string name="title_contacts_show_pic">Zeige Kontaktbilder</string>
+    <string name="summary_contacts_show_pic">Zeige Bilder von Kontakten an.</string>
+    <string name="title_contacts_show_dial_button">Zeige Anruftaste</string>
+    <string name="summary_contacts_show_dial_button">Zeige Anruftaste für Kontakte mit Rufnummern.</string>
+    <string name="title_contacts_view_pic_size">Größe der Kontaktbilder</string>
+    <string name="summary_contacts_view_pic_size">Größe der Kontaktbilder im Profil einstellen. Betrifft auch Favoriten.</string>
+    <string name="title_contacts_choose_pic_size">Größe wählen</string>
+    <string name="title_contacts_show_separators">Alphabetische Trennmarke</string>
+    <string name="summaryon_contacts_show_separators">Alphabetische Trennung wird angezeigt in der Kontaktliste.</string>
+    <string name="summaryoff_contacts_show_separators">Alphabetische Trennung wird nicht angezeigt in der Kontaktliste.</string>
+    <string name="title_auto_show_keyboard">Virt. Tastatur autom. zeigen</string>
+    <string name="summary_auto_show_keyboard">Die virtuelle Tastatur wird eingeblendet, sobald das Kontaktprofil betreten wird.</string>
+    <string name="title_auto_hide_keyboard">Virt. Tastatur verbergen</string>
+    <string name="summary_auto_hide_keyboard">Die virtuelle Tastatur wird ausgeblendet beim Scrollen.</string>
+    <string name="title_view_contact">Kontakt anzeigen</string>
+    <string name="summary_view_contact">Einstellungen für Ansicht eines Kontaktes ändern.</string>
+    <string name="title_show_text_mobile_only">Textaktionen nur für Handys</string>
+    <string name="summaryon_show_text_mobile_only"> Text/SMS Aktion nur für Mobilfunknummern.</string>
+    <string name="summaryoff_show_text_mobile_only">Text/SMS Aktion nur für alle Nummern.</string>
+
+    <string name="groups_manager_title">Gruppen bearbeiten</string>
+    <string name="groups_manager_summary">Einstellungen für Gruppen bearbeiten.</string>
+    <string name="title_groups_ask_before_del">Löschen bestätigen</string>
+    <string name="summaryon_groups_ask_before_del">Löschen von Gruppen mit Bestätigung.</string>
+    <string name="summaryoff_groups_ask_before_del">Löschen von Gruppen ohne Bestätigung.</string>
+
+    <string name="title_favourites_category">Häufig gewählt</string>
+    <string name="title_favourites_hide_freq_call">Häufig Gewählte verbergen.</string>
+    <string name="summary_favourites_hide_freq_call">Die Daten werden nicht gelöscht, nur verborgen.</string>
+    <string name="title_favs_ask_before_clear">Leeren bestätigen</string>
+    <string name="summaryon_favs_ask_before_clear">Leeren der Liste mit Bestätigung.</string>
+    <string name="summaryoff_favs_ask_before_clear">Leeren der Liste ohne Bestätigung.</string>
+
+    <string name="title_all_show_label">Zeige Kennung</string>
+    <string name="summaryon_all_show_label">Kennungen (mobil, privat, etc.) werden angezeigt.</string>
+    <string name="summaryoff_all_show_label">Kennungen (mobil, privat, etc.) werden nicht angezeigt.</string>
+
+    <string name="title_all_show_number">Zeige Rufnummer</string>
+    <string name="summaryon_all_show_number">Rufnummer wird gezeigt.</string>
+    <string name="summaryoff_all_show_number">Rufnummer wird nicht gezeigt.</string>
+
+    <string name="title_misc_category">Sonstiges</string>
+    <string name="title_sensor_rotation">Autorotation verwenden</string>
+
+    <string name="title_about">Über</string>
+    <string name="title_about_name">Mod Name</string>
+    <string name="summary_about_name">Wysie Contacts</string>
+    <string name="title_about_version">Version</string>
+    <string name="summary_about_version">2.7</string>
+    <string name="title_about_credits">Danksagung</string>
+    <string name="summary_about_credits">ChainsDD, geesun and the rest of XDA! :)</string>
+
+    <!-- Wysie_Soh: Call log strings -->
+
+    <string name="alert_clear_call_log_title">Anrufliste leeren</string>
+    <string name="alert_clear_call_log_message">Bist du sicher, dass du die Anrufliste leeren möchtest?</string>
+    <string name="menu_cl_clear_type">Lösche alle %s</string>
+    <string name="recentCalls_removeAllFrom">Lösche alle </string>
+
+    <string name="alert_clear_cl_person">Bist du sicher, dass du alle Anrufe von %s löschen möchtest?</string>
+    <string name="alert_clear_cl_person_incoming">Bist du sicher, dass du alle eingegangenen Anrufe von %s löschen möchtest?</string>
+    <string name="alert_clear_cl_person_outgoing">Bist du sicher, dass du alle ausgegangenen Anrufe an %s löschen möchtest?</string>
+    <string name="alert_clear_cl_person_missed">Bist du sicher, dass du alle verpassten Anrufe von %s löschen möchtest?</string>
+
+    <string name="alert_clear_cl_all_incoming">Bist du sicher, dass du alle eingegangenen Anrufe löschen möchtest?</string>
+    <string name="alert_clear_cl_all_outgoing">Bist du sicher, dass du alle ausgegangenen Anrufe löschen möchtest?</string>
+    <string name="alert_clear_cl_all_missed">Bist du sicher, dass du alle verpassten Anrufe löschen möchtest?</string>
+
+    <!-- Wysie_Soh: Frequently called strings -->
+    <string name="alert_clear_freq_called">Lösche häufig Angerufene</string>
+    <string name="alert_clear_freq_called_msg">Bist du sicher, dass du die Liste der häufig angerufenen Kontakte löschen möchtest?</string>
+
+    <!-- Wysie_Soh: View contact strings -->
+    <string name="view_contact_navigate">Gehe zu</string>
+    <string name="view_contact_groups">Gruppen</string>
+    <string name="view_call_log">Anrufliste ansehen</string>
+    <string name="view_contact_select_cl_number">Nummer auswählen um Log einzusehen</string>
+
+    <!-- Wysie_Soh: Groups management -->
+    <string name="help_title">Nutzung</string>
+    <string name="help_message">Gruppenname gedrückt halten zum umbenennen oder löschen. Für neue Gruppe Menü drücken. Dieser Text wird bis zum nächsten Update nicht gezeigt.
+    </string>
+
+    <string name="title_groups_manager">Gruppen verwalten</string>
+    <string name="option_create_group">Neue Gruppe</string>
+    <string name="alert_create_group_message">Gruppenname eingeben</string>
+    <string name="context_rename_group">Gruppe umbenennen</string>
+    <string name="context_delete_group">Gruppe löschen</string>
+    <string name="alert_rename_group_message">Neuen Gruppennamen eingeben</string>
+    <string name="alert_delete_group_message">Sicher, dass du diese Gruppe löschen möchstest?</string>
+
+    <!-- Wysie_Soh: Others -->
+    <!-- Toast for call detail screen when couldn't read the requested details -->
+    <string name="toast_call_detail_error_wysie">Kein Kontakt oder Ruflisteneintrag für diese Nummer gefunden.</string>
+    <string name="menu_copy_string">Kopiere \"%s\"</string>
+    <string name="cl_total_cl">Gesamtdauer</string>
 </resources>

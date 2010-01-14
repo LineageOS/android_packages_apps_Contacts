@@ -858,9 +858,9 @@
     <string name="title_about_name">Mod Name</string>
     <string name="summary_about_name">Wysie Contacts</string>
     <string name="title_about_version">Version</string>
-    <string name="summary_about_version">2.7</string>
+    <string name="summary_about_version">2.8</string>
     <string name="title_about_credits">Credits</string>
-    <string name="summary_about_credits">ChainsDD, geesun and the rest of XDA! :)</string>
+    <string name="summary_about_credits">ChainsDD, geesun, niuchl, rac2030 and the rest of XDA! :)</string>
     
     <!-- Wysie_Soh: Call log strings -->  
     <string name="alert_clear_call_log_title">Clear call log</string>

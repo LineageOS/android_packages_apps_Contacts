@@ -35,7 +35,6 @@ import android.database.sqlite.SQLiteDiskIOException;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteFullException;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -74,23 +73,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.ResourceCursorAdapter;
 import android.widget.TextView;
 
 import com.android.internal.telephony.CallerInfo;
 import com.android.internal.telephony.ITelephony;
 
-import java.io.FileNotFoundException;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
+import java.util.Map;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.Locale;
+import java.util.Set;
+import java.util.HashSet;
 import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 
@@ -99,8 +93,6 @@ import android.view.LayoutInflater;
 import android.widget.ArrayAdapter;
 import java.util.ArrayList;
 import java.util.List;
-import android.widget.Toast;
-
 
 /**
  * Displays a list of call log entries.
@@ -840,13 +832,19 @@ public class RecentCallsListActivity extends ListActivity
         @Override
         protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
             final RecentCallsListActivity activity = mActivity.get();
+            final Cursor fCursor = cursor;
 
             if (activity != null && !activity.isFinishing()) {
                 // final RecentCallsListActivity.RecentCallsAdapter callsAdapter = activity.mAdapter;
                 final RecentCallsListActivity.RecentCallsArrayAdapter callsAdapter = activity.mArrayAdapter;
 
-                callsAdapter.setLoading(false);
-                activity.getUpdateCallLogsItem(cursor);
+                // niuchl: Process time consuming job asynchronously, so that the main thread will not be blocked.
+                new Handler().post(new Runnable() {
+                    public void run() {
+                      activity.getUpdateCallLogsItem(fCursor);
+                      callsAdapter.setLoading(false);
+                    }
+                  });
 				   
                 // callsAdapter.changeCursor(cursor);
             } else {
@@ -942,6 +940,63 @@ public class RecentCallsListActivity extends ListActivity
             return false;
     }
     
+    private Map<String, Set<Long>> nameIdMap = null;
+    private Map<Long, Set<String>> idPhoneMap = null;
+    // niuchl: Querying database in batch mode, and the performace is improved a lot.
+    private void initNumberList() {
+      if (tempNumList != null && nameIdMap != null && idPhoneMap != null) {
+        return;
+      }
+
+      tempNumList = new Hashtable<String, Long>();
+      nameIdMap = new HashMap<String, Set<Long>>();
+      idPhoneMap = new HashMap<Long, Set<String>>();
+      Cursor cursor = getContentResolver().query(Phones.CONTENT_URI,
+                                                 new String[] {Phones.NUMBER, Phones.PERSON_ID, Phones.DISPLAY_NAME},
+                                                 null, null, null);
+
+      if (cursor != null && cursor.moveToFirst()) {
+        do {
+          String phone = cursor.getString(0);
+          Long id = cursor.getLong(1);
+          String name = cursor.getString(2);
+          tempNumList.put(phone, id);
+          if (nameIdMap.containsKey(name)) {
+            nameIdMap.get(name).add(id);
+          } else {
+            Set<Long> idSet = new HashSet();
+            idSet.add(id);
+            nameIdMap.put(name, idSet);
+          }
+          if (idPhoneMap.containsKey(id)) {
+            idPhoneMap.get(id).add(phone);
+          } else {
+            Set<String> phoneSet = new HashSet();
+            phoneSet.add(phone);
+            idPhoneMap.put(id, phoneSet);
+          }
+        } while (cursor.moveToNext());
+        cursor.close();
+      }
+    }
+
+    private long getPersonId(String phoneNumber, String userName) {
+      if (nameIdMap.containsKey(userName)) {
+        Set<Long> idSet = nameIdMap.get(userName);
+        for (Long id : idSet) {
+          if (idPhoneMap.containsKey(id)) {
+            Set<String> phoneSet = idPhoneMap.get(id);
+            for (String phone : phoneSet) {
+              if (phone.equals(phoneNumber) || PhoneNumberUtils.compare(phone, phoneNumber)) {
+                return id;
+              }
+            }
+          }
+        }
+      }
+      return -1;
+    }
+
     public void getUpdateCallLogsItem(Cursor cursor) {
         mListCallLogs.clear();
         numbersCache.clear();
@@ -950,12 +1005,13 @@ public class RecentCallsListActivity extends ListActivity
         if (cursor == null) {
             return;
         }
+
+        initNumberList();
         
         Cursor phonesCursor = null;        
         int number = -1;
         cacheUpdated = false;
-        if (cursor.getCount() != 0) {
-            cursor.moveToFirst();
+        if (cursor.getCount() != 0 && cursor.moveToFirst()) {
             do { 
                 RecentCallsInfo item = new RecentCallsInfo();
 
@@ -977,44 +1033,18 @@ public class RecentCallsListActivity extends ListActivity
                 item.duration = cursor.getInt(
                         RecentCallsListActivity.DURATION_COLUMN_INDEX);
                         
-                //Wysie_Soh: The following portion of code to retrieve personId
-                //really slows down the performance. However, without it,
-                //call logs will not be grouped by contact, and instead will be grouped
-                //by number (non-ideal). Thus, we make use of a Hashtable to keep
-                //numbers and ids pairs, and avoid querying. This speeds it up significantly,
-                //but it's still slower than default/without querying personId
-                item.personId = -1;
-                try {            
-                    item.personId = tempNumList.get(item.number);
-                } catch (NullPointerException e) {
-                }
-
-                if (item.personId == -1) {                
-                    phonesCursor = getContentResolver().query(
-                                    Uri.withAppendedPath(Phones.CONTENT_FILTER_URL,
-                                    Uri.encode(item.number)), PHONES_ID_PROJECTION, null, null, null);
-                
-                    if (phonesCursor != null && phonesCursor.moveToFirst()) {
-                        item.personId = phonesCursor.getLong(PERSON_ID_COLUMN_INDEX);
-                        tempNumList.put(item.number, item.personId);
-                        cacheUpdated = true;                        
-                        phonesCursor.close();
-                    }
-                }
+                item.personId = getPersonId(item.number, item.name);
 
                 addItemIntoList(item);
                 
             } while (cursor.moveToNext());        
             cursor.close();
-            
         }
         // Log.e(TAG,"getUpdateCallLogsItem");
         numbersCache.clear();
         numbersCachePosition.clear();
         personIdCache.clear();              
         mArrayAdapter.notifyDataSetChanged();
-        writeCacheToFile();
-		
     }
     
     static String numbersOnly(String s) {
@@ -1054,7 +1084,6 @@ public class RecentCallsListActivity extends ListActivity
 
     @Override
     protected void onResume() {
-        loadCacheFromFile();
         
         /*
         mListCallLogs.clear();
@@ -1762,54 +1791,5 @@ public class RecentCallsListActivity extends ListActivity
     }
     
     //WYSIE TODO: Implement manual delete.
-    
-    //Wysie: The purpose is to save the existing tempNumList hashtable to a binary file
-    //so that upon the next start, we can load from here directly, instead of querying
-    //CONTENT_FILTER_URL which is very slow.
-    private void writeCacheToFile() {
-        if (!cacheUpdated)
-            return;
-        try {
-            FileOutputStream fOut = openFileOutput(CACHEFILENAME, 0);
-            ObjectOutputStream oOut = new ObjectOutputStream(fOut);
-            oOut.writeObject(tempNumList);
-            oOut.close();
-            fOut.close();
-            //Log.d("WYSIE", "FILE SAVE SUCCESS");
-        }
-        catch (FileNotFoundException e) {
-            //Do nothing
-        }
-        catch (IOException e) {
-            //Do nothing
-        }
-    }
-    
-    //Wysie: Load the Hashtable from file. Check EditContactActivity for the line
-    //deleteFile(CACHEFILENAME). The current logic works by ALWAYS deleting the cached/saved file
-    //as long as a contact info has been edited. This ensures that the call logs are always up to date.
-    private void loadCacheFromFile() {
-        try {
-            FileInputStream fIn = openFileInput(CACHEFILENAME);
-            ObjectInputStream oIn = new ObjectInputStream(fIn);
-            tempNumList = (Hashtable<String,Long>)oIn.readObject();
-            oIn.close();
-            fIn.close();
-            //Log.d("WYSIE", "FILE LOAD SUCCESS");
-        }
-        //In case of exceptions, create new tempNumList
-        catch (ClassNotFoundException e) {
-            tempNumList = new Hashtable<String,Long>();
-            //Log.d("WYSIE", "FILE LOAD ERROR");
-        }
-        catch (FileNotFoundException e) {
-            tempNumList = new Hashtable<String,Long>();
-            //Log.d("WYSIE", "FILE LOAD ERROR");        
-        }
-        catch (IOException e) {
-            tempNumList = new Hashtable<String,Long>();
-            //Log.d("WYSIE", "FILE LOAD ERROR");
-        }
-    }
     
 }

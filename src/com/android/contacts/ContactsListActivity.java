@@ -2208,16 +2208,14 @@ public final class ContactsListActivity extends ListActivity
             size = cache.numberBuffer.sizeCopied;
             
             if (size != 0) {
+                //Wysie_Soh: 2.8 changes. Always show first. Only hide if preference is set to hide.
+                numberView.setText(cache.numberBuffer.data, 0, size);                              
+                numberView.setVisibility(View.VISIBLE);
+                labelView.setVisibility(View.VISIBLE);
                 
-                if ((showContactsNumber && mContactsTab) || (showFavsNumber && mFavTab)) {
-                    numberView.setText(cache.numberBuffer.data, 0, size);                              
-                    numberView.setVisibility(View.VISIBLE);
-                }
-                else {
+                if ((!showContactsNumber && mContactsTab) || (!showFavsNumber && mFavTab)) {
                     numberView.setVisibility(View.GONE);
                 }
-                
-                labelView.setVisibility(View.VISIBLE);
                 
                 if ((showContactsDialButton && mContactsTab) || (showFavsDialButton && mFavTab)) {
                 	callView.setTag(new String(cache.numberBuffer.data, 0, size)); //Wysie_Soh: Set tag to green dial button
@@ -2237,8 +2235,7 @@ public final class ContactsListActivity extends ListActivity
             }
 
             // Set the label
-            if (!cursor.isNull(TYPE_COLUMN_INDEX) && ((showContactsLabel && mContactsTab) ||
-                    (showFavsLabel && mFavTab))) {
+            if (!cursor.isNull(TYPE_COLUMN_INDEX)) {
                 int type = cursor.getInt(TYPE_COLUMN_INDEX);
 
                 if (type != People.Phones.TYPE_CUSTOM) {
@@ -2252,7 +2249,7 @@ public final class ContactsListActivity extends ListActivity
                     // Don't check size, if it's zero just don't show anything
                     labelView.setText(cache.labelBuffer.data, 0, cache.labelBuffer.sizeCopied);
                 }
-                
+                                
                 //Wysie_Soh: Set layout rules programmatically                    
                 newNameLayout.addRule(RelativeLayout.ABOVE, R.id.label);
                 newNumberLayout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
@@ -2261,19 +2258,21 @@ public final class ContactsListActivity extends ListActivity
                 
                 cache.nameView.setLayoutParams(newNameLayout);
                 numberView.setLayoutParams(newNumberLayout);
+                
+                if ((!showContactsLabel && mContactsTab) || (!showFavsLabel && mFavTab)) {
+                    labelView.setVisibility(View.GONE);
+                    //Wysie_Soh: Set layout rules programmatically                    
+                    newNameLayout.addRule(RelativeLayout.ABOVE, R.id.number);
+                    newNumberLayout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                    newNumberLayout.addRule(RelativeLayout.ALIGN_BASELINE, 0);
+                    newNumberLayout.setMargins(0, -10, 0, 8);
                     
+                    cache.nameView.setLayoutParams(newNameLayout);
+                    numberView.setLayoutParams(newNumberLayout);
+                }                    
             } else {
                 // There is no label, hide the the view
                 labelView.setVisibility(View.GONE);
-                
-                //Wysie_Soh: Set layout rules programmatically                    
-                newNameLayout.addRule(RelativeLayout.ABOVE, R.id.number);
-                newNumberLayout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-                newNumberLayout.addRule(RelativeLayout.ALIGN_BASELINE, 0);
-                newNumberLayout.setMargins(0, -10, 0, 8);
-                
-                cache.nameView.setLayoutParams(newNameLayout);
-                numberView.setLayoutParams(newNumberLayout);
             }
 
             // Set the proper icon (star or presence or nothing)

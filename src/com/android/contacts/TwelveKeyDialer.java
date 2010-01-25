@@ -495,8 +495,6 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         else
             prefVibrateOn = false;        
         
-        Log.d("prefVibrateOn", ""+prefVibrateOn);
-        
         updateDialer();
     }
 
@@ -1281,14 +1279,6 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     	}
     	else if (prefs.getString("vm_button", "0").equals("2")) {
     		mVoicemailButton.setImageResource(R.drawable.ic_dial_action_voice_mail);
-    		
-    		/*
-            if (hasVoicemail()) {
-                mVoicemailButton.setEnabled(true);
-            } else {
-                mVoicemailButton.setEnabled(false);
-            }
-            */
     	}
     }
 
@@ -1372,6 +1362,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     }    
     
     //Wysie: Method to check if there's any number entered
+    //Known Bug: Voicemail button is enabled on first launch. Will fix later.
     private void checkForNumber() {
         CharSequence digits = mDigits.getText();
         if ((digits == null || !TextUtils.isGraphic(digits)) && !prefs.getBoolean("dial_disable_num_check", false)) {
@@ -1379,7 +1370,16 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
                 mVoicemailButton.setEnabled(false);
             }
         } else {
-            mVoicemailButton.setEnabled(true);
+            if (prefs.getString("title_vm_handler", "0").equals("0")) {
+                if (hasVoicemail()) {
+                    mVoicemailButton.setEnabled(true);
+                } else {
+                    mVoicemailButton.setEnabled(false);
+                }
+    		}
+    		else {
+    		    mVoicemailButton.setEnabled(true);
+    		}
         }
     }
     

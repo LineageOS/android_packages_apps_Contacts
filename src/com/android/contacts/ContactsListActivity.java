@@ -116,6 +116,10 @@ import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+//Wysie
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 /*TODO(emillar) I commented most of the code that deals with modes and filtering. It should be
  * brought back in as we add back that functionality.
  */
@@ -203,7 +207,7 @@ public class ContactsListActivity extends ListActivity implements
     /** Unknown mode */
     static final int MODE_UNKNOWN = 0;
     /** Default mode */
-    static final int MODE_DEFAULT = 4 | MODE_MASK_SHOW_PHOTOS | MODE_MASK_SHOW_NUMBER_OF_CONTACTS;
+    static final int MODE_DEFAULT = 4 | MODE_MASK_SHOW_PHOTOS | MODE_MASK_SHOW_NUMBER_OF_CONTACTS | MODE_MASK_SHOW_CALL_BUTTON;
     /** Custom mode */
     static final int MODE_CUSTOM = 8;
     /** Show all starred contacts */
@@ -405,6 +409,15 @@ public class ContactsListActivity extends ListActivity implements
     private static final UriMatcher sContactsIdMatcher;
 
     private static ExecutorService sImageFetchThreadPool;
+    
+    //Wysie
+    private boolean mContacts = false;
+    private boolean mFavs = false;
+    private SharedPreferences ePrefs;    
+    private static boolean showContactsDialButton;
+    private static boolean showContactsPic;
+    private static boolean showFavsDialButton;
+    private static boolean showFavsPic;
 
     static {
         sContactsIdMatcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -420,6 +433,9 @@ public class ContactsListActivity extends ListActivity implements
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        
+        //Wysie
+        ePrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         // Resolve the intent
         final Intent intent = getIntent();
@@ -436,6 +452,7 @@ public class ContactsListActivity extends ListActivity implements
         Log.i(TAG, "Called with action: " + action);
         if (UI.LIST_DEFAULT.equals(action)) {
             mMode = MODE_DEFAULT;
+            mContacts = true;
             // When mDefaultMode is true the mode is set in onResume(), since the preferneces
             // activity may change it whenever this activity isn't running
         } else if (UI.LIST_GROUP_ACTION.equals(action)) {
@@ -455,6 +472,7 @@ public class ContactsListActivity extends ListActivity implements
             mMode = MODE_FREQUENT;
         } else if (UI.LIST_STREQUENT_ACTION.equals(action)) {
             mMode = MODE_STREQUENT;
+            mFavs = true;
         } else if (UI.LIST_CONTACTS_WITH_PHONES_ACTION.equals(action)) {
             mMode = MODE_CUSTOM;
             mDisplayOnlyPhones = true;
@@ -591,6 +609,7 @@ public class ContactsListActivity extends ListActivity implements
 
         if (mMode == MODE_UNKNOWN) {
             mMode = MODE_DEFAULT;
+            mContacts = true;
         }
 
         if (mMode == MODE_JOIN_CONTACT) {
@@ -752,6 +771,11 @@ public class ContactsListActivity extends ListActivity implements
     @Override
     protected void onResume() {
         super.onResume();
+        
+        showContactsDialButton = ePrefs.getBoolean("contacts_show_dial_button", true);
+        showContactsPic = ePrefs.getBoolean("contacts_show_pic", true);
+        showFavsDialButton = ePrefs.getBoolean("favs_show_dial_button", true);
+        showFavsPic = ePrefs.getBoolean("favs_show_pic", true);
 
         // Force cache to reload so we don't show stale photos.
         if (mAdapter.mBitmapCache != null) {
@@ -890,6 +914,9 @@ public class ContactsListActivity extends ListActivity implements
                 });
                 startActivity(intent);
                 return true;
+            }
+            case R.id.menu_preferences: {
+                startActivity(new Intent(this, ContactsPreferences.class));
             }
         }
         return false;
@@ -2521,7 +2548,26 @@ public class ContactsListActivity extends ListActivity implements
             } else {
                 cache.nameView.setText(mUnknownNameText);
             }
-
+            
+            //Wysie: Contacts or Favourites mode, check preferences            
+            if (mContacts || mFavs) {
+                if ((mContacts && showContactsDialButton) || (mFavs && showFavsDialButton)) {
+                    mDisplayCallButton = true;
+                }                
+                else {
+                    mDisplayCallButton = false;
+                }
+                
+                /*
+                if ((mContacts && showContactsPic) || (mFavs && showFavsPic)) {
+                    mDisplayPhotos = true;
+                }
+                else {
+                    mDisplayPhotos = false;
+                }
+                */
+            }
+            
             // Make the call button visible if requested.
             if (mDisplayCallButton) {
                 int pos = cursor.getPosition();

@@ -418,6 +418,7 @@ public class ContactsListActivity extends ListActivity implements
     private static boolean showContactsPic;
     private static boolean showFavsDialButton;
     private static boolean showFavsPic;
+    private MenuItem mClearFreqCalled;
 
     static {
         sContactsIdMatcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -876,6 +877,7 @@ public class ContactsListActivity extends ListActivity implements
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.list, menu);
+        mClearFreqCalled = menu.findItem(R.id.menu_clear_freq_called);
         return true;
     }
 
@@ -883,6 +885,12 @@ public class ContactsListActivity extends ListActivity implements
     public boolean onPrepareOptionsMenu(Menu menu) {
         final boolean defaultMode = (mMode == MODE_DEFAULT);
         menu.findItem(R.id.menu_display_groups).setVisible(defaultMode);
+        if (mFavs && !ePrefs.getBoolean("favourites_hide_freq_called", false)) {       
+            mClearFreqCalled.setVisible(true);
+        }
+        else {
+   			mClearFreqCalled.setVisible(false);
+        }
         return true;
     }
 
@@ -915,8 +923,27 @@ public class ContactsListActivity extends ListActivity implements
                 startActivity(intent);
                 return true;
             }
+            //Wysie
+            case R.id.menu_clear_freq_called: {
+                if (ePrefs.getBoolean("favourites_ask_before_clear", false)) {
+            		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            		alert.setTitle(R.string.fav_clear_freq);
+            		alert.setMessage(R.string.alert_clear_freq_called_msg);
+            		alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int whichButton) {
+    					clearFrequentlyCalled();
+    				}});
+	    		    alert.show();
+            	}
+            	else {
+            		clearFrequentlyCalled();
+            	}            	
+            	return true;
+            }
+            //Wysie
             case R.id.menu_preferences: {
                 startActivity(new Intent(this, ContactsPreferences.class));
+                return true;
             }
         }
         return false;
@@ -1531,7 +1558,13 @@ public class ContactsListActivity extends ListActivity implements
                 return Contacts.CONTENT_URI;
             }
             case MODE_STREQUENT: {
-                return Contacts.CONTENT_STREQUENT_URI;
+                //Wysie: Return a different Uri if hide frequently called is enabled
+                if (ePrefs.getBoolean("favourites_hide_freq_called", false)) {
+                    return Contacts.CONTENT_URI;
+                }
+                else {
+                    return Contacts.CONTENT_STREQUENT_URI;
+                }
             }
             case MODE_LEGACY_PICK_PERSON:
             case MODE_LEGACY_PICK_OR_CREATE_PERSON: {
@@ -1821,7 +1854,17 @@ public class ContactsListActivity extends ListActivity implements
                 break;
 
             case MODE_STREQUENT:
-                mQueryHandler.startQuery(QUERY_TOKEN, null, uri, projection, null, null, null);
+                //Wysie: Query is different if hide_freq_called is enabled
+                if (ePrefs.getBoolean("favourites_hide_freq_called", false)) {
+                    mQueryHandler.startQuery(QUERY_TOKEN, null, uri,
+                            projection, Contacts.STARRED + "=1", null,
+                            getSortOrder(projection));
+                }
+            	else {
+	                mQueryHandler.startQuery(QUERY_TOKEN, null, uri, projection, null, null, null);
+        	    }
+        	    
+                //mQueryHandler.startQuery(QUERY_TOKEN, null, uri, projection, null, null, null);
                 break;
 
             case MODE_PICK_PHONE:
@@ -3007,6 +3050,20 @@ public class ContactsListActivity extends ListActivity implements
             }
 
             mHandler.clearImageFecthing();
+        }
+    }
+    
+    //Wysie: Method to clear frequently called                 
+    private void clearFrequentlyCalled() {
+	    ContentValues values = new ContentValues();
+	    values.put(Contacts.TIMES_CONTACTED, "0");
+	    final String[] PROJECTION = new String[] { Contacts._ID };
+	
+    	Cursor c = getContentResolver().query(Contacts.CONTENT_URI, PROJECTION, Contacts.TIMES_CONTACTED + " > 0", null, null); 	
+        if(c.moveToFirst()) {
+    		do {
+                getContentResolver().update(ContentUris.withAppendedId(Contacts.CONTENT_URI, c.getLong(0)), values, null, null);
+            } while(c.moveToNext());
         }
     }
 }

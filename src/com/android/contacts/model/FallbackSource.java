@@ -188,6 +188,7 @@ public class FallbackSource extends ContactsSource {
 
         if (inflateLevel >= ContactsSource.LEVEL_CONSTRAINTS) {
             kind.typeColumn = Phone.TYPE;
+            
             kind.typeList = Lists.newArrayList();
             kind.typeList.add(buildPhoneType(Phone.TYPE_HOME));
             kind.typeList.add(buildPhoneType(Phone.TYPE_MOBILE));
@@ -251,8 +252,12 @@ public class FallbackSource extends ContactsSource {
         if (kind == null) {
             kind = addKind(new DataKind(StructuredPostal.CONTENT_ITEM_TYPE,
                     R.string.postalLabelsGroup, R.drawable.sym_action_map, 25, true));
+                    
+            //Wysie: Add navigation icon as alternate
+            kind.iconAltRes = R.drawable.sym_action_navi;
+            
             kind.actionHeader = new PostalActionInflater();
-            kind.actionBody = new SimpleInflater(StructuredPostal.FORMATTED_ADDRESS);
+            kind.actionBody = new SimpleInflater(StructuredPostal.FORMATTED_ADDRESS);            
         }
 
         if (inflateLevel >= ContactsSource.LEVEL_CONSTRAINTS) {

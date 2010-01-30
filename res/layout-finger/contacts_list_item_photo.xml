@@ -76,18 +76,22 @@
 
             </LinearLayout>
         </LinearLayout>
-
+        
+        <!-- Wysie: Removed the following
+        android:layout_marginRight="8dip"
+        -->
         <android.widget.QuickContactBadge android:id="@+id/photo"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="8dip"
             style="@*android:style/Widget.QuickContactBadge.WindowMedium" />
         />
-
+        
+        <!-- Wysie: Removed the following
+        android:layout_marginRight="8dip"
+        -->
         <ImageView android:id="@+id/noQuickContactPhoto"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="8dip"
+            android:layout_centerVertical="true"            
             style="@*android:style/Widget.QuickContactBadge.WindowMedium"
             android:background="@null" />
         />
@@ -119,7 +123,10 @@
             android:ellipsize="marquee"
             android:textAppearance="?android:attr/textAppearanceSmall"
         />
-
+        
+        <!-- Wysie: Added the following
+        android:layout_marginLeft="8dip"
+        -->
         <TextView android:id="@+id/name"
             android:layout_width="0dip"
             android:layout_height="0dip"
@@ -128,6 +135,7 @@
             android:layout_alignParentTop="true"
             android:layout_above="@id/label"
             android:layout_alignWithParentIfMissing="true"
+            android:layout_marginLeft="8dip"
 
             android:singleLine="true"
             android:ellipsize="marquee"

@@ -418,6 +418,7 @@ public class ContactsListActivity extends ListActivity implements
     private static boolean showContactsPic;
     private static boolean showFavsDialButton;
     private static boolean showFavsPic;
+    private static boolean showDisplayHeaders;
     private MenuItem mClearFreqCalled;
 
     static {
@@ -777,6 +778,7 @@ public class ContactsListActivity extends ListActivity implements
         showContactsPic = ePrefs.getBoolean("contacts_show_pic", true);
         showFavsDialButton = ePrefs.getBoolean("favs_show_dial_button", true);
         showFavsPic = ePrefs.getBoolean("favs_show_pic", true);
+        showDisplayHeaders = ePrefs.getBoolean("contacts_show_alphabetical_separators", true);
 
         // Force cache to reload so we don't show stale photos.
         if (mAdapter.mBitmapCache != null) {
@@ -2240,7 +2242,8 @@ public class ContactsListActivity extends ListActivity implements
 
             if (mMode == MODE_STREQUENT || mMode == MODE_FREQUENT) {
                 mDisplaySectionHeaders = false;
-            }
+            }           
+
         }
 
         private class ImageFetchHandler extends Handler {
@@ -2460,6 +2463,12 @@ public class ContactsListActivity extends ListActivity implements
                 v = convertView;
             }
             bindView(v, mContext, cursor);
+            
+            //Wysie
+            if (mContacts) {
+                mDisplaySectionHeaders = showDisplayHeaders;                
+            }
+            
             bindSectionHeader(v, realPosition, mDisplaySectionHeaders && !showingSuggestion);
             return v;
         }
@@ -2601,14 +2610,12 @@ public class ContactsListActivity extends ListActivity implements
                     mDisplayCallButton = false;
                 }
                 
-                /*
                 if ((mContacts && showContactsPic) || (mFavs && showFavsPic)) {
                     mDisplayPhotos = true;
                 }
                 else {
                     mDisplayPhotos = false;
                 }
-                */
             }
             
             // Make the call button visible if requested.
@@ -2680,6 +2687,12 @@ public class ContactsListActivity extends ListActivity implements
                         }
                     }
                 }
+            }
+            else {
+                if (cache.photoView != null)
+                    cache.photoView.setVisibility(View.GONE);
+                if (cache.nonQuickContactPhotoView != null)
+                    cache.nonQuickContactPhotoView.setVisibility(View.GONE);
             }
 
             ImageView presenceView = cache.presenceView;

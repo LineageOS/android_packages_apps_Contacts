@@ -1390,24 +1390,24 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     
     //Wysie: Method to set digits colour
     private void setDigitsColor() {
-        int colorPressed = -16777216;
-        int colorFocused = -1;
-        int colorUnselected = -1;
+        int colorPressed = -1;
+        int colorFocused = -16777216;
+        int colorUnselected = -16777216;
         
         if (ePrefs.getBoolean("dial_digit_use_custom_color", false)) {
             try {
-                colorPressed = Color.parseColor(ePrefs.getString("pressed_digit_color_custom", "-16777216"));
-                colorFocused = Color.parseColor(ePrefs.getString("focused_digit_color_custom", "-1"));                
-                colorUnselected = Color.parseColor(ePrefs.getString("unselected_digit_color_custom", "-1"));
+                colorPressed = Color.parseColor(ePrefs.getString("pressed_digit_color_custom", "-1"));
+                colorFocused = Color.parseColor(ePrefs.getString("focused_digit_color_custom", "-16777216"));                
+                colorUnselected = Color.parseColor(ePrefs.getString("unselected_digit_color_custom", "-16777216"));
             }
             catch (IllegalArgumentException e) {
                 //Do nothing
             }            
         }
         else {
-            colorPressed = Integer.parseInt(ePrefs.getString("pressed_digit_color", "-16777216"));
-            colorFocused = Integer.parseInt(ePrefs.getString("focused_digit_color", "-1"));
-            colorUnselected = Integer.parseInt(ePrefs.getString("unselected_digit_color", "-1"));
+            colorPressed = Integer.parseInt(ePrefs.getString("pressed_digit_color", "-1"));
+            colorFocused = Integer.parseInt(ePrefs.getString("focused_digit_color", "-16777216"));
+            colorUnselected = Integer.parseInt(ePrefs.getString("unselected_digit_color", "-16777216"));
         }
     
         mDigits.setTextColor(new ColorStateList(

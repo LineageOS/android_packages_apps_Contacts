@@ -1195,10 +1195,7 @@ public class RecentCallsListActivity extends ListActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MENU_ITEM_DELETE_ALL: {
-                getContentResolver().delete(Calls.CONTENT_URI, null, null);
-                //TODO The change notification should do this automatically, but it isn't working
-                // right now. Remove this when the change notification is working properly.
-                startQuery();
+                clearCallLog();
                 return true;
             }
             case MENU_ITEM_DELETE_ALL_INCOMING: {

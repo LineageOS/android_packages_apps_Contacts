@@ -1339,7 +1339,7 @@ public class RecentCallsListActivity extends ListActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MENU_ITEM_DELETE_ALL: {
-                showDialog(DIALOG_CONFIRM_DELETE_ALL);
+                clearCallLog();
                 return true;
             }
             case MENU_ITEM_DELETE_ALL_INCOMING: {

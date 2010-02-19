@@ -709,12 +709,10 @@ public class RecentCallsListActivity extends ListActivity
             // time. For private and unknown numbers: hide it.
             views.callView.setVisibility(View.VISIBLE);           
 
-
             if (!TextUtils.isEmpty(name)) {
                 views.line1View.setText(name);
                 views.labelView.setVisibility(View.VISIBLE);
-                CharSequence numberLabel = Phone.getDisplayLabel(context, ntype, label,
-                        mLabelArray);
+                CharSequence numberLabel = Phone.getTypeLabel(context.getResources(), ntype, label);
                 views.numberView.setVisibility(View.VISIBLE);
                 views.numberView.setText(formattedNumber);
                 if (!TextUtils.isEmpty(numberLabel)) {

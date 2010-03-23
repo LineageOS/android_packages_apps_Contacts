@@ -2811,7 +2811,14 @@ public class ContactsListActivity extends ListActivity implements
                     } else {
                         mIndexer = getNewIndexer(cursor);
                     }
-                } else {
+                }
+                if (Locale.getDefault().equals(Locale.CHINA)) {
+                    if (mIndexer instanceof ChineseContactListIndexer) {
+                        ((ChineseContactListIndexer)mIndexer).setCursor(cursor);
+                    } else {
+                        mIndexer = getNewIndexer(cursor);
+                    }
+                }else {
                     if (mIndexer instanceof AlphabetIndexer) {
                         ((AlphabetIndexer)mIndexer).setCursor(cursor);
                     } else {

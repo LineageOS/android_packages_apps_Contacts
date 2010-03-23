@@ -32,7 +32,7 @@ import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.PhoneLookup;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.provider.Contacts.Intents.Insert;
+import android.provider.ContactsContract.Intents.Insert;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -209,7 +209,7 @@ public class CallDetailActivity extends ListActivity implements
                             callText = getString(R.string.recentCalls_callNumber,
                                     phonesCursor.getString(COLUMN_INDEX_NAME));
                             mNumber = phonesCursor.getString(COLUMN_INDEX_NUMBER);
-                            callLabel = Phone.getDisplayLabel(this,
+                            callLabel = Phone.getTypeLabel(this.getResources(),
                                     phonesCursor.getInt(COLUMN_INDEX_TYPE),
                                     phonesCursor.getString(COLUMN_INDEX_LABEL)).toString();
                         } else {

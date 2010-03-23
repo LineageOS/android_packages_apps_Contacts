@@ -66,7 +66,7 @@ import android.provider.Contacts.Phones;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Intents;
-import android.provider.ContactsContract.Presence;
+import android.provider.ContactsContract.StatusUpdates;
 import android.provider.ContactsContract.RawContacts;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -2702,7 +2702,7 @@ public class ContactsListActivity extends ListActivity implements
                 if (!cursor.isNull(SUMMARY_PRESENCE_STATUS_COLUMN_INDEX)) {
                     serverStatus = cursor.getInt(SUMMARY_PRESENCE_STATUS_COLUMN_INDEX);
                     presenceView.setImageResource(
-                            Presence.getPresenceIconResourceId(serverStatus));
+                            StatusUpdates.getPresenceIconResourceId(serverStatus));
                     presenceView.setVisibility(View.VISIBLE);
                 } else {
                     presenceView.setVisibility(View.GONE);

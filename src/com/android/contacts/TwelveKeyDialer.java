@@ -35,8 +35,8 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.os.Vibrator;
-import android.provider.Contacts.Intents.Insert;
-import android.provider.Contacts.People;
+import android.provider.ContactsContract.Intents.Insert;
+import android.provider.ContactsContract.Contacts;
 import android.provider.Contacts.Phones;
 import android.provider.Contacts.PhonesColumns;
 import android.provider.Settings;
@@ -326,7 +326,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
                     setFormattedDigits(data);
                 } else {
                     String type = intent.getType();
-                    if (People.CONTENT_ITEM_TYPE.equals(type)
+                    if (Contacts.CONTENT_ITEM_TYPE.equals(type)
                             || Phones.CONTENT_ITEM_TYPE.equals(type)) {
                         // Query the phone number
                         Cursor c = getContentResolver().query(intent.getData(),
@@ -1368,7 +1368,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     	// Put the current digits string into an intent
     	Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
     	intent.putExtra(Insert.PHONE, mDigits.getText().toString());
-    	intent.setType(People.CONTENT_ITEM_TYPE);
+    	intent.setType(Contacts.CONTENT_ITEM_TYPE);
     	startActivity(intent);
     }
     

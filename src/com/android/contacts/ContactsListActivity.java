@@ -16,7 +16,7 @@
 
 package com.android.contacts;
 
-import com.android.contacts.model.ContactsSource;
+import com.android.contacts.model.ContactsSource;  
 import com.android.contacts.model.Sources;
 import com.android.contacts.ui.DisplayGroupsActivity;
 import com.android.contacts.ui.DisplayGroupsActivity.Prefs;

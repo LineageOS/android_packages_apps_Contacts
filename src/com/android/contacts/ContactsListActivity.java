@@ -16,7 +16,7 @@
 
 package com.android.contacts;
 
-import com.android.contacts.model.ContactsSource;
+import com.android.contacts.model.ContactsSource;  
 import com.android.contacts.model.Sources;
 import com.android.contacts.ui.DisplayGroupsActivity;
 import com.android.contacts.ui.DisplayGroupsActivity.Prefs;
@@ -2353,11 +2353,14 @@ public class ContactsListActivity extends ListActivity implements
         }
 
         private SectionIndexer getNewIndexer(Cursor cursor) {
-            /* if (Locale.getDefault().getLanguage().equals(Locale.JAPAN.getLanguage())) {
+             if (Locale.getDefault().getLanguage().equals(Locale.JAPAN.getLanguage())) {
                 return new JapaneseContactListIndexer(cursor, SORT_STRING_INDEX);
-            } else { */
+             } else if (Locale.getDefault().getLanguage().equals(Locale.CHINA.getLanguage())) {
+            	 return new ChineseContactListIndexer(cursor, SORT_STRING_INDEX);
+             }
+             else {
                 return new AlphabetIndexer(cursor, SUMMARY_NAME_COLUMN_INDEX, mAlphabet);
-            /* } */
+             } 
         }
 
         /**
@@ -2811,7 +2814,14 @@ public class ContactsListActivity extends ListActivity implements
                     } else {
                         mIndexer = getNewIndexer(cursor);
                     }
-                } else {
+                }
+                if (Locale.getDefault().equals(Locale.CHINA)) {
+                    if (mIndexer instanceof ChineseContactListIndexer) {
+                        ((ChineseContactListIndexer)mIndexer).setCursor(cursor);
+                    } else {
+                        mIndexer = getNewIndexer(cursor);
+                    }
+                }else {
                     if (mIndexer instanceof AlphabetIndexer) {
                         ((AlphabetIndexer)mIndexer).setCursor(cursor);
                     } else {

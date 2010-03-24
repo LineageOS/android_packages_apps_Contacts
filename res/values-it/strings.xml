@@ -444,15 +444,15 @@
 
     <!-- Preferences: Dialer -->
     <string name="title_last_dialled">Ricomponi ultimo numero</string>
-    <string name="summary_last_dialled">Se i numeri sono vuoti viene ricomposto l\'ultimo numero chiamato</string>
+    <string name="summary_last_dialled">Premendo il tasto chiama viene ricomposto l\'ultimo numero chiamato</string>
     <string name="title_return_to_dialer">Torna al dialer dopo chiamata</string>
     <string name="title_vm_button">Pulsante azione sx (LAB)</string>
     <string name="title_vm_handler">Gestore Voicemail</string>
-    <string name="title_use_1_for_reg_vm">1 per regolare voicemail</string>
-    <string name="summaryon_use_1_for_reg_vm">Il tasto 1 sarà usato per gestire voicemail</string>
+    <string name="title_use_1_for_reg_vm">Tasto 1 per Voicemail</string>
+    <string name="summaryon_use_1_for_reg_vm">Il tasto 1 verrà usato per la voicemail di default</string>
     <string name="summaryoff_use_1_for_reg_vm">Il tasto 1 avvia gestore voicemail</string>
-    <string name="title_disable_num_check">Disabilita controllo num</string>
-    <string name="summaryon_disable_num_check">Il pulsante azione sinistro(LAB) e il menu saranno abilitati</string>
+    <string name="title_disable_num_check">Disabilita controllo num.</string>
+    <string name="summaryon_disable_num_check">Il pulsante azione sinistro(LAB) e il menu verranno abilitati</string>
     <string name="summaryoff_disable_num_check">LAB e menu attivi solo se l\'ultimo num è stato digitato (tranne voicemail)</string>
     <string name="title_enable_haptic_feedback">Abilita feedback aptico</string>
     <string name="title_change_digits_color">Cambia colore numeri</string>
@@ -471,7 +471,7 @@
     <string name="summary_cl_show_seconds">Visualizza i secondi quando utilizzi il tempo esatto</string>
     <string name="title_cl_ask_before_clear">Conferma cancellazione</string>
     <string name="summaryon_cl_ask_before_clear">Chiedi prima di cancellare il registro chiamate</string>
-    <string name="summaryoff_cl_ask_before_clear">Se selezionato il registro chiamate verrà cancellato senza chiedere</string>
+    <string name="summaryoff_cl_ask_before_clear">Se selezionato il registro chiamate verrà cancellato senza chiedere conferma</string>
 
     <!-- Preferences: Contacts -->
     <string name="title_contacts_show_pic">Mostra icone contatti</string>

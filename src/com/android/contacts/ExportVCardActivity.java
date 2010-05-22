@@ -102,8 +102,8 @@ public class ExportVCardActivity extends Activity {
         public void onClick(DialogInterface dialog, int which) {
             if (which == DialogInterface.BUTTON_POSITIVE) {
                 mActualExportThread = new ActualExportThread(mFileName);
-                mActualExportThread.start();
                 showDialog(R.id.dialog_exporting_vcard);
+                mActualExportThread.start();
             }
         }
     }

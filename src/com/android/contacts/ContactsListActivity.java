@@ -2017,58 +2017,31 @@ public class ContactsListActivity extends ListActivity implements
                 return false;
             }
 
-            String phone = null;
-            Cursor phonesCursor = null;
-            phonesCursor = queryPhoneNumbers(cursor.getLong(SUMMARY_ID_COLUMN_INDEX));
-            if (phonesCursor == null || phonesCursor.getCount() == 0) {
-                // No valid number
+	    long contactId = cursor.getLong(SUMMARY_ID_COLUMN_INDEX);
+	    if(!ContactsUtils.callOrSmsContact(contactId, this, sendSms)) {
                 signalError();
                 return false;
-            } else if (phonesCursor.getCount() == 1) {
-                // only one number, call it.
-                phone = phonesCursor.getString(phonesCursor.getColumnIndex(Phone.NUMBER));
-            } else {
-                phonesCursor.moveToPosition(-1);
-                while (phonesCursor.moveToNext()) {
-                    if (phonesCursor.getInt(phonesCursor.
-                            getColumnIndex(Phone.IS_SUPER_PRIMARY)) != 0) {
-                        // Found super primary, call it.
-                        phone = phonesCursor.
-                                getString(phonesCursor.getColumnIndex(Phone.NUMBER));
-                        break;
-                    }
-                }
-            }
-
-            if (phone == null) {
-                // Display dialog to choose a number to call.
-                PhoneDisambigDialog phoneDialog = new PhoneDisambigDialog(
-                        this, phonesCursor, sendSms);
-                phoneDialog.show();
-            } else {
-                if (sendSms) {
-                    ContactsUtils.initiateSms(this, phone);
-                } else {
-                    ContactsUtils.initiateCall(this, phone);
-                }
             }
             return true;
-        }
-
-        return false;
+	}
+	return false;
     }
 
-    private Cursor queryPhoneNumbers(long contactId) {
+    private Cursor queryPhoneNumbers(ContentResolver resolver, long contactId) {
         Uri baseUri = ContentUris.withAppendedId(Contacts.CONTENT_URI, contactId);
         Uri dataUri = Uri.withAppendedPath(baseUri, Contacts.Data.CONTENT_DIRECTORY);
 
-        Cursor c = getContentResolver().query(dataUri,
+        Cursor c = resolver.query(dataUri,
                 new String[] {Phone._ID, Phone.NUMBER, Phone.IS_SUPER_PRIMARY},
                 Data.MIMETYPE + "=?", new String[] {Phone.CONTENT_ITEM_TYPE}, null);
         if (c != null && c.moveToFirst()) {
             return c;
         }
         return null;
+    }
+
+    private Cursor queryPhoneNumbers(long contactId) {
+        return ContactsUtils.queryPhoneNumbers(getContentResolver(), contactId);
     }
 
     /**

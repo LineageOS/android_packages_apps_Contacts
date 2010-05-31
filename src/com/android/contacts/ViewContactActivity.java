@@ -722,13 +722,12 @@ public class ViewContactActivity extends Activity
                         startActivity(entry.intent);
                     }
                 } else if (mNumPhoneNumbers != 0) {
-                    // There isn't anything selected, call the default number
+                    // There isn't anything selected; pick the correct number to dial.
                     long freshContactId = getRefreshedContactId();
-                    if (freshContactId > 0) {
-                        Uri hardContacUri = ContentUris.withAppendedId(
-                                Contacts.CONTENT_URI, freshContactId);
-                        Intent intent = new Intent(Intent.ACTION_CALL_PRIVILEGED, hardContacUri);
-                        startActivity(intent);
+
+                    if(!ContactsUtils.callOrSmsContact(freshContactId, this, false)) {
+                        signalError();
+                        return false;
                     }
                 }
                 return true;

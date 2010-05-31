@@ -2691,7 +2691,6 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
                 }
                 return true;
             }
-
             case MODE_PICK_POSTAL:
             case MODE_LEGACY_PICK_POSTAL: {
                 return false;
@@ -2746,7 +2745,7 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
         return true;
     }
 
-    private Cursor queryPhoneNumbers(long contactId) {
+    private Cursor queryPhoneNumbers(ContentResolver resolver, long contactId) {
         Uri baseUri = ContentUris.withAppendedId(Contacts.CONTENT_URI, contactId);
         Uri dataUri = Uri.withAppendedPath(baseUri, Contacts.Data.CONTENT_DIRECTORY);
 
@@ -2768,6 +2767,9 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
             String format = getResources().getQuantityText(pluralResourceId, count).toString();
             return String.format(format, count);
         }
+    }
+    private Cursor queryPhoneNumbers(long contactId) {
+        return ContactsUtils.queryPhoneNumbers(getContentResolver(), contactId);
     }
 
     /**

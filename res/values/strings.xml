@@ -1134,4 +1134,99 @@
 
     <!-- Title shown in the search result activity of contacts app while searching -->
     <string name="search_results_searching">Searching...</string>
+    
+    <!-- Wysie: Menu strings -->
+    <string name="menu_preferences">Preferences</string>
+    
+    <!-- Wysie: Dialer strings -->
+    <string name="dialer_menu_sms">SMS/MMS</string>
+    
+    <!-- Wysie: Call log strings -->
+    <string name="recent_calls_clear_call_log">Clear call log</string>
+    <string name="recent_calls_clear_what">Clear what?</string>
+    <string name="recent_calls_clear_all">All</string>
+    <string name="recent_calls_clear_incoming">Incoming</string>
+    <string name="recent_calls_clear_outgoing">Outgoing</string>
+    <string name="recent_calls_clear_missed">Missed</string>
+    <string name="alert_clear_call_log_title">Clear call log</string>
+    <string name="alert_clear_call_log_message">Are you sure you want to clear all call records?</string>
+    <string name="alert_clear_cl_all_incoming">Are you sure you want to clear all incoming call records?</string>
+    <string name="alert_clear_cl_all_outgoing">Are you sure you want to clear all outgoing call records?</string>
+    <string name="alert_clear_cl_all_missed">Are you sure you want to clear all missed call records?</string>
+    
+    <!-- Wysie: Favourites strings -->
+    <string name="fav_clear_freq">Clear frequently called</string>
+    <string name="alert_clear_freq_called_msg">Are you sure you want to clear all frequently called entries?</string>
+    
+    <!-- Wysie: Preferences strings -->
+    
+    <!-- Preferences: Dialer -->
+    <string name="title_last_dialled">Call button retrieves last dialled number</string>
+    <string name="summary_last_dialled">Last dialled number will be retrieved if digits are empty</string>
+    <string name="title_return_to_dialer">Return to dialer after call</string>
+    <string name="title_vm_button">Left action button (LAB)</string>
+    <string name="title_vm_handler">Voicemail handler</string>
+    <string name="title_use_1_for_reg_vm">Use 1 for regular voicemail</string>
+    <string name="summaryon_use_1_for_reg_vm">Key 1 will be used for regular voicemail</string>
+    <string name="summaryoff_use_1_for_reg_vm">Key 1 will follow voicemail handler</string>
+    <string name="title_disable_num_check">Disable number checks</string>
+    <string name="summaryon_disable_num_check">Left action button (LAB) and menu will always be enabled</string>
+    <string name="summaryoff_disable_num_check">LAB and menu will be enabled only if at least one number is entered (except voicemail)</string>
+    <string name="title_enable_haptic_feedback">Enable haptic feedback</string>
+    <string name="title_change_digits_color">Change digits color</string>
+    <string name="title_digits_color_pressed">Digits color (pressed)</string>
+    <string name="title_digits_color_focused">Digits color (focused)</string>
+    <string name="title_digits_color_unselected">Digits color (not selected)</string>
+    <string name="title_choose_color">Choose a color</string>
+    <string name="instructions_choose_color">Tap on center color to confirm.\nPress back to cancel.</string>
+    <string name="entry_no_vm_handler">None (Dial Voicemail Number)</string>
+    
+    <!-- Preferences: Call log -->
+    <string name="title_cl_exact_time">Exact times</string>
+    <string name="summaryon_cl_exact_time">Use exact times in call log</string>
+    <string name="summaryoff_cl_exact_time">Use relative times in call log</string>
+    <string name="title_cl_show_seconds">Show seconds</string>
+    <string name="summary_cl_show_seconds">Show seconds when using exact times</string>          
+    <string name="title_cl_ask_before_clear">Ask before clearing</string>
+    <string name="summaryon_cl_ask_before_clear">Ask before clearing call log</string>
+    <string name="summaryoff_cl_ask_before_clear">Call logs will be cleared without asking</string>
+    
+    <!-- Preferences: Contacts -->
+    <string name="title_contacts_show_pic">Show contact pictures</string>
+    <string name="title_contacts_show_dial_button">Show dial button</string>
+    <string name="summary_contacts_show_dial_button">Show a dial button for contacts with numbers</string>
+    <string name="title_contacts_show_count">Show contacts count</string>
+    <string name="summary_contacts_show_count">Contacts count will be shown at the top of the contacts list</string>
+    <string name="title_contacts_show_separators">Show alphabetical separators</string>
+    <string name="summaryon_contacts_show_separators">Alphabetical separators will be shown in the contacts list</string>
+    <string name="summaryoff_contacts_show_separators">Alphabetical separators will be hidden in the contacts list</string>
+    
+    <!-- Preferences: Contacts - View Contact -->
+    <string name="title_view_contact">View contact</string>
+    <string name="summary_view_contact">Set preferences when viewing an individual contact</string>
+    <string name="title_show_text_mobile_only">Text action for mobile only</string>
+    <string name="summaryon_show_text_mobile_only">Only mobile numbers will have a text/sms action</string>
+    <string name="summaryoff_show_text_mobile_only">All numbers will have a text/sms action</string>
+    
+    <!-- Preferences: Favourites -->
+    <string name="title_favourites_hide_freq_call">Hide frequently called</string>
+    <string name="summary_favourites_hide_freq_call">The actual data is not cleared, but hidden.</string>
+    <string name="title_favs_ask_before_clear">Ask before clearing</string>
+    <string name="summaryon_favs_ask_before_clear">Ask before clearing frequently called</string>
+    <string name="summaryoff_favs_ask_before_clear">Frequently called entries will be cleared without asking</string>
+    
+    <!-- Preferences: Misc -->
+    <string name="title_misc_category">Miscellaneous</string>
+    <string name="title_sensor_rotation">Enable sensor rotation</string>
+    <string name="summary_sensor_rotation">If enabled, it will rotate based on system\'s settings"</string>
+    
+    <!-- Wysie: About strings -->    
+    <string name="title_about">About</string>
+    <string name="title_about_name">Mod Name</string>
+    <string name="summary_about_name">WyContacts Froyo</string>
+    <string name="title_about_version">Version</string>
+    <string name="summary_about_version">1.2</string>
+    <string name="title_about_credits">Credits</string>
+    <string name="summary_about_credits">ChainsDD, geesun, niuchl, rac2030, sileht and the rest of XDA! :)</string>
+    
 </resources>

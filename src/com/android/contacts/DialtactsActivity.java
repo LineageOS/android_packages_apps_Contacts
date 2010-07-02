@@ -32,6 +32,11 @@ import android.util.Log;
 import android.view.Window;
 import android.widget.TabHost;
 
+//Wysie
+import android.content.pm.ActivityInfo;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 /**
  * The dialer activity that has one tab with the virtual 12key
  * dialer, a tab with recent calls in it, a tab with the contacts and
@@ -68,6 +73,9 @@ public class DialtactsActivity extends TabActivity implements TabHost.OnTabChang
     private TabHost mTabHost;
     private String mFilterText;
     private Uri mDialUri;
+    
+    //Wysie
+    private SharedPreferences ePrefs;
 
     /**
      * The index of the tab that has last been manually selected (the user clicked on a tab).
@@ -78,6 +86,8 @@ public class DialtactsActivity extends TabActivity implements TabHost.OnTabChang
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        
+        ePrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         final Intent intent = getIntent();
         fixIntent(intent);
@@ -88,8 +98,27 @@ public class DialtactsActivity extends TabActivity implements TabHost.OnTabChang
         mTabHost = getTabHost();
         mTabHost.setOnTabChangedListener(this);
 
+        String componentName = intent.getComponent().getClassName();
+	/* If intent is to view the Contacts List, prevent Dialer tab
+	 * from being set as current tab.
+	 */
+        if (!getClass().getName().equals(componentName) &&
+	    !FAVORITES_ENTRY_COMPONENT.equals(componentName)) {
+            mTabHost.setAvoidFirstTabLoad(true);
+	}
+
         // Setup the tabs
         setupDialerTab();
+
+	/* If intent is to view the Contacts List, restore the state of mTabhost so
+	 * that the rest of the application semantics remains unchanged.
+	 */
+        if (!getClass().getName().equals(componentName) &&
+	    !FAVORITES_ENTRY_COMPONENT.equals(componentName)) {
+	    mTabHost.setCurrentTabToZero();
+	    mTabHost.setAvoidFirstTabLoad(false);
+	}
+
         setupCallLogTab();
         setupContactsTab();
         setupFavoritesTab();
@@ -104,6 +133,21 @@ public class DialtactsActivity extends TabActivity implements TabHost.OnTabChang
         if (intent.getAction().equals(UI.FILTER_CONTACTS_ACTION)
                 && icicle == null) {
             setupFilterText(intent);
+        }        
+
+    }
+    
+    //Wysie
+    @Override
+    protected void onResume() {
+        super.onResume();
+        
+        //Wysie: Set rotation if necessary
+        if(ePrefs.getBoolean("misc_sensor_rotation", false)) {
+            this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        }
+        else {
+        	this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         }
     }
 

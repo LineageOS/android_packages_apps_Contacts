@@ -17,7 +17,7 @@
 package com.android.contacts;
 
 import com.android.contacts.TextHighlightingAnimation.TextWithHighlighting;
-import com.android.contacts.model.ContactsSource;
+import com.android.contacts.model.ContactsSource;  
 import com.android.contacts.model.Sources;
 import com.android.contacts.ui.ContactsPreferences;
 import com.android.contacts.ui.ContactsPreferencesActivity;
@@ -60,6 +60,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.net.Uri.Builder;
 import android.os.Bundle;
+import android.os.Message;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.os.RemoteException;
@@ -111,8 +112,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AlphabetIndexer;
 import android.widget.Button;
-import android.widget.CursorAdapter;
+import android.widget.ResourceCursorAdapter;
 import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -122,10 +124,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AbsListView.OnScrollListener;
 
+import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+//Wysie
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
+/*TODO(emillar) I commented most of the code that deals with modes and filtering. It should be
+ * brought back in as we add back that functionality.
+ */
 
 /**
  * Displays a list of contacts. Usually is embedded into the ContactsActivity.
@@ -221,7 +237,7 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
     /** Unknown mode */
     static final int MODE_UNKNOWN = 0;
     /** Default mode */
-    static final int MODE_DEFAULT = 4 | MODE_MASK_SHOW_PHOTOS | MODE_MASK_SHOW_NUMBER_OF_CONTACTS;
+    static final int MODE_DEFAULT = 4 | MODE_MASK_SHOW_PHOTOS | MODE_MASK_SHOW_NUMBER_OF_CONTACTS | MODE_MASK_SHOW_CALL_BUTTON;
     /** Custom mode */
     static final int MODE_CUSTOM = 8;
     /** Show all starred contacts */
@@ -357,6 +373,7 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
     static final int SUMMARY_SNIPPET_DATA1_COLUMN_INDEX = 12;
     static final int SUMMARY_SNIPPET_DATA4_COLUMN_INDEX = 13;
 
+
     static final String[] PHONES_PROJECTION = new String[] {
         Phone._ID, //0
         Phone.TYPE, //1
@@ -479,6 +496,18 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
     final String[] sLookupProjection = new String[] {
             Contacts.LOOKUP_KEY
     };
+    private static ExecutorService sImageFetchThreadPool;
+
+    //Wysie
+    private boolean mContacts = false;
+    private boolean mFavs = false;
+    private SharedPreferences ePrefs;
+    private static boolean showContactsDialButton;
+    private static boolean showContactsPic;
+    private static boolean showFavsDialButton;
+    private static boolean showFavsPic;
+    private static boolean showDisplayHeaders;
+    private MenuItem mClearFreqCalled;
 
     static {
         sContactsIdMatcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -561,6 +590,9 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
+        //Wysie
+        ePrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
         mIconSize = getResources().getDimensionPixelSize(android.R.dimen.app_icon_size);
         mContactsPrefs = new ContactsPreferences(this);
         mPhotoLoader = new ContactPhotoLoader(this, R.drawable.ic_contact_list_picture);
@@ -605,6 +637,7 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
         mMode = MODE_UNKNOWN;
         if (UI.LIST_DEFAULT.equals(action) || UI.FILTER_CONTACTS_ACTION.equals(action)) {
             mMode = MODE_DEFAULT;
+            mContacts = true;
             // When mDefaultMode is true the mode is set in onResume(), since the preferneces
             // activity may change it whenever this activity isn't running
         } else if (UI.LIST_GROUP_ACTION.equals(action)) {
@@ -624,6 +657,7 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
             mMode = mSearchMode ? MODE_DEFAULT : MODE_FREQUENT;
         } else if (UI.LIST_STREQUENT_ACTION.equals(action)) {
             mMode = mSearchMode ? MODE_DEFAULT : MODE_STREQUENT;
+            mFavs = true;
         } else if (UI.LIST_CONTACTS_WITH_PHONES_ACTION.equals(action)) {
             mMode = MODE_CUSTOM;
             mDisplayOnlyPhones = true;
@@ -802,6 +836,7 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
 
         if (mMode == MODE_UNKNOWN) {
             mMode = MODE_DEFAULT;
+            mContacts = true;
         }
 
         if (((mMode & MODE_MASK_SHOW_NUMBER_OF_CONTACTS) != 0 || mSearchMode)
@@ -1033,6 +1068,12 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
     protected void onResume() {
         super.onResume();
 
+        showContactsDialButton = ePrefs.getBoolean("contacts_show_dial_button", true);
+        showContactsPic = ePrefs.getBoolean("contacts_show_pic", true);
+        showFavsDialButton = ePrefs.getBoolean("favs_show_dial_button", true);
+        showFavsPic = ePrefs.getBoolean("favs_show_pic", true);
+        showDisplayHeaders = ePrefs.getBoolean("contacts_show_alphabetical_separators", true);
+
         registerProviderStatusObserver();
         mPhotoLoader.resume();
 
@@ -1227,6 +1268,7 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.list, menu);
+        mClearFreqCalled = menu.findItem(R.id.menu_clear_freq_called);
         return true;
     }
 
@@ -1234,6 +1276,12 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
     public boolean onPrepareOptionsMenu(Menu menu) {
         final boolean defaultMode = (mMode == MODE_DEFAULT);
         menu.findItem(R.id.menu_display_groups).setVisible(defaultMode);
+        if (mFavs && !ePrefs.getBoolean("favourites_hide_freq_called", false)) {       
+            mClearFreqCalled.setVisible(true);
+        }
+        else {
+   			mClearFreqCalled.setVisible(false);
+        }
         return true;
     }
 
@@ -1264,6 +1312,29 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
                     ContactsContract.AUTHORITY
                 });
                 startActivity(intent);
+                return true;
+            }
+            //Wysie
+            case R.id.menu_clear_freq_called: {
+                if (ePrefs.getBoolean("favourites_ask_before_clear", false)) {
+            		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            		alert.setTitle(R.string.fav_clear_freq);
+            		alert.setMessage(R.string.alert_clear_freq_called_msg);
+            		alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int whichButton) {
+    					clearFrequentlyCalled();
+    				}});
+	    		    alert.show();
+            	}
+            	else {
+            		clearFrequentlyCalled();
+            	}            	
+            	return true;
+            }
+            //Wysie
+            case R.id.menu_preferences: {
+                //Use full classpath due tu duplicate classname
+                startActivity(new Intent(this, com.android.contacts.ContactsPreferences.class));
                 return true;
             }
         }
@@ -2094,7 +2165,13 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
                 return CONTACTS_CONTENT_URI_WITH_LETTER_COUNTS;
             }
             case MODE_STREQUENT: {
-                return Contacts.CONTENT_STREQUENT_URI;
+                //Wysie: Return a different Uri if hide frequently called is enabled
+                if (ePrefs.getBoolean("favourites_hide_freq_called", false)) {
+                    return Contacts.CONTENT_URI;
+                }
+                else {
+                    return Contacts.CONTENT_STREQUENT_URI;
+                }
             }
             case MODE_LEGACY_PICK_PERSON:
             case MODE_LEGACY_PICK_OR_CREATE_PERSON: {
@@ -2451,7 +2528,17 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
                 break;
 
             case MODE_STREQUENT:
-                mQueryHandler.startQuery(QUERY_TOKEN, null, uri, projection, null, null, null);
+                //Wysie: Query is different if hide_freq_called is enabled
+                if (ePrefs.getBoolean("favourites_hide_freq_called", false)) {
+                    mQueryHandler.startQuery(QUERY_TOKEN, null, uri,
+                            projection, Contacts.STARRED + "=1", null,
+                            getSortOrder(projection));
+                }
+            	else {
+	                mQueryHandler.startQuery(QUERY_TOKEN, null, uri, projection, null, null, null);
+        	    }
+        	    
+                //mQueryHandler.startQuery(QUERY_TOKEN, null, uri, projection, null, null, null);
                 break;
 
             case MODE_PICK_PHONE:
@@ -2612,7 +2699,6 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
                 }
                 return true;
             }
-
             case MODE_PICK_POSTAL:
             case MODE_LEGACY_PICK_POSTAL: {
                 return false;
@@ -2667,7 +2753,7 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
         return true;
     }
 
-    private Cursor queryPhoneNumbers(long contactId) {
+    private Cursor queryPhoneNumbers(ContentResolver resolver, long contactId) {
         Uri baseUri = ContentUris.withAppendedId(Contacts.CONTENT_URI, contactId);
         Uri dataUri = Uri.withAppendedPath(baseUri, Contacts.Data.CONTENT_DIRECTORY);
 
@@ -2689,6 +2775,9 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
             String format = getResources().getQuantityText(pluralResourceId, count).toString();
             return String.format(format, count);
         }
+    }
+    private Cursor queryPhoneNumbers(long contactId) {
+        return ContactsUtils.queryPhoneNumbers(getContentResolver(), contactId);
     }
 
     /**
@@ -2766,11 +2855,34 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
     }
 
     final static class ContactListItemCache {
+        public View header;
+        public TextView headerText;
+        public View divider;
+        public TextView nameView;
+        public View callView;
+        public ImageView callButton;
         public CharArrayBuffer nameBuffer = new CharArrayBuffer(128);
+        public TextView labelView;
+        public CharArrayBuffer labelBuffer = new CharArrayBuffer(128);
+        public TextView dataView;
         public CharArrayBuffer dataBuffer = new CharArrayBuffer(128);
+        public ImageView presenceView;
+        public QuickContactBadge photoView;
+        public ImageView nonQuickContactPhotoView;
         public CharArrayBuffer highlightedTextBuffer = new CharArrayBuffer(128);
         public TextWithHighlighting textWithHighlighting;
         public CharArrayBuffer phoneticNameBuffer = new CharArrayBuffer(128);
+    }
+
+    final static class PhotoInfo {
+        public int position;
+        public long photoId;
+
+        public PhotoInfo(int position, long photoId) {
+            this.position = position;
+            this.photoId = photoId;
+        }
+        public QuickContactBadge photoView;
     }
 
     final static class PinnedHeaderCache {
@@ -2779,21 +2891,30 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
         public Drawable background;
     }
 
-    private final class ContactItemListAdapter extends CursorAdapter
+    private final class ContactItemListAdapter extends ResourceCursorAdapter
             implements SectionIndexer, OnScrollListener, PinnedHeaderListView.PinnedHeaderAdapter {
         private SectionIndexer mIndexer;
+        private String mAlphabet;
         private boolean mLoading = true;
         private CharSequence mUnknownNameText;
         private boolean mDisplayPhotos = false;
         private boolean mDisplayCallButton = false;
         private boolean mDisplayAdditionalData = true;
+        private HashMap<Long, SoftReference<Bitmap>> mBitmapCache = null;
+        private HashSet<ImageView> mItemsMissingImages = null;
         private int mFrequentSeparatorPos = ListView.INVALID_POSITION;
         private boolean mDisplaySectionHeaders = true;
         private Cursor mSuggestionsCursor;
         private int mSuggestionsCursorCount;
+        private ImageFetchHandler mHandler;
+        private static final int FETCH_IMAGE_MSG = 1;
+
 
         public ContactItemListAdapter(Context context) {
-            super(context, null, false);
+            super(context, R.layout.contacts_list_item, null, false);
+
+            mHandler = new ImageFetchHandler();
+            mAlphabet = context.getString(com.android.internal.R.string.fast_scroll_alphabet);
 
             mUnknownNameText = context.getText(android.R.string.unknownName);
             switch (mMode) {
@@ -2829,6 +2950,68 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
 
             if ((mMode & MODE_MASK_SHOW_PHOTOS) == MODE_MASK_SHOW_PHOTOS) {
                 mDisplayPhotos = true;
+                setViewResource(R.layout.contacts_list_item_photo);
+                mBitmapCache = new HashMap<Long, SoftReference<Bitmap>>();
+                mItemsMissingImages = new HashSet<ImageView>();
+            }
+
+            if (mMode == MODE_STREQUENT || mMode == MODE_FREQUENT) {
+                mDisplaySectionHeaders = false;
+            }           
+
+        }
+
+        private class ImageFetchHandler extends Handler {
+
+            @Override
+            public void handleMessage(Message message) {
+                if (ContactsListActivity.this.isFinishing()) {
+                    return;
+                }
+                switch(message.what) {
+                    case FETCH_IMAGE_MSG: {
+                        final ImageView imageView = (ImageView) message.obj;
+                        if (imageView == null) {
+                            break;
+                        }
+
+                        final PhotoInfo info = (PhotoInfo)imageView.getTag();
+                        if (info == null) {
+                            break;
+                        }
+
+                        final long photoId = info.photoId;
+                        if (photoId == 0) {
+                            break;
+                        }
+
+                        SoftReference<Bitmap> photoRef = mBitmapCache.get(photoId);
+                        if (photoRef == null) {
+                            break;
+                        }
+                        Bitmap photo = photoRef.get();
+                        if (photo == null) {
+                            mBitmapCache.remove(photoId);
+                            break;
+                        }
+
+                        // Make sure the photoId on this image view has not changed
+                        // while we were loading the image.
+                        synchronized (imageView) {
+                            final PhotoInfo updatedInfo = (PhotoInfo)imageView.getTag();
+                            long currentPhotoId = updatedInfo.photoId;
+                            if (currentPhotoId == photoId) {
+                                imageView.setImageBitmap(photo);
+                                mItemsMissingImages.remove(imageView);
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+
+            public void clearImageFecthing() {
+                removeMessages(FETCH_IMAGE_MSG);
             }
         }
 
@@ -2842,6 +3025,14 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
             }
             mSuggestionsCursor = cursor;
             mSuggestionsCursorCount = cursor == null ? 0 : cursor.getCount();
+        }
+
+        private SectionIndexer getNewIndexer(Cursor cursor) {
+            /* if (Locale.getDefault().getLanguage().equals(Locale.JAPAN.getLanguage())) {
+                return new JapaneseContactListIndexer(cursor, SORT_STRING_INDEX);
+            } else { */
+                return new AlphabetIndexer(cursor, getSummaryDisplayNameColumnIndex(), mAlphabet);
+            /* } */
         }
 
         /**
@@ -2971,6 +3162,12 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
                 v = convertView;
             }
             bindView(v, mContext, cursor);
+            
+            //Wysie
+            if (mContacts) {
+                mDisplaySectionHeaders = showDisplayHeaders;                
+            }
+            
             bindSectionHeader(v, realPosition, mDisplaySectionHeaders && !showingSuggestion);
             return v;
         }
@@ -3106,6 +3303,23 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
             boolean hasPhone = cursor.getColumnCount() >= SUMMARY_HAS_PHONE_COLUMN_INDEX
                     && cursor.getInt(SUMMARY_HAS_PHONE_COLUMN_INDEX) != 0;
 
+
+            //Wysie: Contacts or Favourites mode, check preferences
+            if (mContacts || mFavs) {
+                if ((mContacts && showContactsDialButton) || (mFavs && showFavsDialButton)) {
+                    mDisplayCallButton = true;
+                }
+                else {
+                    mDisplayCallButton = false;
+                }
+                if ((mContacts && showContactsPic) || (mFavs && showFavsPic)) {
+                    mDisplayPhotos = true;
+                }
+                else {
+                    mDisplayPhotos = false;
+                }
+            }
+
             // Make the call button visible if requested.
             if (mDisplayCallButton && hasPhone) {
                 int pos = cursor.getPosition();
@@ -3137,6 +3351,12 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
 
                 final int position = cursor.getPosition();
                 mPhotoLoader.loadPhoto(viewToUse, photoId);
+            }
+            else {
+                if (cache.photoView != null)
+                    cache.photoView.setVisibility(View.GONE);
+                if (cache.nonQuickContactPhotoView != null)
+                    cache.nonQuickContactPhotoView.setVisibility(View.GONE);
             }
 
             if ((mMode & MODE_MASK_NO_PRESENCE) == 0) {
@@ -3315,11 +3535,26 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
         }
 
         private void updateIndexer(Cursor cursor) {
-            if (cursor == null) {
-                mIndexer = null;
-                return;
+            if (mIndexer == null) {
+                mIndexer = getNewIndexer(cursor);
+            } else {
+                /*
+                if (Locale.getDefault().equals(Locale.JAPAN)) {
+                    if (mIndexer instanceof JapaneseContactListIndexer) {
+                        ((JapaneseContactListIndexer)mIndexer).setCursor(cursor);
+                    } else {
+                        mIndexer = getNewIndexer(cursor);
+                    }
+                } else {
+                */
+                    if (mIndexer instanceof AlphabetIndexer) {
+                        ((AlphabetIndexer)mIndexer).setCursor(cursor);
+                    } else {
+                        mIndexer = getNewIndexer(cursor);
+                    }
+                //}
             }
-
+            /*
             Bundle bundle = cursor.getExtras();
             if (bundle.containsKey(ContactCounts.EXTRA_ADDRESS_BOOK_INDEX_TITLES)) {
                 String sections[] =
@@ -3329,6 +3564,7 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
             } else {
                 mIndexer = null;
             }
+            */
         }
 
         /**
@@ -3580,6 +3816,20 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
                 cache.titleView.setTextColor(Color.argb(alpha,
                         Color.red(textColor), Color.green(textColor), Color.blue(textColor)));
             }
+        }
+    }
+    
+    //Wysie: Method to clear frequently called                 
+    private void clearFrequentlyCalled() {
+	    ContentValues values = new ContentValues();
+	    values.put(Contacts.TIMES_CONTACTED, "0");
+	    final String[] PROJECTION = new String[] { Contacts._ID };
+	
+    	Cursor c = getContentResolver().query(Contacts.CONTENT_URI, PROJECTION, Contacts.TIMES_CONTACTED + " > 0", null, null); 	
+        if(c.moveToFirst()) {
+    		do {
+                getContentResolver().update(ContentUris.withAppendedId(Contacts.CONTENT_URI, c.getLong(0)), values, null, null);
+            } while(c.moveToNext());
         }
     }
 }

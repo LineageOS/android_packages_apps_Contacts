@@ -62,6 +62,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
@@ -70,12 +71,34 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ResourceCursorAdapter;
 import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Locale;
+
+//Wysie
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteException;
+import android.preference.PreferenceManager;
+import android.text.format.DateFormat;
+
+//Wysie: Contact pictures
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.provider.ContactsContract.QuickContact;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.QuickContactBadge;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.lang.ref.SoftReference;
+import java.util.HashSet;
+
 
 /**
  * Displays a list of call log entries.
@@ -111,18 +134,28 @@ public class RecentCallsListActivity extends ListActivity
             PhoneLookup.DISPLAY_NAME,
             PhoneLookup.TYPE,
             PhoneLookup.LABEL,
-            PhoneLookup.NUMBER
+            PhoneLookup.NUMBER,
+            //Wysie: Contact pictures
+            PhoneLookup.PHOTO_ID,
+            PhoneLookup.LOOKUP_KEY
     };
 
     static final int PERSON_ID_COLUMN_INDEX = 0;
     static final int NAME_COLUMN_INDEX = 1;
     static final int PHONE_TYPE_COLUMN_INDEX = 2;
     static final int LABEL_COLUMN_INDEX = 3;
-    static final int MATCHED_NUMBER_COLUMN_INDEX = 4;
+    static final int MATCHED_NUMBER_COLUMN_INDEX = 4;    
+    //Wysie: Contact pictures
+    static final int PHOTO_ID_COLUMN_INDEX = 5;
+    static final int LOOKUP_KEY_COLUMN_INDEX = 6;
 
-    private static final int MENU_ITEM_DELETE = 1;
-    private static final int MENU_ITEM_DELETE_ALL = 2;
-    private static final int MENU_ITEM_VIEW_CONTACTS = 3;
+    private static final int MENU_ITEM_CLEAR_CALL_LOG = 1;
+    private static final int MENU_PREFERENCES = 2;
+    private static final int MENU_ITEM_CLEAR_ALL = 3;
+    private static final int MENU_ITEM_CLEAR_INCOMING = 4;
+    private static final int MENU_ITEM_CLEAR_OUTGOING = 5;
+    private static final int MENU_ITEM_CLEAR_MISSED = 6;
+    private static final int MENU_ITEM_DELETE = 7;
 
     private static final int QUERY_TOKEN = 53;
     private static final int UPDATE_TOKEN = 54;
@@ -132,6 +165,25 @@ public class RecentCallsListActivity extends ListActivity
     RecentCallsAdapter mAdapter;
     private QueryHandler mQueryHandler;
     String mVoiceMailNumber;
+    
+    //Wysie
+    private MenuItem mPreferences;    
+    private SharedPreferences ePrefs;
+    private static boolean exactTime;
+    private static boolean is24hour;
+    private static boolean showSeconds;
+    private static final String format24HourSeconds = "MMM d, kk:mm:ss";
+    private static final String format24Hour = "MMM d, kk:mm";
+    private static final String format12HourSeconds = "MMM d, h:mm:ssaa";
+    private static final String format12Hour = "MMM d, h:mmaa";
+    private static int mRecordCount = 0;
+    
+    //Wysie: Contact pictures
+    private static ExecutorService sImageFetchThreadPool;
+    private int mScrollState;
+    private static boolean mDisplayPhotos;
+    private static boolean isQuickContact;
+    private static boolean showDialButton;
 
     static final class ContactInfo {
         public long personId;
@@ -139,12 +191,19 @@ public class RecentCallsListActivity extends ListActivity
         public int type;
         public String label;
         public String number;
-        public String formattedNumber;
+        public String formattedNumber;        
+        //Wysie: Contact pictures
+        public long photoId;
+        public String lookupKey;
 
         public static ContactInfo EMPTY = new ContactInfo();
     }
 
     public static final class RecentCallsListItemViews {
+        //Wysie: Contact pictures
+        QuickContactBadge photoView;
+        ImageView nonQuickContactPhotoView;
+        
         TextView line1View;
         TextView labelView;
         TextView numberView;
@@ -153,6 +212,8 @@ public class RecentCallsListActivity extends ListActivity
         View callView;
         ImageView groupIndicator;
         TextView groupSize;
+        
+        View dividerView;
     }
 
     static final class CallerInfoQuery {
@@ -179,10 +240,25 @@ public class RecentCallsListActivity extends ListActivity
      * {@link PhoneNumberUtils#getFormatTypeForLocale(Locale)}.
      */
     private static int sFormattingType = FORMATTING_TYPE_INVALID;
+    
+    
+    //Wysie: Contact pictures
+    final static class PhotoInfo {
+        public int position;
+        public long photoId;
+        public Uri contactUri;
+
+        public PhotoInfo(int position, long photoId, Uri contactUri) {
+            this.position = position;
+            this.photoId = photoId;
+            this.contactUri = contactUri;
+        }
+        public QuickContactBadge photoView;
+    }
 
     /** Adapter class to fill in data for the Call Log */
     final class RecentCallsAdapter extends GroupingListAdapter
-            implements Runnable, ViewTreeObserver.OnPreDrawListener, View.OnClickListener {
+            implements Runnable, ViewTreeObserver.OnPreDrawListener, View.OnClickListener, OnScrollListener {
         HashMap<String,ContactInfo> mContactInfo;
         private final LinkedList<CallerInfoQuery> mRequests;
         private volatile boolean mDone;
@@ -198,6 +274,16 @@ public class RecentCallsListActivity extends ListActivity
         private Drawable mDrawableIncoming;
         private Drawable mDrawableOutgoing;
         private Drawable mDrawableMissed;
+        
+        //Wysie
+        private ImageFetchHandler mImageHandler;
+        private ImageDbFetcher mImageFetcher;
+        private static final int FETCH_IMAGE_MSG = 3;
+        
+        //Wysie: Contact pictures
+        private HashMap<Long, SoftReference<Bitmap>> mBitmapCache = null;
+        private HashSet<ImageView> mItemsMissingImages = null;
+        
 
         /**
          * Reusable char array buffers.
@@ -206,10 +292,17 @@ public class RecentCallsListActivity extends ListActivity
         private CharArrayBuffer mBuffer2 = new CharArrayBuffer(128);
 
         public void onClick(View view) {
-            String number = (String) view.getTag();
-            if (!TextUtils.isEmpty(number)) {
-                Uri telUri = Uri.fromParts("tel", number, null);
-                startActivity(new Intent(Intent.ACTION_CALL_PRIVILEGED, telUri));
+            if (view instanceof QuickContactBadge) {
+                PhotoInfo info = (PhotoInfo)view.getTag();
+                QuickContact.showQuickContact(mContext, view, info.contactUri, QuickContact.MODE_MEDIUM, null);
+                isQuickContact = true;
+            }
+            else {
+                String number = (String) view.getTag();
+                if (!TextUtils.isEmpty(number)) {
+                    Uri telUri = Uri.fromParts("tel", number, null);
+                    startActivity(new Intent(Intent.ACTION_CALL_PRIVILEGED, telUri));
+                }
             }
         }
 
@@ -249,6 +342,11 @@ public class RecentCallsListActivity extends ListActivity
             mDrawableMissed = getResources().getDrawable(
                     R.drawable.ic_call_log_list_missed_call);
             mLabelArray = getResources().getTextArray(com.android.internal.R.array.phoneTypes);
+            
+            //Wysie: Contact pictures
+            mBitmapCache = new HashMap<Long, SoftReference<Bitmap>>();
+            mItemsMissingImages = new HashSet<ImageView>();
+            mImageHandler = new ImageFetchHandler();
         }
 
         /**
@@ -355,6 +453,10 @@ public class RecentCallsListActivity extends ListActivity
                         info.type = phonesCursor.getInt(PHONE_TYPE_COLUMN_INDEX);
                         info.label = phonesCursor.getString(LABEL_COLUMN_INDEX);
                         info.number = phonesCursor.getString(MATCHED_NUMBER_COLUMN_INDEX);
+                        
+                        //Wysie: Contact pictures
+                        info.photoId = phonesCursor.getLong(PHOTO_ID_COLUMN_INDEX);
+                        info.lookupKey = phonesCursor.getString(LOOKUP_KEY_COLUMN_INDEX);
 
                         // New incoming phone number invalidates our formatted
                         // cache. Any cache fills happen only on the GUI thread.
@@ -521,10 +623,18 @@ public class RecentCallsListActivity extends ListActivity
             views.numberView = (TextView) view.findViewById(R.id.number);
             views.dateView = (TextView) view.findViewById(R.id.date);
             views.iconView = (ImageView) view.findViewById(R.id.call_type_icon);
+            views.dividerView = view.findViewById(R.id.divider);
             views.callView = view.findViewById(R.id.call_icon);
             views.callView.setOnClickListener(this);
             views.groupIndicator = (ImageView) view.findViewById(R.id.groupIndicator);
             views.groupSize = (TextView) view.findViewById(R.id.groupSize);
+            
+            //Wysie: Contact pictures
+            views.photoView = (QuickContactBadge) view.findViewById(R.id.photo);
+            views.photoView.setOnClickListener(this);
+            
+            views.nonQuickContactPhotoView = (ImageView) view.findViewById(R.id.noQuickContactPhoto);
+
             view.setTag(views);
         }
 
@@ -536,9 +646,23 @@ public class RecentCallsListActivity extends ListActivity
             String callerName = c.getString(CALLER_NAME_COLUMN_INDEX);
             int callerNumberType = c.getInt(CALLER_NUMBERTYPE_COLUMN_INDEX);
             String callerNumberLabel = c.getString(CALLER_NUMBERLABEL_COLUMN_INDEX);
-
+            
+            //Wysie
+            boolean noContactInfo = false;
+            
             // Store away the number so we can call it directly if you click on the call icon
             views.callView.setTag(number);
+            
+            //Wysie: Use iconView to dial out if dial button is hidden            
+            if (!showDialButton) {
+                views.iconView.setTag(number);
+                views.iconView.setOnClickListener(this);
+                //views.iconView.setBackgroundResource(R.drawable.call_background);
+            } else {
+                views.iconView.setTag(null);
+                views.iconView.setOnClickListener(null);
+                //views.iconView.setBackgroundResource(0);
+            }
 
             // Lookup contacts with this number
             ContactInfo info = mContactInfo.get(number);
@@ -585,13 +709,12 @@ public class RecentCallsListActivity extends ListActivity
             // Set the text lines and call icon.
             // Assumes the call back feature is on most of the
             // time. For private and unknown numbers: hide it.
-            views.callView.setVisibility(View.VISIBLE);
+            views.callView.setVisibility(View.VISIBLE);           
 
             if (!TextUtils.isEmpty(name)) {
                 views.line1View.setText(name);
                 views.labelView.setVisibility(View.VISIBLE);
-                CharSequence numberLabel = Phone.getDisplayLabel(context, ntype, label,
-                        mLabelArray);
+                CharSequence numberLabel = Phone.getTypeLabel(context.getResources(), ntype, label);
                 views.numberView.setVisibility(View.VISIBLE);
                 views.numberView.setText(formattedNumber);
                 if (!TextUtils.isEmpty(numberLabel)) {
@@ -615,19 +738,115 @@ public class RecentCallsListActivity extends ListActivity
                     // Just a raw number, and no cache, so format it nicely
                     number = formatPhoneNumber(number);
                 }
+                
+                //Wysie
+                noContactInfo = true;
 
                 views.line1View.setText(number);
                 views.numberView.setVisibility(View.GONE);
                 views.labelView.setVisibility(View.GONE);
+            }          
+            
+            //Wysie: Contact pictures
+            if (mDisplayPhotos) {
+                long photoId = info.photoId;
+
+                // Build soft lookup reference
+                final long contactId = info.personId;
+                final String lookupKey = info.lookupKey;
+                Uri contactUri = Contacts.getLookupUri(contactId, lookupKey);
+                ImageView viewToUse;                
+                
+                if (noContactInfo) {
+                    viewToUse = views.nonQuickContactPhotoView;
+                    views.photoView.setVisibility(View.INVISIBLE);
+                    views.nonQuickContactPhotoView.setVisibility(View.VISIBLE);
+                } else {
+                    viewToUse = views.photoView;                    
+                    //views.photoView.assignContactUri(contactUri); //Wysie: Commented out, we handle it explicityly in onClick()
+                    views.photoView.setTag(contactUri);
+                    views.photoView.setVisibility(View.VISIBLE);
+                    views.nonQuickContactPhotoView.setVisibility(View.INVISIBLE);
+                }
+                
+                final int position = c.getPosition();
+                viewToUse.setTag(new PhotoInfo(position, photoId, contactUri));
+
+                if (photoId == 0) {
+                    viewToUse.setImageResource(R.drawable.ic_contact_list_picture);
+                } else {
+
+                    Bitmap photo = null;
+
+                    // Look for the cached bitmap
+                    SoftReference<Bitmap> ref = mBitmapCache.get(photoId);
+                    if (ref != null) {
+                        photo = ref.get();
+                        if (photo == null) {
+                            mBitmapCache.remove(photoId);
+                        }
+                    }
+
+                    // Bind the photo, or use the fallback no photo resource
+                    if (photo != null) {
+                        viewToUse.setImageBitmap(photo);
+                    } else {
+                        // Cache miss
+                        viewToUse.setImageResource(R.drawable.ic_contact_list_picture);
+
+                        // Add it to a set of images that are populated asynchronously.
+                        mItemsMissingImages.add(viewToUse);
+
+                        if (mScrollState != OnScrollListener.SCROLL_STATE_FLING) {
+
+                            // Scrolling is idle or slow, go get the image right now.
+                            sendFetchImageMessage(viewToUse);
+                        }
+                    }
+                }
+            }
+            else {
+                views.photoView.setVisibility(View.GONE);
+                views.nonQuickContactPhotoView.setVisibility(View.GONE);
             }
 
             long date = c.getLong(DATE_COLUMN_INDEX);
+            
+            if (!exactTime) {
+                // Set the date/time field by mixing relative and absolute times.
+                int flags = DateUtils.FORMAT_ABBREV_RELATIVE;
 
-            // Set the date/time field by mixing relative and absolute times.
-            int flags = DateUtils.FORMAT_ABBREV_RELATIVE;
+                views.dateView.setText(
+                        DateUtils.getRelativeTimeSpanString(date,
+                        System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS,
+                        flags));
+            } else {
+                String format = null;
 
-            views.dateView.setText(DateUtils.getRelativeTimeSpanString(date,
-                    System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS, flags));
+                if (is24hour) {
+                    if (showSeconds) {
+                        format = format24HourSeconds;
+                    } else {
+                        format = format24Hour;
+                    }
+                } else {
+                    if (showSeconds) {
+                        format = format12HourSeconds;
+                    } else {
+                        format = format12Hour;
+                    }                  	
+                }
+                
+                views.dateView.setText(DateFormat.format(format, date));                         
+            }
+
+            if (showDialButton) {
+                views.dividerView.setVisibility(View.VISIBLE);
+                views.callView.setVisibility(View.VISIBLE);
+            } else {
+                views.dividerView.setVisibility(View.GONE);
+                views.callView.setVisibility(View.GONE);
+            }
 
             if (views.iconView != null) {
                 int type = c.getInt(CALL_TYPE_COLUMN_INDEX);
@@ -653,6 +872,161 @@ public class RecentCallsListActivity extends ListActivity
                 mPreDrawListener = this;
                 view.getViewTreeObserver().addOnPreDrawListener(this);
             }
+        }
+        
+        
+        //Wysie: Contact pictures
+        private class ImageFetchHandler extends Handler {
+
+            @Override
+            public void handleMessage(Message message) {
+                if (RecentCallsListActivity.this.isFinishing()) {
+                    return;
+                }
+                switch(message.what) {
+                    case FETCH_IMAGE_MSG: {
+                        final ImageView imageView = (ImageView) message.obj;
+                        if (imageView == null) {
+                            break;
+                        }
+
+                        final PhotoInfo info = (PhotoInfo)imageView.getTag();
+                        if (info == null) {
+                            break;
+                        }
+
+                        final long photoId = info.photoId;
+                        if (photoId == 0) {
+                            break;
+                        }
+
+                        SoftReference<Bitmap> photoRef = mBitmapCache.get(photoId);
+                        if (photoRef == null) {
+                            break;
+                        }
+                        Bitmap photo = photoRef.get();
+                        if (photo == null) {
+                            mBitmapCache.remove(photoId);
+                            break;
+                        }
+
+                        // Make sure the photoId on this image view has not changed
+                        // while we were loading the image.
+                        synchronized (imageView) {
+                            final PhotoInfo updatedInfo = (PhotoInfo)imageView.getTag();
+                            long currentPhotoId = updatedInfo.photoId;
+                            if (currentPhotoId == photoId) {
+                                imageView.setImageBitmap(photo);
+                                mItemsMissingImages.remove(imageView);
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+
+            public void clearImageFecthing() {
+                removeMessages(FETCH_IMAGE_MSG);
+            }
+        }
+        
+        //Wysie: Contact pictures
+        private class ImageDbFetcher implements Runnable {
+            long mPhotoId;
+            private ImageView mImageView;
+
+            public ImageDbFetcher(long photoId, ImageView imageView) {
+                this.mPhotoId = photoId;
+                this.mImageView = imageView;
+            }
+
+            public void run() {
+                if (RecentCallsListActivity.this.isFinishing()) {
+                    return;
+                }
+
+                if (Thread.interrupted()) {
+                    // shutdown has been called.
+                    return;
+                }
+                Bitmap photo = null;
+                try {
+                    photo = ContactsUtils.loadContactPhoto(mContext, mPhotoId, null);
+                } catch (OutOfMemoryError e) {
+                    // Not enough memory for the photo, do nothing.
+                }
+
+                if (photo == null) {
+                    return;
+                }
+
+                mBitmapCache.put(mPhotoId, new SoftReference<Bitmap>(photo));
+
+                if (Thread.interrupted()) {
+                    // shutdown has been called.
+                    return;
+                }
+
+                // Update must happen on UI thread
+                Message msg = new Message();
+                msg.what = FETCH_IMAGE_MSG;
+                msg.obj = mImageView;
+                mImageHandler.sendMessage(msg);
+            }
+        }
+        
+        //Wysie: Contact pictures
+        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
+                int totalItemCount) {
+            // no op
+        }
+        
+        public void onScrollStateChanged(AbsListView view, int scrollState) {
+            mScrollState = scrollState;
+            if (scrollState == OnScrollListener.SCROLL_STATE_FLING) {
+                // If we are in a fling, stop loading images.
+                clearImageFetching();
+            } else if (mDisplayPhotos) {
+                processMissingImageItems(view);
+            }
+        }
+
+        private void processMissingImageItems(AbsListView view) {
+            for (ImageView iv : mItemsMissingImages) {
+                sendFetchImageMessage(iv);
+            }
+        }
+
+        private void sendFetchImageMessage(ImageView view) {
+            final PhotoInfo info = (PhotoInfo) view.getTag();
+            if (info == null) {
+                return;
+            }
+            final long photoId = info.photoId;
+            if (photoId == 0) {
+                return;
+            }
+            mImageFetcher = new ImageDbFetcher(photoId, view);
+            synchronized (RecentCallsListActivity.this) {
+                // can't sync on sImageFetchThreadPool.
+                if (sImageFetchThreadPool == null) {
+                    // Don't use more than 3 threads at a time to update. The thread pool will be
+                    // shared by all contact items.
+                    sImageFetchThreadPool = Executors.newFixedThreadPool(3);
+                }
+                sImageFetchThreadPool.execute(mImageFetcher);
+            }
+        }
+        
+        public void clearImageFetching() {
+            synchronized (RecentCallsListActivity.this) {
+                if (sImageFetchThreadPool != null) {
+                    sImageFetchThreadPool.shutdownNow();
+                    sImageFetchThreadPool = null;
+                }
+            }
+
+            mImageHandler.clearImageFecthing();
         }
     }
 
@@ -702,6 +1076,7 @@ public class RecentCallsListActivity extends ListActivity
                 final RecentCallsListActivity.RecentCallsAdapter callsAdapter = activity.mAdapter;
                 callsAdapter.setLoading(false);
                 callsAdapter.changeCursor(cursor);
+                mRecordCount = cursor.getCount();
             } else {
                 cursor.close();
             }
@@ -712,6 +1087,10 @@ public class RecentCallsListActivity extends ListActivity
     protected void onCreate(Bundle state) {
         super.onCreate(state);
 
+        //Wysie
+        ePrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        isQuickContact = false;
+        
         setContentView(R.layout.recent_calls);
 
         // Typing here goes to the dialer
@@ -731,18 +1110,37 @@ public class RecentCallsListActivity extends ListActivity
 
     @Override
     protected void onResume() {
-        // The adapter caches looked up numbers, clear it so they will get
-        // looked up again.
-        if (mAdapter != null) {
-            mAdapter.clearCache();
+        if (isQuickContact) {
+            isQuickContact = false;
+            super.onResume();
         }
+        else {
+            // The adapter caches looked up numbers, clear it so they will get
+            // looked up again.
+            if (mAdapter != null) {
+                mAdapter.clearCache();
+            }
+            
+            // Force cache to reload so we don't show stale photos.
+            if (mAdapter.mBitmapCache != null) {
+                mAdapter.mBitmapCache.clear();
+            }
+            
+            exactTime = ePrefs.getBoolean("cl_exact_time", true);
+            is24hour = DateFormat.is24HourFormat(this);
+            showSeconds = ePrefs.getBoolean("cl_show_seconds", true);
+            mDisplayPhotos = ePrefs.getBoolean("cl_show_pic", true);
+            showDialButton = ePrefs.getBoolean("cl_show_dial_button", false);
+            
+            super.onResume();
 
-        startQuery();
-        resetNewCallsFlag();
+            startQuery();
+            resetNewCallsFlag();
+        
+            mScrollState = OnScrollListener.SCROLL_STATE_IDLE;
 
-        super.onResume();
-
-        mAdapter.mPreDrawListener = null; // Let it restart the thread after next draw
+            mAdapter.mPreDrawListener = null; // Let it restart the thread after next draw
+        }
     }
 
     @Override
@@ -833,8 +1231,23 @@ public class RecentCallsListActivity extends ListActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, MENU_ITEM_DELETE_ALL, 0, R.string.recentCalls_deleteAll)
-                .setIcon(android.R.drawable.ic_menu_close_clear_cancel);
+        SubMenu clearMenu = menu.addSubMenu(1, MENU_ITEM_CLEAR_CALL_LOG, 0, R.string.recent_calls_clear_call_log)
+                .setIcon(android.R.drawable.ic_menu_close_clear_cancel)
+                .setHeaderTitle(R.string.recent_calls_clear_what);
+        clearMenu.add(0, MENU_ITEM_CLEAR_ALL,      0, R.string.recent_calls_clear_all);
+        clearMenu.add(0, MENU_ITEM_CLEAR_INCOMING, 0, R.string.recent_calls_clear_incoming);
+        clearMenu.add(0, MENU_ITEM_CLEAR_OUTGOING, 0, R.string.recent_calls_clear_outgoing);
+        clearMenu.add(0, MENU_ITEM_CLEAR_MISSED,   0, R.string.recent_calls_clear_missed);
+
+	    mPreferences = menu.add(0, MENU_PREFERENCES, 0, R.string.menu_preferences).setIcon(android.R.drawable.ic_menu_preferences);
+        //Wysie_Soh: Preferences intent
+        mPreferences.setIntent(new Intent(this, ContactsPreferences.class));
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.setGroupVisible(1, (mRecordCount > 0));
         return true;
     }
 
@@ -931,18 +1344,24 @@ public class RecentCallsListActivity extends ListActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case MENU_ITEM_DELETE_ALL: {
-                showDialog(DIALOG_CONFIRM_DELETE_ALL);
+            case MENU_ITEM_CLEAR_ALL: {
+                clearCallLog();
                 return true;
             }
-
-            case MENU_ITEM_VIEW_CONTACTS: {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Contacts.CONTENT_URI);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+            case MENU_ITEM_CLEAR_INCOMING: {
+                clearCallLogType(Calls.INCOMING_TYPE);
+                return true;
+            }
+            case MENU_ITEM_CLEAR_OUTGOING: {
+                clearCallLogType(Calls.OUTGOING_TYPE);
+                return true;
+            }
+            case MENU_ITEM_CLEAR_MISSED: {
+                clearCallLogType(Calls.MISSED_TYPE);
                 return true;
             }
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -1115,5 +1534,76 @@ public class RecentCallsListActivity extends ListActivity
         } else {
             ContactsSearchManager.startSearch(this, initialQuery);
         }
+    }  
+    
+    // Wysie: Dialog to confirm if user wants to clear call log    
+    private void clearCallLog() {
+        if (ePrefs.getBoolean("cl_ask_before_clear", false)) {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+            alert.setTitle(R.string.alert_clear_call_log_title);
+            alert.setMessage(R.string.alert_clear_call_log_message);
+      
+            alert.setPositiveButton(android.R.string.ok,
+                    new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    deleteCallLog(null, null);
+                }
+            });
+        
+            alert.setNegativeButton(android.R.string.cancel,
+                    new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {// Canceled.
+                }
+            });
+        
+            alert.show();
+        } else {
+            deleteCallLog(null, null);
+        }
+    }
+    
+    private void deleteCallLog(String where, String[] selArgs) {
+        try {
+            getContentResolver().delete(Calls.CONTENT_URI, where, selArgs);
+            // TODO The change notification should do this automatically, but it isn't working
+            // right now. Remove this when the change notification is working properly.
+            startQuery();
+        } catch (SQLiteException sqle) {// Nothing :P
+        }
+    }
+    
+    private void clearCallLogType(final int type) {
+        int msg = 0;
+        
+        if (type == Calls.INCOMING_TYPE) {
+            msg = R.string.alert_clear_cl_all_incoming;
+        } else if (type == Calls.OUTGOING_TYPE) {
+            msg = R.string.alert_clear_cl_all_outgoing;
+        } else if (type == Calls.MISSED_TYPE) {
+            msg = R.string.alert_clear_cl_all_missed;
+        }
+        
+        if (ePrefs.getBoolean("cl_ask_before_clear", false)) {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+            alert.setTitle(R.string.alert_clear_call_log_title);
+            alert.setMessage(msg);
+            alert.setPositiveButton(android.R.string.ok,
+                    new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    deleteCallLog(Calls.TYPE + "=?", new String[] { Integer.toString(type) });
+                }
+            });        
+            alert.setNegativeButton(android.R.string.cancel,
+                    new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {// Canceled.
+                }
+            });        
+            alert.show();
+            
+        } else {
+            deleteCallLog(Calls.TYPE + "=?", new String[] { Integer.toString(type) });
+        }        
     }
 }

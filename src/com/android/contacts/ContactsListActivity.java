@@ -2777,7 +2777,7 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
         }
     }
     private Cursor queryPhoneNumbers(long contactId) {
-        return ContactsUtils.queryPhoneNumbers(getContentResolver(), contactId);
+        return queryPhoneNumbers(getContentResolver(), contactId);
     }
 
     /**

@@ -3554,8 +3554,8 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
                         mIndexer = getNewIndexer(cursor);
                     }
                 }
-            }
             */
+            }
             Bundle bundle = cursor.getExtras();
             if (bundle.containsKey(ContactCounts.EXTRA_ADDRESS_BOOK_INDEX_TITLES)) {
                 String sections[] =

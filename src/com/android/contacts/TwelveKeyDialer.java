@@ -493,13 +493,8 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
             showDialpadChooser(false);
         }
         
-        //Wysie: Use prefVibrateOn to decide whether to vibrate, in case mVibrateOn is used for something
-        //in future
-        if (mVibrateOn)
-            prefVibrateOn = ePrefs.getBoolean("dial_enable_haptic", true);
-        else
-            prefVibrateOn = false;
-        
+        prefVibrateOn = ePrefs.getBoolean("dial_enable_haptic", true);
+        mVibratePattern = stringToLongArray(Settings.System.getString(getContentResolver(), Settings.System.HAPTIC_TAP_ARRAY));
         retrieveLastDialled = ePrefs.getBoolean("dial_retrieve_last", false);
         returnToDialer = ePrefs.getBoolean("dial_return", false);
 
@@ -1223,13 +1218,17 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
      * Triggers haptic feedback (if enabled) for dialer key presses.
      */
     private synchronized void vibrate() {
-        if (!mVibrateOn || !prefVibrateOn) {
+        if (!prefVibrateOn) {
             return;
         }
         if (mVibrator == null) {
             mVibrator = new Vibrator();
         }
-        mVibrator.vibrate(mVibratePattern, VIBRATE_NO_REPEAT);
+        if (mVibratePattern.length == 1) {
+        	mVibrator.vibrate(mVibratePattern[0]);
+        } else {
+            mVibrator.vibrate(mVibratePattern, VIBRATE_NO_REPEAT);
+        }
     }
 
     /**
@@ -1507,4 +1506,21 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         
         return num;
     }
+    
+    private long[] stringToLongArray(String inpString) {
+        if (inpString == null) {
+            long[] returnLong = new long[1];
+            returnLong[0] = 0;
+            return returnLong;
+        }
+        String[] splitStr = inpString.split(",");
+        int los = splitStr.length;
+        long[] returnLong = new long[los];
+        int i;
+        for (i=0; i < los; i++ ) {
+            returnLong[i] = Long.parseLong(splitStr[i].trim());
+        }
+        return returnLong;
+    }
+    
 }

@@ -127,6 +127,7 @@ public class RecentCallsListActivity extends ListActivity
     static final int CALLER_NAME_COLUMN_INDEX = 5;
     static final int CALLER_NUMBERTYPE_COLUMN_INDEX = 6;
     static final int CALLER_NUMBERLABEL_COLUMN_INDEX = 7;
+    static final int MENU_ITEM_BLACKLIST = 666;
 
     /** The projection to use when querying the phones table */
     static final String[] PHONES_PROJECTION = new String[] {
@@ -183,6 +184,8 @@ public class RecentCallsListActivity extends ListActivity
     private static boolean mDisplayPhotos;
     private static boolean isQuickContact;
     private static boolean showDialButton;
+
+    private static final String INSERT_BLACKLIST = "com.android.phone.INSERT_BLACKLIST";
 
     private ContactPhotoLoader mPhotoLoader;
 
@@ -1124,6 +1127,7 @@ public class RecentCallsListActivity extends ListActivity
             intent.putExtra(Insert.PHONE, number);
             menu.add(0, 0, 0, R.string.recentCalls_addToContact)
                     .setIntent(intent);
+	    menu.add(0, MENU_ITEM_BLACKLIST, 0, R.string.recentCalls_addToBlacklist);
         }
         menu.add(0, MENU_ITEM_DELETE, 0, R.string.recentCalls_removeFromRecentList);
     }
@@ -1187,9 +1191,9 @@ public class RecentCallsListActivity extends ListActivity
             return false;
         }
 
+        Cursor cursor = (Cursor)mAdapter.getItem(menuInfo.position);
         switch (item.getItemId()) {
             case MENU_ITEM_DELETE: {
-                Cursor cursor = (Cursor)mAdapter.getItem(menuInfo.position);
                 int groupSize = 1;
                 if (mAdapter.isGroupHeader(menuInfo.position)) {
                     groupSize = mAdapter.getGroupSize(menuInfo.position);
@@ -1207,7 +1211,12 @@ public class RecentCallsListActivity extends ListActivity
 
                 getContentResolver().delete(Calls.CONTENT_URI, Calls._ID + " IN (" + sb + ")",
                         null);
-            }
+            }break;
+	    case MENU_ITEM_BLACKLIST: {
+	    	Intent intent = new Intent(INSERT_BLACKLIST);
+		intent.putExtra("Insert.BLACKLIST", cursor.getString(NUMBER_COLUMN_INDEX));
+		sendBroadcast(intent);
+ 	    }break;
         }
         return super.onContextItemSelected(item);
     }

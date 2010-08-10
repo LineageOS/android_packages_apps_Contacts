@@ -722,7 +722,8 @@ public class RecentCallsListActivity extends ListActivity
                     views.callView.setVisibility(View.INVISIBLE);
                 } else if (number.equals(CallerInfo.PAYPHONE_NUMBER)) {
                     number = getString(R.string.payphone);
-                } else if (number.equals(mVoiceMailNumber)) {
+                } else if (PhoneNumberUtils.extractNetworkPortion(number)
+                                .equals(mVoiceMailNumber)) {
                     number = getString(R.string.voicemail);
                 } else {
                     // Just a raw number, and no cache, so format it nicely
@@ -1086,7 +1087,7 @@ public class RecentCallsListActivity extends ListActivity
             number = getString(R.string.private_num);
         } else if (number.equals(CallerInfo.PAYPHONE_NUMBER)) {
             number = getString(R.string.payphone);
-        } else if (number.equals(mVoiceMailNumber)) {
+        } else if (PhoneNumberUtils.extractNetworkPortion(number).equals(mVoiceMailNumber)) {
             number = getString(R.string.voicemail);
             numberUri = Uri.parse("voicemail:x");
             isVoicemail = true;

@@ -344,6 +344,23 @@
     <string name="use_photo_as_primary" msgid="8807110122951157246">"Utilizza questa foto"</string>
     <string name="contact_read_only" msgid="1203216914575723978">"Informazioni del contatto da <xliff:g id="SOURCE">%1$s</xliff:g> non modificabili su questo dispositivo."</string>
     <string name="no_contact_details" msgid="6754415338321837001">"Nessuna informazione aggiuntiva per questo contatto"</string>
+    <string name="display_options_sort_list_by" msgid="6080091755852211076">"Ordina elenco per"</string>
+    <string name="display_options_sort_by_given_name" msgid="184916793466387067">"Nome"</string>
+    <string name="display_options_sort_by_family_name" msgid="7857986975275712622">"Cognome"</string>
+    <string name="display_options_view_names_as" msgid="18022868169627979">"Visualizz. nomi contatti"</string>
+    <string name="display_options_view_given_name_first" msgid="6968288511197363292">"Prima il nome"</string>
+    <string name="display_options_view_family_name_first" msgid="1447288164951453714">"Prima il cognome"</string>
+    <string name="search_bar_hint" msgid="1012756309632856553">"Cerca contatti"</string>
+    <string name="search_for_all_contacts" msgid="6644963335787294131">"Cerca tutti i contatti"</string>
+    <string name="take_photo" msgid="7496128293167402354">"Scatta foto"</string>
+    <string name="pick_photo" msgid="448886509158039462">"Seleziona foto da galleria"</string>
+    <string name="locale_change_in_progress" msgid="1124266507671178413">"L\'elenco contatti verrà aggiornato per rispecchiare il cambio di lingua."\n\n"Attendi..."</string>
+    <string name="upgrade_in_progress" msgid="7530893673211750223">"Elenco contatti in fase di aggiornamento."\n\n"Attendi..."</string>
+    <string name="upgrade_out_of_memory" msgid="492151063059824962">"Contatti in fase di aggiornamento. "\n\n"Il processo di aggiornamento richiede circa <xliff:g id="SIZE_IN_MEGABYTES">%d</xliff:g> MB di memoria interna del telefono."\n\n"Scegli una delle seguenti opzioni:"</string>
+    <string name="upgrade_out_of_memory_uninstall" msgid="1721798828992091432">"Disinstalla alcune applicazioni"</string>
+    <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"Riprova l\'aggiornamento"</string>
+    <string name="search_results_for" msgid="8705490885073188513">"Risultati di ricerca per: <xliff:g id="QUERY">%s</xliff:g>"</string>
+    <string name="search_results_searching" msgid="7755623475227227314">"Ricerca in corso..."</string>
 
      <!-- Wysie: Menu strings -->
     <string name="menu_preferences">Preferenze</string>

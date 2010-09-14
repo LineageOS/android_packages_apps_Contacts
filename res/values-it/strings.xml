@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright (C) 2009 The Android Open Source Project
+<!--  Copyright (C) 2006 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -12,7 +12,8 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
--->
+ -->
+
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="contactsList" msgid="8661624236494819731">"Contatti"</string>
@@ -39,8 +40,8 @@
     <string name="menu_removeStar" msgid="5844227078364227030">"Rimuovi dai preferiti"</string>
     <string name="menu_editContact" msgid="3452858480713561396">"Modifica contatto"</string>
     <string name="menu_deleteContact" msgid="1916555454274101750">"Elimina contatto"</string>
-    <string name="menu_call" msgid="3992595586042260618">"Chiama contatto"</string>
-    <string name="menu_sendSMS" msgid="5535886767547006515">"Invia SMS a contatto"</string>
+    <string name="menu_call" msgid="3992595586042260618">"Chiama"</string>
+    <string name="menu_sendSMS" msgid="5535886767547006515">"Invia SMS"</string>
     <string name="menu_sendEmail" msgid="7293508859242926187">"Invia email"</string>
     <string name="menu_viewAddress" msgid="1814744325763202024">"Indirizzo su mappa"</string>
     <string name="menu_makeDefaultNumber" msgid="4838759253316649534">"Rendi numero predefinito"</string>
@@ -73,7 +74,7 @@
     <string name="ghostData_name" msgid="6490954238641157585">"Nome e cognome"</string>
     <string name="ghostData_phonetic_name" msgid="7852749081984070902">"Nome fonetico"</string>
     <string name="ghostData_company" msgid="5414421120553765775">"Società"</string>
-    <string name="ghostData_title" msgid="7662602222400641187">"Mansione"</string>
+    <string name="ghostData_title" msgid="7496735200318496110">"Titolo"</string>
     <string name="invalidContactMessage" msgid="5816991830260044593">"Il contatto non esiste."</string>
     <string name="pickerNewContactHeader" msgid="7750705279843568147">"Crea nuovo contatto"</string>
     <string name="selectLabel" msgid="4255424123394910733">"Seleziona etichetta"</string>
@@ -125,6 +126,10 @@
     <item quantity="other" msgid="7752927996850263152">"<xliff:g id="COUNT">%d</xliff:g> contatti trovati"</item>
   </plurals>
     <string name="listFoundAllContactsZero" msgid="5554368784319460828">"Contatto non trovato"</string>
+  <plurals name="searchFoundContacts">
+    <item quantity="one" msgid="916648718690661777">"1 contatto"</item>
+    <item quantity="other" msgid="5660384247071761844">"<xliff:g id="COUNT">%d</xliff:g> contatti"</item>
+  </plurals>
     <string name="contactsIconLabel" msgid="7666609097606552806">"Contatti"</string>
     <string name="contactsFavoritesLabel" msgid="8417039765586853670">"Preferiti"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefono"</string>
@@ -135,10 +140,14 @@
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Invia messaggio di testo"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Chiama <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Modifica prima di chiamare"</string>
+    <!--Menu item used to add a number from the call log to Blacklist  -->
+    <string name="recentCalls_addToBlacklist">Aggiungi a Blacklist</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Aggiungi a contatti"</string>
     <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"Rimuovi da registro"</string>
     <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Cancella registro chiamate"</string>
     <string name="recentCalls_empty" msgid="247053222448663107">"Il registro chiamate è vuoto."</string>
+    <string name="clearCallLogConfirmation_title" msgid="718072843006222703">"Cancella registro chiamate"</string>
+    <string name="clearCallLogConfirmation" msgid="7625927669136267636">"Cancellare il registro chiamate?"</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="voicemail" msgid="3851469869202611441">"Segreteria"</string>
@@ -149,6 +158,8 @@
     <string name="dialerDialpadHintText" msgid="5824490365898349041">"Componi per aggiungere chiamata"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Caricamento da SIM..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"Contatti SIM"</string>
+    <string name="noContactsHelpTextWithSyncForCreateShortcut" msgid="801504710275614594">"Non ci sono contatti da visualizzare (se hai appena aggiunto un account, la sincronizzazione dei contatti potrebbe richiedere alcuni minuti)."</string>
+    <string name="noContactsHelpTextForCreateShortcut" msgid="3081286388667108335">"Non ci sono contatti da visualizzare."</string>
     <string name="noContactsHelpText" msgid="6788487368878712350">"Non sono presenti contatti da visualizzare."\n\n"Per aggiungere contatti, premi "<font fgcolor="#ffffffff"><b>"Menu"</b></font>" e tocca:"\n" "\n<li><font fgcolor="#ffffffff"><b>"Account"</b></font>" per aggiungere o configurare un account con contatti sincronizzabili con il telefono"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Nuovo contatto"</b></font>" per creare da zero un nuovo contatto"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Importa/esporta"</b></font>\n</li></string>
     <string name="noContactsHelpTextWithSync" msgid="3734101165712848179">"Non sono presenti contatti da visualizzare (se hai appena aggiunto un account, la sincronizzazione dei contatti potrebbe richiedere alcuni minuti)."\n\n"Per aggiungere contatti, premi "<font fgcolor="#ffffffff"><b>"Menu"</b></font>" e tocca:"\n" "\n<li><font fgcolor="#ffffffff"><b>"Account"</b></font>" per aggiungere o configurare un account con contatti sincronizzabili con il telefono"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Opzioni di visualizzazione"</b></font>" per modificare i contatti visibili"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Nuovo contatto"</b></font>" per creare da zero un nuovo contatto"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Importa/esporta"</b></font>\n</li></string>
     <string name="noContactsNoSimHelpText" msgid="6553845386917463292">"Non sono presenti contatti da visualizzare."\n\n"Per aggiungere contatti, premi "<font fgcolor="#ffffffff"><b>"Menu"</b></font>" e tocca:"\n" "\n<li><font fgcolor="#ffffffff"><b>"Account"</b></font>" per aggiungere o configurare un account con contatti sincronizzabili con il telefono"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Nuovo contatto"</b></font>" per creare da zero un nuovo contatto"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Importa/esporta"</b></font>\n</li></string>
@@ -169,10 +180,10 @@
     <string name="callBack" msgid="5498224409038809224">"Richiama"</string>
     <string name="callAgain" msgid="3197312117049874778">"Richiama"</string>
     <string name="returnCall" msgid="8171961914203617813">"Chiama numero"</string>
-    <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> min. <xliff:g id="SECONDS">%s</xliff:g> sec."</string>
-    <string name="favoritesFrquentSeparator" msgid="5007070838253932139">"Numeri più chiamati"</string>
+    <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%1$s</xliff:g> min. <xliff:g id="SECONDS">%2$s</xliff:g> sec."</string>
+    <string name="favoritesFrquentSeparator" msgid="8107518433381283736">"Contattati spesso"</string>
     <string name="add_contact_dlg_title" msgid="2896685845822146494">"Aggiungi contatto"</string>
-    <string name="add_contact_dlg_message_fmt" msgid="7986472669444326576">"Aggiungere \"<xliff:g id="EMAIL">%s</xliff:g>\" ai contatti?"</string>
+    <string name="add_contact_dlg_message_fmt" msgid="7986472669444326576">"Aggiungi \"<xliff:g id="EMAIL">%s</xliff:g>\" ai contatti?"</string>
     <string name="all_tab_label" msgid="4003124364397916826">"Tutti"</string>
     <string name="description_image_button_one" msgid="1740638037139856139">"uno"</string>
     <string name="description_image_button_two" msgid="5882638439003731308">"due"</string>
@@ -186,12 +197,20 @@
     <string name="description_image_button_star" msgid="3365919907520767866">"stella"</string>
     <string name="description_image_button_zero" msgid="4133108949401820710">"zero"</string>
     <string name="description_image_button_pound" msgid="3039765597595889230">"sterlina"</string>
+    <string name="description_voicemail_button" msgid="3402506823655455591">"segreteria"</string>
+    <string name="description_dial_button" msgid="1274091017188142646">"componi"</string>
+    <string name="description_delete_button" msgid="6263102114033407382">"backspace"</string>
+    <string name="description_digits_edittext" msgid="8760207516497016437">"numero da comporre"</string>
+    <string name="description_contact_photo" msgid="3387458082667894062">"foto contatto"</string>
+    <string name="description_minus_button" msgid="387136707700230172">"meno"</string>
+    <string name="description_plus_button" msgid="515164827856229880">"più"</string>
     <string name="no_sdcard_title" msgid="5911758680339949273">"Nessuna scheda SD"</string>
     <string name="no_sdcard_message" msgid="6019391476490445358">"Nessuna scheda SD rilevata"</string>
     <string name="searching_vcard_title" msgid="4970508055399376813">"Ricerca vCard"</string>
     <string name="import_from_sim" msgid="3859272228033941659">"Importa da scheda SIM"</string>
     <string name="import_from_sdcard" msgid="8550360976693202816">"Importa da scheda SD"</string>
     <string name="export_to_sdcard" msgid="2597105442616166277">"Esporta su scheda SD"</string>
+    <string name="share_visible_contacts" msgid="890150378880783797">"Condividi contatti visibili"</string>
     <string name="import_one_vcard_string" msgid="9059163467020328433">"Importa un file vCard"</string>
     <string name="import_multiple_vcard_string" msgid="3810226492811062392">"Importa più file vCard"</string>
     <string name="import_all_vcard_string" msgid="5518136113853448474">"Importa tutti i file vCard"</string>
@@ -205,12 +224,12 @@
     <string name="fail_reason_failed_to_read_files" msgid="3659521123567134029">"Impossibile importare uno o più file (%s)."</string>
     <string name="fail_reason_unknown" msgid="999034019513096768">"Errore sconosciuto"</string>
     <string name="select_vcard_title" msgid="3968948173786172468">"Seleziona file vCard"</string>
-    <string name="progress_shower_message" msgid="5636525578293752526">"<xliff:g id="ACTION">%s</xliff:g>"\n"<xliff:g id="FILENAME">%s</xliff:g>"</string>
+    <string name="progress_shower_message" msgid="5636525578293752526">"<xliff:g id="ACTION">%1$s</xliff:g>"\n"<xliff:g id="FILENAME">%2$s</xliff:g>"</string>
     <string name="reading_vcard_title" msgid="4723433501579653199">"Lettura vCard"</string>
     <string name="reading_vcard_message" msgid="6381368920030748743">"Lettura file vCard"</string>
     <string name="reading_vcard_failed_title" msgid="4923008144735294994">"Lettura dati vCard non riuscita"</string>
-    <string name="reading_vcard_contacts" msgid="3066834102042012868">"<xliff:g id="CURRENT_NUMBER">%s</xliff:g> contatti su <xliff:g id="TOTAL_NUMBER">%s</xliff:g>"</string>
-    <string name="reading_vcard_files" msgid="34180143726972661">"<xliff:g id="CURRENT_NUMBER">%s</xliff:g> file su <xliff:g id="TOTAL_NUMBER">%s</xliff:g>"</string>
+    <string name="reading_vcard_contacts" msgid="3066834102042012868">"<xliff:g id="CURRENT_NUMBER">%1$s</xliff:g> contatti su <xliff:g id="TOTAL_NUMBER">%2$s</xliff:g>"</string>
+    <string name="reading_vcard_files" msgid="34180143726972661">"<xliff:g id="CURRENT_NUMBER">%1$s</xliff:g> file su <xliff:g id="TOTAL_NUMBER">%2$s</xliff:g>"</string>
     <string name="confirm_export_title" msgid="7648747763127442983">"Conferma esportazione"</string>
     <string name="confirm_export_message" msgid="3875683519257829750">"Esportare l\'elenco di contatti in \"<xliff:g id="VCARD_FILENAME">%s</xliff:g>\"?"</string>
     <string name="exporting_contact_failed_title" msgid="585823094820602526">"Esportazione dati contatti non riuscita"</string>
@@ -223,10 +242,10 @@
     <string name="fail_reason_could_not_initialize_exporter" msgid="4943708332700987376">"Impossibile inizializzare l\'utilità di esportazione: \"<xliff:g id="EXACT_REASON">%s</xliff:g>\""</string>
     <string name="fail_reason_error_occurred_during_export" msgid="2151165129433831202">"Si è verificato un errore durante l\'esportazione: \"<xliff:g id="EXACT_REASON">%s</xliff:g>\""</string>
     <string name="composer_failed_to_get_database_infomation" msgid="3723109558155169053">"Recupero informazioni database non riuscito"</string>
-    <string name="composer_has_no_exportable_contact" msgid="2239503301380653777">"Nessun contatto esportabile. Potresti scegliere dati non esportabili"</string>
+    <string name="composer_has_no_exportable_contact" msgid="754734132189369094">"Nessun contatto esportabile. Se nel tuo telefono sono presenti dei contatti, qualche provider di dati potrebbe impedire l\'esportazione di tutti i contatti all\'esterno del telefono."</string>
     <string name="composer_not_initialized" msgid="8041534450748388843">"Il compositore di vCard non è correttamente inizializzato"</string>
-    <string name="fail_reason_could_not_open_file" msgid="4013520943128739511">"Impossibile aprire \"<xliff:g id="FILE_NAME">%s</xliff:g>\": <xliff:g id="EXACT_REASON">%s</xliff:g>"</string>
-    <string name="exporting_contact_list_progress" msgid="560522409559101193">"<xliff:g id="CURRENT_NUMBER">%s</xliff:g> contatti su <xliff:g id="TOTAL_NUMBER">%s</xliff:g>"</string>
+    <string name="fail_reason_could_not_open_file" msgid="4013520943128739511">"Impossibile aprire \"<xliff:g id="FILE_NAME">%1$s</xliff:g>\": <xliff:g id="EXACT_REASON">%2$s</xliff:g>"</string>
+    <string name="exporting_contact_list_progress" msgid="560522409559101193">"<xliff:g id="CURRENT_NUMBER">%1$s</xliff:g> contatti su <xliff:g id="TOTAL_NUMBER">%2$s</xliff:g>"</string>
     <string name="search_settings_description" msgid="2675223022992445813">"I nomi dei tuoi contatti"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Aggiungi pausa 2 sec"</string>
     <string name="add_wait" msgid="3360818652790319634">"Aggiungi attesa"</string>
@@ -236,6 +255,8 @@
     <string name="quickcontact_missing_app" msgid="4600366393134289038">"Nessuna applicazione trovata in grado di gestire questa azione"</string>
     <string name="quickcontact_remember_choice" msgid="5964536411579749424">"Memorizza questa scelta"</string>
     <string name="quickcontact_missing_name" msgid="5590266114306996632">"Sconosciuto"</string>
+    <!-- Text that is shown in the Badge, when there is no data to display -->
+    <string name="quickcontact_no_data">Nessun dato</string>
     <string name="menu_accounts" msgid="8499114602017077970">"Account"</string>
     <string name="menu_import_export" msgid="3765725645491577190">"Importa/esporta"</string>
     <string name="dialog_import_export" msgid="4771877268244096596">"Importa/esporta contatti"</string>
@@ -270,13 +291,13 @@
     <string name="call_fax_work" msgid="7467763592359059243">"Chiama fax ufficio"</string>
     <string name="call_fax_home" msgid="8342175628887571876">"Chiama n. fax casa"</string>
     <string name="call_pager" msgid="9003902812293983281">"Chiama cercapersone"</string>
-    <string name="call_other" msgid="5605584621798108205">"Chiama altro"</string>
+    <string name="call_other" msgid="8563753966926932052">"Chiama"</string>
     <string name="call_callback" msgid="1910165691349426858">"Chiama n. callback"</string>
     <string name="call_car" msgid="3280537320306436445">"Chiama n. automobile"</string>
     <string name="call_company_main" msgid="6105120947138711257">"Chiama n. azienda, principale"</string>
     <string name="call_isdn" msgid="1541590690193403411">"Chiama n. ISDN"</string>
     <string name="call_main" msgid="6082900571803441339">"Chiama n. principale"</string>
-    <string name="call_other_fax" msgid="7777261153532968503">"Chiama n. altro fax"</string>
+    <string name="call_other_fax" msgid="5745314124619636674">"Chiama n. fax"</string>
     <string name="call_radio" msgid="8296755876398357063">"Chiama radiotelefono"</string>
     <string name="call_telex" msgid="2223170774548648114">"Chiama telex"</string>
     <string name="call_tty_tdd" msgid="8951266948204379604">"Chiama n. TTY/TDD"</string>
@@ -291,29 +312,29 @@
     <string name="sms_fax_work" msgid="8028189067816907075">"Invia SMS a fax ufficio"</string>
     <string name="sms_fax_home" msgid="9204042076306809634">"Invia SMS a n. fax casa"</string>
     <string name="sms_pager" msgid="7730404569637015192">"Invia SMS a n. cercapersone"</string>
-    <string name="sms_other" msgid="5131921487474531617">"Invia SMS ad altro"</string>
+    <string name="sms_other" msgid="806127844607642331">"Invia SMS a n."</string>
     <string name="sms_callback" msgid="5004824430094288752">"Invia SMS a n. callback"</string>
     <string name="sms_car" msgid="7444227058437359641">"Invia SMS a n. automobile"</string>
     <string name="sms_company_main" msgid="118970873419678087">"Invia SMS a n. azienda, principale"</string>
     <string name="sms_isdn" msgid="8153785037515047845">"Invia SMS a n. ISDN"</string>
     <string name="sms_main" msgid="8621625784504541679">"Invia SMS a n. principale"</string>
-    <string name="sms_other_fax" msgid="3930666870074006114">"Invia SMS a n. altro fax"</string>
+    <string name="sms_other_fax" msgid="3888842199855843152">"Invia SMS a n. fax"</string>
     <string name="sms_radio" msgid="3329166673433967820">"Invia SMS a radiotelefono"</string>
     <string name="sms_telex" msgid="9034802430065267848">"Invia SMS a n. telex"</string>
     <string name="sms_tty_tdd" msgid="6782284969132531532">"Invia SMS a n. TTY/TDD"</string>
     <string name="sms_work_mobile" msgid="2459939960512702560">"Invia SMS a cellulare lavoro"</string>
     <string name="sms_work_pager" msgid="5566924423316960597">"Invia SMS a cercapersone ufficio"</string>
-    <string name="sms_assistant" msgid="2773424339923116234">"Invia SMS ad <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
+    <string name="sms_assistant" msgid="2773424339923116234">"Invia testo a <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
     <string name="sms_mms" msgid="4069352461380762677">"Invia SMS a n. MMS"</string>
     <string name="email_home" msgid="8573740658148184279">"Invia email a ind. casa"</string>
     <string name="email_mobile" msgid="2042889209787989814">"Invia email a ind. cellulare"</string>
     <string name="email_work" msgid="2807430017302722689">"Invia email a ind. ufficio"</string>
-    <string name="email_other" msgid="8093933498541795832">"Invia email ad altro"</string>
+    <string name="email_other" msgid="3454004077967657109">"Invia email"</string>
     <string name="email_custom" msgid="7548003991586214105">"Invia email a ind. <xliff:g id="CUSTOM">%s</xliff:g>"</string>
     <string name="email" msgid="5668400997660065897">"Email"</string>
     <string name="map_home" msgid="1243547733423343982">"Visualizza indirizzo casa"</string>
     <string name="map_work" msgid="1360474076921878088">"Visualizza indirizzo ufficio"</string>
-    <string name="map_other" msgid="5560707927535653892">"Visualizza altro indirizzo"</string>
+    <string name="map_other" msgid="3817820803587012641">"Visualizza indirizzo"</string>
     <string name="map_custom" msgid="6184363799976265281">"Visualizza indirizzo <xliff:g id="CUSTOM">%s</xliff:g>"</string>
     <string name="chat_aim" msgid="2588492205291249142">"Chatta su AIM"</string>
     <string name="chat_msn" msgid="8041633440091073484">"Chatta su Windows Live"</string>
@@ -369,6 +390,12 @@
     <string name="dialer_menu_sms">SMS/MMS</string>
 
     <!-- Wysie: Call log strings -->
+    <string name="recent_calls_clear_call_log">Cancella registro</string>
+    <string name="recent_calls_clear_what">Cosa cancellare?</string>
+    <string name="recent_calls_clear_all">Tutte</string>
+    <string name="recent_calls_clear_incoming">In arrivo</string>
+    <string name="recent_calls_clear_outgoing">In uscita</string>
+    <string name="recent_calls_clear_missed">Perse</string>
     <string name="alert_clear_call_log_title">Cancella tutte le chiamate</string>
     <string name="alert_clear_call_log_message">Sei sicuro di voler cancellare l\'elenco di tutte le chiamate?</string>
     <string name="alert_clear_cl_all_incoming">Sei sicuro di voler cancellare l\'elenco delle chiamate in arrivo?</string>
@@ -386,20 +413,22 @@
     <string name="summary_last_dialled">Premendo il tasto chiama viene ricomposto l\'ultimo numero chiamato</string>
     <string name="title_return_to_dialer">Torna al dialer dopo chiamata</string>
     <string name="title_vm_button">Pulsante azione sx (LAB)</string>
-    <string name="title_vm_handler">Gestore Voicemail</string>
-    <string name="title_use_1_for_reg_vm">Tasto 1 per Voicemail</string>
-    <string name="summaryon_use_1_for_reg_vm">Il tasto 1 verrà usato per la voicemail di default</string>
-    <string name="summaryoff_use_1_for_reg_vm">Il tasto 1 avvia gestore voicemail</string>
+    <string name="title_vm_handler">Gestore Segreteria</string>
+    <string name="title_use_1_for_reg_vm">Tasto 1 per Segreteria</string>
+    <string name="summaryon_use_1_for_reg_vm">Il tasto 1 verrà usato per la segreteria di default</string>
+    <string name="summaryoff_use_1_for_reg_vm">Il tasto 1 avvia gestore segreteria</string>
     <string name="title_disable_num_check">Disabilita controllo num.</string>
     <string name="summaryon_disable_num_check">Il pulsante azione sinistro(LAB) e il menu verranno abilitati</string>
-    <string name="summaryoff_disable_num_check">LAB e menu attivi solo se l\'ultimo num è stato digitato (tranne voicemail)</string>
+    <string name="summaryoff_disable_num_check">LAB e menu attivi solo se l\'ultimo num. è stato digitato (tranne segreteria)</string>
     <string name="title_enable_haptic_feedback">Abilita feedback aptico</string>
-    <string name="summary_enable_haptic_feedback">Usa la sequenza keypad - vai a CyanogenMod settings per la configurazione</string>
+    <string name="summary_enable_haptic_feedback">Usa la sequenza keypad - vai a Impostazioni CyanogenMod per la configurazione</string>
     <string name="title_change_digits_color">Cambia colore numeri</string>
     <string name="title_digits_color_pressed">Colore numeri (premuti)</string>
     <string name="title_digits_color_focused">Colore numeri (selezionati)</string>
     <string name="title_digits_color_unselected">Colore numeri(non selezionati)</string>
     <string name="title_choose_color">Scegli un colore</string>
+    <string name="instructions_choose_color">Premi al centro per confermare.\nPremi indietro per annullare.</string>
+    <string name="entry_no_vm_handler">Nessuno (Componi num. segreteria)</string>
 
     <!-- Preferences: Call log -->
     <string name="title_cl_exact_time">Tempo effettivo</string>
@@ -430,7 +459,7 @@
 
     <!-- Preferences: Favourites -->
     <string name="title_favourites_hide_freq_call">Nascondi chiam. frequenti</string>
-    <string name="summary_favourites_hide_freq_call">I dati attuali non sono cancellati ma nascosti</string>
+    <string name="summary_favourites_hide_freq_call">I dati attuali non sono stati cancellati ma nascosti</string>
     <string name="title_favs_ask_before_clear">Chiedi prima di cancellare le chiamate frequenti</string>
     <string name="summaryon_favs_ask_before_clear">Conferma cancellazione</string>
     <string name="summaryoff_favs_ask_before_clear">Se selezionato le chiamate frequenti verranno cancellate senza conferma</string>
@@ -443,7 +472,6 @@
     <!-- Wysie: About strings -->
     <string name="title_about">Informazioni</string>
     <string name="title_about_name">Nome della Mod</string>
-    <string name="summary_about_name">WyContacts Froyo</string>
     <string name="title_about_version">Versione</string>
     <string name="title_about_credits">Crediti</string>
     <string name="summary_about_credits">Wysie, ChainsDD, geesun, niuchl, rac2030, sileht e il resto di XDA! :)</string>

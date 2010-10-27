@@ -2748,6 +2748,10 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
                         ContactsUtils.initiateCall(this, phone);
                     }
                 }
+                // Close the phoneCursor after its use
+                if (phonesCursor != null) {
+                    phonesCursor.close();
+                }
             }
         }
         return true;

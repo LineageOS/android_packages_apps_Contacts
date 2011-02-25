@@ -1,0 +1,1277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2006 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Label for this app's shared user ID (and thus for all other
+         apps sharing the uid). -->
+    <string name="sharedUserLabel">Android Rendszer Alkalmazások</string>
+
+    <!-- Title for the activity that shows contacts.  This is the name
+         used in the Launcher icon. -->
+    <string name="contactsList">Névjegyek</string>
+
+    <!-- Title for the activity that dials the phone.  This is the name
+         used in the Launcher icon. -->
+    <string name="launcherDialer">Telefon</string>
+
+    <!-- Name of activity that allows users to create shortcuts on the home screen to a contact.
+         This shows up in a list of things like bookmark, folder, music playlist, etc -->
+    <string name="shortcutContact">Névjegy</string>
+
+    <!-- Name of activity that allows users to create shortcuts on the home screen to dial a contact.
+         This shows up in a list of things like bookmark, folder, music playlist, etc -->
+    <string name="shortcutDialContact">Közvetlen tárcsázás</string>
+
+    <!-- Name of activity that allows users to create shortcuts on the home screen to message (SMS) a contact.
+         This shows up in a list of things like bookmark, folder, music playlist, etc -->
+    <string name="shortcutMessageContact">Közvetlen üzenet</string>
+
+    <!-- Activity title when the user is selecting a contact for a shortcut. -->
+    <string name="shortcutActivityTitle">Válasszon ki egy névjegy hivatkozást</string>
+
+    <!-- Activity title when the user is selecting a contact for a direct dial shortcut. -->
+    <string name="callShortcutActivityTitle">Válassza ki a hívni kívánt számot</string>
+
+    <!-- Activity title when the user is selecting a contact for a direct message shortcut. -->
+    <string name="messageShortcutActivityTitle">Válassza ki az üzenet címzettjét</string>
+
+    <!-- Title for the activity that shows only starred contacts -->
+    <string name="starredList">Csillagozott</string>
+
+    <!-- Title for the activity that shows only frequently contacted contacts -->
+    <string name="frequentList">Gyakori</string>
+
+    <!-- Title for the activity that shows a mix of starred contacts and frequently contacted
+         contacts. -->
+    <string name="strequentList">Kedvencek</string>
+
+    <!-- The title bar when viewing the contact details activity -->
+    <string name="viewContactTitle">Kapcsolat adatai</string>
+
+    <!-- The description presented to the user in the Intent choose when there are multiple activities that allow
+         viewing a contact. This string represents the built in way to view the contact. -->
+    <string name="viewContactDesription">A névjegy megtekintése</string>
+
+    <!-- The description presented to the user in the Intent choose when there are multiple activities that allow
+         editing a contact. This string represents the built in way to edit the contact. -->
+    <string name="editContactDescription">A névjegy módosítása</string>
+
+    <!-- The description presented to the user in the Intent choose when there are multiple activities that allow
+         creating a new contact. This string represents the built in way to create the contact. -->
+    <string name="insertContactDescription">Új kapcsolat</string>
+
+    <!-- Hint text in the search box when the user hits the Search key while in the contacts app -->
+    <string name="searchHint">Kapcsolatok keresése</string>
+
+    <!-- Menu item to search contacts -->
+    <string name="menu_search">Keresés</string>
+
+    <!-- Menu item to create a new contact -->
+    <string name="menu_newContact">Új névjegy</string>
+
+    <!-- Menu item used to view the details for a specific contact -->
+    <string name="menu_viewContact">A névjegy megtekintése</string>
+
+    <!-- Menu item used to call a contact, containing the name of the contact to call -->
+    <string name="menu_callNumber">%s hívása</string>
+
+    <!-- Menu item used to add a star to a contact, which makes that contact show up at the top of favorites -->
+    <string name="menu_addStar">Hozzáadás a kedvencekhez</string>
+
+    <!-- Menu item used to remove a star from a contact, making the contact no longer show up at the top of favorites -->
+    <string name="menu_removeStar">Eltávolítás a kedvencek közül</string>
+
+    <!-- Menu item used to edit a specific contact -->
+    <string name="menu_editContact">A névjegy módosítása</string>
+
+    <!-- Menu item used to delete a specific contact -->
+    <string name="menu_deleteContact">Névjegy törlése</string>
+
+    <!-- Menu item used to call a specific contact when viewing the details of that contact. -->
+    <string name="menu_call">Partner hívása</string>
+
+    <!-- Menu item used to send an SMS or MMS message to a specific phone number or a contacts default phone number -->
+    <string name="menu_sendSMS">Üzenet küldése</string>
+
+    <!-- Menu item used to send an email message to a specific email address -->
+    <string name="menu_sendEmail">E-mail küldése</string>
+
+    <!-- Menu item used to view a contact's address on a map -->
+    <string name="menu_viewAddress">Cím megtekintése a térképen</string>
+
+    <!-- Menu item that makes a phone the default for a contact. The default number used when you
+         try to call a contact without specifying a specific number. -->
+    <string name="menu_makeDefaultNumber">Beállítás alapértelmezett számként</string>
+
+    <!-- Menu item that makes an email address the default for a contact. The default email used
+         when you try to email a contact without specifying a specific address. -->
+    <string name="menu_makeDefaultEmail">Beállítás alapértelmezett e-mailként</string>
+
+    <!-- Menu item used to share the plain-text representation of a specific phone number -->
+    <string name="menu_shareNumber">Szám megosztása</string>
+
+    <!-- Menu item used to share the plain-text representation of a specific email address -->
+    <string name="menu_shareEmail">E-mail megosztása</string>
+
+    <!-- Menu item used to share the plain-text representation of a specific address -->
+    <string name="menu_shareAddress">Cím megosztása</string>
+
+    <!-- Menu item that splits an item from the contact detail into a separate aggregate -->
+    <string name="menu_splitAggregate">Elválasztás</string>
+
+    <!-- Toast shown after a contact has been split from an aggregate by a user action -->
+    <string name="contactsSplitMessage">Elválasztott névjegyek</string>
+
+    <!-- Title of the confirmation dialog for separating contacts into multiple instances  -->
+    <string name="splitConfirmation_title">Kapcsolat elválasztása</string>
+
+    <!-- Confirmation dialog for separating contacts into multiple instances  -->
+    <string name="splitConfirmation">Biztos benne, hogy szeretné elválasztani ezt a névjegyet több különálló névjegybe?</string>
+
+    <!-- Menu item that joins an aggregate with another aggregate -->
+    <string name="menu_joinAggregate">Összekapcsolás</string>
+
+    <!-- Heading of the Join Contact screen -->
+    <string name="titleJoinContactDataWith">Névjegyek összekapcsolása</string>
+
+    <!-- Info blurb on the Join Contact screen -->
+    <string name="blurbJoinContactDataWith">Válassza ki a %s kapcsolattal összekapcsolni kívánt névjegyet.</string>
+
+    <!-- An item in the Join Contact activity that opens up the full contact A-Z list -->
+    <string name="showAllContactsJoinItem">Minden névjegy megjelenítése</string>
+
+    <!-- List separator for the Join Contact list: Suggestions -->
+    <string name="separatorJoinAggregateSuggestions">Javasolt névjegyek</string>
+
+    <!-- List separator for the Join Contact list: A-Z -->
+    <string name="separatorJoinAggregateAll">Minden névjegy</string>
+
+    <!-- Toast shown after two contacts have been joined by a user action -->
+    <string name="contactsJoinedMessage">Összekapcsolt névjegyek</string>
+
+    <!-- Menu item that opens the Options activity for a given contact -->
+    <string name="menu_contactOptions">Opciók</string>
+
+    <!-- Title for the Options activity for a given contact -->
+    <string name="contactOptionsTitle">Opciók</string>
+
+    <!-- Confirmation dialog title after users selects to delete a contact. -->
+    <string name="deleteConfirmation_title">Törlés</string>
+
+    <!-- Confirmation dialog title after users selects clear log. -->
+    <string name="clearConfirmation_title">Hívásnapló törlése</string>
+
+    <!-- Warning dialog contents after users selects to delete a ReadOnly contact. -->
+    <string name="readOnlyContactWarning">Nem lehet törölni a névjegyeket csak olvasható felhasználókból, de el lehet rejteni őket a névjegyek listájában.</string>
+
+    <!-- Warning dialog contents after users selects to delete a contact with ReadOnly and Writable sources. -->
+    <string name="readOnlyContactDeleteConfirmation">Ez a névjegy több fiókból tartalmaz információkat. Információk a csak olvasható fiókból el lesz elrejtve a névjegyek listájában, nem lesz törölve.</string>
+
+    <!-- Warning dialog contents after users selects to delete a contact with multiple Writable sources. -->
+    <string name="multipleContactDeleteConfirmation">Ha törli ezt a névjegyet, azzal törölni fogja az információkat több fiókból.</string>
+
+    <!-- Confirmation dialog contents after users selects to delete a Writable contact. -->
+    <string name="deleteConfirmation">Ez a névjegy törölve lesz.</string>
+
+    <!-- Confirmation dialog contents after users selects to clear call log. -->
+    <string name="clearLogConfirmation">Az bejegyzés törölve lesz a hívásnaplóból.</string>
+
+    <!-- Menu item to indicate you are done editing a contact and want to save the changes you've made -->
+    <string name="menu_done">Kész</string>
+
+    <!-- Menu item to indicate you want to stop editing a contact and NOT save the changes you've made -->
+    <string name="menu_doNotSave">Visszavonás</string>
+
+    <!-- The title of the activity that edits and existing contact -->
+    <string name="editContact_title_edit">Névjegy módosítása</string>
+
+    <!-- The title of the activity that creates a new contact -->
+    <string name="editContact_title_insert">Új névjegy</string>
+
+    <!-- The label describing the phonetic pronunciation/reading of a contact name -->
+    <string name="label_phonetic_name">Fonetikus</string>
+
+    <!-- The label describing the Notes field of a contact. This field allows free form text entry about a contact -->
+    <string name="label_notes">Jegyzetek</string>
+
+    <!-- The label describing the SIP address field of a contact. [CHAR LIMIT=20] -->
+    <string name="label_sip_address">Internetes hívás</string>
+
+    <!-- The label describing the custom ringtone for a contact -->
+    <string name="label_ringtone">Csengőhang</string>
+
+    <!-- Hint text for the contact name when editing -->
+    <string name="ghostData_name">Első és Utolsó</string>
+
+    <!-- Hint text for the phonetic reading of the contact name when editing -->
+    <string name="ghostData_phonetic_name">Név fonetikusan</string>
+
+    <!-- Hint text for the organization name when editing -->
+    <string name="ghostData_company">Cég</string>
+
+    <!-- Hint text for the organization title when editing -->
+    <string name="ghostData_title">Beosztás</string>
+
+    <!-- Message displayed in a toast when you try to view the details of a contact that
+         for some reason doesn't exist anymore. -->
+    <string name="invalidContactMessage">A névjegy nem létezik.</string>
+
+    <!-- When picking a contact from a list of all contacts there is an entry at the top of the
+         list that allows the user to create a new contact, which this string is used for -->
+    <string name="pickerNewContactHeader">Új névjegy létrehozása</string>
+
+    <!-- Dialog title when you select a label when creating or edit a contact -->
+    <string name="selectLabel">Válassza ki a címkét</string>
+
+    <!-- Header that expands to list all of the types of phone numbers when editing or creating a phone number for a contact -->
+    <string name="phoneLabelsGroup">Telefon</string>
+
+    <!-- Header that expands to list all of the types of email addresses when editing or creating an email address for a contact -->
+    <string name="emailLabelsGroup">E-mail</string>
+
+    <!-- Header that expands to list all of the types of IM account when editing or creating an IM account for a contact -->
+    <string name="imLabelsGroup">IM</string>
+
+    <!-- Header that expands to list all of the types of postal addresses when editing or creating an postal address for a contact -->
+    <string name="postalLabelsGroup">Levelezési cím</string>
+
+    <!-- The order of the items below is important, don't reorder without changing EditContactActivity.java -->
+    <skip/>
+    <!-- The labels that are under the otherLabelsGroup when editing a contact. -->
+    <string-array name="otherLabels">
+        <!-- An organization associated with a contact -->
+        <item>Szervezet</item>
+        <!-- A note associated with a contact -->
+        <item>Jegyzet</item>
+    </string-array>
+
+    <!-- Description in the dialog that appears if there are no pictures from which to create an icon for a contact -->
+    <string name="photoPickerNotFoundText">Nem található kép a telefonban.</string>
+
+    <!-- Description of the activity used to set a photo in the pictures application as the icon for a contact -->
+    <string name="attachToContact">Névjegy ikon</string>
+
+    <!-- Title of the dialog used to set a custom label for a contact detail, like a phone number or email address.
+         For example, this may be used to set a phone number's label to "Vaction house" -->
+    <string name="customLabelPickerTitle">Egyéni címke név</string>
+
+    <!-- The menu item to open the list of groups to display -->
+    <string name="menu_displayGroup">Opciók megjelenítése</string>
+
+    <!-- Title of activity that lets user pick which contact groups to display -->
+    <string name="displayGroups">Opciók megjelenítése</string>
+
+    <!-- Check box label that allows calls to the contact to be sent directly to voicemail -->
+    <string name="send_to_voicemail_checkbox">Küldje a hívások közvetlenül a hangpostára</string>
+
+    <!-- String used to indicate that a contact doesn't have a custom ringtone -->
+    <string name="default_ringtone">Alapértelmezett</string>
+
+    <!-- The button/menu item that allows you to change an existing contact picture -->
+    <string name="changePicture">Ikon lecserélése</string>
+
+    <!-- The menu item that allows you to remove a picture from a contact -->
+    <string name="removePicture">Ikon eltávolítása</string>
+
+    <!-- The text displayed when the contacts list is empty while displaying all contacts -->
+    <string name="noContacts">Nincsenek névjegyek.</string>
+
+    <!-- The text displayed when the contacts list is empty while displaying results after searching contacts -->
+    <string name="noMatchingContacts">Nem található megfelelő névjegy.</string>
+
+    <!-- The text displayed when the contacts list is empty while displaying only contacts that have phone numbers -->
+    <string name="noContactsWithPhoneNumbers">Nincsenek névjegyek telefonszámmal.</string>
+
+    <!-- The title of the filter to only show contacts with phone numbers -->
+    <string name="showFilterPhones">Névjegyeket csak telefonnal</string>
+
+    <!-- The description of the filter to only show contacts with phone numbers -->
+    <string name="showFilterPhonesDescrip">Csak azokat a névjegyeket, melyeknek van telefonszámuk</string>
+
+    <!-- The header over the list of all contacts groups -->
+    <string name="headerContactGroups">Válassza ki a megjelenítendő névjegyeket</string>
+
+    <!-- The description of a group with the total number of contacts -->
+    <plurals name="groupDescrip">
+        <item quantity="other"><xliff:g id="count">%0$d</xliff:g> contacts</item>
+    </plurals>
+
+    <!-- The description of a group with the total number of contacts, and the total number of contacts with phone numbers -->
+    <plurals name="groupDescripPhones">
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> contacts, <xliff:g id="countWithPhones">%2$d</xliff:g> with phones</item>
+    </plurals>
+
+    <!-- Displayed in a spinner dialog after the user creates a contact and it's being saved to the database -->
+    <string name="savingContact">Névjegy mentése\u2026</string>
+
+    <!-- Displayed in a spinner dialog as user changes to display options are saved -->
+    <string name="savingDisplayGroups">Megjelenítési opciók mentése\u2026</string>
+
+    <!-- Toast displayed when a contact is saved -->
+    <string name="contactSavedToast">Névjegy elmentve.</string>
+
+    <!-- Toast displayed when saving a contact failed -->
+    <string name="contactSavedErrorToast">Hiba, nem lehet menteni a névjegy változásokat.</string>
+
+    <!-- Displayed at the top of the contacts showing the total number of contacts visible when "Only contacts with phones" is selected -->
+    <plurals name="listTotalPhoneContacts">
+        <item quantity="one">Displaying 1 contact with phone number</item>
+        <item quantity="other">Displaying <xliff:g id="count">%d</xliff:g> contacts with phone numbers</item>
+    </plurals>
+
+    <!-- Displayed at the top of the contacts showing the zero as total number of contacts visible when "Only contacts with phones" is selected -->
+    <string name="listTotalPhoneContactsZero">Nincs látható névjegy telefonszámmal</string>
+
+    <!-- Displayed at the top of the contacts showing the total number of contacts visible when "Only contacts with phones" not selected -->
+    <plurals name="listTotalAllContacts">
+        <item quantity="one">Displaying 1 contact</item>
+        <item quantity="other">Displaying <xliff:g id="count">%d</xliff:g> contacts</item>
+    </plurals>
+
+    <!-- Displayed at the top of the contacts showing the zero total number of contacts visible when "Only contacts with phones" not selected -->
+    <string name="listTotalAllContactsZero">Nincs látható névjegy</string>
+
+    <!-- Displayed at the top of the contacts showing the total number of contacts found when "Only contacts with phones" not selected -->
+    <plurals name="listFoundAllContacts">
+        <item quantity="one">Found 1 contact</item>
+        <item quantity="other">Found <xliff:g id="count">%d</xliff:g> contacts</item>
+    </plurals>
+
+    <!-- Displayed at the top of the contacts showing the zero total number of contacts found when "Only contacts with phones" not selected -->
+    <string name="listFoundAllContactsZero">Névjegy nem található</string>
+
+    <!-- Displayed at the top of the contacts showing the total number of contacts found when typing search query -->
+    <plurals name="searchFoundContacts">
+        <item quantity="one">1 contact</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> contacts</item>
+    </plurals>
+
+    <!-- The description text for the contacts tab. Space is limited for this string, so the shorter the better -->
+    <string name="contactsIconLabel">Névjegyek</string>
+
+    <!-- The description text for the favorites tab. Space is limited for this string, so the shorter the better -->
+    <string name="contactsFavoritesLabel">Kedvencek</string>
+
+    <!-- The description text for the dialer tab. Space is limited for this string, so the shorter the better -->
+    <string name="dialerIconLabel">Telefon</string>
+
+    <!-- The description text for the call log tab. Space is limited for this string, so the shorter the better -->
+    <string name="recentCallsIconLabel">Hívásnapló</string>
+    <string name="liveFolderAll">Az összes névjegy</string>
+    <string name="liveFolderFavorites">Csillagozott névjegyek</string>
+    <string name="liveFolderPhone">Névjegyek telefonszámmal</string>
+
+    <!-- Menu item used to send an SMS or MMS message to a phone number  -->
+    <string name="menu_sendTextMessage">Szöveges üzenet küldése</string>
+
+    <!-- Menu item used to call a contact from the call log -->
+    <string name="recentCalls_callNumber">%s hívása</string>
+
+    <!-- Menu item used to copy a number from the call log to the dialer so it can be edited before calling it -->
+    <string name="recentCalls_editNumberBeforeCall">Szám szerkesztése hívás előtt</string>
+
+    <!--Menu item used to add a number from the call log to Blacklist  -->
+    <string name="recentCalls_addToBlacklist">Feketelistához adás</string>
+    
+    <!-- Menu item used to add a number from the call log to contacts -->
+    <string name="recentCalls_addToContact">Kapcsolatokhoz adás</string>
+
+    <!-- Menu item used to remove a single call from the call log -->
+    <string name="recentCalls_removeFromRecentList">Törlés a hívásnaplóból</string>
+
+    <!-- Menu item used to remove all calls from the call log -->
+    <string name="recentCalls_deleteAll">Hívásnapló ürítése</string>
+
+    <!-- Text displayed when the call log is empty -->
+    <string name="recentCalls_empty">A hívásnapló üres.</string>
+
+    <!-- Title of the confirmation dialog for clearing the call log  -->
+    <string name="clearCallLogConfirmation_title">Hívásnapló ürítées</string>
+
+    <!-- Confirmation dialog for clearing the call log  -->
+    <string name="clearCallLogConfirmation">Biztosan ki kívánja üríteni a hívásnaplót?</string>
+
+    <!-- The title of a dialog that displays the IMEI of the phone -->
+    <string name="imei">IMEI</string>
+
+    <!-- The title of a dialog that displays the MEID of the CDMA phone -->
+    <string name="meid">MEID</string>
+
+    <!-- String used for displaying calls to the voicemail number in the call log -->
+    <string name="voicemail">Hangposta</string>
+
+    <!-- String used to display calls from unknown numbers in the call log -->
+    <string name="unknown">Ismeretlen</string>
+
+    <!-- String used to display calls from private numbers in the call log -->
+    <string name="private_num">Privát szám</string>
+
+    <!-- String used to display calls from pay phone in the call log -->
+    <string name="payphone">Fizetős telefon</string>
+
+    <!-- Displayed in the text entry box in the dialer when in landscape mode to guide the user
+         to dial using the physical keyboard -->
+    <string name="dialerKeyboardHintText">Használja a billentyűzetet a tárcsázáshoz</string>
+
+    <!-- Hint text displayed in the "digits" field above the dialer's
+         dialpad, if there's already a call in progress.  (This hint
+         reminds the user that the dialer will add a new call, as opposed
+         to sending DTMF tones over the current call.) -->
+    <string name="dialerDialpadHintText">Tárcsázzon</string>
+
+    <!-- Dialog text displayed when loading a phone number from the SIM card for speed dial -->
+    <string name="simContacts_emptyLoading">Betöltés SIM kártyáról\u2026</string>
+
+    <!-- Dialog title displayed when loading a phone number from the SIM card for speed dial -->
+    <string name="simContacts_title">SIM-kártyán lévő kapcsolatok</string>
+
+    <!-- Displayed full screen when the user want to create a shortcut, but there is no contacts, and contact syncing is enabled -->
+    <string name="noContactsHelpTextWithSyncForCreateShortcut">"Nincs egy kapcsolata sem. (Eltarthat néhány percig, hogy a rendszer szinkronizálja kapcsolatait.)"</string>
+
+    <!-- Displayed full screen when the user want to create a shortcut, but there is no contacts -->
+    <string name="noContactsHelpTextForCreateShortcut">"Nincs egy kapcsolata sem."</string>
+
+    <!-- Displayed full screen when the user has no contacts and they are displaying the My Contacts group, and contact syncing is disabled -->
+    <string name="noContactsHelpText">"Nincs megjeleníthető kapcsolata.\n\nKapcsolat hozzáadásához nyomja meg a Menü gombot és érintse meg:\n
+		\nFiókok egy, a telefonnal szinkronizálni kívánt fiók hozzáadásához\n
+		\nÚj kapcsolat egy, a telefonnal szinkronizálni kívánt fiók hozzáadásához\n
+        \nImport/Export\n"</string>
+
+    <!-- Displayed full screen when the user has no contacts and they are displaying the My Contacts group, and contact syncing is enabled -->
+    <string name="noContactsHelpTextWithSync">"Nincs megjeleníthető kapcsolata. (Egy új fiók hozzáadása után eltarthat néhány percig a szinkronizálás)\n\nKapcsolat hozzáadásához nyomja meg a Menü gombot és érintse meg:\n
+        \nFiókok egy, a telefonnal szinkronizálni kívánt fiók hozzáadásához\n
+        \nMegjelenítési beállításoka kapcsolatok megjelenítési feltételeinek megváltoztatásához\n
+        \nÚj kapcsolat egy, a telefonnal szinkronizálni kívánt fiók hozzáadásához\n
+        \nImport/Export\n"</string>
+
+    <!-- Displayed full screen when the user has no contacts and they are displaying the My Contacts group, and contact syncing is disabled, and there is no sim card (cdma)-->
+    <string name="noContactsNoSimHelpText">"Nincs megjeleníthető kapcsolata.\n\nKapcsolat hozzáadásához nyomja meg a Menü gombot és érintse meg:\n
+        \nFiókok egy, a telefonnal szinkronizálni kívánt fiók hozzáadásához\n
+        \nÚj kapcsolat egy, a telefonnal szinkronizálni kívánt fiók hozzáadásához\n
+        \nImport/Export\n"</string>
+
+    <!-- Displayed full screen when the user has no contacts and they are displaying the My Contacts group, and contact syncing is enabled, and there is no sim card (cdma) -->
+    <string name="noContactsNoSimHelpTextWithSync">"Nincs megjeleníthető kapcsolata. (Egy új fiók hozzáadása után eltarthat néhány percig a szinkronizálás)\n\nKapcsolat hozzáadásához nyomja meg a Menü gombot és érintse meg:\n
+        \nFiókok egy, a telefonnal szinkronizálni kívánt fiók hozzáadásához\n
+        \nMegjelenítési beállításoka kapcsolatok megjelenítési feltételeinek megváltoztatásához\n
+        \nÚj kapcsolat egy, a telefonnal szinkronizálni kívánt fiók hozzáadásához\n
+        \nImport/Export\n"</string>
+
+    <!-- Displayed full screen when the user has no favorites and they are displaying the favorites tab -->
+    <string name="noFavoritesHelpText">"Nincs egyetlen kedvence sem.\n\nKedvenc hozáadása:\n
+        Érintse meg a Kapcsolatok fület\n
+		\nÉrintse meg a kapcsolatot amit hozzá akar adni a kedvencekhez\n
+		\nÉrintse meg a név mellett lévő csillagot\n"</string>
+
+    <!-- Activity title for the activity that lets the user choose which groups of contacts to sync from the server -->
+
+
+    <!-- Live folder label for all contacts -->
+    <string name="liveFolder_all_label">Az összes kapcsolat</string>
+
+    <!-- Live folder label for only starred contacts -->
+    <string name="liveFolder_favorites_label">Csillagozott</string>
+
+    <!-- Live folder label for all contacts with phone numbers -->
+    <string name="liveFolder_phones_label">Nevek telefonszámmal</string>
+
+    <!-- Item label: jump to the in-call DTMF dialpad.
+         (Part of a list of options shown in the dialer when another call
+         is already in progress.) -->
+    <string name="dialer_useDtmfDialpad">Használja a nyomógombos billentyűzetet</string>
+
+    <!-- Item label: jump to the in-call UI.
+         (Part of a list of options shown in the dialer when another call
+         is already in progress.) -->
+    <string name="dialer_returnToInCallScreen">Visszatérés a folyamatban lévő híváshoz</string>
+
+    <!-- Item label: use the Dialer's dialpad to add another call.
+         (Part of a list of options shown in the dialer when another call
+         is already in progress.) -->
+    <string name="dialer_addAnotherCall">Új hívás</string>
+
+    <!-- Title bar for call detail screen -->
+    <string name="callDetailTitle">Hívás részletei</string>
+
+    <!-- Toast for call detail screen when couldn't read the requested details -->
+    <string name="toast_call_detail_error">A kért hívás részletei nem olvashatók.</string>
+
+    <!-- Title for incoming call details screen -->
+    <string name="type_incoming">Bejövő hívás</string>
+
+    <!-- Title for outgoing call details screen -->
+    <string name="type_outgoing">Kimenő hívás</string>
+
+    <!-- Title for missed call details screen -->
+    <string name="type_missed">Nem fogadott hívás</string>
+
+    <!-- Description for incoming calls going to voice mail vs. not -->
+    <string name="actionIncomingCall">Bejövő hívások</string>
+
+    <!-- Action string for calling back a number in the call log -->
+    <string name="callBack">Visszahívás</string>
+
+    <!-- Action string for calling a number in the call log again -->
+    <string name="callAgain">Hívás újra</string>
+
+    <!-- Action string for returning a missed call in the call log -->
+    <string name="returnCall">Visszahívás</string>
+
+    <!-- A nicely formatted call duration displayed when viewing call details. For example "42 mins 28 secs" -->
+    <string name="callDetailsDurationFormat">%1$s perc %2$s mp</string>
+
+    <!-- A list separator for the Favorites tab indicating that items below it are frequently contacted contacts rather than starred contacts -->
+    <string name="favoritesFrquentSeparator">Gyakran keresett</string>
+
+    <!-- Dialog title when prompting before creating a contact -->
+    <string name="add_contact_dlg_title">Kapcsolat hozzáadása</string>
+    <!-- Dialog message when prompting before creating a contact. Includes
+         the email address, e.g. "Add xyz@foo.com to contacts?" -->
+    <string name="add_contact_dlg_message_fmt">Hozzáadja \"%s\"-t a kapcsolatokhoz</string>
+
+    <!-- Label for the all data tab in the view and edit card -->
+    <string name="all_tab_label">Összes</string>
+
+    <!-- String describing the image on ImageButton one
+
+        Note: AccessibilityServices use this attribute to announce what the view represents.
+              This is especially valuable for views without textual representation like ImageView.
+    -->
+    <string name="description_image_button_one">egy</string>
+
+    <!-- String describing the image on ImageButton two
+
+        Note: AccessibilityServices use this attribute to announce what the view represents.
+              This is especially valuable for views without textual representation like ImageView.
+    -->
+    <string name="description_image_button_two">kettő</string>
+
+    <!-- String describing the image on ImageButton three
+
+        Note: AccessibilityServices use this attribute to announce what the view represents.
+              This is especially valuable for views without textual representation like ImageView.
+    -->
+    <string name="description_image_button_three">három</string>
+
+    <!-- String describing the image on ImageButton four
+
+        Note: AccessibilityServices use this attribute to announce what the view represents.
+              This is especially valuable for views without textual representation like ImageView.
+    -->
+    <string name="description_image_button_four">négy</string>
+
+    <!-- String describing the image on ImageButton five
+
+        Note: AccessibilityServices use this attribute to announce what the view represents.
+              This is especially valuable for views without textual representation like ImageView.
+    -->
+    <string name="description_image_button_five">öt</string>
+
+    <!-- String describing the image on ImageButton six
+
+        Note: AccessibilityServices use this attribute to announce what the view represents.
+              This is especially valuable for views without textual representation like ImageView.
+    -->
+    <string name="description_image_button_six">hat</string>
+
+    <!-- String describing the image on ImageButton seven
+
+        Note: AccessibilityServices use this attribute to announce what the view represents.
+              This is especially valuable for views without textual representation like ImageView.
+    -->
+    <string name="description_image_button_seven">hét</string>
+
+    <!-- String describing the image on ImageButton eight
+
+        Note: AccessibilityServices use this attribute to announce what the view represents.
+              This is especially valuable for views without textual representation like ImageView.
+    -->
+    <string name="description_image_button_eight">nyolc</string>
+
+    <!-- String describing the image on ImageButton nine
+
+        Note: AccessibilityServices use this attribute to announce what the view represents.
+              This is especially valuable for views without textual representation like ImageView.
+    -->
+    <string name="description_image_button_nine">kilenc</string>
+
+    <!-- String describing the image on ImageButton star
+
+        Note: AccessibilityServices use this attribute to announce what the view represents.
+              This is especially valuable for views without textual representation like ImageView.
+    -->
+    <string name="description_image_button_star">csillag</string>
+
+    <!-- String describing the image on ImageButton zero
+
+        Note: AccessibilityServices use this attribute to announce what the view represents.
+              This is especially valuable for views without textual representation like ImageView.
+    -->
+    <string name="description_image_button_zero">nulla</string>
+
+    <!-- String describing the image on ImageButton pound
+
+        Note: AccessibilityServices use this attribute to announce what the view represents.
+              This is especially valuable for views without textual representation like ImageView.
+    -->
+    <string name="description_image_button_pound">font</string>
+
+    <!-- String describing the Voicemail ImageButton
+
+         Used by AccessibilityService to announce the purpose of the button.
+    -->
+    <string name="description_voicemail_button">hangposta</string>
+
+    <!-- String describing the Dial ImageButton
+
+         Used by AccessibilityService to announce the purpose of the button.
+    -->
+    <string name="description_dial_button">tárcsázás</string>
+
+    <!-- String describing the Delete/Backspace ImageButton
+
+         Used by AccessibilityService to announce the purpose of the button.
+    -->
+    <string name="description_delete_button">backspace</string>
+
+    <!-- String describing the digits text box containing the number to dial.
+
+         Used by AccessibilityService to announce the purpose of the view.
+    -->
+    <string name="description_digits_edittext">tárcsázandó szám</string>
+
+    <!-- String describing the Contact Photo Image
+
+         Used by AccessibilityService to announce the purpose of the view.
+    -->
+    <string name="description_contact_photo">névjegy fényképe</string>
+
+    <!-- String describing the Contact Editor Minus button
+
+         Used by AccessibilityService to announce the purpose of the button.
+    -->
+    <string name="description_minus_button">mínusz</string>
+
+    <!-- String describing the Contact Editor Plus button
+
+         Used by AccessibilityService to announce the purpose of the button.
+    -->
+    <string name="description_plus_button">plusz</string>
+
+    <!-- Dialog title shown when USB storage does not exist [CHAR LIMIT=25] -->
+    <string name="no_sdcard_title" product="nosdcard">Nincs SD-kártya</string>
+    <!-- Dialog title shown when SD Card does not exist -->
+    <string name="no_sdcard_title" product="default">Nincs SD-kártya</string>
+
+    <!-- Dialog message shown when USB storage does not exist [CHAR LIMIT=30] -->
+    <string name="no_sdcard_message" product="nosdcard">Nem található SD-kártya</string>
+    <!-- Dialog message shown when SDcard does not exist -->
+    <string name="no_sdcard_message" product="default">Nem található SD-kártya</string>
+
+    <!-- Dialog title shown when searching VCard data from SD Card -->
+    <string name="searching_vcard_title">vCard keresése</string>
+
+    <!-- Action string for selecting SIM for importing contacts -->
+    <string name="import_from_sim">Importálás SIM-kártyáról</string>
+
+    <!-- Action string for selecting USB storage for importing contacts [CHAR LIMIT=25] -->
+    <string name="import_from_sdcard" product="nosdcard">Importálás SIM-kártyáról</string>
+    <!-- Action string for selecting SD Card for importing contacts -->
+    <string name="import_from_sdcard" product="default">Importálás SIM-kártyáról</string>
+
+    <!-- Action that exports all contacts to USB storage [CHAR LIMIT=25] -->
+    <string name="export_to_sdcard" product="nosdcard">Exportálás SD kártyára</string>
+    <!-- Action that exports all contacts to SD Card -->
+    <string name="export_to_sdcard" product="default">Exportálás SD kártyára</string>
+
+    <!-- Action that shares visible contacts -->
+    <string name="share_visible_contacts">Látható névjegyek megosztása</string>
+
+    <!-- One of alternatives shown when the system allows a user to select how many vCard files
+         should be imported. This message shows only when the system is certain that there's more
+         than one vCard files available in the system. -->
+    <string name="import_one_vcard_string">Egy vCard fájl importálása</string>
+
+    <!-- One of alternatives shown when the system allows a user to select how many vCard files
+         should be imported. This message shows only when the system is certain that there's more
+         than one vCard files available in the system. -->
+    <string name="import_multiple_vcard_string">Több vCard fájl importálása</string>
+
+    <!-- One of alternatives shown when the system allows a user to select how many vCard files
+         should be imported. This message shows only when the system is certain that there's more
+         than one vCard files available in the system. -->
+    <string name="import_all_vcard_string">Az összes vCard fájl importálása</string>
+
+    <!-- Dialog message shown when searching VCard data from SD Card [CHAR LIMIT=NONE] -->
+    <string name="searching_vcard_message" product="nosdcard">vCard adatok keresése az SD-kártyán</string>
+    <!-- Dialog message shown when searching VCard data from SD Card -->
+    <string name="searching_vcard_message" product="default">vCard adatok keresése az SD-kártyán</string>
+
+    <!-- Dialog title shown when scanning VCard data failed. [CHAR LIMIT=NONE] -->
+    <string name="scanning_sdcard_failed_title" product="nosdcard">Az SD-kártya vizsgálata sikertelen</string>
+    <!-- Dialog title shown when scanning VCard data failed. -->
+    <string name="scanning_sdcard_failed_title" product="default">Az SD-kártya vizsgálata sikertelen</string>
+
+    <!-- Dialog message shown when searching VCard data failed.
+         An exact reason for the failure should [CHAR LIMIT=NONE] -->
+    <string name="scanning_sdcard_failed_message" product="nosdcard">SD kártya vizsgálata sikertelen (\"%s\")</string>
+    <!-- Dialog message shown when searching VCard data failed.
+         An exact reason for the failure should -->
+    <string name="scanning_sdcard_failed_message" product="default">SD kártya vizsgálata sikertelen (\"%s\")</string>
+
+    <!-- The failed reason shown when Contacts app (especially vCard importer/exporter)
+         emitted some I/O error. Exact reason will be appended by the system. -->
+    <string name="fail_reason_io_error">I/O Hiba</string>
+
+    <!-- The failed reason shown when vCard parser was not able to be parsed by the current vCard
+         implementation. This might happen even when the input vCard is completely valid, though
+         we believe it is rather rare in the actual world. -->
+    <string name="fail_reason_vcard_parse_error">Váratlan okból nem sikerült feldolgozni a vCard-ot</string>
+
+    <!-- The failed reason shown when the current vCard importer cannot parse the file since the
+         parser is incomplete (actually, there's missing part in the current vCard parser, though
+         our understanding is that the functionality missed by the current vCard parser
+         is rarely needed in the actual vCard...). -->
+    <string name="fail_reason_vcard_not_supported_error">Nem sikerült feldolgozni a vCard-ot, bár úgy tűnik érvénytelen formátumú, hiszen a jelenlegi rendszer implementációja nem támogatja</string>
+
+    <!-- The failed reason shown when the system could not find any vCard file
+         (with extension ".vcf" in SDCard.) [CHAR LIMIT=NONE] -->
+    <string name="fail_reason_no_vcard_file" product="nosdcard">Nem található vCard fájl az SD-kártyán</string>
+    <!-- The failed reason shown when the system could not find any vCard file
+         (with extension ".vcf" in SDCard.) -->
+    <string name="fail_reason_no_vcard_file" product="default">Nem található vCard fájl az SD-kártyán</string>
+
+    <!-- The failed reason shown when the import of some of vCard files failed during multiple vCard
+         files import. It includes the case where all files were failed to be imported. -->
+    <string name="fail_reason_failed_to_read_files">Egy vagy több fájlt nem sikerült importálni kell (%s).</string>
+
+    <!-- The failed reason which should not be shown but it may in some buggy condition. -->
+    <string name="fail_reason_unknown">Ismeretlen hiba</string>
+
+    <!-- Dialog title shown when a user is asked to select VCard file -->
+    <string name="select_vcard_title">Jelölje ki a vCard-fájlt</string>
+
+    <!-- The message shown while reading a vCard file/entry. The first argument is like
+    "Reading VCard" or "Reading VCard files" and the second is the display name of the current
+    data being parsed -->
+    <string name="progress_shower_message">%1$s\n%2$s</string>
+
+    <!-- Dialog title shown when reading VCard data -->
+    <string name="reading_vcard_title">vCard olvasása</string>
+
+    <!-- Dialog message shown when reading a VCard file -->
+    <string name="reading_vcard_message">vCard fájl(ok) olvasása</string>
+
+    <!-- Dialog title shown when reading VCard data failed -->
+    <string name="reading_vcard_failed_title">vCard-adatainak olvasása sikertelen</string>
+
+    <!-- Message while reading one vCard file "(current number) of (total number) contacts" The order of "current number" and "total number" cannot be changed (like "total: (total number), current: (current number)")-->
+    <string name="reading_vcard_contacts">%1$s / %2$s kapcsolat</string>
+
+    <!-- Message while reading multiple vCard files "(current number) of (total number) files" The order of "current number" and "total number" cannot be changed (like "total: (total number), current: (current number)")-->
+    <string name="reading_vcard_files">%1$s / %2$s file</string>
+
+    <!-- Dialog title shown when a user confirms whether he/she export Contact data -->
+    <string name="confirm_export_title">Exportálás megerősítése</string>
+
+    <!-- Dialog message shown when a user confirms whether he/she export Contact data -->
+    <string name="confirm_export_message">Biztosan exportálni akarja a kapcsolatokat a \"%s\" helyre?</string>
+
+    <!-- Dialog title shown when exporting Contact data failed -->
+    <string name="exporting_contact_failed_title">Nem sikerült exportálni a névjegyadatokat</string>
+
+    <!-- Dialog message shown when exporting Contact data failed -->
+    <string name="exporting_contact_failed_message">Nem sikerült az exportálás. Ok: \"%s\"</string>
+
+    <!-- The failed reason shown when there's no contact which is allowed to be exported.
+         Note that user may have contacts data but all of them are probably not allowed to be
+         exported because of security/permission reasons. -->
+    <string name="fail_reason_no_exportable_contact">Nincs exportálandó névjegy</string>
+
+    <!-- The failed reason shown when vCard exporter could not create a file for the vCard since
+         there are too many files relevant to vCard. [CHAR LIMIT=NONE] -->
+    <string name="fail_reason_too_many_vcard" product="nosdcard">Túl sok vCard fájl található az SD kártyán</string>
+    <!-- The failed reason shown when vCard exporter could not create a file for the vCard since
+         there are too many files relevant to vCard. -->
+    <string name="fail_reason_too_many_vcard" product="default">Túl sok vCard fájl található az SD kártyán</string>
+
+    <!-- The failed reason shown when the given file name is too long for the system.
+         The length limit of each file is different in each Android device, so we don't need to
+         mention it here. -->
+    <string name="fail_reason_too_long_filename">A fájlnév (\"%s\") túl hosszú</string>
+
+    <!-- Dialog title shown when the application is exporting contact data outside -->
+    <string name="exporting_contact_list_title">Névjegyek exportálása</string>
+
+    <!-- Message shown when the application is exporting contact data outside -->
+    <string name="exporting_contact_list_message">Névjegyek exportálása a \"%s\" helyre.</string>
+
+    <!-- The failed reason shown when contacts exporter fails to be initialized.
+         Some exact reason must follow this. -->
+    <string name="fail_reason_could_not_initialize_exporter">Az exporter inicializálása sikertelen: \"%s\"</string>
+
+    <!-- The failed reason shown when some error happend during contacts export.
+         Some exact reason must follow this. -->
+    <string name="fail_reason_error_occurred_during_export">Hiba történt az exportálás során: \"%s\"</string>
+
+    <!-- The error reason the vCard composer "may" emit when database is corrupted or
+         something is going wrong. Usually users should not see this text. -->
+    <string name="composer_failed_to_get_database_infomation">Nem sikerült lekérni az adatbázis információkat</string>
+
+    <!-- This error message shown when the user actually have no contact
+         (e.g. just after data-wiping), or, data providers of the contact list prohibits their
+         contacts from being exported to outside world via vcard exporter, etc. -->
+    <string name="composer_has_no_exportable_contact">Nincs exportálható kapcsolat. Ha vannak kapcsolatai a telefonon, minden kapcsolat exportálása le van tiltva egy adatszolgáltató által.</string>
+
+    <!-- The error reason the vCard composer may emit when vCard composer is not initialized
+         even when needed.
+         Users should not usually see this error message. -->
+    <string name="composer_not_initialized">A névjegyszerkesztő hibásan töltődött be</string>
+
+    <!-- The failed reason shown when vCard importer/exporter could not open the file
+         specified by a user. The file name should be in the message. -->
+    <string name="fail_reason_could_not_open_file">A(z) \"%1$s\" nem nyitható meg: %2$s</string>
+
+    <!-- Message in progress bar while exporting contact list to a file "(current number) of (total number) contacts" The order of "current number" and "total number" cannot be changed (like "total: (total number), current: (current number)")-->
+    <string name="exporting_contact_list_progress">%1$s / %2$s kapcsolat</string>
+
+    <!-- The string used to describe Contacts as a searchable item within system search settings. -->
+    <string name="search_settings_description">Kapcsolat neve</string>
+
+    <!-- Menu items for dialpad options as part of Pause and Wait ftr -->
+    <string name="add_2sec_pause">2 mp szünet hozzáadása</string>
+    <string name="add_wait">várakoztatás hozzáadása</string>
+
+    <!-- Title for the call disambiguation dialog -->
+    <string name="call_disambig_title">Hívás</string>
+
+    <!-- Title for the sms disambiguation dialog -->
+    <string name="sms_disambig_title">Üzenet írása</string>
+
+    <!-- Message next to disamgiguation dialog check box -->
+    <string name="make_primary">Választás megjegyzése</string>
+
+    <!-- Shown as a toast when the user taps on a Fast-Track icon, and no application
+         was found that could perform the selected action -->
+    <string name="quickcontact_missing_app">Nem található kezelő program</string>
+
+    <!-- Shown as the checkbox label that, when checked, will store remember the
+         selected choice and shortcut to it in the future.  For example, this would
+         make a selected phone number the default. -->
+    <string name="quickcontact_remember_choice">Jegyezze meg ezt a választást</string>
+
+    <!-- Shown as the header name for a person when the name is missing or unknown. -->
+    <string name="quickcontact_missing_name">Ismeretlen</string>
+
+    <!-- Text that is shown in the Badge, when there is no data to display -->
+    <string name="quickcontact_no_data">Nincs adat</string>
+
+    <!-- The menu item to open the list of accounts -->
+    <string name="menu_accounts">Fiókok</string>
+
+    <!-- The menu item to bulk import or bulk export contacts from SIM card or SD card. -->
+    <string name="menu_import_export">Import/Export</string>
+
+    <!-- Dialog title when selecting the bulk operation to perform from a list. -->
+    <string name="dialog_import_export">Névjegyek importálása/exportálása</string>
+
+    <!-- The menu item to share the currently viewed contact -->
+    <string name="menu_share">Megosztás</string>
+
+    <!-- Dialog title when picking the application to share a contact with. -->
+    <string name="share_via">Kapcsolat megosztása</string>
+
+    <!-- Toast indicating that sharing a contact has failed. -->
+    <string name="share_error">A kapcsolatot nem lehet megosztani.</string>
+
+    <!-- Header that expands to list all name types when editing a structured name of a contact -->
+    <string name="nameLabelsGroup">Név</string>
+    <!-- Header that expands to list all nickname types when editing a nickname of a contact -->
+    <string name="nicknameLabelsGroup">Becenév</string>
+    <!-- Header that expands to list all organization types when editing an organization of a contact -->
+    <string name="organizationLabelsGroup">Szervezet</string>
+    <!-- Header that expands to list all website types when editing a website of a contact -->
+    <string name="websiteLabelsGroup">Honlap</string>
+    <!-- Header that expands to list all event types when editing an event of a contact -->
+    <string name="eventLabelsGroup">Esemény</string>
+
+    <!-- Single-character overlay for home phone numbers when creating desktop shortcuts -->
+    <string name="type_short_home">H</string>
+    <!-- Single-character overlay for mobile phone numbers when creating desktop shortcuts -->
+    <string name="type_short_mobile">M</string>
+    <!-- Single-character overlay for work phone numbers when creating desktop shortcuts -->
+    <string name="type_short_work">W</string>
+    <!-- Single-character overlay for pager phone numbers when creating desktop shortcuts -->
+    <string name="type_short_pager">P</string>
+    <!-- Single-character overlay for other phone numbers when creating desktop shortcuts -->
+    <string name="type_short_other">O</string>
+
+    <!-- In edit dialog, shown if the contact is marked as being read-only -->
+    <string name="edit_read_only">Ez a kapcsolat csak olvasható</string>
+
+    <!-- Shown as the header title over a collapsible section that, by default, hides
+         secondary contact detail edit fields, such as birthday. -->
+    <string name="edit_secondary_collapse">Egyebek</string>
+
+    <string name="dialog_primary_name">Elsődleges név</string>
+    <string name="dialog_new_contact_account">Kapcsolat hozzáadása a felhasználói fiókhoz</string>
+
+    <string name="menu_sync_remove">Csoport szinkronizálás eltávolítása</string>
+    <string name="dialog_sync_add">Csoport szinkronizálás</string>
+    <string name="display_more_groups">További csoport\u2026</string>
+
+    <!-- List title for a special contacts group that covers all contacts.-->
+    <string name="display_ungrouped">Minden egyéb Kapcsolat</string>
+
+    <!-- List title for a special contacts group that covers all contacts that
+         aren't members of any other group. -->
+    <string name="display_all_contacts">Az összes névjegy</string>
+
+    <!-- Warning message given to users just before they remove a currently syncing
+         group that would also cause all ungrouped contacts to stop syncing. -->
+    <string name="display_warn_remove_ungrouped">\'%s\' szinkronizálásának letiltása le fogja tiltani az összes csoportosítatlan kapcsolat szinkronizálását is.</string>
+
+    <!-- Title for data source when creating or editing a contact that doesn't
+         belong to a specific account.  This contact will only exist on the phone
+         and will not be synced. -->
+    <string name="account_phone">Csak telefon (szinkronizálatlan)</string>
+
+    <!-- Action string for calling a custom phone number -->
+    <string name="call_custom">Hívás: %s</string>
+    <!-- Action string for calling a home phone number -->
+    <string name="call_home">Hívás: otthoni</string>
+    <!-- Action string for calling a mobile phone number -->
+    <string name="call_mobile">Hívás: mobil</string>
+    <!-- Action string for calling a work phone number -->
+    <string name="call_work">Hívás: munkahelyi</string>
+    <!-- Action string for calling a work fax phone number -->
+    <string name="call_fax_work">Hívás: munkahelyi fax</string>
+    <!-- Action string for calling a home fax phone number -->
+    <string name="call_fax_home">Hívás: otthoni fax</string>
+    <!-- Action string for calling a pager phone number -->
+    <string name="call_pager">Hívás: személyhívó</string>
+    <!-- Action string for calling an other phone number -->
+    <string name="call_other">Hívás</string>
+    <!-- Action string for calling a callback number -->
+    <string name="call_callback">Hívás: visszahívás</string>
+    <!-- Action string for calling a car phone number -->
+    <string name="call_car">Hívás: autó</string>
+    <!-- Action string for calling a company main phone number -->
+    <string name="call_company_main">Hívás: cég fő</string>
+    <!-- Action string for calling a ISDN phone number -->
+    <string name="call_isdn">Hívás: ISDN</string>
+    <!-- Action string for calling a main phone number -->
+    <string name="call_main">Hívás: fő</string>
+    <!-- Action string for calling an other fax phone number -->
+    <string name="call_other_fax">Hívás: fax</string>
+    <!-- Action string for calling a radio phone number -->
+    <string name="call_radio">Hívás: rádió</string>
+    <!-- Action string for calling a Telex phone number -->
+    <string name="call_telex">hívás: telex</string>
+    <!-- Action string for calling a TTY/TDD phone number -->
+    <string name="call_tty_tdd">Hívás: TTY/TDD</string>
+    <!-- Action string for calling a work mobile phone number -->
+    <string name="call_work_mobile">Hívás: munka mobil</string>
+    <!-- Action string for calling a work pager phone number -->
+    <string name="call_work_pager">Hívás: munka személyhívó</string>
+    <!-- Action string for calling an assistant phone number -->
+    <string name="call_assistant">Hívás: %s</string>
+    <!-- Action string for calling a MMS phone number -->
+    <string name="call_mms">Hívás: MMS</string>
+
+    <!-- Action string for sending an SMS to a custom phone number -->
+    <string name="sms_custom">Szöveges üzenet: %s</string>
+    <!-- Action string for sending an SMS to a home phone number -->
+    <string name="sms_home">Szöveges üzenet: otthoni</string>
+    <!-- Action string for sending an SMS to a mobile phone number -->
+    <string name="sms_mobile">Szöveges üzenet: mobil</string>
+    <!-- Action string for sending an SMS to a work phone number -->
+    <string name="sms_work">Szöveges üzenet: munkahelyi</string>
+    <!-- Action string for sending an SMS to a work fax phone number -->
+    <string name="sms_fax_work">Szöveges üzenet: munkahelyi fax</string>
+    <!-- Action string for sending an SMS to a home fax phone number -->
+    <string name="sms_fax_home">Szöveges üzenet: otthoni fax</string>
+    <!-- Action string for sending an SMS to a pager phone number -->
+    <string name="sms_pager">Szöveges üzenet: személyhívó</string>
+    <!-- Action string for sending an SMS to an other phone number -->
+    <string name="sms_other">Szöveges üzenet</string>
+    <!-- Action string for sending an SMS to a callback number -->
+    <string name="sms_callback">Szöveges üzenet: visszahívás</string>
+    <!-- Action string for sending an SMS to a car phone number -->
+    <string name="sms_car">Szöveges üzenet: autó</string>
+    <!-- Action string for sending an SMS to a company main phone number -->
+    <string name="sms_company_main">Szöveges üzenet: cég fő</string>
+    <!-- Action string for sending an SMS to a ISDN phone number -->
+    <string name="sms_isdn">Szöveges üzenet: ISDN</string>
+    <!-- Action string for sending an SMS to a main phone number -->
+    <string name="sms_main">Szöveges üzenet: fő</string>
+    <!-- Action string for sending an SMS to an other fax phone number -->
+    <string name="sms_other_fax">Szöveges üzenet: fax</string>
+    <!-- Action string for sending an SMS to a radio phone number -->
+    <string name="sms_radio">Szöveges üzenet: rádió</string>
+    <!-- Action string for sending an SMS to a Telex phone number -->
+    <string name="sms_telex">Szöveges üzenet: telex</string>
+    <!-- Action string for sending an SMS to a TTY/TDD phone number -->
+    <string name="sms_tty_tdd">Szöveges üzenet: TTY/TDD</string>
+    <!-- Action string for sending an SMS to a work mobile phone number -->
+    <string name="sms_work_mobile">Szöveges üzenet: munkahelyi mobil</string>
+    <!-- Action string for sending an SMS to a work pager phone number -->
+    <string name="sms_work_pager">Szöveges üzenet: munkahelyi személyhívó</string>
+    <!-- Action string for sending an SMS to an assistant phone number -->
+    <string name="sms_assistant">Szöveges üzenet: %s</string>
+    <!-- Action string for sending an SMS to a MMS phone number -->
+    <string name="sms_mms">Szöveges üzenet: MMS</string>
+
+    <!-- Action string for sending an email to a home email address -->
+    <string name="email_home">E-mail: otthoni</string>
+    <!-- Action string for sending an email to a mobile email address -->
+    <string name="email_mobile">E-mail: mobil</string>
+    <!-- Action string for sending an email to a work email address -->
+    <string name="email_work">E-mail: munkahelyi</string>
+    <!-- Action string for sending an email to an other email address -->
+    <string name="email_other">E-mail</string>
+    <!-- Action string for sending an email to a custom email address -->
+    <string name="email_custom">E-mail: %s</string>
+
+    <!-- Generic action string for sending an email -->
+    <string name="email">E-mail</string>
+
+    <!-- Action string for viewing a home postal address -->
+    <string name="map_home">Otthoni cím megjelenítése</string>
+    <!-- Action string for viewing a work postal address -->
+    <string name="map_work">Munkahelyi cím megjelenítése</string>
+    <!-- Action string for viewing an other postal address -->
+    <string name="map_other">Cím megjelenítése</string>
+    <!-- Action string for viewing a custom postal address -->
+    <string name="map_custom">View %s address</string>
+
+    <!-- Action string for starting an IM chat with the AIM protocol -->
+    <string name="chat_aim">AIM Chat</string>
+    <!-- Action string for starting an IM chat with the MSN or Windows Live protocol -->
+    <string name="chat_msn">Windows Live Chat</string>
+    <!-- Action string for starting an IM chat with the Yahoo protocol -->
+    <string name="chat_yahoo">Yahoo! Chat</string>
+    <!-- Action string for starting an IM chat with the Skype protocol -->
+    <string name="chat_skype">Skype Chat</string>
+    <!-- Action string for starting an IM chat with the QQ protocol -->
+    <string name="chat_qq">Csevegés QQ használatával</string>
+    <!-- Action string for starting an IM chat with the Google Talk protocol -->
+    <string name="chat_gtalk">Csevegés Google Talk használatával</string>
+    <!-- Action string for starting an IM chat with the ICQ protocol -->
+    <string name="chat_icq">Csevegés ICQ-n</string>
+    <!-- Action string for starting an IM chat with the Jabber protocol -->
+    <string name="chat_jabber">Csevegés Jabber-en</string>
+
+    <!-- Generic action string for starting an IM chat -->
+    <string name="chat">Csevegés</string>
+
+    <!-- Field title for the street of a structured postal address of a contact -->
+    <string name="postal_street">Utca</string>
+    <!-- Field title for the PO box of a structured postal address of a contact -->
+    <string name="postal_pobox">Postafiók</string>
+    <!-- Field title for the neighborhood of a structured postal address of a contact -->
+    <string name="postal_neighborhood">Szomszédság</string>
+    <!-- Field title for the city of a structured postal address of a contact -->
+    <string name="postal_city">Város</string>
+    <!-- Field title for the region, or state, of a structured postal address of a contact -->
+    <string name="postal_region">Állam/Régió</string>
+    <!-- Field title for the postal code of a structured postal address of a contact -->
+    <string name="postal_postcode">Irányítószám</string>
+    <!-- Field title for the country of a structured postal address of a contact -->
+    <string name="postal_country">Ország</string>
+
+    <!-- Field title for the given name of a contact -->
+    <string name="name_given">Keresztnév</string>
+    <!-- Field title for the family name of a contact -->
+    <string name="name_family">Vezetéknév</string>
+    <!-- Field title for the prefix name of a contact -->
+    <string name="name_prefix">Titulus</string>
+    <!-- Field title for the middle name of a contact -->
+    <string name="name_middle">Középső név</string>
+    <!-- Field title for the suffix name of a contact -->
+    <string name="name_suffix">Név utótag</string>
+    <!-- Field title for the phonetic given name of a contact -->
+    <string name="name_phonetic_given">Fonetikus utónév</string>
+    <!-- Field title for the phonetic middle name of a contact -->
+    <string name="name_phonetic_middle">Fonetikus középső név</string>
+    <!-- Field title for the phonetic family name of a contact -->
+    <string name="name_phonetic_family">Fonetikus családnév</string>
+
+    <!-- String describing which account type a contact came from when editing it -->
+    <string name="account_type_format">%1$s kapcsolat</string>
+
+    <!-- String describing which account a contact came from when editing it -->
+    <string name="from_account_format">Feladó: %1$s</string>
+
+    <!-- Checkbox asking the user if they want to display a particular photo for a contact -->
+    <string name="use_photo_as_primary">Használja ezt a képet</string>
+
+    <!-- Text used to explain that a contact cannot be edited since the data is read only -->
+    <string name="contact_read_only">A %1$s kapcsolat adatai nem szerkeszthetők ezen az eszközön.</string>
+
+    <!-- Text describing that a contact has no information available other than name and photo -->
+    <string name="no_contact_details">Nincs további információ ehhez a kapcsolathoz</string>
+
+    <!-- Label of the "sort list by" display option -->
+    <string name="display_options_sort_list_by">Lista rendezése</string>
+
+    <!-- An allowable value for the "sort list by" contact display option  -->
+    <string name="display_options_sort_by_given_name">Keresztnév szerint</string>
+
+    <!-- An allowable value for the "sort list by" contact display option  -->
+    <string name="display_options_sort_by_family_name">Vezetéknév szerint</string>
+
+    <!-- Label of the "view names as" display option -->
+    <string name="display_options_view_names_as">Nevek megjelenítése</string>
+
+    <!-- An allowable value for the "view names as" contact display option  -->
+    <string name="display_options_view_given_name_first">Keresztnév elől</string>
+
+    <!-- An allowable value for the "view names as" contact display option  -->
+    <string name="display_options_view_family_name_first">Utónév elől</string>
+
+    <!-- Gray hint displayed in the search field in Contacts when empty -->
+    <string name="search_bar_hint">Kapcsolat keresése</string>
+
+    <!-- Button displayed underneath the list of filtered visible contacts -->
+    <string name="search_for_all_contacts">Minden kapcsolat keresése</string>
+
+    <!-- An option in the 'change photo' or 'pick photo' dialog -->
+    <string name="take_photo">Kép készítése</string>
+
+    <!-- An option in the 'change photo' or 'pick photo' dialog -->
+    <string name="pick_photo">Kép kiválasztása a Galériából</string>
+
+    <!-- Text shown in the contacts app while the background process updates contacts after a locale change -->
+    <string name="locale_change_in_progress">Névjegyek frissítése, nyelvválasztás alkalmazása. \n\nKérem várjon...</string>
+
+    <!-- Text shown in the contacts app while the background process updates contacts after a system upgrade -->
+    <string name="upgrade_in_progress">Névjegyek frissítése, \n\nKérem várjon...</string>
+
+    <!-- Text shown in the contacts app if the background process updating contacts fails because of memory shortage -->
+    <string name="upgrade_out_of_memory">A Kapcsolatok alkalmazás frissítése készen áll.
+	\n\nA frissítési folyamatnak %d
+	Mb helyre lenne szüksége a belső memórián.\n\nVálasszon az alábbi lehetőségek közül:</string>
+
+    <!-- Button shown in the contacts app if the background process updating contacts fails because of memory shortage -->
+    <string name="upgrade_out_of_memory_uninstall">Egyes alkalmazások eltávolítása</string>
+
+    <!-- Button shown in the contacts app if the background process updating contacts fails because of memory shortage -->
+    <string name="upgrade_out_of_memory_retry">Frissítés újra</string>
+
+    <!-- Title shown in the search result activity of contacts app -->
+    <string name="search_results_for">Keresési találatok: %s</string>
+
+    <!-- Title shown in the search result activity of contacts app while searching -->
+    <string name="search_results_searching">Keresés...</string>
+    
+    <!-- Wysie: Menu strings -->
+    <string name="menu_preferences">Beállítások</string>
+    
+    <!-- Wysie: Dialer strings -->
+    <string name="dialer_menu_sms">SMS / MMS</string>
+    
+    <!-- Wysie: Call log strings -->
+    <string name="recent_calls_clear_call_log">Hívásnapló ürítése</string>
+    <string name="recent_calls_clear_what">Mit töröl?</string>
+    <string name="recent_calls_clear_all">Összes</string>
+    <string name="recent_calls_clear_incoming">Bejövő</string>
+    <string name="recent_calls_clear_outgoing">Kimenő</string>
+    <string name="recent_calls_clear_missed">Nem fogadott</string>
+    <string name="alert_clear_call_log_title">Hívásnapló törlése</string>
+    <string name="alert_clear_call_log_message">Biztosan törölni kívánja az összes hívás feljegyzést?</string>
+    <string name="alert_clear_cl_all_incoming">Biztosan törölni kívánja az összes bejövő hívás feljegyzést?</string>
+    <string name="alert_clear_cl_all_outgoing">Biztosan törölni kívánja az összes kimenő hívás feljegyzést?</string>
+    <string name="alert_clear_cl_all_missed">Biztosan törölni kívánja az összes nem fogadott hívás feljegyzést?</string>
+    
+    <!-- Wysie: Favourites strings -->
+    <string name="fav_clear_freq">Törölje a gyakran hívottakat</string>
+    <string name="alert_clear_freq_called_msg">Biztosan törölni kívánja az összes gyakran hívott bejegyzést?</string>
+    
+    <!-- Wysie: Preferences strings -->
+    
+    <!-- Preferences: Dialer -->
+    <string name="title_last_dialled">Hívás gomb megjeleníti az utoljára hívott számot</string>
+    <string name="summary_last_dialled">Utoljára hívott szám kerül beolvasásra, ha számjegyek üresek</string>
+    <string name="title_return_to_dialer">Vissza a tárcsázóba hívás után</string>
+    <string name="title_vm_button">Bal akciógombbal (LAB)</string>
+    <string name="title_vm_handler">Hangposta kezelő</string>
+    <string name="title_use_1_for_reg_vm">1-es használata szokásos hangpostaként</string>
+    <string name="summaryon_use_1_for_reg_vm">1-es gomb használata hangpostára</string>
+    <string name="summaryoff_use_1_for_reg_vm">Hangposta: 1-es gomb</string>
+    <string name="title_disable_num_check">Szám ellenőrzések letiltása</string>
+    <string name="summaryon_disable_num_check">Bal akciógomb és menügomb engedélyezése</string>
+    <string name="summaryoff_disable_num_check">Bal akciógomb és menügomb engedélyezése csak ha legalább egy szám be van ütve (kivéve hangposta)</string>
+    <string name="title_enable_haptic_feedback">Rezgő visszajelzés engedélyezése</string>
+    <string name="summary_enable_haptic_feedback">A billentyűzet használatát lásd a CyanogenMod beállításokban</string>
+    <string name="title_change_digits_color">Számjegyek színének megváltoztatása</string>
+    <string name="title_digits_color_pressed">Számjegy szín (lenyomott)</string>
+    <string name="title_digits_color_focused">Számjegy szín (kijelölt)</string>
+    <string name="title_digits_color_unselected">Számjegy szín (nincs kijelölve)</string>
+    <string name="title_choose_color">Válasszon egy színt</string>
+    <string name="instructions_choose_color">Érints meg középen a színt a megerősítéshez / Nyomd meg a "Vissza" gombot az elutasításhoz.</string>
+    <string name="entry_no_vm_handler">Nincs (hangposta szám hívása)</string>
+    
+    <!-- Preferences: Call log -->
+    <string name="title_cl_exact_time">Pontos idő</string>
+    <string name="summaryon_cl_exact_time">Pontos idő használata a hivásnaplóban</string>
+    <string name="summaryoff_cl_exact_time">Saját idő használata a hívásnaplóban</string>
+    <string name="title_cl_show_seconds">Másodpercek mutatása</string>
+    <string name="summary_cl_show_seconds">Másodpercek mutatása pontos idő használatakor</string>          
+    <string name="title_cl_ask_before_clear">Rákérdezés törlés előtt</string>
+    <string name="summaryon_cl_ask_before_clear">Rákérdezés a híváslista törlése előtt</string>
+    <string name="summaryoff_cl_ask_before_clear">Híváslista törlése kérdezés nélkül</string>
+    
+    <!-- Preferences: Contacts -->
+    <string name="title_contacts_show_pic">Kapcsolat képeinek mutatása</string>
+    <string name="title_contacts_show_dial_button">Hívógomb megjelnítése</string>
+    <string name="summary_contacts_show_dial_button">Hívógomb megjelenítése számokkal</string>
+    <string name="title_contacts_show_count">Kapcsolatok számának mutatása</string>
+    <string name="summary_contacts_show_count">Kapcsolatok számának mutatása a névjegyzék tetején</string>
+    <string name="title_contacts_show_separators">ABC elválasztók megjelenítése</string>
+    <string name="summaryon_contacts_show_separators">ABC elválasztók megjelenítése a névjegyzékben</string>
+    <string name="summaryoff_contacts_show_separators">ABC elválasztók elrejtése a névjegyzékben</string>
+    
+    <!-- Preferences: Contacts - View Contact -->
+    <string name="title_view_contact">Kapcsolat megtekintése</string>
+    <string name="summary_view_contact">Egyéni kapcsolat megtekintésének beállításai</string>
+    <string name="title_show_text_mobile_only">szöveg hozzáférés kizárólag mobilszámok részére</string>
+    <string name="summaryon_show_text_mobile_only">Csak a mobil számok fognak rendelkezni szöveg/sms hozzáféréssel</string>
+    <string name="summaryoff_show_text_mobile_only">Minden szám rendelkezni fog szöveg/sms hozzáféréssel</string>
+    
+    <!-- Preferences: Favourites -->
+    <string name="title_favourites_hide_freq_call">Gyakran hívottak elrejtése</string>
+    <string name="summary_favourites_hide_freq_call">Az adatok nem törlődtek csak rejtve vannak.</string>
+    <string name="title_favs_ask_before_clear">Rákérdezés törlés előtt</string>
+    <string name="summaryon_favs_ask_before_clear">Rákérdezés a gyakran hívottak törlése előtt</string>
+    <string name="summaryoff_favs_ask_before_clear">Gyakran hívottak törlése kérdezés nélkül</string>
+    
+    <!-- Preferences: Misc -->
+    <string name="title_misc_category">Egyéb</string>
+    <string name="title_sensor_rotation">Automatikus tájolás engedélyezése</string>
+    <string name="summary_sensor_rotation">Ha engedélyezve, akkor tájolás a rendszerbeállítások szerint</string>
+    <string name="title_data_font_size">Kapcsolat infó betűmérete</string>
+    <string name="summary_data_font_size">Megválaszhatod a kapcsolat információ betűméretét (telefonszám, e-mail, cím, stb.)</string>
+    
+    <!-- Wysie: About strings -->    
+    <string name="title_about">Leírás</string>
+    <string name="title_about_name">Mod Name</string>
+    <string name="summary_about_name">WyContacts Froyo</string>
+    <string name="title_about_version">Verzió</string>
+    <string name="summary_about_version">1.2</string>
+    <string name="title_about_credits">Közreműködők</string>
+    <string name="summary_about_credits">Wysie, ChainsDD, geesun, niuchl, rac2030, sileht and the rest of XDA! :)\nFordítás: gross76, petikeke, Knife, tothmarcell97 és sok más samdroid.net fórumozó</string>
+    
+</resources>

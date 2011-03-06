@@ -170,7 +170,7 @@
     <string name="noFavoritesHelpText" msgid="3744655776704833277">"Você não tem nenhum favorito."\n\n"Para adicionar um contato à sua lista de favoritos:"\n\n"        "<li>"Toque na guia "<b>"Contatos"</b>\n</li>" "\n<li>"Toque no contato que deseja adicionar aos seus favoritos"\n</li>" "\n<li>"Toque na estrela ao lado do nome do contato"\n</li></string>
     <string name="liveFolder_all_label" msgid="5961411940473276616">"Todos os contatos"</string>
     <string name="liveFolder_favorites_label" msgid="2674341514070517105">"Com estrela"</string>
-    <string name="liveFolder_phones_label" msgid="1709786878793436245">"Telefones"</string>
+    <string name="liveFolder_phones_label" msgid="1709786878793436245">"Telefone"s"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Usar teclado multifrequencial"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Retornar para a chamada em espera"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Ad. cham."</string>
@@ -486,4 +486,12 @@
     <string name="summary_about_version">1.2</string>
     <string name="title_about_credits">Créditos</string>
     <string name="summary_about_credits">Wysie, ChainsDD, geesun, niuchl, rac2030, sileht e o resto da XDA! :)</string>
+    <string name="menu_shareNumber">Compartilhar número</string>
+    <string name="menu_shareEmail">Compartilhar email</string>
+    <string name="menu_shareAddress">Compartilhar endereço</string>
+    <string name="clearConfirmation_title">Limpar histórico de ligações</string>
+    <string name="clearLogConfirmation">Todo o histórico de chamada irá ser removido.</string>
+    <string name="quickcontact_no_data">Sem dados</string>
+    <string name="quickcontact_no_data">Não contém dados</string>
+    <string name="quickcontact_no_data">Não há dados</string>
 </resources>

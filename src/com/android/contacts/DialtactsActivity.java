@@ -34,7 +34,6 @@ import android.widget.TabHost;
 
 //Wysie
 import android.content.pm.ActivityInfo;
-import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 /**
@@ -81,7 +80,7 @@ public class DialtactsActivity extends TabActivity implements TabHost.OnTabChang
         mTabHost = getTabHost();
         mTabHost.setOnTabChangedListener(this);
 
-        String componentName = intent.getComponent().getClassName();
+        // String componentName = intent.getComponent().getClassName();
 
 	/* If intent is to view the Contacts List, prevent Dialer tab
 	 * from being set as current tab.

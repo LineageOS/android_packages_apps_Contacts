@@ -16,7 +16,6 @@
 
 package com.android.contacts;
 
-import android.R;
 import android.os.Bundle;
 import android.app.Dialog;
 import android.content.Context;
@@ -28,13 +27,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 import android.graphics.BlurMaskFilter.Blur;
 import android.graphics.drawable.Drawable;
 import android.content.res.Resources;
-import android.content.res.Resources.NotFoundException;
 import android.graphics.Paint.Style;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -117,7 +114,7 @@ public class ColorPickerDialog extends Dialog {
         private static final int CENTER_Y = 100;
         private static final int CENTER_RADIUS = 32;
 
-        private int floatToByte(float x) {
+        /* private int floatToByte(float x) {
             int n = java.lang.Math.round(x);
             return n;
         }
@@ -128,7 +125,7 @@ public class ColorPickerDialog extends Dialog {
                 n = 255;
             }
             return n;
-        }
+        } */
         
         public void setCenterColor(int color) {
             mCenterPaint.setColor(color);
@@ -170,7 +167,7 @@ public class ColorPickerDialog extends Dialog {
             return Color.argb(a, r, g, b);
         }
         
-        private int rotateColor(int color, float rad) {
+        /* private int rotateColor(int color, float rad) {
             float deg = rad * 180 / 3.1415927f;
             int r = Color.red(color);
             int g = Color.green(color);
@@ -193,7 +190,7 @@ public class ColorPickerDialog extends Dialog {
             
             return Color.argb(Color.alpha(color), pinToByte(ir),
                               pinToByte(ig), pinToByte(ib));
-        }
+        } */
         
         private static final float PI = 3.1415926f;
 
@@ -308,7 +305,7 @@ public class ColorPickerDialog extends Dialog {
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setGravity(android.view.Gravity.CENTER); 
         
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                                                     LinearLayout.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(10, 0, 10, 5);
         
@@ -383,7 +380,7 @@ public class ColorPickerDialog extends Dialog {
     
     static class TextSeekBarDrawable extends Drawable implements Runnable {
 		
-		private static final String TAG = "TextSeekBarDrawable";
+		// private static final String TAG = "TextSeekBarDrawable";
 		private static final long DELAY = 50;
 		private String mText;
 		private Drawable mProgress;
@@ -493,7 +490,7 @@ public class ColorPickerDialog extends Dialog {
 	}
 	
 	static class ScrollAnimation extends Animation {
-		private static final String TAG = "ScrollAnimation";
+		// private static final String TAG = "ScrollAnimation";
 		private static final long DURATION = 750;
 		private float mFrom;
 		private float mTo;

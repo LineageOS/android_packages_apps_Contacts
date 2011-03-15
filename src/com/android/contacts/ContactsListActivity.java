@@ -28,7 +28,6 @@ import com.android.contacts.PhoneDisambigDialog;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
@@ -61,7 +60,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.net.Uri.Builder;
 import android.os.Bundle;
-import android.os.Message;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.os.RemoteException;
@@ -125,20 +123,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AbsListView.OnScrollListener;
 
-import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Random;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
-//Wysie
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 /*TODO(emillar) I commented most of the code that deals with modes and filtering. It should be
  * brought back in as we add back that functionality.
@@ -433,7 +422,6 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
 
     private QueryHandler mQueryHandler;
     private boolean mJustCreated;
-    private boolean mSyncEnabled;
     Uri mSelectedContactUri;
 
 //    private boolean mDisplayAll;
@@ -497,7 +485,6 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
     final String[] sLookupProjection = new String[] {
             Contacts.LOOKUP_KEY
     };
-    private static ExecutorService sImageFetchThreadPool;
 
     //Wysie
     private boolean mContacts = false;
@@ -872,7 +859,6 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
         mQueryHandler = new QueryHandler(this);
         mJustCreated = true;
 
-        mSyncEnabled = true;
     }
 
     /**
@@ -1084,8 +1070,6 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
 
         registerProviderStatusObserver();
         mPhotoLoader.resume();
-
-        Activity parent = getParent();
 
         // Do this before setting the filter. The filter thread relies
         // on some state that is initialized in setDefaultMode
@@ -2923,20 +2907,18 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
         private boolean mDisplayPhotos = false;
         private boolean mDisplayCallButton = false;
         private boolean mDisplayAdditionalData = true;
-        private HashMap<Long, SoftReference<Bitmap>> mBitmapCache = null;
-        private HashSet<ImageView> mItemsMissingImages = null;
+        // private HashMap<Long, SoftReference<Bitmap>> mBitmapCache = null;
+        // private HashSet<ImageView> mItemsMissingImages = null;
         private int mFrequentSeparatorPos = ListView.INVALID_POSITION;
         private boolean mDisplaySectionHeaders = true;
         private Cursor mSuggestionsCursor;
         private int mSuggestionsCursorCount;
-        private ImageFetchHandler mHandler;
-        private static final int FETCH_IMAGE_MSG = 1;
+        // private static final int FETCH_IMAGE_MSG = 1;
 
 
         public ContactItemListAdapter(Context context) {
             super(context, R.layout.contacts_list_item, null, false);
 
-            mHandler = new ImageFetchHandler();
             mAlphabet = context.getString(com.android.internal.R.string.fast_scroll_alphabet);
 
             mUnknownNameText = context.getText(android.R.string.unknownName);
@@ -2974,8 +2956,8 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
             if ((mMode & MODE_MASK_SHOW_PHOTOS) == MODE_MASK_SHOW_PHOTOS) {
                 mDisplayPhotos = true;
                 setViewResource(R.layout.contacts_list_item_photo);
-                mBitmapCache = new HashMap<Long, SoftReference<Bitmap>>();
-                mItemsMissingImages = new HashSet<ImageView>();
+                // mBitmapCache = new HashMap<Long, SoftReference<Bitmap>>();
+                // mItemsMissingImages = new HashSet<ImageView>();
             }
 
             if (mMode == MODE_STREQUENT || mMode == MODE_FREQUENT) {
@@ -2984,7 +2966,7 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
 
         }
 
-        private class ImageFetchHandler extends Handler {
+        /* private class ImageFetchHandler extends Handler {
 
             @Override
             public void handleMessage(Message message) {
@@ -3036,7 +3018,7 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
             public void clearImageFecthing() {
                 removeMessages(FETCH_IMAGE_MSG);
             }
-        }
+        } */
 
         public boolean getDisplaySectionHeadersEnabled() {
             return mDisplaySectionHeaders;
@@ -3175,13 +3157,10 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
                 throw new IllegalStateException("couldn't move cursor to position " + position);
             }
 
-            boolean newView;
             View v;
             if (convertView == null || convertView.getTag() == null) {
-                newView = true;
                 v = newView(mContext, cursor, parent);
             } else {
-                newView = false;
                 v = convertView;
             }
             bindView(v, mContext, cursor);
@@ -3260,7 +3239,6 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
             int typeColumnIndex;
             int dataColumnIndex;
             int labelColumnIndex;
-            int defaultType;
             int nameColumnIndex;
             int phoneticNameColumnIndex;
             boolean displayAdditionalData = mDisplayAdditionalData;
@@ -3274,7 +3252,6 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
                     dataColumnIndex = PHONE_NUMBER_COLUMN_INDEX;
                     typeColumnIndex = PHONE_TYPE_COLUMN_INDEX;
                     labelColumnIndex = PHONE_LABEL_COLUMN_INDEX;
-                    defaultType = Phone.TYPE_HOME;
                     break;
                 }
                 case MODE_PICK_POSTAL:
@@ -3284,7 +3261,6 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
                     dataColumnIndex = POSTAL_ADDRESS_COLUMN_INDEX;
                     typeColumnIndex = POSTAL_TYPE_COLUMN_INDEX;
                     labelColumnIndex = POSTAL_LABEL_COLUMN_INDEX;
-                    defaultType = StructuredPostal.TYPE_HOME;
                     break;
                 }
                 default: {
@@ -3298,7 +3274,6 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
                     dataColumnIndex = -1;
                     typeColumnIndex = -1;
                     labelColumnIndex = -1;
-                    defaultType = Phone.TYPE_HOME;
                     displayAdditionalData = false;
                     highlightingEnabled = mHighlightWhenScrolling && mMode != MODE_STREQUENT;
                 }
@@ -3373,7 +3348,6 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
                     viewToUse = view.getPhotoView();
                 }
 
-                final int position = cursor.getPosition();
                 mPhotoLoader.loadPhoto(viewToUse, photoId);
             }
             else {
@@ -3499,7 +3473,7 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
 
         private void bindSectionHeader(View itemView, int position, boolean displaySectionHeaders) {
             final ContactListItemView view = (ContactListItemView)itemView;
-            final ContactListItemCache cache = (ContactListItemCache) view.getTag();
+            // final ContactListItemCache cache = (ContactListItemCache) view.getTag();
             if (!displaySectionHeaders) {
                 view.setSectionHeader(null);
                 view.setDividerVisible(true);
@@ -3530,8 +3504,7 @@ public class ContactsListActivity extends ListActivity implements View.OnCreateC
 
             // Get the split between starred and frequent items, if the mode is strequent
             mFrequentSeparatorPos = ListView.INVALID_POSITION;
-            int cursorCount = 0;
-            if (cursor != null && (cursorCount = cursor.getCount()) > 0
+            if (cursor != null && cursor.getCount() > 0
                     && mMode == MODE_STREQUENT) {
                 cursor.move(-1);
                 for (int i = 0; cursor.moveToNext(); i++) {

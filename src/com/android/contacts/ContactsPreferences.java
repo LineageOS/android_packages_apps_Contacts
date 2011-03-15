@@ -20,7 +20,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.ListPreference;
-import android.preference.CheckBoxPreference;
 import android.preference.PreferenceActivity;
 import 	android.preference.PreferenceScreen;
 import android.content.ComponentName;
@@ -30,11 +29,9 @@ import java.util.List;
 import java.util.ArrayList;
 import android.content.pm.ResolveInfo;
 
-import android.util.Log;
-
 public class ContactsPreferences extends PreferenceActivity implements Preference.OnPreferenceChangeListener {
 
-    private static final String TAG = "ContactsPreferences";
+    // private static final String TAG = "ContactsPreferences";
 
     private static final String VM_BUTTON = "vm_button";
     private static final String VM_HANDLER = "vm_handler";

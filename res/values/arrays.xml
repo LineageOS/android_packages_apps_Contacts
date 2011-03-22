@@ -67,4 +67,14 @@
         <item>22</item>
         <item>26</item>
     </string-array>
+
+    <string-array name="view_default_phone_tabs">
+        <item>Last used to make a call (Default)</item>
+        <item>Last viewed</item>
+        <item>Phone</item>
+        <item>Call log</item>
+        <item>Contacts</item>
+        <item>Favorites</item>
+    </string-array>
+
 </resources>

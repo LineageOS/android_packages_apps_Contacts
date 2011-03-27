@@ -428,6 +428,8 @@
     <string name="summaryoff_disable_num_check">"左ボタンとメニューは番号が入力されたときのみ有効(ボイスメール以外)"</string>
     <string name="title_enable_haptic_feedback">"タッチフィードバック"</string>
     <string name="summary_enable_haptic_feedback">"キーパッドパターンを使用する - CyanogenMod設定で調整できます"</string>
+    <string name="title_format_phone_number">"番号の書式"</string>
+    <string name="summary_format_phone_number">"ダイヤラーで番号のハイフン付き書式を有効にする"</string>
     <string name="title_change_digits_color">"番号の色を変える"</string>
     <string name="title_digits_color_pressed">"番号の色 (押下)"</string>
     <string name="title_digits_color_focused">"番号の色 (フォーカス)"</string>

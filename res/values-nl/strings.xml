@@ -397,6 +397,7 @@
     <string name="title_vm_button">Linker actieknop (LAK)</string>
     <string name="title_vm_handler">Voicemailbeheer</string>
     <string name="title_use_1_for_reg_vm">Kies 1 voor voicemail</string>
+<<<<<<< HEAD
     <string name="summaryon_use_1_for_reg_vm">Toets 1 wordt gebruikt voor de standaardvoicemail</string>
     <string name="summaryoff_use_1_for_reg_vm">Toets 1 volgt instelling voicemailbeheer</string>
     <string name="title_disable_num_check">Nummer niet controleren</string>
@@ -404,6 +405,8 @@
     <string name="summaryoff_disable_num_check">LAK en menuknop alleen ingeschakeld als er min. 1 nummer is ingegeven (behalve voicemail)</string>
     <string name="title_enable_haptic_feedback">Trillen</string>
     <string name="summary_enable_haptic_feedback">Trillen bij nummerkeuze (wijzig dit in CyanogenMod\'s instellingen)</string>
+    <string name="title_format_phone_number">Nummerindeling</string>
+    <string name="summary_format_phone_number">Schakel nummerindeling in telefoonkiezer in</string>
     <string name="title_change_digits_color">Cijferkleur veranderen</string>
     <string name="title_digits_color_pressed">Cijferkleur (ingedrukt)</string>
     <string name="title_digits_color_focused">Cijferkleur (gefocust)</string>

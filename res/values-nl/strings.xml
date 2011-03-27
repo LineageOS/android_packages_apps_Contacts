@@ -404,6 +404,8 @@
     <string name="summaryoff_disable_num_check">LAK en menuknop alleen ingeschakeld als er min. 1 nummer is ingegeven (behalve voicemail)</string>
     <string name="title_enable_haptic_feedback">Trillen</string>
     <string name="summary_enable_haptic_feedback">Trillen bij nummerkeuze (wijzig dit in CyanogenMod\'s instellingen)</string>
+    <string name="title_format_phone_number">Nummerindeling</string>
+    <string name="summary_format_phone_number">Schakel nummerindeling in telefoonkiezer in</string>
     <string name="title_change_digits_color">Cijferkleur veranderen</string>
     <string name="title_digits_color_pressed">Cijferkleur (ingedrukt)</string>
     <string name="title_digits_color_focused">Cijferkleur (gefocust)</string>

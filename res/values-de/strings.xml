@@ -446,6 +446,8 @@
     <string name="summaryoff_disable_num_check">LAT und Menü nur aktiv, wenn mind. eine Zahl eingegeben ist</string>
     <string name="title_enable_haptic_feedback">Nutze haptisches Feedback</string>
     <string name="summary_enable_haptic_feedback">Benutzt das Muster "Tastatur antippen" - siehe CyanogenMod Einstellungen für Anpassungen</string>
+    <string name="title_format_phone_number">Nummer formatieren</string>
+    <string name="summary_format_phone_number">Telefonnummer während der Eingabe formatieren</string>
     <string name="title_change_digits_color">Farben der Zahlen</string>
     <string name="title_digits_color_focused">Fokusiert</string>
     <string name="title_digits_color_pressed">Gedrückt</string>

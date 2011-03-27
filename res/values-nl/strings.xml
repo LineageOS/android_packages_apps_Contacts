@@ -444,6 +444,8 @@
     <string name="summaryoff_disable_num_check">LAK en menu zijn alleen ingeschakeld als er minimaal 1 nummer is ingegeven (behalve voicemail)</string>
     <string name="title_enable_haptic_feedback">Haptische feedback ingeschakelen</string>
     <string name="summary_enable_haptic_feedback">Gebruik toetsenbord patroon - Zie CyanogenMod instellingen om instelling aan te passen</string>
+    <string name="title_format_phone_number">Nummerindeling</string>
+    <string name="summary_format_phone_number">Laat nummerindeling d.m.v. koppelkenens toe</string>
     <string name="title_change_digits_color">Verander kleur cijfers</string>
     <string name="title_digits_color_pressed">Cijfer kleur (ingedrukt)</string>
     <string name="title_digits_color_focused">Cijfer kleur (gefocust)</string>

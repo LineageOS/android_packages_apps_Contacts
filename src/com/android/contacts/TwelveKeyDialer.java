@@ -285,7 +285,8 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     }
 
     protected void maybeAddNumberFormatting() {
-        mDigits.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+    	if (ePrefs.getBoolean("dial_format_phone_number", true))
+    		mDigits.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
     }
 
     /**

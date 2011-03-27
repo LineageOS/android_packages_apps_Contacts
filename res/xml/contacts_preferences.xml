@@ -57,6 +57,11 @@
             android:title="@string/title_enable_haptic_feedback"
             android:summary="@string/summary_enable_haptic_feedback"
             android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="dial_format_phone_number"
+            android:title="@string/title_format_phone_number"
+            android:summary="@string/summary_format_phone_number"
+            android:defaultValue="true" />
         <PreferenceScreen
             android:key="dial_digits_color"
             android:title="@string/title_change_digits_color">  

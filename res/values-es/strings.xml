@@ -424,6 +424,8 @@
     <string name="summaryoff_disable_num_check">LAB y menú se habilitan sólo si al menos un número se introduce (con excepción de buzón de voz)</string>
     <string name="title_enable_haptic_feedback">Habilitar retrovibración</string>
     <string name="summary_enable_haptic_feedback">Usa patrón de teclado - vea configuración CyanogenMod para ajustar</string>
+    <string name="title_format_phone_number">Números con formato</string>
+    <string name="summary_format_phone_number">Habilita la separación de dígitos mediante guiones</string>
     <string name="title_change_digits_color">Cambiar color de los dígitos</string>
     <string name="title_digits_color_pressed">Color dígitos (presionado)</string>
     <string name="title_digits_color_focused">Color dígitos (centrado)</string>

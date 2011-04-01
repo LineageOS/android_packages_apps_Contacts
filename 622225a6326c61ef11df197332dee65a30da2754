@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAADX//+cY\u003d",
+        "filename": "res/values-nb/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 444
+      },
+      "writtenOn": "2011-04-01T08:34:16Z",
+      "side": 1,
+      "message": "detaljert stavet feil",
+      "revId": "622225a6326c61ef11df197332dee65a30da2754",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAADX//+cU\u003d",
+        "filename": "res/values-nb/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 444
+      },
+      "writtenOn": "2011-04-01T08:34:16Z",
+      "side": 1,
+      "message": "Endre til Versjon kanskje?",
+      "revId": "622225a6326c61ef11df197332dee65a30da2754",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

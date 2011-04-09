@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAADn///rQ\u003d",
+        "filename": "res/values-nb/strings.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 444
+      },
+      "writtenOn": "2011-04-09T21:38:42Z",
+      "side": 1,
+      "message": "Missed one lol",
+      "revId": "5ce3dc9740030e25bf3f9e51b02f17112e7a2a80",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

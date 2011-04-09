@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAADn///rc\u003d",
+        "filename": "res/values-nb/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 444
+      },
+      "writtenOn": "2011-04-09T21:34:04Z",
+      "side": 1,
+      "message": "whitespaces at the end. :)",
+      "revId": "8b7c127c515b47bbc1f460bd3fd23946d080045b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

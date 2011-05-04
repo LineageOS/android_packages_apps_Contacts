@@ -492,4 +492,12 @@
     <string name="clearConfirmation_title">Limpar histórico de ligações</string>
     <string name="clearLogConfirmation">Todo o histórico de chamada irá ser removido.</string>
     <string name="quickcontact_no_data">Sem dados</string>
+    <string name="default_phone_tab_contacts">Contatos</string>
+    <string name="default_phone_tab_phone">Telefone</string>
+    <string name="default_phone_tab_call_log">Chamadas</string>
+    <string name="default_phone_tab_last_used">Último usado para fazer uma ligação (Padrão)</string>
+    <string name="default_phone_tab_last_viewed">Último visualizado</string>
+    <string name="title_default_phone_tab">Aba padrão</string>
+    <string name="summary_default_phone_tab">Aba padrão a abrir quando inicializando aplicação do Telefone</string>
+    <string name="default_phone_tab_favorites">Favoritos</string>
 </resources>

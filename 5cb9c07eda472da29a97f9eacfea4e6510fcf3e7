@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAFH///8s\u003d",
+        "filename": "src/com/android/contacts/TwelveKeyDialer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1448,
+      "author": {
+        "id": 805
+      },
+      "writtenOn": "2011-05-10T00:38:49Z",
+      "side": 1,
+      "message": "This section causes android.process.acore to crash when you have enabled sensor rotation in the preferences.  setupKeypad(false) causes a null pointer exception in landscape mode.  This section can be removed as the account phone number is provided as an initial voicemail number and it is not likely that a user will change their voicemail number often enough to warrant the need for such an on the fly setting.",
+      "revId": "5cb9c07eda472da29a97f9eacfea4e6510fcf3e7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

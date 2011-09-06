@@ -48,7 +48,6 @@
     <string name="menu_makeDefaultNumber" msgid="4838759253316649534">"设置默认号码"</string>
     <string name="menu_makeDefaultEmail" msgid="2599044610375789994">"设置为默认电子邮件"</string>
     <string name="menu_splitAggregate" msgid="8368636463748691868">"拆分"</string>
-    <string name="contactsSplitMessage" msgid="5253490235863170269">"已拆分联系人"</string>
     <string name="splitConfirmation_title" msgid="6716467920283502570">"拆分联系人"</string>
     <string name="splitConfirmation" msgid="1150797297503944823">"您确定要将此单一联系人拆分为多位联系人（即，其中包含的每条联系信息分别对应一位联系人）吗？"</string>
     <string name="menu_joinAggregate" msgid="5027981918265667970">"合并"</string>
@@ -73,7 +72,6 @@
     <string name="label_notes" msgid="8337354953278341042">"备注"</string>
     <string name="label_sip_address" msgid="124073911714324974">"互联网通话"</string>
     <string name="label_ringtone" msgid="8833166825330686244">"铃声"</string>
-    <string name="ghostData_name" msgid="6490954238641157585">"姓名"</string>
     <string name="ghostData_phonetic_name" msgid="7852749081984070902">"姓名拼音"</string>
     <string name="ghostData_company" msgid="5414421120553765775">"公司"</string>
     <string name="ghostData_title" msgid="7496735200318496110">"职位"</string>
@@ -145,7 +143,6 @@
     <string name="recentCalls_addToBlacklist">加入黑名单</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"添加到“联系人”"</string>
     <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"从通话记录中删除"</string>
-    <string name="recentCalls_deleteAll" msgid="6352364392762163704">"清除通话记录"</string>
     <string name="recentCalls_empty" msgid="247053222448663107">"通话记录为空。"</string>
     <string name="clearCallLogConfirmation_title" msgid="718072843006222703">"清除通话记录"</string>
     <string name="clearCallLogConfirmation" msgid="7625927669136267636">"确定要清除通话记录吗？"</string>
@@ -185,7 +182,6 @@
     <string name="favoritesFrquentSeparator" msgid="8107518433381283736">"常用联系人"</string>
     <string name="add_contact_dlg_title" msgid="2896685845822146494">"添加联系人"</string>
     <string name="add_contact_dlg_message_fmt" msgid="7986472669444326576">"将“<xliff:g id="EMAIL">%s</xliff:g>”添加到联系人？"</string>
-    <string name="all_tab_label" msgid="4003124364397916826">"全部"</string>
     <string name="description_image_button_one" msgid="1740638037139856139">"一"</string>
     <string name="description_image_button_two" msgid="5882638439003731308">"二"</string>
     <string name="description_image_button_three" msgid="8709731759376015180">"三"</string>
@@ -281,9 +277,7 @@
     <string name="type_short_work" msgid="4925330752504537861">"单位"</string>
     <string name="type_short_pager" msgid="2613818970827594238">"寻呼"</string>
     <string name="type_short_other" msgid="5669407180177236769">"其他"</string>
-    <string name="edit_read_only" msgid="8158629550655830981">"该联系人的状态为只读"</string>
     <string name="edit_secondary_collapse" msgid="5371618426594477103">"更多"</string>
-    <string name="dialog_primary_name" msgid="5521591005692614833">"主名称"</string>
     <string name="dialog_new_contact_account" msgid="9044704073286262197">"在帐户下创建联系人"</string>
     <string name="menu_sync_remove" msgid="3266725887008450161">"删除同步群组"</string>
     <string name="dialog_sync_add" msgid="8267045393119375803">"添加同步群组"</string>

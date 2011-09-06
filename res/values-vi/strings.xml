@@ -48,7 +48,6 @@
     <string name="menu_makeDefaultNumber" msgid="4838759253316649534">"Đặt làm số mặc định"</string>
     <string name="menu_makeDefaultEmail" msgid="2599044610375789994">"Đặt làm email mặc định"</string>
     <string name="menu_splitAggregate" msgid="8368636463748691868">"Tách"</string>
-    <string name="contactsSplitMessage" msgid="5253490235863170269">"Danh bạ đã được tách"</string>
     <string name="splitConfirmation_title" msgid="6716467920283502570">"Tách Liên hệ"</string>
     <string name="splitConfirmation" msgid="1150797297503944823">"Bạn có chắc chắn muốn tách liên hệ duy nhất này thành nhiều liên hệ: một liên hệ cho mỗi tập thông tin liên hệ đã được nhập vào liên hệ không?"</string>
     <string name="menu_joinAggregate" msgid="5027981918265667970">"Kết hợp"</string>
@@ -73,7 +72,6 @@
     <string name="label_notes" msgid="8337354953278341042">"Ghi chú"</string>
     <string name="label_sip_address" msgid="124073911714324974">"Cuộc gọi qua internet"</string>
     <string name="label_ringtone" msgid="8833166825330686244">"Nhạc chuông"</string>
-    <string name="ghostData_name" msgid="6490954238641157585">"Đầu tiên và Cuối cùng"</string>
     <string name="ghostData_phonetic_name" msgid="7852749081984070902">"Tên đúng phát âm"</string>
     <string name="ghostData_company" msgid="5414421120553765775">"Công ty"</string>
     <string name="ghostData_title" msgid="7496735200318496110">"Tiêu đề"</string>
@@ -144,7 +142,6 @@
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Chỉnh sửa số trước khi gọi"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Thêm vào danh bạ"</string>
     <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"Xoá khỏi nhật ký cuộc gọi"</string>
-    <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Xoá nhật ký cuộc gọi"</string>
     <string name="recentCalls_empty" msgid="247053222448663107">"Nhật ký cuộc gọi trống."</string>
     <string name="clearCallLogConfirmation_title" msgid="718072843006222703">"Xoá nhật ký cuộc gọi"</string>
     <string name="clearCallLogConfirmation" msgid="7625927669136267636">"Bạn có chắc chắn muốn xoá nhật ký cuộc gọi không?"</string>
@@ -184,7 +181,6 @@
     <string name="favoritesFrquentSeparator" msgid="8107518433381283736">"Thường xuyên được liên hệ"</string>
     <string name="add_contact_dlg_title" msgid="2896685845822146494">"Thêm liên hệ"</string>
     <string name="add_contact_dlg_message_fmt" msgid="7986472669444326576">"Thêm \"<xliff:g id="EMAIL">%s</xliff:g>\" vào danh bạ?"</string>
-    <string name="all_tab_label" msgid="4003124364397916826">"Tất cả"</string>
     <string name="description_image_button_one" msgid="1740638037139856139">"một"</string>
     <string name="description_image_button_two" msgid="5882638439003731308">"hai"</string>
     <string name="description_image_button_three" msgid="8709731759376015180">"ba"</string>
@@ -280,9 +276,7 @@
     <string name="type_short_work" msgid="4925330752504537861">"W"</string>
     <string name="type_short_pager" msgid="2613818970827594238">"P"</string>
     <string name="type_short_other" msgid="5669407180177236769">"O"</string>
-    <string name="edit_read_only" msgid="8158629550655830981">"Liên hệ này ở chế độ chỉ đọc"</string>
     <string name="edit_secondary_collapse" msgid="5371618426594477103">"Khác"</string>
-    <string name="dialog_primary_name" msgid="5521591005692614833">"Tên chính"</string>
     <string name="dialog_new_contact_account" msgid="9044704073286262197">"Tạo liên hệ trong tài khoản"</string>
     <string name="menu_sync_remove" msgid="3266725887008450161">"Xoá nhóm đồng bộ hoá"</string>
     <string name="dialog_sync_add" msgid="8267045393119375803">"Thêm nhóm đồng bộ hoá"</string>

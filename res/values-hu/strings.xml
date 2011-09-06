@@ -48,7 +48,6 @@
     <string name="menu_makeDefaultNumber" msgid="4838759253316649534">"Legyen ez az alapértelmezett szám"</string>
     <string name="menu_makeDefaultEmail" msgid="2599044610375789994">"Legyen ez az alapértelmezett e-mail cím"</string>
     <string name="menu_splitAggregate" msgid="8368636463748691868">"Szétválasztás"</string>
-    <string name="contactsSplitMessage" msgid="5253490235863170269">"A névjegyek szétválasztása megtörtént"</string>
     <string name="splitConfirmation_title" msgid="6716467920283502570">"Névjegy szétválasztása"</string>
     <string name="splitConfirmation" msgid="1150797297503944823">"Biztosan több névjegybe választja szét ezt az egy névjegyet, hogy minden információtípushoz tartozzon egy?"</string>
     <string name="menu_joinAggregate" msgid="5027981918265667970">"Összekapcsolás"</string>
@@ -73,7 +72,6 @@
     <string name="label_notes" msgid="8337354953278341042">"Jegyzetek"</string>
     <string name="label_sip_address" msgid="124073911714324974">"Internetes hívás"</string>
     <string name="label_ringtone" msgid="8833166825330686244">"Csengőhang"</string>
-    <string name="ghostData_name" msgid="6490954238641157585">"Utó- és vezetéknév"</string>
     <string name="ghostData_phonetic_name" msgid="7852749081984070902">"Név fonetikusan"</string>
     <string name="ghostData_company" msgid="5414421120553765775">"Cég"</string>
     <string name="ghostData_title" msgid="7496735200318496110">"Beosztás"</string>
@@ -144,7 +142,6 @@
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Szám szerkesztése hívás előtt"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Hozzáadás a névjegyekhez"</string>
     <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"Eltávolítás a híváslistából"</string>
-    <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Híváslista törlése"</string>
     <string name="recentCalls_empty" msgid="247053222448663107">"A híváslista üres."</string>
     <string name="clearCallLogConfirmation_title" msgid="718072843006222703">"Híváslista törlése"</string>
     <string name="clearCallLogConfirmation" msgid="7625927669136267636">"Biztosan törli a híváslistát?"</string>
@@ -184,7 +181,6 @@
     <string name="favoritesFrquentSeparator" msgid="8107518433381283736">"Gyakran keresett"</string>
     <string name="add_contact_dlg_title" msgid="2896685845822146494">"Névjegy hozzáadása"</string>
     <string name="add_contact_dlg_message_fmt" msgid="7986472669444326576">"Hozzáadja a(z) \"<xliff:g id="EMAIL">%s</xliff:g>\"címet a Címtárhoz?"</string>
-    <string name="all_tab_label" msgid="4003124364397916826">"Összes"</string>
     <string name="description_image_button_one" msgid="1740638037139856139">"egy"</string>
     <string name="description_image_button_two" msgid="5882638439003731308">"kettő"</string>
     <string name="description_image_button_three" msgid="8709731759376015180">"három"</string>
@@ -280,9 +276,7 @@
     <string name="type_short_work" msgid="4925330752504537861">"Mh"</string>
     <string name="type_short_pager" msgid="2613818970827594238">"Cs"</string>
     <string name="type_short_other" msgid="5669407180177236769">"E"</string>
-    <string name="edit_read_only" msgid="8158629550655830981">"Ez a névjegy írásvédett"</string>
     <string name="edit_secondary_collapse" msgid="5371618426594477103">"Egyebek"</string>
-    <string name="dialog_primary_name" msgid="5521591005692614833">"Elsődleges név"</string>
     <string name="dialog_new_contact_account" msgid="9044704073286262197">"Névjegy létrehozása a következő fiókban:"</string>
     <string name="menu_sync_remove" msgid="3266725887008450161">"Szinkronizálási csoport eltávolítása"</string>
     <string name="dialog_sync_add" msgid="8267045393119375803">"Szinkronizálási csoport hozzáadása"</string>

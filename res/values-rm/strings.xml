@@ -48,7 +48,6 @@
     <string name="menu_makeDefaultNumber" msgid="4838759253316649534">"Numer da telefon da standard"</string>
     <string name="menu_makeDefaultEmail" msgid="2599044610375789994">"E-mail predefinì"</string>
     <string name="menu_splitAggregate" msgid="8368636463748691868">"Divider"</string>
-    <string name="contactsSplitMessage" msgid="5253490235863170269">"Contacts dividids"</string>
     <string name="splitConfirmation_title" msgid="6716467920283502570">"Divider il contact"</string>
     <string name="splitConfirmation" msgid="1150797297503944823">"Vulais Vus propi divider quest contact en plirs contacts (in per mintga detagl da contact)?"</string>
     <string name="menu_joinAggregate" msgid="5027981918265667970">"Unir"</string>
@@ -73,7 +72,6 @@
     <string name="label_notes" msgid="8337354953278341042">"Notizias"</string>
     <!-- outdated translation 943765439755300724 -->     <string name="label_sip_address" msgid="124073911714324974">"Adressa SIP"</string>
     <string name="label_ringtone" msgid="8833166825330686244">"Tun da scalin"</string>
-    <string name="ghostData_name" msgid="6490954238641157585">"Prenum e num"</string>
     <string name="ghostData_phonetic_name" msgid="7852749081984070902">"Num fonetic"</string>
     <string name="ghostData_company" msgid="5414421120553765775">"Interpresa"</string>
     <string name="ghostData_title" msgid="7496735200318496110">"Titel"</string>
@@ -144,7 +142,6 @@
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Modifitgar il numer avant che telefonar"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Agiuntar als contacts"</string>
     <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"Allontanar da la glista da cloms"</string>
-    <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Stizzar la glista da cloms"</string>
     <string name="recentCalls_empty" msgid="247053222448663107">"La glista da cloms e vida"</string>
     <string name="clearCallLogConfirmation_title" msgid="718072843006222703">"Stizzar il protocol da cloms"</string>
     <string name="clearCallLogConfirmation" msgid="7625927669136267636">"Vulais Vus propi stizzar il protocol da cloms?"</string>
@@ -184,7 +181,6 @@
     <string name="favoritesFrquentSeparator" msgid="8107518433381283736">"Contactà savens"</string>
     <string name="add_contact_dlg_title" msgid="2896685845822146494">"Agiuntar in contact"</string>
     <string name="add_contact_dlg_message_fmt" msgid="7986472669444326576">"Agiuntar «<xliff:g id="EMAIL">%s</xliff:g>» als contacts?"</string>
-    <string name="all_tab_label" msgid="4003124364397916826">"Tuts"</string>
     <string name="description_image_button_one" msgid="1740638037139856139">"in"</string>
     <string name="description_image_button_two" msgid="5882638439003731308">"dus"</string>
     <string name="description_image_button_three" msgid="8709731759376015180">"trais"</string>
@@ -281,9 +277,7 @@
     <string name="type_short_work" msgid="4925330752504537861">"F"</string>
     <string name="type_short_pager" msgid="2613818970827594238">"P"</string>
     <string name="type_short_other" msgid="5669407180177236769">"A"</string>
-    <string name="edit_read_only" msgid="8158629550655830981">"Quest contact è mo per lectura."</string>
     <string name="edit_secondary_collapse" msgid="5371618426594477103">"Dapli"</string>
-    <string name="dialog_primary_name" msgid="5521591005692614833">"Num principal"</string>
     <string name="dialog_new_contact_account" msgid="9044704073286262197">"Crear in contact sut il conto"</string>
     <string name="menu_sync_remove" msgid="3266725887008450161">"Allontanar la gruppa da sincronisaziun"</string>
     <string name="dialog_sync_add" msgid="8267045393119375803">"Agiuntar ina gruppa da sincronisaziun"</string>

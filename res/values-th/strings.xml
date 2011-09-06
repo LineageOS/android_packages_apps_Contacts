@@ -48,7 +48,6 @@
     <string name="menu_makeDefaultNumber" msgid="4838759253316649534">"ตั้งเป็นหมายเลขเริ่มต้น"</string>
     <string name="menu_makeDefaultEmail" msgid="2599044610375789994">"กำหนดเป็นอีเมลค่าเริ่มต้น"</string>
     <string name="menu_splitAggregate" msgid="8368636463748691868">"แยก"</string>
-    <string name="contactsSplitMessage" msgid="5253490235863170269">"แยกรายชื่อแล้ว"</string>
     <string name="splitConfirmation_title" msgid="6716467920283502570">"แยกรายชื่อแล้ว"</string>
     <string name="splitConfirmation" msgid="1150797297503944823">"คุณแน่ใจหรือไม่ว่าต้องการแยกรายชื่อในสมุดโทรศัพท์ติดต่อนี้เป็นแบบหลายรายการ นั่นคือ หนึ่งรายการสำหรับชุดข้อมูลแต่ละชุดที่นำมารวมในรายการนี้"</string>
     <string name="menu_joinAggregate" msgid="5027981918265667970">"เข้าร่วม"</string>
@@ -73,7 +72,6 @@
     <string name="label_notes" msgid="8337354953278341042">"หมายเหตุ"</string>
     <string name="label_sip_address" msgid="124073911714324974">"การโทรทางอินเทอร์เน็ต"</string>
     <string name="label_ringtone" msgid="8833166825330686244">"เสียงเรียกเข้า"</string>
-    <string name="ghostData_name" msgid="6490954238641157585">"รายการแรกและสุดท้าย"</string>
     <string name="ghostData_phonetic_name" msgid="7852749081984070902">"ชื่อแบบออกเสียง"</string>
     <string name="ghostData_company" msgid="5414421120553765775">"บริษัท"</string>
     <string name="ghostData_title" msgid="7496735200318496110">"ชื่อ"</string>
@@ -144,7 +142,6 @@
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"แก้ไขหมายเลขก่อนโทร"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"เพิ่มในสมุดโทรศัพท์"</string>
     <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"ลบจากบันทึกการโทร"</string>
-    <string name="recentCalls_deleteAll" msgid="6352364392762163704">"ล้างบันทึกการโทร"</string>
     <string name="recentCalls_empty" msgid="247053222448663107">"บันทึกการโทรว่างเปล่า"</string>
     <string name="clearCallLogConfirmation_title" msgid="718072843006222703">"ล้างบันทึกการโทร"</string>
     <string name="clearCallLogConfirmation" msgid="7625927669136267636">"คุณแน่ใจหรือไม่ว่าต้องการล้างบันทึกการโทรทั้งหมด"</string>
@@ -184,7 +181,6 @@
     <string name="favoritesFrquentSeparator" msgid="8107518433381283736">"ที่ติดต่อบ่อยครั้ง"</string>
     <string name="add_contact_dlg_title" msgid="2896685845822146494">"เพิ่มรายชื่อในสมุดโทรศัพท์"</string>
     <string name="add_contact_dlg_message_fmt" msgid="7986472669444326576">"เพิ่ม \"<xliff:g id="EMAIL">%s</xliff:g>\" ในสมุดโทรศัพท์หรือไม่"</string>
-    <string name="all_tab_label" msgid="4003124364397916826">"ทั้งหมด"</string>
     <string name="description_image_button_one" msgid="1740638037139856139">"หนึ่ง"</string>
     <string name="description_image_button_two" msgid="5882638439003731308">"สอง"</string>
     <string name="description_image_button_three" msgid="8709731759376015180">"สาม"</string>
@@ -280,9 +276,7 @@
     <string name="type_short_work" msgid="4925330752504537861">"W"</string>
     <string name="type_short_pager" msgid="2613818970827594238">"P"</string>
     <string name="type_short_other" msgid="5669407180177236769">"O"</string>
-    <string name="edit_read_only" msgid="8158629550655830981">"รายชื่อนี้เป็นแบบอ่านอย่างเดียว"</string>
     <string name="edit_secondary_collapse" msgid="5371618426594477103">"เพิ่มเติม"</string>
-    <string name="dialog_primary_name" msgid="5521591005692614833">"ชื่อหลัก"</string>
     <string name="dialog_new_contact_account" msgid="9044704073286262197">"สร้างรายชื่อภายในบัญชี"</string>
     <string name="menu_sync_remove" msgid="3266725887008450161">"นำกลุ่มที่ซิงค์ออก"</string>
     <string name="dialog_sync_add" msgid="8267045393119375803">"เพิ่มกลุ่มที่ซิงค์"</string>

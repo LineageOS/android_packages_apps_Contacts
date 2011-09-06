@@ -132,9 +132,6 @@
     <!-- Menu item that splits an item from the contact detail into a separate aggregate -->
     <string name="menu_splitAggregate" msgid="8368636463748691868">"分割"</string>
 
-    <!-- Toast shown after a contact has been split from an aggregate by a user action -->
-    <string name="contactsSplitMessage" msgid="5253490235863170269">"已分割的聯絡人"</string>
-
     <!-- Title of the confirmation dialog for separating contacts into multiple instances  -->
     <string name="splitConfirmation_title" msgid="6716467920283502570">"分割聯絡人"</string>
 
@@ -212,9 +209,6 @@
 
     <!-- The label describing the custom ringtone for a contact -->
     <string name="label_ringtone" msgid="8833166825330686244">"鈴聲"</string>
-
-    <!-- Hint text for the contact name when editing -->
-    <string name="ghostData_name" msgid="6490954238641157585">"姓名"</string>
 
     <!-- Hint text for the phonetic reading of the contact name when editing -->
     <string name="ghostData_phonetic_name" msgid="7852749081984070902">"姓名拼音"</string>
@@ -392,9 +386,6 @@
     <!-- Menu item used to remove a single call from the call log -->
     <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"從通話記錄中移除"</string>
 
-    <!-- Menu item used to remove all calls from the call log -->
-    <string name="recentCalls_deleteAll" msgid="6352364392762163704">"清除通話記錄"</string>
-
     <!-- Text displayed when the call log is empty -->
     <string name="recentCalls_empty" msgid="247053222448663107">"無通話記錄。"</string>
 
@@ -524,9 +515,6 @@
     <!-- Dialog message when prompting before creating a contact. Includes
          the email address, e.g. "Add xyz@foo.com to contacts?" -->
     <string name="add_contact_dlg_message_fmt" msgid="7986472669444326576">"要將「<xliff:g id="EMAIL">%s</xliff:g>」新增為聯絡人嗎？"</string>
-
-    <!-- Label for the all data tab in the view and edit card -->
-    <string name="all_tab_label" msgid="4003124364397916826">"全部"</string>
 
     <!-- String describing the image on ImageButton one
 
@@ -902,14 +890,10 @@
     <!-- Single-character overlay for other phone numbers when creating desktop shortcuts -->
     <string name="type_short_other" msgid="5669407180177236769">"其他"</string>
 
-    <!-- In edit dialog, shown if the contact is marked as being read-only -->
-    <string name="edit_read_only" msgid="8158629550655830981">"此聯絡人為唯讀"</string>
-
     <!-- Shown as the header title over a collapsible section that, by default, hides
          secondary contact detail edit fields, such as birthday. -->
     <string name="edit_secondary_collapse" msgid="5371618426594477103">"更多"</string>
 
-    <string name="dialog_primary_name" msgid="5521591005692614833">"主要名稱"</string>
     <string name="dialog_new_contact_account" msgid="9044704073286262197">"在帳戶下建立聯絡人"</string>
 
     <string name="menu_sync_remove" msgid="3266725887008450161">"移除同步處理群組"</string>

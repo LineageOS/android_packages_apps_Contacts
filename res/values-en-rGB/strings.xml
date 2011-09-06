@@ -48,7 +48,6 @@
     <string name="menu_makeDefaultNumber" msgid="4838759253316649534">"Make default number"</string>
     <string name="menu_makeDefaultEmail" msgid="2599044610375789994">"Make default email"</string>
     <string name="menu_splitAggregate" msgid="8368636463748691868">"Separate"</string>
-    <string name="contactsSplitMessage" msgid="5253490235863170269">"Contacts separated"</string>
     <string name="splitConfirmation_title" msgid="6716467920283502570">"Separate Contact"</string>
     <string name="splitConfirmation" msgid="1150797297503944823">"Are you sure that you want to separate this single contact into multiple contacts: one for each set of contact information that was joined into it?"</string>
     <string name="menu_joinAggregate" msgid="5027981918265667970">"Join"</string>
@@ -73,7 +72,6 @@
     <string name="label_notes" msgid="8337354953278341042">"Notes"</string>
     <string name="label_sip_address" msgid="124073911714324974">"Internet call"</string>
     <string name="label_ringtone" msgid="8833166825330686244">"Ring tone"</string>
-    <string name="ghostData_name" msgid="6490954238641157585">"First and Last"</string>
     <string name="ghostData_phonetic_name" msgid="7852749081984070902">"Phonetic name"</string>
     <string name="ghostData_company" msgid="5414421120553765775">"Company"</string>
     <string name="ghostData_title" msgid="7496735200318496110">"Title"</string>
@@ -144,7 +142,6 @@
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Edit number before call"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Add to contacts"</string>
     <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"Remove from call log"</string>
-    <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Clear call log"</string>
     <string name="recentCalls_empty" msgid="247053222448663107">"Call log is empty."</string>
     <string name="clearCallLogConfirmation_title" msgid="718072843006222703">"Clear call log"</string>
     <string name="clearCallLogConfirmation" msgid="7625927669136267636">"Are you sure that you want to clear the call log?"</string>
@@ -184,7 +181,6 @@
     <string name="favoritesFrquentSeparator" msgid="8107518433381283736">"Frequently contacted"</string>
     <string name="add_contact_dlg_title" msgid="2896685845822146494">"Add contact"</string>
     <string name="add_contact_dlg_message_fmt" msgid="7986472669444326576">"Add \"<xliff:g id="EMAIL">%s</xliff:g>\" to contacts?"</string>
-    <string name="all_tab_label" msgid="4003124364397916826">"All"</string>
     <string name="description_image_button_one" msgid="1740638037139856139">"one"</string>
     <string name="description_image_button_two" msgid="5882638439003731308">"two"</string>
     <string name="description_image_button_three" msgid="8709731759376015180">"three"</string>
@@ -280,9 +276,7 @@
     <string name="type_short_work" msgid="4925330752504537861">"W"</string>
     <string name="type_short_pager" msgid="2613818970827594238">"P"</string>
     <string name="type_short_other" msgid="5669407180177236769">"O"</string>
-    <string name="edit_read_only" msgid="8158629550655830981">"This contact is read-only"</string>
     <string name="edit_secondary_collapse" msgid="5371618426594477103">"More"</string>
-    <string name="dialog_primary_name" msgid="5521591005692614833">"Primary name"</string>
     <string name="dialog_new_contact_account" msgid="9044704073286262197">"Create contact under account"</string>
     <string name="menu_sync_remove" msgid="3266725887008450161">"Remove sync group"</string>
     <string name="dialog_sync_add" msgid="8267045393119375803">"Add sync group"</string>

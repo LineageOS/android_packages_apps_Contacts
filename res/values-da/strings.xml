@@ -48,7 +48,6 @@
     <string name="menu_makeDefaultNumber" msgid="4838759253316649534">"Gør til standardnummer"</string>
     <string name="menu_makeDefaultEmail" msgid="2599044610375789994">"Benyt e-mail som standard"</string>
     <string name="menu_splitAggregate" msgid="8368636463748691868">"Opdel"</string>
-    <string name="contactsSplitMessage" msgid="5253490235863170269">"Kontakterne blev opdelt"</string>
     <string name="splitConfirmation_title" msgid="6716467920283502570">"Opdel kontakt"</string>
     <string name="splitConfirmation" msgid="1150797297503944823">"Er du sikker på, at du vil opdele denne ene kontakt i flere kontakter: én for hver sæt af de indeholdte kontaktoplysninger?"</string>
     <string name="menu_joinAggregate" msgid="5027981918265667970">"Føj til"</string>
@@ -73,7 +72,6 @@
     <string name="label_notes" msgid="8337354953278341042">"Noter"</string>
     <string name="label_sip_address" msgid="124073911714324974">"Internetopkald"</string>
     <string name="label_ringtone" msgid="8833166825330686244">"Ringetone"</string>
-    <string name="ghostData_name" msgid="6490954238641157585">"Fornavn og efternavn"</string>
     <string name="ghostData_phonetic_name" msgid="7852749081984070902">"Fonetisk navn"</string>
     <string name="ghostData_company" msgid="5414421120553765775">"Virksomhed"</string>
     <string name="ghostData_title" msgid="7496735200318496110">"Titel"</string>
@@ -144,7 +142,6 @@
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Rediger nummer inden opkald"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Føj til kontakter"</string>
     <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"Fjern fra opkaldsliste"</string>
-    <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Ryd opkaldsliste"</string>
     <string name="recentCalls_empty" msgid="247053222448663107">"Opkaldslisten er tom."</string>
     <string name="clearCallLogConfirmation_title" msgid="718072843006222703">"Ryd opkaldsliste"</string>
     <string name="clearCallLogConfirmation" msgid="7625927669136267636">"Er du sikker på, at du vil rydde opkaldslisten?"</string>
@@ -184,7 +181,6 @@
     <string name="favoritesFrquentSeparator" msgid="8107518433381283736">"Jævnligt kontaktet"</string>
     <string name="add_contact_dlg_title" msgid="2896685845822146494">"Tilføj kontakt"</string>
     <string name="add_contact_dlg_message_fmt" msgid="7986472669444326576">"Føj \"<xliff:g id="EMAIL">%s</xliff:g>\" til kontaktpersoner?"</string>
-    <string name="all_tab_label" msgid="4003124364397916826">"Alle"</string>
     <string name="description_image_button_one" msgid="1740638037139856139">"et"</string>
     <string name="description_image_button_two" msgid="5882638439003731308">"to"</string>
     <string name="description_image_button_three" msgid="8709731759376015180">"tre"</string>
@@ -280,9 +276,7 @@
     <string name="type_short_work" msgid="4925330752504537861">"O"</string>
     <string name="type_short_pager" msgid="2613818970827594238">"P"</string>
     <string name="type_short_other" msgid="5669407180177236769">"O"</string>
-    <string name="edit_read_only" msgid="8158629550655830981">"Denne kontakt er skrivebeskyttet"</string>
     <string name="edit_secondary_collapse" msgid="5371618426594477103">"Flere"</string>
-    <string name="dialog_primary_name" msgid="5521591005692614833">"Primærnavn"</string>
     <string name="dialog_new_contact_account" msgid="9044704073286262197">"Opret kontakt under konto"</string>
     <string name="menu_sync_remove" msgid="3266725887008450161">"Fjern synkroniseringsgruppe"</string>
     <string name="dialog_sync_add" msgid="8267045393119375803">"Tilføj synkroniseringsgruppe"</string>

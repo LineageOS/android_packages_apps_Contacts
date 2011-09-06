@@ -48,7 +48,6 @@
     <string name="menu_makeDefaultNumber" msgid="4838759253316649534">"הגדר מספר כברירת מחדל"</string>
     <string name="menu_makeDefaultEmail" msgid="2599044610375789994">"הגדר דוא\"ל כברירת מחדל"</string>
     <string name="menu_splitAggregate" msgid="8368636463748691868">"הפרד"</string>
-    <string name="contactsSplitMessage" msgid="5253490235863170269">"אנשי קשר נפרדים"</string>
     <string name="splitConfirmation_title" msgid="6716467920283502570">"הפרדת איש קשר"</string>
     <string name="splitConfirmation" msgid="1150797297503944823">"האם אתה בטוח שברצונך להפריד איש קשר יחיד זה לאנשי קשר מרובים: אחד לכל קבוצת פרטי קשר שצורפה אליו?"</string>
     <string name="menu_joinAggregate" msgid="5027981918265667970">"שלב"</string>
@@ -73,7 +72,6 @@
     <string name="label_notes" msgid="8337354953278341042">"הערות"</string>
     <string name="label_sip_address" msgid="124073911714324974">"שיחת אינטרנט"</string>
     <string name="label_ringtone" msgid="8833166825330686244">"צלצול"</string>
-    <string name="ghostData_name" msgid="6490954238641157585">"שם פרטי ומשפחה"</string>
     <string name="ghostData_phonetic_name" msgid="7852749081984070902">"שם פונטי"</string>
     <string name="ghostData_company" msgid="5414421120553765775">"חברה"</string>
     <string name="ghostData_title" msgid="7496735200318496110">"כותרת"</string>
@@ -144,7 +142,6 @@
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"ערוך מספר לפני השיחה"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"הוסף לאנשי הקשר"</string>
     <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"הסר מיומן השיחות"</string>
-    <string name="recentCalls_deleteAll" msgid="6352364392762163704">"נקה את יומן השיחות"</string>
     <string name="recentCalls_empty" msgid="247053222448663107">"יומן השיחות ריק."</string>
     <string name="clearCallLogConfirmation_title" msgid="718072843006222703">"נקה את יומן השיחות"</string>
     <string name="clearCallLogConfirmation" msgid="7625927669136267636">"האם אתה בטוח שברצונך לנקות את יומן השיחות?"</string>
@@ -184,7 +181,6 @@
     <string name="favoritesFrquentSeparator" msgid="8107518433381283736">"מתקשר לעיתים קרובות"</string>
     <string name="add_contact_dlg_title" msgid="2896685845822146494">"הוסף איש קשר"</string>
     <string name="add_contact_dlg_message_fmt" msgid="7986472669444326576">"להוסיף את \"<xliff:g id="EMAIL">%s</xliff:g>\" לאנשי הקשר?"</string>
-    <string name="all_tab_label" msgid="4003124364397916826">"הכל"</string>
     <string name="description_image_button_one" msgid="1740638037139856139">"אחד"</string>
     <string name="description_image_button_two" msgid="5882638439003731308">"שתיים"</string>
     <string name="description_image_button_three" msgid="8709731759376015180">"שלוש"</string>
@@ -280,9 +276,7 @@
     <string name="type_short_work" msgid="4925330752504537861">"ע"</string>
     <string name="type_short_pager" msgid="2613818970827594238">"ז"</string>
     <string name="type_short_other" msgid="5669407180177236769">"א"</string>
-    <string name="edit_read_only" msgid="8158629550655830981">"איש קשר זה הוא לקריאה בלבד"</string>
     <string name="edit_secondary_collapse" msgid="5371618426594477103">"עוד"</string>
-    <string name="dialog_primary_name" msgid="5521591005692614833">"שם ראשי"</string>
     <string name="dialog_new_contact_account" msgid="9044704073286262197">"צור איש קשר בחשבון"</string>
     <string name="menu_sync_remove" msgid="3266725887008450161">"הסר קבוצת סנכרון"</string>
     <string name="dialog_sync_add" msgid="8267045393119375803">"הוסף קבוצת סנכרון"</string>

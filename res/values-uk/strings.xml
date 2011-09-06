@@ -48,7 +48,6 @@
     <string name="menu_makeDefaultNumber" msgid="4838759253316649534">"Устан. номер за умовч."</string>
     <string name="menu_makeDefaultEmail" msgid="2599044610375789994">"Зроб. ел.адр. за умовч."</string>
     <string name="menu_splitAggregate" msgid="8368636463748691868">"Розділити"</string>
-    <string name="contactsSplitMessage" msgid="5253490235863170269">"Контакти розділено"</string>
     <string name="splitConfirmation_title" msgid="6716467920283502570">"Розділити контакт"</string>
     <string name="splitConfirmation" msgid="1150797297503944823">"Дійсно розділити цей єдиний контакт на декілька контактів: один для кожного набору доданої об\'єднаної контактної інформації?"</string>
     <string name="menu_joinAggregate" msgid="5027981918265667970">"Приєдн."</string>
@@ -73,7 +72,6 @@
     <string name="label_notes" msgid="8337354953278341042">"Примітки"</string>
     <string name="label_sip_address" msgid="124073911714324974">"Інтернет-дзвінок"</string>
     <string name="label_ringtone" msgid="8833166825330686244">"Мелодія"</string>
-    <string name="ghostData_name" msgid="6490954238641157585">"Ім\'я, прізвище"</string>
     <string name="ghostData_phonetic_name" msgid="7852749081984070902">"Вимова імені"</string>
     <string name="ghostData_company" msgid="5414421120553765775">"Компанія"</string>
     <string name="ghostData_title" msgid="7496735200318496110">"Назва"</string>
@@ -144,7 +142,6 @@
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Редаг. номер перед викл."</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Дод. до контактів"</string>
     <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"Видал. з журн. викликів"</string>
-    <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Очист. журнал викл."</string>
     <string name="recentCalls_empty" msgid="247053222448663107">"Журн. викл. порожній."</string>
     <string name="clearCallLogConfirmation_title" msgid="718072843006222703">"Очист. журнал викл."</string>
     <string name="clearCallLogConfirmation" msgid="7625927669136267636">"Дійсно очистити журнал викликів?"</string>
@@ -184,7 +181,6 @@
     <string name="favoritesFrquentSeparator" msgid="8107518433381283736">"Часті контакти"</string>
     <string name="add_contact_dlg_title" msgid="2896685845822146494">"Додати контакт"</string>
     <string name="add_contact_dlg_message_fmt" msgid="7986472669444326576">"Дод.\" <xliff:g id="EMAIL">%s</xliff:g>\" до контактів?"</string>
-    <string name="all_tab_label" msgid="4003124364397916826">"Усе"</string>
     <string name="description_image_button_one" msgid="1740638037139856139">"один"</string>
     <string name="description_image_button_two" msgid="5882638439003731308">"два"</string>
     <string name="description_image_button_three" msgid="8709731759376015180">"три"</string>
@@ -280,9 +276,7 @@
     <string name="type_short_work" msgid="4925330752504537861">"Р"</string>
     <string name="type_short_pager" msgid="2613818970827594238">"П"</string>
     <string name="type_short_other" msgid="5669407180177236769">"І"</string>
-    <string name="edit_read_only" msgid="8158629550655830981">"Цей контакт лише для читання"</string>
     <string name="edit_secondary_collapse" msgid="5371618426594477103">"Більше"</string>
-    <string name="dialog_primary_name" msgid="5521591005692614833">"Основне ім\'я"</string>
     <string name="dialog_new_contact_account" msgid="9044704073286262197">"Створ. контакт в обл. записі"</string>
     <string name="menu_sync_remove" msgid="3266725887008450161">"Видал. синхр. групу"</string>
     <string name="dialog_sync_add" msgid="8267045393119375803">"Дод. синхр. групу"</string>

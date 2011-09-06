@@ -48,7 +48,6 @@
     <string name="menu_makeDefaultNumber" msgid="4838759253316649534">"Učini zadanim brojem"</string>
     <string name="menu_makeDefaultEmail" msgid="2599044610375789994">"Učini zadanom e-poštom"</string>
     <string name="menu_splitAggregate" msgid="8368636463748691868">"Zasebno"</string>
-    <string name="contactsSplitMessage" msgid="5253490235863170269">"Kontakti su razdvojeni"</string>
     <string name="splitConfirmation_title" msgid="6716467920283502570">"Odvoji kontakt"</string>
     <string name="splitConfirmation" msgid="1150797297503944823">"Jeste li sigurni da želite podijeliti ovaj kontakt u više kontakata: jedan za svaki skup podataka za kontakt koji su mu pridruženi?"</string>
     <string name="menu_joinAggregate" msgid="5027981918265667970">"Pridruži se"</string>
@@ -73,7 +72,6 @@
     <string name="label_notes" msgid="8337354953278341042">"Bilješke"</string>
     <string name="label_sip_address" msgid="124073911714324974">"Internetski poziv"</string>
     <string name="label_ringtone" msgid="8833166825330686244">"Zvuk zvona"</string>
-    <string name="ghostData_name" msgid="6490954238641157585">"Ime i prezime"</string>
     <string name="ghostData_phonetic_name" msgid="7852749081984070902">"Ime fonetski"</string>
     <string name="ghostData_company" msgid="5414421120553765775">"Tvrtka"</string>
     <string name="ghostData_title" msgid="7496735200318496110">"Naslov"</string>
@@ -144,7 +142,6 @@
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Uredi broj prije pozivanja"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Dodaj u kontakte"</string>
     <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"Ukloni iz zapisnika poziva"</string>
-    <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Izbriši zapisnik poziva"</string>
     <string name="recentCalls_empty" msgid="247053222448663107">"Zapisnik poziva je prazan"</string>
     <string name="clearCallLogConfirmation_title" msgid="718072843006222703">"Izbriši zapisnik poziva"</string>
     <string name="clearCallLogConfirmation" msgid="7625927669136267636">"Jeste li sigurni da želite izbrisati zapisnik poziva?"</string>
@@ -184,7 +181,6 @@
     <string name="favoritesFrquentSeparator" msgid="8107518433381283736">"Često kontaktirani"</string>
     <string name="add_contact_dlg_title" msgid="2896685845822146494">"Dodaj kontakt"</string>
     <string name="add_contact_dlg_message_fmt" msgid="7986472669444326576">"Dodati \"<xliff:g id="EMAIL">%s</xliff:g>\" kontaktima?"</string>
-    <string name="all_tab_label" msgid="4003124364397916826">"Sve"</string>
     <string name="description_image_button_one" msgid="1740638037139856139">"jedan"</string>
     <string name="description_image_button_two" msgid="5882638439003731308">"dva"</string>
     <string name="description_image_button_three" msgid="8709731759376015180">"tri"</string>
@@ -280,9 +276,7 @@
     <string name="type_short_work" msgid="4925330752504537861">"P"</string>
     <string name="type_short_pager" msgid="2613818970827594238">"P"</string>
     <string name="type_short_other" msgid="5669407180177236769">"D"</string>
-    <string name="edit_read_only" msgid="8158629550655830981">"Ovaj je kontakt samo za čitanje"</string>
     <string name="edit_secondary_collapse" msgid="5371618426594477103">"Više"</string>
-    <string name="dialog_primary_name" msgid="5521591005692614833">"Primarni naziv"</string>
     <string name="dialog_new_contact_account" msgid="9044704073286262197">"Izrada kontakta pod računom"</string>
     <string name="menu_sync_remove" msgid="3266725887008450161">"Ukloni grupu sinkronizacije"</string>
     <string name="dialog_sync_add" msgid="8267045393119375803">"Dodaj grupu sinkroniziranja"</string>

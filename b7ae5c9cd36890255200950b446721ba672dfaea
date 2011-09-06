@@ -16,6 +16,24 @@
       "revId": "b7ae5c9cd36890255200950b446721ba672dfaea",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAH3//+PU\u003d",
+        "filename": "src/com/android/contacts/model/FallbackSource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2011-09-06T14:36:01Z",
+      "side": 1,
+      "message": "I happily would submit a change for that, but I need to understand it first ;)\nAs sDateFormat doesn\u0027t accept a timezone, how can the timezone of it be changed at all?",
+      "parentUuid": "AAAAH3//+Pk\u003d",
+      "revId": "b7ae5c9cd36890255200950b446721ba672dfaea",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

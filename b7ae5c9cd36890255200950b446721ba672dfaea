@@ -52,6 +52,24 @@
       "revId": "b7ae5c9cd36890255200950b446721ba672dfaea",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAH3//+MQ\u003d",
+        "filename": "src/com/android/contacts/model/FallbackSource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1301
+      },
+      "writtenOn": "2011-09-07T21:24:43Z",
+      "side": 1,
+      "message": "i guess the issue stems from the fact that sDateFormat is created once when the class is instanced w/ timezone of creation. upon daylight saving change or traveling to different time zone, sDateFormat is still using the time zone at the moment of class instance, creating a time lag and reporting one hour earlier, which is technically a day before. if you restart the app, it can be avoided as sDateFormat is created again w/ updated time zone. setting timezone before parsing will make sure it is always in the correct time zone.",
+      "parentUuid": "AAAAH3//+NM\u003d",
+      "revId": "b7ae5c9cd36890255200950b446721ba672dfaea",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

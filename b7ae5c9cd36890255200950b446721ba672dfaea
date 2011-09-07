@@ -34,6 +34,24 @@
       "revId": "b7ae5c9cd36890255200950b446721ba672dfaea",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAH3//+NM\u003d",
+        "filename": "src/com/android/contacts/model/FallbackSource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1301
+      },
+      "writtenOn": "2011-09-07T19:42:50Z",
+      "side": 1,
+      "message": "basically i did the following:\n#\n\nLog.d(\"DEBUG\",\"PARSE\u003d \"+parseDate(valueString, sDateFormat));\n\nsDateFormat.setTimeZone(TimeZone.getDefault());\n\nLog.d(\"DEBUG\",\"parse\u003d \"+parseDate(valueString, sDateFormat));\n\nreturn(parseDate(valueString, sDateFormat));\n\n#\n\nthe following article explains timezone issue with Date and SimpleDateFormat:\nhttp://developer.android.com/reference/java/text/SimpleDateFormat.html\n\nit also illustrates how date gets changed depending on timezone, as Date represents absolute date and time in millisecond in UTC. my understanding is that Date is independent of time zone, and SimpleDateFormat translates it to human-readable value specific to a time zone specified. \ni believe sDateFormat needs time zone setting, just like sFullDateFormat, as both are date/time formatter. the string only specifies what output is generated. the actual conversion/formatting depends on timezone.\n\nedit: i can\u0027t seem to reproduce what i experienced yesterday, probably because i was changing time zone on the fly w/o restarting the app. (i should have done a more systematic test. i just watched if date gets changed upon save.)\n\nhowever, without setting time zone for sDateFormat, returned value is changed upon time zone change. it would mean upon the end of day light saving, date will decrease by one day, and saved so if you happen to check it. setting time zone before parsing makes sure date never change. another thing will be that we have to make sure it works w/ gmail sync. i was told that it didn\u0027t before.\n\nthe following is an example where birthday was created in GMT+2 time zone. upon time zone change, returned value also changes\n\nD/DEBUG   ( 1337): PARSE\u003d Tue Sep 06 00:00:00 GMT+02:00 2011\n\nD/DEBUG   ( 1337): PARSE\u003d Mon Sep 05 23:00:00 GMT+01:00 2011\n\nD/DEBUG   ( 1337): PARSE\u003d Tue Sep 06 01:00:00 GMT+03:00 2011\n\nafter adding time zone setting for sDateFormat, it is correct regardless of zone.\n\nD/DEBUG   ( 2994): parse\u003d Tue Sep 06 00:00:00 GMT+02:00 2011\n\nD/DEBUG   ( 2994): parse\u003d Tue Sep 06 00:00:00 GMT+01:00 2011\n\nD/DEBUG   ( 2994): parse\u003d Tue Sep 06 00:00:00 PDT 2011",
+      "parentUuid": "AAAAH3//+PU\u003d",
+      "revId": "b7ae5c9cd36890255200950b446721ba672dfaea",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

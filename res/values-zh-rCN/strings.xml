@@ -45,6 +45,7 @@
     <string name="menu_sendSMS" msgid="5535886767547006515">"向联系人发送短信"</string>
     <string name="menu_sendEmail" msgid="7293508859242926187">"发送电子邮件"</string>
     <string name="menu_viewAddress" msgid="1814744325763202024">"地图地址"</string>
+    <string name="menu_shareNumber">分享号码</string>
     <string name="menu_makeDefaultNumber" msgid="4838759253316649534">"设置默认号码"</string>
     <string name="menu_makeDefaultEmail" msgid="2599044610375789994">"设置为默认电子邮件"</string>
     <string name="menu_splitAggregate" msgid="8368636463748691868">"拆分"</string>
@@ -476,7 +477,19 @@
     <string name="title_misc_category">其他设定</string>
     <string name="title_sensor_rotation">使用重力感应</string>
     <string name="summary_sensor_rotation">如果允许该项，拨号面板将会根据设定旋转方向"</string>
+    <string name="title_data_font_size">联系人信息字体大小</string>
+    <string name="summary_data_font_size">允许你选择显示联系人信息（如电话号码、电子邮件、地址等）时所使用的字体大小</string>
+    <string name="title_default_phone_tab">默认页面</string>
+    <string name="summary_default_phone_tab">电话应用程序启动时的默认显示页面</string>
     
+    <!-- Default Phone Tab strings -->
+    <string name="default_phone_tab_last_used">上一次拨号（预设）</string>
+    <string name="default_phone_tab_last_viewed">上一次查看</string>
+    <string name="default_phone_tab_phone">电话</string>
+    <string name="default_phone_tab_call_log">通话记录</string>
+    <string name="default_phone_tab_contacts">联系人</string>
+    <string name="default_phone_tab_favorites">我的最爱</string>
+
     <!-- Wysie: About strings -->
     <string name="title_about">关于</string>
     <string name="title_about_name">插件名称</string>

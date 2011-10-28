@@ -489,6 +489,9 @@
     <string name="quickcontact_no_data">データなし</string>
 
     <!-- CyanogenMod -->
+    <string name="label_date">日付</string>
+    <string name="button_clear_date">クリア</string>
+
     <string name="menu_shareNumber">番号を共有</string>
     <string name="menu_shareEmail">メールを共有</string>
     <string name="menu_shareAddress">住所を共有</string>

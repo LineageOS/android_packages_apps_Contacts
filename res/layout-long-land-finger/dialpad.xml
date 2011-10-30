@@ -16,19 +16,17 @@
 <TableLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/dialpad"
-	android:layout_width="match_parent"
-	android:layout_height="0dp"
-	android:layout_weight="5"
-	android:gravity="center_vertical">
-	<TableRow
-		android:layout_weight="1"
-		android:gravity="center">
+	android:layout_width="0dp"
+	android:layout_height="match_parent"
+	android:gravity="center"
+	android:layout_weight="1">
+	<TableRow android:layout_weight="1" android:gravity="center">
 		<ImageButton
 			android:id="@+id/one"
 			android:layout_weight="1"
 			android:layout_marginRight="3dp"
 			android:layout_width="88dp"
-			android:layout_height="50dp"
+			android:layout_height="58dp"
 			android:src="@drawable/dial_num_1_no_vm"
 			android:background="@drawable/btn_dial"
 			android:soundEffectsEnabled="false"
@@ -38,7 +36,7 @@
 			android:layout_weight="1"
 			android:layout_marginRight="3dp"
 			android:layout_width="88dp"
-			android:layout_height="50dp"
+			android:layout_height="58dp"
 			android:src="@drawable/dial_num_2"
 			android:background="@drawable/btn_dial"
 			android:soundEffectsEnabled="false"
@@ -48,21 +46,19 @@
 			android:layout_weight="1"
 			android:layout_marginRight="3dp"
 			android:layout_width="88dp"
-			android:layout_height="50dp"
+			android:layout_height="58dp"
 			android:src="@drawable/dial_num_3"
 			android:background="@drawable/btn_dial"
 			android:soundEffectsEnabled="false"
 			android:contentDescription="@string/description_image_button_three" />
 	</TableRow>
-	<TableRow
-		android:layout_weight="1"
-		android:gravity="center">
+	<TableRow android:layout_weight="1" android:gravity="center">
 		<ImageButton
 			android:id="@+id/four"
 			android:layout_weight="1"
 			android:layout_marginRight="3dp"
 			android:layout_width="88dp"
-			android:layout_height="50dp"
+			android:layout_height="58dp"
 			android:src="@drawable/dial_num_4"
 			android:background="@drawable/btn_dial"
 			android:soundEffectsEnabled="false"
@@ -72,7 +68,7 @@
 			android:layout_weight="1"
 			android:layout_marginRight="3dp"
 			android:layout_width="88dp"
-			android:layout_height="50dp"
+			android:layout_height="58dp"
 			android:src="@drawable/dial_num_5"
 			android:background="@drawable/btn_dial"
 			android:soundEffectsEnabled="false"
@@ -82,21 +78,19 @@
 			android:layout_weight="1"
 			android:layout_marginRight="3dp"
 			android:layout_width="88dp"
-			android:layout_height="50dp"
+			android:layout_height="58dp"
 			android:src="@drawable/dial_num_6"
 			android:background="@drawable/btn_dial"
 			android:soundEffectsEnabled="false"
 			android:contentDescription="@string/description_image_button_six" />
 	</TableRow>
-	<TableRow
-		android:layout_weight="1"
-		android:gravity="center">
+	<TableRow android:layout_weight="1" android:gravity="center">
 		<ImageButton
 			android:id="@+id/seven"
 			android:layout_weight="1"
 			android:layout_marginRight="3dp"
 			android:layout_width="88dp"
-			android:layout_height="50dp"
+			android:layout_height="58dp"
 			android:src="@drawable/dial_num_7"
 			android:background="@drawable/btn_dial"
 			android:soundEffectsEnabled="false"
@@ -106,7 +100,7 @@
 			android:layout_weight="1"
 			android:layout_marginRight="3dp"
 			android:layout_width="88dp"
-			android:layout_height="50dp"
+			android:layout_height="58dp"
 			android:src="@drawable/dial_num_8"
 			android:background="@drawable/btn_dial"
 			android:soundEffectsEnabled="false"
@@ -116,21 +110,19 @@
 			android:layout_weight="1"
 			android:layout_marginRight="3dp"
 			android:layout_width="88dp"
-			android:layout_height="50dp"
+			android:layout_height="58dp"
 			android:src="@drawable/dial_num_9"
 			android:background="@drawable/btn_dial"
 			android:soundEffectsEnabled="false"
 			android:contentDescription="@string/description_image_button_nine" />
 	</TableRow>
-	<TableRow
-		android:layout_weight="1"
-		android:gravity="center">
+	<TableRow android:layout_weight="1" android:gravity="center">
 		<ImageButton
 			android:id="@+id/star"
 			android:layout_weight="1"
 			android:layout_marginRight="3dp"
 			android:layout_width="88dp"
-			android:layout_height="50dp"
+			android:layout_height="58dp"
 			android:src="@drawable/dial_num_star"
 			android:background="@drawable/btn_dial"
 			android:soundEffectsEnabled="false"
@@ -140,7 +132,7 @@
 			android:layout_weight="1"
 			android:layout_marginRight="3dp"
 			android:layout_width="88dp"
-			android:layout_height="50dp"
+			android:layout_height="58dp"
 			android:src="@drawable/dial_num_0"
 			android:background="@drawable/btn_dial"
 			android:soundEffectsEnabled="false"
@@ -150,7 +142,7 @@
 			android:layout_weight="1"
 			android:layout_marginRight="3dp"
 			android:layout_width="88dp"
-			android:layout_height="50dp"
+			android:layout_height="58dp"
 			android:src="@drawable/dial_num_pound"
 			android:background="@drawable/btn_dial"
 			android:soundEffectsEnabled="false"

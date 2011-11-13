@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAALX///94\u003d",
+        "filename": "res/values-hu/arrays.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1573
+      },
+      "writtenOn": "2011-11-13T16:57:10Z",
+      "side": 1,
+      "message": "Elég annyi, hogy \"Névjegyzékhez ad\"",
+      "revId": "d90edffbf19705f6b58daa685dc37283806ed00f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

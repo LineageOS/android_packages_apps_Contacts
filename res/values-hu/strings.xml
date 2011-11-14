@@ -430,7 +430,7 @@
     <string name="title_digits_color_focused">Számjegy szín (kijelölt)</string>
     <string name="title_digits_color_unselected">Számjegy szín (nincs kijelölve)</string>
     <string name="title_choose_color">Válasszon egy színt</string>
-    <string name="instructions_choose_color">Érints meg középen a színt a megerősítéshez / Nyomd meg a "Vissza" gombot az elutasításhoz.</string>
+    <string name="instructions_choose_color">Érintsd meg középen a színt a megerősítéshez / Nyomd meg a "Vissza" gombot az elutasításhoz.</string>
     <string name="entry_no_vm_handler">Nincs (hangposta szám hívása)</string>
     <string name="title_cl_exact_time">Pontos idő</string>
     <string name="summaryon_cl_exact_time">Pontos idő használata a hivásnaplóban</string>
@@ -441,7 +441,7 @@
     <string name="summaryon_cl_ask_before_clear">Rákérdezés a híváslista törlése előtt</string>
     <string name="summaryoff_cl_ask_before_clear">Híváslista törlése kérdezés nélkül</string>
     <string name="title_contacts_show_pic">Kapcsolat képeinek mutatása</string>
-    <string name="title_contacts_show_dial_button">Hívógomb megjelnítése</string>
+    <string name="title_contacts_show_dial_button">Hívógomb megjelenítése</string>
     <string name="summary_contacts_show_dial_button">Hívógomb megjelenítése számokkal</string>
     <string name="title_contacts_show_count">Kapcsolatok számának mutatása</string>
     <string name="summary_contacts_show_count">Kapcsolatok számának mutatása a névjegyzék tetején</string>
@@ -463,8 +463,16 @@
     <string name="summary_sensor_rotation">Ha engedélyezve, akkor tájolás a rendszerbeállítások szerint</string>
     <string name="title_data_font_size">Kapcsolat infó betűmérete</string>
     <string name="summary_data_font_size">Megválaszhatod a kapcsolat információ betűméretét (telefonszám, e-mail, cím, stb.)</string>
-    <string name="title_about">Leírás</string>
-    <string name="title_about_name">Mod Name</string>
+    <string name="title_default_phone_tab">Alapértelmezett fül</string>
+    <string name="default_phone_tab_last_used">Hívás előtt használt (Alapértelmezett)</string>
+    <string name="default_phone_tab_last_viewed">Utoljára megtekintett</string>
+    <string name="default_phone_tab_phone">Telefon</string>
+    <string name="default_phone_tab_call_log">Híváslista</string>
+    <string name="default_phone_tab_contacts">Névjegyek</string>
+    <string name="default_phone_tab_favorites">Kedvencek</string>
+
+    <string name="title_about">Névjegy</string>
+    <string name="title_about_name">Mod Neve</string>
     <string name="summary_about_name">WyContacts Froyo</string>
     <string name="title_about_version">Verzió</string>
     <string name="summary_about_version">1.2</string>

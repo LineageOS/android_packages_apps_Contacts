@@ -53,4 +53,11 @@
         <item>116</item>
         <item>128</item>
     </string-array>
+
+    <string-array name="view_data_font_sizes">
+        <item>小 (默认)</item>
+        <item>中等</item>
+        <item>大</item>
+        <item>加大</item>
+    </string-array>
 </resources>

@@ -17,7 +17,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="sharedUserLabel" msgid="7965035505237135241">"Alap Android-alkalmazások"</string>
-    <string name="contactsList" msgid="8661624236494819731">"Címtár"</string>
+    <string name="contactsList" msgid="8661624236494819731">"Névjegyek"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Telefon"</string>
     <string name="shortcutContact" msgid="749243779392912958">"Névjegy"</string>
     <string name="shortcutDialContact" msgid="746622101599186779">"Közvetlen tárcsázás"</string>
@@ -132,7 +132,7 @@
     <item quantity="one" msgid="916648718690661777">"1 névjegy"</item>
     <item quantity="other" msgid="5660384247071761844">"<xliff:g id="COUNT">%d</xliff:g> névjegy"</item>
   </plurals>
-    <string name="contactsIconLabel" msgid="7666609097606552806">"Címtár"</string>
+    <string name="contactsIconLabel" msgid="7666609097606552806">"Névjegyek"</string>
     <string name="contactsFavoritesLabel" msgid="8417039765586853670">"Kedvencek"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Híváslista"</string>
@@ -164,7 +164,7 @@
     <string name="noContactsHelpTextWithSync" msgid="3734101165712848179">"Nincsenek megjeleníthető névjegyei. (Ha a fiókot csak most adta hozzá, a névjegyek szinkronizálása néhány percig is eltarthat.)"\n\n"Névjegyek hozzáadásához nyomja meg a "<font fgcolor="#ffffffff"><b>"Menü"</b></font>" gombot, és érintse meg a(z):"\n" "\n<li><font fgcolor="#ffffffff"><b>"Fiókok"</b></font>" lehetőséget a telefonjával szinkronizálható, névjegyekkel rendelkező fiók hozzáadásához vagy beállításához"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Megjelenítési beállítások"</b></font>" lehetőséget a látható névjegyek módosításához"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Új névjegy"</b></font>" lehetőséget teljesen új névjegy létrehozásához"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Importálás/exportálás"</b></font>\n</li></string>
     <string name="noContactsNoSimHelpText" msgid="6553845386917463292">"Nincsenek megjeleníthető névjegyei."\n\n"Névjegy hozzáadásához nyomja meg a "<font fgcolor="#ffffffff"><b>"Menü"</b></font>" gombot, majd érintse meg a(z):"\n" "\n<li><font fgcolor="#ffffffff"><b>"Fiókok"</b></font>" lehetőséget a telefonjával szinkronizálható, névjegyekkel rendelkező fiók hozzáadásához vagy beállításához"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Új névjegy"</b></font>"  lehetőséget teljesen új névjegy létrehozásához"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Importálás/exportálás"</b></font>\n</li></string>
     <string name="noContactsNoSimHelpTextWithSync" msgid="1122296298361373488">"Nincsenek megjeleníthető névjegyei. (Ha a fiókot csak most adta hozzá, a névjegyek szinkronizálása néhány percig is eltarthat.)"\n\n"Névjegyek hozzáadásához nyomja meg a "<font fgcolor="#ffffffff"><b>"Menü"</b></font>" gombot, és érintse meg a(z):"\n" "\n<li><font fgcolor="#ffffffff"><b>"Fiókok"</b></font>" lehetőséget a telefonjával szinkronizálható, névjegyekkel rendelkező fiók hozzáadásához vagy beállításához"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Megjelenítési beállítások"</b></font>" lehetőséget a látható névjegyek módosításához"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Új névjegy"</b></font>" lehetőséget teljesen új névjegy létrehozásához"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Importálás/exportálás"</b></font>\n</li></string>
-    <string name="noFavoritesHelpText" msgid="3744655776704833277">"Nincsenek kedvencei."\n\n"Így adhat hozzá névjegyet a kedvencek listájához:"\n\n"        "<li>"Érintse meg a "<b>"Címtár"</b>" lapot"\n</li>" "\n<li>"Érintse meg a kedvencekhez hozzáadni kívánt névjegyet"\n</li>" "\n<li>"Érintse meg az ismerős neve melletti csillagot"\n</li></string>
+    <string name="noFavoritesHelpText" msgid="3744655776704833277">"Nincsenek kedvencei."\n\n"Így adhat hozzá névjegyet a kedvencek listájához:"\n\n"        "<li>"Érintse meg a "<b>"Névjegyek"</b>" lapot"\n</li>" "\n<li>"Érintse meg a kedvencekhez hozzáadni kívánt névjegyet"\n</li>" "\n<li>"Érintse meg az ismerős neve melletti csillagot"\n</li></string>
     <string name="liveFolder_all_label" msgid="5961411940473276616">"Összes névjegy"</string>
     <string name="liveFolder_favorites_label" msgid="2674341514070517105">"Csillaggal megjelölt"</string>
     <string name="liveFolder_phones_label" msgid="1709786878793436245">"Telefonszámok"</string>

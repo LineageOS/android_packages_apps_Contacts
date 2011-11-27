@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAM3////A\u003d",
+        "filename": "res/layout-land/dialpad_fragment.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2011-11-27T14:33:57Z",
+      "side": 1,
+      "message": "Evil tabs :)",
+      "revId": "ff644890ac751dc99090a59bb824d319221e86ae",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

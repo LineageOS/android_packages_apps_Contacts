@@ -41,6 +41,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -515,6 +516,18 @@ public class DialtactsActivity extends Activity {
                 transaction.hide(mSearchFragment);
             }
             transaction.commitAllowingStateLoss();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences ePrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        if(ePrefs.getBoolean("misc_sensor_rotation", false)) {
+            this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        }
+        else {
+            this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         }
     }
 

@@ -372,6 +372,11 @@
          [CHAR LIMIT=NONE] -->
     <string name="dialerIconLabel">Phone</string>
 
+    <!-- Dialer UI Settings -->
+    <string name="dialer_ui_title">Dialer settings</string>
+    <string name="dialer_ui_orientation_title">Enable sensor orientation</string>
+    <string name="dialer_ui_orientation_summary">Rotate dialer based on sensor</string>
+
     <!-- The description text for the call log tab.
 
          Note: AccessibilityServices use this attribute to announce what the view represents.

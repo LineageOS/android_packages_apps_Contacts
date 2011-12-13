@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2008 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+  <string-array name="t9_sort_entries">
+    <item>Name matches first</item>
+    <item>Number matches first</item>
+  </string-array>
+  <string-array name="t9_sort_values"
+    translatable="false">
+    <item>1</item>
+    <item>2</item>
+  </string-array>
+  <string-array name="t9_map">
+    <item>0</item>
+    <item>1</item>
+    <item>2abc</item>
+    <item>3def</item>
+    <item>4ghi</item>
+    <item>5jkl</item>
+    <item>6mno</item>
+    <item>7pqrs</item>
+    <item>8tuv</item>
+    <item>9wxyz</item>
+  </string-array>
+  <string-array name="t9_grouptype">
+    <item>None</item>
+    <item>Home</item>
+    <item>Mobile</item>
+    <item>Work</item>
+    <item>Fax work</item>
+    <item>Fax home</item>
+    <item>Pager</item>
+    <item>Other</item>
+    <item>Callback</item>
+    <item>Car</item>
+    <item>Company Main</item>
+    <item>Isdn</item>
+    <item>Main</item>
+    <item>Fax</item>
+    <item>Radio</item>
+    <item>Telex</item>
+    <item>Tty tdd</item>
+    <item>Work mobile</item>
+    <item>Work pager</item>
+    <item>Assistant</item>
+    <item>Mms</item>
+  </string-array>
+</resources>

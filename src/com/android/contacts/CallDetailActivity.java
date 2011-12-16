@@ -121,7 +121,11 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
     private TextView mStatusMessageAction;
 
     /** Whether we should show "edit number before call" in the options menu. */
-    private boolean mHasEditNumberBeforeCall;
+    private boolean mHasEditNumberBeforeCallOption;
+    /** Whether we should show "trash" in the options menu. */
+    private boolean mHasTrashOption;
+    /** Whether we should show "remove from call log" in the options menu. */
+    private boolean mHasRemoveFromCallLogOption;
 
     private ProximitySensorManager mProximitySensorManager;
     private final ProximitySensorListener mProximitySensorListener = new ProximitySensorListener();
@@ -218,7 +222,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
         mResources = getResources();
 
         mCallTypeHelper = new CallTypeHelper(getResources());
-        mPhoneNumberHelper = new PhoneNumberHelper(mResources, getVoicemailNumber());
+        mPhoneNumberHelper = new PhoneNumberHelper(mResources);
         mPhoneCallDetailsHelper = new PhoneCallDetailsHelper(mResources, mCallTypeHelper,
                 mPhoneNumberHelper);
         mVoicemailStatusHelper = new VoicemailStatusHelperImpl();
@@ -290,7 +294,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
             public Void doInBackground(Void... params) {
                 ContentValues values = new ContentValues();
                 values.put(Voicemails.IS_READ, true);
-                getContentResolver().update(voicemailUri, values, null, null);
+                getContentResolver().update(voicemailUri, values,
+                        Voicemails.IS_READ + " = 0", null);
                 return null;
             }
         });
@@ -491,7 +496,10 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                     disableCallButton();
                 }
 
-                mHasEditNumberBeforeCall = canPlaceCallsTo && !isSipNumber && !isVoicemailNumber;
+                mHasEditNumberBeforeCallOption =
+                        canPlaceCallsTo && !isSipNumber && !isVoicemailNumber;
+                mHasTrashOption = hasVoicemail();
+                mHasRemoveFromCallLogOption = !hasVoicemail();
                 invalidateOptionsMenu();
 
                 ListView historyList = (ListView) findViewById(R.id.history);
@@ -564,6 +572,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
             // If this is not a regular number, there is no point in looking it up in the contacts.
             ContactInfo info =
                     mPhoneNumberHelper.canPlaceCallsTo(number)
+                    && !mPhoneNumberHelper.isVoicemailNumber(number)
                             ? mContactInfoHelper.lookupNumber(number, countryIso)
                             : null;
             if (info == null) {
@@ -594,12 +603,6 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
     /** Load the contact photos and places them in the corresponding views. */
     private void loadContactPhotos(Uri photoUri) {
         mContactPhotoManager.loadPhoto(mContactBackgroundView, photoUri, true, true);
-    }
-
-    private String getVoicemailNumber() {
-        TelephonyManager telephonyManager =
-                (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        return telephonyManager.getVoiceMailNumber();
     }
 
     static final class ViewEntry {
@@ -723,9 +726,9 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
     public boolean onPrepareOptionsMenu(Menu menu) {
         // This action deletes all elements in the group from the call log.
         // We don't have this action for voicemails, because you can just use the trash button.
-        menu.findItem(R.id.menu_remove_from_call_log).setVisible(!hasVoicemail());
-        menu.findItem(R.id.menu_edit_number_before_call).setVisible(mHasEditNumberBeforeCall);
-        menu.findItem(R.id.menu_trash).setVisible(hasVoicemail());
+        menu.findItem(R.id.menu_remove_from_call_log).setVisible(mHasRemoveFromCallLogOption);
+        menu.findItem(R.id.menu_edit_number_before_call).setVisible(mHasEditNumberBeforeCallOption);
+        menu.findItem(R.id.menu_trash).setVisible(mHasTrashOption);
         return super.onPrepareOptionsMenu(menu);
     }
 

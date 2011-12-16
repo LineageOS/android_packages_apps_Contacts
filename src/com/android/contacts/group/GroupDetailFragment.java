@@ -37,6 +37,7 @@ import android.content.Intent;
 import android.content.Loader;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract.Groups;
@@ -98,6 +99,7 @@ public class GroupDetailFragment extends Fragment implements OnScrollListener {
     private TextView mGroupTitle;
     private TextView mGroupSize;
     private ListView mMemberListView;
+    private View mEmptyView;
 
     private Listener mListener;
 
@@ -149,6 +151,7 @@ public class GroupDetailFragment extends Fragment implements OnScrollListener {
         mGroupSize = (TextView) mRootView.findViewById(R.id.group_size);
         mGroupSourceViewContainer = (ViewGroup) mRootView.findViewById(
                 R.id.group_source_view_container);
+        mEmptyView = mRootView.findViewById(android.R.id.empty);
         mMemberListView = (ListView) mRootView.findViewById(android.R.id.list);
         mMemberListView.setAdapter(mAdapter);
 
@@ -190,7 +193,6 @@ public class GroupDetailFragment extends Fragment implements OnScrollListener {
      * Start the loader to retrieve the metadata for this group.
      */
     private void startGroupMetadataLoader() {
-        getLoaderManager().destroyLoader(LOADER_METADATA);
         getLoaderManager().restartLoader(LOADER_METADATA, null, mGroupMetadataLoaderListener);
     }
 
@@ -198,7 +200,6 @@ public class GroupDetailFragment extends Fragment implements OnScrollListener {
      * Start the loader to retrieve the list of group members.
      */
     private void startGroupMembersLoader() {
-        getLoaderManager().destroyLoader(LOADER_MEMBERS);
         getLoaderManager().restartLoader(LOADER_MEMBERS, null, mGroupMemberListLoaderListener);
     }
 
@@ -206,7 +207,7 @@ public class GroupDetailFragment extends Fragment implements OnScrollListener {
             new ContactTileAdapter.Listener() {
 
         @Override
-        public void onContactSelected(Uri contactUri) {
+        public void onContactSelected(Uri contactUri, Rect targetRect) {
             mListener.onContactSelected(contactUri);
         }
     };
@@ -251,13 +252,14 @@ public class GroupDetailFragment extends Fragment implements OnScrollListener {
 
         @Override
         public CursorLoader onCreateLoader(int id, Bundle args) {
-            return new GroupMemberLoader(mContext, mGroupId);
+            return GroupMemberLoader.constructLoaderForGroupDetailQuery(mContext, mGroupId);
         }
 
         @Override
         public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
             updateSize(data.getCount());
             mAdapter.setContactCursor(data);
+            mMemberListView.setEmptyView(mEmptyView);
         }
 
         @Override

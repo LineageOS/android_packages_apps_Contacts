@@ -75,6 +75,7 @@ public class ActionBarAdapter implements OnQueryTextListener, OnCloseListener {
     private final MyTabListener mTabListener = new MyTabListener();
 
     private boolean mShowHomeIcon;
+    private boolean mShowTabsAsText;
 
     public enum TabState {
         GROUPS,
@@ -98,13 +99,17 @@ public class ActionBarAdapter implements OnQueryTextListener, OnCloseListener {
     private static final TabState DEFAULT_TAB = TabState.ALL;
     private TabState mCurrentTab = DEFAULT_TAB;
 
-    public ActionBarAdapter(Context context, Listener listener, ActionBar actionBar) {
+    public ActionBarAdapter(Context context, Listener listener, ActionBar actionBar,
+            boolean isUsingTwoPanes) {
         mContext = context;
         mListener = listener;
         mActionBar = actionBar;
         mPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
 
         mShowHomeIcon = mContext.getResources().getBoolean(R.bool.show_home_icon);
+
+        // On wide screens, show the tabs as text (instead of icons)
+        mShowTabsAsText = isUsingTwoPanes;
 
         // Set up search view.
         View customSearchView = LayoutInflater.from(mActionBar.getThemedContext()).inflate(
@@ -153,12 +158,16 @@ public class ActionBarAdapter implements OnQueryTextListener, OnCloseListener {
         mListener = listener;
     }
 
-    private void addTab(TabState tabState, int icon, int contentDescription) {
+    private void addTab(TabState tabState, int icon, int description) {
         final Tab tab = mActionBar.newTab();
         tab.setTag(tabState);
-        tab.setIcon(icon);
-        tab.setContentDescription(contentDescription);
         tab.setTabListener(mTabListener);
+        if (mShowTabsAsText) {
+            tab.setText(description);
+        } else {
+            tab.setIcon(icon);
+            tab.setContentDescription(description);
+        }
         mActionBar.addTab(tab);
     }
 
@@ -211,12 +220,14 @@ public class ActionBarAdapter implements OnQueryTextListener, OnCloseListener {
         return mCurrentTab;
     }
 
+    /**
+     * @return Whether in search mode, i.e. if the search view is visible/expanded.
+     *
+     * Note even if the action bar is in search mode, if the query is empty, the search fragment
+     * will not be in search mode.
+     */
     public boolean isSearchMode() {
         return mSearchMode;
-    }
-
-    public boolean shouldShowSearchResult() {
-        return mSearchMode && !TextUtils.isEmpty(mQueryString);
     }
 
     public void setSearchMode(boolean flag) {
@@ -235,7 +246,7 @@ public class ActionBarAdapter implements OnQueryTextListener, OnCloseListener {
     }
 
     public String getQueryString() {
-        return mQueryString;
+        return mSearchMode ? mQueryString : null;
     }
 
     public void setQueryString(String query) {
@@ -361,6 +372,18 @@ public class ActionBarAdapter implements OnQueryTextListener, OnCloseListener {
         outState.putBoolean(EXTRA_KEY_SEARCH_MODE, mSearchMode);
         outState.putString(EXTRA_KEY_QUERY, mQueryString);
         outState.putInt(EXTRA_KEY_SELECTED_TAB, mCurrentTab.ordinal());
+    }
+
+    /**
+     * Clears the focus from the {@link SearchView} if we are in search mode.
+     * This will suppress the IME if it is visible.
+     */
+    public void clearFocusOnSearchView() {
+        if (isSearchMode()) {
+            if (mSearchView != null) {
+                mSearchView.clearFocus();
+            }
+        }
     }
 
     private void setFocusOnSearchView() {

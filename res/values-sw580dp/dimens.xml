@@ -29,6 +29,7 @@
     <dimen name="detail_update_section_item_horizontal_padding">8dip</dimen>
     <dimen name="detail_update_section_item_vertical_padding">16dip</dimen>
     <dimen name="search_view_width">400dip</dimen>
+    <dimen name="contact_tile_list_padding_top">16dip</dimen>
     <!-- Center vertically -->
     <dimen name="quick_contact_top_position">-1px</dimen>
     <!-- Contact list (vertical scroll bar comes left) -->
@@ -37,6 +38,14 @@
     <dimen name="contact_browser_list_header_left_margin">@dimen/list_visible_scrollbar_padding</dimen>
     <dimen name="contact_browser_list_header_right_margin">24dip</dimen>
     <dimen name="list_visible_scrollbar_padding">48dip</dimen>
+    <dimen name="account_filter_header_top_padding">@dimen/contact_browser_list_top_margin</dimen>
+
+    <!-- Because the "join" screen has the vertical scroll bar on right,
+      we cannot use @dimen/contact_browser_list_header_left_margin as is. -->
+    <dimen name="join_header_left_margin">24dip</dimen>
+    <dimen name="join_header_right_margin">@dimen/list_visible_scrollbar_padding</dimen>
+    <dimen name="join_header_top_margin">16dip</dimen>
+    <dimen name="join_header_bottom_margin">16dip</dimen>
 
     <!-- Margins and padding for text in widget -->
     <dimen name="widget_snippet_top_margin">5dip</dimen>

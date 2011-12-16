@@ -20,12 +20,13 @@ import com.android.common.io.MoreCloseables;
 import com.android.contacts.ContactsUtils;
 import com.android.contacts.R;
 import com.android.contacts.activities.DialtactsActivity.ViewPagerVisibilityListener;
-import com.android.contacts.test.NeededForTesting;
+import com.android.contacts.util.EmptyLoader;
 import com.android.contacts.voicemail.VoicemailStatusHelper;
 import com.android.contacts.voicemail.VoicemailStatusHelper.StatusMessage;
 import com.android.contacts.voicemail.VoicemailStatusHelperImpl;
 import com.android.internal.telephony.CallerInfo;
 import com.android.internal.telephony.ITelephony;
+import com.google.common.annotations.VisibleForTesting;
 
 import android.app.Activity;
 import android.app.KeyguardManager;
@@ -39,7 +40,6 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.CallLog.Calls;
 import android.telephony.PhoneNumberUtils;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -60,9 +60,13 @@ public class CallLogFragment extends ListFragment implements ViewPagerVisibility
         CallLogQueryHandler.Listener, CallLogAdapter.CallFetcher {
     private static final String TAG = "CallLogFragment";
 
+    /**
+     * ID of the empty loader to defer other fragments.
+     */
+    private static final int EMPTY_LOADER_ID = 0;
+
     private CallLogAdapter mAdapter;
     private CallLogQueryHandler mCallLogQueryHandler;
-    private String mVoiceMailNumber;
     private boolean mScrollToTop;
 
     private boolean mShowOptionsMenu;
@@ -77,12 +81,14 @@ public class CallLogFragment extends ListFragment implements ViewPagerVisibility
     private TextView mStatusMessageAction;
     private KeyguardManager mKeyguardManager;
 
+    private boolean mEmptyLoaderRunning;
+    private boolean mCallLogFetched;
+    private boolean mVoicemailStatusFetched;
+
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
 
-        mVoiceMailNumber = ((TelephonyManager) getActivity().getSystemService(
-                Context.TELEPHONY_SERVICE)).getVoiceMailNumber();
         mCallLogQueryHandler = new CallLogQueryHandler(getActivity().getContentResolver(), this);
         mKeyguardManager =
                 (KeyguardManager) getActivity().getSystemService(Context.KEYGUARD_SERVICE);
@@ -107,6 +113,8 @@ public class CallLogFragment extends ListFragment implements ViewPagerVisibility
             listView.smoothScrollToPosition(0);
             mScrollToTop = false;
         }
+        mCallLogFetched = true;
+        destroyEmptyLoaderIfAllDataFetched();
     }
 
     /**
@@ -122,6 +130,15 @@ public class CallLogFragment extends ListFragment implements ViewPagerVisibility
         int activeSources = mVoicemailStatusHelper.getNumberActivityVoicemailSources(statusCursor);
         setVoicemailSourcesAvailable(activeSources != 0);
         MoreCloseables.closeQuietly(statusCursor);
+        mVoicemailStatusFetched = true;
+        destroyEmptyLoaderIfAllDataFetched();
+    }
+
+    private void destroyEmptyLoaderIfAllDataFetched() {
+        if (mCallLogFetched && mVoicemailStatusFetched && mEmptyLoaderRunning) {
+            mEmptyLoaderRunning = false;
+            getLoaderManager().destroyLoader(EMPTY_LOADER_ID);
+        }
     }
 
     /** Sets whether there are any voicemail sources available in the platform. */
@@ -151,7 +168,7 @@ public class CallLogFragment extends ListFragment implements ViewPagerVisibility
         super.onViewCreated(view, savedInstanceState);
         String currentCountryIso = ContactsUtils.getCurrentCountryIso(getActivity());
         mAdapter = new CallLogAdapter(getActivity(), this,
-                new ContactInfoHelper(getActivity(), currentCountryIso), mVoiceMailNumber);
+                new ContactInfoHelper(getActivity(), currentCountryIso));
         setListAdapter(mAdapter);
         getListView().setItemsCanFocus(true);
     }
@@ -159,6 +176,12 @@ public class CallLogFragment extends ListFragment implements ViewPagerVisibility
     @Override
     public void onStart() {
         mScrollToTop = true;
+
+        // Start the empty loader now to defer other fragments.  We destroy it when both calllog
+        // and the voicemail status are fetched.
+        getLoaderManager().initLoader(EMPTY_LOADER_ID, null,
+                new EmptyLoader.Callback(getActivity()));
+        mEmptyLoaderRunning = true;
         super.onStart();
     }
 
@@ -250,11 +273,16 @@ public class CallLogFragment extends ListFragment implements ViewPagerVisibility
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         if (mShowOptionsMenu) {
-            menu.findItem(R.id.delete_all).setEnabled(mAdapter != null && !mAdapter.isEmpty());
-            menu.findItem(R.id.show_voicemails_only).setVisible(
-                    mVoicemailSourcesAvailable && !mShowingVoicemailOnly);
-            menu.findItem(R.id.show_all_calls).setVisible(
-                    mVoicemailSourcesAvailable && mShowingVoicemailOnly);
+            final MenuItem itemDeleteAll = menu.findItem(R.id.delete_all);
+            // Check if all the menu items are inflated correctly. As a shortcut, we assume all
+            // menu items are ready if the first item is non-null.
+            if (itemDeleteAll != null) {
+                itemDeleteAll.setEnabled(mAdapter != null && !mAdapter.isEmpty());
+                menu.findItem(R.id.show_voicemails_only).setVisible(
+                        mVoicemailSourcesAvailable && !mShowingVoicemailOnly);
+                menu.findItem(R.id.show_all_calls).setVisible(
+                        mVoicemailSourcesAvailable && mShowingVoicemailOnly);
+            }
         }
     }
 
@@ -279,6 +307,7 @@ public class CallLogFragment extends ListFragment implements ViewPagerVisibility
                 return false;
         }
     }
+
     public void callSelectedEntry() {
         int position = getListView().getSelectedItemPosition();
         if (position < 0) {
@@ -310,7 +339,8 @@ public class CallLogFragment extends ListFragment implements ViewPagerVisibility
                        (callType == Calls.INCOMING_TYPE
                                 || callType == Calls.MISSED_TYPE)) {
                     // If the caller-id matches a contact with a better qualified number, use it
-                    number = mAdapter.getBetterNumberFromContacts(number);
+                    String countryIso = cursor.getString(CallLogQuery.COUNTRY_ISO);
+                    number = mAdapter.getBetterNumberFromContacts(number, countryIso);
                 }
                 intent = new Intent(Intent.ACTION_CALL_PRIVILEGED,
                                     Uri.fromParts("tel", number, null));
@@ -321,14 +351,9 @@ public class CallLogFragment extends ListFragment implements ViewPagerVisibility
         }
     }
 
-    @NeededForTesting
-    public CallLogAdapter getAdapter() {
+    @VisibleForTesting
+    CallLogAdapter getAdapter() {
         return mAdapter;
-    }
-
-    @NeededForTesting
-    public String getVoiceMailNumber() {
-        return mVoiceMailNumber;
     }
 
     @Override

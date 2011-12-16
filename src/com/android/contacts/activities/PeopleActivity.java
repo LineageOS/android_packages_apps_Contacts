@@ -33,12 +33,12 @@ import com.android.contacts.group.GroupDetailFragment;
 import com.android.contacts.interactions.ContactDeletionInteraction;
 import com.android.contacts.interactions.ImportExportDialogFragment;
 import com.android.contacts.interactions.PhoneNumberInteraction;
-import com.android.contacts.list.AccountFilterActivity;
 import com.android.contacts.list.ContactBrowseListFragment;
 import com.android.contacts.list.ContactEntryListFragment;
 import com.android.contacts.list.ContactListFilter;
 import com.android.contacts.list.ContactListFilterController;
 import com.android.contacts.list.ContactTileAdapter.DisplayType;
+import com.android.contacts.list.ContactTileFrequentFragment;
 import com.android.contacts.list.ContactTileListFragment;
 import com.android.contacts.list.ContactsIntentResolver;
 import com.android.contacts.list.ContactsRequest;
@@ -53,6 +53,7 @@ import com.android.contacts.model.AccountTypeManager;
 import com.android.contacts.model.AccountWithDataSet;
 import com.android.contacts.preference.ContactsPreferenceActivity;
 import com.android.contacts.preference.DisplayOptionsPreferenceFragment;
+import com.android.contacts.util.AccountFilterUtil;
 import com.android.contacts.util.AccountPromptUtils;
 import com.android.contacts.util.AccountSelectionUtil;
 import com.android.contacts.util.AccountsListAdapter;
@@ -61,13 +62,13 @@ import com.android.contacts.util.Constants;
 import com.android.contacts.util.DialogManager;
 import com.android.contacts.util.PhoneCapabilityTester;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -77,6 +78,7 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents;
 import android.provider.ContactsContract.ProviderStatus;
+import android.provider.ContactsContract.QuickContact;
 import android.provider.Settings;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
@@ -108,10 +110,14 @@ public class PeopleActivity extends ContactsActivity
 
     private static final String TAG = "PeopleActivity";
 
-    private static final int SUBACTIVITY_NEW_GROUP = 2;
-    private static final int SUBACTIVITY_EDIT_GROUP = 3;
+    // These values needs to start at 2. See {@link ContactEntryListFragment}.
+    private static final int SUBACTIVITY_NEW_CONTACT = 2;
+    private static final int SUBACTIVITY_EDIT_CONTACT = 3;
+    private static final int SUBACTIVITY_NEW_GROUP = 4;
+    private static final int SUBACTIVITY_EDIT_GROUP = 5;
+    private static final int SUBACTIVITY_ACCOUNT_FILTER = 6;
 
-    private DialogManager mDialogManager = new DialogManager(this);
+    private final DialogManager mDialogManager = new DialogManager(this);
 
     private ContactsIntentResolver mIntentResolver;
     private ContactsRequest mRequest;
@@ -145,7 +151,7 @@ public class PeopleActivity extends ContactsActivity
      */
     private DefaultContactBrowseListFragment mAllFragment;
     private ContactTileListFragment mFavoritesFragment;
-    private ContactTileListFragment mFrequentFragment;
+    private ContactTileFrequentFragment mFrequentFragment;
     private GroupBrowseListFragment mGroupsFragment;
 
     private View mFavoritesView;
@@ -177,6 +183,14 @@ public class PeopleActivity extends ContactsActivity
      */
     private boolean mFragmentInitialized;
 
+    /**
+     * Whether or not the current contact filter is valid or not. We need to do a check on
+     * start of the app to verify that the user is not in single contact mode. If so, we should
+     * dynamically change the filter, unless the incoming intent specifically requested a contact
+     * that should be displayed in that mode.
+     */
+    private boolean mCurrentFilterIsValid;
+
     /** Sequential ID assigned to each instance; used for logging */
     private final int mInstanceId;
     private static final AtomicInteger sNextInstanceId = new AtomicInteger();
@@ -184,8 +198,6 @@ public class PeopleActivity extends ContactsActivity
     public PeopleActivity() {
         mInstanceId = sNextInstanceId.getAndIncrement();
         mIntentResolver = new ContactsIntentResolver(this);
-        mContactListFilterController = new ContactListFilterController(this);
-        mContactListFilterController.addListener(this);
         mProviderStatusLoader = new ProviderStatusLoader(this);
     }
 
@@ -246,6 +258,10 @@ public class PeopleActivity extends ContactsActivity
             return;
         }
 
+        mContactListFilterController = ContactListFilterController.getInstance(this);
+        mContactListFilterController.checkFilterValidity(false);
+        mContactListFilterController.addListener(this);
+
         mIsRecreatedInstance = (savedState != null);
         createViewsAndFragments(savedState);
         if (Log.isLoggable(Constants.PERFORMANCE_TAG, Log.DEBUG)) {
@@ -261,6 +277,9 @@ public class PeopleActivity extends ContactsActivity
             return;
         }
         mActionBarAdapter.initialize(null, mRequest);
+
+        mContactListFilterController.checkFilterValidity(false);
+        mCurrentFilterIsValid = true;
 
         // Re-configure fragments.
         configureFragments(true /* from request */);
@@ -316,7 +335,8 @@ public class PeopleActivity extends ContactsActivity
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
 
         // Prepare the fragments which are used both on 1-pane and on 2-pane.
-        if (PhoneCapabilityTester.isUsingTwoPanes(this)) {
+        boolean isUsingTwoPanes = PhoneCapabilityTester.isUsingTwoPanes(this);
+        if (isUsingTwoPanes) {
             mFavoritesFragment = getFragment(R.id.favorites_fragment);
             mAllFragment = getFragment(R.id.all_fragment);
             mGroupsFragment = getFragment(R.id.groups_fragment);
@@ -366,7 +386,7 @@ public class PeopleActivity extends ContactsActivity
         transaction.hide(mAllFragment);
         transaction.hide(mGroupsFragment);
 
-        if (PhoneCapabilityTester.isUsingTwoPanes(this)) {
+        if (isUsingTwoPanes) {
             // Prepare 2-pane only fragments/views...
 
             // Container views for fragments
@@ -409,7 +429,7 @@ public class PeopleActivity extends ContactsActivity
         }
 
         // Configure action bar
-        mActionBarAdapter = new ActionBarAdapter(this, this, getActionBar());
+        mActionBarAdapter = new ActionBarAdapter(this, this, getActionBar(), isUsingTwoPanes);
         mActionBarAdapter.initialize(savedState, mRequest);
 
         invalidateOptionsMenuIfNeeded();
@@ -435,8 +455,20 @@ public class PeopleActivity extends ContactsActivity
              * (so the argument.)
              */
             configureFragments(!mIsRecreatedInstance);
+        } else if (PhoneCapabilityTester.isUsingTwoPanes(this) && !mCurrentFilterIsValid) {
+            // We only want to do the filter check in onStart for wide screen devices where it
+            // is often possible to get into single contact mode. Only do this check if
+            // the filter hasn't already been set properly (i.e. onCreate or onActivityResult).
+
+            // Since there is only one {@link ContactListFilterController} across multiple
+            // activity instances, make sure the filter controller is in sync withthe current
+            // contact list fragment filter.
+            // TODO: Clean this up. Perhaps change {@link ContactListFilterController} to not be a
+            // singleton?
+            mContactListFilterController.setContactListFilter(mAllFragment.getFilter(), true);
+            mContactListFilterController.checkFilterValidity(true);
+            mCurrentFilterIsValid = true;
         }
-        mContactListFilterController.onStart(false);
         super.onStart();
     }
 
@@ -467,12 +499,22 @@ public class PeopleActivity extends ContactsActivity
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        mCurrentFilterIsValid = false;
+    }
+
+    @Override
     protected void onDestroy() {
-        // mActionBarAdapter will be null here when redirecting to another activity in
-        // configureContentView().
+        // Some of variables will be null if this Activity redirects Intent.
+        // See also onCreate() or other methods called during the Activity's initialization.
         if (mActionBarAdapter != null) {
             mActionBarAdapter.setListener(null);
         }
+        if (mContactListFilterController != null) {
+            mContactListFilterController.removeListener(this);
+        }
+
         super.onDestroy();
     }
 
@@ -506,7 +548,6 @@ public class PeopleActivity extends ContactsActivity
                     break;
                 case ContactsRequest.ACTION_GROUP:
                     tabToOpen = TabState.GROUPS;
-                    // TODO Select the specified group?  See the TODO in ContactsIntentResolver too.
                     break;
             }
             if (tabToOpen != null) {
@@ -566,12 +607,12 @@ public class PeopleActivity extends ContactsActivity
                 invalidateOptionsMenu();
                 break;
             case STOP_SEARCH_MODE:
-                clearSearch();
+                setQueryTextToFragment("");
                 updateFragmentsVisibility();
                 invalidateOptionsMenu();
                 break;
             case CHANGE_SEARCH_QUERY:
-                loadSearch(mActionBarAdapter.getQueryString());
+                setQueryTextToFragment(mActionBarAdapter.getQueryString());
                 break;
             default:
                 throw new IllegalStateException("Unkonwn ActionBarAdapter action: " + action);
@@ -737,6 +778,8 @@ public class PeopleActivity extends ContactsActivity
 
         private boolean mTabPagerAdapterSearchMode;
 
+        private Fragment mCurrentPrimaryItem;
+
         public TabPagerAdapter() {
             mFragmentManager = getFragmentManager();
         }
@@ -807,6 +850,9 @@ public class PeopleActivity extends ContactsActivity
             }
             Fragment f = getFragment(position);
             mCurTransaction.show(f);
+
+            // Non primary pages are not visible.
+            f.setUserVisibleHint(f == mCurrentPrimaryItem);
             return f;
         }
 
@@ -833,6 +879,20 @@ public class PeopleActivity extends ContactsActivity
         }
 
         @Override
+        public void setPrimaryItem(View container, int position, Object object) {
+            Fragment fragment = (Fragment) object;
+            if (mCurrentPrimaryItem != fragment) {
+                if (mCurrentPrimaryItem != null) {
+                    mCurrentPrimaryItem.setUserVisibleHint(false);
+                }
+                if (fragment != null) {
+                    fragment.setUserVisibleHint(true);
+                }
+                mCurrentPrimaryItem = fragment;
+            }
+        }
+
+        @Override
         public Parcelable saveState() {
             return null;
         }
@@ -842,43 +902,38 @@ public class PeopleActivity extends ContactsActivity
         }
     }
 
-    private void clearSearch() {
-        loadSearch("");
-    }
-
-    private void loadSearch(String query) {
-        configureFragments(false /* from request */);
+    private void setQueryTextToFragment(String query) {
         mAllFragment.setQueryString(query, true);
+        mAllFragment.setVisibleScrollbarEnabled(!mAllFragment.isSearchMode());
     }
 
     private void configureContactListFragmentForRequest() {
-        mAllFragment.setContactsRequest(mRequest);
-
         Uri contactUri = mRequest.getContactUri();
         if (contactUri != null) {
+            // For an incoming request, explicitly require a selection if we are on 2-pane UI,
+            // (i.e. even if we view the same selected contact, the contact may no longer be
+            // in the list, so we must refresh the list).
+            if (PhoneCapabilityTester.isUsingTwoPanes(this)) {
+                mAllFragment.setSelectionRequired(true);
+            }
             mAllFragment.setSelectedContactUri(contactUri);
         }
 
-        mAllFragment.setSearchMode(mActionBarAdapter.isSearchMode());
-        mAllFragment.setQueryString(mActionBarAdapter.getQueryString(), false);
+        mAllFragment.setFilter(mContactListFilterController.getFilter());
+        setQueryTextToFragment(mActionBarAdapter.getQueryString());
 
         if (mRequest.isDirectorySearchEnabled()) {
             mAllFragment.setDirectorySearchMode(DirectoryListLoader.SEARCH_MODE_DEFAULT);
         } else {
             mAllFragment.setDirectorySearchMode(DirectoryListLoader.SEARCH_MODE_NONE);
         }
-
-        if (mContactListFilterController.isInitialized()) {
-            mAllFragment.setFilter(mContactListFilterController.getFilter());
-        }
     }
 
     private void configureContactListFragment() {
-        final boolean showSearchResult = mActionBarAdapter.shouldShowSearchResult();
-        mAllFragment.setSearchMode(showSearchResult);
+        // Filter may be changed when this Activity is in background.
+        mAllFragment.setFilter(mContactListFilterController.getFilter());
 
         final boolean useTwoPane = PhoneCapabilityTester.isUsingTwoPanes(this);
-        mAllFragment.setVisibleScrollbarEnabled(!showSearchResult);
         mAllFragment.setVerticalScrollbarPosition(
                 useTwoPane
                         ? View.SCROLLBAR_POSITION_LEFT
@@ -974,11 +1029,10 @@ public class PeopleActivity extends ContactsActivity
             } else {
                 Intent intent = new Intent(Intent.ACTION_VIEW, contactLookupUri);
                 // In search mode, the "up" affordance in the contact detail page should return the
-                // user to the search results, so suppress the normal behavior which would re-launch
-                // {@link PeopleActivity} when the "up" affordance is clicked.
+                // user to the search results, so finish the activity when that button is selected.
                 if (mActionBarAdapter.isSearchMode()) {
-                    intent.putExtra(ContactDetailActivity.INTENT_KEY_IGNORE_DEFAULT_UP_BEHAVIOR,
-                            true);
+                    intent.putExtra(
+                            ContactDetailActivity.INTENT_KEY_FINISH_ACTIVITY_ON_UP_SELECTED, true);
                 }
                 startActivity(intent);
             }
@@ -1001,7 +1055,9 @@ public class PeopleActivity extends ContactsActivity
             if (extras != null) {
                 intent.putExtras(extras);
             }
-            startActivity(intent);
+            intent.putExtra(
+                    ContactEditorActivity.INTENT_KEY_FINISH_ACTIVITY_ON_SAVE_COMPLETED, true);
+            startActivityForResult(intent, SUBACTIVITY_EDIT_CONTACT);
         }
 
         @Override
@@ -1086,7 +1142,10 @@ public class PeopleActivity extends ContactsActivity
 
         @Override
         public void onEditRequested(Uri contactLookupUri) {
-            startActivity(new Intent(Intent.ACTION_EDIT, contactLookupUri));
+            Intent intent = new Intent(Intent.ACTION_EDIT, contactLookupUri);
+            intent.putExtra(
+                    ContactEditorActivity.INTENT_KEY_FINISH_ACTIVITY_ON_SAVE_COMPLETED, true);
+            startActivityForResult(intent, SUBACTIVITY_EDIT_CONTACT);
         }
 
         @Override
@@ -1139,7 +1198,7 @@ public class PeopleActivity extends ContactsActivity
 
         @Override
         public void onImportContactsFromFileAction() {
-            AccountSelectionUtil.doImportFromSdCard(PeopleActivity.this, null);
+            ImportExportDialogFragment.show(getFragmentManager());
         }
 
         @Override
@@ -1151,9 +1210,9 @@ public class PeopleActivity extends ContactsActivity
     private final class StrequentContactListFragmentListener
             implements ContactTileListFragment.Listener {
         @Override
-        public void onContactSelected(Uri contactUri) {
+        public void onContactSelected(Uri contactUri, Rect targetRect) {
             if (PhoneCapabilityTester.isUsingTwoPanes(PeopleActivity.this)) {
-                setupContactDetailFragment(contactUri);
+                QuickContact.showQuickContact(PeopleActivity.this, targetRect, contactUri, 0, null);
             } else {
                 startActivity(new Intent(Intent.ACTION_VIEW, contactUri));
             }
@@ -1365,8 +1424,8 @@ public class PeopleActivity extends ContactsActivity
                 return true;
             }
             case R.id.menu_contacts_filter: {
-                final Intent intent = new Intent(this, AccountFilterActivity.class);
-                startActivityForResult(intent, AccountFilterActivity.DEFAULT_REQUEST_CODE);
+                AccountFilterUtil.startAccountFilterActivityForResult(this,
+                        SUBACTIVITY_ACCOUNT_FILTER);
                 return true;
             }
             case R.id.menu_search: {
@@ -1375,7 +1434,17 @@ public class PeopleActivity extends ContactsActivity
             }
             case R.id.menu_add_contact: {
                 final Intent intent = new Intent(Intent.ACTION_INSERT, Contacts.CONTENT_URI);
-                startActivity(intent);
+                // On 2-pane UI, we can let the editor activity finish itself and return
+                // to this activity to display the new contact.
+                if (PhoneCapabilityTester.isUsingTwoPanes(this)) {
+                    intent.putExtra(
+                        ContactEditorActivity.INTENT_KEY_FINISH_ACTIVITY_ON_SAVE_COMPLETED, true);
+                    startActivityForResult(intent, SUBACTIVITY_NEW_CONTACT);
+                } else {
+                    // Otherwise, on 1-pane UI, we need the editor to launch the view contact
+                    // intent itself.
+                    startActivity(intent);
+                }
                 return true;
             }
             case R.id.menu_add_group: {
@@ -1444,18 +1513,24 @@ public class PeopleActivity extends ContactsActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-            case AccountFilterActivity.DEFAULT_REQUEST_CODE: {
-                if (resultCode == Activity.RESULT_OK) {
-                    ContactListFilter filter = (ContactListFilter) data.getParcelableExtra(
-                            AccountFilterActivity.KEY_EXTRA_CONTACT_LIST_FILTER);
-                    if (filter == null) {
-                        return;
+            case SUBACTIVITY_ACCOUNT_FILTER: {
+                AccountFilterUtil.handleAccountFilterResult(
+                        mContactListFilterController, resultCode, data);
+                break;
+            }
+
+            case SUBACTIVITY_NEW_CONTACT:
+            case SUBACTIVITY_EDIT_CONTACT: {
+                if (resultCode == RESULT_OK && PhoneCapabilityTester.isUsingTwoPanes(this)) {
+                    mRequest.setActionCode(ContactsRequest.ACTION_VIEW_CONTACT);
+                    mAllFragment.setSelectionRequired(true);
+                    mAllFragment.reloadDataAndSetSelectedUri(data.getData());
+                    // Suppress IME if in search mode
+                    if (mActionBarAdapter != null) {
+                        mActionBarAdapter.clearFocusOnSearchView();
                     }
-                    if (filter.filterType == ContactListFilter.FILTER_TYPE_CUSTOM) {
-                        mContactListFilterController.selectCustomFilter();
-                    } else {
-                        mContactListFilterController.setContactListFilter(filter, true);
-                    }
+                    // No need to change the contact filter
+                    mCurrentFilterIsValid = true;
                 }
                 break;
             }

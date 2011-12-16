@@ -82,6 +82,38 @@ public abstract class AccountType {
      */
     private HashMap<String, DataKind> mMimeKinds = Maps.newHashMap();
 
+    protected boolean mIsInitialized;
+
+    protected static class DefinitionException extends Exception {
+        public DefinitionException(String message) {
+            super(message);
+        }
+
+        public DefinitionException(String message, Exception inner) {
+            super(message, inner);
+        }
+    }
+
+    /**
+     * Whether this account type was able to be fully initialized.  This may be false if
+     * (for example) the package name associated with the account type could not be found.
+     */
+    public final boolean isInitialized() {
+        return mIsInitialized;
+    }
+
+    /**
+     * @return Whether this type is an "embedded" type.  i.e. any of {@link FallbackAccountType},
+     * {@link GoogleAccountType} or {@link ExternalAccountType}.
+     *
+     * If an embedded type cannot be initialized (i.e. if {@link #isInitialized()} returns
+     * {@code false}) it's considered critical, and the application will crash.  On the other
+     * hand if it's not an embedded type, we just skip loading the type.
+     */
+    public boolean isEmbedded() {
+        return true;
+    }
+
     public boolean isExtension() {
         return false;
     }
@@ -234,10 +266,6 @@ public abstract class AccountType {
      */
     abstract public boolean isGroupMembershipEditable();
 
-    abstract public int getHeaderColor(Context context);
-
-    abstract public int getSideBarColor(Context context);
-
     /**
      * {@link Comparator} to sort by {@link DataKind#weight}.
      */
@@ -269,7 +297,15 @@ public abstract class AccountType {
     /**
      * Add given {@link DataKind} to list of those provided by this source.
      */
-    public DataKind addKind(DataKind kind) {
+    public DataKind addKind(DataKind kind) throws DefinitionException {
+        if (kind.mimeType == null) {
+            throw new DefinitionException("null is not a valid mime type");
+        }
+        if (mMimeKinds.get(kind.mimeType) != null) {
+            throw new DefinitionException(
+                    "mime type '" + kind.mimeType + "' is already registered");
+        }
+
         kind.resPackageName = this.resPackageName;
         this.mKinds.add(kind);
         this.mMimeKinds.put(kind.mimeType, kind);
@@ -327,6 +363,16 @@ public abstract class AccountType {
         public int hashCode() {
             return rawValue;
         }
+
+        @Override
+        public String toString() {
+            return this.getClass().getSimpleName()
+                    + " rawValue=" + rawValue
+                    + " labelRes=" + labelRes
+                    + " secondary=" + secondary
+                    + " specificMax=" + specificMax
+                    + " customColumn=" + customColumn;
+        }
     }
 
     public static class EventEditType extends EditType {
@@ -344,6 +390,11 @@ public abstract class AccountType {
             mYearOptional = yearOptional;
             return this;
         }
+
+        @Override
+        public String toString() {
+            return super.toString() + " mYearOptional=" + mYearOptional;
+        }
     }
 
     /**
@@ -351,7 +402,7 @@ public abstract class AccountType {
      * {@link Phone#NUMBER}. Includes flags to apply to an {@link EditText}, and
      * the column where this field is stored.
      */
-    public static class EditField {
+    public static final class EditField {
         public String column;
         public int titleRes;
         public int inputType;
@@ -392,6 +443,19 @@ public abstract class AccountType {
 
         public boolean isMultiLine() {
             return (inputType & EditorInfo.TYPE_TEXT_FLAG_MULTI_LINE) != 0;
+        }
+
+
+        @Override
+        public String toString() {
+            return this.getClass().getSimpleName() + ":"
+                    + " column=" + column
+                    + " titleRes=" + titleRes
+                    + " inputType=" + inputType
+                    + " minLines=" + minLines
+                    + " optional=" + optional
+                    + " shortForm=" + shortForm
+                    + " longForm=" + longForm;
         }
     }
 

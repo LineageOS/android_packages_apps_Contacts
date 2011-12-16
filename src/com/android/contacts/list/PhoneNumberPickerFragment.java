@@ -17,20 +17,17 @@ package com.android.contacts.list;
 
 import com.android.contacts.R;
 import com.android.contacts.list.ShortcutIntentBuilder.OnShortcutIntentCreatedListener;
+import com.android.contacts.util.AccountFilterUtil;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 /**
  * Fragment containing a phone number list for picking.
@@ -39,16 +36,16 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
         implements OnShortcutIntentCreatedListener {
     private static final String TAG = PhoneNumberPickerFragment.class.getSimpleName();
 
+    private static final int REQUEST_CODE_ACCOUNT_FILTER = 1;
+
     private OnPhoneNumberPickerActionListener mListener;
     private String mShortcutAction;
 
-    private SharedPreferences mPrefs;
     private ContactListFilter mFilter;
 
-    private TextView mAccountFilterHeaderView;
-    private View mAccountFilterHeaderContainer;
+    private View mAccountFilterHeader;
     /**
-     * Lives as ListView's header and is shown when {@link #mAccountFilterHeaderContainer} is set
+     * Lives as ListView's header and is shown when {@link #mAccountFilterHeader} is set
      * to View.GONE.
      */
     private View mPaddingView;
@@ -61,17 +58,11 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
     private ContactListItemView.PhotoPosition mPhotoPosition =
             ContactListItemView.DEFAULT_PHOTO_POSITION;
 
-    // A complete copy from DefaultContactBrowserListFragment
-    // TODO: should be able to share logic around filter header.
     private class FilterHeaderClickListener implements OnClickListener {
         @Override
         public void onClick(View view) {
-            final Activity activity = getActivity();
-            if (activity != null) {
-                final Intent intent = new Intent(activity, AccountFilterActivity.class);
-                activity.startActivityForResult(
-                        intent, AccountFilterActivity.DEFAULT_REQUEST_CODE);
-            }
+            AccountFilterUtil.startAccountFilterActivityForResult(
+                    PhoneNumberPickerFragment.this, REQUEST_CODE_ACCOUNT_FILTER);
         }
     }
     private OnClickListener mFilterHeaderClickListener = new FilterHeaderClickListener();
@@ -79,7 +70,6 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
     public PhoneNumberPickerFragment() {
         setQuickContactEnabled(false);
         setPhotoLoaderEnabled(true);
-        setVisibleScrollbarEnabled(true);
         setSectionHeaderDisplayEnabled(true);
         setDirectorySearchMode(DirectoryListLoader.SEARCH_MODE_DATA_SHORTCUT);
 
@@ -99,58 +89,33 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
         mPaddingView = paddingView.findViewById(R.id.contact_detail_list_padding);
         getListView().addHeaderView(paddingView);
 
-        mAccountFilterHeaderView = (TextView) getView().findViewById(R.id.account_filter_header);
-        mAccountFilterHeaderContainer =
-                getView().findViewById(R.id.account_filter_header_container);
-        mAccountFilterHeaderContainer.setOnClickListener(mFilterHeaderClickListener);
+        mAccountFilterHeader = getView().findViewById(R.id.account_filter_header_container);
+        mAccountFilterHeader.setOnClickListener(mFilterHeaderClickListener);
         updateFilterHeaderView();
+
+        setVisibleScrollbarEnabled(!isLegacyCompatibilityMode());
     }
 
     @Override
-    public void setSearchMode(boolean flag) {
+    protected void setSearchMode(boolean flag) {
         super.setSearchMode(flag);
         updateFilterHeaderView();
     }
 
     private void updateFilterHeaderView() {
-        if (mAccountFilterHeaderView != null) {
-            ContactListFilter filter = getFilter();
-            if (filter != null && !isSearchMode()) {
-                if (filter.filterType == ContactListFilter.FILTER_TYPE_SINGLE_CONTACT) {
-                    mAccountFilterHeaderContainer.setVisibility(View.VISIBLE);
-                    mAccountFilterHeaderView.setText(getContext().getString(
-                            R.string.listSingleContact));
-                    mPaddingView.setVisibility(View.GONE);
-                    return;
-                } else if (filter.filterType == ContactListFilter.FILTER_TYPE_CUSTOM) {
-                    mAccountFilterHeaderContainer.setVisibility(View.VISIBLE);
-                    mAccountFilterHeaderView.setText(getContext().getString(
-                            R.string.listCustomView));
-                    mPaddingView.setVisibility(View.GONE);
-                    return;
-                } else if (filter.filterType != ContactListFilter.FILTER_TYPE_ALL_ACCOUNTS) {
-                    mAccountFilterHeaderContainer.setVisibility(View.VISIBLE);
-                    mAccountFilterHeaderView.setText(getContext().getString(
-                            R.string.listAllContactsInAccount, filter.accountName));
-                    mPaddingView.setVisibility(View.GONE);
-                    return;
-                }
-            }
-            mAccountFilterHeaderContainer.setVisibility(View.GONE);
-            mPaddingView.setVisibility(View.VISIBLE);
+        final ContactListFilter filter = getFilter();
+        if (mAccountFilterHeader == null || filter == null) {
+            return;
         }
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mPrefs = null;
+        final boolean shouldShowHeader = AccountFilterUtil.updateAccountFilterTitleForPhone(
+                mAccountFilterHeader, filter, false, false);
+        if (shouldShowHeader) {
+            mPaddingView.setVisibility(View.GONE);
+            mAccountFilterHeader.setVisibility(View.VISIBLE);
+        } else {
+            mPaddingView.setVisibility(View.VISIBLE);
+            mAccountFilterHeader.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -248,7 +213,7 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
 
     @Override
     protected View inflateView(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.contacts_list_content, null);
+        return inflater.inflate(R.layout.contact_list_content, null);
     }
 
     public void pickPhoneNumber(Uri uri) {
@@ -272,6 +237,18 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
         mListener.onPickPhoneNumberAction(data.getData());
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_ACCOUNT_FILTER) {
+            if (getActivity() != null) {
+                AccountFilterUtil.handleAccountFilterResult(
+                        ContactListFilterController.getInstance(getActivity()), resultCode, data);
+            } else {
+                Log.e(TAG, "getActivity() returns null during Fragment#onActivityResult()");
+            }
+        }
+    }
+
     public ContactListFilter getFilter() {
         return mFilter;
     }
@@ -283,13 +260,6 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
         }
 
         mFilter = filter;
-        if (mPrefs != null) {
-            // Save the preference now.
-            ContactListFilter.storeToPreferences(mPrefs, mFilter);
-        }
-
-        // This method can be called before {@link #onStart} where we start the loader.  In that
-        // case we shouldn't start the loader yet, as we haven't done all initialization yet.
         if (mLoaderStarted) {
             reloadData();
         }

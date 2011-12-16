@@ -47,11 +47,42 @@ import libcore.util.Objects;
 /**
  * Adapter class to fill in data for the Call Log.
  */
-public class CallLogAdapter extends GroupingListAdapter
+/*package*/ class CallLogAdapter extends GroupingListAdapter
         implements Runnable, ViewTreeObserver.OnPreDrawListener, CallLogGroupBuilder.GroupCreator {
     /** Interface used to initiate a refresh of the content. */
     public interface CallFetcher {
         public void fetchCalls();
+    }
+
+    /**
+     * Stores a phone number of a call with the country code where it originally occurred.
+     * <p>
+     * Note the country does not necessarily specifies the country of the phone number itself, but
+     * it is the country in which the user was in when the call was placed or received.
+     */
+    private static final class NumberWithCountryIso {
+        public final String number;
+        public final String countryIso;
+
+        public NumberWithCountryIso(String number, String countryIso) {
+            this.number = number;
+            this.countryIso = countryIso;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (o == null) return false;
+            if (!(o instanceof NumberWithCountryIso)) return false;
+            NumberWithCountryIso other = (NumberWithCountryIso) o;
+            return TextUtils.equals(number, other.number)
+                    && TextUtils.equals(countryIso, other.countryIso);
+        }
+
+        @Override
+        public int hashCode() {
+            return (number == null ? 0 : number.hashCode())
+                    ^ (countryIso == null ? 0 : countryIso.hashCode());
+        }
     }
 
     /** The time in millis to delay starting the thread processing requests. */
@@ -69,8 +100,10 @@ public class CallLogAdapter extends GroupingListAdapter
      * <p>
      * The content of the cache is expired (but not purged) whenever the application comes to
      * the foreground.
+     * <p>
+     * The key is number with the country in which the call was placed or received.
      */
-    private ExpirableCache<String, ContactInfo> mContactInfoCache;
+    private ExpirableCache<NumberWithCountryIso, ContactInfo> mContactInfoCache;
 
     /**
      * A request for contact details for the given number.
@@ -193,8 +226,8 @@ public class CallLogAdapter extends GroupingListAdapter
         }
     };
 
-    public CallLogAdapter(Context context, CallFetcher callFetcher,
-            ContactInfoHelper contactInfoHelper, String voicemailNumber) {
+    CallLogAdapter(Context context, CallFetcher callFetcher,
+            ContactInfoHelper contactInfoHelper) {
         super(context);
 
         mContext = context;
@@ -209,7 +242,7 @@ public class CallLogAdapter extends GroupingListAdapter
         CallTypeHelper callTypeHelper = new CallTypeHelper(resources);
 
         mContactPhotoManager = ContactPhotoManager.getInstance(mContext);
-        mPhoneNumberHelper = new PhoneNumberHelper(resources, voicemailNumber);
+        mPhoneNumberHelper = new PhoneNumberHelper(resources);
         PhoneCallDetailsHelper phoneCallDetailsHelper = new PhoneCallDetailsHelper(
                 resources, callTypeHelper, mPhoneNumberHelper);
         mCallLogViewsHelper =
@@ -240,11 +273,7 @@ public class CallLogAdapter extends GroupingListAdapter
         }
     }
 
-    public ContactInfo getContactInfo(String number) {
-        return mContactInfoCache.getPossiblyExpired(number);
-    }
-
-    public void startRequestProcessing() {
+    private void startRequestProcessing() {
         if (mRequestProcessingDisabled) {
             return;
         }
@@ -321,14 +350,15 @@ public class CallLogAdapter extends GroupingListAdapter
 
         // Check the existing entry in the cache: only if it has changed we should update the
         // view.
-        ContactInfo existingInfo = mContactInfoCache.getPossiblyExpired(number);
+        NumberWithCountryIso numberCountryIso = new NumberWithCountryIso(number, countryIso);
+        ContactInfo existingInfo = mContactInfoCache.getPossiblyExpired(numberCountryIso);
         boolean updated = !info.equals(existingInfo);
         // Store the data in the cache so that the UI thread can use to display it. Store it
         // even if it has not changed so that it is marked as not expired.
-        mContactInfoCache.put(number, info);
+        mContactInfoCache.put(numberCountryIso, info);
         // Update the call log even if the cache it is up-to-date: it is possible that the cache
         // contains the value from a different call log entry.
-        updateCallLogContactInfoCache(number, info, callLogInfo);
+        updateCallLogContactInfoCache(number, countryIso, info, callLogInfo);
         return updated;
     }
     /*
@@ -368,9 +398,8 @@ public class CallLogAdapter extends GroupingListAdapter
         mCallLogGroupBuilder.addGroups(cursor);
     }
 
-    @VisibleForTesting
     @Override
-    public View newStandAloneView(Context context, ViewGroup parent) {
+    protected View newStandAloneView(Context context, ViewGroup parent) {
         LayoutInflater inflater =
                 (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.call_log_list_item, parent, false);
@@ -378,15 +407,13 @@ public class CallLogAdapter extends GroupingListAdapter
         return view;
     }
 
-    @VisibleForTesting
     @Override
-    public void bindStandAloneView(View view, Context context, Cursor cursor) {
+    protected void bindStandAloneView(View view, Context context, Cursor cursor) {
         bindView(view, cursor, 1);
     }
 
-    @VisibleForTesting
     @Override
-    public View newChildView(Context context, ViewGroup parent) {
+    protected View newChildView(Context context, ViewGroup parent) {
         LayoutInflater inflater =
                 (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.call_log_list_item, parent, false);
@@ -394,15 +421,13 @@ public class CallLogAdapter extends GroupingListAdapter
         return view;
     }
 
-    @VisibleForTesting
     @Override
-    public void bindChildView(View view, Context context, Cursor cursor) {
+    protected void bindChildView(View view, Context context, Cursor cursor) {
         bindView(view, cursor, 1);
     }
 
-    @VisibleForTesting
     @Override
-    public View newGroupView(Context context, ViewGroup parent) {
+    protected View newGroupView(Context context, ViewGroup parent) {
         LayoutInflater inflater =
                 (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.call_log_list_item, parent, false);
@@ -410,9 +435,8 @@ public class CallLogAdapter extends GroupingListAdapter
         return view;
     }
 
-    @VisibleForTesting
     @Override
-    public void bindGroupView(View view, Context context, Cursor cursor, int groupSize,
+    protected void bindGroupView(View view, Context context, Cursor cursor, int groupSize,
             boolean expanded) {
         bindView(view, cursor, groupSize);
     }
@@ -481,8 +505,9 @@ public class CallLogAdapter extends GroupingListAdapter
         }
 
         // Lookup contacts with this number
+        NumberWithCountryIso numberCountryIso = new NumberWithCountryIso(number, countryIso);
         ExpirableCache.CachedValue<ContactInfo> cachedInfo =
-                mContactInfoCache.getCachedValue(number);
+                mContactInfoCache.getCachedValue(numberCountryIso);
         ContactInfo info = cachedInfo == null ? null : cachedInfo.getValue();
         if (!mPhoneNumberHelper.canPlaceCallsTo(number)
                 || mPhoneNumberHelper.isVoicemailNumber(number)) {
@@ -490,7 +515,7 @@ public class CallLogAdapter extends GroupingListAdapter
             // for it.
             info = ContactInfo.EMPTY;
         } else if (cachedInfo == null) {
-            mContactInfoCache.put(number, ContactInfo.EMPTY);
+            mContactInfoCache.put(numberCountryIso, ContactInfo.EMPTY);
             // Use the cached contact info from the call log.
             info = cachedContactInfo;
             // The db request should happen on a non-UI thread.
@@ -568,8 +593,8 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     /** Stores the updated contact info in the call log if it is different from the current one. */
-    private void updateCallLogContactInfoCache(String number, ContactInfo updatedInfo,
-            ContactInfo callLogInfo) {
+    private void updateCallLogContactInfoCache(String number, String countryIso,
+            ContactInfo updatedInfo, ContactInfo callLogInfo) {
         final ContentValues values = new ContentValues();
         boolean needsUpdate = false;
 
@@ -625,12 +650,15 @@ public class CallLogAdapter extends GroupingListAdapter
             return;
         }
 
-        StringBuilder where = new StringBuilder();
-        where.append(Calls.NUMBER);
-        where.append(" = ?");
-
-        mContext.getContentResolver().update(Calls.CONTENT_URI_WITH_VOICEMAIL, values,
-                where.toString(), new String[]{ number });
+        if (countryIso == null) {
+            mContext.getContentResolver().update(Calls.CONTENT_URI_WITH_VOICEMAIL, values,
+                    Calls.NUMBER + " = ? AND " + Calls.COUNTRY_ISO + " IS NULL",
+                    new String[]{ number });
+        } else {
+            mContext.getContentResolver().update(Calls.CONTENT_URI_WITH_VOICEMAIL, values,
+                    Calls.NUMBER + " = ? AND " + Calls.COUNTRY_ISO + " = ?",
+                    new String[]{ number, countryIso });
+        }
     }
 
     /** Returns the contact information as stored in the call log. */
@@ -678,12 +706,15 @@ public class CallLogAdapter extends GroupingListAdapter
      * This method should be called in tests to disable such processing of requests when not
      * needed.
      */
-    public void disableRequestProcessingForTest() {
+    @VisibleForTesting
+    void disableRequestProcessingForTest() {
         mRequestProcessingDisabled = true;
     }
 
-    public void injectContactInfoForTest(String number, ContactInfo contactInfo) {
-        mContactInfoCache.put(number, contactInfo);
+    @VisibleForTesting
+    void injectContactInfoForTest(String number, String countryIso, ContactInfo contactInfo) {
+        NumberWithCountryIso numberCountryIso = new NumberWithCountryIso(number, countryIso);
+        mContactInfoCache.put(numberCountryIso, contactInfo);
     }
 
     @Override
@@ -700,10 +731,11 @@ public class CallLogAdapter extends GroupingListAdapter
      *         Else if the number in the contacts starts with a "+", use that one
      *         Else if the number in the contacts is longer, use that one
      */
-    public String getBetterNumberFromContacts(String number) {
+    public String getBetterNumberFromContacts(String number, String countryIso) {
         String matchingNumber = null;
         // Look in the cache first. If it's not found then query the Phones db
-        ContactInfo ci = mContactInfoCache.getPossiblyExpired(number);
+        NumberWithCountryIso numberCountryIso = new NumberWithCountryIso(number, countryIso);
+        ContactInfo ci = mContactInfoCache.getPossiblyExpired(numberCountryIso);
         if (ci != null && ci != ContactInfo.EMPTY) {
             matchingNumber = ci.number;
         } else {

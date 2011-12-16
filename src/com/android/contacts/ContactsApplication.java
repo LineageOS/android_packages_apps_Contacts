@@ -16,6 +16,7 @@
 
 package com.android.contacts;
 
+import com.android.contacts.list.ContactListFilterController;
 import com.android.contacts.model.AccountTypeManager;
 import com.android.contacts.test.InjectedServices;
 import com.android.contacts.util.Constants;
@@ -32,9 +33,13 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 public final class ContactsApplication extends Application {
+    private static final boolean ENABLE_LOADER_LOG = false; // Don't submit with true
+    private static final boolean ENABLE_FRAGMENT_LOG = false; // Don't submit with true
+
     private static InjectedServices sInjectedServices;
     private AccountTypeManager mAccountTypeManager;
     private ContactPhotoManager mContactPhotoManager;
+    private ContactListFilterController mContactListFilterController;
 
     /**
      * Overrides the system services with mocks for testing.
@@ -90,9 +95,18 @@ public final class ContactsApplication extends Application {
         if (ContactPhotoManager.CONTACT_PHOTO_SERVICE.equals(name)) {
             if (mContactPhotoManager == null) {
                 mContactPhotoManager = ContactPhotoManager.createContactPhotoManager(this);
+                registerComponentCallbacks(mContactPhotoManager);
                 mContactPhotoManager.preloadPhotosInBackground();
             }
             return mContactPhotoManager;
+        }
+
+        if (ContactListFilterController.CONTACT_LIST_FILTER_SERVICE.equals(name)) {
+            if (mContactListFilterController == null) {
+                mContactListFilterController =
+                        ContactListFilterController.createContactListFilterController(this);
+            }
+            return mContactListFilterController;
         }
 
         return super.getSystemService(name);
@@ -110,6 +124,8 @@ public final class ContactsApplication extends Application {
         Context context = getApplicationContext();
         PreferenceManager.getDefaultSharedPreferences(context);
         AccountTypeManager.getInstance(context);
+        if (ENABLE_FRAGMENT_LOG) FragmentManager.enableDebugLogging(true);
+        if (ENABLE_LOADER_LOG) LoaderManager.enableDebugLogging(true);
 
         if (Log.isLoggable(Constants.STRICT_MODE_TAG, Log.DEBUG)) {
             StrictMode.setThreadPolicy(

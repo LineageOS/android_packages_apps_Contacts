@@ -55,15 +55,6 @@ public class AccountFilterActivity extends ContactsActivity
 
     private static final int SUBACTIVITY_CUSTOMIZE_FILTER = 0;
 
-    /**
-     * Request code for this Activity, which will be used with
-     * {@link Activity#startActivityForResult(Intent, int)}.
-     *
-     * This is useful when we want to share one request code among multiple Activities and
-     * Fragments.
-     */
-    public static final int DEFAULT_REQUEST_CODE = 10001;
-
     public static final String KEY_EXTRA_CONTACT_LIST_FILTER = "contactListFilter";
 
     private static final int FILTER_LOADER_ID = 0;
@@ -127,8 +118,8 @@ public class AccountFilterActivity extends ContactsActivity
                 continue;
             }
             Drawable icon = accountType != null ? accountType.getDisplayIcon(context) : null;
-            accountFilters.add(ContactListFilter.createAccountFilter(account.type, account.name,
-                    account.dataSet, icon, account.name));
+            accountFilters.add(ContactListFilter.createAccountFilter(
+                    account.type, account.name, account.dataSet, icon));
         }
 
         // Always show "All", even when there's no accounts.  (We may have local contacts)

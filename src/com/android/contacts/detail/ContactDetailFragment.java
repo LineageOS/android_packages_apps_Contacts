@@ -299,7 +299,9 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
         mQuickFixButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                mQuickFix.execute();
+                if (mQuickFix != null) {
+                    mQuickFix.execute();
+                }
             }
         });
 
@@ -382,6 +384,16 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
         mLookupUri = lookupUri;
         mContactData = result;
         bindData();
+    }
+
+    /**
+     * Reset the list adapter in this {@link Fragment} to get rid of any saved scroll position
+     * from a previous contact.
+     */
+    public void resetAdapter() {
+        if (mListView != null) {
+            mListView.setAdapter(mAdapter);
+        }
     }
 
     /**
@@ -1995,7 +2007,7 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
             // should update the ui
             final Intent intent = ContactSaveService.createSaveContactIntent(getActivity(),
                     contactDeltaList, "", 0, false, getActivity().getClass(),
-                    UI.LIST_ALL_CONTACTS_ACTION);
+                    Intent.ACTION_VIEW);
             getActivity().startService(intent);
         }
     }

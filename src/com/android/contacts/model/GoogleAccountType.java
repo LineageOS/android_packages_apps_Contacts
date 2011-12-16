@@ -17,6 +17,7 @@
 package com.android.contacts.model;
 
 import com.android.contacts.R;
+import com.android.contacts.model.AccountType.DefinitionException;
 import com.android.contacts.util.DateUtils;
 import com.google.android.collect.Lists;
 
@@ -26,14 +27,14 @@ import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Event;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.Relation;
-import android.view.inputmethod.EditorInfo;
+import android.util.Log;
 
 import java.util.List;
 
 public class GoogleAccountType extends BaseAccountType {
+    private static final String TAG = "GoogleAccountType";
+
     public static final String ACCOUNT_TYPE = "com.google";
-    protected static final int FLAGS_RELATION = EditorInfo.TYPE_CLASS_TEXT
-    | EditorInfo.TYPE_TEXT_FLAG_CAP_WORDS | EditorInfo.TYPE_TEXT_VARIATION_PERSON_NAME;
 
     private static final List<String> mExtensionPackages =
             Lists.newArrayList("com.google.android.apps.plus");
@@ -43,22 +44,28 @@ public class GoogleAccountType extends BaseAccountType {
         this.resPackageName = null;
         this.summaryResPackageName = resPackageName;
 
-        addDataKindStructuredName(context);
-        addDataKindDisplayName(context);
-        addDataKindPhoneticName(context);
-        addDataKindNickname(context);
-        addDataKindPhone(context);
-        addDataKindEmail(context);
-        addDataKindStructuredPostal(context);
-        addDataKindIm(context);
-        addDataKindOrganization(context);
-        addDataKindPhoto(context);
-        addDataKindNote(context);
-        addDataKindWebsite(context);
-        addDataKindSipAddress(context);
-        addDataKindGroupMembership(context);
-        addDataKindRelation(context);
-        addDataKindEvent(context);
+        try {
+            addDataKindStructuredName(context);
+            addDataKindDisplayName(context);
+            addDataKindPhoneticName(context);
+            addDataKindNickname(context);
+            addDataKindPhone(context);
+            addDataKindEmail(context);
+            addDataKindStructuredPostal(context);
+            addDataKindIm(context);
+            addDataKindOrganization(context);
+            addDataKindPhoto(context);
+            addDataKindNote(context);
+            addDataKindWebsite(context);
+            addDataKindSipAddress(context);
+            addDataKindGroupMembership(context);
+            addDataKindRelation(context);
+            addDataKindEvent(context);
+
+            mIsInitialized = true;
+        } catch (DefinitionException e) {
+            Log.e(TAG, "Problem building account type", e);
+        }
     }
 
     @Override
@@ -67,7 +74,7 @@ public class GoogleAccountType extends BaseAccountType {
     }
 
     @Override
-    protected DataKind addDataKindPhone(Context context) {
+    protected DataKind addDataKindPhone(Context context) throws DefinitionException {
         final DataKind kind = super.addDataKindPhone(context);
 
         kind.typeColumn = Phone.TYPE;
@@ -90,7 +97,7 @@ public class GoogleAccountType extends BaseAccountType {
     }
 
     @Override
-    protected DataKind addDataKindEmail(Context context) {
+    protected DataKind addDataKindEmail(Context context) throws DefinitionException {
         final DataKind kind = super.addDataKindEmail(context);
 
         kind.typeColumn = Email.TYPE;
@@ -107,7 +114,7 @@ public class GoogleAccountType extends BaseAccountType {
         return kind;
     }
 
-    private DataKind addDataKindRelation(Context context) {
+    private DataKind addDataKindRelation(Context context) throws DefinitionException {
         DataKind kind = addKind(new DataKind(Relation.CONTENT_ITEM_TYPE,
                 R.string.relationLabelsGroup, 160, true, R.layout.text_fields_editor_view));
         kind.actionHeader = new RelationActionInflater();
@@ -142,7 +149,7 @@ public class GoogleAccountType extends BaseAccountType {
         return kind;
     }
 
-    private DataKind addDataKindEvent(Context context) {
+    private DataKind addDataKindEvent(Context context) throws DefinitionException {
         DataKind kind = addKind(new DataKind(Event.CONTENT_ITEM_TYPE,
                     R.string.eventLabelsGroup, 150, true, R.layout.event_field_editor_view));
         kind.actionHeader = new EventActionInflater();
@@ -165,16 +172,6 @@ public class GoogleAccountType extends BaseAccountType {
         kind.fieldList.add(new EditField(Event.DATA, R.string.eventLabelsGroup, FLAGS_EVENT));
 
         return kind;
-    }
-
-    @Override
-    public int getHeaderColor(Context context) {
-        return 0xff89c2c2;
-    }
-
-    @Override
-    public int getSideBarColor(Context context) {
-        return 0xff5bb4b4;
     }
 
     @Override

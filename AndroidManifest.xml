@@ -44,6 +44,7 @@
     <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
     <uses-permission android:name="com.android.voicemail.permission.ADD_VOICEMAIL" />
     <uses-permission android:name="com.android.voicemail.permission.READ_WRITE_ALL_VOICEMAIL" />
+    <uses-permission android:name="android.permission.ALLOW_ANY_CODEC_FOR_PLAYBACK" />
     <!-- allow broadcasting secret code intents that reboot the phone -->
     <uses-permission android:name="android.permission.REBOOT" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -55,19 +56,6 @@
         android:taskAffinity="android.task.contacts"
         android:hardwareAccelerated="true"
     >
-
-        <!-- A list of recent calls -->
-        <activity android:name=".activities.CallLogActivity"
-            android:label="@string/recentCallsIconLabel"
-            android:theme="@style/DialtactsTheme"
-            android:uiOptions="splitActionBarWhenNarrow"
-        >
-            <intent-filter>
-                <action android:name="com.android.phone.action.RECENT_CALLS" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.TAB" />
-            </intent-filter>
-        </activity>
 
         <!-- Intercept Dialer Intents for devices without a phone.
         This activity should have the same intent filters as the DialtactsActivity,
@@ -133,7 +121,7 @@
             android:screenOrientation="nosensor"
             android:enabled="@*android:bool/config_voice_capable"
             android:taskAffinity="android.task.contacts.phone"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden|adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.DIAL" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -182,6 +170,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.TAB" />
             </intent-filter>
+            <intent-filter android:label="@string/recentCallsIconLabel">
+                <action android:name="com.android.phone.action.RECENT_CALLS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.TAB" />
+            </intent-filter>
         </activity>
 
         <!-- The main Contacts activity with the contact list, favorites, and groups. -->
@@ -197,6 +190,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.APP_CONTACTS" />
             </intent-filter>
             <intent-filter>
                 <action android:name="com.android.contacts.action.LIST_DEFAULT" />
@@ -274,7 +268,7 @@
             android:theme="@style/ContactPickerTheme"
             android:launchMode="singleTop"
             android:clearTaskOnLaunch="true"
-        >
+            android:uiOptions="splitActionBarWhenNarrow">
             <intent-filter>
                 <action android:name="android.intent.action.INSERT_OR_EDIT" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -326,6 +320,18 @@
 
         <!-- Backwards compatibility: "Phone" from Gingerbread and earlier -->
         <activity-alias android:name="DialtactsActivity"
+            android:targetActivity=".activities.DialtactsActivity"
+            android:exported="true"
+        />
+
+        <!-- Backwards compatibility: "Call log" from Gingerbread and earlier -->
+        <activity-alias android:name="RecentCallsListActivity"
+            android:targetActivity=".activities.DialtactsActivity"
+            android:exported="true"
+        />
+
+        <!-- Backwards compatibility: "Call log" from ICS -->
+        <activity-alias android:name=".activities.CallLogActivity"
             android:targetActivity=".activities.DialtactsActivity"
             android:exported="true"
         />
@@ -421,26 +427,6 @@
                 <data android:mimeType="vnd.android.cursor.item/person" />
             </intent-filter>
         </activity>
-
-        <!-- Flushes the QuickContact IntentCache -->
-        <receiver android:name=".quickcontact.PackageIntentReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-                <data android:scheme="package" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REPLACED" />
-                <data android:scheme="package" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REMOVED" />
-                <data android:scheme="package" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_CHANGED" />
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
 
         <activity-alias android:name="ContactShortcut"
             android:targetActivity=".activities.ContactSelectionActivity"
@@ -578,37 +564,6 @@
         <!-- Interstitial activity that shows a phone disambig dialog -->
         <activity android:name="CallContactActivity"
             android:theme="@android:style/Theme.Translucent">
-        </activity>
-
-        <!-- LIVE FOLDERS -->
-        <activity
-            android:name=".ContactsLiveFolders$AllContacts"
-            android:label="@string/liveFolderAll"
-            android:icon="@mipmap/ic_launcher_folder_live_contacts">
-            <intent-filter>
-                <action android:name="android.intent.action.CREATE_LIVE_FOLDER" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".ContactsLiveFolders$StarredContacts"
-            android:label="@string/liveFolderFavorites"
-            android:icon="@mipmap/ic_launcher_folder_live_contacts_starred">
-            <intent-filter>
-                <action android:name="android.intent.action.CREATE_LIVE_FOLDER" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".ContactsLiveFolders$PhoneContacts"
-            android:label="@string/liveFolderPhone"
-            android:icon="@mipmap/ic_launcher_folder_live_contacts_phone">
-            <intent-filter>
-                <action android:name="android.intent.action.CREATE_LIVE_FOLDER" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
 
         <!-- vCard related -->

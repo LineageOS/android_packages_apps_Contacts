@@ -72,7 +72,7 @@ public class DefaultContactListAdapter extends ContactListAdapter {
                 // Regardless of the directory, we don't want anything returned,
                 // so let's just send a "nothing" query to the local directory.
                 loader.setUri(Contacts.CONTENT_URI);
-                loader.setProjection(PROJECTION_CONTACT);
+                loader.setProjection(getProjection(false));
                 loader.setSelection("0");
             } else {
                 Builder builder = Contacts.CONTENT_FILTER_URI.buildUpon();
@@ -87,11 +87,11 @@ public class DefaultContactListAdapter extends ContactListAdapter {
                         SNIPPET_ARGS);
                 builder.appendQueryParameter(SearchSnippetColumns.DEFERRED_SNIPPETING_KEY,"1");
                 loader.setUri(builder.build());
-                loader.setProjection(FILTER_PROJECTION);
+                loader.setProjection(getProjection(true));
             }
         } else {
             configureUri(loader, directoryId, filter);
-            configureProjection(loader, directoryId, filter);
+            loader.setProjection(getProjection(false));
             configureSelection(loader, directoryId, filter);
         }
 
@@ -107,16 +107,12 @@ public class DefaultContactListAdapter extends ContactListAdapter {
 
     protected void configureUri(CursorLoader loader, long directoryId, ContactListFilter filter) {
         Uri uri = Contacts.CONTENT_URI;
-        if (filter != null) {
-            if (filter.filterType == ContactListFilter.FILTER_TYPE_GROUP) {
-                uri = Data.CONTENT_URI;
-            } else if (filter.filterType == ContactListFilter.FILTER_TYPE_SINGLE_CONTACT) {
-                String lookupKey = getSelectedContactLookupKey();
-                if (lookupKey != null) {
-                    uri = Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, lookupKey);
-                } else {
-                    uri = ContentUris.withAppendedId(Contacts.CONTENT_URI, getSelectedContactId());
-                }
+        if (filter != null && filter.filterType == ContactListFilter.FILTER_TYPE_SINGLE_CONTACT) {
+            String lookupKey = getSelectedContactLookupKey();
+            if (lookupKey != null) {
+                uri = Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, lookupKey);
+            } else {
+                uri = ContentUris.withAppendedId(Contacts.CONTENT_URI, getSelectedContactId());
             }
         }
 
@@ -134,15 +130,6 @@ public class DefaultContactListAdapter extends ContactListAdapter {
         }
 
         loader.setUri(uri);
-    }
-
-    protected void configureProjection(
-            CursorLoader loader, long directoryId, ContactListFilter filter) {
-        if (filter != null && filter.filterType == ContactListFilter.FILTER_TYPE_GROUP) {
-            loader.setProjection(PROJECTION_DATA);
-        } else {
-            loader.setProjection(PROJECTION_CONTACT);
-        }
     }
 
     private void configureSelection(
@@ -203,13 +190,6 @@ public class DefaultContactListAdapter extends ContactListAdapter {
                 selection.append(")");
                 break;
             }
-            case ContactListFilter.FILTER_TYPE_GROUP: {
-                selection.append(Data.MIMETYPE + "=?"
-                        + " AND " + GroupMembership.GROUP_ROW_ID + "=?");
-                selectionArgs.add(GroupMembership.CONTENT_ITEM_TYPE);
-                selectionArgs.add(String.valueOf(filter.groupId));
-                break;
-            }
         }
         loader.setSelection(selection.toString());
         loader.setSelectionArgs(selectionArgs.toArray(new String[0]));
@@ -228,9 +208,8 @@ public class DefaultContactListAdapter extends ContactListAdapter {
         bindSectionHeaderAndDivider(view, position, cursor);
 
         if (isQuickContactEnabled()) {
-            bindQuickContact(view, partition, cursor,
-                    CONTACT_PHOTO_ID_COLUMN_INDEX, CONTACT_ID_COLUMN_INDEX,
-                    CONTACT_LOOKUP_KEY_COLUMN_INDEX);
+            bindQuickContact(view, partition, cursor, ContactQuery.CONTACT_PHOTO_ID,
+                    ContactQuery.CONTACT_ID, ContactQuery.CONTACT_LOOKUP_KEY);
         } else {
             bindPhoto(view, partition, cursor);
         }

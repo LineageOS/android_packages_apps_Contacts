@@ -29,6 +29,8 @@ import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
+import android.provider.ContactsContract.CommonDataKinds.Photo;
+import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -86,29 +88,73 @@ public class ExternalAccountType extends BaseAccountType {
     private List<String> mExtensionPackageNames;
     private String mAccountTypeLabelAttribute;
     private String mAccountTypeIconAttribute;
-    private boolean mInitSuccessful;
     private boolean mHasContactsMetadata;
     private boolean mHasEditSchema;
 
     public ExternalAccountType(Context context, String resPackageName, boolean isExtension) {
+        this(context, resPackageName, isExtension, null);
+    }
+
+    /**
+     * Constructor used for testing to initialize with any arbitrary XML.
+     *
+     * @param injectedMetadata If non-null, it'll be used to initialize the type.  Only set by
+     *     tests.  If null, the metadata is loaded from the specified package.
+     */
+    ExternalAccountType(Context context, String resPackageName, boolean isExtension,
+            XmlResourceParser injectedMetadata) {
         this.mIsExtension = isExtension;
         this.resPackageName = resPackageName;
         this.summaryResPackageName = resPackageName;
 
-        // Handle unknown sources by searching their package
         final PackageManager pm = context.getPackageManager();
+        final XmlResourceParser parser;
+        if (injectedMetadata == null) {
+            try {
+                parser = loadContactsXml(context, resPackageName);
+            } catch (NameNotFoundException e1) {
+                // If the package name is not found, we can't initialize this account type.
+                return;
+            }
+        } else {
+            parser = injectedMetadata;
+        }
+        boolean needLineNumberInErrorLog = true;
         try {
-            PackageInfo packageInfo = pm.getPackageInfo(resPackageName,
-                    PackageManager.GET_SERVICES|PackageManager.GET_META_DATA);
-            for (ServiceInfo serviceInfo : packageInfo.services) {
-                final XmlResourceParser parser = serviceInfo.loadXmlMetaData(pm,
-                        METADATA_CONTACTS);
-                if (parser == null) continue;
+            if (parser != null) {
                 inflate(context, parser);
             }
-        } catch (NameNotFoundException nnfe) {
-            // If the package name is not found, we can't initialize this account type.
+
+            // Done parsing; line number no longer needed in error log.
+            needLineNumberInErrorLog = false;
+            if (mHasEditSchema) {
+                checkKindExists(StructuredName.CONTENT_ITEM_TYPE);
+                checkKindExists(DataKind.PSEUDO_MIME_TYPE_DISPLAY_NAME);
+                checkKindExists(DataKind.PSEUDO_MIME_TYPE_PHONETIC_NAME);
+                checkKindExists(Photo.CONTENT_ITEM_TYPE);
+            } else {
+                // Bring in name and photo from fallback source, which are non-optional
+                addDataKindStructuredName(context);
+                addDataKindDisplayName(context);
+                addDataKindPhoneticName(context);
+                addDataKindPhoto(context);
+            }
+        } catch (DefinitionException e) {
+            final StringBuilder error = new StringBuilder();
+            error.append("Problem reading XML");
+            if (needLineNumberInErrorLog && (parser != null)) {
+                error.append(" in line ");
+                error.append(parser.getLineNumber());
+            }
+            error.append(" for external package ");
+            error.append(resPackageName);
+
+            Log.e(TAG, error.toString(), e);
             return;
+        } finally {
+            if (parser != null) {
+                parser.close();
+            }
         }
 
         mExtensionPackageNames = new ArrayList<String>();
@@ -121,29 +167,53 @@ public class ExternalAccountType extends BaseAccountType {
         iconRes = resolveExternalResId(context, mAccountTypeIconAttribute,
                 this.resPackageName, ATTR_ACCOUNT_ICON);
 
-        if (!mHasEditSchema) {
-            // Bring in name and photo from fallback source, which are non-optional
-            addDataKindStructuredName(context);
-            addDataKindDisplayName(context);
-            addDataKindPhoneticName(context);
-            addDataKindPhoto(context);
-        }
-
         // If we reach this point, the account type has been successfully initialized.
-        mInitSuccessful = true;
+        mIsInitialized = true;
+    }
+
+    /**
+     * Returns the CONTACTS_STRUCTURE metadata (aka "contacts.xml") in the given apk package.
+     *
+     * Unfortunately, there's no public way to determine which service defines a sync service for
+     * which account type, so this method looks through all services in the package, and just
+     * returns the first CONTACTS_STRUCTURE metadata defined in any of them.
+     *
+     * Returns {@code null} if the package has no CONTACTS_STRUCTURE metadata.  In this case
+     * the account type *will* be initialized with minimal configuration.
+     *
+     * On the other hand, if the package is not found, it throws a {@link NameNotFoundException},
+     * in which case the account type will *not* be initialized.
+     */
+    private XmlResourceParser loadContactsXml(Context context, String resPackageName)
+            throws NameNotFoundException {
+        final PackageManager pm = context.getPackageManager();
+        PackageInfo packageInfo = pm.getPackageInfo(resPackageName,
+                PackageManager.GET_SERVICES|PackageManager.GET_META_DATA);
+        for (ServiceInfo serviceInfo : packageInfo.services) {
+            final XmlResourceParser parser = serviceInfo.loadXmlMetaData(pm,
+                    METADATA_CONTACTS);
+            if (parser != null) {
+                return parser;
+            }
+        }
+        // Package was found, but that doesn't contain the CONTACTS_STRUCTURE metadata.
+        return null;
+    }
+
+    private void checkKindExists(String mimeType) throws DefinitionException {
+        if (getKindForMimetype(mimeType) == null) {
+            throw new DefinitionException(mimeType + " must be supported");
+        }
+    }
+
+    @Override
+    public boolean isEmbedded() {
+        return false;
     }
 
     @Override
     public boolean isExtension() {
         return mIsExtension;
-    }
-
-    /**
-     * Whether this account type was able to be fully initialized.  This may be false if
-     * (for example) the package name associated with the account type could not be found.
-     */
-    public boolean isInitialized() {
-        return mInitSuccessful;
     }
 
     @Override
@@ -212,7 +282,7 @@ public class ExternalAccountType extends BaseAccountType {
      * Inflate this {@link AccountType} from the given parser. This may only
      * load details matching the publicly-defined schema.
      */
-    protected void inflate(Context context, XmlPullParser parser) {
+    protected void inflate(Context context, XmlPullParser parser) throws DefinitionException {
         final AttributeSet attrs = Xml.asAttributeSet(parser);
 
         try {
@@ -276,12 +346,19 @@ public class ExternalAccountType extends BaseAccountType {
             }
 
             // Parse all children kinds
-            final int depth = parser.getDepth();
-            while (((type = parser.next()) != XmlPullParser.END_TAG || parser.getDepth() > depth)
+            final int startDepth = parser.getDepth();
+            while (((type = parser.next()) != XmlPullParser.END_TAG
+                        || parser.getDepth() > startDepth)
                     && type != XmlPullParser.END_DOCUMENT) {
+
+                if (type != XmlPullParser.START_TAG || parser.getDepth() != startDepth + 1) {
+                    continue; // Not a direct child tag
+                }
+
                 String tag = parser.getName();
                 if (TAG_EDIT_SCHEMA.equals(tag)) {
-                    parseEditSchema(context, parser);
+                    mHasEditSchema = true;
+                    parseEditSchema(context, parser, attrs);
                 } else if (TAG_CONTACTS_DATA_KIND.equals(tag)) {
                     final TypedArray a = context.obtainStyledAttributes(attrs,
                             android.R.styleable.ContactsDataKind);
@@ -319,50 +396,10 @@ public class ExternalAccountType extends BaseAccountType {
                 }
             }
         } catch (XmlPullParserException e) {
-            throw new IllegalStateException("Problem reading XML", e);
+            throw new DefinitionException("Problem reading XML", e);
         } catch (IOException e) {
-            throw new IllegalStateException("Problem reading XML", e);
+            throw new DefinitionException("Problem reading XML", e);
         }
-    }
-
-    /**
-     * Has to be started while the parser is on the EditSchema tag. Will finish on the end tag
-     */
-    private void parseEditSchema(Context context, XmlPullParser parser)
-            throws XmlPullParserException, IOException {
-        // Loop until we left this tag
-        final int startingDepth = parser.getDepth();
-        int type;
-        do {
-            type = parser.next();
-        } while (!(parser.getDepth() == startingDepth && type == XmlPullParser.END_TAG));
-
-        // Just add all defaults for now
-        addDataKindStructuredName(context);
-        addDataKindDisplayName(context);
-        addDataKindPhoneticName(context);
-        addDataKindNickname(context);
-        addDataKindPhone(context);
-        addDataKindEmail(context);
-        addDataKindStructuredPostal(context);
-        addDataKindIm(context);
-        addDataKindOrganization(context);
-        addDataKindPhoto(context);
-        addDataKindNote(context);
-        addDataKindWebsite(context);
-        addDataKindSipAddress(context);
-
-        mHasEditSchema = true;
-    }
-
-    @Override
-    public int getHeaderColor(Context context) {
-        return 0xff6d86b4;
-    }
-
-    @Override
-    public int getSideBarColor(Context context) {
-        return 0xff6d86b4;
     }
 
     /**

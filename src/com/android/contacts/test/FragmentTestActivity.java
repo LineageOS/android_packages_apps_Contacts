@@ -30,6 +30,6 @@ public class FragmentTestActivity extends ContactsActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.empty);
+        setContentView(R.layout.fragment_test);
     }
 }

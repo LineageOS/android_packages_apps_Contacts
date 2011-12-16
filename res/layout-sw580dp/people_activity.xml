@@ -117,7 +117,7 @@
                 <FrameLayout
                     android:layout_width="0dip"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="10"
                     android:background="@drawable/panel_favorites_holo_light">
 
                     <fragment
@@ -125,20 +125,19 @@
                         class="com.android.contacts.list.ContactTileListFragment"
                         android:layout_height="match_parent"
                         android:layout_width="match_parent"
-                        android:layout_marginTop="32dip"
-                        android:layout_marginRight="32dip"
-                        android:layout_marginLeft="32dip"/>
+                        android:layout_marginRight="16dip"
+                        android:layout_marginLeft="16dip"/>
 
                 </FrameLayout>
 
                 <!-- Most Frequent -->
                 <fragment
                     android:id="@+id/frequent_fragment"
-                    class="com.android.contacts.list.ContactTileListFragment"
+                    class="com.android.contacts.list.ContactTileFrequentFragment"
                     android:layout_width="0dip"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginTop="32dip"
+                    android:layout_weight="8"
+                    android:layout_marginTop="16dip"
                     android:layout_marginRight="16dip"/>
 
             </LinearLayout>

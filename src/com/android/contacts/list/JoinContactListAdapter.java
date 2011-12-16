@@ -39,19 +39,9 @@ public class JoinContactListAdapter extends ContactListAdapter {
     private static final int MAX_SUGGESTIONS = 4;
 
     public static final int PARTITION_SUGGESTIONS = 0;
-    public static final int PARTITION_SHOW_ALL_CONTACTS = 1;
-    public static final int PARTITION_ALL_CONTACTS = 2;
+    public static final int PARTITION_ALL_CONTACTS = 1;
 
     private long mTargetContactId;
-
-    private int mShowAllContactsViewType;
-
-    /**
-     * Determines whether we display a list item with the label
-     * "Show all contacts" or actually show all contacts
-     */
-    private boolean mAllContactsListShown;
-
 
     public JoinContactListAdapter(Context context) {
         super(context);
@@ -59,7 +49,6 @@ public class JoinContactListAdapter extends ContactListAdapter {
         setSectionHeaderDisplayEnabled(true);
         setIndexedPartition(PARTITION_ALL_CONTACTS);
         setDirectorySearchMode(DirectoryListLoader.SEARCH_MODE_NONE);
-        mShowAllContactsViewType = getViewTypeCount() - 1;
     }
 
     @Override
@@ -68,10 +57,7 @@ public class JoinContactListAdapter extends ContactListAdapter {
         // Partition 0: suggestions
         addPartition(false, true);
 
-        // Partition 1: "Show all contacts"
-        addPartition(false, false);
-
-        // Partition 2: All contacts
+        // Partition 1: All contacts
         addPartition(createDefaultDirectoryPartition());
     }
 
@@ -81,8 +67,7 @@ public class JoinContactListAdapter extends ContactListAdapter {
 
     @Override
     public void configureLoader(CursorLoader cursorLoader, long directoryId) {
-        JoinContactLoader loader = (JoinContactLoader)cursorLoader;
-        loader.setLoadSuggestionsAndAllContacts(mAllContactsListShown);
+        JoinContactLoader loader = (JoinContactLoader) cursorLoader;
 
         Builder builder = Contacts.CONTENT_URI.buildUpon();
         builder.appendEncodedPath(String.valueOf(mTargetContactId));
@@ -98,7 +83,7 @@ public class JoinContactListAdapter extends ContactListAdapter {
         loader.setSuggestionUri(builder.build());
 
         // TODO simplify projection
-        loader.setProjection(PROJECTION_CONTACT);
+        loader.setProjection(getProjection(false));
         Uri allContactsUri = buildSectionIndexerUri(Contacts.CONTENT_URI).buildUpon()
                 .appendQueryParameter(
                         ContactsContract.DIRECTORY_PARAM_KEY, String.valueOf(Directory.DEFAULT))
@@ -118,21 +103,8 @@ public class JoinContactListAdapter extends ContactListAdapter {
         return false;
     }
 
-    public boolean isAllContactsListShown() {
-        return mAllContactsListShown;
-    }
-
-    public void setAllContactsListShown(boolean flag) {
-        mAllContactsListShown = flag;
-    }
-
     public void setSuggestionsCursor(Cursor cursor) {
         changeCursor(PARTITION_SUGGESTIONS, cursor);
-        if (cursor != null && cursor.getCount() != 0 && !mAllContactsListShown) {
-            changeCursor(PARTITION_SHOW_ALL_CONTACTS, getShowAllContactsLabelCursor());
-        } else {
-            changeCursor(PARTITION_SHOW_ALL_CONTACTS, null);
-        }
     }
 
     @Override
@@ -153,9 +125,6 @@ public class JoinContactListAdapter extends ContactListAdapter {
 
     @Override
     public int getItemViewType(int partition, int position) {
-        if (partition == PARTITION_SHOW_ALL_CONTACTS) {
-            return mShowAllContactsViewType;
-        }
         return super.getItemViewType(partition, position);
     }
 
@@ -164,13 +133,13 @@ public class JoinContactListAdapter extends ContactListAdapter {
             ViewGroup parent) {
         switch (partition) {
             case PARTITION_SUGGESTIONS: {
-                View view = inflate(R.layout.join_contact_picker_section, parent);
+                View view = inflate(R.layout.join_contact_picker_section_header, parent);
                 ((TextView) view.findViewById(R.id.text)).setText(
                         R.string.separatorJoinAggregateSuggestions);
                 return view;
             }
             case PARTITION_ALL_CONTACTS: {
-                View view = inflate(R.layout.join_contact_picker_section, parent);
+                View view = inflate(R.layout.join_contact_picker_section_header, parent);
                 ((TextView) view.findViewById(R.id.text)).setText(
                         R.string.separatorJoinAggregateAll);
                 return view;
@@ -192,8 +161,6 @@ public class JoinContactListAdapter extends ContactListAdapter {
             case PARTITION_SUGGESTIONS:
             case PARTITION_ALL_CONTACTS:
                 return super.newView(context, partition, cursor, position, parent);
-            case PARTITION_SHOW_ALL_CONTACTS:
-                return inflate(R.layout.join_contact_picker_show_all, parent);
         }
         return null;
     }
@@ -212,9 +179,6 @@ public class JoinContactListAdapter extends ContactListAdapter {
                 bindName(view, cursor);
                 break;
             }
-            case PARTITION_SHOW_ALL_CONTACTS: {
-                break;
-            }
             case PARTITION_ALL_CONTACTS: {
                 final ContactListItemView view = (ContactListItemView)itemView;
                 bindSectionHeaderAndDivider(view, position, cursor);
@@ -225,17 +189,10 @@ public class JoinContactListAdapter extends ContactListAdapter {
         }
     }
 
-    public Cursor getShowAllContactsLabelCursor() {
-        MatrixCursor matrixCursor = new MatrixCursor(PROJECTION_CONTACT);
-        Object[] row = new Object[PROJECTION_CONTACT.length];
-        matrixCursor.addRow(row);
-        return matrixCursor;
-    }
-
     @Override
     public Uri getContactUri(int partitionIndex, Cursor cursor) {
-        long contactId = cursor.getLong(CONTACT_ID_COLUMN_INDEX);
-        String lookupKey = cursor.getString(CONTACT_LOOKUP_KEY_COLUMN_INDEX);
+        long contactId = cursor.getLong(ContactQuery.CONTACT_ID);
+        String lookupKey = cursor.getString(ContactQuery.CONTACT_LOOKUP_KEY);
         return Contacts.getLookupUri(contactId, lookupKey);
     }
 }

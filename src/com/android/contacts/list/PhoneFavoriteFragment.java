@@ -19,6 +19,7 @@ import com.android.contacts.ContactPhotoManager;
 import com.android.contacts.ContactTileLoaderFactory;
 import com.android.contacts.R;
 import com.android.contacts.preference.ContactsPreferences;
+import com.android.contacts.util.AccountFilterUtil;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -27,11 +28,10 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
-import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.provider.ContactsContract.Directory;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,6 +41,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -63,6 +64,8 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     private static int LOADER_ID_ALL_CONTACTS = 2;
 
     private static final String KEY_FILTER = "filter";
+
+    private static final int REQUEST_CODE_ACCOUNT_FILTER = 1;
 
     public interface Listener {
         public void onContactSelected(Uri contactUri);
@@ -95,7 +98,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
 
             // Show the filter header with "loading" state.
             updateFilterHeaderView();
-            mAccountFilterHeaderContainer.setVisibility(View.VISIBLE);
+            mAccountFilterHeader.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -129,7 +132,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
 
     private class ContactTileAdapterListener implements ContactTileAdapter.Listener {
         @Override
-        public void onContactSelected(Uri contactUri) {
+        public void onContactSelected(Uri contactUri, Rect targetRect) {
             if (mListener != null) {
                 mListener.onContactSelected(contactUri);
             }
@@ -139,12 +142,8 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     private class FilterHeaderClickListener implements OnClickListener {
         @Override
         public void onClick(View view) {
-            final Activity activity = getActivity();
-            if (activity != null) {
-                final Intent intent = new Intent(activity, AccountFilterActivity.class);
-                activity.startActivityForResult(
-                        intent, AccountFilterActivity.DEFAULT_REQUEST_CODE);
-            }
+            AccountFilterUtil.startAccountFilterActivityForResult(
+                    PhoneFavoriteFragment.this, REQUEST_CODE_ACCOUNT_FILTER);
         }
     }
 
@@ -166,6 +165,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
             // FastScroller should be visible only when the user is seeing "all" contacts section.
             final boolean shouldShow = mAdapter.shouldShowFirstScroller(firstVisibleItem);
             if (shouldShow != mShouldShowFastScroller) {
+                mListView.setVerticalScrollBarEnabled(shouldShow);
                 mListView.setFastScrollEnabled(shouldShow);
                 mListView.setFastScrollAlwaysVisible(shouldShow);
                 mShouldShowFastScroller = shouldShow;
@@ -193,14 +193,16 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
      */
     private boolean mAllContactsForceReload;
 
-    private SharedPreferences mPrefs;
     private ContactsPreferences mContactsPrefs;
     private ContactListFilter mFilter;
 
     private TextView mEmptyView;
     private ListView mListView;
-    private View mAccountFilterHeaderContainer;
-    private TextView mAccountFilterHeaderView;
+    /**
+     * Layout containing {@link #mAccountFilterHeader}. Used to limit area being "pressed".
+     */
+    private FrameLayout mAccountFilterHeaderContainer;
+    private View mAccountFilterHeader;
 
     private final ContactTileAdapter.Listener mContactTileAdapterListener =
             new ContactTileAdapterListener();
@@ -231,7 +233,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        mPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
         mContactsPrefs = new ContactsPreferences(activity);
     }
 
@@ -243,7 +244,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         mListView = (ListView) listLayout.findViewById(R.id.contact_tile_list);
         mListView.setItemsCanFocus(true);
         mListView.setOnItemClickListener(this);
-        mListView.setVerticalScrollBarEnabled(true);
+        mListView.setVerticalScrollBarEnabled(false);
         mListView.setVerticalScrollbarPosition(View.SCROLLBAR_POSITION_RIGHT);
         mListView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
 
@@ -303,22 +304,16 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         }
 
         // Create the account filter header but keep it hidden until "all" contacts are loaded.
-        mAccountFilterHeaderContainer = inflater.inflate(
-                R.layout.phone_favorite_account_filter_header, mListView, false);
-        mAccountFilterHeaderView =
-                (TextView) mAccountFilterHeaderContainer.findViewById(R.id.account_filter_header);
-        mAccountFilterHeaderContainer.setOnClickListener(mFilterHeaderClickListener);
+        mAccountFilterHeaderContainer = new FrameLayout(context, null);
+        mAccountFilterHeader = inflater.inflate(R.layout.account_filter_header_for_phone_favorite,
+                mListView, false);
+        mAccountFilterHeader.setOnClickListener(mFilterHeaderClickListener);
+        mAccountFilterHeaderContainer.addView(mAccountFilterHeader);
         mAccountFilterHeaderContainer.setVisibility(View.GONE);
 
         mAdapter = new PhoneFavoriteMergedAdapter(context,
                 mContactTileAdapter, mAccountFilterHeaderContainer, mAllContactsAdapter);
 
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mPrefs = null;
     }
 
     @Override
@@ -361,6 +356,18 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
             final int localPosition = position - mContactTileAdapter.getCount() - 1;
             if (mListener != null) {
                 mListener.onContactSelected(mAllContactsAdapter.getDataUri(localPosition));
+            }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_ACCOUNT_FILTER) {
+            if (getActivity() != null) {
+                AccountFilterUtil.handleAccountFilterResult(
+                        ContactListFilterController.getInstance(getActivity()), resultCode, data);
+            } else {
+                Log.e(TAG, "getActivity() returns null during Fragment#onActivityResult()");
             }
         }
     }
@@ -410,27 +417,12 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     }
 
     private void updateFilterHeaderView() {
-        if (mAccountFilterHeaderContainer == null || mAllContactsAdapter == null) {
+        final ContactListFilter filter = getFilter();
+        if (mAccountFilterHeader == null || mAllContactsAdapter == null || filter == null) {
             return;
         }
-
-        final ContactListFilter filter = getFilter();
-        if (mAllContactsAdapter.isLoading()) {
-            mAccountFilterHeaderView.setText(R.string.contact_list_loading);
-        } else if (filter != null) {
-            if (filter.filterType == ContactListFilter.FILTER_TYPE_ALL_ACCOUNTS) {
-                mAccountFilterHeaderView.setText(R.string.list_filter_phones);
-            } else if (filter.filterType == ContactListFilter.FILTER_TYPE_ACCOUNT) {
-                mAccountFilterHeaderView.setText(getString(
-                        R.string.listAllContactsInAccount, filter.accountName));
-            } else if (filter.filterType == ContactListFilter.FILTER_TYPE_CUSTOM) {
-                mAccountFilterHeaderView.setText(R.string.listCustomView);
-            } else {
-                Log.w(TAG, "Filter type \"" + filter.filterType + "\" isn't expected.");
-            }
-        } else {
-            Log.w(TAG, "Filter is null.");
-        }
+        AccountFilterUtil.updateAccountFilterTitleForPhone(
+                mAccountFilterHeader, filter, mAllContactsAdapter.isLoading(), true);
     }
 
     public ContactListFilter getFilter() {
@@ -448,10 +440,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         }
 
         mFilter = filter;
-        if (mPrefs != null) {
-            // Save the preference now.
-            ContactListFilter.storeToPreferences(mPrefs, mFilter);
-        }
 
         if (mAllContactsAdapter != null) {
             mAllContactsAdapter.setFilter(mFilter);

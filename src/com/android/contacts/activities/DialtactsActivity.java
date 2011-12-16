@@ -20,14 +20,14 @@ import com.android.contacts.R;
 import com.android.contacts.calllog.CallLogFragment;
 import com.android.contacts.dialpad.DialpadFragment;
 import com.android.contacts.interactions.PhoneNumberInteraction;
-import com.android.contacts.list.AccountFilterActivity;
-import com.android.contacts.list.ContactListFilter;
 import com.android.contacts.list.ContactListFilterController;
 import com.android.contacts.list.ContactListFilterController.ContactListFilterListener;
 import com.android.contacts.list.ContactListItemView;
 import com.android.contacts.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.list.PhoneFavoriteFragment;
 import com.android.contacts.list.PhoneNumberPickerFragment;
+import com.android.contacts.activities.TransactionSafeActivity;
+import com.android.contacts.util.AccountFilterUtil;
 import com.android.internal.telephony.ITelephony;
 
 import android.app.ActionBar;
@@ -76,7 +76,7 @@ import android.widget.SearchView.OnQueryTextListener;
  * embedded using intents.
  * The dialer tab's title is 'phone', a more common name (see strings.xml).
  */
-public class DialtactsActivity extends Activity {
+public class DialtactsActivity extends TransactionSafeActivity {
     private static final String TAG = "DialtactsActivity";
 
     /** Used to open Call Setting */
@@ -110,6 +110,8 @@ public class DialtactsActivity extends Activity {
             "DialtactsActivity_last_manually_selected_tab";
     private static final int PREF_LAST_MANUALLY_SELECTED_TAB_DEFAULT = TAB_INDEX_DIALER;
 
+    private static final int SUBACTIVITY_ACCOUNT_FILTER = 1;
+
     /**
      * Listener interface for Fragments accommodated in {@link ViewPager} enabling them to know
      * when it becomes visible or invisible inside the ViewPager.
@@ -119,10 +121,6 @@ public class DialtactsActivity extends Activity {
     }
 
     public class ViewPagerAdapter extends FragmentPagerAdapter {
-        private DialpadFragment mDialpadFragment;
-        private CallLogFragment mCallLogFragment;
-        private PhoneFavoriteFragment mPhoneFavoriteFragment;
-
         public ViewPagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -131,20 +129,11 @@ public class DialtactsActivity extends Activity {
         public Fragment getItem(int position) {
             switch (position) {
                 case TAB_INDEX_DIALER:
-                    if (mDialpadFragment == null) {
-                        mDialpadFragment = new DialpadFragment();
-                    }
-                    return mDialpadFragment;
+                    return new DialpadFragment();
                 case TAB_INDEX_CALL_LOG:
-                    if (mCallLogFragment == null) {
-                        mCallLogFragment = new CallLogFragment();
-                    }
-                    return mCallLogFragment;
+                    return new CallLogFragment();
                 case TAB_INDEX_FAVORITES:
-                    if (mPhoneFavoriteFragment == null) {
-                        mPhoneFavoriteFragment = new PhoneFavoriteFragment();
-                    }
-                    return mPhoneFavoriteFragment;
+                    return new PhoneFavoriteFragment();
             }
             throw new IllegalStateException("No fragment at position " + position);
         }
@@ -215,6 +204,30 @@ public class DialtactsActivity extends Activity {
     private CallLogFragment mCallLogFragment;
     private PhoneFavoriteFragment mPhoneFavoriteFragment;
 
+    private final ContactListFilterListener mContactListFilterListener =
+            new ContactListFilterListener() {
+        @Override
+        public void onContactListFilterChanged() {
+            boolean doInvalidateOptionsMenu = false;
+
+            if (mPhoneFavoriteFragment != null && mPhoneFavoriteFragment.isAdded()) {
+                mPhoneFavoriteFragment.setFilter(mContactListFilterController.getFilter());
+                doInvalidateOptionsMenu = true;
+            }
+
+            if (mSearchFragment != null && mSearchFragment.isAdded()) {
+                mSearchFragment.setFilter(mContactListFilterController.getFilter());
+                doInvalidateOptionsMenu = true;
+            } else {
+                Log.w(TAG, "Search Fragment isn't available when ContactListFilter is changed");
+            }
+
+            if (doInvalidateOptionsMenu) {
+                invalidateOptionsMenu();
+            }
+        }
+    };
+
     private final TabListener mTabListener = new TabListener() {
         @Override
         public void onTabUnselected(Tab tab, FragmentTransaction ft) {
@@ -278,10 +291,8 @@ public class DialtactsActivity extends Activity {
             new OnMenuItemClickListener() {
         @Override
         public boolean onMenuItemClick(MenuItem item) {
-            final Intent intent =
-                    new Intent(DialtactsActivity.this, AccountFilterActivity.class);
-            ContactListFilter filter = mContactListFilterController.getFilter();
-            startActivityForResult(intent, AccountFilterActivity.DEFAULT_REQUEST_CODE);
+            AccountFilterUtil.startAccountFilterActivityForResult(
+                    DialtactsActivity.this, SUBACTIVITY_ACCOUNT_FILTER);
             return true;
         }
     };
@@ -339,8 +350,9 @@ public class DialtactsActivity extends Activity {
                 @Override
                 public boolean onQueryTextChange(String newText) {
                     // Show search result with non-empty text. Show a bare list otherwise.
-                    mSearchFragment.setQueryString(newText, true);
-                    mSearchFragment.setSearchMode(!TextUtils.isEmpty(newText));
+                    if (mSearchFragment != null) {
+                        mSearchFragment.setQueryString(newText, true);
+                    }
                     return true;
                 }
     };
@@ -363,6 +375,16 @@ public class DialtactsActivity extends Activity {
                 }
     };
 
+    private final View.OnLayoutChangeListener mFirstLayoutListener
+            = new View.OnLayoutChangeListener() {
+        @Override
+        public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft,
+                int oldTop, int oldRight, int oldBottom) {
+            v.removeOnLayoutChangeListener(this); // Unregister self.
+            addSearchFragment();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -372,35 +394,14 @@ public class DialtactsActivity extends Activity {
 
         setContentView(R.layout.dialtacts_activity);
 
-        mContactListFilterController = new ContactListFilterController(this);
-        mContactListFilterController.addListener(new ContactListFilterListener() {
-            @Override
-            public void onContactListFilterChanged() {
-                boolean doInvalidateOptionsMenu = false;
+        mContactListFilterController = ContactListFilterController.getInstance(this);
+        mContactListFilterController.addListener(mContactListFilterListener);
 
-                if (mPhoneFavoriteFragment != null && mPhoneFavoriteFragment.isAdded()) {
-                    mPhoneFavoriteFragment.setFilter(mContactListFilterController.getFilter());
-                    doInvalidateOptionsMenu = true;
-                }
-
-                if (mSearchFragment != null && mSearchFragment.isAdded()) {
-                    mSearchFragment.setFilter(mContactListFilterController.getFilter());
-                    doInvalidateOptionsMenu = true;
-                } else {
-                    Log.w(TAG, "Search Fragment isn't available when ContactListFilter is changed");
-                }
-
-                if (doInvalidateOptionsMenu) {
-                    invalidateOptionsMenu();
-                }
-            }
-        });
+        findViewById(R.id.dialtacts_frame).addOnLayoutChangeListener(mFirstLayoutListener);
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(new ViewPagerAdapter(getFragmentManager()));
         mViewPager.setOnPageChangeListener(mPageChangeListener);
-
-        prepareSearchView();
 
         // Setup the ActionBar tabs (the order matches the tab-index contants TAB_INDEX_*)
         setupDialer();
@@ -430,18 +431,41 @@ public class DialtactsActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-        // Force filter reload to reflect possible filter changes done via People UI.
-        //
-        // Ideally both (People/Phone) UI should share the same instance for
-        // ContactListFilterController and they should be able to receive filter change event
-        // from the same controller (Bug 5165507)
-        mContactListFilterController.onStart(true);
         if (mPhoneFavoriteFragment != null) {
             mPhoneFavoriteFragment.setFilter(mContactListFilterController.getFilter());
         }
         if (mSearchFragment != null) {
             mSearchFragment.setFilter(mContactListFilterController.getFilter());
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mContactListFilterController.removeListener(mContactListFilterListener);
+    }
+
+    /**
+     * Add search fragment.  Note this is called during onLayout, so there's some restrictions,
+     * such as executePendingTransaction can't be used in it.
+     */
+    private void addSearchFragment() {
+        // In order to take full advantage of "fragment deferred start", we need to create the
+        // search fragment after all other fragments are created.
+        // The other fragments are created by the ViewPager on the first onMeasure().
+        // We use the first onLayout call, which is after onMeasure().
+
+        // Just return if the fragment is already created, which happens after configuration
+        // changes.
+        if (mSearchFragment != null) return;
+
+        final FragmentTransaction ft = getFragmentManager().beginTransaction();
+        final Fragment searchFragment = new PhoneNumberPickerFragment();
+
+        searchFragment.setUserVisibleHint(false);
+        ft.add(R.id.dialtacts_frame, searchFragment);
+        ft.hide(searchFragment);
+        ft.commitAllowingStateLoss();
     }
 
     private void prepareSearchView() {
@@ -509,13 +533,25 @@ public class DialtactsActivity extends Activity {
             mSearchFragment.setQuickContactEnabled(true);
             mSearchFragment.setDarkTheme(true);
             mSearchFragment.setPhotoPosition(ContactListItemView.PhotoPosition.LEFT);
-            final FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            if (mInSearchUi) {
-                transaction.show(mSearchFragment);
-            } else {
-                transaction.hide(mSearchFragment);
+            if (mContactListFilterController != null
+                    && mContactListFilterController.getFilter() != null) {
+                mSearchFragment.setFilter(mContactListFilterController.getFilter());
             }
-            transaction.commitAllowingStateLoss();
+            // Here we assume that we're not on the search mode, so let's hide the fragment.
+            //
+            // We get here either when the fragment is created (normal case), or after configuration
+            // changes.  In the former case, we're not in search mode because we can only
+            // enter search mode if the fragment is created.  (see enterSearchUi())
+            // In the latter case we're not in search mode either because we don't retain
+            // mInSearchUi -- ideally we should but at this point it's not supported.
+            mSearchFragment.setUserVisibleHint(false);
+            // After configuration changes fragments will forget their "hidden" state, so make
+            // sure to hide it.
+            if (!mSearchFragment.isHidden()) {
+                final FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.hide(mSearchFragment);
+                transaction.commitAllowingStateLoss();
+            }
         }
     }
 
@@ -646,7 +682,7 @@ public class DialtactsActivity extends Activity {
         if (UI.FILTER_CONTACTS_ACTION.equals(action)) {
             setupFilterText(newIntent);
         }
-        if (mInSearchUi || mSearchFragment.isVisible()) {
+        if (mInSearchUi || (mSearchFragment != null && mSearchFragment.isVisible())) {
             exitSearchUi();
         }
 
@@ -825,6 +861,19 @@ public class DialtactsActivity extends Activity {
      * Hides every tab and shows search UI for phone lookup.
      */
     private void enterSearchUi() {
+        if (mSearchFragment == null) {
+            // We add the search fragment dynamically in the first onLayoutChange() and
+            // mSearchFragment is set sometime later when the fragment transaction is actually
+            // executed, which means there's a window when users are able to hit the (physical)
+            // search key but mSearchFragment is still null.
+            // It's quite hard to handle this case right, so let's just ignore the search key
+            // in this case.  Users can just hit it again and it will work this time.
+            return;
+        }
+        if (mSearchView == null) {
+            prepareSearchView();
+        }
+
         final ActionBar actionBar = getActionBar();
 
         final Tab tab = actionBar.getSelectedTab();
@@ -844,6 +893,7 @@ public class DialtactsActivity extends Activity {
         sendFragmentVisibilityChange(mViewPager.getCurrentItem(), false);
 
         // Show the search fragment and hide everything else.
+        mSearchFragment.setUserVisibleHint(true);
         final FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.show(mSearchFragment);
         transaction.commitAllowingStateLoss();
@@ -878,9 +928,14 @@ public class DialtactsActivity extends Activity {
     private void exitSearchUi() {
         final ActionBar actionBar = getActionBar();
 
-        final FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.hide(mSearchFragment);
-        transaction.commitAllowingStateLoss();
+        // Hide the search fragment, if exists.
+        if (mSearchFragment != null) {
+            mSearchFragment.setUserVisibleHint(false);
+
+            final FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.hide(mSearchFragment);
+            transaction.commitAllowingStateLoss();
+        }
 
         // We want to hide SearchView and show Tabs. Also focus on previously selected one.
         actionBar.setDisplayShowCustomEnabled(false);
@@ -935,17 +990,9 @@ public class DialtactsActivity extends Activity {
             return;
         }
         switch (requestCode) {
-            case AccountFilterActivity.DEFAULT_REQUEST_CODE: {
-                ContactListFilter filter = (ContactListFilter) data.getParcelableExtra(
-                        AccountFilterActivity.KEY_EXTRA_CONTACT_LIST_FILTER);
-                if (filter == null) {
-                    return;
-                }
-                if (filter.filterType == ContactListFilter.FILTER_TYPE_CUSTOM) {
-                    mContactListFilterController.selectCustomFilter();
-                } else {
-                    mContactListFilterController.setContactListFilter(filter, true);
-                }
+            case SUBACTIVITY_ACCOUNT_FILTER: {
+                AccountFilterUtil.handleAccountFilterResult(
+                        mContactListFilterController, resultCode, data);
             }
             break;
         }

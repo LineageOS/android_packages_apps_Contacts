@@ -30,17 +30,70 @@
         android:orientation="vertical"
         android:layout_weight="1">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:id="@+id/t9topbar"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_weight="0.3">
+        <QuickContactBadge
+            android:id="@+id/t9badge"
+            android:layout_width="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_height="40dp"
+            android:visibility="invisible"
+            android:layout_centerVertical="true"
+            android:focusable="true" />
+        <TextView
+            android:id="@+id/t9result"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:layout_width="0dp"
+            android:clickable="true"
+            android:background="@drawable/t9result_state"
+            android:layout_height="match_parent" />
+        <ToggleButton
+            android:id="@+id/t9toggle"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:visibility="invisible"
+            android:scaleType="centerInside"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:textOn=""
+            android:textOff=""
+            android:background="@drawable/t9toggle_state"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+    <ViewSwitcher
+        android:id="@+id/t9flipper"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7">
+        <!-- Keypad section -->
         <com.android.contacts.dialpad.DigitsEditText
             android:id="@+id/digits"
             android:layout_width="match_parent"
             android:layout_weight="1"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:gravity="center"
             android:textAppearance="@style/DialtactsDigitsTextAppearance"
             android:textColor="?android:attr/textColorPrimary"
             android:nextFocusRight="@+id/overflow_menu"
             android:background="@android:color/transparent" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:id="@+id/t9list"
+            android:visibility="gone"
+            android:scrollingCache="true"
+            android:layout_height="match_parent" />
+    </ViewSwitcher>
 
         <!-- Horizontal row of buttons (Voicemail + DialButton + Delete.) -->
         <include

@@ -77,4 +77,33 @@
         <item>@string/default_phone_tab_favorites</item>
     </string-array>
 
+  <string-array name="t9_sort_entries"
+    translatable="false">
+    <item>@string/t9_sort_name</item>
+    <item>@string/t9_sort_number</item>
+  </string-array>
+
+  <string-array name="t9_sort_values"
+    translatable="false">
+    <item>1</item>
+    <item>2</item>
+  </string-array>
+
+  <string-array name="t9_map"
+    translatable="false">
+    <item>0</item>
+    <item>1</item>
+    <item>@string/t9_map_row_2</item>
+    <item>@string/t9_map_row_3</item>
+    <item>@string/t9_map_row_4</item>
+    <item>@string/t9_map_row_5</item>
+    <item>@string/t9_map_row_6</item>
+    <item>@string/t9_map_row_7</item>
+    <item>@string/t9_map_row_8</item>
+    <item>@string/t9_map_row_9</item>
+    <item>*</item>
+    <item>#</item>
+    <item>+</item>
+  </string-array>
+
 </resources>

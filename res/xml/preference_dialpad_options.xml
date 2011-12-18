@@ -23,6 +23,7 @@
 		android:summary="@string/dialer_ui_orientation_summary" />
 	<CheckBoxPreference
 		android:key="t9_state"
+		android:defaultValue="true"
 		android:title="@string/t9_state_title"
 		android:persistent="true"
 		android:summary="@string/t9_state_summary" />

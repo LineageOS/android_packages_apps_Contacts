@@ -18,41 +18,32 @@
 	android:id="@+id/voicemailAndDialAndDelete"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:orientation="vertical">
-	<LinearLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content">
-		<!-- Onscreen "Voicemail" button. The width is 75 (from the mocks) + 12
-			of padding from the 9patch, total is 87. -->
-		<ImageButton
-			android:id="@+id/voicemailButton"
-			android:layout_width="0dp"
-			android:layout_weight="1"
-			android:layout_height="wrap_content"
-			android:state_enabled="false"
-			android:background="@drawable/btn_dial_voicemail"
-			android:contentDescription="@string/description_voicemail_button"
-			android:src="@drawable/ic_dial_action_voice_mail" />
-		<!-- Onscreen "Dial" button, used on all platforms by default. Its usage
-			can be disabled using resources (see config.xml.) -->
-		<!-- Onscreen "Backspace/Delete" button The width is 75 (from the mocks)
-			+ 12 of padding from the 9patch, total is 87. -->
-		<ImageButton
-			android:id="@+id/deleteButton"
-			android:layout_width="0dp"
-			android:layout_weight="1"
-			android:layout_height="wrap_content"
-			android:state_enabled="false"
-			android:background="@drawable/btn_dial_delete"
-			android:contentDescription="@string/description_delete_button"
-			android:src="@drawable/ic_dial_action_delete" />
-	</LinearLayout>
+	android:orientation="horizontal">
+	<ImageButton
+		android:id="@+id/voicemailButton"
+		android:layout_width="0dp"
+		android:layout_weight="1"
+		android:layout_height="wrap_content"
+		android:state_enabled="false"
+		android:background="@drawable/btn_dial_voicemail"
+		android:contentDescription="@string/description_voicemail_button"
+		android:src="@drawable/ic_dial_action_voice_mail" />
 	<ImageButton
 		android:id="@+id/dialButton"
-		android:layout_width="match_parent"
+		android:layout_width="0dp"
+		android:layout_weight="1"
 		android:layout_height="wrap_content"
 		android:state_enabled="false"
 		android:background="@drawable/btn_dial_action"
 		android:contentDescription="@string/description_dial_button"
 		android:src="@drawable/ic_dial_action_call" />
+	<ImageButton
+		android:id="@+id/deleteButton"
+		android:layout_width="0dp"
+		android:layout_weight="1"
+		android:layout_height="wrap_content"
+		android:state_enabled="false"
+		android:background="@drawable/btn_dial_delete"
+		android:contentDescription="@string/description_delete_button"
+		android:src="@drawable/ic_dial_action_delete" />
 </LinearLayout>

@@ -16,6 +16,9 @@
 
 package com.android.contacts;
 
+import com.android.contacts.T9Search.ContactItem;
+import com.android.contacts.T9Search.T9Adapter;
+import com.android.contacts.T9Search.T9SearchResult;
 import com.android.internal.telephony.ITelephony;
 import com.android.phone.CallLogAsync;
 import com.android.phone.HapticFeedback;
@@ -48,9 +51,11 @@ import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
+import android.text.Spannable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.DialerKeyListener;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -60,14 +65,22 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.QuickContactBadge;
 import android.widget.TextView;
+import android.widget.ToggleButton;
+import android.widget.ViewSwitcher;
 
 import com.android.internal.telephony.ITelephony;
 
@@ -150,6 +163,14 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
 
     /** Identifier for the "Add Call" intent extra. */
     static final String ADD_CALL_MODE_KEY = "add_call_mode";
+    private static T9Search sT9Search; // Static to avoid reloading when class is destroyed and recreated
+    private ToggleButton mT9Toggle;
+    private ListView mT9List;
+    private TextView mT9Result;
+    private QuickContactBadge mT9ResultBadge;
+    private T9Adapter mT9Adapter;
+    private ViewSwitcher mT9Flipper;
+    private LinearLayout mT9Top;
 
     /**
      * Identifier for intent extra for sending an empty Flash message for
@@ -240,7 +261,21 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         mDigits.setKeyListener(DialerKeyListener.getInstance());
         mDigits.setOnClickListener(this);
         mDigits.setOnKeyListener(this);
-
+        mT9Result = (TextView) findViewById(R.id.t9result);
+        if (mT9Result != null) {
+            mT9Result.setOnClickListener(this);
+        }
+        mT9ResultBadge = (QuickContactBadge) findViewById(R.id.t9badge);
+        mT9List = (ListView) findViewById(R.id.t9list);
+        if (mT9List!= null) {
+            mT9List.setOnItemClickListener(this);
+        }
+        mT9Toggle = (ToggleButton) findViewById(R.id.t9toggle);
+        if (mT9Toggle != null) {
+            mT9Toggle.setOnClickListener(this);
+        }
+        mT9Flipper = (ViewSwitcher) findViewById(R.id.t9flipper);
+        mT9Top = (LinearLayout) findViewById(R.id.t9topbar);
         maybeAddNumberFormatting();
 
         setupKeypad(true);
@@ -467,7 +502,15 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     @Override
     protected void onResume() {
         super.onResume();
-
+        if (sT9Search == null && isT9On()) {
+            Thread loadContacts = new Thread(new Runnable() {
+                public void run () {
+                    sT9Search = new T9Search(getBaseContext());
+                }
+            });
+            loadContacts.start();
+        }
+        hideT9();
         // Query the last dialed number. Do it first because hitting
         // the DB is 'slow'. This call is asynchronous.
         queryLastOutgoingCall();
@@ -537,6 +580,153 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         updateDialAndDeleteButtonEnabledState();
         updateDialer();
     }
+
+
+    /**
+     * Hides the topresult layout
+     * Needed to reclaim the space when T9 is off.
+     */
+    private void hideT9 () {
+        if (!isT9On()) {
+            mT9Top.setVisibility(View.GONE);
+        } else {
+            mT9Top.setVisibility(View.VISIBLE);
+        }
+        return;
+    }
+
+    /**
+     * Toggles between expanded list and dialpad
+     */
+    private void toggleT9() {
+        if (!isT9On()) {
+            hideT9();
+            return;
+        }
+        if (mT9Flipper.getCurrentView() == mT9List) {
+            mT9Toggle.setChecked(false);
+            animateT9();
+        }
+    }
+
+    /**
+     * Initiates a search for the dialed digits
+     * Toggles view visibility based on results
+     */
+    private void searchContacts() {
+        if (!isT9On())
+            return;
+        final int length = mDigits.length();
+        if (length > 0) {
+            if (sT9Search != null) {
+                T9SearchResult result = sT9Search.search(mDigits.getText().toString());
+                if (result != null) {
+                    T9Search.ContactItem contact = result.getTopContact();
+                    mT9Result.setText(contact.name + " : " + contact.normalNumber, TextView.BufferType.SPANNABLE);
+                    Spannable WordtoSpan = (Spannable) mT9Result.getText();
+                    String normalizedInput = T9Search.removeNonDigits(mDigits.getText().toString());
+                    int normalizedLength = normalizedInput.length();
+                    if (contact.nameMatchId != -1) {
+                        int nameStart = contact.normalName.indexOf(normalizedInput);
+                        WordtoSpan.setSpan(new ForegroundColorSpan(getResources().getColor(android.R.color.white)), nameStart,
+                                nameStart + normalizedLength, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                    }
+                    if (contact.numberMatchId != -1) {
+                        int numberStart = contact.name.length() + 3 + contact.numberMatchId;
+                        WordtoSpan.setSpan(new ForegroundColorSpan(getResources().getColor(android.R.color.white)),
+                                numberStart, numberStart + normalizedLength, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                    }
+                    mT9Result.setText(WordtoSpan);
+                    mT9ResultBadge.assignContactFromPhone(contact.number, true);
+                    mT9ResultBadge.setTag(contact.number);
+                    if (contact.photo != null)
+                        mT9ResultBadge.setImageBitmap(contact.photo);
+                    else
+                        mT9ResultBadge.setImageResource(R.drawable.ic_contact_list_picture);
+                    if (result.getNumResults()>  1) {
+                        mT9Toggle.setVisibility(View.VISIBLE);
+                    } else {
+                        mT9Toggle.setVisibility(View.GONE);
+                    }
+                    if (mT9Adapter == null) {
+                        mT9Adapter = new T9Adapter(this, 0, result.getResults(),getLayoutInflater());
+                        mT9Adapter.setNotifyOnChange(true);
+                        mT9List.setAdapter(mT9Adapter);
+                    } else {
+                        mT9Adapter.clear();
+                        for (ContactItem item : result.getResults()) {
+                            mT9Adapter.add(item);
+                        }
+                    }
+                    if (mT9List.getAdapter() == null) {
+                        mT9List.setAdapter(mT9Adapter);
+                    }
+                    mT9ResultBadge.setVisibility(View.VISIBLE);
+                    mT9Result.setVisibility(View.VISIBLE);
+                } else {
+                    mT9ResultBadge.setVisibility(View.INVISIBLE);
+                    mT9Result.setVisibility(View.INVISIBLE);
+                    mT9Toggle.setVisibility(View.INVISIBLE);
+                    toggleT9();
+                }
+            }
+        } else {
+            mT9ResultBadge.setVisibility(View.INVISIBLE);
+            mT9Result.setVisibility(View.INVISIBLE);
+            mT9Toggle.setVisibility(View.INVISIBLE);
+            toggleT9();
+        }
+    }
+
+    /**
+     * Returns preference value for T9Dialer
+     */
+    private boolean isT9On() {
+        return PreferenceManager.getDefaultSharedPreferences(this).getBoolean("t9_state", true);
+    }
+
+    /**
+     * Returns preference for whether to dial
+     * upon clicking contact in listview/topbar
+     */
+    private boolean dialOnTap() {
+        return PreferenceManager.getDefaultSharedPreferences(this).getBoolean("t9_dial_onclick", false);
+    }
+
+    /**
+     * Animates the dialpad/listview
+     */
+    private void animateT9() {
+        TranslateAnimation slidedown1 = new TranslateAnimation(
+                Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT, 0.0f,
+                Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT, 1.0f);
+        TranslateAnimation slidedown2 = new TranslateAnimation(
+                Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT, 0.0f,
+                Animation.RELATIVE_TO_PARENT, -1.0f, Animation.RELATIVE_TO_PARENT, 0.0f);
+        TranslateAnimation slideup1 = new TranslateAnimation(
+                Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT, 0.0f,
+                Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT, -1.0f);
+        TranslateAnimation slideup2 = new TranslateAnimation(
+                Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT, 0.0f,
+                Animation.RELATIVE_TO_PARENT, 1.0f, Animation.RELATIVE_TO_PARENT, 0.0f);
+        slidedown2.setDuration(500);
+        slidedown2.setInterpolator(new DecelerateInterpolator());
+        slidedown1.setDuration(500);
+        slidedown1.setInterpolator(new DecelerateInterpolator());
+        slideup1.setDuration(500);
+        slideup1.setInterpolator(new DecelerateInterpolator());
+        slideup2.setDuration(500);
+        slideup2.setInterpolator(new DecelerateInterpolator());
+        if (mT9Toggle.isChecked()) {
+            mT9Flipper.setOutAnimation(slidedown1);
+            mT9Flipper.setInAnimation(slidedown2);
+        } else {
+            mT9Flipper.setOutAnimation(slideup1);
+            mT9Flipper.setInAnimation(slideup2);
+        }
+        mT9Flipper.showNext();
+    }
+
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -726,6 +916,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     private void keyPressed(int keyCode) {
         KeyEvent event = new KeyEvent(KeyEvent.ACTION_DOWN, keyCode);
         mDigits.onKeyDown(keyCode, event);
+        searchContacts();
     }
 
     public boolean onKey(View view, int keyCode, KeyEvent event) {
@@ -839,6 +1030,17 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
             	}
             	break;
             }
+            case R.id.t9toggle: {
+                animateT9();
+                return;
+            }
+            case R.id.t9result: {
+                mDigits.setText(mT9ResultBadge.getTag().toString());
+                if (dialOnTap()) {
+                    dialButtonPressed();
+                }
+                return;
+            }
         }
         
         //Wysie: Set the "voicemail"/add button to be enabled/disabled according to if any number is displayed   
@@ -860,6 +1062,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         switch (id) {
             case R.id.deleteButton: {
                 digits.clear();
+                searchContacts();
                 //Wysie: Invoke checkForNumber() to disable button
                 checkForNumber();
                 // TODO: The framework forgets to clear the pressed
@@ -1043,6 +1246,14 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
                 mDialpadChooser.setAdapter(mDialpadChooserAdapter);
             }
         } else {
+            if (isT9On() && !mDigits.getText().toString().isEmpty()) {
+                if (mT9Flipper.getCurrentView() != mT9List) {
+                    mT9Toggle.setChecked(false);
+                    searchContacts();
+                } else {
+                    return;
+                }
+            }
             // Log.i(TAG, "Displaying normal Dialer UI.");
             mDigits.setVisibility(View.VISIBLE);
             if (mDialpad != null) mDialpad.setVisibility(View.VISIBLE);
@@ -1157,6 +1368,13 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
      * Handle clicks from the dialpad chooser.
      */
     public void onItemClick(AdapterView parent, View v, int position, long id) {
+        if (parent == mT9List) {
+            mDigits.setText(mT9Adapter.getItem(position).number);
+            if (dialOnTap()) {
+                dialButtonPressed();
+            }
+            return;
+        }
         DialpadChooserAdapter.ChoiceItem item =
                 (DialpadChooserAdapter.ChoiceItem) parent.getItemAtPosition(position);
         int itemId = item.id;

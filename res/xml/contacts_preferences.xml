@@ -73,6 +73,27 @@
                     android:title="@string/title_digits_color_unselected"
                     android:defaultValue="-1" />
         </PreferenceScreen>
+        <CheckBoxPreference
+            android:key="t9_state"
+            android:title="@string/t9_state_title"
+            android:persistent="true"
+            android:defaultValue="true"
+            android:summary="@string/t9_state_summary" />
+        <CheckBoxPreference
+            android:key="t9_dial_onclick"
+            android:title="@string/t9_dial_click_title"
+            android:persistent="true"
+            android:dependency="t9_state"
+            android:summary="@string/t9_dial_click_summary" />
+        <ListPreference
+            android:key="t9_sort"
+            android:defaultValue="@string/t9_default_sort"
+            android:title="@string/t9_sort_title"
+            android:dependency="t9_state"
+            android:summary="@string/t9_sort_summary"
+            android:entries="@array/t9_sort_entries"
+            android:entryValues="@array/t9_sort_values"
+            android:dialogTitle="@string/t9_sort_title" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/recentCallsIconLabel">
         <CheckBoxPreference

@@ -496,4 +496,14 @@
     <string name="title_about_version">版本</string>
     <string name="title_about_credits">感谢</string>
 
+    <string name="t9_sort_title">T9排序模式</string>
+    <string name="t9_sort_summary">选择如何过滤T9结果</string>
+    <string name="t9_sort_name">姓名匹配优先</string>
+    <string name="t9_sort_number">号码匹配优先</string>
+    <string name="t9_state_title">开启T9拨号</string>
+    <string name="t9_state_summary">在拨号界面开启T9搜索</string>
+    <string name="t9_dial_click_title">拨打选中的联系人</string>
+    <string name="t9_dial_click_summary">在T9中拨打选中的联系人</string>
+    <string name="t9_add_to_contacts">添加到联系人</string>
+
 </resources>

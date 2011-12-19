@@ -50,7 +50,7 @@
         android:id="@+id/t9topbar"
         android:layout_gravity="center"
         android:gravity="center"
-        android:layout_weight="1">
+        android:layout_weight="1.5">
         <QuickContactBadge
             android:id="@+id/t9badge"
             android:layout_width="40dp"

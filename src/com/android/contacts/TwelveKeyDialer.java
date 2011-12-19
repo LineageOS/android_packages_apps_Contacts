@@ -233,6 +233,11 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
             mDigits.setCursorVisible(false);
             mDigits.setBackgroundDrawable(mDigitsEmptyBackground);
         }
+        /*
+         * ignore the drawable padding (in case there's not enough space to reflect it),
+         * the text is centered anyway
+         */
+        mDigits.setPadding(0, 0, 0, 0);
 
         updateDialAndDeleteButtonEnabledState();
     }

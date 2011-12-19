@@ -63,6 +63,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:layout_width="0dp"
+            android:visibility="invisible"
             android:background="@drawable/t9result_state"
             android:clickable="true"
             android:layout_height="match_parent" />

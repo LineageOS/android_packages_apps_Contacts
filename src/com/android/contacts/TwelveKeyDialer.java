@@ -627,7 +627,14 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
                 T9SearchResult result = sT9Search.search(mDigits.getText().toString());
                 if (result != null) {
                     T9Search.ContactItem contact = result.getTopContact();
-                    mT9Result.setText(contact.name + " : " + contact.normalNumber, TextView.BufferType.SPANNABLE);
+                    StringBuilder text = new StringBuilder(contact.name);
+                    text.append(" : ");
+                    text.append(contact.normalNumber);
+                    text.append(" (");
+                    text.append(contact.groupType);
+                    text.append(")");
+
+                    mT9Result.setText(text.toString(), TextView.BufferType.SPANNABLE);
                     Spannable WordtoSpan = (Spannable) mT9Result.getText();
                     String normalizedInput = T9Search.removeNonDigits(mDigits.getText().toString());
                     int normalizedLength = normalizedInput.length();

@@ -23,6 +23,8 @@ import com.android.internal.telephony.ITelephony;
 import com.android.phone.CallLogAsync;
 import com.android.phone.HapticFeedback;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -166,9 +168,9 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     private static T9Search sT9Search; // Static to avoid reloading when class is destroyed and recreated
     private ToggleButton mT9Toggle;
     private ListView mT9List;
-    private TextView mT9Result;
-    private QuickContactBadge mT9ResultBadge;
+    private ListView mT9ListTop;
     private T9Adapter mT9Adapter;
+    private T9Adapter mT9AdapterTop;
     private ViewSwitcher mT9Flipper;
     private LinearLayout mT9Top;
 
@@ -260,15 +262,15 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         mDigits = (EditText) findViewById(R.id.digits);
         mDigits.setKeyListener(DialerKeyListener.getInstance());
         mDigits.setOnClickListener(this);
+        mDigits.setOnTouchListener(this);
         mDigits.setOnKeyListener(this);
-        mT9Result = (TextView) findViewById(R.id.t9result);
-        if (mT9Result != null) {
-            mT9Result.setOnClickListener(this);
-        }
-        mT9ResultBadge = (QuickContactBadge) findViewById(R.id.t9badge);
         mT9List = (ListView) findViewById(R.id.t9list);
-        if (mT9List!= null) {
+        if (mT9List != null) {
             mT9List.setOnItemClickListener(this);
+        }
+        mT9ListTop = (ListView) findViewById(R.id.t9listtop);
+        if (mT9ListTop != null) {
+            mT9ListTop.setOnItemClickListener(this);
         }
         mT9Toggle = (ToggleButton) findViewById(R.id.t9toggle);
         if (mT9Toggle != null) {
@@ -621,37 +623,9 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
             if (sT9Search != null) {
                 T9SearchResult result = sT9Search.search(mDigits.getText().toString());
                 if (result != null) {
-                    T9Search.ContactItem contact = result.getTopContact();
-                    mT9Result.setText(contact.name + " : " + contact.normalNumber, TextView.BufferType.SPANNABLE);
-                    Spannable WordtoSpan = (Spannable) mT9Result.getText();
-                    String normalizedInput = T9Search.removeNonDigits(mDigits.getText().toString());
-                    int normalizedLength = normalizedInput.length();
-                    if (contact.nameMatchId != -1) {
-                        int nameStart = contact.normalName.indexOf(normalizedInput);
-                        WordtoSpan.setSpan(new ForegroundColorSpan(getResources().getColor(android.R.color.white)), nameStart,
-                                nameStart + normalizedLength, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                    }
-                    if (contact.numberMatchId != -1) {
-                        int numberStart = contact.name.length() + 3 + contact.numberMatchId;
-                        WordtoSpan.setSpan(new ForegroundColorSpan(getResources().getColor(android.R.color.white)),
-                                numberStart, numberStart + normalizedLength, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                    }
-                    mT9Result.setText(WordtoSpan);
-                    mT9ResultBadge.assignContactFromPhone(contact.number, true);
-                    mT9ResultBadge.setTag(contact.number);
-                    if (contact.photo != null)
-                        mT9ResultBadge.setImageBitmap(contact.photo);
-                    else
-                        mT9ResultBadge.setImageResource(R.drawable.ic_contact_list_picture);
-                    if (result.getNumResults()>  1) {
-                        mT9Toggle.setVisibility(View.VISIBLE);
-                    } else {
-                        mT9Toggle.setVisibility(View.GONE);
-                    }
                     if (mT9Adapter == null) {
-                        mT9Adapter = new T9Adapter(this, 0, result.getResults(),getLayoutInflater());
+                        mT9Adapter = sT9Search.new T9Adapter(this, 0, result.getResults(),getLayoutInflater());
                         mT9Adapter.setNotifyOnChange(true);
-                        mT9List.setAdapter(mT9Adapter);
                     } else {
                         mT9Adapter.clear();
                         for (ContactItem item : result.getResults()) {
@@ -661,18 +635,32 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
                     if (mT9List.getAdapter() == null) {
                         mT9List.setAdapter(mT9Adapter);
                     }
-                    mT9ResultBadge.setVisibility(View.VISIBLE);
-                    mT9Result.setVisibility(View.VISIBLE);
+
+                    if (mT9AdapterTop == null) {
+                        mT9AdapterTop = sT9Search.new T9Adapter(this, 0, new ArrayList<ContactItem>(),getLayoutInflater());
+                        mT9AdapterTop.setNotifyOnChange(true);
+                    } else {
+                        mT9AdapterTop.clear();
+                    }
+                    mT9AdapterTop.add(result.getTopContact());
+                    if (mT9ListTop.getAdapter() == null) {
+                        mT9ListTop.setAdapter(mT9AdapterTop);
+                    }
+
+                    mT9ListTop.setVisibility(View.VISIBLE);
+                    if (result.getNumResults()>  1) {
+                        mT9Toggle.setVisibility(View.VISIBLE);
+                    } else {
+                        mT9Toggle.setVisibility(View.GONE);
+                    }
                 } else {
-                    mT9ResultBadge.setVisibility(View.INVISIBLE);
-                    mT9Result.setVisibility(View.INVISIBLE);
+                    mT9ListTop.setVisibility(View.INVISIBLE);
                     mT9Toggle.setVisibility(View.INVISIBLE);
                     toggleT9();
                 }
             }
         } else {
-            mT9ResultBadge.setVisibility(View.INVISIBLE);
-            mT9Result.setVisibility(View.INVISIBLE);
+            mT9ListTop.setVisibility(View.INVISIBLE);
             mT9Toggle.setVisibility(View.INVISIBLE);
             toggleT9();
         }
@@ -927,6 +915,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
                     dialButtonPressed();
                     return true;
                 }
+                searchContacts();
                 break;
         }
         return false;
@@ -1034,13 +1023,6 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
                 animateT9();
                 return;
             }
-            case R.id.t9result: {
-                mDigits.setText(mT9ResultBadge.getTag().toString());
-                if (dialOnTap()) {
-                    dialButtonPressed();
-                }
-                return;
-            }
         }
         
         //Wysie: Set the "voicemail"/add button to be enabled/disabled according to if any number is displayed   
@@ -1049,6 +1031,16 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
 
     @Override
     public boolean onTouch(View view, MotionEvent event) {
+        if (view == mDigits) {
+            // hack to prevent soft keyboard from appearing,
+            // while still allowing touch interaction, like
+            // cursor positioning and selection
+            int inType = mDigits.getInputType();                    // back up the input type
+            mDigits.setInputType(android.text.InputType.TYPE_NULL); // disable soft input
+            mDigits.onTouchEvent(event);                            // call native handler
+            mDigits.setInputType(inType);                           // restore input type
+            return true;                                            // consume touch event
+        }
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             vibrate();
         }
@@ -1368,8 +1360,12 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
      * Handle clicks from the dialpad chooser.
      */
     public void onItemClick(AdapterView parent, View v, int position, long id) {
-        if (parent == mT9List) {
-            mDigits.setText(mT9Adapter.getItem(position).number);
+        if (parent == mT9List || parent == mT9ListTop) {
+            if (parent == mT9List)
+                mDigits.setText(mT9Adapter.getItem(position).number);
+            else
+                mDigits.setText(mT9AdapterTop.getItem(position).number);
+            mDigits.setSelection(mDigits.length());
             if (dialOnTap()) {
                 dialButtonPressed();
             }

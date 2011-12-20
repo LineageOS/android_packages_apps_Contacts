@@ -481,4 +481,14 @@
     <string name="summary_about_version">1.2</string>
     <string name="title_about_credits">Благодарность</string>
     <string name="summary_about_credits">Wysie, ChainsDD, geesun, niuchl, rac2030, sileht и остальные с XDA! :)</string>	
+
+    <string name="t9_sort_title">Режим сортировки T9</string>
+    <string name="t9_sort_summary">Выберите способ фильтрации результатов T9</string>
+    <string name="t9_sort_name">Сначала имена</string>
+    <string name="t9_sort_number">Сначала номера</string>
+    <string name="t9_state_title">Включить набор T9</string>
+    <string name="t9_state_summary">Включить поиск T9 в телефоне</string>
+    <string name="t9_dial_click_title">Вызвать выбранный контакт</string>
+    <string name="t9_dial_click_summary">Вызвать выбранный контакт для T9</string>
+
 </resources>

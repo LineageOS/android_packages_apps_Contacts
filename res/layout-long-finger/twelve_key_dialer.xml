@@ -28,7 +28,7 @@
     <!-- TODO: Use a textAppearance to control the display of the number -->
     <EditText android:id="@+id/digits"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="68dp"
         android:gravity="center"
         android:maxLines="1"
         android:scrollHorizontally="true"
@@ -39,37 +39,27 @@
         android:focusableInTouchMode="true"
         android:editable="true"
         android:cursorVisible="false"
-        android:layout_weight="1"
+        android:layout_weight="0"
     />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0px"
+        android:layout_height="wrap_content"
         android:id="@+id/t9topbar"
         android:layout_gravity="center"
         android:gravity="center"
-        android:layout_weight="1">
-        <QuickContactBadge
-            android:id="@+id/t9badge"
-            android:layout_width="40dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_height="40dp"
-            android:visibility="invisible"
-            android:layout_centerVertical="true"
-            android:focusable="true" />
-        <TextView
-            android:id="@+id/t9result"
-            android:layout_weight="1"
-            android:gravity="center"
+        android:layout_weight="0">
+        <ListView
             android:layout_width="0dp"
-            android:background="@drawable/t9result_state"
-            android:clickable="true"
-            android:layout_height="match_parent" />
+            android:id="@+id/t9listtop"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:scrollingCache="true"
+            android:layout_height="42dp" />
         <ToggleButton
             android:id="@+id/t9toggle"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="40dp"
+            android:layout_height="42dp"
             android:visibility="invisible"
             android:scaleType="centerInside"
             android:layout_marginRight="5dp"

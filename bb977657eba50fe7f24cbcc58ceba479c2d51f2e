@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAOX///gE\u003d",
+        "filename": "src/com/android/contacts/T9Search.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 940
+      },
+      "writtenOn": "2011-12-20T23:30:58Z",
+      "side": 1,
+      "message": "Not sure this is needed.\n\nWe have mPrevInput, could you not make use of that ?",
+      "revId": "bb977657eba50fe7f24cbcc58ceba479c2d51f2e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

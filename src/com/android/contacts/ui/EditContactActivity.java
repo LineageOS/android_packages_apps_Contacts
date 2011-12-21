@@ -1397,6 +1397,8 @@ public final class EditContactActivity extends Activity
         if (!skipAccountTypeCheck) {
             if (oneSource.accountType == null) {
                 return 1;
+            } else if (twoSource.accountType == null) {
+                return -1;
             }
             value = oneSource.accountType.compareTo(twoSource.accountType);
             if (value != 0) {

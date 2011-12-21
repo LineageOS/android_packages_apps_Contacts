@@ -314,7 +314,7 @@ class T9Search {
             ContactItem o = mItems.get(position);
 
             holder.name.setText(o.name, TextView.BufferType.SPANNABLE);
-            holder.number.setText(o.number + " (" + o.groupType + ")", TextView.BufferType.SPANNABLE);
+            holder.number.setText(o.normalNumber + " (" + o.groupType + ")", TextView.BufferType.SPANNABLE);
             if (o.nameMatchId != -1) {
                 Spannable s = (Spannable) holder.name.getText();
                 int nameStart = o.normalName.indexOf(mPrevInput);

@@ -590,6 +590,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
      */
     private void hideT9 () {
         if (!isT9On()) {
+            toggleT9();
             mT9Top.setVisibility(View.GONE);
         } else {
             mT9Top.setVisibility(View.VISIBLE);
@@ -601,10 +602,6 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
      * Toggles between expanded list and dialpad
      */
     private void toggleT9() {
-        if (!isT9On()) {
-            hideT9();
-            return;
-        }
         if (mT9Flipper.getCurrentView() == mT9List) {
             mT9Toggle.setChecked(false);
             animateT9();
@@ -1238,7 +1235,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
                 mDialpadChooser.setAdapter(mDialpadChooserAdapter);
             }
         } else {
-            if (isT9On() && !mDigits.getText().toString().isEmpty()) {
+            if (isT9On()) {
                 if (mT9Flipper.getCurrentView() != mT9List) {
                     mT9Toggle.setChecked(false);
                     searchContacts();

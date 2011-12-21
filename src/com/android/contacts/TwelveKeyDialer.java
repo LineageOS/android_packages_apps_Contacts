@@ -1139,6 +1139,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
                 // Only if set in options.
                 mDigits.setText(mLastNumberDialed);
                 mDigits.setSelection(mDigits.length());
+                searchContacts();
                 return;
             } else {
                 // Rare case: there's no "last number dialed".  There's

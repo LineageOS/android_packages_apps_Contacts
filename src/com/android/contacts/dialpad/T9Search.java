@@ -16,13 +16,22 @@
 
 package com.android.contacts.dialpad;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.telephony.PhoneNumberUtils;
+import android.text.Spannable;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,12 +41,6 @@ import android.widget.TextView;
 
 import com.android.contacts.ContactPhotoManager;
 import com.android.contacts.R;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 /**
  * @author shade, Danesh, pawitp
@@ -264,7 +267,7 @@ class T9Search {
         return sb.toString();
     }
 
-    protected static class T9Adapter extends ArrayAdapter<ContactItem> {
+    protected class T9Adapter extends ArrayAdapter<ContactItem> {
 
         private ArrayList<ContactItem> mItems;
         private LayoutInflater mMenuInflate;
@@ -280,7 +283,6 @@ class T9Search {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
-
             if (convertView == null) {
                 convertView = mMenuInflate.inflate(R.layout.row, null);
                 holder = new ViewHolder();
@@ -291,20 +293,32 @@ class T9Search {
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-
             ContactItem o = mItems.get(position);
-            holder.name.setText(o.name);
-            holder.number.setText(o.number + " (" + o.groupType + ")");
+            holder.name.setText(o.name, TextView.BufferType.SPANNABLE);
+            holder.number.setText(o.normalNumber + " (" + o.groupType + ")", TextView.BufferType.SPANNABLE);
+            if (o.nameMatchId != -1) {
+                Spannable s = (Spannable) holder.name.getText();
+                int nameStart = o.normalName.indexOf(mPrevInput);
+                s.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(android.R.color.holo_blue_dark)),
+                        nameStart, nameStart + mPrevInput.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                holder.name.setText(s);
+            }
+            if (o.numberMatchId != -1) {
+                Spannable s = (Spannable) holder.number.getText();
+                int numberStart = o.numberMatchId;
+                s.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(android.R.color.holo_blue_dark)),
+                        numberStart, numberStart + mPrevInput.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                holder.number.setText(s);
+            }
             if (o.photo != null)
                 mPhotoLoader.loadPhoto(holder.icon, o.photo, false, true);
             else
                 holder.icon.setImageResource(ContactPhotoManager.getDefaultAvatarResId(false, true));
-
             holder.icon.assignContactFromPhone(o.number, true);
             return convertView;
         }
 
-        static class ViewHolder {
+        class ViewHolder {
             TextView name;
             TextView number;
             QuickContactBadge icon;

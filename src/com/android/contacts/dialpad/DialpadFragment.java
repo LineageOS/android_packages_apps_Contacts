@@ -16,6 +16,8 @@
 
 package com.android.contacts.dialpad;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -82,6 +84,7 @@ import com.android.contacts.R;
 import com.android.contacts.SpecialCharSequenceMgr;
 import com.android.contacts.activities.DialtactsActivity;
 import com.android.contacts.activities.DialtactsActivity.ViewPagerVisibilityListener;
+import com.android.contacts.dialpad.T9Search.ContactItem;
 import com.android.contacts.dialpad.T9Search.T9Adapter;
 import com.android.contacts.dialpad.T9Search.T9SearchResult;
 import com.android.contacts.util.PhoneNumberFormatter;
@@ -139,9 +142,9 @@ public class DialpadFragment extends Fragment
     private ContactPhotoManager mPhotoLoader;
     private ToggleButton mT9Toggle;
     private ListView mT9List;
-    private TextView mT9Result;
-    private QuickContactBadge mT9ResultBadge;
+    private ListView mT9ListTop;
     private T9Adapter mT9Adapter;
+    private T9Adapter mT9AdapterTop;
     private ViewSwitcher mT9Flipper;
     private LinearLayout mT9Top;
 
@@ -271,14 +274,13 @@ public class DialpadFragment extends Fragment
         mDigits.setOnKeyListener(this);
         mDigits.setOnLongClickListener(this);
         mDigits.addTextChangedListener(this);
-        mT9Result = (TextView) fragmentView.findViewById(R.id.t9result);
-        if (mT9Result != null) {
-            mT9Result.setOnClickListener(this);
-        }
-        mT9ResultBadge = (QuickContactBadge) fragmentView.findViewById(R.id.t9badge);
         mT9List = (ListView) fragmentView.findViewById(R.id.t9list);
         if (mT9List!= null) {
             mT9List.setOnItemClickListener(this);
+        }
+        mT9ListTop = (ListView) fragmentView.findViewById(R.id.t9listtop);
+        if (mT9ListTop != null) {
+            mT9ListTop.setOnItemClickListener(this);
         }
         mT9Toggle = (ToggleButton) fragmentView.findViewById(R.id.t9toggle);
         if (mT9Toggle != null) {
@@ -707,6 +709,7 @@ public class DialpadFragment extends Fragment
     private void hideT9 () {
         if (mDigitsContainer == null) {
             if (!isT9On()) {
+                toggleT9();
                 mT9Top.setVisibility(View.GONE);
             }else{
                 mT9Top.setVisibility(View.VISIBLE);
@@ -714,6 +717,7 @@ public class DialpadFragment extends Fragment
         } else {
             LinearLayout.LayoutParams digitsLayout = (LayoutParams) mDigitsContainer.getLayoutParams();
             if (!isT9On()) {
+                toggleT9();
                 digitsLayout.weight = 0.2f;
                 mT9Top.setVisibility(View.GONE);
             } else {
@@ -729,10 +733,6 @@ public class DialpadFragment extends Fragment
      * Toggles between expanded list and dialpad
      */
     private void toggleT9() {
-        if (!isT9On()) {
-            hideT9();
-            return;
-        }
         if (mT9Flipper.getCurrentView() == mT9List) {
             mT9Toggle.setChecked(false);
             animateT9();
@@ -751,37 +751,9 @@ public class DialpadFragment extends Fragment
             if (sT9Search != null) {
                 T9SearchResult result = sT9Search.search(mDigits.getText().toString());
                 if (result != null) {
-                    T9Search.ContactItem contact = result.getTopContact();
-                    mT9Result.setText(contact.name + " : " + contact.normalNumber, TextView.BufferType.SPANNABLE);
-                    Spannable WordtoSpan = (Spannable) mT9Result.getText();
-                    String normalizedInput = T9Search.removeNonDigits(mDigits.getText().toString());
-                    int normalizedLength = normalizedInput.length();
-                    if (contact.nameMatchId != -1) {
-                        int nameStart = contact.normalName.indexOf(normalizedInput);
-                        WordtoSpan.setSpan(new ForegroundColorSpan(getResources().getColor(android.R.color.holo_blue_dark)), nameStart,
-                                nameStart + normalizedLength, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                    }
-                    if (contact.numberMatchId != -1) {
-                        int numberStart = contact.name.length() + 3 + contact.numberMatchId;
-                        WordtoSpan.setSpan(new ForegroundColorSpan(getResources().getColor(android.R.color.holo_blue_dark)),
-                                numberStart, numberStart + normalizedLength, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                    }
-                    mT9Result.setText(WordtoSpan);
-                    mT9ResultBadge.assignContactFromPhone(contact.number, true);
-                    mT9ResultBadge.setTag(contact.number);
-                    if (contact.photo != null)
-                        mPhotoLoader.loadPhoto(mT9ResultBadge, contact.photo, false, true);
-                    else
-                        mT9ResultBadge.setImageResource(ContactPhotoManager.getDefaultAvatarResId(false, true));
-                    if (result.getNumResults()>  1) {
-                        mT9Toggle.setVisibility(View.VISIBLE);
-                    } else {
-                        mT9Toggle.setVisibility(View.GONE);
-                    }
                     if (mT9Adapter == null) {
-                        mT9Adapter = new T9Adapter(getActivity(), 0, result.getResults(),getActivity().getLayoutInflater(), mPhotoLoader);
+                        mT9Adapter = sT9Search.new T9Adapter(getActivity(), 0, result.getResults(),getActivity().getLayoutInflater(), mPhotoLoader);
                         mT9Adapter.setNotifyOnChange(true);
-                        mT9List.setAdapter(mT9Adapter);
                     } else {
                         mT9Adapter.clear();
                         mT9Adapter.addAll(result.getResults());
@@ -789,18 +761,31 @@ public class DialpadFragment extends Fragment
                     if (mT9List.getAdapter() == null) {
                         mT9List.setAdapter(mT9Adapter);
                     }
-                    mT9ResultBadge.setVisibility(View.VISIBLE);
-                    mT9Result.setVisibility(View.VISIBLE);
+                    if (mT9AdapterTop == null) {
+                        mT9AdapterTop = sT9Search.new T9Adapter(getActivity(), 0, new ArrayList<ContactItem>(), getActivity().getLayoutInflater(), mPhotoLoader);
+                        mT9AdapterTop.setNotifyOnChange(true);
+                    } else {
+                        mT9AdapterTop.clear();
+                    }
+                    mT9AdapterTop.add(result.getTopContact());
+                    if (mT9ListTop.getAdapter() == null) {
+                        mT9ListTop.setAdapter(mT9AdapterTop);
+                    }
+
+                    mT9ListTop.setVisibility(View.VISIBLE);
+                    if (result.getNumResults()>  1) {
+                        mT9Toggle.setVisibility(View.VISIBLE);
+                    } else {
+                        mT9Toggle.setVisibility(View.GONE);
+                    }
                 } else {
-                    mT9ResultBadge.setVisibility(View.INVISIBLE);
-                    mT9Result.setVisibility(View.INVISIBLE);
+                    mT9ListTop.setVisibility(View.INVISIBLE);
                     mT9Toggle.setVisibility(View.INVISIBLE);
                     toggleT9();
                 }
             }
         } else {
-            mT9ResultBadge.setVisibility(View.INVISIBLE);
-            mT9Result.setVisibility(View.INVISIBLE);
+            mT9ListTop.setVisibility(View.INVISIBLE);
             mT9Toggle.setVisibility(View.INVISIBLE);
             toggleT9();
         }
@@ -875,6 +860,7 @@ public class DialpadFragment extends Fragment
                     dialButtonPressed();
                     return true;
                 }
+                searchContacts();
                 break;
         }
         return false;
@@ -974,13 +960,6 @@ public class DialpadFragment extends Fragment
             }
             case R.id.t9toggle: {
                 animateT9();
-                return;
-            }
-            case R.id.t9result: {
-                setFormattedDigits(mT9ResultBadge.getTag().toString(),null);
-                if (dialOnTap()) {
-                    dialButtonPressed();
-                }
                 return;
             }
         }
@@ -1263,7 +1242,7 @@ public class DialpadFragment extends Fragment
             }
             mDialpadChooser.setAdapter(mDialpadChooserAdapter);
         } else {
-            if (isT9On() && !mDigits.getText().toString().isEmpty()) {
+            if (isT9On()) {
                 if (mT9Flipper.getCurrentView() != mT9List) {
                     mT9Toggle.setChecked(false);
                     searchContacts();
@@ -1389,8 +1368,12 @@ public class DialpadFragment extends Fragment
      * Handle clicks from the dialpad chooser.
      */
     public void onItemClick(AdapterView parent, View v, int position, long id) {
-        if (parent == mT9List) {
-            setFormattedDigits(mT9Adapter.getItem(position).number,null);
+        if (parent == mT9List || parent == mT9ListTop) {
+            if (parent == mT9List) {
+                setFormattedDigits(mT9Adapter.getItem(position).number,null);
+            } else {
+                setFormattedDigits(mT9AdapterTop.getItem(position).number,null);
+            }
             if (dialOnTap()) {
                 dialButtonPressed();
             }

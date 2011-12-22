@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAOX///Sc\u003d",
+        "filename": "res/values-hu/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 2016
+      },
+      "writtenOn": "2011-12-22T04:48:56Z",
+      "side": 1,
+      "message": "El?ször",
+      "revId": "f301a7c09f66c219457c94ba5295d9e1f6f631ca",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

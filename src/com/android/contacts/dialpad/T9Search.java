@@ -24,7 +24,6 @@ import java.util.Set;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -294,27 +293,35 @@ class T9Search {
                 holder = (ViewHolder) convertView.getTag();
             }
             ContactItem o = mItems.get(position);
-            holder.name.setText(o.name, TextView.BufferType.SPANNABLE);
-            holder.number.setText(o.normalNumber + " (" + o.groupType + ")", TextView.BufferType.SPANNABLE);
-            if (o.nameMatchId != -1) {
-                Spannable s = (Spannable) holder.name.getText();
-                int nameStart = o.normalName.indexOf(mPrevInput);
-                s.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(android.R.color.holo_blue_dark)),
-                        nameStart, nameStart + mPrevInput.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                holder.name.setText(s);
+            if (o.name == null) {
+                holder.name.setText(mContext.getResources().getString(R.string.t9_add_to_contacts));
+                holder.number.setVisibility(View.GONE);
+                holder.icon.setImageResource(R.drawable.ic_menu_add_field_holo_light);
+                holder.icon.assignContactFromPhone(o.number, true);
+            } else {
+                holder.name.setText(o.name, TextView.BufferType.SPANNABLE);
+                holder.number.setText(o.normalNumber + " (" + o.groupType + ")", TextView.BufferType.SPANNABLE);
+                holder.number.setVisibility(View.VISIBLE);
+                if (o.nameMatchId != -1) {
+                    Spannable s = (Spannable) holder.name.getText();
+                    int nameStart = o.normalName.indexOf(mPrevInput);
+                    s.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(android.R.color.holo_blue_dark)),
+                            nameStart, nameStart + mPrevInput.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                    holder.name.setText(s);
+                }
+                if (o.numberMatchId != -1) {
+                    Spannable s = (Spannable) holder.number.getText();
+                    int numberStart = o.numberMatchId;
+                    s.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(android.R.color.holo_blue_dark)),
+                            numberStart, numberStart + mPrevInput.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                    holder.number.setText(s);
+                }
+                if (o.photo != null)
+                    mPhotoLoader.loadPhoto(holder.icon, o.photo, false, true);
+                else
+                    holder.icon.setImageResource(ContactPhotoManager.getDefaultAvatarResId(false, true));
+                holder.icon.assignContactFromPhone(o.number, true);
             }
-            if (o.numberMatchId != -1) {
-                Spannable s = (Spannable) holder.number.getText();
-                int numberStart = o.numberMatchId;
-                s.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(android.R.color.holo_blue_dark)),
-                        numberStart, numberStart + mPrevInput.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                holder.number.setText(s);
-            }
-            if (o.photo != null)
-                mPhotoLoader.loadPhoto(holder.icon, o.photo, false, true);
-            else
-                holder.icon.setImageResource(ContactPhotoManager.getDefaultAvatarResId(false, true));
-            holder.icon.assignContactFromPhone(o.number, true);
             return convertView;
         }
 

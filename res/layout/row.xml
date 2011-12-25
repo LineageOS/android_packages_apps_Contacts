@@ -18,11 +18,13 @@
 		<TextView
 			android:id="@+id/rowName"
 			android:layout_weight="0.5"
+			android:gravity="center_vertical"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent" />
 		<TextView
 			android:id="@+id/rowNumber"
 			android:layout_weight="0.5"
+			android:gravity="center_vertical"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent" />
 	</LinearLayout>

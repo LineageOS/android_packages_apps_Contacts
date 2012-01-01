@@ -26,7 +26,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -48,11 +47,9 @@ import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
-import android.text.Spannable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.DialerKeyListener;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -73,7 +70,6 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.PopupMenu;
-import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 import android.widget.ViewSwitcher;
@@ -281,6 +277,7 @@ public class DialpadFragment extends Fragment
         mT9ListTop = (ListView) fragmentView.findViewById(R.id.t9listtop);
         if (mT9ListTop != null) {
             mT9ListTop.setOnItemClickListener(this);
+            mT9ListTop.setTag(new ContactItem());
         }
         mT9Toggle = (ToggleButton) fragmentView.findViewById(R.id.t9toggle);
         if (mT9Toggle != null) {
@@ -750,6 +747,12 @@ public class DialpadFragment extends Fragment
         if (length > 0) {
             if (sT9Search != null) {
                 T9SearchResult result = sT9Search.search(mDigits.getText().toString());
+                if (mT9AdapterTop == null) {
+                    mT9AdapterTop = sT9Search.new T9Adapter(getActivity(), 0, new ArrayList<ContactItem>(), getActivity().getLayoutInflater(), mPhotoLoader);
+                    mT9AdapterTop.setNotifyOnChange(true);
+                } else {
+                    mT9AdapterTop.clear();
+                }
                 if (result != null) {
                     if (mT9Adapter == null) {
                         mT9Adapter = sT9Search.new T9Adapter(getActivity(), 0, result.getResults(),getActivity().getLayoutInflater(), mPhotoLoader);
@@ -761,27 +764,23 @@ public class DialpadFragment extends Fragment
                     if (mT9List.getAdapter() == null) {
                         mT9List.setAdapter(mT9Adapter);
                     }
-                    if (mT9AdapterTop == null) {
-                        mT9AdapterTop = sT9Search.new T9Adapter(getActivity(), 0, new ArrayList<ContactItem>(), getActivity().getLayoutInflater(), mPhotoLoader);
-                        mT9AdapterTop.setNotifyOnChange(true);
-                    } else {
-                        mT9AdapterTop.clear();
-                    }
                     mT9AdapterTop.add(result.getTopContact());
-                    if (mT9ListTop.getAdapter() == null) {
-                        mT9ListTop.setAdapter(mT9AdapterTop);
-                    }
-
-                    mT9ListTop.setVisibility(View.VISIBLE);
                     if (result.getNumResults()>  1) {
                         mT9Toggle.setVisibility(View.VISIBLE);
                     } else {
                         mT9Toggle.setVisibility(View.GONE);
                     }
+                    mT9Toggle.setTag(null);
                 } else {
-                    mT9ListTop.setVisibility(View.INVISIBLE);
-                    mT9Toggle.setVisibility(View.INVISIBLE);
+                    ((ContactItem) mT9ListTop.getTag()).number = mDigits.getText().toString();
+                    mT9AdapterTop.add((ContactItem) mT9ListTop.getTag());
+                    mT9Toggle.setTag(new Boolean(true));
+                    mT9Toggle.setVisibility(View.GONE);
                     toggleT9();
+                }
+                mT9ListTop.setVisibility(View.VISIBLE);
+                if (mT9ListTop.getAdapter() == null) {
+                    mT9ListTop.setAdapter(mT9AdapterTop);
                 }
             }
         } else {
@@ -1373,7 +1372,12 @@ public class DialpadFragment extends Fragment
             if (parent == mT9List) {
                 setFormattedDigits(mT9Adapter.getItem(position).number,null);
             } else {
-                setFormattedDigits(mT9AdapterTop.getItem(position).number,null);
+                if (mT9Toggle.getTag() == null) {
+                    setFormattedDigits(mT9AdapterTop.getItem(position).number,null);
+                } else {
+                    startActivity(getAddToContactIntent(mDigits.getText()));
+                    return;
+                }
             }
             if (dialOnTap()) {
                 dialButtonPressed();

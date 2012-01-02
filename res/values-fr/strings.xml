@@ -487,4 +487,15 @@
     <string name="title_about_name">Nom du mod</string>
     <string name="title_about_version">Version</string>
     <string name="title_about_credits">Crédits</string>
+
+    <!-- Preferences: T9  -->
+    <string name="t9_sort_title">Mode de tri T9</string>
+    <string name="t9_sort_summary">Méthode de tri des résultats issus du mode T9</string>
+    <string name="t9_sort_name">Noms en priorité</string>
+    <string name="t9_sort_number">Numéros en priorité</string>
+    <string name="t9_state_title">Activer le mode T9</string>
+    <string name="t9_state_summary">Activer la recherche de contacts par les lettres du clavier</string>
+    <string name="t9_dial_click_title">Sélection contact T9</string>
+    <string name="t9_dial_click_summary">Appeler de préférence le contact sélectionné par le mode T9</string>
+
 </resources>

@@ -769,6 +769,7 @@ public class DialpadFragment extends Fragment
                         mT9Toggle.setVisibility(View.VISIBLE);
                     } else {
                         mT9Toggle.setVisibility(View.GONE);
+                        toggleT9();
                     }
                     mT9Toggle.setTag(null);
                 } else {

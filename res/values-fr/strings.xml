@@ -420,17 +420,17 @@
     <!-- Wysie: Preferences strings -->
 
     <!-- Preferences: Dialer -->
-    <string name="title_last_dialled">Appeler compose dernier appel</string>
-    <string name="summary_last_dialled">Si aucun numéro n\'est entré, le dernier numéro composé sera rappelé </string>
-    <string name="title_return_to_dialer">Retour au numéroteur après appel</string>
-    <string name="title_vm_button">Bouton d\'action gauche (BAG)</string>
-    <string name="title_vm_handler">Gestionnaire de messagerie vocale</string>
-    <string name="title_use_1_for_reg_vm">1 appelle la messagerie vocale</string>
+    <string name="title_last_dialled">Touche BIS</string>
+    <string name="summary_last_dialled">Si aucun numéro n\'est entré, le dernier numéro composé sera rappelé</string>
+    <string name="title_return_to_dialer">Retour au clavier après appel</string>
+    <string name="title_vm_button">Bouton d\'action gauche</string>
+    <string name="title_vm_handler">Gestionnaire messagerie</string>
+    <string name="title_use_1_for_reg_vm">1 pour messagerie vocale</string>
     <string name="summaryon_use_1_for_reg_vm">La touche 1 est un raccourci pour la messagerie vocale standard</string>
     <string name="summaryoff_use_1_for_reg_vm">La touche 1 utilise le gestionnaire de messagerie vocale</string>
-    <string name="title_disable_num_check">Ne pas vérifier les numéros</string>
+    <string name="title_disable_num_check">Ne pas vérifier numéros</string>
     <string name="summaryon_disable_num_check">Le bouton d\'action gauche et le menu seront toujours actifs</string>
-    <string name="summaryoff_disable_num_check">Le bouton d\'action gauche et menu seront actifs dès qu\'un chiffre sera entré</string>
+    <string name="summaryoff_disable_num_check">Le bouton d\'action et le menu seront actifs dès qu\'un chiffre sera entré</string>
     <string name="title_enable_haptic_feedback">Retour haptique</string>
     <string name="summary_enable_haptic_feedback">Utiliser le retour haptique du clavier - voir les Paramètres CyanogenMod pour les réglages</string>
     <string name="title_change_digits_color">Couleur des touches</string>
@@ -442,7 +442,7 @@
     <string name="entry_no_vm_handler">Aucun (Appeler Messagerie vocale)</string>
 
     <!-- Preferences: Call log -->
-    <string name="title_cl_exact_time">Horodatages absolus/relatifs</string>
+    <string name="title_cl_exact_time">Horodatages absolus</string>
     <string name="summaryon_cl_exact_time">Utiliser des horodatages absolus dans l\'historique des appels</string>
     <string name="summaryoff_cl_exact_time">Utiliser des horodatages relatifs dans l\'historique des appels</string>
     <string name="title_cl_show_seconds">Afficher les secondes</string>
@@ -457,16 +457,16 @@
     <string name="summary_contacts_show_dial_button">Afficher un bouton d\'appel à côté des contacts possédant un numéro de téléphone</string>
     <string name="title_contacts_show_count">Afficher le nombre de contacts</string>
     <string name="summary_contacts_show_count">Le nombre de contacts sera affiché en haut de la liste des contacts</string>
-    <string name="title_contacts_show_separators">Séparateurs alphabétiques</string>
-    <string name="summaryon_contacts_show_separators">Les séparateurs alphabétiques seront affichés dans la liste des contacts</string>
-    <string name="summaryoff_contacts_show_separators">Les séparateurs alphabétiques ne seront pas affichés dans la liste des contacts</string>
+    <string name="title_contacts_show_separators">Répertoire alphabétique</string>
+    <string name="summaryon_contacts_show_separators">Regrouper la liste de contacts par leur première lettre</string>
+    <string name="summaryoff_contacts_show_separators">Ne pas regrouper les contacts par leur première lettre</string>
 
     <!-- Preferences: Contacts - View Contact -->
-    <string name="title_view_contact">Afficher contact</string>
+    <string name="title_view_contact">Affichage contact</string>
     <string name="summary_view_contact">Configuration de l\'option &quot;Afficher contact&quot;</string>
-    <string name="title_show_text_mobile_only">SMS pour les mobiles uniquement</string>
-    <string name="summaryon_show_text_mobile_only">Seuls les numéros mobiles auront une action SMS associée</string>
-    <string name="summaryoff_show_text_mobile_only">Tous les numéros auront une action SMS associée</string>
+    <string name="title_show_text_mobile_only">SMS sur mobiles uniquement</string>
+    <string name="summaryon_show_text_mobile_only">Seuls les numéros mobiles auront un bouton SMS</string>
+    <string name="summaryoff_show_text_mobile_only">Tous les numéros auront un bouton SMS</string>
 
     <!-- Preferences: Favourites -->
     <string name="title_favourites_hide_freq_call">Cacher fréquemment appelés</string>
@@ -479,12 +479,33 @@
     <string name="title_misc_category">Divers</string>
     <string name="title_sensor_rotation">Rotation automatique</string>
     <string name="summary_sensor_rotation">Si activé, la rotation sera effective selon la configuration du système</string>
-    <string name="title_data_font_size">Taille police infos contact</string>
+    <string name="title_data_font_size">Police infos contact</string>
     <string name="summary_data_font_size">Permet de choisir la taille de la police utilisée pour afficher les informations détaillées des contacts (n° tél., e-mail, adresse, etc.)</string>
+    <string name="title_default_phone_tab">Onglet par défaut</string>
+    <string name="summary_default_phone_tab">Onglet affiché à l\'ouverture de l\'application Téléphone</string>
 
     <!-- Wysie: About strings -->
-    <string name="title_about">À propos de</string>
+    <string name="title_about">A propos...</string>
     <string name="title_about_name">Nom du mod</string>
     <string name="title_about_version">Version</string>
     <string name="title_about_credits">Crédits</string>
+
+    <!-- Default Phone Tab strings -->
+    <string name="default_phone_tab_last_used">Dernier utilisé pour appel (Défaut)</string>
+    <string name="default_phone_tab_last_viewed">Dernier affiché</string>
+    <string name="default_phone_tab_phone">Téléphone</string>
+    <string name="default_phone_tab_call_log">Historique</string>
+    <string name="default_phone_tab_contacts">Contacts</string>
+    <string name="default_phone_tab_favorites">Favoris</string>
+
+    <!-- Preferences: T9  -->
+    <string name="t9_sort_title">Mode de tri T9</string>
+    <string name="t9_sort_summary">Méthode de tri des résultats issus du mode T9</string>
+    <string name="t9_sort_name">Noms en priorité</string>
+    <string name="t9_sort_number">Numéros en priorité</string>
+    <string name="t9_state_title">Activer le mode T9</string>
+    <string name="t9_state_summary">Activer la recherche de contacts par les lettres du clavier</string>
+    <string name="t9_dial_click_title">Sélection contact T9</string>
+    <string name="t9_dial_click_summary">Appeler de préférence le contact sélectionné par le mode T9</string>
+
 </resources>

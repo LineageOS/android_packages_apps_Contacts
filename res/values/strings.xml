@@ -1306,6 +1306,7 @@
     <string name="t9_state_summary">Enable T9 searching in dialer</string>
     <string name="t9_dial_click_title">Dial selected contact</string>
     <string name="t9_dial_click_summary">Dial the selected contact for T9</string>
+    <string name="t9_add_to_contacts">Add to contacts</string>
     <string name="t9_map_row_2">2abcàáâäåɑæçǽćčá</string>
     <string name="t9_map_row_3">3deféèêë</string>
     <string name="t9_map_row_4">4ghiíìïîǵ</string>

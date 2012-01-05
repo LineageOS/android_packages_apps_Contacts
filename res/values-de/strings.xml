@@ -520,6 +520,7 @@
     <string name="t9_state_summary">Aktiviert T9-artiges Suchen mit der Telefontastatur</string>
     <string name="t9_dial_click_title">Gewählten Kontakt anrufen</string>
     <string name="t9_dial_click_summary">Ausgewählten Kontakt bei T9-Suche anrufen</string>
+    <string name="t9_add_to_contacts">Zu Kontakten hinzufügen</string>
 
     <string name="search_results_searching">Suche läuft\u2026</string>
 </resources>

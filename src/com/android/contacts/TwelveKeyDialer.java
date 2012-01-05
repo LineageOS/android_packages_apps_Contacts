@@ -53,11 +53,9 @@ import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
-import android.text.Spannable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.DialerKeyListener;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -79,7 +77,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 import android.widget.ViewSwitcher;
@@ -271,6 +268,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         mT9ListTop = (ListView) findViewById(R.id.t9listtop);
         if (mT9ListTop != null) {
             mT9ListTop.setOnItemClickListener(this);
+            mT9ListTop.setTag(new ContactItem());
         }
         mT9Toggle = (ToggleButton) findViewById(R.id.t9toggle);
         if (mT9Toggle != null) {
@@ -583,7 +581,6 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         updateDialer();
     }
 
-
     /**
      * Hides the topresult layout
      * Needed to reclaim the space when T9 is off.
@@ -619,6 +616,12 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         if (length > 0) {
             if (sT9Search != null) {
                 T9SearchResult result = sT9Search.search(mDigits.getText().toString());
+                if (mT9AdapterTop == null) {
+                    mT9AdapterTop = sT9Search.new T9Adapter(this, 0, new ArrayList<ContactItem>(),getLayoutInflater());
+                    mT9AdapterTop.setNotifyOnChange(true);
+                } else {
+                    mT9AdapterTop.clear();
+                }
                 if (result != null) {
                     if (mT9Adapter == null) {
                         mT9Adapter = sT9Search.new T9Adapter(this, 0, result.getResults(),getLayoutInflater());
@@ -633,27 +636,25 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
                         mT9List.setAdapter(mT9Adapter);
                     }
 
-                    if (mT9AdapterTop == null) {
-                        mT9AdapterTop = sT9Search.new T9Adapter(this, 0, new ArrayList<ContactItem>(),getLayoutInflater());
-                        mT9AdapterTop.setNotifyOnChange(true);
-                    } else {
-                        mT9AdapterTop.clear();
-                    }
                     mT9AdapterTop.add(result.getTopContact());
-                    if (mT9ListTop.getAdapter() == null) {
-                        mT9ListTop.setAdapter(mT9AdapterTop);
-                    }
-
-                    mT9ListTop.setVisibility(View.VISIBLE);
                     if (result.getNumResults()>  1) {
                         mT9Toggle.setVisibility(View.VISIBLE);
                     } else {
                         mT9Toggle.setVisibility(View.GONE);
+                        toggleT9();
                     }
+                    mT9Toggle.setTag(null);
                 } else {
-                    mT9ListTop.setVisibility(View.INVISIBLE);
-                    mT9Toggle.setVisibility(View.INVISIBLE);
+                    ContactItem contact = (ContactItem) mT9ListTop.getTag();
+                    contact.number = mDigits.getText().toString();
+                    mT9AdapterTop.add(contact);
+                    mT9Toggle.setTag(new Boolean(true));
+                    mT9Toggle.setVisibility(View.GONE);
                     toggleT9();
+                }
+                mT9ListTop.setVisibility(View.VISIBLE);
+                if (mT9ListTop.getAdapter() == null) {
+                    mT9ListTop.setAdapter(mT9AdapterTop);
                 }
             }
         } else {
@@ -1359,10 +1360,16 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
      */
     public void onItemClick(AdapterView parent, View v, int position, long id) {
         if (parent == mT9List || parent == mT9ListTop) {
-            if (parent == mT9List)
+            if (parent == mT9List) {
                 mDigits.setText(mT9Adapter.getItem(position).number);
-            else
-                mDigits.setText(mT9AdapterTop.getItem(position).number);
+            } else {
+                if (mT9Toggle.getTag() == null) {
+                    mDigits.setText(mT9AdapterTop.getItem(position).number);
+                } else {
+                    addToContacts();
+                    return;
+                }
+            }
             mDigits.setSelection(mDigits.length());
             if (dialOnTap()) {
                 dialButtonPressed();

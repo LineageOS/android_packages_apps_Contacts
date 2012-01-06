@@ -172,7 +172,7 @@ public class RecentCallsListActivity extends ListActivity
     String mVoiceMailNumber;
     
     private String query = null;
-    
+
     //Wysie
     private MenuItem mPreferences;    
     private SharedPreferences ePrefs;
@@ -1065,22 +1065,20 @@ public class RecentCallsListActivity extends ListActivity
 
         // Reset locale-based formatting cache
         sFormattingType = FORMATTING_TYPE_INVALID;
-        
+
         this.onNewIntent(getIntent());
     }
-    
+
     @Override
     public void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        
-        if (intent.getExtras().getString("caller_name") == null && 
-            intent.getExtras().getString("number") == null) {
+
+        if (intent.getExtras().getString("caller_name") == null
+                && intent.getExtras().getString("number") == null) {
             return;
-        }
-        else if (intent.getExtras().getString("caller_name") != null) {
+        } else if (intent.getExtras().getString("caller_name") != null) {
             query = Calls.CACHED_NAME + "='" + intent.getExtras().getString("caller_name") + "'";
-        }
-        else if (intent.getExtras().getString("number") != null) {
+        } else if (intent.getExtras().getString("number") != null) {
             query = Calls.NUMBER + "='" + intent.getExtras().getString("number") + "'";
         }
     }
@@ -1305,10 +1303,6 @@ public class RecentCallsListActivity extends ListActivity
             menu.add(0, CONTEXT_MENU_CALL_CONTACT, 0,
                     getResources().getString(R.string.recentCalls_callNumber, number))
                     .setIntent(intent);
-
-            Intent viewRecentCallsIntent = new Intent("com.android.phone.action.RECENT_CALLS");
-            viewRecentCallsIntent.putExtra("number", numberUri.getSchemeSpecificPart());
-            menu.add(0, 0, 0, getString(R.string.menu_contactHistory)).setIntent(viewRecentCallsIntent);
         }
 
         if (contactInfoPresent) {
@@ -1316,6 +1310,16 @@ public class RecentCallsListActivity extends ListActivity
                     ContentUris.withAppendedId(Contacts.CONTENT_URI, info.personId));
             StickyTabs.setTab(intent, getIntent());
             menu.add(0, 0, 0, R.string.menu_viewContact).setIntent(intent);
+
+            Intent viewRecentCallsIntent = new Intent("com.android.phone.action.RECENT_CALLS");
+            viewRecentCallsIntent.putExtra("caller_name", info.name);
+            menu.add(0, 0, 0, getString(R.string.menu_contactHistory)).setIntent(
+                    viewRecentCallsIntent);
+        } else {
+            Intent viewRecentCallsIntent = new Intent("com.android.phone.action.RECENT_CALLS");
+            viewRecentCallsIntent.putExtra("number", cursor.getString(NUMBER_COLUMN_INDEX));
+            menu.add(0, 0, 0, getString(R.string.menu_contactHistory)).setIntent(
+                    viewRecentCallsIntent);
         }
 
         if (numberUri != null && !isVoicemail && !isSipNumber) {

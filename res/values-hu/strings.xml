@@ -478,4 +478,13 @@
     <string name="summary_about_version">1.2</string>
     <string name="title_about_credits">Közreműködők</string>
     <string name="summary_about_credits">Wysie, ChainsDD, geesun, niuchl, rac2030, sileht and the rest of XDA! :)\nFordítás: Google, gross76, petikeke, Knife, tothmarcell97 és sok más samdroid.net fórumozó</string>
+
+    <string name="t9_sort_title">T9 Rendezési mód</string>
+    <string name="t9_sort_summary">Keresés eredményeinek szűrése</string>
+    <string name="t9_sort_name">Először nevekre</string>
+    <string name="t9_sort_number">Először számokra</string>
+    <string name="t9_state_title">T9 tárcsázó</string>
+    <string name="t9_state_summary">T9 szerinti keresés a tárcsázóban</string>
+    <string name="t9_dial_click_title">Névjegy tárcsázása</string>
+    <string name="t9_dial_click_summary">Tárcsázza a T9 szerint kiválaszott Névjegyet</string>
 </resources>

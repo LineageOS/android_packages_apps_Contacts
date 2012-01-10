@@ -43,12 +43,12 @@
     <string name="menu_deleteContact" msgid="1916555454274101750">"Eliminar contacto"</string>
     <string name="menu_call" msgid="3992595586042260618">"Llamar al contacto"</string>
     <string name="menu_sendSMS" msgid="5535886767547006515">"Enviar SMS al contacto"</string>
-    <string name="menu_sendEmail" msgid="7293508859242926187">"Enviar email"</string>
+    <string name="menu_sendEmail" msgid="7293508859242926187">"Enviar correo-e"</string>
     <string name="menu_viewAddress" msgid="1814744325763202024">"Dirección en mapa"</string>
     <string name="menu_makeDefaultNumber" msgid="4838759253316649534">"Convertir en número predeterminado"</string>
-    <string name="menu_makeDefaultEmail" msgid="2599044610375789994">"Establecer como dirección de email predeterminada"</string>
+    <string name="menu_makeDefaultEmail" msgid="2599044610375789994">"Establecer como dirección de correo-e predeterminada"</string>
     <string name="menu_shareNumber">Compartir número</string>
-    <string name="menu_shareEmail">Compartir email</string>
+    <string name="menu_shareEmail">Compartir correo-e</string>
     <string name="menu_shareAddress">Compartir dirección</string>
     <string name="menu_splitAggregate" msgid="8368636463748691868">"Dividir"</string>
     <string name="contactsSplitMessage" msgid="5253490235863170269">"Contactos divididos"</string>
@@ -86,7 +86,7 @@
     <string name="pickerNewContactHeader" msgid="7750705279843568147">"Crear contacto nuevo"</string>
     <string name="selectLabel" msgid="4255424123394910733">"Seleccionar etiqueta"</string>
     <string name="phoneLabelsGroup" msgid="6468091477851199285">"Teléfono"</string>
-    <string name="emailLabelsGroup" msgid="8389931313045344406">"Email"</string>
+    <string name="emailLabelsGroup" msgid="8389931313045344406">"Correo-e"</string>
     <string name="imLabelsGroup" msgid="3898238486262614027">"MI"</string>
     <string name="postalLabelsGroup" msgid="1618078212734693682">"Dirección postal"</string>
   <string-array name="otherLabels">
@@ -114,8 +114,8 @@
   <plurals name="groupDescripPhones">
     <item quantity="other" msgid="3816047547470490208">"<xliff:g id="COUNT_0">%1$d</xliff:g> contactos, <xliff:g id="COUNTWITHPHONES">%2$d</xliff:g> con teléfonos"</item>
   </plurals>
-    <string name="savingContact" msgid="4075751076741924939">"Guardando contacto…"</string>
-    <string name="savingDisplayGroups" msgid="2133152192716475939">"Guardando opciones de visualización…"</string>
+    <string name="savingContact" msgid="4075751076741924939">"Guardando contacto\u2026"</string>
+    <string name="savingDisplayGroups" msgid="2133152192716475939">"Guardando opciones de visualización\u2026"</string>
     <string name="contactSavedToast" msgid="7152589189385441091">"El contacto se ha guardado."</string>
     <string name="contactSavedErrorToast" msgid="9189098776225004666">"Se ha producido un error al guardar los cambios del contacto."</string>
   <plurals name="listTotalPhoneContacts">
@@ -162,7 +162,7 @@
     <string name="payphone" msgid="4864313342828942922">"Teléfono público"</string>
     <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Utilizar teclado para marcar"</string>
     <string name="dialerDialpadHintText" msgid="5824490365898349041">"Añadir llamada"</string>
-    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Cargando desde tarjeta SIM…"</string>
+    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Cargando desde tarjeta SIM\u2026"</string>
     <string name="simContacts_title" msgid="27341688347689769">"Contactos de tarjeta SIM"</string>
     <string name="noContactsHelpTextWithSyncForCreateShortcut" msgid="801504710275614594">"No tienes ningún contacto que mostrar. (Si acabas de añadir una cuenta, es posible que la sincronización de contactos tarde algunos minutos)."</string>
     <string name="noContactsHelpTextForCreateShortcut" msgid="3081286388667108335">"No tienes ningún contacto que mostrar."</string>
@@ -253,7 +253,7 @@
     <string name="fail_reason_too_many_vcard" product="default" msgid="7084146295639672658">"Hay demasiados archivos de vCard en la tarjeta SD."</string>
     <string name="fail_reason_too_long_filename" msgid="1915716071321839166">"El nombre de archivo necesario es demasiado largo (\"<xliff:g id="FILENAME">%s</xliff:g>\")."</string>
     <string name="exporting_contact_list_title" msgid="9072240631534457415">"Exportando datos de contacto"</string>
-    <string name="exporting_contact_list_message" msgid="5640326540405486055">"Exportando datos de contacto a \"<xliff:g id="FILE_NAME">%s</xliff:g>\"..."</string>
+    <string name="exporting_contact_list_message" msgid="5640326540405486055">"Exportando datos de contacto a \"<xliff:g id="FILE_NAME">%s</xliff:g>\"\u2026"</string>
     <string name="fail_reason_could_not_initialize_exporter" msgid="4943708332700987376">"No se ha podido inicializar el exportador: \"<xliff:g id="EXACT_REASON">%s</xliff:g>\""</string>
     <string name="fail_reason_error_occurred_during_export" msgid="2151165129433831202">"Se ha producido un error durante la exportación: \"<xliff:g id="EXACT_REASON">%s</xliff:g>\""</string>
     <string name="composer_failed_to_get_database_infomation" msgid="3723109558155169053">"Error al obtener información de la base de datos"</string>
@@ -293,7 +293,7 @@
     <string name="dialog_new_contact_account" msgid="9044704073286262197">"Crear contacto en la cuenta"</string>
     <string name="menu_sync_remove" msgid="3266725887008450161">"Eliminar grupo de sincronización"</string>
     <string name="dialog_sync_add" msgid="8267045393119375803">"Añadir grupo de sincronización"</string>
-    <string name="display_more_groups" msgid="2682547080423434170">"Más grupos…"</string>
+    <string name="display_more_groups" msgid="2682547080423434170">"Más grupos\u2026"</string>
     <string name="display_ungrouped" msgid="4602580795576261158">"Todos los demás contactos"</string>
     <string name="display_all_contacts" msgid="6846131371214707956">"Todos los contactos"</string>
     <string name="display_warn_remove_ungrouped" msgid="2314043155909167610">"Si eliminas \"<xliff:g id="GROUP">%s</xliff:g>\" de la sincronización, también se eliminarán todos los contactos no agrupados."</string>
@@ -340,12 +340,12 @@
     <string name="sms_work_pager" msgid="5566924423316960597">"Enviar SMS al buscapersonas del trabajo"</string>
     <string name="sms_assistant" msgid="2773424339923116234">"Enviar un mensaje de texto a <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
     <string name="sms_mms" msgid="4069352461380762677">"Enviar SMS a MMS"</string>
-    <string name="email_home" msgid="8573740658148184279">"Enviar email a casa"</string>
-    <string name="email_mobile" msgid="2042889209787989814">"Enviar email al móvil"</string>
-    <string name="email_work" msgid="2807430017302722689">"Enviar email al trabajo"</string>
-    <string name="email_other" msgid="3454004077967657109">"Enviar email"</string>
-    <string name="email_custom" msgid="7548003991586214105">"Enviar email a <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="email" msgid="5668400997660065897">"Email"</string>
+    <string name="email_home" msgid="8573740658148184279">"Enviar correo-e a casa"</string>
+    <string name="email_mobile" msgid="2042889209787989814">"Enviar correo-e al móvil"</string>
+    <string name="email_work" msgid="2807430017302722689">"Enviar correo-e al trabajo"</string>
+    <string name="email_other" msgid="3454004077967657109">"Enviar correo-e"</string>
+    <string name="email_custom" msgid="7548003991586214105">"Enviar correo-e a <xliff:g id="CUSTOM">%s</xliff:g>"</string>
+    <string name="email" msgid="5668400997660065897">"Correo-e"</string>
     <string name="map_home" msgid="1243547733423343982">"Ver dirección de casa"</string>
     <string name="map_work" msgid="1360474076921878088">"Ver dirección del trabajo"</string>
     <string name="map_other" msgid="3817820803587012641">"Ver dirección"</string>
@@ -389,13 +389,13 @@
     <string name="search_for_all_contacts" msgid="6644963335787294131">"Buscar todos los contactos"</string>
     <string name="take_photo" msgid="7496128293167402354">"Hacer una foto"</string>
     <string name="pick_photo" msgid="448886509158039462">"Seleccionar foto de la galería"</string>
-    <string name="locale_change_in_progress" msgid="1124266507671178413">"La lista de contactos se está actualizando para reflejar el cambio de idioma."\n\n"Por favor, espera..."</string>
-    <string name="upgrade_in_progress" msgid="7530893673211750223">"La lista de contactos se está actualizando."\n\n"Por favor, espera..."</string>
+    <string name="locale_change_in_progress" msgid="1124266507671178413">"La lista de contactos se está actualizando para reflejar el cambio de idioma."\n\n"Por favor, espera\u2026"</string>
+    <string name="upgrade_in_progress" msgid="7530893673211750223">"La lista de contactos se está actualizando."\n\n"Por favor, espera\u2026"</string>
     <string name="upgrade_out_of_memory" msgid="492151063059824962">"Los contactos se están actualizando. "\n\n"El proceso de actualización necesita aproximadamente <xliff:g id="SIZE_IN_MEGABYTES">%d</xliff:g> MB de almacenamiento interno del teléfono."\n\n"Selecciona una de las siguientes opciones:"</string>
     <string name="upgrade_out_of_memory_uninstall" msgid="1721798828992091432">"Desinstalar algunas aplicaciones"</string>
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"Reintentar actualización"</string>
     <string name="search_results_for" msgid="8705490885073188513">"Resultados de la búsqueda de: <xliff:g id="QUERY">%s</xliff:g>"</string>
-    <string name="search_results_searching" msgid="7755623475227227314">"Buscando..."</string>
+    <string name="search_results_searching" msgid="7755623475227227314">"Buscando\u2026"</string>
     <string name="menu_preferences">Preferencias</string>
     <string name="dialer_menu_sms">SMS/MMS</string>
     <string name="recent_calls_clear_call_log">Borrar historial de llamadas</string>
@@ -405,18 +405,18 @@
     <string name="recent_calls_clear_outgoing">Salientes</string>
     <string name="recent_calls_clear_missed">Perdidas</string>
     <string name="alert_clear_call_log_title">Borrar historial de llamadas</string>
-    <string name="alert_clear_call_log_message">¿Está seguro que desea borrar todos los registros de llamadas?</string>
-    <string name="alert_clear_cl_all_incoming">¿Está seguro que desea borrar todos los registros de llamadas entrantes?</string>
-    <string name="alert_clear_cl_all_outgoing">¿Está seguro que desea borrar todos los registros de llamadas salientes?</string>
-    <string name="alert_clear_cl_all_missed">¿Está seguro que desea borrar todos los registros de llamadas perdidas?</string>
+    <string name="alert_clear_call_log_message">¿Estás seguro que desea borrar todos los registros de llamadas?</string>
+    <string name="alert_clear_cl_all_incoming">¿Estás seguro que desea borrar todos los registros de llamadas entrantes?</string>
+    <string name="alert_clear_cl_all_outgoing">¿Estás seguro que desea borrar todos los registros de llamadas salientes?</string>
+    <string name="alert_clear_cl_all_missed">¿Estás seguro que desea borrar todos los registros de llamadas perdidas?</string>
     <string name="fav_clear_freq">Borrar llamados con frecuencia</string>
-    <string name="alert_clear_freq_called_msg">¿Está seguro que desea borrar todas las entradas llamadas con frecuencia?</string>
+    <string name="alert_clear_freq_called_msg">¿Estás seguro que desea borrar todas las entradas llamadas con frecuencia?</string>
     <string name="title_last_dialled">Botón llamar recupera el último número marcado</string>
     <string name="summary_last_dialled">Último número marcado se recuperará si los dígitos están vacíos</string>
     <string name="title_return_to_dialer">Volver al marcador después de la llamada</string>
     <string name="title_vm_button">Acción Botón izquierdo (LAB)</string>
     <string name="title_vm_handler">Buzón de voz</string>
-    <string name="title_use_1_for_reg_vm">Utilice 1 para buzón de voz</string>
+    <string name="title_use_1_for_reg_vm">Utiliza 1 para buzón de voz</string>
     <string name="summaryon_use_1_for_reg_vm">La tecla 1 se utiliza para buzón de voz</string>
     <string name="summaryoff_use_1_for_reg_vm">La tecla 1 seguirá siendo el buzón de voz</string>
     <string name="title_disable_num_check">Desactivar control de número</string>
@@ -428,8 +428,8 @@
     <string name="title_digits_color_pressed">Color dígitos (presionado)</string>
     <string name="title_digits_color_focused">Color dígitos (centrado)</string>
     <string name="title_digits_color_unselected">Color dígitos (no seleccionado)</string>
-    <string name="title_choose_color">Elija un color</string>
-    <string name="instructions_choose_color">Toque en el centro de color para confirmar.\nPulse volver para cancelar.</string>
+    <string name="title_choose_color">Elige un color</string>
+    <string name="instructions_choose_color">Toca en el centro para confirmar el color.\nPulsa volver para cancelar.</string>
     <string name="entry_no_vm_handler">Ninguno (Número Buzón de Voz)</string>
     <string name="title_cl_exact_time">Tiempos exactos</string>
     <string name="summaryon_cl_exact_time">Usar tiempos exactos en el historial de llamadas</string>
@@ -461,13 +461,13 @@
     <string name="title_sensor_rotation">Habilitar el sensor de rotación</string>
     <string name="summary_sensor_rotation">Si está activado, girará basado en la configuración del sistema"</string>
     <string name="title_data_font_size">Tamaño de fuente de información de contacto</string>
-    <string name="summary_data_font_size">Le permite elegir el tamaño de la fuente utilizada para mostrar información de contacto detallada (número de teléfono, correo electrónico, dirección, etc)</string>
-    <string name="title_default_phone_tab">Tab por defecto</string>
-    <string name="summary_default_phone_tab">Define que tab se abre cuando se inicia la aplicación del teléfono</string>
+    <string name="summary_data_font_size">Le permite elegir el tamaño de la fuente utilizada para mostrar información de contacto detallada</string>
+    <string name="title_default_phone_tab">Pestaña por defecto</string>
+    <string name="summary_default_phone_tab">Define que pestaña se abre cuando se inicia la aplicación del teléfono</string>
 
     <!-- Default Phone Tab strings -->
-    <string name="default_phone_tab_last_used">Ultimo tab usado para llamar (Defecto)</string>
-    <string name="default_phone_tab_last_viewed">Ultimos vistos</string>
+    <string name="default_phone_tab_last_used">Última pestaña usada</string>
+    <string name="default_phone_tab_last_viewed">Últimos vistos</string>
     <string name="default_phone_tab_phone">Teléfono</string>
     <string name="default_phone_tab_call_log">Llamadas</string>
     <string name="default_phone_tab_contacts">Contactos</string>
@@ -480,4 +480,22 @@
     <string name="summary_about_version">1.2</string>
     <string name="title_about_credits">Creditos</string>
     <string name="summary_about_credits">Wysie, ChainsDD, geesun, niuchl, rac2030, sileht y el resto de XDA! :)</string>
+
+    <string name="t9_default_sort">2</string>
+    <string name="t9_sort_title">Ordenación de T9</string>
+    <string name="t9_sort_summary">Elige como filtrar los resultados de T9</string>
+    <string name="t9_sort_name">Nombres primero</string>
+    <string name="t9_sort_number">Números primero</string>
+    <string name="t9_state_title">Habilitar marcado T9</string>
+    <string name="t9_state_summary">Habilitar la búsqueda T9 en el teclado</string>
+    <string name="t9_dial_click_title">Llamar al contacto seleccionado</string>
+    <string name="t9_dial_click_summary">Llamar directamente al pulsar en el contacto seleccionado por T9</string>
+    <string name="t9_map_row_2">2abcàáâäåɑæçǽćčá</string>
+    <string name="t9_map_row_3">3deféèêë</string>
+    <string name="t9_map_row_4">4ghiíìïîǵ</string>
+    <string name="t9_map_row_5">5jklḱḱĺ</string>
+    <string name="t9_map_row_6">6mnoòóöôøñŋǿḿńő</string>
+    <string name="t9_map_row_7">7pqrsßɾṕŕśřš</string>
+    <string name="t9_map_row_8">8tuvúùüûű</string>
+    <string name="t9_map_row_9">9wxyzýẃź</string>
 </resources>

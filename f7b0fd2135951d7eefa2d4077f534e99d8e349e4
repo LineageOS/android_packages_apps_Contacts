@@ -1,0 +1,9 @@
+Change-Id: I5898729d07c835c49c55761b5637c1759040449b
+Code-Review+2: Ricardo Cerqueira <cyanogenmod@cerqueira.org>
+Verified+1: Ricardo Cerqueira <cyanogenmod@cerqueira.org>
+Code-Review+1: Ivan Makarenko <shining.currents@gmail.com>
+Submitted-by: Ricardo Cerqueira <cyanogenmod@cerqueira.org>
+Submitted-at: Thu, 12 Jan 2012 20:12:52 +0300
+Reviewed-on: http://review.cyanogenmod.com/11643
+Project: CyanogenMod/android_packages_apps_Contacts
+Branch: refs/heads/gingerbread

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAPn///jc\u003d",
+        "filename": "src/com/android/contacts/TwelveKeyDialer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1579
+      },
+      "writtenOn": "2012-01-25T09:26:31Z",
+      "side": 1,
+      "message": "please use space instead of tab",
+      "revId": "a1857d394e20767e418ae00be678ab34470cedf0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

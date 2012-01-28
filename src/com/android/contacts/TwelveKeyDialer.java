@@ -99,6 +99,7 @@ import android.widget.ImageButton;
 public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         View.OnLongClickListener, View.OnKeyListener,
         View.OnTouchListener,
+        AdapterView.OnItemLongClickListener,
         AdapterView.OnItemClickListener, TextWatcher {
     private static final String EMPTY_NUMBER = "";
     private static final String TAG = "TwelveKeyDialer";
@@ -264,10 +265,12 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         mT9List = (ListView) findViewById(R.id.t9list);
         if (mT9List != null) {
             mT9List.setOnItemClickListener(this);
+            mT9List.setOnItemLongClickListener(this);
         }
         mT9ListTop = (ListView) findViewById(R.id.t9listtop);
         if (mT9ListTop != null) {
             mT9ListTop.setOnItemClickListener(this);
+            mT9ListTop.setOnItemLongClickListener(this);
             mT9ListTop.setTag(new ContactItem());
         }
         mT9Toggle = (ToggleButton) findViewById(R.id.t9toggle);
@@ -1405,6 +1408,26 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
                 Log.w(TAG, "onItemClick: unexpected itemId: " + itemId);
                 break;
         }
+    }
+
+    /**
+     * Handle long clicks from mT9List and mT9ListTop
+     */
+    @Override
+    public boolean onItemLongClick(AdapterView parent, View v, int position, long id) {
+        long contactId;
+        if (parent == mT9List) {
+            contactId = mT9Adapter.getItem(position).id;
+        } else if (mT9Toggle.getTag() == null) {
+            contactId = mT9AdapterTop.getItem(position).id;
+        } else {
+            return false;
+        }
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        Uri uri = Uri.withAppendedPath(Contacts.CONTENT_URI, String.valueOf(contactId));
+        intent.setData(uri);
+        startActivity(intent);
+        return true;
     }
 
     /**

@@ -456,9 +456,9 @@
   <string name="title_return_to_dialer">Zpět na číselník po hovoru</string>
   <string name="title_vm_button">Levé akční tlačítko</string>
   <string name="title_vm_handler">Obsluha hlasové schránky</string>
-  <string name="title_use_1_for_reg_vm">Kláv. "1" pro hlasovou schránku</string>
-  <string name="summaryon_use_1_for_reg_vm">Klávesa "1" se používá pro klasickou hlasovou schránku</string>
-  <string name="summaryoff_use_1_for_reg_vm">Klávesa "1" se používá pro obsluhu hlasové schránky</string>
+  <string name="title_use_1_for_reg_vm">\"1\" pro hlasovou schránku</string>
+  <string name="summaryon_use_1_for_reg_vm">Klávesa \"1\" se používá pro klasickou hlasovou schránku</string>
+  <string name="summaryoff_use_1_for_reg_vm">Klávesa \"1\" se používá pro obsluhu hlasové schránky</string>
   <string name="title_disable_num_check">Vypnout kontrolu čísel</string>
   <string name="summaryon_disable_num_check">Levé tlačítko a menu bude vždy aktivní</string>
   <string name="summaryoff_disable_num_check">Levé tlačítko a menu bude aktivní pokud bude zadáno alespoň 1 číslo</string>
@@ -532,4 +532,15 @@
   <skip />
   <string name="title_about_credits">"Titulky"</string>
   <string name="summary_about_credits">"Wysie, ChainsDD, geesun, niuchl, rac2030, sileht a zbytek XDA! :)"</string>
+
+  <string name="t9_default_sort">2</string>
+  <string name="t9_sort_title">Třídění v T9</string>
+  <string name="t9_sort_summary">Zvolte, jakým způsobem mají být filtrovány výsledky T9</string>
+  <string name="t9_sort_name">Jména první</string>
+  <string name="t9_sort_number">Čísla první</string>
+  <string name="t9_state_title">Povolit T9 v číselníku</string>
+  <string name="t9_state_summary">Povolit vyhledávání T9 při výběru čísla v číselníku</string>
+  <string name="t9_dial_click_title">Volat vybraný kontakt</string>
+  <string name="t9_dial_click_summary">Volat vybraný kontakt nalezený pomocí T9</string>
+  <string name="t9_add_to_contacts">Přidat do kontaktů</string>
 </resources>

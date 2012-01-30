@@ -29,4 +29,11 @@
         <item>Extra velký</item>
     </string-array>
 
+    <string-array name="view_data_font_sizes">
+        <item>Malý (výchozí)</item>
+        <item>Střední</item>
+        <item>Veliký</item>
+        <item>Velmi veliký</item>
+    </string-array>
+
 </resources>

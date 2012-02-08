@@ -47,6 +47,9 @@
     <string name="menu_viewAddress" msgid="1814744325763202024">"Adresi haritada göster"</string>
     <string name="menu_makeDefaultNumber" msgid="4838759253316649534">"Varsayılan numara yap"</string>
     <string name="menu_makeDefaultEmail" msgid="2599044610375789994">"Varsayılan e-posta yap"</string>
+    <string name="menu_shareNumber">Numarayı paylaş</string>
+    <string name="menu_shareEmail">E-postayı paylaş</string>
+    <string name="menu_shareAddress">Adresi paylaş</string>
     <string name="menu_splitAggregate" msgid="8368636463748691868">"Ayır"</string>
     <string name="contactsSplitMessage" msgid="5253490235863170269">"Kişi ayrıldı"</string>
     <string name="splitConfirmation_title" msgid="6716467920283502570">"Kişiyi Ayır"</string>
@@ -61,10 +64,12 @@
     <string name="menu_contactOptions" msgid="1957061455705020617">"Seçenekler"</string>
     <string name="contactOptionsTitle" msgid="8259347644090700915">"Seçenekler"</string>
     <string name="deleteConfirmation_title" msgid="6394309508930335204">"Sil"</string>
+    <string name="clearConfirmation_title">Arama kaydını sil</string>
     <string name="readOnlyContactWarning" msgid="1390849295342594265">"Kişileri salt okunur hesaplardan silemezsiniz ancak bu kişileri kişiler listenizde gizleyebilirsiniz."</string>
     <string name="readOnlyContactDeleteConfirmation" msgid="2137170726670196909">"Bu kişi birden fazla hesaptan bilgiler içeriyor. Salt okunur hesaplardaki bilgiler silinmez, kişiler listelerinizde gizlenir."</string>
     <string name="multipleContactDeleteConfirmation" msgid="938900978442960800">"Bu kişiyi silmek, birden fazla hesaba ait bilgileri de siler."</string>
     <string name="deleteConfirmation" msgid="811706994761610640">"Bu kişi silinecek."</string>
+    <string name="clearLogConfirmation">Tüm arama kayıtları silinecek.</string>
     <string name="menu_done" msgid="796017761764190697">"Bitti"</string>
     <string name="menu_doNotSave" msgid="2174577548513895144">"Geri Döndür"</string>
     <string name="editContact_title_edit" msgid="7678695190666836093">"Kişiyi düzenle"</string>
@@ -142,6 +147,7 @@
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Kısa mesaj gönder"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Ara: <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Önce numarayı düzenle"</string>
+    <string name="recentCalls_addToBlacklist">Kara listeye ekle</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Kişilere ekle"</string>
     <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"Çağrı kaydından kaldır"</string>
     <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Çağrı kaydını temizle"</string>
@@ -264,6 +270,7 @@
     <string name="quickcontact_missing_app" msgid="4600366393134289038">"Bu işlemi gerçekleştirecek bir uygulama bulunamadı"</string>
     <string name="quickcontact_remember_choice" msgid="5964536411579749424">"Bu tercihi anımsa"</string>
     <string name="quickcontact_missing_name" msgid="5590266114306996632">"Bilinmiyor"</string>
+    <string name="quickcontact_no_data">Veri yok</string>
     <string name="menu_accounts" msgid="8499114602017077970">"Hesaplar"</string>
     <string name="menu_import_export" msgid="3765725645491577190">"İçe/Dışa Aktar"</string>
     <string name="dialog_import_export" msgid="4771877268244096596">"Kişileri içe/dışa aktar"</string>
@@ -367,6 +374,8 @@
     <string name="name_phonetic_given" msgid="6853570431394449191">"Fonetik adı"</string>
     <string name="name_phonetic_middle" msgid="8643721493320405200">"Fonetik ikinci ad"</string>
     <string name="name_phonetic_family" msgid="462095502140180305">"Fonetik soyadı"</string>
+    <string name="label_date">Tarih</string>
+    <string name="button_clear_date">Temizle</string>
     <string name="account_type_format" msgid="718948015590343010">"<xliff:g id="SOURCE">%1$s</xliff:g> kişi"</string>
     <string name="from_account_format" msgid="687567483928582084">"kaynak: <xliff:g id="SOURCE">%1$s</xliff:g>"</string>
     <string name="use_photo_as_primary" msgid="8807110122951157246">"Bu fotoğrafı kullan"</string>
@@ -389,4 +398,103 @@
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"Yeni sürüme geçmeyi tekrar dene"</string>
     <string name="search_results_for" msgid="8705490885073188513">"Şunun için arama sonuçları: <xliff:g id="QUERY">%s</xliff:g>"</string>
     <string name="search_results_searching" msgid="7755623475227227314">"Aranıyor..."</string>
+    <string name="menu_preferences">Seçenekler</string>
+    <string name="dialer_menu_sms">SMS/MMS</string>
+    <string name="recent_calls_clear_call_log">Arama kaydını sil</string>
+    <string name="recent_calls_clear_what">Hangileri silinsin?</string>
+    <string name="recent_calls_clear_all">Tümü</string>
+    <string name="recent_calls_clear_incoming">Gelen</string>
+    <string name="recent_calls_clear_outgoing">Giden</string>
+    <string name="recent_calls_clear_missed">Cevapsız</string>
+    <string name="alert_clear_call_log_title">Arama kaydını sil</string>
+    <string name="alert_clear_call_log_message">Tüm arama kayıtlarını silmek istediğinizden emin misiniz?</string>
+    <string name="alert_clear_cl_all_incoming">Tüm gelen arama kayıtlarını silmek istediğinizden emin misiniz?</string>
+    <string name="alert_clear_cl_all_outgoing">Tüm giden arama kayıtlarını silmek istediğinizden emin misiniz?</string>
+    <string name="alert_clear_cl_all_missed">Tüm cevapsız arama kayıtlarını silmek istediğinizden emin misiniz?</string>
+    <string name="fav_clear_freq">Sık kullanılanlar aramalarını temizle</string>
+    <string name="alert_clear_freq_called_msg">Tüm sık kullanılan arama kayıtlarını temizlemek istediğinizden emin misiniz?</string>
+    <string name="title_last_dialled">Son arananları göster</string>
+    <string name="summary_last_dialled">Rakamlar boşsa arama tuşu son aranan numaraları gösterir</string>
+    <string name="title_return_to_dialer">Aramadan sonra numara çeviriciye dön</string>
+    <string name="title_vm_button">Soldaki işlem butonu (SİB)</string>
+    <string name="title_vm_handler">Sesli mesaj sağlayıcısı</string>
+    <string name="title_use_1_for_reg_vm">Normal sesli mesaj için 1\'i kullanın</string>
+    <string name="summaryon_use_1_for_reg_vm">1 tuşu sesli mesaj için kullanılır</string>
+    <string name="summaryoff_use_1_for_reg_vm">1 tuşu sesli mesaj sağlayıcını izler</string>
+    <string name="title_disable_num_check">Numara kontrolünü kapat</string>
+    <string name="summaryon_disable_num_check">Soldaki işlem butonu (SİB) ve menü her zaman etkin olur</string>
+    <string name="summaryoff_disable_num_check">SİB ve menü, en az bir rakam girildiğinde etkin olur (sesli mesaj hariç)</string>
+    <string name="title_enable_haptic_feedback">Dokunsal geribildirim kullan</string>
+    <string name="summary_enable_haptic_feedback">Tuş takımı desenlerini kullan - ayarlamak için CyanogenMod ayarlarına bakın</string>
+    <string name="title_change_digits_color">Rakam renklerini değiştir</string>
+    <string name="title_digits_color_pressed">Rakam renkleri (basılı)</string>
+    <string name="title_digits_color_focused">Rakam renkleri (yazı)</string>
+    <string name="title_digits_color_unselected">Rakam renkleri (basılı değil)</string>
+    <string name="title_choose_color">Bir renk seçin</string>
+    <string name="instructions_choose_color">Onaylamak için ortadaki renge dokunun.\nİptal etmek için geri tuşuna basın.</string>
+    <string name="entry_no_vm_handler">Hiçbiri (Sesli Mesaj Numarasını Ara)</string>
+    <string name="title_cl_exact_time">Kesin zaman</string>
+    <string name="summaryon_cl_exact_time">Arama kayıtlarında tam zamanı göster</string>
+    <string name="summaryoff_cl_exact_time">Arama kayıtlarında yaklaşık zamanı göster</string>
+    <string name="title_cl_show_seconds">Saniyeleri göster</string>
+    <string name="summary_cl_show_seconds">Tam zamanı gösterirken saniyeyi göster</string>
+    <string name="title_cl_ask_before_clear">Temizlemeden önce sor</string>
+    <string name="summaryon_cl_ask_before_clear">Arama kayıtlarını temizlemeden önce sor</string>
+    <string name="summaryoff_cl_ask_before_clear">Arama kayıtları sormadan temizlenir</string>
+    <string name="title_contacts_show_pic">Kişi resimlerini göster</string>
+    <string name="title_contacts_show_dial_button">Arama seçeneğini göster</string>
+    <string name="summary_contacts_show_dial_button">Telefon numarası olan kişiler için arama düğmesi göster</string>
+    <string name="title_contacts_show_count">Kişi sayısını göster</string>
+    <string name="summary_contacts_show_count">Kişi sayısı, kişi listesinin en üstünde gösterilir</string>
+    <string name="title_contacts_show_separators">Alfabetik ayraçları göster</string>
+    <string name="summaryon_contacts_show_separators">Alfabetik ayraçlar kişi listesinde gösterilir</string>
+    <string name="summaryoff_contacts_show_separators">Alfabetik ayraçlar kişi listesinde gösterilmez</string>
+    <string name="title_view_contact">Kişi görüntüleme</string>
+    <string name="summary_view_contact">Bir kişiyi gösterme seçeneklerini ayarlayın</string>
+    <string name="title_show_text_mobile_only">Sadece cep için metin işlemi</string>
+    <string name="summaryon_show_text_mobile_only">Sadece cep telefonları için metin/sms seçeneğini göster</string>
+    <string name="summaryoff_show_text_mobile_only">Tüm telefon numaraları için metin/sms seçeneğini göster</string>
+    <string name="title_favourites_hide_freq_call">Sık arananları gizle</string>
+    <string name="summary_favourites_hide_freq_call">Gerçek veri silinmez, ama gizlenir.</string>
+    <string name="title_favs_ask_before_clear">Temizlemeden önce sor</string>
+    <string name="summaryon_favs_ask_before_clear">Sık arananları temizlemeden önce sor</string>
+    <string name="summaryoff_favs_ask_before_clear">Sık aranan kayıtları sorulmadan temizlenir</string>
+    <string name="title_misc_category">Çeşitli</string>
+    <string name="title_sensor_rotation">Sensör ile döndür</string>
+    <string name="summary_sensor_rotation">Etkinleştirilirse, sistem ayarları temel alınarak ekranı döndürecek</string>
+    <string name="title_data_font_size">Kişi bilgisi yazı boyutu</string>
+    <string name="summary_data_font_size">Ayrıntılı kişi bilgilerini göstermek için kullanılan yazı boyunu seçin (telefon numarası, e-posta, adres gibi)</string>
+    <string name="title_default_phone_tab">Varsayılan sekme</string>
+    <string name="summary_default_phone_tab">Telefon uygulaması başlarken açılacak sekme</string>
+    <string name="default_phone_tab_last_used">Arama yapmak için son kullanılan (Varsayılan)</string>
+    <string name="default_phone_tab_last_viewed">Son görüntülenen</string>
+    <string name="default_phone_tab_phone">Telefon</string>
+    <string name="default_phone_tab_call_log">Arama kaydı</string>
+    <string name="default_phone_tab_contacts">Kişiler</string>
+    <string name="default_phone_tab_favorites">Sık kullanılanlar</string>
+    <string name="title_about">Hakkında</string>
+    <string name="title_about_name">Mod Adı</string>
+    <string name="summary_about_name">WyKişiler Froyo</string>
+    <string name="title_about_version">Sürüm</string>
+    <string name="summary_about_version">1.2</string>
+    <string name="title_about_credits">Hazırlayanlar</string>
+    <string name="summary_about_credits">Wysie, ChainsDD, geesun, niuchl, rac2030, sileht ve XDA\'daki diğerleri! :)</string>
+    <string name="t9_default_sort">2</string>
+    <string name="t9_sort_title">T9 sıralama modu</string>
+    <string name="t9_sort_summary">T9 sonuçlarının nasıl filtreleneceğini seçin</string>
+    <string name="t9_sort_name">Önce isim eşleşir</string>
+    <string name="t9_sort_number">Önce numara eşleşir</string>
+    <string name="t9_state_title">T9 çeviriciyi etkinleştir</string>
+    <string name="t9_state_summary">Çeviricide T9 aramayı etkinleştir</string>
+    <string name="t9_dial_click_title">Seçili kişiyi ara</string>
+    <string name="t9_dial_click_summary">T9 için seçili kişiyi ara</string>
+    <string name="t9_add_to_contacts">Kişilere ekle</string>
+    <string name="t9_map_row_2">2abcçàáâäåɑæǽćčá</string>
+    <string name="t9_map_row_3">3deféèêë</string>
+    <string name="t9_map_row_4">4ghiığíìïîǵ</string>
+    <string name="t9_map_row_5">5jklḱḱĺ</string>
+    <string name="t9_map_row_6">6mnoöòóôøñŋǿḿńő</string>
+    <string name="t9_map_row_7">7prsşqßɾṕŕśřš</string>
+    <string name="t9_map_row_8">8tuvüúùûű</string>
+    <string name="t9_map_row_9">9wxyzýẃź</string>
 </resources>

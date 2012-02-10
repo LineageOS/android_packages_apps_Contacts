@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="entries_vm_button">
+        <item>Kişilere ekle</item>
+        <item>SMS/MMS</item>
+        <item>Sesli mesaj</item>
+    </string-array>
+    <string-array name="view_contact_pic_sizes">
+        <item>Küçük (Varsayılan)</item>
+        <item>Orta</item>
+        <item>Büyük</item>
+        <item>Çok büyük</item>
+    </string-array>
+    <string-array name="view_data_font_sizes">
+        <item>Küçük (Varsayılan)</item>
+        <item>Orta</item>
+        <item>Büyük</item>
+        <item>Çok büyük</item>
+    </string-array>
+</resources>

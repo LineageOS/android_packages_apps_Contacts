@@ -564,4 +564,19 @@
     <string name="dialog_phone_call_prohibited_title" msgid="2111395432187079579">"発信できません"</string>
     <string name="dialog_voicemail_not_ready_title" msgid="7258109862329777060">"ボイスメールの番号を利用できません"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"ボイスメールをセットアップするには、MENUキー&gt;[設定]をタップします。"</string>
+
+    <!-- T9 -->
+    <string name="dialer_ui_title">ダイヤラー設定</string>
+    <string name="dialer_ui_orientation_title">回転センサを有効にする</string>
+    <string name="dialer_ui_orientation_summary">センサによりダイヤラーを回転させる</string>
+
+    <string name="t9_sort_title">T9ソートモード</string>
+    <string name="t9_sort_summary">T9結果のフィルタを選択</string>
+    <string name="t9_sort_name">名前が一致した順</string>
+    <string name="t9_sort_number">番号が一致した順</string>
+    <string name="t9_state_title">T9ダイヤラーを有効にする</string>
+    <string name="t9_state_summary">ダイヤラーでT9検索を有効にする</string>
+    <string name="t9_dial_click_title">選択した連絡先にダイヤルする</string>
+    <string name="t9_dial_click_summary">T9で選択した連絡先にダイヤルする</string>
+    <string name="t9_add_to_contacts">連絡先の追加</string>
 </resources>

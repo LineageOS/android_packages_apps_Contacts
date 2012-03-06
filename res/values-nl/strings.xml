@@ -29,13 +29,13 @@
     <string name="frequentList" msgid="7154768136473953056">"Vaak"</string>
     <string name="strequentList" msgid="5640192862059373511">"Favorieten"</string>
     <string name="viewContactTitle" msgid="7989394521836644384">"Details van contact"</string>
-    <string name="viewContactDesription" msgid="214186610887547860">"Contact weergeven"</string>
+    <string name="viewContactDesription" msgid="214186610887547860">"Contact tonen"</string>
     <string name="editContactDescription" msgid="2947202828256214947">"Contact bewerken"</string>
     <string name="insertContactDescription" msgid="4709878105452681987">"Contact maken"</string>
     <string name="searchHint" msgid="8482945356247760701">"Contacten zoeken"</string>
     <string name="menu_search" msgid="9147752853603483719">"Zoeken"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Nieuw contact"</string>
-    <string name="menu_viewContact" msgid="2795575601596468581">"Contact weergeven"</string>
+    <string name="menu_viewContact" msgid="2795575601596468581">"Contact tonen"</string>
     <string name="menu_callNumber" msgid="5142851348489387516">"<xliff:g id="NAME">%s</xliff:g> bellen"</string>
     <string name="menu_addStar" msgid="2908478235715404876">"Toevoegen aan favorieten"</string>
     <string name="menu_removeStar" msgid="5844227078364227030">"Uit favorieten verwijderen"</string>
@@ -44,17 +44,17 @@
     <string name="menu_call" msgid="3992595586042260618">"Contact bellen"</string>
     <string name="menu_sendSMS" msgid="5535886767547006515">"Sms\'en naar contact"</string>
     <string name="menu_sendEmail" msgid="7293508859242926187">"E-mail verzenden"</string>
-    <string name="menu_viewAddress" msgid="1814744325763202024">"Adres op kaart weergeven"</string>
+    <string name="menu_viewAddress" msgid="1814744325763202024">"Adres op kaart tonen"</string>
     <string name="menu_makeDefaultNumber" msgid="4838759253316649534">"Als standaardnummer instellen"</string>
     <string name="menu_makeDefaultEmail" msgid="2599044610375789994">"Instellen als standaard e-mailadres"</string>
-	
+
     <!-- Menu item used to share the plain-text representation of a specific phone number -->
     <string name="menu_shareNumber">Nummer delen</string>
     <!-- Menu item used to share the plain-text representation of a specific email address -->
     <string name="menu_shareEmail">E-mail delen</string>
     <!-- Menu item used to share the plain-text representation of a specific address -->
     <string name="menu_shareAddress">Adres delen</string>
-	
+
     <string name="menu_splitAggregate" msgid="8368636463748691868">"Scheiden"</string>
     <string name="contactsSplitMessage" msgid="5253490235863170269">"Contacten gescheiden"</string>
     <string name="splitConfirmation_title" msgid="6716467920283502570">"Contacten scheiden"</string>
@@ -62,7 +62,7 @@
     <string name="menu_joinAggregate" msgid="5027981918265667970">"Samenvoegen"</string>
     <string name="titleJoinContactDataWith" msgid="7684875775798635354">"Contacten samenvoegen"</string>
     <string name="blurbJoinContactDataWith" msgid="995870557595050304">"Selecteer het contact dat u met <xliff:g id="NAME">%s</xliff:g> wilt samenvoegen."</string>
-    <string name="showAllContactsJoinItem" msgid="2189695051430392383">"Alle contacten weergeven"</string>
+    <string name="showAllContactsJoinItem" msgid="2189695051430392383">"Alle contacten tonen"</string>
     <string name="separatorJoinAggregateSuggestions" msgid="2831414448851313345">"Mogelijke contacten"</string>
     <string name="separatorJoinAggregateAll" msgid="7939932265026181043">"Alle contacten"</string>
     <string name="contactsJoinedMessage" msgid="7208148163607047389">"Contacten zijn samengevoegd"</string>
@@ -109,16 +109,16 @@
     <string name="noMatchingContacts" msgid="4266283206853990471">"Kan geen overeenkomende contacten vinden."</string>
     <string name="noContactsWithPhoneNumbers" msgid="1605457050218824269">"Geen contacten met telefoonnummers."</string>
     <string name="showFilterPhones" msgid="4184858075465653970">"Alleen contacten met tel.nr."</string>
-    <string name="showFilterPhonesDescrip" msgid="6644443248815191067">"Alleen contacten weergeven met telefoonnummers"</string>
-    <string name="headerContactGroups" msgid="2426134991932503843">"Contacten voor weergave kiezen"</string>
+    <string name="showFilterPhonesDescrip" msgid="6644443248815191067">"Alleen contacten tonen met telefoonnummers"</string>
+    <string name="headerContactGroups" msgid="2426134991932503843">"Te tonen contacten kiezen"</string>
   <plurals name="groupDescrip">
     <item quantity="other" msgid="3507881585720628389">"<xliff:g id="COUNT">%0$d</xliff:g> contacten"</item>
   </plurals>
   <plurals name="groupDescripPhones">
     <item quantity="other" msgid="3816047547470490208">"<xliff:g id="COUNT_0">%1$d</xliff:g> contacten, <xliff:g id="COUNTWITHPHONES">%2$d</xliff:g> met telefoonnummers"</item>
   </plurals>
-    <string name="savingContact" msgid="4075751076741924939">"Contact opslaan..."</string>
-    <string name="savingDisplayGroups" msgid="2133152192716475939">"Weergaveopties opslaan..."</string>
+    <string name="savingContact" msgid="4075751076741924939">"Contact opslaan\u2026"</string>
+    <string name="savingDisplayGroups" msgid="2133152192716475939">"Weergaveopties opslaan\u2026"</string>
     <string name="contactSavedToast" msgid="7152589189385441091">"Contact opgeslagen."</string>
     <string name="contactSavedErrorToast" msgid="9189098776225004666">"Fout. Kan wijzigingen in contact niet opslaan."</string>
   <plurals name="listTotalPhoneContacts">
@@ -150,10 +150,10 @@
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Sms verzenden"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> bellen"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Nummer bewerken voor bellen"</string>
-	
+
     <!--Menu item used to add a number from the call log to Blacklist  -->
     <string name="recentCalls_addToBlacklist">Aan blacklist toevoegen</string>
-	
+
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Toevoegen aan contacten"</string>
     <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"Verwijderen uit Gesprekken"</string>
     <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Gesprekken wissen"</string>
@@ -168,15 +168,15 @@
     <string name="payphone" msgid="4864313342828942922">"Betaaltelefoon"</string>
     <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Toetsen gebruiken om te bellen"</string>
     <string name="dialerDialpadHintText" msgid="5824490365898349041">"Oproep toevoegen"</string>
-    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Laden vanaf SIM-kaart..."</string>
+    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Laden vanaf SIM-kaart\u2026"</string>
     <string name="simContacts_title" msgid="27341688347689769">"Contacten op SIM-kaart"</string>
-    <string name="noContactsHelpTextWithSyncForCreateShortcut" msgid="801504710275614594">"U heeft geen contacten om weer te geven. Als u zojuist een account heeft toegevoegd, kan het enkele minuten duren voordat de contacten zijn gesynchroniseerd."</string>
-    <string name="noContactsHelpTextForCreateShortcut" msgid="3081286388667108335">"U heeft geen contacten om weer te geven."</string>
-    <string name="noContactsHelpText" msgid="6788487368878712350">"U heeft geen contacten om weer te geven."\n\n"Als u contacten wilt toevoegen, drukt u op "<font fgcolor="#ffffffff"><b>"\'Menu\'"</b></font>" en raakt u de volgende opties aan:"\n" "\n<li><font fgcolor="#ffffffff"><b>"\'Accounts\'"</b></font>" om een account toe te voegen of een account te configureren met contacten die u kunt synchroniseren met de telefoon"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"\'Nieuw contact\'"</b></font>" om een geheel nieuw contact te maken"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"\'Importeren/exporteren\'"</b></font>\n</li></string>
-    <string name="noContactsHelpTextWithSync" msgid="3734101165712848179">"U heeft geen contacten om weer te geven. (Als u net een account heeft toegevoegd, kan het enkele minuten duren voordat de contacten zijn gesynchroniseerd.)"\n\n"Als u contacten wilt toevoegen, drukt u op "<font fgcolor="#ffffffff"><b>"\'Menu\'"</b></font>" en raakt u de volgende opties aan:"\n" "\n<li><font fgcolor="#ffffffff"><b>"\'Accounts\'"</b></font>" om een account toe te voegen of een account te configureren met contacten die u kunt synchroniseren met de telefoon"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"\'Weergaveopties\'"</b></font>" om de zichtbaarheid van contacten te wijzigen"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"\'Nieuw contact\'"</b></font>" om een geheel nieuw contact te maken"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"\'Importeren/exporteren\'"</b></font>\n</li></string>
-    <string name="noContactsNoSimHelpText" msgid="6553845386917463292">"U heeft geen contacten om weer te geven."\n\n"Als u contacten wilt toevoegen, drukt u op "<font fgcolor="#ffffffff"><b>"\'Menu\'"</b></font>" en raakt u de volgende opties aan:"\n" "\n<li><font fgcolor="#ffffffff"><b>"\'Account "</b></font>" om een account toe te voegen of een account te configureren met contacten die u kunt synchroniseren met de telefoon"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"\'Nieuw contact\'"</b></font>" om een geheel nieuw contact te maken"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"\'Importeren/exporteren\'"</b></font>\n</li></string>
-    <string name="noContactsNoSimHelpTextWithSync" msgid="1122296298361373488">"U heeft geen contacten om weer te geven. (Als u net een account heeft toegevoegd, kan het enkele minuten duren voordat de contacten zijn gesynchroniseerd.)"\n\n"Als u contacten wilt toevoegen, drukt u op "<font fgcolor="#ffffffff"><b>"\'Menu\'"</b></font>" en raakt u de volgende opties aan:"\n" "\n<li><font fgcolor="#ffffffff"><b>"\'Accounts\'"</b></font>" om een account toe te voegen of een account te configureren met contacten die u kunt synchroniseren met de telefoon"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"\'Weergaveopties\'"</b></font>" om de zichtbaarheid van contacten te wijzigen"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"\'Nieuw contact\'"</b></font>" om een geheel nieuw contact te maken"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"\'Importeren/exporteren\'"</b></font>\n</li></string>
-    <string name="noFavoritesHelpText" msgid="3744655776704833277">"U heeft geen favorieten."\n\n"U kunt als volgt een contact toevoegen aan uw lijst met favorieten:"\n\n"        "<li>"Raak het tabblad \'"<b>"Contacten"</b>"\' aan."\n</li>" "\n<li>"Raak het contact aan dat u wilt toevoegen aan uw favorieten."\n</li>" "\n<li>"Raak de ster aan die wordt weergegeven naast de naam van het contact."\n</li></string>
+    <string name="noContactsHelpTextWithSyncForCreateShortcut" msgid="801504710275614594">"U heeft geen contacten om te tonen. Als u zojuist een account heeft toegevoegd, kan het enkele minuten duren voordat de contacten zijn gesynchroniseerd."</string>
+    <string name="noContactsHelpTextForCreateShortcut" msgid="3081286388667108335">"U heeft geen contacten te tonen."</string>
+    <string name="noContactsHelpText" msgid="6788487368878712350">"U heeft geen contacten om te tonen."\n\n"Als u contacten wilt toevoegen, drukt u op "<font fgcolor="#ffffffff"><b>"\'Menu\'"</b></font>" en raakt u de volgende opties aan:"\n" "\n<li><font fgcolor="#ffffffff"><b>"\'Accounts\'"</b></font>" om een account toe te voegen of te configureren dat contacten kan synchroniseren met uw telefoon"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"\'Nieuw contact\'"</b></font>" om een geheel nieuw contact aan te maken"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"\'Importeren/exporteren\'"</b></font>\n</li></string>
+    <string name="noContactsHelpTextWithSync" msgid="3734101165712848179">"U heeft geen contacten om te tonen. (Als u net een account heeft toegevoegd, kan het enkele minuten duren voordat de contacten zijn gesynchroniseerd.)"\n\n"Als u contacten wilt toevoegen, drukt u op "<font fgcolor="#ffffffff"><b>"\'Menu\'"</b></font>" en raakt u de volgende opties aan:"\n" "\n<li><font fgcolor="#ffffffff"><b>"\'Accounts\'"</b></font>" om een account toe te voegen of te configureren dat contacten kan synchroniseren met uw telefoon"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"\'Weergaveopties\'"</b></font>" om de zichtbaarheid van contacten te wijzigen"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"\'Nieuw contact\'"</b></font>" om een geheel nieuw contact aan te maken"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"\'Importeren/exporteren\'"</b></font>\n</li></string>
+    <string name="noContactsNoSimHelpText" msgid="6553845386917463292">"U heeft geen contacten om te tonen."\n\n"Als u contacten wilt toevoegen, drukt u op "<font fgcolor="#ffffffff"><b>"\'Menu\'"</b></font>" en raakt u de volgende opties aan:"\n" "\n<li><font fgcolor="#ffffffff"><b>"\'Accounts\'"</b></font>" om een account toe te voegen of te configureren dat contacten kan synchroniseren met uw telefoon"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"\'Nieuw contact\'"</b></font>" om een geheel nieuw contact te maken"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"\'Importeren/exporteren\'"</b></font>\n</li></string>
+    <string name="noContactsNoSimHelpTextWithSync" msgid="1122296298361373488">"U heeft geen contacten om te tonen. (Als u net een account heeft toegevoegd, kan het enkele minuten duren voordat de contacten zijn gesynchroniseerd.)"\n\n"Als u contacten wilt toevoegen, drukt u op "<font fgcolor="#ffffffff"><b>"\'Menu\'"</b></font>" en raakt u de volgende opties aan:"\n" "\n<li><font fgcolor="#ffffffff"><b>"\'Accounts\'"</b></font>" om een account toe te voegen of te configureren dat contacten kan synchroniseren met uw telefoon"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"\'Weergaveopties\'"</b></font>" om de zichtbaarheid van contacten te wijzigen"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"\'Nieuw contact\'"</b></font>" om een geheel nieuw contact aan te maken"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"\'Importeren/exporteren\'"</b></font>\n</li></string>
+    <string name="noFavoritesHelpText" msgid="3744655776704833277">"U heeft geen favorieten."\n\n"U kunt als volgt een contact toevoegen aan uw lijst met favorieten:"\n\n"        "<li>"Raak het tabblad \'"<b>"Contacten"</b>"\' aan."\n</li>" "\n<li>"Raak het contact aan dat u wilt toevoegen aan uw favorieten."\n</li>" "\n<li>"Raak de ster naast de naam van het contact aan."\n</li></string>
     <string name="liveFolder_all_label" msgid="5961411940473276616">"Alle contacten"</string>
     <string name="liveFolder_favorites_label" msgid="2674341514070517105">"Met ster"</string>
     <string name="liveFolder_phones_label" msgid="1709786878793436245">"Telefoons"</string>
@@ -276,10 +276,10 @@
     <string name="quickcontact_missing_app" msgid="4600366393134289038">"Er is geen app gevonden om deze actie uit te voeren"</string>
     <string name="quickcontact_remember_choice" msgid="5964536411579749424">"Deze keuze onthouden"</string>
     <string name="quickcontact_missing_name" msgid="5590266114306996632">"Onbekend"</string>
-	
+
     <!-- Text that is shown in the Badge, when there is no data to display -->
     <string name="quickcontact_no_data">Geen data</string>
-	
+
     <string name="menu_accounts" msgid="8499114602017077970">"Accounts"</string>
     <string name="menu_import_export" msgid="3765725645491577190">"Importeren/exporteren"</string>
     <string name="dialog_import_export" msgid="4771877268244096596">"Contacten importeren/exporteren"</string>
@@ -355,10 +355,10 @@
     <string name="email_other" msgid="3454004077967657109">"E-mail"</string>
     <string name="email_custom" msgid="7548003991586214105">"E-mailadres <xliff:g id="CUSTOM">%s</xliff:g>"</string>
     <string name="email" msgid="5668400997660065897">"E-mail"</string>
-    <string name="map_home" msgid="1243547733423343982">"Thuisadres weergeven"</string>
-    <string name="map_work" msgid="1360474076921878088">"Werkadres weergeven"</string>
-    <string name="map_other" msgid="3817820803587012641">"Adres weergeven"</string>
-    <string name="map_custom" msgid="6184363799976265281">"<xliff:g id="CUSTOM">%s</xliff:g> adres weergeven"</string>
+    <string name="map_home" msgid="1243547733423343982">"Thuisadres tonen"</string>
+    <string name="map_work" msgid="1360474076921878088">"Werkadres tonen"</string>
+    <string name="map_other" msgid="3817820803587012641">"Adres tonen"</string>
+    <string name="map_custom" msgid="6184363799976265281">"<xliff:g id="CUSTOM">%s</xliff:g> adres tonen"</string>
     <string name="chat_aim" msgid="2588492205291249142">"Chatten via AIM"</string>
     <string name="chat_msn" msgid="8041633440091073484">"Chatten via Windows Live"</string>
     <string name="chat_yahoo" msgid="6629211142719943666">"Chatten via Yahoo"</string>
@@ -391,21 +391,21 @@
     <string name="display_options_sort_list_by" msgid="6080091755852211076">"Lijst sorteren op"</string>
     <string name="display_options_sort_by_given_name" msgid="184916793466387067">"Roepnaam"</string>
     <string name="display_options_sort_by_family_name" msgid="7857986975275712622">"Achternaam"</string>
-    <string name="display_options_view_names_as" msgid="18022868169627979">"Contactnamen weergeven als"</string>
+    <string name="display_options_view_names_as" msgid="18022868169627979">"Contactnamen tonen met"</string>
     <string name="display_options_view_given_name_first" msgid="6968288511197363292">"Roepnaam eerst"</string>
     <string name="display_options_view_family_name_first" msgid="1447288164951453714">"Achternaam eerst"</string>
     <string name="search_bar_hint" msgid="1012756309632856553">"Contacten zoeken"</string>
     <string name="search_for_all_contacts" msgid="6644963335787294131">"Alle contacten zoeken"</string>
     <string name="take_photo" msgid="7496128293167402354">"Foto maken"</string>
     <string name="pick_photo" msgid="448886509158039462">"Foto selecteren in Galerij"</string>
-    <string name="locale_change_in_progress" msgid="1124266507671178413">"Lijst met contacten wordt bijgewerkt om de gewijzigde taal te weerspiegelen."\n\n"Een ogenblik geduld..."</string>
-    <string name="upgrade_in_progress" msgid="7530893673211750223">"Lijst met contacten wordt bijgewerkt."\n\n"Een ogenblik geduld..."</string>
+    <string name="locale_change_in_progress" msgid="1124266507671178413">"Lijst met contacten wordt bijgewerkt om de gewijzigde taal te weerspiegelen."\n\n"Een ogenblik geduld\u2026"</string>
+    <string name="upgrade_in_progress" msgid="7530893673211750223">"Lijst met contacten wordt bijgewerkt."\n\n"Een ogenblik geduld\u2026"</string>
     <string name="upgrade_out_of_memory" msgid="492151063059824962">"Contacten worden bijgewerkt. "\n\n"Voor het upgradeproces is ongeveer <xliff:g id="SIZE_IN_MEGABYTES">%d</xliff:g> MB interne telefoonopslag vereist."\n\n"Kies een van de volgende opties:"</string>
     <string name="upgrade_out_of_memory_uninstall" msgid="1721798828992091432">"Verwijder enkele apps"</string>
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"Upgrade opnieuw proberen"</string>
     <string name="search_results_for" msgid="8705490885073188513">"Zoekresultaten voor: <xliff:g id="QUERY">%s</xliff:g>"</string>
-    <string name="search_results_searching" msgid="7755623475227227314">"Zoeken..."</string>
-	
+    <string name="search_results_searching" msgid="7755623475227227314">"Zoeken\u2026"</string>
+
 
     <!-- Wysie: Menu strings -->
     <string name="menu_preferences">Instellingen</string>
@@ -421,55 +421,55 @@
     <string name="recent_calls_clear_outgoing">Uitgaand</string>
     <string name="recent_calls_clear_missed">Gemist</string>
     <string name="alert_clear_call_log_title">Leeg gesprekkenlijst</string>
-    <string name="alert_clear_call_log_message">Weet je zeker dat je de gesprekkenlijst wilt legen?</string>
-    <string name="alert_clear_cl_all_incoming">Weet je zeker dat je alle info betreffende inkomende gesprekken wilt verwijderen?</string>
-    <string name="alert_clear_cl_all_outgoing">Weet je zeker dat je alle info betreffende uitgaande gesprekken wilt verwijderen?</string>
-    <string name="alert_clear_cl_all_missed">Weet je zeker dat je alle info betreffende gemiste oproepen wilt verwijderen?</string>
+    <string name="alert_clear_call_log_message">Weet u zeker dat u de gesprekkenlijst wilt legen?</string>
+    <string name="alert_clear_cl_all_incoming">Weet u zeker dat u alle info betreffende inkomende gesprekken wilt verwijderen?</string>
+    <string name="alert_clear_cl_all_outgoing">Weet u zeker dat u alle info betreffende uitgaande gesprekken wilt verwijderen?</string>
+    <string name="alert_clear_cl_all_missed">Weet u zeker dat u alle info betreffende gemiste oproepen wilt verwijderen?</string>
 
     <!-- Wysie: Favourites strings -->
-    <string name="fav_clear_freq">Verwijder frequent gemelde nummers</string>
-    <string name="alert_clear_freq_called_msg">Weet je zeker dat je alle info betreffende frequent gebelde nummers wilt verwijderen?</string>
+    <string name="fav_clear_freq">Verwijder vaak gebelde nummers</string>
+    <string name="alert_clear_freq_called_msg">Weet u zeker dat u alle info betreffende vaak gebelde nummers wilt verwijderen?</string>
 
     <!-- Preferences: Dialer -->
-    <string name="title_last_dialled">Bel knop geeft laatst gekozen nummer weer</string>
-    <string name="summary_last_dialled">Laats gekozen nummer weergeven, zolang er geen ingave is.</string>
-    <string name="title_return_to_dialer">Terug naar telefoon na ophangen</string>
-    <string name="title_vm_button">Linker Actie Knop (LAK)</string>
-    <string name="title_vm_handler">Voicemail management</string>
+    <string name="title_last_dialled">Toon laatst gekozen nummer</string>
+    <string name="summary_last_dialled">Toon laatst gekozen nummer als er niets is ingevoerd</string>
+    <string name="title_return_to_dialer">Naar kiezer na ophangen</string>
+    <string name="title_vm_button">Linker actieknop (LAK)</string>
+    <string name="title_vm_handler">Voicemailbeheer</string>
     <string name="title_use_1_for_reg_vm">Kies 1 voor voicemail</string>
-    <string name="summaryon_use_1_for_reg_vm">Toets 1 wordt gebruikt voor de standaard voicemail</string>
-    <string name="summaryoff_use_1_for_reg_vm">Toets 1 volgt voicemail management instelling</string>
-    <string name="title_disable_num_check">Nummer controleren uitschakelen</string>
-    <string name="summaryon_disable_num_check">Linker Actie Knop (LAK) en menu zijn altijd ingeschakeld</string>
-    <string name="summaryoff_disable_num_check">LAK en menu zijn alleen ingeschakeld als er minimaal 1 nummer is ingegeven (behalve voicemail)</string>
-    <string name="title_enable_haptic_feedback">Haptische feedback ingeschakelen</string>
-    <string name="summary_enable_haptic_feedback">Gebruik toetsenbord patroon - Zie CyanogenMod instellingen om instelling aan te passen</string>
-    <string name="title_change_digits_color">Verander kleur cijfers</string>
-    <string name="title_digits_color_pressed">Cijfer kleur (ingedrukt)</string>
-    <string name="title_digits_color_focused">Cijfer kleur (gefocust)</string>
+    <string name="summaryon_use_1_for_reg_vm">Toets 1 wordt gebruikt voor de standaardvoicemail</string>
+    <string name="summaryoff_use_1_for_reg_vm">Toets 1 volgt instelling voicemailbeheer</string>
+    <string name="title_disable_num_check">Nummer niet controleren</string>
+    <string name="summaryon_disable_num_check">Linker actieknop (LAK) en menuknop zijn altijd ingeschakeld</string>
+    <string name="summaryoff_disable_num_check">LAK en menuknop zijn alleen ingeschakeld als er minimaal 1 nummer is ingegeven (behalve voicemail)</string>
+    <string name="title_enable_haptic_feedback">Haptische feedback</string>
+    <string name="summary_enable_haptic_feedback">Gebruik haptische feedback bij nummerkeuze (wijzig dit in CyanogenMod\'s instellingen)</string>
+    <string name="title_change_digits_color">Verander cijferkleur</string>
+    <string name="title_digits_color_pressed">Cijferkleur (ingedrukt)</string>
+    <string name="title_digits_color_focused">Cijferkleur (gefocust)</string>
     <string name="title_digits_color_unselected">Cijfer kleur (niet geselecteerd)</string>
     <string name="title_choose_color">Kies een kleur</string>
-    <string name="instructions_choose_color">Druk in het midden van de kleur om te bevestigen.\nDruk terug om te annuleren.</string>
-    <string name="entry_no_vm_handler">Geen (Kies voicemail nummer)</string>
+    <string name="instructions_choose_color">Raak het midden van de kleur aan om te bevestigen.\nDruk op terug om te annuleren.</string>
+    <string name="entry_no_vm_handler">Geen (kies voicemail nummer)</string>
     
     <!-- Preferences: Call log -->
     <string name="title_cl_exact_time">Exacte tijden</string>
     <string name="summaryon_cl_exact_time">Gebruik exacte tijden in gesprekkenlijst</string>
     <string name="summaryoff_cl_exact_time">Gebruik relatieve tijden in gesprekkenlijst</string>
-    <string name="title_cl_show_seconds">Seconden weergeven</string>
-    <string name="summary_cl_show_seconds">Geef seconden weer bij exacte tijden</string>          
+    <string name="title_cl_show_seconds">Toon seconden</string>
+    <string name="summary_cl_show_seconds">Toon seconden bij exacte tijden</string>
     <string name="title_cl_ask_before_clear">Vraag voor leeg maken</string>
     <string name="summaryon_cl_ask_before_clear">Vraag bevestiging voor het legen van de gesprekkenlijst</string>
     <string name="summaryoff_cl_ask_before_clear">Gesprekkenlijst wordt geleegd zonder bevestiging</string>
     
     <!-- Preferences: Contacts -->
-    <string name="title_contacts_show_pic">Geef contact foto weer</string>
-    <string name="title_contacts_show_dial_button">Geef bel knop weer</string>
-    <string name="summary_contacts_show_dial_button">Geef een bel knop weer bij contacten met een telefoonnummer</string>
-    <string name="title_contacts_show_count">Geef contacten teller weer</string>
-    <string name="summary_contacts_show_count">Contacten teller wordt bovenaan de contactenlijst weergegeven</string>
+    <string name="title_contacts_show_pic">Toon contact foto</string>
+    <string name="title_contacts_show_dial_button">Toon belknop</string>
+    <string name="summary_contacts_show_dial_button">Toon een belknop bij contacten met een telefoonnummer</string>
+    <string name="title_contacts_show_count">Toon contacten teller</string>
+    <string name="summary_contacts_show_count">Contacten teller wordt bovenaan de contactenlijst getoond</string>
     <string name="title_contacts_show_separators">Alfabetische scheidingen</string>
-    <string name="summaryon_contacts_show_separators">Alfabetische scheidingen worden weergeven in de contactenlijst</string>
+    <string name="summaryon_contacts_show_separators">Alfabetische scheidingen worden getoond in de contactenlijst</string>
     <string name="summaryoff_contacts_show_separators">Alfabetische scheidingen worden verborgen in de contactenlijst</string>
     
     <!-- Preferences: Contacts - View Contact -->
@@ -480,23 +480,23 @@
     <string name="summaryoff_show_text_mobile_only">Alle nummers hebben een SMS actie</string>
     
     <!-- Preferences: Favourites -->
-    <string name="title_favourites_hide_freq_call">Verberg frequent gebeld</string>
+    <string name="title_favourites_hide_freq_call">Verberg vaak gebeld</string>
     <string name="summary_favourites_hide_freq_call">De data is niet verwijderd, maar verborgen</string>
     <string name="title_favs_ask_before_clear">Vraag voor verwijderen</string>
-    <string name="summaryon_favs_ask_before_clear">Vraag om bevestiging voor het verwijderen van frequent gebelde nummers</string>
-    <string name="summaryoff_favs_ask_before_clear">Frequent gebele nummers worden verwijderd zonder bevestiging</string>
+    <string name="summaryon_favs_ask_before_clear">Vraag om bevestiging voor het verwijderen van vaak gebelde nummers</string>
+    <string name="summaryoff_favs_ask_before_clear">Vaak gebele nummers worden verwijderd zonder bevestiging</string>
     
     <!-- Preferences: Misc -->
     <string name="title_misc_category">Diversen</string>
-    <string name="title_sensor_rotation">Sensor rotatie aan</string>
-    <string name="summary_sensor_rotation">Wanneer ingeschakeld, roteerd het scherm volgens systeem instellingen</string>
-    <string name="title_data_font_size">Contact infor lettergrootte</string>
-    <string name="summary_data_font_size">Kies lettergrootte voor contact informatie (telefoon nummer, email, adres, etc.)</string>
-    <string name="title_default_phone_tab">Standaard tab</string>
-    <string name="summary_default_phone_tab">Standaard tab bij het openen van de telefoon app</string>
+    <string name="title_sensor_rotation">Automatische schermoriëntatie</string>
+    <string name="summary_sensor_rotation">Indien ingeschakeld roteert het scherm volgens systeeminstellingen</string>
+    <string name="title_data_font_size">Lettergrootte contactinfo</string>
+    <string name="summary_data_font_size">Kies lettergrootte voor contact informatie (telefoonnummer, e-mail, adres,\u2026)</string>
+    <string name="title_default_phone_tab">Standaardtab</string>
+    <string name="summary_default_phone_tab">Standaardtab bij het openen van de telefoonapplicatie</string>
 
     <!-- Default Phone Tab strings -->
-    <string name="default_phone_tab_last_used">Laatst gebruikt bij een telefoon gesprek (standaard)</string>
+    <string name="default_phone_tab_last_used">Laatst gebruikt bij een telefoongesprek (standaard)</string>
     <string name="default_phone_tab_last_viewed">Laatst bekeken</string>
     <string name="default_phone_tab_phone">Telefoon</string>
     <string name="default_phone_tab_call_log">Gesprekkenlijst</string>
@@ -505,8 +505,18 @@
     
     <!-- Wysie: About strings -->    
     <string name="title_about">Over</string>
-    <string name="title_about_name">Mod Naam</string>
+    <string name="title_about_name">Modnaam</string>
     <string name="title_about_version">Versie</string>
     <string name="title_about_credits">Credits</string>
     <string name="summary_about_credits">Wysie, ChainsDD, geesun, niuchl, rac2030, sileht en de rest van XDA! :)</string>
+
+    <string name="t9_sort_title">T9-sorteerwijze</string>
+    <string name="t9_sort_summary">Kies hoe de T9-resultaten gesorteerd worden</string>
+    <string name="t9_sort_name">Eerst op naam gevonden</string>
+    <string name="t9_sort_number">Eerst op nr. gevonden</string>
+    <string name="t9_state_title">T9-telefoonkiezer</string>
+    <string name="t9_state_summary">Schakel T9-zoeken in telefoonkiezer in</string>
+    <string name="t9_dial_click_title">Bel geselecteerd contact</string>
+    <string name="t9_dial_click_summary">Bel het geselecteerde contact gevonden door de T9-telefoonkiezer</string>
+    <string name="t9_add_to_contacts">Aan contacten toevoegen</string>
 </resources>

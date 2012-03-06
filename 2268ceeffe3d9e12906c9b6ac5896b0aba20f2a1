@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQX//72w\u003d",
+        "filename": "res/values-it/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2012-03-06T05:42:54Z",
+      "side": 1,
+      "message": "Non mi suona molto bene, forse è meglio un \"Modalità ricerca T9\" o \"Priorità ricerca T9\". Per adesso non mi vien in mente nient\u0027altro...",
+      "revId": "2268ceeffe3d9e12906c9b6ac5896b0aba20f2a1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//72s\u003d",
+        "filename": "res/values-it/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2012-03-06T05:42:54Z",
+      "side": 1,
+      "message": "Qui avrei messo \"Prima i nomi\". Idem per quella sotto",
+      "revId": "2268ceeffe3d9e12906c9b6ac5896b0aba20f2a1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//72o\u003d",
+        "filename": "res/values-it/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2012-03-06T05:42:54Z",
+      "side": 1,
+      "message": "Qui lascerei dialer : \"Attiva dialer T9\"",
+      "revId": "2268ceeffe3d9e12906c9b6ac5896b0aba20f2a1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//72k\u003d",
+        "filename": "res/values-it/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2012-03-06T05:42:54Z",
+      "side": 1,
+      "message": "\"Attiva la ricerca tra i contatti utilizzando il T9\"",
+      "revId": "2268ceeffe3d9e12906c9b6ac5896b0aba20f2a1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//72g\u003d",
+        "filename": "res/values-it/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2012-03-06T05:42:54Z",
+      "side": 1,
+      "message": "Puoi togliere \"il\" . Nei titoli è meglio scrivere il meno possibile",
+      "revId": "2268ceeffe3d9e12906c9b6ac5896b0aba20f2a1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//72c\u003d",
+        "filename": "res/values-it/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2012-03-06T05:42:54Z",
+      "side": 1,
+      "message": "Qui avrei messo proposto invece di scelto ma va bene uguale.",
+      "revId": "2268ceeffe3d9e12906c9b6ac5896b0aba20f2a1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

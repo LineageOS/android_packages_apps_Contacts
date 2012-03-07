@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQX//7vU\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T00:15:54Z",
+      "side": 1,
+      "message": "I would rather have \u0027Schakel nummerindeling in telefoonkiezer in\u0027.",
+      "revId": "694c53a5228e341cefad08308a4fc1e266eb3496",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

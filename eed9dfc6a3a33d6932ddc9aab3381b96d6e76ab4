@@ -1,0 +1,599 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQX//7pw\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "Liever alles formeel (dus met \u0027u\u0027).",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7ps\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "\u0027frequent\u0027 \u003e \u0027vaak\u0027",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7p0\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "Alle \u0027weergeven\u0027 moeten worden veranderd naar \u0027tonen.",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7po\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "\u0027Toon laatst gekozen nummer als er niets is ingevoerd.\u0027?",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7pk\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "telefoonkiezer*",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7pg\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "\u0027Linker actieknop (LAK)\u0027",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7pc\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "\u0027Voicemailbeheer\u0027",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7pY\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "standaardvoicemail*",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7pU\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "\u0027Toets 1 volgt instellingen voicemailbeheer\u0027",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7pQ\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "\u0027Linker actie- (LAK) en menuknop...\u0027",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7pM\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "\u0027Linker actie- (LAK) en menuknop...\u0027",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7pI\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "\u0027Gebruik haptische feedback bij nummerkeuze (wijzig dit in CyanogenMod\u0027s instellingen)\u0027",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7pE\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "Cijferkleur*",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7pA\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "Cijferkleur*",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7o8\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "Cijferkleur*",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7o4\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "\u0027Raak het midden van de kleur aan om te bevestigen.\\nDruk op terug om te annuleren.\u0027",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7o0\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "\u0027Geen (kies voicemailnummer)\u0027",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7ow\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "frequent \u003e vaak",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7os\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "frequent \u003e vaak",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7oo\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "frequent \u003e vaak",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7ok\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "\u0027Automatische schermoriëntatie\u0027",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7og\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "\u0027Indien ingeschakeld roteert het scherm volgens systeeminstellingen\u0027",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7oc\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "\u0027Lettergrootte contactinfo\u0027",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7oY\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "contactinformatie*\ntelefoonnummer*\ne-mail*",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7oU\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "Standaardtab*",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7oQ\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "Standaardtab*\ntelefoon app \u003e telefoonkiezer",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7oM\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "telefoongesprek*",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7oI\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "Modnaam*",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7oE\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "T9-sorteerwijze*",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7oA\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "T9-resultaten*",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7n8\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "\u0027Eerst op naam gevonden\u0027?",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7n4\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "\u0027Eerst op nummer gevonden\u0027?",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7n0\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "T9-telefoonkiezer",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7nw\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "T9-zoeken*",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7ns\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-07T23:00:59Z",
+      "side": 1,
+      "message": "T9-telefoonkiezer*",
+      "revId": "eed9dfc6a3a33d6932ddc9aab3381b96d6e76ab4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

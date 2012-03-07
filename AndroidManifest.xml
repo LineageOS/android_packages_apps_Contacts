@@ -46,6 +46,7 @@
         <!-- A virtual 12 key dialer -->
         <activity android:name="TwelveKeyDialer"
             android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden"
         >
             <intent-filter>
                 <action android:name="com.android.phone.action.TOUCH_DIALER" />
@@ -73,6 +74,7 @@
             android:clearTaskOnLaunch="true"
             android:icon="@drawable/ic_launcher_phone"
             android:screenOrientation="nosensor"
+            android:windowSoftInputMode="stateHidden"
         >
             <intent-filter>
                 <action android:name="android.intent.action.DIAL" />

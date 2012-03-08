@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQX//7hU\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 2049
+      },
+      "writtenOn": "2012-03-08T02:18:32Z",
+      "side": 1,
+      "message": "in te stellen is een paar keer configureren. Weet niet welke het beste is. Zal deze dan ook kiezen voor de gb.\nWeergeven moet nog tonen worden",
+      "revId": "1702d5b6aeb78d3f894a80f84ff12b99af759b9a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7hs\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 2049
+      },
+      "writtenOn": "2012-03-08T02:18:32Z",
+      "side": 1,
+      "message": "tonen met?",
+      "revId": "1702d5b6aeb78d3f894a80f84ff12b99af759b9a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7hI\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 2049
+      },
+      "writtenOn": "2012-03-08T02:18:32Z",
+      "side": 1,
+      "message": "getoond?",
+      "revId": "1702d5b6aeb78d3f894a80f84ff12b99af759b9a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7js\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 2049
+      },
+      "writtenOn": "2012-03-08T02:18:32Z",
+      "side": 1,
+      "message": "\u0027Kies hoe de T9-resultaten gesorteerd worden\u0027?\nBeide resultaten worden nog getoond.",
+      "revId": "1702d5b6aeb78d3f894a80f84ff12b99af759b9a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7jc\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 2049
+      },
+      "writtenOn": "2012-03-08T02:18:32Z",
+      "side": 1,
+      "message": "\u0027Eerst op naam gevonden\u0027?",
+      "revId": "1702d5b6aeb78d3f894a80f84ff12b99af759b9a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7jY\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 2049
+      },
+      "writtenOn": "2012-03-08T02:18:32Z",
+      "side": 1,
+      "message": "\u0027Eerst op nr. gevonden\u0027? Nummer geraakt er niet tussen",
+      "revId": "1702d5b6aeb78d3f894a80f84ff12b99af759b9a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7hA\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 2049
+      },
+      "writtenOn": "2012-03-08T02:18:32Z",
+      "side": 1,
+      "message": "\u0027Bel het geselecteerde contact gevonden door de T9-telefoonkiezer\u0027?",
+      "revId": "1702d5b6aeb78d3f894a80f84ff12b99af759b9a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

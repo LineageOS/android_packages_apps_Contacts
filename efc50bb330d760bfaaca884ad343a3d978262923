@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQX//7Uc\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 2049
+      },
+      "writtenOn": "2012-03-08T23:33:18Z",
+      "side": 1,
+      "message": "toe te voegen of te configureren \u003d\u003e toe te voegen of in te stellen?",
+      "revId": "efc50bb330d760bfaaca884ad343a3d978262923",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7UY\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 2049
+      },
+      "writtenOn": "2012-03-08T23:33:18Z",
+      "side": 1,
+      "message": "\"",
+      "revId": "efc50bb330d760bfaaca884ad343a3d978262923",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7UU\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 2049
+      },
+      "writtenOn": "2012-03-08T23:33:18Z",
+      "side": 1,
+      "message": "\"",
+      "revId": "efc50bb330d760bfaaca884ad343a3d978262923",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7UQ\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 2049
+      },
+      "writtenOn": "2012-03-08T23:33:18Z",
+      "side": 1,
+      "message": "\"",
+      "revId": "efc50bb330d760bfaaca884ad343a3d978262923",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

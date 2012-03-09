@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//7Tk\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-03-09T00:11:08Z",
+      "side": 1,
+      "message": "Is niet nodig. Er staat (wat leesbaarder gemaakt):\n\n\"U heeft geen contacten om te tonen. (Als u net een account heeft toegevoegd, kan het enkele minuten duren voordat de contacten zijn gesynchroniseerd.)\"\n\\n\n\\n\n\"Als u contacten wilt toevoegen, drukt u op \"\n\u003cfont fgcolor\u003d\"#ffffffff\"\u003e\u003cb\u003e\"Menu\"\u003c/b\u003e\u003c/font\u003e\n\" en raakt u de volgende opties aan:\"\n\\n\n\" \"\n\\n\n\u003cli\u003e\n\u003cfont fgcolor\u003d\"#ffffffff\"\u003e\u003cb\u003e\"Accounts\"\u003c/b\u003e\u003c/font\u003e\n\" om een account toe te voegen of in te stellen met contacten die u kunt synchroniseren met de tablet\"\n\\n\n\u003c/li\u003e\n\" \"\n\\n\n\u003cli\u003e\n\u003cfont fgcolor\u003d\"#ffffffff\"\u003e\u003cb\u003e\"Weergaveopties\"\u003c/b\u003e\u003c/font\u003e\n\" om de zichtbaarheid van contacten te wijzigen\"\n\\n\n\u003c/li\u003e\n\" \"\n\\n\n\u003cli\u003e\n\u003cfont fgcolor\u003d\"#ffffffff\"\u003e\u003cb\u003e\"Nieuw contact\"\u003c/b\u003e\u003c/font\u003e\n\" om een nieuw contact te maken\"\n\\n\n\u003c/li\u003e\n\" \"\n\\n\n\u003cli\u003e\n\u003cfont fgcolor\u003d\"#ffffffff\"\u003e\u003cb\u003e\"Importeren/exporteren\"\u003c/b\u003e\u003c/font\u003e\n\" om contacten van uw SD-kaart te importeren\"\n\\n",
+      "parentUuid": "AAAAQX//7UY\u003d",
+      "revId": "efc50bb330d760bfaaca884ad343a3d978262923",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//7UU\u003d",
         "filename": "res/values-nl/strings.xml",
         "patchSetId": 3

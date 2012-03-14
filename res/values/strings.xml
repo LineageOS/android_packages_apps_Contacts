@@ -22,8 +22,8 @@
          used in the Launcher icon. -->
     <string name="people">People</string>
 
-    <string name="t9_default_sort">2</string>
-    <string name="t9_sort_title">T9 Sorting mode</string>
+    <string name="t9_default_sort">1</string>
+    <string name="t9_sort_title">T9 sorting mode</string>
     <string name="t9_sort_summary">Choose how to filter T9 results</string>
     <string name="t9_sort_name">Name matches first</string>
     <string name="t9_sort_number">Number matches first</string>

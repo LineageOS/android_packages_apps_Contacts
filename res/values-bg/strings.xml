@@ -564,4 +564,13 @@
     <string name="dialog_phone_call_prohibited_title" msgid="2111395432187079579">"Обаждането не е извършено"</string>
     <string name="dialog_voicemail_not_ready_title" msgid="7258109862329777060">"Номерът за гласова поща не е налице"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"За да настроите гласовата поща, отворете „Меню“ &gt; „Настройки“."</string>
+
+    <string name="t9_map_row_2">2abcàáâäåɑæçǽćčáабвг</string>
+    <string name="t9_map_row_3">3deféèêëдежз</string>
+    <string name="t9_map_row_4">4ghiíìïîǵийкл</string>
+    <string name="t9_map_row_5">5jklḱḱĺмноп</string>
+    <string name="t9_map_row_6">6mnoòóöôøñŋǿḿńőрсту</string>
+    <string name="t9_map_row_7">7pqrsßɾṕŕśřšфхцч</string>
+    <string name="t9_map_row_8">8tuvúùüûűшщъ</string>
+    <string name="t9_map_row_9">9wxyzýẃźьюя</string>
 </resources>

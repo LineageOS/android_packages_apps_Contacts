@@ -69,6 +69,7 @@
             android:divider="@null"
             android:gravity="center_vertical"
             android:layout_gravity="center_vertical"
+            android:overScrollMode="never"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="40dp" />

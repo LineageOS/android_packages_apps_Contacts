@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -34,6 +35,7 @@ import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
@@ -42,6 +44,7 @@ import android.provider.Contacts.Intents.Insert;
 import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
 import android.provider.Contacts.PhonesColumns;
+import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
@@ -147,6 +150,7 @@ public class DialpadFragment extends Fragment
     private T9Adapter mT9AdapterTop;
     private ViewSwitcher mT9Flipper;
     private LinearLayout mT9Top;
+    private static boolean mContactsUpdated;
 
     /**
      * Regular expression prohibiting manual phone call. Can be empty, which means "no rule".
@@ -259,6 +263,14 @@ public class DialpadFragment extends Fragment
         mProhibitedPhoneNumberRegexp = getResources().getString(
                 R.string.config_prohibited_phone_number_regexp);
     }
+
+    private ContentObserver mContactObserver = new ContentObserver(new Handler()) {
+        @Override
+        public void onChange(boolean selfChange) {
+            mContactsUpdated = true;
+            getActivity().getContentResolver().unregisterContentObserver(mContactObserver);
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
@@ -522,13 +534,21 @@ public class DialpadFragment extends Fragment
     public void onResume() {
         super.onResume();
 
-        if (sT9Search == null && isT9On()) {
+        if ((sT9Search == null && isT9On()) || mContactsUpdated) {
             Thread loadContacts = new Thread(new Runnable() {
                 public void run () {
                     sT9Search = new T9Search(getActivity());
                 }
             });
             loadContacts.start();
+            if (mContactsUpdated) {
+                mContactsUpdated = false;
+                onLongClick(mDelete);
+                mT9Adapter = null;
+                mT9AdapterTop = null;
+                mT9ListTop.setAdapter(null);
+                mT9List.setAdapter(null);
+            }
         }
 
         hideT9();
@@ -615,6 +635,10 @@ public class DialpadFragment extends Fragment
         // TODO: I wonder if we should not check if the AsyncTask that
         // lookup the last dialed number has completed.
         mLastNumberDialed = EMPTY_NUMBER;  // Since we are going to query again, free stale number.
+        if (isT9On()) {
+            getActivity().getContentResolver().registerContentObserver(
+                    ContactsContract.Contacts.CONTENT_URI, true, mContactObserver);
+        }
     }
 
     @Override
@@ -780,7 +804,7 @@ public class DialpadFragment extends Fragment
                         mT9List.setAdapter(mT9Adapter);
                     }
                     mT9AdapterTop.add(result.getTopContact());
-                    if (result.getNumResults()>  1) {
+                    if (result.getNumResults() > 1) {
                         mT9Toggle.setVisibility(View.VISIBLE);
                     } else {
                         mT9Toggle.setVisibility(View.GONE);

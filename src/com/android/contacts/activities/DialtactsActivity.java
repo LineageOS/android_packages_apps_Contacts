@@ -42,6 +42,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -896,7 +897,12 @@ public class DialtactsActivity extends TransactionSafeActivity {
 
                     fakeMenuItem.setVisible(ViewConfiguration.get(this).hasPermanentMenuKey());
                 } else {
-                    searchMenuItem.setVisible(false);
+                    if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                        searchMenuItem.setVisible(false);
+                    } else {
+                        searchMenuItem.setVisible(true);
+                        searchMenuItem.setOnMenuItemClickListener(mSearchMenuItemClickListener);
+                    }
                     // When permanent menu key is _not_ available, the call settings menu should be
                     // available via DialpadFragment.
                     showCallSettingsMenu = ViewConfiguration.get(this).hasPermanentMenuKey();

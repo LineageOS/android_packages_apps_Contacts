@@ -26,6 +26,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.database.Cursor;
@@ -647,7 +648,8 @@ public class DialpadFragment extends Fragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        if (mShowOptionsMenu && ViewConfiguration.get(getActivity()).hasPermanentMenuKey() &&
+        final boolean isLandscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+        if (mShowOptionsMenu && (ViewConfiguration.get(getActivity()).hasPermanentMenuKey() || isLandscape) &&
                 isLayoutReady() && mDialpadChooser != null) {
             inflater.inflate(R.menu.dialpad_options, menu);
         }
@@ -655,8 +657,9 @@ public class DialpadFragment extends Fragment
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
+        final boolean isLandscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
         // Hardware menu key should be available and Views should already be ready.
-        if (mShowOptionsMenu && ViewConfiguration.get(getActivity()).hasPermanentMenuKey() &&
+        if (mShowOptionsMenu && (ViewConfiguration.get(getActivity()).hasPermanentMenuKey() || isLandscape) &&
                 isLayoutReady() && mDialpadChooser != null) {
              setupMenuItems(menu);
         }

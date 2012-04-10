@@ -1,0 +1,8 @@
+Change-Id: I9bb6cc8923da60ef0e3b9f4a74bb66d2ac0434c9
+Code-Review+2: Steve Kondik <shade@chemlab.org>
+Verified+1: Steve Kondik <shade@chemlab.org>
+Submitted-by: Steve Kondik <shade@chemlab.org>
+Submitted-at: Tue, 10 Apr 2012 22:18:12 +0400
+Reviewed-on: http://review.cyanogenmod.com/14520
+Project: CyanogenMod/android_packages_apps_Contacts
+Branch: refs/heads/ics

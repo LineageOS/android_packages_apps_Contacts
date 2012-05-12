@@ -564,4 +564,14 @@
     <string name="dialog_phone_call_prohibited_title" msgid="2111395432187079579">"השיחה לא נשלחה."</string>
     <string name="dialog_voicemail_not_ready_title" msgid="7258109862329777060">"המספר של הדואר הקולי אינו זמין"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"כדי להגדיר את הדואר הקולי, עבור אל \'תפריט\' &gt; \'הגדרות\'."</string>
+    <string name="t9_sort_title">"מצב סידור T9"</string>
+    <string name="t9_sort_summary">"בחר איך לסנן תוצאות T9"</string>
+    <string name="t9_sort_name">"סדר לפי שם"</string>
+    <string name="t9_sort_number">"סדר לפי מספר"</string>
+    <string name="t9_state_title">"אפשר חייגן T9"</string>
+    <string name="t9_state_summary">"אפשר חיפוש T9 בחייגן"</string>
+    <string name="t9_dial_click_title">"חייג איש קשר נבחר"</string>
+    <string name="t9_dial_click_summary">"חייג את איש הקשר הנבחר עבור T9"</string>
+    <string name="t9_add_to_contacts">"הוסף לאנשי הקשר"</string>
+</resources>
 </resources>

@@ -70,7 +70,8 @@ class T9Search {
     private Set<ContactItem> mAllResults = new LinkedHashSet<ContactItem>();
     private ArrayList<ContactItem> mContacts = new ArrayList<ContactItem>();
     private String mPrevInput;
-    private static char[][] sT9Map;
+    private static String sT9Chars;
+    private static String sT9Digits;
 
     public T9Search(Context context) {
         mContext = context;
@@ -78,8 +79,7 @@ class T9Search {
     }
 
     private void getAll() {
-        if (sT9Map == null)
-            initT9Map();
+        initT9Map();
 
         Cursor contact = mContext.getContentResolver().query(Contacts.CONTENT_URI, CONTACT_PROJECTION, CONTACT_QUERY, null, CONTACT_SORT);
         Cursor phone = mContext.getContentResolver().query(Phone.CONTENT_URI, PHONE_PROJECTION, PHONE_ID_SELECTION, PHONE_ID_SELECTION_ARGS, PHONE_SORT);
@@ -92,7 +92,7 @@ class T9Search {
             }
             while (phone.getLong(1) == contactId) {
                 String num = phone.getString(0);
-                ContactItem contactInfo = new ContactItem();
+                ContactItem contactInfo = new BitmapContactItem();
                 contactInfo.id = contactId;
                 contactInfo.name = contact.getString(1);
                 contactInfo.number = PhoneNumberUtils.formatNumber(num);
@@ -101,15 +101,6 @@ class T9Search {
                 contactInfo.timesContacted = contact.getInt(2);
                 contactInfo.isSuperPrimary = phone.getInt(2) > 0;
                 contactInfo.groupType = Phone.getTypeLabel(mContext.getResources(), phone.getInt(3), phone.getString(4));
-                Uri contactUri = ContentUris.withAppendedId(Contacts.CONTENT_URI, contactId);
-                InputStream photoStream = Contacts.openContactPhotoInputStream(mContext.getContentResolver(), contactUri);
-                if (photoStream != null) {
-                    contactInfo.photo = BitmapFactory.decodeStream(photoStream);
-                    try {
-                        photoStream.close();
-                    } catch (IOException e) {
-                    }
-                }
                 mContacts.add(contactInfo);
                 if (!phone.moveToNext()) {
                     break;
@@ -123,7 +114,7 @@ class T9Search {
     public static class T9SearchResult {
 
         private final ArrayList<ContactItem> mResults;
-        private ContactItem mTopContact = new ContactItem();
+        private final ContactItem mTopContact;
 
         public T9SearchResult (final ArrayList<ContactItem> results, final Context mContext) {
             mTopContact = results.get(0);
@@ -145,7 +136,6 @@ class T9Search {
     }
 
     public static class ContactItem {
-        Bitmap photo;
         String name;
         String number;
         String normalNumber;
@@ -156,6 +146,26 @@ class T9Search {
         CharSequence groupType;
         long id;
         boolean isSuperPrimary;
+        public Bitmap getPhoto() {
+            return null;
+        }
+    }
+
+    public class BitmapContactItem extends ContactItem {
+        @Override
+        public Bitmap getPhoto() {
+            Bitmap result = null;
+            Uri contactUri = ContentUris.withAppendedId(Contacts.CONTENT_URI, this.id);
+            InputStream photoStream = Contacts.openContactPhotoInputStream(mContext.getContentResolver(), contactUri);
+            if (photoStream != null) {
+                result = BitmapFactory.decodeStream(photoStream);
+                try {
+                    photoStream.close();
+                } catch (IOException e) {
+                }
+            }
+            return result;
+        }
     }
 
     public T9SearchResult search(String number) {
@@ -232,46 +242,38 @@ class T9Search {
     }
 
     private void initT9Map() {
-        String[] t9Array = mContext.getResources().getStringArray(R.array.t9_map);
-        sT9Map = new char[t9Array.length][];
-        int rc = 0;
-        for (String item : t9Array) {
-            int cc = 0;
-            sT9Map[rc] = new char[item.length()];
-            for (char ch : item.toCharArray()) {
-                sT9Map[rc][cc] = ch;
-                cc++;
+        synchronized (this.getClass()) {
+            if (sT9Chars != null)
+                return;
+
+            StringBuilder bT9Chars = new StringBuilder();
+            StringBuilder bT9Digits = new StringBuilder();
+            for (String item: mContext.getResources().getStringArray(R.array.t9_map)) {
+                bT9Chars.append(item);
+                for (int i = 0; i < item.length(); i++) {
+                    bT9Digits.append(item.charAt(0));
+                }
             }
-            rc++;
+
+            sT9Chars = bT9Chars.toString();
+            sT9Digits = bT9Digits.toString();
         }
     }
 
-    private static String nameToNumber(String name) {
-        StringBuilder sb = new StringBuilder();
+    private static String nameToNumber(final String name) {
         int len = name.length();
+        StringBuilder sb = new StringBuilder(len);
         for (int i = 0; i < len; i++) {
-            boolean matched = false;
-            char ch = Character.toLowerCase(name.charAt(i));
-            for (char[] row : sT9Map) {
-                for (char a : row) {
-                    if (ch == a) {
-                        matched = true;
-                        sb.append(row[0]);
-                        break;
-                    }
-                }
-                if (matched) {
-                    break;
-                }
+            int pos = sT9Chars.indexOf(Character.toLowerCase(name.charAt(i)));
+            if (pos == -1) {
+                pos = 0;
             }
-            if (!matched) {
-                sb.append(sT9Map[0][0]);
-            }
+            sb.append(sT9Digits.charAt(pos));
         }
         return sb.toString();
     }
 
-    public static String removeNonDigits(String number) {
+    public static String removeNonDigits(final String number) {
         int len = number.length();
         StringBuilder sb = new StringBuilder(len);
         for (int i = 0; i < len; i++) {
@@ -335,8 +337,9 @@ class T9Search {
                             numberStart, numberStart + mPrevInput.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
                     holder.number.setText(s);
                 }
-                if (o.photo != null)
-                    holder.icon.setImageBitmap(o.photo);
+                Bitmap photo = o.getPhoto();
+                if (photo != null)
+                    holder.icon.setImageBitmap(photo);
                 else
                     holder.icon.setImageResource(R.drawable.ic_contact_list_picture);
 

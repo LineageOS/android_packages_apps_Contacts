@@ -44,7 +44,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-import java.text.ParseException;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -467,7 +467,7 @@ public class FallbackSource extends ContactsSource {
             kind.typeList.add(buildEventType(Event.TYPE_OTHER));
 
             kind.fieldList = Lists.newArrayList();
-            kind.fieldList.add(new EventDateEditField(false));
+            kind.fieldList.add(new EventDateEditField(context, false));
         }
 
         return kind;
@@ -766,7 +766,16 @@ public class FallbackSource extends ContactsSource {
         private static SimpleDateFormat sDateFormat =
                 new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         private static SimpleDateFormat sFullDateFormat =
-                new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US);
+                new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
+
+        public static final TimeZone sUtcTimeZone = TimeZone.getTimeZone("UTC");
+
+        static {
+            sDateFormat.setLenient(true);
+            sDateFormat.setTimeZone(sUtcTimeZone);
+            sFullDateFormat.setLenient(true);
+            sFullDateFormat.setTimeZone(sUtcTimeZone);
+        }
 
         public static Date parseDateFromDb(CharSequence value) {
             if (value == null) {
@@ -774,14 +783,7 @@ public class FallbackSource extends ContactsSource {
             }
 
             String valueString = value.toString();
-
-            /*
-             * Try the most comprehensive format first.
-             * Some servers (e.g. Exchange) use 'Z' as timezone, indicating
-             * that the time is in UTC. The SimpleDateFormat routines don't
-             * support that format, so replace 'Z' by 'GMT'.
-             */
-            Date date = parseDate(valueString.replace("Z", "GMT"), sFullDateFormat);
+            Date date = parseDate(valueString, sFullDateFormat);
             if (date != null) {
                 return date;
             }
@@ -790,12 +792,13 @@ public class FallbackSource extends ContactsSource {
         }
 
         private static Date parseDate(String value, SimpleDateFormat format) {
-            try {
-                /* Reset format time zone in case it was changed by a previous run */
-                format.setTimeZone(TimeZone.getDefault());
-                return format.parse(value);
-            } catch (ParseException e) {
+            ParsePosition position = new ParsePosition(0);
+            Date date = format.parse(value, position);
+
+            if (position.getIndex() == value.length()) {
+                return date;
             }
+
             return null;
         }
 
@@ -807,9 +810,14 @@ public class FallbackSource extends ContactsSource {
     protected static class EventDateEditField extends EditField {
         private View.OnClickListener mListener;
         private boolean mAllowClear;
+        private Date mDate;
+        private java.text.DateFormat mFormat;
 
-        public EventDateEditField(boolean allowClear) {
+        public EventDateEditField(final Context context, boolean allowClear) {
             super(Event.START_DATE, R.string.label_date, FLAGS_DATE);
+
+            mFormat = DateFormat.getDateFormat(context);
+            mFormat.setTimeZone(EventDateConverter.sUtcTimeZone);
 
             mAllowClear = allowClear;
             mListener = new View.OnClickListener() {
@@ -824,22 +832,19 @@ public class FallbackSource extends ContactsSource {
         private void openDatePicker(final EditText edit) {
             final Context context = edit.getContext();
             String value = edit.getText().toString();
-            final Calendar cal = Calendar.getInstance();
+            final Calendar cal = Calendar.getInstance(EventDateConverter.sUtcTimeZone, Locale.US);
 
-            try {
-                Date date = DateFormat.getDateFormat(context).parse(value);
-                cal.setTime(date);
-            } catch (ParseException e) {
-                /* use today in that case */
+            if (mDate != null) {
+                cal.setTime(mDate);
             }
 
             final DatePickerDialog.OnDateSetListener dateListener =
                     new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker view, int year, int month, int day) {
-                    final Context c = view.getContext();
                     cal.set(year, month, day);
-                    edit.setText(DateFormat.getDateFormat(c).format(cal.getTime()));
+                    mDate = cal.getTime();
+                    edit.setText(mFormat.format(mDate));
                 }
             };
 
@@ -854,6 +859,7 @@ public class FallbackSource extends ContactsSource {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         edit.setText(null);
+                        mDate = null;
                     }
                 });
             }
@@ -863,19 +869,17 @@ public class FallbackSource extends ContactsSource {
 
         @Override
         public CharSequence fromValue(Context context, CharSequence value) {
-            Date date = EventDateConverter.parseDateFromDb(value);
-            if (date != null) {
-                return DateFormat.getDateFormat(context).format(date);
+            mDate = EventDateConverter.parseDateFromDb(value);
+            if (mDate != null) {
+                return mFormat.format(mDate);
             }
             return null;
         }
 
         @Override
         public CharSequence toValue(Context context, CharSequence value) {
-            try {
-                Date date = DateFormat.getDateFormat(context).parse(value.toString());
-                return EventDateConverter.formatDateForDb(date);
-            } catch (ParseException e) {
+            if (mDate != null) {
+                return EventDateConverter.formatDateForDb(mDate);
             }
             return null;
         }

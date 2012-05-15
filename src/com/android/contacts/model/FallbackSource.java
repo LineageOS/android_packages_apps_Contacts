@@ -45,6 +45,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 import java.text.ParseException;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -766,7 +767,16 @@ public class FallbackSource extends ContactsSource {
         private static SimpleDateFormat sDateFormat =
                 new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         private static SimpleDateFormat sFullDateFormat =
-                new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US);
+                new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
+
+        public static final TimeZone sUtcTimeZone = TimeZone.getTimeZone("UTC");
+
+        static {
+            sDateFormat.setLenient(true);
+            sDateFormat.setTimeZone(sUtcTimeZone);
+            sFullDateFormat.setLenient(true);
+            sFullDateFormat.setTimeZone(sUtcTimeZone);
+        }
 
         public static Date parseDateFromDb(CharSequence value) {
             if (value == null) {
@@ -774,14 +784,7 @@ public class FallbackSource extends ContactsSource {
             }
 
             String valueString = value.toString();
-
-            /*
-             * Try the most comprehensive format first.
-             * Some servers (e.g. Exchange) use 'Z' as timezone, indicating
-             * that the time is in UTC. The SimpleDateFormat routines don't
-             * support that format, so replace 'Z' by 'GMT'.
-             */
-            Date date = parseDate(valueString.replace("Z", "GMT"), sFullDateFormat);
+            Date date = parseDate(valueString, sFullDateFormat);
             if (date != null) {
                 return date;
             }
@@ -790,12 +793,13 @@ public class FallbackSource extends ContactsSource {
         }
 
         private static Date parseDate(String value, SimpleDateFormat format) {
-            try {
-                /* Reset format time zone in case it was changed by a previous run */
-                format.setTimeZone(TimeZone.getDefault());
-                return format.parse(value);
-            } catch (ParseException e) {
+            ParsePosition position = new ParsePosition(0);
+            Date date = format.parse(value, position);
+
+            if (position.getIndex() == value.length()) {
+                return date;
             }
+
             return null;
         }
 
@@ -827,7 +831,10 @@ public class FallbackSource extends ContactsSource {
             final Calendar cal = Calendar.getInstance();
 
             try {
-                Date date = DateFormat.getDateFormat(context).parse(value);
+                java.text.DateFormat format = DateFormat.getDateFormat(context);
+                format.setTimeZone(EventDateConverter.sUtcTimeZone);
+
+                Date date = format.parse(value);
                 cal.setTime(date);
             } catch (ParseException e) {
                 /* use today in that case */

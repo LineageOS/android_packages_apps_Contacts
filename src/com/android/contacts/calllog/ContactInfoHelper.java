@@ -239,7 +239,7 @@ public class ContactInfoHelper {
                     info.normalizedNumber = c.getString(CallLogQuery.CACHED_NORMALIZED_NUMBER);
                     info.photoId = c.getLong(CallLogQuery.CACHED_PHOTO_ID);
                     info.photoUri = null;  // We do not cache the photo URI.
-                    info.formattedNumber = c.getString(CallLogQuery.CACHED_FORMATTED_NUMBER);
+                    info.formattedNumber = formatPhoneNumber(info.number, null, countryIso);
                 } else {
                     info = ContactInfo.EMPTY;
                 }

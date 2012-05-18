@@ -389,4 +389,7 @@
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"Znova poskusi nadgraditi"</string>
     <string name="search_results_for" msgid="8705490885073188513">"Rezultati iskanja za: <xliff:g id="QUERY">%s</xliff:g>"</string>
     <string name="search_results_searching" msgid="7755623475227227314">"Iskanje ..."</string>
+    <string name="date_year_toggle" msgid="7356532842767854606">"Vnesite leto"</string>
+    <string name="date_format_short_no_year">d. MM.</string>
+    <string name="date_format_full_no_year">MMMM d</string>
 </resources>

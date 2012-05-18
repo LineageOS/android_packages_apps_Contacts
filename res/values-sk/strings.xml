@@ -389,7 +389,10 @@
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"Skúsiť inovovať znova"</string>
     <string name="search_results_for" msgid="8705490885073188513">"Výsledky hľadania pre: <xliff:g id="QUERY">%s</xliff:g>"</string>
     <string name="search_results_searching" msgid="7755623475227227314">"Prebieha vyhľadávanie..."</string>
-<string name="menu_preferences">Nastavenia</string>
+    <string name="date_year_toggle" msgid="7356532842767854606">"Uviesť rok"</string>
+    <string name="date_format_short_no_year">d.M.</string>
+    <string name="date_format_full_no_year">d. MMMM</string>
+    <string name="menu_preferences">Nastavenia</string>
     <!-- Wysie: Dialer strings -->
     <string name="dialer_menu_sms">SMS/MMS</string>
     <!-- Wysie: Call log strings -->

@@ -1189,7 +1189,13 @@
 
     <!-- Title shown in the search result activity of contacts app while searching -->
     <string name="search_results_searching">Searching...</string>
-    
+
+    <!-- Checkbox whether to provide a year for a birthday [CHAR LIMIT=30] -->
+    <string name="date_year_toggle">Provide a year</string>
+
+    <string name="date_format_short_no_year">M/d</string>
+    <string name="date_format_full_no_year">MMMM d</string>
+
     <!-- Wysie: Menu strings -->
     <string name="menu_preferences">Preferences</string>
     

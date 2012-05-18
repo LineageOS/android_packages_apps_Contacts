@@ -479,4 +479,6 @@
     <item quantity="one">איש קשר 1</item>
     <item quantity="other"> אנשי קשר</item>
   </plurals>
+  <string name="date_format_short_no_year">dd/MM</string>
+  <string name="date_format_full_no_year">d בMMMM</string>
 </resources>

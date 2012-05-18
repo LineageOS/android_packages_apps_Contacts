@@ -398,6 +398,9 @@
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"Försök uppgradera igen"</string>
     <string name="search_results_for" msgid="8705490885073188513">"Sökresultat för: <xliff:g id="QUERY">%s</xliff:g>"</string>
     <string name="search_results_searching" msgid="7755623475227227314">"Söker..."</string>
+    <string name="date_year_toggle" msgid="7356532842767854606">"Ange ett år"</string>
+    <string name="date_format_short_no_year">dd-MM</string>
+    <string name="date_format_full_no_year">d MMMM</string>
     <string name="menu_preferences">Inställningar</string>
     <string name="dialer_menu_sms">SMS/MMS</string>
 

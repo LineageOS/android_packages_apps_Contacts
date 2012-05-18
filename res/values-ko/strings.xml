@@ -389,4 +389,7 @@
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"업그레이드 다시 시도"</string>
     <string name="search_results_for" msgid="8705490885073188513">"<xliff:g id="QUERY">%s</xliff:g>에 대한 검색결과"</string>
     <string name="search_results_searching" msgid="7755623475227227314">"검색 중..."</string>
+    <string name="date_year_toggle" msgid="7356532842767854606">"출생연도 입력 선택"</string>
+    <string name="date_format_short_no_year">M. d.</string>
+    <string name="date_format_full_no_year">MMMM d일</string>
 </resources>

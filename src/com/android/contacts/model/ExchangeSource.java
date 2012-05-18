@@ -324,7 +324,7 @@ public class ExchangeSource extends FallbackSource {
             kind.titleRes = com.android.internal.R.string.eventTypeBirthday;
 
             kind.fieldList = Lists.newArrayList();
-            kind.fieldList.add(new EventDateEditField(context, true));
+            kind.fieldList.add(new EventDateEditField(context, true, false));
         }
 
         return kind;

@@ -370,6 +370,12 @@
     <string name="menu_shareNumber">Nummer delen</string>
     <string name="menu_shareEmail">E-mailadres delen</string>
     <string name="menu_shareAddress">Adres delen</string>
+
+    <string name="date_year_toggle" msgid="7356532842767854606">"Een jaar opgeven"</string>
+    <string name="date_format_short_no_year">dd-MM</string>
+    <string name="date_format_full_no_year">d MMMM</string>
+
+    <!-- Wysie: Menu strings -->
     <string name="menu_preferences">Instellingen</string>
     <string name="dialer_menu_sms">Sms/mms</string>
     <string name="recent_calls_clear_call_log">Oproepenlijst wissen</string>

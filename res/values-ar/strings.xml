@@ -389,4 +389,7 @@
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"إعادة محاولة الترقية"</string>
     <string name="search_results_for" msgid="8705490885073188513">"نتائج البحث عن: <xliff:g id="QUERY">%s</xliff:g>"</string>
     <string name="search_results_searching" msgid="7755623475227227314">"جارِ البحث..."</string>
+    <string name="date_year_toggle" msgid="7356532842767854606">"عرض السنة"</string>
+    <string name="date_format_short_no_year">d‏/M‏</string>
+    <string name="date_format_full_no_year">d MMMM</string>
 </resources>

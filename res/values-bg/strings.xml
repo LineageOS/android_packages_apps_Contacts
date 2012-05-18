@@ -398,4 +398,8 @@
     <string name="t9_map_row_7">7pqrsфхцч</string>
     <string name="t9_map_row_8">8tuvшщъ</string>
     <string name="t9_map_row_9">9wxyzьюя</string>
+
+    <string name="date_year_toggle" msgid="7356532842767854606">"Въвеждане на година"</string>
+    <string name="date_format_short_no_year">dd.MM.</string>
+    <string name="date_format_full_no_year">d MMMM</string>
 </resources>

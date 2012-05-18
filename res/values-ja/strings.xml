@@ -391,6 +391,9 @@
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"アップグレードを再試行"</string>
     <string name="search_results_for" msgid="8705490885073188513">"検索結果: <xliff:g id="QUERY">%s</xliff:g>"</string>
     <string name="search_results_searching" msgid="7755623475227227314">"検索中..."</string>
+    <string name="date_year_toggle" msgid="7356532842767854606">"年を入力する"</string>
+    <string name="date_format_short_no_year">MM/dd</string>
+    <string name="date_format_full_no_year">M月d日</string>
 
     <!-- Wysie: Menu strings -->
     <string name="menu_preferences">"設定"</string>

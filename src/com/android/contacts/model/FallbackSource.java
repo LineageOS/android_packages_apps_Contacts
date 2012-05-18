@@ -17,9 +17,10 @@
 package com.android.contacts.model;
 
 import com.android.contacts.R;
+import com.android.contacts.datepicker.DatePicker;
+import com.android.contacts.datepicker.DatePickerDialog;
 import com.google.android.collect.Lists;
 
-import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -41,7 +42,6 @@ import android.provider.ContactsContract.CommonDataKinds.Website;
 import android.text.format.DateFormat;
 import android.view.inputmethod.EditorInfo;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.EditText;
 
 import java.text.ParsePosition;
@@ -467,7 +467,7 @@ public class FallbackSource extends ContactsSource {
             kind.typeList.add(buildEventType(Event.TYPE_OTHER));
 
             kind.fieldList = Lists.newArrayList();
-            kind.fieldList.add(new EventDateEditField(context, false));
+            kind.fieldList.add(new EventDateEditField(context, false, true));
         }
 
         return kind;
@@ -735,20 +735,32 @@ public class FallbackSource extends ContactsSource {
     }
 
     public static class EventDateInflater extends SimpleInflater {
+        private SimpleDateFormat mNoYearFormat;
+
         public EventDateInflater() {
             super(Event.START_DATE);
         }
 
         private CharSequence parseDate(Context context, CharSequence value) {
-            Date date = EventDateConverter.parseDateFromDb(value);
-
-            if (date != null) {
-                java.text.DateFormat format = DateFormat.getLongDateFormat(context);
-                format.setTimeZone(EventDateConverter.sUtcTimeZone);
-                return format.format(date);
+            EventDateConverter.ParseResult result = EventDateConverter.parseDateFromDb(value);
+            if (result == null) {
+                return value;
             }
 
-            return value;
+            java.text.DateFormat format;
+
+            if (!result.hasYear) {
+                if (mNoYearFormat == null) {
+                    mNoYearFormat = new SimpleDateFormat(
+                            context.getResources().getString(R.string.date_format_full_no_year));
+                }
+                format = mNoYearFormat;
+            } else {
+                format = DateFormat.getLongDateFormat(context);
+            }
+            format.setTimeZone(EventDateConverter.sUtcTimeZone);
+
+            return format.format(result.date);
         }
 
         public CharSequence inflateUsing(Context context, Cursor cursor) {
@@ -769,19 +781,32 @@ public class FallbackSource extends ContactsSource {
     private static class EventDateConverter {
         private static SimpleDateFormat sDateFormat =
                 new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        private static SimpleDateFormat sDateFormatNoYear =
+                new SimpleDateFormat("--MM-dd", Locale.US);
         private static SimpleDateFormat sFullDateFormat =
                 new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
 
         public static final TimeZone sUtcTimeZone = TimeZone.getTimeZone("UTC");
 
+        public static class ParseResult {
+            public ParseResult(Date date, boolean hasYear) {
+                this.date = date;
+                this.hasYear = hasYear;
+            }
+            Date date;
+            boolean hasYear;
+        }
+
         static {
             sDateFormat.setLenient(true);
             sDateFormat.setTimeZone(sUtcTimeZone);
+            sDateFormatNoYear.setLenient(true);
+            sDateFormatNoYear.setTimeZone(sUtcTimeZone);
             sFullDateFormat.setLenient(true);
             sFullDateFormat.setTimeZone(sUtcTimeZone);
         }
 
-        public static Date parseDateFromDb(CharSequence value) {
+        public static ParseResult parseDateFromDb(CharSequence value) {
             if (value == null) {
                 return null;
             }
@@ -789,10 +814,20 @@ public class FallbackSource extends ContactsSource {
             String valueString = value.toString();
             Date date = parseDate(valueString, sFullDateFormat);
             if (date != null) {
-                return date;
+                return new ParseResult(date, true);
             }
 
-            return parseDate(valueString, sDateFormat);
+            date = parseDate(valueString, sDateFormat);
+            if (date != null) {
+                return new ParseResult(date, true);
+            }
+
+            date = parseDate(valueString, sDateFormatNoYear);
+            if (date != null) {
+                return new ParseResult(date, false);
+            }
+
+            return null;
         }
 
         private static Date parseDate(String value, SimpleDateFormat format) {
@@ -806,24 +841,34 @@ public class FallbackSource extends ContactsSource {
             return null;
         }
 
-        public static CharSequence formatDateForDb(Date date) {
-            return sDateFormat.format(date);
+        public static CharSequence formatDateForDb(Date date, boolean withYear) {
+            SimpleDateFormat format = withYear ? sDateFormat : sDateFormatNoYear;
+            return format.format(date);
         }
     }
 
     protected static class EventDateEditField extends EditField {
         private View.OnClickListener mListener;
         private boolean mAllowClear;
+        private boolean mYearOptional;
         private Date mDate;
+        private boolean mHasYear;
         private java.text.DateFormat mFormat;
+        private java.text.DateFormat mFormatNoYear;
 
-        public EventDateEditField(final Context context, boolean allowClear) {
+        public EventDateEditField(final Context context, boolean allowClear, boolean yearOptional) {
             super(Event.START_DATE, R.string.label_date, FLAGS_DATE);
 
             mFormat = DateFormat.getDateFormat(context);
             mFormat.setTimeZone(EventDateConverter.sUtcTimeZone);
 
+            mFormatNoYear = new SimpleDateFormat(
+                    context.getResources().getString(R.string.date_format_short_no_year));
+            mFormatNoYear.setTimeZone(EventDateConverter.sUtcTimeZone);
+
             mAllowClear = allowClear;
+            mYearOptional = yearOptional;
+
             mListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -840,22 +885,27 @@ public class FallbackSource extends ContactsSource {
 
             if (mDate != null) {
                 cal.setTime(mDate);
+                if (!mHasYear) {
+                    cal.set(Calendar.YEAR, 1900);
+                }
             }
 
             final DatePickerDialog.OnDateSetListener dateListener =
                     new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker view, int year, int month, int day) {
-                    cal.set(year, month, day);
+                    mHasYear = year != 0;
+                    cal.set(year == 0 ? 1900 : year, month, day);
                     mDate = cal.getTime();
-                    edit.setText(mFormat.format(mDate));
+                    edit.setText(formatDate());
                 }
             };
 
             DatePickerDialog dp = new DatePickerDialog(context, dateListener,
-                                                       cal.get(Calendar.YEAR),
+                                                       mHasYear ? cal.get(Calendar.YEAR) : 0,
                                                        cal.get(Calendar.MONTH),
-                                                       cal.get(Calendar.DAY_OF_MONTH));
+                                                       cal.get(Calendar.DAY_OF_MONTH),
+                                                       mYearOptional);
 
             if (mAllowClear) {
                 dp.setButton3(context.getString(R.string.button_clear_date),
@@ -871,11 +921,27 @@ public class FallbackSource extends ContactsSource {
             dp.show();
         }
 
+        private CharSequence formatDate() {
+            if (mDate == null) {
+                return null;
+            }
+            if (mHasYear) {
+                return mFormat.format(mDate);
+            }
+            return mFormatNoYear.format(mDate);
+        }
+
         @Override
         public CharSequence fromValue(Context context, CharSequence value) {
-            mDate = EventDateConverter.parseDateFromDb(value);
+            EventDateConverter.ParseResult result = EventDateConverter.parseDateFromDb(value);
+            if (result != null) {
+                mDate = result.date;
+                mHasYear = result.hasYear;
+            } else {
+                mDate = null;
+            }
             if (mDate != null) {
-                return mFormat.format(mDate);
+                return formatDate();
             }
             return null;
         }
@@ -883,7 +949,7 @@ public class FallbackSource extends ContactsSource {
         @Override
         public CharSequence toValue(Context context, CharSequence value) {
             if (mDate != null) {
-                return EventDateConverter.formatDateForDb(mDate);
+                return EventDateConverter.formatDateForDb(mDate, mHasYear && mYearOptional);
             }
             return null;
         }

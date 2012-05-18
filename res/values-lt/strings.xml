@@ -389,4 +389,7 @@
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"Bandyti naujovinti iš naujo"</string>
     <string name="search_results_for" msgid="8705490885073188513">"Paieškos rezultatai pagal: <xliff:g id="QUERY">%s</xliff:g>"</string>
     <string name="search_results_searching" msgid="7755623475227227314">"Ieškoma..."</string>
+    <string name="date_year_toggle" msgid="7356532842767854606">"Nurodyti metus"</string>
+    <string name="date_format_short_no_year">MM-dd</string>
+    <string name="date_format_full_no_year">MMMM d</string>
 </resources>

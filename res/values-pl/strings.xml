@@ -389,7 +389,10 @@
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"Ponów próbę uaktualnienia"</string>
     <string name="search_results_for" msgid="8705490885073188513">"Wyniki wyszukiwania dla: <xliff:g id="QUERY">%s</xliff:g>"</string>
     <string name="search_results_searching" msgid="7755623475227227314">"Trwa wyszukiwanie..."</string>
-    
+    <string name="date_year_toggle" msgid="7356532842767854606">"Podaj rok"</string>
+    <string name="date_format_short_no_year">dd.MM.</string>
+    <string name="date_format_full_no_year">d MMMM</string>
+
     <!-- Wysie: Menu strings -->
     <string name="menu_preferences">Ustawienia</string>
     

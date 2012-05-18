@@ -389,4 +389,5 @@
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"Повторен опит за надстройка"</string>
     <string name="search_results_for" msgid="8705490885073188513">"Резултати от търсенето на: <xliff:g id="QUERY">%s</xliff:g>"</string>
     <string name="search_results_searching" msgid="7755623475227227314">"Търси се..."</string>
+    <string name="date_year_toggle" msgid="7356532842767854606">"Въвеждане на година"</string>
 </resources>

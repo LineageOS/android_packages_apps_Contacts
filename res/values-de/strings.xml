@@ -408,6 +408,7 @@
     <string name="upgrade_out_of_memory_uninstall" msgid="1721798828992091432">"Einige Anwendungen deinstallieren"</string>
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"Upgrade wiederholen"</string>
     <string name="search_results_for" msgid="8705490885073188513">"Suchergebnisse für: <xliff:g id="QUERY">%s</xliff:g>"</string>
+    <string name="date_year_toggle" msgid="7356532842767854606">"Jahr angeben"</string>
 
     <!-- Wysie: Menu strings -->
     <string name="menu_preferences">Einstellungen</string>

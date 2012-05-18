@@ -398,6 +398,9 @@
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"Yeni sürüme geçmeyi tekrar dene"</string>
     <string name="search_results_for" msgid="8705490885073188513">"Şunun için arama sonuçları: <xliff:g id="QUERY">%s</xliff:g>"</string>
     <string name="search_results_searching" msgid="7755623475227227314">"Aranıyor..."</string>
+    <string name="date_year_toggle" msgid="7356532842767854606">"Yıl girin"</string>
+    <string name="date_format_short_no_year">dd MM</string>
+    <string name="date_format_full_no_year">dd MMMM</string>
     <string name="menu_preferences">Seçenekler</string>
     <string name="dialer_menu_sms">SMS/MMS</string>
     <string name="recent_calls_clear_call_log">Arama kaydını sil</string>

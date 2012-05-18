@@ -464,6 +464,9 @@
     <string name="summary_data_font_size">Le permite elegir el tamaño de la fuente utilizada para mostrar información de contacto detallada</string>
     <string name="title_default_phone_tab">Pestaña por defecto</string>
     <string name="summary_default_phone_tab">Define que pestaña se abre cuando se inicia la aplicación del teléfono</string>
+    <string name="date_year_toggle" msgid="7356532842767854606">"Introducir año"</string>
+    <string name="date_format_short_no_year">dd/MM</string>
+    <string name="date_format_full_no_year">d \'de\' MMMM</string>
 
     <!-- Default Phone Tab strings -->
     <string name="default_phone_tab_last_used">Última pestaña usada</string>

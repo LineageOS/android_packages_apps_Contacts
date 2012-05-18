@@ -427,6 +427,9 @@
   <string name="search_results_for" msgid="8705490885073188513">"Výsledky vyhledávání pro dotaz: <xliff:g id="QUERY">%s</xliff:g>"</string>
   <string name="search_results_searching" msgid="7755623475227227314">"Vyhledávání\u2026"</string>
   <string name="menu_preferences">Nastavení</string>
+  <string name="date_year_toggle" msgid="7356532842767854606">"Uvést rok"</string>
+  <string name="date_format_short_no_year">d. M.</string>
+  <string name="date_format_full_no_year">d. MMMM</string>
 
   <!-- Wysie: Dialer strings -->
   <string name="dialer_menu_sms">SMS/MMS</string>

@@ -389,7 +389,9 @@
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"Verziófrissítés újrapróbálása"</string>
     <string name="search_results_for" msgid="8705490885073188513">"Találatok a következőre: <xliff:g id="QUERY">%s</xliff:g>"</string>
     <string name="search_results_searching" msgid="7755623475227227314">"Keresés..."</string>
-
+    <string name="date_year_toggle" msgid="7356532842767854606">"Születési év megadása"</string>
+    <string name="date_format_short_no_year">MM.dd.</string>
+    <string name="date_format_full_no_year">MMMM d</string>
     <string name="menu_shareNumber">Szám megosztása</string>
     <string name="menu_shareEmail">E-mail megosztása</string>
     <string name="menu_shareAddress">Cím megosztása</string>

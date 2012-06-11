@@ -53,6 +53,23 @@
     },
     {
       "key": {
+        "uuid": "AAAAUH///pE\u003d",
+        "filename": "res/values-de/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1683
+      },
+      "writtenOn": "2012-06-11T17:59:59Z",
+      "side": 1,
+      "message": "T9-Filter? Klingt wie ein Kaffeefilter...",
+      "revId": "bad04c6f651aa539d05d8c1da9425a53d5187f68",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAUH///uo\u003d",
         "filename": "res/values-de/strings.xml",
         "patchSetId": 2
@@ -70,6 +87,23 @@
     },
     {
       "key": {
+        "uuid": "AAAAUH///pA\u003d",
+        "filename": "res/values-de/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1683
+      },
+      "writtenOn": "2012-06-11T17:59:59Z",
+      "side": 1,
+      "message": "Dannys Vorschlag!",
+      "revId": "bad04c6f651aa539d05d8c1da9425a53d5187f68",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAUH///uk\u003d",
         "filename": "res/values-de/strings.xml",
         "patchSetId": 2
@@ -81,6 +115,40 @@
       "writtenOn": "2012-06-11T12:35:37Z",
       "side": 1,
       "message": "Aus CM7 (fand ich da auch besser):\n    \u003cstring name\u003d\"t9_sort_name\"\u003eNamenstreffer bevorzugen\u003c/string\u003e\n    \u003cstring name\u003d\"t9_sort_number\"\u003eNummerntreffer bevorzugen\u003c/string\u003e",
+      "revId": "bad04c6f651aa539d05d8c1da9425a53d5187f68",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUH///o8\u003d",
+        "filename": "res/values-de/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1683
+      },
+      "writtenOn": "2012-06-11T17:59:59Z",
+      "side": 1,
+      "message": "Dannys Vorschlag klingt gut. Eventuell näher am Original:\nnach Namen / Nummern sortieren",
+      "revId": "bad04c6f651aa539d05d8c1da9425a53d5187f68",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUH///o0\u003d",
+        "filename": "res/values-de/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1683
+      },
+      "writtenOn": "2012-06-11T17:59:59Z",
+      "side": 1,
+      "message": "vorschlagen oder vervollständigen? Titel und Beschreibung passen nicht zusammen.",
       "revId": "bad04c6f651aa539d05d8c1da9425a53d5187f68",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -115,6 +183,23 @@
       "writtenOn": "2012-06-11T12:35:37Z",
       "side": 1,
       "message": "Da fehlt ein Komma.\n\nVorschlag: \"Klick auf Vorschlag ruft Kontakt an\" ... ganz sicher bin ich mir da aber noch nicht.\n\nAls Anregung: CM7 hat\n    \u003cstring name\u003d\"t9_dial_click_title\"\u003eGewählten Kontakt anrufen\u003c/string\u003e\n    \u003cstring name\u003d\"t9_dial_click_summary\"\u003eAusgewählten Kontakt bei T9-Suche anrufen\u003c/string\u003e",
+      "revId": "bad04c6f651aa539d05d8c1da9425a53d5187f68",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUH///ow\u003d",
+        "filename": "res/values-de/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1683
+      },
+      "writtenOn": "2012-06-11T17:59:59Z",
+      "side": 1,
+      "message": "aus CM/ wie Danny vorschlägt übernehmen.",
       "revId": "bad04c6f651aa539d05d8c1da9425a53d5187f68",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false

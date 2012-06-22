@@ -40,6 +40,8 @@ import android.widget.TextView;
 
 import com.android.contacts.ContactPhotoManager;
 import com.android.contacts.R;
+import com.android.contacts.dialpad.util.NameToNumber;
+import com.android.contacts.dialpad.util.NameToNumberFactory;
 
 /**
  * @author shade, Danesh, pawitp
@@ -67,7 +69,8 @@ class T9Search {
     private Set<ContactItem> mAllResults = new LinkedHashSet<ContactItem>();
     private ArrayList<ContactItem> mContacts = new ArrayList<ContactItem>();
     private String mPrevInput;
-    private static char[][] sT9Map;
+    private static String sT9Chars;
+    private static String sT9Digits;
 
     public T9Search(Context context) {
         mContext = context;
@@ -75,8 +78,9 @@ class T9Search {
     }
 
     private void getAll() {
-        if (sT9Map == null)
-            initT9Map();
+        initT9Map();
+
+        NameToNumber normalizer = NameToNumberFactory.create(mContext, sT9Chars, sT9Digits);
 
         Cursor contact = mContext.getContentResolver().query(Contacts.CONTENT_URI, CONTACT_PROJECTION, CONTACT_QUERY, null, CONTACT_SORT);
         Cursor phone = mContext.getContentResolver().query(Phone.CONTENT_URI, PHONE_PROJECTION, PHONE_ID_SELECTION, PHONE_ID_SELECTION_ARGS, PHONE_SORT);
@@ -94,7 +98,7 @@ class T9Search {
                 contactInfo.name = contact.getString(1);
                 contactInfo.number = PhoneNumberUtils.formatNumber(num);
                 contactInfo.normalNumber = removeNonDigits(num);
-                contactInfo.normalName = nameToNumber(contact.getString(1));
+                contactInfo.normalName = normalizer.convert(contact.getString(1));
                 contactInfo.timesContacted = contact.getInt(2);
                 contactInfo.isSuperPrimary = phone.getInt(2) > 0;
                 contactInfo.groupType = Phone.getTypeLabel(mContext.getResources(), phone.getInt(3), phone.getString(4));
@@ -215,43 +219,23 @@ class T9Search {
     }
 
     private void initT9Map() {
-        String[] t9Array = mContext.getResources().getStringArray(R.array.t9_map);
-        sT9Map = new char[t9Array.length][];
-        int rc = 0;
-        for (String item : t9Array) {
-            int cc = 0;
-            sT9Map[rc] = new char[item.length()];
-            for (char ch : item.toCharArray()) {
-                sT9Map[rc][cc] = ch;
-                cc++;
-            }
-            rc++;
-        }
-    }
+        synchronized(this.getClass()) {
+            if (sT9Chars != null)
+                return;
 
-    private static String nameToNumber(String name) {
-        StringBuilder sb = new StringBuilder();
-        int len = name.length();
-        for (int i = 0; i < len; i++) {
-            boolean matched = false;
-            char ch = Character.toLowerCase(name.charAt(i));
-            for (char[] row : sT9Map) {
-                for (char a : row) {
-                    if (ch == a) {
-                        matched = true;
-                        sb.append(row[0]);
-                        break;
-                    }
-                }
-                if (matched) {
-                    break;
+            StringBuilder bT9Chars = new StringBuilder();
+            StringBuilder bT9Digits = new StringBuilder();
+
+            for (String item : mContext.getResources().getStringArray(R.array.t9_map)) {
+                bT9Chars.append(item);
+                for (int i = 0; i < item.length(); i++) {
+                    bT9Digits.append(item.charAt(0));
                 }
             }
-            if (!matched) {
-                sb.append(sT9Map[0][0]);
-            }
+
+            sT9Chars = bT9Chars.toString();
+            sT9Digits = bT9Digits.toString();
         }
-        return sb.toString();
     }
 
     public static String removeNonDigits(String number) {

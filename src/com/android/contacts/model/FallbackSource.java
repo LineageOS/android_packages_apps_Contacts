@@ -741,9 +741,13 @@ public class FallbackSource extends ContactsSource {
 
         private CharSequence parseDate(Context context, CharSequence value) {
             Date date = EventDateConverter.parseDateFromDb(value);
+
             if (date != null) {
-                return DateFormat.getLongDateFormat(context).format(date);
+                java.text.DateFormat format = DateFormat.getLongDateFormat(context);
+                format.setTimeZone(EventDateConverter.sUtcTimeZone);
+                return format.format(date);
             }
+
             return value;
         }
 

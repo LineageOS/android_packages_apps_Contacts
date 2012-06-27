@@ -216,6 +216,16 @@ public class DialpadFragment extends Fragment
 
     private boolean mWasEmptyBeforeTextChange;
 
+    /**
+     * This field is set to true while processing an incoming DIAL intent, in order to make sure
+     * that SpecialCharSequenceMgr actions can be triggered by user input but *not* by a
+     * tel: URI passed by some other app.  It will be set to false when all digits are cleared.
+     */
+    private boolean mDigitsFilledByIntent;
+
+    private static final String PREF_DIGITS_FILLED_BY_INTENT = "pref_digits_filled_by_intent";
+
+    @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         mWasEmptyBeforeTextChange = TextUtils.isEmpty(s);
     }
@@ -233,12 +243,14 @@ public class DialpadFragment extends Fragment
     }
 
     public void afterTextChanged(Editable input) {
-        if (SpecialCharSequenceMgr.handleChars(getActivity(), input.toString(), mDigits)) {
+        if (!mDigitsFilledByIntent &&
+                SpecialCharSequenceMgr.handleChars(getActivity(), input.toString(), mDigits)) {
             // A special sequence was entered, clear the digits
             mDigits.getText().clear();
         }
 
         if (isDigitsEmpty()) {
+            mDigitsFilledByIntent = false;
             mDigits.setCursorVisible(false);
         }
 
@@ -263,6 +275,10 @@ public class DialpadFragment extends Fragment
 
         mProhibitedPhoneNumberRegexp = getResources().getString(
                 R.string.config_prohibited_phone_number_regexp);
+
+        if (state != null) {
+            mDigitsFilledByIntent = state.getBoolean(PREF_DIGITS_FILLED_BY_INTENT);
+        }
     }
 
     private ContentObserver mContactObserver = new ContentObserver(new Handler()) {
@@ -387,6 +403,8 @@ public class DialpadFragment extends Fragment
                 if ("tel".equals(uri.getScheme())) {
                     // Put the requested number into the input area
                     String data = uri.getSchemeSpecificPart();
+                    // Remember it is filled via Intent.
+                    mDigitsFilledByIntent = true;
                     setFormattedDigits(data, null);
                     return true;
                 } else {
@@ -400,6 +418,8 @@ public class DialpadFragment extends Fragment
                         if (c != null) {
                             try {
                                 if (c.moveToFirst()) {
+                                    // Remember it is filled via Intent.
+                                    mDigitsFilledByIntent = true;
                                     // Put the number into the input area
                                     setFormattedDigits(c.getString(0), c.getString(1));
                                     return true;
@@ -493,6 +513,9 @@ public class DialpadFragment extends Fragment
         showDialpadChooser(needToShowDialpadChooser);
     }
 
+    /**
+     * Sets formatted digits to digits field.
+     */
     private void setFormattedDigits(String data, String normalizedNumber) {
         // strip the non-dialable numbers out of the data string.
         String dialString = PhoneNumberUtils.extractNetworkPortion(data);
@@ -643,6 +666,12 @@ public class DialpadFragment extends Fragment
             getActivity().getContentResolver().registerContentObserver(
                     ContactsContract.Contacts.CONTENT_URI, true, mContactObserver);
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(PREF_DIGITS_FILLED_BY_INTENT, mDigitsFilledByIntent);
     }
 
     @Override

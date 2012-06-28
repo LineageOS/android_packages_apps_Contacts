@@ -1,35 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2007 The Android Open Source Project
+<!--  Copyright (C) 2007 The Android Open Source Project
+      Copyright (C) 2012 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
-  
+
           http://www.apache.org/licenses/LICENSE-2.0
-  
+
      Unless required by applicable law or agreed to in writing, software
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
--->
+ -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string-array name="otherLabels">
+        <item msgid="8287841928119937597">"Organisatie"</item>
+        <item msgid="7196592230748086755">"Opmerking"</item>
+    </string-array>
 
-<resources>
+    <!-- CYANOGENMOD EDITS -->
     <string-array name="entries_vm_button">
-        <item>Aan contacten toevoegen</item>
-        <item>SMS/MMS</item>
+        <item>Toevoegen aan contacten</item>
+        <item>Sms/mms</item>
         <item>Voicemail</item>
     </string-array>
-    
     <string-array name="view_contact_pic_sizes">
-        <item>Klein (Standaard)</item>
+        <item>Klein (standaard)</item>
         <item>Gemiddeld</item>
         <item>Groot</item>
         <item>Extra groot</item>
     </string-array>
-
     <string-array name="view_data_font_sizes">
-        <item>Klein (Standaard)</item>
+        <item>Klein (standaard)</item>
         <item>Gemiddeld</item>
         <item>Groot</item>
         <item>Extra groot</item>

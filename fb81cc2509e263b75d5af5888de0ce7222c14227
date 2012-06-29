@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAAUH//7gU\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 2049
+      },
+      "writtenOn": "2012-06-29T23:04:41Z",
+      "side": 1,
+      "message": "Moet dan wel overal gesprekken vervangen door oproepen.",
+      "revId": "fb81cc2509e263b75d5af5888de0ce7222c14227",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAUH//7qs\u003d",
         "filename": "res/values-nl/strings.xml",
         "patchSetId": 1
@@ -13,6 +30,24 @@
       "writtenOn": "2012-06-28T22:50:18Z",
       "side": 1,
       "message": "Weet u zeker dat u alle inkomende gesprekken wilt verwijderen?",
+      "revId": "fb81cc2509e263b75d5af5888de0ce7222c14227",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUH//7gQ\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 2049
+      },
+      "writtenOn": "2012-06-29T23:04:41Z",
+      "side": 1,
+      "message": "Vind het voorgestelde nog niet zo slecht. Verslag kan ook niet gebruikt worden. Enkel gegevens of informatie of het voorgestelde.",
+      "parentUuid": "AAAAUH//7qs\u003d",
       "revId": "fb81cc2509e263b75d5af5888de0ce7222c14227",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -98,6 +133,24 @@
       "writtenOn": "2012-06-28T22:50:18Z",
       "side": 1,
       "message": "legen \u003d wissen, zoals je ook boven veranderd hebt.",
+      "revId": "fb81cc2509e263b75d5af5888de0ce7222c14227",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUH//7gs\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 2049
+      },
+      "writtenOn": "2012-06-29T23:04:41Z",
+      "side": 1,
+      "message": "En ook zonder \"vragen\"?",
+      "parentUuid": "AAAAUH//7qY\u003d",
       "revId": "fb81cc2509e263b75d5af5888de0ce7222c14227",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false

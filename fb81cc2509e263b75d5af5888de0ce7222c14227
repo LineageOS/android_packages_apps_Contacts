@@ -286,6 +286,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAUH//7Mc\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-06-30T15:15:36Z",
+      "side": 1,
+      "message": "Ik vind jouw vertaling niet anders, maar anders wat ik hierboven heb geschreven. Want automatisch alle gemiste oproepen wissen is niet zo erg als een inkomende oproep verwijderen, en jouw vertaling hier ligt dan ook dichter bij de \u0027actie\u0027 dan bij bovenstaande.",
+      "parentUuid": "AAAAUH//7RU\u003d",
+      "revId": "fb81cc2509e263b75d5af5888de0ce7222c14227",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAUH//7qg\u003d",
         "filename": "res/values-nl/strings.xml",
         "patchSetId": 1
@@ -491,6 +509,24 @@
       "side": 1,
       "message": "Oei, ik heb een ziekte :)\nMaar dan nog is het \"Contactfoto\"",
       "parentUuid": "AAAAUH//7c0\u003d",
+      "revId": "fb81cc2509e263b75d5af5888de0ce7222c14227",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUH//7MY\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-06-30T15:15:36Z",
+      "side": 1,
+      "message": "Geeft niet, hier vertalingen controleren is het beste medicijn!\n- Contactfoto: done",
+      "parentUuid": "AAAAUH//7RQ\u003d",
       "revId": "fb81cc2509e263b75d5af5888de0ce7222c14227",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -807,6 +843,24 @@
       "side": 1,
       "message": "OK!",
       "parentUuid": "AAAAUH//7cM\u003d",
+      "revId": "fb81cc2509e263b75d5af5888de0ce7222c14227",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUH//7MU\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-06-30T15:15:36Z",
+      "side": 1,
+      "message": "- Geselecteerd\n- dat",
+      "parentUuid": "AAAAUH//7RM\u003d",
       "revId": "fb81cc2509e263b75d5af5888de0ce7222c14227",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false

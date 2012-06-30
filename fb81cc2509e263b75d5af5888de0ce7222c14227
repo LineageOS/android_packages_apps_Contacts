@@ -162,6 +162,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAUH//7RY\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-06-30T04:15:36Z",
+      "side": 1,
+      "message": "\"Are you sure you want to clear all outgoing call records\"\n\nIn ICS kan je standaard alleen kiezen voor \"gesprekken wissen\". Daar wordt ook niet extra gespecificeerd dat het \"info over gesprekken\" is. Door CM is er dan nu onderscheid tussen ingaande en uitgaande, maar de toevoeging \"info over\" vind ik echt overbodig (en te lang).\n\nIk snap je gedachten over dat je kan denken dat het automatisch wordt verwijderd, maar het is geen optie die je aan/uit kan vinken, het is een eenmalige actie en je zit specifiek in het gespreksgeschiedenis-scherm\n\nDus ik vind mijn voorstel nog steeds de beste :)",
+      "parentUuid": "AAAAUH//7ZA\u003d",
+      "revId": "fb81cc2509e263b75d5af5888de0ce7222c14227",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAUH//7qo\u003d",
         "filename": "res/values-nl/strings.xml",
         "patchSetId": 1
@@ -226,6 +244,24 @@
       "side": 1,
       "message": "Dat is dan toch weer iets anders. Toch heb ik liever iets anders voor bovenstaande zinnen, en dat dat hier ook consistent gebruikt wordt.",
       "parentUuid": "AAAAUH//7qk\u003d",
+      "revId": "fb81cc2509e263b75d5af5888de0ce7222c14227",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUH//7RU\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-06-30T04:15:36Z",
+      "side": 1,
+      "message": "Ik vind het niet anders. Je hebt uitgaande gesprekken, ingaande gesprekken en gemiste oproepen. En je kan ze nu in CM allemaal apart wissen, ipv alles tegelijk wissen in ICS.",
+      "parentUuid": "AAAAUH//7dI\u003d",
       "revId": "fb81cc2509e263b75d5af5888de0ce7222c14227",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -419,6 +455,24 @@
       "side": 1,
       "message": "https://nl.wikipedia.org/wiki/Onjuist_spatiegebruik",
       "parentUuid": "AAAAUH//7qE\u003d",
+      "revId": "fb81cc2509e263b75d5af5888de0ce7222c14227",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUH//7RQ\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-06-30T04:15:36Z",
+      "side": 1,
+      "message": "Oei, ik heb een ziekte :)\nMaar dan nog is het \"Contactfoto\"",
+      "parentUuid": "AAAAUH//7c0\u003d",
       "revId": "fb81cc2509e263b75d5af5888de0ce7222c14227",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -717,6 +771,24 @@
       "side": 1,
       "message": "naamwoord*",
       "parentUuid": "AAAAUH//7cY\u003d",
+      "revId": "fb81cc2509e263b75d5af5888de0ce7222c14227",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUH//7RM\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-06-30T04:15:36Z",
+      "side": 1,
+      "message": "OK!",
+      "parentUuid": "AAAAUH//7cM\u003d",
       "revId": "fb81cc2509e263b75d5af5888de0ce7222c14227",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false

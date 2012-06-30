@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAUH//7ZE\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-06-30T00:43:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAUH//7bs\u003d",
+      "revId": "fb81cc2509e263b75d5af5888de0ce7222c14227",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAUH//7qs\u003d",
         "filename": "res/values-nl/strings.xml",
         "patchSetId": 1
@@ -120,6 +138,24 @@
       "side": 1,
       "message": "Weet u zeker dat u alle inkomende oproepverslagen wilt verwijderen?\n\nWeet u zeker dat u alle inkomende oproepinformatie wilt verwijderen?\n\nWeet u zeker dat u alle inkomende oproepgegevens wilt verwijderen?",
       "parentUuid": "AAAAUH//7dQ\u003d",
+      "revId": "fb81cc2509e263b75d5af5888de0ce7222c14227",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUH//7ZA\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-06-30T00:43:20Z",
+      "side": 1,
+      "message": "verslagen \u003d 9;\ninformatie \u003d 10;\ngegevens \u003d 8\n\nAls je een lage resolutie hebt, telt elke karakter!",
+      "parentUuid": "AAAAUH//7bc\u003d",
       "revId": "fb81cc2509e263b75d5af5888de0ce7222c14227",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false

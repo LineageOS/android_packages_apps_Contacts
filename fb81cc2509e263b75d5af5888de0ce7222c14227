@@ -180,6 +180,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAUH//7Pw\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 2049
+      },
+      "writtenOn": "2012-06-30T04:45:14Z",
+      "side": 1,
+      "message": "Het is meer dat je de \u0027verslagen/gegevens\u0027 verwijderd en niet de gesprekken zelf. (vandaar \u0027records\u0027 in het engels)\nHet is natuurlijk zonder ook duidelijk waar het over gaat, maar niet echt correct.",
+      "parentUuid": "AAAAUH//7RY\u003d",
+      "revId": "fb81cc2509e263b75d5af5888de0ce7222c14227",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAUH//7qo\u003d",
         "filename": "res/values-nl/strings.xml",
         "patchSetId": 1

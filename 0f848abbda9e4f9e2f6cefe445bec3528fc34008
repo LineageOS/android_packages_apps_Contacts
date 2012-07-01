@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAUH//7Bs\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 2248
+      },
+      "writtenOn": "2012-07-01T18:58:32Z",
+      "side": 1,
+      "message": "Is er een reden om van gesprekkenlijst gesprekslijst te maken? Want ik vind de eerste veel beter klinken.",
+      "revId": "0f848abbda9e4f9e2f6cefe445bec3528fc34008",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUH//7Bo\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 2248
+      },
+      "writtenOn": "2012-07-01T18:58:32Z",
+      "side": 1,
+      "message": "Ik heb net de discussie gelezen, wat mij betreft is gespreksgegevens de beste optie, alhoewel \"inkomende gesprekken\" wat mij betreft ook prima kan (dus zonder gegevens). Dit is in elk geval beter/helderder dan \"alles over\" in patch set 1.",
+      "revId": "0f848abbda9e4f9e2f6cefe445bec3528fc34008",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUH//7Bc\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 2248
+      },
+      "writtenOn": "2012-07-01T18:58:32Z",
+      "side": 1,
+      "message": "Hier dan ook niet gespreksgegevens van maken? \"Weet u zeker dat u de inkomende gespreksgegevens wilt verwijderen?\"",
+      "revId": "0f848abbda9e4f9e2f6cefe445bec3528fc34008",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUH//7BU\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 2248
+      },
+      "writtenOn": "2012-07-01T18:58:32Z",
+      "side": 1,
+      "message": "Hier dan niet net als hierboven gesprekkenlijst van maken?",
+      "revId": "0f848abbda9e4f9e2f6cefe445bec3528fc34008",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

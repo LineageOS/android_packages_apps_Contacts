@@ -178,6 +178,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAUH//6g8\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 2049
+      },
+      "writtenOn": "2012-07-03T22:48:24Z",
+      "side": 1,
+      "message": "Gemiste oproepen klinkt inderdaad logischer dan gemiste gesprekken. Akkoord met voorstel (eventueel alles oproepen maar dit klinkt goed)",
+      "parentUuid": "AAAAUH//6mw\u003d",
+      "revId": "0f848abbda9e4f9e2f6cefe445bec3528fc34008",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAUH//6vs\u003d",
         "filename": "res/values-nl/strings.xml",
         "patchSetId": 2

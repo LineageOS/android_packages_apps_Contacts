@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAUH//6m8\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-07-03T13:32:47Z",
+      "side": 1,
+      "message": "- Oproepenlijst",
+      "parentUuid": "AAAAUH//6wE\u003d",
+      "revId": "0f848abbda9e4f9e2f6cefe445bec3528fc34008",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAUH//6v0\u003d",
         "filename": "res/values-nl/strings.xml",
         "patchSetId": 2
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAUH//6m4\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-07-03T13:32:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAUH//6v0\u003d",
+      "revId": "0f848abbda9e4f9e2f6cefe445bec3528fc34008",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAUH//6vw\u003d",
         "filename": "res/values-nl/strings.xml",
         "patchSetId": 2
@@ -65,6 +101,24 @@
       "writtenOn": "2012-07-03T02:56:20Z",
       "side": 1,
       "message": "Oproepenlijst",
+      "revId": "0f848abbda9e4f9e2f6cefe445bec3528fc34008",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUH//6m0\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-07-03T13:32:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAUH//6vw\u003d",
       "revId": "0f848abbda9e4f9e2f6cefe445bec3528fc34008",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -100,6 +154,24 @@
       "side": 1,
       "message": "Dit is inderdaad wel beter, al snap ik nog steeds niet echt waarom er verschil zou moeten zitten tussen \"inkomende gesprekken\" en \"inkomende gespreksgegevens\".\n\nEn daarnaast is er volgens mij ook gekozen om alles om te dopen tot \"Oproepenlijst\", dan zou dat hier ook toegepast moeten worden, dus \"inkomende oproepgegevens\".\n(Als zou ik nog steds opteren voor \"inkomende oproepen\".)",
       "parentUuid": "AAAAUH//7Bo\u003d",
+      "revId": "0f848abbda9e4f9e2f6cefe445bec3528fc34008",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUH//6mw\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-07-03T13:32:47Z",
+      "side": 1,
+      "message": "Er moet een verschil worden gemaakt tussen een oproep en een gesprek (Google gebruikt ook beide woorden). Naar mijn mening moet je alleen gesprek gebruiken als je zeker weet dat er opgenomen is, dat je wat hebt gepraat, en dat je dus echt een gesprek aan het voeren bent. Al het andere (niet opgenomen, opgenomen en niet opgenomen gemixt) wordt dan een oproep.\nHier wordt een onderscheid gemaakt tussen gemist (niet opgenomen) en inkomend/uitgaand (blijkbaar wel opgenomen, dus een gesprek). Vandaar dat ik zeg:\n\n- Weet u zeker dat u alle inkomende gesprekken wilt verwijderen?\n- Weet u zeker dat u alle uitgaande gesprekken wilt verwijderen?\n- Weet u zeker dat u alle gemiste oproepen wilt verwijderen?\n\n(gegevens heb ik er maar uitgehaald)",
+      "parentUuid": "AAAAUH//6wA\u003d",
       "revId": "0f848abbda9e4f9e2f6cefe445bec3528fc34008",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false

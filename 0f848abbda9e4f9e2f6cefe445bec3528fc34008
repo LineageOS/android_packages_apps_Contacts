@@ -19,6 +19,58 @@
     },
     {
       "key": {
+        "uuid": "AAAAUH//6wE\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-07-03T02:56:20Z",
+      "side": 1,
+      "message": "Ik ben het met Kasper eens, maar aangezien hieronder alles is veranderd naar \"Oproepenlijst\" is dat nog beter.",
+      "parentUuid": "AAAAUH//7Bs\u003d",
+      "revId": "0f848abbda9e4f9e2f6cefe445bec3528fc34008",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUH//6v0\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-07-03T02:56:20Z",
+      "side": 1,
+      "message": "Oproepenlijst",
+      "revId": "0f848abbda9e4f9e2f6cefe445bec3528fc34008",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUH//6vw\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-07-03T02:56:20Z",
+      "side": 1,
+      "message": "Oproepenlijst",
+      "revId": "0f848abbda9e4f9e2f6cefe445bec3528fc34008",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAUH//7Bo\u003d",
         "filename": "res/values-nl/strings.xml",
         "patchSetId": 2
@@ -30,6 +82,41 @@
       "writtenOn": "2012-07-01T18:58:32Z",
       "side": 1,
       "message": "Ik heb net de discussie gelezen, wat mij betreft is gespreksgegevens de beste optie, alhoewel \"inkomende gesprekken\" wat mij betreft ook prima kan (dus zonder gegevens). Dit is in elk geval beter/helderder dan \"alles over\" in patch set 1.",
+      "revId": "0f848abbda9e4f9e2f6cefe445bec3528fc34008",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUH//6wA\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-07-03T02:56:20Z",
+      "side": 1,
+      "message": "Dit is inderdaad wel beter, al snap ik nog steeds niet echt waarom er verschil zou moeten zitten tussen \"inkomende gesprekken\" en \"inkomende gespreksgegevens\".\n\nEn daarnaast is er volgens mij ook gekozen om alles om te dopen tot \"Oproepenlijst\", dan zou dat hier ook toegepast moeten worden, dus \"inkomende oproepgegevens\".\n(Als zou ik nog steds opteren voor \"inkomende oproepen\".)",
+      "parentUuid": "AAAAUH//7Bo\u003d",
+      "revId": "0f848abbda9e4f9e2f6cefe445bec3528fc34008",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUH//6vs\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-07-03T02:56:20Z",
+      "side": 1,
+      "message": "uitgaande oproepgegevens.",
       "revId": "0f848abbda9e4f9e2f6cefe445bec3528fc34008",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -53,6 +140,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAUH//6v8\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-07-03T02:56:20Z",
+      "side": 1,
+      "message": "Of juist \"Oproepgegevens\"",
+      "parentUuid": "AAAAUH//7Bc\u003d",
+      "revId": "0f848abbda9e4f9e2f6cefe445bec3528fc34008",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAUH//7BU\u003d",
         "filename": "res/values-nl/strings.xml",
         "patchSetId": 2
@@ -64,6 +169,24 @@
       "writtenOn": "2012-07-01T18:58:32Z",
       "side": 1,
       "message": "Hier dan niet net als hierboven gesprekkenlijst van maken?",
+      "revId": "0f848abbda9e4f9e2f6cefe445bec3528fc34008",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUH//6v4\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-07-03T02:56:20Z",
+      "side": 1,
+      "message": "Nee, er was juist gekozen voor \"oproepen\"",
+      "parentUuid": "AAAAUH//7BU\u003d",
       "revId": "0f848abbda9e4f9e2f6cefe445bec3528fc34008",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false

@@ -248,6 +248,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAUH//6ds\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2012-07-04T01:48:18Z",
+      "side": 1,
+      "message": "Het gaat om de meest gebelde nummers...",
+      "parentUuid": "AAAAUH//6v8\u003d",
+      "revId": "0f848abbda9e4f9e2f6cefe445bec3528fc34008",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAUH//7BU\u003d",
         "filename": "res/values-nl/strings.xml",
         "patchSetId": 2

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAUH//6N4\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 2049
+      },
+      "writtenOn": "2012-07-05T19:08:07Z",
+      "side": 1,
+      "message": "trailing space.",
+      "revId": "f8d256dbae8514c2315712a64fde8d565d87c80b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

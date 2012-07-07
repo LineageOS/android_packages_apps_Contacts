@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!--  Copyright (C) 2006 The Android Open Source Project
+      Copyright (C) 2012 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,7 +14,6 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
-
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="sharedUserLabel" msgid="7965035505237135241">"Android-kerntoepassingen"</string>
@@ -47,14 +47,6 @@
     <string name="menu_viewAddress" msgid="1814744325763202024">"Adres op kaart tonen"</string>
     <string name="menu_makeDefaultNumber" msgid="4838759253316649534">"Als standaardnummer instellen"</string>
     <string name="menu_makeDefaultEmail" msgid="2599044610375789994">"Instellen als standaard e-mailadres"</string>
-
-    <!-- Menu item used to share the plain-text representation of a specific phone number -->
-    <string name="menu_shareNumber">Nummer delen</string>
-    <!-- Menu item used to share the plain-text representation of a specific email address -->
-    <string name="menu_shareEmail">E-mail delen</string>
-    <!-- Menu item used to share the plain-text representation of a specific address -->
-    <string name="menu_shareAddress">Adres delen</string>
-
     <string name="menu_splitAggregate" msgid="8368636463748691868">"Scheiden"</string>
     <string name="contactsSplitMessage" msgid="5253490235863170269">"Contacten gescheiden"</string>
     <string name="splitConfirmation_title" msgid="6716467920283502570">"Contacten scheiden"</string>
@@ -69,8 +61,8 @@
     <string name="menu_contactOptions" msgid="1957061455705020617">"Opties"</string>
     <string name="contactOptionsTitle" msgid="8259347644090700915">"Opties"</string>
     <string name="deleteConfirmation_title" msgid="6394309508930335204">"Verwijderen"</string>
-    <string name="readOnlyContactWarning" msgid="1390849295342594265">"U kunt contacten niet verwijderen uit alleen-lezen accounts, maar u kunt ze verbergen in uw contactenlijst."</string>
-    <string name="readOnlyContactDeleteConfirmation" msgid="2137170726670196909">"Dit contact bevat gegevens uit meerdere accounts. Gegevens uit alleen-lezen accounts worden verborgen in uw contactenlijst, maar niet verwijderd."</string>
+    <string name="readOnlyContactWarning" msgid="1390849295342594265">"U kunt contacten niet verwijderen uit alleen-lezen accounts, maar u kunt ze verbergen in uw contactlijst."</string>
+    <string name="readOnlyContactDeleteConfirmation" msgid="2137170726670196909">"Dit contact bevat gegevens uit meerdere accounts. Gegevens uit alleen-lezen accounts worden verborgen in uw contactlijst, maar niet verwijderd."</string>
     <string name="multipleContactDeleteConfirmation" msgid="938900978442960800">"Als u dit contact verwijdert, worden gegevens van meerdere accounts verwijderd."</string>
     <string name="deleteConfirmation" msgid="811706994761610640">"Dit contact wordt verwijderd."</string>
     <string name="menu_done" msgid="796017761764190697">"Gereed"</string>
@@ -92,10 +84,6 @@
     <string name="emailLabelsGroup" msgid="8389931313045344406">"E-mailadres"</string>
     <string name="imLabelsGroup" msgid="3898238486262614027">"Chat"</string>
     <string name="postalLabelsGroup" msgid="1618078212734693682">"Postadres"</string>
-  <string-array name="otherLabels">
-    <item msgid="8287841928119937597">"Organisatie"</item>
-    <item msgid="7196592230748086755">"Opmerking"</item>
-  </string-array>
     <string name="photoPickerNotFoundText" msgid="431331662154342581">"Er zijn geen foto\'s beschikbaar op de telefoon."</string>
     <string name="attachToContact" msgid="8820530304406066714">"Pictogram voor contact"</string>
     <string name="customLabelPickerTitle" msgid="1081475101983255212">"Aangepaste labelnaam"</string>
@@ -111,35 +99,13 @@
     <string name="showFilterPhones" msgid="4184858075465653970">"Alleen contacten met tel.nr."</string>
     <string name="showFilterPhonesDescrip" msgid="6644443248815191067">"Alleen contacten tonen met telefoonnummers"</string>
     <string name="headerContactGroups" msgid="2426134991932503843">"Te tonen contacten kiezen"</string>
-  <plurals name="groupDescrip">
-    <item quantity="other" msgid="3507881585720628389">"<xliff:g id="COUNT">%0$d</xliff:g> contacten"</item>
-  </plurals>
-  <plurals name="groupDescripPhones">
-    <item quantity="other" msgid="3816047547470490208">"<xliff:g id="COUNT_0">%1$d</xliff:g> contacten, <xliff:g id="COUNTWITHPHONES">%2$d</xliff:g> met telefoonnummers"</item>
-  </plurals>
     <string name="savingContact" msgid="4075751076741924939">"Contact opslaan\u2026"</string>
     <string name="savingDisplayGroups" msgid="2133152192716475939">"Weergaveopties opslaan\u2026"</string>
     <string name="contactSavedToast" msgid="7152589189385441091">"Contact opgeslagen."</string>
     <string name="contactSavedErrorToast" msgid="9189098776225004666">"Fout. Kan wijzigingen in contact niet opslaan."</string>
-  <plurals name="listTotalPhoneContacts">
-    <item quantity="one" msgid="8721111084815668845">"1 contact met telefoonnummer"</item>
-    <item quantity="other" msgid="6133262880804110289">"<xliff:g id="COUNT">%d</xliff:g> contacten met telefoonnummers"</item>
-  </plurals>
     <string name="listTotalPhoneContactsZero" msgid="2756295259674938869">"Geen zichtbare contacten met telefoonnummers"</string>
-  <plurals name="listTotalAllContacts">
-    <item quantity="one" msgid="1096068709488455155">"1 contact"</item>
-    <item quantity="other" msgid="2865867557378939630">"<xliff:g id="COUNT">%d</xliff:g> contacten"</item>
-  </plurals>
     <string name="listTotalAllContactsZero" msgid="6811347506748072822">"Geen zichtbare contacten"</string>
-  <plurals name="listFoundAllContacts">
-    <item quantity="one" msgid="2830107332033967280">"1 contact gevonden"</item>
-    <item quantity="other" msgid="7752927996850263152">"<xliff:g id="COUNT">%d</xliff:g> contacten gevonden"</item>
-  </plurals>
     <string name="listFoundAllContactsZero" msgid="5554368784319460828">"Contact niet gevonden"</string>
-  <plurals name="searchFoundContacts">
-    <item quantity="one" msgid="916648718690661777">"1 contact"</item>
-    <item quantity="other" msgid="5660384247071761844">"<xliff:g id="COUNT">%d</xliff:g> contacten"</item>
-  </plurals>
     <string name="contactsIconLabel" msgid="7666609097606552806">"Contact"</string>
     <string name="contactsFavoritesLabel" msgid="8417039765586853670">"Favoriet"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefoon"</string>
@@ -150,10 +116,6 @@
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Sms verzenden"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> bellen"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Nummer bewerken voor bellen"</string>
-
-    <!--Menu item used to add a number from the call log to Blacklist  -->
-    <string name="recentCalls_addToBlacklist">Aan blacklist toevoegen</string>
-
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Toevoegen aan contacten"</string>
     <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"Verwijderen uit Gesprekken"</string>
     <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Gesprekken wissen"</string>
@@ -276,10 +238,6 @@
     <string name="quickcontact_missing_app" msgid="4600366393134289038">"Er is geen app gevonden om deze actie uit te voeren"</string>
     <string name="quickcontact_remember_choice" msgid="5964536411579749424">"Deze keuze onthouden"</string>
     <string name="quickcontact_missing_name" msgid="5590266114306996632">"Onbekend"</string>
-
-    <!-- Text that is shown in the Badge, when there is no data to display -->
-    <string name="quickcontact_no_data">Geen data</string>
-
     <string name="menu_accounts" msgid="8499114602017077970">"Accounts"</string>
     <string name="menu_import_export" msgid="3765725645491577190">"Importeren/exporteren"</string>
     <string name="dialog_import_export" msgid="4771877268244096596">"Contacten importeren/exporteren"</string>
@@ -406,33 +364,29 @@
     <string name="search_results_for" msgid="8705490885073188513">"Zoekresultaten voor: <xliff:g id="QUERY">%s</xliff:g>"</string>
     <string name="search_results_searching" msgid="7755623475227227314">"Zoeken\u2026"</string>
 
-
-    <!-- Wysie: Menu strings -->
+    <!-- CYANOGENMOD EDITS -->
+    <string name="quickcontact_no_data">Geen gegevens</string>
+    <string name="recentCalls_addToBlacklist">Toevoegen aan zwarte lijst</string>
+    <string name="menu_shareNumber">Nummer delen</string>
+    <string name="menu_shareEmail">E-mailadres delen</string>
+    <string name="menu_shareAddress">Adres delen</string>
     <string name="menu_preferences">Instellingen</string>
-
-    <!-- Wysie: Dialer strings -->
-    <string name="dialer_menu_sms">SMS/MMS</string>
-
-    <!-- Wysie: Call log strings -->
-    <string name="recent_calls_clear_call_log">Leeg gesprekkenlijst</string>
+    <string name="dialer_menu_sms">Sms/mms</string>
+    <string name="recent_calls_clear_call_log">Oproepenlijst wissen</string>
     <string name="recent_calls_clear_what">Welke oproepen?</string>
     <string name="recent_calls_clear_all">Alles</string>
-    <string name="recent_calls_clear_incoming">Inkomend</string>
-    <string name="recent_calls_clear_outgoing">Uitgaand</string>
-    <string name="recent_calls_clear_missed">Gemist</string>
-    <string name="alert_clear_call_log_title">Leeg gesprekkenlijst</string>
-    <string name="alert_clear_call_log_message">Weet u zeker dat u de gesprekkenlijst wilt legen?</string>
-    <string name="alert_clear_cl_all_incoming">Weet u zeker dat u alle info betreffende inkomende gesprekken wilt verwijderen?</string>
-    <string name="alert_clear_cl_all_outgoing">Weet u zeker dat u alle info betreffende uitgaande gesprekken wilt verwijderen?</string>
-    <string name="alert_clear_cl_all_missed">Weet u zeker dat u alle info betreffende gemiste oproepen wilt verwijderen?</string>
-
-    <!-- Wysie: Favourites strings -->
-    <string name="fav_clear_freq">Verwijder vaak gebelde nummers</string>
-    <string name="alert_clear_freq_called_msg">Weet u zeker dat u alle info betreffende vaak gebelde nummers wilt verwijderen?</string>
-
-    <!-- Preferences: Dialer -->
-    <string name="title_last_dialled">Toon laatst gekozen nummer</string>
-    <string name="summary_last_dialled">Toon laatst gekozen nummer als er niets is ingevoerd</string>
+    <string name="recent_calls_clear_incoming">Inkomende</string>
+    <string name="recent_calls_clear_outgoing">Uitgaande</string>
+    <string name="recent_calls_clear_missed">Gemiste</string>
+    <string name="alert_clear_call_log_title">Oproepenlijst wissen</string>
+    <string name="alert_clear_call_log_message">Weet u zeker dat u de oproepenlijst wilt wissen?</string>
+    <string name="alert_clear_cl_all_incoming">Weet u zeker dat u alle inkomende gesprekken wilt verwijderen?</string>
+    <string name="alert_clear_cl_all_outgoing">Weet u zeker dat u alle uitgaande gesprekken wilt verwijderen?</string>
+    <string name="alert_clear_cl_all_missed">Weet u zeker dat u alle gemiste oproepen wilt verwijderen?</string>
+    <string name="fav_clear_freq">Vaak gebelde nummers verwijderen</string>
+    <string name="alert_clear_freq_called_msg">Weet u zeker dat u alle vaak gebelde nummers wilt verwijderen?</string>
+    <string name="title_last_dialled">Laatst gekozen nummer tonen</string>
+    <string name="summary_last_dialled">Laatst gekozen nummer tonen als er niets is ingevoerd</string>
     <string name="title_return_to_dialer">Naar kiezer na ophangen</string>
     <string name="title_vm_button">Linker actieknop (LAK)</string>
     <string name="title_vm_handler">Voicemailbeheer</string>
@@ -440,83 +394,72 @@
     <string name="summaryon_use_1_for_reg_vm">Toets 1 wordt gebruikt voor de standaardvoicemail</string>
     <string name="summaryoff_use_1_for_reg_vm">Toets 1 volgt instelling voicemailbeheer</string>
     <string name="title_disable_num_check">Nummer niet controleren</string>
-    <string name="summaryon_disable_num_check">Linker actieknop (LAK) en menuknop zijn altijd ingeschakeld</string>
-    <string name="summaryoff_disable_num_check">LAK en menuknop zijn alleen ingeschakeld als er minimaal 1 nummer is ingegeven (behalve voicemail)</string>
-    <string name="title_enable_haptic_feedback">Haptische feedback</string>
-    <string name="summary_enable_haptic_feedback">Gebruik haptische feedback bij nummerkeuze (wijzig dit in CyanogenMod\'s instellingen)</string>
-    <string name="title_change_digits_color">Verander cijferkleur</string>
+    <string name="summaryon_disable_num_check">Linker actieknop (LAK) en menuknop altijd ingeschakeld</string>
+    <string name="summaryoff_disable_num_check">LAK en menuknop alleen ingeschakeld als er min. 1 nummer is ingegeven (behalve voicemail)</string>
+    <string name="title_enable_haptic_feedback">Trillen</string>
+    <string name="summary_enable_haptic_feedback">Trillen bij nummerkeuze (wijzig dit in CyanogenMod\'s instellingen)</string>
+    <string name="title_change_digits_color">Cijferkleur veranderen</string>
     <string name="title_digits_color_pressed">Cijferkleur (ingedrukt)</string>
     <string name="title_digits_color_focused">Cijferkleur (gefocust)</string>
-    <string name="title_digits_color_unselected">Cijfer kleur (niet geselecteerd)</string>
-    <string name="title_choose_color">Kies een kleur</string>
+    <string name="title_digits_color_unselected">Cijferkleur (niet geselecteerd)</string>
+    <string name="title_choose_color">Kleur kiezen</string>
     <string name="instructions_choose_color">Raak het midden van de kleur aan om te bevestigen.\nDruk op terug om te annuleren.</string>
-    <string name="entry_no_vm_handler">Geen (kies voicemail nummer)</string>
-    
-    <!-- Preferences: Call log -->
+    <string name="entry_no_vm_handler">Geen (voicemailnummer kiezen)</string>
     <string name="title_cl_exact_time">Exacte tijden</string>
-    <string name="summaryon_cl_exact_time">Gebruik exacte tijden in gesprekkenlijst</string>
-    <string name="summaryoff_cl_exact_time">Gebruik relatieve tijden in gesprekkenlijst</string>
-    <string name="title_cl_show_seconds">Toon seconden</string>
-    <string name="summary_cl_show_seconds">Toon seconden bij exacte tijden</string>
-    <string name="title_cl_ask_before_clear">Vraag voor leeg maken</string>
-    <string name="summaryon_cl_ask_before_clear">Vraag bevestiging voor het legen van de gesprekkenlijst</string>
-    <string name="summaryoff_cl_ask_before_clear">Gesprekkenlijst wordt geleegd zonder bevestiging</string>
-    
-    <!-- Preferences: Contacts -->
-    <string name="title_contacts_show_pic">Toon contact foto</string>
-    <string name="title_contacts_show_dial_button">Toon belknop</string>
-    <string name="summary_contacts_show_dial_button">Toon een belknop bij contacten met een telefoonnummer</string>
-    <string name="title_contacts_show_count">Toon contacten teller</string>
-    <string name="summary_contacts_show_count">Contacten teller wordt bovenaan de contactenlijst getoond</string>
+    <string name="summaryon_cl_exact_time">Exacte tijden gebruiken in oproepenlijst</string>
+    <string name="summaryoff_cl_exact_time">Relatieve tijden gebruiken in oproepenlijst</string>
+    <string name="title_cl_show_seconds">Seconden tonen</string>
+    <string name="summary_cl_show_seconds">Seconden tonen bij exacte tijden</string>
+    <string name="title_cl_ask_before_clear">Bevestiging voor wissen</string>
+    <string name="summaryon_cl_ask_before_clear">Bevestiging voor het wissen van de oproepenlijst</string>
+    <string name="summaryoff_cl_ask_before_clear">Zonder bevestiging oproepenlijst wissen</string>
+    <string name="title_contacts_show_pic">Contactfoto tonen</string>
+    <string name="title_contacts_show_dial_button">Belknop tonen</string>
+    <string name="summary_contacts_show_dial_button">Belknop tonen bij contacten met een telefoonnummer</string>
+    <string name="title_contacts_show_count">Aantal contacten tonen</string>
+    <string name="summary_contacts_show_count">Aantal contacten bovenaan contactlijst tonen</string>
     <string name="title_contacts_show_separators">Alfabetische scheidingen</string>
-    <string name="summaryon_contacts_show_separators">Alfabetische scheidingen worden getoond in de contactenlijst</string>
-    <string name="summaryoff_contacts_show_separators">Alfabetische scheidingen worden verborgen in de contactenlijst</string>
-    
-    <!-- Preferences: Contacts - View Contact -->
-    <string name="title_view_contact">Contact weergave</string>
-    <string name="summary_view_contact">Contact weergave instellingen</string>
-    <string name="title_show_text_mobile_only">SMS</string>
-    <string name="summaryon_show_text_mobile_only">Alleen mobiele nummers hebben een SMS actie</string>
-    <string name="summaryoff_show_text_mobile_only">Alle nummers hebben een SMS actie</string>
-    
-    <!-- Preferences: Favourites -->
-    <string name="title_favourites_hide_freq_call">Verberg vaak gebeld</string>
-    <string name="summary_favourites_hide_freq_call">De data is niet verwijderd, maar verborgen</string>
-    <string name="title_favs_ask_before_clear">Vraag voor verwijderen</string>
-    <string name="summaryon_favs_ask_before_clear">Vraag om bevestiging voor het verwijderen van vaak gebelde nummers</string>
-    <string name="summaryoff_favs_ask_before_clear">Vaak gebele nummers worden verwijderd zonder bevestiging</string>
-    
-    <!-- Preferences: Misc -->
+    <string name="summaryon_contacts_show_separators">Alfabetische scheidingen tonen in de contactlijst</string>
+    <string name="summaryoff_contacts_show_separators">Alfabetische scheidingen verbergen in de contactlijst</string>
+    <string name="title_view_contact">Contactweergave</string>
+    <string name="summary_view_contact">Instellingen contactweergave</string>
+    <string name="title_show_text_mobile_only">Sms</string>
+    <string name="summaryon_show_text_mobile_only">Sms-actie alleen tonen bij mobiele nummers</string>
+    <string name="summaryoff_show_text_mobile_only">Sms-actie tonen bij alle nummers</string>
+    <string name="title_favourites_hide_freq_call">Vaak gebeld verbergen</string>
+    <string name="summary_favourites_hide_freq_call">Gegevens worden niet verwijderd, maar verborgen</string>
+    <string name="title_favs_ask_before_clear">Verwijderen bevestigen</string>
+    <string name="summaryon_favs_ask_before_clear">Bevestiging voor het verwijderen van vaak gebelde nummers</string>
+    <string name="summaryoff_favs_ask_before_clear">Zonder bevestiging vaak gebelde nummers verwijderen</string>
     <string name="title_misc_category">Diversen</string>
     <string name="title_sensor_rotation">Automatische schermoriëntatie</string>
-    <string name="summary_sensor_rotation">Indien ingeschakeld roteert het scherm volgens systeeminstellingen</string>
-    <string name="title_data_font_size">Lettergrootte contactinfo</string>
-    <string name="summary_data_font_size">Kies lettergrootte voor contact informatie (telefoonnummer, e-mail, adres,\u2026)</string>
-    <string name="title_default_phone_tab">Standaardtab</string>
-    <string name="summary_default_phone_tab">Standaardtab bij het openen van de telefoonapplicatie</string>
-
-    <!-- Default Phone Tab strings -->
+    <string name="summary_sensor_rotation">Het scherm draaien volgens systeeminstellingen</string>
+    <string name="title_data_font_size">Lettergrootte contactinformatie</string>
+    <string name="summary_data_font_size">Lettergrootte kiezen voor contactinformatie (telefoonnummer, e-mail, adres\u2026)</string>
+    <string name="title_default_phone_tab">Standaardtabblad</string>
+    <string name="summary_default_phone_tab">Standaardtabblad bij het openen van de telefoonapplicatie</string>
     <string name="default_phone_tab_last_used">Laatst gebruikt bij een telefoongesprek (standaard)</string>
     <string name="default_phone_tab_last_viewed">Laatst bekeken</string>
     <string name="default_phone_tab_phone">Telefoon</string>
-    <string name="default_phone_tab_call_log">Gesprekkenlijst</string>
+    <string name="default_phone_tab_call_log">Oproepenlijst</string>
     <string name="default_phone_tab_contacts">Contacten</string>
     <string name="default_phone_tab_favorites">Favorieten</string>
-    
-    <!-- Wysie: About strings -->    
     <string name="title_about">Over</string>
-    <string name="title_about_name">Modnaam</string>
+    <string name="title_about_name">Mod-naam</string>
     <string name="title_about_version">Versie</string>
     <string name="title_about_credits">Credits</string>
     <string name="summary_about_credits">Wysie, ChainsDD, geesun, niuchl, rac2030, sileht en de rest van XDA! :)</string>
-
     <string name="t9_sort_title">T9-sorteerwijze</string>
-    <string name="t9_sort_summary">Kies hoe de T9-resultaten gesorteerd worden</string>
+    <string name="t9_sort_summary">Kiezen hoe de T9-resultaten worden gesorteerd</string>
     <string name="t9_sort_name">Eerst op naam gevonden</string>
     <string name="t9_sort_number">Eerst op nr. gevonden</string>
     <string name="t9_state_title">T9-telefoonkiezer</string>
-    <string name="t9_state_summary">Schakel T9-zoeken in telefoonkiezer in</string>
-    <string name="t9_dial_click_title">Bel geselecteerd contact</string>
-    <string name="t9_dial_click_summary">Bel het geselecteerde contact gevonden door de T9-telefoonkiezer</string>
-    <string name="t9_add_to_contacts">Aan contacten toevoegen</string>
+    <string name="t9_state_summary">T9-zoeken inschakelen in telefoonkiezer</string>
+    <string name="t9_dial_click_title">Geselecteerd contact bellen</string>
+    <string name="t9_dial_click_summary">Geselecteerd contact bellen dat is gevonden door de T9-telefoonkiezer</string>
+    <string name="t9_add_to_contacts">Toevoegen aan contacten</string>
+    <string name="clearConfirmation_title">Oproepenlijst wissen?</string>
+    <string name="clearLogConfirmation">Alle oproepen zullen worden verwijderd.</string>
+    <string name="label_date">Datum</string>
+    <string name="button_clear_date">Wissen</string>
 </resources>

@@ -82,10 +82,6 @@
     <string name="emailLabelsGroup" msgid="8389931313045344406">"E-mailadres"</string>
     <string name="imLabelsGroup" msgid="3898238486262614027">"Chat"</string>
     <string name="postalLabelsGroup" msgid="3487738141112589324">"Adres"</string>
-  <string-array name="otherLabels">
-    <item msgid="8287841928119937597">"Organisatie"</item>
-    <item msgid="7196592230748086755">"Opmerking"</item>
-  </string-array>
     <string name="photoPickerNotFoundText" product="tablet" msgid="6247290728908599701">"Er zijn geen foto\'s beschikbaar op de tablet."</string>
     <string name="photoPickerNotFoundText" product="default" msgid="431331662154342581">"Er zijn geen foto\'s beschikbaar op de telefoon."</string>
     <string name="attach_photo_dialog_title" msgid="5599827035558557169">"Contactfoto"</string>
@@ -105,15 +101,7 @@
     <string name="contactSavedErrorToast" msgid="3207250533172944892">"Kan wijzigingen in contact niet opslaan."</string>
     <string name="groupSavedToast" msgid="1168756874239833756">"Groep opgeslagen."</string>
     <string name="groupSavedErrorToast" msgid="7984466936615304740">"Kan wijzigingen in groep niet opslaan."</string>
-  <plurals name="listTotalPhoneContacts">
-    <item quantity="one" msgid="3015357862286673986">"1 contact met telefoonnummer"</item>
-    <item quantity="other" msgid="3299954047880968205">"<xliff:g id="COUNT">%d</xliff:g> contacten met telefoonnummers"</item>
-  </plurals>
     <string name="listTotalPhoneContactsZero" msgid="6968813857632984319">"Geen contacten met telefoonnummers"</string>
-  <plurals name="listTotalAllContacts">
-    <item quantity="one" msgid="3405747744700823280">"1 contact"</item>
-    <item quantity="other" msgid="3578469907265375314">"<xliff:g id="COUNT">%d</xliff:g> contacten"</item>
-  </plurals>
     <string name="listTotalAllContactsZero" msgid="5513001821794568211">"Geen contacten."</string>
     <string name="listTotalAllContactsZeroCustom" msgid="5004974705699445044">"Geen zichtbare contacten."</string>
     <string name="listTotalAllContactsZeroStarred" msgid="3173820905501592808">"Geen favorieten."</string>
@@ -121,16 +109,8 @@
     <string name="listAllContactsInAccount" msgid="7496143179265311758">"Contacten in <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="listSingleContact" msgid="6067813698903535563">"Eén contact"</string>
     <string name="listCustomView" msgid="6950713892532194050">"Contacten in aangepaste weergave"</string>
-  <plurals name="listFoundAllContacts">
-    <item quantity="one" msgid="5517063038754171134">"1 gevonden"</item>
-    <item quantity="other" msgid="3852668542926965042">"<xliff:g id="COUNT">%d</xliff:g> gevonden"</item>
-  </plurals>
     <string name="foundTooManyContacts" msgid="5163335650920020220">"Meer dan <xliff:g id="COUNT">%d</xliff:g> gevonden."</string>
     <string name="listFoundAllContactsZero" msgid="7132202364587656501">"Niets gevonden."</string>
-  <plurals name="searchFoundContacts">
-    <item quantity="one" msgid="4826918429708286628">"1 gevonden"</item>
-    <item quantity="other" msgid="7988132539476575389">"<xliff:g id="COUNT">%d</xliff:g> gevonden"</item>
-  </plurals>
     <string name="contactsAllLabel" msgid="6178225597569649305">"Alle"</string>
     <string name="contactsGroupsLabel" msgid="2841971472518003524">"Groepen"</string>
     <string name="contactsFavoritesLabel" msgid="8417039765586853670">"Favoriet"</string>
@@ -433,10 +413,6 @@
     <string name="contact_status_update_attribution_with_date" msgid="7358045508107825068">"<xliff:g id="DATE">%1$s</xliff:g> via <xliff:g id="SOURCE">%2$s</xliff:g>"</string>
     <string name="description_star" msgid="2605854427360036550">"favoriet"</string>
     <string name="edit_contact" msgid="7529281274005689512">"Contact bewerken"</string>
-  <plurals name="merge_info">
-    <item quantity="one" msgid="148365587896371969">"niet samengevoegd"</item>
-    <item quantity="other" msgid="425683718017380845">"samengevoegd uit <xliff:g id="COUNT">%0$d</xliff:g> bronnen"</item>
-  </plurals>
     <string name="local_invisible_directory" msgid="6046691709127661065">"Overig"</string>
     <string name="aggregation_suggestion_join_dialog_title" msgid="5276699501316246253">"Contacten samenvoegen"</string>
     <string name="aggregation_suggestion_join_dialog_message" msgid="3842757977671434836">"Wilt u het huidige contact samenvoegen met het geselecteerde contact?"</string>
@@ -476,19 +452,7 @@
     <string name="create_group_dialog_title" msgid="6874527142828424475">"Nieuwe groep maken"</string>
     <string name="create_group_item_label" msgid="5218022006186243310">"[Nieuwe groep maken]"</string>
     <string name="delete_group_dialog_title" msgid="7368429698398624427">"Groep verwijderen"</string>
-  <plurals name="num_groups_in_account">
-    <item quantity="one" msgid="2944819210288517794">"1 groep"</item>
-    <item quantity="other" msgid="1276758425904917367">"<xliff:g id="COUNT">%0$d</xliff:g> groepen"</item>
-  </plurals>
     <string name="delete_group_dialog_message" msgid="7586856514337560529">"De groep \'<xliff:g id="GROUP_LABEL">%1$s</xliff:g>\' verwijderen? (De contacten zelf worden niet verwijderd.)"</string>
-  <plurals name="num_contacts_in_group">
-    <item quantity="one" msgid="1352418549951013448">"<xliff:g id="COUNT_0">%1$d</xliff:g> persoon van <xliff:g id="ACCOUNT_TYPE">%2$s</xliff:g>"</item>
-    <item quantity="other" msgid="8146027769011086349">"<xliff:g id="COUNT_0">%1$d</xliff:g> personen van <xliff:g id="ACCOUNT_TYPE">%2$s</xliff:g>"</item>
-  </plurals>
-  <plurals name="group_list_num_contacts_in_group">
-    <item quantity="one" msgid="3323065321661972446">"<xliff:g id="COUNT">%1$d</xliff:g> persoon"</item>
-    <item quantity="other" msgid="6251996206137048525">"<xliff:g id="COUNT">%1$d</xliff:g> personen"</item>
-  </plurals>
     <string name="toast_join_with_empty_contact" msgid="2238581529864542985">"Geef een contactnaam op voordat u dit contact samenvoegt met een ander contact."</string>
     <string name="copy_text" msgid="3257145021583508761">"Kopiëren naar klembord"</string>
     <string name="set_default" msgid="4417505153468300351">"Standaard instellen"</string>
@@ -500,10 +464,6 @@
     <string name="profile_display_name" msgid="4127389543625918771">"Mijn profiel instellen"</string>
     <string name="enter_contact_name" msgid="1738391320566349924">"Typ de naam van de persoon"</string>
     <string name="view_updates_from_group" msgid="1782685984905600034">"Updates bekijken"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"Voicemail"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> voicemails"</item>
-  </plurals>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Nieuwe voicemail van <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="1811242131549854624">"Kan voicemail niet afspelen."</string>
@@ -563,16 +523,16 @@
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Voor het instellen van voicemail, gaat u naar \'Menu\' &gt; \'Instellingen\'."</string>
 
     <!-- CYANOGENMOD EDITS -->
-
     <string name="t9_sort_title">T9-sorteermethoden</string>
     <string name="t9_sort_summary">Kies hoe T9-resultaten gesorteerd moeten worden</string>
     <string name="t9_sort_name">Eerst op naam gevonden</string>
     <string name="t9_sort_number">Eerst op nr. gevonden</string>
-    <string name="t9_state_title">Schakel T9-kiezer in</string>
-    <string name="t9_state_summary">Schakel T9-zoeken in telefoonkiezer in</string>
-    <string name="t9_dial_click_title">Bel geselecteerd contact</string>
-    <string name="t9_dial_click_summary">Bel het geselecteerde contact gevonden door de T9-telefoonkiezer</string>
-    <string name="t9_add_to_contacts">Aan contacten toevoegen</string>
-    <string name="dialer_ui_orientation_title">Schakel automatische schermoriëntatie in</string>
-    <string name="dialer_ui_orientation_summary">Sensor-gebaseerde rotatie van kiezer</string>
+    <string name="t9_state_title">T9-kiezer inschakelen</string>
+    <string name="t9_state_summary">T9-zoeken inschakelen telefoonkiezer</string>
+    <string name="t9_dial_click_title">Geselecteerd contact bellen</string>
+    <string name="t9_dial_click_summary">Geselecteerde contact gevonden door T9-telefoonkiezer bellen</string>
+    <string name="t9_add_to_contacts">Toevoegen aan contacten</string>
+    <string name="dialer_ui_orientation_title">Automatisch scherm draaien</string>
+    <string name="dialer_ui_orientation_summary">Sensor scherm laten draaien</string>
+    <string name="dialer_ui_title">Kiezerinstellingen</string>
 </resources>

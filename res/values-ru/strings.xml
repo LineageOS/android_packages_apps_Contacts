@@ -396,7 +396,8 @@
     <string name="search_results_for" msgid="8705490885073188513">"Результаты поиска для: <xliff:g id="QUERY">%s</xliff:g>"</string>
     <string name="search_results_searching" msgid="7755623475227227314">"Поиск..."</string>
     <string name="date_year_toggle" msgid="7356532842767854606">"Указать год"</string>
-	<string name="date_format_short_no_year">dd.MM.</string>
+    <string name="date_year_toggle">Укажите год</string>
+    <string name="date_format_short_no_year">dd.MM.</string>
     <string name="date_format_full_no_year">d MMMM</string>
     <!-- Wysie -->
     <string name="menu_preferences">Настройки</string>

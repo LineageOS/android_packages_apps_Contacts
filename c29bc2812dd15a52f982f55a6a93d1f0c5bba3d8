@@ -1,0 +1,259 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAUX///Wk\u003d",
+        "filename": "res/values-nl/plurals.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-07-12T23:55:19Z",
+      "side": 1,
+      "message": "Kleine letter v?\nOf komt dit omdat er helemaal geen getal genoemd wordt verder?",
+      "revId": "c29bc2812dd15a52f982f55a6a93d1f0c5bba3d8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUX///Wg\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-07-12T23:55:19Z",
+      "side": 1,
+      "message": "verzenden \u003d sturen/doorsturen",
+      "revId": "c29bc2812dd15a52f982f55a6a93d1f0c5bba3d8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUX///Wc\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-07-12T23:55:19Z",
+      "side": 1,
+      "message": "als het \"Toevoegen aan contacten\" is, dan kan het toch ook \"Verwijderen uit gesprekken\" zijn - zonder hoofdletter?",
+      "revId": "c29bc2812dd15a52f982f55a6a93d1f0c5bba3d8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUX///WY\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-07-12T23:55:19Z",
+      "side": 1,
+      "message": "simkaart",
+      "revId": "c29bc2812dd15a52f982f55a6a93d1f0c5bba3d8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUX///WU\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-07-12T23:55:19Z",
+      "side": 1,
+      "message": "waarom \"exporteren\" niet voluit?",
+      "revId": "c29bc2812dd15a52f982f55a6a93d1f0c5bba3d8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUX///WQ\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-07-12T23:55:19Z",
+      "side": 1,
+      "message": "alleen voor tablet (net zoals bij telefoon)",
+      "revId": "c29bc2812dd15a52f982f55a6a93d1f0c5bba3d8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUX///WI\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-07-12T23:55:19Z",
+      "side": 1,
+      "message": "fax thuis?",
+      "revId": "c29bc2812dd15a52f982f55a6a93d1f0c5bba3d8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUX///WE\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-07-12T23:55:19Z",
+      "side": 1,
+      "message": "fax thuis?",
+      "revId": "c29bc2812dd15a52f982f55a6a93d1f0c5bba3d8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUX///WA\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-07-12T23:55:19Z",
+      "side": 1,
+      "message": "pager werk (staat ook bij bellen)",
+      "revId": "c29bc2812dd15a52f982f55a6a93d1f0c5bba3d8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUX///V8\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-07-12T23:55:19Z",
+      "side": 1,
+      "message": "Mms",
+      "revId": "c29bc2812dd15a52f982f55a6a93d1f0c5bba3d8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUX///V0\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-07-12T23:55:19Z",
+      "side": 1,
+      "message": "mijn of Mijn?",
+      "revId": "c29bc2812dd15a52f982f55a6a93d1f0c5bba3d8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUX///V4\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-07-12T23:55:19Z",
+      "side": 1,
+      "message": "mijn of Mijn? Hierboven staat het zonder hoofdletter",
+      "revId": "c29bc2812dd15a52f982f55a6a93d1f0c5bba3d8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUX///Vw\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-07-12T23:55:19Z",
+      "side": 1,
+      "message": "Map? Folder?",
+      "revId": "c29bc2812dd15a52f982f55a6a93d1f0c5bba3d8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUX///Vs\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-07-12T23:55:19Z",
+      "side": 1,
+      "message": "Map? Folder?",
+      "revId": "c29bc2812dd15a52f982f55a6a93d1f0c5bba3d8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAUX///Vo\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-07-12T23:55:19Z",
+      "side": 1,
+      "message": "inschakelen in",
+      "revId": "c29bc2812dd15a52f982f55a6a93d1f0c5bba3d8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

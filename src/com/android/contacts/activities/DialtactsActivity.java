@@ -27,6 +27,8 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -708,6 +710,17 @@ public class DialtactsActivity extends TransactionSafeActivity
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if(mPrefs.getBoolean("misc_sensor_rotation", true)) {
+            this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        }
+        else {
+            this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        }
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
 
@@ -1021,12 +1034,14 @@ public class DialtactsActivity extends TransactionSafeActivity
         } else {
             // This is when the user is looking at the dialer pad.  In this case, the real
             // ActionBar is hidden and fake menu items are shown.
+
             // Except in landscape, in which case the real search menu item is shown.
             searchMenuItem.setVisible(ContactsUtils.isLandscape(this));
+            emptyRightMenuItem.setVisible(!ContactsUtils.isLandscape(this));
+
             // If a permanent menu key is available, then we need to show the call settings item
             // so that the call settings item can be invoked by the permanent menu key.
             callSettingsMenuItem.setVisible(ViewConfiguration.get(this).hasPermanentMenuKey());
-            emptyRightMenuItem.setVisible(false);
         }
     }
 

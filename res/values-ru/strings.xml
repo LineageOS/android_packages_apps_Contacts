@@ -580,4 +580,7 @@
     <string name="dialer_ui_title">Настройки набора номера</string>
     <string name="dialer_ui_orientation_title">Автоповорот экрана</string>
     <string name="dialer_ui_orientation_summary">Включить автоповорот экрана</string>
+    <string name="dialer_ui_title">Настройки набора номера</string>
+    <string name="dialer_ui_orientation_title">Автоповорот экрана</string>
+    <string name="dialer_ui_orientation_summary">Включить автоповорот экрана</string>
 </resources>

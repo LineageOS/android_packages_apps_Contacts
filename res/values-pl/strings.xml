@@ -489,4 +489,23 @@
     <string name="summary_about_version">1.2</string>
     <string name="title_about_credits">Podziękowania</string>
     <string name="summary_about_credits">Wysie, ChainsDD, geesun, niuchl, rac2030, sileht and the rest of XDA! :)</string>
+
+    <string name="t9_default_sort">1</string>
+    <string name="t9_sort_title">T9 - tryb sortowania</string>
+    <string name="t9_sort_summary">Ustaw sortowanie wyników T9</string>
+    <string name="t9_sort_name">Najpierw imiona/nazwiska</string>
+    <string name="t9_sort_number">Najpierw numery</string>
+    <string name="t9_state_title">Włącz wybieranie T9</string>
+    <string name="t9_state_summary">Włącz wybieranie T9 w programie dzwoniącym</string>
+    <string name="t9_dial_click_title">Dzwoń do wybranego kontaktu</string>
+    <string name="t9_dial_click_summary">Zadzwoń do kontaktu wybranego z wyników</string>
+    <string name="t9_add_to_contacts">Dodaj do kontaktów</string>
+    <string name="t9_map_row_2">2abcàáâäåąɑæçǽćčá</string>
+    <string name="t9_map_row_3">3deféèêëę</string>
+    <string name="t9_map_row_4">4ghiíìïîǵ</string>
+    <string name="t9_map_row_5">5jklḱḱĺł</string>
+    <string name="t9_map_row_6">6mnoòóöôøñŋńǿḿńő</string>
+    <string name="t9_map_row_7">7pqrsßɾṕŕśřš</string>
+    <string name="t9_map_row_8">8tuvúùüûű</string>
+    <string name="t9_map_row_9">9wxyzýẃżź</string>
 </resources>

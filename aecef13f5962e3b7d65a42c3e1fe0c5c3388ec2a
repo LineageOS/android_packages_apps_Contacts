@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAVX///9c\u003d",
+        "filename": "res/values-pl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 2930
+      },
+      "writtenOn": "2012-07-18T15:38:58Z",
+      "side": 1,
+      "message": "pukni?tego? ;d",
+      "revId": "aecef13f5962e3b7d65a42c3e1fe0c5c3388ec2a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

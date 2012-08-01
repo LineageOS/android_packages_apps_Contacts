@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2006 The Android Open Source Project
+     Copyright (C) 2012 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <plurals name="listTotalPhoneContacts">
+        <item quantity="one" msgid="3015357862286673986">"1 contact met telefoonnummer"</item>
+        <item quantity="other" msgid="3299954047880968205">"<xliff:g id="COUNT">%d</xliff:g> contacten met telefoonnummer"</item>
+    </plurals>
+    <plurals name="listTotalAllContacts">
+        <item quantity="one" msgid="3405747744700823280">"1 contact"</item>
+        <item quantity="other" msgid="3578469907265375314">"<xliff:g id="COUNT">%d</xliff:g> contacten"</item>
+    </plurals>
+    <plurals name="listFoundAllContacts">
+        <item quantity="one" msgid="5517063038754171134">"1 gevonden"</item>
+        <item quantity="other" msgid="3852668542926965042">"<xliff:g id="COUNT">%d</xliff:g> gevonden"</item>
+    </plurals>
+    <plurals name="searchFoundContacts">
+        <item quantity="one" msgid="4826918429708286628">"1 gevonden"</item>
+        <item quantity="other" msgid="7988132539476575389">"<xliff:g id="COUNT">%d</xliff:g> gevonden"</item>
+    </plurals>
+    <plurals name="merge_info">
+        <item quantity="one" msgid="148365587896371969">"niet samengevoegd"</item>
+        <item quantity="other" msgid="425683718017380845">"samengevoegd uit <xliff:g id="COUNT">%0$d</xliff:g> bronnen"</item>
+    </plurals>
+    <plurals name="num_groups_in_account">
+        <item quantity="one" msgid="2944819210288517794">"1 groep"</item>
+        <item quantity="other" msgid="1276758425904917367">"<xliff:g id="COUNT">%0$d</xliff:g> groepen"</item>
+    </plurals>
+    <plurals name="num_contacts_in_group">
+        <item quantity="one" msgid="1352418549951013448">"<xliff:g id="COUNT_0">%1$d</xliff:g> persoon van <xliff:g id="ACCOUNT_TYPE">%2$s</xliff:g>"</item>
+        <item quantity="other" msgid="8146027769011086349">"<xliff:g id="COUNT_0">%1$d</xliff:g> personen van <xliff:g id="ACCOUNT_TYPE">%2$s</xliff:g>"</item>
+    </plurals>
+    <plurals name="group_list_num_contacts_in_group">
+        <item quantity="one" msgid="3323065321661972446">"<xliff:g id="COUNT">%1$d</xliff:g> persoon"</item>
+        <item quantity="other" msgid="6251996206137048525">"<xliff:g id="COUNT">%1$d</xliff:g> personen"</item>
+    </plurals>
+    <plurals name="notification_voicemail_title">
+        <item quantity="one" msgid="1746619685488504230">"Voicemail"</item>
+        <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> voicemails"</item>
+    </plurals>
+</resources>

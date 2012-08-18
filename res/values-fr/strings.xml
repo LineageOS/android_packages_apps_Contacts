@@ -23,6 +23,7 @@
     <string name="dialer_ui_orientation_title">Auto-rotation</string>
     <string name="dialer_ui_orientation_summary">Utiliser le capteur pour passer du mode portrait au mode paysage</string>
 
+    <string name="t9_default_sort">1</string>
     <string name="t9_sort_title">Mode de tri T9</string>
     <string name="t9_sort_summary">Méthode de tri des résultats issus du mode T9</string>
     <string name="t9_sort_name">Noms en priorité</string>
@@ -31,6 +32,15 @@
     <string name="t9_state_summary">Activer la recherche des contacts par les lettres du clavier</string>
     <string name="t9_dial_click_title">Sélection contact T9</string>
     <string name="t9_dial_click_summary">Appeler de préférence le contact sélectionné par le mode T9</string>
+    <string name="t9_add_to_contacts">Ajouter aux contacts</string>
+    <string name="t9_map_row_2">2abcàáâäåɑæçǽćčá</string>
+    <string name="t9_map_row_3">3deféèêë</string>
+    <string name="t9_map_row_4">4ghiíìïîǵ</string>
+    <string name="t9_map_row_5">5jklḱḱĺ</string>
+    <string name="t9_map_row_6">6mnoòóöôøñŋǿḿńő</string>
+    <string name="t9_map_row_7">7pqrsßɾṕŕśřš</string>
+    <string name="t9_map_row_8">8tuvúùüûű</string>
+    <string name="t9_map_row_9">9wxyzýẃź</string>
 
     <string name="launcherDialer" msgid="8636288196618486553">"Téléphone"</string>
     <string name="people" msgid="1048457247435785074">"Contacts"</string>

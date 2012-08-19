@@ -22,7 +22,7 @@
          used in the Launcher icon. -->
     <string name="people">People</string>
 
-    <string name="t9_default_sort">1</string>
+    <string name="t9_default_sort" translatable="false">1</string>
     <string name="t9_sort_title">T9 sorting mode</string>
     <string name="t9_sort_summary">Choose how to filter T9 results</string>
     <string name="t9_sort_name">Name matches first</string>
@@ -32,14 +32,14 @@
     <string name="t9_dial_click_title">Dial selected contact</string>
     <string name="t9_dial_click_summary">Dial the selected contact for T9</string>
     <string name="t9_add_to_contacts">Add to contacts</string>
-    <string name="t9_map_row_2">2abcàáâäåɑæçǽćčá</string>
-    <string name="t9_map_row_3">3deféèêë</string>
-    <string name="t9_map_row_4">4ghiíìïîǵ</string>
-    <string name="t9_map_row_5">5jklḱḱĺ</string>
-    <string name="t9_map_row_6">6mnoòóöôøñŋǿḿńő</string>
-    <string name="t9_map_row_7">7pqrsßɾṕŕśřš</string>
-    <string name="t9_map_row_8">8tuvúùüûű</string>
-    <string name="t9_map_row_9">9wxyzýẃź</string>
+    <string name="t9_map_row_2" translatable="false">2abcàáâäåɑæçǽćčá</string>
+    <string name="t9_map_row_3" translatable="false">3deféèêë</string>
+    <string name="t9_map_row_4" translatable="false">4ghiíìïîǵ</string>
+    <string name="t9_map_row_5" translatable="false">5jklḱḱĺ</string>
+    <string name="t9_map_row_6" translatable="false">6mnoòóöôøñŋǿḿńő</string>
+    <string name="t9_map_row_7" translatable="false">7pqrsßɾṕŕśřš</string>
+    <string name="t9_map_row_8" translatable="false">8tuvúùüûű</string>
+    <string name="t9_map_row_9" translatable="false">9wxyzýẃź</string>
 
     <!-- Directory partition name -->
     <string name="contactsList">Contacts</string>
@@ -1293,7 +1293,7 @@
     <string name="account_type_format"><xliff:g id="source" example="Gmail">%1$s</xliff:g> contact</string>
 
     <!-- String describing which account a contact came from when editing it -->
-    <string name="from_account_format"><xliff:g id="source" example="user@gmail.com">%1$s</xliff:g></string>
+    <string name="from_account_format" translatable="false"><xliff:g id="source" example="user@gmail.com">%1$s</xliff:g></string>
 
     <!-- Checkbox asking the user if they want to display a particular photo for a contact -->
     <string name="use_photo_as_primary">Use this photo</string>

@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAWX//+dA\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 4297
+      },
+      "writtenOn": "2012-08-22T03:08:36Z",
+      "side": 1,
+      "message": "Eerst op naam zoeken?",
+      "revId": "9187fd5057f09d3024558e8fe97995946fb747cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAWX//+c8\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 4297
+      },
+      "writtenOn": "2012-08-22T03:08:36Z",
+      "side": 1,
+      "message": "Eerst op nummer zoeken? Het liefst nummer voluit",
+      "revId": "9187fd5057f09d3024558e8fe97995946fb747cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAWX//+c4\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 4297
+      },
+      "writtenOn": "2012-08-22T03:08:36Z",
+      "side": 1,
+      "message": "Bel het door de T9-(telefoon)kiezer gevonden contact?",
+      "revId": "9187fd5057f09d3024558e8fe97995946fb747cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAWX//+OE\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 2049
+      },
+      "writtenOn": "2012-08-22T23:27:34Z",
+      "side": 1,
+      "message": "Ik denk dat het 23-24 leestekens zijn bij mijn GSM. Weet niet of dit ook is bij LDPI, lage resolutie GSM\u0027s",
+      "parentUuid": "AAAAWX//+Qs\u003d",
+      "revId": "a3fe8bdbef6d619594b9b95ead5c04e4c87a43b4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAWX//+Qk\u003d",
         "filename": "res/values-nl/strings.xml",
         "patchSetId": 4

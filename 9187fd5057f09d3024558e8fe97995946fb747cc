@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAWX//+S0\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 2049
+      },
+      "writtenOn": "2012-08-22T21:21:25Z",
+      "side": 1,
+      "message": "Mij gelijk. Eerst op naam gevonden is \u0027juister\u0027 maar niet echt duidelijk. Of de T9-kiezer effectief eerst zoekt op naam of niet, doet er niet echt toe.",
+      "parentUuid": "AAAAWX//+dA\u003d",
+      "revId": "9187fd5057f09d3024558e8fe97995946fb747cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAWX//+c8\u003d",
         "filename": "res/values-nl/strings.xml",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAWX//+S8\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 2049
+      },
+      "writtenOn": "2012-08-22T21:21:25Z",
+      "side": 1,
+      "message": "Gaat niet passen op het scherm denk ik. Met gevonden toch niet. Met zoeken misschien wel.",
+      "parentUuid": "AAAAWX//+c8\u003d",
+      "revId": "9187fd5057f09d3024558e8fe97995946fb747cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAWX//+c4\u003d",
         "filename": "res/values-nl/strings.xml",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2012-08-22T03:08:36Z",
       "side": 1,
       "message": "Bel het door de T9-(telefoon)kiezer gevonden contact?",
+      "revId": "9187fd5057f09d3024558e8fe97995946fb747cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAWX//+S4\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 2049
+      },
+      "writtenOn": "2012-08-22T21:21:25Z",
+      "side": 1,
+      "message": "Het door T9-kiezer gevonden contact bellen na het selecteren?",
+      "parentUuid": "AAAAWX//+c4\u003d",
       "revId": "9187fd5057f09d3024558e8fe97995946fb747cc",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false

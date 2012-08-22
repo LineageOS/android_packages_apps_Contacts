@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAWX//+Qs\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 4297
+      },
+      "writtenOn": "2012-08-22T22:44:50Z",
+      "side": 1,
+      "message": "Als \"Automatisch scherm draaien\" past, dan past \"Scherm automatisch draaien\" ook",
+      "revId": "a3fe8bdbef6d619594b9b95ead5c04e4c87a43b4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAWX//+Qk\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 4297
+      },
+      "writtenOn": "2012-08-22T22:44:50Z",
+      "side": 1,
+      "message": "Scherm door de sensor laten draaien lijkt mij wat mooier",
+      "revId": "a3fe8bdbef6d619594b9b95ead5c04e4c87a43b4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

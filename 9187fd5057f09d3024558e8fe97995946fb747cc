@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAWX//+Sg\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 4297
+      },
+      "writtenOn": "2012-08-22T21:34:24Z",
+      "side": 1,
+      "message": "Met \"zoeken\" lijkt het mij duidelijker wat deze optie doet",
+      "parentUuid": "AAAAWX//+S0\u003d",
+      "revId": "9187fd5057f09d3024558e8fe97995946fb747cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAWX//+c8\u003d",
         "filename": "res/values-nl/strings.xml",
         "patchSetId": 3
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAWX//+So\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 4297
+      },
+      "writtenOn": "2012-08-22T21:34:24Z",
+      "side": 1,
+      "message": "\"Eerst op nummer zoeken\" is maar 1 teken langer dan \"Eerst op nr. gevonden\", dus misschien past het nog steeds",
+      "parentUuid": "AAAAWX//+S8\u003d",
+      "revId": "9187fd5057f09d3024558e8fe97995946fb747cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAWX//+c4\u003d",
         "filename": "res/values-nl/strings.xml",
         "patchSetId": 3
@@ -101,6 +137,24 @@
       "side": 1,
       "message": "Het door T9-kiezer gevonden contact bellen na het selecteren?",
       "parentUuid": "AAAAWX//+c4\u003d",
+      "revId": "9187fd5057f09d3024558e8fe97995946fb747cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAWX//+Ss\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 4297
+      },
+      "writtenOn": "2012-08-22T21:34:24Z",
+      "side": 1,
+      "message": "Het door de T9-kiezer gevonden contact bellen na het selecteren lijkt mij ook het beste",
+      "parentUuid": "AAAAWX//+S4\u003d",
       "revId": "9187fd5057f09d3024558e8fe97995946fb747cc",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false

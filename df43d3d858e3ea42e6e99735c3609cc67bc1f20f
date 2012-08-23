@@ -16,6 +16,24 @@
       "revId": "df43d3d858e3ea42e6e99735c3609cc67bc1f20f",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAWn///vA\u003d",
+        "filename": "res/values-nl/plurals.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 4297
+      },
+      "writtenOn": "2012-08-23T19:19:31Z",
+      "side": 1,
+      "message": "Mee eens",
+      "parentUuid": "AAAAWn///vw\u003d",
+      "revId": "df43d3d858e3ea42e6e99735c3609cc67bc1f20f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

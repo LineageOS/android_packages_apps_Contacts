@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAWn///vw\u003d",
+        "filename": "res/values-nl/plurals.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2012-08-23T19:14:40Z",
+      "side": 1,
+      "message": "telefoonnummers -\u003e telefoonnummer\n\nHet gaat om het meervoud van de contacten.",
+      "revId": "df43d3d858e3ea42e6e99735c3609cc67bc1f20f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

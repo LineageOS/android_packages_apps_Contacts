@@ -163,7 +163,7 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
 
     /** Identifier for the "Add Call" intent extra. */
     static final String ADD_CALL_MODE_KEY = "add_call_mode";
-    private static T9Search sT9Search; // Static to avoid reloading when class is destroyed and recreated
+    private T9Search mT9Search;
     private ToggleButton mT9Toggle;
     private ListView mT9List;
     private ListView mT9ListTop;
@@ -262,6 +262,8 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
         mDigits.setOnClickListener(this);
         mDigits.setOnTouchListener(this);
         mDigits.setOnKeyListener(this);
+
+        mT9Search = new T9Search(this);
         mT9List = (ListView) findViewById(R.id.t9list);
         if (mT9List != null) {
             mT9List.setOnItemClickListener(this);
@@ -505,13 +507,14 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
     @Override
     protected void onResume() {
         super.onResume();
-        if (sT9Search == null && isT9On()) {
-            Thread loadContacts = new Thread(new Runnable() {
-                public void run () {
-                    sT9Search = new T9Search(getBaseContext());
+        if (isT9On()) {
+            mT9Search.load(new T9Search.LoadFinishCallback() {
+                @Override
+                public void onLoadFinished() {
+                    Log.d(TAG, "load finished");
+                    searchContacts();
                 }
             });
-            loadContacts.start();
         }
         hideT9();
         // Query the last dialed number. Do it first because hitting
@@ -617,48 +620,46 @@ public class TwelveKeyDialer extends Activity implements View.OnClickListener,
             return;
         final int length = mDigits.length();
         if (length > 0) {
-            if (sT9Search != null) {
-                T9SearchResult result = sT9Search.search(mDigits.getText().toString());
-                if (mT9AdapterTop == null) {
-                    mT9AdapterTop = sT9Search.new T9Adapter(this, 0, new ArrayList<ContactItem>(),getLayoutInflater());
-                    mT9AdapterTop.setNotifyOnChange(true);
+            T9SearchResult result = mT9Search.search(mDigits.getText().toString());
+            if (mT9AdapterTop == null) {
+                mT9AdapterTop = mT9Search.new T9Adapter(this, 0, new ArrayList<ContactItem>(),getLayoutInflater());
+                mT9AdapterTop.setNotifyOnChange(true);
+            } else {
+                mT9AdapterTop.clear();
+            }
+            if (result != null) {
+                if (mT9Adapter == null) {
+                    mT9Adapter = mT9Search.new T9Adapter(this, 0, result.getResults(),getLayoutInflater());
+                    mT9Adapter.setNotifyOnChange(true);
                 } else {
-                    mT9AdapterTop.clear();
+                    mT9Adapter.clear();
+                    for (ContactItem item : result.getResults()) {
+                        mT9Adapter.add(item);
+                    }
                 }
-                if (result != null) {
-                    if (mT9Adapter == null) {
-                        mT9Adapter = sT9Search.new T9Adapter(this, 0, result.getResults(),getLayoutInflater());
-                        mT9Adapter.setNotifyOnChange(true);
-                    } else {
-                        mT9Adapter.clear();
-                        for (ContactItem item : result.getResults()) {
-                            mT9Adapter.add(item);
-                        }
-                    }
-                    if (mT9List.getAdapter() == null) {
-                        mT9List.setAdapter(mT9Adapter);
-                    }
+                if (mT9List.getAdapter() == null) {
+                    mT9List.setAdapter(mT9Adapter);
+                }
 
-                    mT9AdapterTop.add(result.getTopContact());
-                    if (result.getNumResults()>  1) {
-                        mT9Toggle.setVisibility(View.VISIBLE);
-                    } else {
-                        mT9Toggle.setVisibility(View.GONE);
-                        toggleT9();
-                    }
-                    mT9Toggle.setTag(null);
+                mT9AdapterTop.add(result.getTopContact());
+                if (result.getNumResults() > 1) {
+                    mT9Toggle.setVisibility(View.VISIBLE);
                 } else {
-                    ContactItem contact = (ContactItem) mT9ListTop.getTag();
-                    contact.number = mDigits.getText().toString();
-                    mT9AdapterTop.add(contact);
-                    mT9Toggle.setTag(new Boolean(true));
                     mT9Toggle.setVisibility(View.GONE);
                     toggleT9();
                 }
-                mT9ListTop.setVisibility(View.VISIBLE);
-                if (mT9ListTop.getAdapter() == null) {
-                    mT9ListTop.setAdapter(mT9AdapterTop);
-                }
+                mT9Toggle.setTag(null);
+            } else {
+                ContactItem contact = (ContactItem) mT9ListTop.getTag();
+                contact.number = mDigits.getText().toString();
+                mT9AdapterTop.add(contact);
+                mT9Toggle.setTag(new Boolean(true));
+                mT9Toggle.setVisibility(View.GONE);
+                toggleT9();
+            }
+            mT9ListTop.setVisibility(View.VISIBLE);
+            if (mT9ListTop.getAdapter() == null) {
+                mT9ListTop.setAdapter(mT9AdapterTop);
             }
         } else {
             mT9ListTop.setVisibility(View.INVISIBLE);

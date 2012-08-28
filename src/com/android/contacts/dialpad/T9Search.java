@@ -287,8 +287,10 @@ class T9Search {
                 if (o.nameMatchId != -1) {
                     Spannable s = (Spannable) holder.name.getText();
                     int nameStart = o.normalName.indexOf(mPrevInput);
-                    s.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(android.R.color.holo_blue_dark)),
-                            nameStart, nameStart + mPrevInput.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                    if (nameStart <= o.name.length() && nameStart + mPrevInput.length() <= o.name.length()) {
+                        s.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(android.R.color.holo_blue_dark)),
+                                nameStart, nameStart + mPrevInput.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                    }
                     holder.name.setText(s);
                 }
                 if (o.numberMatchId != -1) {

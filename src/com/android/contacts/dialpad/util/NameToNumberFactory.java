@@ -36,6 +36,8 @@ public class NameToNumberFactory {
         NameToNumber instance;
         if (lc.getLanguage().equalsIgnoreCase("ko")) {
             instance = new NameToNumberKorean(t9Chars, t9Digits);
+        } else if (lc.equals(Locale.CHINA)) {
+            instance = new NameToNumberChinese(t9Chars, t9Digits);
         } else {
             instance = new NameToNumber(t9Chars, t9Digits);
         }

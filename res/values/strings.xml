@@ -475,8 +475,8 @@
     <!-- String used for displaying calls to the voicemail number in the call log -->
     <string name="voicemail">Voicemail</string>
 
-    <!-- String used to display calls from unknown numbers in the call log -->
-    <string name="unknown">Unknown</string>
+    <!-- String used to display calls with unknown call types in the call log -->
+    <string name="unknown">Unknown type</string>
 
     <!-- String used to display calls from private numbers in the call log -->
     <string name="private_num">Private number</string>
@@ -602,6 +602,9 @@
 
     <!-- Title for voicemail details screen -->
     <string name="type_voicemail">Voicemail</string>
+
+    <!-- Title for unknown call details screen -->
+    <string name="type_unknown">Unknown call</string>
 
     <!-- Description for incoming calls going to voice mail vs. not -->
     <string name="actionIncomingCall">Incoming calls</string>

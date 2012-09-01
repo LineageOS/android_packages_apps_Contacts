@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAXH///FI\u003d",
+        "filename": "res/values/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2012-09-01T12:35:31Z",
+      "side": 1,
+      "message": "lowercase t",
+      "revId": "67e7a8443ea0eb12624509448cd8846e81445737",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAXH///FE\u003d",
+        "filename": "src/com/android/contacts/calllog/CallTypeIconsView.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2012-09-01T12:35:31Z",
+      "side": 1,
+      "message": "Whitespace :)",
+      "revId": "67e7a8443ea0eb12624509448cd8846e81445737",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

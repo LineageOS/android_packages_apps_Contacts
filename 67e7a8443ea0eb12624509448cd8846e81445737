@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "AAAAXH//++g\u003d",
+        "filename": "res/values/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 2403
+      },
+      "writtenOn": "2012-09-01T14:51:22Z",
+      "side": 1,
+      "message": "Should be \"--\u003e\" at the end, must be a typo :)",
+      "revId": "67e7a8443ea0eb12624509448cd8846e81445737",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAXH///FE\u003d",
         "filename": "src/com/android/contacts/calllog/CallTypeIconsView.java",
         "patchSetId": 2

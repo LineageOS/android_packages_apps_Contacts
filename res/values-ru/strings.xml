@@ -157,7 +157,7 @@
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="voicemail" msgid="3851469869202611441">"Голосовая почта"</string>
-    <string name="unknown" msgid="740067747858270469">"Неизвестно"</string>
+    <string name="unknown" msgid="740067747858270469">Неизвестный тип</string>
     <string name="private_num" msgid="6374339738119166953">"Скрытый номер"</string>
     <string name="payphone" msgid="4864313342828942922">"Телефон-автомат"</string>
     <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Наберите номер с клавиатуры"</string>
@@ -184,6 +184,7 @@
     <string name="type_outgoing" msgid="343108709599392641">"Исходящий вызов"</string>
     <string name="type_missed" msgid="2720502601640509542">"Пропущенный вызов"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"Голосовая почта"</string>
+    <string name="type_unknown">Неизвестный вызов</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"Входящие вызовы"</string>
     <string name="callBack" msgid="5498224409038809224">"Перезвонить"</string>
     <string name="callAgain" msgid="3197312117049874778">"Позвонить снова"</string>

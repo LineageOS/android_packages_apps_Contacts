@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "AAAAXH//+lA\u003d",
+        "filename": "res/values-zh-rCN/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 3589
+      },
+      "writtenOn": "2012-09-03T01:39:01Z",
+      "side": 1,
+      "message": "Also, please add this line here: http://pastebin.com/EaquzVjU",
+      "revId": "e920ce106b19b21a324ad046bb0c0f97aa49628d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAXH//+lg\u003d",
         "filename": "res/values-zh-rCN/strings.xml",
         "patchSetId": 1

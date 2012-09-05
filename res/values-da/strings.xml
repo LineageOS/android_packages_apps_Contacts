@@ -575,6 +575,8 @@
     <string name="dialer_ui_title">Indstillinger for opkaldsprogram</string>
     <string name="dialer_ui_orientation_title">Slå sensor-orientering til</string>
     <string name="dialer_ui_orientation_summary">Rotér opkaldsprogram baseret på sensor</string>
+
+    <string name="type_unknown">Ukendt opkald</string>
     <!-- CM9 additions end -->
 
 </resources>

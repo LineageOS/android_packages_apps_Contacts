@@ -132,12 +132,12 @@
     <string name="clearCallLogConfirmation" msgid="5043563133171583152">"Al uw oproepgegevens worden verwijderd."</string>
     <string name="clearCallLogProgress_title" msgid="8365943000154295771">"Oproeplijst wissen\u2026"</string>
     <string name="clearFrequentsConfirmation_title" msgid="766292372438450432">"Lijst met regelmatige contacten wissen?"</string>
-    <string name="clearFrequentsConfirmation" msgid="3254215748990281318">"U wist de lijst met contacten waarmee u regelmatig contact opneemt in de apps Personen en Telefoon, en e-mailapps moeten uw voorkeursadressen weer opnieuw leren."</string>
+    <string name="clearFrequentsConfirmation" msgid="3254215748990281318">"U wist de lijst met contacten waarmee u regelmatig contact opneemt in Personen en Telefoon, en e-mailapps moeten uw voorkeursadressen weer opnieuw leren."</string>
     <string name="clearFrequentsProgress_title" msgid="5157001637482794212">"Regelmatige contacten wissen\u2026"</string>
     <string name="imei" msgid="3045126336951684285">"IMEI-nummer"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="voicemail" msgid="3851469869202611441">"Voicemail"</string>
-    <string name="unknown" msgid="740067747858270469">"Onbekend"</string>
+    <string name="unknown" msgid="740067747858270469">"Onbekend type"</string>
     <string name="private_num" msgid="6374339738119166953">"Privénummer"</string>
     <string name="payphone" msgid="4864313342828942922">"Betaaltelefoon"</string>
     <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Toetsen gebruiken om te bellen"</string>
@@ -504,7 +504,7 @@
     <string name="user_profile_contacts_list_header" msgid="5582421742835006940">"Ik"</string>
     <string name="local_profile_title" msgid="2021416826991393684">"Mijn lokale profiel"</string>
     <string name="external_profile_title" msgid="8034998767621359438">"Mijn <xliff:g id="EXTERNAL_SOURCE">%1$s</xliff:g>-profiel"</string>
-    <string name="toast_displaying_all_contacts" msgid="2737388783898593875">"Alle contacten worden weergegeven"</string>
+    <string name="toast_displaying_all_contacts" msgid="2737388783898593875">"Alle contacten worden getoond"</string>
     <string name="no_account_prompt" msgid="7061052512446855192">"Personen werkt beter met een Google-account."\n\n"• Toegang via elke webbrowser."\n"• Maak beveiligde back-ups van uw contacten."</string>
     <string name="generic_no_account_prompt" msgid="7218827704367325460">"Zorg dat uw contacten veilig zijn, zelfs wanneer u uw telefoon verliest: synchroniseer met een online service."</string>
     <string name="generic_no_account_prompt_title" msgid="753783911899054860">"Account toevoegen"</string>
@@ -525,6 +525,9 @@
     <string name="dialer_ui_title">Kiezerinstellingen</string>
     <string name="dialer_ui_orientation_title">Scherm autom. draaien</string>
     <string name="dialer_ui_orientation_summary">Scherm door de sensor laten draaien</string>
+
+    <!-- Title for unknown call details screen -->
+    <string name="type_unknown">Onbekende oproep</string>
 
     <string name="t9_sort_title">T9-sorteermethoden</string>
     <string name="t9_sort_summary">Kies hoe T9-resultaten gesorteerd moeten worden</string>

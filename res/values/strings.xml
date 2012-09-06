@@ -1303,6 +1303,7 @@
     <string name="title_about_credits">Credits</string>
     <string name="summary_about_credits">Wysie, ChainsDD, geesun, niuchl, rac2030, sileht and the rest of XDA! :)</string>
 
+    <string name="t9_loading">Loading\u2026</string>
     <string name="t9_default_sort">1</string>
     <string name="t9_sort_title">T9 sorting mode</string>
     <string name="t9_sort_summary">Choose how to filter T9 results</string>
@@ -1321,5 +1322,4 @@
     <string name="t9_map_row_7">7pqrsßɾṕŕśřš</string>
     <string name="t9_map_row_8">8tuvúùüûű</string>
     <string name="t9_map_row_9">9wxyzýẃź</string>
-
 </resources>

@@ -47,6 +47,9 @@
     <string name="menu_viewAddress" msgid="1814744325763202024">"Adresa na mape"</string>
     <string name="menu_makeDefaultNumber" msgid="4838759253316649534">"Nastaviť číslo ako predvolenú hodnotu"</string>
     <string name="menu_makeDefaultEmail" msgid="2599044610375789994">"Nastaviť ako predvolený e-mail"</string>
+    <string name="menu_shareNumber">Zdieľať číslo</string>
+    <string name="menu_shareEmail">Zdieľať e-mail</string>
+    <string name="menu_shareAddress">Zdieľať adresu</string>
     <string name="menu_splitAggregate" msgid="8368636463748691868">"Oddeliť"</string>
     <string name="contactsSplitMessage" msgid="5253490235863170269">"Kontakty boli oddelené"</string>
     <string name="splitConfirmation_title" msgid="6716467920283502570">"Oddeliť kontakt"</string>
@@ -61,10 +64,12 @@
     <string name="menu_contactOptions" msgid="1957061455705020617">"Možnosti"</string>
     <string name="contactOptionsTitle" msgid="8259347644090700915">"Možnosti"</string>
     <string name="deleteConfirmation_title" msgid="6394309508930335204">"Odstrániť"</string>
+    <string name="clearConfirmation_title">Vymazať denník hovorov</string>
     <string name="readOnlyContactWarning" msgid="1390849295342594265">"Z účtov, ktoré sú iba na čítanie, nie je možné odstrániť kontakty. Tieto kontakty môžete vo vašom zozname kontaktov skryť."</string>
     <string name="readOnlyContactDeleteConfirmation" msgid="2137170726670196909">"Tento kontakt obsahuje informácie z niekoľkých účtov. Informácie z účtov iba na čítanie budú v zoznamoch kontaktov skryté, ale nebudú odstránené."</string>
     <string name="multipleContactDeleteConfirmation" msgid="938900978442960800">"Odstránením tohto kontaktu odstránite informácie z viacerých účtov."</string>
     <string name="deleteConfirmation" msgid="811706994761610640">"Tento kontakt bude odstránený."</string>
+    <string name="clearLogConfirmation">Všetky záznamy z denníka hovorov budú vymazané.</string>
     <string name="menu_done" msgid="796017761764190697">"Hotovo"</string>
     <string name="menu_doNotSave" msgid="2174577548513895144">"Vrátiť"</string>
     <string name="editContact_title_edit" msgid="7678695190666836093">"Upraviť kontakt"</string>
@@ -142,6 +147,7 @@
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Poslať textovú správu"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Zavolať kontakt <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Pred volaním upraviť číslo"</string>
+    <string name="recentCalls_addToBlacklist">Pridať do zoznamu zakázaných</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Pridať medzi kontakty"</string>
     <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"Odstrániť zo záznamu hovorov"</string>
     <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Vymazať záznam hovorov"</string>
@@ -264,6 +270,7 @@
     <string name="quickcontact_missing_app" msgid="4600366393134289038">"Aplikácia potrebná na spracovanie tejto akcie sa nenašla"</string>
     <string name="quickcontact_remember_choice" msgid="5964536411579749424">"Zapamätať túto voľbu"</string>
     <string name="quickcontact_missing_name" msgid="5590266114306996632">"Neznáme"</string>
+    <string name="quickcontact_no_data">Žiadne údaje</string>
     <string name="menu_accounts" msgid="8499114602017077970">"Účty"</string>
     <string name="menu_import_export" msgid="3765725645491577190">"Import a export"</string>
     <string name="dialog_import_export" msgid="4771877268244096596">"Importovať alebo exportovať kontakty"</string>
@@ -367,6 +374,8 @@
     <string name="name_phonetic_given" msgid="6853570431394449191">"Krstné meno (foneticky)"</string>
     <string name="name_phonetic_middle" msgid="8643721493320405200">"Druhé meno (foneticky)"</string>
     <string name="name_phonetic_family" msgid="462095502140180305">"Priezvisko (foneticky)"</string>
+    <string name="label_date">"Dátum"</string>
+    <string name="button_clear_date">"Vymazať"</string>
     <string name="account_type_format" msgid="718948015590343010">"Kontakt <xliff:g id="SOURCE">%1$s</xliff:g>"</string>
     <string name="from_account_format" msgid="687567483928582084">"z miesta: <xliff:g id="SOURCE">%1$s</xliff:g>"</string>
     <string name="use_photo_as_primary" msgid="8807110122951157246">"Použiť túto fotografiu"</string>
@@ -421,11 +430,14 @@
     <string name="summaryon_disable_num_check">Ľavé tlačidlo a menu bude vždy aktivné</string>
     <string name="summaryoff_disable_num_check">Ľavé tlačidlo a menu bude aktivné pokiaľ bude zadané aspoň jedno číslo</string>
     <string name="title_enable_haptic_feedback">Zapnúť odozvu dotykov</string>
+    <string name="summary_enable_haptic_feedback">Použiť vzor odozvy - zmenu vykonáte v CyanogenMod nastaveniach</string>
     <string name="title_change_digits_color">Zmenit farbu číslic</string>
     <string name="title_digits_color_pressed">Farba číslic (stlačené)</string>
     <string name="title_digits_color_focused">Farba číslic (vybrané)</string>
     <string name="title_digits_color_unselected">Farba číslic (nevybrané)</string>
     <string name="title_choose_color">Vyberte farbu</string>
+    <string name="instructions_choose_color">Dotykom na stred potvrdíte výber.\nTlačidlom \"Späť\" voľbu zrušíte.</string>
+    <string name="entry_no_vm_handler">Žiadny (vytočiť číslo hlasovej schránky)</string>
     <!-- Preferences: Call log -->
     <string name="title_cl_exact_time">Presný čas</string>
     <string name="summaryon_cl_exact_time">Používajú sa presné hodiny pre záznamy hovorov</string>
@@ -460,7 +472,31 @@
     <string name="title_misc_category">Rôzne</string>
     <string name="title_sensor_rotation">Použiť polohový senzor</string>
     <string name="summary_sensor_rotation">Povoliť otáčanie obrazovky podľa sytémového nastavenia</string>
+    <string name="title_data_font_size">Veľkosť písma informácií o kontakte</string>
+    <string name="summary_data_font_size">Umožní Vám vybrať veľkosť písma pre zobrazenie informácií o kontakte (tel. číslo, e-mail, adresa, atď.)</string>
+    <string name="title_default_phone_tab">Predvolená karta</string>
+    <string name="summary_default_phone_tab">Predvolená karta pri otvorení aplikácie na telefonovanie</string>
+
+    <string name="default_phone_tab_last_used">Posledná použitá pre volanie (predvolená)</string>
+    <string name="default_phone_tab_last_viewed">Posledná zobrazená</string>
+    <string name="default_phone_tab_phone">Telefón</string>
+    <string name="default_phone_tab_call_log">Denník hovorov</string>
+    <string name="default_phone_tab_contacts">Kontakty</string>
+    <string name="default_phone_tab_favorites">Obľúbené</string>
     <!-- Wysie: About strings -->
     <string name="title_about">O aplikácii</string>
+    <string name="title_about_name">Názov modifikácie</string>
+    <string name="title_about_version">Verzia</string>
+    <string name="title_about_credits">Spolupracovali</string>
+    <string name="summary_about_credits">Wysie, ChainsDD, geesun, niuchl, rac2030, sileht a ďalší z XDA! :)</string>
+    <string name="t9_sort_title">Triedenie T9</string>
+    <string name="t9_sort_summary">Vyberte spôsob, ktorým majú byť filtrované výsledky T9</string>
+    <string name="t9_sort_name">Najprv mená</string>
+    <string name="t9_sort_number">Najprv čísla</string>
+    <string name="t9_state_title">Povoliť T9 v číselníku</string>
+    <string name="t9_state_summary">Povoliť vyhľadávanie T9 pri výbere čísla v číselníku</string>
+    <string name="t9_dial_click_title">Volať vybraný kontakt</string>
+    <string name="t9_dial_click_summary">Volať vybraný kontakt nájdený pomocou T9</string>
+    <string name="t9_add_to_contacts">Pridať do kontaktov</string>
 </resources>
 

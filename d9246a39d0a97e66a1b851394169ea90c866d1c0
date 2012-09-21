@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAYX//9e0\u003d",
+        "filename": "src/com/android/contacts/dialpad/DialpadFragment.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1642
+      },
+      "writtenOn": "2012-09-21T00:57:26Z",
+      "side": 1,
+      "message": "please use english here",
+      "revId": "d9246a39d0a97e66a1b851394169ea90c866d1c0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

@@ -555,7 +555,7 @@ public class RecentCallsListActivity extends ListActivity
                     needNotify = true;
                 }
             }
-            if (info != null) {
+            if (info != null && info != ContactInfo.EMPTY) {
                 updateCallLog(ciq, info);
             }
             return needNotify;

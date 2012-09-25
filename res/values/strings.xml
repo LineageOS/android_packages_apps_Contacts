@@ -257,13 +257,6 @@
 
     <!-- The order of the items below is important, don't reorder without changing EditContactActivity.java -->
     <skip/>
-    <!-- The labels that are under the otherLabelsGroup when editing a contact. [CHAR LIMIT=20] -->
-    <string-array name="otherLabels">
-        <!-- An organization associated with a contact -->
-        <item>Organization</item>
-        <!-- A note associated with a contact -->
-        <item>Note</item>
-    </string-array>
 
     <!-- Description in the dialog that appears if there are no pictures from which to create an icon for a contact -->
     <string name="photoPickerNotFoundText" product="tablet">No pictures are available on the tablet.</string>

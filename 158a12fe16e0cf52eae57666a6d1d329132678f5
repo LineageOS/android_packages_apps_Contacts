@@ -1,0 +1,9 @@
+Change-Id: I158a12fe16e0cf52eae57666a6d1d329132678f5
+Code-Review+1: Pavel Kucera <pavel@doshaska.net>
+Code-Review+2: Danny Baumann <dannybaumann@web.de>
+Verified+1: Danny Baumann <dannybaumann@web.de>
+Submitted-by: Danny Baumann <dannybaumann@web.de>
+Submitted-at: Thu, 27 Sep 2012 08:27:38 -0700
+Reviewed-on: http://review.cyanogenmod.com/23978
+Project: CyanogenMod/android_packages_apps_Contacts
+Branch: refs/heads/gingerbread

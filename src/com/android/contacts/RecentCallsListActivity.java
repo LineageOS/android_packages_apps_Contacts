@@ -1300,20 +1300,14 @@ public class RecentCallsListActivity extends ListActivity
         }
 
         // "Add to contacts" item, if this entry isn't already associated with a contact
-        if (!contactInfoPresent && numberUri != null && !isVoicemail && !isSipNumber) {
-            // TODO: This item is currently disabled for SIP addresses, because
-            // the Insert.PHONE extra only works correctly for PSTN numbers.
-            //
-            // To fix this for SIP addresses, we need to:
-            // - define ContactsContract.Intents.Insert.SIP_ADDRESS, and use it here if
-            //   the current number is a SIP address
-            // - update the contacts UI code to handle Insert.SIP_ADDRESS by
-            //   updating the SipAddress field
-            // and then we can remove the "!isSipNumber" check above.
-
+        if (!contactInfoPresent && numberUri != null && !isVoicemail) {
             Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
             intent.setType(Contacts.CONTENT_ITEM_TYPE);
-            intent.putExtra(Insert.PHONE, number);
+            if (isSipNumber) {
+                intent.putExtra(Insert.SIP_ADDRESS, number);
+            } else {
+                intent.putExtra(Insert.PHONE, number);
+            }
             menu.add(0, 0, 0, R.string.recentCalls_addToContact)
                     .setIntent(intent);
 	    menu.add(0, MENU_ITEM_BLACKLIST, 0, R.string.recentCalls_addToBlacklist);

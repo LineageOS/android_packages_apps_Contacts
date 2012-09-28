@@ -39,6 +39,7 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.Photo;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
+import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.Intents.Insert;
 import android.text.TextUtils;
 import android.util.Log;
@@ -467,6 +468,18 @@ public class EntityModifier {
                     Phone.NUMBER);
             parseExtras(state, kind, extras, Insert.TERTIARY_PHONE_TYPE, Insert.TERTIARY_PHONE,
                     Phone.NUMBER);
+        }
+
+        // SipAddress
+        final boolean hasSipAddress = extras.containsKey(Insert.SIP_ADDRESS);
+        final DataKind kindSipAddress = source.getKindForMimetype(SipAddress.CONTENT_ITEM_TYPE);
+
+        if (hasSipAddress && EntityModifier.canInsert(state, kindSipAddress))
+        {
+            final String sipAddress = extras.getString(Insert.SIP_ADDRESS);
+            final ValuesDelta child = EntityModifier.insertChild(state, kindSipAddress);
+
+            child.put(SipAddress.SIP_ADDRESS, sipAddress);
         }
 
         {

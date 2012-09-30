@@ -45,7 +45,7 @@ import android.preference.PreferenceManager;
  * The dialer tab's title is 'phone', a more common name (see strings.xml).
  */
 public class DialtactsActivity extends TabActivity implements TabHost.OnTabChangeListener {
-    private static final String TAG = "Dailtacts";
+    private static final String TAG = "Dialtacts";
     private static final String FAVORITES_ENTRY_COMPONENT =
             "com.android.contacts.DialtactsFavoritesEntryActivity";
 
@@ -92,6 +92,14 @@ public class DialtactsActivity extends TabActivity implements TabHost.OnTabChang
         mTabHost.setOnTabChangedListener(this);
 
         String componentName = intent.getComponent().getClassName();
+
+        if (getClass().getName().equals(componentName)) {
+            // Check for malicious codes sent to dialer
+            if (isMaliciousDialIntent(intent)) {
+                finish();
+                return;
+            }
+        }
 
 	/* If intent is to view the Contacts List, prevent Dialer tab
 	 * from being set as current tab.
@@ -308,6 +316,23 @@ public class DialtactsActivity extends TabActivity implements TabHost.OnTabChang
             final Uri data = intent.getData();
             if (data != null && "tel".equals(data.getScheme())) {
                 return true;
+            }
+        }
+        return false;
+    }
+
+    /** Returns true if the given intent contains a malicious phone number to populate the dialer with */
+    private boolean isMaliciousDialIntent(Intent intent) {
+        // Choose the tab based on the inbound intent
+        final String action = intent.getAction();
+        if (Intent.ACTION_VIEW.equals(action)) {
+            final Uri data = intent.getData();
+            if (data != null && "tel".equals(data.getScheme())) {
+                String number = data.getEncodedSchemeSpecificPart();
+                if (!number.matches("[0-9.\\-() +]*")) {
+                    Log.i(TAG,"Intent containing malicious code [" + number + "] received - Ignored by framework");
+                    return true;
+                }
             }
         }
         return false;

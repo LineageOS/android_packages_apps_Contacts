@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAYn///MU\u003d",
+        "filename": "src/com/android/contacts/dialpad/T9Search.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 4533
+      },
+      "writtenOn": "2012-10-01T14:52:24Z",
+      "side": 1,
+      "message": "This could be removed so a restart would not be nessessary, but it would use more memory when nickname-search is turned off",
+      "revId": "5f4b03b7c3840bb44da823bddb7d5757b71f07ce",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

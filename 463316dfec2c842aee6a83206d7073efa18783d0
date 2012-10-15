@@ -85,6 +85,24 @@
       "revId": "463316dfec2c842aee6a83206d7073efa18783d0",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAY3//9Tk\u003d",
+        "filename": "src/com/android/contacts/dialpad/T9Search.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 2248
+      },
+      "writtenOn": "2012-10-15T15:45:38Z",
+      "side": 1,
+      "message": "I agree this T9 stuff could be done more efficient in general, but as I am not that fluent in Java writing, it will take some time and effort to write and test...time that I currently don\u0027t have. So my suggestions would be to go forward with this patch (I will solve the space issue) and I make a separate patch later to simplify the T9 code. If that is not acceptable, I will abandon this patch and come with a complete solution somewhere in future.",
+      "parentUuid": "AAAAY3//9Ww\u003d",
+      "revId": "463316dfec2c842aee6a83206d7073efa18783d0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

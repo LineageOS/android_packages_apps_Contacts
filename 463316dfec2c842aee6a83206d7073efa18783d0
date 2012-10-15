@@ -33,6 +33,23 @@
       "revId": "463316dfec2c842aee6a83206d7073efa18783d0",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAY3//9XE\u003d",
+        "filename": "src/com/android/contacts/dialpad/T9Search.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 4533
+      },
+      "writtenOn": "2012-10-15T10:01:57Z",
+      "side": 1,
+      "message": "The machtIDs contain the position of the first character that matches the input so I think these individual checks needed.\nSay your contact \u0027Mike Miller\u0027 works at \u0027Miller and Sons\u0027, if you search for \u0027Mill\u0027 this will highlight the Mill in the contact name AND add the company and highlight it in there there, too.\nIf you know a way to simplify this feel free to submit this :-)",
+      "revId": "463316dfec2c842aee6a83206d7073efa18783d0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

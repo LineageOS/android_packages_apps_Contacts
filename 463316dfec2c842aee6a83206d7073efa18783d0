@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAY3//9Yw\u003d",
+        "filename": "src/com/android/contacts/dialpad/T9Search.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1381
+      },
+      "writtenOn": "2012-10-15T06:18:23Z",
+      "side": 1,
+      "message": "Spacing",
+      "revId": "463316dfec2c842aee6a83206d7073efa18783d0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAY3//9Ys\u003d",
+        "filename": "src/com/android/contacts/dialpad/T9Search.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1381
+      },
+      "writtenOn": "2012-10-15T06:18:23Z",
+      "side": 1,
+      "message": "Maybe there\u0027s a way to generalize this? Seems like a lot of duplicate code here.",
+      "revId": "463316dfec2c842aee6a83206d7073efa18783d0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

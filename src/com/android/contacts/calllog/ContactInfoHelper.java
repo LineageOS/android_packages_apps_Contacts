@@ -219,8 +219,9 @@ public class ContactInfoHelper {
 
         // The "contactNumber" is a regular phone number, so use the CallLog table.
         Uri uri = Uri.withAppendedPath(CallLog.Calls.CONTENT_FILTER_URI, Uri.encode(contactNumber));
-        //if we ought to find something it would be in incmoning calls
-        String selectionClause = " " + CallLog.Calls.TYPE + " = " + CallLog.Calls.INCOMING_TYPE;
+        //if we ought to find something it would be in incmoning/missed calls
+        String selectionClause = " " + CallLog.Calls.TYPE + " = " + CallLog.Calls.INCOMING_TYPE +
+                                 " OR " + CallLog.Calls.TYPE + " = " + CallLog.Calls.MISSED_TYPE;
         Cursor c = mContext.getContentResolver().query(
                 uri,
                 CallLogQuery._PROJECTION,

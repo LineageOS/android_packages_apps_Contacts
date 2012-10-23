@@ -34,13 +34,13 @@
     <string name="t9_dial_click_summary">Dial the selected contact for T9</string>
     <string name="t9_add_to_contacts">Add to contacts</string>
     <string name="t9_map_row_2">2abcàáâäåɑæçǽćčá</string>
-    <string name="t9_map_row_3">3deféèêë</string>
+    <string name="t9_map_row_3">3defďéèêëě</string>
     <string name="t9_map_row_4">4ghiíìïîǵ</string>
     <string name="t9_map_row_5">5jklḱḱĺ</string>
-    <string name="t9_map_row_6">6mnoòóöôøñŋǿḿńő</string>
+    <string name="t9_map_row_6">6mnoòóöôøñŋǿḿńňő</string>
     <string name="t9_map_row_7">7pqrsßɾṕŕśřš</string>
-    <string name="t9_map_row_8">8tuvúùüûű</string>
-    <string name="t9_map_row_9">9wxyzýẃź</string>
+    <string name="t9_map_row_8">8tuvťúùüûűů</string>
+    <string name="t9_map_row_9">9wxyzýẃźž</string>
 
     <!-- Directory partition name -->
     <string name="contactsList">Contacts</string>

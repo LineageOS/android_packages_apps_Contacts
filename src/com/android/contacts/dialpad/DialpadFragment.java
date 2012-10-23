@@ -23,14 +23,12 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -47,7 +45,6 @@ import android.provider.Contacts.Intents.Insert;
 import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
 import android.provider.Contacts.PhonesColumns;
-import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
@@ -150,7 +147,7 @@ public class DialpadFragment extends Fragment
     private ListView mDialpadChooser;
     private DialpadChooserAdapter mDialpadChooserAdapter;
 
-    private static T9Search sT9Search; // Static to avoid reloading when class is destroyed and recreated
+    private T9Search mT9Search;
     private ContactPhotoManager mPhotoLoader;
     private ToggleButton mT9Toggle;
     private ListView mT9List;
@@ -159,7 +156,6 @@ public class DialpadFragment extends Fragment
     private T9Adapter mT9AdapterTop;
     private ViewSwitcher mT9Flipper;
     private LinearLayout mT9Top;
-    private boolean mContactsUpdated;
 
     /**
      * Regular expression prohibiting manual phone call. Can be empty, which means "no rule".
@@ -231,27 +227,6 @@ public class DialpadFragment extends Fragment
 
     private static final String PREF_DIGITS_FILLED_BY_INTENT = "pref_digits_filled_by_intent";
 
-    // Add LOCALE_CHAGNED event receiver.
-    private final BroadcastReceiver mLocaleChangedReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            Log.v(TAG, "mIntentReceiver  onReceive  intent.getAction(): " + intent.getAction());
-            if (intent.getAction().equals(Intent.ACTION_LOCALE_CHANGED)) {
-                if (isT9On()) {
-                    sT9Search = new T9Search(getActivity());
-                }
-            }
-        }
-    };
-
-    @Override
-    public void onDestroy() {
-        // TODO Auto-generated method stub
-        super.onDestroy();
-
-        getActivity().unregisterReceiver(mLocaleChangedReceiver);
-    }
-
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         mWasEmptyBeforeTextChange = TextUtils.isEmpty(s);
@@ -311,18 +286,7 @@ public class DialpadFragment extends Fragment
         if (state != null) {
             mDigitsFilledByIntent = state.getBoolean(PREF_DIGITS_FILLED_BY_INTENT);
         }
-
-        // Add LOCALE_CHAGNED event receiver.
-        IntentFilter localeChangedfilter = new IntentFilter(Intent.ACTION_LOCALE_CHANGED);
-        getActivity().registerReceiver(mLocaleChangedReceiver, localeChangedfilter);
     }
-
-    private ContentObserver mContactObserver = new ContentObserver(new Handler()) {
-        @Override
-        public void onChange(boolean selfChange) {
-            mContactsUpdated = true;
-        }
-    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
@@ -338,6 +302,8 @@ public class DialpadFragment extends Fragment
         mDigits.setOnKeyListener(this);
         mDigits.setOnLongClickListener(this);
         mDigits.addTextChangedListener(this);
+
+        mT9Search = new T9Search(getActivity());
 
         mT9List = (ListView) fragmentView.findViewById(R.id.t9list);
         if (mT9List!= null) {
@@ -571,25 +537,14 @@ public class DialpadFragment extends Fragment
 
         final StopWatch stopWatch = StopWatch.start("Dialpad.onResume");
 
-        if ((sT9Search == null && isT9On()) || mContactsUpdated) {
-            Thread loadContacts = new Thread(new Runnable() {
-                public void run () {
-                    sT9Search = new T9Search(getActivity());
-                }
-            });
-            loadContacts.start();
-            if (mContactsUpdated) {
-                mContactsUpdated = false;
-                onLongClick(mDelete);
-                mT9Adapter = null;
-                mT9AdapterTop = null;
-                mT9ListTop.setAdapter(mT9AdapterTop);
-                mT9List.setAdapter(mT9Adapter);
-            }
-        }
-
         if (isT9On()) {
-            getActivity().getContentResolver().unregisterContentObserver(mContactObserver);
+            mT9Search.load(new T9Search.LoadFinishCallback() {
+                @Override
+                public void onLoadFinished() {
+                    Log.d(TAG, "load finished");
+                    searchContacts();
+                 }
+             });
         }
 
         hideT9();
@@ -700,10 +655,6 @@ public class DialpadFragment extends Fragment
         // TODO: I wonder if we should not check if the AsyncTask that
         // lookup the last dialed number has completed.
         mLastNumberDialed = EMPTY_NUMBER;  // Since we are going to query again, free stale number.
-        if (isT9On()) {
-            getActivity().getContentResolver().registerContentObserver(
-                    ContactsContract.Contacts.CONTENT_URI, true, mContactObserver);
-        }
         SpecialCharSequenceMgr.cleanup();
     }
 
@@ -863,48 +814,52 @@ public class DialpadFragment extends Fragment
      * Toggles view visibility based on results
      */
     private void searchContacts() {
-        if (!isT9On())
+        if (!isT9On()) {
             return;
+        }
+
         final int length = mDigits.length();
         if (length > 0) {
-            if (sT9Search != null) {
-                T9SearchResult result = sT9Search.search(mDigits.getText().toString());
-                if (mT9AdapterTop == null) {
-                    mT9AdapterTop = sT9Search.new T9Adapter(getActivity(), 0, new ArrayList<ContactItem>(), getActivity().getLayoutInflater(), mPhotoLoader);
-                    mT9AdapterTop.setNotifyOnChange(true);
+            T9SearchResult result = mT9Search.search(mDigits.getText().toString());
+            if (mT9AdapterTop == null) {
+                mT9AdapterTop = mT9Search.new T9Adapter(getActivity(), 0,
+                        new ArrayList<ContactItem>(), mPhotoLoader);
+                mT9AdapterTop.setNotifyOnChange(true);
+            } else {
+                mT9AdapterTop.clear();
+            }
+
+            if (result != null) {
+                if (mT9Adapter == null) {
+                    mT9Adapter = mT9Search.new T9Adapter(getActivity(), 0,
+                            result.getResults(), mPhotoLoader);
+                    mT9Adapter.setNotifyOnChange(true);
                 } else {
-                    mT9AdapterTop.clear();
+                    mT9Adapter.clear();
+                    mT9Adapter.addAll(result.getResults());
                 }
-                if (result != null) {
-                    if (mT9Adapter == null) {
-                        mT9Adapter = sT9Search.new T9Adapter(getActivity(), 0, result.getResults(),getActivity().getLayoutInflater(), mPhotoLoader);
-                        mT9Adapter.setNotifyOnChange(true);
-                    } else {
-                        mT9Adapter.clear();
-                        mT9Adapter.addAll(result.getResults());
-                    }
-                    if (mT9List.getAdapter() == null) {
-                        mT9List.setAdapter(mT9Adapter);
-                    }
-                    mT9AdapterTop.add(result.getTopContact());
-                    if (result.getNumResults() > 1) {
-                        mT9Toggle.setVisibility(View.VISIBLE);
-                    } else {
-                        mT9Toggle.setVisibility(View.GONE);
-                        toggleT9();
-                    }
-                    mT9Toggle.setTag(null);
+                if (mT9List.getAdapter() == null) {
+                    mT9List.setAdapter(mT9Adapter);
+                }
+                mT9AdapterTop.add(result.getTopContact());
+                if (result.getNumResults() > 1) {
+                    mT9Toggle.setVisibility(View.VISIBLE);
                 } else {
-                    ((ContactItem) mT9ListTop.getTag()).number = mDigits.getText().toString();
-                    mT9AdapterTop.add((ContactItem) mT9ListTop.getTag());
-                    mT9Toggle.setTag(new Boolean(true));
                     mT9Toggle.setVisibility(View.GONE);
                     toggleT9();
                 }
-                mT9ListTop.setVisibility(View.VISIBLE);
-                if (mT9ListTop.getAdapter() == null) {
-                    mT9ListTop.setAdapter(mT9AdapterTop);
-                }
+                mT9Toggle.setTag(null);
+            } else {
+                ContactItem contact = (ContactItem) mT9ListTop.getTag();
+                contact.number = mDigits.getText().toString();
+                mT9AdapterTop.add(contact);
+                mT9Toggle.setTag(new Boolean(true));
+                mT9Toggle.setVisibility(View.GONE);
+                toggleT9();
+            }
+            mT9ListTop.setVisibility(View.VISIBLE);
+            if (mT9ListTop.getAdapter() == null) {
+                mT9ListTop.setAdapter(mT9AdapterTop);
             }
         } else {
             mT9ListTop.setVisibility(View.INVISIBLE);

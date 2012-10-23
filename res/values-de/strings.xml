@@ -560,6 +560,7 @@
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Konfigurieren Sie Ihre Mailbox unter \"Menü\" &gt; \"Einstellungen\"."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Deaktivieren Sie zunächst den Flugmodus, um die Mailbox anzurufen."</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Mehr Optionen"</string>
+    <string name="t9_loading">Lade Kontakte\u2026</string>
     <string name="t9_sort_title">T9-Sortierung</string>
     <string name="t9_sort_summary">Reihenfolge der T9-Resultate auswählen</string>
     <string name="t9_sort_name">Namenstreffer bevorzugen</string>

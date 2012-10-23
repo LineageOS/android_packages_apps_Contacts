@@ -16,6 +16,7 @@
 
 package com.android.contacts;
 
+import com.android.contacts.dialpad.T9SearchCache;
 import com.android.contacts.list.ContactListFilterController;
 import com.android.contacts.model.AccountTypeManager;
 import com.android.contacts.test.InjectedServices;
@@ -43,6 +44,7 @@ public final class ContactsApplication extends Application {
     private AccountTypeManager mAccountTypeManager;
     private ContactPhotoManager mContactPhotoManager;
     private ContactListFilterController mContactListFilterController;
+    private T9SearchCache mT9Cache;
 
     /**
      * Overrides the system services with mocks for testing.
@@ -110,6 +112,13 @@ public final class ContactsApplication extends Application {
                         ContactListFilterController.createContactListFilterController(this);
             }
             return mContactListFilterController;
+        }
+
+        if (T9SearchCache.T9_CACHE_SERVICE.equals(name)) {
+            if (mT9Cache == null) {
+                mT9Cache = T9SearchCache.createT9Cache(this);
+            }
+            return mT9Cache;
         }
 
         return super.getSystemService(name);

@@ -19,7 +19,9 @@ package com.android.contacts.dialpad;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 
 import android.content.Context;
@@ -27,8 +29,11 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.provider.ContactsContract.CommonDataKinds.Nickname;
+import android.provider.ContactsContract.CommonDataKinds.Organization;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Data;
 import android.telephony.PhoneNumberUtils;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -58,25 +63,32 @@ class T9Search {
     private static final int NAME_FIRST = 1;
     private static final int NUMBER_FIRST = 2;
 
-    // Phone number queries
-    private static final String[] PHONE_PROJECTION = new String[] {
+    // Phone number, nickname, organization query
+    private static final String[] DATA_PROJECTION = new String[] {
+        Data.CONTACT_ID,
+        Data.MIMETYPE,
         Phone.NUMBER,
-        Phone.CONTACT_ID,
         Phone.IS_SUPER_PRIMARY,
         Phone.TYPE,
-        Phone.LABEL
+        Phone.LABEL,
+        Organization.COMPANY,
+        Nickname.NAME
     };
-    private static final int PHONE_COLUMN_NUMBER = 0;
-    private static final int PHONE_COLUMN_CONTACT = 1;
-    private static final int PHONE_COLUMN_PRIMARY = 2;
-    private static final int PHONE_COLUMN_TYPE = 3;
-    private static final int PHONE_COLUMN_LABEL = 4;
+    private static final int DATA_COLUMN_CONTACT = 0;
+    private static final int DATA_COLUMN_MIMETYPE = 1;
+    private static final int DATA_COLUMN_PHONENUMBER = 2;
+    private static final int DATA_COLUMN_PRIMARY = 3;
+    private static final int DATA_COLUMN_PHONETYPE = 4;
+    private static final int DATA_COLUMN_PHONELABEL = 5;
+    private static final int DATA_COLUMN_ORGANIZATION = 6;
+    private static final int DATA_COLUMN_NICKNAME = 7;
 
-    private static final String PHONE_ID_SELECTION = Contacts.Data.MIMETYPE + " = ? ";
-    private static final String[] PHONE_ID_SELECTION_ARGS = new String[] {
-        Phone.CONTENT_ITEM_TYPE
+    private static final String DATA_SELECTION =
+            Data.MIMETYPE + " = ? or " + Data.MIMETYPE + " = ? or " + Data.MIMETYPE + " = ?";
+    private static final String[] DATA_SELECTION_ARGS = new String[] {
+        Phone.CONTENT_ITEM_TYPE, Organization.CONTENT_ITEM_TYPE, Nickname.CONTENT_ITEM_TYPE
     };
-    private static final String PHONE_SORT = Phone.CONTACT_ID + " ASC";
+    private static final String DATA_SORT = Data.CONTACT_ID + " ASC";
 
     private static final String[] CONTACT_PROJECTION = new String[] {
         Contacts._ID,
@@ -131,43 +143,54 @@ class T9Search {
             Cursor contact = mContext.getContentResolver().query(
                     Contacts.CONTENT_URI, CONTACT_PROJECTION, CONTACT_QUERY,
                     null, CONTACT_SORT);
-            Cursor phone = mContext.getContentResolver().query(
-                    Phone.CONTENT_URI, PHONE_PROJECTION, PHONE_ID_SELECTION,
-                    PHONE_ID_SELECTION_ARGS, PHONE_SORT);
+            Cursor data = mContext.getContentResolver().query(
+                    Data.CONTENT_URI, DATA_PROJECTION, DATA_SELECTION,
+                    DATA_SELECTION_ARGS, DATA_SORT);
 
-            phone.moveToFirst();
+            data.moveToFirst();
 
             while (contact.moveToNext()) {
                 long contactId = contact.getLong(CONTACT_COLUMN_ID);
-                String contactName = contact.getString(CONTACT_COLUMN_NAME);
+                String nickName = null, organization = null;
                 int contactContactedCount = contact.getInt(CONTACT_COLUMN_CONTACTED);
+                ArrayList<ContactItem> contactItems = new ArrayList<ContactItem>();
 
-                while (!phone.isAfterLast() && phone.getLong(PHONE_COLUMN_CONTACT) == contactId) {
-                    String num = phone.getString(PHONE_COLUMN_NUMBER);
-                    ContactItem contactInfo = new ContactItem();
+                while (!data.isAfterLast() && data.getLong(DATA_COLUMN_CONTACT) < contactId) {
+                    data.moveToNext();
+                }
 
-                    contactInfo.id = contactId;
-                    contactInfo.name = contactName;
-                    contactInfo.number = PhoneNumberUtils.formatNumber(num);
-                    contactInfo.normalNumber = removeNonDigits(num);
-                    contactInfo.normalName = normalizer.convert(contactName);
-                    contactInfo.timesContacted = contactContactedCount;
-                    contactInfo.isSuperPrimary = phone.getInt(PHONE_COLUMN_PRIMARY) > 0;
-                    contactInfo.groupType = Phone.getTypeLabel(mContext.getResources(),
-                            phone.getInt(PHONE_COLUMN_TYPE), phone.getString(PHONE_COLUMN_LABEL));
+                while (!data.isAfterLast() && data.getLong(DATA_COLUMN_CONTACT) == contactId) {
+                    final String mimeType = data.getString(DATA_COLUMN_MIMETYPE);
+                    if (TextUtils.equals(mimeType, Phone.CONTENT_ITEM_TYPE)) {
+                        String num = data.getString(DATA_COLUMN_PHONENUMBER);
+                        ContactItem contactInfo = new ContactItem();
 
-                    String photoUri = contact.getString(CONTACT_COLUMN_PHOTO_URI);
-                    if (photoUri != null) {
-                        contactInfo.photo = Uri.parse(photoUri);
+                        contactInfo.id = contactId;
+                        contactInfo.number = PhoneNumberUtils.formatNumber(num);
+                        contactInfo.normalNumber = removeNonDigits(num);
+                        contactInfo.timesContacted = contactContactedCount;
+                        contactInfo.isSuperPrimary = data.getInt(DATA_COLUMN_PRIMARY) > 0;
+                        contactInfo.groupType = Phone.getTypeLabel(mContext.getResources(),
+                                data.getInt(DATA_COLUMN_PHONETYPE), data.getString(DATA_COLUMN_PHONELABEL));
+                        contactItems.add(contactInfo);
+                    } else if (TextUtils.equals(mimeType, Organization.CONTENT_ITEM_TYPE)) {
+                        organization = data.getString(DATA_COLUMN_ORGANIZATION);
+                    } else if (TextUtils.equals(mimeType, Nickname.CONTENT_ITEM_TYPE)) {
+                        nickName = data.getString(DATA_COLUMN_NICKNAME);
                     }
+                    data.moveToNext();
+                }
 
-                    mContacts.add(contactInfo);
-                    phone.moveToNext();
+                for (ContactItem item : contactItems) {
+                    item.addNameEntry(ENTRY_NAME, contact.getString(CONTACT_COLUMN_NAME), normalizer);
+                    item.addNameEntry(ENTRY_NICKNAME, nickName, normalizer);
+                    item.addNameEntry(ENTRY_ORGANIZATION, organization, normalizer);
+                    mContacts.add(item);
                 }
             }
 
             contact.close();
-            phone.close();
+            data.close();
             return null;
         }
 
@@ -204,18 +227,48 @@ class T9Search {
         }
     }
 
+    private static class NameMatchEntry {
+        String value;
+        String normalValue;
+        int matchId;
+        String prefix;
+        String postfix;
+    }
+
+    private static final int ENTRY_NAME = 0;
+    private static final int ENTRY_NICKNAME = 1;
+    private static final int ENTRY_ORGANIZATION = 2;
+    private static final int MATCH_ENTRY_COUNT = 3;
+
     public static class ContactItem {
         Uri photo;
-        String name;
         String number;
         String normalNumber;
-        String normalName;
-        int timesContacted;
-        int nameMatchId;
         int numberMatchId;
+        Map<Integer, NameMatchEntry> nameEntries;
+        int timesContacted;
         CharSequence groupType;
         long id;
         boolean isSuperPrimary;
+
+        public ContactItem() {
+            nameEntries = new LinkedHashMap<Integer, NameMatchEntry>();
+        }
+        public void addNameEntry(int type, String value, NameToNumber normalizer) {
+            NameMatchEntry entry = new NameMatchEntry();
+            entry.matchId = -1;
+            entry.value = value;
+            if (value != null) {
+                entry.normalValue = normalizer.convert(value);
+            }
+            if (type == ENTRY_NICKNAME) {
+                entry.prefix = " (";
+                entry.postfix = ")";
+            } else if (type == ENTRY_ORGANIZATION) {
+                entry.prefix = " - ";
+            }
+            nameEntries.put(type, entry);
+        }
     }
 
     public T9SearchResult search(String number) {
@@ -232,20 +285,31 @@ class T9Search {
 
         // Go through each contact
         for (ContactItem item : (newQuery ? mContacts : mAllResults)) {
-            item.numberMatchId = -1;
-            item.nameMatchId = -1;
             pos = item.normalNumber.indexOf(number);
             if (pos != -1) {
                 item.numberMatchId = pos;
                 numberResults.add(item);
+            } else {
+                item.numberMatchId = -1;
             }
-            pos = item.normalName.indexOf(number);
-            if (pos != -1) {
-                int lastSpace = item.normalName.lastIndexOf("0", pos);
-                if (lastSpace == -1) {
-                    lastSpace = 0;
+
+            boolean hasNameMatch = false;
+
+            for (NameMatchEntry entry : item.nameEntries.values()) {
+                pos = entry.normalValue.indexOf(number);
+                if (pos != -1) {
+                    int lastSpace = entry.normalValue.lastIndexOf("0", pos);
+                    if (lastSpace == -1) {
+                        lastSpace = 0;
+                    }
+                    entry.matchId = pos - lastSpace;
+                    hasNameMatch = true;
+                } else {
+                    entry.matchId = -1;
                 }
-                item.nameMatchId = pos - lastSpace;
+            }
+
+            if (hasNameMatch) {
                 nameResults.add(item);
             }
         }
@@ -282,10 +346,19 @@ class T9Search {
     private static final Comparator<ContactItem> sNameComparator = new Comparator<ContactItem>() {
         @Override
         public int compare(ContactItem lhs, ContactItem rhs) {
-            int ret = Integer.compare(lhs.nameMatchId, rhs.nameMatchId);
-            if (ret == 0) ret = Integer.compare(rhs.timesContacted, lhs.timesContacted);
-            if (ret == 0) ret = Boolean.compare(rhs.isSuperPrimary, lhs.isSuperPrimary);
-            return ret;
+            int ret;
+            for (int i = 0; i < MATCH_ENTRY_COUNT; i++) {
+                ret = Integer.compare(lhs.nameEntries.get(i).matchId, rhs.nameEntries.get(i).matchId);
+                if (ret != 0) {
+                    return ret;
+                }
+            }
+            ret = Integer.compare(rhs.timesContacted, lhs.timesContacted);
+            if (ret != 0) {
+                return ret;
+            }
+
+            return Boolean.compare(rhs.isSuperPrimary, lhs.isSuperPrimary);
         }
     };
 
@@ -364,19 +437,32 @@ class T9Search {
             }
 
             ContactItem o = mItems.get(position);
-            if (o.name == null) {
+            if (o.nameEntries.isEmpty()) {
                 holder.name.setText(mContext.getResources().getString(R.string.t9_add_to_contacts));
                 holder.number.setVisibility(View.GONE);
                 holder.icon.setImageResource(R.drawable.ic_menu_add_field_holo_light);
                 holder.icon.assignContactFromPhone(o.number, true);
             } else {
                 SpannableStringBuilder nameBuilder = new SpannableStringBuilder();
-                nameBuilder.append(o.name);
-                if (o.nameMatchId != -1) {
-                    int nameStart = o.normalName.indexOf(mPrevInput);
-                    if (nameStart <= o.name.length() && nameStart + mPrevInput.length() <= o.name.length()) {
+                for (NameMatchEntry entry : o.nameEntries.values()) {
+                    if (TextUtils.isEmpty(entry.value)) {
+                        continue;
+                    }
+                    int prefixLen = 0, postfixLen = 0;
+                    if (!TextUtils.isEmpty(entry.prefix)) {
+                        nameBuilder.append(entry.prefix);
+                        prefixLen = entry.prefix.length();
+                    }
+                    nameBuilder.append(entry.value);
+                    if (!TextUtils.isEmpty(entry.postfix)) {
+                        nameBuilder.append(entry.postfix);
+                        postfixLen = entry.postfix.length();
+                    }
+                    if (entry.matchId != -1) {
+                        int start = entry.matchId + nameBuilder.length() +
+                                postfixLen - prefixLen;
                         nameBuilder.setSpan(new ForegroundColorSpan(mHighlightColor),
-                                nameStart, nameStart + mPrevInput.length(),
+                                start, start + mPrevInput.length(),
                                 Spannable.SPAN_INCLUSIVE_INCLUSIVE);
                     }
                 }

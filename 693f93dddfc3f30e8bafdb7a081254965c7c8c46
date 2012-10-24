@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAaH//+G4\u003d",
+        "filename": "res/layout/row_loading.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1576
+      },
+      "writtenOn": "2012-10-24T20:42:43Z",
+      "side": 1,
+      "message": "tabs, should be 4 spaces",
+      "revId": "693f93dddfc3f30e8bafdb7a081254965c7c8c46",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

@@ -33,6 +33,24 @@
       "revId": "693f93dddfc3f30e8bafdb7a081254965c7c8c46",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAaH//9+g\u003d",
+        "filename": "src/com/android/contacts/dialpad/T9Search.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2012-10-25T11:03:38Z",
+      "side": 1,
+      "message": "I think getColumnIndex is meant for the cases where you don\u0027t know the column layout off-hand (e.g. because you didn\u0027t provide a projection). AOSP code uses that style (projection + int constants) everywhere.\nFor an example in the contacts app, see e.g. /src/com/android/contacts/calllog/DefaultVoicemailNotifier.java, line 239.",
+      "parentUuid": "AAAAaH//+AI\u003d",
+      "revId": "693f93dddfc3f30e8bafdb7a081254965c7c8c46",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

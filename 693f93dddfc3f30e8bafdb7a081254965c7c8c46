@@ -16,6 +16,23 @@
       "revId": "693f93dddfc3f30e8bafdb7a081254965c7c8c46",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAaH//+AI\u003d",
+        "filename": "src/com/android/contacts/dialpad/T9Search.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 940
+      },
+      "writtenOn": "2012-10-25T08:52:17Z",
+      "side": 1,
+      "message": "I know these were hard coded previously too, but can we switch over to getColumnIndex() instead ? Safer that way imo\n\nFor eg :\n\nint contactContactedCount \u003d contact.getInt(contact.getColumnIndex(Contacts.TIMES_CONTACTED));",
+      "revId": "693f93dddfc3f30e8bafdb7a081254965c7c8c46",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

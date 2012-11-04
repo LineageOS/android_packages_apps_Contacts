@@ -575,4 +575,5 @@
     <string name="t9_dial_click_title">Kijelölt személy tárcsázása</string>
     <string name="t9_dial_click_summary">Tárcsázza a T9 tárcsázó által megtalált személyt</string>
     <string name="t9_add_to_contacts">Hozzáadás a névjegyekhez</string>
+    <string name="t9_loading">Betöltés\u2026</string>
 </resources>

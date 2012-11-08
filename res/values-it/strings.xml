@@ -18,6 +18,7 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="launcherDialer" msgid="8636288196618486553">"Telefono"</string>
     <string name="people" msgid="1048457247435785074">"Persone"</string>
+    <string name="t9_loading">Caricamento\u2026</string>
     <string name="t9_sort_title">"Modalità di ricerca T9"</string>
     <string name="t9_sort_summary">"Scegli come filtrare i risultati"</string>
     <string name="t9_sort_name">"Priorità ai nomi"</string>

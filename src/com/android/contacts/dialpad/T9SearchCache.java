@@ -573,9 +573,12 @@ public class T9SearchCache implements ComponentCallbacks2 {
                     }
 
                     if (entry.matchId != -1) {
-                        nameBuilder.setSpan(new ForegroundColorSpan(mHighlightColor),
-                                start, start + mPrevInput.length(),
-                                Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                        if (start <= entry.value.length()
+                                && start + mPrevInput.length() <= entry.value.length()) {
+                            nameBuilder.setSpan(new ForegroundColorSpan(mHighlightColor),
+                                    start, start + mPrevInput.length(),
+                                    Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                        }
                     }
                 }
 

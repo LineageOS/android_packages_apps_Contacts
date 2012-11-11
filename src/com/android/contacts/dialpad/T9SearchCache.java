@@ -508,8 +508,8 @@ public class T9SearchCache implements ComponentCallbacks2 {
         return sb.toString();
     }
 
-    public T9Adapter createT9Adapter(ArrayList<ContactItem> items) {
-        return new T9Adapter(items);
+    public T9Adapter createT9Adapter(Context context, ArrayList<ContactItem> items) {
+        return new T9Adapter(context, items);
     }
 
     protected class T9Adapter extends ArrayAdapter<ContactItem> {
@@ -519,10 +519,10 @@ public class T9SearchCache implements ComponentCallbacks2 {
         private ContactPhotoManager mPhotoLoader;
         private View mLoadingView;
 
-        protected T9Adapter(ArrayList<ContactItem> items) {
-            super(mContext, 0, items);
-            mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            mPhotoLoader = ContactPhotoManager.getInstance(mContext);
+        protected T9Adapter(Context context, ArrayList<ContactItem> items) {
+            super(context, 0, items);
+            mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            mPhotoLoader = ContactPhotoManager.getInstance(context);
             mItems = items;
         }
 
@@ -550,7 +550,7 @@ public class T9SearchCache implements ComponentCallbacks2 {
 
             ContactItem o = mItems.get(position);
             if (o.nameEntries.isEmpty()) {
-                holder.name.setText(mContext.getResources().getString(R.string.t9_add_to_contacts));
+                holder.name.setText(getContext().getResources().getString(R.string.t9_add_to_contacts));
                 holder.number.setVisibility(View.GONE);
                 holder.icon.setImageResource(R.drawable.ic_menu_add_field_holo_light);
                 holder.icon.assignContactFromPhone(o.number, true);

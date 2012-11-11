@@ -829,7 +829,7 @@ public class DialpadFragment extends Fragment
         if (length > 0) {
             T9SearchResult result = mT9Search.search(mDigits.getText().toString());
             if (mT9AdapterTop == null) {
-                mT9AdapterTop = mT9Search.createT9Adapter(new ArrayList<ContactItem>());
+                mT9AdapterTop = mT9Search.createT9Adapter(new ArrayList<ContactItem>(), getActivity());
                 mT9AdapterTop.setNotifyOnChange(true);
             } else {
                 mT9AdapterTop.clear();
@@ -837,7 +837,7 @@ public class DialpadFragment extends Fragment
 
             if (result != null) {
                 if (mT9Adapter == null) {
-                    mT9Adapter = mT9Search.createT9Adapter(result.getResults());
+                    mT9Adapter = mT9Search.createT9Adapter(result.getResults(), getActivity());
                     mT9Adapter.setNotifyOnChange(true);
                 } else {
                     mT9Adapter.clear();

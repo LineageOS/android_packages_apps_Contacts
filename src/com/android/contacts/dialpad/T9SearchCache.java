@@ -508,8 +508,8 @@ public class T9SearchCache implements ComponentCallbacks2 {
         return sb.toString();
     }
 
-    public T9Adapter createT9Adapter(ArrayList<ContactItem> items) {
-        return new T9Adapter(items);
+    public T9Adapter createT9Adapter(ArrayList<ContactItem> items, Context context) {
+        return new T9Adapter(items, context);
     }
 
     protected class T9Adapter extends ArrayAdapter<ContactItem> {
@@ -518,9 +518,11 @@ public class T9SearchCache implements ComponentCallbacks2 {
         private LayoutInflater mInflater;
         private ContactPhotoManager mPhotoLoader;
         private View mLoadingView;
+        private Context mContext;
 
-        protected T9Adapter(ArrayList<ContactItem> items) {
-            super(mContext, 0, items);
+        protected T9Adapter(ArrayList<ContactItem> items, Context context) {
+            super(context, 0, items);
+            mContext = context;
             mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             mPhotoLoader = ContactPhotoManager.getInstance(mContext);
             mItems = items;

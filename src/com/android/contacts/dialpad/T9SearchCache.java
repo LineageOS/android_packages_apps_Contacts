@@ -155,11 +155,10 @@ public class T9SearchCache implements ComponentCallbacks2 {
     };
 
     public static synchronized T9SearchCache getInstance(Context context) {
-        Context applicationContext = context.getApplicationContext();
         T9SearchCache service = (T9SearchCache)
-                applicationContext.getSystemService(T9_CACHE_SERVICE);
+                context.getSystemService(T9_CACHE_SERVICE);
         if (service == null) {
-            service = createT9Cache(applicationContext);
+            service = createT9Cache(context);
         }
         return service;
     }

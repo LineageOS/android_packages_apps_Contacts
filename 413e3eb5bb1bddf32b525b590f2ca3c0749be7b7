@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAa3//9l0\u003d",
+        "filename": "res/values-cs/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1558
+      },
+      "writtenOn": "2012-11-11T01:15:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAa3//9ng\u003d",
+      "revId": "413e3eb5bb1bddf32b525b590f2ca3c0749be7b7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAa3//9m4\u003d",
         "filename": "res/values-cs/strings.xml",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2012-11-11T01:08:14Z",
       "side": 1,
       "message": "nemelo by tu byt \"krizek\" ?",
+      "revId": "413e3eb5bb1bddf32b525b590f2ca3c0749be7b7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAa3//9l8\u003d",
+        "filename": "res/values-cs/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1558
+      },
+      "writtenOn": "2012-11-11T01:15:29Z",
+      "side": 1,
+      "message": "Ja sem se koukal vsude mozne, do ostatnich prekladu a i v originale je \"libra\" a nevim proc. Pokud by to byl krizek, tak ocekavam v originale \"hashmark\".",
+      "parentUuid": "AAAAa3//9m4\u003d",
       "revId": "413e3eb5bb1bddf32b525b590f2ca3c0749be7b7",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAa3//9l4\u003d",
+        "filename": "res/values-cs/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1558
+      },
+      "writtenOn": "2012-11-11T01:15:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAa3//9ms\u003d",
+      "revId": "413e3eb5bb1bddf32b525b590f2ca3c0749be7b7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAa3//9mg\u003d",
         "filename": "res/values-cs/strings.xml",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2012-11-11T01:08:14Z",
       "side": 1,
       "message": "Aktualnost",
+      "revId": "413e3eb5bb1bddf32b525b590f2ca3c0749be7b7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAa3//9lw\u003d",
+        "filename": "res/values-cs/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1558
+      },
+      "writtenOn": "2012-11-11T01:15:29Z",
+      "side": 1,
+      "message": "A ja nad tim tady sedel asi pul hodiny... :) dik, asi uz bylo pozde.",
+      "parentUuid": "AAAAa3//9mg\u003d",
       "revId": "413e3eb5bb1bddf32b525b590f2ca3c0749be7b7",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAa3//9ls\u003d",
+        "filename": "res/values-cs/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1558
+      },
+      "writtenOn": "2012-11-11T01:15:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAa3//9mc\u003d",
+      "revId": "413e3eb5bb1bddf32b525b590f2ca3c0749be7b7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAa3//9mY\u003d",
         "filename": "res/values-cs/strings.xml",
         "patchSetId": 2
@@ -98,6 +188,24 @@
       "writtenOn": "2012-11-11T01:08:14Z",
       "side": 1,
       "message": "Vlastni zobrazeni",
+      "revId": "413e3eb5bb1bddf32b525b590f2ca3c0749be7b7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAa3//9lo\u003d",
+        "filename": "res/values-cs/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1558
+      },
+      "writtenOn": "2012-11-11T01:15:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAa3//9mY\u003d",
       "revId": "413e3eb5bb1bddf32b525b590f2ca3c0749be7b7",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false

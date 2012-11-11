@@ -18,6 +18,7 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="launcherDialer" msgid="8636288196618486553">"拨号"</string>
     <string name="people" msgid="1048457247435785074">"联系人"</string>
+    <string name="t9_loading">载入中\u2026</string>
     <string name="t9_sort_title">T9 排序模式</string>
     <string name="t9_sort_summary">选择如何过滤 T9 结果</string>
     <string name="t9_sort_name">姓名匹配优先</string>

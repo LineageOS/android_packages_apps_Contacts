@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAa3//9ig\u003d",
+        "filename": "res/values-cs/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1558
+      },
+      "writtenOn": "2012-11-11T03:26:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAa3//9jM\u003d",
+      "revId": "181c185888af951601894bd99e81bea123504c10",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAa3//9jI\u003d",
         "filename": "res/values-cs/strings.xml",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2012-11-11T03:15:54Z",
       "side": 1,
       "message": "vazba?",
+      "revId": "181c185888af951601894bd99e81bea123504c10",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAa3//9is\u003d",
+        "filename": "res/values-cs/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1558
+      },
+      "writtenOn": "2012-11-11T03:26:25Z",
+      "side": 1,
+      "message": "Zmenim to tak, priznavam ale, ze me to moc neuspokojuje :) v originale je popis, ze se jedna o detaily kontaktu, ktere pochazeji z externiho zdroje - napr. korporatni adresar. Je fakt, ze \u0027napojeni\u0027 ovsem take neni idealni.",
+      "parentUuid": "AAAAa3//9jI\u003d",
       "revId": "181c185888af951601894bd99e81bea123504c10",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAa3//9ik\u003d",
+        "filename": "res/values-cs/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1558
+      },
+      "writtenOn": "2012-11-11T03:26:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAa3//9jE\u003d",
+      "revId": "181c185888af951601894bd99e81bea123504c10",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAa3//9jA\u003d",
         "filename": "res/values-cs/strings.xml",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2012-11-11T03:15:54Z",
       "side": 1,
       "message": "Opakovat aktualizaci",
+      "revId": "181c185888af951601894bd99e81bea123504c10",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAa3//9io\u003d",
+        "filename": "res/values-cs/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1558
+      },
+      "writtenOn": "2012-11-11T03:26:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAa3//9jA\u003d",
       "revId": "181c185888af951601894bd99e81bea123504c10",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false

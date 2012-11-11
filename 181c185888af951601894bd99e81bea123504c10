@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAa3//9jM\u003d",
+        "filename": "res/values-cs/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 4951
+      },
+      "writtenOn": "2012-11-11T03:15:54Z",
+      "side": 1,
+      "message": "pokud infinitivy, tak vyto?it/volat/vytá?et ... podle m? :)",
+      "revId": "181c185888af951601894bd99e81bea123504c10",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAa3//9jI\u003d",
+        "filename": "res/values-cs/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 4951
+      },
+      "writtenOn": "2012-11-11T03:15:54Z",
+      "side": 1,
+      "message": "vazba?",
+      "revId": "181c185888af951601894bd99e81bea123504c10",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAa3//9jE\u003d",
+        "filename": "res/values-cs/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 4951
+      },
+      "writtenOn": "2012-11-11T03:15:54Z",
+      "side": 1,
+      "message": "P?idat vazbu?",
+      "revId": "181c185888af951601894bd99e81bea123504c10",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAa3//9jA\u003d",
+        "filename": "res/values-cs/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 4951
+      },
+      "writtenOn": "2012-11-11T03:15:54Z",
+      "side": 1,
+      "message": "Opakovat aktualizaci",
+      "revId": "181c185888af951601894bd99e81bea123504c10",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

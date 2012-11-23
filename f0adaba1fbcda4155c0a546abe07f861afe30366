@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAa3//6yI\u003d",
+        "filename": "src/com/android/contacts/datepicker/DatePicker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2012-11-23T15:32:39Z",
+      "side": 1,
+      "message": "Looks like the setMinValue/setMaxValue lines can be pulled out of the if condition.",
+      "revId": "f0adaba1fbcda4155c0a546abe07f861afe30366",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

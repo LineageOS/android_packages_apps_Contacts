@@ -136,9 +136,9 @@ public class DatePicker extends FrameLayout {
             mMonthPicker.setMinValue(1);
             mMonthPicker.setMaxValue(12);
         } else {
+            mMonthPicker.setDisplayedValues(months);
             mMonthPicker.setMinValue(1);
             mMonthPicker.setMaxValue(12);
-            mMonthPicker.setDisplayedValues(months);
         }
 
         mMonthPicker.setOnLongPressUpdateInterval(200);

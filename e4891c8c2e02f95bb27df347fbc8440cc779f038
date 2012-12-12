@@ -1,0 +1,11 @@
+Change-Id: Ie4891c8c2e02f95bb27df347fbc8440cc779f038
+Code-Review+1: Pavel Volkov <marshmollow@gmail.com>
+Code-Review+2: Ricardo Cerqueira <cyanogenmod@cerqueira.org>
+Verified+1: Ricardo Cerqueira <cyanogenmod@cerqueira.org>
+Code-Review+2: Björn Lundén <blunden2@gmail.com>
+Code-Review+1: Dmitriy Chermenev <chdiman86@gmail.com>
+Submitted-by: Ricardo Cerqueira <cyanogenmod@cerqueira.org>
+Submitted-at: Wed, 12 Dec 2012 14:53:54 -0800
+Reviewed-on: http://review.cyanogenmod.org/27608
+Project: CyanogenMod/android_packages_apps_Contacts
+Branch: refs/heads/mr1-staging

@@ -252,7 +252,6 @@
     <string name="type_outgoing" msgid="343108709599392641">"Odchozí volání"</string>
     <string name="type_missed" msgid="2720502601640509542">"Zmeškaný hovor"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"Hlasová schránka"</string>
-    <string name="type_unknown">Neznámý hovor</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"Příchozí volání"</string>
     <string name="callBack" msgid="5498224409038809224">"Zavolat zpět"</string>
     <string name="callAgain" msgid="3197312117049874778">"Zavolat znovu"</string>

@@ -580,4 +580,5 @@
     <string name="t9_dial_click_title">Discar contato selecionado</string>
     <string name="t9_dial_click_summary">Discar os contatos selecionados pelo T9</string>
     <string name="t9_add_to_contacts">Adicionar aos contatos</string>
+    <string name="t9_loading">Carregando\u2026</string>
 </resources>

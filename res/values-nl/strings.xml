@@ -568,4 +568,20 @@
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Als u uw voicemail wilt bellen, moet u eerst de Vliegmodus uitschakelen."</string>
     <string name="menu_export_database" msgid="2659719297530170820">"Databasebestanden exporteren"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Meer opties"</string>
+
+    <!-- CYANOGENMOD EDITS -->
+    <string name="t9_loading">Laden\u2026</string>
+    <string name="t9_sort_title">T9-sortering</string>
+    <string name="t9_sort_summary">T9-resultatenfiltering kiezen</string>
+    <string name="t9_sort_name">Eerst op naam</string>
+    <string name="t9_sort_number">Eerst op telefoonnummer</string>
+    <string name="t9_state_title">Inschakelen</string>
+    <string name="t9_state_summary">T9-kiezer inschakelen</string>
+    <string name="t9_dial_click_title">Geselecteerd contact bellen</string>
+    <string name="t9_dial_click_summary">Door T9-kiezer gekozen contact bellen</string>
+    <string name="t9_add_to_contacts">Toevoegen aan Personen</string>
+    <string name="dialer_ui_title">Kiezerinstellingen</string>
+    <string name="dialer_ui_orientation_title">Scherm automatisch draaien</string>
+    <string name="dialer_ui_orientation_summary">Scherm door sensor laten draaien</string>
+    <string name="from_account_format"><xliff:g id="source" example="gebruiker@gmail.com">%1$s</xliff:g></string>
 </resources>

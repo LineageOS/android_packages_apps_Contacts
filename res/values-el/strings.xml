@@ -16,6 +16,16 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="t9_loading">Φόρτωση\u2026</string>
+    <string name="t9_sort_title">Φίλτρο T9</string>
+    <string name="t9_sort_summary">Επιλέξτε τον τρόπο που θα φιλτράρονται τα αποτελέσματα</string>
+    <string name="t9_sort_name">Πρώτα ταιριάζει το όνομα</string>
+    <string name="t9_sort_number">Πρώτα ταιριάζει ο αριθμός</string>
+    <string name="t9_state_title">Ενεργοποίηση T9</string>
+    <string name="t9_state_summary">Ενεργοποίηση αναζήτησης T9</string>
+    <string name="t9_dial_click_title">Κλήση επιλεγμένης επαφής</string>
+    <string name="t9_dial_click_summary">Καλέστε την επιλεγμένη επαφή T9</string>
+    <string name="t9_add_to_contacts">Προσθήκη στις επαφές</string>
     <string name="t9_map_row_2">2αάβγabc</string>
     <string name="t9_map_row_3">3δεέζdef</string>
     <string name="t9_map_row_4">4ηήθιίϊΐghi</string>
@@ -110,8 +120,8 @@
     <string name="noContactsWithPhoneNumbers" msgid="1605457050218824269">"Δεν υπάρχουν επαφές με αριθμούς τηλεφώνου."</string>
     <string name="emptyGroup" msgid="7502116218697177370">"Δεν υπάρχουν άτομα σε αυτήν την ομάδα."</string>
     <string name="addPeopleToGroup" msgid="7879585947222263516">"Αν θέλετε να προσθέσετε άτομα, επεξεργαστείτε την ομάδα."</string>
-    <string name="savingContact" msgid="4075751076741924939">"Αποθήκευση επαφής…"</string>
-    <string name="savingDisplayGroups" msgid="2133152192716475939">"Αποθήκευση επιλογών προβολής…"</string>
+    <string name="savingContact" msgid="4075751076741924939">"Αποθήκευση επαφής\u2026"</string>
+    <string name="savingDisplayGroups" msgid="2133152192716475939">"Αποθήκευση επιλογών προβολής\u2026"</string>
     <string name="contactSavedToast" msgid="7152589189385441091">"Η επαφή αποθηκεύτηκε."</string>
     <string name="contactSavedErrorToast" msgid="3207250533172944892">"Δεν ήταν δυνατή η αποθήκευση των αλλαγών που πραγματοποιήθηκαν στις επαφές."</string>
     <string name="groupSavedToast" msgid="1168756874239833756">"Η ομάδα αποθηκεύτηκε."</string>
@@ -170,7 +180,7 @@
     <string name="payphone" msgid="4864313342828942922">"Καρτοτηλέφωνο"</string>
     <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Χρησιμοποιήστε το πληκτρολόγιο για να καλέσετε έναν αριθμό"</string>
     <string name="dialerDialpadHintText" msgid="5824490365898349041">"Καλέστε έναν αρ. για προσθ. μιας κλήσ."</string>
-    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Φόρτωση από κάρτα SIM…"</string>
+    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Φόρτωση από κάρτα SIM\u2026"</string>
     <string name="simContacts_title" msgid="27341688347689769">"Επαφές στην κάρτα SIM"</string>
     <string name="noContactsHelpTextWithSyncForCreateShortcut" msgid="801504710275614594">"Δεν υπάρχουν επαφές για προβολή. (Εάν προσθέσατε τώρα ένα λογαριασμό, ο συγχρονισμός των επαφών μπορεί να καθυστερήσει μερικά λεπτά.)"</string>
     <string name="noContactsHelpTextForCreateShortcut" msgid="3081286388667108335">"Δεν υπάρχουν επαφές για προβολή."</string>
@@ -405,8 +415,6 @@
     <string name="recent" msgid="2659189233141493004">"Πρόσφατες"</string>
     <string name="recent_updates" msgid="4267258535615860710">"Πρόσφατες ενημερώσεις"</string>
     <string name="account_type_format" msgid="718948015590343010">"<xliff:g id="SOURCE">%1$s</xliff:g> επαφή"</string>
-    <!-- no translation found for from_account_format (4469138575127580203) -->
-    <skip />
     <string name="use_photo_as_primary" msgid="8807110122951157246">"Χρήση αυτής της φωτογραφίας"</string>
     <string name="contact_read_only" msgid="7421346527289472273">"Αδυναμία επεξεργασ. από αυτήν την εφαρμ."</string>
     <string name="no_contact_details" msgid="6636856378019344497">"Δεν υπάρχουν πρόσθετες πληροφορίες για αυτήν την επαφή."</string>
@@ -426,7 +434,7 @@
     <string name="upgrade_out_of_memory" msgid="1209994418877625940">"Γίνεται αναβάθμιση των επαφών. "\n\n"Η διαδικασία αναβάθμισης απαιτεί περίπου <xliff:g id="SIZE_IN_MEGABYTES">%s</xliff:g> MB από τον εσωτερικό χώρο αποθήκευσης."\n\n"Ορίστε μία από τις παρακάτω επιλογές:"</string>
     <string name="upgrade_out_of_memory_uninstall" msgid="1721798828992091432">"Καταργήστε την εγκατάσταση ορισμένων εφαρμογών"</string>
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"Επανάληψη αναβάθμισης"</string>
-    <string name="search_results_searching" msgid="3984833028938569930">"Αναζήτηση…"</string>
+    <string name="search_results_searching" msgid="3984833028938569930">"Αναζήτηση\u2026"</string>
     <string name="menu_display_selected" msgid="6470001164297969034">"Εμφάνιση επιλεγμένων"</string>
     <string name="menu_display_all" msgid="8887488642609786198">"Εμφάνιση όλων"</string>
     <string name="menu_select_all" msgid="621719255150713545">"Επιλογή όλων"</string>
@@ -453,7 +461,7 @@
     <string name="contact_directory_description" msgid="683398073603909119">"Κατάλογος <xliff:g id="TYPE">%1$s</xliff:g>"</string>
     <string name="directory_search_label" msgid="1887759056597975053">"Κατάλογος"</string>
     <string name="local_search_label" msgid="2551177578246113614">"Όλες οι επαφές"</string>
-    <string name="toast_making_personal_copy" msgid="288549957278065542">"Δημιουργία προσωπικού αντιγράφου..."</string>
+    <string name="toast_making_personal_copy" msgid="288549957278065542">"Δημιουργία προσωπικού αντιγράφου\u2026"</string>
     <string name="list_filter_all_accounts" msgid="8908683398914322369">"Όλες οι επαφές"</string>
     <string name="list_filter_all_starred" msgid="5031734941601931356">"Με αστέρι"</string>
     <string name="list_filter_custom" msgid="8910173055702057002">"Προσαρμοσμένη"</string>
@@ -461,7 +469,7 @@
     <string name="list_filter_phones" msgid="735313795643493365">"Όλες οι επαφές με αριθμούς τηλεφώνου"</string>
     <string name="list_filter_single" msgid="5871400283515893087">"Επαφή"</string>
     <string name="custom_list_filter" msgid="7836035257402013957">"Ορισμός προσαρμοσμένης προβολής"</string>
-    <string name="contact_list_loading" msgid="5488620820563977329">"Φόρτωση…"</string>
+    <string name="contact_list_loading" msgid="5488620820563977329">"Φόρτωση\u2026"</string>
     <string name="activity_title_settings" msgid="5464130076132770781">"Ρυθμίσεις"</string>
     <string name="activity_title_contacts_filter" msgid="8275542497615516969">"Επαφές για προβολή"</string>
     <string name="menu_settings" msgid="377929915873428211">"Ρυθμίσεις"</string>
@@ -576,4 +584,5 @@
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Για κλήση αυτόματου τηλεφωνητή, πρώτα απενεργοποιήστε τη λειτουργία πτήσης."</string>
     <string name="menu_export_database" msgid="2659719297530170820">"Εξαγωγή αρχείων βάσης δεδομένων"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Περισσότερες επιλογές"</string>
+
 </resources>

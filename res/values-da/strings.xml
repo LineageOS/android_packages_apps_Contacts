@@ -571,7 +571,6 @@
 
     <!-- CYANOGENMOD ADDITIONS -->
     <string name="t9_loading">Indlæser\u2026</string>
-    <string name="t9_default_sort">1</string>
     <string name="t9_sort_title">T9-sorteringstilstand</string>
     <string name="t9_sort_summary">Vælg, hvordan T9-resultater sorteres</string>
     <string name="t9_sort_name">Navn matcher først</string>

@@ -568,4 +568,20 @@
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"機内モードをOFFにしてからボイスメールを呼び出してください。"</string>
     <string name="menu_export_database" msgid="2659719297530170820">"データベースファイルをエクスポート"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"その他のオプション"</string>
+
+    <!-- CM extra entries -->
+    <string name="t9_loading">読込中\u2026</string>
+    <string name="t9_sort_title">T9ソートモード</string>
+    <string name="t9_sort_summary">T9結果のフィルタを選択</string>
+    <string name="t9_sort_name">名前が一致した順</string>
+    <string name="t9_sort_number">番号が一致した順</string>
+    <string name="t9_state_title">T9ダイヤラーを有効にする</string>
+    <string name="t9_state_summary">ダイヤラーでT9検索を有効にする</string>
+    <string name="t9_dial_click_title">選択した連絡先にダイヤルする</string>
+    <string name="t9_dial_click_summary">T9で選択した連絡先にダイヤルする</string>
+    <string name="t9_add_to_contacts">連絡先の追加</string>
+    <string name="dialer_ui_title">ダイヤラ設定</string>
+    <string name="dialer_ui_orientation_title">画面の回転を有効</string>
+    <string name="dialer_ui_orientation_summary">センサーによりダイヤラ画面を回転させる</string>
+
 </resources>

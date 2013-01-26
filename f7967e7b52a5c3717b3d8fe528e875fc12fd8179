@@ -16,6 +16,24 @@
       "revId": "f7967e7b52a5c3717b3d8fe528e875fc12fd8179",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAc3//+Gc\u003d",
+        "filename": "res/values/strings.xml",
+        "patchSetId": 12
+      },
+      "lineNbr": 1914,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-01-26T04:41:16Z",
+      "side": 1,
+      "message": "No. If you look at the German translation, I use a different format there. Some translations may also want to use something equivalent to e.g. \u00271 hour, 2 minutes and 3 seconds\u0027.",
+      "parentUuid": "AAAAc3//+Is\u003d",
+      "revId": "f7967e7b52a5c3717b3d8fe528e875fc12fd8179",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAc3//9DM\u003d",
+        "filename": "res/values-de/strings.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 4884
+      },
+      "writtenOn": "2013-01-29T21:07:24Z",
+      "side": 1,
+      "message": "Ich finde das Wort gar nicht so kompliziert. Würde es dabei belassen.",
+      "parentUuid": "AAAAc3//9D8\u003d",
+      "revId": "72daba7bb6af0ec078f3517073d738bb0668b564",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAc3//9FM\u003d",
         "filename": "res/values-de/strings.xml",
         "patchSetId": 14
@@ -142,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAc3//9DI\u003d",
+        "filename": "res/values-de/strings.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 4884
+      },
+      "writtenOn": "2013-01-29T21:07:24Z",
+      "side": 1,
+      "message": "Beginndatum habe ich noch nie gehört. Startdatum nach meiner Meinung gut.",
+      "parentUuid": "AAAAc3//9Ds\u003d",
+      "revId": "72daba7bb6af0ec078f3517073d738bb0668b564",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAc3//9FA\u003d",
         "filename": "res/values-de/strings.xml",
         "patchSetId": 14
@@ -153,6 +189,24 @@
       "writtenOn": "2013-01-29T20:36:44Z",
       "side": 1,
       "message": "Endedatum oder kurz Ende",
+      "revId": "72daba7bb6af0ec078f3517073d738bb0668b564",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAc3//9DE\u003d",
+        "filename": "res/values-de/strings.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 4884
+      },
+      "writtenOn": "2013-01-29T21:07:24Z",
+      "side": 1,
+      "message": "Google benutzt z.B. bei AdWords \u0027Start- und Enddatum\u0027. Ich finde wir sollten es so lassen. http://support.google.com/adwords/answer/2404203?hl\u003dde",
+      "parentUuid": "AAAAc3//9FA\u003d",
       "revId": "72daba7bb6af0ec078f3517073d738bb0668b564",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -188,6 +242,24 @@
       "side": 1,
       "message": "\u0027Sortieren nach Anrufdauer\u0027? Sorry, das ist IMHO kein gutes Deutsch. Im Anrufprotokoll steht ja auch z.B. \u0027Nur ausgehende Anrufe anzeigen\u0027 im Menü.",
       "parentUuid": "AAAAc3//9E8\u003d",
+      "revId": "72daba7bb6af0ec078f3517073d738bb0668b564",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAc3//9C8\u003d",
+        "filename": "res/values-de/strings.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 4884
+      },
+      "writtenOn": "2013-01-29T21:07:24Z",
+      "side": 1,
+      "message": "Würde es hier auch bei Dannys etwas ausführlicheren Übersetzungen lassen :)",
+      "parentUuid": "AAAAc3//9Dk\u003d",
       "revId": "72daba7bb6af0ec078f3517073d738bb0668b564",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false

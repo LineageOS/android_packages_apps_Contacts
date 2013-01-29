@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAc3//9FQ\u003d",
+        "filename": "res/values-de/strings.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 4977
+      },
+      "writtenOn": "2013-01-29T20:36:44Z",
+      "side": 1,
+      "message": "kompliziertes Wort ;)",
+      "revId": "72daba7bb6af0ec078f3517073d738bb0668b564",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAc3//9FM\u003d",
+        "filename": "res/values-de/strings.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 4977
+      },
+      "writtenOn": "2013-01-29T20:36:44Z",
+      "side": 1,
+      "message": "Unterschied zu L585?",
+      "revId": "72daba7bb6af0ec078f3517073d738bb0668b564",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAc3//9FI\u003d",
+        "filename": "res/values-de/strings.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 4977
+      },
+      "writtenOn": "2013-01-29T20:36:44Z",
+      "side": 1,
+      "message": "Unterschied zu L596 \u0026 L597?",
+      "revId": "72daba7bb6af0ec078f3517073d738bb0668b564",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAc3//9FE\u003d",
+        "filename": "res/values-de/strings.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 4977
+      },
+      "writtenOn": "2013-01-29T20:36:44Z",
+      "side": 1,
+      "message": "Beginndatum oder kurz Beginn",
+      "revId": "72daba7bb6af0ec078f3517073d738bb0668b564",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAc3//9FA\u003d",
+        "filename": "res/values-de/strings.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 4977
+      },
+      "writtenOn": "2013-01-29T20:36:44Z",
+      "side": 1,
+      "message": "Endedatum oder kurz Ende",
+      "revId": "72daba7bb6af0ec078f3517073d738bb0668b564",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAc3//9E8\u003d",
+        "filename": "res/values-de/strings.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 4977
+      },
+      "writtenOn": "2013-01-29T20:36:44Z",
+      "side": 1,
+      "message": "Sortieren nach... in L604 und L605",
+      "revId": "72daba7bb6af0ec078f3517073d738bb0668b564",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAc3//9E4\u003d",
+        "filename": "res/values-de/strings.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 4977
+      },
+      "writtenOn": "2013-01-29T20:36:44Z",
+      "side": 1,
+      "message": "muss example im Tag vorhanden sein?",
+      "revId": "72daba7bb6af0ec078f3517073d738bb0668b564",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

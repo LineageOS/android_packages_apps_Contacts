@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAc3//9D8\u003d",
+        "filename": "res/values-de/strings.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-01-29T20:58:03Z",
+      "side": 1,
+      "message": "Besserer Vorschlag? ;)",
+      "parentUuid": "AAAAc3//9FQ\u003d",
+      "revId": "72daba7bb6af0ec078f3517073d738bb0668b564",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAc3//9FM\u003d",
         "filename": "res/values-de/strings.xml",
         "patchSetId": 14
@@ -30,6 +48,24 @@
       "writtenOn": "2013-01-29T20:36:44Z",
       "side": 1,
       "message": "Unterschied zu L585?",
+      "revId": "72daba7bb6af0ec078f3517073d738bb0668b564",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAc3//9D4\u003d",
+        "filename": "res/values-de/strings.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-01-29T20:58:03Z",
+      "side": 1,
+      "message": "Das eine ist der Menüeintrag, das andere der Activity-Titel. Beide müssen ja nicht zwangsläufig identisch sein.",
+      "parentUuid": "AAAAc3//9FM\u003d",
       "revId": "72daba7bb6af0ec078f3517073d738bb0668b564",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAc3//9Dw\u003d",
+        "filename": "res/values-de/strings.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-01-29T20:58:03Z",
+      "side": 1,
+      "message": "Einmal stehen Anrufe und Dauer drin, einmal nur Anrufe, einmal nur Dauer. Den total_details-String schmeiße ich aber noch raus.",
+      "parentUuid": "AAAAc3//9FI\u003d",
+      "revId": "72daba7bb6af0ec078f3517073d738bb0668b564",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAc3//9FE\u003d",
         "filename": "res/values-de/strings.xml",
         "patchSetId": 14
@@ -64,6 +118,24 @@
       "writtenOn": "2013-01-29T20:36:44Z",
       "side": 1,
       "message": "Beginndatum oder kurz Beginn",
+      "revId": "72daba7bb6af0ec078f3517073d738bb0668b564",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAc3//9Ds\u003d",
+        "filename": "res/values-de/strings.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-01-29T20:58:03Z",
+      "side": 1,
+      "message": "\u0027Beginn\u0027 ist IMHO der Anfang einer Aktion ... etwas \u0027beginnt\u0027 halt. Das ist hier aber ja nicht der Fall, da wird ja nur ein Zeitbereich ausgewählt. Beginndatum klingt IMHO auch ganz schlimm.\n\nJacob?",
+      "parentUuid": "AAAAc3//9FE\u003d",
       "revId": "72daba7bb6af0ec078f3517073d738bb0668b564",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAc3//9Dk\u003d",
+        "filename": "res/values-de/strings.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-01-29T20:58:03Z",
+      "side": 1,
+      "message": "\u0027Sortieren nach Anrufdauer\u0027? Sorry, das ist IMHO kein gutes Deutsch. Im Anrufprotokoll steht ja auch z.B. \u0027Nur ausgehende Anrufe anzeigen\u0027 im Menü.",
+      "parentUuid": "AAAAc3//9E8\u003d",
+      "revId": "72daba7bb6af0ec078f3517073d738bb0668b564",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAc3//9E4\u003d",
         "filename": "res/values-de/strings.xml",
         "patchSetId": 14
@@ -115,6 +205,24 @@
       "writtenOn": "2013-01-29T20:36:44Z",
       "side": 1,
       "message": "muss example im Tag vorhanden sein?",
+      "revId": "72daba7bb6af0ec078f3517073d738bb0668b564",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAc3//9Dg\u003d",
+        "filename": "res/values-de/strings.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-01-29T20:58:03Z",
+      "side": 1,
+      "message": "Ich mach\u0027s im nächsten PS weg.",
+      "parentUuid": "AAAAc3//9E4\u003d",
       "revId": "72daba7bb6af0ec078f3517073d738bb0668b564",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false

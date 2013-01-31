@@ -139,7 +139,9 @@ public class T9SearchCache implements ComponentCallbacks2 {
             NameToNumber normalizer = NameToNumberFactory.create(mContext, mT9Chars, mT9Digits);
             for (ContactItem contact : mContacts) {
                 for (NameMatchEntry entry : contact.nameEntries.values()) {
-                    entry.normalValue = normalizer.convert(entry.value);
+                    if (entry.value != null) {
+                        entry.normalValue = normalizer.convert(entry.value);
+                    }
                 }
             }
             notifyLoadFinished();

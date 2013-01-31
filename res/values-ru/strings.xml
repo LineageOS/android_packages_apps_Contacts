@@ -49,7 +49,7 @@
     <string name="menu_copy" msgid="6108677035381940698">"Копировать"</string>
     <string name="menu_create_contact_shortcut" msgid="1217971915748509640">"Поместить на главный экран"</string>
     <string name="menu_call" msgid="3992595586042260618">"Позвонить"</string>
-    <string name="menu_sendSMS" msgid="5535886767547006515">"Отправить SMS/MMS"</string>
+    <string name="menu_sendSMS" msgid="5535886767547006515">"Отправить сообщение"</string>
     <string name="menu_splitAggregate" msgid="8368636463748691868">"Разделить"</string>
     <string name="menu_editGroup" msgid="5062005185370983720">"Изменить"</string>
     <string name="menu_deleteGroup" msgid="3486380004411482874">"Удалить"</string>

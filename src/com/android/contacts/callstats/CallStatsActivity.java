@@ -19,8 +19,6 @@ package com.android.contacts.callstats;
 
 import android.app.ActionBar;
 import android.app.ListActivity;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -58,7 +56,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CallStatsActivity extends ListActivity implements
-        CallStatsQueryHandler.Listener, ActionBar.OnNavigationListener {
+        CallStatsQueryHandler.Listener, ActionBar.OnNavigationListener,
+        DoubleDatePickerDialog.OnDateSetListener {
     private static final String TAG = "CallStatsActivity";
 
     private static final int[] CALL_DIRECTION_RESOURCES = new int[] {
@@ -83,7 +82,6 @@ public class CallStatsActivity extends ListActivity implements
 
     private final Handler mHandler = new Handler();
 
-    DoubleDatePickerFragment mFilterFragment;
     private final ContentObserver mCallLogObserver = new CustomContentObserver();
     private final ContentObserver mContactsObserver = new CustomContentObserver();
     private boolean mRefreshDataRequired = true;
@@ -98,40 +96,6 @@ public class CallStatsActivity extends ListActivity implements
         @Override
         public void onChange(boolean selfChange) {
             mRefreshDataRequired = true;
-        }
-    }
-
-    public class DoubleDatePickerFragment extends DialogFragment
-            implements DoubleDatePickerDialog.OnDateSetListener {
-
-        DoubleDatePickerDialog mDialog;
-        Context mContext;
-
-        public DoubleDatePickerFragment(Context context) {
-            mContext = context;
-            mDialog = new DoubleDatePickerDialog(context, this);
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            return mDialog;
-        }
-
-        @Override
-        public void onStart() {
-            if (mFilterFrom != -1) {
-                mDialog.setValues(mFilterFrom, mFilterTo);
-            } else {
-                mDialog.resetPickers();
-            }
-            super.onStart();
-        }
-
-        public void onDateSet(long from, long to) {
-            mFilterFrom = from;
-            mFilterTo = to;
-            invalidateOptionsMenu();
-            fetchCalls();
         }
     }
 
@@ -175,7 +139,6 @@ public class CallStatsActivity extends ListActivity implements
         cr.registerContentObserver(ContactsContract.Contacts.CONTENT_URI, true, mContactsObserver);
 
         Resources res = getResources();
-        mFilterFragment = new DoubleDatePickerFragment(this);
         mNavItems = res.getStringArray(R.array.call_stats_nav_items);
         configureActionBar();
 
@@ -257,7 +220,11 @@ public class CallStatsActivity extends ListActivity implements
                 break;
             }
             case R.id.date_filter: {
-                mFilterFragment.show(getFragmentManager(), "filter");
+                final DoubleDatePickerDialog.Fragment fragment =
+                        new DoubleDatePickerDialog.Fragment();
+                fragment.setArguments(DoubleDatePickerDialog.Fragment.createArguments(
+                        mFilterFrom, mFilterTo));
+                fragment.show(getFragmentManager(), "filter");
                 break;
             }
             case R.id.reset_date_filter: {
@@ -281,6 +248,14 @@ public class CallStatsActivity extends ListActivity implements
             }
         }
         return true;
+    }
+
+    @Override
+    public void onDateSet(long from, long to) {
+        mFilterFrom = from;
+        mFilterTo = to;
+        invalidateOptionsMenu();
+        fetchCalls();
     }
 
     @Override

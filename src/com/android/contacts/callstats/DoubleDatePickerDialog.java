@@ -18,6 +18,8 @@
 package com.android.contacts.callstats;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -47,6 +49,43 @@ public class DoubleDatePickerDialog extends AlertDialog
     public interface OnDateSetListener {
         void onDateSet(long from, long to);
     }
+
+    public static class Fragment extends DialogFragment implements OnDateSetListener {
+        private DoubleDatePickerDialog mDialog;
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            mDialog = new DoubleDatePickerDialog(getActivity(), this);
+            return mDialog;
+        }
+
+        @Override
+        public void onStart() {
+            final Bundle args = getArguments();
+            final long from = args.getLong("from", -1);
+            final long to = args.getLong("to", -1);
+
+            if (from != -1) {
+                mDialog.setValues(from, to);
+            } else {
+                mDialog.resetPickers();
+            }
+            super.onStart();
+        }
+
+        @Override
+        public void onDateSet(long from, long to) {
+            ((DoubleDatePickerDialog.OnDateSetListener) getActivity()).onDateSet(from, to);
+        }
+
+        public static Bundle createArguments(long from, long to) {
+            final Bundle args = new Bundle();
+            args.putLong("from", from);
+            args.putLong("to", to);
+            return args;
+        }
+    }
+
 
     private static final String YEAR = "year";
     private static final String MONTH = "month";

@@ -148,7 +148,7 @@ public class CallStatsDetailHelper {
         }
 
         boolean dispHours = hours > 0;
-        boolean dispMinutes = minutes > 0 || !includeSeconds;
+        boolean dispMinutes = minutes > 0 || (!includeSeconds && hours == 0);
         boolean dispSeconds = includeSeconds && (seconds > 0 || (hours == 0 && minutes == 0));
 
         final String hourString = dispHours ?

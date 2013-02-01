@@ -28,11 +28,15 @@ import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.DatePicker.OnDateChangedListener;
+import android.widget.Spinner;
 
-import java.lang.System;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import com.android.contacts.R;
@@ -42,7 +46,7 @@ import com.android.contacts.R;
  * Used to filter the callstats query.
  */
 public class DoubleDatePickerDialog extends AlertDialog
-        implements OnClickListener, OnDateChangedListener {
+        implements OnClickListener, OnDateChangedListener, OnItemSelectedListener {
 
     private static final String TAG = "DoubleDatePickerDialog";
 
@@ -86,11 +90,59 @@ public class DoubleDatePickerDialog extends AlertDialog
         }
     }
 
+    private interface QuickSelection {
+        void adjustStartDate(Calendar date);
+    }
+
+    private static final int[] QUICKSELECTION_ENTRIES = new int[] {
+        R.string.date_quick_selection,
+        R.string.date_qs_currentmonth,
+        R.string.date_qs_currentyear,
+        R.string.date_qs_lastmonth,
+        R.string.date_qs_lastquarter,
+        R.string.date_qs_lastyear
+    };
+
+    private static final QuickSelection[] QUICKSELECTIONS = new QuickSelection[] {
+        null,
+        new QuickSelection() {
+            @Override
+            public void adjustStartDate(Calendar date) {
+                date.set(Calendar.DAY_OF_MONTH, 1);
+            }
+        },
+        new QuickSelection() {
+            @Override
+            public void adjustStartDate(Calendar date) {
+                date.set(Calendar.DAY_OF_MONTH, 1);
+                date.set(Calendar.MONTH, 0);
+            }
+        },
+        new QuickSelection() {
+            @Override
+            public void adjustStartDate(Calendar date) {
+                date.add(Calendar.MONTH, -1);
+            }
+        },
+        new QuickSelection() {
+            @Override
+            public void adjustStartDate(Calendar date) {
+                date.add(Calendar.MONTH, -3);
+            }
+        },
+        new QuickSelection() {
+            @Override
+            public void adjustStartDate(Calendar date) {
+                date.add(Calendar.YEAR, -1);
+            }
+        },
+    };
 
     private static final String YEAR = "year";
     private static final String MONTH = "month";
     private static final String DAY = "day";
 
+    private final Spinner mQuickSelSpinner;
     private final DatePicker mDatePickerFrom;
     private final DatePicker mDatePickerTo;
     private final OnDateSetListener mCallBack;
@@ -112,8 +164,22 @@ public class DoubleDatePickerDialog extends AlertDialog
         View view = inflater.inflate(R.layout.double_date_picker_dialog, null);
         setView(view);
 
-        mDatePickerFrom = (DatePicker) view.findViewById(R.id.datePickerFrom);
-        mDatePickerTo = (DatePicker) view.findViewById(R.id.datePickerTo);
+        mDatePickerFrom = (DatePicker) view.findViewById(R.id.date_picker_from);
+        mDatePickerTo = (DatePicker) view.findViewById(R.id.date_picker_to);
+
+        ArrayList<CharSequence> quickSelEntries = new ArrayList<CharSequence>();
+        for (int entryId : QUICKSELECTION_ENTRIES) {
+            quickSelEntries.add(context.getString(entryId));
+        }
+        ArrayAdapter<CharSequence> quickSelAdapter = new ArrayAdapter<CharSequence>(
+                context, android.R.layout.simple_spinner_item,
+                android.R.id.text1, quickSelEntries);
+        quickSelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        mQuickSelSpinner = (Spinner) view.findViewById(R.id.date_quick_selection);
+        mQuickSelSpinner.setOnItemSelectedListener(this);
+        mQuickSelSpinner.setAdapter(quickSelAdapter);
+
         resetPickers();
     }
 
@@ -133,6 +199,26 @@ public class DoubleDatePickerDialog extends AlertDialog
             case BUTTON_NEGATIVE:
                 break;
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        QuickSelection sel = QUICKSELECTIONS[pos];
+        if (sel == null) {
+            return;
+        }
+
+        Calendar from = Calendar.getInstance();
+        long millisTo = from.getTimeInMillis();
+        sel.adjustStartDate(from);
+        long millisFrom = from.getTimeInMillis();
+
+        setValues(millisFrom, millisTo);
+        mQuickSelSpinner.setSelection(0);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
     }
 
     public void onDateChanged(DatePicker view, int year,

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAc3//8NY\u003d",
+        "filename": "res/values-hu/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 3214
+      },
+      "writtenOn": "2013-02-01T04:47:27Z",
+      "side": 1,
+      "message": "Szerintem, nem hosszú, de itt most ki is próbálom.\nRendezés hívások száma szerint\nIdöszak beállítása\nA másik hosszabb.",
+      "parentUuid": "AAAAc3//8No\u003d",
+      "revId": "4f4842c79e9de666f0b0f37f7105f81537111a89",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAc3//8Nw\u003d",
         "filename": "res/values-hu/strings.xml",
         "patchSetId": 1

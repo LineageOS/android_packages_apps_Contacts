@@ -48,12 +48,14 @@ import android.widget.TextView;
 import com.android.contacts.ContactsUtils;
 import com.android.contacts.R;
 import com.android.contacts.activities.DialtactsActivity;
+import com.android.contacts.calllog.ContactInfo;
 import com.android.contacts.calllog.ContactInfoHelper;
 import com.android.contacts.util.Constants;
 import com.android.internal.telephony.CallerInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class CallStatsActivity extends ListActivity implements
         CallStatsQueryHandler.Listener, ActionBar.OnNavigationListener,
@@ -236,13 +238,13 @@ public class CallStatsActivity extends ListActivity implements
             }
             case R.id.sort_by_duration: {
                 mSortByDuration = true;
-                mAdapter.sort(true);
+                mAdapter.updateDisplayedData(mCallTypeFilter, true);
                 invalidateOptionsMenu();
                 break;
             }
             case R.id.sort_by_count: {
                 mSortByDuration = false;
-                mAdapter.sort(false);
+                mAdapter.updateDisplayedData(mCallTypeFilter, false);
                 invalidateOptionsMenu();
                 break;
             }
@@ -261,7 +263,7 @@ public class CallStatsActivity extends ListActivity implements
     @Override
     public boolean onNavigationItemSelected(int position, long id) {
         mCallTypeFilter = position;
-        mCallStatsQueryHandler.fetchCalls(mFilterFrom, mFilterTo);
+        mAdapter.updateDisplayedData(mCallTypeFilter, mSortByDuration);
         return true;
     }
 
@@ -270,12 +272,13 @@ public class CallStatsActivity extends ListActivity implements
      * fetched or updated.
      */
     @Override
-    public void onCallsFetched(Cursor cursor) {
+    public void onCallsFetched(Map<ContactInfo, CallStatsDetails> calls) {
         if (isFinishing()) {
             return;
         }
-        mAdapter.processCursor(cursor, mCallTypeFilter, mFilterFrom, mFilterTo, mSortByDuration);
-        cursor.close();
+
+        mAdapter.updateData(calls, mFilterFrom, mFilterTo);
+        mAdapter.updateDisplayedData(mCallTypeFilter, mSortByDuration);
         updateHeader();
     }
 
@@ -304,10 +307,6 @@ public class CallStatsActivity extends ListActivity implements
         mCallStatsQueryHandler.fetchCalls(mFilterFrom, mFilterTo);
     }
 
-    public void startCallsQuery() {
-        mCallStatsQueryHandler.fetchCalls(mFilterFrom, mFilterTo);
-    }
-
     private void updateHeader() {
         final String callCount = mAdapter.getTotalCallCountString();
         final String duration = mAdapter.getFullDurationString(false);
@@ -324,6 +323,8 @@ public class CallStatsActivity extends ListActivity implements
             mDateFilterView.setText(DateUtils.formatDateRange(this, mFilterFrom, mFilterTo, 0));
             mDateFilterView.setVisibility(View.VISIBLE);
         }
+
+        findViewById(R.id.call_stats_header).setVisibility(View.VISIBLE);
     }
 
     public void callSelectedEntry() {
@@ -372,7 +373,7 @@ public class CallStatsActivity extends ListActivity implements
             // Mark all entries in the contact info cache as out of date, so
             // they will be looked up again once being shown.
             mAdapter.invalidateCache();
-            startCallsQuery();
+            fetchCalls();
             mRefreshDataRequired = false;
         }
     }

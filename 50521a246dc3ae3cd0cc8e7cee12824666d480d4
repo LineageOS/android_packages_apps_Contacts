@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAc3//7Uo\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 2248
+      },
+      "writtenOn": "2013-02-03T17:46:14Z",
+      "side": 1,
+      "message": "Is gesprek niet beter dan oproep? Ik weet dat wel elders ook oproep gebruikt hebben, maar ik vind oproep meer het feit dat je iemand belt/gebeld wordt, en niet het gesprek zelf...\nIk zou dus het aantal oproepen en de lengte van gesprekken gebruiken...\n\nMaar als eerder anders is besloten of als AOSP overal oproepen gebruik kan ik daar ook wel mee leven :) Maar ik was zelf al aan een vertaling van gesprekstatistieken begonnen en hier lang over nagedacht en tot de keuze gespreksstatistiekdetails gekomen...",
+      "revId": "50521a246dc3ae3cd0cc8e7cee12824666d480d4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

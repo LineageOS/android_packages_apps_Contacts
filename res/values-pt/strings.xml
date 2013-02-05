@@ -627,4 +627,12 @@
         <item quantity="one">1 chamada</item>
         <item quantity="other">%d chamadas</item>
     </plurals>
+    <string name="date_quick_selection">Seleção rápida</string>
+    <string name="date_qs_currentmonth">Mês atual</string>
+    <string name="date_qs_currentquarter">Trimestre atual</string>
+    <string name="date_qs_currentyear">Ano atual</string>
+    <string name="date_qs_lastweek">Última semana</string>
+    <string name="date_qs_lastmonth">Último mês</string>
+    <string name="date_qs_lastquarter">Último trimestre</string>
+    <string name="date_qs_lastyear">Último ano</string>
 </resources>

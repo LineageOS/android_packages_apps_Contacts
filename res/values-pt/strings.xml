@@ -612,19 +612,27 @@
         <item><xliff:g id="hours" example="2 hrs" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%1$s</xliff:g><xliff:g id="minutes" example="2 mins" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%2$s</xliff:g><xliff:g id="seconds" example="2 secs" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%3$s</xliff:g></item>
     </string-array>
     <plurals name="hour">
-        <item quantity="one">1 h</item>
-        <item quantity="other">%d h</item>
+        <item quantity="one">1 hora</item>
+        <item quantity="other">%d horas</item>
     </plurals>
     <plurals name="minute">
-        <item quantity="one">1 min</item>
-        <item quantity="other">%d min</item>
+        <item quantity="one">1 minuto</item>
+        <item quantity="other">%d minutos</item>
     </plurals>
     <plurals name="second">
-        <item quantity="one">1 s</item>
-        <item quantity="other">%d s</item>
+        <item quantity="one">1 segundo</item>
+        <item quantity="other">%d segundos</item>
     </plurals>
     <plurals name="call">
         <item quantity="one">1 chamada</item>
         <item quantity="other">%d chamadas</item>
     </plurals>
+    <string name="date_quick_selection">Seleção rápida</string>
+    <string name="date_qs_currentmonth">Mês atual</string>
+    <string name="date_qs_currentquarter">Trimestre atual</string>
+    <string name="date_qs_currentyear">Ano atual</string>
+    <string name="date_qs_lastweek">Última semana</string>
+    <string name="date_qs_lastmonth">Último mês</string>
+    <string name="date_qs_lastquarter">Último trimestre</string>
+    <string name="date_qs_lastyear">Último ano</string>
 </resources>

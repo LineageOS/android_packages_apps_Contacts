@@ -584,6 +584,58 @@
     <string name="dialer_ui_title">Indstillinger for opkaldsprogram</string>
     <string name="dialer_ui_orientation_title">Slå sensor-orientering til</string>
     <string name="dialer_ui_orientation_summary">Rotér opkaldsprogram baseret på sensor</string>
+
+    <!-- Call stats -->
+    <string name="callStatsDetailTitle">Detaljer for opkaldsstatistik</string>
+    <string name="call_stats">Opkaldsstatistik</string>
+    <string name="call_stats_refresh">Genopfrisk</string>
+    <string name="activity_title_call_stats">Opkaldsstatistik</string>
+    <string name="call_stats_nav_all">Alle</string>
+    <string name="call_stats_nav_incoming">Indgående</string>
+    <string name="call_stats_nav_outgoing">Udgående</string>
+    <string name="call_stats_nav_missed">Ubesvaret</string>
+    <string name="call_stats_incoming">Indgående: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_outgoing">Udgående: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_missed">Ubesvaret</string>
+    <string name="call_stats_missed_percent">Ubesvaret: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">I alt: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">I alt: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Startdato</string>
+    <string name="call_stats_filter_to">Slutdato</string>
+    <string name="call_stats_filter_picker_title">Tidsinterval</string>
+
+    <string name="date_quick_selection">Hurtigvalg</string>
+    <string name="date_qs_currentmonth">Denne måned</string>
+    <string name="date_qs_currentquarter">Dette kvartal</string>
+    <string name="date_qs_currentyear">Dette år</string>
+    <string name="date_qs_lastweek">Sidste uge</string>
+    <string name="date_qs_lastmonth">Sidste måned</string>
+    <string name="date_qs_lastquarter">Sidste kvartal</string>
+    <string name="date_qs_lastyear">Sidste år</string>
+
+    <string name="call_stats_date_filter">Justér tidsinterval</string>
+    <string name="call_stats_reset_filter">Nulstil tidsinterval</string>
+    <string name="call_stats_sort_by_duration">Sortér på opkaldslængde</string>
+    <string name="call_stats_sort_by_count">Sortér på antal opkald</string>
+
+    <plurals name="hour">
+        <item quantity="one">1 time</item>
+        <item quantity="other">%d timer</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="one">1 minut</item>
+        <item quantity="other">%d minutter</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="one">1 sekund</item>
+        <item quantity="other">%d sekunder</item>
+    </plurals>
+
+    <plurals name="call">
+        <item quantity="one">1 opkald</item>
+        <item quantity="other">%d opkald</item>
+    </plurals>
+
     <!-- CYANOGENMOD ADDITIONS END -->
 
 </resources>

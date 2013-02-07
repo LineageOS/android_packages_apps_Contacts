@@ -608,6 +608,15 @@
     <string name="call_stats_filter_to">Конечная дата</string>
     <string name="call_stats_filter_picker_title">Значения фильтра</string>
 
+    <string name="date_quick_selection">Быстрый фильтр</string>
+    <string name="date_qs_currentmonth">Текущий месяц</string>
+    <string name="date_qs_currentquarter">Текущий квартал</string>
+    <string name="date_qs_currentyear">Текущий год</string>
+    <string name="date_qs_lastweek">Прошлая неделя</string>
+    <string name="date_qs_lastmonth">Прошлый месяц</string>
+    <string name="date_qs_lastquarter">Прошлый квартал</string>
+    <string name="date_qs_lastyear">Прошлый год</string>
+
     <string name="call_stats_date_filter">Фильтр</string>
     <string name="call_stats_reset_filter">Сброс фильтра</string>
     <string name="call_stats_sort_by_duration">По продолжительности</string>

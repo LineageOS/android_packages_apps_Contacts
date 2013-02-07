@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAdH///Fo\u003d",
+        "filename": "res/values-ru/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 5574
+      },
+      "writtenOn": "2013-02-07T23:40:02Z",
+      "side": 1,
+      "message": "Do we really need to state that this is _quick_ selection?\nI think \"filter\" will be just fine for this context.",
+      "revId": "e337a6482c261a403bd90d899afdca05cbe2f7bd",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

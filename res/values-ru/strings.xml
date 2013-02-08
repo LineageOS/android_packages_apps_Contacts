@@ -597,16 +597,24 @@
     <string name="call_stats_nav_incoming">Входящие</string>
     <string name="call_stats_nav_outgoing">Исходящие</string>
     <string name="call_stats_nav_missed">Пропущенные</string>
-    <string name="call_stats_incoming">Входящие: <xliff:g id="percent">%d</xliff:g>%% (<xliff:g id="call_count">%s</xliff:g>)</string>
-    <string name="call_stats_outgoing">Исходящие: <xliff:g id="percent">%d</xliff:g>%% (<xliff:g id="call_count">%s</xliff:g>)</string>
-    <string name="call_stats_missed">Пропущенные: <xliff:g id="percent">%d</xliff:g>%% (<xliff:g id="call_count">%s</xliff:g>)</string>
-    <string name="call_stats_missed_countonly">Пропущенные: <xliff:g id="call_count">%s</xliff:g></string>
-    <string name="call_stats_header_total">Всего: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_incoming">Входящие: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_outgoing">Исходящие: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_missed">Пропущенные</string>
+    <string name="call_stats_missed_percent">Пропущенные: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Всего: <xliff:g id="call_count">%s</xliff:g> (<xliff:g id="duration">%s</xliff:g>)</string>
     <string name="call_stats_header_total_callsonly">Всего: <xliff:g id="call_count">%s</xliff:g></string>
-    <string name="call_stats_header_total_details">Всего: <xliff:g id="duration">%s</xliff:g></string>
     <string name="call_stats_filter_from">Начальная дата</string>
     <string name="call_stats_filter_to">Конечная дата</string>
     <string name="call_stats_filter_picker_title">Значения фильтра</string>
+
+    <string name="date_quick_selection">Быстрый фильтр</string>
+    <string name="date_qs_currentmonth">Текущий месяц</string>
+    <string name="date_qs_currentquarter">Текущий квартал</string>
+    <string name="date_qs_currentyear">Текущий год</string>
+    <string name="date_qs_lastweek">Прошлая неделя</string>
+    <string name="date_qs_lastmonth">Прошлый месяц</string>
+    <string name="date_qs_lastquarter">Прошлый квартал</string>
+    <string name="date_qs_lastyear">Прошлый год</string>
 
     <string name="call_stats_date_filter">Фильтр</string>
     <string name="call_stats_reset_filter">Сброс фильтра</string>
@@ -624,20 +632,20 @@
     </string-array>
 
     <plurals name="hour">
-        <item quantity="one">1 час</item>
-        <item quantity="other">%d часа (ов)</item>
+        <item quantity="one">1 ч.</item>
+        <item quantity="other">%d ч.</item>
     </plurals>
     <plurals name="minute">
-        <item quantity="one">1 минута</item>
-        <item quantity="other">%d минут (ы)</item>
+        <item quantity="one">1 мин.</item>
+        <item quantity="other">%d мин.</item>
     </plurals>
     <plurals name="second">
-        <item quantity="one">1 секунда</item>
-        <item quantity="other">%d секунд (ы)</item>
+        <item quantity="one">1 сек.</item>
+        <item quantity="other">%d сек.</item>
     </plurals>
 
     <plurals name="call">
-        <item quantity="one">1 звонок</item>
-        <item quantity="other">%d звонка (ов)</item>
+        <item quantity="one">1 зв.</item>
+        <item quantity="other">%d зв.</item>
     </plurals>
 </resources>

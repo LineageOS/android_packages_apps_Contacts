@@ -192,6 +192,7 @@
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Torna alla chiamata in corso"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Aggiungi"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Dettagli chiamata"</string>
+    <string name="callStatsDetailTitle">Dettagli statistiche chiamata</string>
     <string name="toast_call_detail_error" msgid="7200975244804730096">"Impossibile leggere i dettagli per la chiamata richiesta."</string>
     <string name="type_incoming" msgid="6502076603836088532">"Chiamata ricevuta"</string>
     <string name="type_outgoing" msgid="343108709599392641">"Chiamata effettuata"</string>
@@ -293,6 +294,8 @@
     <string name="add_wait" msgid="3360818652790319634">"Aggiungi attesa"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"Scegli numero"</string>
     <string name="call_settings" msgid="7666474782093693667">"Impostazioni"</string>
+    <string name="call_stats">Statistiche chiamata</string>
+    <string name="call_stats_refresh">Aggiorna</string>
     <string name="sms_disambig_title" msgid="5846266399240630846">"Scegli numero"</string>
     <string name="make_primary" msgid="5829291915305113983">"Memorizza questa scelta"</string>
     <string name="quickcontact_missing_app" msgid="358168575340921552">"Nessuna applicazione trovata per gestire questa azione."</string>
@@ -410,8 +413,6 @@
     <string name="recent" msgid="2659189233141493004">"Recenti"</string>
     <string name="recent_updates" msgid="4267258535615860710">"Aggiornamenti recenti"</string>
     <string name="account_type_format" msgid="718948015590343010">"Contatto da <xliff:g id="SOURCE">%1$s</xliff:g>"</string>
-    <!-- no translation found for from_account_format (4469138575127580203) -->
-    <skip />
     <string name="use_photo_as_primary" msgid="8807110122951157246">"Utilizza questa foto"</string>
     <string name="contact_read_only" msgid="7421346527289472273">"Non modificabile da questa applicazione."</string>
     <string name="no_contact_details" msgid="6636856378019344497">"Nessuna informazione aggiuntiva per questo contatto."</string>
@@ -468,6 +469,7 @@
     <string name="custom_list_filter" msgid="7836035257402013957">"Definisci visualizzazione personalizzata"</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"Caricamento..."</string>
     <string name="activity_title_settings" msgid="5464130076132770781">"Impostazioni"</string>
+    <string name="activity_title_call_stats">Statistiche chiamata</string>
     <string name="activity_title_contacts_filter" msgid="8275542497615516969">"Contatti da visualizzare"</string>
     <string name="menu_settings" msgid="377929915873428211">"Impostazioni"</string>
     <string name="menu_help" msgid="5123887102216637725">"Guida"</string>
@@ -581,4 +583,45 @@
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Per chiamare la segreteria, disattiva la modalità aereo."</string>
     <string name="menu_export_database" msgid="2659719297530170820">"Esporta file database"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Altre opzioni"</string>
+    <string name="call_stats_nav_all">Tutte</string>
+    <string name="call_stats_nav_incoming">In arrivo</string>
+    <string name="call_stats_nav_outgoing">In uscita</string>
+    <string name="call_stats_nav_missed">Perse</string>
+    <string name="call_stats_incoming">In arrivo: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_outgoing">In uscita: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_missed">Perse</string>
+    <string name="call_stats_missed_percent">Perse: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Totale: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Totale: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Data inizio</string>
+    <string name="call_stats_filter_to">Data fine</string>
+    <string name="call_stats_filter_picker_title">Filtro intervallo</string>
+    <string name="date_quick_selection">Selezione rapida</string>
+    <string name="date_qs_currentmonth">Mese corrente</string>
+    <string name="date_qs_currentquarter">Trimestre corrente</string>
+    <string name="date_qs_currentyear">Anno corrente</string>
+    <string name="date_qs_lastweek">Settimana scorsa</string>
+    <string name="date_qs_lastmonth">Mese scorso</string>
+    <string name="date_qs_lastquarter">Trimestre scorso</string>
+    <string name="date_qs_lastyear">Anno scorso</string>
+    <string name="call_stats_date_filter">Regola intervallo</string>
+    <string name="call_stats_reset_filter">Ripristina intervallo</string>
+    <string name="call_stats_sort_by_duration">Ordina per durata</string>
+    <string name="call_stats_sort_by_count">Ordina per quantità</string>
+    <plurals name="hour">
+        <item quantity="one">1 ora</item>
+        <item quantity="other">%d ore</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="one">1 min</item>
+        <item quantity="other">%d min</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="one">1 sec</item>
+        <item quantity="other">%d sec</item>
+    </plurals>
+    <plurals name="call">
+        <item quantity="one">1 chiamata</item>
+        <item quantity="other">%d chiamate</item>
+    </plurals>
 </resources>

@@ -16,6 +16,24 @@
       "revId": "e337a6482c261a403bd90d899afdca05cbe2f7bd",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAdH///E8\u003d",
+        "filename": "res/values-ru/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 4
+      },
+      "writtenOn": "2013-02-08T00:02:54Z",
+      "side": 1,
+      "message": "Da, imenno \"Bystryj filtr\" zdes\u0027 bolee umestno. Zdes\u0027 ispol\u0027zuyutsya predustanovki znachenij, a polnocennyj filtr dostupen nije.",
+      "parentUuid": "AAAAdH///Fo\u003d",
+      "revId": "e337a6482c261a403bd90d899afdca05cbe2f7bd",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

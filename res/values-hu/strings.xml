@@ -102,8 +102,8 @@
     <string name="noContactsWithPhoneNumbers" msgid="1605457050218824269">"Nincsenek telefonszámot is tartalmazó névjegyek."</string>
     <string name="emptyGroup" msgid="7502116218697177370">"Ebben a csoportban nincsenek személyek."</string>
     <string name="addPeopleToGroup" msgid="7879585947222263516">"Felhasználók hozzáadásához szerkessze a csoportot."</string>
-    <string name="savingContact" msgid="4075751076741924939">"Névjegy mentése..."</string>
-    <string name="savingDisplayGroups" msgid="2133152192716475939">"Megjelenítési beállítások mentése..."</string>
+    <string name="savingContact" msgid="4075751076741924939">"Névjegy mentése\u2026"</string>
+    <string name="savingDisplayGroups" msgid="2133152192716475939">"Megjelenítési beállítások mentése\u2026"</string>
     <string name="contactSavedToast" msgid="7152589189385441091">"Névjegy mentve."</string>
     <string name="contactSavedErrorToast" msgid="3207250533172944892">"Nem sikerült menteni a névjegymódosításokat."</string>
     <string name="groupSavedToast" msgid="1168756874239833756">"Csoport mentve."</string>
@@ -150,10 +150,10 @@
     <string name="recentCalls_empty" msgid="247053222448663107">"A híváslista üres."</string>
     <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Törli a híváslistát?"</string>
     <string name="clearCallLogConfirmation" msgid="5043563133171583152">"Minden telefonhívás törlésre kerül."</string>
-    <string name="clearCallLogProgress_title" msgid="8365943000154295771">"Híváslista törlése..."</string>
+    <string name="clearCallLogProgress_title" msgid="8365943000154295771">"Híváslista törlése\u2026"</string>
     <string name="clearFrequentsConfirmation_title" msgid="766292372438450432">"Törli a gyakran keresetteket?"</string>
     <string name="clearFrequentsConfirmation" msgid="3254215748990281318">"Törölni fogja a gyakran keresett személyek listáját a Személyek és a Telefon alkalmazásokban, és arra kényszeríti az e-mail alkalmazásokat, hogy újra, elölről megtanulják az Ön címzési preferenciáit."</string>
-    <string name="clearFrequentsProgress_title" msgid="5157001637482794212">"Gyakran keresettek törlése..."</string>
+    <string name="clearFrequentsProgress_title" msgid="5157001637482794212">"Gyakran keresettek törlése\u2026"</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="voicemail" msgid="3851469869202611441">"Hangposta"</string>
@@ -162,7 +162,7 @@
     <string name="payphone" msgid="4864313342828942922">"Nyilvános telefon"</string>
     <string name="dialerKeyboardHintText" msgid="5401660096579787344">"A tárcsázáshoz használja a billentyűzetet"</string>
     <string name="dialerDialpadHintText" msgid="5824490365898349041">"Tárcsázás hívás hozzáadásához"</string>
-    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Betöltés a SIM-kártyáról..."</string>
+    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Betöltés a SIM-kártyáról\u2026"</string>
     <string name="simContacts_title" msgid="27341688347689769">"Névjegyek a SIM-kártyán"</string>
     <string name="noContactsHelpTextWithSyncForCreateShortcut" msgid="801504710275614594">"Nincsenek megjeleníthető névjegyei. (Ha a fiókot csak most adta hozzá, a névjegyek szinkronizálása néhány percig is eltarthat.)"</string>
     <string name="noContactsHelpTextForCreateShortcut" msgid="3081286388667108335">"Nincsenek megjeleníthető névjegyek."</string>
@@ -224,7 +224,7 @@
     <string name="import_multiple_vcard_string" msgid="3810226492811062392">"Több vCard fájl importálása"</string>
     <string name="import_all_vcard_string" msgid="5518136113853448474">"Az összes vCard fájl importálása"</string>
     <string name="searching_vcard_message" product="nosdcard" msgid="557077639409584945">"vCard-adatok keresése a tárhelyen..."</string>
-    <string name="searching_vcard_message" product="default" msgid="3962269894118092049">"vCard-adatok keresése az SD-kártyán..."</string>
+    <string name="searching_vcard_message" product="default" msgid="3962269894118092049">"vCard-adatok keresése az SD-kártyán\u2026"</string>
     <string name="scanning_sdcard_failed_message" product="nosdcard" msgid="7221682312959229201">"A tárhelyet nem lehet beolvasni. (Indok: \"<xliff:g id="FAIL_REASON">%s</xliff:g>\")"</string>
     <string name="scanning_sdcard_failed_message" product="default" msgid="189023067829510792">"Az SD-kártyát nem lehet beolvasni. (Ok: \"<xliff:g id="FAIL_REASON">%s</xliff:g>\")"</string>
     <string name="fail_reason_io_error" msgid="6748358842976073255">"I/O hiba"</string>
@@ -307,7 +307,7 @@
     <string name="dialog_new_group_account" msgid="2318032089273496830">"Csoport létrehozása a fiókban"</string>
     <string name="menu_sync_remove" msgid="3266725887008450161">"Szinkronizálási csoport eltávolítása"</string>
     <string name="dialog_sync_add" msgid="8267045393119375803">"Szinkronizálási csoport hozzáadása"</string>
-    <string name="display_more_groups" msgid="2682547080423434170">"További csoportok..."</string>
+    <string name="display_more_groups" msgid="2682547080423434170">"További csoportok\u2026"</string>
     <string name="display_ungrouped" msgid="6885954210243119591">"Az összes többi névjegy"</string>
     <string name="display_all_contacts" msgid="2031647544742889505">"Összes névjegy"</string>
     <string name="display_warn_remove_ungrouped" msgid="8872290721676651414">"Ha leállítja a(z) \"<xliff:g id="GROUP">%s</xliff:g>\" csoport szinkronizálását, ugyanez történik a nem csoportosított névjegyekkel is."</string>
@@ -421,7 +421,7 @@
     <string name="upgrade_out_of_memory" msgid="1209994418877625940">"A névjegyek frissítése folyamatban van. "\n\n"A frissítés elvégzéséhez megközelítőleg <xliff:g id="SIZE_IN_MEGABYTES">%s</xliff:g> MB belső tárhelyre lesz szükség."\n\n"Válasszon a következő lehetőségek közül:"</string>
     <string name="upgrade_out_of_memory_uninstall" msgid="1721798828992091432">"Távolítson el néhány alkalmazást"</string>
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"Verziófrissítés újrapróbálása"</string>
-    <string name="search_results_searching" msgid="3984833028938569930">"Keresés..."</string>
+    <string name="search_results_searching" msgid="3984833028938569930">"Keresés\u2026"</string>
     <string name="menu_display_selected" msgid="6470001164297969034">"Kiválasztottak megjelenítése"</string>
     <string name="menu_display_all" msgid="8887488642609786198">"Összes megjelenítése"</string>
     <string name="menu_select_all" msgid="621719255150713545">"Összes kijelölése"</string>
@@ -448,7 +448,7 @@
     <string name="contact_directory_description" msgid="683398073603909119">"Mappa: <xliff:g id="TYPE">%1$s</xliff:g>"</string>
     <string name="directory_search_label" msgid="1887759056597975053">"Mappa"</string>
     <string name="local_search_label" msgid="2551177578246113614">"Összes névjegy"</string>
-    <string name="toast_making_personal_copy" msgid="288549957278065542">"Személyes másolat készítése..."</string>
+    <string name="toast_making_personal_copy" msgid="288549957278065542">"Személyes másolat készítése\u2026"</string>
     <string name="list_filter_all_accounts" msgid="8908683398914322369">"Összes névjegy"</string>
     <string name="list_filter_all_starred" msgid="5031734941601931356">"Csillaggal megjelölt"</string>
     <string name="list_filter_custom" msgid="8910173055702057002">"Egyéni"</string>
@@ -456,7 +456,7 @@
     <string name="list_filter_phones" msgid="735313795643493365">"Minden névjegy telefonszámokkal"</string>
     <string name="list_filter_single" msgid="5871400283515893087">"Kapcsolat"</string>
     <string name="custom_list_filter" msgid="7836035257402013957">"Egyéni nézet megadása"</string>
-    <string name="contact_list_loading" msgid="5488620820563977329">"Betöltés..."</string>
+    <string name="contact_list_loading" msgid="5488620820563977329">"Betöltés\u2026"</string>
     <string name="activity_title_settings" msgid="5464130076132770781">"Beállítások"</string>
     <string name="activity_title_call_stats">Hívásinfó</string>
     <string name="activity_title_contacts_filter" msgid="8275542497615516969">"Megjelenítendő névjegyek"</string>
@@ -472,7 +472,7 @@
     <string name="widget_name_and_phonetic" msgid="8739586586600099979">"<xliff:g id="DISPLAY_NAME">%1$s</xliff:g> (<xliff:g id="PHONETIC_NAME">%2$s</xliff:g>)"</string>
     <string name="date_year_toggle" msgid="7356532842767854606">"Születési év megadása"</string>
     <string name="social_widget_label" msgid="6378905543028924592">"Névjegy"</string>
-    <string name="social_widget_loading" msgid="5327336597364074608">"Betöltés..."</string>
+    <string name="social_widget_loading" msgid="5327336597364074608">"Betöltés\u2026"</string>
     <string name="contacts_unavailable_create_contact" msgid="7014525713871959208">"Új névjegy létrehozása"</string>
     <string name="contacts_unavailable_add_account" msgid="7911101713860139754">"Jelentkezzen be fiókjába"</string>
     <string name="contacts_unavailable_import_contacts" msgid="4957393255392437529">"Névjegyek importálása"</string>
@@ -601,6 +601,15 @@
     <string name="call_stats_filter_from">Kezdete</string>
     <string name="call_stats_filter_to">Vége</string>
     <string name="call_stats_filter_picker_title">Időszak</string>
+
+    <string name="date_quick_selection">Gyors kiválasztás</string>
+    <string name="date_qs_currentmonth">Jelenlegi hónap</string>
+    <string name="date_qs_currentquarter">Jelenlegi negyedév</string>
+    <string name="date_qs_currentyear">Jelenlegi év</string>
+    <string name="date_qs_lastweek">Utolsó hét</string>
+    <string name="date_qs_lastmonth">Utolsó hónap</string>
+    <string name="date_qs_lastquarter">Utolsó negyedév</string>
+    <string name="date_qs_lastyear">Utolsó év</string>
 
     <string name="call_stats_date_filter">Időszak beállítása</string>
     <string name="call_stats_reset_filter">Időszak törlése</string>

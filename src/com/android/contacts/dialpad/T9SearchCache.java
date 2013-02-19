@@ -593,15 +593,31 @@ public class T9SearchCache implements ComponentCallbacks2 {
                 }
 
                 SpannableStringBuilder numberBuilder = new SpannableStringBuilder();
-                numberBuilder.append(o.normalNumber);
+                numberBuilder.append(o.number);
                 numberBuilder.append(" (");
                 numberBuilder.append(o.groupType);
                 numberBuilder.append(")");
                 if (o.numberMatchId != -1) {
-                    int numberStart = o.numberMatchId;
-                    numberBuilder.setSpan(new ForegroundColorSpan(mHighlightColor),
-                            numberStart, numberStart + mPrevInput.length(),
-                            Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                    int numberStart = -1, numberEnd = -1;
+                    int formattedNumberLength = o.number.length();
+
+                    for (int i = 0, normalIndex = 0; i < formattedNumberLength; i++) {
+                        if (o.number.charAt(i) != o.normalNumber.charAt(normalIndex)) {
+                            continue;
+                        }
+
+                        if (normalIndex == o.numberMatchId) {
+                            numberStart = i;
+                        } else if (normalIndex == o.numberMatchId + mPrevInput.length()) {
+                            numberEnd = i;
+                            break;
+                        }
+                        normalIndex++;
+                    }
+                    if (numberStart >= 0 && numberEnd >= 0) {
+                        numberBuilder.setSpan(new ForegroundColorSpan(mHighlightColor),
+                                numberStart, numberEnd, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                    }
                 }
 
                 holder.name.setText(nameBuilder);

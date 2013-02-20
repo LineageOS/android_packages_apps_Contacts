@@ -16,6 +16,24 @@
       "revId": "f59516682cdea7a8052a0d89e6af97dd33cce258",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAdX//8jI\u003d",
+        "filename": "src/com/android/contacts/dialpad/T9SearchCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 940
+      },
+      "writtenOn": "2013-02-20T23:05:51Z",
+      "side": 0,
+      "message": "Heres where it was originally introduced : http://goo.gl/mo1mm\n\nThe premise for it was so that if the first name and last name had a similar squence, you\u0027d want to give preference to the last name match.",
+      "parentUuid": "AAAAdX//8n0\u003d",
+      "revId": "f59516682cdea7a8052a0d89e6af97dd33cce258",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

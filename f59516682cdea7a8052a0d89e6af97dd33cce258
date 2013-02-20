@@ -52,6 +52,24 @@
       "revId": "f59516682cdea7a8052a0d89e6af97dd33cce258",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAdX//8ho\u003d",
+        "filename": "src/com/android/contacts/dialpad/T9SearchCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 940
+      },
+      "writtenOn": "2013-02-20T23:30:10Z",
+      "side": 0,
+      "message": "I assume you\u0027re referring to the \"View contact names as\" setting in the People app ?\n\nMight get a bit confusing for people who want to change it and start looking into dialer settings to change it and not finding it.",
+      "parentUuid": "AAAAdX//8iM\u003d",
+      "revId": "f59516682cdea7a8052a0d89e6af97dd33cce258",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

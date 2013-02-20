@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAdX//8nk\u003d",
+        "filename": "src/com/android/contacts/dialpad/T9SearchCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-02-20T17:08:57Z",
+      "side": 1,
+      "message": "Now that I think about it, lines 415-421 can probably be shortened to\n\nentry.matchId \u003d entry.normalValue !\u003d null ? entry.normalValue.indexOf(number) : -1;\nhasNameMatch |\u003d entry.matchId \u003e\u003d 0;",
+      "revId": "ef47b161b74ea69bdd12f1284e71e10f01e0ee58",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

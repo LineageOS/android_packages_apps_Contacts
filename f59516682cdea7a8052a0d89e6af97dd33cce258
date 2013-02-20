@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAdX//8n0\u003d",
+        "filename": "src/com/android/contacts/dialpad/T9SearchCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-02-20T17:08:57Z",
+      "side": 0,
+      "message": "Danesh, what was the point of that lastSpace thing? It broke the highlighting in the following scenario:\n\n- Name is Foo-Bar\n- Entered was 227, thus matchId is 4\n- lastSpace becomes 3, thus matchId becomes 1\n- thus \u0027oo-\u0027 was incorrectly highlighted",
+      "revId": "f59516682cdea7a8052a0d89e6af97dd33cce258",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

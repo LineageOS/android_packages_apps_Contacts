@@ -34,6 +34,24 @@
       "revId": "f59516682cdea7a8052a0d89e6af97dd33cce258",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAdX//8iM\u003d",
+        "filename": "src/com/android/contacts/dialpad/T9SearchCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-02-20T23:20:40Z",
+      "side": 0,
+      "message": "OK, I think that can be safely removed then. After all, it\u0027s more important to highlight the correct portion of the name than choosing the last name over the given name, which probably was broken for non-western name ordering anyway.\n\nThat reminds me of something: Do you agree it\u0027s a good idea if the T9 dialer follows the name ordering set in the contacts app?",
+      "parentUuid": "AAAAdX//8jI\u003d",
+      "revId": "f59516682cdea7a8052a0d89e6af97dd33cce258",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

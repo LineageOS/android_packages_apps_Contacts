@@ -70,6 +70,24 @@
       "revId": "f59516682cdea7a8052a0d89e6af97dd33cce258",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAdX//8fc\u003d",
+        "filename": "src/com/android/contacts/dialpad/T9SearchCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-02-21T01:00:09Z",
+      "side": 0,
+      "message": "Yes, exactly. It\u0027s a bit unfortunate that this setting has no effect on the call log (it only caches the primary name, not the alternative one), because that would make the relation more obvious.\nI\u0027ll leave it as is then.",
+      "parentUuid": "AAAAdX//8ho\u003d",
+      "revId": "f59516682cdea7a8052a0d89e6af97dd33cce258",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

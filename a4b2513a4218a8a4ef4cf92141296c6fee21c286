@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAdX//7hE\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2013-02-24T01:49:47Z",
+      "side": 1,
+      "message": "In het engels staan er helemaal geen scheidingstekens en dat vind ik nu na het zien van mijn Gespreksstatistieken veel mooier!\n\n- NL:     1 uur, 48 minuten \u0026 10 seconden\n\n- ENG:  1 hr 48 mins 10 secs\n\nhet \u0027\u0026\u0027 teken slaat sowieso nergens op en omdat we geen afkortingen gebruiken, staat alles steeds over 2 regels verdeeld.\n\nIk stel voor om het meer te houden zoals in het Engels.\n\n- geen scheidingstekens\n- minuten -\u003e min\n- seconden -\u003e sec",
+      "revId": "a4b2513a4218a8a4ef4cf92141296c6fee21c286",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

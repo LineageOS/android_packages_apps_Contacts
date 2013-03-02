@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--  Copyright (C) 2006 The Android Open Source Project
+<!-- Copyright (C) 2006 The Android Open Source Project
+     Copyright (C) 2013 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -12,7 +13,7 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
- -->
+-->
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
@@ -50,7 +51,7 @@
     <string name="menu_splitAggregate" msgid="8368636463748691868">"Séparer"</string>
     <string name="contactsSplitMessage" msgid="5253490235863170269">"Contacts séparés"</string>
     <string name="splitConfirmation_title" msgid="6716467920283502570">"Séparer le contact"</string>
-    <string name="splitConfirmation" msgid="1150797297503944823">"Souhaitez-vous vraiment séparer ce contact en plusieurs instances : une pour chaque ensemble d\'informations associé à ce contact ?"</string>
+    <string name="splitConfirmation" msgid="1150797297503944823">"Souhaitez-vous vraiment séparer ce contact en plusieurs instances\u00A0: une pour chaque ensemble d\'informations associé à ce contact\u00A0?"</string>
     <string name="menu_joinAggregate" msgid="5027981918265667970">"Joindre"</string>
     <string name="titleJoinContactDataWith" msgid="7684875775798635354">"Joindre les contacts"</string>
     <string name="blurbJoinContactDataWith" msgid="995870557595050304">"Sélectionnez le contact que vous voulez associer à <xliff:g id="NAME">%s</xliff:g>."</string>
@@ -86,10 +87,12 @@
     <string name="emailLabelsGroup" msgid="8389931313045344406">"E-mail"</string>
     <string name="imLabelsGroup" msgid="3898238486262614027">"Chat"</string>
     <string name="postalLabelsGroup" msgid="1618078212734693682">"Adresse postale"</string>
-  <string-array name="otherLabels">
-    <item msgid="8287841928119937597">"Organisation"</item>
-    <item msgid="7196592230748086755">"Remarque"</item>
-  </string-array>
+
+    <string-array name="otherLabels">
+        <item msgid="8287841928119937597">"Organisation"</item>
+        <item msgid="7196592230748086755">"Remarque"</item>
+    </string-array>
+
     <string name="photoPickerNotFoundText" msgid="431331662154342581">"Aucune image disponible sur le téléphone."</string>
     <string name="attachToContact" msgid="8820530304406066714">"Icône de contact"</string>
     <string name="customLabelPickerTitle" msgid="1081475101983255212">"Libellé personnalisé"</string>
@@ -105,35 +108,46 @@
     <string name="showFilterPhones" msgid="4184858075465653970">"Contacts avec un n° de tél."</string>
     <string name="showFilterPhonesDescrip" msgid="6644443248815191067">"Afficher uniquement les contacts avec un numéro de téléphone"</string>
     <string name="headerContactGroups" msgid="2426134991932503843">"Choisir les contacts à afficher"</string>
-  <plurals name="groupDescrip">
-    <item quantity="other" msgid="3507881585720628389">"<xliff:g id="COUNT">%0$d</xliff:g> contacts"</item>
-  </plurals>
-  <plurals name="groupDescripPhones">
-    <item quantity="other" msgid="3816047547470490208">"<xliff:g id="COUNT_0">%1$d</xliff:g> contacts, dont <xliff:g id="COUNTWITHPHONES">%2$d</xliff:g> avec un téléphone"</item>
-  </plurals>
-    <string name="savingContact" msgid="4075751076741924939">"Enregistrement du contact…"</string>
-    <string name="savingDisplayGroups" msgid="2133152192716475939">"Enregistrement des options d\'affichage..."</string>
+
+    <plurals name="groupDescrip">
+        <item quantity="other" msgid="3507881585720628389">"<xliff:g id="COUNT">%0$d</xliff:g> contacts"</item>
+    </plurals>
+
+    <plurals name="groupDescripPhones">
+        <item quantity="other" msgid="3816047547470490208">"<xliff:g id="COUNT_0">%1$d</xliff:g> contacts, dont <xliff:g id="COUNTWITHPHONES">%2$d</xliff:g> avec un téléphone"</item>
+    </plurals>
+
+    <string name="savingContact" msgid="4075751076741924939">"Enregistrement du contact\u2026"</string>
+    <string name="savingDisplayGroups" msgid="2133152192716475939">"Enregistrement des options d\'affichage\u2026"</string>
     <string name="contactSavedToast" msgid="7152589189385441091">"Contact enregistré."</string>
-    <string name="contactSavedErrorToast" msgid="9189098776225004666">"Erreur : impossible d\'enregistrer les modifications du contact"</string>
-  <plurals name="listTotalPhoneContacts">
-    <item quantity="one" msgid="8721111084815668845">"Afficher 1 contact avec son numéro de téléphone"</item>
-    <item quantity="other" msgid="6133262880804110289">"Affichage de <xliff:g id="COUNT">%d</xliff:g> contacts avec numéro de téléphone"</item>
-  </plurals>
-    <string name="listTotalPhoneContactsZero" msgid="2756295259674938869">"Aucun contact visible avec numéro de téléphone"</string>
-  <plurals name="listTotalAllContacts">
-    <item quantity="one" msgid="1096068709488455155">"Affichage de 1 contact"</item>
-    <item quantity="other" msgid="2865867557378939630">"Affichage de <xliff:g id="COUNT">%d</xliff:g> contacts"</item>
-  </plurals>
+    <string name="contactSavedErrorToast" msgid="9189098776225004666">"Impossible d\'enregistrer les modifications apportées au contact."</string>
+
+    <plurals name="listTotalPhoneContacts">
+        <item quantity="one" msgid="8721111084815668845">"1 contact avec numéro de téléphone"</item>
+        <item quantity="other" msgid="6133262880804110289">"<xliff:g id="COUNT">%d</xliff:g> contacts avec des n° de téléphone"</item>
+    </plurals>
+
+    <string name="listTotalPhoneContactsZero" msgid="2756295259674938869">"Aucun contact disposant d\'un numéro de téléphone"</string>
+
+    <plurals name="listTotalAllContacts">
+        <item quantity="one" msgid="1096068709488455155">"1 contact"</item>
+        <item quantity="other" msgid="2865867557378939630">"<xliff:g id="COUNT">%d</xliff:g> contacts"</item>
+    </plurals>
+
     <string name="listTotalAllContactsZero" msgid="6811347506748072822">"Aucun contact visible"</string>
-  <plurals name="listFoundAllContacts">
-    <item quantity="one" msgid="2830107332033967280">"1 contact trouvé"</item>
-    <item quantity="other" msgid="7752927996850263152">"<xliff:g id="COUNT">%d</xliff:g> contacts trouvés"</item>
-  </plurals>
-    <string name="listFoundAllContactsZero" msgid="5554368784319460828">"Contact introuvable"</string>
-  <plurals name="searchFoundContacts">
-    <item quantity="one" msgid="916648718690661777">"1 contact"</item>
-    <item quantity="other" msgid="5660384247071761844">"<xliff:g id="COUNT">%d</xliff:g> contacts"</item>
-  </plurals>
+
+    <plurals name="listFoundAllContacts">
+        <item quantity="one" msgid="2830107332033967280">"1 contact trouvé"</item>
+        <item quantity="other" msgid="7752927996850263152">"<xliff:g id="COUNT">%d</xliff:g> contacts trouvés"</item>
+    </plurals>
+
+    <string name="listFoundAllContactsZero" msgid="5554368784319460828">"Aucun contact"</string>
+
+    <plurals name="searchFoundContacts">
+        <item quantity="one" msgid="916648718690661777">"1 contact"</item>
+        <item quantity="other" msgid="5660384247071761844">"<xliff:g id="COUNT">%d</xliff:g> contacts"</item>
+    </plurals>
+
     <string name="contactsIconLabel" msgid="7666609097606552806">"Contacts"</string>
     <string name="contactsFavoritesLabel" msgid="8417039765586853670">"Favoris"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Tél."</string>
@@ -149,8 +163,8 @@
     <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"Supprimer du journal d\'appels"</string>
     <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Effacer tous les appels"</string>
     <string name="recentCalls_empty" msgid="247053222448663107">"Aucun appel."</string>
-    <string name="clearCallLogConfirmation_title" msgid="718072843006222703">"Effacer le journal d\'appels"</string>
-    <string name="clearCallLogConfirmation" msgid="7625927669136267636">"Voulez-vous vraiment effacer le journal d\'appels ?"</string>
+    <string name="clearCallLogConfirmation_title" msgid="718072843006222703">"Effacer les appels\u00A0?</string>
+    <string name="clearCallLogConfirmation" msgid="7625927669136267636">"Votre journal d\'appels va être effacé."</string>
     <string name="imei" msgid="3045126336951684285">"Code IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="voicemail" msgid="3851469869202611441">"Messagerie vocale"</string>
@@ -159,15 +173,15 @@
     <string name="payphone" msgid="4864313342828942922">"Cabine téléphonique"</string>
     <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Utilisez le clavier pour composer le numéro"</string>
     <string name="dialerDialpadHintText" msgid="5824490365898349041">"Composer"</string>
-    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Chargement depuis la carte SIM..."</string>
+    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Chargement depuis la carte SIM\u2026"</string>
     <string name="simContacts_title" msgid="27341688347689769">"Contacts de carte SIM"</string>
     <string name="noContactsHelpTextWithSyncForCreateShortcut" msgid="801504710275614594">"Vous n\'avez aucun contact à afficher. Si vous venez d\'ajouter un compte, la synchronisation des contacts peut prendre quelques minutes."</string>
     <string name="noContactsHelpTextForCreateShortcut" msgid="3081286388667108335">"Vous n\'avez aucun contact à afficher."</string>
-    <string name="noContactsHelpText" msgid="6788487368878712350">"Vous n\'avez aucun contact à afficher."\n\n"Pour ajouter des contacts, appuyez sur "<font fgcolor="#ffffffff"><b>"Menu"</b></font>" et sélectionnez :"\n" "\n<li><font fgcolor="#ffffffff"><b>"Comptes"</b></font>" pour ajouter ou configurer un compte dont vous pourrez synchroniser les contacts sur le téléphone ;"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Nouveau contact"</b></font>" pour créer un contact ;"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Importer/Exporter."</b></font>\n</li></string>
-    <string name="noContactsHelpTextWithSync" msgid="3734101165712848179">"Vous n\'avez aucun contact à afficher (si vous venez d\'ajouter un compte, la synchronisation des contacts peut prendre quelques minutes)."\n\n"Pour ajouter des contacts, appuyez sur "<font fgcolor="#ffffffff"><b>"Menu"</b></font>" et sélectionnez :"\n" "\n<li><font fgcolor="#ffffffff"><b>"Comptes"</b></font>" pour ajouter ou configurer un compte comportant des contacts que vous pourrez synchroniser sur le téléphone ;"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Options d\'affichage"</b></font>" pour modifier le paramètre de visibilité des contacts ;"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Nouveau contact"</b></font>" pour créer une entrée ;"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Importer/Exporter."</b></font>\n</li></string>
-    <string name="noContactsNoSimHelpText" msgid="6553845386917463292">"Vous n\'avez aucun contact à afficher."\n\n"Pour ajouter des contacts, appuyez sur "<font fgcolor="#ffffffff"><b>"Menu"</b></font>" et sélectionnez :"\n" "\n<li><font fgcolor="#ffffffff"><b>"Comptes"</b></font>" pour ajouter ou configurer un compte dont vous pourrez synchroniser les contacts sur le téléphone ;"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Nouveau contact"</b></font>" pour créer un contact ;"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Importer/Exporter."</b></font>\n</li></string>
-    <string name="noContactsNoSimHelpTextWithSync" msgid="1122296298361373488">"Vous n\'avez aucun contact à afficher (si vous venez d\'ajouter un compte, la synchronisation des contacts peut prendre quelques minutes)."\n\n"Pour ajouter des contacts, appuyez sur "<font fgcolor="#ffffffff"><b>"Menu"</b></font>" et sélectionnez :"\n" "\n<li><font fgcolor="#ffffffff"><b>"Comptes"</b></font>" pour ajouter ou configurer un compte comportant des contacts que vous pourrez synchroniser sur le téléphone ;"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Options d\'affichage"</b></font>" pour modifier le paramètre de visibilité des contacts ;"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Nouveau contact"</b></font>" pour créer une entrée ;"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Importer/Exporter."</b></font>\n</li></string>
-    <string name="noFavoritesHelpText" msgid="3744655776704833277">"Vous ne disposez d\'aucun favoris."\n\n"Pour ajouter un contact à la liste de favoris :"\n\n"        "<li>"Appuyez sur l\'onglet "<b>"Contacts"</b>"."\n</li>" "\n<li>"Appuyez sur le contact à ajouter à vos favoris."\n</li>" "\n<li>"Appuyez sur l\'étoile en regard du nom du contact."\n</li></string>
+    <string name="noContactsHelpText" msgid="6788487368878712350">"Vous n\'avez aucun contact à afficher."\n\n"Pour ajouter des contacts, appuyez sur "<font fgcolor="#ffffffff"><b>"Menu"</b></font>" et sélectionnez\u00A0:"\n" "\n<li><font fgcolor="#ffffffff"><b>"Comptes"</b></font>" pour ajouter ou configurer un compte dont vous pourrez synchroniser les contacts sur le téléphone ;"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Nouveau contact"</b></font>" pour créer un contact ;"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Importer/Exporter."</b></font>\n</li></string>
+    <string name="noContactsHelpTextWithSync" msgid="3734101165712848179">"Vous n\'avez aucun contact à afficher (si vous venez d\'ajouter un compte, la synchronisation des contacts peut prendre quelques minutes)."\n\n"Pour ajouter des contacts, appuyez sur "<font fgcolor="#ffffffff"><b>"Menu"</b></font>" et sélectionnez\u00A0:"\n" "\n<li><font fgcolor="#ffffffff"><b>"Comptes"</b></font>" pour ajouter ou configurer un compte comportant des contacts que vous pourrez synchroniser sur le téléphone ;"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Options d\'affichage"</b></font>" pour modifier le paramètre de visibilité des contacts ;"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Nouveau contact"</b></font>" pour créer une entrée ;"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Importer/Exporter."</b></font>\n</li></string>
+    <string name="noContactsNoSimHelpText" msgid="6553845386917463292">"Vous n\'avez aucun contact à afficher."\n\n"Pour ajouter des contacts, appuyez sur "<font fgcolor="#ffffffff"><b>"Menu"</b></font>" et sélectionnez\u00A0:"\n" "\n<li><font fgcolor="#ffffffff"><b>"Comptes"</b></font>" pour ajouter ou configurer un compte dont vous pourrez synchroniser les contacts sur le téléphone ;"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Nouveau contact"</b></font>" pour créer un contact ;"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Importer/Exporter."</b></font>\n</li></string>
+    <string name="noContactsNoSimHelpTextWithSync" msgid="1122296298361373488">"Vous n\'avez aucun contact à afficher (si vous venez d\'ajouter un compte, la synchronisation des contacts peut prendre quelques minutes)."\n\n"Pour ajouter des contacts, appuyez sur "<font fgcolor="#ffffffff"><b>"Menu"</b></font>" et sélectionnez\u00A0:"\n" "\n<li><font fgcolor="#ffffffff"><b>"Comptes"</b></font>" pour ajouter ou configurer un compte comportant des contacts que vous pourrez synchroniser sur le téléphone ;"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Options d\'affichage"</b></font>" pour modifier le paramètre de visibilité des contacts ;"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Nouveau contact"</b></font>" pour créer une entrée ;"\n</li>" "\n<li><font fgcolor="#ffffffff"><b>"Importer/Exporter."</b></font>\n</li></string>
+    <string name="noFavoritesHelpText" msgid="3744655776704833277">"Vous ne disposez d\'aucun favoris."\n\n"Pour ajouter un contact à la liste de favoris\u00A0:"\n\n"        "<li>"Appuyez sur l\'onglet "<b>"Contacts"</b>"."\n</li>" "\n<li>"Appuyez sur le contact à ajouter à vos favoris."\n</li>" "\n<li>"Appuyez sur l\'étoile en regard du nom du contact."\n</li></string>
     <string name="liveFolder_all_label" msgid="5961411940473276616">"Tous les contacts"</string>
     <string name="liveFolder_favorites_label" msgid="2674341514070517105">"Suivis"</string>
     <string name="liveFolder_phones_label" msgid="1709786878793436245">"Téléphones"</string>
@@ -186,7 +200,7 @@
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%1$s</xliff:g> mn <xliff:g id="SECONDS">%2$s</xliff:g> s"</string>
     <string name="favoritesFrquentSeparator" msgid="8107518433381283736">"Contactés fréquemment"</string>
     <string name="add_contact_dlg_title" msgid="2896685845822146494">"Ajouter un contact"</string>
-    <string name="add_contact_dlg_message_fmt" msgid="7986472669444326576">"Ajouter \"<xliff:g id="EMAIL">%s</xliff:g>\" aux contacts ?"</string>
+    <string name="add_contact_dlg_message_fmt" msgid="7986472669444326576">"Ajouter \"<xliff:g id="EMAIL">%s</xliff:g>\" aux contacts\u00A0?"</string>
     <string name="all_tab_label" msgid="4003124364397916826">"Tout"</string>
     <string name="description_image_button_one" msgid="1740638037139856139">"un"</string>
     <string name="description_image_button_two" msgid="5882638439003731308">"deux"</string>
@@ -207,59 +221,59 @@
     <string name="description_contact_photo" msgid="3387458082667894062">"photo du contact"</string>
     <string name="description_minus_button" msgid="387136707700230172">"moins"</string>
     <string name="description_plus_button" msgid="515164827856229880">"plus"</string>
-    <string name="no_sdcard_title" product="nosdcard" msgid="5362631473262100989">"Mémoire de stockage USB non disponible"</string>
-    <string name="no_sdcard_title" product="default" msgid="5911758680339949273">"Aucune carte SD trouvée"</string>
-    <string name="no_sdcard_message" product="nosdcard" msgid="8045830739790534254">"Mémoire de stockage USB non détectée"</string>
+    <string name="no_sdcard_title" product="nosdcard" msgid="5362631473262100989">"Mémoire de stockage non disponible"</string>
+    <string name="no_sdcard_title" product="default" msgid="5911758680339949273">"Aucune carte SD détectée"</string>
+    <string name="no_sdcard_message" product="nosdcard" msgid="8045830739790534254">"Aucune mémoire de stockage n\'a été détectée."</string>
     <string name="no_sdcard_message" product="default" msgid="6019391476490445358">"Aucune carte SD n\'a été détectée."</string>
     <string name="searching_vcard_title" msgid="4970508055399376813">"Recherche des données VCard"</string>
-    <string name="import_from_sim" msgid="3859272228033941659">"Importer à partir de la carte SIM"</string>
-    <string name="import_from_sdcard" product="nosdcard" msgid="8294728696808674154">"Importer depuis mémoire USB"</string>
-    <string name="import_from_sdcard" product="default" msgid="8550360976693202816">"Importer à partir de la carte SD"</string>
-    <string name="export_to_sdcard" product="nosdcard" msgid="7201274701382901259">"Exporter vers mémoire USB"</string>
+    <string name="import_from_sim" msgid="3859272228033941659">"Importer depuis la carte SIM"</string>
+    <string name="import_from_sdcard" product="nosdcard" msgid="8294728696808674154">"Importer depuis la mémoire de stockage"</string>
+    <string name="import_from_sdcard" product="default" msgid="8550360976693202816">"Importer depuis la carte SD"</string>
+    <string name="export_to_sdcard" product="nosdcard" msgid="7201274701382901259">"Exporter vers la mémoire de stockage"</string>
     <string name="export_to_sdcard" product="default" msgid="2597105442616166277">"Exporter vers la carte SD"</string>
     <string name="share_visible_contacts" msgid="890150378880783797">"Partager les contacts visibles"</string>
     <string name="import_one_vcard_string" msgid="9059163467020328433">"Importer un fichier vCard"</string>
     <string name="import_multiple_vcard_string" msgid="3810226492811062392">"Importer plusieurs fichiers vCard"</string>
     <string name="import_all_vcard_string" msgid="5518136113853448474">"Importer tous les fichiers vCard"</string>
-    <string name="searching_vcard_message" product="nosdcard" msgid="8214795338181412751">"Recherche de données VCard sur la mémoire de stockage USB"</string>
-    <string name="searching_vcard_message" product="default" msgid="6917522333561434546">"Recherche de données VCard sur la carte SD"</string>
-    <string name="scanning_sdcard_failed_title" product="nosdcard" msgid="7447077516493667568">"Impossible d\'analyser la mémoire de stockage USB"</string>
-    <string name="scanning_sdcard_failed_title" product="default" msgid="3506782007953167180">"Échec de l\'analyse de la carte SD"</string>
-    <string name="scanning_sdcard_failed_message" product="nosdcard" msgid="5645544323676912703">"Impossible d\'analyser la mémoire de stockage USB (Raison : \"<xliff:g id="FAIL_REASON">%s</xliff:g>\")"</string>
-    <string name="scanning_sdcard_failed_message" product="default" msgid="3761992500690182922">"Échec de l\'analyse de la carte SD (Raison : \"<xliff:g id="FAIL_REASON">%s</xliff:g>\")"</string>
-    <string name="fail_reason_io_error" msgid="5922864781066136340">"Erreur d\'E/S"</string>
-    <string name="fail_reason_vcard_parse_error" msgid="1201233722762680214">"Échec de l\'analyse des données VCard pour une raison inattendue"</string>
-    <string name="fail_reason_vcard_not_supported_error" msgid="655208100451286027">"Échec de l\'analyse des données VCard. Le format semble valide, mais l\'implémentation actuelle ne le prend pas en charge."</string>
-    <string name="fail_reason_no_vcard_file" product="nosdcard" msgid="4231528180481838813">"Aucun fichier VCard n\'a été trouvé sur la mémoire de stockage USB."</string>
-    <string name="fail_reason_no_vcard_file" product="default" msgid="6376516175882881595">"Aucun fichier VCard n\'a été trouvé sur la carte SD."</string>
-    <string name="fail_reason_failed_to_read_files" msgid="3659521123567134029">"Échec de l\'importation d\'un ou de plusieurs fichiers (%s)"</string>
-    <string name="fail_reason_unknown" msgid="999034019513096768">"Erreur inconnue"</string>
-    <string name="select_vcard_title" msgid="3968948173786172468">"Sélectionner un fichier VCard"</string>
+    <string name="searching_vcard_message" product="nosdcard" msgid="8214795338181412751">"Recherche de données vCard dans la mémoire de stockage\u2026"</string>
+    <string name="searching_vcard_message" product="default" msgid="6917522333561434546">"Recherche de données vCard sur la carte SD\u2026"</string>
+    <string name="scanning_sdcard_failed_title" product="nosdcard" msgid="7447077516493667568">"Impossible d\'analyser la mémoire de stockage."</string>
+    <string name="scanning_sdcard_failed_title" product="default" msgid="3506782007953167180">"Impossible d\'analyser la carte SD."</string>
+    <string name="scanning_sdcard_failed_message" product="nosdcard" msgid="5645544323676912703">"Impossible d\'explorer la mémoire de stockage pour la raison suivante\u00A0: <xliff:g id="FAIL_REASON">%s</xliff:g>."</string>
+    <string name="scanning_sdcard_failed_message" product="default" msgid="3761992500690182922">"Impossible d\'explorer la carte SD pour la raison suivante\u00A0: <xliff:g id="FAIL_REASON">%s</xliff:g>."</string>
+    <string name="fail_reason_io_error" msgid="5922864781066136340">"Erreur d\'E/S."</string>
+    <string name="fail_reason_vcard_parse_error" msgid="1201233722762680214">"Impossible d\'analyser le fichier vCard pour une raison inattendue."</string>
+    <string name="fail_reason_vcard_not_supported_error" msgid="655208100451286027">"Impossible d\'analyser les données VCard. Le format semble valide, mais l\'implémentation actuelle ne le prend pas en charge."</string>
+    <string name="fail_reason_no_vcard_file" product="nosdcard" msgid="4231528180481838813">"Aucun fichier vCard trouvé dans la mémoire de stockage."</string>
+    <string name="fail_reason_no_vcard_file" product="default" msgid="6376516175882881595">"Aucun fichier vCard trouvé sur la carte SD."</string>
+    <string name="fail_reason_failed_to_read_files" msgid="3659521123567134029">"Impossible d\'importer un ou plusieurs fichiers (%s)."</string>
+    <string name="fail_reason_unknown" msgid="999034019513096768">"Erreur inconnue."</string>
+    <string name="select_vcard_title" msgid="3968948173786172468">"Sélectionner vCard"</string>
     <string name="progress_shower_message" msgid="5636525578293752526">"<xliff:g id="ACTION">%1$s</xliff:g>"\n"<xliff:g id="FILENAME">%2$s</xliff:g>"</string>
     <string name="reading_vcard_title" msgid="4723433501579653199">"Lecture des données VCard"</string>
     <string name="reading_vcard_message" msgid="6381368920030748743">"Lecture des fichiers VCard"</string>
-    <string name="reading_vcard_failed_title" msgid="4923008144735294994">"Échec de la lecture des données VCard"</string>
+    <string name="reading_vcard_failed_title" msgid="4923008144735294994">"Impossible de lire les données vCard."</string>
     <string name="reading_vcard_contacts" msgid="3066834102042012868">"<xliff:g id="CURRENT_NUMBER">%1$s</xliff:g> sur <xliff:g id="TOTAL_NUMBER">%2$s</xliff:g> contacts"</string>
     <string name="reading_vcard_files" msgid="34180143726972661">"<xliff:g id="CURRENT_NUMBER">%1$s</xliff:g> sur <xliff:g id="TOTAL_NUMBER">%2$s</xliff:g> fichiers"</string>
-    <string name="confirm_export_title" msgid="7648747763127442983">"Confirmer l\'exportation"</string>
-    <string name="confirm_export_message" msgid="3875683519257829750">"Voulez-vous vraiment exporter la liste de contacts vers \"<xliff:g id="VCARD_FILENAME">%s</xliff:g>\" ?"</string>
-    <string name="exporting_contact_failed_title" msgid="585823094820602526">"Échec lors de l\'exportation des données du contact"</string>
-    <string name="exporting_contact_failed_message" msgid="4151348002470298092">"Échec lors de l\'exportation des données du contact."\n"Motif : \"<xliff:g id="FAIL_REASON">%s</xliff:g>\""</string>
-    <string name="fail_reason_no_exportable_contact" msgid="4919714086648344495">"Aucun contact exportable"</string>
-    <string name="fail_reason_too_many_vcard" product="nosdcard" msgid="2638638826954895225">"La mémoire de stockage USB contient trop de fichiers VCard."</string>
-    <string name="fail_reason_too_many_vcard" product="default" msgid="7084146295639672658">"La carte SD contient trop de fichiers VCard."</string>
+    <string name="confirm_export_title" msgid="7648747763127442983">"Exporter contacts\u00A0?"</string>
+    <string name="confirm_export_message" msgid="3875683519257829750">"Votre liste de contacts va être exportée vers le fichier \"<xliff:g id="VCARD_FILENAME">%s</xliff:g>\"."</string>
+    <string name="exporting_contact_failed_title" msgid="585823094820602526">"Échec exportation"</string>
+    <string name="exporting_contact_failed_message" msgid="4151348002470298092">"Les données du contact n\'ont pas été exportées."\n"Motif\u00A0: \"<xliff:g id="FAIL_REASON">%s</xliff:g>\"."</string>
+    <string name="fail_reason_no_exportable_contact" msgid="4919714086648344495">"Aucun contact ne peut être exporté."</string>
+    <string name="fail_reason_too_many_vcard" product="nosdcard" msgid="2638638826954895225">"La mémoire de stockage contient trop de fichiers vCard."</string>
+    <string name="fail_reason_too_many_vcard" product="default" msgid="7084146295639672658">"La carte SD contient trop de fichiers vCard."</string>
     <string name="fail_reason_too_long_filename" msgid="1915716071321839166">"Le nom de fichier requis est trop long (\"<xliff:g id="FILENAME">%s</xliff:g>\")."</string>
     <string name="exporting_contact_list_title" msgid="9072240631534457415">"Exportation des données des contacts"</string>
-    <string name="exporting_contact_list_message" msgid="5640326540405486055">"Exportation des données des contacts vers \"<xliff:g id="FILE_NAME">%s</xliff:g>\""</string>
-    <string name="fail_reason_could_not_initialize_exporter" msgid="4943708332700987376">"Échec de l\'initialisation du module d\'exportation : \"<xliff:g id="EXACT_REASON">%s</xliff:g>\""</string>
-    <string name="fail_reason_error_occurred_during_export" msgid="2151165129433831202">"Une erreur s\'est produite lors de l\'exportation : \"<xliff:g id="EXACT_REASON">%s</xliff:g>\""</string>
-    <string name="composer_failed_to_get_database_infomation" msgid="3723109558155169053">"Impossible d\'obtenir les informations concernant la base de données"</string>
-    <string name="composer_has_no_exportable_contact" msgid="754734132189369094">"Aucun contact n\'est exportable. Si votre téléphone comporte actuellement des contacts, il se peut qu\'un fournisseur de données empêche leur exportation hors de votre téléphone."</string>
-    <string name="composer_not_initialized" msgid="8041534450748388843">"Le système de composition vCard n\'est pas correctement initialisé."</string>
-    <string name="fail_reason_could_not_open_file" msgid="4013520943128739511">"Impossible d\'ouvrir \"<xliff:g id="FILE_NAME">%1$s</xliff:g>\" : <xliff:g id="EXACT_REASON">%2$s</xliff:g>"</string>
+    <string name="exporting_contact_list_message" msgid="5640326540405486055">"Vos données de contact sont en cours d\'exportation vers\u00A0: \"<xliff:g id="FILE_NAME">%s</xliff:g>\"."</string>
+    <string name="fail_reason_could_not_initialize_exporter" msgid="4943708332700987376">"Impossible de démarrer le programme d\'exportation\u00A0: \"<xliff:g id="EXACT_REASON">%s</xliff:g>\"."</string>
+    <string name="fail_reason_error_occurred_during_export" msgid="2151165129433831202">"Une erreur s\'est produite lors de l\'exportation\u00A0: \"<xliff:g id="EXACT_REASON">%s</xliff:g>\"."</string>
+    <string name="composer_failed_to_get_database_infomation" msgid="3723109558155169053">"Impossible d\'obtenir les informations concernant la base de données."</string>
+    <string name="composer_has_no_exportable_contact" msgid="754734132189369094">"Aucun contact ne peut être exporté. Si des contacts sont enregistrés sur votre téléphone, il est possible qu\'un fournisseur de données n\'autorise pas l\'exportation de contacts vers un autre appareil."</string>
+    <string name="composer_not_initialized" msgid="8041534450748388843">"Le système de composition vCard n\'a pas démarré correctement."</string>
+    <string name="fail_reason_could_not_open_file" msgid="4013520943128739511">"Impossible d\'ouvrir \"<xliff:g id="FILE_NAME">%1$s</xliff:g>\"\u00A0: <xliff:g id="EXACT_REASON">%2$s</xliff:g>"</string>
     <string name="exporting_contact_list_progress" msgid="560522409559101193">"<xliff:g id="CURRENT_NUMBER">%1$s</xliff:g> sur <xliff:g id="TOTAL_NUMBER">%2$s</xliff:g> contacts"</string>
     <string name="search_settings_description" msgid="2675223022992445813">"Noms de vos contacts"</string>
-    <string name="add_2sec_pause" msgid="9214012315201040129">"Ajouter une pause de 2 s"</string>
+    <string name="add_2sec_pause" msgid="9214012315201040129">"Ajouter une pause de 2 secondes"</string>
     <string name="add_wait" msgid="3360818652790319634">"Ajouter Attendre"</string>
     <string name="call_disambig_title" msgid="1911302597959335178">"Appeler via"</string>
     <string name="sms_disambig_title" msgid="4675399294513152364">"Envoyer un SMS via"</string>
@@ -273,12 +287,12 @@
     <string name="dialog_import_export" msgid="4771877268244096596">"Importer/Exporter les contacts"</string>
     <string name="menu_share" msgid="943789700636542260">"Partager"</string>
     <string name="share_via" msgid="563121028023030093">"Partager contact via"</string>
-    <string name="share_error" msgid="4374508848981697170">"Ce contact ne peut pas être partagé."</string>
+    <string name="share_error" msgid="4374508848981697170">"Impossible de partager ce contact."</string>
     <string name="nameLabelsGroup" msgid="2034640839640477827">"Nom"</string>
     <string name="nicknameLabelsGroup" msgid="2891682101053358010">"Pseudo"</string>
     <string name="organizationLabelsGroup" msgid="2478611760751832035">"Organisation"</string>
     <string name="websiteLabelsGroup" msgid="4202998982804009261">"Site Web"</string>
-    <string name="eventLabelsGroup" msgid="8069912895912714412">"Événement"</string>
+    <string name="eventLabelsGroup" msgid="8069912895912714412">"Événements"</string>
     <string name="type_short_home" msgid="7770424864090605384">"D"</string>
     <string name="type_short_mobile" msgid="1655473281466676216">"M"</string>
     <string name="type_short_work" msgid="4925330752504537861">"B"</string>
@@ -290,10 +304,10 @@
     <string name="dialog_new_contact_account" msgid="9044704073286262197">"Créer un contact sous le compte"</string>
     <string name="menu_sync_remove" msgid="3266725887008450161">"Supprimer le groupe de synchronisation"</string>
     <string name="dialog_sync_add" msgid="8267045393119375803">"Ajouter groupe de synchronisation"</string>
-    <string name="display_more_groups" msgid="2682547080423434170">"Autres groupes..."</string>
+    <string name="display_more_groups" msgid="2682547080423434170">"Autres groupes\u2026"</string>
     <string name="display_ungrouped" msgid="4602580795576261158">"Tous les autres contacts"</string>
     <string name="display_all_contacts" msgid="6846131371214707956">"Tous les contacts"</string>
-    <string name="display_warn_remove_ungrouped" msgid="2314043155909167610">"Le retrait du groupe \"<xliff:g id="GROUP">%s</xliff:g>\" de la synchronisation entraîne également la suppression de tous les contacts non groupés de la synchronisation."</string>
+    <string name="display_warn_remove_ungrouped" msgid="2314043155909167610">"Le retrait de \"<xliff:g id="GROUP">%s</xliff:g>\" de la synchronisation entraînera également le retrait des contacts n\'appartenant à aucun groupe."</string>
     <string name="account_phone" msgid="3682950835276226870">"Téléphone uniquement, sans synchronisation"</string>
     <string name="call_custom" msgid="7756571794763171802">"Appeler <xliff:g id="CUSTOM">%s</xliff:g>"</string>
     <string name="call_home" msgid="1990519474420545392">"Appeler domicile"</string>
@@ -364,13 +378,13 @@
     <string name="postal_postcode" msgid="572136414136673751">"Code postal"</string>
     <string name="postal_country" msgid="7638264508416368690">"Pays"</string>
     <string name="name_given" msgid="1687286314106019813">"Prénom"</string>
-    <string name="name_family" msgid="3416695586119999058">"Nom de famille"</string>
-    <string name="name_prefix" msgid="59756378548779822">"Préfixe du nom"</string>
+    <string name="name_family" msgid="3416695586119999058">"Nom"</string>
+    <string name="name_prefix" msgid="59756378548779822">"Titre"</string>
     <string name="name_middle" msgid="8467433655992690326">"2e prénom"</string>
-    <string name="name_suffix" msgid="3855278445375651441">"Suffixe du nom"</string>
+    <string name="name_suffix" msgid="3855278445375651441">"Suffixe"</string>
     <string name="name_phonetic_given" msgid="6853570431394449191">"Phonétique du prénom"</string>
     <string name="name_phonetic_middle" msgid="8643721493320405200">"Phonétique 2e prénom"</string>
-    <string name="name_phonetic_family" msgid="462095502140180305">"Phonétique du nom de famille"</string>
+    <string name="name_phonetic_family" msgid="462095502140180305">"Phonétique du nom"</string>
     <string name="account_type_format" msgid="718948015590343010">"Contact <xliff:g id="SOURCE">%1$s</xliff:g>"</string>
     <string name="from_account_format" msgid="687567483928582084">"de <xliff:g id="SOURCE">%1$s</xliff:g>"</string>
     <string name="use_photo_as_primary" msgid="8807110122951157246">"Utiliser cette photo"</string>
@@ -378,21 +392,21 @@
     <string name="no_contact_details" msgid="6754415338321837001">"Aucune autre information pour ce contact"</string>
     <string name="display_options_sort_list_by" msgid="6080091755852211076">"Trier la liste par"</string>
     <string name="display_options_sort_by_given_name" msgid="184916793466387067">"Prénom"</string>
-    <string name="display_options_sort_by_family_name" msgid="7857986975275712622">"Nom de famille"</string>
+    <string name="display_options_sort_by_family_name" msgid="7857986975275712622">"Nom"</string>
     <string name="display_options_view_names_as" msgid="18022868169627979">"Afficher les contacts par"</string>
     <string name="display_options_view_given_name_first" msgid="6968288511197363292">"Le prénom en premier"</string>
-    <string name="display_options_view_family_name_first" msgid="1447288164951453714">"Le nom de famille en premier"</string>
-    <string name="search_bar_hint" msgid="1012756309632856553">"Rechercher..."</string>
+    <string name="display_options_view_family_name_first" msgid="1447288164951453714">"Le nom en premier"</string>
+    <string name="search_bar_hint" msgid="1012756309632856553">"Rechercher\u2026"</string>
     <string name="search_for_all_contacts" msgid="6644963335787294131">"Rechercher tous les contacts"</string>
     <string name="take_photo" msgid="7496128293167402354">"Prendre une photo"</string>
     <string name="pick_photo" msgid="448886509158039462">"Sélectionner une photo dans la galerie"</string>
-    <string name="locale_change_in_progress" msgid="1124266507671178413">"Mise à jour de la liste des contacts en cours suite au changement de langue."\n\n"Veuillez patienter..."</string>
-    <string name="upgrade_in_progress" msgid="7530893673211750223">"Mise à jour de la liste des contacts en cours."\n\n"Veuillez patienter..."</string>
-    <string name="upgrade_out_of_memory" msgid="492151063059824962">"Les contacts sont en cours de mise à niveau. "\n\n"La mise à niveau requiert environ <xliff:g id="SIZE_IN_MEGABYTES">%d</xliff:g> Mo de mémoire interne du téléphone."\n\n"Choisissez l\'une des options suivantes :"</string>
+    <string name="locale_change_in_progress" msgid="1124266507671178413">"Mise à jour de la liste des contacts en cours suite au changement de langue."\n\n"Veuillez patienter\u2026"</string>
+    <string name="upgrade_in_progress" msgid="7530893673211750223">"Mise à jour de la liste des contacts en cours."\n\n"Veuillez patienter\u2026"</string>
+    <string name="upgrade_out_of_memory" msgid="492151063059824962">"Les contacts sont en cours de mise à niveau. "\n\n"La mise à niveau requiert environ <xliff:g id="SIZE_IN_MEGABYTES">%d</xliff:g> Mo de mémoire interne du téléphone."\n\n"Choisissez l\'une des options suivantes\u00A0:"</string>
     <string name="upgrade_out_of_memory_uninstall" msgid="1721798828992091432">"Désinstaller certaines applications"</string>
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"Réessayer la mise à niveau"</string>
-    <string name="search_results_for" msgid="8705490885073188513">"Résultats de recherche pour : <xliff:g id="QUERY">%s</xliff:g>"</string>
-    <string name="search_results_searching" msgid="7755623475227227314">"Recherche en cours..."</string>
+    <string name="search_results_for" msgid="8705490885073188513">"Résultats de recherche pour\u00A0: <xliff:g id="QUERY">%s</xliff:g>"</string>
+    <string name="search_results_searching" msgid="7755623475227227314">"Recherche en cours\u2026"</string>
     <string name="date_year_toggle" msgid="7356532842767854606">"Indiquer une année"</string>
     <string name="date_format_short_no_year">dd/MM</string>
     <string name="date_format_full_no_year">d MMMM</string>
@@ -405,20 +419,20 @@
 
     <!-- Wysie: Call log strings -->
     <string name="recent_calls_clear_call_log">Vider le journal</string>
-    <string name="recent_calls_clear_what">Que faut-il vider ?</string>
+    <string name="recent_calls_clear_what">Que faut-il vider\u00A0?</string>
     <string name="recent_calls_clear_all">Tout</string>
     <string name="recent_calls_clear_incoming">Appels reçus</string>
     <string name="recent_calls_clear_outgoing">Appels sortant</string>
     <string name="recent_calls_clear_missed">Appels en absence</string>
     <string name="alert_clear_call_log_title">Vider le journal d\'appels</string>
-    <string name="alert_clear_call_log_message">Êtes-vous sûr de vouloir effacer l\'historique d\'appels ?</string>
-    <string name="alert_clear_cl_all_incoming">Êtes-vous sûr de vouloir effacer tous les appels reçus ?</string>
-    <string name="alert_clear_cl_all_outgoing">Êtes-vous sûr de vouloir effacer tous les appels sortants ?</string>
-    <string name="alert_clear_cl_all_missed">Êtes-vous sûr de vouloir effacer tous les appels en absence ?</string>
+    <string name="alert_clear_call_log_message">Êtes-vous sûr de vouloir effacer l\'historique d\'appels\u00A0?</string>
+    <string name="alert_clear_cl_all_incoming">Êtes-vous sûr de vouloir effacer tous les appels reçus\u00A0?</string>
+    <string name="alert_clear_cl_all_outgoing">Êtes-vous sûr de vouloir effacer tous les appels sortants\u00A0?</string>
+    <string name="alert_clear_cl_all_missed">Êtes-vous sûr de vouloir effacer tous les appels en absence\u00A0?</string>
 
     <!-- Wysie: Favourites strings -->
     <string name="fav_clear_freq">Vider fréquemment appelés</string>
-    <string name="alert_clear_freq_called_msg">Êtes-vous sûr de vouloir vider la liste des personnes fréquemment appelés ?</string>
+    <string name="alert_clear_freq_called_msg">Êtes-vous sûr de vouloir vider la liste des numéros fréquemment appelés\u00A0?</string>
 
     <!-- Wysie: Preferences strings -->
 
@@ -435,21 +449,21 @@
     <string name="summaryon_disable_num_check">Le bouton d\'action gauche et le menu seront toujours actifs</string>
     <string name="summaryoff_disable_num_check">Le bouton d\'action et le menu seront actifs dès qu\'un chiffre sera entré</string>
     <string name="title_enable_haptic_feedback">Retour haptique</string>
-    <string name="summary_enable_haptic_feedback">Utiliser le retour haptique du clavier - voir les Paramètres CyanogenMod pour les réglages</string>
+    <string name="summary_enable_haptic_feedback">Utiliser le retour haptique du clavier\u00A0-\u00A0voir les paramètres CyanogenMod pour les réglages</string>
     <string name="title_change_digits_color">Couleur des touches</string>
     <string name="title_digits_color_pressed">Appuyées</string>
     <string name="title_digits_color_focused">Mises en évidence</string>
     <string name="title_digits_color_unselected">Aucune action</string>
     <string name="title_choose_color">Choisir une couleur</string>
-    <string name="instructions_choose_color">Toucher la couleur au centre pour confirmer.\nPresser sur retour pour annuler</string>
-    <string name="entry_no_vm_handler">Aucun (Appeler Messagerie vocale)</string>
+    <string name="instructions_choose_color">Toucher la couleur au centre pour confirmer.\nPresser sur retour pour annuler.</string>
+    <string name="entry_no_vm_handler">Aucun (Appeler la messagerie vocale)</string>
 
     <!-- Preferences: Call log -->
-    <string name="title_cl_exact_time">Horodatages absolus</string>
-    <string name="summaryon_cl_exact_time">Utiliser des horodatages absolus dans l\'historique des appels</string>
-    <string name="summaryoff_cl_exact_time">Utiliser des horodatages relatifs dans l\'historique des appels</string>
+    <string name="title_cl_exact_time">Heure exacte</string>
+    <string name="summaryon_cl_exact_time">Utiliser l\'heure absolue dans l\'historique des appels</string>
+    <string name="summaryoff_cl_exact_time">Utiliser l\'heure relative dans l\'historique des appels</string>
     <string name="title_cl_show_seconds">Afficher les secondes</string>
-    <string name="summary_cl_show_seconds">Afficher les secondes avec les horodatages absolus</string>
+    <string name="summary_cl_show_seconds">Afficher les secondes lors de l'utilisation de l\'heure absolue</string>
     <string name="title_cl_ask_before_clear">Demander avant vidage</string>
     <string name="summaryon_cl_ask_before_clear">Demander confirmation avant l\'effacement de l\'historique des appels</string>
     <string name="summaryoff_cl_ask_before_clear">Ne pas demander confirmation avant l\'effacement de l\'historique des appels</string>
@@ -473,10 +487,10 @@
 
     <!-- Preferences: Favourites -->
     <string name="title_favourites_hide_freq_call">Cacher fréquemment appelés</string>
-    <string name="summary_favourites_hide_freq_call">Les données ne sont pas effacées mais juste cachées.</string>
-    <string name="title_favs_ask_before_clear">Demander avant vidage</string>
-    <string name="summaryon_favs_ask_before_clear">Demander confirmation avant de vider la liste fréquemment appelés</string>
-    <string name="summaryoff_favs_ask_before_clear">La liste fréquemment appelés sera vidée sans confirmation</string>
+    <string name="summary_favourites_hide_freq_call">Les données ne sont pas effacées, mais juste cachées.</string>
+    <string name="title_favs_ask_before_clear">Confirmer avant de vider</string>
+    <string name="summaryon_favs_ask_before_clear">Confirmer avant de vider la liste des appels fréquents</string>
+    <string name="summaryoff_favs_ask_before_clear">La liste des appels fréquents sera vidée sans confirmation</string>
 
     <!-- Preferences: Misc -->
     <string name="title_misc_category">Divers</string>
@@ -487,12 +501,6 @@
     <string name="title_default_phone_tab">Onglet par défaut</string>
     <string name="summary_default_phone_tab">Onglet affiché à l\'ouverture de l\'application Téléphone</string>
 
-    <!-- Wysie: About strings -->
-    <string name="title_about">A propos...</string>
-    <string name="title_about_name">Nom du mod</string>
-    <string name="title_about_version">Version</string>
-    <string name="title_about_credits">Crédits</string>
-
     <!-- Default Phone Tab strings -->
     <string name="default_phone_tab_last_used">Dernier utilisé pour appel (Défaut)</string>
     <string name="default_phone_tab_last_viewed">Dernier affiché</string>
@@ -501,7 +509,18 @@
     <string name="default_phone_tab_contacts">Contacts</string>
     <string name="default_phone_tab_favorites">Favoris</string>
 
+    <!-- Wysie: About strings -->
+    <string name="title_about">À propos\u2026</string>
+    <string name="title_about_name">Nom du mod</string>
+    <string name="summary_about_name">WyContacts Gingerbread</string>
+    <string name="title_about_version">Version</string>
+    <string name="summary_about_version">1.2</string>
+    <string name="title_about_credits">Crédits</string>
+    <string name="summary_about_credits">Wysie, ChainsDD, geesun, niuchl, rac2030, sileht et le reste de XDA\u00A0!\u00A0:)</string>
+
     <!-- Preferences: T9  -->
+    <string name="t9_loading">Chargement\u2026</string>
+    <string name="t9_default_sort">1</string>
     <string name="t9_sort_title">Mode de tri T9</string>
     <string name="t9_sort_summary">Méthode de tri des résultats issus du mode T9</string>
     <string name="t9_sort_name">Noms en priorité</string>
@@ -510,5 +529,13 @@
     <string name="t9_state_summary">Activer la recherche de contacts par les lettres du clavier</string>
     <string name="t9_dial_click_title">Sélection contact T9</string>
     <string name="t9_dial_click_summary">Appeler de préférence le contact sélectionné par le mode T9</string>
-
+    <string name="t9_add_to_contacts">Ajouter aux contacts</string>
+    <string name="t9_map_row_2">2abcàáâäåɑæçǽćčá</string>
+    <string name="t9_map_row_3">3deféèêë</string>
+    <string name="t9_map_row_4">4ghiíìïîǵ</string>
+    <string name="t9_map_row_5">5jklḱḱĺ</string>
+    <string name="t9_map_row_6">6mnoòóöôøñŋǿḿńő</string>
+    <string name="t9_map_row_7">7pqrsßɾṕŕśřš</string>
+    <string name="t9_map_row_8">8tuvúùüûű</string>
+    <string name="t9_map_row_9">9wxyzýẃź</string>
 </resources>

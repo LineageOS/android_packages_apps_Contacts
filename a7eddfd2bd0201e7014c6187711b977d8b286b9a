@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAd3///2k\u003d",
+        "filename": "res/values-fr/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 4808
+      },
+      "writtenOn": "2013-03-04T03:52:42Z",
+      "side": 1,
+      "message": "ici cela sera forcément au pluriel pas besoin de mettre les \"s\" entre parenthèses.",
+      "revId": "a7eddfd2bd0201e7014c6187711b977d8b286b9a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAd3///2c\u003d",
+        "filename": "res/values-fr/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 4808
+      },
+      "writtenOn": "2013-03-04T03:52:42Z",
+      "side": 1,
+      "message": "Je préférerais le terme \"effacer\", là on dirait que c\u0027est la fonction journal d\u0027appel qui va être supprimée alors que l\u0027on veut juste vider son contenu.",
+      "revId": "a7eddfd2bd0201e7014c6187711b977d8b286b9a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAd3///2U\u003d",
+        "filename": "res/values-fr/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 4808
+      },
+      "writtenOn": "2013-03-04T03:52:42Z",
+      "side": 1,
+      "message": "espace insécable avant le \"?\"",
+      "revId": "a7eddfd2bd0201e7014c6187711b977d8b286b9a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

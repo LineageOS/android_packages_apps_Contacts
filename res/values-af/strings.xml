@@ -18,6 +18,18 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="launcherDialer" msgid="8636288196618486553">"Foon"</string>
     <string name="people" msgid="1048457247435785074">"Mense"</string>
+
+    <string name="t9_loading">Besig om te laai\u2026</string>
+    <string name="t9_sort_title">T9 sorteer metode</string>
+    <string name="t9_sort_summary">Kies hoe om T9 resultate te filter</string>
+    <string name="t9_sort_name">Sorteer naam eerste</string>
+    <string name="t9_sort_number">Sorteer nommers eerste</string>
+    <string name="t9_state_title">Aktiveer T9 nommerbord</string>
+    <string name="t9_state_summary">Aktiveer T9 deursoeking in nommerbord</string>
+    <string name="t9_dial_click_title">Skakel geselekteerde kontak</string>
+    <string name="t9_dial_click_summary">Skakel die geselekteerde kontak vir T9</string>
+    <string name="t9_add_to_contacts">Voeg by kontakte</string>
+
     <string name="contactsList" msgid="8661624236494819731">"Kontakte"</string>
     <string name="shortcutContact" msgid="749243779392912958">"Kontak"</string>
     <string name="shortcutDialContact" msgid="746622101599186779">"Direk skakel"</string>
@@ -139,6 +151,9 @@
     <string name="contactsFavoritesLabel" msgid="8417039765586853670">"Gunstelinge"</string>
     <string name="dialerAllContactsLabel" msgid="1025920923112988336">"Gunstelinge en alle kontakte"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Foon"</string>
+    <string name="dialer_ui_title">Nommerbord instellings</string>
+    <string name="dialer_ui_orientation_title">Aktiveer sensor oriëntasie</string>
+    <string name="dialer_ui_orientation_summary">Draai nommerbord gebaseer op die sensor</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Oproeprekord"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Stuur teksboodskap"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Bel <xliff:g id="NAME">%s</xliff:g>"</string>
@@ -281,6 +296,8 @@
     <string name="add_wait" msgid="3360818652790319634">"Voeg wagtyd by"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"Kies nommer"</string>
     <string name="call_settings" msgid="7666474782093693667">"Instellings"</string>
+    <string name="call_stats">Oproep statistieke</string>
+    <string name="call_stats_refresh">Herlaai</string>
     <string name="sms_disambig_title" msgid="5846266399240630846">"Kies nommer"</string>
     <string name="make_primary" msgid="5829291915305113983">"Onthou hierdie keuse"</string>
     <string name="quickcontact_missing_app" msgid="358168575340921552">"Geen program is gevind om hierdie aksie te hanteer nie."</string>
@@ -570,4 +587,61 @@
     <string name="menu_export_database" msgid="2659719297530170820">"Voer databasislêers uit"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Meer opsies"</string>
     <string name="expand_collapse_name_fields_description" msgid="8682630859539604311">"Vou naamvelde uit of in"</string>
+
+    <string name="call_stats_nav_all">Alles</string>
+    <string name="call_stats_nav_incoming">Inkomende</string>
+    <string name="call_stats_nav_outgoing">Uitgaande</string>
+    <string name="call_stats_nav_missed">Gemis</string>
+    <string name="call_stats_incoming">Inkomende: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_outgoing">Uitgaande: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_missed">Gemis</string>
+    <string name="call_stats_missed_percent">Gemis: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Totaal: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Totaal: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Begin datum</string>
+    <string name="call_stats_filter_to">Einddatum</string>
+    <string name="call_stats_filter_picker_title">Filter reeks</string>
+
+    <string name="date_quick_selection">Vinnige keuse</string>
+    <string name="date_qs_currentmonth">Huidige maand</string>
+    <string name="date_qs_currentquarter">Huidige kwartaal</string>
+    <string name="date_qs_currentyear">Huidige jaar</string>
+    <string name="date_qs_lastweek">Laas week</string>
+    <string name="date_qs_lastmonth">Laas maand</string>
+    <string name="date_qs_lastquarter">Laas kwartaal</string>
+    <string name="date_qs_lastyear">Laas jaar</string>
+
+    <string name="call_stats_date_filter">Verstel tyd reeks</string>
+    <string name="call_stats_reset_filter">Herstel tyd reeks</string>
+    <string name="call_stats_sort_by_duration">Sorteer volgens duur van die oproep</string>
+    <string name="call_stats_sort_by_count">Sorteer volgens aantal oproepe</string>
+
+    <string-array name="call_stats_duration">
+        <item><xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
+        <item><xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
+        <item><xliff:g id="minutes" example="2 mins">%2$s</xliff:g> <xliff:g id="seconds" example="2 ses">%3$s</xliff:g></item>
+        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g></item>
+        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
+        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
+        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="minutes" example="2 mins">%2$s</xliff:g> <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
+    </string-array>
+
+    <plurals name="hour">
+        <item quantity="one">1 uur</item>
+        <item quantity="other">%d ure</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="one">1 min</item>
+        <item quantity="other">%d minute</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="one">1 sek.</item>
+        <item quantity="other">%d sek.</item>
+    </plurals>
+
+    <plurals name="call">
+        <item quantity="one">1 oproep</item>
+        <item quantity="other">%d oproepe</item>
+    </plurals>
+
 </resources>

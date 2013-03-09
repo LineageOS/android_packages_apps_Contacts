@@ -570,4 +570,83 @@
     <string name="menu_export_database" msgid="2659719297530170820">"Voer databasislêers uit"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Meer opsies"</string>
     <string name="expand_collapse_name_fields_description" msgid="8682630859539604311">"Vou naamvelde uit of in"</string>
+
+    <!-- CYANOGENMOD EDITS START -->
+
+    <string name="t9_loading">Besig om te laai\u2026</string>
+    <string name="t9_sort_title">T9 sorteringsmetode</string>
+    <string name="t9_sort_summary">Kies hoe om T9 resultate te filter</string>
+    <string name="t9_sort_name">Sorteer naam eerste</string>
+    <string name="t9_sort_number">Sorteer nommers eerste</string>
+    <string name="t9_state_title">Aktiveer T9 sleutelbord</string>
+    <string name="t9_state_summary">Aktiveer T9 deursoeking in sleutelbord</string>
+    <string name="t9_dial_click_title">Skakel geselekteerde kontak</string>
+    <string name="t9_dial_click_summary">Skakel die geselekteerde kontak vir T9</string>
+    <string name="t9_add_to_contacts">Voeg by kontakte</string>
+
+    <string name="dialer_ui_title">Sleutelbord instellings</string>
+    <string name="dialer_ui_orientation_title">Aktiveer sensor oriëntasie</string>
+    <string name="dialer_ui_orientation_summary">Draai sleutelbord gebaseer op die sensor</string>
+
+    <string name="call_stats">Oproep statistieke</string>
+    <string name="call_stats_refresh">Herlaai</string>
+
+    <string name="call_stats_nav_all">Alles</string>
+    <string name="call_stats_nav_incoming">Inkomende</string>
+    <string name="call_stats_nav_outgoing">Uitgaande</string>
+    <string name="call_stats_nav_missed">Gemis</string>
+    <string name="call_stats_incoming">Inkomende: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_outgoing">Uitgaande: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_missed">Gemis</string>
+    <string name="call_stats_missed_percent">Gemis: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Totaal: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Totaal: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Begin datum</string>
+    <string name="call_stats_filter_to">Einddatum</string>
+    <string name="call_stats_filter_picker_title">Filter reeks</string>
+
+    <string name="date_quick_selection">Vinnige keuse</string>
+    <string name="date_qs_currentmonth">Huidige maand</string>
+    <string name="date_qs_currentquarter">Huidige kwartaal</string>
+    <string name="date_qs_currentyear">Huidige jaar</string>
+    <string name="date_qs_lastweek">Laaste week</string>
+    <string name="date_qs_lastmonth">Laaste maand</string>
+    <string name="date_qs_lastquarter">Laaste kwartaal</string>
+    <string name="date_qs_lastyear">Laaste jaar</string>
+
+    <string name="call_stats_date_filter">Verstel tydreeks</string>
+    <string name="call_stats_reset_filter">Herstel tydreeks</string>
+    <string name="call_stats_sort_by_duration">Sorteer volgens die lengte van die oproep</string>
+    <string name="call_stats_sort_by_count">Sorteer volgens aantal oproepe</string>
+
+    <string-array name="call_stats_duration">
+        <item><xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
+        <item><xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
+        <item><xliff:g id="minutes" example="2 mins">%2$s</xliff:g> <xliff:g id="seconds" example="2 ses">%3$s</xliff:g></item>
+        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g></item>
+        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
+        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
+        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="minutes" example="2 mins">%2$s</xliff:g> <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
+    </string-array>
+
+    <plurals name="hour">
+        <item quantity="one">1 uur</item>
+        <item quantity="other">%d ure</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="one">1 min</item>
+        <item quantity="other">%d minute</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="one">1 sek.</item>
+        <item quantity="other">%d sek.</item>
+    </plurals>
+
+    <plurals name="call">
+        <item quantity="one">1 oproep</item>
+        <item quantity="other">%d oproepe</item>
+    </plurals>
+
+    <!-- **** CYANOGENMOD ADDITIONS END **** -->
+
 </resources>

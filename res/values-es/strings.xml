@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2006 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copyright (C) 2006 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
--->
+ -->
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
@@ -42,8 +42,8 @@
     <string name="menu_newContact" msgid="1209922412763274638">"Contacto nuevo"</string>
     <string name="menu_viewContact" msgid="2795575601596468581">"Ver contacto"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Llamar a <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="menu_addStar" msgid="2908478235715404876">"Añadir a \"Favoritos\""</string>
-    <string name="menu_removeStar" msgid="5844227078364227030">"Eliminar de \"Favoritos\""</string>
+    <string name="menu_addStar" msgid="2908478235715404876">"Añadir a \u00ABFavoritos\u00BB"</string>
+    <string name="menu_removeStar" msgid="5844227078364227030">"Eliminar de \u00ABFavoritos\u00BB"</string>
     <string name="menu_editContact" msgid="9042415603857662633">"Editar"</string>
     <string name="menu_deleteContact" msgid="6788644058868189393">"Eliminar"</string>
     <string name="menu_copy" msgid="6108677035381940698">"Copiar"</string>
@@ -70,7 +70,7 @@
     <string name="readOnlyContactDeleteConfirmation" msgid="2137170726670196909">"Este contacto contiene información de varias cuentas. La información de las cuentas de solo lectura se ocultará en las listas de contactos, pero no se eliminará."</string>
     <string name="multipleContactDeleteConfirmation" msgid="938900978442960800">"Si se elimina este contacto, se eliminará la información de varias cuentas."</string>
     <string name="deleteConfirmation" msgid="811706994761610640">"El contacto se eliminará."</string>
-    <string name="menu_done" msgid="796017761764190697">"OK"</string>
+    <string name="menu_done" msgid="796017761764190697">"Aceptar"</string>
     <string name="menu_doNotSave" msgid="58593876893538465">"Cancelar"</string>
     <string name="menu_discard" msgid="6456087569315685632">"Descartar"</string>
     <string name="label_notes" msgid="8337354953278341042">"Notas"</string>
@@ -139,9 +139,6 @@
     <string name="contactsFavoritesLabel" msgid="8417039765586853670">"Favoritos"</string>
     <string name="dialerAllContactsLabel" msgid="1025920923112988336">"Favoritos y todos los contactos"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Teléfono"</string>
-    <string name="dialer_ui_title">"Ajustes de marcación"</string>
-    <string name="dialer_ui_orientation_title">"Activar rotación"</string>
-    <string name="dialer_ui_orientation_summary">"Rotar el teclado de marcación basado en la orientación del sensor"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Llamadas"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Enviar un mensaje de texto"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Llamar a <xliff:g id="NAME">%s</xliff:g>"</string>
@@ -195,7 +192,7 @@
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> min. y <xliff:g id="SECONDS">%s</xliff:g> seg."</string>
     <string name="favoritesFrequentContacted" msgid="6184232487472425690">"Contactos frecuentes"</string>
     <string name="favoritesFrequentCalled" msgid="6128306889600696124">"Más llamados"</string>
-    <string name="add_contact_dlg_message_fmt" msgid="7986472669444326576">"¿Quieres añadir \"<xliff:g id="EMAIL">%s</xliff:g>\" a Contactos?"</string>
+    <string name="add_contact_dlg_message_fmt" msgid="7986472669444326576">"¿Quieres añadir \u00AB<xliff:g id="EMAIL">%s</xliff:g>\u00BB a Contactos?"</string>
     <string name="description_image_button_one" msgid="1740638037139856139">"uno"</string>
     <string name="description_image_button_two" msgid="5882638439003731308">"dos"</string>
     <string name="description_image_button_three" msgid="8709731759376015180">"tres"</string>
@@ -228,8 +225,8 @@
     <string name="import_all_vcard_string" msgid="5518136113853448474">"Importar todos los archivos de vCard"</string>
     <string name="searching_vcard_message" product="nosdcard" msgid="557077639409584945">"Buscando datos de vCard en el almacenamiento\u2026"</string>
     <string name="searching_vcard_message" product="default" msgid="3962269894118092049">"Buscando datos de vCard en la tarjeta SD\u2026"</string>
-    <string name="scanning_sdcard_failed_message" product="nosdcard" msgid="7221682312959229201">"No se ha podido analizar el almacenamiento (motivo: \"<xliff:g id="FAIL_REASON">%s</xliff:g>\")."</string>
-    <string name="scanning_sdcard_failed_message" product="default" msgid="189023067829510792">"No se ha podido analizar la tarjeta SD (motivo: \"<xliff:g id="FAIL_REASON">%s</xliff:g>\")."</string>
+    <string name="scanning_sdcard_failed_message" product="nosdcard" msgid="7221682312959229201">"No se ha podido analizar el almacenamiento (motivo: \u00AB<xliff:g id="FAIL_REASON">%s</xliff:g>\u00BB)."</string>
+    <string name="scanning_sdcard_failed_message" product="default" msgid="189023067829510792">"No se ha podido analizar la tarjeta SD (motivo: \u00AB<xliff:g id="FAIL_REASON">%s</xliff:g>\u00BB)."</string>
     <string name="fail_reason_io_error" msgid="6748358842976073255">"Error de E/S"</string>
     <string name="fail_reason_low_memory_during_import" msgid="875222757734882898">"No hay suficiente espacio de memoria (el archivo puede ser demasiado grande)."</string>
     <string name="fail_reason_vcard_parse_error" msgid="888263542360355784">"No se ha podido analizar el archivo vCard debido a un error inesperado."</string>
@@ -259,22 +256,22 @@
     <string name="confirm_export_title" msgid="6834385377255286349">"¿Exportar contactos?"</string>
     <string name="confirm_export_message" msgid="2423421354816428708">"Tu lista de contactos se exportará al archivo <xliff:g id="VCARD_FILENAME">%s</xliff:g>."</string>
     <string name="exporting_contact_failed_title" msgid="4892358112409576342">"Error al exportar"</string>
-    <string name="exporting_contact_failed_message" msgid="4938527850142003141">"No se han exportado los datos de contactos ("\n"motivo: \"<xliff:g id="FAIL_REASON">%s</xliff:g>\")."</string>
+    <string name="exporting_contact_failed_message" msgid="4938527850142003141">"No se han exportado los datos de contactos ("\n"motivo: \u00AB<xliff:g id="FAIL_REASON">%s</xliff:g>\u00BB)."</string>
     <string name="fail_reason_no_exportable_contact" msgid="8728506011371262065">"No hay contactos que exportar."</string>
     <string name="fail_reason_too_many_vcard" product="nosdcard" msgid="590645599157376285">"Hay demasiados archivos vCard en el almacenamiento."</string>
     <string name="fail_reason_too_many_vcard" product="default" msgid="4887177369627277474">"Hay demasiados archivos vCard en la tarjeta SD."</string>
-    <string name="fail_reason_too_long_filename" msgid="3393764245254738333">"El nombre de archivo obligatorio es demasiado largo (\"<xliff:g id="FILENAME">%s</xliff:g>\")."</string>
+    <string name="fail_reason_too_long_filename" msgid="3393764245254738333">"El nombre de archivo obligatorio es demasiado largo (\u00AB<xliff:g id="FILENAME">%s</xliff:g>\u00BB)."</string>
     <string name="exporting_vcard_finished_title" msgid="4767045779458185251">"Exportación de <xliff:g id="FILENAME">%s</xliff:g> finalizada"</string>
     <string name="exporting_vcard_canceled_title" msgid="2652222370493306887">"Se ha cancelado la exportación de <xliff:g id="FILENAME">%s</xliff:g>."</string>
     <string name="exporting_contact_list_title" msgid="9072240631534457415">"Exportando datos de contacto"</string>
     <string name="exporting_contact_list_message" msgid="7181663157672374569">"Se están exportando tus datos de contactos a <xliff:g id="FILE_NAME">%s</xliff:g>."</string>
-    <string name="fail_reason_could_not_initialize_exporter" msgid="707260459259688510">"No se ha podido iniciar la exportación: (\"<xliff:g id="EXACT_REASON">%s</xliff:g>\")."</string>
-    <string name="fail_reason_error_occurred_during_export" msgid="3018855323913649063">"Se ha producido un error durante la exportación (\"<xliff:g id="EXACT_REASON">%s</xliff:g>\")."</string>
+    <string name="fail_reason_could_not_initialize_exporter" msgid="707260459259688510">"No se ha podido iniciar la exportación: (\u00AB<xliff:g id="EXACT_REASON">%s</xliff:g>\u00BB)."</string>
+    <string name="fail_reason_error_occurred_during_export" msgid="3018855323913649063">"Se ha producido un error durante la exportación (\u00AB<xliff:g id="EXACT_REASON">%s</xliff:g>\u00BB)."</string>
     <string name="composer_failed_to_get_database_infomation" msgid="1765944280846236723">"No se ha podido obtener información de la base de datos."</string>
     <string name="composer_has_no_exportable_contact" product="tablet" msgid="6991449891825077743">"No hay contactos que exportar. Si ya tienes contactos en el tablet, es posible que el proveedor de datos no permita que se exporten los contactos del tablet."</string>
     <string name="composer_has_no_exportable_contact" product="default" msgid="3296493229040294335">"No hay contactos que exportar. Si ya tienes contactos en el teléfono, es posible que el proveedor de datos no permita que se exporten los contactos del teléfono."</string>
     <string name="composer_not_initialized" msgid="2321648986367005254">"El redactor de vCard no se ha iniciado correctamente."</string>
-    <string name="fail_reason_could_not_open_file" msgid="2067725459821997463">"No se ha podido abrir el archivo \"<xliff:g id="FILE_NAME">%s</xliff:g>\" (<xliff:g id="EXACT_REASON">%s</xliff:g>)."</string>
+    <string name="fail_reason_could_not_open_file" msgid="2067725459821997463">"No se ha podido abrir el archivo \u00AB<xliff:g id="FILE_NAME">%s</xliff:g>\u00BB (<xliff:g id="EXACT_REASON">%s</xliff:g>)."</string>
     <string name="exporting_contact_list_progress" msgid="560522409559101193">"<xliff:g id="CURRENT_NUMBER">%s</xliff:g> de <xliff:g id="TOTAL_NUMBER">%s</xliff:g> contactos"</string>
     <string name="cancel_import_confirmation_message" msgid="3929951040347726757">"¿Seguro que quieres cancelar la importación de <xliff:g id="FILENAME">%s</xliff:g>?"</string>
     <string name="cancel_export_confirmation_message" msgid="1995462401949262638">"¿Seguro que quieres cancelar la exportación de <xliff:g id="FILENAME">%s</xliff:g>?"</string>
@@ -311,7 +308,7 @@
     <string name="display_more_groups" msgid="2682547080423434170">"Más grupos\u2026"</string>
     <string name="display_ungrouped" msgid="6885954210243119591">"Todos los demás contactos"</string>
     <string name="display_all_contacts" msgid="2031647544742889505">"Todos los contactos"</string>
-    <string name="display_warn_remove_ungrouped" msgid="8872290721676651414">"Si eliminas \"<xliff:g id="GROUP">%s</xliff:g>\" de las sincronización, también se eliminarán todos los contactos no agrupados."</string>
+    <string name="display_warn_remove_ungrouped" msgid="8872290721676651414">"Si eliminas \u00AB<xliff:g id="GROUP">%s</xliff:g>\u00BB de las sincronización, también se eliminarán todos los contactos no agrupados."</string>
     <string name="account_phone" product="tablet" msgid="7946049152658522054">"Solo en el tablet (sin sincronizar)"</string>
     <string name="account_phone" product="default" msgid="3682950835276226870">"Solo en el teléfono, no sincronizado"</string>
     <string name="call_custom" msgid="7756571794763171802">"Llamar a <xliff:g id="CUSTOM">%s</xliff:g>"</string>
@@ -482,7 +479,7 @@
     <item quantity="one" msgid="2944819210288517794">"Un grupo"</item>
     <item quantity="other" msgid="1276758425904917367">"<xliff:g id="COUNT">%0$d</xliff:g> grupos"</item>
   </plurals>
-    <string name="delete_group_dialog_message" msgid="7586856514337560529">"¿Seguro que quieres eliminar el grupo \"<xliff:g id="GROUP_LABEL">%1$s</xliff:g>\"? Los contactos no se eliminarán."</string>
+    <string name="delete_group_dialog_message" msgid="7586856514337560529">"¿Seguro que quieres eliminar el grupo \u00AB<xliff:g id="GROUP_LABEL">%1$s</xliff:g>\u00BB? Los contactos no se eliminarán."</string>
   <plurals name="num_contacts_in_group">
     <item quantity="one" msgid="1352418549951013448">"<xliff:g id="COUNT_0">%1$d</xliff:g> persona de <xliff:g id="ACCOUNT_TYPE">%2$s</xliff:g>"</item>
     <item quantity="other" msgid="8146027769011086349">"<xliff:g id="COUNT_0">%1$d</xliff:g> personas de <xliff:g id="ACCOUNT_TYPE">%2$s</xliff:g>"</item>
@@ -576,6 +573,9 @@
 
     <!-- CYANOGENMOD ADDITIONS START -->
 
+    <string name="dialer_ui_title">Ajustes de marcación</string>
+    <string name="dialer_ui_orientation_title">Activar rotación</string>
+    <string name="dialer_ui_orientation_summary">Rotar el teclado de marcación según la orientación del sensor</string>
     <string name="t9_loading">Cargando\u2026</string>
     <string name="t9_sort_title">Modo de ordenación T9</string>
     <string name="t9_sort_summary">Escoger como se filtran los resultados T9</string>

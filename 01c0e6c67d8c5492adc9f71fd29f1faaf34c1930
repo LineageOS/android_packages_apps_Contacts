@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAeX//+Cw\u003d",
+        "filename": "res/values-af/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2013-03-09T17:58:39Z",
+      "side": 1,
+      "message": "Create a line, containing:\n\n\u003c!-- CYANOGENMOD ADDITIONS --\u003e\n\nhere and move all CM strings below this line",
+      "revId": "01c0e6c67d8c5492adc9f71fd29f1faaf34c1930",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

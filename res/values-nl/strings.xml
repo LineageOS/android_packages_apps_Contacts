@@ -622,12 +622,12 @@
         <item quantity="other">%d uur</item>
     </plurals>
     <plurals name="minute">
-        <item quantity="one">1 minuut</item>
-        <item quantity="other">%d minuten</item>
+        <item quantity="one">1 min.</item>
+        <item quantity="other">%d min.</item>
     </plurals>
     <plurals name="second">
-        <item quantity="one">1 seconde</item>
-        <item quantity="other">%d seconden</item>
+        <item quantity="one">1 sec.</item>
+        <item quantity="other">%d sec.</item>
     </plurals>
     <plurals name="call">
         <item quantity="one">1 gesprek</item>
@@ -638,10 +638,10 @@
     <string-array name="call_stats_duration">
         <item><xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
         <item><xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
-        <item><xliff:g id="minutes" example="2 mins">%2$s</xliff:g> &amp; <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
+        <item><xliff:g id="minutes" example="2 mins">%2$s</xliff:g> <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
         <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> &amp; <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> &amp; <xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g>, <xliff:g id="minutes" example="2 mins">%2$s</xliff:g> &amp; <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
+        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
+        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
+        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="minutes" example="2 mins">%2$s</xliff:g> <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
     </string-array>
 </resources>

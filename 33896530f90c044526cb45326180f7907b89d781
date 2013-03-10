@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAeX//92I\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2013-03-10T04:31:41Z",
+      "side": 1,
+      "message": "liefst nog zonder . (punt)\n\n- min",
+      "revId": "33896530f90c044526cb45326180f7907b89d781",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAeX//92E\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2013-03-10T04:31:41Z",
+      "side": 1,
+      "message": "- sec",
+      "revId": "33896530f90c044526cb45326180f7907b89d781",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

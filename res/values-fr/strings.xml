@@ -463,7 +463,7 @@
     <string name="summaryon_cl_exact_time">Utiliser l\'heure absolue dans l\'historique des appels</string>
     <string name="summaryoff_cl_exact_time">Utiliser l\'heure relative dans l\'historique des appels</string>
     <string name="title_cl_show_seconds">Afficher les secondes</string>
-    <string name="summary_cl_show_seconds">Afficher les secondes lors de l'utilisation de l\'heure absolue</string>
+    <string name="summary_cl_show_seconds">Afficher les secondes lors de l\'utilisation de l\'heure absolue</string>
     <string name="title_cl_ask_before_clear">Demander avant vidage</string>
     <string name="summaryon_cl_ask_before_clear">Demander confirmation avant l\'effacement de l\'historique des appels</string>
     <string name="summaryoff_cl_ask_before_clear">Ne pas demander confirmation avant l\'effacement de l\'historique des appels</string>

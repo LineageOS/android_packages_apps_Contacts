@@ -1,0 +1,9 @@
+Change-Id: I031ed4a8639690d8d807e0237184aa16251309bb
+Code-Review+2: Jef Oliver <jeagoss@cyanogenmod.org>
+Verified+1: Jef Oliver <jeagoss@cyanogenmod.org>
+Code-Review+1: Thibault LEMOINE <thibaultblizz@gmail.com>
+Submitted-by: Jef Oliver <jeagoss@cyanogenmod.org>
+Submitted-at: Mon, 11 Mar 2013 16:55:35 -0700
+Reviewed-on: http://review.cyanogenmod.org/33619
+Project: CyanogenMod/android_packages_apps_Contacts
+Branch: refs/heads/gingerbread

@@ -436,6 +436,8 @@
     <string name="summaryoff_disable_num_check">Το αριστερό πλήκτρο ενέργειας θα είναι ενεργό μόνο όταν εισαχθεί τουλάχιστον ένας αριθμός (εκτός ηχητικών μηνυμάτων)</string>
     <string name="title_enable_haptic_feedback">Ενεργ. απτικής ανάδρασης</string>
     <string name="summary_enable_haptic_feedback">Χρήση μοτίβου πληκτρολογίου - δείτε τις ρυθμίσεις CyanogenMod για αλλαγή</string>
+    <string name="title_format_phone_number">Μορφοποίηση τηλεφ. αριθμών</string>
+    <string name="summary_format_phone_number">Ενεργοποίηση μορφοποίησης τηλεφωνικών αριθμών</string>
     <string name="title_change_digits_color">Αλλαγή χρώματος ψηφίων</string>
     <string name="title_digits_color_pressed">Χρώμα ψηφίων (πατημένα)</string>
     <string name="title_digits_color_focused">Χρώμα ψηφίων (σε εστίαση)</string>

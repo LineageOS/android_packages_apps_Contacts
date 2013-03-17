@@ -571,7 +571,14 @@
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Więcej opcji"</string>
     <string name="expand_collapse_name_fields_description" msgid="8682630859539604311">"Rozwiń lub zwiń pola imion i nazwisk"</string>
 
-    <!-- **** CYANOGENMOD EDITS START **** -->
+    <!-- CYANOGENMOD ADDITIONS -->
+
+    <!-- Dialer UI Settings -->
+    <string name="dialer_ui_title">Wybieranie numeru</string>
+    <string name="dialer_ui_orientation_title">Autoobracanie ekranu</string>
+    <string name="dialer_ui_orientation_summary">Pozwól na automatyczny obrót ekranu</string>
+
+    <string name="t9_loading">Wczytywanie\u2026</string>
     <string name="t9_sort_title">Tryb sortowania T9</string>
     <string name="t9_sort_summary">Wybierz, jak filtrować wyniki</string>
     <string name="t9_sort_name">Najpierw nazwa</string>
@@ -590,9 +597,74 @@
     <string name="t9_map_row_8">8tuvúùüûű</string>
     <string name="t9_map_row_9">9wxyzýẃźż</string>
 
-    <!-- Dialer UI Settings -->
-    <string name="dialer_ui_title">Wybieranie numeru</string>
-    <string name="dialer_ui_orientation_title">Autoobracanie ekranu</string>
-    <string name="dialer_ui_orientation_summary">Pozwól na automatyczny obrót ekranu</string>
-    <!-- **** CYANOGENMOD EDITS END **** -->
+    <!-- Title bar for call stat detail screen -->
+    <string name="callStatsDetailTitle">Szczegółowe statystyki połączeń</string>
+
+    <string name="call_stats">Statystyki połączeń</string>
+    <string name="call_stats_refresh">Odśwież</string>
+    <string name="activity_title_call_stats">Statystyki połączeń</string>
+
+    <string name="call_stats_nav_all">Wszystkie</string>
+    <string name="call_stats_nav_incoming">Przychodzące</string>
+    <string name="call_stats_nav_outgoing">Wychodzące</string>
+    <string name="call_stats_nav_missed">Nieodebrane</string>
+    <string name="call_stats_incoming">Przychodzące: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_outgoing">Wychodzące: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_missed">Nieodebrane</string>
+    <string name="call_stats_missed_percent">Nieodebrane: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Łącznie: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Łącznie: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Data początkowa</string>
+    <string name="call_stats_filter_to">Data końcowa</string>
+    <string name="call_stats_filter_picker_title">Zakres filtrowania</string>
+
+    <string name="date_quick_selection">Szybki wybór</string>
+    <string name="date_qs_currentmonth">Bieżący miesiąc</string>
+    <string name="date_qs_currentquarter">Bieżący kwartał</string>
+    <string name="date_qs_currentyear">Bieżący rok</string>
+    <string name="date_qs_lastweek">Ostatni tydzień</string>
+    <string name="date_qs_lastmonth">Ostatni miesiąc</string>
+    <string name="date_qs_lastquarter">Ostatni kwartał</string>
+    <string name="date_qs_lastyear">Ostatni rok</string>
+
+    <string name="call_stats_date_filter">Ustaw zakres czasu</string>
+    <string name="call_stats_reset_filter">Zresetuj zakres czasu</string>
+    <string name="call_stats_sort_by_duration">Sortuj wg czasu trwania</string>
+    <string name="call_stats_sort_by_count">Sortuj wg liczby połączeń</string>
+
+    <!-- 0:           sec
+         1:      min
+         2:      min  sec
+         3: hour
+         4: hour      sec
+         5: hour min
+         6: hour min  sec -->
+
+    <string-array name="call_stats_duration">
+        <item><xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
+        <item><xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
+        <item><xliff:g id="minutes" example="2 mins">%2$s</xliff:g> <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
+        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g></item>
+        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
+        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
+        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="minutes" example="2 mins">%2$s</xliff:g> <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
+    </string-array>
+
+    <plurals name="hour">
+        <item quantity="one">1 godz.</item>
+        <item quantity="other">%d godz.</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="one">1 min</item>
+        <item quantity="other">%d min</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="one">1 sek.</item>
+        <item quantity="other">%d sek.</item>
+    </plurals>
+
+    <plurals name="call">
+        <item quantity="one">1 poł.</item>
+        <item quantity="other">%d poł.</item>
+    </plurals>
 </resources>

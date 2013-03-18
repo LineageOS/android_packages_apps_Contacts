@@ -16,6 +16,24 @@
       "revId": "7fceff35c7662ad25b1fd343f80c1694824b31a4",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAeX//65c\u003d",
+        "filename": "res/values-pl/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 5868
+      },
+      "writtenOn": "2013-03-18T05:15:40Z",
+      "side": 1,
+      "message": "I saw it in other translations but honestly I\u0027m not sure if it\u0027s needed.",
+      "parentUuid": "AAAAeX//67M\u003d",
+      "revId": "7fceff35c7662ad25b1fd343f80c1694824b31a4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

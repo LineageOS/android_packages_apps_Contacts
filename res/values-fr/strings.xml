@@ -599,18 +599,18 @@
     <string name="t9_map_row_8">8tuvťúùüûűů</string>
     <string name="t9_map_row_9">9wxyzýẃźž</string>
 
-    <string name="call_stats">Statistique</string>
+    <string name="call_stats">Statistiques</string>
     <string name="call_stats_refresh">Rafraichir</string>
-    <string name="activity_title_call_stats">Statistique</string>
+    <string name="activity_title_call_stats">Statistiques</string>
 
     <string name="call_stats_nav_all">Tous</string>
-    <string name="call_stats_nav_incoming">Entrant</string>
-    <string name="call_stats_nav_outgoing">Sortant</string>
-    <string name="call_stats_nav_missed">Manqué</string>
-    <string name="call_stats_incoming">Entrant : <xliff:g id="percent">%d</xliff:g>%%</string>
-    <string name="call_stats_outgoing">Sortant : <xliff:g id="percent">%d</xliff:g>%%</string>
-    <string name="call_stats_missed">Manqué</string>
-    <string name="call_stats_missed_percent">Manqué : <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_nav_incoming">Entrants</string>
+    <string name="call_stats_nav_outgoing">Sortants</string>
+    <string name="call_stats_nav_missed">Manqués</string>
+    <string name="call_stats_incoming">Entrants : <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_outgoing">Sortants : <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_missed">Manqués</string>
+    <string name="call_stats_missed_percent">Manqués : <xliff:g id="percent">%d</xliff:g>%%</string>
     <string name="call_stats_header_total">Total : <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
     <string name="call_stats_header_total_callsonly">Total : <xliff:g id="call_count">%s</xliff:g></string>
     <string name="call_stats_filter_from">Date de début</string>

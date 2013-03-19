@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAeX//6Jk\u003d",
+        "filename": "res/values-fr/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 5596
+      },
+      "writtenOn": "2013-03-19T05:30:09Z",
+      "side": 1,
+      "message": "Je viens de remarquer qu\u0027il manque un \u0027s\u0027",
+      "revId": "c8c6c7e61483c6bf814063494755e785690bcf89",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAeX//6Jg\u003d",
+        "filename": "res/values-fr/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 5596
+      },
+      "writtenOn": "2013-03-19T05:30:09Z",
+      "side": 1,
+      "message": "Idem",
+      "revId": "c8c6c7e61483c6bf814063494755e785690bcf89",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAeX//6Jc\u003d",
+        "filename": "res/values-fr/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 5596
+      },
+      "writtenOn": "2013-03-19T05:30:09Z",
+      "side": 1,
+      "message": "Idem",
+      "revId": "c8c6c7e61483c6bf814063494755e785690bcf89",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAeX//6JY\u003d",
+        "filename": "res/values-fr/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 5596
+      },
+      "writtenOn": "2013-03-19T05:30:09Z",
+      "side": 1,
+      "message": "Idem",
+      "revId": "c8c6c7e61483c6bf814063494755e785690bcf89",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAeX//6JU\u003d",
+        "filename": "res/values-fr/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 5596
+      },
+      "writtenOn": "2013-03-19T05:30:09Z",
+      "side": 1,
+      "message": "Idem",
+      "revId": "c8c6c7e61483c6bf814063494755e785690bcf89",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAeX//6JQ\u003d",
+        "filename": "res/values-fr/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 5596
+      },
+      "writtenOn": "2013-03-19T05:30:09Z",
+      "side": 1,
+      "message": "Idem",
+      "revId": "c8c6c7e61483c6bf814063494755e785690bcf89",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAeX//6JM\u003d",
+        "filename": "res/values-fr/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 5596
+      },
+      "writtenOn": "2013-03-19T05:30:09Z",
+      "side": 1,
+      "message": "Idem",
+      "revId": "c8c6c7e61483c6bf814063494755e785690bcf89",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAeX//6JE\u003d",
+        "filename": "res/values-fr/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 5596
+      },
+      "writtenOn": "2013-03-19T05:30:09Z",
+      "side": 1,
+      "message": "Idem",
+      "revId": "c8c6c7e61483c6bf814063494755e785690bcf89",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAeX//6JA\u003d",
+        "filename": "res/values-fr/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 5596
+      },
+      "writtenOn": "2013-03-19T05:30:09Z",
+      "side": 1,
+      "message": "Idem",
+      "revId": "c8c6c7e61483c6bf814063494755e785690bcf89",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

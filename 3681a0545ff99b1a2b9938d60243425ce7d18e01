@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAeX//2pA\u003d",
+        "filename": "res/values-ru/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5896
+      },
+      "writtenOn": "2013-03-28T21:47:39Z",
+      "side": 1,
+      "message": "Prosto postavshhikom dannyh (data provider v originale)?",
+      "parentUuid": "AAAAeX//228\u003d",
+      "revId": "3681a0545ff99b1a2b9938d60243425ce7d18e01",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAeX//23A\u003d",
         "filename": "res/values-ru/strings.xml",
         "patchSetId": 3

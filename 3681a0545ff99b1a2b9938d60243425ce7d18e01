@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAeX//2os\u003d",
+        "filename": "res/values-ru/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5574
+      },
+      "writtenOn": "2013-03-28T22:06:43Z",
+      "side": 1,
+      "message": "Pohozhe, imeyutsya v vidu operatorskie kontakti (u nashih operatorov obichno oni v SIM). Vot tut est\u0027 bolee interesniy variant perevoda: https://github.com/tmobile/themes-platform-packages-apps-Contacts/blob/master/res/values-ru/strings.xml#L243\nVozmozhno, \"postavshika uslug\" vpolne mozhno sokratit\u0027 do slova \"operator\".",
+      "parentUuid": "AAAAeX//2pA\u003d",
+      "revId": "3681a0545ff99b1a2b9938d60243425ce7d18e01",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAeX//23A\u003d",
         "filename": "res/values-ru/strings.xml",
         "patchSetId": 3

@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAeX//2hE\u003d",
+        "filename": "res/values-ru/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5574
+      },
+      "writtenOn": "2013-03-29T03:03:06Z",
+      "side": 1,
+      "message": "V telefonnoy knige nekotorix simok est \"zaschishennie nomera\", kotorie nel\u0027zya ni udalit, ni izmenit, ni, sudya po vsemu, eksportirovat\u0027.\nNu raz nikto ne videl -- davayte ostavim kak est\u0027 :)",
+      "parentUuid": "AAAAeX//2jg\u003d",
+      "revId": "3681a0545ff99b1a2b9938d60243425ce7d18e01",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAeX//23A\u003d",
         "filename": "res/values-ru/strings.xml",
         "patchSetId": 3

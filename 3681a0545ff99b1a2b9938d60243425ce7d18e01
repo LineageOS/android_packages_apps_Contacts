@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAeX//2jg\u003d",
+        "filename": "res/values-ru/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5896
+      },
+      "writtenOn": "2013-03-29T00:52:55Z",
+      "side": 1,
+      "message": "Ja s takoj situaciej ne stalkivalsja ni razu. Ne predstavljaju chtoby kontakty byli zashhishheny ot eksporta  - ne videl takogo. Tak chto bez ponjatija chto zdes\u0027 stoit menjat\u0027, a chto net.",
+      "parentUuid": "AAAAeX//2os\u003d",
+      "revId": "3681a0545ff99b1a2b9938d60243425ce7d18e01",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAeX//23A\u003d",
         "filename": "res/values-ru/strings.xml",
         "patchSetId": 3

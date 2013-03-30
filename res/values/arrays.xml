@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2008 The Android Open Source Project
+<!-- Copyright (C) 2008-2013 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,37 +13,34 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources>
-  <string-array name="t9_sort_entries"
-    translatable="false">
-    <item>@string/t9_sort_name</item>
-    <item>@string/t9_sort_number</item>
-  </string-array>
-  <string-array name="t9_sort_values"
-    translatable="false">
-    <item>1</item>
-    <item>2</item>
-  </string-array>
-  <string-array name="t9_map"
-    translatable="false">
-    <item>0</item>
-    <item>1</item>
-    <item>@string/t9_map_row_2</item>
-    <item>@string/t9_map_row_3</item>
-    <item>@string/t9_map_row_4</item>
-    <item>@string/t9_map_row_5</item>
-    <item>@string/t9_map_row_6</item>
-    <item>@string/t9_map_row_7</item>
-    <item>@string/t9_map_row_8</item>
-    <item>@string/t9_map_row_9</item>
-    <item>*</item>
-    <item>#</item>
-    <item>+</item>
-  </string-array>
-  <string-array name="call_stats_nav_items">
-    <item>@string/call_stats_nav_all</item>
-    <item>@string/call_stats_nav_incoming</item>
-    <item>@string/call_stats_nav_outgoing</item>
-    <item>@string/call_stats_nav_missed</item>
-  </string-array>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string-array name="t9_sort_entries" translatable="false">
+        <item>@string/t9_sort_name</item>
+        <item>@string/t9_sort_number</item>
+    </string-array>
+    <string-array name="t9_sort_values" translatable="false">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="t9_map" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>@string/t9_map_row_2</item>
+        <item>@string/t9_map_row_3</item>
+        <item>@string/t9_map_row_4</item>
+        <item>@string/t9_map_row_5</item>
+        <item>@string/t9_map_row_6</item>
+        <item>@string/t9_map_row_7</item>
+        <item>@string/t9_map_row_8</item>
+        <item>@string/t9_map_row_9</item>
+        <item>*</item>
+        <item>#</item>
+        <item>+</item>
+    </string-array>
+    <string-array name="call_stats_nav_items" translatable="false">
+        <item>@string/call_stats_nav_all</item>
+        <item>@string/call_stats_nav_incoming</item>
+        <item>@string/call_stats_nav_outgoing</item>
+        <item>@string/call_stats_nav_missed</item>
+    </string-array>
 </resources>

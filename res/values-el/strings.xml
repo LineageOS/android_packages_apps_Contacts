@@ -300,6 +300,7 @@
     <string name="add_wait" msgid="3360818652790319634">"Προσθήκη αναμονής"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"Επιλέξτε αριθμό"</string>
     <string name="call_settings" msgid="7666474782093693667">"Ρυθμίσεις"</string>
+    <string name="call_stats">Στατιστικά κλήσεων</string>
     <string name="call_stats_refresh">Ανανέωση</string>
     <string name="sms_disambig_title" msgid="5846266399240630846">"Επιλέξτε αριθμό"</string>
     <string name="make_primary" msgid="5829291915305113983">"Διατήρηση αυτής της ρύθμισης"</string>

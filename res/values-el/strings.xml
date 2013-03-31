@@ -16,24 +16,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="t9_loading">Φόρτωση\u2026</string>
-    <string name="t9_sort_title">Φίλτρο T9</string>
-    <string name="t9_sort_summary">Επιλέξτε τον τρόπο που θα φιλτράρονται τα αποτελέσματα</string>
-    <string name="t9_sort_name">Πρώτα ταιριάζει το όνομα</string>
-    <string name="t9_sort_number">Πρώτα ταιριάζει ο αριθμός</string>
-    <string name="t9_state_title">Ενεργοποίηση T9</string>
-    <string name="t9_state_summary">Ενεργοποίηση αναζήτησης T9</string>
-    <string name="t9_dial_click_title">Κλήση επιλεγμένης επαφής</string>
-    <string name="t9_dial_click_summary">Καλέστε την επιλεγμένη επαφή T9</string>
-    <string name="t9_add_to_contacts">Προσθήκη στις επαφές</string>
-    <string name="t9_map_row_2">2αάβγabc</string>
-    <string name="t9_map_row_3">3δεέζdef</string>
-    <string name="t9_map_row_4">4ηήθιίϊΐghi</string>
-    <string name="t9_map_row_5">5κλμjkl</string>
-    <string name="t9_map_row_6">6νξοόmno</string>
-    <string name="t9_map_row_7">7πρσςpqrs</string>
-    <string name="t9_map_row_8">8τυύϋΰφtuv</string>
-    <string name="t9_map_row_9">9χψωώwxyz</string>
+
     <string name="launcherDialer" msgid="8636288196618486553">"Τηλέφωνο"</string>
     <string name="people" msgid="1048457247435785074">"Άτομα"</string>
     <string name="contactsList" msgid="8661624236494819731">"Επαφές"</string>
@@ -300,7 +283,6 @@
     <string name="add_wait" msgid="3360818652790319634">"Προσθήκη αναμονής"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"Επιλέξτε αριθμό"</string>
     <string name="call_settings" msgid="7666474782093693667">"Ρυθμίσεις"</string>
-    <string name="call_stats_refresh">Ανανέωση</string>
     <string name="sms_disambig_title" msgid="5846266399240630846">"Επιλέξτε αριθμό"</string>
     <string name="make_primary" msgid="5829291915305113983">"Διατήρηση αυτής της ρύθμισης"</string>
     <string name="quickcontact_missing_app" msgid="358168575340921552">"Δεν βρέθηκε εφαρμογή για τη διαχείριση αυτής της ενέργειας."</string>
@@ -589,6 +571,30 @@
     <string name="menu_export_database" msgid="2659719297530170820">"Εξαγωγή αρχείων βάσης δεδομένων"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Περισσότερες επιλογές"</string>
     <string name="expand_collapse_name_fields_description" msgid="8682630859539604311">"Ανάπτυξη ή σύμπτυξη πεδίων ονομάτων"</string>
+
+    <!-- CYANOGENMOD ADDITIONS -->
+
+    <string name="t9_loading">Φόρτωση\u2026</string>
+    <string name="t9_sort_title">Φίλτρο T9</string>
+    <string name="t9_sort_summary">Επιλέξτε τον τρόπο που θα φιλτράρονται τα αποτελέσματα</string>
+    <string name="t9_sort_name">Πρώτα ταιριάζει το όνομα</string>
+    <string name="t9_sort_number">Πρώτα ταιριάζει ο αριθμός</string>
+    <string name="t9_state_title">Ενεργοποίηση T9</string>
+    <string name="t9_state_summary">Ενεργοποίηση αναζήτησης T9</string>
+    <string name="t9_dial_click_title">Κλήση επιλεγμένης επαφής</string>
+    <string name="t9_dial_click_summary">Καλέστε την επιλεγμένη επαφή T9</string>
+    <string name="t9_add_to_contacts">Προσθήκη στις επαφές</string>
+    <string name="t9_map_row_2">2αάβγabc</string>
+    <string name="t9_map_row_3">3δεέζdef</string>
+    <string name="t9_map_row_4">4ηήθιίϊΐghi</string>
+    <string name="t9_map_row_5">5κλμjkl</string>
+    <string name="t9_map_row_6">6νξοόmno</string>
+    <string name="t9_map_row_7">7πρσςpqrs</string>
+    <string name="t9_map_row_8">8τυύϋΰφtuv</string>
+    <string name="t9_map_row_9">9χψωώwxyz</string>
+
+    <string name="call_stats">Στατιστικά κλήσεων</string>
+    <string name="call_stats_refresh">Ανανέωση</string>
 
     <string name="call_stats_nav_all">Όλες</string>
     <string name="call_stats_nav_incoming">Εισερχόμενες</string>

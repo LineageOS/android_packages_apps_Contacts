@@ -16,6 +16,24 @@
       "revId": "ca0259c62b6fe8da98d7fe1b62bf1440a07d6560",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAen///gk\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2013-04-02T22:43:29Z",
+      "side": 0,
+      "message": "Deze is verwijderd, omdat deze hetzelfde is als de Engelse vertaling (tenminste zonder komma\u0027s en het \u0026-teken). Volgens mij past dit niet helemaal op het scherm (ik draai zelf momenteel geen cm-10.1).",
+      "parentUuid": "AAAAen///g4\u003d",
+      "revId": "ca0259c62b6fe8da98d7fe1b62bf1440a07d6560",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

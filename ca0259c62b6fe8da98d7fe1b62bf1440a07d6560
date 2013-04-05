@@ -52,6 +52,24 @@
       "revId": "ca0259c62b6fe8da98d7fe1b62bf1440a07d6560",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAen//+ao\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2013-04-05T20:33:51Z",
+      "side": 0,
+      "message": "Die zijn ook weg?",
+      "parentUuid": "AAAAen//+tc\u003d",
+      "revId": "ca0259c62b6fe8da98d7fe1b62bf1440a07d6560",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

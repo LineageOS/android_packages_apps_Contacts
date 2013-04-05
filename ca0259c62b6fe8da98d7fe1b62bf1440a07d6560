@@ -34,6 +34,24 @@
       "revId": "ca0259c62b6fe8da98d7fe1b62bf1440a07d6560",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAen//+tc\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2013-04-05T01:56:41Z",
+      "side": 0,
+      "message": "Doordat we de plurals hebben ingekort past het nu wel, maar toch vind ik het zonder komma\u0027s en het \u0026-teken veel mooier....",
+      "parentUuid": "AAAAen///gk\u003d",
+      "revId": "ca0259c62b6fe8da98d7fe1b62bf1440a07d6560",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

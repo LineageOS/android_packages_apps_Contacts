@@ -87,6 +87,10 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
     /** If the activity was triggered from a notification. */
     public static final String EXTRA_FROM_NOTIFICATION = "EXTRA_FROM_NOTIFICATION";
 
+    // Blacklist support
+    private static final String INSERT_BLACKLIST = "com.android.phone.INSERT_BLACKLIST";
+    private static final String BLACKLIST_NUMBER = "number";
+
     private CallDetailHeader mCallDetailHeader;
     private CallTypeHelper mCallTypeHelper;
     private PhoneNumberHelper mPhoneNumberHelper;
@@ -569,6 +573,12 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                         finish();
                     }
                 });
+    }
+
+    public void onMenuAddToBlacklist(MenuItem menuItem) {
+        Intent intent = new Intent(INSERT_BLACKLIST);
+        intent.putExtra(BLACKLIST_NUMBER, ContactsUtils.getCallUri(mNumber));
+        sendBroadcast(intent);
     }
 
     private void configureActionBar() {

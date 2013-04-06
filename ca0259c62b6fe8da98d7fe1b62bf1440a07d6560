@@ -88,6 +88,24 @@
       "revId": "ca0259c62b6fe8da98d7fe1b62bf1440a07d6560",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAen//+Mc\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2013-04-06T03:57:46Z",
+      "side": 0,
+      "message": "Uit res/values/strings.xml:\n\n    \u003cstring-array name\u003d\"call_stats_duration\"\u003e\n        \u003citem\u003e\u003cxliff:g id\u003d\"seconds\" example\u003d\"2 secs\"\u003e%3$s\u003c/xliff:g\u003e\u003c/item\u003e\n        \u003citem\u003e\u003cxliff:g id\u003d\"minutes\" example\u003d\"2 mins\"\u003e%2$s\u003c/xliff:g\u003e\u003c/item\u003e\n        \u003citem\u003e\u003cxliff:g id\u003d\"minutes\" example\u003d\"2 mins\"\u003e%2$s\u003c/xliff:g\u003e \u003cxliff:g id\u003d\"seconds\" example\u003d\"2 secs\"\u003e%3$s\u003c/xliff:g\u003e\u003c/item\u003e\n        \u003citem\u003e\u003cxliff:g id\u003d\"hours\" example\u003d\"2 hrs\"\u003e%1$s\u003c/xliff:g\u003e\u003c/item\u003e\n        \u003citem\u003e\u003cxliff:g id\u003d\"hours\" example\u003d\"2 hrs\"\u003e%1$s\u003c/xliff:g\u003e \u003cxliff:g id\u003d\"seconds\" example\u003d\"2 secs\"\u003e%3$s\u003c/xliff:g\u003e\u003c/item\u003e\n        \u003citem\u003e\u003cxliff:g id\u003d\"hours\" example\u003d\"2 hrs\"\u003e%1$s\u003c/xliff:g\u003e \u003cxliff:g id\u003d\"minutes\" example\u003d\"2 mins\"\u003e%2$s\u003c/xliff:g\u003e\u003c/item\u003e\n        \u003citem\u003e\u003cxliff:g id\u003d\"hours\" example\u003d\"2 hrs\"\u003e%1$s\u003c/xliff:g\u003e \u003cxliff:g id\u003d\"minutes\" example\u003d\"2 mins\"\u003e%2$s\u003c/xliff:g\u003e \u003cxliff:g id\u003d\"seconds\" example\u003d\"2 secs\"\u003e%3$s\u003c/xliff:g\u003e\u003c/item\u003e\n    \u003c/string-array\u003e",
+      "parentUuid": "AAAAen//+Nk\u003d",
+      "revId": "ca0259c62b6fe8da98d7fe1b62bf1440a07d6560",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

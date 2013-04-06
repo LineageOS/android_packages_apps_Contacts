@@ -70,6 +70,24 @@
       "revId": "ca0259c62b6fe8da98d7fe1b62bf1440a07d6560",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAen//+Nk\u003d",
+        "filename": "res/values-nl/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2013-04-06T02:47:04Z",
+      "side": 0,
+      "message": "Ooh bij de Engelse ook? Dan snap ik nu wat je bedoelde met (tenminste zonder komma\u0027s en het \u0026-teken) en heb ik niks gezegd.",
+      "parentUuid": "AAAAen//+ao\u003d",
+      "revId": "ca0259c62b6fe8da98d7fe1b62bf1440a07d6560",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

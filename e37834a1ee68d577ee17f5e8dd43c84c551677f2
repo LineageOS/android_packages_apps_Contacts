@@ -16,6 +16,24 @@
       "revId": "e37834a1ee68d577ee17f5e8dd43c84c551677f2",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAen//91M\u003d",
+        "filename": "res/values/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 1964,
+      "author": {
+        "id": 1576
+      },
+      "writtenOn": "2013-04-06T22:38:51Z",
+      "side": 1,
+      "message": "Good catch.  Done",
+      "parentUuid": "AAAAen//93A\u003d",
+      "revId": "e37834a1ee68d577ee17f5e8dd43c84c551677f2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

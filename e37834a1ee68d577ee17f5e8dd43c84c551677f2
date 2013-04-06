@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAen//93A\u003d",
+        "filename": "res/values/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 1964,
+      "author": {
+        "id": 5550
+      },
+      "writtenOn": "2013-04-06T21:54:39Z",
+      "side": 1,
+      "message": "I would add a \"to\", i.e. \"%s added to blacklist\", right?",
+      "revId": "e37834a1ee68d577ee17f5e8dd43c84c551677f2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

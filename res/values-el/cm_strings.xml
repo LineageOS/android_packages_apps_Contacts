@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012-2013 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="t9_loading">Φόρτωση\u2026</string>
+    <string name="t9_sort_title">Φίλτρο T9</string>
+    <string name="t9_sort_summary">Επιλέξτε τον τρόπο που θα φιλτράρονται τα αποτελέσματα</string>
+    <string name="t9_sort_name">Πρώτα ταιριάζει το όνομα</string>
+    <string name="t9_sort_number">Πρώτα ταιριάζει ο αριθμός</string>
+    <string name="t9_state_title">Ενεργοποίηση T9</string>
+    <string name="t9_state_summary">Ενεργοποίηση αναζήτησης T9</string>
+    <string name="t9_dial_click_title">Κλήση επιλεγμένης επαφής</string>
+    <string name="t9_dial_click_summary">Καλέστε την επιλεγμένη επαφή T9</string>
+    <string name="t9_add_to_contacts">Προσθήκη στις επαφές</string>
+    <string name="t9_map_row_2">2αάβγabc</string>
+    <string name="t9_map_row_3">3δεέζdef</string>
+    <string name="t9_map_row_4">4ηήθιίϊΐghi</string>
+    <string name="t9_map_row_5">5κλμjkl</string>
+    <string name="t9_map_row_6">6νξοόmno</string>
+    <string name="t9_map_row_7">7πρσςpqrs</string>
+    <string name="t9_map_row_8">8τυύϋΰφtuv</string>
+    <string name="t9_map_row_9">9χψωώwxyz</string>
+    <string name="callStatsDetailTitle">Λεπτομέρειες στατιστικών κλήσεων</string>
+    <string name="call_stats">Στατιστικά κλήσεων</string>
+    <string name="call_stats_refresh">Ανανέωση</string>
+    <string name="activity_title_call_stats">Στατιστικά κλήσεων</string>
+    <string name="call_stats_nav_all">Όλες</string>
+    <string name="call_stats_nav_incoming">Εισερχόμενες</string>
+    <string name="call_stats_nav_outgoing">Εξερχόμενες</string>
+    <string name="call_stats_nav_missed">Αναπάντητες</string>
+    <string name="call_stats_incoming">Εισερχόμενες: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_outgoing">Εξερχόμενες: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_missed">Αναπάντητες</string>
+    <string name="call_stats_missed_percent">Αναπάντητες: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Σύνολο: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Σύνολο: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Ημερομηνία έναρξης</string>
+    <string name="call_stats_filter_to">Ημερομηνία λήξης</string>
+    <string name="call_stats_filter_picker_title">Εύρος φίλτρου</string>
+    <string name="date_quick_selection">Γρήγορη επιλογή</string>
+    <string name="date_qs_currentmonth">Τρέχων μήνας</string>
+    <string name="date_qs_currentquarter">Τρέχων τρίμηνο</string>
+    <string name="date_qs_currentyear">Τρέχων χρόνος</string>
+    <string name="date_qs_lastweek">Προηγούμενη εβδομάδα</string>
+    <string name="date_qs_lastmonth">Προηγούμενος μήνας</string>
+    <string name="date_qs_lastquarter">Προηγούμενο τρίμηνο</string>
+    <string name="date_qs_lastyear">Προηγούμενος χρόνος</string>
+    <string name="call_stats_date_filter">Ρύθμιση χρονικού εύρους</string>
+    <string name="call_stats_reset_filter">Επαναφορά χρονικού εύρους</string>
+    <string name="call_stats_sort_by_duration">Ταξινόμηση κατά διάρκεια κλήσεων</string>
+    <string name="call_stats_sort_by_count">Ταξινόμηση κατά αριθμό κλήσεων</string>
+    <string-array name="call_stats_duration">
+        <item><xliff:g id="seconds" example="2 δ">%3$s</xliff:g></item>
+        <item><xliff:g id="minutes" example="2 λ">%2$s</xliff:g></item>
+        <item><xliff:g id="minutes" example="2 λ">%2$s</xliff:g> <xliff:g id="seconds" example="2 δ">%3$s</xliff:g></item>
+        <item><xliff:g id="hours" example="2 ω">%1$s</xliff:g></item>
+        <item><xliff:g id="hours" example="2 ω">%1$s</xliff:g> <xliff:g id="seconds" example="2 δ">%3$s</xliff:g></item>
+        <item><xliff:g id="hours" example="2 ω">%1$s</xliff:g> <xliff:g id="minutes" example="2 λ">%2$s</xliff:g></item>
+        <item><xliff:g id="hours" example="2 ω">%1$s</xliff:g> <xliff:g id="minutes" example="2 λ">%2$s</xliff:g> <xliff:g id="seconds" example="2 δ">%3$s</xliff:g></item>
+    </string-array>
+    <plurals name="hour">
+        <item quantity="one">1 ω</item>
+        <item quantity="other">%d ω</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="one">1 λ</item>
+        <item quantity="other">%d λ</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="one">1 δ</item>
+        <item quantity="other">%d δ</item>
+    </plurals>
+    <plurals name="call">
+        <item quantity="one">1 κλήση</item>
+        <item quantity="other">%d κλήσεις</item>
+    </plurals>
+</resources>

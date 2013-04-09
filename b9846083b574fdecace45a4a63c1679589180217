@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAen//9EA\u003d",
+        "filename": "res/values-cs/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 3875
+      },
+      "writtenOn": "2013-04-09T15:27:20Z",
+      "side": 1,
+      "message": "ctvrtleti \u003e vypadlo t",
+      "revId": "b9846083b574fdecace45a4a63c1679589180217",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

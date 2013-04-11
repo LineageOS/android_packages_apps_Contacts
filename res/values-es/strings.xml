@@ -640,6 +640,9 @@
         <item quantity="one">1 llamada</item>
         <item quantity="other">%d llamadas</item>
     </plurals>
-
+    
+    <string name="menu_add_to_blacklist">Añadir a números bloqueados</string>
+    <string name="toast_added_to_blacklist">%s añadido a números bloqueados.</string>
+ 
     <!-- CYANOGENMOD ADDITIONS END -->
 </resources>

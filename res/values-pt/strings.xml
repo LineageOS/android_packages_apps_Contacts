@@ -639,4 +639,6 @@
     <string name="date_qs_lastquarter">Último trimestre</string>
     <string name="date_qs_lastyear">Último ano</string>
 
+    <string name="menu_add_to_blacklist">Adicionar à lista negra</string>
+    <string name="toast_added_to_blacklist">%s foi adicionado à lista negra</string>
 </resources>

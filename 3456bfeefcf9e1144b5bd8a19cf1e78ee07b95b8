@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAen//79M\u003d",
+        "filename": "res/values-fr/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 4617
+      },
+      "writtenOn": "2013-04-12T18:55:42Z",
+      "side": 1,
+      "message": "Rotation automatique",
+      "revId": "3456bfeefcf9e1144b5bd8a19cf1e78ee07b95b8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAen//79U\u003d",
+        "filename": "res/values-fr/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 4617
+      },
+      "writtenOn": "2013-04-12T18:55:42Z",
+      "side": 1,
+      "message": "Ajouter aux contacts",
+      "revId": "3456bfeefcf9e1144b5bd8a19cf1e78ee07b95b8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAen//79Y\u003d",
+        "filename": "res/values-fr/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 4617
+      },
+      "writtenOn": "2013-04-12T18:55:42Z",
+      "side": 1,
+      "message": "\"%s ajouté à la liste noire\"",
+      "revId": "3456bfeefcf9e1144b5bd8a19cf1e78ee07b95b8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

@@ -667,4 +667,7 @@
         <item quantity="one">1 poł.</item>
         <item quantity="other">%d poł.</item>
     </plurals>
+
+    <string name="menu_add_to_blacklist">Dodaj do czarnej listy</string>
+    <string name="toast_added_to_blacklist">Dodano %s do czarnej listy.</string>
 </resources>

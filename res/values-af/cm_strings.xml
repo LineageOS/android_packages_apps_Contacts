@@ -26,11 +26,23 @@
     <string name="t9_dial_click_title">Skakel geselekteerde kontak</string>
     <string name="t9_dial_click_summary">Skakel die geselekteerde kontak vir T9</string>
     <string name="t9_add_to_contacts">Voeg by kontakte</string>
+    <string name="t9_map_row_2">2abc</string>
+    <string name="t9_map_row_3">3defďéèêë</string>
+    <string name="t9_map_row_4">4ghiíìïî</string>
+    <string name="t9_map_row_5">5jkl</string>
+    <string name="t9_map_row_6">6mnoöô</string>
+    <string name="t9_map_row_7">7pqrs</string>
+    <string name="t9_map_row_8">8tuvť</string>
+    <string name="t9_map_row_9">9wxyz</string>
+
+
     <string name="dialer_ui_title">Sleutelbord instellings</string>
     <string name="dialer_ui_orientation_title">Aktiveer sensor oriëntasie</string>
     <string name="dialer_ui_orientation_summary">Draai sleutelbord gebaseer op die sensor</string>
+
     <string name="call_stats">Oproep statistieke</string>
     <string name="call_stats_refresh">Herlaai</string>
+
     <string name="call_stats_nav_all">Alles</string>
     <string name="call_stats_nav_incoming">Inkomende</string>
     <string name="call_stats_nav_outgoing">Uitgaande</string>
@@ -44,6 +56,7 @@
     <string name="call_stats_filter_from">Begin datum</string>
     <string name="call_stats_filter_to">Einddatum</string>
     <string name="call_stats_filter_picker_title">Filter reeks</string>
+
     <string name="date_quick_selection">Vinnige keuse</string>
     <string name="date_qs_currentmonth">Huidige maand</string>
     <string name="date_qs_currentquarter">Huidige kwartaal</string>
@@ -52,6 +65,7 @@
     <string name="date_qs_lastmonth">Laaste maand</string>
     <string name="date_qs_lastquarter">Laaste kwartaal</string>
     <string name="date_qs_lastyear">Laaste jaar</string>
+
     <string name="call_stats_date_filter">Verstel tydreeks</string>
     <string name="call_stats_reset_filter">Herstel tydreeks</string>
     <string name="call_stats_sort_by_duration">Sorteer volgens die lengte van die oproep</string>
@@ -67,20 +81,9 @@
         <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="minutes" example="2 mins">%2$s</xliff:g> <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
     </string-array>
 
-    <plurals name="hour">
-        <item quantity="one">1 uur</item>
-        <item quantity="other">%d ure</item>
-    </plurals>
-    <plurals name="minute">
-        <item quantity="one">1 min</item>
-        <item quantity="other">%d minute</item>
-    </plurals>
-    <plurals name="second">
-        <item quantity="one">1 sek.</item>
-        <item quantity="other">%d sek.</item>
-    </plurals>
-    <plurals name="call">
-        <item quantity="one">1 oproep</item>
-        <item quantity="other">%d oproepe</item>
-    </plurals>
+    <string name="callStatsDetailTitle">Oproep details</string>
+    <string name="activity_title_call_stats">Oproep statistieke</string>
+    <string name="menu_add_to_blacklist">Voeg tot blokeerlys</string>
+    <string name="toast_added_to_blacklist">%s bygevoeg tot blokeerlys.</string>
+
 </resources>

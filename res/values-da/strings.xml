@@ -582,8 +582,29 @@
     <string name="t9_dial_click_title">Ring op til den valgte kontakt</string>
     <string name="t9_dial_click_summary">Ring op til den valgte kontakt for T9</string>
     <string name="t9_add_to_contacts">Tilføj til kontakter</string>
+    <string name="t9_map_row_2">2abcàáâäåɑæçǽćčá</string>
+    <string name="t9_map_row_3">3defďéèêëě</string>
+    <string name="t9_map_row_4">4ghiíìïîǵ</string>
+    <string name="t9_map_row_5">5jklḱḱĺ</string>
+    <string name="t9_map_row_6">6mnoòóöôøñŋǿḿńňő</string>
+    <string name="t9_map_row_7">7pqrsßɾṕŕśřš</string>
+    <string name="t9_map_row_8">8tuvťúùüûűů</string>
+    <string name="t9_map_row_9">9wxyzýẃźž</string>
 
-    <string name="dialer_ui_title">Indstillinger for opkaldsprogram</string>
+    <!-- String describing which account a contact came from when editing it -->
+    <string name="from_account_format"><xliff:g id="source" example="user@gmail.com">%1$s</xliff:g></string>
+
+     <string-array name="call_stats_duration">
+        <item><xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
+        <item><xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
+        <item><xliff:g id="minutes" example="2 mins">%2$s</xliff:g> <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
+        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g></item>
+        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
+        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
+        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="minutes" example="2 mins">%2$s</xliff:g> <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
+    </string-array>
+ 
+   <string name="dialer_ui_title">Indstillinger for opkaldsprogram</string>
     <string name="dialer_ui_orientation_title">Slå sensor-orientering til</string>
     <string name="dialer_ui_orientation_summary">Rotér opkaldsprogram baseret på sensor</string>
 
@@ -638,6 +659,8 @@
         <item quantity="other">%d opkald</item>
     </plurals>
 
+    <string name="menu_add_to_blacklist">Tilføj til sortliste</string>
+    <string name="toast_added_to_blacklist">%s tilføjet til sortliste.</string>
     <!-- CYANOGENMOD ADDITIONS END -->
 
 </resources>

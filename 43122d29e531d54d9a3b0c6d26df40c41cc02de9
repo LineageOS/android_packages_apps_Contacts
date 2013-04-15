@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAen//6l0\u003d",
+        "filename": "res/values-af/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1576
+      },
+      "writtenOn": "2013-04-15T00:57:35Z",
+      "side": 1,
+      "message": "?",
+      "revId": "43122d29e531d54d9a3b0c6d26df40c41cc02de9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAen//6lw\u003d",
+        "filename": "res/values-af/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1576
+      },
+      "writtenOn": "2013-04-15T00:57:35Z",
+      "side": 1,
+      "message": "Stat?",
+      "revId": "43122d29e531d54d9a3b0c6d26df40c41cc02de9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAen//6ls\u003d",
+        "filename": "res/values-af/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1576
+      },
+      "writtenOn": "2013-04-15T00:57:35Z",
+      "side": 1,
+      "message": "Is this how we referred to adding in other apps?",
+      "revId": "43122d29e531d54d9a3b0c6d26df40c41cc02de9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAen//5xc\u003d",
+        "filename": "res/values-hu/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1573
+      },
+      "writtenOn": "2013-04-17T13:45:38Z",
+      "side": 1,
+      "message": "2013 The CyanogenMod Project",
+      "revId": "78f73b8a5463652f6202ad13c67208c6c17c6b3a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

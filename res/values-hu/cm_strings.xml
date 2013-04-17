@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copyright (C) 2012-2013 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="callStatsDetailTitle">Részletek</string>
+    <string name="call_stats">Hívásinfó</string>
+    <string name="call_stats_refresh">Frissítés</string>
+    <string name="activity_title_call_stats">Hívásinfó</string>
+    <string name="dialer_ui_title">Tárcsázó beállítások</string>
+    <string name="dialer_ui_orientation_title">Képernyő elforgatás</string>
+    <string name="dialer_ui_orientation_summary">Képernyő elforgatása kijelzővel együtt</string>
+    <string name="t9_sort_title">T9 rendezési sorrendje</string>
+    <string name="t9_sort_summary">Állítsd be a T9 tárcsázó általi rendezés sorrendjét</string>
+    <string name="t9_sort_name">Először a nevek</string>
+    <string name="t9_sort_number">Először a telefonszámok</string>
+    <string name="t9_state_title">T9 tárcsázó engedélyezése</string>
+    <string name="t9_state_summary">T9 tárcsázó általi keresés engedélyezése</string>
+    <string name="t9_dial_click_title">Kijelölt személy tárcsázása</string>
+    <string name="t9_dial_click_summary">Tárcsázza a T9 tárcsázó által megtalált személyt</string>
+    <string name="t9_add_to_contacts">Hozzáadás a névjegyekhez</string>
+    <string name="t9_loading">Betöltés\u2026</string>
+    <string name="call_stats_nav_all">Mind</string>
+    <string name="call_stats_nav_incoming">Bejövő</string>
+    <string name="call_stats_nav_outgoing">Kimenő</string>
+    <string name="call_stats_nav_missed">Nem fogadott</string>
+    <string name="call_stats_incoming">Bejövő: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_outgoing">Kimenő: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_missed">Nem fogadott</string>
+    <string name="call_stats_missed_percent">Nem fogadott: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Összesen: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Összesen: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Kezdete</string>
+    <string name="call_stats_filter_to">Vége</string>
+    <string name="call_stats_filter_picker_title">Időszak</string>
+    <string name="date_quick_selection">Gyors kiválasztás</string>
+    <string name="date_qs_currentmonth">Jelenlegi hónap</string>
+    <string name="date_qs_currentquarter">Jelenlegi negyedév</string>
+    <string name="date_qs_currentyear">Jelenlegi év</string>
+    <string name="date_qs_lastweek">Utolsó hét</string>
+    <string name="date_qs_lastmonth">Utolsó hónap</string>
+    <string name="date_qs_lastquarter">Utolsó negyedév</string>
+    <string name="date_qs_lastyear">Utolsó év</string>
+    <string name="call_stats_date_filter">Időszak beállítása</string>
+    <string name="call_stats_reset_filter">Időszak törlése</string>
+    <string name="call_stats_sort_by_duration">Rendezés hívások időtartama szerint</string>
+    <string name="call_stats_sort_by_count">Rendezés hívások száma szerint</string>
+    <plurals name="hour">
+        <item quantity="one">1 óra</item>
+        <item quantity="other">%d óra</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="one">1 perc</item>
+        <item quantity="other">%d perc</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="one">1 másodperc</item>
+        <item quantity="other">%d másodperc</item>
+    </plurals>
+    <plurals name="call">
+        <item quantity="one">1 hívás</item>
+        <item quantity="other">%d hívás</item>
+    </plurals>
+    <string name="menu_add_to_blacklist">Hozzáadás a tiltólistához</string>
+    <string name="toast_added_to_blacklist">%s hozzáadva a tiltólistához.</string>
+
+</resources>

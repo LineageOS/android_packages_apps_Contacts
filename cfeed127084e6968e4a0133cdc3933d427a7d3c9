@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAAen//4r0\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2013-04-19T18:43:29Z",
+      "side": 1,
+      "message": "http://wiki.cyanogenmod.org/w/Doc:_Translation_Guide#Commit_message\n\n\"Contacts: DA translations\"\n\nYou can add extra information under the title, but the title itself should stay as simple as possible.",
+      "revId": "cfeed127084e6968e4a0133cdc3933d427a7d3c9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAen//43o\u003d",
         "filename": "res/values-da/strings.xml",
         "patchSetId": 2

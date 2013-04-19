@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAen//43o\u003d",
+        "filename": "res/values-da/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-04-19T12:03:02Z",
+      "side": 1,
+      "message": "Indention seems off here (+ the trailing space).",
+      "revId": "cfeed127084e6968e4a0133cdc3933d427a7d3c9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

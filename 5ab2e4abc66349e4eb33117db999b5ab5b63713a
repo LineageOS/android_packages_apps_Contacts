@@ -34,6 +34,24 @@
       "revId": "5ab2e4abc66349e4eb33117db999b5ab5b63713a",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAen//43M\u003d",
+        "filename": "res/values-da/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 3386
+      },
+      "writtenOn": "2013-04-19T17:17:33Z",
+      "side": 0,
+      "message": "I just felt, based of the latest comments from Eddy, that you no longer wanted any comments whatsoever in the translation files. But I can of course quickly reinsert it, until this project has cm_ files.",
+      "parentUuid": "AAAAen//43w\u003d",
+      "revId": "5ab2e4abc66349e4eb33117db999b5ab5b63713a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

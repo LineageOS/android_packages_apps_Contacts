@@ -30,7 +30,7 @@
     <string name="starredList" msgid="4817256136413959463">"Označené hvězdičkou"</string>
     <string name="frequentList" msgid="7154768136473953056">"Časté"</string>
     <string name="strequentList" msgid="5640192862059373511">"Oblíbené"</string>
-    <string name="viewContactTitle" msgid="7989394521836644384">"Kontaktní údaje"</string>
+    <string name="viewContactTitle" msgid="7989394521836644384">"Informace o kontaktu"</string>
     <string name="viewContactDesription" msgid="214186610887547860">"Zobrazit kontakt"</string>
     <string name="editContactDescription" msgid="2947202828256214947">"Upravit kontakt"</string>
     <string name="insertContactDescription" msgid="4709878105452681987">"Vytvořit kontakt"</string>
@@ -143,7 +143,7 @@
     <string name="listFoundAllContactsZero" msgid="922980883593159444">"Žádné kontakty"</string>
 
     <plurals name="searchFoundContacts">
-        <item quantity="one" msgid="4826918429708286628">"Nalezeno 1"</item>
+        <item quantity="one" msgid="4826918429708286628">"Nalezen 1"</item>
         <item quantity="few">"Nalezeny <xliff:g id="COUNT">%d</xliff:g>"</item>
         <item quantity="other" msgid="7988132539476575389">"Nalezeno <xliff:g id="COUNT">%d</xliff:g>"</item>
     </plurals>
@@ -180,44 +180,44 @@
     <string name="dialerDialpadHintText" msgid="5824490365898349041">"Vytočením přidáte hovor"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Načítání ze SIM karty\u2026"</string>
     <string name="simContacts_title" msgid="27341688347689769">"Kontakty na SIM kartě"</string>
-    <string name="noContactsHelpTextWithSyncForCreateShortcut" msgid="801504710275614594">"Nemáte uloženy žádné kontakty, které by bylo možno zobrazit. (Pokud jste účet právě přidali, může synchronizace kontaktů trvat několik minut.)"</string>
+    <string name="noContactsHelpTextWithSyncForCreateShortcut" msgid="801504710275614594">"Nemáte uloženy žádné kontakty, které by bylo možno zobrazit. (Pokud byl účet právě přidán, může synchronizace kontaktů trvat několik minut.)"</string>
     <string name="noContactsHelpTextForCreateShortcut" msgid="3081286388667108335">"Nemáte uloženy žádné kontakty, které by bylo možno zobrazit."</string>
 
-    <string name="noContactsHelpText" product="tablet" msgid="6226271923423236696">"Nemáte žádné kontakty, které by bylo možné zobrazit."\n\n"Chcete-li přidat kontakty, stiskněte tlačítko "<font fgcolor="#ffffffff"><b>"Menu"</b></font>" a poté zvolte:"\n\n
+    <string name="noContactsHelpText" product="tablet" msgid="6226271923423236696">"Nemáte žádné kontakty, které by bylo možné zobrazit."\n\n"Chcete-li přidat kontakty, stiskněte tlačítko "<font fgcolor="#ffffffff"><b>"Nabídka"</b></font>" a poté zvolte:"\n\n
         <li><font fgcolor="#ffffffff"><b>"Účty"</b></font>" pro přidání nebo nastavení účtu a kontakty v něm synchronizovat s tabletem;"\n</li>\n
         <li><font fgcolor="#ffffffff"><b>"Nový kontakt"</b></font>" pro vytvoření nového kontaktu;"\n</li>\n
         <li><font fgcolor="#ffffffff"><b>"Importovat nebo exportovat"</b></font>" pro import kontaktů ze SIM karty nebo karty SD."\n</li></string>
-    <string name="noContactsHelpText" product="default" msgid="4405064135698982080">"Nemáte žádné kontakty, které by bylo možné zobrazit."\n\n"Chcete-li přidat kontakty, stiskněte tlačítko "<font fgcolor="#ffffffff"><b>"Menu"</b></font>" a poté zvolte:"\n\n
+    <string name="noContactsHelpText" product="default" msgid="4405064135698982080">"Nemáte žádné kontakty, které by bylo možné zobrazit."\n\n"Chcete-li přidat kontakty, stiskněte tlačítko "<font fgcolor="#ffffffff"><b>"Nabídka"</b></font>" a poté zvolte:"\n\n
         <li><font fgcolor="#ffffffff"><b>"Účty"</b></font>" pro přidání nebo nastavení účtu a kontakty v něm synchronizovat s telefonem;"\n</li>\n
         <li><font fgcolor="#ffffffff"><b>"Nový kontakt"</b></font>" pro vytvoření nového kontaktu;"\n</li>\n
         <li><font fgcolor="#ffffffff"><b>"Importovat nebo exportovat"</b></font>" pro import kontaktů ze SIM karty nebo karty SD."\n</li></string>
 
-    <string name="noContactsHelpTextWithSync" product="tablet" msgid="6773195806404659174">"Nemáte žádné kontakty, které by bylo možné zobrazit. (Pokud jste právě přidali účet, může synchronizace kontaktů trvat několik minut.)"\n\n"Chcete-li přidat kontakty, stiskněte tlačítko "<font fgcolor="#ffffffff"><b>"Menu"</b></font>" a poté zvolte:"\n\n
+    <string name="noContactsHelpTextWithSync" product="tablet" msgid="6773195806404659174">"Nemáte žádné kontakty, které by bylo možné zobrazit. (Pokud byl účet právě přidán, může synchronizace kontaktů trvat několik minut.)"\n\n"Chcete-li přidat kontakty, stiskněte tlačítko "<font fgcolor="#ffffffff"><b>"Nabídka"</b></font>" a poté zvolte:"\n\n
         <li><font fgcolor="#ffffffff"><b>"Účty"</b></font>" pro přidání nebo nastavení účtu a kontakty v něm synchronizovat s tabletem;"\n</li>\n
         <li><font fgcolor="#ffffffff"><b>"Možnosti zobrazení"</b></font>" pro změnu viditelnosti kontaktů;"\n</li>\n
         <li><font fgcolor="#ffffffff"><b>"Nový kontakt"</b></font>" pro vytvoření nového kontaktu;"\n</li>\n
         <li><font fgcolor="#ffffffff"><b>"Importovat nebo exportovat"</b></font>" pro import kontaktů ze SIM karty nebo karty SD."\n</li></string>
-    <string name="noContactsHelpTextWithSync" product="default" msgid="7016825676090327312">"Nemáte žádné kontakty, které by bylo možné zobrazit. (Pokud jste právě přidali účet, může synchronizace kontaktů trvat několik minut.)"\n\n"Chcete-li přidat kontakty, stiskněte tlačítko "<font fgcolor="#ffffffff"><b>"Menu"</b></font>" a poté zvolte:"\n\n
+    <string name="noContactsHelpTextWithSync" product="default" msgid="7016825676090327312">"Nemáte žádné kontakty, které by bylo možné zobrazit. (Pokud byl účet právě přidán, může synchronizace kontaktů trvat několik minut.)"\n\n"Chcete-li přidat kontakty, stiskněte tlačítko "<font fgcolor="#ffffffff"><b>"Nabídka"</b></font>" a poté zvolte:"\n\n
         <li><font fgcolor="#ffffffff"><b>"Účty"</b></font>" pro přidání nebo nastavení účtu a kontakty v něm synchronizovat s telefonem;"\n</li>\n
         <li><font fgcolor="#ffffffff"><b>"Možnosti zobrazení"</b></font>" pro změnu viditelnosti kontaktů;"\n</li>\n
         <li><font fgcolor="#ffffffff"><b>"Nový kontakt"</b></font>" pro vytvoření nového kontaktu;"\n</li>\n
         <li><font fgcolor="#ffffffff"><b>"Importovat nebo exportovat"</b></font>" pro import kontaktů ze SIM karty nebo karty SD."\n</li></string>
 
-    <string name="noContactsNoSimHelpText" product="tablet" msgid="7823757505923033456">"Nemáte žádné kontakty, které by bylo možné zobrazit. "\n\n"Chcete-li přidat kontakty, stiskněte tlačítko "<font fgcolor="#ffffffff"><b>"Menu"</b></font>" a poté zvolte:"\n\n
+    <string name="noContactsNoSimHelpText" product="tablet" msgid="7823757505923033456">"Nemáte žádné kontakty, které by bylo možné zobrazit. "\n\n"Chcete-li přidat kontakty, stiskněte tlačítko "<font fgcolor="#ffffffff"><b>"Nabídka"</b></font>" a poté zvolte:"\n\n
         <li><font fgcolor="#ffffffff"><b>"Účty"</b></font>" pro přidání nebo nastavení účtu a kontakty v něm synchronizovat s tabletem;"\n</li>\n
         <li><font fgcolor="#ffffffff"><b>"Nový kontakt"</b></font>" pro vytvoření nového kontaktu;"\n</li>\n
         <li><font fgcolor="#ffffffff"><b>"Importovat nebo exportovat"</b></font>" pro import kontaktů ze SIM karty nebo karty SD."\n</li></string>
-    <string name="noContactsNoSimHelpText" product="default" msgid="6224952277619986841">"Nemáte žádné kontakty, které by bylo možné zobrazit. "\n\n"Chcete-li přidat kontakty, stiskněte tlačítko "<font fgcolor="#ffffffff"><b>"Menu"</b></font>" a poté zvolte:"\n\n
+    <string name="noContactsNoSimHelpText" product="default" msgid="6224952277619986841">"Nemáte žádné kontakty, které by bylo možné zobrazit. "\n\n"Chcete-li přidat kontakty, stiskněte tlačítko "<font fgcolor="#ffffffff"><b>"Nabídka"</b></font>" a poté zvolte:"\n\n
         <li><font fgcolor="#ffffffff"><b>"Účty"</b></font>" pro přidání nebo nastavení účtu a kontakty v něm synchronizovat s telefonem;"\n</li>\n
         <li><font fgcolor="#ffffffff"><b>"Nový kontakt"</b></font>" pro vytvoření nového kontaktu;"\n</li>\n
         <li><font fgcolor="#ffffffff"><b>"Importovat nebo exportovat"</b></font>" pro import kontaktů ze SIM karty nebo karty SD."\n</li></string>
 
-    <string name="noContactsNoSimHelpTextWithSync" product="tablet" msgid="5415762667445638265">"Nemáte žádné kontakty, které by bylo možné zobrazit. (Pokud jste právě přidali účet, může synchronizace kontaktů trvat několik minut.)"\n\n"Chcete-li přidat kontakty, stiskněte tlačítko "<font fgcolor="#ffffffff"><b>"Menu"</b></font>" a poté zvolte:"\n\n
+    <string name="noContactsNoSimHelpTextWithSync" product="tablet" msgid="5415762667445638265">"Nemáte žádné kontakty, které by bylo možné zobrazit. (Pokud byl účet právě přidán, může synchronizace kontaktů trvat několik minut.)"\n\n"Chcete-li přidat kontakty, stiskněte tlačítko "<font fgcolor="#ffffffff"><b>"Nabidka"</b></font>" a poté zvolte:"\n\n
         <li><font fgcolor="#ffffffff"><b>"Účty"</b></font>" pro přidání nebo nastavení účtu a kontakty v něm synchronizovat s tabletem;"\n</li>\n
         <li><font fgcolor="#ffffffff"><b>"Možnosti zobrazení"</b></font>" pro změnu viditelnosti kontaktů;"\n</li>\n
         <li><font fgcolor="#ffffffff"><b>"Nový kontakt"</b></font>" pro vytvoření nového kontaktu;"\n</li>\n
         <li><font fgcolor="#ffffffff"><b>"Importovat nebo exportovat"</b></font>" pro import kontaktů ze SIM karty nebo karty SD."\n</li></string>
-    <string name="noContactsNoSimHelpTextWithSync" product="default" msgid="7443705129830284440">"Nemáte žádné kontakty, které by bylo možné zobrazit. (Pokud jste právě přidali účet, může synchronizace kontaktů trvat několik minut.)"\n\n"Chcete-li přidat kontakty, stiskněte tlačítko "<font fgcolor="#ffffffff"><b>"Menu"</b></font>" a poté zvolte:"\n\n
+    <string name="noContactsNoSimHelpTextWithSync" product="default" msgid="7443705129830284440">"Nemáte žádné kontakty, které by bylo možné zobrazit. (Pokud byl účet právě přidán, může synchronizace kontaktů trvat několik minut.)"\n\n"Chcete-li přidat kontakty, stiskněte tlačítko "<font fgcolor="#ffffffff"><b>"Nabídka"</b></font>" a poté zvolte:"\n\n
         <li><font fgcolor="#ffffffff"><b>"Účty"</b></font>" pro přidání nebo nastavení účtu a kontakty v něm synchronizovat s telefonem;"\n</li>\n
         <li><font fgcolor="#ffffffff"><b>"Možnosti zobrazení"</b></font>" pro změnu viditelnosti kontaktů;"\n</li>\n
         <li><font fgcolor="#ffffffff"><b>"Nový kontakt"</b></font>" pro vytvoření nového kontaktu;"\n</li>\n
@@ -336,7 +336,6 @@
 
     <string name="composer_has_no_exportable_contact" product="tablet" msgid="6991449891825077743">"Nelze exportovat žádné kontakty. Pokud máte v tabletu skutečně uložené kontakty, je možné, že některý poskytovatel datových služeb zakázal jejich export mimo tablet."</string>
     <string name="composer_has_no_exportable_contact" product="default" msgid="3296493229040294335">"Nelze exportovat žádné kontakty. Pokud máte v telefonu skutečně uložené kontakty, je možné, že některý poskytovatel datových služeb zakázal jejich export mimo telefon."</string>
-
     <string name="composer_not_initialized" msgid="2321648986367005254">"Editor karty vCard nebyl správně inicializován."</string>
     <string name="fail_reason_could_not_open_file" msgid="2067725459821997463">"Soubor \u201e<xliff:g id="FILE_NAME">%s</xliff:g>\u201c nelze otevřít: <xliff:g id="EXACT_REASON">%s</xliff:g>"</string>
     <string name="exporting_contact_list_progress" msgid="560522409559101193">"<xliff:g id="CURRENT_NUMBER">%s</xliff:g> z <xliff:g id="TOTAL_NUMBER">%s</xliff:g> kontaktů"</string>
@@ -503,7 +502,7 @@
 
     <string name="locale_change_in_progress" msgid="7583992153091537467">"Probíhá aktualizace seznamu kontaktů související se změnou jazyka."</string>
     <string name="upgrade_in_progress" msgid="474511436863451061">"Probíhá aktualizace seznamu kontaktů."</string>
-    <string name="upgrade_out_of_memory" msgid="1209994418877625940">"Probíhá aktualizace kontaktů. "\n\n"Aktualizace vyžaduje přibližně <xliff:g id="SIZE_IN_MEGABYTES">%s</xliff:g> MB interní paměti."\n\n"Zvolte jednu z následujících možností:"</string>
+    <string name="upgrade_out_of_memory" msgid="1209994418877625940">"Probíhá aktualizace kontaktů."\n\n"Aktualizace vyžaduje přibližně <xliff:g id="SIZE_IN_MEGABYTES">%s</xliff:g> MB interní paměti."\n\n"Zvolte jednu z následujících možností:"</string>
     <string name="upgrade_out_of_memory_uninstall" msgid="1721798828992091432">"Odinstalovat některé aplikace"</string>
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"Opakovat aktualizaci"</string>
 
@@ -526,7 +525,8 @@
 
     <plurals name="merge_info">
         <item quantity="one" msgid="148365587896371969">"sloučení se nezdařilo"</item>
-        <item quantity="other" msgid="425683718017380845">"sloučeno ze <xliff:g id="COUNT">%0$d</xliff:g> zdrojů"</item>
+        <item quantity="few" msgid="425683718017380845">"sloučeno ze <xliff:g id="COUNT">%0$d</xliff:g> zdrojů"</item>
+        <item quantity="other">"sloučeno z <xliff:g id="COUNT">%0$d</xliff:g> zdrojů"</item>
     </plurals>
 
     <string name="local_invisible_directory" msgid="6046691709127661065">"Ostatní"</string>
@@ -578,13 +578,13 @@
     <string name="delete_group_dialog_message" msgid="7586856514337560529">"Chcete smazat skupinu \u201e<xliff:g id="GROUP_LABEL">%1$s</xliff:g>\u201c? (Vlastní kontakty smazány nebudou.)"</string>
 
     <plurals name="num_contacts_in_group">
-        <item quantity="one" msgid="1352418549951013448">"Jeden kontakt ze skupiny <xliff:g id="ACCOUNT_TYPE">%2$s</xliff:g></item>
+        <item quantity="one" msgid="1352418549951013448">"1 kontakt ze skupiny <xliff:g id="ACCOUNT_TYPE">%2$s</xliff:g></item>
         <item quantity="few">"<xliff:g id="COUNT_0">%1$d</xliff:g> kontakty ze skupiny <xliff:g id="ACCOUNT_TYPE">%2$s</xliff:g>"</item>
         <item quantity="other" msgid="8146027769011086349">"<xliff:g id="COUNT_0">%1$d</xliff:g> kontaktů ze skupiny <xliff:g id="ACCOUNT_TYPE">%2$s</xliff:g>"</item>
     </plurals>
 
     <plurals name="group_list_num_contacts_in_group">
-        <item quantity="one" msgid="3323065321661972446">"<xliff:g id="COUNT">%1$d</xliff:g> kontakt"</item>
+        <item quantity="one" msgid="3323065321661972446">"1 kontakt"</item>
         <item quantity="few">"<xliff:g id="COUNT">%1$d</xliff:g> kontakty"</item>
         <item quantity="other" msgid="6251996206137048525">"<xliff:g id="COUNT">%1$d</xliff:g> kontaktů"</item>
     </plurals>
@@ -668,7 +668,7 @@
     <string name="local_profile_title" msgid="2021416826991393684">"Můj místní profil"</string>
     <string name="external_profile_title" msgid="8034998767621359438">"Můj externí profil <xliff:g id="EXTERNAL_SOURCE">%1$s</xliff:g>"</string>
     <string name="toast_displaying_all_contacts" msgid="2737388783898593875">"Zobrazují se všechny kontakty"</string>
-    <string name="no_account_prompt" msgid="7061052512446855192">"Služba Lidé funguje lépe s účtem Google."\n\n"\u2022 Můžete k ní přistupovat z libovolného webového prohlížeče"\n"\u2022 Kontakty lze bezpečně zálohovat."</string>
+    <string name="no_account_prompt" msgid="7061052512446855192">"Služba Lidé funguje lépe s účtem Google."\n\n"\u2022 Můžete k ní přistupovat z libovolného webového prohlížeče."\n"\u2022 Kontakty lze bezpečně zálohovat."</string>
     <string name="generic_no_account_prompt" msgid="7218827704367325460">"Mějte kontakty v bezpečí - synchronizujte je s online službou."</string>
     <string name="generic_no_account_prompt_title" msgid="753783911899054860">"Přidat účet"</string>
     <string name="contact_editor_prompt_zero_accounts" msgid="1785345895691886499">"Nový kontakt nebude zálohován. Chcete přidat účet pro zálohování kontaktů online?"</string>
@@ -680,7 +680,7 @@
     <string name="add_new_account" msgid="5748627740680940264">"Přidat nový účet"</string>
 
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Hovor nebyl proveden"</string>
-    <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Chcete-li nastavit hlasovou schránku, přejděte do části Menu &gt; Nastavení."</string>
+    <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Chcete-li nastavit hlasovou schránku, přejděte do části Nabídka \u2192 Nastavení."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Chcete-li volat hlasovou schránku, nejdříve vypněte režim V letadle."</string>
     <string name="menu_export_database" msgid="2659719297530170820">"Exportovat soubory databáze"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Více možností"</string>

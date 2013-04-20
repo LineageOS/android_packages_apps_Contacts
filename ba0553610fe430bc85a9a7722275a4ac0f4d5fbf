@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAen//4fQ\u003d",
+        "filename": "res/values-es/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2134
+      },
+      "writtenOn": "2013-04-20T12:45:41Z",
+      "side": 1,
+      "message": "\u0027á\u0027 before of \u0027à\u0027 ?",
+      "revId": "ba0553610fe430bc85a9a7722275a4ac0f4d5fbf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAen//4fI\u003d",
+        "filename": "res/values-es/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 2134
+      },
+      "writtenOn": "2013-04-20T12:45:41Z",
+      "side": 1,
+      "message": "\u0027é\u0027 before of \u0027?\u0027 ?",
+      "revId": "ba0553610fe430bc85a9a7722275a4ac0f4d5fbf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAen//4fY\u003d",
+        "filename": "res/values-es/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 2134
+      },
+      "writtenOn": "2013-04-20T12:45:41Z",
+      "side": 1,
+      "message": "@Jorge, Should I placing the letter \u0027ñ\u0027 in another position, near of \u0027o\u0027 ?\n\u0027ó\u0027 before of \u0027ò\u0027 ?",
+      "revId": "ba0553610fe430bc85a9a7722275a4ac0f4d5fbf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAen//4fM\u003d",
+        "filename": "res/values-es/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2134
+      },
+      "writtenOn": "2013-04-20T12:45:41Z",
+      "side": 1,
+      "message": "\u0027ú\u0027 and \u0027ü\u0027 before of \u0027?\u0027 ?",
+      "revId": "ba0553610fe430bc85a9a7722275a4ac0f4d5fbf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--  Copyright (C) 2006 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,17 +18,6 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="launcherDialer" msgid="8636288196618486553">"Telefon"</string>
     <string name="people" msgid="1048457247435785074">"Lidé"</string>
-
-    <string name="t9_loading">Načítání\u2026</string>
-    <string name="t9_sort_title">Režim třídění pro T9</string>
-    <string name="t9_sort_summary">Zvolte jak filtrovat výsledky T9</string>
-    <string name="t9_sort_name">Jméno vybírat jako první</string>
-    <string name="t9_sort_number">Číslo vybírat jako první</string>
-    <string name="t9_state_title">Povolit číselník T9</string>
-    <string name="t9_state_summary">Povolit T9 vyhledávání v číselníku</string>
-    <string name="t9_dial_click_title">Vytočit vybraný kontakt</string>
-    <string name="t9_dial_click_summary">Vytočit vybraný kontakt pro T9</string>
-    <string name="t9_add_to_contacts">Přidat do kontaktů</string>
 
     <string name="contactsList" msgid="8661624236494819731">"Kontakty"</string>
     <string name="shortcutContact" msgid="749243779392912958">"Kontakt"</string>
@@ -164,10 +153,6 @@
     <string name="contactsFavoritesLabel" msgid="8417039765586853670">"Oblíbené"</string>
     <string name="dialerAllContactsLabel" msgid="1025920923112988336">"Oblíbené kontakty a všechny kontakty"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
-
-    <string name="dialer_ui_title">Nastavení číselníku</string>
-    <string name="dialer_ui_orientation_title">Povolit senzor orientace</string>
-    <string name="dialer_ui_orientation_summary">Otáčet číselníkem na základě senzoru orientace</string>
 
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Hovory"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Odeslat textovou zprávu"</string>
@@ -700,4 +685,77 @@
     <string name="menu_export_database" msgid="2659719297530170820">"Exportovat soubory databáze"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Více možností"</string>
     <string name="expand_collapse_name_fields_description" msgid="8682630859539604311">"Rozbalit nebo sbalit pole jména"</string>
+
+    <!-- CYANOGENMOD ADDITIONS -->
+    <string name="t9_loading">Načítání\u2026</string>
+    <string name="t9_sort_title">Třídění v T9</string>
+    <string name="t9_sort_summary">Zvolte, jakým způsobem mají být filtrovány výsledky T9</string>
+    <string name="t9_sort_name">Jména první</string>
+    <string name="t9_sort_number">Čísla první</string>
+    <string name="t9_state_title">Povolit T9 v číselníku</string>
+    <string name="t9_state_summary">Povolit vyhledávání T9 při výběru čísla v číselníku</string>
+    <string name="t9_dial_click_title">Volat vybraný kontakt</string>
+    <string name="t9_dial_click_summary">Volat vybraný kontakt nalezený pomocí T9</string>
+    <string name="t9_add_to_contacts">Přidat do kontaktů</string>
+
+    <string name="dialer_ui_title">Nastavení číselníku</string>
+    <string name="dialer_ui_orientation_title">Povolit senzor orientace</string>
+    <string name="dialer_ui_orientation_summary">Otáčet číselníkem na základě senzoru orientace</string>
+
+    <string name="callStatsDetailTitle">Podrobná statistika volání</string>
+    <string name="call_stats">Statistika volání</string>
+    <string name="call_stats_refresh">Obnovit</string>
+    <string name="activity_title_call_stats">Statistika volání</string>
+
+    <string name="call_stats_nav_all">Vše</string>
+    <string name="call_stats_nav_incoming">Příchozí</string>
+    <string name="call_stats_nav_outgoing">Odchozí</string>
+    <string name="call_stats_nav_missed">Změškané</string>
+    <string name="call_stats_incoming">Příchozí: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_outgoing">Odchozí: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_missed">Zmeškané</string>
+    <string name="call_stats_missed_percent">Zmeškané: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Celkem: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Celkem: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Datum začátku</string>
+    <string name="call_stats_filter_to">Datum konce</string>
+    <string name="call_stats_filter_picker_title">Časový rozsah</string>
+
+    <string name="date_quick_selection">Rychlý výběr</string>
+    <string name="date_qs_currentmonth">Aktuální měsíc</string>
+    <string name="date_qs_currentquarter">Aktuální čtvrtletí</string>
+    <string name="date_qs_currentyear">Aktuální rok</string>
+    <string name="date_qs_lastweek">Minulý týden</string>
+    <string name="date_qs_lastmonth">Minulý měsíc</string>
+    <string name="date_qs_lastquarter">Minulé čtvrtletí</string>
+    <string name="date_qs_lastyear">Minulý rok</string>
+
+    <string name="call_stats_date_filter">Nastavit časový rozsah</string>
+    <string name="call_stats_reset_filter">Obnovit časový rozsah</string>
+    <string name="call_stats_sort_by_duration">Třídit podle trvání hovoru</string>
+    <string name="call_stats_sort_by_count">Třídit podle počtu hovorů</string>
+
+    <plurals name="hour">
+        <item quantity="one">1 hodina</item>
+        <item quantity="few">%d hodiny</item>
+        <item quantity="other">%d hodin</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="one">1 minuta</item>
+        <item quantity="few">%d minuty</item>
+        <item quantity="other">%d minut</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="one">1 sekunda</item>
+        <item quantity="few">%d sekundy</item>
+        <item quantity="other">%d sekund</item>
+    </plurals>
+    <plurals name="call">
+        <item quantity="one">1 hovor</item>
+        <item quantity="few">%d hovory</item>
+        <item quantity="other">%d hovorů</item>
+    </plurals>
+
+    <string name="menu_add_to_blacklist">Přidat na černou listinu</string>
+    <string name="toast_added_to_blacklist">%s přidán na černou listinu.</string>
 </resources>

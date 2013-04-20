@@ -70,7 +70,7 @@
     <string name="readOnlyContactDeleteConfirmation" msgid="2137170726670196909">"Este contacto contiene información de varias cuentas. La información de las cuentas de solo lectura se ocultará en las listas de contactos, pero no se eliminará."</string>
     <string name="multipleContactDeleteConfirmation" msgid="938900978442960800">"Si se elimina este contacto, se eliminará la información de varias cuentas."</string>
     <string name="deleteConfirmation" msgid="811706994761610640">"El contacto se eliminará."</string>
-    <string name="menu_done" msgid="796017761764190697">"Aceptar"</string>
+    <string name="menu_done" msgid="796017761764190697">"OK"</string>
     <string name="menu_doNotSave" msgid="58593876893538465">"Cancelar"</string>
     <string name="menu_discard" msgid="6456087569315685632">"Descartar"</string>
     <string name="label_notes" msgid="8337354953278341042">"Notas"</string>
@@ -570,78 +570,4 @@
     <string name="menu_export_database" msgid="2659719297530170820">"Exportar archivos de base de datos"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Más opciones"</string>
     <string name="expand_collapse_name_fields_description" msgid="8682630859539604311">"Ampliar o contraer campos de nombre"</string>
-
-    <!-- CYANOGENMOD ADDITIONS START -->
-
-    <string name="dialer_ui_title">Ajustes de marcación</string>
-    <string name="dialer_ui_orientation_title">Activar rotación</string>
-    <string name="dialer_ui_orientation_summary">Rotar el teclado de marcación según la orientación del sensor</string>
-    <string name="t9_loading">Cargando\u2026</string>
-    <string name="t9_sort_title">Modo de ordenación T9</string>
-    <string name="t9_sort_summary">Escoger como se filtran los resultados T9</string>
-    <string name="t9_sort_name">Nombres primero</string>
-    <string name="t9_sort_number">Números primero</string>
-    <string name="t9_state_title">Activar marcación T9</string>
-    <string name="t9_state_summary">Activar búsqueda T9 en teclado de marcación</string>
-    <string name="t9_dial_click_title">Llamar al contacto</string>
-    <string name="t9_dial_click_summary">Llamar al contacto seleccionado mediante T9</string>
-    <string name="t9_add_to_contacts">Añadir a contactos</string>
-    <string name="callStatsDetailTitle">Detalles de llamada</string>
-    <string name="call_stats">Estadísticas de llamadas</string>
-    <string name="call_stats_refresh">Actualizar</string>
-    <string name="activity_title_call_stats">Estadísticas de llamadas</string>
-    <string name="call_stats_nav_all">Todas</string>
-    <string name="call_stats_nav_incoming">Entrantes</string>
-    <string name="call_stats_nav_outgoing">Salientes</string>
-    <string name="call_stats_nav_missed">Perdidas</string>
-    <string name="call_stats_incoming">Entrantes: <xliff:g id="percent">%d</xliff:g>%%</string>
-    <string name="call_stats_outgoing">Salientes: <xliff:g id="percent">%d</xliff:g>%%</string>
-    <string name="call_stats_missed">Perdidas</string>
-    <string name="call_stats_missed_percent">Perdidas: <xliff:g id="percent">%d</xliff:g>%%</string>
-    <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
-    <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
-    <string name="call_stats_filter_from">Fecha inicio</string>
-    <string name="call_stats_filter_to">Fecha fin</string>
-    <string name="call_stats_filter_picker_title">Rango de fechas</string>
-    <string name="date_quick_selection">Selección rápida</string>
-    <string name="date_qs_currentmonth">Mes actual</string>
-    <string name="date_qs_currentquarter">Trimestre actual</string>
-    <string name="date_qs_currentyear">Año actual</string>
-    <string name="date_qs_lastweek">Última semana</string>
-    <string name="date_qs_lastmonth">Último mes</string>
-    <string name="date_qs_lastquarter">Último trimestre</string>
-    <string name="date_qs_lastyear">Último año</string>
-    <string name="call_stats_date_filter">Ajustar rango de fechas</string>
-    <string name="call_stats_reset_filter">Restablecer rango de fechas</string>
-    <string name="call_stats_sort_by_duration">Ordenar por duración</string>
-    <string name="call_stats_sort_by_count">Ordenar por núm. llamadas</string>
-    <string-array name="call_stats_duration">
-        <item><xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
-        <item><xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
-        <item><xliff:g id="minutes" example="2 mins">%2$s</xliff:g>, <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g>, <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g>, <xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g>, <xliff:g id="minutes" example="2 mins">%2$s</xliff:g>, <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
-    </string-array>
-    <plurals name="hour">
-        <item quantity="one">1 hora</item>
-        <item quantity="other">%d horas</item>
-    </plurals>
-    <plurals name="minute">
-        <item quantity="one">1 minuto</item>
-        <item quantity="other">%d minutos</item>
-    </plurals>
-    <plurals name="second">
-        <item quantity="one">1 segundo</item>
-        <item quantity="other">%d segundos</item>
-    </plurals>
-    <plurals name="call">
-        <item quantity="one">1 llamada</item>
-        <item quantity="other">%d llamadas</item>
-    </plurals>
-    <string name="menu_add_to_blacklist">Añadir a la lista negra</string>
-    <string name="toast_added_to_blacklist">%s añadido a la lista negra.</string>
-
-    <!-- CYANOGENMOD ADDITIONS END -->
 </resources>

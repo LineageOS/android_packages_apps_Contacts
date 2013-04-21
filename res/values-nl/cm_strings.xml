@@ -58,5 +58,6 @@
     <string name="date_qs_lastmonth">Vorige maand</string>
     <string name="date_qs_lastquarter">Vorig kwartaal</string>
     <string name="date_qs_lastyear">Vorig jaar</string>
+    <string name="menu_add_to_blacklist">Toevoegen aan zwarte lijst</string>
+    <string name="toast_added_to_blacklist">%s toegevoegd aan zwarte lijst</string>
 </resources>
-

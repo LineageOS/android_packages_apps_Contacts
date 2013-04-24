@@ -32,6 +32,9 @@
     <string name="t9_map_row_7">7πρσςpqrs</string>
     <string name="t9_map_row_8">8τυύϋΰφtuv</string>
     <string name="t9_map_row_9">9χψωώwxyz</string>
+    <string name="dialer_ui_title">Ρυθμίσεις τηλεφώνου</string>
+    <string name="dialer_ui_orientation_title">Ενεργοποίηση περιστροφής</string>
+    <string name="dialer_ui_orientation_summary">Περιστροφή με βάση τον αισθητήρα προσανατολισμού</string>
     <string name="callStatsDetailTitle">Λεπτομέρειες στατιστικών κλήσεων</string>
     <string name="call_stats">Στατιστικά κλήσεων</string>
     <string name="call_stats_refresh">Ανανέωση</string>
@@ -86,4 +89,6 @@
         <item quantity="one">1 κλήση</item>
         <item quantity="other">%d κλήσεις</item>
     </plurals>
+    <string name="menu_add_to_blacklist">Προσθήση στη μαύρη λίστα</string>
+    <string name="toast_added_to_blacklist">%s προστέθηκε στη μαύρη λίστα.</string>
 </resources>

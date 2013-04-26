@@ -19,17 +19,6 @@
     <string name="launcherDialer" msgid="8636288196618486553">"Telefon"</string>
     <string name="people" msgid="1048457247435785074">"Lidé"</string>
 
-    <string name="t9_loading">Načítání\u2026</string>
-    <string name="t9_sort_title">Režim třídění pro T9</string>
-    <string name="t9_sort_summary">Zvolte jak filtrovat výsledky T9</string>
-    <string name="t9_sort_name">Jméno vybírat jako první</string>
-    <string name="t9_sort_number">Číslo vybírat jako první</string>
-    <string name="t9_state_title">Povolit číselník T9</string>
-    <string name="t9_state_summary">Povolit T9 vyhledávání v číselníku</string>
-    <string name="t9_dial_click_title">Vytočit vybraný kontakt</string>
-    <string name="t9_dial_click_summary">Vytočit vybraný kontakt pro T9</string>
-    <string name="t9_add_to_contacts">Přidat do kontaktů</string>
-
     <string name="contactsList" msgid="8661624236494819731">"Kontakty"</string>
     <string name="shortcutContact" msgid="749243779392912958">"Kontakt"</string>
     <string name="shortcutDialContact" msgid="746622101599186779">"Přímé vytáčení"</string>
@@ -125,14 +114,12 @@
 
     <plurals name="listTotalPhoneContacts">
         <item quantity="one" msgid="3015357862286673986">"1 kontakt s telefonním číslem"</item>
-        <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> kontakty s telefonními čísly</item>
         <item quantity="other" msgid="3299954047880968205">"<xliff:g id="COUNT">%d</xliff:g> kontaktů s telefonními čísly"</item>
     </plurals>
 
     <string name="listTotalPhoneContactsZero" msgid="6968813857632984319">"Ke kontaktům nejsou přiřazena žádná telefonní čísla"</string>
     <plurals name="listTotalAllContacts">
         <item quantity="one" msgid="3405747744700823280">"1 kontakt"</item>
-        <item quantity="few">"<xliff:g id="COUNT">%d</xliff:g> kontakty"</item>
         <item quantity="other" msgid="3578469907265375314">"<xliff:g id="COUNT">%d</xliff:g> kontaktů"</item>
     </plurals>
 
@@ -146,7 +133,6 @@
 
     <plurals name="listFoundAllContacts">
         <item quantity="one" msgid="5517063038754171134">"Nalezen 1 kontakt"</item>
-        <item quantity="few">"Nalezeny <xliff:g id="COUNT">%d</xliff:g> kontakty"</item>
         <item quantity="other" msgid="3852668542926965042">"Nalezeno <xliff:g id="COUNT">%d</xliff:g> kontaktů"</item>
     </plurals>
 
@@ -155,7 +141,6 @@
 
     <plurals name="searchFoundContacts">
         <item quantity="one" msgid="4826918429708286628">"Nalezeno 1"</item>
-        <item quantity="few">"Nalezeny <xliff:g id="COUNT">%d</xliff:g>"</item>
         <item quantity="other" msgid="7988132539476575389">"Nalezeno <xliff:g id="COUNT">%d</xliff:g>"</item>
     </plurals>
 
@@ -164,10 +149,6 @@
     <string name="contactsFavoritesLabel" msgid="8417039765586853670">"Oblíbené"</string>
     <string name="dialerAllContactsLabel" msgid="1025920923112988336">"Oblíbené kontakty a všechny kontakty"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
-
-    <string name="dialer_ui_title">Nastavení číselníku</string>
-    <string name="dialer_ui_orientation_title">Povolit senzor orientace</string>
-    <string name="dialer_ui_orientation_summary">Otáčet číselníkem na základě senzoru orientace</string>
 
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Hovory"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Odeslat textovou zprávu"</string>
@@ -586,7 +567,6 @@
 
     <plurals name="num_groups_in_account">
         <item quantity="one" msgid="2944819210288517794">"1 skupina"</item>
-        <item quantity="few">"<xliff:g id="COUNT">%0$d</xliff:g> skupiny"</item>
         <item quantity="other" msgid="1276758425904917367">"<xliff:g id="COUNT">%0$d</xliff:g> skupin"</item>
     </plurals>
 
@@ -594,13 +574,11 @@
 
     <plurals name="num_contacts_in_group">
         <item quantity="one" msgid="1352418549951013448">"Jeden kontakt ze skupiny <xliff:g id="ACCOUNT_TYPE">%2$s</xliff:g></item>
-        <item quantity="few">"<xliff:g id="COUNT_0">%1$d</xliff:g> kontakty ze skupiny <xliff:g id="ACCOUNT_TYPE">%2$s</xliff:g>"</item>
         <item quantity="other" msgid="8146027769011086349">"<xliff:g id="COUNT_0">%1$d</xliff:g> kontaktů ze skupiny <xliff:g id="ACCOUNT_TYPE">%2$s</xliff:g>"</item>
     </plurals>
 
     <plurals name="group_list_num_contacts_in_group">
         <item quantity="one" msgid="3323065321661972446">"<xliff:g id="COUNT">%1$d</xliff:g> kontakt"</item>
-        <item quantity="few">"<xliff:g id="COUNT">%1$d</xliff:g> kontakty"</item>
         <item quantity="other" msgid="6251996206137048525">"<xliff:g id="COUNT">%1$d</xliff:g> kontaktů"</item>
     </plurals>
 
@@ -617,7 +595,6 @@
 
     <plurals name="notification_voicemail_title">
         <item quantity="one" msgid="1746619685488504230">"Hlasová zpráva"</item>
-        <item quantity="few">"<xliff:g id="COUNT">%1$d</xliff:g> hlasové zprávy"</item>
         <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> hlasových zpráv"</item>
     </plurals>
 

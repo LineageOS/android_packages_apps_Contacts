@@ -1,0 +1,11 @@
+Change-Id: I5cecdeaaa81dc49289635a251f908511f5dfd5d6
+Code-Review+2: Marco Brohet <therbom@gmail.com>
+Code-Review+1: Dmitriy Chermenev <chdiman86@gmail.com>
+Verified+1: Cid
+Code-Review+1: Vladislav Koldobskiy <nevergone.ru@gmail.com>
+Code-Review+1: Vladimir Belkov <belladimir@gmail.com>
+Submitted-by: Marco Brohet <therbom@gmail.com>
+Submitted-at: Sat, 27 Apr 2013 10:13:03 -0700
+Reviewed-on: http://review.cyanogenmod.org/36466
+Project: CyanogenMod/android_packages_apps_Contacts
+Branch: refs/heads/cm-10.1

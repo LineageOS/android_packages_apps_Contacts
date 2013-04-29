@@ -696,7 +696,7 @@ public class ContactListItemView extends ViewGroup
                 mHeaderTextView.setTextColor(mHeaderTextColor);
                 mHeaderTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mHeaderTextSize);
                 mHeaderTextView.setTypeface(mHeaderTextView.getTypeface(), Typeface.BOLD);
-                mHeaderTextView.setGravity(Gravity.CENTER_VERTICAL);
+                mHeaderTextView.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
                 addView(mHeaderTextView);
             }
             if (mHeaderDivider == null) {

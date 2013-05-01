@@ -15,19 +15,20 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <plurals name="hour">
-        <item quantity="one">1 uur</item>
-        <item quantity="other">%d uur</item>
+        <item quantity="one">1 time</item>
+        <item quantity="other">%d timer</item>
     </plurals>
     <plurals name="minute">
-        <item quantity="one">1 min</item>
-        <item quantity="other">%d min</item>
+        <item quantity="one">1 minut</item>
+        <item quantity="other">%d minutter</item>
     </plurals>
     <plurals name="second">
-        <item quantity="one">1 sec</item>
-        <item quantity="other">%d sec</item>
+        <item quantity="one">1 sekund</item>
+        <item quantity="other">%d sekunder</item>
     </plurals>
+
     <plurals name="call">
-        <item quantity="one">1 gesprek</item>
-        <item quantity="other">%d gesprekken</item>
+        <item quantity="one">1 opkald</item>
+        <item quantity="other">%d opkald</item>
     </plurals>
 </resources>

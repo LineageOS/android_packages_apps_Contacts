@@ -64,31 +64,6 @@
     <string name="call_stats_reset_filter">Επαναφορά χρονικού εύρους</string>
     <string name="call_stats_sort_by_duration">Ταξινόμηση κατά διάρκεια κλήσεων</string>
     <string name="call_stats_sort_by_count">Ταξινόμηση κατά αριθμό κλήσεων</string>
-    <string-array name="call_stats_duration">
-        <item><xliff:g id="seconds" example="2 δ">%3$s</xliff:g></item>
-        <item><xliff:g id="minutes" example="2 λ">%2$s</xliff:g></item>
-        <item><xliff:g id="minutes" example="2 λ">%2$s</xliff:g> <xliff:g id="seconds" example="2 δ">%3$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 ω">%1$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 ω">%1$s</xliff:g> <xliff:g id="seconds" example="2 δ">%3$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 ω">%1$s</xliff:g> <xliff:g id="minutes" example="2 λ">%2$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 ω">%1$s</xliff:g> <xliff:g id="minutes" example="2 λ">%2$s</xliff:g> <xliff:g id="seconds" example="2 δ">%3$s</xliff:g></item>
-    </string-array>
-    <plurals name="hour">
-        <item quantity="one">1 ω</item>
-        <item quantity="other">%d ω</item>
-    </plurals>
-    <plurals name="minute">
-        <item quantity="one">1 λ</item>
-        <item quantity="other">%d λ</item>
-    </plurals>
-    <plurals name="second">
-        <item quantity="one">1 δ</item>
-        <item quantity="other">%d δ</item>
-    </plurals>
-    <plurals name="call">
-        <item quantity="one">1 κλήση</item>
-        <item quantity="other">%d κλήσεις</item>
-    </plurals>
     <string name="menu_add_to_blacklist">Προσθήση στη μαύρη λίστα</string>
     <string name="toast_added_to_blacklist">%s προστέθηκε στη μαύρη λίστα.</string>
 </resources>

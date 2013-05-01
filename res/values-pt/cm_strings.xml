@@ -48,31 +48,6 @@
     <string name="call_stats_reset_filter">Restaurar intervalo de tempo</string>
     <string name="call_stats_sort_by_duration">Ordenar por duração de ligação</string>
     <string name="call_stats_sort_by_count">Ordenar por número de ligações</string>
-    <string-array name="call_stats_duration">
-        <item><xliff:g id="seconds" example="2 secs" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%3$s</xliff:g></item>
-        <item><xliff:g id="minutes" example="2 mins" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%2$s</xliff:g></item>
-        <item><xliff:g id="minutes" example="2 mins" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%2$s</xliff:g><xliff:g id="seconds" example="2 secs" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%3$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 hrs" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%1$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 hrs" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%1$s</xliff:g><xliff:g id="seconds" example="2 secs" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%3$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 hrs" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%1$s</xliff:g><xliff:g id="minutes" example="2 mins" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%2$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 hrs" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%1$s</xliff:g><xliff:g id="minutes" example="2 mins" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%2$s</xliff:g><xliff:g id="seconds" example="2 secs" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%3$s</xliff:g></item>
-    </string-array>
-    <plurals name="hour">
-        <item quantity="one">1 hora</item>
-        <item quantity="other">%d horas</item>
-    </plurals>
-    <plurals name="minute">
-        <item quantity="one">1 minuto</item>
-        <item quantity="other">%d minutos</item>
-    </plurals>
-    <plurals name="second">
-        <item quantity="one">1 segundo</item>
-        <item quantity="other">%d segundos</item>
-    </plurals>
-    <plurals name="call">
-        <item quantity="one">1 chamada</item>
-        <item quantity="other">%d chamadas</item>
-    </plurals>
     <string name="date_quick_selection">Seleção rápida</string>
     <string name="date_qs_currentmonth">Mês atual</string>
     <string name="date_qs_currentquarter">Trimestre atual</string>

@@ -24,11 +24,9 @@
     <string name="t9_dial_click_title">Volat vybraný kontakt</string>
     <string name="t9_dial_click_summary">Volat vybraný kontakt nalezený pomocí T9</string>
     <string name="t9_add_to_contacts">Přidat do kontaktů</string>
-
     <string name="dialer_ui_title">Nastavení číselníku</string>
     <string name="dialer_ui_orientation_title">Povolit senzor orientace</string>
     <string name="dialer_ui_orientation_summary">Otáčet číselníkem na základě senzoru orientace</string>
-
     <string name="callStatsDetailTitle">Podrobná statistika volání</string>
     <string name="call_stats">Statistika volání</string>
     <string name="call_stats_refresh">Obnovit</string>
@@ -46,7 +44,6 @@
     <string name="call_stats_filter_from">Datum začátku</string>
     <string name="call_stats_filter_to">Datum konce</string>
     <string name="call_stats_filter_picker_title">Časový rozsah</string>
-
     <string name="date_quick_selection">Rychlý výběr</string>
     <string name="date_qs_currentmonth">Aktuální měsíc</string>
     <string name="date_qs_currentquarter">Aktuální čtvrtletí</string>
@@ -55,33 +52,10 @@
     <string name="date_qs_lastmonth">Minulý měsíc</string>
     <string name="date_qs_lastquarter">Minulé čtvrtletí</string>
     <string name="date_qs_lastyear">Minulý rok</string>
-
     <string name="call_stats_date_filter">Nastavit časový rozsah</string>
     <string name="call_stats_reset_filter">Obnovit časový rozsah</string>
     <string name="call_stats_sort_by_duration">Třídit podle trvání hovoru</string>
     <string name="call_stats_sort_by_count">Třídit podle počtu hovorů</string>
-
-    <plurals name="hour">
-        <item quantity="one">1 hodina</item>
-        <item quantity="few">%d hodiny</item>
-        <item quantity="other">%d hodin</item>
-    </plurals>
-    <plurals name="minute">
-        <item quantity="one">1 minuta</item>
-        <item quantity="few">%d minuty</item>
-        <item quantity="other">%d minut</item>
-    </plurals>
-    <plurals name="second">
-        <item quantity="one">1 sekunda</item>
-        <item quantity="few">%d sekundy</item>
-        <item quantity="other">%d sekund</item>
-    </plurals>
-    <plurals name="call">
-        <item quantity="one">1 hovor</item>
-        <item quantity="few">%d hovory</item>
-        <item quantity="other">%d hovorů</item>
-    </plurals>
-
     <string name="menu_add_to_blacklist">Přidat na černou listinu</string>
     <string name="toast_added_to_blacklist">%s přidán na černou listinu.</string>
 </resources>

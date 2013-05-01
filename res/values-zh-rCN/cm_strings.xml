@@ -13,9 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="t9_loading">载入中\u2026</string>
     <string name="t9_sort_title">T9 排序模式</string>
     <string name="t9_sort_summary">选择如何过滤 T9 结果</string>
@@ -26,11 +24,9 @@
     <string name="t9_dial_click_title">拨打选中的联系人</string>
     <string name="t9_dial_click_summary">在 T9 中拨打选中的联系人</string>
     <string name="t9_add_to_contacts">"添加到“联系人”"</string>
-
     <string name="dialer_ui_title">拨号器设置</string>
     <string name="dialer_ui_orientation_title">开启传感器定向</string>
     <string name="dialer_ui_orientation_summary">根据传感器旋转拨号器</string>
-
     <string name="callStatsDetailTitle">通话统计数据详情</string>
     <string name="call_stats">通话统计数据</string>
     <string name="call_stats_refresh">刷新</string>
@@ -48,7 +44,6 @@
     <string name="call_stats_filter_from">开始日期</string>
     <string name="call_stats_filter_to">结束日期</string>
     <string name="call_stats_filter_picker_title">过滤范围</string>
-
     <string name="date_quick_selection">快速选择</string>
     <string name="date_qs_currentmonth">本月</string>
     <string name="date_qs_currentquarter">本季度</string>
@@ -57,30 +52,10 @@
     <string name="date_qs_lastmonth">上个月</string>
     <string name="date_qs_lastquarter">上个季度</string>
     <string name="date_qs_lastyear">去年</string>
-
     <string name="call_stats_date_filter">调整时间范围</string>
     <string name="call_stats_reset_filter">重置时间范围</string>
     <string name="call_stats_sort_by_duration">以通话时间排序</string>
     <string name="call_stats_sort_by_count">以通话次数排序</string>
-
-    <plurals name="hour">
-        <item quantity="one">1 小时</item>
-        <item quantity="other">%d 小时</item>
-    </plurals>
-    <plurals name="minute">
-        <item quantity="one">1 分钟</item>
-        <item quantity="other">%d 分钟</item>
-    </plurals>
-    <plurals name="second">
-        <item quantity="one">1 秒</item>
-        <item quantity="other">%d 秒</item>
-    </plurals>
-
-    <plurals name="call">
-        <item quantity="one">1 个通话</item>
-        <item quantity="other">%d 个通话</item>
-    </plurals>
-
     <string name="menu_add_to_blacklist">添加到黑名单</string>
     <string name="toast_added_to_blacklist">%s 已添加到黑名单.</string>
 </resources>

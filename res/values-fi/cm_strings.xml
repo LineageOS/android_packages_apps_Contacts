@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012-2013 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="dialer_ui_title">Numerovalitsimen asetukset</string>
+    <string name="dialer_ui_orientation_title">Näytön asento tunnistimen mukaan</string>
+    <string name="dialer_ui_orientation_summary">Käännä numerovalitsinta tunnistimen mukaan</string>
+    <string name="t9_state_title">Ota T9-numerovalitsin käyttöön</string>
+    <string name="t9_state_summary">Ota T9-haku numerovalitsimessa käyttöön</string>
+    <string name="t9_dial_click_title">Soita valitulle yhteystiedolle</string>
+    <string name="t9_dial_click_summary">Soittaa valitulle yhteystiedolle T9-tilassa</string>
+    <string name="t9_add_to_contacts">Lisää yhteystietoihin</string>
+    <string name="t9_sort_title">Lajittelu</string>
+    <string name="t9_sort_summary">Valitse kuinka T9-tulokset lajitellaan</string>
+    <string name="t9_sort_name">Nimen mukaan</string>
+    <string name="t9_sort_number">Numeron mukaan</string>
+</resources>

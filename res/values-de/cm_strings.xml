@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--  Copyright (C) 2013 The CyanogenMod Project
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012-2013 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -12,10 +12,8 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
- -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="t9_loading">Lade Kontakte\u2026</string>
     <string name="t9_sort_title">T9-Sortierung</string>
     <string name="t9_sort_summary">Reihenfolge der T9-Resultate auswählen</string>
@@ -26,14 +24,11 @@
     <string name="t9_dial_click_title">Gewählten Kontakt anrufen</string>
     <string name="t9_dial_click_summary">Ausgewählten Kontakt bei T9-Suche anrufen</string>
     <string name="t9_add_to_contacts">Zu Kontakten hinzufügen</string>
-
     <string name="dialer_ui_title">Anrufeinstellungen</string>
     <string name="dialer_ui_orientation_title">Autorotation verwenden</string>
     <string name="dialer_ui_orientation_summary">Wenn eingeschaltet, werden Systemeinstellungen verwendet</string>
-
     <string name="menu_add_to_blacklist">Zur Sperrliste hinzufügen</string>
     <string name="toast_added_to_blacklist">%s wurde zur Sperrliste hinzugefügt.</string>
-
     <string name="callStatsDetailTitle">Anrufstatistikdetails</string>
     <string name="call_stats">Anrufstatistik</string>
     <string name="call_stats_refresh">Aktualisieren</string>
@@ -55,7 +50,6 @@
     <string name="call_stats_reset_filter">Datumsbereich zurücksetzen</string>
     <string name="call_stats_sort_by_duration">Nach Anrufdauer sortieren</string>
     <string name="call_stats_sort_by_count">Nach Anrufanzahl sortieren</string>
-
     <string name="date_quick_selection">Schnellauswahl</string>
     <string name="date_qs_currentmonth">Aktueller Monat</string>
     <string name="date_qs_currentquarter">Aktuelles Quartal</string>
@@ -64,32 +58,4 @@
     <string name="date_qs_lastmonth">Letzter Monat</string>
     <string name="date_qs_lastquarter">Letztes Quartal</string>
     <string name="date_qs_lastyear">Letztes Jahr</string>
-
-    <plurals name="call">
-        <item quantity="one">1 Anruf</item>
-        <item quantity="other">%d Anrufe</item>
-    </plurals>
-
-    <string-array name="call_stats_duration">
-        <item><xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
-        <item><xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
-        <item><xliff:g id="minutes" example="2 mins">%2$s</xliff:g>, <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g>, <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g>, <xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
-         <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g>, <xliff:g id="minutes" example="2 mins">%2$s</xliff:g>, <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
-    </string-array>
-
-    <plurals name="hour">
-        <item quantity="one">1 Stunde</item>
-        <item quantity="other">%d Stunden</item>
-    </plurals>
-    <plurals name="minute">
-        <item quantity="one">1 Minute</item>
-        <item quantity="other">%d Minuten</item>
-    </plurals>
-    <plurals name="second">
-        <item quantity="one">1 Sekunde</item>
-        <item quantity="other">%d Sekunden</item>
-    </plurals>
 </resources>

@@ -32,11 +32,9 @@
     <string name="t9_map_row_7">7pqrsßɾṕŕśřš</string>
     <string name="t9_map_row_8">8tuvťúùüûűů</string>
     <string name="t9_map_row_9">9wxyzýẃźž</string>
-
     <string name="dialer_ui_title">Indstillinger for opkaldsprogram</string>
     <string name="dialer_ui_orientation_title">Slå sensor-orientering til</string>
     <string name="dialer_ui_orientation_summary">Rotér opkaldsprogram baseret på sensor</string>
-
     <string name="callStatsDetailTitle">Detaljer for opkaldsstatistik</string>
     <string name="call_stats">Opkaldsstatistik</string>
     <string name="call_stats_refresh">Genopfrisk</string>
@@ -54,7 +52,6 @@
     <string name="call_stats_filter_from">Startdato</string>
     <string name="call_stats_filter_to">Slutdato</string>
     <string name="call_stats_filter_picker_title">Tidsinterval</string>
-
     <string name="date_quick_selection">Hurtigvalg</string>
     <string name="date_qs_currentmonth">Denne måned</string>
     <string name="date_qs_currentquarter">Dette kvartal</string>
@@ -63,40 +60,10 @@
     <string name="date_qs_lastmonth">Sidste måned</string>
     <string name="date_qs_lastquarter">Sidste kvartal</string>
     <string name="date_qs_lastyear">Sidste år</string>
-
     <string name="call_stats_date_filter">Justér tidsinterval</string>
     <string name="call_stats_reset_filter">Nulstil tidsinterval</string>
     <string name="call_stats_sort_by_duration">Sortér på opkaldslængde</string>
     <string name="call_stats_sort_by_count">Sortér på antal opkald</string>
-
-    <string-array name="call_stats_duration">
-        <item><xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
-        <item><xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
-        <item><xliff:g id="minutes" example="2 mins">%2$s</xliff:g> <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="minutes" example="2 mins">%2$s</xliff:g> <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
-    </string-array>
-
-    <plurals name="hour">
-        <item quantity="one">1 time</item>
-        <item quantity="other">%d timer</item>
-    </plurals>
-    <plurals name="minute">
-        <item quantity="one">1 minut</item>
-        <item quantity="other">%d minutter</item>
-    </plurals>
-    <plurals name="second">
-        <item quantity="one">1 sekund</item>
-        <item quantity="other">%d sekunder</item>
-    </plurals>
-
-    <plurals name="call">
-        <item quantity="one">1 opkald</item>
-        <item quantity="other">%d opkald</item>
-    </plurals>
-
     <string name="menu_add_to_blacklist">Tilføj til sortliste</string>
     <string name="toast_added_to_blacklist">%s tilføjet til sortliste.</string>
 </resources>

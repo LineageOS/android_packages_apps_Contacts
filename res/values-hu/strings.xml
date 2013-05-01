@@ -570,6 +570,4 @@
     <string name="menu_export_database" msgid="2659719297530170820">"Adatbázisfájlok exportálása"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"További beállítások"</string>
     <string name="expand_collapse_name_fields_description" msgid="8682630859539604311">"Névmezők kinyitása és összecsukása"</string>
-
-
 </resources>

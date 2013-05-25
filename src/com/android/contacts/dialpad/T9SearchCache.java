@@ -249,12 +249,12 @@ public class T9SearchCache implements ComponentCallbacks2 {
                 while (!data.isAfterLast() && data.getLong(DATA_COLUMN_CONTACT) == contactId) {
                     final String mimeType = data.getString(DATA_COLUMN_MIMETYPE);
                     if (TextUtils.equals(mimeType, Phone.CONTENT_ITEM_TYPE)) {
-                        String num = data.getString(DATA_COLUMN_PHONENUMBER);
                         ContactItem contactInfo = new ContactItem();
 
                         contactInfo.id = contactId;
-                        contactInfo.number = PhoneNumberUtils.formatNumber(num);
-                        contactInfo.normalNumber = removeNonDigits(num);
+                        contactInfo.number =
+                                PhoneNumberUtils.formatNumber(data.getString(DATA_COLUMN_PHONENUMBER));
+                        contactInfo.normalNumber = removeNonDigits(contactInfo.number);
                         contactInfo.timesContacted = contactContactedCount;
                         contactInfo.isSuperPrimary = data.getInt(DATA_COLUMN_PRIMARY) > 0;
                         contactInfo.groupType = Phone.getTypeLabel(mContext.getResources(),
@@ -612,7 +612,7 @@ public class T9SearchCache implements ComponentCallbacks2 {
                 numberBuilder.append(o.groupType);
                 numberBuilder.append(")");
                 if (o.numberMatchId != -1) {
-                    int numberStart = -1, numberEnd = -1;
+                    int numberStart = -1, numberEnd = o.number.length();
                     int formattedNumberLength = o.number.length();
 
                     for (int i = 0, normalIndex = 0; i < formattedNumberLength; i++) {
@@ -628,7 +628,7 @@ public class T9SearchCache implements ComponentCallbacks2 {
                         }
                         normalIndex++;
                     }
-                    if (numberStart >= 0 && numberEnd >= 0) {
+                    if (numberStart >= 0) {
                         numberBuilder.setSpan(new ForegroundColorSpan(mHighlightColor),
                                 numberStart, numberEnd, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
                     }

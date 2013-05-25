@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "iAHYiVI",
+        "filename": "res/values-fr/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2013-05-25T17:55:58Z",
+      "side": 1,
+      "message": "Please revert. Gingerbread provides support for low-res devices and therefore we should retain AOSP abbreviations.",
+      "revId": "e5044e10acb2aafc14f6369e3d27b0a51d5f45fb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "iOHcdUg",
+        "filename": "res/values-fr/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2013-05-25T17:55:58Z",
+      "side": 1,
+      "message": "Why extra whitespaces? I\u0027d prefer to have the string \u0027noContactsHelpText\u0027 on one line, as it was before",
+      "revId": "e5044e10acb2aafc14f6369e3d27b0a51d5f45fb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "iMHhcQA",
+        "filename": "res/values-fr/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2013-05-25T17:55:58Z",
+      "side": 1,
+      "message": "Remove the double quotes at the beginning of the string contents",
+      "revId": "e5044e10acb2aafc14f6369e3d27b0a51d5f45fb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "iKHnnRE",
+        "filename": "res/values-fr/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2013-05-25T17:55:58Z",
+      "side": 1,
+      "message": "Remove the end-double quotes",
+      "revId": "e5044e10acb2aafc14f6369e3d27b0a51d5f45fb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "iIHkmQ0",
+        "filename": "res/values-fr/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2013-05-25T17:55:58Z",
+      "side": 1,
+      "message": "Remove those extra line breaks and the begin/end double quotes",
+      "revId": "e5044e10acb2aafc14f6369e3d27b0a51d5f45fb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

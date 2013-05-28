@@ -24,6 +24,14 @@
     <string name="t9_dial_click_title">Gewählten Kontakt anrufen</string>
     <string name="t9_dial_click_summary">Ausgewählten Kontakt bei T9-Suche anrufen</string>
     <string name="t9_add_to_contacts">Zu Kontakten hinzufügen</string>
+    <string name="t9_map_row_2">2abcàáâäåɑæçǽćčá</string>
+    <string name="t9_map_row_3">3defďéèêëě</string>
+    <string name="t9_map_row_4">4ghiíìïîǵ</string>
+    <string name="t9_map_row_5">5jklḱḱĺ</string>
+    <string name="t9_map_row_6">6mnoòóöôøñŋǿḿńňő</string>
+    <string name="t9_map_row_7">7pqrsßɾṕŕśřš</string>
+    <string name="t9_map_row_8">8tuvťúùüûűů</string>
+    <string name="t9_map_row_9">9wxyzýẃźž</string>
     <string name="dialer_ui_title">Anrufeinstellungen</string>
     <string name="dialer_ui_orientation_title">Autorotation verwenden</string>
     <string name="dialer_ui_orientation_summary">Wenn eingeschaltet, werden Systemeinstellungen verwendet</string>

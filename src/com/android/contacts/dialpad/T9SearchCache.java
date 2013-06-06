@@ -145,7 +145,7 @@ public class T9SearchCache implements ComponentCallbacks2 {
                 }
 
                 contact.formattedNumber = PhoneNumberUtils.formatNumber(contact.number);
-                contact.normalNumber = removeNonDigits(contact.formattedNumber);
+                contact.normalNumber = PhoneNumberUtils.stripSeparators(contact.formattedNumber);
                 if (contact.numberType >= 0) {
                     final int labelId = Phone.getTypeLabelResource(contact.numberType);
                     contact.groupType = context.getResources().getString(labelId);
@@ -263,8 +263,10 @@ public class T9SearchCache implements ComponentCallbacks2 {
 
                         contactInfo.id = contactId;
                         contactInfo.number = data.getString(DATA_COLUMN_PHONENUMBER);
-                        contactInfo.formattedNumber = PhoneNumberUtils.formatNumber(contactInfo.number);
-                        contactInfo.normalNumber = removeNonDigits(contactInfo.formattedNumber);
+                        contactInfo.formattedNumber =
+                                PhoneNumberUtils.formatNumber(contactInfo.number);
+                        contactInfo.normalNumber =
+                                PhoneNumberUtils.stripSeparators(contactInfo.formattedNumber);
                         contactInfo.timesContacted = contactContactedCount;
                         contactInfo.isSuperPrimary = data.getInt(DATA_COLUMN_PRIMARY) > 0;
                         contactInfo.numberType = data.getInt(DATA_COLUMN_PHONETYPE);
@@ -408,7 +410,7 @@ public class T9SearchCache implements ComponentCallbacks2 {
             return null;
         }
 
-        number = removeNonDigits(number);
+        number = PhoneNumberUtils.stripSeparators(number);
 
         int pos = 0;
         final ArrayList<ContactItem> numberResults = new ArrayList<ContactItem>();
@@ -525,18 +527,6 @@ public class T9SearchCache implements ComponentCallbacks2 {
 
         mNormalizer = NameToNumberFactory.create(mContext,
                 t9Chars.toString(), t9Digits.toString());
-    }
-
-    private String removeNonDigits(String number) {
-        int len = number.length();
-        StringBuilder sb = new StringBuilder(len);
-        for (int i = 0; i < len; i++) {
-            char ch = number.charAt(i);
-            if ((ch >= '0' && ch <= '9') || ch == '*' || ch == '#' || ch == '+') {
-                sb.append(ch);
-            }
-        }
-        return sb.toString();
     }
 
     public T9Adapter createT9Adapter(Context context, ArrayList<ContactItem> items) {

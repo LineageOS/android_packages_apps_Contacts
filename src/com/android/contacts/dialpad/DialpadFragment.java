@@ -62,6 +62,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
@@ -101,6 +102,7 @@ import com.android.phone.HapticFeedback;
 public class DialpadFragment extends Fragment
         implements View.OnClickListener,
         View.OnLongClickListener, View.OnKeyListener,
+        View.OnTouchListener,
         AdapterView.OnItemClickListener, TextWatcher,
         PopupMenu.OnMenuItemClickListener,
         DialpadImageButton.OnPressedListener {
@@ -312,6 +314,7 @@ public class DialpadFragment extends Fragment
         mDigits.setOnKeyListener(this);
         mDigits.setOnLongClickListener(this);
         mDigits.addTextChangedListener(this);
+        mDigits.setOnTouchListener(this);
 
         mT9Search = T9SearchCache.getInstance(getActivity());
         mT9List = (ListView) fragmentView.findViewById(R.id.t9list);
@@ -352,6 +355,7 @@ public class DialpadFragment extends Fragment
         mDialButton = fragmentView.findViewById(R.id.dialButton);
         if (r.getBoolean(R.bool.config_show_onscreen_dial_button)) {
             mDialButton.setOnClickListener(this);
+            mDialButton.setOnTouchListener(this);
             mDialButton.setOnLongClickListener(this);
         } else {
             mDialButton.setVisibility(View.GONE); // It's VISIBLE by default
@@ -519,7 +523,9 @@ public class DialpadFragment extends Fragment
         int[] buttonIds = new int[] { R.id.one, R.id.two, R.id.three, R.id.four, R.id.five,
                 R.id.six, R.id.seven, R.id.eight, R.id.nine, R.id.zero, R.id.star, R.id.pound};
         for (int id : buttonIds) {
-            ((DialpadImageButton) fragmentView.findViewById(id)).setOnPressedListener(this);
+            DialpadImageButton button = ((DialpadImageButton)fragmentView.findViewById(id));
+            button.setOnPressedListener(this);
+            button.setOnTouchListener(this);
         }
 
         // Long-pressing one button will initiate Voicemail.
@@ -959,7 +965,6 @@ public class DialpadFragment extends Fragment
                 break;
         }
 
-        mHaptic.vibrate();
         KeyEvent event = new KeyEvent(KeyEvent.ACTION_DOWN, keyCode);
         mDigits.onKeyDown(keyCode, event);
 
@@ -969,6 +974,14 @@ public class DialpadFragment extends Fragment
         if (length == mDigits.getSelectionStart() && length == mDigits.getSelectionEnd()) {
             mDigits.setCursorVisible(false);
         }
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            mHaptic.vibrate();
+        }
+        return false;
     }
 
     @Override
@@ -1076,7 +1089,6 @@ public class DialpadFragment extends Fragment
                 return;
             }
             case R.id.dialButton: {
-                mHaptic.vibrate();  // Vibrate here too, just like we do for the regular keys
                 dialButtonPressed();
                 return;
             }

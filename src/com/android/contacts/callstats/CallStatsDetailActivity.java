@@ -228,6 +228,8 @@ public class CallStatsDetailActivity extends Activity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.menu_edit_number_before_call).setVisible(
                 mCallDetailHeader.canEditNumberBeforeCall());
+        menu.findItem(R.id.menu_add_to_blacklist).setVisible(
+                mContactInfoHelper.canBlacklistCalls());
         return super.onPrepareOptionsMenu(menu);
     }
 

@@ -59,7 +59,6 @@ import com.android.contacts.ContactPhotoManager;
 import com.android.contacts.R;
 import com.android.contacts.dialpad.util.NameToNumber;
 import com.android.contacts.dialpad.util.NameToNumberFactory;
-//import com.google.analytics.tracking.android.Log;
 
 /**
  * @author shade, Danesh, pawitp
@@ -107,7 +106,7 @@ public class T9SearchCache implements ComponentCallbacks2 {
         Contacts._ID,
         Contacts.DISPLAY_NAME,
         Contacts.TIMES_CONTACTED,
-        Contacts.PHOTO_THUMBNAIL_URI,
+        Contacts.PHOTO_THUMBNAIL_URI
     };
     private static final int CONTACT_COLUMN_ID = 0;
     private static final int CONTACT_COLUMN_NAME = 1;
@@ -292,11 +291,11 @@ public class T9SearchCache implements ComponentCallbacks2 {
                         	if(call_log.getString(CALLLOG_COLUMN_CACHED_NAME) == null)
                         		continue;
                         	if(call_log.getString(CALLLOG_COLUMN_CACHED_NAME).equals(contact.getString(CONTACT_COLUMN_NAME)))
-                            	if(PhoneNumberUtils.compare(call_log.getString(CALLLOG_COLUMN_NUMBER),contactInfo.number))
-                            	{
-                            		contactInfo.lastTimeContacted = call_log.getLong(CALLLOG_COLUMN_DATE);
-                            		break;
-                            	}
+                        		if(PhoneNumberUtils.compare(call_log.getString(CALLLOG_COLUMN_NUMBER),contactInfo.number))
+                        		{
+                        			contactInfo.lastTimeContacted = call_log.getLong(CALLLOG_COLUMN_DATE);
+                        			break;
+                        		}
                         } while (call_log.moveToNext());
                         contactInfo.isSuperPrimary = data.getInt(DATA_COLUMN_PRIMARY) > 0;
                         contactInfo.numberType = data.getInt(DATA_COLUMN_PHONETYPE);
@@ -495,16 +494,6 @@ public class T9SearchCache implements ComponentCallbacks2 {
             mAllResults.addAll(numberResults);
             mAllResults.addAll(nameResults);
         }
-/*        if (preferSortByHistory())
-        {
-        	Log.d("Dialer", "Trideni dle historie");
-        	for (ContactItem c: mAllResults)
-        	{
-        		Log.d("Dialer", c.formattedNumber);
-        		Log.d("Dialer", "cas"+java.text.DateFormat.getDateTimeInstance().format(c.lastTimeContacted));
-        		
-        	}
-        }*/
 
         return new T9SearchResult(new ArrayList<ContactItem>(mAllResults));
     }

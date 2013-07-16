@@ -19,6 +19,7 @@
     <string name="t9_sort_summary">Zvolte, jakým způsobem mají být filtrovány výsledky T9</string>
     <string name="t9_sort_name">Jména první</string>
     <string name="t9_sort_number">Čísla první</string>
+    <string name="t9_sort_history">Historie první</string>
     <string name="t9_state_title">Povolit T9 v číselníku</string>
     <string name="t9_state_summary">Povolit vyhledávání T9 při výběru čísla v číselníku</string>
     <string name="t9_dial_click_title">Volat vybraný kontakt</string>

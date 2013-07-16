@@ -17,10 +17,12 @@
     <string-array name="t9_sort_entries" translatable="false">
         <item>@string/t9_sort_name</item>
         <item>@string/t9_sort_number</item>
+        <item>@string/t9_sort_history</item>
     </string-array>
     <string-array name="t9_sort_values" translatable="false">
         <item>1</item>
         <item>2</item>
+        <item>3</item>
     </string-array>
     <string-array name="t9_map" translatable="false">
         <item>0</item>

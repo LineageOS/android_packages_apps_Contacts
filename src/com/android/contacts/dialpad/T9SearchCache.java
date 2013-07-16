@@ -37,6 +37,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.provider.CallLog;
 import android.provider.ContactsContract.CommonDataKinds.Nickname;
 import android.provider.ContactsContract.CommonDataKinds.Organization;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -72,6 +73,8 @@ public class T9SearchCache implements ComponentCallbacks2 {
     // List sort modes
     private static final int NAME_FIRST = 1;
     private static final int NUMBER_FIRST = 2;
+    private static final int NAME_FIRST_CONT_HIST = 3;
+    private static final int NUMBER_FIRST_CONT_HIST = 4;
 
     // Phone number, nickname, organization query
     private static final String[] DATA_PROJECTION = new String[] {
@@ -113,6 +116,17 @@ public class T9SearchCache implements ComponentCallbacks2 {
 
     private static final String CONTACT_QUERY = Contacts.HAS_PHONE_NUMBER + " > 0";
     private static final String CONTACT_SORT = Contacts._ID + " ASC";
+
+    private static final String[] CALLLOG_PROJECTION = new String[] {
+        CallLog.Calls.NUMBER,
+        CallLog.Calls.CACHED_NAME,
+        CallLog.Calls.DATE,
+    };
+    private static final int CALLLOG_COLUMN_NUMBER = 0;
+    private static final int CALLLOG_COLUMN_CACHED_NAME = 1;
+    private static final int CALLLOG_COLUMN_DATE = 2;
+
+    private static final String CALLLOG_SORT = CallLog.Calls.DATE + " DESC";
 
     // Local variables
     private Context mContext;
@@ -236,6 +250,23 @@ public class T9SearchCache implements ComponentCallbacks2 {
             Cursor data = mContext.getContentResolver().query(
                     Data.CONTENT_URI, DATA_PROJECTION, DATA_SELECTION,
                     DATA_SELECTION_ARGS, DATA_SORT);
+            Cursor callLog = mContext.getContentResolver().query(
+                    CallLog.Calls.CONTENT_URI, CALLLOG_PROJECTION, null,
+                    null, CALLLOG_SORT);
+
+            Map<String, Long> callLogMap = new LinkedHashMap<String, Long>();
+
+            callLog.moveToFirst();
+            do
+            {
+                if(callLog.getString(CALLLOG_COLUMN_CACHED_NAME) == null)
+                    continue;
+
+                String phoneNumber = android.telephony.PhoneNumberUtils.formatNumber(callLog.getString(CALLLOG_COLUMN_NUMBER));
+                if(callLogMap.containsKey(phoneNumber))
+                    continue;
+                callLogMap.put(phoneNumber, callLog.getLong(CALLLOG_COLUMN_DATE));
+            } while (callLog.moveToNext());
 
             data.moveToFirst();
 
@@ -268,6 +299,12 @@ public class T9SearchCache implements ComponentCallbacks2 {
                         contactInfo.normalNumber =
                                 PhoneNumberUtils.stripSeparators(contactInfo.formattedNumber);
                         contactInfo.timesContacted = contactContactedCount;
+                        contactInfo.lastTimeContacted = 0;
+                        if (callLogMap.containsKey(android.telephony.PhoneNumberUtils.formatNumber(contactInfo.number)))
+                        {
+                            contactInfo.lastTimeContacted = callLogMap.get(android.telephony.PhoneNumberUtils.formatNumber(contactInfo.number));
+                        }
+
                         contactInfo.isSuperPrimary = data.getInt(DATA_COLUMN_PRIMARY) > 0;
                         contactInfo.numberType = data.getInt(DATA_COLUMN_PHONETYPE);
                         contactInfo.groupType = Phone.getTypeLabel(mContext.getResources(),
@@ -381,6 +418,7 @@ public class T9SearchCache implements ComponentCallbacks2 {
         int numberMatchId;
         Map<Integer, NameMatchEntry> nameEntries;
         int timesContacted;
+        long lastTimeContacted;
         CharSequence groupType;
         long id;
         boolean isSuperPrimary;
@@ -447,14 +485,31 @@ public class T9SearchCache implements ComponentCallbacks2 {
         mAllResults.clear();
         mPrevInput = number;
 
-        Collections.sort(numberResults, sNumberComparator);
-        Collections.sort(nameResults, sNameComparator);
+        int sortMode = getSortMode();
+
+        if ((sortMode == NAME_FIRST_CONT_HIST) || (sortMode == NUMBER_FIRST_CONT_HIST))
+        {
+            Collections.sort(numberResults, sNumberComparatorByContHist);
+        }
+        else
+        {
+            Collections.sort(numberResults, sNumberComparatorByContFreq);
+        }
+
+        if ((sortMode == NAME_FIRST_CONT_HIST) || (sortMode == NUMBER_FIRST_CONT_HIST))
+        {
+            Collections.sort(nameResults, sNameComparatorByContHist);
+        }
+        else
+        {
+            Collections.sort(nameResults, sNameComparatorByContFreq);
+        }
 
         if (nameResults.isEmpty() && numberResults.isEmpty()) {
             return null;
         }
 
-        if (preferSortByName()) {
+        if ((sortMode == NAME_FIRST) || (sortMode == NAME_FIRST_CONT_HIST)) {
             mAllResults.addAll(nameResults);
             mAllResults.addAll(numberResults);
         } else {
@@ -465,68 +520,134 @@ public class T9SearchCache implements ComponentCallbacks2 {
         return new T9SearchResult(new ArrayList<ContactItem>(mAllResults));
     }
 
-    private boolean preferSortByName() {
+    private int getSortMode() {
         String mode = PreferenceManager.getDefaultSharedPreferences(mContext).getString("t9_sort", null);
-        if (TextUtils.equals(mode, Integer.toString(NUMBER_FIRST))) {
-            return false;
+        if (mode == null) {
+            mode = mContext.getString(R.string.t9_default_sort);
         }
-        return true;
+        return Integer.valueOf(mode);
     }
 
-    private static final Comparator<ContactItem> sNameComparator = new Comparator<ContactItem>() {
+    // sort by contact frequency first - higher contact frequency first
+    // then by primary state - primary first
+    // and finally by match position in the entries - leftmost match first
+    private static final ContactComparatorByNameByContactFrequency sNameComparatorByContFreq = new ContactComparatorByNameByContactFrequency();
+    private static final ContactComparatorByNumberByContactFrequency sNumberComparatorByContFreq = new ContactComparatorByNumberByContactFrequency();
+
+    // sort by contact call history - last called contact first
+    // then by primary state - primary first
+    // and finally by match position in the entries - leftmost match first
+    private static final ContactComparatorByNameByContactHistory sNameComparatorByContHist = new ContactComparatorByNameByContactHistory();
+    private static final ContactComparatorByNumberByContactHistory sNumberComparatorByContHist = new ContactComparatorByNumberByContactHistory();
+
+
+    private static class ContactComparatorByNameByContactFrequency extends ContactComparatorByNameBase
+    {
         @Override
-        public int compare(ContactItem lhs, ContactItem rhs) {
-            // sort by contact frequency first - higher contact frequency first
-            if (lhs.timesContacted != rhs.timesContacted) {
+        public int compare(ContactItem lhs, ContactItem rhs)
+        {
+            if (lhs.timesContacted != rhs.timesContacted)
+            {
                 return -Integer.compare(lhs.timesContacted, rhs.timesContacted);
             }
+            return super.compare(lhs, rhs);
+        }
+    }
 
-            // then by primary state - primary first
-            if (lhs.isSuperPrimary != rhs.isSuperPrimary) {
+    private static class ContactComparatorByNameByContactHistory extends ContactComparatorByNameBase
+    {
+        @Override
+        public int compare(ContactItem lhs, ContactItem rhs)
+        {
+            if (lhs.lastTimeContacted != rhs.lastTimeContacted)
+            {
+                return -Long.compare(lhs.lastTimeContacted, rhs.lastTimeContacted);
+            }
+            return super.compare(lhs, rhs);
+        }
+    }
+
+    private static class ContactComparatorByNameBase implements Comparator<ContactItem>
+    {
+        @Override
+        public int compare(ContactItem lhs, ContactItem rhs)
+        {
+            if (lhs.isSuperPrimary != rhs.isSuperPrimary)
+            {
                 return lhs.isSuperPrimary ? -1 : 1;
             }
 
-            // and finally by match position in the entries - leftmost match first
             int lowestMatchLeft = Integer.MAX_VALUE, lowestMatchRight = Integer.MAX_VALUE;
-            for (int i = 0; i < MATCH_ENTRY_COUNT; i++) {
+            for (int i = 0; i < MATCH_ENTRY_COUNT; i++)
+            {
                 NameMatchEntry l = lhs.nameEntries.get(i);
                 NameMatchEntry r = rhs.nameEntries.get(i);
-                if (l.matchId >= 0 && l.matchId < lowestMatchLeft) {
+                if (l.matchId >= 0 && l.matchId < lowestMatchLeft)
+                {
                     lowestMatchLeft = l.matchId;
                 }
-                if (r.matchId >= 0 && r.matchId < lowestMatchRight) {
+                if (r.matchId >= 0 && r.matchId < lowestMatchRight)
+                {
                     lowestMatchRight = r.matchId;
                 }
             }
 
             return Integer.compare(lowestMatchLeft, lowestMatchRight);
         }
-    };
 
-    private static final Comparator<ContactItem> sNumberComparator = new Comparator<ContactItem>() {
+    }
+
+    private static class ContactComparatorByNumberByContactFrequency extends ContactComparatorByNumberBase
+    {
         @Override
-        public int compare(ContactItem lhs, ContactItem rhs) {
-            // as above: contact frequency first, then primary state, then position
-            int ret = -Integer.compare(rhs.timesContacted, lhs.timesContacted);
-            if (ret == 0) ret = Boolean.compare(rhs.isSuperPrimary, lhs.isSuperPrimary);
+        public int compare(ContactItem lhs, ContactItem rhs)
+        {
+            if (lhs.timesContacted != rhs.timesContacted)
+            {
+                return -Integer.compare(lhs.timesContacted, rhs.timesContacted);
+            }
+            return super.compare(lhs, rhs);
+        }
+    }
+
+    private static class ContactComparatorByNumberByContactHistory extends ContactComparatorByNumberBase
+    {
+        @Override
+        public int compare(ContactItem lhs, ContactItem rhs)
+        {
+            if (lhs.lastTimeContacted != rhs.lastTimeContacted)
+            {
+                return -Long.compare(lhs.lastTimeContacted, rhs.lastTimeContacted);
+            }
+
+            return super.compare(lhs, rhs);
+        }
+    }
+
+    private static class ContactComparatorByNumberBase implements Comparator<ContactItem>
+    {
+        @Override
+        public int compare(ContactItem lhs, ContactItem rhs)
+        {
+            int ret = Boolean.compare(rhs.isSuperPrimary, lhs.isSuperPrimary);
             if (ret == 0) ret = Integer.compare(lhs.numberMatchId, rhs.numberMatchId);
             return ret;
         }
-    };
+    }
 
     private void initNormalizer() {
-        StringBuilder t9Chars = new StringBuilder();
-        StringBuilder t9Digits = new StringBuilder();
+    	StringBuilder t9Chars = new StringBuilder();
+    	StringBuilder t9Digits = new StringBuilder();
 
-        for (String item : mContext.getResources().getStringArray(R.array.t9_map)) {
-            t9Chars.append(item);
-            for (int i = 0; i < item.length(); i++) {
-                t9Digits.append(item.charAt(0));
-            }
-        }
+    	for (String item : mContext.getResources().getStringArray(R.array.t9_map)) {
+    		t9Chars.append(item);
+    		for (int i = 0; i < item.length(); i++) {
+    			t9Digits.append(item.charAt(0));
+    		}
+    	}
 
-        mNormalizer = NameToNumberFactory.create(mContext,
-                t9Chars.toString(), t9Digits.toString());
+    	mNormalizer = NameToNumberFactory.create(mContext,
+    			t9Chars.toString(), t9Digits.toString());
     }
 
     public T9Adapter createT9Adapter(Context context, ArrayList<ContactItem> items) {

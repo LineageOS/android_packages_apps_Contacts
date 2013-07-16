@@ -37,6 +37,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.provider.CallLog;
 import android.provider.ContactsContract.CommonDataKinds.Nickname;
 import android.provider.ContactsContract.CommonDataKinds.Organization;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -72,6 +73,7 @@ public class T9SearchCache implements ComponentCallbacks2 {
     // List sort modes
     private static final int NAME_FIRST = 1;
     private static final int NUMBER_FIRST = 2;
+    private static final int HISTORY_FIRST = 3;
 
     // Phone number, nickname, organization query
     private static final String[] DATA_PROJECTION = new String[] {
@@ -113,6 +115,17 @@ public class T9SearchCache implements ComponentCallbacks2 {
 
     private static final String CONTACT_QUERY = Contacts.HAS_PHONE_NUMBER + " > 0";
     private static final String CONTACT_SORT = Contacts._ID + " ASC";
+
+    private static final String[] CALLLOG_PROJECTION = new String[] {
+        CallLog.Calls.NUMBER,
+        CallLog.Calls.CACHED_NAME,
+        CallLog.Calls.DATE,
+    };
+    private static final int CALLLOG_COLUMN_NUMBER = 0;
+    private static final int CALLLOG_COLUMN_CACHED_NAME = 1;
+    private static final int CALLLOG_COLUMN_DATE = 2;
+    
+    private static final String CALLLOG_SORT = CallLog.Calls.DATE + " DESC";
 
     // Local variables
     private Context mContext;
@@ -236,6 +249,9 @@ public class T9SearchCache implements ComponentCallbacks2 {
             Cursor data = mContext.getContentResolver().query(
                     Data.CONTENT_URI, DATA_PROJECTION, DATA_SELECTION,
                     DATA_SELECTION_ARGS, DATA_SORT);
+            Cursor call_log = mContext.getContentResolver().query(
+                    CallLog.Calls.CONTENT_URI, CALLLOG_PROJECTION, null,
+                    null, CALLLOG_SORT);
 
             data.moveToFirst();
 
@@ -268,6 +284,19 @@ public class T9SearchCache implements ComponentCallbacks2 {
                         contactInfo.normalNumber =
                                 PhoneNumberUtils.stripSeparators(contactInfo.formattedNumber);
                         contactInfo.timesContacted = contactContactedCount;
+                        contactInfo.lastTimeContacted = 0;
+                        call_log.moveToFirst();
+                        do
+                        {
+                        	if(call_log.getString(CALLLOG_COLUMN_CACHED_NAME) == null)
+                        		continue;
+                        	if(call_log.getString(CALLLOG_COLUMN_CACHED_NAME).equals(contact.getString(CONTACT_COLUMN_NAME)))
+                        		if(PhoneNumberUtils.compare(call_log.getString(CALLLOG_COLUMN_NUMBER),contactInfo.number))
+                        		{
+                        			contactInfo.lastTimeContacted = call_log.getLong(CALLLOG_COLUMN_DATE);
+                        			break;
+                        		}
+                        } while (call_log.moveToNext());
                         contactInfo.isSuperPrimary = data.getInt(DATA_COLUMN_PRIMARY) > 0;
                         contactInfo.numberType = data.getInt(DATA_COLUMN_PHONETYPE);
                         contactInfo.groupType = Phone.getTypeLabel(mContext.getResources(),
@@ -381,6 +410,7 @@ public class T9SearchCache implements ComponentCallbacks2 {
         int numberMatchId;
         Map<Integer, NameMatchEntry> nameEntries;
         int timesContacted;
+        long lastTimeContacted;
         CharSequence groupType;
         long id;
         boolean isSuperPrimary;
@@ -448,13 +478,16 @@ public class T9SearchCache implements ComponentCallbacks2 {
         mPrevInput = number;
 
         Collections.sort(numberResults, sNumberComparator);
-        Collections.sort(nameResults, sNameComparator);
+        if (preferSortByHistory())
+        	Collections.sort(nameResults, sHistoryComparator);
+        else
+            Collections.sort(nameResults, sNameComparator);
 
         if (nameResults.isEmpty() && numberResults.isEmpty()) {
             return null;
         }
 
-        if (preferSortByName()) {
+        if (preferSortByName() || preferSortByHistory()) {
             mAllResults.addAll(nameResults);
             mAllResults.addAll(numberResults);
         } else {
@@ -467,7 +500,15 @@ public class T9SearchCache implements ComponentCallbacks2 {
 
     private boolean preferSortByName() {
         String mode = PreferenceManager.getDefaultSharedPreferences(mContext).getString("t9_sort", null);
-        if (TextUtils.equals(mode, Integer.toString(NUMBER_FIRST))) {
+        if (!TextUtils.equals(mode, Integer.toString(NAME_FIRST))) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean preferSortByHistory() {
+        String mode = PreferenceManager.getDefaultSharedPreferences(mContext).getString("t9_sort", null);
+        if (!TextUtils.equals(mode, Integer.toString(HISTORY_FIRST))) {
             return false;
         }
         return true;
@@ -479,6 +520,36 @@ public class T9SearchCache implements ComponentCallbacks2 {
             // sort by contact frequency first - higher contact frequency first
             if (lhs.timesContacted != rhs.timesContacted) {
                 return -Integer.compare(lhs.timesContacted, rhs.timesContacted);
+            }
+
+            // then by primary state - primary first
+            if (lhs.isSuperPrimary != rhs.isSuperPrimary) {
+                return lhs.isSuperPrimary ? -1 : 1;
+            }
+
+            // and finally by match position in the entries - leftmost match first
+            int lowestMatchLeft = Integer.MAX_VALUE, lowestMatchRight = Integer.MAX_VALUE;
+            for (int i = 0; i < MATCH_ENTRY_COUNT; i++) {
+                NameMatchEntry l = lhs.nameEntries.get(i);
+                NameMatchEntry r = rhs.nameEntries.get(i);
+                if (l.matchId >= 0 && l.matchId < lowestMatchLeft) {
+                    lowestMatchLeft = l.matchId;
+                }
+                if (r.matchId >= 0 && r.matchId < lowestMatchRight) {
+                    lowestMatchRight = r.matchId;
+                }
+            }
+
+            return Integer.compare(lowestMatchLeft, lowestMatchRight);
+        }
+    };
+
+    private static final Comparator<ContactItem> sHistoryComparator = new Comparator<ContactItem>() {
+        @Override
+        public int compare(ContactItem lhs, ContactItem rhs) {
+            // sort by contact frequency first - higher contact frequency first
+            if (lhs.lastTimeContacted != rhs.lastTimeContacted) {
+                return -Long.compare(lhs.lastTimeContacted, rhs.lastTimeContacted);
             }
 
             // then by primary state - primary first

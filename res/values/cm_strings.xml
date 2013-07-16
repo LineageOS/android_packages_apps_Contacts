@@ -21,6 +21,7 @@
     <string name="t9_sort_summary">Choose how to filter T9 results</string>
     <string name="t9_sort_name">Name matches first</string>
     <string name="t9_sort_number">Number matches first</string>
+    <string name="t9_sort_history">Call history matches first</string>
     <string name="t9_state_title">Enable T9 dialer</string>
     <string name="t9_state_summary">Enable T9 searching in dialer</string>
     <string name="t9_dial_click_title">Dial selected contact</string>

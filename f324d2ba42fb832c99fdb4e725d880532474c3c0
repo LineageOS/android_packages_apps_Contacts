@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dac4157f_7ed8e953",
+        "filename": "res/values-cs/cm_strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-07-17T16:34:30Z",
+      "side": 1,
+      "message": "Please leave the translation up to a separate commit.",
+      "revId": "f324d2ba42fb832c99fdb4e725d880532474c3c0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dac4157f_7e3109a2",
+        "filename": "src/com/android/contacts/dialpad/T9SearchCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-07-17T16:34:30Z",
+      "side": 1,
+      "message": "call_log -\u003e callLog",
+      "revId": "f324d2ba42fb832c99fdb4e725d880532474c3c0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dac4157f_1e21ed4d",
+        "filename": "src/com/android/contacts/dialpad/T9SearchCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-07-17T16:34:30Z",
+      "side": 1,
+      "message": "Besides the whitespace issues:\n\n- Reiterating the call log cursor for every number is expensive and is going to be slow. \n- Even worse: It\u0027s not needed at all ;)\n- Just query and use the Contacts.LAST_TIME_CONTACTED column.",
+      "revId": "f324d2ba42fb832c99fdb4e725d880532474c3c0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dac4157f_fe1d1910",
+        "filename": "src/com/android/contacts/dialpad/T9SearchCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-07-17T16:34:30Z",
+      "side": 1,
+      "message": "if {\n    ...\n} else {\n    ...\n}\n\n(IOW: braces missing)",
+      "revId": "f324d2ba42fb832c99fdb4e725d880532474c3c0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dac4157f_be17a1ec",
+        "filename": "src/com/android/contacts/dialpad/T9SearchCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-07-17T16:34:30Z",
+      "side": 1,
+      "message": "Just make this a\n\nprivate int getSortMode() {\n    String mode \u003d PreferenceManager.getDefaultSharedPreferences(mContext).getString(\"t9_sort\"), null);\n    if (mode \u003d\u003d null) {\n        mode \u003d mContext.getString(R.string.t9_default_sort);\n    }\n    return Integer.valueOf(mode);\n}\n\nand call it only once above (store the return value into a variable), and compare it against the defined constants.",
+      "revId": "f324d2ba42fb832c99fdb4e725d880532474c3c0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dac4157f_9ed3bd38",
+        "filename": "src/com/android/contacts/dialpad/T9SearchCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-07-17T16:34:30Z",
+      "side": 1,
+      "message": "This deserves a base class + 2 derived classes, I think. Make a\n\nprivate static class ContactComparatorBase extends Comparator\u003cContactItem\u003e {\n}\n\n(having the primary + position comparison code)\n\nplus two derived instances for number and history.",
+      "revId": "f324d2ba42fb832c99fdb4e725d880532474c3c0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

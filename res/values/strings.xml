@@ -663,4 +663,7 @@
     <string name="contact_detail_picture_description">Picture. Select to change</string>
 
     <string name="menu_sendViaSMS">Send contact via SMS</string>
+
+    <string name="edit_before_call">Edit number before call</string>
+
 </resources>

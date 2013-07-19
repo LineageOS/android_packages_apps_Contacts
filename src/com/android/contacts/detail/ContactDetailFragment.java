@@ -138,6 +138,7 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
         static final int COPY_TEXT = 0;
         static final int CLEAR_DEFAULT = 1;
         static final int SET_DEFAULT = 2;
+        static final int EDIT_BEFORE_CALL = 3;
     }
 
     private static final String KEY_CONTACT_URI = "contactUri";
@@ -1921,8 +1922,12 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
         } else if (!isUniqueMimeType) {
             menu.add(ContextMenu.NONE, ContextMenuIds.SET_DEFAULT,
                     ContextMenu.NONE, getString(R.string.set_default));
+            }
+        if (Phone.CONTENT_ITEM_TYPE.equals(selectedMimeType)) {
+            menu.add(ContextMenu.NONE, ContextMenuIds.EDIT_BEFORE_CALL,
+                    ContextMenu.NONE, getString(R.string.edit_before_call));
         }
-    }
+     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
@@ -1943,6 +1948,9 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
                 return true;
             case ContextMenuIds.CLEAR_DEFAULT:
                 clearDefaultContactMethod(mListView.getItemIdAtPosition(menuInfo.position));
+                return true;
+            case ContextMenuIds.EDIT_BEFORE_CALL:
+                callByEdit(menuInfo.position);
                 return true;
             default:
                 throw new IllegalArgumentException("Unknown menu option " + item.getItemId());
@@ -1968,6 +1976,13 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
         if (TextUtils.isEmpty(textToCopy)) return;
 
         ClipboardUtils.copyText(getActivity(), detailViewEntry.typeString, textToCopy, true);
+    }
+
+    private void callByEdit(int viewEntryPosition) {
+        DetailViewEntry detailViewEntry = (DetailViewEntry) mAllEntries.get(viewEntryPosition);
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", detailViewEntry.data,
+                null));
+        mContext.startActivity(intent);
     }
 
     @Override

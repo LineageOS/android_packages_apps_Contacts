@@ -661,4 +661,6 @@
 
     <!-- Description when picture in the contact detail view is selected. [CHAR LIMIT=NONE] -->
     <string name="contact_detail_picture_description">Picture. Select to change</string>
+
+    <string name="menu_sendViaSMS">Send contact via SMS</string>
 </resources>

@@ -351,6 +351,10 @@ final public class RawContact implements Parcelable {
         return list;
     }
 
+    public List<NamedDataItem> getNamedDataItems() {
+        return mDataItems;
+    }
+
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("RawContact: ").append(mValues);

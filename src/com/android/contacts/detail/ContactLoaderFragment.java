@@ -21,6 +21,7 @@ import android.app.Fragment;
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ActivityNotFoundException;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
@@ -28,7 +29,14 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.CommonDataKinds.Email;
+import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
+import android.provider.ContactsContract.CommonDataKinds.Organization;
+import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Data;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -45,6 +53,7 @@ import com.android.contacts.activities.ContactDetailActivity.FragmentKeyListener
 import com.android.contacts.common.list.ShortcutIntentBuilder;
 import com.android.contacts.common.list.ShortcutIntentBuilder.OnShortcutIntentCreatedListener;
 import com.android.contacts.model.Contact;
+import com.android.contacts.model.RawContact;
 import com.android.contacts.model.ContactLoader;
 import com.android.contacts.util.PhoneCapabilityTester;
 import com.google.common.base.Objects;
@@ -305,6 +314,11 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
                 doPickRingtone();
                 return true;
             }
+            case R.id.menu_send_via_sms: {
+                if (mContactData == null) return false;
+                sendContactViaSMS();
+                return true;
+            }
             case R.id.menu_share: {
                 if (mContactData == null) return false;
 
@@ -407,6 +421,85 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
             }
         }
         return false;
+    }
+
+    private void sendContactViaSMS() {
+        // Get name string
+        String name = mContactData.getDisplayName();
+        String phone = null;
+        String email = null;
+        String postal = null;
+        String organization = null;
+        String sipAddress = null;
+
+        Log.d(TAG, "Contact name: " + name);
+
+        for (RawContact raw: mContactData.getRawContacts()) {
+            final ContentValues entValues = raw.getValues();
+            Log.d(TAG, "  entValues:" + entValues);
+
+            for (RawContact.NamedDataItem namedDataItem : raw.getNamedDataItems()) {
+                final ContentValues entryValues = namedDataItem.mContentValues;
+                final String mimeType = entryValues.getAsString(Data.MIMETYPE);
+
+                Log.d(TAG, "    entryValues:" + entryValues);
+
+                if (mimeType == null) continue;
+
+                if (Phone.CONTENT_ITEM_TYPE.equals(mimeType)) { // Get phone string
+                    if (phone == null) {
+                        phone = entryValues.getAsString(Phone.NUMBER);
+                    } else {
+                        phone = phone + ", " + entryValues.getAsString(Phone.NUMBER);
+                    }
+                } else if (Email.CONTENT_ITEM_TYPE.equals(mimeType)) { // Get email string
+                    if (email == null) {
+                        email = entryValues.getAsString(Email.ADDRESS);
+                    } else {
+                        email = email + ", " + entryValues.getAsString(Email.ADDRESS);
+                    }
+                } else if (StructuredPostal.CONTENT_ITEM_TYPE.equals(mimeType)) {
+                    if (postal == null) {
+                        postal = entryValues.getAsString(StructuredPostal.FORMATTED_ADDRESS);
+                    } else {
+                        postal = postal + ", " + entryValues.getAsString(
+                                 StructuredPostal.FORMATTED_ADDRESS);
+                    }
+                } else if (Organization.CONTENT_ITEM_TYPE.equals(mimeType)) {
+                    if (organization == null) {
+                        organization = entryValues.getAsString(Organization.COMPANY);
+                    } else {
+                        organization = organization + ", " + entryValues
+                                     .getAsString(Organization.COMPANY);
+                    }
+                } else if (SipAddress.CONTENT_ITEM_TYPE.equals(mimeType)) {
+                    if (sipAddress == null) {
+                        sipAddress = entryValues.getAsString(SipAddress.SIP_ADDRESS);
+                    } else {
+                        sipAddress = sipAddress + ", " + entryValues
+                                    .getAsString(SipAddress.SIP_ADDRESS);
+                    }
+                }
+            }
+
+        }
+
+        if (TextUtils.isEmpty(name)) {
+            name = mContext.getResources().getString(R.string.missing_name);
+        }
+        name = getString(R.string.nameLabelsGroup) + ":" + name + "\r\n";
+        phone = phone == null ? "" : getString(R.string.phoneLabelsGroup) + ":" + phone + "\r\n";
+        email = email == null ? "" : getString(R.string.emailLabelsGroup) + ":" + email + "\r\n";
+        postal = postal == null ? "" : getString(R.string.postalLabelsGroup) + ":" + postal
+                           + "\r\n";
+        organization = organization == null ? "" : getString(R.string.organizationLabelsGroup)
+                           + ":" + organization + "\r\n";
+        sipAddress = sipAddress == null ? "" : getString(R.string.label_sip_address) + ":"
+                           + sipAddress + "\r\n";
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.putExtra("sms_body", name + phone + email + postal + organization + sipAddress);
+        intent.setType("vnd.android-dir/mms-sms");
+        mContext.startActivity(intent);
     }
 
     private void doPickRingtone() {

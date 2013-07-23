@@ -30,6 +30,14 @@
     <string name="t9_dial_click_title">Kijelölt személy tárcsázása</string>
     <string name="t9_dial_click_summary">Tárcsázza a T9 tárcsázó által megtalált személyt</string>
     <string name="t9_add_to_contacts">Hozzáadás a névjegyekhez</string>
+    <string name="t9_map_row_2">2abcàáâäåɑæçǽćčá</string>
+    <string name="t9_map_row_3">3defďéèêëě</string>
+    <string name="t9_map_row_4">4ghiíìïîǵ</string>
+    <string name="t9_map_row_5">5jklḱḱĺ</string>
+    <string name="t9_map_row_6">6mnoòóöôøñŋǿḿńňő</string>
+    <string name="t9_map_row_7">7pqrsßɾṕŕśřš</string>
+    <string name="t9_map_row_8">8tuvťúùüûűů</string>
+    <string name="t9_map_row_9">9wxyzýẃźž</string>
     <string name="t9_loading">Betöltés\u2026</string>
     <string name="call_stats_nav_all">Mind</string>
     <string name="call_stats_nav_incoming">Bejövő</string>

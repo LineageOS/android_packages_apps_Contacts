@@ -34,6 +34,7 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.ProviderStatus;
 import android.provider.ContactsContract.QuickContact;
 import android.provider.Settings;
+import android.preference.PreferenceManager;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -65,6 +66,7 @@ import com.android.contacts.group.GroupBrowseListFragment.OnGroupBrowserActionLi
 import com.android.contacts.group.GroupDetailFragment;
 import com.android.contacts.interactions.ContactDeletionInteraction;
 import com.android.contacts.common.interactions.ImportExportDialogFragment;
+import com.android.contacts.common.list.AccountFilterActivity;
 import com.android.contacts.list.ContactBrowseListFragment;
 import com.android.contacts.common.list.ContactEntryListFragment;
 import com.android.contacts.common.list.ContactListFilter;
@@ -109,6 +111,8 @@ public class PeopleActivity extends ContactsActivity
         ContactListFilterController.ContactListFilterListener, ProviderStatusListener {
 
     private static final String TAG = "PeopleActivity";
+
+    public static String EDITABLE_KEY = "search_contacts";
 
     private static final int TAB_FADE_IN_DURATION = 500;
 
@@ -1447,6 +1451,7 @@ public class PeopleActivity extends ContactsActivity
             contactsFilterMenu.setVisible(false);
             clearFrequentsMenu.setVisible(false);
             helpMenu.setVisible(false);
+            makeMenuItemVisible(menu, R.id.menu_delete, false);
         } else {
             switch (mActionBarAdapter.getCurrentTab()) {
                 case TabState.FAVORITES:
@@ -1571,6 +1576,17 @@ public class PeopleActivity extends ContactsActivity
             }
             case R.id.menu_add_group: {
                 createNewGroup();
+            }
+            // QRD enhancement: multi contact delete
+            case R.id.menu_delete: {
+                final Intent intent = new Intent(Intent.ACTION_DELETE, Contacts.CONTENT_URI);
+                intent.putExtra(EDITABLE_KEY, mActionBarAdapter.getQueryString());
+
+                ContactListFilter filter = ContactListFilter.restoreDefaultPreferences(
+                    PreferenceManager.getDefaultSharedPreferences(this));
+                intent.putExtra(AccountFilterActivity.KEY_EXTRA_CONTACT_LIST_FILTER, filter);
+
+                startActivity(intent);
                 return true;
             }
             case R.id.menu_import_export: {

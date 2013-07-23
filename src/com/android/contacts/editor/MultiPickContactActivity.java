@@ -67,6 +67,8 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.RawContacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
+import android.provider.Settings;
+import android.provider.Settings.SettingNotFoundException;
 import android.telephony.MSimTelephonyManager;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
@@ -329,6 +331,17 @@ public class MultiPickContactActivity extends ListActivity implements
         return (mMode & MODE_MASK_SEARCH) == MODE_MASK_SEARCH;
     }
 
+    private boolean initSearchText(){
+        String s = getIntent().getStringExtra(PeopleActivity.EDITABLE_KEY);
+        if (s != null && s.trim().length() > 0) {
+            mSearchEditor.setText(s.trim());
+            enterSearchMode();
+            doFilter(mSearchEditor.getText());
+            return true;
+        }
+        return false;
+    }
+
     private void initResource() {
         mOKButton = (Button) findViewById(R.id.btn_ok);
         mOKButton.setOnClickListener(this);
@@ -491,6 +504,10 @@ public class MultiPickContactActivity extends ListActivity implements
         private final int COLUMN_NUMBER = 1;
         private final int COLUMN_NAME = 2;
 
+        private ArrayList<ContentProviderOperation> mOpsCalls = null;
+
+        private ArrayList<ContentProviderOperation> mOpsContacts = null;
+
         public DeleteContactsThread() {
         }
 
@@ -498,19 +515,44 @@ public class MultiPickContactActivity extends ListActivity implements
         public void run() {
             final ContentResolver resolver = getContentResolver();
 
-            Set<String> keySet = mChoiceSet.keySet();
+            // The mChoiceSet object will change when activity restart, but
+            // DeleteContactsThread running in background, so we need clone the
+            // choiceSet to avoid ConcurrentModificationException.
+            Bundle choiceSet = (Bundle) mChoiceSet.clone();
+            Set<String> keySet = choiceSet.keySet();
             Iterator<String> it = keySet.iterator();
+
+            android.content.ContentProviderOperation.Builder builder = null;
+
+            ContentProviderOperation cpo = null;
+
+            // Current contact count we can delete.
+            int count = 0;
+
+            // The contacts we batch delete once.
+            final int BATCH_DELETE_CONTACT_NUMBER = 100;
+
+            mOpsCalls = new ArrayList<ContentProviderOperation>();
+            mOpsContacts = new ArrayList<ContentProviderOperation>();
+
             while (!mCanceled && it.hasNext()) {
                 String id = it.next();
                 Uri uri = null;
                 if (isPickCall()) {
                     uri = Uri.withAppendedPath(Calls.CONTENT_URI, id);
+                    builder = ContentProviderOperation.newDelete(uri);
+                    cpo = builder.build();
+                    mOpsCalls.add(cpo);
                 } else {
                     uri = Uri.withAppendedPath(Contacts.CONTENT_URI, id);
                     long longId = Long.parseLong(id);
                     int subscription =
                             mSimContactsOperation.getSimSubscription(longId);
+
                     if (subscription == MSimConstants.SUB1 || subscription == MSimConstants.SUB2) {
+                        if (isAirplaneModeOn()) {
+                            break;
+                        }
                         ContentValues values =
                                 mSimContactsOperation.getSimAccountValues(longId);
                         log("values is : " + values + "; sub is " + subscription);
@@ -520,18 +562,48 @@ public class MultiPickContactActivity extends ListActivity implements
                             continue;
                         }
                     }
+                    builder = ContentProviderOperation.newDelete(uri);
+                    cpo = builder.build();
+                    mOpsContacts.add(cpo);
                 }
-                resolver.delete(uri, null, null);
+                // If contacts more than 2000, delete all contacts
+                // one by one will cause UI nonresponse.
                 mProgressDialog.incrementProgressBy(1);
+                // We batch delete contacts every 100.
+                if (count % BATCH_DELETE_CONTACT_NUMBER == 0) {
+                    batchDelete();
+                }
+                count ++;
             }
+
+            batchDelete();
+            mOpsCalls = null;
+            mOpsContacts = null;
+            Log.d(TAG, "DeleteContactsThread run, progress:" + mProgressDialog.getProgress());
             mProgressDialog.dismiss();
             finish();
         }
 
+        /**
+         * Batch delete contacts more efficient than one by one.
+         */
+        private void batchDelete() {
+            try {
+                 mContext.getContentResolver().applyBatch(CallLog.AUTHORITY, mOpsCalls);
+                 mContext.getContentResolver().applyBatch(ContactsContract.AUTHORITY, mOpsContacts);
+                 mOpsCalls.clear();
+                 mOpsContacts.clear();
+             } catch (RemoteException e) {
+                 e.printStackTrace();
+             } catch (OperationApplicationException e) {
+                 e.printStackTrace();
+             }
+        }
+
         public void onCancel(DialogInterface dialog) {
             mCanceled = true;
-            log("DeleteContactsThread onCancel, progress:"
-                    + mProgressDialog.getProgress());
+            Log.d(TAG, "DeleteContactsThread onCancel, progress:" + mProgressDialog.getProgress());
+            //  Give a toast show to tell user delete termination
         }
 
         public void onClick(DialogInterface dialog, int which) {
@@ -722,10 +794,44 @@ public class MultiPickContactActivity extends ListActivity implements
                 .appendQueryParameter(ContactCounts.ADDRESS_BOOK_INDEX_EXTRAS, "true").build();
     }
 
+    /**
+     * Just get the uri we need to query contacts.
+     *
+     * @return uri with account info parameter if explicit request contacts fit
+     *         current account, else just search contacts fit specified keyword.
+     */
+    private Uri getContactsFilterUri() {
+        Uri filterUri = Contacts.CONTENT_FILTER_URI;
+
+        // To confirm if the search rule must contain account limitation.
+        Intent intent = getIntent();
+        ContactListFilter filter = (ContactListFilter) intent.getParcelableExtra(
+                AccountFilterActivity.KEY_EXTRA_CONTACT_LIST_FILTER);
+
+        if (filter != null &&
+                filter.filterType == ContactListFilter.FILTER_TYPE_ACCOUNT) {
+
+            // Need consider account info limitation, construct the uri with
+            // account info query parameter.
+            Builder builder = filterUri.buildUpon();
+            filter.addAccountQueryParameterToUrl(builder);
+            return builder.build();
+        }
+
+        if (!isShowSIM()) {
+            filterUri = filterUri.buildUpon().appendQueryParameter(RawContacts.ACCOUNT_TYPE,
+                     SimAccountType.ACCOUNT_TYPE)
+                    .appendQueryParameter(DefaultContactListAdapter.WITHOUT_SIM_FLAG,
+                     "true").build();
+        }
+        // No need to consider account info limitation, just return a uri
+        // with "filter" path.
+        return filterUri;
+    }
     private Uri getFilterUri() {
         switch (mMode) {
             case MODE_SEARCH_CONTACT:
-                return Contacts.CONTENT_FILTER_URI;
+                return getContactsFilterUri();
             case MODE_SEARCH_PHONE:
                 return Phone.CONTENT_FILTER_URI;
             case MODE_SEARCH_EMAIL:
@@ -829,6 +935,26 @@ public class MultiPickContactActivity extends ListActivity implements
 
     public void startQuery() {
         Uri uri = getUriToQuery();
+        ContactListFilter filter = (ContactListFilter) getIntent().getExtra(
+                          AccountFilterActivity.KEY_EXTRA_CONTACT_LIST_FILTER);
+        if (filter != null) {
+            if (filter.filterType == ContactListFilter.FILTER_TYPE_ACCOUNT) {
+                // We should exclude the invisiable contacts.
+                uri = uri.buildUpon().appendQueryParameter(RawContacts.ACCOUNT_NAME,
+                         filter.accountName).appendQueryParameter(RawContacts.ACCOUNT_TYPE,
+                         filter.accountType)
+                        .appendQueryParameter(ContactsContract.DIRECTORY_PARAM_KEY,
+                         ContactsContract.Directory.DEFAULT+"").build();
+            } else if (filter.filterType == ContactListFilter.FILTER_TYPE_ALL_ACCOUNTS) {
+                // Do not query sim contacts in airplane mode.
+                if (!isShowSIM()) {
+                    uri = uri.buildUpon().appendQueryParameter(RawContacts.ACCOUNT_TYPE,
+                              SimAccountType.ACCOUNT_TYPE)
+                             .appendQueryParameter(DefaultContactListAdapter.WITHOUT_SIM_FLAG,
+                              "true").build();
+                }
+            }
+        }
         String[] projection = getProjectionForQuery();
         String selection = getSelectionForQuery();
         String[] selectionArgs = getSelectionArgsForQuery();

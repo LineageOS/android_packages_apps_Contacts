@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "5ad0253b_35ad1089",
+        "filename": "src/com/android/contacts/dialpad/T9SearchCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 6746
+      },
+      "writtenOn": "2013-07-23T03:18:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dac4157f_7e3109a2",
+      "revId": "f324d2ba42fb832c99fdb4e725d880532474c3c0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dac4157f_1e21ed4d",
         "filename": "src/com/android/contacts/dialpad/T9SearchCache.java",
         "patchSetId": 3
@@ -47,6 +65,24 @@
       "writtenOn": "2013-07-17T16:34:30Z",
       "side": 1,
       "message": "Besides the whitespace issues:\n\n- Reiterating the call log cursor for every number is expensive and is going to be slow. \n- Even worse: It\u0027s not needed at all ;)\n- Just query and use the Contacts.LAST_TIME_CONTACTED column.",
+      "revId": "f324d2ba42fb832c99fdb4e725d880532474c3c0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ad0253b_f5b558d0",
+        "filename": "src/com/android/contacts/dialpad/T9SearchCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 6746
+      },
+      "writtenOn": "2013-07-23T03:18:01Z",
+      "side": 1,
+      "message": "I can`t use Contacts.LAST_TIME_CONTACTED because it`s related to contact by I want to sort it by phone numbers when he has more phone numbers. So i created a LinkedHashMap at the beginning so i don`t have to iterate throught the call log for every phone number",
+      "parentUuid": "dac4157f_1e21ed4d",
       "revId": "f324d2ba42fb832c99fdb4e725d880532474c3c0",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "5ad0253b_d5ba5cc0",
+        "filename": "src/com/android/contacts/dialpad/T9SearchCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 6746
+      },
+      "writtenOn": "2013-07-23T03:18:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dac4157f_fe1d1910",
+      "revId": "f324d2ba42fb832c99fdb4e725d880532474c3c0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dac4157f_be17a1ec",
         "filename": "src/com/android/contacts/dialpad/T9SearchCache.java",
         "patchSetId": 3
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "5ad0253b_b5afe07c",
+        "filename": "src/com/android/contacts/dialpad/T9SearchCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 6746
+      },
+      "writtenOn": "2013-07-23T03:18:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dac4157f_be17a1ec",
+      "revId": "f324d2ba42fb832c99fdb4e725d880532474c3c0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dac4157f_9ed3bd38",
         "filename": "src/com/android/contacts/dialpad/T9SearchCache.java",
         "patchSetId": 3
@@ -98,6 +170,24 @@
       "writtenOn": "2013-07-17T16:34:30Z",
       "side": 1,
       "message": "This deserves a base class + 2 derived classes, I think. Make a\n\nprivate static class ContactComparatorBase extends Comparator\u003cContactItem\u003e {\n}\n\n(having the primary + position comparison code)\n\nplus two derived instances for number and history.",
+      "revId": "f324d2ba42fb832c99fdb4e725d880532474c3c0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ad0253b_75ca6851",
+        "filename": "src/com/android/contacts/dialpad/T9SearchCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 6746
+      },
+      "writtenOn": "2013-07-23T03:18:01Z",
+      "side": 1,
+      "message": "I 2 base classes, one for number comparator a one for name comparator and then 2 derived classes for these base classes for call history and call frequency comparator",
+      "parentUuid": "dac4157f_9ed3bd38",
       "revId": "f324d2ba42fb832c99fdb4e725d880532474c3c0",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false

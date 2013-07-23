@@ -33,6 +33,10 @@
         android:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/menu_delete"
+        android:title="@string/menu_deleteContact" />
+
+    <item
         android:id="@+id/menu_contacts_filter"
         android:title="@string/menu_contacts_filter" />
 

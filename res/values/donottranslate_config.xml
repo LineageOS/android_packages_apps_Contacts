@@ -66,4 +66,7 @@
     <!-- Help URL pointing to editing contacts in People. This is intentionally empty because
          the overlay will fill this in during build time. -->
     <string name="help_url_people_edit"></string>
+
+    <!-- If true, baidu_xcloud will be enabled. -->
+    <bool name="baidu_xcloud_enable">true</bool>
 </resources>

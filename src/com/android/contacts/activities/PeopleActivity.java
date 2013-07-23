@@ -92,6 +92,7 @@ import com.android.contacts.util.DialogManager;
 import com.android.contacts.util.HelpUtils;
 import com.android.contacts.util.PhoneCapabilityTester;
 import com.android.contacts.common.util.UriUtils;
+import com.android.contacts.util.XCloudManager;
 import com.android.contacts.widget.TransitionAnimationView;
 
 import java.util.ArrayList;
@@ -1417,7 +1418,19 @@ public class PeopleActivity extends ContactsActivity
         if (!mOptionsMenuContactsAvailable) {
             return false;
         }
-
+        if (getResources().getBoolean(R.bool.baidu_xcloud_enable)) {
+            XCloudManager.getInstance().updateMenuState(menu, this);
+        } else {
+            final MenuItem autoSyncToXCloudSwitcher = menu.findItem(
+                R.id.menu_auto_sync_to_baidu_cloud);
+            final MenuItem syncToXCloud = menu.findItem(R.id.menu_sync_to_baidu_cloud);
+            if (autoSyncToXCloudSwitcher != null) {
+                autoSyncToXCloudSwitcher.setVisible(false);
+            }
+            if (syncToXCloud != null) {
+                syncToXCloud.setVisible(false);
+            }
+        }
         // Get references to individual menu items in the menu
         final MenuItem addContactMenu = menu.findItem(R.id.menu_add_contact);
         final MenuItem contactsFilterMenu = menu.findItem(R.id.menu_contacts_filter);
@@ -1498,6 +1511,11 @@ public class PeopleActivity extends ContactsActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         if (mDisableOptionItemSelected) {
             return false;
+        }
+
+        if (getResources().getBoolean(R.bool.baidu_xcloud_enable)) {
+            if(XCloudManager.getInstance().handleXCouldRelatedMenuItem(item, this))
+                return true;
         }
 
         switch (item.getItemId()) {

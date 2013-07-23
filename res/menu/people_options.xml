@@ -37,6 +37,14 @@
         android:title="@string/menu_contacts_filter" />
 
     <item
+        android:id="@+id/menu_auto_sync_to_baidu_cloud"
+        android:title="@string/menu_auto_sync_to_baidu_cloud"
+        android:checkable="true"/>
+    <item
+        android:id="@+id/menu_sync_to_baidu_cloud"
+        android:title="@string/menu_sync_to_baidu_cloud" />
+
+    <item
         android:id="@+id/menu_import_export"
         android:title="@string/menu_import_export" />
 

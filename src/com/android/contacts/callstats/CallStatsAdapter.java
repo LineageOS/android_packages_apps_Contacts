@@ -96,6 +96,7 @@ class CallStatsAdapter extends ArrayAdapter<CallStatsDetails>
         setNotifyOnChange(false);
 
         mAllItems = new ArrayList<CallStatsDetails>();
+        mTotalItem = new CallStatsDetails(null, null, null, null, 0);
         mInfoLookup = new ConcurrentHashMap<ContactInfo, CallStatsDetails>();
         mContext = context;
 
@@ -118,7 +119,7 @@ class CallStatsAdapter extends ArrayAdapter<CallStatsDetails>
         mFilterTo = to;
 
         mAllItems.clear();
-        mTotalItem = new CallStatsDetails(null, null, null, null, 0);
+        mTotalItem.reset();
 
         for (Map.Entry<ContactInfo, CallStatsDetails> entry : calls.entrySet()) {
             final CallStatsDetails call = entry.getValue();

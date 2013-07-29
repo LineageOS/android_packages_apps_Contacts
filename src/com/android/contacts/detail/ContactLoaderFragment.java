@@ -1,5 +1,9 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2013 The Linux Foundation. All rights reserved.
+ *
+ * Not a Contribution, Apache license notifications and license are retained
+ * for attribution purposes only.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +25,11 @@ import android.app.Fragment;
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ActivityNotFoundException;
+import android.content.BroadcastReceiver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.Loader;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -80,6 +86,10 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
     private boolean mSendToVoicemailState;
     private String mCustomRingtone;
 
+    private static final String ACTION_INSTALL_SHORTCUT_SUCCESSFUL =
+            "com.android.launcher.action.INSTALL_SHORTCUT_SUCCESSFUL";
+    private static final String EXTRA_RESPONSE_PACKAGENAME = "response_packagename";
+
     /**
      * This is a listener to the {@link ContactLoaderFragment} and will be notified when the
      * contact details have finished loading or if the user selects any menu options.
@@ -112,12 +122,34 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
 
     private static final String KEY_CONTACT_URI = "contactUri";
     private static final String LOADER_ARG_CONTACT_URI = "contactUri";
+    private static final String CONTACTS_COMMON_PKG_NAME = "com.android.contacts.common";
 
     private Context mContext;
     private Uri mLookupUri;
     private ContactLoaderFragmentListener mListener;
 
     private Contact mContactData;
+
+    private IntentFilter mResponseFilter;
+
+    /** Receive broadcast, show toast only when put shortcut sucessful in laucher */
+    private BroadcastReceiver mResponseReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (!ACTION_INSTALL_SHORTCUT_SUCCESSFUL.equals(intent.getAction())) {
+                return;
+            }
+            String packageName = intent.getStringExtra(EXTRA_RESPONSE_PACKAGENAME);
+            if (packageName != null && (packageName.equals(context.getPackageName()) ||
+                    CONTACTS_COMMON_PKG_NAME.equals(packageName))) {
+                // Send a toast to give feedback to the user that a shortcut to this
+                // contact was added to the launcher.
+                Toast.makeText(context, R.string.createContactShortcutSuccessful,
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 
     public ContactLoaderFragment() {
     }
@@ -128,6 +160,7 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
         if (savedInstanceState != null) {
             mLookupUri = savedInstanceState.getParcelable(KEY_CONTACT_URI);
         }
+        mResponseFilter = new IntentFilter(ACTION_INSTALL_SHORTCUT_SUCCESSFUL);
     }
 
     @Override
@@ -160,6 +193,18 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
             args.putParcelable(LOADER_ARG_CONTACT_URI, mLookupUri);
             getLoaderManager().initLoader(LOADER_DETAILS, args, mDetailLoaderListener);
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().unregisterReceiver(mResponseReceiver);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().registerReceiver(mResponseReceiver, mResponseFilter);
     }
 
     public void loadUri(Uri lookupUri) {
@@ -381,12 +426,6 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
                 // shortcut to this contact
                 shortcutIntent.setAction(ACTION_INSTALL_SHORTCUT);
                 parentActivity.sendBroadcast(shortcutIntent);
-
-                // Send a toast to give feedback to the user that a shortcut to this
-                // contact was added to the launcher.
-                Toast.makeText(parentActivity,
-                        R.string.createContactShortcutSuccessful,
-                        Toast.LENGTH_SHORT).show();
             }
 
         });

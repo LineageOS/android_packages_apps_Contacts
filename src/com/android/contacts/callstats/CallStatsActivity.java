@@ -241,6 +241,7 @@ public class CallStatsActivity extends ListActivity implements
     public boolean onNavigationItemSelected(int position, long id) {
         mCallTypeFilter = position;
         mAdapter.updateDisplayedData(mCallTypeFilter, mSortByDuration);
+        updateHeader();
         return true;
     }
 

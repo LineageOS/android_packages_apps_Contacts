@@ -68,6 +68,7 @@ public class CallStatsActivity extends ListActivity implements
     private long mFilterFrom = -1;
     private long mFilterTo = -1;
     private boolean mSortByDuration = true;
+    private boolean mDataLoaded = false;
 
     private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
 
@@ -241,7 +242,9 @@ public class CallStatsActivity extends ListActivity implements
     public boolean onNavigationItemSelected(int position, long id) {
         mCallTypeFilter = position;
         mAdapter.updateDisplayedData(mCallTypeFilter, mSortByDuration);
-        updateHeader();
+        if (mDataLoaded) {
+            updateHeader();
+        }
         return true;
     }
 
@@ -255,6 +258,7 @@ public class CallStatsActivity extends ListActivity implements
             return;
         }
 
+        mDataLoaded = true;
         mAdapter.updateData(calls, mFilterFrom, mFilterTo);
         mAdapter.updateDisplayedData(mCallTypeFilter, mSortByDuration);
         updateHeader();
@@ -277,6 +281,10 @@ public class CallStatsActivity extends ListActivity implements
     public void onDestroy() {
         super.onDestroy();
         getContentResolver().unregisterContentObserver(mObserver);
+    }
+
+    /* package */ boolean isDataLoaded() {
+        return mDataLoaded;
     }
 
     private void fetchCalls() {

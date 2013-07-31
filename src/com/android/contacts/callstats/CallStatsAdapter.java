@@ -50,19 +50,18 @@ class CallStatsAdapter extends ArrayAdapter<CallStatsDetails>
         public void onClick(View view) {
             IntentProvider intentProvider = (IntentProvider) view.getTag();
             if (intentProvider != null) {
-                mContext.startActivity(intentProvider.getIntent(mContext));
+                mParent.startActivity(intentProvider.getIntent(mParent));
             }
         }
     };
 
-    private final Context mContext;
+    private final CallStatsActivity mParent;
     private final CallLogAdapterHelper mAdapterHelper;
     private final CallStatsDetailHelper mCallStatsDetailHelper;
 
     private ArrayList<CallStatsDetails> mAllItems;
     private CallStatsDetails mTotalItem;
     private Map<ContactInfo, CallStatsDetails> mInfoLookup;
-    private boolean mLoading = true;
 
     private int mType = CallStatsQueryHandler.CALL_TYPE_ALL;
     private long mFilterFrom;
@@ -90,25 +89,25 @@ class CallStatsAdapter extends ArrayAdapter<CallStatsDetails>
         }
     };
 
-    CallStatsAdapter(Context context) {
-        super(context, R.layout.call_stats_list_item, R.id.number);
+    CallStatsAdapter(CallStatsActivity parent) {
+        super(parent, R.layout.call_stats_list_item, R.id.number);
 
         setNotifyOnChange(false);
 
         mAllItems = new ArrayList<CallStatsDetails>();
         mTotalItem = new CallStatsDetails(null, null, null, null, 0);
         mInfoLookup = new ConcurrentHashMap<ContactInfo, CallStatsDetails>();
-        mContext = context;
+        mParent = parent;
 
-        Resources resources = mContext.getResources();
+        Resources resources = mParent.getResources();
         PhoneNumberHelper phoneNumberHelper = new PhoneNumberHelper(resources);
 
-        final String currentCountryIso = ContactsUtils.getCurrentCountryIso(mContext);
-        final ContactInfoHelper contactInfoHelper = new ContactInfoHelper(mContext, currentCountryIso);
+        final String currentCountryIso = ContactsUtils.getCurrentCountryIso(mParent);
+        final ContactInfoHelper contactInfoHelper = new ContactInfoHelper(mParent, currentCountryIso);
 
-        mAdapterHelper = new CallLogAdapterHelper(mContext, this,
+        mAdapterHelper = new CallLogAdapterHelper(mParent, this,
                 contactInfoHelper, phoneNumberHelper);
-        mContactPhotoManager = ContactPhotoManager.getInstance(mContext);
+        mContactPhotoManager = ContactPhotoManager.getInstance(mParent);
         mCallStatsDetailHelper = new CallStatsDetailHelper(resources, phoneNumberHelper);
     }
 
@@ -144,7 +143,6 @@ class CallStatsAdapter extends ArrayAdapter<CallStatsDetails>
             }
         }
 
-        mLoading = false;
         notifyDataSetChanged();
     }
 
@@ -162,18 +160,18 @@ class CallStatsAdapter extends ArrayAdapter<CallStatsDetails>
 
     public String getTotalCallCountString() {
         return CallStatsDetailHelper.getCallCountString(
-                mContext.getResources(), mTotalItem.getRequestedCount(mType));
+                mParent.getResources(), mTotalItem.getRequestedCount(mType));
     }
 
     public String getFullDurationString(boolean withSeconds) {
         final long duration = mTotalItem.getRequestedDuration(mType);
         return CallStatsDetailHelper.getDurationString(
-                mContext.getResources(), duration, withSeconds);
+                mParent.getResources(), duration, withSeconds);
     }
 
     @Override
     public boolean isEmpty() {
-        if (mLoading) {
+        if (!mParent.isDataLoaded()) {
             return false;
         }
         return super.isEmpty();

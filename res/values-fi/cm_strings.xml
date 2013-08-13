@@ -46,11 +46,11 @@
     <string name="call_stats_filter_picker_title">Suodata aikaväli</string>
     <string name="date_quick_selection">Nopea valinta</string>
     <string name="date_qs_currentmonth">Nykyinen kuukausi</string>
-    <string name="date_qs_currentquarter">Nykyinen kvarttaali</string>
+    <string name="date_qs_currentquarter">Nykyinen kvartaali</string>
     <string name="date_qs_currentyear">Nykyinen vuosi</string>
     <string name="date_qs_lastweek">Edellinen viikko</string>
     <string name="date_qs_lastmonth">Edellinen kuukausi</string>
-    <string name="date_qs_lastquarter">Edellinen kvarttaali</string>
+    <string name="date_qs_lastquarter">Edellinen kvartaali</string>
     <string name="date_qs_lastyear">Edellinen vuosi</string>
     <string name="call_stats_date_filter">Muokkaa aikaväliä</string>
     <string name="call_stats_reset_filter">Nollaa aikaväli</string>

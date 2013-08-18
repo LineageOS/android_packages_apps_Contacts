@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "baee8101_9645ec18",
+        "filename": "res/values/colors.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2013-08-18T21:43:50Z",
+      "side": 1,
+      "message": "Trailing space at end of line",
+      "revId": "b88f925320dad9b8b430c3ca17dd7e16ec5681a6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

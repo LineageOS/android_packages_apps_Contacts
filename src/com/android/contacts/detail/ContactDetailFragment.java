@@ -25,6 +25,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.net.ParseException;
 import android.net.Uri;
 import android.net.WebAddress;
@@ -794,6 +796,25 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
         flattenList(mGroupEntries);
         flattenList(mRelationEntries);
         flattenList(mNoteEntries);
+
+        addRingtone();
+    }
+
+    /**
+     * Add ringtone entry if a custom ringtone was defined
+     */
+    private void addRingtone() {
+        if (null != mContactData.getCustomRingtone()) {
+            String ringtoneTitle = mContext.getString(R.string.contactsRingtoneLabel);
+            mAllEntries.add(new KindTitleViewEntry(ringtoneTitle.toUpperCase()));
+
+            Ringtone ringtone = RingtoneManager.getRingtone(mContext, Uri.parse(mContactData.getCustomRingtone()));
+
+            final DetailViewEntry entry = new DetailViewEntry();
+            entry.kind = ringtoneTitle;
+            entry.data = ringtone.getTitle(mContext);
+            mAllEntries.add(entry);
+        }
     }
 
     /**

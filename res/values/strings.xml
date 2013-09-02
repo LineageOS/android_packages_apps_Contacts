@@ -295,6 +295,9 @@
          [CHAR LIMIT=NONE] -->
     <string name="contactsGroupsLabel">Groups</string>
 
+    <!-- Label for the custom ringtone on details screen -->
+    <string name="contactsRingtoneLabel">Custom ringtone</string>
+
     <!-- Action string for calling back a number in the call log -->
     <string name="callBack">Call back</string>
 

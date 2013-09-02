@@ -409,7 +409,7 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
         return false;
     }
 
-    private void doPickRingtone() {
+    public void doPickRingtone() {
 
         Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
         // Allow user to pick 'Default'

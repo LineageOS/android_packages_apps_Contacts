@@ -218,6 +218,36 @@ public class ContactDetailDisplayUtils {
     }
 
     /**
+     * Sets the custom ringtone state of this contact.
+     */
+    public static void configureRingtoneMenuItem(MenuItem ringtoneMenuItem, boolean isDirectoryEntry,
+                                                boolean isUserProfile) {
+        if (!isDirectoryEntry && !isUserProfile) {
+            ringtoneMenuItem.setVisible(true);
+            ringtoneMenuItem.setIcon(R.drawable.btn_custom_ringtone_on);
+            ringtoneMenuItem.setChecked(true);
+            ringtoneMenuItem.setTitle(R.string.menu_set_ring_tone);
+        } else {
+            ringtoneMenuItem.setVisible(false);
+        }
+    }
+
+    /**
+     * Sets the redirect to voicemail state of this contact.
+     */
+    public static void configureRedirectMenuItem(MenuItem redirectMenuItem, boolean isDirectoryEntry,
+                                               boolean isUserProfile) {
+        if (!isDirectoryEntry && !isUserProfile) {
+            redirectMenuItem.setVisible(true);
+            redirectMenuItem.setIcon(R.drawable.send_to_voicemail_on);
+            redirectMenuItem.setChecked(true);
+            redirectMenuItem.setTitle(R.string.menu_redirect_calls_to_vm);
+        } else {
+            redirectMenuItem.setVisible(false);
+        }
+    }
+
+    /**
      * Set the social snippet text. If there isn't one, then set the view to gone.
      */
     public static void setSocialSnippet(Context context, Contact contactData, TextView statusView,

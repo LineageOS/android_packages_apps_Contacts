@@ -176,7 +176,42 @@ public class ContactDetailActivity extends ContactsActivity {
             ContactDetailDisplayUtils.configureStarredMenuItem(starredMenuItem,
                     mContactData.isDirectoryEntry(), mContactData.isUserProfile(),
                     mContactData.getStarred());
+
+            if (null != mContactData.getCustomRingtone()) {
+                getMenuInflater().inflate(R.menu.ringtone, menu);
+                final MenuItem customRingtoneMenuItem = menu.findItem(R.id.menu_ringtone);
+                customRingtoneMenuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if (mLookupUri != null) {
+                            mLoaderFragment.doPickRingtone();
+                        }
+                        return true;
+                    }
+                });
+               ContactDetailDisplayUtils.configureRingtoneMenuItem(customRingtoneMenuItem,
+                    mContactData.isDirectoryEntry(), mContactData.isUserProfile());
+            }
+
+            if (mContactData.isSendToVoicemail()) {
+                getMenuInflater().inflate(R.menu.redirect, menu);
+                final MenuItem redirectMenuItem = menu.findItem(R.id.menu_redirect);
+                redirectMenuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if (mLookupUri != null) {
+                            Intent intent = ContactSaveService.createSetSendToVoicemail(
+                                    ContactDetailActivity.this, mLookupUri, false);
+                            ContactDetailActivity.this.startService(intent);
+                        }
+                        return true;
+                    }
+                });
+                ContactDetailDisplayUtils.configureRedirectMenuItem(redirectMenuItem,
+                    mContactData.isDirectoryEntry(), mContactData.isUserProfile());
+            }
         }
+
         return true;
     }
 

@@ -392,6 +392,12 @@
     <!-- An allowable value for the "view names as" contact display option  -->
     <string name="display_options_view_family_name_first">Family name first</string>
 
+    <!-- Hide frequent -->
+    <string name="display_options_hide_frequent">Hide frequently called</string>
+
+    <!-- Hide frequent summary -->
+    <string name="display_options_hide_frequent_summary">Hide frequently called</string>
+
     <!-- An option in the 'Contact photo' dialog, if there is no photo yet [CHAR LIMIT=50] -->
     <string name="take_photo">Take photo</string>
 

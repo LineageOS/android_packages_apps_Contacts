@@ -24,4 +24,11 @@
         android:key="displayOrder"
         android:title="@string/display_options_view_names_as"
         android:dialogTitle="@string/display_options_view_names_as" />
+
+    <CheckBoxPreference
+        android:key="hideFrequents"
+        android:title="@string/display_options_hide_frequent"
+        android:persistent="true"
+        android:defaultValue="true"
+        android:summary="@string/display_options_hide_frequent_summary" />
 </PreferenceScreen>

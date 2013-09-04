@@ -76,4 +76,12 @@
 
     <string name="menu_add_to_blacklist">Add to blacklist</string>
     <string name="toast_added_to_blacklist">%s added to blacklist.</string>
+
+    <!-- Contacts Settings -->
+    <!-- Hide frequent -->
+    <string name="display_options_hide_frequent">Hide frequently called</string>
+
+    <!-- Hide frequent summary -->
+    <string name="display_options_hide_frequent_summary">Hide frequently called</string>
+
 </resources>

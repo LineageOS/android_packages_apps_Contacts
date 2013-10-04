@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a41bdd9_bf2a372b",
+        "filename": "res/values-de/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-10-04T19:09:28Z",
+      "side": 1,
+      "message": "Was wird denn häufig ausgeblendet? ;) Die Wortwahl ist hier etwas schwierig...\n\nIch bin aber eh dafür, das Feature zu reverten -\u003e http://review.cyanogenmod.org/#/c/51364/",
+      "revId": "bcc68f2cbe6413b24b9f37296635842f4584c2d3",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

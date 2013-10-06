@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9a41bdd9_a5b54a7f",
+        "filename": "res/values-it/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 3184
+      },
+      "writtenOn": "2013-10-06T20:09:58Z",
+      "side": 1,
+      "message": "\"Contattati spesso\" è il nome che compare nella lista. E\u0027 una stringa AOSP.",
+      "parentUuid": "9a41bdd9_c5ec0e92",
+      "revId": "fc26f67151a92d3e3be0e0d878daaa7976206c33",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a41bdd9_6502e240",
         "filename": "res/values-it/cm_strings.xml",
         "patchSetId": 1

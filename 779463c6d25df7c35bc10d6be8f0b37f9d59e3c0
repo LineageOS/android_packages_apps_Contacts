@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a43c5e1_3d52afde",
+        "filename": "res/values-nl/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2013-10-07T08:53:01Z",
+      "side": 1,
+      "message": "Je kunt net zo goed hier niks in zetten...\n\nIk zou het ook gewoon leeglaten",
+      "revId": "779463c6d25df7c35bc10d6be8f0b37f9d59e3c0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

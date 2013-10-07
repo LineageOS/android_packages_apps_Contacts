@@ -16,6 +16,24 @@
       "revId": "779463c6d25df7c35bc10d6be8f0b37f9d59e3c0",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a43c5e1_bd5c7fee",
+        "filename": "res/values-nl/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2013-10-07T08:54:45Z",
+      "side": 1,
+      "message": "Ja ik vind het ook dubbelop, maar dat is denk ik gedaan omdat de andere 2 opties in dat scherm ook beide een summary hebben....",
+      "parentUuid": "5a43c5e1_3d52afde",
+      "revId": "779463c6d25df7c35bc10d6be8f0b37f9d59e3c0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

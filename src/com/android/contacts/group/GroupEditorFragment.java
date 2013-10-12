@@ -708,7 +708,7 @@ public class GroupEditorFragment extends Fragment implements SelectAccountDialog
 
         // Update the autocomplete adapter (if there is one) so these contacts don't get suggested
         if (mAutoCompleteAdapter != null) {
-            mAutoCompleteAdapter.updateExistingMembersList(members);
+            mAutoCompleteAdapter.updateExistingMembersList(mListToDisplay);
         }
     }
 

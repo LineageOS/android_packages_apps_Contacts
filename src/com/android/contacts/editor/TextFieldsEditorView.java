@@ -21,6 +21,7 @@ import android.graphics.Rect;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -197,6 +198,12 @@ public class TextFieldsEditorView extends LabeledEditorView {
             final EditText fieldView = new EditText(mContext);
             fieldView.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
                     field.isMultiLine() ? LayoutParams.WRAP_CONTENT : mMinFieldHeight));
+            // Set the max length of EditText if user provide a value more
+            // than zero.
+            if (kind.maxLength > 0) {
+                fieldView.setFilters(new InputFilter[] {
+                    new InputFilter.LengthFilter(kind.maxLength)});
+                }
             // Set either a minimum line requirement or a minimum height (because {@link TextView}
             // only takes one or the other at a single time).
             if (field.minLines != 0) {

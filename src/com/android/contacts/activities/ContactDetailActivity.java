@@ -55,9 +55,6 @@ import java.util.ArrayList;
 public class ContactDetailActivity extends ContactsActivity {
     private static final String TAG = "ContactDetailActivity";
 
-    /** Shows a toogle button for hiding/showing updates. Don't submit with true */
-    private static final boolean DEBUG_TRANSITIONS = false;
-
     private Contact mContactData;
     private Uri mLookupUri;
 
@@ -81,14 +78,12 @@ public class ContactDetailActivity extends ContactsActivity {
             // can freely navigate the app (this is different from phones, where only the UP button
             // kicks the user into the full app)
             if (shouldUpRecreateTask(intent)) {
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK |
-                        Intent.FLAG_ACTIVITY_TASK_ON_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             } else {
                 intent.setFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS |
                         Intent.FLAG_ACTIVITY_FORWARD_RESULT | Intent.FLAG_ACTIVITY_SINGLE_TOP |
                         Intent.FLAG_ACTIVITY_CLEAR_TOP);
             }
-
             intent.setClass(this, PeopleActivity.class);
             startActivity(intent);
             finish();
@@ -128,19 +123,6 @@ public class ContactDetailActivity extends ContactsActivity {
         super.onCreateOptionsMenu(menu);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.star, menu);
-        if (DEBUG_TRANSITIONS) {
-            final MenuItem toggleSocial =
-                    menu.add(mLoaderFragment.getLoadStreamItems() ? "less" : "more");
-            toggleSocial.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-            toggleSocial.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    mLoaderFragment.toggleLoadStreamItems();
-                    invalidateOptionsMenu();
-                    return false;
-                }
-            });
-        }
         return true;
     }
 

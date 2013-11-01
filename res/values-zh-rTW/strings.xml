@@ -27,7 +27,7 @@
     <string name="contactPickerActivityTitle" msgid="4301062192337417640">"選擇聯絡人"</string>
     <string name="starredList" msgid="4817256136413959463">"已加星號"</string>
     <string name="frequentList" msgid="7154768136473953056">"經常聯絡"</string>
-    <string name="strequentList" msgid="5640192862059373511">"我的最愛"</string>
+    <string name="strequentList" msgid="5640192862059373511">"我的收藏"</string>
     <string name="viewContactTitle" msgid="7989394521836644384">"聯絡人詳細資料"</string>
     <string name="viewContactDesription" msgid="214186610887547860">"檢視聯絡人"</string>
     <string name="editContactDescription" msgid="2947202828256214947">"編輯聯絡人"</string>
@@ -38,8 +38,8 @@
     <string name="contactDetailUpdates" msgid="3780588624763446941">"更新"</string>
     <string name="searchHint" msgid="8482945356247760701">"搜尋聯絡人"</string>
     <string name="menu_viewContact" msgid="2795575601596468581">"檢視聯絡人"</string>
-    <string name="menu_addStar" msgid="2908478235715404876">"新增至我的最愛"</string>
-    <string name="menu_removeStar" msgid="5844227078364227030">"從我的最愛中移除"</string>
+    <string name="menu_addStar" msgid="2908478235715404876">"加到我的收藏"</string>
+    <string name="menu_removeStar" msgid="5844227078364227030">"從我的收藏中移除"</string>
     <string name="menu_editContact" msgid="9042415603857662633">"編輯"</string>
     <string name="menu_deleteContact" msgid="6788644058868189393">"刪除"</string>
     <string name="menu_create_contact_shortcut" msgid="1217971915748509640">"新增到主螢幕上"</string>
@@ -147,7 +147,7 @@
     <string name="pick_new_photo" msgid="7962368009197147617">"從圖片庫選取新相片"</string>
     <string name="locale_change_in_progress" msgid="7583992153091537467">"正在更新聯絡人清單以反映語言變更。"</string>
     <string name="upgrade_in_progress" msgid="474511436863451061">"正在更新聯絡人清單。"</string>
-    <string name="upgrade_out_of_memory" msgid="1209994418877625940">"正在升級通訊錄。"\n\n"升級程序大約需要 <xliff:g id="SIZE_IN_MEGABYTES">%s</xliff:g> MB 的內部儲存空間。"\n\n"請選擇下列其中一個選項："</string>
+    <string name="upgrade_out_of_memory" msgid="1209994418877625940">"正在升級通訊錄。\n\n升級程序大約需要 <xliff:g id="SIZE_IN_MEGABYTES">%s</xliff:g> MB 的內部儲存空間。\n\n請選擇下列其中一個選項："</string>
     <string name="upgrade_out_of_memory_uninstall" msgid="1721798828992091432">"解除安裝一些應用程式"</string>
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"重試升級"</string>
     <string name="search_results_searching" msgid="3984833028938569930">"搜尋中…"</string>
@@ -162,7 +162,7 @@
     <string name="group_edit_field_hint_text" msgid="3966441850870457808">"群組名稱"</string>
     <string name="contact_status_update_attribution" msgid="752179367353018597">"透過 <xliff:g id="SOURCE">%1$s</xliff:g>"</string>
     <string name="contact_status_update_attribution_with_date" msgid="7358045508107825068">"<xliff:g id="DATE">%1$s</xliff:g> (透過 <xliff:g id="SOURCE">%2$s</xliff:g>)"</string>
-    <string name="description_star" msgid="2605854427360036550">"我的最愛"</string>
+    <string name="description_star" msgid="2605854427360036550">"我的收藏"</string>
     <string name="edit_contact" msgid="7529281274005689512">"編輯聯絡人"</string>
   <plurals name="merge_info">
     <item quantity="one" msgid="148365587896371969">"未合併"</item>
@@ -185,7 +185,7 @@
     <string name="activity_title_confirm_add_detail" msgid="4065089866210730616">"加入聯絡人"</string>
     <string name="non_phone_close" msgid="7608506439725515667">"關閉"</string>
     <string name="widget_name_and_phonetic" msgid="8739586586600099979">"<xliff:g id="DISPLAY_NAME">%1$s</xliff:g> (<xliff:g id="PHONETIC_NAME">%2$s</xliff:g>)"</string>
-    <string name="date_year_toggle" msgid="7356532842767854606">"提供年份"</string>
+    <string name="date_year_toggle" msgid="7356532842767854606">"輸入年份"</string>
     <string name="social_widget_label" msgid="6378905543028924592">"聯絡人"</string>
     <string name="social_widget_loading" msgid="5327336597364074608">"載入中…"</string>
     <string name="contacts_unavailable_create_contact" msgid="7014525713871959208">"建立新聯絡人"</string>
@@ -219,7 +219,7 @@
     <string name="local_profile_title" msgid="2021416826991393684">"我的本機個人資料"</string>
     <string name="external_profile_title" msgid="8034998767621359438">"我的 <xliff:g id="EXTERNAL_SOURCE">%1$s</xliff:g> 個人資料"</string>
     <string name="toast_displaying_all_contacts" msgid="2737388783898593875">"顯示所有聯絡人"</string>
-    <string name="no_account_prompt" msgid="7061052512446855192">"透過「Google 帳戶」使用「Google 人物搜尋」可獲得更佳的效益。"\n\n"• 透過任何瀏覽器都可存取。"\n"• 安全備份您的聯絡人。"</string>
+    <string name="no_account_prompt" msgid="7061052512446855192">"透過「Google 帳戶」使用「Google 人物搜尋」可獲得更佳的效益。\n\n• 透過任何瀏覽器都可存取。\n• 安全備份您的聯絡人。"</string>
     <string name="generic_no_account_prompt" msgid="7218827704367325460">"即使手機遺失，聯絡人資訊依然萬無一失：與線上服務保持同步。"</string>
     <string name="generic_no_account_prompt_title" msgid="753783911899054860">"新增帳戶"</string>
     <string name="contact_editor_prompt_zero_accounts" msgid="1785345895691886499">"系統不會備份您新增的聯絡人資料。您是否要新建一個帳戶，將您的聯絡人資料另存在線上？"</string>

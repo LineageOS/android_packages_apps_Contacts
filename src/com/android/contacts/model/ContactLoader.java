@@ -35,35 +35,36 @@ import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Directory;
 import android.provider.ContactsContract.Groups;
 import android.provider.ContactsContract.RawContacts;
-import android.provider.ContactsContract.StreamItemPhotos;
-import android.provider.ContactsContract.StreamItems;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.LongSparseArray;
 
 import com.android.contacts.GroupMetaData;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.model.AccountTypeManager;
 import com.android.contacts.common.model.account.AccountType;
 import com.android.contacts.common.model.account.AccountTypeWithDataSet;
+import com.android.contacts.common.util.Constants;
+import com.android.contacts.common.util.UriUtils;
 import com.android.contacts.model.dataitem.DataItem;
 import com.android.contacts.model.dataitem.PhoneDataItem;
 import com.android.contacts.model.dataitem.PhotoDataItem;
 import com.android.contacts.util.ContactLoaderUtils;
 import com.android.contacts.util.DataStatus;
-import com.android.contacts.util.StreamItemEntry;
-import com.android.contacts.util.StreamItemPhotoEntry;
-import com.android.contacts.common.util.UriUtils;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -72,6 +73,7 @@ import java.util.Set;
  * Loads a single Contact and all it constituent RawContacts.
  */
 public class ContactLoader extends AsyncTaskLoader<Contact> {
+
     private static final String TAG = ContactLoader.class.getSimpleName();
 
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
@@ -82,7 +84,6 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
     private final Uri mRequestedUri;
     private Uri mLookupUri;
     private boolean mLoadGroupMetaData;
-    private boolean mLoadStreamItems;
     private boolean mLoadInvitableAccountTypes;
     private boolean mPostViewNotification;
     private boolean mComputeFormattedPhoneNumber;
@@ -91,17 +92,16 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
     private final Set<Long> mNotifiedRawContactIds = Sets.newHashSet();
 
     public ContactLoader(Context context, Uri lookupUri, boolean postViewNotification) {
-        this(context, lookupUri, false, false, false, postViewNotification, false);
+        this(context, lookupUri, false, false, postViewNotification, false);
     }
 
     public ContactLoader(Context context, Uri lookupUri, boolean loadGroupMetaData,
-            boolean loadStreamItems, boolean loadInvitableAccountTypes,
+            boolean loadInvitableAccountTypes,
             boolean postViewNotification, boolean computeFormattedPhoneNumber) {
         super(context);
         mLookupUri = lookupUri;
         mRequestedUri = lookupUri;
         mLoadGroupMetaData = loadGroupMetaData;
-        mLoadStreamItems = loadStreamItems;
         mLoadInvitableAccountTypes = loadInvitableAccountTypes;
         mPostViewNotification = postViewNotification;
         mComputeFormattedPhoneNumber = computeFormattedPhoneNumber;
@@ -318,7 +318,11 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
                 result = new Contact(mRequestedUri, cachedResult);
                 resultIsCached = true;
             } else {
-                result = loadContactEntity(resolver, uriCurrentFormat);
+                if (uriCurrentFormat.getLastPathSegment().equals(Constants.LOOKUP_URI_ENCODED)) {
+                    result = loadEncodedContactEntity(uriCurrentFormat);
+                } else {
+                    result = loadContactEntity(resolver, uriCurrentFormat);
+                }
                 resultIsCached = false;
             }
             if (result.isLoaded()) {
@@ -330,9 +334,6 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
                     if (result.getGroupMetaData() == null) {
                         loadGroupMetaData(result);
                     }
-                }
-                if (mLoadStreamItems && result.getStreamItems() == null) {
-                    loadStreamItems(result);
                 }
                 if (mComputeFormattedPhoneNumber) {
                     computeFormattedPhoneNumbers(result);
@@ -349,6 +350,99 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
             Log.e(TAG, "Error loading the contact: " + mLookupUri, e);
             return Contact.forError(mRequestedUri, e);
         }
+    }
+
+    private Contact loadEncodedContactEntity(Uri uri) throws JSONException {
+        final String jsonString = uri.getEncodedFragment();
+        final JSONObject json = new JSONObject(jsonString);
+
+        final long directoryId =
+                Long.valueOf(uri.getQueryParameter(ContactsContract.DIRECTORY_PARAM_KEY));
+
+        final String displayName = json.getString(Contacts.DISPLAY_NAME);
+        final String altDisplayName = json.optString(
+                Contacts.DISPLAY_NAME_ALTERNATIVE, displayName);
+        final int displayNameSource = json.getInt(Contacts.DISPLAY_NAME_SOURCE);
+        final String photoUri = json.optString(Contacts.PHOTO_URI, null);
+        final Contact contact = new Contact(
+                uri, uri,
+                mLookupUri,
+                directoryId,
+                null /* lookupKey */,
+                -1 /* id */,
+                -1 /* nameRawContactId */,
+                displayNameSource,
+                0 /* photoId */,
+                photoUri,
+                displayName,
+                altDisplayName,
+                null /* phoneticName */,
+                false /* starred */,
+                null /* presence */,
+                false /* sendToVoicemail */,
+                null /* customRingtone */,
+                false /* isUserProfile */);
+
+        contact.setStatuses(new ImmutableMap.Builder<Long, DataStatus>().build());
+
+        final String accountName = json.optString(RawContacts.ACCOUNT_NAME, null);
+        final String directoryName = uri.getQueryParameter(Directory.DISPLAY_NAME);
+        if (accountName != null) {
+            final String accountType = json.getString(RawContacts.ACCOUNT_TYPE);
+            contact.setDirectoryMetaData(directoryName, null, accountName, accountType,
+                    json.optInt(Directory.EXPORT_SUPPORT,
+                            Directory.EXPORT_SUPPORT_SAME_ACCOUNT_ONLY));
+        } else {
+            contact.setDirectoryMetaData(directoryName, null, null, null,
+                    json.optInt(Directory.EXPORT_SUPPORT, Directory.EXPORT_SUPPORT_ANY_ACCOUNT));
+        }
+
+        final ContentValues values = new ContentValues();
+        values.put(Data._ID, -1);
+        values.put(Data.CONTACT_ID, -1);
+        final RawContact rawContact = new RawContact(values);
+
+        final JSONObject items = json.getJSONObject(Contacts.CONTENT_ITEM_TYPE);
+        final Iterator keys = items.keys();
+        while (keys.hasNext()) {
+            final String mimetype = (String) keys.next();
+
+            // Could be single object or array.
+            final JSONObject obj = items.optJSONObject(mimetype);
+            if (obj == null) {
+                final JSONArray array = items.getJSONArray(mimetype);
+                for (int i = 0; i < array.length(); i++) {
+                    final JSONObject item = array.getJSONObject(i);
+                    processOneRecord(rawContact, item, mimetype);
+                }
+            } else {
+                processOneRecord(rawContact, obj, mimetype);
+            }
+        }
+
+        contact.setRawContacts(new ImmutableList.Builder<RawContact>()
+                .add(rawContact)
+                .build());
+        return contact;
+    }
+
+    private void processOneRecord(RawContact rawContact, JSONObject item, String mimetype)
+            throws JSONException {
+        final ContentValues itemValues = new ContentValues();
+        itemValues.put(Data.MIMETYPE, mimetype);
+        itemValues.put(Data._ID, -1);
+
+        final Iterator iterator = item.keys();
+        while (iterator.hasNext()) {
+            String name = (String) iterator.next();
+            final Object o = item.get(name);
+            if (o instanceof String) {
+                itemValues.put(name, (String) o);
+            } else if (o instanceof Integer) {
+                itemValues.put(name, (Integer) o);
+            }
+        }
+        rawContact.addDataItemValues(itemValues);
     }
 
     private Contact loadContactEntity(ContentResolver resolver, Uri contactUri) {
@@ -413,25 +507,35 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
      * not found, returns null
      */
     private void loadPhotoBinaryData(Contact contactData) {
-
         // If we have a photo URI, try loading that first.
         String photoUri = contactData.getPhotoUri();
         if (photoUri != null) {
             try {
-                AssetFileDescriptor fd = getContext().getContentResolver()
-                       .openAssetFileDescriptor(Uri.parse(photoUri), "r");
+                final InputStream inputStream;
+                final AssetFileDescriptor fd;
+                final Uri uri = Uri.parse(photoUri);
+                final String scheme = uri.getScheme();
+                if ("http".equals(scheme) || "https".equals(scheme)) {
+                    // Support HTTP urls that might come from extended directories
+                    inputStream = new URL(photoUri).openStream();
+                    fd = null;
+                } else {
+                    fd = getContext().getContentResolver().openAssetFileDescriptor(uri, "r");
+                    inputStream = fd.createInputStream();
+                }
                 byte[] buffer = new byte[16 * 1024];
-                FileInputStream fis = fd.createInputStream();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 try {
                     int size;
-                    while ((size = fis.read(buffer)) != -1) {
+                    while ((size = inputStream.read(buffer)) != -1) {
                         baos.write(buffer, 0, size);
                     }
                     contactData.setPhotoBinaryData(baos.toByteArray());
                 } finally {
-                    fis.close();
-                    fd.close();
+                    inputStream.close();
+                    if (fd != null) {
+                        fd.close();
+                    }
                 }
                 return;
             } catch (IOException ioe) {
@@ -711,95 +815,6 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
     }
 
     /**
-     * Loads all stream items and stream item photos belonging to this contact.
-     */
-    private void loadStreamItems(Contact result) {
-        final Cursor cursor = getContext().getContentResolver().query(
-                Contacts.CONTENT_LOOKUP_URI.buildUpon()
-                        .appendPath(result.getLookupKey())
-                        .appendPath(Contacts.StreamItems.CONTENT_DIRECTORY).build(),
-                null, null, null, null);
-        final LongSparseArray<StreamItemEntry> streamItemsById =
-                new LongSparseArray<StreamItemEntry>();
-        final ArrayList<StreamItemEntry> streamItems = new ArrayList<StreamItemEntry>();
-        try {
-            while (cursor.moveToNext()) {
-                StreamItemEntry streamItem = new StreamItemEntry(cursor);
-                streamItemsById.put(streamItem.getId(), streamItem);
-                streamItems.add(streamItem);
-            }
-        } finally {
-            cursor.close();
-        }
-
-        // Pre-decode all HTMLs
-        final long start = System.currentTimeMillis();
-        for (StreamItemEntry streamItem : streamItems) {
-            streamItem.decodeHtml(getContext());
-        }
-        final long end = System.currentTimeMillis();
-        if (DEBUG) {
-            Log.d(TAG, "Decoded HTML for " + streamItems.size() + " items, took "
-                    + (end - start) + " ms");
-        }
-
-        // Now retrieve any photo records associated with the stream items.
-        if (!streamItems.isEmpty()) {
-            if (result.isUserProfile()) {
-                // If the stream items we're loading are for the profile, we can't bulk-load the
-                // stream items with a custom selection.
-                for (StreamItemEntry entry : streamItems) {
-                    Cursor siCursor = getContext().getContentResolver().query(
-                            Uri.withAppendedPath(
-                                    ContentUris.withAppendedId(
-                                            StreamItems.CONTENT_URI, entry.getId()),
-                                    StreamItems.StreamItemPhotos.CONTENT_DIRECTORY),
-                            null, null, null, null);
-                    try {
-                        while (siCursor.moveToNext()) {
-                            entry.addPhoto(new StreamItemPhotoEntry(siCursor));
-                        }
-                    } finally {
-                        siCursor.close();
-                    }
-                }
-            } else {
-                String[] streamItemIdArr = new String[streamItems.size()];
-                StringBuilder streamItemPhotoSelection = new StringBuilder();
-                streamItemPhotoSelection.append(StreamItemPhotos.STREAM_ITEM_ID + " IN (");
-                for (int i = 0; i < streamItems.size(); i++) {
-                    if (i > 0) {
-                        streamItemPhotoSelection.append(",");
-                    }
-                    streamItemPhotoSelection.append("?");
-                    streamItemIdArr[i] = String.valueOf(streamItems.get(i).getId());
-                }
-                streamItemPhotoSelection.append(")");
-                Cursor sipCursor = getContext().getContentResolver().query(
-                        StreamItems.CONTENT_PHOTO_URI,
-                        null, streamItemPhotoSelection.toString(), streamItemIdArr,
-                        StreamItemPhotos.STREAM_ITEM_ID);
-                try {
-                    while (sipCursor.moveToNext()) {
-                        long streamItemId = sipCursor.getLong(
-                                sipCursor.getColumnIndex(StreamItemPhotos.STREAM_ITEM_ID));
-                        StreamItemEntry streamItem = streamItemsById.get(streamItemId);
-                        streamItem.addPhoto(new StreamItemPhotoEntry(sipCursor));
-                    }
-                } finally {
-                    sipCursor.close();
-                }
-            }
-        }
-
-        // Set the sorted stream items on the result.
-        Collections.sort(streamItems);
-        result.setStreamItems(new ImmutableList.Builder<StreamItemEntry>()
-                .addAll(streamItems.iterator())
-                .build());
-    }
-
-    /**
      * Iterates over all data items that represent phone numbers are tries to calculate a formatted
      * number. This function can safely be called several times as no unformatted data is
      * overwritten
@@ -892,28 +907,16 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
     }
 
     /**
-     * Sets whether to load stream items. Will trigger a reload if the value has changed.
-     * At the moment, this is only used for debugging purposes
-     */
-    public void setLoadStreamItems(boolean value) {
-        if (mLoadStreamItems != value) {
-            mLoadStreamItems = value;
-            onContentChanged();
-        }
-    }
-
-    /**
      * Fully upgrades this ContactLoader to one with all lists fully loaded. When done, the
      * new result will be delivered
      */
     public void upgradeToFullContact() {
         // Everything requested already? Nothing to do, so let's bail out
-        if (mLoadGroupMetaData && mLoadInvitableAccountTypes && mLoadStreamItems
+        if (mLoadGroupMetaData && mLoadInvitableAccountTypes
                 && mPostViewNotification && mComputeFormattedPhoneNumber) return;
 
         mLoadGroupMetaData = true;
         mLoadInvitableAccountTypes = true;
-        mLoadStreamItems = true;
         mPostViewNotification = true;
         mComputeFormattedPhoneNumber = true;
 
@@ -923,10 +926,6 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
         // Our load parameters have changed, so let's pretend the data has changed. Its the same
         // thing, essentially.
         onContentChanged();
-    }
-
-    public boolean getLoadStreamItems() {
-        return mLoadStreamItems;
     }
 
     public Uri getLookupUri() {

@@ -109,9 +109,6 @@ public class PeopleActivity extends ContactsActivity
 
     private static final String TAG = "PeopleActivity";
 
-    /** Shows a toogle button for hiding/showing updates. Don't submit with true */
-    private static final boolean DEBUG_TRANSITIONS = false;
-
     private static final int TAB_FADE_IN_DURATION = 500;
 
     private static final String ENABLE_DEBUG_OPTIONS_HIDDEN_CODE = "debug debug!";
@@ -197,6 +194,11 @@ public class PeopleActivity extends ContactsActivity
      * that should be displayed in that mode.
      */
     private boolean mCurrentFilterIsValid;
+
+    /**
+     * This is to disable {@link #onOptionsItemSelected} when we trying to stop the activity.
+     */
+    private boolean mDisableOptionItemSelected;
 
     /** Sequential ID assigned to each instance; used for logging */
     private final int mInstanceId;
@@ -503,6 +505,7 @@ public class PeopleActivity extends ContactsActivity
         // Re-register the listener, which may have been cleared when onSaveInstanceState was
         // called.  See also: onSaveInstanceState
         mActionBarAdapter.setListener(this);
+        mDisableOptionItemSelected = false;
         if (mTabPager != null) {
             mTabPager.setOnPageChangeListener(mTabPagerListener);
         }
@@ -994,26 +997,31 @@ public class PeopleActivity extends ContactsActivity
         mAllFragment.setFilter(mContactListFilterController.getFilter());
 
         final boolean useTwoPane = PhoneCapabilityTester.isUsingTwoPanes(this);
-        final Locale locale = Locale.getDefault();
-        final int layoutDirection = TextUtils.getLayoutDirectionFromLocale(locale);
-        final boolean isLayoutRtl = (layoutDirection == View.LAYOUT_DIRECTION_RTL);
-        final int position;
-        if (useTwoPane)  {
-            position = isLayoutRtl ? View.SCROLLBAR_POSITION_RIGHT : View.SCROLLBAR_POSITION_LEFT;
-        } else {
-            position = isLayoutRtl ? View.SCROLLBAR_POSITION_LEFT: View.SCROLLBAR_POSITION_RIGHT;
-        }
-        mAllFragment.setVerticalScrollbarPosition(position);
+
+        mAllFragment.setVerticalScrollbarPosition(getScrollBarPosition(useTwoPane));
         mAllFragment.setSelectionVisible(useTwoPane);
         mAllFragment.setQuickContactEnabled(!useTwoPane);
     }
 
+    private int getScrollBarPosition(boolean useTwoPane) {
+        final boolean isLayoutRtl = isRTL();
+        final int position;
+        if (useTwoPane) {
+            position = isLayoutRtl ? View.SCROLLBAR_POSITION_RIGHT : View.SCROLLBAR_POSITION_LEFT;
+        } else {
+            position = isLayoutRtl ? View.SCROLLBAR_POSITION_LEFT : View.SCROLLBAR_POSITION_RIGHT;
+        }
+        return position;
+    }
+
+    private boolean isRTL() {
+        final Locale locale = Locale.getDefault();
+        return TextUtils.getLayoutDirectionFromLocale(locale) == View.LAYOUT_DIRECTION_RTL;
+    }
+
     private void configureGroupListFragment() {
         final boolean useTwoPane = PhoneCapabilityTester.isUsingTwoPanes(this);
-        mGroupsFragment.setVerticalScrollbarPosition(
-                useTwoPane
-                        ? View.SCROLLBAR_POSITION_LEFT
-                        : View.SCROLLBAR_POSITION_RIGHT);
+        mGroupsFragment.setVerticalScrollbarPosition(getScrollBarPosition(useTwoPane));
         mGroupsFragment.setSelectionVisible(useTwoPane);
     }
 
@@ -1373,20 +1381,6 @@ public class PeopleActivity extends ContactsActivity
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.people_options, menu);
 
-        if (DEBUG_TRANSITIONS && mContactDetailLoaderFragment != null) {
-            final MenuItem toggleSocial =
-                    menu.add(mContactDetailLoaderFragment.getLoadStreamItems() ? "less" : "more");
-            toggleSocial.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-            toggleSocial.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    mContactDetailLoaderFragment.toggleLoadStreamItems();
-                    invalidateOptionsMenu();
-                    return false;
-                }
-            });
-        }
-
         return true;
     }
 
@@ -1443,7 +1437,7 @@ public class PeopleActivity extends ContactsActivity
         } else {
             switch (mActionBarAdapter.getCurrentTab()) {
                 case TabState.FAVORITES:
-                    addContactMenu.setVisible(false);
+                    addContactMenu.setVisible(true);
                     addGroupMenu.setVisible(false);
                     contactsFilterMenu.setVisible(false);
                     clearFrequentsMenu.setVisible(hasFrequents());
@@ -1502,6 +1496,10 @@ public class PeopleActivity extends ContactsActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (mDisableOptionItemSelected) {
+            return false;
+        }
+
         switch (item.getItemId()) {
             case android.R.id.home: {
                 // The home icon on the action bar is pressed
@@ -1720,6 +1718,7 @@ public class PeopleActivity extends ContactsActivity
         // Clear the listener to make sure we don't get callbacks after onSaveInstanceState,
         // in order to avoid doing fragment transactions after it.
         // TODO Figure out a better way to deal with the issue.
+        mDisableOptionItemSelected = true;
         mActionBarAdapter.setListener(null);
         if (mTabPager != null) {
             mTabPager.setOnPageChangeListener(null);

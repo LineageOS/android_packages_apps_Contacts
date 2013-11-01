@@ -65,7 +65,7 @@
     <string name="readOnlyContactDeleteConfirmation" msgid="2137170726670196909">"Ce contact contient des informations provenant de plusieurs comptes. Vous pouvez masquer dans votre liste de contacts les informations des comptes en lecture seule, mais pas les supprimer."</string>
     <string name="multipleContactDeleteConfirmation" msgid="938900978442960800">"La suppression de ce contact entraînera celle d\'informations provenant de plusieurs comptes."</string>
     <string name="deleteConfirmation" msgid="811706994761610640">"Ce contact sera supprimé."</string>
-    <string name="menu_discard" msgid="6456087569315685632">"Ignorer"</string>
+    <string name="menu_discard" msgid="6456087569315685632">"Annuler"</string>
     <string name="invalidContactMessage" msgid="8215051456181842274">"Ce contact n\'existe pas."</string>
     <string name="createContactShortcutSuccessful" msgid="7874133287558150877">"Widget de contact ajouté à l\'écran d\'accueil."</string>
     <string name="pickerNewContactHeader" msgid="7750705279843568147">"Créer un nouveau contact"</string>
@@ -76,7 +76,7 @@
   </string-array>
     <string name="photoPickerNotFoundText" product="tablet" msgid="6247290728908599701">"Aucune image n\'est disponible sur la tablette."</string>
     <string name="photoPickerNotFoundText" product="default" msgid="431331662154342581">"Aucune image disponible sur le téléphone."</string>
-    <string name="attach_photo_dialog_title" msgid="5599827035558557169">"Photo du contact"</string>
+    <string name="attach_photo_dialog_title" msgid="5599827035558557169">"Photo d\'un contact"</string>
     <string name="customLabelPickerTitle" msgid="1081475101983255212">"Libellé personnalisé"</string>
     <string name="send_to_voicemail_checkbox" msgid="9001686764070676353">"Renvoyer les appels directement vers la messagerie vocale"</string>
     <string name="removePhoto" msgid="4898105274130284565">"Supprimer la photo"</string>
@@ -147,7 +147,7 @@
     <string name="pick_new_photo" msgid="7962368009197147617">"Choisir dans la galerie"</string>
     <string name="locale_change_in_progress" msgid="7583992153091537467">"Mise à jour de la liste des contacts en cours suite au changement de langue."</string>
     <string name="upgrade_in_progress" msgid="474511436863451061">"La liste de contacts est en cours de mise à jour."</string>
-    <string name="upgrade_out_of_memory" msgid="1209994418877625940">"Les contacts font actuellement l\'objet d\'une mise à jour."\n\n"Cette opération nécessite environ <xliff:g id="SIZE_IN_MEGABYTES">%s</xliff:g> Mo de mémoire de stockage interne."\n\n"Veuillez sélectionner l\'une des options suivantes :"</string>
+    <string name="upgrade_out_of_memory" msgid="1209994418877625940">"Les contacts font actuellement l\'objet d\'une mise à jour.\n\nCette opération nécessite environ <xliff:g id="SIZE_IN_MEGABYTES">%s</xliff:g> Mo de mémoire de stockage interne.\n\nVeuillez sélectionner l\'une des options suivantes :"</string>
     <string name="upgrade_out_of_memory_uninstall" msgid="1721798828992091432">"Désinstaller certaines applications"</string>
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"Réessayer la mise à niveau"</string>
     <string name="search_results_searching" msgid="3984833028938569930">"Recherche…"</string>
@@ -219,7 +219,7 @@
     <string name="local_profile_title" msgid="2021416826991393684">"Mon profil local"</string>
     <string name="external_profile_title" msgid="8034998767621359438">"Mon profil <xliff:g id="EXTERNAL_SOURCE">%1$s</xliff:g>"</string>
     <string name="toast_displaying_all_contacts" msgid="2737388783898593875">"Affichage de tous les contacts"</string>
-    <string name="no_account_prompt" msgid="7061052512446855192">"Tirez le meilleur parti de l\'application Contacts en utilisant un compte Google."\n\n"• Accédez-y depuis n\'importe quel navigateur Web."\n"• Sauvegardez vos contacts en toute sécurité."</string>
+    <string name="no_account_prompt" msgid="7061052512446855192">"Tirez le meilleur parti de l\'application Contacts en utilisant un compte Google.\n\n• Accédez-y depuis n\'importe quel navigateur Web.\n• Sauvegardez vos contacts en toute sécurité."</string>
     <string name="generic_no_account_prompt" msgid="7218827704367325460">"Assurez la sécurité de vos contacts, même si vous perdez votre téléphone en effectuant une synchronisation avec un service en ligne."</string>
     <string name="generic_no_account_prompt_title" msgid="753783911899054860">"Ajouter un compte"</string>
     <string name="contact_editor_prompt_zero_accounts" msgid="1785345895691886499">"Votre nouveau contact ne sera pas sauvegardé. Ajouter un compte permettant de sauvegarder les contacts en ligne ?"</string>

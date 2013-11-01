@@ -24,7 +24,9 @@
             android:id="@+id/photo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:clickable="true"
+            android:contentDescription="@string/description_contact_photo" />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dip"
@@ -39,11 +41,10 @@
             android:layout_alignRight="@id/photo"
             android:layout_alignStart="@id/photo"
             android:layout_alignEnd="@id/photo"
-            android:background="@color/call_detail_photo_bg" />
+            android:background="@color/quickcontact_name_detail_background" />
         <ImageView
             android:id="@+id/contact_details_image"
             android:src="@drawable/ic_contacts_holo_dark"
-            android:contentDescription="@null"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_marginRight="16dip"
@@ -51,16 +52,31 @@
             android:layout_marginBottom="5dip"
             android:layout_alignBottom="@id/photo_text_bar"
             android:layout_alignRight="@id/photo_text_bar"
-            android:layout_alignEnd="@id/photo_text_bar" />
+            android:layout_alignEnd="@id/photo_text_bar"
+            android:clickable="true"
+            android:contentDescription="@string/viewContactDesription" />
+        <ImageView
+            android:id="@+id/quickcontact_star_button"
+            android:src="@drawable/ic_favorite_off_lt"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="5dip"
+            android:layout_marginRight="16dip"
+            android:layout_marginEnd="16dip"
+            android:layout_alignBottom="@id/photo_text_bar"
+            android:layout_toLeftOf="@id/contact_details_image"
+            android:layout_toStartOf="@id/contact_details_image"
+            android:clickable="true"
+            android:contentDescription="@string/menu_addStar" />
         <TextView
             android:id="@+id/name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="42dip"
             android:layout_alignBottom="@id/photo"
             android:layout_alignLeft="@id/photo"
             android:layout_alignStart="@id/photo"
-            android:layout_toLeftOf="@id/open_details_button"
-            android:layout_toStartOf="@id/open_details_button"
+            android:layout_toLeftOf="@id/quickcontact_star_button"
+            android:layout_toStartOf="@id/quickcontact_star_button"
             android:gravity="center_vertical"
             android:paddingLeft="8dip"
             android:paddingStart="8dip"
@@ -68,11 +84,5 @@
             android:ellipsize="end"
             android:textColor="@color/white_text"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-        <ImageButton
-            android:id="@+id/open_details_push_layer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/viewContactDesription"
-            android:background="?android:attr/selectableItemBackground" />
     </RelativeLayout>
 </merge>

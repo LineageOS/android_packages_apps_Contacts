@@ -69,7 +69,7 @@
     <string name="invalidContactMessage" msgid="8215051456181842274">"Mwasiliani hayupo."</string>
     <string name="createContactShortcutSuccessful" msgid="7874133287558150877">"Wijeti ya mawasiliano imeongezwa kwenye skrini ya Nyumbani."</string>
     <string name="pickerNewContactHeader" msgid="7750705279843568147">"Weka anwani mpya"</string>
-    <string name="pickerNewContactText" msgid="6166997164401048211">"Anzisha mwasiliani mpya"</string>
+    <string name="pickerNewContactText" msgid="6166997164401048211">"Ongeza anwani mpya"</string>
   <string-array name="otherLabels">
     <item msgid="8287841928119937597">"Shirika"</item>
     <item msgid="7196592230748086755">"Hati"</item>
@@ -78,7 +78,7 @@
     <string name="photoPickerNotFoundText" product="default" msgid="431331662154342581">"Hakuna picha zinazopatikana kwenye simu."</string>
     <string name="attach_photo_dialog_title" msgid="5599827035558557169">"Picha ya anwani"</string>
     <string name="customLabelPickerTitle" msgid="1081475101983255212">"Jina maalum la lebo"</string>
-    <string name="send_to_voicemail_checkbox" msgid="9001686764070676353">"Tuma simu moja kwa moja kwa barua ya sauti"</string>
+    <string name="send_to_voicemail_checkbox" msgid="9001686764070676353">"Tuma simu moja kwa moja kwenye ujumbe wa sauti"</string>
     <string name="removePhoto" msgid="4898105274130284565">"Ondoa picha"</string>
     <string name="noContacts" msgid="8579310973261953559">"Hakuna anwani."</string>
     <string name="noGroups" msgid="8614664663561385253">"Hakuna vikundi."</string>
@@ -147,7 +147,7 @@
     <string name="pick_new_photo" msgid="7962368009197147617">"Chagua picha mpya kutoka kwa Matunzio"</string>
     <string name="locale_change_in_progress" msgid="7583992153091537467">"Orodha ya anwani inasasishwa ili kuangazia mabadiliko ya lugha."</string>
     <string name="upgrade_in_progress" msgid="474511436863451061">"Orodha ya anwani inasasishwa."</string>
-    <string name="upgrade_out_of_memory" msgid="1209994418877625940">"Anwani ziko katika harakati ya kupandishwa gredi. "\n\n"Mchakato wa kupandisha gredi unahitaji takriban MB <xliff:g id="SIZE_IN_MEGABYTES">%s</xliff:g> za hifadhi ya ndani."\n\n"Chagua mojawapo ya chaguo zifwatazo:"</string>
+    <string name="upgrade_out_of_memory" msgid="1209994418877625940">"Anwani ziko katika harakati ya kupandishwa gredi. \n\nMchakato wa kupandisha gredi unahitaji takriban MB <xliff:g id="SIZE_IN_MEGABYTES">%s</xliff:g> za hifadhi ya ndani.\n\nChagua mojawapo ya chaguo zifwatazo:"</string>
     <string name="upgrade_out_of_memory_uninstall" msgid="1721798828992091432">"Ondoa baadhi ya programu"</string>
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"Jaribu kupandisha gredi tena"</string>
     <string name="search_results_searching" msgid="3984833028938569930">"Inatafuta…"</string>
@@ -157,7 +157,7 @@
     <string name="menu_select_none" msgid="7093222469852132345">"Usichague zozote"</string>
     <string name="add_field" msgid="2384260056674995230">"Ongeza sehemu nyingine"</string>
     <string name="add_new_entry_for_section" msgid="5223080690667565044">"Ongeza mpya"</string>
-    <string name="add_organization" msgid="7311893231158291197">"Ongeza shirikisho"</string>
+    <string name="add_organization" msgid="7311893231158291197">"Ongeza shirika"</string>
     <string name="event_edit_field_hint_text" msgid="5794424930242630477">"Tarehe"</string>
     <string name="group_edit_field_hint_text" msgid="3966441850870457808">"Jina la kikundi"</string>
     <string name="contact_status_update_attribution" msgid="752179367353018597">"kupitia <xliff:g id="SOURCE">%1$s</xliff:g>"</string>
@@ -219,7 +219,7 @@
     <string name="local_profile_title" msgid="2021416826991393684">"Wasifu wangu wa ndani."</string>
     <string name="external_profile_title" msgid="8034998767621359438">"Wasifu wangu wa <xliff:g id="EXTERNAL_SOURCE">%1$s</xliff:g>"</string>
     <string name="toast_displaying_all_contacts" msgid="2737388783898593875">"Inaonyesha anwani zote"</string>
-    <string name="no_account_prompt" msgid="7061052512446855192">"Watu wanafanya kazi vizuri wakiwa na Akaunti ya Google. "\n" "\n" • Iangalie kwa kutumia kivinjari chochote. "\n" • Tunza mawasiliano yako kwa usalama."</string>
+    <string name="no_account_prompt" msgid="7061052512446855192">"Watu wanafanya kazi vizuri wakiwa na Akaunti ya Google. \n \n • Iangalie kwa kutumia kivinjari chochote. \n • Tunza mawasiliano yako kwa usalama."</string>
     <string name="generic_no_account_prompt" msgid="7218827704367325460">"Weka anwani za unaowasiliana nao salama hata ukipoteza simu yako: sawazisha kwa huduma iliyo mtandaoni."</string>
     <string name="generic_no_account_prompt_title" msgid="753783911899054860">"Ongeza akaunti"</string>
     <string name="contact_editor_prompt_zero_accounts" msgid="1785345895691886499">"Anwani yako mpya haitahifadhiwa. Je, ungetaka kuongeza akaunti ambayo inahifadhi nakala ya anwani katika mtandao?"</string>

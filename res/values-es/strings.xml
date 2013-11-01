@@ -42,7 +42,7 @@
     <string name="menu_removeStar" msgid="5844227078364227030">"Eliminar de \"Favoritos\""</string>
     <string name="menu_editContact" msgid="9042415603857662633">"Editar"</string>
     <string name="menu_deleteContact" msgid="6788644058868189393">"Eliminar"</string>
-    <string name="menu_create_contact_shortcut" msgid="1217971915748509640">"Añadir al escritorio"</string>
+    <string name="menu_create_contact_shortcut" msgid="1217971915748509640">"Añadir a la pantalla de inicio"</string>
     <string name="menu_call" msgid="3992595586042260618">"Llamar al contacto"</string>
     <string name="menu_sendSMS" msgid="5535886767547006515">"Enviar SMS al contacto"</string>
     <string name="menu_splitAggregate" msgid="8368636463748691868">"Dividir"</string>
@@ -67,9 +67,9 @@
     <string name="deleteConfirmation" msgid="811706994761610640">"El contacto se eliminará."</string>
     <string name="menu_discard" msgid="6456087569315685632">"Descartar"</string>
     <string name="invalidContactMessage" msgid="8215051456181842274">"Este contacto no existe."</string>
-    <string name="createContactShortcutSuccessful" msgid="7874133287558150877">"El widget de contactos se ha añadido al escritorio."</string>
-    <string name="pickerNewContactHeader" msgid="7750705279843568147">"Crear contacto nuevo"</string>
-    <string name="pickerNewContactText" msgid="6166997164401048211">"Crear contacto nuevo"</string>
+    <string name="createContactShortcutSuccessful" msgid="7874133287558150877">"El widget de contactos se ha añadido a la pantalla de inicio."</string>
+    <string name="pickerNewContactHeader" msgid="7750705279843568147">"Crear nuevo contacto"</string>
+    <string name="pickerNewContactText" msgid="6166997164401048211">"Crear nuevo contacto"</string>
   <string-array name="otherLabels">
     <item msgid="8287841928119937597">"Organización"</item>
     <item msgid="7196592230748086755">"Nota"</item>
@@ -147,7 +147,7 @@
     <string name="pick_new_photo" msgid="7962368009197147617">"Seleccionar nueva foto de la galería"</string>
     <string name="locale_change_in_progress" msgid="7583992153091537467">"La lista de contactos se está actualizando para reflejar el cambio de idioma."</string>
     <string name="upgrade_in_progress" msgid="474511436863451061">"La lista de contactos se está actualizando."</string>
-    <string name="upgrade_out_of_memory" msgid="1209994418877625940">"Los contactos se están actualizando. "\n\n"Se necesitan aproximadamente <xliff:g id="SIZE_IN_MEGABYTES">%s</xliff:g> MB de almacenamiento interno para el proceso de actualización."\n\n"Selecciona una de las siguientes opciones:"</string>
+    <string name="upgrade_out_of_memory" msgid="1209994418877625940">"Los contactos se están actualizando. \n\nSe necesitan aproximadamente <xliff:g id="SIZE_IN_MEGABYTES">%s</xliff:g> MB de almacenamiento interno para el proceso de actualización.\n\nSelecciona una de las siguientes opciones:"</string>
     <string name="upgrade_out_of_memory_uninstall" msgid="1721798828992091432">"Desinstalar algunas aplicaciones"</string>
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"Reintentar actualización"</string>
     <string name="search_results_searching" msgid="3984833028938569930">"Buscando..."</string>
@@ -188,7 +188,7 @@
     <string name="date_year_toggle" msgid="7356532842767854606">"Introducir año"</string>
     <string name="social_widget_label" msgid="6378905543028924592">"Contacto"</string>
     <string name="social_widget_loading" msgid="5327336597364074608">"Cargando..."</string>
-    <string name="contacts_unavailable_create_contact" msgid="7014525713871959208">"Crear contacto nuevo"</string>
+    <string name="contacts_unavailable_create_contact" msgid="7014525713871959208">"Crear nuevo contacto"</string>
     <string name="contacts_unavailable_add_account" msgid="7911101713860139754">"Iniciar sesión en una cuenta"</string>
     <string name="contacts_unavailable_import_contacts" msgid="4957393255392437529">"Importar contactos"</string>
     <string name="create_group_dialog_title" msgid="6874527142828424475">"Crear grupo nuevo"</string>
@@ -219,7 +219,7 @@
     <string name="local_profile_title" msgid="2021416826991393684">"Mi perfil local"</string>
     <string name="external_profile_title" msgid="8034998767621359438">"Mi perfil de <xliff:g id="EXTERNAL_SOURCE">%1$s</xliff:g>"</string>
     <string name="toast_displaying_all_contacts" msgid="2737388783898593875">"Mostrando todos los contactos"</string>
-    <string name="no_account_prompt" msgid="7061052512446855192">"La aplicación Contactos funciona mejor con una cuenta de Google."\n\n"• Accede a tu lista de contactos desde cualquier navegador web."\n"• Haz copias de seguridad de tus contactos de forma segura."</string>
+    <string name="no_account_prompt" msgid="7061052512446855192">"La aplicación Contactos funciona mejor con una cuenta de Google.\n\n• Accede a tu lista de contactos desde cualquier navegador web.\n• Haz copias de seguridad de tus contactos de forma segura."</string>
     <string name="generic_no_account_prompt" msgid="7218827704367325460">"Mantén tus contactos a salvo aunque pierdas el teléfono: sincronízalos con un servicio online."</string>
     <string name="generic_no_account_prompt_title" msgid="753783911899054860">"Añadir una cuenta"</string>
     <string name="contact_editor_prompt_zero_accounts" msgid="1785345895691886499">"No se hará una copia de seguridad del nuevo contacto. ¿Quieres añadir una cuenta para hacer copias de seguridad online de los contactos?"</string>

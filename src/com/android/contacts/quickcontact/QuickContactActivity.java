@@ -37,6 +37,9 @@ import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.CommonDataKinds.Website;
 import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.DisplayNameSources;
+import android.provider.ContactsContract.Intents.Insert;
+import android.provider.ContactsContract.Directory;
 import android.provider.ContactsContract.QuickContact;
 import android.provider.ContactsContract.RawContacts;
 import android.support.v13.app.FragmentPagerAdapter;
@@ -51,12 +54,12 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.HorizontalScrollView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.contacts.ContactSaveService;
 import com.android.contacts.common.Collapser;
 import com.android.contacts.R;
 import com.android.contacts.common.model.AccountTypeManager;
@@ -69,6 +72,7 @@ import com.android.contacts.common.model.dataitem.DataKind;
 import com.android.contacts.model.dataitem.EmailDataItem;
 import com.android.contacts.model.dataitem.ImDataItem;
 import com.android.contacts.common.util.Constants;
+import com.android.contacts.common.util.UriUtils;
 import com.android.contacts.util.DataStatus;
 import com.android.contacts.util.ImageViewDrawableSetter;
 import com.android.contacts.util.SchedulingUtils;
@@ -112,11 +116,13 @@ public class QuickContactActivity extends Activity {
     private View mSelectedTabRectangle;
     private View mLineAfterTrack;
 
-    private ImageView mOpenDetailsImage;
-    private ImageButton mOpenDetailsPushLayerButton;
+    private ImageView mPhotoView;
+    private ImageView mOpenDetailsOrAddContactImage;
+    private ImageView mStarImage;
     private ViewPager mListPager;
     private ViewPagerAdapter mPagerAdapter;
 
+    private Contact mContactData;
     private ContactLoader mContactLoader;
 
     private final ImageViewDrawableSetter mPhotoSetter = new ImageViewDrawableSetter();
@@ -156,6 +162,37 @@ public class QuickContactActivity extends Activity {
 
     private StopWatch mStopWatch = ENABLE_STOPWATCH
             ? StopWatch.start("QuickContact") : StopWatch.getNullStopWatch();
+
+    final OnClickListener mOpenDetailsClickHandler = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            final Intent intent = new Intent(Intent.ACTION_VIEW, mLookupUri);
+            mContactLoader.cacheResult();
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+            startActivity(intent);
+            close(false);
+        }
+    };
+
+    final OnClickListener mAddToContactsClickHandler = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (mContactData == null) {
+                Log.e(TAG, "Empty contact data when trying to add to contact");
+                return;
+            }
+            final Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
+            intent.setType(Contacts.CONTENT_ITEM_TYPE);
+
+            // Only pre-fill the name field if the provided display name is an organization
+            // name or better (e.g. structured name, nickname)
+            if (mContactData.getDisplayNameSource() >= DisplayNameSources.ORGANIZATION) {
+                intent.putExtra(Insert.NAME, mContactData.getDisplayName());
+            }
+            intent.putExtra(Insert.DATA, mContactData.getContentValues());
+            startActivity(intent);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -200,8 +237,8 @@ public class QuickContactActivity extends Activity {
         mFloatingLayout = (FloatingChildLayout) findViewById(R.id.floating_layout);
         mTrack = (ViewGroup) findViewById(R.id.track);
         mTrackScroller = (HorizontalScrollView) findViewById(R.id.track_scroller);
-        mOpenDetailsImage = (ImageView) findViewById(R.id.contact_details_image);
-        mOpenDetailsPushLayerButton = (ImageButton) findViewById(R.id.open_details_push_layer);
+        mOpenDetailsOrAddContactImage = (ImageView) findViewById(R.id.contact_details_image);
+        mStarImage = (ImageView) findViewById(R.id.quickcontact_star_button);
         mListPager = (ViewPager) findViewById(R.id.item_list_pager);
         mSelectedTabRectangle = findViewById(R.id.selected_tab_rectangle);
         mLineAfterTrack = findViewById(R.id.line_after_track);
@@ -214,17 +251,8 @@ public class QuickContactActivity extends Activity {
             }
         });
 
-        final OnClickListener openDetailsClickHandler = new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Intent intent = new Intent(Intent.ACTION_VIEW, mLookupUri);
-                mContactLoader.cacheResult();
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-                startActivity(intent);
-                close(false);
-            }
-        };
-        mOpenDetailsPushLayerButton.setOnClickListener(openDetailsClickHandler);
+        mOpenDetailsOrAddContactImage.setOnClickListener(mOpenDetailsClickHandler);
+
         mPagerAdapter = new ViewPagerAdapter(getFragmentManager());
         mListPager.setAdapter(mPagerAdapter);
         mListPager.setOnPageChangeListener(new PageChangeListener());
@@ -236,7 +264,11 @@ public class QuickContactActivity extends Activity {
 
         // find and prepare correct header view
         mPhotoContainer = findViewById(R.id.photo_container);
+
         setHeaderNameText(R.id.name, R.string.missing_name);
+
+        mPhotoView = (ImageView) mPhotoContainer.findViewById(R.id.photo);
+        mPhotoView.setOnClickListener(mOpenDetailsClickHandler);
 
         mStopWatch.lap("v"); // view initialized
 
@@ -334,18 +366,66 @@ public class QuickContactActivity extends Activity {
      * Handle the result from the ContactLoader
      */
     private void bindData(Contact data) {
+        mContactData = data;
         final ResolveCache cache = ResolveCache.getInstance(this);
         final Context context = this;
 
-        mOpenDetailsImage.setVisibility(isMimeExcluded(Contacts.CONTENT_ITEM_TYPE) ? View.GONE
-                : View.VISIBLE);
+        mOpenDetailsOrAddContactImage.setVisibility(isMimeExcluded(Contacts.CONTENT_ITEM_TYPE) ?
+                View.GONE : View.VISIBLE);
+        final boolean isStarred = data.getStarred();
+        if (isStarred) {
+            mStarImage.setImageResource(R.drawable.ic_favorite_on_lt);
+            mStarImage.setContentDescription(
+                getResources().getString(R.string.menu_removeStar));
+        } else {
+            mStarImage.setImageResource(R.drawable.ic_favorite_off_lt);
+            mStarImage.setContentDescription(
+                getResources().getString(R.string.menu_addStar));
+        }
+        final Uri lookupUri = data.getLookupUri();
+
+        // If this is a json encoded URI, there is no local contact to star
+        if (UriUtils.isEncodedContactUri(lookupUri)) {
+            mStarImage.setVisibility(View.GONE);
+
+            // If directory export support is not allowed, then don't allow the user to add
+            // to contacts
+            if (mContactData.getDirectoryExportSupport() == Directory.EXPORT_SUPPORT_NONE) {
+                configureHeaderClickActions(false);
+            } else {
+                configureHeaderClickActions(true);
+            }
+        } else {
+            configureHeaderClickActions(false);
+            mStarImage.setVisibility(View.VISIBLE);
+            mStarImage.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Toggle "starred" state
+                    // Make sure there is a contact
+                    if (lookupUri != null) {
+                        // Changes the state of the image already before sending updates to the
+                        // database
+                        if (isStarred) {
+                            mStarImage.setImageResource(R.drawable.ic_favorite_off_lt);
+                        } else {
+                            mStarImage.setImageResource(R.drawable.ic_favorite_on_lt);
+                        }
+
+                        // Now perform the real save
+                        final Intent intent = ContactSaveService.createSetStarredIntent(context,
+                                lookupUri, !isStarred);
+                        context.startService(intent);
+                    }
+                }
+            });
+        }
 
         mDefaultsMap.clear();
 
         mStopWatch.lap("sph"); // Start photo setting
 
-        final ImageView photoView = (ImageView) mPhotoContainer.findViewById(R.id.photo);
-        mPhotoSetter.setupContactPhoto(data, photoView);
+        mPhotoSetter.setupContactPhoto(data, mPhotoView);
 
         mStopWatch.lap("ph"); // Photo set
 
@@ -466,6 +546,24 @@ public class QuickContactActivity extends Activity {
     }
 
     /**
+     * Bind the correct image resource and click handlers to the header views
+     *
+     * @param canAdd Whether or not the user can directly add information in this quick contact
+     * to their local contacts
+     */
+    private void configureHeaderClickActions(boolean canAdd) {
+        if (canAdd) {
+            mOpenDetailsOrAddContactImage.setImageResource(R.drawable.ic_add_contact_holo_dark);
+            mOpenDetailsOrAddContactImage.setOnClickListener(mAddToContactsClickHandler);
+            mPhotoView.setOnClickListener(mAddToContactsClickHandler);
+        } else {
+            mOpenDetailsOrAddContactImage.setImageResource(R.drawable.ic_contacts_holo_dark);
+            mOpenDetailsOrAddContactImage.setOnClickListener(mOpenDetailsClickHandler);
+            mPhotoView.setOnClickListener(mOpenDetailsClickHandler);
+        }
+    }
+
+    /**
      * Inflate the in-track view for the action of the given MIME-type, collapsing duplicate values.
      * Will use the icon provided by the {@link DataKind}.
      */
@@ -557,9 +655,8 @@ public class QuickContactActivity extends Activity {
                 Log.wtf(TAG, "Lookup uri wasn't initialized. Loader was started too early");
             }
             return new ContactLoader(getApplicationContext(), mLookupUri,
-                    false /*loadGroupMetaData*/, false /*loadStreamItems*/,
-                    false /*loadInvitableAccountTypes*/, false /*postViewNotification*/,
-                    true /*computeFormattedPhoneNumber*/);
+                    false /*loadGroupMetaData*/, false /*loadInvitableAccountTypes*/,
+                    false /*postViewNotification*/, true /*computeFormattedPhoneNumber*/);
         }
     };
 

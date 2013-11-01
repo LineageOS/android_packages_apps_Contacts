@@ -58,6 +58,7 @@ import com.android.contacts.common.model.account.AccountType.EditType;
 import com.android.contacts.common.model.account.AccountType.EventEditType;
 import com.android.contacts.common.model.account.GoogleAccountType;
 import com.android.contacts.common.model.dataitem.DataKind;
+import com.android.contacts.model.dataitem.PhoneDataItem;
 import com.android.contacts.model.dataitem.StructuredNameDataItem;
 import com.android.contacts.util.DateUtils;
 import com.android.contacts.util.NameConverter;
@@ -693,6 +694,16 @@ public class RawContactModifier {
             // Won't override the contact name
             if (StructuredName.CONTENT_ITEM_TYPE.equals(mimeType)) {
                 continue;
+            } else if (Phone.CONTENT_ITEM_TYPE.equals(mimeType)) {
+                values.remove(PhoneDataItem.KEY_FORMATTED_PHONE_NUMBER);
+                final Integer type = values.getAsInteger(Phone.TYPE);
+                // If the provided phone number provides a custom phone type but not a label,
+                // replace it with mobile (by default) to avoid the "Enter custom label" from
+                // popping up immediately upon entering the ContactEditorFragment
+                if (type != null && type == Phone.TYPE_CUSTOM &&
+                        TextUtils.isEmpty(values.getAsString(Phone.LABEL))) {
+                    values.put(Phone.TYPE, Phone.TYPE_MOBILE);
+                }
             }
 
             DataKind kind = accountType.getKindForMimetype(mimeType);

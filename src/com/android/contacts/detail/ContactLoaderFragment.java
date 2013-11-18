@@ -425,7 +425,7 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
         // Show only ringtones
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_RINGTONE);
         // Allow the user to pick a silent ringtone
-        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, true);
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
         // Set HoloLight theme dialog
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_DIALOG_THEME, R.style.Theme_RingtoneDialog);
 

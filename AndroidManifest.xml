@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2006 The Android Open Source Project
+     Copyright (C) 2013 The Linux Foundation. All Rights Reserved.
+     Not a Contribution.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -64,6 +66,7 @@
         <activity android:name=".activities.PeopleActivity"
             android:label="@string/people"
             android:theme="@style/PeopleTheme"
+            android:screenOrientation="nosensor"
             android:uiOptions="splitActionBarWhenNarrow"
             android:clearTaskOnLaunch="true"
             android:launchMode="singleTop"
@@ -442,6 +445,41 @@
         <activity android:name=".common.vcard.ExportVCardActivity"
             android:theme="@style/BackgroundOnlyTheme" />
 
+        <activity
+            android:name=".editor.MultiPickContactActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:screenOrientation="nosensor"
+            android:configChanges="orientation|keyboardHidden|locale">
+            <intent-filter>
+                <action android:name="com.android.contacts.action.MULTI_PICK" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="vnd.android.cursor.dir/person"/>
+                <data android:mimeType="vnd.android.cursor.dir/contact"/>
+                <data android:mimeType="vnd.android.cursor.dir/raw_contact"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.DELETE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="vnd.android.cursor.dir/person"/>
+                <data android:mimeType="vnd.android.cursor.dir/contact"/>
+                <data android:mimeType="vnd.android.cursor.dir/raw_contact"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.android.contacts.action.MULTI_PICK_CALL"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.android.contacts.action.MULTI_PICK_EMAIL"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="vnd.android.cursor.dir/person"/>
+                <data android:mimeType="vnd.android.cursor.dir/contact"/>
+                <data android:mimeType="vnd.android.cursor.dir/raw_contact"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.android.contacts.action.MULTI_PICK_SIM"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
         <service
             android:name=".common.vcard.VCardService"
             android:exported="false" />

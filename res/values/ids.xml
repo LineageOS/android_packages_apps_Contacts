@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2008 The Android Open Source Project
+     Copyright (C) 2013 The Linux Foundation. All Rights Reserved.
+     Not a Contribution.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -18,6 +20,14 @@
     <item type="id" name="data"/>
     <item type="id" name="header_phones"/>
     <item type="id" name="dialog_sync_add"/>
+
+    <!-- For ContactsListActivity -->
+    <item type="id" name="dialog_readonly_contact_hide_confirmation"/>
+    <item type="id" name="dialog_multiple_contact_delete_confirmation"/>
+    <item type="id" name="dialog_readonly_contact_delete_confirmation"/>
+
+    <!-- For ImportSimContactsActivity -->
+    <item type="id" name="dialog_import_sim_contact_confirmation"/>
 
     <!-- For ContactDeletionInteraction -->
     <item type="id" name="dialog_delete_contact_confirmation"/>

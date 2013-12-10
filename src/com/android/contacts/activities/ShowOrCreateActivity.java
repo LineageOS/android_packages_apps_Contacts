@@ -17,6 +17,7 @@
 package com.android.contacts.activities;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ComponentName;
@@ -36,6 +37,8 @@ import com.android.contacts.common.CallUtil;
 import com.android.contacts.ContactsActivity;
 import com.android.contacts.R;
 import com.android.contacts.util.NotifyingAsyncQueryHandler;
+
+import java.util.List;
 
 /**
  * Handle several edge cases around showing or possibly creating contacts in
@@ -195,9 +198,23 @@ public final class ShowOrCreateActivity extends ContactsActivity
                 finish();
 
             } else {
-                showDialog(CREATE_CONTACT_DIALOG);
+                if (isShowOrCreateActivityRunning()) {
+                    showDialog(CREATE_CONTACT_DIALOG);
+                }
             }
         }
+    }
+
+    private boolean isShowOrCreateActivityRunning() {
+        ActivityManager am = (ActivityManager) getApplicationContext().getSystemService("activity");
+        List<ActivityManager.RunningTaskInfo> runningTasks = am.getRunningTasks(1);
+        if (runningTasks.size() > 0) {
+            if (runningTasks.get(0).topActivity.getClassName()
+                    .equals("com.android.contacts.activities.ShowOrCreateActivity")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

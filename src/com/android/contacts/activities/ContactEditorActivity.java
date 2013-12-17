@@ -132,9 +132,10 @@ public class ContactEditorActivity extends ContactsActivity
             mFragment.setIntentExtras(intent.getExtras());
         } else if (ACTION_SAVE_COMPLETED.equals(action)) {
             mFragment.onSaveCompleted(true,
-                    intent.getIntExtra(ContactEditorFragment.SAVE_MODE_EXTRA_KEY, SaveMode.CLOSE),
-                    intent.getBooleanExtra(ContactSaveService.EXTRA_SAVE_SUCCEEDED, false),
-                    intent.getData());
+                intent.getIntExtra(ContactEditorFragment.SAVE_MODE_EXTRA_KEY, SaveMode.CLOSE),
+                intent.getBooleanExtra(ContactSaveService.EXTRA_SAVE_SUCCEEDED, false),
+                intent.getData(),
+                intent.getIntExtra(ContactSaveService.SAVE_CONTACT_RESULT, 0));
         } else if (ACTION_JOIN_COMPLETED.equals(action)) {
             mFragment.onJoinCompleted(intent.getData());
         }

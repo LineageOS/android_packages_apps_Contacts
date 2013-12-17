@@ -215,4 +215,7 @@
     <string name="delete_locale_group_dialog_message">Confirm group deletion?</string>
 
     <string name="too_many_contacts_add_to_group">Too many contacts, must be fewer than <xliff:g id="count">%d</xliff:g></string>
+
+    <string name="no_phone_number_or_email">Please add phone number or email address.</string>
+    <string name="memory_card_full">Error: Memory is full.</string>
 </resources>

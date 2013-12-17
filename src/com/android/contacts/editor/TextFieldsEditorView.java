@@ -392,4 +392,13 @@ public class TextFieldsEditorView extends LabeledEditorView {
             }
         }
     }
+    /**
+     * use for account type is ACCOUNT_TYPE_SIM only because that sim card
+     * can not store expand fields.
+     */
+
+    public void setExpansionViewContainerDisabled() {
+        mExpansionViewContainer.setEnabled(false);
+        mExpansionView.setVisibility(View.INVISIBLE);
+    }
 }

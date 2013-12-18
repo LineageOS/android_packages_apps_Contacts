@@ -232,6 +232,11 @@
             android:label="@string/activity_title_contacts_filter"
             android:theme="@style/ContactListFilterTheme" />
 
+        <activity
+            android:name=".activities.MemoryStatusActivity"
+            android:label="@string/memory_status_title"
+            android:theme="@style/ContactListFilterTheme" />
+
         <!-- Used to select display and sync groups -->
         <activity
             android:name=".common.list.CustomContactListFilterActivity"

@@ -218,4 +218,12 @@
 
     <string name="no_phone_number_or_email">Please add phone number or email address.</string>
     <string name="memory_card_full">Error: Memory is full.</string>
+
+    <!-- add for MemoryStatusActivity -->
+    <string name="menu_memory_status">Memory Status</string>
+    <string name="memory_status_title">Memory Status</string>
+    <string name="memory_size">Total:</string>
+    <string name="memory_available">Available</string>
+    <string name="memory_used">Used:</string>
+    <string name="calculating_status_now">Calculating status now...</string>
 </resources>

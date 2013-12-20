@@ -23,6 +23,7 @@ import android.os.Parcelable;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.GroupMembership;
+import android.provider.ContactsContract.CommonDataKinds.LocalGroup;
 import android.provider.ContactsContract.CommonDataKinds.Organization;
 import android.provider.ContactsContract.CommonDataKinds.Photo;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -211,6 +212,8 @@ public class RawContactEditorView extends BaseRawContactEditorView {
         return;
     }
 
+    private static boolean isMyLocalProfile = false;
+
     /**
      * Set the internal state for this view, given a current
      * {@link RawContactDelta} state and the {@link AccountType} that
@@ -221,6 +224,7 @@ public class RawContactEditorView extends BaseRawContactEditorView {
             boolean isProfile) {
 
         mState = state;
+        isMyLocalProfile = isProfile;
 
         // Remove any existing sections
         mFields.removeAllViews();
@@ -568,6 +572,10 @@ public class RawContactEditorView extends BaseRawContactEditorView {
 
                 if (DataKind.PSEUDO_MIME_TYPE_PHONETIC_NAME.equals(kind.mimeType)
                         && mPhoneticName.getVisibility() == View.VISIBLE) {
+                    continue;
+                }
+
+                if (isMyLocalProfile && LocalGroup.CONTENT_ITEM_TYPE.equals(kind.mimeType)) {
                     continue;
                 }
 

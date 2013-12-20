@@ -27,6 +27,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.contacts.common.test.NeededForTesting;
+import com.android.contacts.common.SimContactsConstants;
 import com.android.contacts.common.model.AccountTypeManager;
 import com.android.contacts.common.model.account.AccountType;
 import com.android.contacts.common.model.account.AccountWithDataSet;
@@ -241,7 +242,12 @@ public class ContactEditorUtils {
     String[] getWritableAccountTypeStrings() {
         final Set<String> types = Sets.newHashSet();
         for (AccountType type : mAccountTypes.getAccountTypes(true)) {
-            types.add(type.accountType);
+            if (type.accountType.equals(SimContactsConstants.ACCOUNT_TYPE_SIM)
+                    || type.accountType.equals(SimContactsConstants.ACCOUNT_TYPE_PHONE)) {
+                continue;
+            } else {
+                types.add(type.accountType);
+            }
         }
         return types.toArray(new String[types.size()]);
     }

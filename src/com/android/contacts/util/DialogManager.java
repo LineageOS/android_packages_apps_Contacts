@@ -45,11 +45,22 @@ public class DialogManager {
     private final Activity mActivity;
     private boolean mUseDialogId2 = false;
     public final static String VIEW_ID_KEY = "view_id";
+    public static Dialog mDialog = null;
 
     public static final boolean isManagedId(int id) {
         return (id == R.id.dialog_manager_id_1) || (id == R.id.dialog_manager_id_2);
     }
 
+    public static void setDialog(Dialog dialog) {
+        mDialog = dialog;
+    }
+
+    public static void DialogDismiss() {
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
+            mDialog = null;
+        }
+    }
     /**
      * Creates a new instance of this class for the given Activity.
      * @param activity The activity this object is used for

@@ -226,4 +226,6 @@
     <string name="memory_available">Available</string>
     <string name="memory_used">Used:</string>
     <string name="calculating_status_now">Calculating status now...</string>
+
+    <string name="button_moveto">Move</string>
 </resources>

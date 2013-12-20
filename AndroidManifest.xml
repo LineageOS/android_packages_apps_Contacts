@@ -453,6 +453,18 @@
         <activity android:name=".common.vcard.ExportVCardActivity"
             android:theme="@style/BackgroundOnlyTheme" />
 
+        <activity android:name=".group.local.GroupEditActivity" />
+
+        <activity android:name=".group.local.MemberListActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.EDIT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="vnd.android.cursor.item/local-groups"
+                    android:host="com.android.contacts.groups" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".editor.MultiPickContactActivity"
             android:windowSoftInputMode="stateHidden|adjustResize"

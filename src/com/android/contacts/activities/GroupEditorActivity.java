@@ -22,6 +22,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -140,6 +142,12 @@ public class GroupEditorActivity extends ContactsActivity
 
         @Override
         public void onAccountsNotFound() {
+            final Intent intent = new Intent(Settings.ACTION_ADD_ACCOUNT);
+            intent.putExtra(Settings.EXTRA_AUTHORITIES, new String[] {
+                ContactsContract.AUTHORITY
+            });
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+            startActivity(intent);
             finish();
         }
 

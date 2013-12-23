@@ -121,7 +121,6 @@ public class MultiPickContactActivity extends ListActivity implements
     private final static String TAG = "MultiPickContactActivity";
     private final static boolean DEBUG = true;
 
-    public static final String RESULT_KEY = "result";
     public static final String SORT_ORDER = "desc";
 
     static final String[] CONTACTS_SUMMARY_PROJECTION = new String[] {
@@ -238,6 +237,8 @@ public class MultiPickContactActivity extends ListActivity implements
     static final String ACTION_MULTI_PICK_CALL = "com.android.contacts.action.MULTI_PICK_CALL";
     static final String ACTION_MULTI_PICK_SIM = "com.android.contacts.action.MULTI_PICK_SIM";
 
+    private static final String IS_CONTACT ="is_contact";
+
     private static final int DIALOG_DEL_CALL = 1;
 
     static final String SUBSCRIPTION = "Subscription";
@@ -290,19 +291,39 @@ public class MultiPickContactActivity extends ListActivity implements
 
     private int MAX_CONTACTS_NUM_TO_SELECT_ONCE = 500;
 
+    //registerReceiver to update content when airplane mode change.
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // TODO Auto-generated method stub
+            if (intent.getAction().equals(Intent.ACTION_AIRPLANE_MODE_CHANGED)) {
+                updateContent();
+
+                // If now is airplane mode, should cancel import sim contacts
+                if (isPickSim() && isAirplaneModeOn()) {
+                    cancelSimContactsImporting();
+                }
+            }
+        }
+    };
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         String action = intent.getAction();
+        boolean isContact = intent.getBooleanExtra(IS_CONTACT,false);
         if (Intent.ACTION_DELETE.equals(action)) {
             mMode = MODE_DEFAULT_CONTACT;
             setTitle(R.string.menu_deleteContact);
         } else if (Intent.ACTION_GET_CONTENT.equals(action)) {
             mMode = MODE_DEFAULT_CONTACT;
         } else if (ACTION_MULTI_PICK.equals(action)) {
-            mMode = MODE_DEFAULT_PHONE;
+            if (!isContact) {
+                mMode = MODE_DEFAULT_PHONE;
+            } else {
+                mMode = MODE_DEFAULT_CONTACT;
+            }
         } else if (ACTION_MULTI_PICK_EMAIL.equals(action)) {
             mMode = MODE_DEFAULT_EMAIL;
         } else if (ACTION_MULTI_PICK_SIM.equals(action)) {
@@ -319,6 +340,10 @@ public class MultiPickContactActivity extends ListActivity implements
         accountManager = AccountManager.get(mContext);
         initResource();
         startQuery();
+        //register receiver.
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        registerReceiver(mBroadcastReceiver, filter);
     }
 
     @Override
@@ -685,7 +710,7 @@ public class MultiPickContactActivity extends ListActivity implements
                         } else {
                             Intent intent = new Intent();
                             Bundle bundle = new Bundle();
-                            bundle.putBundle(RESULT_KEY, mChoiceSet);
+                            bundle.putBundle(PeopleActivity.RESULT_KEY, mChoiceSet);
                             intent.putExtras(bundle);
                             this.setResult(RESULT_OK, intent);
                             finish();
@@ -696,7 +721,7 @@ public class MultiPickContactActivity extends ListActivity implements
                 } else if (mMode == MODE_DEFAULT_PHONE) {
                     Intent intent = new Intent();
                     Bundle bundle = new Bundle();
-                    bundle.putBundle(RESULT_KEY, mChoiceSet);
+                    bundle.putBundle(PeopleActivity.RESULT_KEY, mChoiceSet);
                     intent.putExtras(bundle);
                     this.setResult(RESULT_OK, intent);
                     finish();
@@ -707,7 +732,7 @@ public class MultiPickContactActivity extends ListActivity implements
                 } else if (mMode == MODE_DEFAULT_EMAIL) {
                     Intent intent = new Intent();
                     Bundle bundle = new Bundle();
-                    bundle.putBundle(RESULT_KEY, mChoiceSet);
+                    bundle.putBundle(PeopleActivity.RESULT_KEY, mChoiceSet);
                     intent.putExtras(bundle);
                     this.setResult(RESULT_OK, intent);
                     finish();
@@ -716,7 +741,7 @@ public class MultiPickContactActivity extends ListActivity implements
                         if (mSelectCallLog) {
                             Intent intent = new Intent();
                             Bundle bundle = new Bundle();
-                            bundle.putBundle(RESULT_KEY, mChoiceSet);
+                            bundle.putBundle(PeopleActivity.RESULT_KEY, mChoiceSet);
                             intent.putExtras(bundle);
                             this.setResult(RESULT_OK, intent);
                             finish();
@@ -756,6 +781,11 @@ public class MultiPickContactActivity extends ListActivity implements
 
         if (mProgressDialog != null) {
             mProgressDialog.cancel();
+        }
+
+        //unregister receiver.
+        if (mBroadcastReceiver != null) {
+            unregisterReceiver(mBroadcastReceiver);
         }
 
         super.onDestroy();
@@ -1389,6 +1419,10 @@ public class MultiPickContactActivity extends ListActivity implements
             implements OnCancelListener, DialogInterface.OnClickListener {
         private int mSubscription = 0;
         boolean mCanceled = false;
+        // The total count how many to import.
+        private int mTotalCount = 0;
+        // The real count have imported.
+        private int mActualCount = 0;
 
         private Account mAccount;
 
@@ -1411,12 +1445,14 @@ public class MultiPickContactActivity extends ListActivity implements
                             : SimContactsConstants.ACCOUNT_TYPE_PHONE);
             log("import sim contact to account: " + mAccount);
             Set<String> keySet = mChoiceSet.keySet();
+            mTotalCount = keySet.size();
             Iterator<String> it = keySet.iterator();
             while (!mCanceled && it.hasNext()) {
 
                 String key = it.next();
                 String[] values = mChoiceSet.getStringArray(key);
                 actuallyImportOneSimContact(values, resolver, mAccount);
+                mActualCount++;
                 mProgressDialog.incrementProgressBy(1);
             }
             finish();
@@ -1424,6 +1460,13 @@ public class MultiPickContactActivity extends ListActivity implements
 
         public void onCancel(DialogInterface dialog) {
             mCanceled = true;
+            // Give a toast show to tell user import termination.
+            if (mActualCount < mTotalCount) {
+                Toast.makeText(mContext, R.string.import_stop, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(mContext, R.string.import_finish, Toast.LENGTH_SHORT)
+                        .show();
+            }
         }
 
         public void onClick(DialogInterface dialog, int which) {
@@ -1520,5 +1563,14 @@ public class MultiPickContactActivity extends ListActivity implements
             log("airplane mode setting value was not found");
         }
         return false;
+    }
+
+    /**
+     * After turn on airplane mode, cancel import sim contacts operation.
+     */
+    private void cancelSimContactsImporting() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.cancel();
+        }
     }
 }

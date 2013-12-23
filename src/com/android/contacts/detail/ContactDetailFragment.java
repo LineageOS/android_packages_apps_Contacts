@@ -114,6 +114,7 @@ import com.android.contacts.common.model.dataitem.WebsiteDataItem;
 import com.android.contacts.util.PhoneCapabilityTester;
 import com.android.contacts.util.StructuredPostalUtils;
 import com.android.contacts.util.UiClosables;
+import com.android.internal.telephony.PhoneConstants;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -138,10 +139,12 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
         static final int CLEAR_DEFAULT = 1;
         static final int SET_DEFAULT = 2;
         static final int EDIT_BEFORE_CALL = 3;
+        static final int IPCALL = 4;
     }
 
     private static final String KEY_CONTACT_URI = "contactUri";
     private static final String KEY_LIST_STATE = "liststate";
+    private static final int MAX_NUM_LENGTH = 3; // add limit length to show IP call item
 
     private Context mContext;
     private View mView;
@@ -1952,6 +1955,11 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
                     ContextMenu.NONE, getString(R.string.set_default));
             }
         if (Phone.CONTENT_ITEM_TYPE.equals(selectedMimeType)) {
+            // add limit length to show IP call item
+            if (selectedEntry.data.length() > MAX_NUM_LENGTH) {
+                menu.add(ContextMenu.NONE, ContextMenuIds.IPCALL,
+                        ContextMenu.NONE, getString(R.string.ipcall));
+            }
             menu.add(ContextMenu.NONE, ContextMenuIds.EDIT_BEFORE_CALL,
                     ContextMenu.NONE, getString(R.string.edit_before_call));
         }
@@ -1979,6 +1987,9 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
                 return true;
             case ContextMenuIds.EDIT_BEFORE_CALL:
                 callByEdit(menuInfo.position);
+                return true;
+            case ContextMenuIds.IPCALL:
+                callViaIP(menuInfo.position);
                 return true;
             default:
                 throw new IllegalArgumentException("Unknown menu option " + item.getItemId());
@@ -2010,6 +2021,13 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
         }
 
         ClipboardUtils.copyText(getActivity(), detailViewEntry.typeString, textToCopy, true);
+    }
+
+    private void callViaIP(int viewEntryPosition) {
+        DetailViewEntry detailViewEntry = (DetailViewEntry) mAllEntries.get(viewEntryPosition);
+        Intent callIntent = new Intent(detailViewEntry.intent);
+        callIntent.putExtra(PhoneConstants.IP_CALL, true);
+        mContext.startActivity(callIntent);
     }
 
     private void callByEdit(int viewEntryPosition) {

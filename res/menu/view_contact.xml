@@ -34,6 +34,18 @@
         android:title="@string/menu_set_ring_tone" />
 
     <item
+        android:id="@+id/menu_copy_to_phone"
+        android:title="@string/menu_copyTo" />
+
+    <item
+        android:id="@+id/menu_copy_to_sim1"
+        android:title="@string/menu_copyTo" />
+
+    <item
+        android:id="@+id/menu_copy_to_sim2"
+        android:title="@string/menu_copyTo" />
+
+    <item
         android:id="@+id/menu_send_via_sms"
         android:title="@string/menu_sendViaSMS" />
 

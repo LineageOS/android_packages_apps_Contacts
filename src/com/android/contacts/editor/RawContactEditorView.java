@@ -47,6 +47,7 @@ import com.android.contacts.common.model.account.AccountType;
 import com.android.contacts.common.model.account.AccountType.EditType;
 import com.android.contacts.common.model.dataitem.DataKind;
 import com.android.contacts.common.model.RawContactDelta;
+import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.model.ValuesDelta;
 import com.android.contacts.common.model.RawContactModifier;
 import com.android.contacts.common.SimContactsConstants;
@@ -107,15 +108,6 @@ public class RawContactEditorView extends BaseRawContactEditorView {
     public RawContactEditorView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
-    }
-
-    public static boolean is3GCard(int subscription) {
-        // need framework support SimContacts' anrs and emails.
-        // String type = getCardType(subscription);
-        // if ( SimContactsConstants.USIM.equals(type) || SimContactsConstants.CSIM.equals(type) ) {
-        //    return true;
-        // }
-        return false;
     }
 
     @Override
@@ -298,7 +290,7 @@ public class RawContactEditorView extends BaseRawContactEditorView {
             if (SimContactsConstants.SIM_NAME_2.equals(accountName)) {
                 sub = SimContactsConstants.SUB_2;
             }
-            if (!is3GCard(sub)) {
+            if (!MoreContactUtils.canSaveAnr(sub)) {
                 for (ValuesDelta entry : mState
                         .getMimeEntries(Phone.CONTENT_ITEM_TYPE)) {
                     if (Phone.TYPE_HOME == entry.getAsLong(Phone.TYPE)) {
@@ -307,6 +299,9 @@ public class RawContactEditorView extends BaseRawContactEditorView {
                         break;
                     }
                 }
+            }
+
+            if(!MoreContactUtils.canSaveEmail(sub)){
                 ArrayList<ValuesDelta> temp = mState
                     .getMimeEntries(Email.CONTENT_ITEM_TYPE);
                 if (temp != null) {
@@ -358,7 +353,7 @@ public class RawContactEditorView extends BaseRawContactEditorView {
                     if (SimContactsConstants.SIM_NAME_2.equals(accountName)) {
                         sub = SimContactsConstants.SUB_2;
                     }
-                    if (!is3GCard(sub)) {
+                    if (!MoreContactUtils.canSaveEmail(sub)) {
                        mFields.removeView(section);
                     }
                 }
@@ -374,7 +369,7 @@ public class RawContactEditorView extends BaseRawContactEditorView {
                     }
                     EditType typeHome = new EditType(Phone.TYPE_HOME,
                         Phone.getTypeLabelResource(Phone.TYPE_HOME));
-                    if (!is3GCard(sub)) {
+                    if (!MoreContactUtils.canSaveAnr(sub)) {
                         kind.typeOverallMax = 1;
                         if (null != kind.typeList) {
                             // When the sim card is not 3g the interface should

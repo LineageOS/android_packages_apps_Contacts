@@ -74,7 +74,7 @@
          vCard export. [CHAR LIMIT=128] -->
     <string name="cancel_export_confirmation_title">Cancelling vCard export</string>
 
-    <string name="account_sim">SIM Card</string>
+    <string name="account_sim"><xliff:g id="sim">%s</xliff:g> Card</string>
 
     <!-- Field title for the name of a contact -->
     <string name="name_for_sim">Name</string>
@@ -228,4 +228,7 @@
     <string name="calculating_status_now">Calculating status now...</string>
 
     <string name="button_moveto">Move</string>
+    <string name="menu_copyTo">"Copy to "</string>
+
+    <string name="no_empty_email_in_usim">Error: Must have valid email</string>
 </resources>

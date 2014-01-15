@@ -470,7 +470,7 @@
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="nosensor"
             android:theme="@android:style/Theme.Holo.Light"
-            android:configChanges="orientation|keyboardHidden|locale">
+            android:configChanges="orientation|keyboardHidden|layoutDirection">
             <intent-filter>
                 <action android:name="com.android.contacts.action.MULTI_PICK" />
                 <category android:name="android.intent.category.DEFAULT" />

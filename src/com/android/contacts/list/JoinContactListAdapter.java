@@ -24,6 +24,7 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Contacts.AggregationSuggestions;
 import android.provider.ContactsContract.Directory;
+import android.provider.ContactsContract.RawContacts;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +34,9 @@ import android.widget.TextView;
 import com.android.contacts.R;
 import com.android.contacts.common.list.ContactListAdapter;
 import com.android.contacts.common.list.ContactListItemView;
+import com.android.contacts.common.list.DefaultContactListAdapter;
 import com.android.contacts.common.list.DirectoryListLoader;
+import com.android.contacts.common.model.account.SimAccountType;
 
 public class JoinContactListAdapter extends ContactListAdapter {
 
@@ -80,6 +83,8 @@ public class JoinContactListAdapter extends ContactListAdapter {
         }
 
         builder.appendQueryParameter("limit", String.valueOf(MAX_SUGGESTIONS));
+        builder.appendQueryParameter(RawContacts.ACCOUNT_TYPE, SimAccountType.ACCOUNT_TYPE);
+        builder.appendQueryParameter(DefaultContactListAdapter.WITHOUT_SIM_FLAG, "true");
 
         loader.setSuggestionUri(builder.build());
 
@@ -91,11 +96,15 @@ public class JoinContactListAdapter extends ContactListAdapter {
                 .appendEncodedPath(Uri.encode(filter))
                 .appendQueryParameter(
                         ContactsContract.DIRECTORY_PARAM_KEY, String.valueOf(Directory.DEFAULT))
+                .appendQueryParameter(RawContacts.ACCOUNT_TYPE, SimAccountType.ACCOUNT_TYPE)
+                .appendQueryParameter(DefaultContactListAdapter.WITHOUT_SIM_FLAG, "true")
                 .build();
         } else {
             allContactsUri = buildSectionIndexerUri(Contacts.CONTENT_URI).buildUpon()
                 .appendQueryParameter(
                         ContactsContract.DIRECTORY_PARAM_KEY, String.valueOf(Directory.DEFAULT))
+                .appendQueryParameter(RawContacts.ACCOUNT_TYPE, SimAccountType.ACCOUNT_TYPE)
+                .appendQueryParameter(DefaultContactListAdapter.WITHOUT_SIM_FLAG, "true")
                 .build();
         }
         loader.setUri(allContactsUri);

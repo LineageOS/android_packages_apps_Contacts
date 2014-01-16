@@ -700,7 +700,7 @@ public class MultiPickContactActivity extends ListActivity implements
                     exitSearchMode(true);
                 }
                 if (mMode == MODE_DEFAULT_CONTACT) {
-                    if (Intent.ACTION_GET_CONTENT.equals(getIntent().getAction())) {
+                    if (ACTION_MULTI_PICK.equals(getIntent().getAction())) {
                         if (mChoiceSet.size() > MAX_CONTACTS_NUM_TO_SELECT_ONCE) {
                             Toast.makeText(
                                     mContext,

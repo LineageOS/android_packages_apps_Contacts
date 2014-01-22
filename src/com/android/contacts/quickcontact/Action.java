@@ -35,14 +35,23 @@ public interface Action extends Collapser.Collapsible<Action> {
     /** Returns an icon that can be clicked for the alternate action. */
     public Drawable getAlternateIcon();
 
+    /** Returns an icon that can be clicked for the alternate action. */
+    public Drawable get2AlternateIcon();
+
     /** Returns the content description of the icon for the alternate action. */
     public String getAlternateIconDescription();
+
+
+    /** Returns the content description of the icon for the alternate action. */
+    public String get2AlternateIconDescription();
 
     /** Build an {@link Intent} that will perform this action. */
     public Intent getIntent();
 
     /** Build an {@link Intent} that will perform the alternate action. */
     public Intent getAlternateIntent();
+    /** Build an {@link Intent} that will perform the alternate action. */
+    public Intent get2AlternateIntent();
 
     /** Checks if the contact data for this action is primary. */
     public Boolean isPrimary();

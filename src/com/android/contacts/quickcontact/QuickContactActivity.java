@@ -31,6 +31,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemProperties;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.SipAddress;
@@ -100,6 +101,7 @@ public class QuickContactActivity extends Activity {
     private static final int POST_DRAW_WAIT_DURATION = 60;
     private static final boolean ENABLE_STOPWATCH = false;
 
+    public static final String VTCALL_ITEM_TYPE = "VTCALL";
 
     @SuppressWarnings("deprecation")
     private static final String LEGACY_AUTHORITY = android.provider.Contacts.AUTHORITY;
@@ -151,7 +153,9 @@ public class QuickContactActivity extends Activity {
      * <p>The rest go between them, in the order in the array.</p>
      */
     private static final List<String> LEADING_MIMETYPES = Lists.newArrayList(
-            Phone.CONTENT_ITEM_TYPE, SipAddress.CONTENT_ITEM_TYPE, Email.CONTENT_ITEM_TYPE);
+            Phone.CONTENT_ITEM_TYPE, VTCALL_ITEM_TYPE,
+            SipAddress.CONTENT_ITEM_TYPE,
+            Email.CONTENT_ITEM_TYPE);
 
     /** See {@link #LEADING_MIMETYPES}. */
     private static final List<String> TRAILING_MIMETYPES = Lists.newArrayList(
@@ -432,7 +436,7 @@ public class QuickContactActivity extends Activity {
 
         for (RawContact rawContact : data.getRawContacts()) {
             for (DataItem dataItem : rawContact.getDataItems()) {
-                final String mimeType = dataItem.getMimeType();
+                String mimeType = dataItem.getMimeType();
                 final AccountType accountType = rawContact.getAccountType(this);
                 final DataKind dataKind = AccountTypeManager.getInstance(this)
                         .getKindOrFallback(accountType, mimeType);
@@ -455,6 +459,21 @@ public class QuickContactActivity extends Activity {
                         if (isSuperPrimary || (isPrimary && (mDefaultsMap.get(mimeType) == null))) {
                             mDefaultsMap.put(mimeType, action);
                         }
+                    }
+
+                    if (isVTSupported() && Phone.CONTENT_ITEM_TYPE.equals(mimeType)) {
+                        dataItem.setMimeType(VTCALL_ITEM_TYPE);
+                        mimeType = VTCALL_ITEM_TYPE;
+                        final Action vtAction = new DataAction(context, dataItem, dataKind);
+                        final boolean vtWasAdded = considerAdd(vtAction, cache, isSuperPrimary);
+                        if (vtWasAdded) {
+                            // Remember the default
+                            if (isSuperPrimary
+                                    || (isPrimary && (mDefaultsMap.get(mimeType) == null))) {
+                                mDefaultsMap.put(mimeType, vtAction);
+                            }
+                        }
+                        dataItem.setMimeType(Phone.CONTENT_ITEM_TYPE);
                     }
                 }
 
@@ -529,6 +548,11 @@ public class QuickContactActivity extends Activity {
         mListPager.setVisibility(hasData ? View.VISIBLE : View.GONE);
     }
 
+    private boolean isVTSupported() {
+        return SystemProperties.getBoolean("persist.radio.csvt.enabled"
+        /* TelephonyProperties.PROPERTY_CSVT_ENABLED */, false);
+    }
+
     /**
      * Consider adding the given {@link Action}, which will only happen if
      * {@link PackageManager} finds an application to handle
@@ -579,10 +603,16 @@ public class QuickContactActivity extends Activity {
 
         // Set icon and listen for clicks
         final CharSequence descrip = resolveCache.getDescription(firstInfo, name);
-        final Drawable icon = resolveCache.getIcon(firstInfo);
         typeView.setChecked(false);
         typeView.setContentDescription(descrip);
-        typeView.setImageDrawable(icon);
+        if (VTCALL_ITEM_TYPE.equals(mimeType)) {
+            final Drawable videoIconDrawable = getResources().getDrawable(
+                    R.drawable.ic_launcher_phone_video);
+            typeView.setImageDrawable(videoIconDrawable);
+        } else {
+            final Drawable icon = resolveCache.getIcon(firstInfo);
+            typeView.setImageDrawable(icon);
+        }
         typeView.setOnClickListener(mTypeViewClickListener);
 
         return typeView;
@@ -767,5 +797,26 @@ public class QuickContactActivity extends Activity {
             // Defer the action to make the window properly repaint
             new Handler().post(startAppRunnable);
         }
+
+        @Override
+        public void on2ItemClicked(final Action action, final boolean alternate) {
+            final Runnable startAppRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        startActivity(alternate ?
+                            action.get2AlternateIntent() : action.getIntent());
+                    } catch (ActivityNotFoundException e) {
+                        Toast.makeText(QuickContactActivity.this, R.string.quickcontact_missing_app,
+                                Toast.LENGTH_SHORT).show();
+                    }
+
+                    close(false);
+                }
+            };
+            // Defer the action to make the window properly repaint
+            new Handler().post(startAppRunnable);
+        }
+
     };
 }

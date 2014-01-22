@@ -61,9 +61,12 @@ public class DataAction implements Action {
     private CharSequence mSubtitle;
     private Intent mIntent;
     private Intent mAlternateIntent;
+    private Intent m2AlternateIntent;
     private int mAlternateIconDescriptionRes;
+    private int m2AlternateIconDescriptionRes;
     private int mAlternateIconRes;
     private int mPresence = -1;
+    private int m2AlternateIconRes;
 
     private Uri mDataUri;
     private long mDataId;
@@ -125,6 +128,7 @@ public class DataAction implements Action {
 
                         mIsSecure = ContactDetailDisplayUtils.hasActiveSession(mContext, number);
                     }
+                    final Intent videocallIntent = getVTCallIntent(number);
 
                     // Configure Icons and Intents. Notice actionIcon is already set to the phone
                     if (hasPhone && hasSms) {
@@ -132,8 +136,14 @@ public class DataAction implements Action {
                         mAlternateIntent = smsIntent;
                         mAlternateIconRes = kind.iconAltRes;
                         mAlternateIconDescriptionRes = kind.iconAltDescriptionRes;
+                        m2AlternateIntent = videocallIntent;
+                        m2AlternateIconRes = R.drawable.ic_contact_quick_contact_call_video;
+                        m2AlternateIconDescriptionRes = R.string.video_chat;
                     } else if (hasPhone) {
                         mIntent = phoneIntent;
+                        m2AlternateIntent = videocallIntent;
+                        m2AlternateIconRes = R.drawable.ic_contact_quick_contact_call_video;
+                        m2AlternateIconDescriptionRes = R.string.video_chat;
                     } else if (hasSms) {
                         mIntent = smsIntent;
                     }
@@ -295,9 +305,21 @@ public class DataAction implements Action {
     }
 
     @Override
+    public Drawable get2AlternateIcon() {
+        if (m2AlternateIconRes == 0) return null;
+        return mContext.getResources().getDrawable(m2AlternateIconRes);
+    }
+
+    @Override
     public String getAlternateIconDescription() {
         if (mAlternateIconDescriptionRes == 0) return null;
         return mContext.getResources().getString(mAlternateIconDescriptionRes);
+    }
+
+    @Override
+    public String get2AlternateIconDescription() {
+        if (m2AlternateIconDescriptionRes == 0) return null;
+        return mContext.getResources().getString(m2AlternateIconDescriptionRes);
     }
 
     @Override
@@ -308,6 +330,11 @@ public class DataAction implements Action {
     @Override
     public Intent getAlternateIntent() {
         return mAlternateIntent;
+    }
+
+    @Override
+    public Intent get2AlternateIntent() {
+        return m2AlternateIntent;
     }
 
     @Override
@@ -334,4 +361,22 @@ public class DataAction implements Action {
         }
         return true;
     }
+    private Intent getVTCallIntent(String number) {
+        Intent intent = new Intent("com.borqs.videocall.action.LaunchVideoCallScreen");
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                                | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        intent.putExtra("IsCallOrAnswer", true); // true as a
+        // call,
+        // while
+        // false as
+        // answer
+
+        intent.putExtra("LaunchMode", 1); // nLaunchMode: 1 as
+        // telephony, while
+        // 0 as socket
+        intent.putExtra("call_number_key", number);
+        return intent;
+    }
+
 }

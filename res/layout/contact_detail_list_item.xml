@@ -108,6 +108,7 @@
             android:paddingEnd="@dimen/detail_item_icon_margin"
             android:focusable="true"
             android:background="?android:attr/selectableItemBackground"
+            android:nextFocusRight="@+id/third_action_view_container"
             android:nextFocusLeft="@id/actions_view_container">
             <ImageView
                 android:id="@+id/secondary_action_button"
@@ -116,5 +117,31 @@
                 android:layout_gravity="center_vertical"
                 android:duplicateParentState="false" />
         </FrameLayout>
+
+        <View
+            android:id="@+id/vertical_divider_1"
+            android:layout_width="1dip"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/detail_vertical_divider_vertical_margin"
+            android:layout_marginBottom="@dimen/detail_vertical_divider_vertical_margin"
+            android:background="?android:attr/dividerVertical" />
+
+        <FrameLayout
+            android:id="@+id/third_action_view_container"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/detail_item_icon_margin"
+            android:paddingRight="@dimen/detail_item_icon_margin"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:nextFocusLeft="@id/secondary_action_view_container">
+            <ImageView
+                android:id="@+id/third_action_button"
+                android:layout_width="32dip"
+                android:layout_height="32dip"
+                android:layout_gravity="center_vertical"
+                android:duplicateParentState="false" />
+        </FrameLayout>
+
     </com.android.contacts.detail.ActionsViewContainer>
 </FrameLayout>

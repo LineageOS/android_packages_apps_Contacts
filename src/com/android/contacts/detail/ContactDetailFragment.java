@@ -126,6 +126,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import android.os.SystemProperties;
 
 public class ContactDetailFragment extends Fragment implements FragmentKeyListener,
         SelectAccountDialogFragment.Listener, OnItemClickListener {
@@ -134,12 +135,15 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
 
     private static final int TEXT_DIRECTION_UNDEFINED = -1;
 
+    private static final boolean HIDE_VTCALL_BTN = true;
+
     private interface ContextMenuIds {
         static final int COPY_TEXT = 0;
         static final int CLEAR_DEFAULT = 1;
         static final int SET_DEFAULT = 2;
         static final int EDIT_BEFORE_CALL = 3;
         static final int IPCALL = 4;
+        static final int VIDEOCALL = 5;  // add for new feature: csvt call prefix
     }
 
     private static final String KEY_CONTACT_URI = "contactUri";
@@ -586,15 +590,23 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
                         }
                     }
 
+                    //add for csvt
+                    final Intent vtIntent = getVTCallIntent(phone.getNumber());
+
                     // Configure Icons and Intents.
-                    if (hasPhone && hasSms) {
+                    if (hasPhone) {
                         entry.intent = phoneIntent;
-                        entry.secondaryIntent = smsIntent;
-                        entry.secondaryActionIcon = kind.iconAltRes;
-                        entry.secondaryActionDescription =
-                            ContactDisplayUtils.getSmsLabelResourceId(entry.type);
-                    } else if (hasPhone) {
-                        entry.intent = phoneIntent;
+                        //add for csvt
+                        entry.thirdIntent = vtIntent;
+                        entry.thirdActionIcon =
+                            R.drawable.ic_contact_quick_contact_call_video;
+                        entry.thirdActionDescription = R.string.description_videocall;
+                        if(hasSms){
+                            entry.secondaryIntent = smsIntent;
+                            entry.secondaryActionIcon = kind.iconAltRes;
+                            entry.secondaryActionDescription =
+                                ContactDisplayUtils.getSmsLabelResourceId(entry.type);
+                        }
                     } else if (hasSms) {
                         entry.intent = smsIntent;
                     } else {
@@ -1234,9 +1246,13 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
         public Context context = null;
         public boolean isPrimary = false;
         public int secondaryActionIcon = -1;
+        public int thirdActionIcon = -1;
         public int secondaryActionDescription = -1;
+        public int thirdActionDescription = -1;
         public Intent intent;
         public Intent secondaryIntent = null;
+        public Intent thirdIntent = null;
+
         public ArrayList<Long> ids = new ArrayList<Long>();
         public int collapseCount = 0;
 
@@ -1459,16 +1475,20 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
         public final TextView data;
         public final ImageView presenceIcon;
         public final ImageView secondaryActionButton;
+        public final ImageView thirdActionButton;
         public final View actionsViewContainer;
         public final View primaryActionView;
         public final View secondaryActionViewContainer;
+        public final View thirdActionViewContainer;
         public final View secondaryActionDivider;
+        public final View thirdActionDivider;
         public final View primaryIndicator;
         public final View securityIndicator;
 
         public DetailViewCache(View view,
                 OnClickListener primaryActionClickListener,
-                OnClickListener secondaryActionClickListener) {
+                OnClickListener secondaryActionClickListener,
+                OnClickListener thirdActionClickListener) {
             type = (TextView) view.findViewById(R.id.type);
             data = (TextView) view.findViewById(R.id.data);
             primaryIndicator = view.findViewById(R.id.primary_indicator);
@@ -1487,6 +1507,13 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
                     R.id.secondary_action_button);
 
             secondaryActionDivider = view.findViewById(R.id.vertical_divider);
+
+            thirdActionViewContainer = view.findViewById(R.id.third_action_view_container);
+            thirdActionViewContainer.setOnClickListener(thirdActionClickListener);
+            thirdActionButton = (ImageView) view.findViewById(R.id.third_action_button);
+
+            thirdActionDivider = view.findViewById(R.id.vertical_divider_1);
+
         }
     }
 
@@ -1684,7 +1711,8 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
 
                 // Cache the children
                 viewCache = new DetailViewCache(v,
-                        mPrimaryActionClickListener, mSecondaryActionClickListener);
+                        mPrimaryActionClickListener, mSecondaryActionClickListener,
+                        mThirdActionClickListener);
                 v.setTag(viewCache);
             }
 
@@ -1780,6 +1808,29 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
                 views.secondaryActionDivider.setVisibility(View.GONE);
             }
 
+            // Set the third action button
+            final ImageView thirdActionView = views.thirdActionButton;
+            Drawable thirdActionIcon = null;
+            String thirdActionDescription = null;
+            if (entry.thirdActionIcon != -1) {
+                    thirdActionIcon = resources
+                            .getDrawable(entry.thirdActionIcon);
+                thirdActionDescription = resources.getString(entry.thirdActionDescription);
+            }
+
+            final View thirdActionViewContainer = views.thirdActionViewContainer;
+            if (!HIDE_VTCALL_BTN && entry.thirdIntent != null && thirdActionIcon != null
+                    && isVTSupported()) {
+                thirdActionView.setImageDrawable(thirdActionIcon);
+                thirdActionView.setContentDescription(thirdActionDescription);
+                thirdActionViewContainer.setTag(entry);
+                thirdActionViewContainer.setVisibility(View.VISIBLE);
+                views.thirdActionDivider.setVisibility(View.VISIBLE);
+            } else {
+                thirdActionViewContainer.setVisibility(View.GONE);
+                views.thirdActionDivider.setVisibility(View.GONE);
+            }
+
             // Right and left padding should not have "pressed" effect.
             view.setPadding(
                     entry.isInSubSection()
@@ -1798,6 +1849,12 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
                     mViewEntryDimensions.getPaddingTop(),
                     secondaryActionViewContainer.getPaddingRight(),
                     mViewEntryDimensions.getPaddingBottom());
+            thirdActionViewContainer.setPadding(
+                    thirdActionViewContainer.getPaddingLeft(),
+                    mViewEntryDimensions.getPaddingTop(),
+                    thirdActionViewContainer.getPaddingRight(),
+                    mViewEntryDimensions.getPaddingBottom());
+
 
             // Set the text direction
             if (entry.textDirection != TEXT_DIRECTION_UNDEFINED) {
@@ -1835,6 +1892,20 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
                 if (entry == null || !(entry instanceof DetailViewEntry)) return;
                 final DetailViewEntry detailViewEntry = (DetailViewEntry) entry;
                 final Intent intent = detailViewEntry.secondaryIntent;
+                if (intent == null) return;
+                mListener.onItemClicked(intent);
+            }
+        };
+
+        private final OnClickListener mThirdActionClickListener = new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mListener == null) return;
+                if (view == null) return;
+                final ViewEntry entry = (ViewEntry) view.getTag();
+                if (entry == null || !(entry instanceof DetailViewEntry)) return;
+                final DetailViewEntry detailViewEntry = (DetailViewEntry) entry;
+                final Intent intent = detailViewEntry.thirdIntent;
                 if (intent == null) return;
                 mListener.onItemClicked(intent);
             }
@@ -1926,6 +1997,12 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
             menu.setHeaderTitle(selectedEntry.data);
         }
 
+        if (Phone.CONTENT_ITEM_TYPE.equals(selectedEntry.mimetype)) {
+            if (isVTSupported()){
+                menu.add(ContextMenu.NONE, ContextMenuIds.VIDEOCALL,
+                    ContextMenu.NONE, getString(R.string.videocall));
+            }
+        }
         menu.add(ContextMenu.NONE, ContextMenuIds.COPY_TEXT,
                 ContextMenu.NONE, getString(R.string.copy_text));
 
@@ -1988,6 +2065,9 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
             case ContextMenuIds.EDIT_BEFORE_CALL:
                 callByEdit(menuInfo.position);
                 return true;
+            case ContextMenuIds.VIDEOCALL:
+                videocall(menuInfo.position);
+                return true;
             case ContextMenuIds.IPCALL:
                 callViaIP(menuInfo.position);
                 return true;
@@ -2036,6 +2116,36 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
                 null));
         mContext.startActivity(intent);
     }
+
+    //add for csvt
+    private void videocall(int viewEntryPosition) {
+        DetailViewEntry detailViewEntry = (DetailViewEntry) mAllEntries.get(viewEntryPosition);
+        mContext.startActivity(getVTCallIntent(detailViewEntry.data));
+    }
+
+    private boolean isVTSupported(){
+        return SystemProperties.getBoolean("persist.radio.csvt.enabled"
+           /* TelephonyProperties.PROPERTY_CSVT_ENABLED*/, false);
+    }
+
+    private Intent getVTCallIntent(String number) {
+        Intent intent = new Intent("com.borqs.videocall.action.LaunchVideoCallScreen");
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                                | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        intent.putExtra("IsCallOrAnswer", true); // true as a
+        // call,
+        // while
+        // false as
+        // answer
+
+        intent.putExtra("LaunchMode", 1); // nLaunchMode: 1 as
+        // telephony, while
+        // 0 as socket
+        intent.putExtra("call_number_key", number);
+        return intent;
+    }
+    //add for csvt end
 
     @Override
     public boolean handleKeyDown(int keyCode) {

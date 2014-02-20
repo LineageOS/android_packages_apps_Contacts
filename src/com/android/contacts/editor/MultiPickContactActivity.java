@@ -104,6 +104,7 @@ import android.widget.Toast;
 
 import com.android.contacts.activities.PeopleActivity;
 import com.android.contacts.R;
+import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.SimContactsConstants;
 import com.android.contacts.common.SimContactsOperation;
 import com.android.contacts.common.list.AccountFilterActivity;
@@ -141,6 +142,8 @@ public class MultiPickContactActivity extends ListActivity implements
             Contacts.LOOKUP_KEY, // 8
             Contacts.PHONETIC_NAME, // 9
             Contacts.HAS_PHONE_NUMBER, // 10
+            RawContacts.ACCOUNT_TYPE, // 11
+            RawContacts.ACCOUNT_NAME, // 12
             Contacts.IN_VISIBLE_GROUP,
     };
 
@@ -195,6 +198,8 @@ public class MultiPickContactActivity extends ListActivity implements
     public static final int SUMMARY_LOOKUP_KEY_COLUMN_INDEX = 8;
     public static final int SUMMARY_PHONETIC_NAME_COLUMN_INDEX = 9;
     public static final int SUMMARY_HAS_PHONE_COLUMN_INDEX = 10;
+    public static final int SUMMARY_ACCOUNT_TYPE = 11;
+    public static final int SUMMARY_ACCOUNT_NAME = 12;
 
     public static final int ID_COLUMN_INDEX = 0;
     public static final int NUMBER_COLUMN_INDEX = 1;
@@ -1188,6 +1193,7 @@ public class MultiPickContactActivity extends ListActivity implements
         protected LayoutInflater mInflater;
         private ContactsSectionIndexer mIndexer;
         public boolean mIsContentChanged = false;
+        private ContactPhotoManager mContactPhotoManager;
 
         public ContactItemListAdapter(Context context) {
             super(context, null, false);
@@ -1195,6 +1201,7 @@ public class MultiPickContactActivity extends ListActivity implements
             mContext = context;
             mInflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            mContactPhotoManager = ContactPhotoManager.getInstance(mContext);
         }
 
         @Override
@@ -1207,6 +1214,20 @@ public class MultiPickContactActivity extends ListActivity implements
                 ((TextView) view.findViewById(R.id.pick_contact_name))
                         .setText(cache.name == null ? getString(R.string.unknown) : cache.name);
                 view.findViewById(R.id.pick_contact_number).setVisibility(View.GONE);
+
+                long photoId = 0;
+                if (!cursor.isNull(SUMMARY_PHOTO_ID_COLUMN_INDEX)) {
+                    photoId = cursor.getLong(SUMMARY_PHOTO_ID_COLUMN_INDEX);
+                }
+                Account account = null;
+                if (!cursor.isNull(SUMMARY_ACCOUNT_TYPE) && !cursor.isNull(SUMMARY_ACCOUNT_NAME)) {
+                    final String accountType = cursor.getString(SUMMARY_ACCOUNT_TYPE);
+                    final String accountName = cursor.getString(SUMMARY_ACCOUNT_NAME);
+                    account = new Account(accountName, accountType);
+                }
+                ImageView photo = ((ImageView) view.findViewById(R.id.pick_contact_photo));
+                photo.setVisibility(View.VISIBLE);
+                mContactPhotoManager.loadThumbnail(photo, photoId, false, null);
             } else if (isPickPhone()) {
                 cache.id = cursor.getLong(PHONE_COLUMN_ID);
                 cache.name = cursor.getString(PHONE_COLUMN_DISPLAY_NAME);

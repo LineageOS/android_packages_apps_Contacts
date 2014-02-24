@@ -179,7 +179,8 @@ public class GroupEditActivity extends PreferenceActivity implements OnPreferenc
     }
 
     private void pickMembers() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        Intent intent = new Intent(MultiPickContactActivity.ACTION_MULTI_PICK);
+        intent.putExtra(MultiPickContactActivity.IS_CONTACT,true);
         intent.setClass(this, MultiPickContactActivity.class);
         ContactListFilter filter = new ContactListFilter(ContactListFilter.FILTER_TYPE_ACCOUNT,
                 PhoneAccountType.ACCOUNT_TYPE, SimContactsConstants.PHONE_NAME, null, null);

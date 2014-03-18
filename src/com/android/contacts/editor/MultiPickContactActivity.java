@@ -1235,7 +1235,12 @@ public class MultiPickContactActivity extends ListActivity implements
                 cache.email = cursor.getString(SIM_COLUMN_EMAILS);
                 cache.anrs = cursor.getString(SIM_COLUMN_ANRS);
                 ((TextView) view.findViewById(R.id.pick_contact_name)).setText(cache.name);
-                ((TextView) view.findViewById(R.id.pick_contact_number)).setText(cache.number);
+                if (!TextUtils.isEmpty(cache.number)) {
+                    ((TextView) view.findViewById(R.id.pick_contact_number)).setText(cache.number);
+                } else if (!TextUtils.isEmpty(cache.email)) {
+                    String[] emailArray = (cache.email).split(",");
+                    ((TextView) view.findViewById(R.id.pick_contact_number)).setText(emailArray[0]);
+                }
             } else if (isPickEmail()) {
                 cache.id = cursor.getLong(EMAIL_COLUMN_ID);
                 cache.name = cursor.getString(EMAIL_COLUMN_DISPLAY_NAME);

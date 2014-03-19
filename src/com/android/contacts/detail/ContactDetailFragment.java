@@ -40,8 +40,9 @@ import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Directory;
 import android.provider.ContactsContract.DisplayNameSources;
 import android.provider.ContactsContract.StatusUpdates;
-import android.telephony.TelephonyManager;
 import android.provider.LocalGroups.Group;
+import android.telephony.MSimTelephonyManager;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -1717,9 +1718,14 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
                 v = mInflater.inflate(R.layout.contact_detail_list_item, parent, false);
 
                 // Cache the children
-                viewCache = new DetailViewCache(v,
-                        mPrimaryActionClickListener, mSecondaryActionClickListener,
-                        mThirdActionClickListener);
+                if (MSimTelephonyManager.getDefault().isMultiSimEnabled()
+                        && Phone.CONTENT_ITEM_TYPE.equals(entry.mimetype)) {
+                    viewCache = new DetailViewCache(v, null, mSecondaryActionClickListener,
+                            mThirdActionClickListener);
+                } else {
+                    viewCache = new DetailViewCache(v, mPrimaryActionClickListener,
+                            mSecondaryActionClickListener, mThirdActionClickListener);
+                }
                 v.setTag(viewCache);
             }
 

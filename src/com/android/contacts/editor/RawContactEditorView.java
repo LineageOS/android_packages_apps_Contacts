@@ -44,6 +44,8 @@ import android.widget.TextView;
 import com.android.contacts.GroupMetaDataLoader;
 import com.android.contacts.R;
 import com.android.contacts.common.model.account.AccountType;
+import com.android.contacts.common.model.account.PhoneAccountType;
+import com.android.contacts.common.model.account.SimAccountType;
 import com.android.contacts.common.model.account.AccountType.EditType;
 import com.android.contacts.common.model.dataitem.DataKind;
 import com.android.contacts.common.model.RawContactDelta;
@@ -246,11 +248,13 @@ public class RawContactEditorView extends BaseRawContactEditorView {
             }
         } else {
             String accountName = state.getAccountName();
-            CharSequence accountType = type.getDisplayLabel(mContext);
+            String account = state.getAccountType();
+            CharSequence accountType = type.getDisplayLabel(mContext, accountName);
             if (TextUtils.isEmpty(accountType)) {
                 accountType = mContext.getString(R.string.account_phone);
             }
-            if (!TextUtils.isEmpty(accountName)) {
+            if (!TextUtils.isEmpty(accountName) && !SimAccountType.ACCOUNT_TYPE.equals(account)
+                    && !PhoneAccountType.ACCOUNT_TYPE.equals(account)) {
                 mAccountNameTextView.setVisibility(View.VISIBLE);
                 mAccountNameTextView.setText(
                         mContext.getString(R.string.from_account_format, accountName));

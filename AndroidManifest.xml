@@ -457,7 +457,8 @@
         <activity android:name=".group.local.GroupEditActivity" />
 
         <activity android:name=".group.local.MemberListActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light">
             <intent-filter>
                 <action android:name="android.intent.action.EDIT" />
                 <category android:name="android.intent.category.DEFAULT" />

@@ -911,6 +911,8 @@ public class MultiPickContactActivity extends ListActivity implements
 
     private String getSelectionForQuery() {
         switch (mMode) {
+            case MODE_DEFAULT_EMAIL:
+            case MODE_SEARCH_EMAIL:
             case MODE_DEFAULT_PHONE:
             case MODE_SEARCH_PHONE:
                 if (isShowSIM()) {
@@ -948,6 +950,8 @@ public class MultiPickContactActivity extends ListActivity implements
 
     private String[] getSelectionArgsForQuery() {
         switch (mMode) {
+            case MODE_DEFAULT_EMAIL:
+            case MODE_SEARCH_EMAIL:
             case MODE_DEFAULT_PHONE:
             case MODE_SEARCH_PHONE:
                 if (isShowSIM()) {

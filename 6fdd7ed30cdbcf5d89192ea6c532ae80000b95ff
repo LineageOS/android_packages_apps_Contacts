@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bae84128_0baba575",
+        "filename": "res/values/styles.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-03-24T23:45:06Z",
+      "side": 1,
+      "message": "Theme.RingtoneDialog would fit better, I think.\n\nBut why not pass the dialog base theme directly into the intent?",
+      "revId": "6fdd7ed30cdbcf5d89192ea6c532ae80000b95ff",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

@@ -34,6 +34,24 @@
       "revId": "6fdd7ed30cdbcf5d89192ea6c532ae80000b95ff",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bae84128_b6e77ce3",
+        "filename": "res/values/styles.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-03-25T09:31:51Z",
+      "side": 1,
+      "message": "Ah, I completely missed the .Alert part. Never mind then :)",
+      "parentUuid": "bae84128_d6c7a043",
+      "revId": "6fdd7ed30cdbcf5d89192ea6c532ae80000b95ff",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

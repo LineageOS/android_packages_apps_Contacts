@@ -88,7 +88,7 @@ public class LocalGroupsSelector extends Button implements OnClickListener,
     }
 
     public void clear() {
-        mEntry.markDeleted();
+        mEntry.putNull(column);
         setText(R.string.group_selector);
         onGroupSelectListener.onGroupChanged();
     }

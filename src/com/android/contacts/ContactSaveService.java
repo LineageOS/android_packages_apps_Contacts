@@ -641,20 +641,11 @@ public class ContactSaveService extends IntentService {
         return ContactPhotoUtils.savePhotoFromUriToUri(this, photoUri, outputUri, true);
     }
 
-    /**
-     * Get device's current "AirPlane" mode status.
-     */
-    private boolean isCurrentInAirPlaneMode() {
-        return Settings.System.getInt(getApplicationContext().
-            getContentResolver(), Settings.System.AIRPLANE_MODE_ON
-            , 0) == 1;
-    }
-
     private Integer doSaveToSimCard(RawContactDelta entity, ContentResolver resolver,
         int subscription) {
         // Return Error code to indicate caller that device is in
         // the "AirPlane" mode and application can't access SIM card.
-        if (isCurrentInAirPlaneMode()) {
+        if (MoreContactUtils.isAPMOnAndSIMPowerDown(getApplicationContext())) {
             return RESULT_AIR_PLANE_MODE;
         }
 

@@ -107,6 +107,7 @@ import com.android.contacts.common.list.ContactsSectionIndexer;
 import com.android.contacts.common.list.DefaultContactListAdapter;
 import com.android.contacts.common.model.AccountTypeManager;
 import com.android.contacts.common.model.account.SimAccountType;
+import com.android.contacts.common.MoreContactUtils;
 import com.android.internal.telephony.CallerInfo;
 import com.android.internal.telephony.MSimConstants;
 
@@ -305,7 +306,7 @@ public class MultiPickContactActivity extends ListActivity implements
                 updateContent();
 
                 // If now is airplane mode, should cancel import sim contacts
-                if (isPickSim() && isAirplaneModeOn()) {
+                if (isPickSim() && MoreContactUtils.isAPMOnAndSIMPowerDown(mContext)) {
                     cancelSimContactsImporting();
                 }
             }
@@ -580,7 +581,7 @@ public class MultiPickContactActivity extends ListActivity implements
                             mSimContactsOperation.getSimSubscription(longId);
 
                     if (subscription == MSimConstants.SUB1 || subscription == MSimConstants.SUB2) {
-                        if (isAirplaneModeOn()) {
+                        if (MoreContactUtils.isAPMOnAndSIMPowerDown(mContext)) {
                             break;
                         }
                         ContentValues values =
@@ -969,7 +970,8 @@ public class MultiPickContactActivity extends ListActivity implements
 
     private boolean isShowSIM() {
         // if airplane mode on, do not show SIM.
-        return !getIntent().hasExtra(EXT_NOT_SHOW_SIM_FLAG) && !isAirplaneModeOn();
+        return !getIntent().hasExtra(EXT_NOT_SHOW_SIM_FLAG)
+                && !MoreContactUtils.isAPMOnAndSIMPowerDown(mContext);
     }
 
     public void startQuery() {
@@ -1583,16 +1585,6 @@ public class MultiPickContactActivity extends ListActivity implements
         } catch (OperationApplicationException e) {
             log(String.format("%s: %s", e.toString(), e.getMessage()));
         }
-    }
-
-    private boolean isAirplaneModeOn() {
-        try {
-            return Settings.System.getInt(getContentResolver(),
-                    Settings.System.AIRPLANE_MODE_ON) == 1 ? true : false;
-        } catch (SettingNotFoundException e) {
-            log("airplane mode setting value was not found");
-        }
-        return false;
     }
 
     /**

@@ -28,6 +28,7 @@ import com.android.contacts.common.model.account.AccountType;
 import com.android.contacts.util.StreamItemEntry;
 
 import com.google.common.collect.Lists;
+import com.google.common.annotations.VisibleForTesting;
 
 import java.util.List;
 
@@ -144,6 +145,7 @@ public class StreamItemAdapter extends BaseAdapter {
         return ITEM_VIEW_TYPE_STREAM_ITEM;
     }
 
+    @VisibleForTesting
     public void setStreamItems(List<StreamItemEntry> streamItems) {
         mStreamItems = streamItems;
         notifyDataSetChanged();

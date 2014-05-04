@@ -127,6 +127,8 @@ public class MemberListActivity extends TabActivity implements OnItemClickListen
 
     private DeleteMembersThread mDeleteMembersTask;
 
+    private boolean mPaused = false;
+
     private Handler mUpdateUiHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -278,6 +280,14 @@ public class MemberListActivity extends TabActivity implements OnItemClickListen
         }
     };
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        mPaused = true;
+        mAdapter.changeCursor(null);
+    }
+
     public void onDestroy() {
         super.onDestroy();
         getContentResolver().unregisterContentObserver(observer);
@@ -316,6 +326,7 @@ public class MemberListActivity extends TabActivity implements OnItemClickListen
     @Override
     protected void onResume() {
         super.onResume();
+        mPaused = false;
         startQuery();
     }
 
@@ -349,6 +360,9 @@ public class MemberListActivity extends TabActivity implements OnItemClickListen
 
         @Override
         protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
+            if (mPaused) {
+                return;
+            }
             final MemberListActivity activity = mActivity.get();
             activity.mAdapter.changeCursor(cursor);
             updateDisplay(cursor == null || cursor.getCount() == 0);

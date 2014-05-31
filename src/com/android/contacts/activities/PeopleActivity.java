@@ -72,6 +72,7 @@ import com.android.contacts.detail.ContactDetailLayoutController;
 import com.android.contacts.detail.ContactDetailUpdatesFragment;
 import com.android.contacts.detail.ContactLoaderFragment;
 import com.android.contacts.detail.ContactLoaderFragment.ContactLoaderFragmentListener;
+import com.android.contacts.editor.MultiPickContactActivity;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.contacts.common.editor.SelectAccountDialogFragment;
@@ -1875,6 +1876,41 @@ public class PeopleActivity extends ContactsActivity
                     exportIntent.putExtra(VCardCommonArguments.ARG_CALLING_ACTIVITY,
                             PeopleActivity.class.getName());
                     this.startActivity(exportIntent);
+                }
+                break;
+            case ImportExportDialogFragment.SUBACTIVITY_SHARE_VISILBLE_CONTACTS:
+                if (resultCode == RESULT_OK) {
+                    Bundle result = data.getExtras().getBundle(RESULT_KEY);
+                    StringBuilder uriListBuilder = new StringBuilder();
+                    int index = 0;
+                    int size =result.keySet().size();
+                    // The premise of allowing to share contacts is that the
+                    // amount of those contacts which have been selected to
+                    // append and will be put into intent as extra data to
+                    // deliver is not more that 2000, because too long arguments
+                    // will cause TransactionTooLargeException in binder.
+                    if (size > ImportExportDialogFragment.MAX_COUNT_ALLOW_SHARE_CONTACT) {
+                        Toast.makeText(this, R.string.share_failed,
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    Iterator<String> it = result.keySet().iterator();
+                    String[] values = null;
+                    while (it.hasNext()) {
+                        if (index != 0) {
+                            uriListBuilder.append(':');
+                        }
+                        values = result.getStringArray(it.next());
+                        uriListBuilder.append(values[0]);
+                        index++;
+                    }
+                    Uri uri = Uri.withAppendedPath(
+                            Contacts.CONTENT_MULTI_VCARD_URI,
+                            Uri.encode(uriListBuilder.toString()));
+                    final Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType(Contacts.CONTENT_VCARD_TYPE);
+                    intent.putExtra(Intent.EXTRA_STREAM, uri);
+                    startActivity(intent);
                 }
                 break;
         }

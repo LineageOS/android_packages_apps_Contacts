@@ -119,6 +119,7 @@
     <string name="exporting_contact_list_progress" msgid="560522409559101193">"<xliff:g id="CURRENT_NUMBER">%s</xliff:g> av <xliff:g id="TOTAL_NUMBER">%s</xliff:g> kontakter"</string>
     <string name="search_settings_description" msgid="2675223022992445813">"Navn på kontakter"</string>
     <string name="quickcontact_missing_app" msgid="358168575340921552">"Det ble ikke funnet noen app som kan håndtere denne handlingen."</string>
+    <string name="missing_app" msgid="1466111003546611387">"Kunne ikke finne noen app som kan håndtere denne handlingen."</string>
     <string name="menu_share" msgid="943789700636542260">"Del"</string>
     <string name="share_via" msgid="563121028023030093">"Del kontakt via"</string>
     <string name="dialog_new_group_account" msgid="2318032089273496830">"Opprett gruppe under konto"</string>
@@ -187,7 +188,7 @@
     <string name="social_widget_label" msgid="6378905543028924592">"Kontakt"</string>
     <string name="social_widget_loading" msgid="5327336597364074608">"Laster inn …"</string>
     <string name="contacts_unavailable_create_contact" msgid="7014525713871959208">"Opprett en ny kontakt"</string>
-    <string name="contacts_unavailable_add_account" msgid="7911101713860139754">"Logg deg på en konto"</string>
+    <string name="contacts_unavailable_add_account" msgid="7911101713860139754">"Logg på en konto"</string>
     <string name="contacts_unavailable_import_contacts" msgid="4957393255392437529">"Importer kontakter"</string>
     <string name="create_group_dialog_title" msgid="6874527142828424475">"Opprett ny gruppe"</string>
     <string name="create_group_item_label" msgid="4411981763169654825">"Opprett en ny gruppe"</string>

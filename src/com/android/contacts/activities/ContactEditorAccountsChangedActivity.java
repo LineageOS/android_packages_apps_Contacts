@@ -140,6 +140,12 @@ public class ContactEditorAccountsChangedActivity extends Activity {
             // If the user canceled the account setup process, then keep this activity visible to
             // the user.
             if (resultCode != RESULT_OK) {
+                // refresh the account list when come back
+                if (mAccountListView != null) {
+                    mAccountListAdapter = new AccountsListAdapter(this,
+                            AccountListFilter.ACCOUNTS_CONTACT_WRITABLE);
+                    mAccountListView.setAdapter(mAccountListAdapter);
+                }
                 return;
             }
             // Subactivity was successful, so pass the result back and finish the activity.
@@ -157,11 +163,6 @@ public class ContactEditorAccountsChangedActivity extends Activity {
         // Save this as the default account
         mEditorUtils.saveDefaultAndAllAccounts(account);
 
-        if (mAccountListView != null) {
-            mAccountListAdapter = new AccountsListAdapter(this,
-                    AccountListFilter.ACCOUNTS_CONTACT_WRITABLE);
-            mAccountListView.setAdapter(mAccountListAdapter);
-        }
         // Pass account info in activity result intent
         Intent intent = new Intent();
         intent.putExtra(Intents.Insert.ACCOUNT, account);

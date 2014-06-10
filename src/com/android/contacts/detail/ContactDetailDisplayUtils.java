@@ -16,14 +16,17 @@
 
 package com.android.contacts.detail;
 
+import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.provider.BaseColumns;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.DisplayNameSources;
 import android.provider.ContactsContract.Preferences;
@@ -140,6 +143,33 @@ public class ContactDetailDisplayUtils {
             return context.getString(R.string.contact_directory_description, displayName);
         }
         return null;
+    }
+
+    /**
+     * Returns true if there is a current active secure communication session with WhisperPush.
+     * Returns false if there isn't.
+     */
+    public static boolean hasActiveSession(Context context, String number) {
+        ContentResolver resolver = context.getContentResolver();
+        Cursor cursor = resolver.query(Uri.parse("content://org.whispersystems.whisperpush.sessionprovider"),
+                null, null, new String[] { number }, null);
+
+        if (cursor == null) {
+            return false;
+        }
+
+        try {
+            if (cursor.moveToFirst()) {
+                String session = cursor.getString(0);
+                if (!TextUtils.isEmpty(session)
+                        && TextUtils.equals(session, "1")) {
+                    return true;
+                }
+            }
+        } finally {
+            cursor.close();
+        }
+        return false;
     }
 
     /**

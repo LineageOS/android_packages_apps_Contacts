@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "da0c15f0_d774b3fe",
+        "filename": "src/com/android/contacts/detail/ContactDetailDisplayUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2014-06-10T17:18:38Z",
+      "side": 1,
+      "message": "Isn\u0027t the null check already done in the if block above?",
+      "revId": "ff928a698d92009b3db4be13eeca66839f396ebf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da0c15f0_37124fb5",
         "filename": "src/com/android/contacts/detail/ContactDetailDisplayUtils.java",
         "patchSetId": 2
@@ -47,6 +64,23 @@
       "writtenOn": "2014-06-10T16:34:37Z",
       "side": 1,
       "message": "just use the equals method of TextUtils",
+      "revId": "ff928a698d92009b3db4be13eeca66839f396ebf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da0c15f0_37608f35",
+        "filename": "src/com/android/contacts/detail/ContactDetailDisplayUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2014-06-10T17:18:38Z",
+      "side": 1,
+      "message": "Shouldn\u0027t you close the cursor before you return true in the if block above as well?",
       "revId": "ff928a698d92009b3db4be13eeca66839f396ebf",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false

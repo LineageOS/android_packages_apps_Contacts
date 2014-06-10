@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "da0c15f0_37eecf8b",
+        "filename": "src/com/android/contacts/detail/ContactDetailDisplayUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-06-10T19:27:22Z",
+      "side": 1,
+      "message": "Formatting issue here.\n\nCursor cursor \u003d resolver.query(Uri.parse(\"content://org.whispersystems.whisperpush.sessionprovider\"),\n        null, null, new String[] { number }, null);\n\nBTW, what\u0027s the point of passing in selectionArgs without a selection?",
+      "revId": "ff928a698d92009b3db4be13eeca66839f396ebf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da0c15f0_17174ba4",
         "filename": "src/com/android/contacts/detail/ContactDetailDisplayUtils.java",
         "patchSetId": 2
@@ -70,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "da0c15f0_17f3cb74",
+        "filename": "src/com/android/contacts/detail/ContactDetailDisplayUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-06-10T19:27:22Z",
+      "side": 1,
+      "message": "Yes, and add a space after the if.",
+      "parentUuid": "da0c15f0_37124fb5",
+      "revId": "ff928a698d92009b3db4be13eeca66839f396ebf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da0c15f0_37608f35",
         "filename": "src/com/android/contacts/detail/ContactDetailDisplayUtils.java",
         "patchSetId": 2
@@ -81,6 +116,75 @@
       "writtenOn": "2014-06-10T17:18:38Z",
       "side": 1,
       "message": "Shouldn\u0027t you close the cursor before you return true in the if block above as well?",
+      "revId": "ff928a698d92009b3db4be13eeca66839f396ebf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da0c15f0_77e8477d",
+        "filename": "src/com/android/contacts/detail/ContactDetailDisplayUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-06-10T19:27:22Z",
+      "side": 1,
+      "message": "ACK. Probably it\u0027s best to use a try ... finally construct.",
+      "parentUuid": "da0c15f0_37608f35",
+      "revId": "ff928a698d92009b3db4be13eeca66839f396ebf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da0c15f0_57ed438a",
+        "filename": "src/com/android/contacts/detail/ContactDetailFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-06-10T19:27:22Z",
+      "side": 1,
+      "message": "Please revert that change: http://source.android.com/source/code-style.html#fully-qualify-imports",
+      "revId": "ff928a698d92009b3db4be13eeca66839f396ebf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da0c15f0_b702df3c",
+        "filename": "src/com/android/contacts/detail/ContactDetailFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-06-10T19:27:22Z",
+      "side": 1,
+      "message": "if (",
+      "revId": "ff928a698d92009b3db4be13eeca66839f396ebf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da0c15f0_97ffdb33",
+        "filename": "src/com/android/contacts/detail/ContactDetailFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1700,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-06-10T19:27:22Z",
+      "side": 1,
+      "message": "100 chars",
       "revId": "ff928a698d92009b3db4be13eeca66839f396ebf",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false

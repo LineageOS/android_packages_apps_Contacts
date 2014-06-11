@@ -48,6 +48,21 @@
                 android:textColor="@color/secondary_text_color"
                 android:textAllCaps="true"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
+            <View
+                android:id="@+id/primary_indicator"
+                android:layout_width="16dip"
+                android:layout_height="16dip"
+                android:visibility="gone"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_list_default_mime_holo_dark" />
+
+            <View
+                android:id="@+id/security_indicator"
+                android:layout_width="16dip"
+                android:layout_height="16dip"
+                android:visibility="gone"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_list_security_whisperpush" />
         </LinearLayout>
     </LinearLayout>
     <include layout="@layout/quickcontact_list_item_base"/>

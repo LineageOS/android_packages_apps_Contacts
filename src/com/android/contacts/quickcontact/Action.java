@@ -47,6 +47,9 @@ public interface Action extends Collapser.Collapsible<Action> {
     /** Checks if the contact data for this action is primary. */
     public Boolean isPrimary();
 
+    /** Checks if the contact data for this action is secure communication. */
+    public Boolean isSecure();
+
     /**
      * Returns a lookup (@link Uri) for the contact data item or null if there is no data item
      * corresponding to this row

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba0121b8_ded515ba",
+        "filename": "src/com/android/contacts/quickcontact/DataAction.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 4884
+      },
+      "writtenOn": "2014-06-12T19:16:51Z",
+      "side": 1,
+      "message": "public Boolean isSecure() {\n    return mIsSecure;\n}",
+      "revId": "6fe263fcbd5584e5dfc229d47eb20c40e8756aef",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba0121b8_fed0d9cb",
+        "filename": "src/com/android/contacts/quickcontact/QuickContactListFragment.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 4884
+      },
+      "writtenOn": "2014-06-12T19:16:51Z",
+      "side": 1,
+      "message": "100 chars.",
+      "revId": "6fe263fcbd5584e5dfc229d47eb20c40e8756aef",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

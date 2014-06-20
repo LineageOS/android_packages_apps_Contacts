@@ -70,11 +70,15 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CursorAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.QuickContactBadge;
 import android.widget.TabHost;
 import android.widget.TextView;
 import com.android.contacts.R;
+
+import com.android.contacts.common.ContactPhotoManager;
+import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -92,7 +96,7 @@ public class MemberListActivity extends TabActivity implements OnItemClickListen
 
     static final String[] CONTACTS_SUMMARY_PROJECTION = new String[] {
             Contacts._ID, Contacts.DISPLAY_NAME, Contacts.PHOTO_ID, Contacts.LOOKUP_KEY,
-            Data.RAW_CONTACT_ID
+            Data.RAW_CONTACT_ID, Contacts.PHOTO_THUMBNAIL_URI, Contacts.DISPLAY_NAME_PRIMARY
     };
 
     static final int SUMMARY_ID_COLUMN_INDEX = 0;
@@ -104,6 +108,10 @@ public class MemberListActivity extends TabActivity implements OnItemClickListen
     static final int SUMMARY_LOOKUP_KEY_INDEX = 3;
 
     static final int SUMMARY_RAW_CONTACTS_ID_INDEX = 4;
+
+    static final int SUMMARY_PHOTO_URI_INDEX = 5;
+
+    static final int SUMMARY_DISPLAY_NAME_PRIMARY_INDEX = 6;
 
     private static final int QUERY_TOKEN = 1;
 
@@ -126,6 +134,8 @@ public class MemberListActivity extends TabActivity implements OnItemClickListen
     private Button cancelBtn;
 
     private DeleteMembersThread mDeleteMembersTask;
+
+    private ContactPhotoManager mContactPhotoManager;
 
     private boolean mPaused = false;
 
@@ -260,6 +270,7 @@ public class MemberListActivity extends TabActivity implements OnItemClickListen
         removeSet = new Bundle();
         mQueryHandler = new QueryHandler(this);
         mAdapter = new MemberListAdapter(this);
+        mContactPhotoManager = ContactPhotoManager.getInstance(this);
         emptyText = (TextView) findViewById(R.id.emptyText);
         listView = (ListView) findViewById(R.id.member_list);
         listView.setOnItemClickListener(this);
@@ -390,7 +401,7 @@ public class MemberListActivity extends TabActivity implements OnItemClickListen
 
             contactNameView
                     .setText(displayName == null ? getString(R.string.unknown) : displayName);
-            quickContactBadge.setImageBitmap(getContactsPhoto(photoId));
+            loadContactsPhotoByCursor(quickContactBadge, cursor);
             quickContactBadge.assignContactUri(Contacts.getLookupUri(contactId, lookupId));
 
             String key = String.valueOf(rawContactsId);
@@ -615,4 +626,29 @@ public class MemberListActivity extends TabActivity implements OnItemClickListen
             mDeleteMembersTask.start();
         }
     }
+
+    private void loadContactsPhotoByCursor(ImageView view, Cursor cursor) {
+        long photoId = cursor.getLong(SUMMARY_PHOTO_ID_INDEX);
+
+        if (photoId != 0) {
+            mContactPhotoManager.loadThumbnail(view, photoId, false, null);
+        } else {
+            final String photoUriString = cursor.getString(SUMMARY_PHOTO_URI_INDEX);
+            final Uri photoUri = photoUriString == null ? null : Uri.parse(photoUriString);
+            DefaultImageRequest request = null;
+            if (photoUri == null) {
+                request = getDefaultImageRequestFromCursor(cursor,
+                        SUMMARY_DISPLAY_NAME_PRIMARY_INDEX, SUMMARY_LOOKUP_KEY_INDEX);
+            }
+            mContactPhotoManager.loadPhoto(view, photoUri, -1, false, request);
+        }
+    }
+
+    private DefaultImageRequest getDefaultImageRequestFromCursor(Cursor cursor,
+            int displayNameColumn, int lookupKeyColumn) {
+        final String displayName = cursor.getString(displayNameColumn);
+        final String lookupKey = cursor.getString(lookupKeyColumn);
+        return new DefaultImageRequest(displayName, lookupKey);
+    }
+
 }

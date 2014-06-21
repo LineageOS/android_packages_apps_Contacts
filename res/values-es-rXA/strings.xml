@@ -118,6 +118,7 @@
   <string name="exporting_contact_list_progress"><xliff:g id="CURRENT_NUMBER">%s</xliff:g> de <xliff:g id="TOTAL_NUMBER">%s</xliff:g> contautos</string>
   <string name="search_settings_description">Nomes de los tos contautos</string>
   <string name="quickcontact_missing_app">Nun se deteutó nenguna aplicación que pueda facer esta aición.</string>
+  <string name="missing_app">Nun se deteutó nenguna aplicación que pueda facer esta aición.</string>
   <string name="menu_share">Compartir</string>
   <string name="share_via">Compartir contautu a traviés de</string>
   <string name="dialog_new_group_account">Crear grupu en cuenta</string>

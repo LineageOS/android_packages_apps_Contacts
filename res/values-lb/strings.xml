@@ -33,15 +33,22 @@
   <string name="menu_call">Kontakt uruffen</string>
   <string name="menu_editGroup">Änneren</string>
   <string name="menu_deleteGroup">Läschen</string>
+  <string name="menu_new_contact_action_bar">Kontakt dobäisetzen</string>
+  <string name="menu_new_group_action_bar">Grupp dobäisetzen</string>
+  <string name="separatorJoinAggregateAll">All Kontakter</string>
+  <string name="menu_set_ring_tone">Schelltoun setzen</string>
   <string name="deleteConfirmation">Dëse Kontakt gëtt geläscht.</string>
   <string name="invalidContactMessage">De Kontakt existéiert net.</string>
   <string name="pickerNewContactHeader">Neie Kontakt erstellen</string>
   <string name="pickerNewContactText">Neie Kontakt erstellen</string>
   <string name="attach_photo_dialog_title">Kontaktfoto</string>
   <string name="listFoundAllContactsZero">Keng Kontakter</string>
+  <string name="contactsAllLabel">All Kontakter</string>
   <string name="contactsGroupsLabel">Gruppen</string>
+  <string name="callAgain">Erëm uruffen</string>
   <string name="description_contact_photo">Kontaktfoto</string>
   <string name="exporting_contact_list_progress"><xliff:g id="current_number">%s</xliff:g> vu(n) <xliff:g id="total_number">%s</xliff:g> Kontakter</string>
+  <string name="search_settings_description">Nimm vun denge Kontakter</string>
   <string name="connections">Connectiounen</string>
   <string name="add_connection_button">Connectioun dobäisetzen</string>
   <string name="recent" msgid="2062236709538790412">Rezent</string>
@@ -51,11 +58,13 @@
   <string name="menu_display_all">"Alles uweisen"</string>
   <string name="event_edit_field_hint_text">Datum</string>
   <string name="edit_contact">Kontakt änneren</string>
+  <string name="list_filter_custom">Personaliséiert</string>
   <string name="activity_title_settings">Astellungen</string>
   <string name="menu_settings" msgid="377929915873428211">Astellungen</string>
   <string name="menu_help">Hëllef</string>
   <string name="non_phone_close">Zoumaachen</string>
   <string name="social_widget_label">Kontakt</string>
+  <string name="social_widget_loading">Gëtt gelueden\u2026</string>
   <string name="contacts_unavailable_create_contact">Neie Kontakt erstellen</string>
   <string name="set_default">Als Standard setzen</string>
   <string name="group_name_hint">Numm vun der Grupp</string>

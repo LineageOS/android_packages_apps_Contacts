@@ -617,8 +617,14 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
                 synchronized (this) {
                     int adnCountInSimContact = 1;
                     int anrCountInSimContact = 1;
+                    int emailCountInSimContact = 0;
                     if (!MoreContactUtils.canSaveAnr(sub)) {
                         anrCountInSimContact = 0;
+                    } else {
+                        anrCountInSimContact = MoreContactUtils.getOneSimAnrCount(sub);
+                    }
+                    if (MoreContactUtils.canSaveEmail(sub)) {
+                        emailCountInSimContact = MoreContactUtils.getOneSimEmailCount(sub);
                     }
                     int totalEmptyAdn = MoreContactUtils.getSimFreeCount(mContext, sub);
                     int totalEmptyAnr = MoreContactUtils.getSpareAnrCount(sub);
@@ -672,7 +678,10 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
                     int nameCount = (strName != null && !strName.equals("")) ? 1 : 0;
                     int groupNumCount = (arrayNumber.size() % numEntitySize) != 0 ? (arrayNumber
                             .size() / numEntitySize + 1) : (arrayNumber.size() / numEntitySize);
-                    int groupEmailCount = arrayEmail.size();
+                    int groupEmailCount = emailCountInSimContact == 0 ? 0
+                            : ((arrayEmail.size() % emailCountInSimContact) != 0 ? (arrayEmail
+                                    .size() / emailCountInSimContact + 1)
+                                    : (arrayEmail.size() / emailCountInSimContact));
 
                     int groupCount = Math.max(groupEmailCount, Math.max(nameCount, groupNumCount));
 
@@ -696,7 +705,13 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
 
                     for (int i = 0; i < groupEmailCount; i++) {
                         value = results.get(i);
-                        value.putEmail(arrayEmail.get(i));
+                        ArrayList<String> emailItem = new ArrayList<String>();
+                        for (int j = 0; j < emailCountInSimContact; j++) {
+                            if ((i * emailCountInSimContact + j) < arrayEmail.size()) {
+                                emailItem.add(arrayEmail.get(i * emailCountInSimContact + j));
+                            }
+                        }
+                        value.putEmailList(emailItem);
                     }
 
                     ArrayList<String> emptyList = new ArrayList<String>();
@@ -708,7 +723,6 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
                     }
 
                     //get phone number from UsimEntity,then insert to SIM card
-                    String strEmail = null;
                     for (int i = 0; i < groupCount; i++) {
                         value = results.get(i);
                         if (value.containsNumber()) {
@@ -718,14 +732,33 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
                         }
 
                         if (value.containsEmail()) {
-                            strEmail = (String) value.getEmail();
+                            arrayEmail = (ArrayList<String>) value.getEmailList();
                         } else {
-                            strEmail = null;
+                            arrayEmail = emptyList;
                         }
                         String strNum = arrayNumber.size() > 0 ? arrayNumber.get(0) : null;
-                        String strAnrNum = arrayNumber.size() > 1 ? arrayNumber.get(1) : null;
+                        StringBuilder strAnrNum = new StringBuilder();
+                        for (int j = 1; j < arrayNumber.size(); j++) {
+                            String s = arrayNumber.get(j);
+                            if (s.length() > MoreContactUtils.MAX_LENGTH_NUMBER_IN_SIM) {
+                                s = s.substring(
+                                        0, MoreContactUtils.MAX_LENGTH_NUMBER_IN_SIM);
+                            }
+                            strAnrNum.append(s);
+                            strAnrNum.append(",");
+                        }
+                        StringBuilder strEmail = new StringBuilder();
+                        for (int j = 0; j < arrayEmail.size(); j++) {
+                            String s = arrayEmail.get(j);
+                            if (s.length() > MoreContactUtils.MAX_LENGTH_EMAIL_IN_SIM) {
+                                s = s.substring(
+                                        0, MoreContactUtils.MAX_LENGTH_EMAIL_IN_SIM);
+                            }
+                            strEmail.append(s);
+                            strEmail.append(",");
+                        }
                         itemUri = MoreContactUtils.insertToCard(mContext, strName, strNum,
-                                strEmail, strAnrNum, sub);
+                                strEmail.toString(), strAnrNum.toString(), sub);
                     }
                     if (itemUri != null) {
                         msg.what = MSG_COPY_DONE;
@@ -877,18 +910,18 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
     //supply phone number and email which could stored in one ADN
     class UsimEntity {
         private ArrayList<String> mNumberList = new ArrayList<String>();
-        private String mEmail = null;
+        private ArrayList<String> mEmailList = new ArrayList<String>();
 
-        public String getEmail() {
-            return mEmail;
+        public ArrayList<String> getEmailList() {
+            return mEmailList;
         }
 
         public ArrayList<String> getNumberList() {
             return mNumberList;
         }
 
-        public void putEmail(String email) {
-            mEmail = email;
+        public void putEmailList(ArrayList<String> list) {
+            mEmailList = list;
         }
 
         public void putNumberList(ArrayList<String> list) {
@@ -896,7 +929,7 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
         }
 
         public boolean containsEmail() {
-            return mEmail != null;
+            return !mEmailList.isEmpty();
         }
 
         public boolean containsNumber() {

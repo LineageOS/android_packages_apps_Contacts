@@ -359,6 +359,8 @@ public class RawContactEditorView extends BaseRawContactEditorView {
                     }
                     if (!MoreContactUtils.canSaveEmail(sub)) {
                        mFields.removeView(section);
+                    } else {
+                        kind.typeOverallMax = MoreContactUtils.getOneSimEmailCount(sub);
                     }
                 }
             } else if (Phone.CONTENT_ITEM_TYPE.equals(mimeType) && kind.fieldList != null) {
@@ -381,7 +383,7 @@ public class RawContactEditorView extends BaseRawContactEditorView {
                             kind.typeList.remove(typeHome);
                         }
                     } else {
-                        kind.typeOverallMax = 2;
+                        kind.typeOverallMax = MoreContactUtils.getOneSimAnrCount(sub) +1;
                         if (null != kind.typeList && !kind.typeList.contains(typeHome)) {
                             // When the sim card is 3g the interface should
                             // add the TYPE_HOME number view.

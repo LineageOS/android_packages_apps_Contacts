@@ -118,6 +118,7 @@ public class KindSectionView extends LinearLayout implements EditorListener {
         } else {
             // Otherwise it's okay to delete this {@link Editor}
             editor.deleteEditor();
+            updateAddFooterVisible(true);
         }
     }
 

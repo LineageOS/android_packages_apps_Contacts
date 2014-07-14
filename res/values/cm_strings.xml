@@ -234,4 +234,6 @@
 
     <string name="voicemail">Voicemail</string>
     <string name="select_call_title">Select call logs</string>
+
+    <string name="invalid_number_type">Error: Number type is invalid.</string>
 </resources>

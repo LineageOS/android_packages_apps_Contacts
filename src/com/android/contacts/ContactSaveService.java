@@ -180,6 +180,7 @@ public class ContactSaveService extends IntentService {
     public static final int RESULT_NUMBER_INVALID = 9; // only for sim failure of number is valid
 
     public static final int RESULT_MEMORY_FULL_FAILURE = 11; //for memory full exception
+    public static final int RESULT_NUMBER_TYPE_FAILURE =12;  //only for sim failure of number TYPE
 
     private final int MAX_NUM_LENGTH = 20;
     private final int MAX_EMAIL_LENGTH = 40;
@@ -675,9 +676,27 @@ public class ContactSaveService extends IntentService {
             return RESULT_NO_NUMBER_AND_EMAIL;
         }
 
-        if ((!TextUtils.isEmpty(number) && number.length() > MAX_NUM_LENGTH)
-                || (!TextUtils.isEmpty(anr) && anr.length() > MAX_NUM_LENGTH)) {
-            return RESULT_NUMBER_ANR_FAILURE;
+        if (!TextUtils.isEmpty(number)) {
+            if (number.length() > MAX_NUM_LENGTH) {
+                return RESULT_NUMBER_ANR_FAILURE;
+            } else if (number.contains(SimContactsConstants.STR_ANRS)) {
+                return RESULT_NUMBER_TYPE_FAILURE;
+            }
+        }
+
+        if (!TextUtils.isEmpty(anr)) {
+            String[] anrs = anr.split(",");
+            if (anrs != null) {
+                if (anrs.length > MoreContactUtils
+                        .getOneSimAnrCount(subscription)) {
+                    return RESULT_NUMBER_TYPE_FAILURE;
+                }
+                for (String mAnr : anrs) {
+                    if (mAnr.length() > MAX_NUM_LENGTH) {
+                        return RESULT_NUMBER_ANR_FAILURE;
+                    }
+                }
+            }
         }
 
         if (!TextUtils.isEmpty(number) && TextUtils.isEmpty(PhoneNumberUtils
@@ -685,8 +704,13 @@ public class ContactSaveService extends IntentService {
             return RESULT_NUMBER_INVALID;
         }
 
-        if (!TextUtils.isEmpty(email) && email.length() >= MAX_EMAIL_LENGTH) {
-            return RESULT_EMAIL_FAILURE;
+        if (!TextUtils.isEmpty(email)) {
+            String[] emails = email.split(",");
+            for (String mEmail : emails) {
+                if (mEmail != null && mEmail.length() > MAX_EMAIL_LENGTH) {
+                    return RESULT_EMAIL_FAILURE;
+                }
+            }
         }
 
         if (!TextUtils.isEmpty(tag)) {

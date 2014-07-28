@@ -77,6 +77,7 @@ import com.android.contacts.common.model.ValuesDelta;
 import com.android.contacts.common.model.account.AccountType;
 import com.android.contacts.common.model.account.AccountWithDataSet;
 import com.android.contacts.common.model.account.GoogleAccountType;
+import com.android.contacts.common.model.account.SimAccountType;
 import com.android.contacts.common.util.AccountsListAdapter;
 import com.android.contacts.common.util.AccountsListAdapter.AccountListFilter;
 import com.android.contacts.detail.PhotoSelectionHandler;
@@ -88,6 +89,7 @@ import com.android.contacts.common.model.RawContact;
 import com.android.contacts.common.model.RawContactDelta;
 import com.android.contacts.common.model.RawContactDeltaList;
 import com.android.contacts.common.model.RawContactModifier;
+import com.android.contacts.ContactSaveService;
 import com.android.contacts.quickcontact.QuickContactActivity;
 import com.android.contacts.util.ContactPhotoUtils;
 import com.android.contacts.util.HelpUtils;
@@ -269,6 +271,7 @@ public class ContactEditorFragment extends Fragment implements
     private boolean mSendToVoicemailState;
     private boolean mArePhoneOptionsChangable;
     private String mCustomRingtone;
+    private String currentAccountTpye;
 
     // This is used to pre-populate the editor with a display name when a user edits a read-only
     // contact.
@@ -368,6 +371,14 @@ public class ContactEditorFragment extends Fragment implements
         super.onAttach(activity);
         mContext = activity;
         mEditorUtils = ContactEditorUtils.getInstance(mContext);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (Intent.ACTION_EDIT.equals(mAction)) {
+            mHasNewContact = false;
+        }
     }
 
     @Override
@@ -733,7 +744,14 @@ public class ContactEditorFragment extends Fragment implements
                 oldAccount.type, oldAccount.dataSet);
         AccountType newAccountType = accountTypes.getAccountType(
                 newAccount.type, newAccount.dataSet);
+        currentAccountTpye = newAccount.type;
 
+        if (!SimAccountType.ACCOUNT_TYPE.equals(oldAccountType.accountType)
+                && SimAccountType.ACCOUNT_TYPE.equals(newAccountType.accountType)
+                && mUpdatedPhotos != null) {
+            mUpdatedPhotos.clear();
+        }
+         //Remove photo when change account to Sim.
         if (newAccountType.getCreateContactActivityClassName() != null) {
             Log.w(TAG, "external activity called in rebind situation");
             if (mListener != null) {
@@ -823,6 +841,7 @@ public class ContactEditorFragment extends Fragment implements
                 Context.LAYOUT_INFLATER_SERVICE);
         final AccountTypeManager accountTypes = AccountTypeManager.getInstance(mContext);
         int numRawContacts = mState.size();
+        currentAccountTpye = mState.get(0).getValues().getAsString(RawContacts.ACCOUNT_TYPE);
 
         for (int i = 0; i < numRawContacts; i++) {
             // TODO ensure proper ordering of entities in the list
@@ -1079,7 +1098,11 @@ public class ContactEditorFragment extends Fragment implements
             // Split only if more than one raw profile and not a user profile
             splitMenu.setVisible(mState.size() > 1 && !isEditingUserProfile());
             // Cannot join a user profile
-            joinMenu.setVisible(!isEditingUserProfile());
+            if (SimAccountType.ACCOUNT_TYPE.equals(currentAccountTpye)) {
+                joinMenu.setVisible(false);
+            } else {
+                joinMenu.setVisible(!isEditingUserProfile());
+            }
             deleteMenu.setVisible(!mDisableDeleteMenuOption);
         } else {
             // something else, so don't show the help menu
@@ -1194,7 +1217,8 @@ public class ContactEditorFragment extends Fragment implements
                 mStatus = Status.EDITING;
                 return true;
             }
-            onSaveCompleted(false, saveMode, mLookupUri != null, mLookupUri);
+            onSaveCompleted(false, saveMode, mLookupUri != null, mLookupUri,
+                getActivity().getIntent().getIntExtra(ContactSaveService.SAVE_CONTACT_RESULT, 0));
             return true;
         }
 
@@ -1303,18 +1327,78 @@ public class ContactEditorFragment extends Fragment implements
     }
 
     public void onJoinCompleted(Uri uri) {
-        onSaveCompleted(false, SaveMode.RELOAD, uri != null, uri);
+        onSaveCompleted(false, SaveMode.RELOAD, uri != null, uri,
+            getActivity().getIntent().getIntExtra(ContactSaveService.SAVE_CONTACT_RESULT, 0));
     }
 
     public void onSaveCompleted(boolean hadChanges, int saveMode, boolean saveSucceeded,
-            Uri contactLookupUri) {
+        Uri contactLookupUri, int result) {
+        Log.d(TAG, "onSaveCompleted(" + saveMode + ", " + contactLookupUri + ", saveResult:"
+                + result);
         if (hadChanges) {
             if (saveSucceeded) {
                 if (saveMode != SaveMode.JOIN) {
-                    Toast.makeText(mContext, R.string.contactSavedToast, Toast.LENGTH_SHORT).show();
+                    if (null != contactLookupUri) {
+                        Toast.makeText(mContext, R.string.contactSavedToast, Toast.LENGTH_SHORT)
+                                .show();
+                    } else {
+                        Toast.makeText(mContext, R.string.contactDeletedToast, Toast.LENGTH_SHORT)
+                                .show();
+                    }
                 }
             } else {
-                Toast.makeText(mContext, R.string.contactSavedErrorToast, Toast.LENGTH_LONG).show();
+                if (result == ContactSaveService.RESULT_AIR_PLANE_MODE) {
+                    // Access SIM card in the "AirPlane"
+                    // mode prompt a toast to alert user.
+                    Toast.makeText(mContext, R.string.airplane_mode_on, Toast.LENGTH_LONG).show();
+                } else if (result == ContactSaveService.RESULT_SIM_FAILURE) {
+                    Toast.makeText(mContext, R.string.contactSavedToSimCardError,
+                            Toast.LENGTH_LONG).show();
+                } else if (result == ContactSaveService.RESULT_NUMBER_ANR_FAILURE) {
+                    Toast.makeText(mContext, R.string.number_anr_too_long, Toast.LENGTH_LONG)
+                            .show();
+                    mStatus = Status.EDITING;
+                    setEnabled(true);
+                    bindEditors();
+                    return;
+                } else if (result == ContactSaveService.RESULT_EMAIL_FAILURE) {
+                    Toast.makeText(mContext, R.string.email_address_too_long, Toast.LENGTH_LONG)
+                            .show();
+                    mStatus = Status.EDITING;
+                    setEnabled(true);
+                    bindEditors();
+                    return;
+                } else if (result == ContactSaveService.RESULT_SIM_FULL_FAILURE) {
+                    Toast.makeText(mContext, R.string.sim_card_full, Toast.LENGTH_LONG).show();
+                } else if (result == ContactSaveService.RESULT_TAG_FAILURE) {
+                    Toast.makeText(mContext, R.string.tag_too_long, Toast.LENGTH_SHORT).show();
+                    mStatus = Status.EDITING;
+                    setEnabled(true);
+                    bindEditors();
+                    return;
+                } else if (result == ContactSaveService.RESULT_NO_NUMBER_AND_EMAIL) {
+                    Toast.makeText(mContext, R.string.no_phone_number_or_email, Toast.LENGTH_SHORT)
+                            .show();
+                    mStatus = Status.EDITING;
+                    setEnabled(true);
+                    bindEditors();
+                    return;
+                } else if (result == ContactSaveService.RESULT_NUMBER_INVALID) {
+                    Toast.makeText(mContext, R.string.invalid_phone_number, Toast.LENGTH_SHORT)
+                            .show();
+                    mStatus = Status.EDITING;
+                    setEnabled(true);
+                    return;
+                } else if (result == ContactSaveService.RESULT_MEMORY_FULL_FAILURE) {
+                    Toast.makeText(mContext, R.string.memory_card_full, Toast.LENGTH_SHORT)
+                            .show();
+                } else if(result == ContactSaveService.RESULT_NUMBER_TYPE_FAILURE) {
+                    Toast.makeText(mContext, R.string.invalid_number_type, Toast.LENGTH_SHORT)
+                    .show();
+                } else {
+                    Toast.makeText(mContext, R.string.contactSavedErrorToast, Toast.LENGTH_LONG)
+                            .show();
+                }
             }
         }
         switch (saveMode) {

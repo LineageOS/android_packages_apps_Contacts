@@ -238,6 +238,23 @@
     <string name="keep_local" msgid="1258761699192993322">"本地保存"</string>
     <string name="add_account" msgid="8201790677994503186">"添加帐户"</string>
     <string name="add_new_account" msgid="5748627740680940264">"添加新帐户"</string>
+    <string name="select_all">"全选"</string>
+    <string name="btn_ok">"确定"</string>
+    <string name="btn_cancel">"取消"</string>
+    <string name="search_bar_hint">"搜索联系人"</string>
+    <string name="menu_sendViaSMS">通过短信发送联系人</string>
+    <string name="deleteConfirmation_title">"要删除联系人吗？"</string>
+    <string name="ContactMultiDeleteConfirmation">"将会删除这些联系人。"</string>
+    <string name="delete_contacts_title">"删除联系人"</string>
+    <string name="delete_contacts_message">"正在删除..."</string>
+    <string name="delete_termination">"删除结束"</string>
+    <string name="ContactMultiImportConfirmation">"将会导入这些联系人。"</string>
+    <string name="import_sim_contacts_title">"导入联系人"</string>
+    <string name="import_sim_contacts_message">"正在导入..."</string>
+    <!-- Import from sim card -->
+    <string name="import_finish">"导入完成"</string>
+    <string name="import_stop">"导入停止"</string>
+    <string name="too_many_contacts_add_to_group">联系人过多，应该少于<xliff:g id="count">%d</xliff:g>个</string>
     <string name="menu_export_database" msgid="2659719297530170820">"导出数据库文件"</string>
     <string name="action_menu_add_new_contact_button" msgid="3180222523336380017">"添加新联系人"</string>
     <string name="expanding_entry_card_view_see_more" msgid="3779194067124758079">"查看更多"</string>

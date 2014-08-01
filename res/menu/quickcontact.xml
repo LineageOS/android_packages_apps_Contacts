@@ -29,6 +29,9 @@
         android:id="@+id/menu_share"
         android:title="@string/menu_share"
         android:alphabeticShortcut="s" />
+    <item
+        android:id="@+id/menu_send_via_sms"
+        android:title="@string/menu_sendViaSMS" />
 
     <item
         android:id="@+id/menu_create_contact_shortcut"

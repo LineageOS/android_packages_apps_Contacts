@@ -89,7 +89,7 @@ public class AggregationSuggestionView extends LinearLayout {
                     suggestion.photo, 0, suggestion.photo.length));
         } else {
             photo.setImageDrawable(ContactPhotoManager.getDefaultAvatarDrawableForContact(
-                    getResources(), false, null));
+                    getContext(), false, null, null));
         }
 
         TextView name = (TextView) findViewById(R.id.aggregation_suggestion_name);

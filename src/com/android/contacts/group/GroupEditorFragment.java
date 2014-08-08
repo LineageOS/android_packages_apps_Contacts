@@ -975,7 +975,7 @@ public class GroupEditorFragment extends Fragment implements SelectAccountDialog
             }
             DefaultImageRequest request = new DefaultImageRequest(member.getDisplayName(),
                     member.getLookupKey(), true /* isCircular */);
-            mPhotoManager.loadPhoto(badge, member.getPhotoUri(),
+            mPhotoManager.loadPhoto(badge, member.getPhotoUri(), null,
                     ViewUtil.getConstantPreLayoutWidth(badge), false, true /* isCircular */,
                             request);
             return result;

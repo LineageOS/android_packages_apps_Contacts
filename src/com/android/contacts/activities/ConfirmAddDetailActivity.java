@@ -272,7 +272,7 @@ public class ConfirmAddDetailActivity extends Activity implements
         mDisplayNameView = (TextView) findViewById(R.id.name);
         mPhotoView = (ImageView) findViewById(R.id.photo);
         mPhotoView.setImageDrawable(ContactPhotoManager.getDefaultAvatarDrawableForContact(
-                getResources(), false, null));
+                this, false, null, null));
 
         mEditorContainerView = (ViewGroup) findViewById(R.id.editor_container);
 
@@ -746,8 +746,8 @@ public class ConfirmAddDetailActivity extends Activity implements
 
     private void setDefaultContactImage(String displayName, String lookupKey) {
         mPhotoView.setImageDrawable(ContactPhotoManager.getDefaultAvatarDrawableForContact(
-                getResources(), false,
-                new DefaultImageRequest(displayName, lookupKey, false /* isCircular */)));
+                this, false,
+                new DefaultImageRequest(displayName, lookupKey, false /* isCircular */), null));
     }
 
     /**

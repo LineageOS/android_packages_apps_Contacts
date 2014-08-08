@@ -89,6 +89,7 @@ import android.widget.Toast;
 import com.android.contacts.activities.PeopleActivity;
 import com.android.contacts.R;
 import com.android.contacts.common.ContactPhotoManager;
+import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.SimContactsConstants;
 import com.android.contacts.common.SimContactsOperation;
 import com.android.contacts.common.list.AccountFilterActivity;
@@ -1133,7 +1134,11 @@ public class MultiPickContactActivity extends ListActivity implements
                 }
                 ImageView photo = ((ImageView) view.findViewById(R.id.pick_contact_photo));
                 photo.setVisibility(View.VISIBLE);
-                mContactPhotoManager.loadThumbnail(photo, photoId, false, true, null);
+                DefaultImageRequest request = null;
+                if (photoId == 0) {
+                    request = new DefaultImageRequest(cache.name, cache.lookupKey, true);
+                }
+                mContactPhotoManager.loadThumbnail(photo, photoId, account, false, true, request);
             } else if (isPickPhone()) {
                 cache.id = cursor.getLong(PHONE_COLUMN_ID);
                 cache.name = cursor.getString(PHONE_COLUMN_DISPLAY_NAME);

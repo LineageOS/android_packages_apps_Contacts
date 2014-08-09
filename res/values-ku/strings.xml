@@ -183,7 +183,7 @@
   <string name="copy_text">لەبەرگرتەنەوە بۆ کلیپبۆرد</string>
   <string name="set_default">دانانی بنەڕەتی</string>
   <string name="clear_default">پاکردنەوەی بنەڕەتی</string>
-  <string name="toast_text_copied">دەق لەبەریگرا</string>
+  <string name="toast_text_copied">دەق لەبەریگیرا</string>
   <string name="cancel_confirmation_dialog_message">وەلانانی گۆڕانکاریەکان?</string>
   <string name="call_type_and_date">
         <xliff:g id="call_type" example="Friends">%1$s</xliff:g>  <xliff:g id="call_short_date" example="Friends">%2$s</xliff:g>
@@ -194,7 +194,7 @@
   <string name="local_profile_title">کورتەژیاننامەی ناوخۆی من</string>
   <string name="external_profile_title"> <xliff:g id="external_source">%1$s</xliff:g> کورتەژیاننامەم</string>
   <string name="toast_displaying_all_contacts">پیشاندانی هەموو ناوەکان</string>
-  <string name="no_account_prompt">خەڵک باشتر کارەکەن لەگەڵ هەژماری گووگڵ.\n\n\u2022 ڕێگە لە هەر وێبگەرێکەوە.\n\u2022 پاشەکەوتکردنی ناوەکانت بۆ زیاتر ئاسایش.</string>
+  <string name="no_account_prompt">خەڵک باشتر کارەکەن لەگەڵ هەژماری گووگڵ.\n\n\u2022 ڕێگە لە هەر وێبگەرێکەوە.\n\u2022 پاشەکەوتکردنی ناوەکانت بۆ زیاتر ئاساییش.</string>
   <string name="generic_no_account_prompt">پاراستنی ناوەکانت ئەگەرچی تەلەفۆنەکەت ون بکەیت: بینێرە بۆ هەر هەژمارێک بە ئەنتەرنێتەوە.</string>
   <string name="generic_no_account_prompt_title">زیادکردنی هەژمار</string>
   <string name="contact_editor_prompt_zero_accounts">ناوەکانت پاشەکەوت ناکرێن. زیادکردنی ناوێک کە لەسەر ئەنتەرنێت پاشەکەوتکراو?</string>

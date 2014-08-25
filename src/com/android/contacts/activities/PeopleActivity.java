@@ -86,6 +86,8 @@ import com.android.contacts.common.util.ViewUtil;
 import com.android.contacts.quickcontact.QuickContactActivity;
 import com.android.contacts.util.AccountPromptUtils;
 import com.android.contacts.common.util.Constants;
+import com.android.contacts.common.vcard.ExportVCardActivity;
+import com.android.contacts.common.vcard.VCardCommonArguments;
 import com.android.contacts.util.DialogManager;
 import com.android.contacts.util.HelpUtils;
 
@@ -1250,6 +1252,31 @@ public class PeopleActivity extends ContactsActivity implements
                     }
                 }
                 break;
+        case ImportExportDialogFragment.SUBACTIVITY_EXPORT_CONTACTS:
+            if (resultCode == RESULT_OK) {
+                Bundle result = data.getExtras().getBundle(
+                        SimContactsConstants.RESULT_KEY);
+                Set<String> keySet = result.keySet();
+                Iterator<String> it = keySet.iterator();
+                StringBuilder selExportBuilder = new StringBuilder();
+                while (it.hasNext()) {
+                    String id = it.next();
+                    if (0 != selExportBuilder.length()) {
+                        selExportBuilder.append(",");
+                    }
+                    selExportBuilder.append(id);
+                }
+                selExportBuilder.insert(0, "_id IN (");
+                selExportBuilder.append(")");
+                Intent exportIntent = new Intent(this,
+                        ExportVCardActivity.class);
+                exportIntent.putExtra("SelExport", selExportBuilder.toString());
+                exportIntent.putExtra(
+                        VCardCommonArguments.ARG_CALLING_ACTIVITY,
+                        PeopleActivity.class.getName());
+                this.startActivity(exportIntent);
+            }
+            break;
         }
     }
 

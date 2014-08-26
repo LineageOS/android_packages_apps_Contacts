@@ -770,4 +770,6 @@
 
     <string name="menu_copyTo">"Copy to "</string>
     <string name="no_empty_email_in_usim">"Email is full, some record copy failed "</string>
+    <string name="add_to_white">Add to whitelist</string>
+    <string name="add_to_black">Add to blacklist</string>
 </resources>

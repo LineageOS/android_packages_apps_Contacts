@@ -666,6 +666,13 @@ public class ContactEditorFragment extends Fragment implements
      * @param account may be null to signal a device-local contact should be created.
      */
     private void createContact(AccountWithDataSet account) {
+        if (account == null) {
+            // local account!
+            String localAccountName = mContext.getString(
+                    com.android.contacts.common.R.string.local_storage_account);
+            account = new AccountWithDataSet(localAccountName, AccountType.LOCAL_ACCOUNT, null);
+        }
+
         final AccountTypeManager accountTypes = AccountTypeManager.getInstance(mContext);
         final AccountType accountType =
                 accountTypes.getAccountType(account != null ? account.type : null,

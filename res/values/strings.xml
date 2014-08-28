@@ -772,4 +772,10 @@
     <string name="no_empty_email_in_usim">"Email is full, some record copy failed "</string>
     <string name="add_to_white">Add to whitelist</string>
     <string name="add_to_black">Add to blacklist</string>
+    <string name="voicemail">Voicemail</string>
+    <string name="select_call_title">Select call logs</string>
+    <string name="delete_call_title">Delete call logs</string>
+    <string name="delete_call_message">Deleting call logs ...</string>
+    <string name="delete_call_alert">Sure to delete the call logs selected?</string>
+    <string name="title_del_call">Delete</string>
 </resources>

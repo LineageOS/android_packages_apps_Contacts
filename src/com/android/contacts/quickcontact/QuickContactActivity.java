@@ -788,15 +788,6 @@ public class QuickContactActivity extends ContactsActivity {
         Trace.endSection();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        isFireWallInstalled = isFirewalltalled();
-        if (mContactCard != null) {
-            mContactCard.isFireWallInstalled(isFireWallInstalled);
-        }
-    }
-
     private boolean isFirewalltalled() {
         boolean installed = false;
         try {
@@ -1049,6 +1040,10 @@ public class QuickContactActivity extends ContactsActivity {
         if (mHasIntentLaunched) {
             mHasIntentLaunched = false;
             populateContactAndAboutCard(mCachedCp2DataCardModel);
+        }
+        isFireWallInstalled = isFirewalltalled();
+        if (mContactCard != null) {
+            mContactCard.isFireWallInstalled(isFireWallInstalled);
         }
     }
 

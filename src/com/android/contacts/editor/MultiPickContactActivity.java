@@ -62,9 +62,11 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.RawContacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
+import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.telephony.SubscriptionManager;
 import android.text.Editable;
+import android.text.format.DateUtils;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -129,7 +131,7 @@ public class MultiPickContactActivity extends ListActivity implements
             Calls.TYPE,
             Calls.CACHED_NAME,
             Calls.CACHED_NUMBER_TYPE,
-            Calls.CACHED_NUMBER_LABEL
+            Calls.CACHED_NUMBER_LABEL, Calls.PHONE_ACCOUNT_ID
     };
 
     static final String CONTACTS_SELECTION = Contacts.IN_VISIBLE_GROUP + "=1";
@@ -172,6 +174,7 @@ public class MultiPickContactActivity extends ListActivity implements
     private static final int CALLER_NAME_COLUMN_INDEX = 5;
     private static final int CALLER_NUMBERTYPE_COLUMN_INDEX = 6;
     private static final int CALLER_NUMBERLABEL_COLUMN_INDEX = 7;
+    private static final int PHONE_SUBSCRIPTION_COLUMN_INDEX = 8;
 
     private static final int PHONE_COLUMN_ID = 0;
     private static final int PHONE_COLUMN_TYPE = 1;
@@ -198,6 +201,7 @@ public class MultiPickContactActivity extends ListActivity implements
     private static final int MODE_SEARCH_CALL = MODE_DEFAULT_CALL | MODE_MASK_SEARCH;
     private static final int MODE_SEARCH_SIM = MODE_DEFAULT_SIM | MODE_MASK_SEARCH;
 
+    private static final int DIALOG_DEL_CALL = 1;
     private ContactItemListAdapter mAdapter;
     private QueryHandler mQueryHandler;
     private Bundle mChoiceSet;
@@ -209,6 +213,7 @@ public class MultiPickContactActivity extends ListActivity implements
     private CheckBox mSelectAllCheckBox;
     private int mMode;
     private boolean mSelectCallLog;
+    public static final String KEY_SELECT_CALLLOG = "selectcalllog";
 
     private ProgressDialog mProgressDialog;
     private SimContactsOperation mSimContactsOperation;
@@ -229,6 +234,10 @@ public class MultiPickContactActivity extends ListActivity implements
     private static final int SIM_COLUMN_EMAILS = 2;
     private static final int SIM_COLUMN_ANRS = 3;
     private static final int SIM_COLUMN_ID = 4;
+
+    private Drawable mDrawableIncoming;
+    private Drawable mDrawableOutgoing;
+    private Drawable mDrawableMissed;
 
     /**
      * control of whether show the contacts in SIM card, if intent has this
@@ -272,6 +281,19 @@ public class MultiPickContactActivity extends ListActivity implements
             }
         } else if (SimContactsConstants.ACTION_MULTI_PICK_EMAIL.equals(action)) {
             mMode = MODE_DEFAULT_EMAIL;
+        } else if (SimContactsConstants.ACTION_MULTI_PICK_CALL.equals(action)) {
+            mMode = MODE_DEFAULT_CALL;
+            setTitle(R.string.delete_call_title);
+            mDrawableIncoming = getResources().getDrawable(
+                    R.drawable.ic_call_log_list_incoming_call);
+            mDrawableOutgoing = getResources().getDrawable(
+                    R.drawable.ic_call_log_list_outgoing_call);
+            mDrawableMissed = getResources().getDrawable(
+                    R.drawable.ic_call_log_list_missed_call);
+            if (intent.getBooleanExtra(KEY_SELECT_CALLLOG, false)) {
+                mSelectCallLog = true;
+                setTitle(R.string.select_call_title);
+            }
         } else if (SimContactsConstants.ACTION_MULTI_PICK_SIM.equals(action)) {
             mMode = MODE_DEFAULT_SIM;
         }
@@ -358,6 +380,12 @@ public class MultiPickContactActivity extends ListActivity implements
                 value = new String[] {
                         cache.name, cache.number, cache.email, cache.anrs
                 };
+            } else if (isPickCall()) {
+                if (mSelectCallLog) {
+                    value = new String[] {
+                            cache.name, cache.number
+                    };
+                }
             }
             mChoiceSet.putStringArray(String.valueOf(id), value);
             if (!isSearchMode()) {
@@ -432,6 +460,13 @@ public class MultiPickContactActivity extends ListActivity implements
                         .setNegativeButton(android.R.string.cancel, null)
                         .setPositiveButton(android.R.string.ok,
                                 new DeleteClickListener()).create();
+            }
+            case DIALOG_DEL_CALL: {
+                return new AlertDialog.Builder(this).setTitle(R.string.title_del_call)
+                        .setIcon(android.R.drawable.ic_dialog_alert).setMessage(
+                                R.string.delete_call_alert).setNegativeButton(
+                                android.R.string.cancel, null).setPositiveButton(
+                                android.R.string.ok, new DeleteClickListener()).create();
             }
             case R.id.dialog_import_sim_contact_confirmation: {
                 return new AlertDialog.Builder(this)
@@ -579,7 +614,10 @@ public class MultiPickContactActivity extends ListActivity implements
             CharSequence title = null;
             CharSequence message = null;
 
-            if (isPickSim()) {
+            if (isPickCall()) {
+                title = getString(R.string.delete_call_title);
+                message = getString(R.string.delete_call_message);
+            } else if (isPickSim()) {
                 title = getString(R.string.import_sim_contacts_title);
                 message = getString(R.string.import_sim_contacts_message);
             } else {
@@ -670,6 +708,19 @@ public class MultiPickContactActivity extends ListActivity implements
                     intent.putExtras(bundle);
                     this.setResult(RESULT_OK, intent);
                     finish();
+                } else if (mMode == MODE_DEFAULT_CALL) {
+                    if (mChoiceSet.size() > 0) {
+                        if (mSelectCallLog) {
+                            Intent intent = new Intent();
+                            Bundle bundle = new Bundle();
+                            bundle.putBundle(SimContactsConstants.RESULT_KEY, mChoiceSet);
+                            intent.putExtras(bundle);
+                            this.setResult(RESULT_OK, intent);
+                            finish();
+                        } else {
+                            showDialog(DIALOG_DEL_CALL);
+                        }
+                    }
                 }
                 break;
             case R.id.btn_cancel:
@@ -742,7 +793,7 @@ public class MultiPickContactActivity extends ListActivity implements
                 throw new IllegalArgumentException("getUriToQuery: Incorrect mode: " + mMode);
         }
         return uri.buildUpon()
-                .appendQueryParameter(Contacts.ADDRESS_BOOK_INDEX_EXTRAS,
+                .appendQueryParameter(Contacts.EXTRA_ADDRESS_BOOK_INDEX,
                         "true")
                 .build();
     }
@@ -843,6 +894,15 @@ public class MultiPickContactActivity extends ListActivity implements
             case MODE_DEFAULT_SIM:
             case MODE_SEARCH_SIM:
                 return null;
+            case MODE_DEFAULT_CALL:
+                // Add a subscription judgement, if selection = -1 that means
+                // need query both cards.
+                String selection = null;
+                int subscription = mIntent.getIntExtra(SimContactsConstants.SUB, -1);
+                if (SimContactsConstants.SUB_INVALID != subscription) {
+                selection = Calls.PHONE_ACCOUNT_ID + "=" + subscription;
+                }
+                return selection;
             default:
                 return null;
         }
@@ -960,6 +1020,16 @@ public class MultiPickContactActivity extends ListActivity implements
         } else {
             startQuery();
         }
+    }
+
+    private CharSequence getDisplayNumber(CharSequence number) {
+        if (TextUtils.isEmpty(number)) {
+            return "";
+        }
+        if (PhoneNumberUtils.isVoiceMailNumber(number.toString())) {
+            return getString(R.string.voicemail);
+        }
+        return number;
     }
 
     private boolean isPickContact() {
@@ -1166,6 +1236,86 @@ public class MultiPickContactActivity extends ListActivity implements
                 cache.email = cursor.getString(EMAIL_COLUMN_ADDRESS);
                 ((TextView) view.findViewById(R.id.pick_contact_name)).setText(cache.name);
                 ((TextView) view.findViewById(R.id.pick_contact_number)).setText(cache.email);
+            }  else if (isPickCall()) {
+                cache.id = cursor.getLong(ID_COLUMN_INDEX);
+                cache.name = cursor.getString(CALLER_NAME_COLUMN_INDEX);
+                cache.number = cursor.getString(NUMBER_COLUMN_INDEX);
+                String number = cursor.getString(NUMBER_COLUMN_INDEX);
+                String callerName = cursor.getString(CALLER_NAME_COLUMN_INDEX);
+                int callerNumberType = cursor.getInt(CALLER_NUMBERTYPE_COLUMN_INDEX);
+                String callerNumberLabel = cursor.getString(CALLER_NUMBERLABEL_COLUMN_INDEX);
+                int subscription = cursor.getInt(PHONE_SUBSCRIPTION_COLUMN_INDEX);
+                long date = cursor.getLong(DATE_COLUMN_INDEX);
+                long duration = cursor.getLong(DURATION_COLUMN_INDEX);
+                int type = cursor.getInt(CALL_TYPE_COLUMN_INDEX);
+
+                ImageView callType = (ImageView) view.findViewById(R.id.call_type_icon);
+                TextView dateText = (TextView) view.findViewById(R.id.date);
+                TextView durationText = (TextView) view.findViewById(R.id.duration);
+                TextView subSlotText = (TextView) view.findViewById(R.id.subscription);
+                TextView numberLableText = (TextView) view.findViewById(R.id.label);
+                TextView numberText = (TextView) view.findViewById(R.id.number);
+                TextView callerNameText = (TextView) view.findViewById(R.id.line1);
+
+                // only for monkey test, callType can not be null in normal behaviour
+                if(callType == null){
+                    return;
+                }
+
+                callType.setVisibility(View.VISIBLE);
+                // Set the icon
+                switch (type) {
+                    case Calls.INCOMING_TYPE:
+                        callType.setImageDrawable(mDrawableIncoming);
+                        break;
+                    case Calls.OUTGOING_TYPE:
+                        callType.setImageDrawable(mDrawableOutgoing);
+                        break;
+                    case Calls.MISSED_TYPE:
+                        callType.setImageDrawable(mDrawableMissed);
+                        break;
+                    default:
+                        callType.setVisibility(View.INVISIBLE);
+                        break;
+                }
+
+                // set the number
+                if (!TextUtils.isEmpty(callerName)) {
+                    callerNameText.setText(callerName);
+                    callerNameText.setVisibility(View.VISIBLE);
+                    numberText.setVisibility(View.GONE);
+                    numberText.setText(null);
+                } else {
+                    callerNameText.setVisibility(View.GONE);
+                    callerNameText.setText(null);
+                    numberText.setVisibility(View.VISIBLE);
+                    numberText.setText(getDisplayNumber(number));
+                }
+
+                CharSequence numberLabel = null;
+                if (!PhoneNumberUtils.isUriNumber(number)) {
+                    numberLabel = Phone.getTypeLabel(context.getResources(),
+                            callerNumberType, callerNumberLabel);
+                }
+                if (!TextUtils.isEmpty(numberLabel)) {
+                    numberLableText.setText(numberLabel);
+                    numberLableText.setVisibility(View.VISIBLE);
+                } else {
+                    numberLableText.setText(null);
+                    numberLableText.setVisibility(View.INVISIBLE);
+                }
+
+                // set date
+                dateText.setText(DateUtils.getRelativeTimeSpanString(date,
+                        System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS,
+                        DateUtils.FORMAT_ABBREV_RELATIVE));
+
+                // set duration
+                durationText.setText(DateUtils.formatElapsedTime(duration));
+
+                // set slot
+                subSlotText.setText(MoreContactUtils.getMultiSimAliasesName(
+                        MultiPickContactActivity.this, subscription));
             }
 
             CheckBox checkBox = (CheckBox) view.findViewById(R.id.pick_contact_check);
@@ -1179,8 +1329,12 @@ public class MultiPickContactActivity extends ListActivity implements
         @Override
         public View newView(Context context, Cursor cursor, ViewGroup parent) {
             View v = null;
+            if (isPickCall()) {
+                v = mInflater.inflate(R.layout.pick_calls_item, parent, false);
+            } else {
                 v = mInflater
                         .inflate(R.layout.pick_contact_item, parent, false);
+            }
             ContactItemCache cache = new ContactItemCache();
             v.setTag(cache);
             return v;

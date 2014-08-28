@@ -296,5 +296,7 @@
     <string name="no_empty_email_in_usim">"卡上电子邮件空间已满，部分邮件信息将不会复制 "</string>
     <string name="add_to_white">加入白名单</string>
     <string name="add_to_black">加入黑名单</string>
+    <string name="title_del_call">删除</string>
+    <string name="delete_call_alert">"确定要删除选中的通话记录吗?"</string>
     <string name="message_from_you_prefix" msgid="7180706529908434482">"您：<xliff:g id="SMS_BODY">%s</xliff:g>"</string>
 </resources>

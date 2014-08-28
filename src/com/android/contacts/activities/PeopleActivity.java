@@ -1878,7 +1878,7 @@ public class PeopleActivity extends ContactsActivity
                     this.startActivity(exportIntent);
                 }
                 break;
-            case ImportExportDialogFragment.SUBACTIVITY_SHARE_VISILBLE_CONTACTS:
+            case ImportExportDialogFragment.SUBACTIVITY_SHARE_VISIBLE_CONTACTS:
                 if (resultCode == RESULT_OK) {
                     Bundle result = data.getExtras().getBundle(RESULT_KEY);
                     StringBuilder uriListBuilder = new StringBuilder();

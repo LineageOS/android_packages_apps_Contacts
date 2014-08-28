@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1b2928_5e51f761",
+        "filename": "src/com/android/contacts/ContactSaveService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1118,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-08-28T18:16:40Z",
+      "side": 1,
+      "message": "Should do the toasts outside the for loop, I think.",
+      "revId": "6b1789648219ac9b87542f876a43e060504eaa65",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

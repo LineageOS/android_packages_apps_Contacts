@@ -429,17 +429,6 @@ public class MultiPickContactActivity extends ListActivity implements
         return (mMode & MODE_MASK_SEARCH) == MODE_MASK_SEARCH;
     }
 
-    private boolean initSearchText(){
-        String s = getIntent().getStringExtra(PeopleActivity.EDITABLE_KEY);
-        if (s != null && s.trim().length() > 0) {
-            mSearchEditor.setText(s.trim());
-            enterSearchMode();
-            doFilter(mSearchEditor.getText());
-            return true;
-        }
-        return false;
-    }
-
     private void initResource() {
         mOKButton = (Button) findViewById(R.id.btn_ok);
         mOKButton.setOnClickListener(this);

@@ -39,24 +39,4 @@
         android:fastScrollEnabled="true"
         android:id="@android:id/list">
     </ListView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        style="@android:style/Holo.Light.ButtonBar">
-
-        <Button android:id="@+id/btn_ok"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/btn_ok"
-        />
-
-        <Button android:id="@+id/btn_cancel"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/btn_cancel"
-        />
-    </LinearLayout>
 </LinearLayout>

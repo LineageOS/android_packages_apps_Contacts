@@ -183,7 +183,7 @@ public class GroupEditActivity extends PreferenceActivity implements OnPreferenc
         intent.putExtra(MultiPickContactActivity.IS_CONTACT,true);
         intent.setClass(this, MultiPickContactActivity.class);
         ContactListFilter filter = new ContactListFilter(ContactListFilter.FILTER_TYPE_ACCOUNT,
-                PhoneAccountType.ACCOUNT_TYPE, SimContactsConstants.PHONE_NAME, null, null);
+                PhoneAccountType.ACCOUNT_TYPE, SimContactsConstants.ACCOUNT_TYPE_PHONE, null, null);
         intent.putExtra(AccountFilterActivity.KEY_EXTRA_CONTACT_LIST_FILTER, filter);
         startActivityForResult(intent, CODE_PICK_MEMBER);
     }

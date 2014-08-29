@@ -132,6 +132,8 @@ import com.android.contacts.common.model.dataitem.SipAddressDataItem;
 import com.android.contacts.common.model.dataitem.StructuredNameDataItem;
 import com.android.contacts.common.model.dataitem.StructuredPostalDataItem;
 import com.android.contacts.common.model.dataitem.WebsiteDataItem;
+import com.android.contacts.common.MoreContactUtils;
+import com.android.contacts.common.SimContactsConstants;
 import com.android.contacts.common.util.DateUtils;
 import com.android.contacts.common.util.MaterialColorMapUtils;
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
@@ -319,6 +321,7 @@ public class QuickContactActivity extends ContactsActivity {
     private static final String NUMBER_KEY = "number";
     private static final String PERSON_KEY = "personid";
     private static final String MODE_KEY = "mode";
+    private static final int MAX_NUM_LENGTH = 3; // add limit length to show IP call item
 
     private static final int[] mRecentLoaderIds = new int[]{
         LOADER_SMS_ID,
@@ -416,6 +419,8 @@ public class QuickContactActivity extends ContactsActivity {
         static final int EDIT_BEFORE_CALL = 3;
         static final int ADD_TO_BLACKLIST = 4;
         static final int ADD_TO_WHITELIST = 5;
+        static final int IPCALL1 = 6;
+        static final int IPCALL2 = 7; // add for new feature: ip call prefix
     }
 
     private final OnCreateContextMenuListener mEntryContextMenuListener =
@@ -468,6 +473,26 @@ public class QuickContactActivity extends ContactsActivity {
                         ContextMenu.NONE, getString(R.string.add_to_white)).setIntent(
                         info.getWhiteIntent());
                 }
+
+                // add limit length to show IP call item
+                if (info.getData().length() > MAX_NUM_LENGTH) {
+                    if (MoreContactUtils.isMultiSimEnable(QuickContactActivity.this,
+                            SimContactsConstants.SUB_1)) {
+                        String sub1Name = MoreContactUtils.getMultiSimAliasesName(
+                                getApplicationContext(), SimContactsConstants.SUB_1);
+                        menu.add(ContextMenu.NONE, ContextMenuIds.IPCALL1, ContextMenu.NONE,
+                                getApplicationContext().getString(
+                                com.android.contacts.common.R.string.ip_call_by_slot, sub1Name));
+                    }
+                    if (MoreContactUtils.isMultiSimEnable(QuickContactActivity.this,
+                            SimContactsConstants.SUB_2)) {
+                        String sub2Name = MoreContactUtils.getMultiSimAliasesName(
+                                getApplicationContext(), SimContactsConstants.SUB_2);
+                        menu.add(ContextMenu.NONE, ContextMenuIds.IPCALL2, ContextMenu.NONE,
+                                getApplicationContext().getString(
+                                com.android.contacts.common.R.string.ip_call_by_slot, sub2Name));
+                    }
+                }
             }
         }
     };
@@ -504,8 +529,26 @@ public class QuickContactActivity extends ContactsActivity {
                 return false;
             case ContextMenuIds.ADD_TO_WHITELIST:
                 return false;
+            case ContextMenuIds.IPCALL1:
+                ipCallBySlot(menuInfo.getData(), SimContactsConstants.SUB_1);
+                return true;
+            case ContextMenuIds.IPCALL2:
+                ipCallBySlot(menuInfo.getData(), SimContactsConstants.SUB_2);
+                return true;
             default:
                 throw new IllegalArgumentException("Unknown menu option " + item.getItemId());
+        }
+    }
+
+    private void ipCallBySlot(String data, int subscription) {
+        String ipCallPrefix = MoreContactUtils.getIPCallPrefix(this,
+		        subscription);
+        if (!TextUtils.isEmpty(ipCallPrefix)) {
+            Intent callIntent = CallUtil.getCallIntent(ipCallPrefix + data,
+                    MoreContactUtils.getAccount(subscription));
+            startActivity(callIntent);
+        } else {
+            MoreContactUtils.showNoIPNumberDialog(this, subscription);
         }
     }
 
@@ -2748,4 +2791,5 @@ public class QuickContactActivity extends ContactsActivity {
             return true;
         return false;
     }
+
 }

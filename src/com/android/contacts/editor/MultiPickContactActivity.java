@@ -232,6 +232,7 @@ public class MultiPickContactActivity extends ListActivity implements OnTouchLis
     static final String ACTION_MULTI_PICK_SIM = "com.android.contacts.action.MULTI_PICK_SIM";
 
     public static final String IS_CONTACT ="is_contact";
+    public static final String IS_SELECT_ALL_DISALLOWED = "is_select_all_disallowed";
 
     private static final int DIALOG_DEL_CALL = 1;
 
@@ -246,6 +247,7 @@ public class MultiPickContactActivity extends ListActivity implements OnTouchLis
 
     private int mMode;
     private boolean mSelectCallLog;
+    private boolean mAllowSelectAll = true;
     public static final String KEY_SELECT_CALLLOG = "selectcalllog";
 
     private ProgressDialog mProgressDialog;
@@ -308,6 +310,7 @@ public class MultiPickContactActivity extends ListActivity implements OnTouchLis
         Intent intent = getIntent();
         String action = intent.getAction();
         boolean isContact = intent.getBooleanExtra(IS_CONTACT,false);
+        mAllowSelectAll = !intent.getBooleanExtra(IS_SELECT_ALL_DISALLOWED, false);
         if (Intent.ACTION_DELETE.equals(action)) {
             mMode = MODE_DEFAULT_CONTACT;
             setTitle(R.string.menu_deleteContact);
@@ -365,6 +368,7 @@ public class MultiPickContactActivity extends ListActivity implements OnTouchLis
         mDone = menu.findItem(R.id.done);
         mDone.setVisible(false);
         mSelectAllCheck = menu.findItem(R.id.select_all_check);
+        mSelectAllCheck.setVisible(mAllowSelectAll);
         mSearchView = (SearchView) menu.findItem(R.id.search)
                 .getActionView();
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

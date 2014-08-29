@@ -30,13 +30,13 @@
 
 package com.android.contacts.editor;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.app.SearchManager;
 import android.content.AsyncQueryHandler;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -50,18 +50,14 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.OperationApplicationException;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.net.Uri.Builder;
 import android.os.Bundle;
-import android.os.Looper;
 import android.os.RemoteException;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.ContactCounts;
-import android.provider.Settings;
-import android.provider.Settings.SettingNotFoundException;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -69,15 +65,9 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.RawContacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
-import android.provider.Settings;
-import android.provider.Settings.SettingNotFoundException;
 import android.telephony.MSimTelephonyManager;
 import android.telephony.PhoneNumberUtils;
-import android.telephony.TelephonyManager;
-import android.text.Editable;
-import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -89,12 +79,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CursorAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -111,7 +98,6 @@ import com.android.contacts.common.list.AccountFilterActivity;
 import com.android.contacts.common.list.ContactListFilter;
 import com.android.contacts.common.list.ContactsSectionIndexer;
 import com.android.contacts.common.list.DefaultContactListAdapter;
-import com.android.contacts.common.model.AccountTypeManager;
 import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.model.account.SimAccountType;
 import com.android.internal.telephony.MSimConstants;
@@ -119,12 +105,9 @@ import com.android.internal.telephony.MSimConstants;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
-public class MultiPickContactActivity extends ListActivity implements
-        View.OnClickListener,
-        OnTouchListener {
+public class MultiPickContactActivity extends ListActivity implements OnTouchListener {
     private final static String TAG = "MultiPickContactActivity";
     private final static boolean DEBUG = true;
 
@@ -258,9 +241,7 @@ public class MultiPickContactActivity extends ListActivity implements
     private Bundle mChoiceSet;
     private Bundle mBackupChoiceSet;
 
-    private Button mOKButton;
-    private Button mCancelButton;
-    private SearchView mSarchView;
+    private SearchView mSearchView;
     private MenuItem mSelectAllCheck;
 
     private int mMode;
@@ -276,6 +257,8 @@ public class MultiPickContactActivity extends ListActivity implements
 
     protected static final int SUB1 = 0;
     protected static final int SUB2 = 1;
+    private ActionBar mBar;
+    private MenuItem mDone;
     private Context mContext;
     private Intent mIntent;
     private AccountManager accountManager;
@@ -364,7 +347,9 @@ public class MultiPickContactActivity extends ListActivity implements
         mSimContactsOperation = new SimContactsOperation(this);
         mContext = getApplicationContext();
         accountManager = AccountManager.get(mContext);
-        initResource();
+        mBar = getActionBar();
+        mBar.setHomeButtonEnabled(true);
+        mBar.setDisplayHomeAsUpEnabled(true);
         startQuery();
         //register receiver.
         IntentFilter filter = new IntentFilter();
@@ -377,10 +362,12 @@ public class MultiPickContactActivity extends ListActivity implements
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.multi_contact_picker_options, menu);
 
+        mDone = menu.findItem(R.id.done);
+        mDone.setVisible(false);
         mSelectAllCheck = menu.findItem(R.id.select_all_check);
-        mSarchView = (SearchView) menu.findItem(R.id.search)
+        mSearchView = (SearchView) menu.findItem(R.id.search)
                 .getActionView();
-        mSarchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 if (!TextUtils.isEmpty(query)) {
@@ -421,20 +408,71 @@ public class MultiPickContactActivity extends ListActivity implements
                     selectAll(false);
                 }
                 return true;
+            case R.id.done:
+                if (isSearchMode()) {
+                    exitSearchMode(true);
+                }
+                if (mMode == MODE_DEFAULT_CONTACT) {
+                    if (ACTION_MULTI_PICK.equals(getIntent().getAction())) {
+                        if (mChoiceSet.size() > MAX_CONTACTS_NUM_TO_SELECT_ONCE) {
+                            Toast.makeText(
+                                    mContext,
+                                    mContext.getString(R.string.too_many_contacts_add_to_group,
+                                            MAX_CONTACTS_NUM_TO_SELECT_ONCE), Toast.LENGTH_SHORT)
+                                    .show();
+                        } else {
+                            Intent intent = new Intent();
+                            Bundle bundle = new Bundle();
+                            bundle.putBundle(PeopleActivity.RESULT_KEY, mChoiceSet);
+                            intent.putExtras(bundle);
+                            this.setResult(RESULT_OK, intent);
+                            finish();
+                        }
+                    } else if (mChoiceSet.size() > 0) {
+                        showDialog(R.id.dialog_delete_contact_confirmation);
+                    }
+                } else if (mMode == MODE_DEFAULT_PHONE) {
+                    Intent intent = new Intent();
+                    Bundle bundle = new Bundle();
+                    bundle.putBundle(PeopleActivity.RESULT_KEY, mChoiceSet);
+                    intent.putExtras(bundle);
+                    this.setResult(RESULT_OK, intent);
+                    finish();
+                } else if (mMode == MODE_DEFAULT_SIM) {
+                    if (mChoiceSet.size() > 0) {
+                        showDialog(R.id.dialog_import_sim_contact_confirmation);
+                    }
+                } else if (mMode == MODE_DEFAULT_EMAIL) {
+                    Intent intent = new Intent();
+                    Bundle bundle = new Bundle();
+                    bundle.putBundle(PeopleActivity.RESULT_KEY, mChoiceSet);
+                    intent.putExtras(bundle);
+                    this.setResult(RESULT_OK, intent);
+                    finish();
+                } else if (mMode == MODE_DEFAULT_CALL) {
+                    if (mChoiceSet.size() > 0) {
+                        if (mSelectCallLog) {
+                            Intent intent = new Intent();
+                            Bundle bundle = new Bundle();
+                            bundle.putBundle(PeopleActivity.RESULT_KEY, mChoiceSet);
+                            intent.putExtras(bundle);
+                            this.setResult(RESULT_OK, intent);
+                            finish();
+                        } else {
+                            showDialog(DIALOG_DEL_CALL);
+                        }
+                    }
+                }
+                return true;
+            case android.R.id.home:
+                finish();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private boolean isSearchMode() {
         return (mMode & MODE_MASK_SEARCH) == MODE_MASK_SEARCH;
-    }
-
-    private void initResource() {
-        mOKButton = (Button) findViewById(R.id.btn_ok);
-        mOKButton.setOnClickListener(this);
-        mOKButton.setText(getOKString());
-        mCancelButton = (Button) findViewById(R.id.btn_cancel);
-        mCancelButton.setOnClickListener(this);
     }
 
     @Override
@@ -480,7 +518,7 @@ public class MultiPickContactActivity extends ListActivity implements
             mChoiceSet.remove(String.valueOf(id));
             mSelectAllCheck.setChecked(false);
         }
-        mOKButton.setText(getOKString());
+        mBar.setSubtitle(updateCount());
     }
 
     @Override
@@ -496,14 +534,14 @@ public class MultiPickContactActivity extends ListActivity implements
         return super.onKeyDown(keyCode, event);
     }
 
-    private String getOKString() {
+    private String updateCount() {
         if (0 == mChoiceSet.size()) {
-            mOKButton.setEnabled(false);
+            mDone.setVisible(false);
+            return null;
         } else {
-            mOKButton.setEnabled(true);
+            mDone.setVisible(true);
+            return mChoiceSet.size() + " " + getString(R.string.contacts_selected);
         }
-
-        return getString(R.string.btn_ok) + "(" + mChoiceSet.size() + ")";
     }
 
     private void backupChoiceSet() {
@@ -525,7 +563,7 @@ public class MultiPickContactActivity extends ListActivity implements
         if (!isConfirmed) {
             restoreChoiceSet();
         }
-        mOKButton.setText(getOKString());
+        mBar.setSubtitle(updateCount());
     }
 
     protected Dialog onCreateDialog(int id, Bundle bundle) {
@@ -738,76 +776,6 @@ public class MultiPickContactActivity extends ListActivity implements
             mProgressDialog.show();
 
             thread.start();
-        }
-    }
-
-    public void onClick(View v) {
-        int id = v.getId();
-        switch (id) {
-            case R.id.btn_ok:
-                if (isSearchMode()) {
-                    exitSearchMode(true);
-                }
-                if (mMode == MODE_DEFAULT_CONTACT) {
-                    if (ACTION_MULTI_PICK.equals(getIntent().getAction())) {
-                        if (mChoiceSet.size() > MAX_CONTACTS_NUM_TO_SELECT_ONCE) {
-                            Toast.makeText(
-                                    mContext,
-                                    mContext.getString(R.string.too_many_contacts_add_to_group,
-                                            MAX_CONTACTS_NUM_TO_SELECT_ONCE), Toast.LENGTH_SHORT)
-                                    .show();
-                        } else {
-                            Intent intent = new Intent();
-                            Bundle bundle = new Bundle();
-                            bundle.putBundle(PeopleActivity.RESULT_KEY, mChoiceSet);
-                            intent.putExtras(bundle);
-                            this.setResult(RESULT_OK, intent);
-                            finish();
-                        }
-                    } else if (mChoiceSet.size() > 0) {
-                        showDialog(R.id.dialog_delete_contact_confirmation);
-                    }
-                } else if (mMode == MODE_DEFAULT_PHONE) {
-                    Intent intent = new Intent();
-                    Bundle bundle = new Bundle();
-                    bundle.putBundle(PeopleActivity.RESULT_KEY, mChoiceSet);
-                    intent.putExtras(bundle);
-                    this.setResult(RESULT_OK, intent);
-                    finish();
-                } else if (mMode == MODE_DEFAULT_SIM) {
-                    if (mChoiceSet.size() > 0) {
-                        showDialog(R.id.dialog_import_sim_contact_confirmation);
-                    }
-                } else if (mMode == MODE_DEFAULT_EMAIL) {
-                    Intent intent = new Intent();
-                    Bundle bundle = new Bundle();
-                    bundle.putBundle(PeopleActivity.RESULT_KEY, mChoiceSet);
-                    intent.putExtras(bundle);
-                    this.setResult(RESULT_OK, intent);
-                    finish();
-                } else if (mMode == MODE_DEFAULT_CALL) {
-                    if (mChoiceSet.size() > 0) {
-                        if (mSelectCallLog) {
-                            Intent intent = new Intent();
-                            Bundle bundle = new Bundle();
-                            bundle.putBundle(PeopleActivity.RESULT_KEY, mChoiceSet);
-                            intent.putExtras(bundle);
-                            this.setResult(RESULT_OK, intent);
-                            finish();
-                        } else {
-                            showDialog(DIALOG_DEL_CALL);
-                        }
-                    }
-                }
-                break;
-            case R.id.btn_cancel:
-                if (!isSearchMode()) {
-                    this.setResult(this.RESULT_CANCELED);
-                    finish();
-                } else {
-                    exitSearchMode(false);
-                }
-                break;
         }
     }
 
@@ -1060,7 +1028,7 @@ public class MultiPickContactActivity extends ListActivity implements
 
     public void updateContent() {
         if (isSearchMode()) {
-            doFilter(mSarchView.getQuery().toString());
+            doFilter(mSearchView.getQuery().toString());
         } else {
             startQuery();
         }
@@ -1163,7 +1131,7 @@ public class MultiPickContactActivity extends ListActivity implements
         }
 
         // update UI items.
-        mOKButton.setText(getOKString());
+        mBar.setSubtitle(updateCount());
 
         int count = mList.getChildCount();
         for (int i = 0; i < count; i++) {
@@ -1518,7 +1486,7 @@ public class MultiPickContactActivity extends ListActivity implements
         // Hide soft keyboard, if visible
         InputMethodManager inputMethodManager = (InputMethodManager)
                 getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(mSarchView.getWindowToken(), 0);
+        inputMethodManager.hideSoftInputFromWindow(mSearchView.getWindowToken(), 0);
     }
 
     protected static void log(String msg) {

@@ -129,6 +129,8 @@
     <string name="select_all">All</string>
     <string name="btn_ok">Ok</string>
     <string name="btn_cancel">Cancel</string>
+    <string name="action_done">Done</string>
+    <string name="contacts_selected">selected</string>
 
     <string name="all_call_log">All call logs</string>
     <string name="title_slot_change">Multi-SIM change</string>

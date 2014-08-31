@@ -18,191 +18,189 @@
   <string name="people">خەڵک</string>
   <string name="contactsList">ناوەکان</string>
   <string name="shortcutContact">ناوەکان</string>
-  <string name="shortcutDialContact">ڕاستەوخۆ</string>
+  <string name="shortcutDialContact">په‌یوه‌ندیی ڕاستەوخۆ</string>
   <string name="shortcutMessageContact">نامەی ڕاستەخۆ</string>
-  <string name="shortcutActivityTitle">هەڵبژاردنی قەدبڕی ناوەکان</string>
-  <string name="callShortcutActivityTitle">تەلەفۆنێک هەڵبژێرە بۆ تەلەفۆن</string>
-  <string name="messageShortcutActivityTitle">ژمارەیەک هەڵبژێرە بۆ نامە</string>
+  <string name="shortcutActivityTitle">کورتبڕیی ناوێک هه‌ڵبژێره‌</string>
+  <string name="callShortcutActivityTitle">ژماره‌یه‌ک هه‌ڵبژێره‌ بۆ په‌یوه‌ندی پێوه‌ کردن</string>
+  <string name="messageShortcutActivityTitle">ژمارەیەک هەڵبژێرە بۆ نامەناردن</string>
   <string name="contactPickerActivityTitle">ناوێک هەڵبژێرە</string>
-  <string name="starredList">پەیوەستبوون</string>
-  <string name="frequentList">زووزوو</string>
-  <string name="strequentList">په‌سه‌ندکراوه‌کان</string>
-  <string name="viewContactTitle">زانیاری ناوەکان</string>
+  <string name="starredList">ئه‌ستێره‌دار</string>
+  <string name="frequentList">زوو زوو</string>
+  <string name="strequentList">دڵخوازه‌کان</string>
+  <string name="viewContactTitle">ورده‌کاریی ناو</string>
   <string name="viewContactDesription">هەڵبژاردنی ناوەکان</string>
-  <string name="editContactDescription">دەستکاریکردنی ناوە</string>
+  <string name="editContactDescription">دەستکاریکردنی ناو</string>
   <string name="insertContactDescription">دروستکردنی ناو</string>
-  <string name="editGroupDescription">دەستکاریکردنی گرووپ</string>
-  <string name="insertGroupDescription">دروستکردنی گرووپ</string>
+  <string name="editGroupDescription">دەستکاریکردنی کۆمه‌ڵه‌</string>
+  <string name="insertGroupDescription">دروستکردنی کۆمه‌ڵه‌</string>
   <string name="contactDetailAbout">دەربارەی</string>
   <string name="contactDetailUpdates">تازەکردنەوەکان</string>
   <string name="searchHint">گەڕانی ناوەکان</string>
   <string name="menu_viewContact">پیشاندانی ناوەکان</string>
-  <string name="menu_addStar">زیادکردن بۆ په‌سه‌ندکراوه‌کان</string>
-  <string name="menu_removeStar">سڕینه‌وه‌ له‌ په‌سه‌ندکراوه‌کان</string>
-  <string name="menu_editContact">دەستکاری</string>
+  <string name="menu_addStar">زیادیکه‌ بۆ دڵخوازه‌کان</string>
+  <string name="menu_removeStar">بیسڕه‌وه‌ له‌ دڵخوازه‌کان</string>
+  <string name="menu_editContact">دەستکاریی</string>
   <string name="menu_deleteContact">سڕینه‌وه‌</string>
-  <string name="menu_create_contact_shortcut">دانان بۆ سەرشاشەی ماڵەوە</string>
-  <string name="menu_call">تەلەفۆنی ناوەکان</string>
-  <string name="menu_sendSMS">دەقی ناوەکان</string>
-  <string name="menu_splitAggregate">جیا</string>
-  <string name="menu_editGroup">دەستکاری</string>
+  <string name="menu_create_contact_shortcut">دانان له‌سه‌ر ڕوونمای ماڵه‌وه‌</string>
+  <string name="menu_call">په‌یوه‌ندیی بکه‌ به‌م ناوه‌وه‌</string>
+  <string name="menu_sendSMS">نامه‌ بنێره‌ بۆ ئه‌م ناوه‌</string>
+  <string name="menu_splitAggregate">جیاکردنه‌وه‌</string>
+  <string name="menu_editGroup">دەستکاریی</string>
   <string name="menu_deleteGroup">سڕینه‌وه‌</string>
   <string name="menu_new_contact_action_bar">زیادکردنی ناو</string>
-  <string name="menu_new_group_action_bar">زیادکردنی گروپ</string>
-  <string name="splitConfirmation_title">جیاکردنەوەی ناوکان?</string>
-  <string name="splitConfirmation">ئەم ناوە جیا ئەکرێتەوە بۆ ناوی جۆراوجۆر.</string>
-  <string name="menu_joinAggregate">بەشداری</string>
-  <string name="titleJoinContactDataWith">بەشداری ناوەکان</string>
-  <string name="blurbJoinContactDataWith">ناوەکان هەڵبژێرە کە ئەتەوێت بەشداری بکەیت لەگەڵ <xliff:g id="name">%s</xliff:g>:</string>
+  <string name="menu_new_group_action_bar">زیادکردنی کۆمه‌ڵه‌</string>
+  <string name="splitConfirmation_title">ناوه‌که‌ جیا ده‌که‌یته‌وه‌؟</string>
+  <string name="splitConfirmation">ئەم ناوە جیا دەکرێتەوە بۆ چه‌ند ناوێکی تر.</string>
+  <string name="menu_joinAggregate">بەشداریی</string>
+  <string name="titleJoinContactDataWith">بەشداریی ناوەکان</string>
+  <string name="blurbJoinContactDataWith">ئه‌و ناوه‌ هه‌ڵبژێره‌ که‌ ده‌ته‌وێت به‌شداریی پێبکه‌یت له‌گه‌ڵ <xliff:g id="name">%s</xliff:g>:</string>
   <string name="showAllContactsJoinItem">پیشاندانی هەموو ناوەکان</string>
   <string name="separatorJoinAggregateSuggestions">ناوە پێشنیارکراوەکان</string>
   <string name="separatorJoinAggregateAll">هەموو ناوەکان</string>
-  <string name="contactsJoinedMessage">ناوەکان کە بەشداریانکردوە</string>
+  <string name="contactsJoinedMessage">ناوەکان به‌شدارییان پێکرا</string>
   <string name="menu_set_ring_tone">دانانی زەنگ</string>
-  <string name="menu_redirect_calls_to_vm">هەموو تەلەفۆنەکان بۆ دەنگە نامە</string>
-  <string name="readOnlyContactWarning">ناتوانی ناوەکان بسڕیتەوە تەنها-لە خوێندنەوەی ناوەکان، بەڵام ئەتوانی بیان شاریتەوە لە زنجیرەی ناوەکان.</string>
-  <string name="readOnlyContactDeleteConfirmation">ئەم ناوە زانیاری جۆراوجۆری تیایە لە ناوی جیاوز. خوێندنەوەی زیانیاریەکان تەنها لە زنجیرەی ناوەکان ئەبێت، ناسڕێتەوە.</string>
-  <string name="multipleContactDeleteConfirmation">سرینەوەی ئەم ناوە زیانیاری جیاوز ئەسڕێتەوە لە ناوە جۆراوجۆرەکان.</string>
-  <string name="deleteConfirmation">ئەم ناوە ئەسڕێتەوە.</string>
+  <string name="menu_redirect_calls_to_vm">هەموو په‌یوه‌ندییه‌کان بکه‌ به‌ دەنگەنامە</string>
+  <string name="readOnlyContactWarning">ناتوانی ناوەکان بسڕیتەوە له‌ هه‌ژماره‌ ته‌نها-خوێندنه‌وه‌ییه‌کاندا، بەڵام دەتوانی بیانشاریتەوە لە لیستی ناوەکاندا.</string>
+  <string name="readOnlyContactDeleteConfirmation">ئەم ناوە له‌ کۆمه‌ڵێک هه‌ژماره‌وه‌ زانیاریی له‌خۆ ده‌گرێت. زانیارییه‌کان له‌ هه‌ژماره‌ ته‌نها-خوێندنه‌وه‌ییه‌کانه‌وه‌ ده‌شارێنه‌وه‌ له‌ لیستی ناوه‌کانتدا، ناسڕێنەوە.</string>
+  <string name="multipleContactDeleteConfirmation">سڕینەوەی ئەم ناوە  ده‌بێته‌ هۆی سڕینه‌وه‌ی زانیاریی له‌ چه‌ند هه‌ژمارێکدا.</string>
+  <string name="deleteConfirmation">ئەم ناوە دەسڕێتەوە.</string>
   <string name="menu_discard">ڕەتکردنەوە</string>
-  <string name="invalidContactMessage">ناوەکان بونیان نیە.</string>
-  <string name="createContactShortcutSuccessful">کورته‌وێنه‌ی ناوەکان زیادکرا بۆ سەرشاشە.</string>
+  <string name="invalidContactMessage">ناوه‌که‌ بوونی نییه‌.</string>
+  <string name="createContactShortcutSuccessful">ورده‌واڵه‌ی ناو زیاد کرا بۆ ڕوونمای ماڵه‌وه‌.</string>
   <string name="pickerNewContactHeader">دروستکردنی ناوی تازە</string>
   <string name="pickerNewContactText">دروستکردنی ناوی تازە</string>
   <string-array name="otherLabels">
-    <item>ڕێکخراو</item>
+    <item>ڕێکخستن</item>
     <item>تێبینی</item>
   </string-array>
-  <string name="photoPickerNotFoundText" product="tablet">هیچ وێنەیەک لەکارە نیە لەسەر تاتەبژمێرەکە.</string>
-  <string name="photoPickerNotFoundText" product="default">هیچ وێنەیەک لە کارە نیە لەسەر تەلەفۆنەکە.</string>
+  <string name="photoPickerNotFoundText" product="tablet">هیچ وێنەیەک به‌رده‌ست نییه‌ له‌سه‌ر تابلێته‌که‌.</string>
+  <string name="photoPickerNotFoundText" product="default">هیچ وێنەیەک به‌رده‌ست نییە لەسەر تەلەفۆنەکە.</string>
   <string name="attach_photo_dialog_title">وێنەی ناو</string>
-  <string name="customLabelPickerTitle">پێناسی ناوی دروستکراو</string>
+  <string name="customLabelPickerTitle">ناوزه‌دی ئاسایی</string>
   <string name="send_to_voicemail_checkbox">ناردنی تەلەفۆن ڕاستەوخۆ بۆ دەنگەئیمەیڵ</string>
   <string name="removePhoto">سڕینەوەی وێنە</string>
-  <string name="noContacts">ناو نیە.</string>
-  <string name="noGroups">گرووپ نیە.</string>
-  <string name="noAccounts">بۆ دروستکردنی گرووپەکان پێویستیت بە هەژمارێکە.</string>
-  <string name="emptyGroup">خەڵک لەم گرووپە نیە.</string>
-  <string name="addPeopleToGroup">بۆ زیادکردنی هەندێک. دەستکاریکردنی گرووپ.</string>
-  <string name="savingContact">پاشەکەوتکردنی ناو\u2026</string>
-  <string name="contactSavedToast">ناو پاشەکەوتکرا.</string>
-  <string name="contactSavedErrorToast">ناتوانرێت گۆڕانکاری لە ناوەکان پاشەکەوتبکرێت.</string>
-  <string name="groupSavedToast">گرووپەکان پاشەکەوتکرا.</string>
-  <string name="groupSavedErrorToast">ناتوانرێت گۆڕانکاری لە گرووپەکان پاشەکەوتبکرێت.</string>
-  <string name="listTotalPhoneContactsZero">هیچ ناوێک نیە لەگەڵ ژمارەی تەلەفۆنەکان</string>
-  <string name="listFoundAllContactsZero">ناو نیە</string>
+  <string name="noContacts">ناو نییە.</string>
+  <string name="noGroups">کۆمه‌ڵه‌ نییە.</string>
+  <string name="noAccounts">بۆ دروستکردنی کۆمه‌ڵه‌کان پێویستت بە هەژمارێکە.</string>
+  <string name="emptyGroup">که‌س لەم گرووپەدا نییە.</string>
+  <string name="addPeopleToGroup">بۆ زیادکردنی هەندێک، دەستکاریی کۆمه‌ڵه‌که‌ بکه‌.</string>
+  <string name="savingContact">پاشەکەوتی ناو\u2026</string>
+  <string name="contactSavedToast">ناوه‌که‌ پاشەکەوت کرا.</string>
+  <string name="contactSavedErrorToast">ناتوانرێت گۆڕانکاریی لە ناودا پاشه‌که‌وت بکرێت.</string>
+  <string name="groupSavedToast">کۆمه‌ڵه‌که‌ پاشەکەوت کرا.</string>
+  <string name="groupSavedErrorToast">ناتوانرێت گۆڕانکاریی لە کۆمه‌ڵه‌دا پاشەکەوت بکرێت.</string>
+  <string name="listTotalPhoneContactsZero">هیچ ناوێک نییە ژمارە تەلەفۆنی له‌گه‌ڵدا بێت</string>
+  <string name="listFoundAllContactsZero">ناو نییە</string>
   <string name="contactsAllLabel">هەموو ناوەکان</string>
-  <string name="contactsGroupsLabel">گرووپەکان</string>
-  <string name="callBack">زەنگ لێدەرەوە</string>
+  <string name="contactsGroupsLabel">کۆمه‌ڵه‌کان</string>
+  <string name="callBack">زه‌نگی بۆ لێده‌وه‌</string>
   <string name="callAgain">دوبارە تەلەفۆن بکە</string>
-  <string name="returnCall">گەڕانەوەی تەلەفۆن</string>
-  <string name="add_contact_dlg_message_fmt">زیادکردن\"<xliff:g id="email">%s</xliff:g>\" بۆ ناوەکان?</string>
+  <string name="returnCall">گەڕاندنەوەی په‌یوه‌ندی</string>
+  <string name="add_contact_dlg_message_fmt">\"<xliff:g id="email">%s</xliff:g>\" زیاد ده‌که‌یت بۆ ناوه‌کان؟</string>
   <string name="description_contact_photo">وێنەی ناو</string>
-  <string name="description_plus_button">زێده کردن به</string>
+  <string name="description_plus_button">له‌گه‌ڵ</string>
   <string name="exporting_contact_list_progress"><xliff:g id="current_number">%s</xliff:g> of <xliff:g id="total_number">%s</xliff:g> ناوەکان</string>
-  <string name="search_settings_description">ناوی ناوەکانت</string>
+  <string name="search_settings_description">لسیتی ناوه‌کانت</string>
   <string name="quickcontact_missing_app">هیچ بەرنامەیەک نەدۆزرایەوە بۆ هەڵگرتنی ئەم چالاکیە.</string>
-  <string name="missing_app">هیچ بەرنامەیەک نەدۆزرایەوە بۆ هەڵگرتنی ئەم چالاکیە.</string>
-  <string name="menu_share">به‌شداریپێکردن</string>
-  <string name="share_via">بەشداریکردنی ناوەکان بە</string>
-  <string name="dialog_new_group_account">دروستکردنی گروپەکان لەژێر هەژمار</string>
-  <string name="audio_chat">دەمەتەقێ دەنگ</string>
-  <string name="video_chat">دەمەتەقێی ڤیدۆی</string>
+  <string name="menu_share">په‌رشیکه‌</string>
+  <string name="share_via">ناوه‌که‌ په‌رشکه‌ له‌ڕێی</string>
+  <string name="dialog_new_group_account">کۆمه‌ڵه‌ دروست بکه‌ له‌ژێر هه‌ژماردا</string>
+  <string name="audio_chat">چاتی ده‌نگیی</string>
+  <string name="video_chat">چاتی ڤیدیۆیی</string>
   <string name="connections">پەیوەستەکان</string>
   <string name="add_connection_button">زیادکردنی پەیوەست</string>
   <string name="recent" msgid="2062236709538790412">تازه‌</string>
-  <string name="recent_updates" msgid="2018245636796411442">تازەکردنەوەی نوێ</string>
-  <string name="account_type_format"><xliff:g id="source" example="Gmail">%1$s</xliff:g> ناوەکان</string>
+  <string name="recent_updates" msgid="2018245636796411442">دوایین تازه‌کردنه‌وه‌</string>
+  <string name="account_type_format"><xliff:g id="source" example="Gmail">%1$s</xliff:g> ناو</string>
   <string name="from_account_format"><xliff:g id="source" example="user@gmail.com">%1$s</xliff:g></string>
-  <string name="use_photo_as_primary">بەکارهێنانی ئەم وینەیە</string>
-  <string name="contact_read_only">ناتوانرێت چالاک بێت لەم بەرنامەیە.</string>
+  <string name="use_photo_as_primary">ئه‌م وێنه‌یه‌ به‌کاربێنه‌</string>
+  <string name="contact_read_only">ناتوانرێت ده‌ستکاریی بکرێت لەم بەرنامەیەدا.</string>
   <string name="no_contact_details">هیچ زانیاریەکی تر نیە بۆ ئەم ناوە.</string>
-  <string name="group_read_only">ناتوانرێت دەستکاری بکرێت لەسەر ئەم ئامیرە.</string>
-  <string name="display_options_sort_list_by">ڕیزکردن خشتەکە بە</string>
-  <string name="display_options_sort_by_given_name">ناو پێدراو</string>
+  <string name="group_read_only">ناتوانرێت دەستکاری بکرێت لەسەر ئەم ئامێره‌.</string>
+  <string name="display_options_sort_list_by">لیسته‌که‌ ڕێک بخه‌ به‌پێی</string>
+  <string name="display_options_sort_by_given_name">ناوی دراو</string>
   <string name="display_options_sort_by_family_name">ناوی خێزان</string>
-  <string name="display_options_view_names_as">پیشاندانی ناوەکان</string>
-  <string name="display_options_view_given_name_first">ناوی یەکەم</string>
-  <string name="display_options_view_family_name_first">ناوی خێزان یەکەم</string>
-  <string name="take_photo">وێنەیەک بگرە</string>
-  <string name="take_new_photo">وێنەی تازە بگرە</string>
-  <string name="pick_photo">هه‌ڵبژاردنی وینه‌یه‌ک له‌ پێشەنگا</string>
-  <string name="pick_new_photo">دیاریکردنی وێنەیەک لە پێشەنگا</string>
-  <string name="locale_change_in_progress">خشتەی ناوەکان تازەکرایەوە بۆ پەرچدانەوەی گۆڕینی زمان.</string>
+  <string name="display_options_view_names_as">لیستی ناوه‌کان پیشان بده‌</string>
+  <string name="display_options_view_given_name_first">سه‌ره‌تا ناوی دراو</string>
+  <string name="display_options_view_family_name_first">سه‌ره‌تا ناوی خێزان</string>
+  <string name="take_photo">وێنە بگرە</string>
+  <string name="take_new_photo">وێنەی نوێ بگرە</string>
+  <string name="pick_photo">وێنه‌ هه‌ڵبژێره‌ له‌ پێشانگاوه‌</string>
+  <string name="pick_new_photo">وێنه‌ی نوێ دیاریی بکه‌ له‌ پێشانگاوه‌</string>
+  <string name="locale_change_in_progress">لیستی ناوه‌کان تازه‌کرایه‌وه‌ بۆ هاوتابوونی گۆڕینی زمان.</string>
   <string name="upgrade_in_progress">خشتەی ناوەکان تازەکرایەوە.</string>
-  <string name="upgrade_out_of_memory">ناوەکان لە پرۆسەن بۆ تازەکردنەوەیان.
-    \n\nپرۆسەی تازەکردنەوەکە بە نزیکی پێویستە <xliff:g id="size_in_megabytes">%s</xliff:g>
-    مێگابایت لە بیرگە.\n\nهەڵبژاردنی یەکێک لەمانەی خوارەوە:</string>
+  <string name="upgrade_out_of_memory">ناوەکان لە پرۆسەی به‌رزکردنه‌وه‌دان.
+    \n\nپرۆسەی به‌رزکردنه‌وه‌که‌ بە نزیکی پێویستی به‌ <xliff:g id="size_in_megabytes">%s</xliff:g>
+    مێگابایت هه‌یه‌ لە بیرگەی ناوه‌کی.\n\nیه‌کێک له‌م بژاردانه‌ی خواره‌وه‌ هه‌ڵبژێره‌:</string>
   <string name="upgrade_out_of_memory_uninstall">سڕینەوەی هەندێک بەرنامە</string>
-  <string name="upgrade_out_of_memory_retry">هەوڵدانەوە بۆ تازەکردنەوە</string>
+  <string name="upgrade_out_of_memory_retry">دووباره‌ هه‌وڵی به‌رزکردنه‌وه‌ بده‌</string>
   <string name="search_results_searching">گەڕان\u2026</string>
   <string name="menu_display_selected">"پیشاندانی دیاریکراو"</string>
-  <string name="menu_display_all">"پیشاندانی هەموو"</string>
-  <string name="menu_select_all">"دیاریکردنی هەموو"</string>
-  <string name="menu_select_none">"دیاری نەکردنی هەموو"</string>
-  <string name="add_field">زیادکردنی خانەیەکی تر</string>
-  <string name="add_new_entry_for_section">زیادکردنی تازە</string>
-  <string name="add_organization">زیادکردنی رێکخر‌او</string>
-  <string name="event_edit_field_hint_text">ڕۆژ</string>
-  <string name="group_edit_field_hint_text">ناوی گرووپ</string>
+  <string name="menu_display_all">"پیشاندانی گشت"</string>
+  <string name="menu_select_all">"دیاریکردنی گشت"</string>
+  <string name="menu_select_none">"دیاریی نەکردنی گشت"</string>
+  <string name="add_field">خانەیەکی تر زیاد بکه‌</string>
+  <string name="add_new_entry_for_section">نوێ زیاد بکه‌</string>
+  <string name="add_organization">ڕێکخر‌او زیاد بکه‌</string>
+  <string name="event_edit_field_hint_text">به‌روار</string>
+  <string name="group_edit_field_hint_text">ناوی کۆمه‌ڵه‌</string>
   <string name="description_star">دڵخواز</string>
-  <string name="edit_contact">دەستکاریکردنی ناوە</string>
-  <string name="aggregation_suggestion_join_dialog_message">بەشداریکردن
-ناوی ئیستا لەگەڵ ناوی دیاریکراو?</string>
-  <string name="aggregation_suggestion_edit_dialog_message">گۆڕینی بۆ دەستکاریکردن
-ناوی دیاریکراو? زانیاریەکان کە داتناوە لەبەر ئەگرێتەوە.</string>
-  <string name="menu_copyContact">لەبەرگرتنەوەی ناوەکانم</string>
-  <string name="add_to_my_contacts">زیادکردنی بۆ ناوەکانم</string>
-  <string name="contact_directory_description">فەرهەنگ <xliff:g id="type" example="Corporate Directory">%1$s</xliff:g></string>
-  <string name="toast_making_personal_copy">دروستکردنی لەبەرگرتەنەوەی کەسی\u2026</string>
+  <string name="edit_contact">ده‌ستکاریی ناوه‌که‌ بکه‌</string>
+  <string name="aggregation_suggestion_join_dialog_message">بەشداریی
+        ناوی ئێستا لەگەڵ ناوی دیاریکراو ده‌که‌یت؟</string>
+  <string name="aggregation_suggestion_edit_dialog_message">ده‌یگۆڕیت بۆ ده‌ستکاریی کردنی
+        ناوی دیاریکراو؟ ئه‌و زانیارییانه‌ی تا ئێستا تێت کردوون له‌به‌ریان ده‌گیرێته‌وه‌.</string>
+  <string name="menu_copyContact">له‌به‌ری بگره‌وه‌ بۆ لیستی ناوه‌کانم</string>
+  <string name="add_to_my_contacts">زیادی بکه‌ بۆ لیستی ناوه‌کانم</string>
+  <string name="contact_directory_description">ڕێبه‌ریی <xliff:g id="type" example="Corporate Directory">%1$s</xliff:g></string>
+  <string name="toast_making_personal_copy">دروستکردنی لەبەرگرتەنەوەی کەسیی\u2026</string>
   <string name="list_filter_custom">دروستکراو</string>
   <string name="activity_title_settings">ڕێکخستنه‌کان</string>
   <string name="menu_settings" msgid="377929915873428211">ڕێکخستنه‌کان</string>
   <string name="menu_help">یارمەتی</string>
-  <string name="preference_displayOptions">پیشاندانی هەڵبژاردەکان</string>
+  <string name="preference_displayOptions">پیشاندانی بژارده‌کان</string>
   <string name="organization_company_and_title"><xliff:g id="company" example="Technical Program Manager">%2$s</xliff:g>, <xliff:g id="company" example="Google Inc.">%1$s</xliff:g></string>
   <string name="non_phone_caption">ژماره‌ی مۆبایل</string>
-  <string name="non_phone_add_to_contacts">زیادکردن بۆ ناوەکان</string>
-  <string name="activity_title_confirm_add_detail">زیادکردن بۆ ناوەکان</string>
+  <string name="non_phone_add_to_contacts">زیادیکه‌ بۆ ناوه‌کان</string>
+  <string name="activity_title_confirm_add_detail">زیادیکه‌ بۆ ناوه‌کان</string>
   <string name="non_phone_close">داخستن</string>
   <string name="widget_name_and_phonetic"><xliff:g id="display_name" example="John Huber">%1$s</xliff:g> (<xliff:g id="phonetic_name">%2$s</xliff:g>)</string>
-  <string name="date_year_toggle">دابینکردنی ساڵێک</string>
+  <string name="date_year_toggle">ساڵێک دابنێ</string>
   <string name="social_widget_label">ناو</string>
-  <string name="social_widget_loading">ئامادەکاری\u2026</string>
-  <string name="contacts_unavailable_create_contact">دروستکردنی ناوی تازە</string>
-  <string name="contacts_unavailable_add_account">چونەژورەوە بۆ هەژمارێک</string>
+  <string name="social_widget_loading">بارکردن\u2026</string>
+  <string name="contacts_unavailable_create_contact">ناوێکی نوێ دروست بکه‌</string>
+  <string name="contacts_unavailable_add_account">بچۆره‌ ناو ئه‌کاونتێکه‌وه‌</string>
   <string name="contacts_unavailable_import_contacts">هاوردنی ناوەکان</string>
-  <string name="create_group_dialog_title">دروستکردنی گرووپی تازە</string>
-  <string name="create_group_item_label">دروستکردنی گرووپی تازە</string>
-  <string name="delete_group_dialog_message">سڕینەوەی گرووپ
+  <string name="create_group_dialog_title">کۆمه‌ڵه‌ی نوێ دروست بکه‌</string>
+  <string name="delete_group_dialog_message">کۆمه‌ڵه‌که‌ بسڕه‌وه‌
       \"<xliff:g id="group_label" example="Friends">%1$s</xliff:g>\"?
       (ناوەکانە لەخۆیانەوە ناسڕێنەوە.)
-    </string>
+    </string>
   <string name="toast_join_with_empty_contact">دروستکردنی ناوێک پێشی بەشداریکردن
 لەگەڵ یەکێکی تر.</string>
-  <string name="copy_text">لەبەرگرتەنەوە بۆ کلیپبۆرد</string>
-  <string name="set_default">دانانی بنەڕەتی</string>
+  <string name="copy_text">له‌به‌ری بگره‌وه‌ بۆ ته‌خته‌نووس</string>
+  <string name="set_default">له‌سه‌ر بنه‌ڕه‌تیی دایبنێ</string>
   <string name="clear_default">پاکردنەوەی بنەڕەتی</string>
-  <string name="toast_text_copied">دەق لەبەریگیرا</string>
-  <string name="cancel_confirmation_dialog_message">وەلانانی گۆڕانکاریەکان?</string>
+  <string name="toast_text_copied">ده‌ق له‌به‌ری گیرایه‌وه‌</string>
+  <string name="cancel_confirmation_dialog_message">گۆڕانکارییه‌کانت وه‌لا ده‌نێی؟</string>
   <string name="call_type_and_date">
         <xliff:g id="call_type" example="Friends">%1$s</xliff:g>  <xliff:g id="call_short_date" example="Friends">%2$s</xliff:g>
     </string>
-  <string name="profile_display_name">دروستکردنی کورتەژیاننامە</string>
-  <string name="enter_contact_name">نوسینی ناوی کەس</string>
-  <string name="group_name_hint">ناوی گروپ</string>
-  <string name="local_profile_title">کورتەژیاننامەی ناوخۆی من</string>
-  <string name="external_profile_title"> <xliff:g id="external_source">%1$s</xliff:g> کورتەژیاننامەم</string>
+  <string name="profile_display_name">په‌ڕه‌ی ژینم بۆ دانێ</string>
+  <string name="enter_contact_name">ناوی که‌سه‌که‌ بنوسه‌</string>
+  <string name="group_name_hint">ناوی کۆمه‌ڵه‌</string>
+  <string name="local_profile_title">په‌ڕه‌ی ژینی ناوخۆییم</string>
+  <string name="external_profile_title">په‌ڕه‌ی <xliff:g id="external_source">%1$s</xliff:g> ژینم</string>
   <string name="toast_displaying_all_contacts">پیشاندانی هەموو ناوەکان</string>
-  <string name="no_account_prompt">خەڵک باشتر کارەکەن لەگەڵ هەژماری Google.\n\n\u2022 ڕێگە لە هەر وێبگەرێکەوە.\n\u2022 پاشەکەوتکردنی ناوەکانت بۆ زیاتر ئاساییش.</string>
-  <string name="generic_no_account_prompt">پاراستنی ناوەکانت ئەگەرچی تەلەفۆنەکەت ون بکەیت: بینێرە بۆ هەر هەژمارێک بە ئەنتەرنێتەوە.</string>
+  <string name="no_account_prompt">کاره‌کانی خه‌ڵک له‌گه‌ڵ هه‌ژماری گوگوڵدا باشتره‌.\n\n\u2022 بچۆ ژووره‌وه‌ له‌ هه‌موو وێبگه‌ڕێکه‌وه‌.\n\u2022  لیستی ناوه‌کانت به‌ پارێزراوی بگه‌ڕێنه‌وه‌.</string>
+  <string name="generic_no_account_prompt">لیستی ناوه‌کانت ده‌پارێزێت ته‌نانه‌ت ئه‌گه‌ر ته‌له‌فۆنه‌که‌شت ون بکه‌یت: له‌گه‌ڵ ڕاژه‌یه‌کی سه‌رهێڵدا خۆی هاوکات ده‌کاته‌وه‌.</string>
   <string name="generic_no_account_prompt_title">زیادکردنی هەژمار</string>
-  <string name="contact_editor_prompt_zero_accounts">ناوەکانت پاشەکەوت ناکرێن. زیادکردنی ناوێک کە لەسەر ئەنتەرنێت پاشەکەوتکراو?</string>
-  <string name="contact_editor_prompt_one_account">ناوەکانت ئەنێردرێت لەگەڵ <xliff:g id="account_name">%1$s</xliff:g>.</string>
-  <string name="contact_editor_prompt_multiple_accounts">ئەتوانیت ناوەکانت بنێریت بۆ یەکێک لەم هەژمارانەی خوارەوە. کامەی ئەتەوێت بەکاربهێنیت?</string>
-  <string name="keep_local">لە ناوخۆی بیپارێزە</string>
-  <string name="add_account">زیادکردنی هەژمارێک</string>
-  <string name="add_new_account">زیادکردنی هەژماری تازە</string>
+  <string name="contact_editor_prompt_zero_accounts">ناوه‌ نوێیه‌که‌ت ناگه‌ڕێنرێته‌وه‌. هه‌ژمارێک زیاد ده‌که‌یت که‌ به‌ شێوه‌ی سه‌رهێڵ ناوه‌کانت بگه‌ڕێنێته‌وه‌؟</string>
+  <string name="contact_editor_prompt_one_account">ناوه‌ نوێیه‌که‌ت له‌گه‌ڵ <xliff:g id="account_name">%1$s</xliff:g> هاوکات ده‌بێت.</string>
+  <string name="contact_editor_prompt_multiple_accounts">ده‌توانیت ناوه‌ نوێیه‌که‌ت هاوکات بکه‌یت به‌ یه‌کێک له‌م هه‌ژمارانه‌ی خواره‌وه‌. ده‌ته‌وێت کامیان به‌کاربهێنیت؟</string>
+  <string name="keep_local">ناوخۆییانه‌ بیپارێزه‌</string>
+  <string name="add_account">هه‌ژمار زیاد بکه‌</string>
+  <string name="add_new_account">هه‌ژماری نوێ زیاد بکه‌</string>
   <string name="menu_export_database">هەناردەی فایلەکانی بنكه‌دراوه‌</string>
-  <string name="contact_detail_picture_description">وێنە. دیاریکردن بۆ گۆڕان</string>
+  <string name="contact_detail_picture_description">وێنە. دیاریی بکه‌ بۆ گۆڕان</string>
 </resources>

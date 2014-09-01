@@ -58,6 +58,9 @@ import com.android.contacts.activities.ActionBarAdapter.TabState;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.contacts.common.editor.SelectAccountDialogFragment;
+import com.android.contacts.group.GroupBrowseListFragment;
+import com.android.contacts.group.GroupBrowseListFragment.OnGroupBrowserActionListener;
+import com.android.contacts.group.GroupDetailFragment;
 import com.android.contacts.interactions.ContactDeletionInteraction;
 import com.android.contacts.common.interactions.ImportExportDialogFragment;
 import com.android.contacts.common.interactions.ImportExportDialogFragment.ExportToSimThread;
@@ -115,6 +118,8 @@ public class PeopleActivity extends ContactsActivity implements
 
     // These values needs to start at 2. See {@link ContactEntryListFragment}.
     private static final int SUBACTIVITY_ACCOUNT_FILTER = 2;
+    private static final int SUBACTIVITY_NEW_GROUP = 4;
+    private static final int SUBACTIVITY_EDIT_GROUP = 5;
 
     private final DialogManager mDialogManager = new DialogManager(this);
 
@@ -122,6 +127,10 @@ public class PeopleActivity extends ContactsActivity implements
     private ContactsRequest mRequest;
 
     private ActionBarAdapter mActionBarAdapter;
+
+    private GroupDetailFragment mGroupDetailFragment;
+    private final GroupDetailFragmentListener mGroupDetailFragmentListener =
+            new GroupDetailFragmentListener();
 
     private ContactTileListFragment.Listener mFavoritesFragmentListener =
             new StrequentContactListFragmentListener();
@@ -139,6 +148,7 @@ public class PeopleActivity extends ContactsActivity implements
      */
     private DefaultContactBrowseListFragment mAllFragment;
     private ContactTileListFragment mFavoritesFragment;
+    private GroupBrowseListFragment mGroupsFragment;
 
     /** ViewPager for swipe */
     private ViewPager mTabPager;
@@ -334,6 +344,7 @@ public class PeopleActivity extends ContactsActivity implements
         mTabTitles = new String[TabState.COUNT];
         mTabTitles[TabState.FAVORITES] = getString(R.string.favorites_tab_label);
         mTabTitles[TabState.ALL] = getString(R.string.all_contacts_tab_label);
+        mTabTitles[TabState.GROUPS] = getString(R.string.contacts_groups_label);
         mTabPager = getView(R.id.tab_pager);
         mTabPagerAdapter = new TabPagerAdapter();
         mTabPager.setAdapter(mTabPagerAdapter);
@@ -356,6 +367,7 @@ public class PeopleActivity extends ContactsActivity implements
 
         final String FAVORITE_TAG = "tab-pager-favorite";
         final String ALL_TAG = "tab-pager-all";
+        final String GROUPS_TAG = "tab-pager-groups";
 
         // Create the fragments and add as children of the view pager.
         // The pager adapter will only change the visibility; it'll never create/destroy
@@ -367,23 +379,30 @@ public class PeopleActivity extends ContactsActivity implements
                 fragmentManager.findFragmentByTag(FAVORITE_TAG);
         mAllFragment = (DefaultContactBrowseListFragment)
                 fragmentManager.findFragmentByTag(ALL_TAG);
+        mGroupsFragment = (GroupBrowseListFragment)
+                fragmentManager.findFragmentByTag(GROUPS_TAG);
 
         if (mFavoritesFragment == null) {
             mFavoritesFragment = new ContactTileListFragment();
             mAllFragment = new DefaultContactBrowseListFragment();
+            mGroupsFragment = new GroupBrowseListFragment();
 
             transaction.add(R.id.tab_pager, mFavoritesFragment, FAVORITE_TAG);
             transaction.add(R.id.tab_pager, mAllFragment, ALL_TAG);
+            transaction.add(R.id.tab_pager, mGroupsFragment, GROUPS_TAG);
         }
 
         mFavoritesFragment.setListener(mFavoritesFragmentListener);
 
         mAllFragment.setOnContactListActionListener(new ContactBrowserActionListener());
 
+        mGroupsFragment.setListener(new GroupBrowserActionListener());
+
         // Hide all fragments for now.  We adjust visibility when we get onSelectedTabChanged()
         // from ActionBarAdapter.
         transaction.hide(mFavoritesFragment);
         transaction.hide(mAllFragment);
+        transaction.hide(mGroupsFragment);
 
         transaction.commitAllowingStateLoss();
         fragmentManager.executePendingTransactions();
@@ -520,6 +539,9 @@ public class PeopleActivity extends ContactsActivity implements
                 case ContactsRequest.ACTION_VIEW_CONTACT:
                     tabToOpen = TabState.ALL;
                     break;
+                case ContactsRequest.ACTION_GROUP:
+                    tabToOpen = TabState.GROUPS;
+                    break;
                 default:
                     tabToOpen = -1;
                     break;
@@ -542,6 +564,7 @@ public class PeopleActivity extends ContactsActivity implements
         }
 
         configureContactListFragment();
+        configureGroupListFragment();
 
         invalidateOptionsMenuIfNeeded();
     }
@@ -556,6 +579,12 @@ public class PeopleActivity extends ContactsActivity implements
 
         invalidateOptionsMenuIfNeeded();
     }
+
+    //
+    // private void setupGroupDetailFragment(Uri groupUri) {
+    // mGroupDetailFragment.loadGroup(groupUri);
+    // invalidateOptionsMenuIfNeeded();
+    // }
 
     /**
      * Handler for action bar actions.
@@ -621,6 +650,9 @@ public class PeopleActivity extends ContactsActivity implements
         }
         invalidateOptionsMenu();
         showEmptyStateForTab(tab);
+        if (tab == TabState.GROUPS) {
+            mGroupsFragment.setAddAccountsVisibility(!areGroupWritableAccountsAvailable());
+        }
     }
 
     private void showEmptyStateForTab(int tab) {
@@ -629,6 +661,10 @@ public class PeopleActivity extends ContactsActivity implements
                 case TabState.FAVORITES:
                     mContactsUnavailableFragment.setMessageText(
                             R.string.listTotalAllContactsZeroStarred, -1);
+                    break;
+                case TabState.GROUPS:
+                    mContactsUnavailableFragment.setMessageText(R.string.noGroups,
+                            areGroupWritableAccountsAvailable() ? -1 : R.string.noAccounts);
                     break;
                 case TabState.ALL:
                     mContactsUnavailableFragment.setMessageText(R.string.noContacts, -1);
@@ -678,6 +714,9 @@ public class PeopleActivity extends ContactsActivity implements
                 mActionBarAdapter.setCurrentTab(position, false);
                 mViewPagerTabs.onPageSelected(position);
                 showEmptyStateForTab(position);
+                if (position == TabState.GROUPS) {
+                    mGroupsFragment.setAddAccountsVisibility(!areGroupWritableAccountsAvailable());
+                }
                 invalidateOptionsMenu();
             }
         }
@@ -736,6 +775,9 @@ public class PeopleActivity extends ContactsActivity implements
                 if (object == mAllFragment) {
                     return getTabPositionForTextDirection(TabState.ALL);
                 }
+                if (object == mGroupsFragment) {
+                    return TabState.GROUPS;
+                }
             }
             return POSITION_NONE;
         }
@@ -759,6 +801,8 @@ public class PeopleActivity extends ContactsActivity implements
                     return mFavoritesFragment;
                 } else if (position == TabState.ALL) {
                     return mAllFragment;
+                } else if (position == TabState.GROUPS) {
+                    return mGroupsFragment;
                 }
             }
             throw new IllegalArgumentException("position: " + position);
@@ -864,6 +908,11 @@ public class PeopleActivity extends ContactsActivity implements
     private boolean isRTL() {
         final Locale locale = Locale.getDefault();
         return TextUtils.getLayoutDirectionFromLocale(locale) == View.LAYOUT_DIRECTION_RTL;
+    }
+
+    private void configureGroupListFragment() {
+        mGroupsFragment.setVerticalScrollbarPosition(getScrollBarPosition());
+        mGroupsFragment.setSelectionVisible(false);
     }
 
     @Override
@@ -1025,6 +1074,67 @@ public class PeopleActivity extends ContactsActivity implements
         }
     }
 
+    private final class GroupBrowserActionListener implements OnGroupBrowserActionListener {
+
+        GroupBrowserActionListener() {}
+
+        @Override
+        public void onViewGroupAction(Uri groupUri) {
+            Intent intent = new Intent(PeopleActivity.this, GroupDetailActivity.class);
+            intent.setData(groupUri);
+            startActivity(intent);
+        }
+    }
+
+    private class GroupDetailFragmentListener implements GroupDetailFragment.Listener {
+
+        GroupDetailFragmentListener() {}
+
+        @Override
+        public void onGroupSizeUpdated(String size) {
+            // Nothing needs to be done here because the size will be displayed in the detail
+            // fragment
+        }
+
+        @Override
+        public void onGroupTitleUpdated(String title) {
+            // Nothing needs to be done here because the title will be displayed in the detail
+            // fragment
+        }
+
+        @Override
+        public void onAccountTypeUpdated(String accountTypeString, String dataSet) {
+            // Nothing needs to be done here because the group source will be displayed in the
+            // detail fragment
+        }
+
+        @Override
+        public void onEditRequested(Uri groupUri) {
+            final Intent intent = new Intent(PeopleActivity.this, GroupEditorActivity.class);
+            intent.setData(groupUri);
+            intent.setAction(Intent.ACTION_EDIT);
+            startActivityForResult(intent, SUBACTIVITY_EDIT_GROUP);
+        }
+
+        @Override
+        public void onContactSelected(Uri contactUri) {
+            // Nothing needs to be done here because either quickcontact will be displayed
+            // or activity will take care of selection
+        }
+    }
+
+    public void startActivityAndForwardResult(final Intent intent) {
+        intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+
+        // Forward extras to the new activity
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            intent.putExtras(extras);
+        }
+        startActivity(intent);
+        finish();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!areContactsAvailable()) {
@@ -1054,6 +1164,10 @@ public class PeopleActivity extends ContactsActivity implements
             return true;
         }
 
+        if (mGroupDetailFragment != null && mGroupDetailFragment.isOptionsMenuChanged()) {
+            return true;
+        }
+
         return false;
     }
 
@@ -1066,11 +1180,15 @@ public class PeopleActivity extends ContactsActivity implements
 
         // Get references to individual menu items in the menu
         final MenuItem contactsFilterMenu = menu.findItem(R.id.menu_contacts_filter);
+
+        MenuItem addGroupMenu = menu.findItem(R.id.menu_add_group);
+
         final MenuItem clearFrequentsMenu = menu.findItem(R.id.menu_clear_frequents);
         final MenuItem helpMenu = menu.findItem(R.id.menu_help);
 
         final boolean isSearchMode = mActionBarAdapter.isSearchMode();
         if (isSearchMode) {
+            addGroupMenu.setVisible(false);
             contactsFilterMenu.setVisible(false);
             clearFrequentsMenu.setVisible(false);
             helpMenu.setVisible(false);
@@ -1078,11 +1196,24 @@ public class PeopleActivity extends ContactsActivity implements
         } else {
             switch (mActionBarAdapter.getCurrentTab()) {
                 case TabState.FAVORITES:
+                    addGroupMenu.setVisible(false);
                     contactsFilterMenu.setVisible(false);
                     clearFrequentsMenu.setVisible(hasFrequents());
                     break;
                 case TabState.ALL:
+                    addGroupMenu.setVisible(false);
                     contactsFilterMenu.setVisible(true);
+                    clearFrequentsMenu.setVisible(false);
+                    break;
+                case TabState.GROUPS:
+                    // Do not display the "new group" button if no accounts are available
+                    if (areGroupWritableAccountsAvailable()) {
+                        addGroupMenu.setVisible(true);
+                    } else {
+                        addGroupMenu.setVisible(false);
+                    }
+                    addGroupMenu.setVisible(true);
+                    contactsFilterMenu.setVisible(false);
                     clearFrequentsMenu.setVisible(false);
                     break;
             }
@@ -1156,6 +1287,10 @@ public class PeopleActivity extends ContactsActivity implements
                 onSearchRequested();
                 return true;
             }
+            case R.id.menu_add_group: {
+                createNewGroup();
+                return true;
+            }
             case R.id.menu_delete: {
                 final Intent intent = new Intent(Intent.ACTION_DELETE, Contacts.CONTENT_URI);
                 intent.putExtra(EDITABLE_KEY, mActionBarAdapter.getQueryString());
@@ -1202,6 +1337,12 @@ public class PeopleActivity extends ContactsActivity implements
         return false;
     }
 
+    private void createNewGroup() {
+        final Intent intent = new Intent(this, GroupEditorActivity.class);
+        intent.setAction(Intent.ACTION_INSERT);
+        startActivityForResult(intent, SUBACTIVITY_NEW_GROUP);
+    }
+
     @Override
     public boolean onSearchRequested() { // Search key pressed.
         mActionBarAdapter.setSearchMode(true);
@@ -1217,12 +1358,22 @@ public class PeopleActivity extends ContactsActivity implements
                 break;
             }
 
+            case SUBACTIVITY_NEW_GROUP:
+            case SUBACTIVITY_EDIT_GROUP: {
+                if (resultCode == RESULT_OK) {
+                    mRequest.setActionCode(ContactsRequest.ACTION_GROUP);
+                    mGroupsFragment.setSelectedUri(data.getData());
+                }
+                break;
+            }
+
             // TODO: Using the new startActivityWithResultFromFragment API this should not be needed
             // anymore
             case ContactEntryListFragment.ACTIVITY_REQUEST_CODE_PICKER:
                 if (resultCode == RESULT_OK) {
                     mAllFragment.onPickerResult(data);
                 }
+                break;
 
 // TODO fix or remove multipicker code
 //                else if (resultCode == RESULT_CANCELED && mMode == MODE_PICK_MULTIPLE_PHONES) {

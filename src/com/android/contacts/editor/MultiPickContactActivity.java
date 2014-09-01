@@ -51,14 +51,17 @@ import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.net.Uri.Builder;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Email;
+import android.provider.ContactsContract.CommonDataKinds.GroupMembership;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Groups;
 import android.provider.ContactsContract.RawContacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
@@ -120,7 +123,9 @@ public class MultiPickContactActivity extends ListActivity implements
             Contacts.PHOTO_ID, // 3
             Contacts.LOOKUP_KEY, // 4
             RawContacts.ACCOUNT_TYPE, // 5
-            RawContacts.ACCOUNT_NAME // 6
+            RawContacts.ACCOUNT_NAME, // 6
+            Contacts.NAME_RAW_CONTACT_ID,
+            Contacts.PHOTO_THUMBNAIL_URI
     };
 
     static final String[] CALL_LOG_PROJECTION = new String[] {
@@ -200,8 +205,16 @@ public class MultiPickContactActivity extends ListActivity implements
     private static final int MODE_SEARCH_EMAIL = MODE_DEFAULT_EMAIL | MODE_MASK_SEARCH;
     private static final int MODE_SEARCH_CALL = MODE_DEFAULT_CALL | MODE_MASK_SEARCH;
     private static final int MODE_SEARCH_SIM = MODE_DEFAULT_SIM | MODE_MASK_SEARCH;
-
     private static final int DIALOG_DEL_CALL = 1;
+    public static final int ACTION_ADD_GROUP_MEMBER = 0;
+    public static final int ACTION_MOVE_GROUP_MEMBER = 1;
+    public static final int ACTION_DEFAULT_VALUE = -1;
+
+    public static final String ADD_GROUP_MEMBERS= "add_group_members";
+
+    public static final String ADD_MOVE_GROUP_MEMBER_KEY = "add_move_group_member";
+    public static final String KEY_GROUP_ID = "group_id";
+
     private ContactItemListAdapter mAdapter;
     private QueryHandler mQueryHandler;
     private Bundle mChoiceSet;
@@ -214,6 +227,8 @@ public class MultiPickContactActivity extends ListActivity implements
     private int mMode;
     private boolean mSelectCallLog;
     public static final String KEY_SELECT_CALLLOG = "selectcalllog";
+
+    private ArrayList<Long> mGroupIds= new ArrayList<Long>();
 
     private ProgressDialog mProgressDialog;
     private SimContactsOperation mSimContactsOperation;
@@ -365,7 +380,9 @@ public class MultiPickContactActivity extends ListActivity implements
             ContactItemCache cache = (ContactItemCache) v.getTag();
             if (isPickContact()) {
                 value = new String[] {
-                        cache.lookupKey, String.valueOf(cache.id)
+                        cache.lookupKey, String.valueOf(cache.id),
+                        String.valueOf(cache.nameRawContactId),
+                        cache.photoUri, cache.name
                 };
             } else if (isPickPhone()) {
                 value = new String[] {
@@ -680,12 +697,26 @@ public class MultiPickContactActivity extends ListActivity implements
                                             MAX_CONTACTS_NUM_TO_SELECT_ONCE), Toast.LENGTH_SHORT)
                                     .show();
                         } else {
-                            Intent intent = new Intent();
-                            Bundle bundle = new Bundle();
-                            bundle.putBundle(SimContactsConstants.RESULT_KEY, mChoiceSet);
-                            intent.putExtras(bundle);
-                            this.setResult(RESULT_OK, intent);
-                            finish();
+                            switch (getIntent().getIntExtra(ADD_MOVE_GROUP_MEMBER_KEY,
+                                    ACTION_DEFAULT_VALUE)) {
+                                case ACTION_ADD_GROUP_MEMBER:
+                                    this.setResult(RESULT_OK, new Intent().putExtras(mChoiceSet));
+                                    finish();
+                                    break;
+                                case ACTION_MOVE_GROUP_MEMBER:
+                                    showGroupSelectionList(
+                                            getIntent().getStringExtra(
+                                                    SimContactsConstants.ACCOUNT_TYPE),
+                                            getIntent().getLongExtra(KEY_GROUP_ID, -1));
+                                    break;
+                                default:
+                                    Intent intent = new Intent();
+                                    Bundle bundle = new Bundle();
+                                    bundle.putBundle(SimContactsConstants.RESULT_KEY, mChoiceSet);
+                                    intent.putExtras(bundle);
+                                    this.setResult(RESULT_OK, intent);
+                                    finish();
+                            }
                         }
                     } else if (mChoiceSet.size() > 0) {
                         showDialog(R.id.dialog_delete_contact_confirmation);
@@ -767,6 +798,26 @@ public class MultiPickContactActivity extends ListActivity implements
         Uri uri;
         switch (mMode) {
             case MODE_DEFAULT_CONTACT:
+                int operation = getIntent().getIntExtra(ADD_MOVE_GROUP_MEMBER_KEY, -1);
+                long groupId = getIntent().getLongExtra(KEY_GROUP_ID, -1);
+                String accountName = getIntent().getStringExtra(SimContactsConstants.ACCOUNT_NAME);
+                String accountType = getIntent().getStringExtra(SimContactsConstants.ACCOUNT_TYPE);
+                switch (operation) {
+                    case ACTION_ADD_GROUP_MEMBER:
+                    case ACTION_MOVE_GROUP_MEMBER:
+                        Builder builder = Contacts.CONTENT_GROUP_URI.buildUpon();
+                        builder.appendQueryParameter(ADD_GROUP_MEMBERS, String.valueOf(
+                                operation == ACTION_ADD_GROUP_MEMBER));
+                        builder.appendQueryParameter(Groups._ID, String.valueOf(groupId));
+                        builder.appendQueryParameter(RawContacts.ACCOUNT_NAME, accountName);
+                        builder.appendQueryParameter(RawContacts.ACCOUNT_TYPE, accountType);
+                        uri = builder.build();
+                        break;
+                    default:
+                        uri = Contacts.CONTENT_URI;
+                        break;
+                }
+                break;
             case MODE_SEARCH_CONTACT:
                 uri = Contacts.CONTENT_URI;
                 break;
@@ -811,7 +862,21 @@ public class MultiPickContactActivity extends ListActivity implements
         Intent intent = getIntent();
         ContactListFilter filter = (ContactListFilter) intent.getParcelableExtra(
                 AccountFilterActivity.KEY_EXTRA_CONTACT_LIST_FILTER);
-
+        int operation = getIntent().getIntExtra(ADD_MOVE_GROUP_MEMBER_KEY, -1);
+        long groupId = getIntent().getLongExtra(KEY_GROUP_ID, -1);
+        String accountName = getIntent().getStringExtra(SimContactsConstants.ACCOUNT_NAME);
+        String accountType = getIntent().getStringExtra(SimContactsConstants.ACCOUNT_TYPE);
+        switch (operation) {
+            case ACTION_ADD_GROUP_MEMBER:
+            case ACTION_MOVE_GROUP_MEMBER:
+                Builder builder = Contacts.CONTENT_FILTER_URI.buildUpon();
+                builder.appendQueryParameter(ADD_GROUP_MEMBERS, String.valueOf(
+                        operation == ACTION_ADD_GROUP_MEMBER));
+                builder.appendQueryParameter(Groups._ID, String.valueOf(groupId));
+                builder.appendQueryParameter(RawContacts.ACCOUNT_NAME, accountName);
+                builder.appendQueryParameter(RawContacts.ACCOUNT_TYPE, accountType);
+                return builder.build();
+        }
         if (filter != null &&
                 filter.filterType == ContactListFilter.FILTER_TYPE_ACCOUNT) {
 
@@ -898,9 +963,10 @@ public class MultiPickContactActivity extends ListActivity implements
                 // Add a subscription judgement, if selection = -1 that means
                 // need query both cards.
                 String selection = null;
-                int subscription = mIntent.getIntExtra(SimContactsConstants.SUB, -1);
+                 int subscription = getIntent().getIntExtra(
+                    SimContactsConstants.SUB, -1);
                 if (SimContactsConstants.SUB_INVALID != subscription) {
-                selection = Calls.PHONE_ACCOUNT_ID + "=" + subscription;
+                    selection = Calls.PHONE_ACCOUNT_ID + "=" + subscription;
                 }
                 return selection;
             default:
@@ -1068,7 +1134,10 @@ public class MultiPickContactActivity extends ListActivity implements
             if (isPickContact()) {
                 id = String.valueOf(cursor.getLong(SUMMARY_ID_COLUMN_INDEX));
                 value = new String[] {
-                        cursor.getString(SUMMARY_LOOKUP_KEY_COLUMN_INDEX), id
+                        cursor.getString(SUMMARY_LOOKUP_KEY_COLUMN_INDEX), id,
+                        cursor.getString(cursor.getColumnIndex(Contacts.NAME_RAW_CONTACT_ID)),
+                        cursor.getString(cursor.getColumnIndex(Contacts.PHOTO_THUMBNAIL_URI)),
+                        cursor.getString(SUMMARY_DISPLAY_NAME_PRIMARY_COLUMN_INDEX)
                 };
             } else if (isPickPhone()) {
                 id = String.valueOf(cursor.getLong(PHONE_COLUMN_ID));
@@ -1165,6 +1234,8 @@ public class MultiPickContactActivity extends ListActivity implements
         String contact_id;
         String email;
         String anrs;
+        long nameRawContactId;
+        String photoUri;
     }
 
     private final class ContactItemListAdapter extends CursorAdapter {
@@ -1188,6 +1259,10 @@ public class MultiPickContactActivity extends ListActivity implements
                 cache.id = cursor.getLong(SUMMARY_ID_COLUMN_INDEX);
                 cache.lookupKey = cursor.getString(SUMMARY_LOOKUP_KEY_COLUMN_INDEX);
                 cache.name = cursor.getString(SUMMARY_DISPLAY_NAME_PRIMARY_COLUMN_INDEX);
+                cache.nameRawContactId = cursor.getLong(cursor
+                        .getColumnIndex(Contacts.NAME_RAW_CONTACT_ID));
+                cache.photoUri = cursor.getString(cursor
+                        .getColumnIndex(Contacts.PHOTO_THUMBNAIL_URI));
                 ((TextView) view.findViewById(R.id.pick_contact_name))
                         .setText(cache.name == null ? "" : cache.name);
                 view.findViewById(R.id.pick_contact_number).setVisibility(View.GONE);
@@ -1581,6 +1656,267 @@ public class MultiPickContactActivity extends ListActivity implements
     private void cancelSimContactsImporting() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.cancel();
+        }
+    }
+
+    private void showGroupSelectionList(String accountType, long srcGroupId) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.label_groups));
+        ContentResolver resolver = getContentResolver();
+        String selection = Groups.ACCOUNT_TYPE + " =? AND " + Groups.DELETED + " != ?";
+        ArrayList<String> items = new ArrayList<String>();
+
+        mGroupIds.clear();
+        items.clear();
+        Cursor cursor = resolver.query(Groups.CONTENT_URI, new String[] {
+                Groups._ID, Groups.TITLE
+        },
+        selection,
+        new String[] {
+                        accountType, "1"
+        },
+        null);
+        if (cursor == null || cursor.getCount() == 0) {
+            Toast.makeText(mContext, R.string.message_can_not_move_members,
+                    Toast.LENGTH_LONG).show();
+            return;
+        } else {
+            try {
+                while (cursor.moveToNext()) {
+                    if (!cursor.getString(0).equals(String.valueOf(srcGroupId))) {
+                        mGroupIds.add(cursor.getLong(0));
+                        items.add(cursor.getString(1));
+                    }
+                }
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
+            }
+        }
+        if (mGroupIds.size() == 0) {
+            Toast.makeText(mContext, R.string.message_can_not_move_members,
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+        String[] groupItem = new String[items.size()];
+        for (int i = 0; i < items.size(); i++) {
+            groupItem[i] = items.get(i);
+        }
+        builder.setItems(groupItem, new ChooseActionListener());
+        builder.create().show();
+    }
+
+    private class ChooseActionListener implements DialogInterface.OnClickListener {
+        public void onClick(DialogInterface dialog, int which) {
+            new MoveGroupMemberTask(mChoiceSet,
+                    getIntent().getLongExtra(KEY_GROUP_ID, -1),
+                    mGroupIds.get(which)).execute();
+        }
+    }
+
+    class MoveGroupMemberTask extends AsyncTask<Object, Object, Object> {
+
+        private static final String GROUP_QUERY_GROUP_MEMBER_SELECTION =
+                Data.MIMETYPE + "=? AND "
+                        + GroupMembership.GROUP_ROW_ID + "=?";
+
+        private static final String GROUP_QUERY_RAW_CONTACTS_SELECTION =
+                RawContacts.CONTACT_ID + "=?";
+
+        private static final String GROUP_DELETE_MEMBER_SELECTION = Data.CONTACT_ID
+                + "=? AND "
+                + Data.MIMETYPE
+                + "=? AND "
+                + GroupMembership.GROUP_ROW_ID
+                + "=?";
+
+        private static final int BUFFER_LENGTH = 499;
+
+        private Bundle mChoiceSet;
+        private long mDestGroupId;
+        private long mSrcGroupId;
+        private boolean mCanceled = false;
+
+        private ArrayList<ContentProviderOperation> mAddOrMoveOperation;
+        private ArrayList<ContentProviderOperation> mDeleteOperation;
+        private ArrayList<String> mGroupMemberList = new ArrayList<String>();
+
+        public MoveGroupMemberTask(Bundle choiceSet,
+                long srcGroupId, long destGroupId) {
+            mChoiceSet = choiceSet;
+            mSrcGroupId = srcGroupId;
+            mDestGroupId = destGroupId;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            mProgressDialog = new ProgressDialog(MultiPickContactActivity.this,
+                    com.android.internal.R.style.Theme_Holo_Light_Dialog_Alert);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            mProgressDialog.setTitle(getProgressDialogTitle());
+            mProgressDialog.setMessage(getProgressDialogMessage());
+            mProgressDialog.setMax(mChoiceSet != null ? mChoiceSet.keySet().size() : 100);
+            mProgressDialog.setProgress(0);
+            mProgressDialog.setCanceledOnTouchOutside(false);
+            mProgressDialog.setOnCancelListener(new OnCancelListener() {
+                public void onCancel(DialogInterface dialog) {
+                    mCanceled = true;
+                }
+            });
+            mProgressDialog.show();
+        }
+
+        @Override
+        protected Bundle doInBackground(Object... params) {
+            if (mChoiceSet == null || mSrcGroupId <= 0) {
+                return null;
+            }
+            ContentResolver resolver = mContext.getContentResolver();
+            Cursor memberCursor = null;
+
+            memberCursor = resolver.query(Data.CONTENT_URI,
+                    new String[] {
+                        Data.CONTACT_ID
+                    },
+                    GROUP_QUERY_GROUP_MEMBER_SELECTION,
+                    new String[] {
+                            GroupMembership.CONTENT_ITEM_TYPE,
+                            String.valueOf(mDestGroupId)
+                    },
+                    null);
+
+            if (memberCursor != null && memberCursor.getCount() > 0) {
+                try {
+                    while (memberCursor.moveToNext()) {
+                        // Mark those contacts that already exist in the dest
+                        // group
+                        mGroupMemberList.add(String.valueOf(memberCursor.getLong(0)));
+                    }
+                } finally {
+                    if (memberCursor != null) {
+                        memberCursor.close();
+                    }
+                }
+            }
+
+            Set<String> keySet = mChoiceSet.keySet();
+            Iterator<String> it = keySet.iterator();
+
+            ContentProviderOperation.Builder builder;
+
+            mAddOrMoveOperation = new ArrayList<ContentProviderOperation>();
+            mDeleteOperation = new ArrayList<ContentProviderOperation>();
+            String id;
+            int count = 0;
+            int maxSize = mChoiceSet.keySet().size();
+            while (!mCanceled && it.hasNext()) {
+                id = it.next();
+                ++count;
+
+                if (mDestGroupId <= 0) {
+                    // Invalid group id, cancel the task
+                    return null;
+                }
+                if (mProgressDialog != null && mProgressDialog.isShowing()
+                        && count < maxSize - (maxSize) / 100) {
+                    mProgressDialog.incrementProgressBy(1);
+                }
+                if (mGroupMemberList.contains(id)) {
+                    // If the contact already exists in the group, need to
+                    // delete those
+                    // contacts that in the previous group
+                    builder = ContentProviderOperation.newDelete(Data.CONTENT_URI);
+                    builder.withSelection(GROUP_DELETE_MEMBER_SELECTION,
+                            new String[] {
+                            id,
+                            GroupMembership.CONTENT_ITEM_TYPE,
+                            String.valueOf(mSrcGroupId)
+                    });
+                    mDeleteOperation.add(builder.build());
+                    continue;
+                }
+                ContentValues values = new ContentValues();
+                values.put(GroupMembership.GROUP_ROW_ID, mDestGroupId);
+                builder = ContentProviderOperation.newUpdate(Data.CONTENT_URI);
+                builder.withSelection(GROUP_DELETE_MEMBER_SELECTION,
+                        new String[] {
+                                id,
+                                GroupMembership.CONTENT_ITEM_TYPE,
+                                String.valueOf(mSrcGroupId)
+                        });
+                builder.withValues(values);
+                mAddOrMoveOperation.add(builder.build());
+            }
+
+            if (mDeleteOperation.size() > 0) {
+                if (mDeleteOperation.size() > BUFFER_LENGTH) {
+                    addOrMoveApplyBatchByBuffer(mDeleteOperation, resolver);
+                } else {
+                    try {
+                        resolver.applyBatch(ContactsContract.AUTHORITY, mDeleteOperation);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    } catch (OperationApplicationException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            if (mAddOrMoveOperation.size() > BUFFER_LENGTH) {
+                addOrMoveApplyBatchByBuffer(mAddOrMoveOperation, resolver);
+            } else {
+                try {
+                    resolver.applyBatch(ContactsContract.AUTHORITY, mAddOrMoveOperation);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                } catch (OperationApplicationException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object result) {
+            if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                mProgressDialog.dismiss();
+                finish();
+            }
+        }
+
+        private void addOrMoveApplyBatchByBuffer(ArrayList<ContentProviderOperation> list,
+                ContentResolver cr) {
+            final ArrayList<ContentProviderOperation> temp
+                = new ArrayList<ContentProviderOperation>(BUFFER_LENGTH);
+            int bufferSize = list.size() / BUFFER_LENGTH;
+            for (int index = 0; index <= bufferSize; index++) {
+                temp.clear();
+                if (index == bufferSize) {
+                    for (int i = index * BUFFER_LENGTH; i < list.size(); i++) {
+                        temp.add(list.get(i));
+                    }
+                } else {
+                    for (int i = index * BUFFER_LENGTH;
+                            i < index * BUFFER_LENGTH + BUFFER_LENGTH; i++) {
+                        temp.add(list.get(i));
+                    }
+                }
+                if (!temp.isEmpty()) {
+                    try {
+                        cr.applyBatch(ContactsContract.AUTHORITY, temp);
+                    } catch (Exception e) {
+                        Log.e(TAG, "apply batch by buffer error:" + e);
+                    }
+                }
+            }
+        }
+
+        private String getProgressDialogTitle() {
+            return getString(R.string.title_move_members);
+        }
+
+        private String getProgressDialogMessage() {
+            return getString(R.string.message_move_members);
         }
     }
 }

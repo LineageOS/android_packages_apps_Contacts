@@ -129,6 +129,8 @@
     <!-- Menu item that deletes the currently selected group [CHAR LIMIT=30] -->
     <string name="menu_deleteGroup">Delete</string>
 
+    <string name="menu_moveGroupMembers">Move group members</string>
+
     <!-- Menu item (in the action bar) that creates a new contact [CHAR LIMIT=30] -->
     <string name="menu_new_contact_action_bar">Add Contact</string>
 
@@ -303,6 +305,9 @@
     <!-- The title of "favorites" tab. [CHAR LIMIT=14] -->
     <string name="favorites_tab_label">Favorites</string>
 
+    <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
+    <string name="contacts_groups_label">Groups</string>
+
     <!-- Action string for calling back a number in the call log -->
     <string name="callBack">Call back</string>
 
@@ -361,6 +366,12 @@
 
     <!-- Title for the disambiguation dialog that requests the user choose an account for the new group to be created under [CHAR LIMIT=NONE] -->
     <string name="dialog_new_group_account">Create group under account</string>
+
+    <string name="title_move_members">Move members</string>
+    <string name="message_add_members">Add members...</string>
+    <string name="message_move_members">Move members...</string>
+    <string name="cancel_operation">Operation is canceled.</string>
+    <string name="message_can_not_move_members">Can not move members</string>
 
     <!-- Generic action string for starting an audio chat. Used by AccessibilityService to announce the purpose of the view. [CHAR LIMIT=NONE] -->
     <string name="audio_chat">Voice chat</string>
@@ -778,4 +789,5 @@
     <string name="delete_call_message">Deleting call logs ...</string>
     <string name="delete_call_alert">Sure to delete the call logs selected?</string>
     <string name="title_del_call">Delete</string>
+    <string name="title_add_members">Add members</string>
 </resources>

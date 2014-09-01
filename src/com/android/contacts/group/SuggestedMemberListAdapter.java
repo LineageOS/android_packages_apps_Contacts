@@ -119,6 +119,10 @@ public class SuggestedMemberListAdapter extends ArrayAdapter<SuggestedMember> {
         mExistingMemberContactIds.add(contactId);
     }
 
+    public boolean containsMember(long contactId) {
+        return mExistingMemberContactIds.contains(contactId);
+    }
+
     public void removeMember(long contactId) {
         if (mExistingMemberContactIds.contains(contactId)) {
             mExistingMemberContactIds.remove(contactId);

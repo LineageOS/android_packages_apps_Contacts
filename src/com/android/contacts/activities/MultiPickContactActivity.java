@@ -55,8 +55,9 @@ import android.os.RemoteException;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
-import android.provider.ContactsContract.InternalContactCounts;
+import android.provider.ContactsContract.ContactCounts;
 import android.provider.ContactsContract.CommonDataKinds.Email;
+import android.provider.ContactsContract.CommonDataKinds.GroupMembership;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.Contacts;
@@ -232,7 +233,6 @@ public class MultiPickContactActivity extends ListActivity implements
     public static final int GROUP_ACTION_MOVE_MEMBER = 1;
     public static final int GROUP_ACTION_NONE = -1;
 
-    private static final int DIALOG_DEL_CALL = 1;
     private ContactItemListAdapter mAdapter;
     private QueryHandler mQueryHandler;
     private Bundle mChoiceSet;
@@ -940,7 +940,7 @@ public class MultiPickContactActivity extends ListActivity implements
                 throw new IllegalArgumentException("getUriToQuery: Incorrect mode: " + mMode);
         }
         return uri.buildUpon()
-                .appendQueryParameter(InternalContactCounts.EXTRA_ADDRESS_BOOK_INDEX, "true")
+                .appendQueryParameter(ContactCounts.EXTRA_ADDRESS_BOOK_INDEX, "true")
                 .build();
     }
 
@@ -1237,6 +1237,8 @@ public class MultiPickContactActivity extends ListActivity implements
         String contact_id;
         String email;
         String anrs;
+        long nameRawContactId;
+        String photoUri;
     }
 
     private final class ContactItemListAdapter extends CursorAdapter implements SectionIndexer {
@@ -1398,7 +1400,7 @@ public class MultiPickContactActivity extends ListActivity implements
                     int slotId = SimContactsConstants.SUB_INVALID;
                     if (accountId != null) {
                         try {
-                            slotId = SubscriptionManager.getSlotId(Long.valueOf(accountId));
+                            slotId = SubscriptionManager.getSlotId(Integer.valueOf(accountId));
                         } catch (NumberFormatException e) {
                             // ignore and keep the default 'invalid'
                         }
@@ -1439,10 +1441,10 @@ public class MultiPickContactActivity extends ListActivity implements
             int[] counts = null;
             Bundle extras = cursor != null ? cursor.getExtras() : null;
             if (extras != null &&
-                    extras.containsKey(InternalContactCounts.EXTRA_ADDRESS_BOOK_INDEX_TITLES)) {
+                    extras.containsKey(ContactCounts.EXTRA_ADDRESS_BOOK_INDEX_TITLES)) {
                 sections = extras.getStringArray(
-                        InternalContactCounts.EXTRA_ADDRESS_BOOK_INDEX_TITLES);
-                counts = extras.getIntArray(InternalContactCounts.EXTRA_ADDRESS_BOOK_INDEX_COUNTS);
+                        ContactCounts.EXTRA_ADDRESS_BOOK_INDEX_TITLES);
+                counts = extras.getIntArray(ContactCounts.EXTRA_ADDRESS_BOOK_INDEX_COUNTS);
             } else {
                 sections = new String[0];
                 counts = new int[0];

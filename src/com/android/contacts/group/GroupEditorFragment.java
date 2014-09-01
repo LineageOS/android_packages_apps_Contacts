@@ -78,7 +78,9 @@ import com.android.contacts.group.SuggestedMemberListAdapter.SuggestedMember;
 import com.google.common.base.Objects;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class GroupEditorFragment extends Fragment implements SelectAccountDialogFragment.Listener {
     private static final String TAG = "GroupEditorFragment";
@@ -99,6 +101,8 @@ public class GroupEditorFragment extends Fragment implements SelectAccountDialog
     private static final String KEY_MEMBERS_TO_DISPLAY = "membersToDisplay";
 
     private static final String CURRENT_EDITOR_TAG = "currentEditorForAccount";
+
+    public static final int REQUEST_CODE_PICK_GROUP_MEM = 1001;
 
     public static interface Listener {
         /**
@@ -185,6 +189,7 @@ public class GroupEditorFragment extends Fragment implements SelectAccountDialog
 
     private TextView mGroupNameView;
     private AutoCompleteTextView mAutoCompleteTextView;
+    private ImageView mAddGroupMemberView;
 
     private String mAccountName;
     private String mAccountType;
@@ -407,6 +412,7 @@ public class GroupEditorFragment extends Fragment implements SelectAccountDialog
         mGroupNameView = (TextView) editorView.findViewById(R.id.group_name);
         mAutoCompleteTextView = (AutoCompleteTextView) editorView.findViewById(
                 R.id.add_member_field);
+        mAddGroupMemberView = (ImageView) editorView.findViewById(R.id.addGroupMember);
 
         mListView = (ListView) editorView.findViewById(android.R.id.list);
         mListView.setAdapter(mMemberListAdapter);
@@ -481,6 +487,47 @@ public class GroupEditorFragment extends Fragment implements SelectAccountDialog
             mRootView.addView(editorView);
         }
         mStatus = Status.EDITING;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        if (requestCode == REQUEST_CODE_PICK_GROUP_MEM) {
+            Bundle mChoiceSet = data.getExtras();
+            Set<String> keys = mChoiceSet.keySet();
+            Iterator<String> iterator = keys.iterator();
+            String key;
+            String[] info;
+            String contactId;
+            String nameRawContactId;
+            String displayName;
+            String lookupKey;
+            String photoUri;
+
+            while (iterator.hasNext()) {
+                key = iterator.next();
+                info = mChoiceSet.getStringArray(key);
+
+                contactId = info[1];
+
+                if (!mAutoCompleteAdapter.containsMember(Long.valueOf(contactId))) {
+                    // Retrieve the contact data fields that will be sufficient
+                    // to update
+                    // the adapter with a new entry for this contact
+                    lookupKey = info[0];
+                    nameRawContactId = info[2];
+                    photoUri= info[3];
+                    displayName = info[4];
+
+                    Member member = new Member(Long.valueOf(nameRawContactId), lookupKey,
+                        Long.valueOf(contactId), displayName, photoUri);
+                    addMember(member);
+                }
+            }
+        }
     }
 
     public void load(String action, Uri groupUri, Bundle intentExtras) {
@@ -733,8 +780,13 @@ public class GroupEditorFragment extends Fragment implements SelectAccountDialog
     }
 
     private void addMember(Member member) {
-        // Update the display list
-        mListMembersToAdd.add(member);
+        // If the contact was just removed during this session, remove it from
+        // the list of members to remove
+        if (mListMembersToRemove.contains(member)) {
+            mListMembersToRemove.remove(member);
+        } else {
+            mListMembersToAdd.add(member);
+        }
         mListToDisplay.add(member);
         mMemberListAdapter.notifyDataSetChanged();
 

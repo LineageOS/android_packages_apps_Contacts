@@ -31,7 +31,11 @@ import android.database.Cursor;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+
+import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Groups;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -116,6 +120,7 @@ public class GroupDetailFragment extends Fragment implements OnScrollListener {
     private Uri mGroupUri;
     private long mGroupId;
     private String mGroupName;
+    private String mAccountNameString;
     private String mAccountTypeString;
     private String mDataSet;
     private boolean mIsReadOnly;
@@ -299,6 +304,7 @@ public class GroupDetailFragment extends Fragment implements OnScrollListener {
     private void bindGroupMetaData(Cursor cursor) {
         cursor.moveToPosition(-1);
         if (cursor.moveToNext()) {
+            mAccountNameString = cursor.getString(GroupMetaDataLoader.ACCOUNT_NAME);
             mAccountTypeString = cursor.getString(GroupMetaDataLoader.ACCOUNT_TYPE);
             mDataSet = cursor.getString(GroupMetaDataLoader.DATA_SET);
             mGroupId = cursor.getLong(GroupMetaDataLoader.GROUP_ID);
@@ -455,6 +461,9 @@ public class GroupDetailFragment extends Fragment implements OnScrollListener {
 
         final MenuItem deleteMenu = menu.findItem(R.id.menu_delete_group);
         deleteMenu.setVisible(mOptionsMenuGroupDeletable);
+
+        final MenuItem moveMenu = menu.findItem(R.id.menu_move_group_members);
+        moveMenu.setVisible(isVisible() && mAdapter != null && mAdapter.getCount() > 0);
     }
 
     @Override

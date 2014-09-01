@@ -51,6 +51,7 @@
     <string name="menu_splitAggregate" msgid="8368636463748691868">"拆分"</string>
     <string name="menu_editGroup" msgid="5062005185370983720">"修改"</string>
     <string name="menu_deleteGroup" msgid="3486380004411482874">"删除"</string>
+    <string name="menu_moveGroupMembers">"移除组成员"</string>
     <string name="menu_new_contact_action_bar" msgid="7263362129442119188">"添加联系人"</string>
     <string name="menu_new_group_action_bar" msgid="3520232877587377175">"添加群组"</string>
     <string name="splitConfirmation_title" msgid="633640935430370530">"要拆分联系人吗？"</string>
@@ -109,6 +110,7 @@
   </plurals>
     <string name="all_contacts_tab_label" msgid="6250372293594147703">"所有联系人"</string>
     <string name="favorites_tab_label" msgid="1524869648904016414">"收藏"</string>
+    <string name="contacts_groups_label">"群组"</string>
     <string name="callBack" msgid="5498224409038809224">"回电"</string>
     <string name="callAgain" msgid="3197312117049874778">"重拨"</string>
     <string name="returnCall" msgid="8171961914203617813">"回拨"</string>
@@ -254,5 +256,7 @@
     <string name="content_description_recent_call_type_outgoing" msgid="5156553338985232744">"外拨电话"</string>
     <string name="content_description_recent_call_type_missed" msgid="7371810920196048204">"未接电话"</string>
     <string name="content_description_recent_call" msgid="6204048362763219585">"近期通话。<xliff:g id="CALL_DETAILS">%s</xliff:g>。点按可回拨"</string>
+    <string name="menu_copyTo">"复制到"</string>
+    <string name="no_empty_email_in_usim">"卡上电子邮件空间已满，部分邮件信息将不会复制 "</string>
     <string name="message_from_you_prefix" msgid="7180706529908434482">"您：<xliff:g id="SMS_BODY">%s</xliff:g>"</string>
 </resources>

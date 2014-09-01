@@ -47,8 +47,11 @@ import android.net.Uri;
 import android.net.WebAddress;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Trace;
 import android.provider.CalendarContract;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Event;
@@ -79,6 +82,7 @@ import android.telephony.SubscriptionManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -96,6 +100,8 @@ import android.widget.Toolbar;
 import com.android.contacts.ContactSaveService;
 import com.android.contacts.ContactsActivity;
 import com.android.contacts.NfcHandler;
+import com.android.contacts.common.MoreContactUtils;
+import com.android.contacts.common.SimContactsConstants;
 import com.android.contacts.R;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.ClipboardUtils;
@@ -110,6 +116,7 @@ import com.android.contacts.common.model.AccountTypeManager;
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.ContactLoader;
 import com.android.contacts.common.model.RawContact;
+import com.android.contacts.common.model.RawContactDelta;
 import com.android.contacts.common.model.account.AccountType;
 import com.android.contacts.common.model.account.AccountWithDataSet;
 import com.android.contacts.common.model.dataitem.DataItem;
@@ -151,6 +158,7 @@ import com.android.contacts.widget.MultiShrinkScroller.MultiShrinkScrollerListen
 import com.android.contacts.widget.QuickContactImageView;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -437,7 +445,7 @@ public class QuickContactActivity extends ContactsActivity {
             } else if (!onlyOneOfMimeType) {
                 menu.add(ContextMenu.NONE, ContextMenuIds.SET_DEFAULT,
                         ContextMenu.NONE, getString(R.string.set_default));
-
+            }
             if (Phone.CONTENT_ITEM_TYPE.equals(info.getMimeType())) {
                 menu.add(ContextMenu.NONE, ContextMenuIds.EDIT_BEFORE_CALL,
                         ContextMenu.NONE, getString(R.string.edit_before_call));
@@ -2114,8 +2122,9 @@ public class QuickContactActivity extends ContactsActivity {
         final List<ResolveInfo> receivers = getPackageManager()
                 .queryBroadcastReceivers(createShortcutIntent, 0);
         return receivers != null && receivers.size() > 0;
-   
-     private void sendContactViaSMS() {
+    }
+
+    private void sendContactViaSMS() {
         // Get name string
         String name = mContactData.getDisplayName();
         String phone = null;
@@ -2253,19 +2262,21 @@ public class QuickContactActivity extends ContactsActivity {
             if (!TextUtils.isEmpty(accoutType)) {
                 if (SimContactsConstants.ACCOUNT_TYPE_SIM.equals(accoutType)) {
                     copyToPhoneMenu.setVisible(true);
-                    copyToPhoneMenu.setTitle(getString(R.string.menu_copyTo,
-                            getString(R.string.phoneLabelsGroup)));
+                    copyToPhoneMenu.setTitle(getString(R.string.menu_copyTo)
+                            + getString(R.string.phoneLabelsGroup));
                     if (TelephonyManager.getDefault().isMultiSimEnabled()) {
                         if (SimContactsConstants.SIM_NAME_1.equals(accoutName)
                                 && simIsReady(SimContactsConstants.SUB_2)) {
-                            copyToSim2Menu.setTitle(getString(R.string.menu_copyTo,
-                                    getString(R.string.copy_to_target_msim, 2)));
+                            copyToSim2Menu.setTitle(getString(R.string.menu_copyTo)
+                                    + MoreContactUtils.getMultiSimAliasesName(
+                                            this, SimContactsConstants.SUB_2));
                             copyToSim2Menu.setVisible(true);
                         }
                         if (SimContactsConstants.SIM_NAME_2.equals(accoutName)
                                 && simIsReady(SimContactsConstants.SUB_1)) {
-                            copyToSim1Menu.setTitle(getString(R.string.menu_copyTo,
-                                    getString(R.string.copy_to_target_msim, 1)));
+                            copyToSim1Menu.setTitle(getString(R.string.menu_copyTo)
+                                    + MoreContactUtils.getMultiSimAliasesName(
+                                                this, SimContactsConstants.SUB_1));
                             copyToSim1Menu.setVisible(true);
                         }
                     }
@@ -2274,19 +2285,21 @@ public class QuickContactActivity extends ContactsActivity {
                     boolean hasPhoneOrEmail = hasPhoneOrEmailDate(mContactData);
                     if (TelephonyManager.getDefault().isMultiSimEnabled()) {
                         if (hasPhoneOrEmail && simIsReady(SimContactsConstants.SUB_1)) {
-                            copyToSim1Menu.setTitle(getString(R.string.menu_copyTo,
-                                    getString(R.string.copy_to_target_msim, 1)));
+                            copyToSim1Menu.setTitle(getString(R.string.menu_copyTo)
+                                    + MoreContactUtils.getMultiSimAliasesName(
+                                            this, SimContactsConstants.SUB_1));
                             copyToSim1Menu.setVisible(true);
                         }
                         if (hasPhoneOrEmail && simIsReady(SimContactsConstants.SUB_2)) {
-                            copyToSim2Menu.setTitle(getString(R.string.menu_copyTo,
-                                    getString(R.string.copy_to_target_msim, 2)));
+                            copyToSim2Menu.setTitle(getString(R.string.menu_copyTo)
+                                    + MoreContactUtils.getMultiSimAliasesName(
+                                            this, SimContactsConstants.SUB_2));
                             copyToSim2Menu.setVisible(true);
                         }
                     } else {
                         if (hasPhoneOrEmail && simIsReady(SimContactsConstants.SUB_1)) {
-                            copyToSim1Menu.setTitle(getString(R.string.menu_copyTo,
-                                    getString(R.string.copy_to_target_sim)));
+                            copyToSim1Menu.setTitle(getString(R.string.menu_copyTo)
+                                    + SimContactsConstants.SIM_NAME);
                             copyToSim1Menu.setVisible(true);
                         }
                     }
@@ -2360,6 +2373,21 @@ public class QuickContactActivity extends ContactsActivity {
                     return false;
                 }
                 sendContactViaSMS();
+                return true;
+            }
+            case R.id.menu_copy_to_phone: {
+                if (mContactData == null) return false;
+                copyToPhone();
+                return true;
+            }
+            case R.id.menu_copy_to_sim1: {
+                if (mContactData == null) return false;
+                copyToCard(SimContactsConstants.SUB_1);
+                return true;
+            }
+            case R.id.menu_copy_to_sim2: {
+                if (mContactData == null) return false;
+                copyToCard(SimContactsConstants.SUB_2);
                 return true;
             }
             case R.id.menu_create_contact_shortcut:
@@ -2513,7 +2541,7 @@ public class QuickContactActivity extends ContactsActivity {
                     Cursor cr = null;
                     // call query first, otherwise the count queries will fail
                     try{
-                        long[] subId = SubscriptionManager.getSubId(sub);
+                        int[] subId = SubscriptionManager.getSubId(sub);
                         if (subId != null
                             && TelephonyManager.getDefault().isMultiSimEnabled()) {
                             cr = getContentResolver().query(
@@ -2691,5 +2719,4 @@ public class QuickContactActivity extends ContactsActivity {
             return true;
         return false;
     }
-
 }

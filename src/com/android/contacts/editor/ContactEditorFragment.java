@@ -718,7 +718,9 @@ public class ContactEditorFragment extends Fragment implements
         currentAccountTpye = newAccount.type;
 
         //Remove photo when change account to Sim.
-        if (oldAccountType.accountType.equals(PhoneAccountType.ACCOUNT_TYPE) ||
+        if (oldAccountType == null ||
+                oldAccountType.accountType == null ||
+                oldAccountType.accountType.equals(PhoneAccountType.ACCOUNT_TYPE) ||
                 oldAccountType.accountType.equals(GoogleAccountType.ACCOUNT_TYPE) ||
                 oldAccountType.accountType.equals(ExchangeAccountType.ACCOUNT_TYPE_AOSP) ||
                 oldAccountType.accountType.equals(ExchangeAccountType.ACCOUNT_TYPE_GOOGLE)&&

@@ -645,20 +645,9 @@ public class ContactEditorFragment extends Fragment implements
 
         // If there is no default account or the accounts have changed such that we need to
         // prompt the user again, then launch the account prompt.
-        if (mEditorUtils.shouldShowAccountChangedNotification()) {
-            Intent intent = new Intent(mContext, ContactEditorAccountsChangedActivity.class);
-            mStatus = Status.SUB_ACTIVITY;
-            startActivityForResult(intent, REQUEST_CODE_ACCOUNTS_CHANGED);
-        } else {
-            // Otherwise, there should be a default account. Then either create a local contact
-            // (if default account is null) or create a contact with the specified account.
-            AccountWithDataSet defaultAccount = mEditorUtils.getDefaultAccount();
-            if (defaultAccount == null) {
-                createContact(null);
-            } else {
-                createContact(defaultAccount);
-            }
-        }
+        Intent intent = new Intent(mContext, ContactEditorAccountsChangedActivity.class);
+        mStatus = Status.SUB_ACTIVITY;
+        startActivityForResult(intent, REQUEST_CODE_ACCOUNTS_CHANGED);
     }
 
     /**

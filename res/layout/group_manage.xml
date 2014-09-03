@@ -29,80 +29,34 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  -->
 <TabHost
-    android:id="@android:id/tabhost"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+        android:id="@android:id/tabhost"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
-        <FrameLayout
-            android:id="@android:id/tabcontent"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0" />
+    <TextView android:id="@+id/emptyText"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:layout_weight="1"
+         android:text="@string/noMember"
+         android:textSize="20sp"
+         android:textColor="?android:attr/textColorSecondary"
+         android:paddingLeft="10dip"
+         android:paddingRight="10dip"
+         android:paddingTop="10dip"
+         android:gravity="center"
+         android:lineSpacingMultiplier="0.92"/>
 
-        <TabWidget
-            android:id="@android:id/tabs"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
-
-        <TextView android:id="@+id/emptyText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/noMember"
-            android:textSize="20sp"
-            android:textColor="?android:attr/textColorSecondary"
-            android:paddingLeft="10dip"
-            android:paddingRight="10dip"
-            android:paddingTop="10dip"
-            android:gravity="center"
-            android:lineSpacingMultiplier="0.92"/>
-
-        <ListView
-            android:layout_weight="1"
-            android:id="@+id/member_list"
-            android:visibility="gone"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-
-        <LinearLayout android:id="@+id/tool_bar"
-            android:layout_weight="0"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="5dip"
-            android:paddingLeft="4dip"
-            android:paddingRight="4dip"
-            android:paddingBottom="1dip"
-            android:background="@android:drawable/bottom_bar">
-
-            <Button
-                android:id="@+id/btn_delete"
-                android:layout_width="0dip"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/button_delete" />
-
-            <Button
-                android:id="@+id/btn_move"
-                android:layout_width="0dip"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/button_moveto" />
-
-            <Button
-                android:id="@+id/btn_cancel"
-                android:layout_width="0dip"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/button_cancel" />
-        </LinearLayout>
+    <ListView
+        android:layout_weight="1"
+        android:id="@+id/member_list"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
     </LinearLayout>
 </TabHost>

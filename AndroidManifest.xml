@@ -455,8 +455,6 @@
         <activity android:name=".common.vcard.ExportVCardActivity"
             android:theme="@style/BackgroundOnlyTheme" />
 
-        <activity android:name=".group.local.GroupEditActivity" />
-
         <activity android:name=".group.local.MemberListActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.Light">

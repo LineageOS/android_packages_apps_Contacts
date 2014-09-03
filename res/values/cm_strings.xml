@@ -215,6 +215,7 @@
     <string name="menu_sync_to_baidu_cloud">Sync to Baidu Cloud Now</string>
 
     <string name="delete_locale_group_dialog_message">Confirm group deletion?</string>
+    <string name="edit_local_group_dialog_title">Rename group</string>
 
     <string name="too_many_contacts_add_to_group">Too many contacts, must be fewer than <xliff:g id="count">%d</xliff:g></string>
 

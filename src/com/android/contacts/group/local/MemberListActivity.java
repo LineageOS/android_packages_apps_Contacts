@@ -29,11 +29,14 @@
 
 package com.android.contacts.group.local;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.TabActivity;
+import android.app.ProgressDialog;
 import android.content.AsyncQueryHandler;
 import android.content.ContentProviderOperation;
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
@@ -48,8 +51,10 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Message;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.LocalGroup;
@@ -58,39 +63,43 @@ import android.provider.ContactsContract.Contacts.Photo;
 import android.provider.ContactsContract.Data;
 import android.provider.LocalGroups;
 import android.provider.LocalGroups.GroupColumns;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CursorAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.QuickContactBadge;
-import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.android.contacts.R;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
+import com.android.contacts.common.SimContactsConstants;
+import com.android.contacts.common.list.AccountFilterActivity;
+import com.android.contacts.common.list.ContactListFilter;
+import com.android.contacts.common.model.account.PhoneAccountType;
+import com.android.contacts.editor.MultiPickContactActivity;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
-public class MemberListActivity extends TabActivity implements OnItemClickListener,
-        OnClickListener, OnItemLongClickListener {
+public class MemberListActivity extends Activity implements AdapterView.OnItemClickListener {
 
-    private static final String TAB_TAG = "groups";
-
-    private TabHost mTabHost;
+    private static final int CODE_PICK_MEMBER = 1;
 
     private Uri uri;
 
@@ -119,19 +128,16 @@ public class MemberListActivity extends TabActivity implements OnItemClickListen
 
     private MemberListAdapter mAdapter;
 
-    private ListView listView;
+    private AddMembersTask mAddMembersTask;
+    private LocalGroups.Group mGroup;
+
+    private ActionMode mActionMode;
+
+    private ListView mListView;
 
     private TextView emptyText;
 
-    private Bundle removeSet;
-
-    private View toolsBar;
-
-    private Button deleteBtn;
-
-    private Button moveBtn;
-
-    private Button cancelBtn;
+    private Bundle mRemoveSet;
 
     private DeleteMembersThread mDeleteMembersTask;
 
@@ -143,7 +149,7 @@ public class MemberListActivity extends TabActivity implements OnItemClickListen
         @Override
         public void handleMessage(Message msg) {
             mDeleteMembersTask = null;
-            removeSet.clear();
+            mRemoveSet.clear();
             mAdapter.refresh();
             new LocalGroupCountTask(MemberListActivity.this).execute();
         }
@@ -165,7 +171,7 @@ public class MemberListActivity extends TabActivity implements OnItemClickListen
             this.mRemoveSet = removeSet;
         }
 
-        public int getStaus() {
+        public int getStatus() {
             return status;
         }
 
@@ -259,29 +265,103 @@ public class MemberListActivity extends TabActivity implements OnItemClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.group_manage);
 
-        toolsBar = findViewById(R.id.tool_bar);
-        deleteBtn = (Button) toolsBar.findViewById(R.id.btn_delete);
-        moveBtn = (Button) toolsBar.findViewById(R.id.btn_move);
-        cancelBtn = (Button) toolsBar.findViewById(R.id.btn_cancel);
-        deleteBtn.setOnClickListener(this);
-        moveBtn.setOnClickListener(this);
-        cancelBtn.setOnClickListener(this);
+        // actionbar setup
+        final ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
 
-        removeSet = new Bundle();
+        mRemoveSet = new Bundle();
         mQueryHandler = new QueryHandler(this);
         mAdapter = new MemberListAdapter(this);
         mContactPhotoManager = ContactPhotoManager.getInstance(this);
         emptyText = (TextView) findViewById(R.id.emptyText);
-        listView = (ListView) findViewById(R.id.member_list);
-        listView.setOnItemClickListener(this);
-        listView.setOnItemLongClickListener(this);
-        listView.setAdapter(mAdapter);
-        mTabHost = getTabHost();
+        mListView = (ListView) findViewById(R.id.member_list);
+        mListView.setAdapter(mAdapter);
+        mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        mListView.setOnItemClickListener(this);
+        mListView.setMultiChoiceModeListener(mMultiChoiceModeListener);
         uri = getIntent().getParcelableExtra("data");
-        addEditView();
         getContentResolver().registerContentObserver(
                 Uri.withAppendedPath(LocalGroup.CONTENT_FILTER_URI,
                         Uri.encode(uri.getLastPathSegment())), true, observer);
+        mGroup = LocalGroups.Group.restoreGroupById(getContentResolver(),
+                Long.parseLong(uri.getLastPathSegment()));
+        actionBar.setSubtitle(mGroup.getTitle());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.member_list_options, menu);
+        menu.add(0, 0, 0, R.string.menu_option_delete);
+        menu.add(0, 1, 0, R.string.edit_local_group_dialog_title);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            case R.id.add:
+                pickMembers();
+                break;
+            case 0:
+                new AlertDialog.Builder(this)
+                        .setMessage(R.string.delete_locale_group_dialog_message)
+                        .setTitle(R.string.delete_group_dialog_title)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // TODO Auto-generated method stub
+                                if (mGroup.delete(getContentResolver())) {
+                                    finish();
+                                }
+                            }
+                        }).setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // TODO Auto-generated method stub
+                        // Don't need any operation
+                    }
+                }).show();
+                break;
+            case 1:
+                final EditText editText = new EditText(this);
+                editText.setHint(R.string.group_edit_field_hint_text);
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.edit_local_group_dialog_title)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setView(editText)
+                        .setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (!TextUtils.isEmpty(editText.getText())) {
+                                    if (checkGroupTitleExist(editText.getText().toString())) {
+                                        Toast.makeText(getApplicationContext(), R.string.error_group_exist,
+                                                Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        mGroup.setTitle(editText.getText().toString());
+                                        if (mGroup.update(getContentResolver())) {
+                                            getActionBar().setSubtitle(mGroup.getTitle());
+                                        }
+                                    }
+                                }
+                            }
+                        }).setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // TODO Auto-generated method stub
+                        // Don't need any operation
+                    }
+                }).show();
+        }
+        return false;
     }
 
     private ContentObserver observer = new ContentObserver(new Handler()) {
@@ -290,6 +370,26 @@ public class MemberListActivity extends TabActivity implements OnItemClickListen
             mAdapter.refresh();
         }
     };
+
+    private boolean checkGroupTitleExist(String name) {
+        Cursor c = null;
+        try {
+            c = getApplicationContext().getContentResolver().query(
+                    LocalGroups.CONTENT_URI, null, LocalGroups.GroupColumns.TITLE + "=?",
+                    new String[] {
+                            name
+                    }, null);
+            if (c != null) {
+                return c.getCount() > 0;
+            } else {
+                return false;
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+        }
+    }
 
     @Override
     protected void onPause() {
@@ -304,35 +404,67 @@ public class MemberListActivity extends TabActivity implements OnItemClickListen
         getContentResolver().unregisterContentObserver(observer);
     }
 
-    @Override
-    public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-        selectAll();
-        return true;
-    }
-
     private void updateDisplay(boolean isEmpty) {
         if (isEmpty) {
-            listView.setVisibility(View.GONE);
+            mListView.setVisibility(View.GONE);
             emptyText.setVisibility(View.VISIBLE);
         } else {
-            listView.setVisibility(View.VISIBLE);
+            mListView.setVisibility(View.VISIBLE);
             emptyText.setVisibility(View.GONE);
         }
     }
 
-    private void selectAll() {
-        Cursor cursor = mAdapter.getCursor();
-        if (cursor == null) {
-            return;
+    private AbsListView.MultiChoiceModeListener mMultiChoiceModeListener
+            = new AbsListView.MultiChoiceModeListener() {
+
+        @Override
+        public void onItemCheckedStateChanged(ActionMode mode, int position,
+                                              long id, boolean checked) {
+            View v = mListView.getChildAt(position);
+            String contactId = (String) v.getTag();
+            CheckBox checkBox = (CheckBox) v.findViewById(R.id.pick_contact_check);
+            if (mRemoveSet.containsKey(contactId)) {
+                mRemoveSet.remove(contactId);
+            } else {
+                mRemoveSet.putString(contactId, contactId);
+            }
+            setCheckStatus(contactId, checkBox);
         }
 
-        cursor.moveToPosition(-1);
-        while (cursor.moveToNext()) {
-            String contactId = String.valueOf(cursor.getLong(SUMMARY_RAW_CONTACTS_ID_INDEX));
-            removeSet.putString(contactId, contactId);
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            mode.getMenuInflater().inflate(R.menu.member_list_options_cab, menu);
+            mActionMode = mode;
+            return true;
         }
-        mAdapter.refresh();
-    }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.move:
+                    chooseGroup();
+                    return true;
+                case R.id.remove:
+                    removeContactsFromGroup();
+                    mAdapter.refresh();
+                    return true;
+            }
+            return false;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+            mListView.clearChoices();
+            mRemoveSet.clear();
+            mAdapter.notifyDataSetChanged();
+            mActionMode = null;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            return false;
+        }
+    };
 
     @Override
     protected void onResume() {
@@ -341,13 +473,17 @@ public class MemberListActivity extends TabActivity implements OnItemClickListen
         startQuery();
     }
 
-    private void addEditView() {
-        Intent intent = new Intent(this, GroupEditActivity.class);
-        intent.setData(uri);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK)
+            switch (requestCode) {
+                case CODE_PICK_MEMBER:
+                    Bundle result = data.getExtras().getBundle("result");
 
-        mTabHost.addTab(mTabHost.newTabSpec(TAB_TAG)
-                .setIndicator(TAB_TAG, getResources().getDrawable(R.drawable.ic_launcher_contacts))
-                .setContent(intent));
+                    // define member object mAddMembersTask to use later.
+                    mAddMembersTask = new AddMembersTask(result);
+                    mAddMembersTask.execute();
+            }
     }
 
     private void startQuery() {
@@ -423,18 +559,18 @@ public class MemberListActivity extends TabActivity implements OnItemClickListen
              * job if removeSet is empty.
              */
             Cursor cursor = getCursor();
-            if (!removeSet.isEmpty() && cursor != null && !cursor.isClosed()) {
+            if (!mRemoveSet.isEmpty() && cursor != null && !cursor.isClosed()) {
                 cursor.moveToPosition(-1);
                 Bundle newRemoveSet = new Bundle();
                 while (cursor.moveToNext()) {
                     String contactId = String.valueOf(
                             cursor.getLong(SUMMARY_RAW_CONTACTS_ID_INDEX));
-                    if (removeSet.containsKey(contactId)) {
+                    if (mRemoveSet.containsKey(contactId)) {
                         newRemoveSet.putString(contactId, contactId);
                     }
                 }
-                if (newRemoveSet.size() != removeSet.size()) {
-                    removeSet = newRemoveSet;
+                if (newRemoveSet.size() != mRemoveSet.size()) {
+                    mRemoveSet = newRemoveSet;
                 }
             }
             updateToolsBar();
@@ -517,52 +653,38 @@ public class MemberListActivity extends TabActivity implements OnItemClickListen
     }
 
     @Override
-    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-        String contactId = (String) arg1.getTag();
-        CheckBox checkBox = (CheckBox) arg1.findViewById(R.id.pick_contact_check);
-        if (removeSet.containsKey(contactId)) {
-            removeSet.remove(contactId);
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+        if (!mListView.isItemChecked(position)) {
+            mListView.setItemChecked(position, true);
         } else {
-            removeSet.putString(contactId, contactId);
+            mListView.setItemChecked(position, false);
         }
-        setCheckStatus(contactId, checkBox);
-        updateToolsBar();
+    }
+
+    private void pickMembers() {
+        Intent intent = new Intent(MultiPickContactActivity.ACTION_MULTI_PICK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.putExtra(MultiPickContactActivity.IS_CONTACT,true);
+        intent.setClass(this, MultiPickContactActivity.class);
+        ContactListFilter filter = new ContactListFilter(ContactListFilter.FILTER_TYPE_ACCOUNT,
+                PhoneAccountType.ACCOUNT_TYPE, SimContactsConstants.PHONE_NAME, null, null);
+        intent.putExtra(AccountFilterActivity.KEY_EXTRA_CONTACT_LIST_FILTER, filter);
+        startActivityForResult(intent, CODE_PICK_MEMBER);
     }
 
     private void updateToolsBar() {
         if (mDeleteMembersTask != null
-                && mDeleteMembersTask.getStaus() == DeleteMembersThread.TASK_RUNNING) {
-            if (toolsBar.getVisibility() != View.GONE) {
-                toolsBar.setVisibility(View.GONE);
-            }
+                && mDeleteMembersTask.getStatus() == DeleteMembersThread.TASK_RUNNING) {
             return;
         }
 
-        if (removeSet.isEmpty() && toolsBar.getVisibility() == View.VISIBLE) {
-            toolsBar.setVisibility(View.GONE);
-            toolsBar.startAnimation(AnimationUtils.loadAnimation(this, R.anim.tools_bar_disappear));
-        } else if (!removeSet.isEmpty() && toolsBar.getVisibility() == View.GONE) {
-            toolsBar.setVisibility(View.VISIBLE);
-            toolsBar.startAnimation(AnimationUtils.loadAnimation(this, R.anim.tools_bar_appear));
+        if (mRemoveSet.isEmpty() && mActionMode != null) {
+            mActionMode.finish();
         }
     }
 
     private void setCheckStatus(String contactId, CheckBox checkBox) {
-        checkBox.setChecked(removeSet.containsKey(contactId));
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v == cancelBtn) {
-            removeSet.clear();
-            mAdapter.refresh();
-        } else if (v == deleteBtn) {
-            removeContactsFromGroup();
-            mAdapter.refresh();
-        } else if (v == moveBtn) {
-            chooseGroup();
-        }
-
+        checkBox.setChecked(mRemoveSet.containsKey(contactId));
     }
 
     private void chooseGroup() {
@@ -601,8 +723,8 @@ public class MemberListActivity extends TabActivity implements OnItemClickListen
     }
 
     private void moveContactstoGroup(int groupId) {
-        if (removeSet != null && removeSet.size() > 0) {
-            Bundle bundleData = (Bundle) removeSet.clone();
+        if (mRemoveSet != null && mRemoveSet.size() > 0) {
+            Bundle bundleData = (Bundle) mRemoveSet.clone();
             if (mDeleteMembersTask != null) {
                 mDeleteMembersTask.setStatus(DeleteMembersThread.TASK_CANCEL);
                 mDeleteMembersTask = null;
@@ -615,8 +737,8 @@ public class MemberListActivity extends TabActivity implements OnItemClickListen
     }
 
     private void removeContactsFromGroup() {
-        if (removeSet != null && removeSet.size() > 0) {
-            Bundle bundleData = (Bundle) removeSet.clone();
+        if (mRemoveSet != null && mRemoveSet.size() > 0) {
+            Bundle bundleData = (Bundle) mRemoveSet.clone();
             if (mDeleteMembersTask != null) {
                 mDeleteMembersTask.setStatus(DeleteMembersThread.TASK_CANCEL);
                 mDeleteMembersTask = null;
@@ -651,4 +773,189 @@ public class MemberListActivity extends TabActivity implements OnItemClickListen
         return new DefaultImageRequest(displayName, lookupKey);
     }
 
+
+    class AddMembersTask extends AsyncTask<Object, Object, Object> {
+        private ProgressDialog mProgressDialog;
+        private static final int MSG_CANCEL = 1;
+        private boolean mIsAddMembersTaskCanceled;
+
+        private Handler alertHandler = new Handler() {
+            @Override
+            public void dispatchMessage(Message msg) {
+                if (msg.what == MSG_CANCEL) {
+                    Toast.makeText(MemberListActivity.this, R.string.add_member_task_canceled,
+                            Toast.LENGTH_LONG).show();
+                } else if (msg.what == 0) {
+                    Toast.makeText(MemberListActivity.this, R.string.toast_not_add,
+                            Toast.LENGTH_LONG)
+                            .show();
+                }
+            }
+        };
+
+        private Bundle result;
+
+        private int size;
+
+        AddMembersTask(Bundle result) {
+            size = result.size();
+            this.result = result;
+            HandlerThread thread = new HandlerThread("DownloadTask");
+            thread.start();
+        }
+
+        protected void onPostExecute(Object result) {
+            if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                mProgressDialog.dismiss();
+            }
+            new LocalGroupCountTask(MemberListActivity.this).execute();
+        }
+
+        @Override
+        protected void onPreExecute() {
+            mIsAddMembersTaskCanceled = false;
+            mProgressDialog = new ProgressDialog(MemberListActivity.this);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            mProgressDialog.setProgress(0);
+            mProgressDialog.setMax(size);
+            mProgressDialog.show();
+            mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                public void onCancel(DialogInterface dialog) {
+
+                    // if dialog is canceled, cancel the task also.
+                    mIsAddMembersTaskCanceled = true;
+                }
+            });
+        }
+
+        @Override
+        protected Bundle doInBackground(Object... params) {
+            process();
+            return null;
+        }
+
+        public void process() {
+            boolean hasInvalide = false;
+            int progressIncrement = 0;
+            ContentValues values = new ContentValues();
+            // add Non-null protection of group for monkey test
+            if (null != mGroup) {
+                values.put(LocalGroup.DATA1, mGroup.getId());
+            }
+
+            Set<String> keySet = result.keySet();
+            Iterator<String> it = keySet.iterator();
+
+            // add a ContentProviderOperation update list.
+            final ArrayList<ContentProviderOperation> updateList =
+                    new ArrayList<ContentProviderOperation>();
+            ContentProviderOperation.Builder builder = null;
+            mIsAddMembersTaskCanceled = false;
+            while (it.hasNext()) {
+                if (mIsAddMembersTaskCanceled) {
+                    alertHandler.sendEmptyMessage(MSG_CANCEL);
+                    break;
+                }
+                if (progressIncrement++ % 2 == 0) {
+                    if (mProgressDialog != null) {
+                        mProgressDialog.incrementProgressBy(2);
+                    } else if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                        mProgressDialog.dismiss();
+                        mProgressDialog = null;
+                    }
+                }
+                String id = it.next();
+                Cursor c = null;
+                try {
+                    c = getContentResolver().query(ContactsContract.RawContacts.CONTENT_URI, new String[] {
+                            ContactsContract.RawContacts._ID, ContactsContract.RawContacts.ACCOUNT_TYPE
+                    }, ContactsContract.RawContacts.CONTACT_ID + "=?", new String[] {
+                            id
+                    }, null);
+                    if (c.moveToNext()) {
+                        String rawId = String.valueOf(c.getLong(0));
+
+                        if (!PhoneAccountType.ACCOUNT_TYPE.equals(c.getString(1))) {
+                            hasInvalide = true;
+                            continue;
+                        }
+
+                        builder = ContentProviderOperation.newDelete(Data.CONTENT_URI);
+                        builder.withSelection(Data.RAW_CONTACT_ID + "=? and " + Data.MIMETYPE
+                                + "=?", new String[] {
+                                rawId, LocalGroup.CONTENT_ITEM_TYPE
+                        });
+
+                        // add the delete operation to the update list.
+                        updateList.add(builder.build());
+
+                        builder = ContentProviderOperation.newInsert(Data.CONTENT_URI);
+                        // add Non-null protection of group for monkey test
+                        if (null != mGroup) {
+                            builder.withValue(LocalGroup.DATA1, mGroup.getId());
+                        }
+                        builder.withValue(Data.RAW_CONTACT_ID, rawId);
+                        builder.withValue(Data.MIMETYPE, LocalGroup.CONTENT_ITEM_TYPE);
+
+                        // add the insert operation to the update list.
+                        updateList.add(builder.build());
+                    }
+                } finally {
+                    if (c != null) {
+                        c.close();
+                    }
+                }
+            }
+
+            // if task is canceled ,still update the database with the data in
+            // updateList.
+
+            // apply batch to execute the delete and insert operation.
+            if (updateList.size() > 0) {
+                addMembersApplyBatchByBuffer(updateList, getContentResolver());
+            }
+            if (hasInvalide) {
+                alertHandler.sendEmptyMessage(0);
+            }
+        }
+
+        /**
+         * the max length of applyBatch is 500
+         */
+        private static final int BUFFER_LENGTH = 499;
+
+
+        private void addMembersApplyBatchByBuffer(ArrayList<ContentProviderOperation> list,
+                                                  ContentResolver cr) {
+            final ArrayList<ContentProviderOperation> temp =
+                    new ArrayList<ContentProviderOperation>(BUFFER_LENGTH);
+            int bufferSize = list.size() / BUFFER_LENGTH;
+            for (int index = 0; index <= bufferSize; index++) {
+                temp.clear();
+                if (index == bufferSize) {
+                    for (int i = index * BUFFER_LENGTH; i < list.size(); i++) {
+                        temp.add(list.get(i));
+                    }
+                } else {
+                    for (int i = index * BUFFER_LENGTH; i < index * BUFFER_LENGTH + BUFFER_LENGTH;
+                         i++) {
+                        temp.add(list.get(i));
+                    }
+                }
+                if (!temp.isEmpty()) {
+                    try {
+                        cr.applyBatch(ContactsContract.AUTHORITY, temp);
+                        if (mProgressDialog != null) {
+                            mProgressDialog.incrementProgressBy(temp.size() / 4);
+                        } else if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                            mProgressDialog.dismiss();
+                            mProgressDialog = null;
+                        }
+                    } catch (Exception e) {
+                        Log.e(MemberListActivity.class.getSimpleName(), "apply batch by buffer error:" + e);
+                    }
+                }
+            }
+        }
+    }
 }

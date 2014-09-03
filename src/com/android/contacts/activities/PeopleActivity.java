@@ -1739,8 +1739,8 @@ public class PeopleActivity extends ContactsActivity
             .setTitle(isLocalGroupsShown ? R.string.title_switch_group_remote
                 : R.string.title_switch_group_local);
         switchGroupsMenu
-            .setIcon(isLocalGroupsShown ? R.drawable.ic_remote_group_holo_dark
-                : R.drawable.ic_location_group_holo_dark);
+            .setIcon(isLocalGroupsShown ? R.drawable.ic_remote_group_holo_light
+                : R.drawable.ic_location_group_holo_light);
     }
 
 

@@ -27,6 +27,11 @@
         android:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/menu_switch_group"
+        android:icon="@drawable/ic_add_group_holo_dark"
+        android:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/menu_add_group"
         android:icon="@drawable/ic_add_person_dk"
         android:title="@string/menu_new_group_action_bar"

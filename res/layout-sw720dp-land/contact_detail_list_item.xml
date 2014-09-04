@@ -130,5 +130,34 @@
                 android:scaleType="center"
                 android:duplicateParentState="false" />
         </FrameLayout>
+
+        <View
+            android:id="@+id/vertical_divider_1"
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/detail_vertical_divider_vertical_margin"
+            android:layout_marginBottom="@dimen/detail_vertical_divider_vertical_margin"
+            android:background="?android:attr/dividerVertical" />
+
+        <FrameLayout
+            android:id="@+id/third_action_view_container"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/detail_item_icon_margin"
+            android:paddingRight="@dimen/detail_item_icon_margin"
+            android:paddingStart="@dimen/detail_item_icon_margin"
+            android:paddingEnd="@dimen/detail_item_icon_margin"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:nextFocusLeft="@id/secondary_action_view_container">
+            <ImageView
+                android:id="@+id/third_action_button"
+                android:layout_width="32dip"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:scaleType="center"
+                android:duplicateParentState="false" />
+        </FrameLayout>
     </com.android.contacts.detail.ActionsViewContainer>
 </FrameLayout>

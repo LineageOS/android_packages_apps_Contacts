@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1b2928_84e84b7e",
+        "filename": "res/values/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2014-09-05T23:06:10Z",
+      "side": 1,
+      "message": "Delete contacts",
+      "revId": "fc1a8b5b2690f64ac0da3b8987b017a8da7024a6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1b2928_64ed2f8b",
+        "filename": "res/values/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2014-09-05T23:06:10Z",
+      "side": 1,
+      "message": "Missing quotes in the beginning, or remove the trailing quotes",
+      "revId": "fc1a8b5b2690f64ac0da3b8987b017a8da7024a6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1b2928_a4ff4733",
+        "filename": "res/values/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2014-09-05T23:06:10Z",
+      "side": 1,
+      "message": "Sync to Baidu Cloud now",
+      "revId": "fc1a8b5b2690f64ac0da3b8987b017a8da7024a6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1b2928_c402433e",
+        "filename": "res/values/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2014-09-05T23:06:10Z",
+      "side": 1,
+      "message": "tab",
+      "revId": "fc1a8b5b2690f64ac0da3b8987b017a8da7024a6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

@@ -576,7 +576,9 @@ public class MultiPickContactActivity extends ListActivity implements OnTouchLis
                 return new AlertDialog.Builder(this)
                         .setTitle(R.string.deleteConfirmation_title)
                         .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setMessage(R.string.ContactMultiDeleteConfirmation)
+                        .setMessage(getResources().getQuantityString(
+                                R.plurals.ContactMultiDeleteConfirmation,
+                                mChoiceSet.size(), mChoiceSet.size()))
                         .setNegativeButton(android.R.string.cancel, null)
                         .setPositiveButton(android.R.string.ok,
                                 new DeleteClickListener()).create();
@@ -592,7 +594,9 @@ public class MultiPickContactActivity extends ListActivity implements OnTouchLis
                 return new AlertDialog.Builder(this)
                         .setTitle(R.string.importConfirmation_title)
                         .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setMessage(R.string.ContactMultiImportConfirmation)
+                        .setMessage(getResources().getQuantityString(
+                                R.plurals.ContactMultiImportConfirmation,
+                                mChoiceSet.size(), mChoiceSet.size()))
                         .setNegativeButton(android.R.string.cancel, null)
                         .setPositiveButton(android.R.string.ok,
                                 new DeleteClickListener()).create();
@@ -768,7 +772,7 @@ public class MultiPickContactActivity extends ListActivity implements OnTouchLis
             mProgressDialog.setMessage(message);
             mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             mProgressDialog.setButton(DialogInterface.BUTTON_NEGATIVE,
-                    getString(R.string.btn_cancel), (OnClickListener) thread);
+                    getString(android.R.string.cancel), (OnClickListener) thread);
             mProgressDialog.setOnCancelListener((OnCancelListener) thread);
             mProgressDialog.setOnKeyListener(keyListener);
             mProgressDialog.setProgress(0);
@@ -1575,10 +1579,11 @@ public class MultiPickContactActivity extends ListActivity implements OnTouchLis
             mCanceled = true;
             // Give a toast show to tell user import termination.
             if (mActualCount < mTotalCount) {
-                Toast.makeText(mContext, R.string.import_stop, Toast.LENGTH_SHORT).show();
+                String text = getResources().getQuantityString(R.plurals.import_stop,
+                        mActualCount, mActualCount);
+                Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(mContext, R.string.import_finish, Toast.LENGTH_SHORT)
-                        .show();
+                Toast.makeText(mContext, R.string.import_finish, Toast.LENGTH_SHORT).show();
             }
         }
 

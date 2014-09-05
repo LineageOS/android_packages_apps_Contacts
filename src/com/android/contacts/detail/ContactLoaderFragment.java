@@ -366,19 +366,19 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
         if (!TextUtils.isEmpty(accoutType)) {
             if (SimContactsConstants.ACCOUNT_TYPE_SIM.equals(accoutType)) {
                 copyToPhoneMenu.setVisible(true);
-                copyToPhoneMenu.setTitle(getString(R.string.menu_copyTo)
-                        + getString(R.string.phoneLabelsGroup));
+                copyToPhoneMenu.setTitle(getString(R.string.menu_copyTo,
+                        getString(R.string.phoneLabelsGroup)));
                 if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
                     if (SimContactsConstants.SIM_NAME_1.equals(accoutName)
                             && hasEnabledIccCard(SimContactsConstants.SUB_2)) {
-                        copyToSim2Menu.setTitle(getString(R.string.menu_copyTo) + getString(
-                                R.string.account_sim, SimContactsConstants.SIM_NAME_2));
+                        copyToSim2Menu.setTitle(getString(R.string.menu_copyTo,
+                                getString(R.string.copy_to_target_msim, 2)));
                         copyToSim2Menu.setVisible(true);
                     }
                     if (SimContactsConstants.SIM_NAME_2.equals(accoutName)
                             && hasEnabledIccCard(SimContactsConstants.SUB_1)) {
-                        copyToSim1Menu.setTitle(getString(R.string.menu_copyTo) + getString(
-                                R.string.account_sim, SimContactsConstants.SIM_NAME_1));
+                        copyToSim1Menu.setTitle(getString(R.string.menu_copyTo,
+                                getString(R.string.copy_to_target_msim, 1)));
                         copyToSim1Menu.setVisible(true);
                     }
                 }
@@ -387,21 +387,21 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
                 boolean hasPhoneOrEmail = hasPhoneOrEmailDate(mContactData);
                 if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
                     if (hasPhoneOrEmail && hasEnabledIccCard(SimContactsConstants.SUB_1)) {
-                        copyToSim1Menu.setTitle(getString(R.string.menu_copyTo) + getString(
-                                R.string.account_sim, SimContactsConstants.SIM_NAME_1));
+                        copyToSim1Menu.setTitle(getString(R.string.menu_copyTo,
+                                getString(R.string.copy_to_target_msim, 1)));
                         copyToSim1Menu.setVisible(true);
                     }
                     if (hasPhoneOrEmail && hasEnabledIccCard(SimContactsConstants.SUB_2)) {
-                        copyToSim2Menu.setTitle(getString(R.string.menu_copyTo) + getString(
-                                R.string.account_sim, SimContactsConstants.SIM_NAME_2));
+                        copyToSim2Menu.setTitle(getString(R.string.menu_copyTo,
+                                getString(R.string.copy_to_target_msim, 2)));
                         copyToSim2Menu.setVisible(true);
                     }
                 } else {
                     if (hasPhoneOrEmail && TelephonyManager.getDefault().hasIccCard()
                             && TelephonyManager.getDefault().getSimState()
                                 == TelephonyManager.SIM_STATE_READY) {
-                        copyToSim1Menu.setTitle(getString(R.string.menu_copyTo) + getString(
-                                R.string.account_sim, SimContactsConstants.SIM_NAME));
+                        copyToSim1Menu.setTitle(getString(R.string.menu_copyTo,
+                                getString(R.string.copy_to_target_sim)));
                         copyToSim1Menu.setVisible(true);
                     }
                 }

@@ -85,8 +85,8 @@ public class AddLocalGroupDialog extends AlertDialog implements OnClickListener,
             case DialogInterface.BUTTON_POSITIVE:
                 String name = groupSettings.getText().toString();
                 if (checkGroupTitleExist(name)) {
-                    Toast.makeText(getContext(), R.string.error_group_exist,
-                            Toast.LENGTH_SHORT).show();
+                    String text = getContext().getString(R.string.error_group_exist, name);
+                    Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
                 } else {
                     addGroupListener.onAddGroup(name);
                 }

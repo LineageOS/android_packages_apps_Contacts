@@ -310,10 +310,12 @@ public class MemberListActivity extends Activity implements AdapterView.OnItemCl
                 break;
             case 0:
                 new AlertDialog.Builder(this)
-                        .setMessage(R.string.delete_locale_group_dialog_message)
+                        .setMessage(getString(R.string.delete_local_group_dialog_message,
+                                    mGroup.getTitle()))
                         .setTitle(R.string.delete_group_dialog_title)
                         .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(android.R.string.ok,
+                                new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // TODO Auto-generated method stub
@@ -321,14 +323,9 @@ public class MemberListActivity extends Activity implements AdapterView.OnItemCl
                                     finish();
                                 }
                             }
-                        }).setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
-                        // Don't need any operation
-                    }
-                }).show();
+                        })
+                        .setNegativeButton(android.R.string.cancel, null)
+                        .show();
                 break;
             case 1:
                 final EditText editText = new EditText(this);
@@ -337,29 +334,27 @@ public class MemberListActivity extends Activity implements AdapterView.OnItemCl
                         .setTitle(R.string.edit_local_group_dialog_title)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setView(editText)
-                        .setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(android.R.string.ok,
+                                new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 if (!TextUtils.isEmpty(editText.getText())) {
-                                    if (checkGroupTitleExist(editText.getText().toString())) {
-                                        Toast.makeText(getApplicationContext(), R.string.error_group_exist,
+                                    String name = editText.getText().toString();
+                                    if (checkGroupTitleExist(name)) {
+                                        String text = getString(R.string.error_group_exist, name);
+                                        Toast.makeText(MemberListActivity.this, text,
                                                 Toast.LENGTH_SHORT).show();
                                     } else {
-                                        mGroup.setTitle(editText.getText().toString());
+                                        mGroup.setTitle(name);
                                         if (mGroup.update(getContentResolver())) {
                                             getActionBar().setSubtitle(mGroup.getTitle());
                                         }
                                     }
                                 }
                             }
-                        }).setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
-                        // Don't need any operation
-                    }
-                }).show();
+                        })
+                        .setNegativeButton(android.R.string.cancel, null)
+                        .show();
         }
         return false;
     }
@@ -776,16 +771,12 @@ public class MemberListActivity extends Activity implements AdapterView.OnItemCl
 
     class AddMembersTask extends AsyncTask<Object, Object, Object> {
         private ProgressDialog mProgressDialog;
-        private static final int MSG_CANCEL = 1;
         private boolean mIsAddMembersTaskCanceled;
 
         private Handler alertHandler = new Handler() {
             @Override
             public void dispatchMessage(Message msg) {
-                if (msg.what == MSG_CANCEL) {
-                    Toast.makeText(MemberListActivity.this, R.string.add_member_task_canceled,
-                            Toast.LENGTH_LONG).show();
-                } else if (msg.what == 0) {
+                if (msg.what == 0) {
                     Toast.makeText(MemberListActivity.this, R.string.toast_not_add,
                             Toast.LENGTH_LONG)
                             .show();
@@ -853,7 +844,6 @@ public class MemberListActivity extends Activity implements AdapterView.OnItemCl
             mIsAddMembersTaskCanceled = false;
             while (it.hasNext()) {
                 if (mIsAddMembersTaskCanceled) {
-                    alertHandler.sendEmptyMessage(MSG_CANCEL);
                     break;
                 }
                 if (progressIncrement++ % 2 == 0) {

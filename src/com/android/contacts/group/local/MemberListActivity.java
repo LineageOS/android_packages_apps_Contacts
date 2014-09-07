@@ -84,13 +84,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.android.contacts.R;
 
+import com.android.contacts.activities.MultiPickContactActivity;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.SimContactsConstants;
 import com.android.contacts.common.list.AccountFilterActivity;
 import com.android.contacts.common.list.ContactListFilter;
 import com.android.contacts.common.model.account.PhoneAccountType;
-import com.android.contacts.editor.MultiPickContactActivity;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;

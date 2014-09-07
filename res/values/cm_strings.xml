@@ -88,4 +88,21 @@
 
     <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
 
+    <plurals name="ContactMultiImportConfirmation">
+        <item quantity="one">%d contact will be imported.</item>
+        <item quantity="other">%d contacts will be imported.</item>
+    </plurals>
+    <plurals name="import_progress">
+        <item quantity="one">%d contact imported</item>
+        <item quantity="other">%d contacts imported</item>
+    </plurals>
+    <plurals name="contacts_selected">
+        <item quantity="one">%d contact selected</item>
+        <item quantity="other">%d contacts selected</item>
+    </plurals>
+    <!-- Multi Delete Contacts related strings -->
+    <plurals name="ContactMultiDeleteConfirmation">
+        <item quantity="one">%d contact will be deleted.</item>
+        <item quantity="other">%d contacts will be deleted.</item>
+    </plurals>
 </resources>

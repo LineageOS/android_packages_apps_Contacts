@@ -63,15 +63,17 @@ import com.android.contacts.GroupMemberLoader.GroupEditorQuery;
 import com.android.contacts.GroupMetaDataLoader;
 import com.android.contacts.R;
 import com.android.contacts.activities.GroupEditorActivity;
+import com.android.contacts.activities.MultiPickContactActivity;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.model.account.AccountType;
 import com.android.contacts.common.model.account.AccountWithDataSet;
 import com.android.contacts.common.editor.SelectAccountDialogFragment;
-import com.android.contacts.group.SuggestedMemberListAdapter.SuggestedMember;
 import com.android.contacts.common.model.AccountTypeManager;
 import com.android.contacts.common.util.AccountsListAdapter.AccountListFilter;
 import com.android.contacts.common.util.ViewUtil;
+import com.android.contacts.common.SimContactsConstants;
+import com.android.contacts.group.SuggestedMemberListAdapter.SuggestedMember;
 
 import com.google.common.base.Objects;
 
@@ -454,6 +456,23 @@ public class GroupEditorFragment extends Fragment implements SelectAccountDialog
             // Update the exempt list.  (mListToDisplay might have been restored from the saved
             // state.)
             mAutoCompleteAdapter.updateExistingMembersList(mListToDisplay);
+        }
+
+        if (mAddGroupMemberView != null) {
+            mAddGroupMemberView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(SimContactsConstants.ACTION_MULTI_PICK);
+                    intent.setType(Contacts.CONTENT_TYPE);
+                    intent.putExtra(SimContactsConstants.IS_CONTACT, true);
+                    intent.putExtra(SimContactsConstants.ACCOUNT_NAME, mAccountName);
+                    intent.putExtra(SimContactsConstants.ACCOUNT_TYPE, mAccountType);
+                    intent.putExtra(MultiPickContactActivity.EXTRA_GROUP_ACTION,
+                            MultiPickContactActivity.GROUP_ACTION_ADD_MEMBER);
+                    intent.putExtra(MultiPickContactActivity.EXTRA_GROUP_ID, mGroupId);
+                    startActivityForResult(intent, REQUEST_CODE_PICK_GROUP_MEM);
+                }
+            });
         }
 
         // If the group name is ready only, don't let the user focus on the field.

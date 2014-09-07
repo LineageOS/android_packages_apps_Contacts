@@ -50,13 +50,15 @@ import android.widget.Toast;
 import com.android.contacts.GroupMemberLoader;
 import com.android.contacts.GroupMetaDataLoader;
 import com.android.contacts.R;
+import com.android.contacts.activities.MultiPickContactActivity;
 import com.android.contacts.common.ContactPhotoManager;
-import com.android.contacts.interactions.GroupDeletionDialogFragment;
+import com.android.contacts.common.SimContactsConstants;
 import com.android.contacts.common.list.ContactTileAdapter;
 import com.android.contacts.common.list.ContactTileView;
-import com.android.contacts.list.GroupMemberTileAdapter;
 import com.android.contacts.common.model.AccountTypeManager;
 import com.android.contacts.common.model.account.AccountType;
+import com.android.contacts.interactions.GroupDeletionDialogFragment;
+import com.android.contacts.list.GroupMemberTileAdapter;
 
 /**
  * Displays the details of a group and shows a list of actions possible for the group.
@@ -465,6 +467,18 @@ public class GroupDetailFragment extends Fragment implements OnScrollListener {
             case R.id.menu_delete_group: {
                 GroupDeletionDialogFragment.show(getFragmentManager(), mGroupId, mGroupName,
                         mCloseActivityAfterDelete);
+                return true;
+            }
+            case R.id.menu_move_group_members: {
+                Intent intent = new Intent(SimContactsConstants.ACTION_MULTI_PICK);
+                intent.setType(Contacts.CONTENT_TYPE);
+                intent.putExtra(SimContactsConstants.IS_CONTACT, true);
+                intent.putExtra(MultiPickContactActivity.EXTRA_GROUP_ID, getGroupId());
+                intent.putExtra(SimContactsConstants.ACCOUNT_TYPE, mAccountTypeString);
+                intent.putExtra(SimContactsConstants.ACCOUNT_NAME, mAccountNameString);
+                intent.putExtra(MultiPickContactActivity.EXTRA_GROUP_ACTION,
+                        MultiPickContactActivity.GROUP_ACTION_MOVE_MEMBER);
+                startActivity(intent);
                 return true;
             }
         }

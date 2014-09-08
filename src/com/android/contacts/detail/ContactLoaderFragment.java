@@ -904,7 +904,11 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.putExtra("sms_body", name + phone + email + postal + organization + sipAddress);
         intent.setType("vnd.android-dir/mms-sms");
-        mContext.startActivity(intent);
+        try {
+            mContext.startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(mContext, R.string.share_error, Toast.LENGTH_SHORT).show();
+        }
     }
 
     //supply phone number and email which could stored in one ADN

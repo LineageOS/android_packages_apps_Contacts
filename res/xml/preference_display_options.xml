@@ -24,4 +24,11 @@
         android:key="displayOrder"
         android:title="@string/display_options_view_names_as"
         android:dialogTitle="@string/display_options_view_names_as" />
+
+    <com.android.contacts.preference.SimMemoryPreference
+        android:key="simMemory"
+        android:title="@string/memory_status_title"
+        android:summary="@string/calculating_status_now" />
+
+
 </PreferenceScreen>

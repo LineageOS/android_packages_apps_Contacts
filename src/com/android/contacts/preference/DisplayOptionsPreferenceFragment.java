@@ -24,7 +24,11 @@ import com.android.contacts.R;
 /**
  * This fragment shows the preferences for the first header.
  */
-public class DisplayOptionsPreferenceFragment extends PreferenceFragment {
+public class DisplayOptionsPreferenceFragment extends PreferenceFragment
+        implements SimMemoryPreference.SimMemoryLoadingFinishedCallback {
+
+    private static final String KEY_SIM_MEMORY = "simMemory";
+    private SimMemoryPreference mSimMemoryPreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,18 @@ public class DisplayOptionsPreferenceFragment extends PreferenceFragment {
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preference_display_options);
+        mSimMemoryPreference = (SimMemoryPreference) findPreference(KEY_SIM_MEMORY);
+        if (mSimMemoryPreference != null) {
+            mSimMemoryPreference.setCallback(this);
+            mSimMemoryPreference.prepare();
+        }
+    }
+
+    @Override
+    public void onLoadingFinished(boolean hasSimContacts) {
+        if (mSimMemoryPreference != null && !hasSimContacts) {
+            getPreferenceScreen().removePreference(mSimMemoryPreference);
+        }
     }
 }
 

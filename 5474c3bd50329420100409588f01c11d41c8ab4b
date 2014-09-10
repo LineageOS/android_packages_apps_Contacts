@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1b2928_a65bc753",
+        "filename": "src/com/android/contacts/preference/SimMemoryPreference.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-09-10T20:40:31Z",
+      "side": 1,
+      "message": "Could also deduce the number of used SIM slots here: There\u0027s AdnRecord.isEmpty().",
+      "revId": "5474c3bd50329420100409588f01c11d41c8ab4b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

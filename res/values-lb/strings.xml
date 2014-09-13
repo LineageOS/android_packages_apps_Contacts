@@ -18,10 +18,14 @@
   <string name="people">Leit</string>
   <string name="contactsList">Kontakter</string>
   <string name="shortcutContact">Kontakt</string>
+  <string name="shortcutDialContact">Direkten Telefon</string>
   <string name="shortcutMessageContact">Direkte Message</string>
   <string name="shortcutActivityTitle">Eng Kontaktofkierzung auswielen</string>
+  <string name="callShortcutActivityTitle">Eng Nummer wiele fir unzeruffen</string>
   <string name="contactPickerActivityTitle">E Kontakt auswielen</string>
+  <string name="starredList">Markéiert</string>
   <string name="frequentList">Frequent</string>
+  <string name="strequentList">Favoritten</string>
   <string name="viewContactTitle">Kontaktdetailer</string>
   <string name="viewContactDesription">Kontakt ukucken</string>
   <string name="editContactDescription">Kontakt änneren</string>
@@ -29,6 +33,8 @@
   <string name="editGroupDescription">Grupp änneren</string>
   <string name="insertGroupDescription">Grupp erstellen</string>
   <string name="contactDetailAbout">Iwwer</string>
+  <string name="contactDetailUpdates">Updates</string>
+  <string name="searchHint">Kontakter duerchsichen</string>
   <string name="menu_viewContact">Kontakt uweisen</string>
   <string name="menu_editContact">Änneren</string>
   <string name="menu_deleteContact">Läschen</string>
@@ -37,14 +43,48 @@
   <string name="menu_deleteGroup">Läschen</string>
   <string name="menu_new_contact_action_bar">Kontakt dobäisetzen</string>
   <string name="menu_new_group_action_bar">Grupp dobäisetzen</string>
+  <string name="showAllContactsJoinItem">All d\'Kontakter uweisen</string>
+  <string name="separatorJoinAggregateSuggestions">Proposéiert Kontakter</string>
   <string name="separatorJoinAggregateAll">All Kontakter</string>
   <string name="menu_set_ring_tone">Schelltoun setzen</string>
   <string name="deleteConfirmation">Dëse Kontakt gëtt geläscht.</string>
   <string name="invalidContactMessage">De Kontakt existéiert net.</string>
   <string name="pickerNewContactHeader">Neie Kontakt erstellen</string>
   <string name="pickerNewContactText">Neie Kontakt erstellen</string>
+  <string-array name="otherLabels">
+    <item>Organisatioun</item>
+    <item>Note</item>
+  </string-array>
+  <string name="photoPickerNotFoundText" product="tablet">Keng Biller sinn um Tablet disponibel.</string>
+  <string name="photoPickerNotFoundText" product="default">Keng Biller sinn um Telefon disponibel.</string>
   <string name="attach_photo_dialog_title">Kontaktfoto</string>
+  <string name="noContacts">Keng Kontakter.</string>
+  <string name="noGroups">Keng Gruppen.</string>
+  <string name="noAccounts">Fir Gruppen z\'erstellen brauchs du e Kont.</string>
+  <string name="addPeopleToGroup">Fir e puer dobäizesetzen, änner d\'Grupp.</string>
+  <string name="savingContact">Kontakt gëtt gespäichert\u2026</string>
+  <string name="contactSavedToast">Kontakt gespäichert.</string>
+  <string name="contactSavedErrorToast">Kontaktännerunge konnten net gespäichert ginn.</string>
+  <string name="groupSavedToast">Grupp gespäichert.</string>
+  <string name="groupSavedErrorToast">Gruppännerunge konnten net gespäichert ginn.</string>
+  <plurals name="listTotalPhoneContacts">
+    <item quantity="one">1 Kontakt mat Telefonsnummer</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> Kontakter mat Telefonsnummer</item>
+  </plurals>
+  <string name="listTotalPhoneContactsZero">Keng Kontakter mat Telefonsnummer</string>
+  <plurals name="listTotalAllContacts">
+    <item quantity="one">1 Kontakt</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> Kontakter</item>
+  </plurals>
+  <plurals name="listFoundAllContacts">
+    <item quantity="one">1 fonnt</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> fonnt</item>
+  </plurals>
   <string name="listFoundAllContactsZero">Keng Kontakter</string>
+  <plurals name="searchFoundContacts">
+    <item quantity="one">1 fonnt</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> fonnt</item>
+  </plurals>
   <string name="contactsAllLabel">All Kontakter</string>
   <string name="contactsGroupsLabel">Gruppen</string>
   <string name="callBack">Zréckuruffen</string>
@@ -71,5 +111,6 @@
   <string name="social_widget_loading">Gëtt gelueden\u2026</string>
   <string name="contacts_unavailable_create_contact">Neie Kontakt erstellen</string>
   <string name="set_default">Als Standard setzen</string>
+  <string name="cancel_confirmation_dialog_message">Deng Ännerungen zrécksetzen?</string>
   <string name="group_name_hint">Numm vun der Grupp</string>
 </resources>

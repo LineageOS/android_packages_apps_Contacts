@@ -49,8 +49,8 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="4dip"/>
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="4dip"/>
 
        <TextView android:id="@+id/label"
             android:layout_width="wrap_content"
@@ -128,7 +128,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="5dip"
         android:layout_marginBottom="5dip"
-        android:layout_marginLeft="11dip"
+        android:layout_marginStart="11dip"
     />
 
     <CheckBox
@@ -136,7 +136,7 @@
         android:id="@+id/pick_contact_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dip"
+        android:layout_marginEnd="10dip"
         android:layout_centerVertical="true"
         android:focusable="false"
         android:clickable="false">

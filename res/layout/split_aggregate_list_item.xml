@@ -73,7 +73,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:singleLine="true"
         android:ellipsize="marquee"
-        android:gravity="center_vertical|left"
+        android:gravity="center_vertical|start"
     />
 
 </RelativeLayout>

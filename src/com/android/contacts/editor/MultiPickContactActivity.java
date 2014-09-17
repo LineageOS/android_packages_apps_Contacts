@@ -544,7 +544,9 @@ public class MultiPickContactActivity extends ListActivity implements OnTouchLis
             return null;
         } else {
             mDone.setVisible(true);
-            return mChoiceSet.size() + " " + getString(R.string.contacts_selected);
+            String count = getResources().getQuantityString(
+                    R.plurals.contacts_selected, mChoiceSet.size());
+            return count;
         }
     }
 

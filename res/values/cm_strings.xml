@@ -150,7 +150,7 @@
     <string name="menu_memory_status">Memory status</string>
     <string name="memory_status_title">Memory status</string>
     <string name="memory_size">Total:</string>
-    <string name="memory_available">Available</string>
+    <string name="memory_available">Available:</string>
     <string name="memory_used">Used:</string>
     <string name="calculating_status_now">Calculating status\u2026</string>
 

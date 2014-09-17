@@ -78,8 +78,10 @@ public class LocalGroupCountTask extends AsyncTask<Object, Object, Object> {
             groups = mContext.getContentResolver().query(LocalGroups.CONTENT_URI, new String[] {
                     GroupColumns._ID
             }, null, null, null);
-            while (groups.moveToNext()) {
-                countMemebersById(updateList, groups.getLong(0));
+            if (groups != null) {
+                while (groups.moveToNext()) {
+                    countMemebersById(updateList, groups.getLong(0));
+                }
             }
         } finally {
             if (groups != null) {

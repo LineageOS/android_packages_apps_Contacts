@@ -27,7 +27,7 @@
     <string name="contactDeletedToast">Contact deleted</string>
 
     <!-- Toast displayed when saving a contact to sim card failed -->
-    <string name="contactSavedToSimCardError">The SIM contacts could not be loaded</string>
+    <string name="contactSavedToSimCardError">Could not save the selected contacts to the SIM card</string>
     <string name="airplane_mode_on">The SIM card can not be accessed while airplane mode is enabled</string>
     <string name="number_anr_too_long">The number is too long</string>
     <string name="email_address_too_long">The email address is too long</string>

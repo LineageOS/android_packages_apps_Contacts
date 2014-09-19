@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1b2928_1ec63867",
+        "filename": "src/com/android/contacts/editor/MultiPickContactActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-09-19T00:01:49Z",
+      "side": 1,
+      "message": "You need to add mChoiceSet.size() twice: the first time for determining the type of plural item used, the second time for the format.\n\n(Also no need for the intermediate variable, you can just do return getResources().getQuantityString([...])",
+      "revId": "0bc8989174525cf502ef2ad9d1179f894fb59340",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

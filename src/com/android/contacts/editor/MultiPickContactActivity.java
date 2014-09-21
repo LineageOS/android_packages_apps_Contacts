@@ -286,7 +286,7 @@ public class MultiPickContactActivity extends ListActivity implements OnTouchLis
      */
     public static final String EXT_NOT_SHOW_SIM_FLAG = "not_sim_show";
 
-    private int MAX_CONTACTS_NUM_TO_SELECT_ONCE = 500;
+    private int MAX_CONTACTS_NUM_TO_SELECT_ONCE = 1000;
 
     //registerReceiver to update content when airplane mode change.
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {

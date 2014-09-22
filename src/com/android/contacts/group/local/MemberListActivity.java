@@ -84,13 +84,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.android.contacts.R;
 
+import com.android.contacts.activities.MultiPickContactActivity;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.SimContactsConstants;
 import com.android.contacts.common.list.AccountFilterActivity;
 import com.android.contacts.common.list.ContactListFilter;
 import com.android.contacts.common.model.account.PhoneAccountType;
-import com.android.contacts.editor.MultiPickContactActivity;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -659,7 +659,7 @@ public class MemberListActivity extends Activity implements AdapterView.OnItemCl
     private void pickMembers() {
         Intent intent = new Intent(MultiPickContactActivity.ACTION_MULTI_PICK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        intent.putExtra(MultiPickContactActivity.IS_CONTACT,true);
+        intent.putExtra(MultiPickContactActivity.EXTRA_IS_CONTACT, true);
         intent.setClass(this, MultiPickContactActivity.class);
         ContactListFilter filter = new ContactListFilter(ContactListFilter.FILTER_TYPE_ACCOUNT,
                 PhoneAccountType.ACCOUNT_TYPE, SimContactsConstants.PHONE_NAME, null, null);

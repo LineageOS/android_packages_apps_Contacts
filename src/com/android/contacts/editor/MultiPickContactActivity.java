@@ -963,10 +963,13 @@ public class MultiPickContactActivity extends ListActivity implements
                 // Add a subscription judgement, if selection = -1 that means
                 // need query both cards.
                 String selection = null;
-                 int subscription = getIntent().getIntExtra(
-                    SimContactsConstants.SUB, -1);
-                if (SimContactsConstants.SUB_INVALID != subscription) {
-                    selection = Calls.PHONE_ACCOUNT_ID + "=" + subscription;
+                int slotId = getIntent().getIntExtra(
+                        SimContactsConstants.SUB, SimContactsConstants.SUB_INVALID);
+                if (SimContactsConstants.SUB_INVALID != slotId) {
+                    long[] subId = SubscriptionManager.getSubId(slotId);
+                    if (subId != null && subId.length >= 1) {
+                        selection = Calls.PHONE_ACCOUNT_ID + "=" + subId[0];
+                    }
                 }
                 return selection;
             default:
@@ -1319,7 +1322,7 @@ public class MultiPickContactActivity extends ListActivity implements
                 String callerName = cursor.getString(CALLER_NAME_COLUMN_INDEX);
                 int callerNumberType = cursor.getInt(CALLER_NUMBERTYPE_COLUMN_INDEX);
                 String callerNumberLabel = cursor.getString(CALLER_NUMBERLABEL_COLUMN_INDEX);
-                int subscription = cursor.getInt(PHONE_SUBSCRIPTION_COLUMN_INDEX);
+                String subscriptionId = cursor.getString(PHONE_SUBSCRIPTION_COLUMN_INDEX);
                 long date = cursor.getLong(DATE_COLUMN_INDEX);
                 long duration = cursor.getLong(DURATION_COLUMN_INDEX);
                 int type = cursor.getInt(CALL_TYPE_COLUMN_INDEX);
@@ -1389,8 +1392,12 @@ public class MultiPickContactActivity extends ListActivity implements
                 durationText.setText(DateUtils.formatElapsedTime(duration));
 
                 // set slot
+                int slotId = SimContactsConstants.SUB_INVALID;
+                if (subscriptionId != null && !subscriptionId.equals("E")) {
+                    slotId = SubscriptionManager.getSlotId(Long.valueOf(subscriptionId));
+                }
                 subSlotText.setText(MoreContactUtils.getMultiSimAliasesName(
-                        MultiPickContactActivity.this, subscription));
+                        MultiPickContactActivity.this, slotId));
             }
 
             CheckBox checkBox = (CheckBox) view.findViewById(R.id.pick_contact_check);

@@ -459,7 +459,7 @@ public class QuickContactActivity extends ContactsActivity {
             } else if (!onlyOneOfMimeType) {
                 menu.add(ContextMenu.NONE, ContextMenuIds.SET_DEFAULT,
                         ContextMenu.NONE, getString(R.string.set_default));
-
+            }
             if (Phone.CONTENT_ITEM_TYPE.equals(info.getMimeType())) {
                 menu.add(ContextMenu.NONE, ContextMenuIds.EDIT_BEFORE_CALL,
                         ContextMenu.NONE, getString(R.string.edit_before_call));
@@ -2218,7 +2218,7 @@ public class QuickContactActivity extends ContactsActivity {
         final List<ResolveInfo> receivers = getPackageManager()
                 .queryBroadcastReceivers(createShortcutIntent, 0);
         return receivers != null && receivers.size() > 0;
-   
+   } 
      private void sendContactViaSMS() {
         // Get name string
         String name = mContactData.getDisplayName();

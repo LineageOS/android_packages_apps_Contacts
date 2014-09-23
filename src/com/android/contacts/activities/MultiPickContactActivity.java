@@ -205,6 +205,9 @@ public class MultiPickContactActivity extends ListActivity implements
     public static final String EXTRA_SELECT_CALLLOG = "selectcalllog";
     public static final String EXTRA_NOT_SHOW_SIM_FLAG = "not_sim_show";
 
+    public static final String EXTRA_WANT_EXPORT = "want_export";
+    private boolean wantExport;
+
     private static final int DIALOG_DEL_CALL = 1;
 
     private ContactItemListAdapter mAdapter;
@@ -266,6 +269,7 @@ public class MultiPickContactActivity extends ListActivity implements
         Intent intent = getIntent();
         String action = intent.getAction();
         boolean isContact = intent.getBooleanExtra(EXTRA_IS_CONTACT,false);
+        wantExport = intent.getBooleanExtra(EXTRA_WANT_EXPORT,false);
         mAllowSelectAll = !intent.getBooleanExtra(EXTRA_IS_SELECT_ALL_DISALLOWED, false);
 
         if (Intent.ACTION_DELETE.equals(action)) {
@@ -359,7 +363,7 @@ public class MultiPickContactActivity extends ListActivity implements
                 }
                 if (mMode == MODE_DEFAULT_CONTACT) {
                     if (ACTION_MULTI_PICK.equals(getIntent().getAction())) {
-                        if (mChoiceSet.size() > MAX_CONTACTS_NUM_TO_SELECT_ONCE) {
+                        if (mChoiceSet.size() > MAX_CONTACTS_NUM_TO_SELECT_ONCE && !wantExport) {
                             String text = getString(R.string.too_many_contacts_add_to_group,
                                     MAX_CONTACTS_NUM_TO_SELECT_ONCE);
                             Toast.makeText(this, text, Toast.LENGTH_SHORT).show();

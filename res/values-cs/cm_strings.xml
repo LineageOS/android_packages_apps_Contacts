@@ -16,4 +16,86 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"Zkopírováno do schránky"</string>
+  <string name="deleteConfirmation_title">Odstranit kontakt?</string>
+  <string name="importConfirmation_title">Importovat kontakt?</string>
+  <string name="contactDeletedToast">Kontakt odstraněn</string>
+  <string name="contactSavedToSimCardError">Nelze uložit vybrané kontakty na SIM kartu</string>
+  <string name="airplane_mode_on">SIM karta není dostupná, pokud je zařízení v režimu „V letadle“</string>
+  <string name="number_anr_too_long">Číslo je příliš dlouhé</string>
+  <string name="email_address_too_long">E-mailová adresa je příliš dlouhá</string>
+  <string name="sim_card_full">SIM karta je plná</string>
+  <string name="tag_too_long">Jméno kontaktu je příliš dlouhé</string>
+  <string name="invalid_phone_number">Telefonní číslo je neplatné</string>
+  <string name="videocall">Video hovor</string>
+  <string name="unknown">Neznámé</string>
+  <string name="copy_to_target_sim">SIM karta</string>
+  <string name="copy_to_target_msim">SIM karta <xliff:g id="index">%d</xliff:g></string>
+  <string name="search_bar_hint">Prohledávat kontakty</string>
+  <string name="delete_group_dialog_title">Odstranit skupinu</string>
+  <string name="edit_before_call">Upravit číslo před voláním</string>
+  <string name="description_videocall">Video hovor <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">Vytáčené VT <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">Název skupiny</string>
+  <string name="title_group_add">Nová skupina</string>
+  <string name="group_selector">Klepnutím vyberete skupinu</string>
+  <string name="title_group_picker">Výběr skupiny</string>
+  <string name="noGroupsHelpText">"Žádné místní skupiny."</string>
+  <string name="menu_option_delete">Odstranit skupinu</string>
+  <string name="toast_not_add">"Nelze přidat všechny kontakty do nemístních účtů"</string>
+  <string name="noMember">V této skupině nejsou členové.</string>
+  <string name="button_delete">Odstranit</string>
+  <string name="title_add_members">Přidat členy</string>
+  <string name="select_all">Vše</string>
+  <string name="action_done">Hotovo</string>
+  <plurals name="contacts_selected">
+    <item quantity="one">%d vybrán</item>
+    <item quantity="few">%d vybrány</item>
+    <item quantity="other">%d vybraných</item>
+  </plurals>
+  <string name="delete_call_title">Odstranit historii volání</string>
+  <string name="delete_call_message">Odstraňování historie volání\u2026</string>
+  <string name="delete_call_alert">Odstranit vybrané historie volání?</string>
+  <string name="title_del_call">Odstranit</string>
+  <string name="menu_sendViaSMS">Odeslat kontakt pomocí SMS</string>
+  <string name="title_switch_group_remote">Vzdálené skupiny</string>
+  <string name="title_switch_group_local">Místní skupiny</string>
+  <string name="import_sim_contacts_title">Importovat kontakty ze SIM karty</string>
+  <string name="import_sim_contacts_message">Importování kontaktů ze SIM karty\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">Bude importován %d kontakt.</item>
+    <item quantity="few">Budou importovány %d kontakty.</item>
+    <item quantity="other">Bude importováno %d kontaktů.</item>
+  </plurals>
+  <string name="import_finish">Import dokončen</string>
+  <plurals name="import_stop">
+    <item quantity="one">Import byl zrušen, byl importován %d kontakt</item>
+    <item quantity="few">Import byl zrušen, byly importovány %d kontakty</item>
+    <item quantity="other">Import byl zrušen, bylo importováno %d kontaktů</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">Bude odstraněn %d kontakt.</item>
+    <item quantity="few">Budou odstraněny %d kontakty.</item>
+    <item quantity="other">Bude odstraněno %d kontaktů.</item>
+  </plurals>
+  <string name="delete_contacts_title">Odstranit kontakt</string>
+  <string name="delete_contacts_message">Odstraňování kontaktů\u2026</string>
+  <string name="error_group_exist">Skupina s názvem „<xliff:g id="name">%s</xliff:g>“ již existuje</string>
+  <string name="menu_auto_sync_to_baidu_cloud">Automatická synchronizace s Baidu Cloud</string>
+  <string name="menu_sync_to_baidu_cloud">Synchronizovat do Baidu Cloud</string>
+  <string name="delete_local_group_dialog_message">Odstranit skupinu „<xliff:g id="name">%s</xliff:g>“?</string>
+  <string name="edit_local_group_dialog_title">Přejmenovat skupinu</string>
+  <string name="too_many_contacts_add_to_group">Nelze přidat více než <xliff:g id="count">%d</xliff:g> kontaktů</string>
+  <string name="no_phone_number_or_email">Zadejte telefonní číslo nebo e-mailovou adresu.</string>
+  <string name="memory_card_full">Kontakt nelze uložit, paměť telefonu je plná</string>
+  <string name="menu_memory_status">Stav paměti</string>
+  <string name="memory_status_title">Stav paměti</string>
+  <string name="memory_size">Celkem:</string>
+  <string name="memory_used">Použito:</string>
+  <string name="calculating_status_now">Zjišťuje se stav\u2026</string>
+  <string name="button_moveto">Přesunout</string>
+  <string name="menu_copyTo">Zkopírovat do <xliff:g id="destination">%s</xliff:g></string>
+  <string name="no_empty_email_in_usim">Kopírování kontaktu selhalo, e-mailová adresa je neplatná</string>
+  <string name="voicemail">Hlasová schránka</string>
+  <string name="select_call_title">Vyberte historii hovorů</string>
+  <string name="invalid_number_type">Typ čísla je neplatný</string>
 </resources>

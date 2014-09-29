@@ -16,4 +16,78 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"Panoya kopyalandı"</string>
+  <string name="deleteConfirmation_title">Kişi silinsin mi?</string>
+  <string name="importConfirmation_title">Kişi alınsın mı?</string>
+  <string name="contactDeletedToast">Kişi silindi</string>
+  <string name="contactSavedToSimCardError">Seçili kişiler SIM karta kaydedilemedi</string>
+  <string name="airplane_mode_on">Uçak modu etkinken SIM karta erişilemez</string>
+  <string name="number_anr_too_long">Numara çok uzun</string>
+  <string name="email_address_too_long">E-posta adresi çok uzun</string>
+  <string name="sim_card_full">SIM kart dolu</string>
+  <string name="tag_too_long">Kişi ismi çok uzun</string>
+  <string name="invalid_phone_number">Telefon numarası geçersiz</string>
+  <string name="videocall">Görüntülü arama</string>
+  <string name="unknown">Bilinmiyor</string>
+  <string name="copy_to_target_sim">SIM kart</string>
+  <string name="copy_to_target_msim">SIM kart <xliff:g id="index">%d</xliff:g></string>
+  <string name="search_bar_hint">Kişileri ara</string>
+  <string name="delete_group_dialog_title">Grubu sil</string>
+  <string name="edit_before_call">Çağrıdan önce numarayı düzenle</string>
+  <string name="description_videocall">Görüntülü ara : <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">Görüntülü ara : <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">Grup adı</string>
+  <string name="title_group_add">Yeni grup</string>
+  <string name="group_selector">Grubu seçmek için tıklayın</string>
+  <string name="title_group_picker">Grubu seçin</string>
+  <string name="noGroupsHelpText">"Yerel grup yok."</string>
+  <string name="menu_option_delete">Grubu sil</string>
+  <string name="toast_not_add">"Yerel olmayan hesaplardaki tüm kişiler eklenemedi"</string>
+  <string name="noMember">Bu grupta üye yok.</string>
+  <string name="button_delete">Kaldır</string>
+  <string name="title_add_members">Üye ekle</string>
+  <string name="select_all">Tümü</string>
+  <string name="action_done">Tamamlandı</string>
+  <plurals name="contacts_selected">
+    <item quantity="other">%d kişi seçildi</item>
+  </plurals>
+  <string name="delete_call_title">Arama kayıtlarını sil</string>
+  <string name="delete_call_message">Arama kayıtları siliniyor\u2026</string>
+  <string name="delete_call_alert">Seçili arama kayıtları silinsin mi?</string>
+  <string name="title_del_call">Sil</string>
+  <string name="menu_sendViaSMS">Kişiyi SMS ile gönder</string>
+  <string name="title_switch_group_remote">Uzak gruplar</string>
+  <string name="title_switch_group_local">Yerel gruplar</string>
+  <string name="import_sim_contacts_title">SIM kişilerini al</string>
+  <string name="import_sim_contacts_message">SIM kişileri alınıyor\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="other">%d kişi alınacak.</item>
+  </plurals>
+  <string name="import_finish">Alma işi bitti</string>
+  <plurals name="import_stop">
+    <item quantity="other">Alma işlemi iptal edildi, %d öge alındı</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="other">%d kişi silinecek.</item>
+  </plurals>
+  <string name="delete_contacts_title">Kişileri sil</string>
+  <string name="delete_contacts_message">Kişiler siliniyor\u2026</string>
+  <string name="error_group_exist">\'<xliff:g id="name">%s</xliff:g>\' isminde bir grup zaten var</string>
+  <string name="menu_auto_sync_to_baidu_cloud">Baidu Bulut ile otomatik senkronizasyon</string>
+  <string name="menu_sync_to_baidu_cloud">Baidu Bulut ile şimdi  senkronize et</string>
+  <string name="delete_local_group_dialog_message">\'<xliff:g id="name">%s</xliff:g>\' grubu silinsin mi?</string>
+  <string name="edit_local_group_dialog_title">Grubu yeniden adlandır</string>
+  <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g> \'den fazla kişi eklenemez</string>
+  <string name="no_phone_number_or_email">Lütfen bir telefon numarası ya da e-posta adresi girin.</string>
+  <string name="memory_card_full">Kişi kaydedilemedi, telefon hafızası dolu</string>
+  <string name="menu_memory_status">Hafıza durumu</string>
+  <string name="memory_status_title">Hafıza durumu</string>
+  <string name="memory_size">Toplam:</string>
+  <string name="memory_used">Kullanılan:</string>
+  <string name="calculating_status_now">Durum hesaplanıyor\u2026</string>
+  <string name="button_moveto">Taşı</string>
+  <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g> konumuna kopyala</string>
+  <string name="no_empty_email_in_usim">Kişi kopyalanamadı, e-posta adresi geçersiz</string>
+  <string name="voicemail">Sesli mesaj</string>
+  <string name="select_call_title">Arama kayıtlarını seç</string>
+  <string name="invalid_number_type">Numara türü geçersiz</string>
 </resources>

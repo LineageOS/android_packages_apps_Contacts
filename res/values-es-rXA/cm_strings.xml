@@ -16,4 +16,82 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"Copiáu al cartafueyu"</string>
+  <string name="deleteConfirmation_title">Desaniciar contautu?</string>
+  <string name="importConfirmation_title">Importar contautu?</string>
+  <string name="contactDeletedToast">Contautu desaniciáu</string>
+  <string name="contactSavedToSimCardError">Nun pudieron guardase los contautos seleicionaos na tarxeta SIM</string>
+  <string name="airplane_mode_on">Nun pue accedese a la tarxeta SIM mentanto\'l mou avión tea habilitáu</string>
+  <string name="number_anr_too_long">El númberu ye enforma llargu</string>
+  <string name="email_address_too_long">La direición de corréu ye enforma llarga</string>
+  <string name="sim_card_full">La tarxeta SIM ta llena</string>
+  <string name="tag_too_long">El nome del contautu ye enforma llargu</string>
+  <string name="invalid_phone_number">El númberu de teléfonu nun ye válidu</string>
+  <string name="videocall">Videollamada</string>
+  <string name="unknown">Desconocíu</string>
+  <string name="copy_to_target_sim">Tarxeta SIM</string>
+  <string name="copy_to_target_msim">Tarxeta SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="search_bar_hint">Guetar contautos</string>
+  <string name="delete_group_dialog_title">Desaniciar grupu</string>
+  <string name="edit_before_call">Editar númberu enantes de llamar</string>
+  <string name="description_videocall">Videollamada <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">Facer videollamada <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">Nome del grupu</string>
+  <string name="title_group_add">Grupu nuevu</string>
+  <string name="group_selector">Toca pa seleicionar grupu</string>
+  <string name="title_group_picker">Seleicionar grupu</string>
+  <string name="noGroupsHelpText">"Nun hai grupos llocales."</string>
+  <string name="menu_option_delete">Desaniciar grupu</string>
+  <string name="toast_not_add">"Imposible amestar tolos contautos en cuentes non llocales"</string>
+  <string name="noMember">Nun hai miembros nesti grupu.</string>
+  <string name="button_delete">Desaniciar</string>
+  <string name="title_add_members">Amestar miembros</string>
+  <string name="select_all">Too</string>
+  <string name="action_done">Fecho</string>
+  <plurals name="contacts_selected">
+    <item quantity="one">%d esbilláu</item>
+    <item quantity="other">%d esbillaos</item>
+  </plurals>
+  <string name="delete_call_title">Desaniciar rexistros de llamaes</string>
+  <string name="delete_call_message">Desaniciando rexistros de llamaes\u2026</string>
+  <string name="delete_call_alert">¿Desaniciar rexistros de llamaes esbillaes?</string>
+  <string name="title_del_call">Desaniciar</string>
+  <string name="menu_sendViaSMS">Unviar contautu vía SMS</string>
+  <string name="title_switch_group_remote">Grupos remotos</string>
+  <string name="title_switch_group_local">Grupos llocales</string>
+  <string name="import_sim_contacts_title">Importar contautos de SIM</string>
+  <string name="import_sim_contacts_message">Importando contautos de SIM\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">Va importase %d contautu.</item>
+    <item quantity="other">Van importase %d contautos.</item>
+  </plurals>
+  <string name="import_finish">Finó la importación</string>
+  <plurals name="import_stop">
+    <item quantity="one">Encaboxóse la importación, importóse %d elementu</item>
+    <item quantity="other">Encaboxóse la importación, importáronse %d elementos</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">Va desaniciase %d contautu.</item>
+    <item quantity="other">Van desaniciase %d contautos.</item>
+  </plurals>
+  <string name="delete_contacts_title">Desaniciar contautos</string>
+  <string name="delete_contacts_message">Desaniciando contautos\u2026</string>
+  <string name="error_group_exist">Yá esiste un grupu denomáu \'<xliff:g id="name">%s</xliff:g>\'</string>
+  <string name="menu_auto_sync_to_baidu_cloud">Sincronización automática con Baidu Cloud</string>
+  <string name="menu_sync_to_baidu_cloud">Sincronizar agora con Baidu Cloud</string>
+  <string name="delete_local_group_dialog_message">¿Desaniciar el grupu \'<xliff:g id="name">%s</xliff:g>\'?</string>
+  <string name="edit_local_group_dialog_title">Renomar grupu</string>
+  <string name="too_many_contacts_add_to_group">Nun puen amestase más de <xliff:g id="count">%d</xliff:g> contautos</string>
+  <string name="no_phone_number_or_email">Introduz un númberu de teléfonu o direición de corréu-e.</string>
+  <string name="memory_card_full">Nun pudo guardase\'l contautu, la memoria ta llena</string>
+  <string name="menu_memory_status">Estáu de la memoria</string>
+  <string name="memory_status_title">Estáu de la memoria</string>
+  <string name="memory_size">Total:</string>
+  <string name="memory_used">Usáu:</string>
+  <string name="calculating_status_now">Calculando estáu\u2026</string>
+  <string name="button_moveto">Mover</string>
+  <string name="menu_copyTo">Copiar a <xliff:g id="destination">%s</xliff:g></string>
+  <string name="no_empty_email_in_usim">Falló la copia del contautu, la direición de corréu ye inválida</string>
+  <string name="voicemail">Buzón de voz</string>
+  <string name="select_call_title">Seleicionar rexistros de llamaes</string>
+  <string name="invalid_number_type">El tipu de númberu ye inválidu</string>
 </resources>

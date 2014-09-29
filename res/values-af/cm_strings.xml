@@ -16,4 +16,82 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"Na knipbord gekopiëer"</string>
+  <string name="deleteConfirmation_title">Verwyder kontak?</string>
+  <string name="importConfirmation_title">Invoer kontak?</string>
+  <string name="contactDeletedToast">Kontak is verwyder</string>
+  <string name="contactSavedToSimCardError">Kon nie die geselekteerde kontakte na die SIM-kaart stoor</string>
+  <string name="airplane_mode_on">Die SIM-kaart kan nie verkry word nie, terwyl vliegtuigmodus geaktiveer is</string>
+  <string name="number_anr_too_long">Die nommer is te lank</string>
+  <string name="email_address_too_long">Die e-posadres is te lank</string>
+  <string name="sim_card_full">Die SIM-kaart is vol</string>
+  <string name="tag_too_long">Die kontak naam is te lank</string>
+  <string name="invalid_phone_number">Die telefoonnommer is ongeldig</string>
+  <string name="videocall">Video oproep</string>
+  <string name="unknown">Onbekend</string>
+  <string name="copy_to_target_sim">SIM-kaart</string>
+  <string name="copy_to_target_msim">SIM-kaart <xliff:g id="index">%d</xliff:g></string>
+  <string name="search_bar_hint">Soek kontakte</string>
+  <string name="delete_group_dialog_title">Verwyder groep</string>
+  <string name="edit_before_call">Wysig nommer voor oproep</string>
+  <string name="description_videocall">Video oproep <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">Skakel VT <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">Groep naam</string>
+  <string name="title_group_add">Nuwe groep</string>
+  <string name="group_selector">Klik om groep te kies</string>
+  <string name="title_group_picker">Groep kies</string>
+  <string name="noGroupsHelpText">"Geen lokale groepe."</string>
+  <string name="menu_option_delete">Verwyder groep</string>
+  <string name="toast_not_add">"Kon nie alle kontakte byvoeg in nie-lokale rekeninge"</string>
+  <string name="noMember">Geen lede in die groep.</string>
+  <string name="button_delete">Verwyder</string>
+  <string name="title_add_members">Voeg lede by</string>
+  <string name="select_all">Alles</string>
+  <string name="action_done">Klaar</string>
+  <plurals name="contacts_selected">
+    <item quantity="one">%d gekies</item>
+    <item quantity="other">%d gekies</item>
+  </plurals>
+  <string name="delete_call_title">Verwyder oproep lys</string>
+  <string name="delete_call_message">Verwydering van oproep lys\u2026</string>
+  <string name="delete_call_alert">Verwyder gekose oproep lys?</string>
+  <string name="title_del_call">Verwyder</string>
+  <string name="menu_sendViaSMS">Stuur kontak via SMS</string>
+  <string name="title_switch_group_remote">Afgeleë groepe</string>
+  <string name="title_switch_group_local">Lokale groepe</string>
+  <string name="import_sim_contacts_title">Voer SIM kontakte in</string>
+  <string name="import_sim_contacts_message">Besig om SIM kontakte in te voer\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">%d kontak sal ingevoer word.</item>
+    <item quantity="other">%d kontakte sal ingevoer word.</item>
+  </plurals>
+  <string name="import_finish">Invoering klaar</string>
+  <plurals name="import_stop">
+    <item quantity="one">Uitvoer gekanselleer, %d item is uitgevoer</item>
+    <item quantity="other">Uitvoer gekanselleer, %d items is uitgevoer</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">%d kontak sal verwyder word.</item>
+    <item quantity="other">%d kontakte sal verwyder word.</item>
+  </plurals>
+  <string name="delete_contacts_title">Verwyder kontak</string>
+  <string name="delete_contacts_message">Verwydering van kontakte\u2026</string>
+  <string name="error_group_exist">\'n Groep genaamd \'<xliff:g id="name">%s</xliff:g>\' bestaan alreeds</string>
+  <string name="menu_auto_sync_to_baidu_cloud">Outo sync na Baidu Wolk</string>
+  <string name="menu_sync_to_baidu_cloud">Sync na Baidu Wolk nou</string>
+  <string name="delete_local_group_dialog_message">Verwyder groep \'<xliff:g id="name">%s</xliff:g>\'?</string>
+  <string name="edit_local_group_dialog_title">Hernoem groep</string>
+  <string name="too_many_contacts_add_to_group">Nie mees as <xliff:g id="count">%d</xliff:g> kontakte kan gedeel word nie</string>
+  <string name="no_phone_number_or_email">Sleutel asseblief \'n telefoonnommer of e-posadres in.</string>
+  <string name="memory_card_full">Die kontak kon nie gestoor word nie, die foon geheue is vol</string>
+  <string name="menu_memory_status">Geheue status</string>
+  <string name="memory_status_title">Geheue status</string>
+  <string name="memory_size">Totaal:</string>
+  <string name="memory_used">Gebruik:</string>
+  <string name="calculating_status_now">Berekening van status\u2026</string>
+  <string name="button_moveto">Skuif</string>
+  <string name="menu_copyTo">Kopieer na<xliff:g id="destination">%s</xliff:g></string>
+  <string name="no_empty_email_in_usim">Kopiëring van die kontak het misluk, die e-posadres is ongeldig</string>
+  <string name="voicemail">Stempos</string>
+  <string name="select_call_title">Kies oproep lys</string>
+  <string name="invalid_number_type">Die nommer tipe is ongeldig</string>
 </resources>

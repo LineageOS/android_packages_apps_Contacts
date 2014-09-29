@@ -16,4 +16,82 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"Kopiert til utklippstavlen"</string>
+  <string name="deleteConfirmation_title">Slette kontakt?</string>
+  <string name="importConfirmation_title">Importere kontakt?</string>
+  <string name="contactDeletedToast">Kontakt slettet</string>
+  <string name="contactSavedToSimCardError">Kunne ikke lagre valgte kontakter på SIMkortet</string>
+  <string name="airplane_mode_on">SIM-kortet kan ikke åpnes mens Flymodus er aktivert</string>
+  <string name="number_anr_too_long">Nummeret er for langt</string>
+  <string name="email_address_too_long">E-postadressen er for lang</string>
+  <string name="sim_card_full">SIM-kortet er fullt</string>
+  <string name="tag_too_long">Navnet er for langt</string>
+  <string name="invalid_phone_number">Telefonnummeret er ugyldig</string>
+  <string name="videocall">Videoanrop</string>
+  <string name="unknown">Ukjent</string>
+  <string name="copy_to_target_sim">SIM-kort</string>
+  <string name="copy_to_target_msim">SIM card <xliff:g id="index">%d</xliff:g></string>
+  <string name="search_bar_hint">Søk etter kontakter</string>
+  <string name="delete_group_dialog_title">Slett gruppe</string>
+  <string name="edit_before_call">Rediger nummer før samtalen</string>
+  <string name="description_videocall">Videoanrop <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">Ekstern VT <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">Gruppenavn</string>
+  <string name="title_group_add">Ny gruppe</string>
+  <string name="group_selector">Merk gruppen</string>
+  <string name="title_group_picker">Gruppe velger</string>
+  <string name="noGroupsHelpText">"Ingen lokale grupper."</string>
+  <string name="menu_option_delete">Slett gruppe</string>
+  <string name="toast_not_add">"Kan ikke legge til alle kontaktene i ikke-lokale kontoer"</string>
+  <string name="noMember">Ingen medlemmer i denne gruppen.</string>
+  <string name="button_delete">Fjern</string>
+  <string name="title_add_members">Legg til medlemmer</string>
+  <string name="select_all">Alle</string>
+  <string name="action_done">Ferdig</string>
+  <plurals name="contacts_selected">
+    <item quantity="one">%d valgt</item>
+    <item quantity="other">%d valgte</item>
+  </plurals>
+  <string name="delete_call_title">Slette Anropslister</string>
+  <string name="delete_call_message">Sletter anropslister\u2026</string>
+  <string name="delete_call_alert">Slett valgte Anropslister?</string>
+  <string name="title_del_call">Slett</string>
+  <string name="menu_sendViaSMS">Sende kontakten via SMS</string>
+  <string name="title_switch_group_remote">Eksterne grupper</string>
+  <string name="title_switch_group_local">Lokale grupper</string>
+  <string name="import_sim_contacts_title">Importer SIM-kontakter</string>
+  <string name="import_sim_contacts_message">Importerer SIM kontakter\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">%d Kontakt importeres.</item>
+    <item quantity="other">%d kontakter importeres.</item>
+  </plurals>
+  <string name="import_finish">Import fullført</string>
+  <plurals name="import_stop">
+    <item quantity="one">Importen ble avbrutt, %d element ble importert</item>
+    <item quantity="other">Importen ble avbrutt, %d elementer ble importert</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">%d Kontakt slettes.</item>
+    <item quantity="other">%d kontakter slettes.</item>
+  </plurals>
+  <string name="delete_contacts_title">Slette kontakter</string>
+  <string name="delete_contacts_message">Sletter kontakter\u2026</string>
+  <string name="error_group_exist">En gruppe med navnet \' <xliff:g id="name">%s</xliff:g> finnes allerede</string>
+  <string name="menu_auto_sync_to_baidu_cloud">Auto-sync Baidu skyen</string>
+  <string name="menu_sync_to_baidu_cloud">Synkroniser til Baidu Sky nå</string>
+  <string name="delete_local_group_dialog_message">Slette gruppen \' <xliff:g id="name">%s</xliff:g>?</string>
+  <string name="edit_local_group_dialog_title">Gi nytt navn til gruppe</string>
+  <string name="too_many_contacts_add_to_group">Ikke mer enn <xliff:g id="count">%d</xliff:g> kontakter kan legges til</string>
+  <string name="no_phone_number_or_email">Angi et telefonnummer eller e-postadresse.</string>
+  <string name="memory_card_full">Kan ikke lagre kontakten, telefonminnet er full</string>
+  <string name="menu_memory_status">Minnestatus</string>
+  <string name="memory_status_title">Minnestatus</string>
+  <string name="memory_size">Totalt:</string>
+  <string name="memory_used">Brukt:</string>
+  <string name="calculating_status_now">Beregner status\u2026</string>
+  <string name="button_moveto">Flytt</string>
+  <string name="menu_copyTo">Kopiere til <xliff:g id="destination">%s</xliff:g></string>
+  <string name="no_empty_email_in_usim">Kopiering kontakten mislyktes,  E-postadressen er ugyldig</string>
+  <string name="voicemail">Talepostkasse</string>
+  <string name="select_call_title">Velg Anropslister</string>
+  <string name="invalid_number_type">Tall er ugyldig</string>
 </resources>

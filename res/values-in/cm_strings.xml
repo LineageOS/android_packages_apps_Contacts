@@ -16,4 +16,78 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"Disalin ke clipboard"</string>
+  <string name="deleteConfirmation_title">Hapus kontak?</string>
+  <string name="importConfirmation_title">Impor kontak?</string>
+  <string name="contactDeletedToast">Kontak dihapus</string>
+  <string name="contactSavedToSimCardError">Tidak dapat menyimpan kontak yang dipilih ke kartu SIM</string>
+  <string name="airplane_mode_on">Kartu SIM tidak dapat diakses saat mode pesawat diaktifkan</string>
+  <string name="number_anr_too_long">Nomor ini terlalu panjang</string>
+  <string name="email_address_too_long">Alamat email terlalu panjang</string>
+  <string name="sim_card_full">Kartu SIM penuh</string>
+  <string name="tag_too_long">Nama kontak terlalu panjang</string>
+  <string name="invalid_phone_number">Nomor telepon tidak valid</string>
+  <string name="videocall">Panggilan video</string>
+  <string name="unknown">Tidak dikenal</string>
+  <string name="copy_to_target_sim">Kartu SIM</string>
+  <string name="copy_to_target_msim">Kartu SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="search_bar_hint">Cari kontak</string>
+  <string name="delete_group_dialog_title">Hapus Grup</string>
+  <string name="edit_before_call">Edit nomor sebelum panggilan</string>
+  <string name="description_videocall">Panggilan video <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">Dial VT <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">Nama grup</string>
+  <string name="title_group_add">Grup baru</string>
+  <string name="group_selector">Klik untuk memilih grup</string>
+  <string name="title_group_picker">Pilih grup</string>
+  <string name="noGroupsHelpText">"Tidak ada grup lokal."</string>
+  <string name="menu_option_delete">Hapus Grup</string>
+  <string name="toast_not_add">"Tidak dapat menambahkan semua kontak di akun non-lokal"</string>
+  <string name="noMember">Tidak ada anggota di dalam grup ini.</string>
+  <string name="button_delete">Hapus</string>
+  <string name="title_add_members">Tambahkan anggota</string>
+  <string name="select_all">Semua</string>
+  <string name="action_done">Selesai</string>
+  <plurals name="contacts_selected">
+    <item quantity="other">%d dipilih</item>
+  </plurals>
+  <string name="delete_call_title">Hapus log panggilan</string>
+  <string name="delete_call_message">Menghapus log panggilan\u2026</string>
+  <string name="delete_call_alert">Hapus log panggilan yang dipilih?</string>
+  <string name="title_del_call">Hapus</string>
+  <string name="menu_sendViaSMS">Kirim kontak melalui SMS</string>
+  <string name="title_switch_group_remote">Grup jarak jauh</string>
+  <string name="title_switch_group_local">Grup lokal</string>
+  <string name="import_sim_contacts_title">Mengimpor kontak SIM</string>
+  <string name="import_sim_contacts_message">Mengimpor kontak SIM\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="other">%d kontak akan diimpor.</item>
+  </plurals>
+  <string name="import_finish">Impor selesai</string>
+  <plurals name="import_stop">
+    <item quantity="other">Impor telah dibatalkan, %d item diimpor</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="other">%d kontak akan dihapus.</item>
+  </plurals>
+  <string name="delete_contacts_title">Hapus kontak</string>
+  <string name="delete_contacts_message">Menghapus kontak\u2026</string>
+  <string name="error_group_exist">Sebuah grup bernama \'<xliff:g id="name">%s</xliff:g>\' sudah ada</string>
+  <string name="menu_auto_sync_to_baidu_cloud">Otomatis sinkronkan ke Baidu Cloud</string>
+  <string name="menu_sync_to_baidu_cloud">Sinkronkan ke Baidu Cloud sekarang</string>
+  <string name="delete_local_group_dialog_message">Hapus grup \'<xliff:g id="name">%s</xliff:g>\'?</string>
+  <string name="edit_local_group_dialog_title">Ubah nama grup</string>
+  <string name="too_many_contacts_add_to_group">Tidak lebih dari <xliff:g id="count">%d</xliff:g> kontak dapat ditambahkan</string>
+  <string name="no_phone_number_or_email">Harap masukkan nomor telepon atau alamat email.</string>
+  <string name="memory_card_full">Kontak tidak bisa disimpan, memori telepon penuh</string>
+  <string name="menu_memory_status">Status memori</string>
+  <string name="memory_status_title">Status memori</string>
+  <string name="memory_size">Total:</string>
+  <string name="memory_used">Digunakan:</string>
+  <string name="calculating_status_now">Menghitung status\u2026</string>
+  <string name="button_moveto">Pindah</string>
+  <string name="menu_copyTo">Salin ke <xliff:g id="destination">%s</xliff:g></string>
+  <string name="no_empty_email_in_usim">Menyalin kontak gagal, alamat email tidak valid</string>
+  <string name="voicemail">Pesan suara</string>
+  <string name="select_call_title">Pilih log panggilan</string>
+  <string name="invalid_number_type">Jenis nomor tidak valid</string>
 </resources>

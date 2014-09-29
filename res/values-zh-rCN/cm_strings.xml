@@ -16,4 +16,78 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"已复制到剪切板"</string>
+  <string name="deleteConfirmation_title">删除联系人？</string>
+  <string name="importConfirmation_title">导入联系人？</string>
+  <string name="contactDeletedToast">联系人已删除</string>
+  <string name="contactSavedToSimCardError">无法将选择的联系人保存到 SIM 卡</string>
+  <string name="airplane_mode_on">飞行模式启用时无法访问 SIM 卡</string>
+  <string name="number_anr_too_long">号码过长</string>
+  <string name="email_address_too_long">电子邮件地址过长</string>
+  <string name="sim_card_full">SIM 卡已满</string>
+  <string name="tag_too_long">联系人名称过长</string>
+  <string name="invalid_phone_number">电话号码无效</string>
+  <string name="videocall">视频呼叫</string>
+  <string name="unknown">未知号码</string>
+  <string name="copy_to_target_sim">SIM 卡</string>
+  <string name="copy_to_target_msim">SIM 卡 <xliff:g id="index">%d</xliff:g></string>
+  <string name="search_bar_hint">搜索联系人</string>
+  <string name="delete_group_dialog_title">删除群组</string>
+  <string name="edit_before_call">呼叫之前编辑号码</string>
+  <string name="description_videocall">视频呼叫 <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">拨号 VT <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">群组名称</string>
+  <string name="title_group_add">新增群组</string>
+  <string name="group_selector">单击以选择群组</string>
+  <string name="title_group_picker">选择群组</string>
+  <string name="noGroupsHelpText">"没有本地群组。"</string>
+  <string name="menu_option_delete">删除群组</string>
+  <string name="toast_not_add">"无法在非本地帐户中添加所有的联系人"</string>
+  <string name="noMember">此群组没有成员。</string>
+  <string name="button_delete">移除</string>
+  <string name="title_add_members">添加成员</string>
+  <string name="select_all">全部</string>
+  <string name="action_done">完成</string>
+  <plurals name="contacts_selected">
+    <item quantity="other">已选择 %d</item>
+  </plurals>
+  <string name="delete_call_title">删除呼叫记录</string>
+  <string name="delete_call_message">正在删除呼叫记录\u2026</string>
+  <string name="delete_call_alert">删除选定的呼叫记录吗？</string>
+  <string name="title_del_call">删除</string>
+  <string name="menu_sendViaSMS">通过短信发送联系人</string>
+  <string name="title_switch_group_remote">远程群组</string>
+  <string name="title_switch_group_local">本地群组</string>
+  <string name="import_sim_contacts_title">导入 SIM 卡联系人</string>
+  <string name="import_sim_contacts_message">正在导入 SIM 卡联系人\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="other">%d 个联系人将被导入。</item>
+  </plurals>
+  <string name="import_finish">导入完成</string>
+  <plurals name="import_stop">
+    <item quantity="other">导入已取消，%d 个项目已被导入</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="other">%d 个联系人将被删除。</item>
+  </plurals>
+  <string name="delete_contacts_title">删除联系人</string>
+  <string name="delete_contacts_message">正在删除联系人\u2026</string>
+  <string name="error_group_exist">组名 “<xliff:g id="name">%s</xliff:g>” 已存在</string>
+  <string name="menu_auto_sync_to_baidu_cloud">自动同步到百度云</string>
+  <string name="menu_sync_to_baidu_cloud">立即同步到百度云</string>
+  <string name="delete_local_group_dialog_message">删除群组 “<xliff:g id="name">%s</xliff:g>”？</string>
+  <string name="edit_local_group_dialog_title">重命名群组</string>
+  <string name="too_many_contacts_add_to_group">可以共享不超过 <xliff:g id="count">%d</xliff:g> 个联系人</string>
+  <string name="no_phone_number_or_email">请输入一个电话号码或电子邮件地址。</string>
+  <string name="memory_card_full">无法保存该联系人，手机内存已满</string>
+  <string name="menu_memory_status">内存状态</string>
+  <string name="memory_status_title">内存状态</string>
+  <string name="memory_size">总共：</string>
+  <string name="memory_used">已用：</string>
+  <string name="calculating_status_now">正在计算状态\u2026</string>
+  <string name="button_moveto">移动</string>
+  <string name="menu_copyTo">复制到 <xliff:g id="destination">%s</xliff:g></string>
+  <string name="no_empty_email_in_usim">复制联系人失败，电子邮件地址无效</string>
+  <string name="voicemail">语音邮件</string>
+  <string name="select_call_title">选择呼叫记录</string>
+  <string name="invalid_number_type">号码类型无效</string>
 </resources>

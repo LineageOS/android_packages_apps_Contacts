@@ -16,4 +16,72 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"In die Zwischenablage kopiert"</string>
+  <string name="deleteConfirmation_title">Kontakt löschen?</string>
+  <string name="importConfirmation_title">Kontakt importieren?</string>
+  <string name="contactDeletedToast">Kontakt gelöscht</string>
+  <string name="contactSavedToSimCardError">Die ausgewählten Kontakte konnten nicht auf der SIM-Karte gespeichert werden</string>
+  <string name="number_anr_too_long">Die Nummer ist zu lang</string>
+  <string name="email_address_too_long">Die E-Mail-Adresse ist zu lang</string>
+  <string name="sim_card_full">Die SIM-Karte ist voll</string>
+  <string name="tag_too_long">Kontaktname ist zu lang</string>
+  <string name="invalid_phone_number">Ungültige Telefonnummer</string>
+  <string name="videocall">Videoanruf</string>
+  <string name="unknown">Unbekannt</string>
+  <string name="copy_to_target_sim">SIM-Karte</string>
+  <string name="search_bar_hint">Kontakte suchen</string>
+  <string name="delete_group_dialog_title">Gruppe löschen</string>
+  <string name="edit_before_call">Nummer vor Anruf bearbeiten</string>
+  <string name="description_videocall">Videoanruf <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">Gruppenname</string>
+  <string name="title_group_add">Neue Gruppe</string>
+  <string name="title_group_picker">Gruppe auswählen</string>
+  <string name="menu_option_delete">Gruppe löschen</string>
+  <string name="noMember">Diese Gruppe hat keine Mitglieder</string>
+  <string name="button_delete">Entfernen</string>
+  <string name="title_add_members">Mitglieder hinzufügen</string>
+  <string name="select_all">Alle</string>
+  <string name="action_done">Fertig</string>
+  <plurals name="contacts_selected">
+    <item quantity="one">%d ausgewählt</item>
+    <item quantity="other">%d ausgewählt</item>
+  </plurals>
+  <string name="delete_call_title">Anrufslisten löschen</string>
+  <string name="delete_call_message">Anruflisten werden gelöscht\u2026</string>
+  <string name="delete_call_alert">Sollen die ausgewählten Anruflisten gelöscht werden?</string>
+  <string name="title_del_call">Löschen</string>
+  <string name="menu_sendViaSMS">Kontakt per SMS senden</string>
+  <string name="title_switch_group_remote">Remote-Gruppen</string>
+  <string name="title_switch_group_local">Lokale Gruppen</string>
+  <string name="import_sim_contacts_title">Kontakte von SIM-Karte importieren</string>
+  <string name="import_sim_contacts_message">SIM-Kontakte werden importiert\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">%d Kontakt wird importiert.</item>
+    <item quantity="other">%d Kontakte werden importiert.</item>
+  </plurals>
+  <string name="import_finish">Importieren abgeschlossen</string>
+  <plurals name="import_stop">
+    <item quantity="one">Importieren abgebrochen, %d Element wurde importiert</item>
+    <item quantity="other">Importieren abgebrochen, %d Elemente wurden importiert</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">%d Kontakt wird gelöscht.</item>
+    <item quantity="other">%d Kontakte werden gelöscht.</item>
+  </plurals>
+  <string name="delete_contacts_title">Kontakte löschen</string>
+  <string name="delete_contacts_message">Kontakte werden gelöscht\u2026</string>
+  <string name="error_group_exist">Eine Gruppe mit den Namen  \"<xliff:g id="name">%s</xliff:g>\" existiert bereits</string>
+  <string name="delete_local_group_dialog_message">Soll die Gruppe \"<xliff:g id="name">%s</xliff:g>\" gelöscht werden?</string>
+  <string name="edit_local_group_dialog_title">Gruppe umbenennen</string>
+  <string name="too_many_contacts_add_to_group">Es könnten nicht mehr als <xliff:g id="count">%d</xliff:g> Kontakte hinzugefügt werden</string>
+  <string name="no_phone_number_or_email">Bitte eine Telefonnummer oder E-Mail-Adresse eingeben.</string>
+  <string name="menu_memory_status">Speicherstatus</string>
+  <string name="memory_status_title">Speicherstatus</string>
+  <string name="memory_size">Gesamt:</string>
+  <string name="memory_used">Belegt:</string>
+  <string name="calculating_status_now">Status wird berechnet\u2026</string>
+  <string name="button_moveto">Verschieben</string>
+  <string name="menu_copyTo">Nach <xliff:g id="destination">%s</xliff:g> kopieren</string>
+  <string name="no_empty_email_in_usim">Kontakt konnte nicht kopiert werden, da seine E-Mail-Adresse ungültig ist</string>
+  <string name="voicemail">Sprachnachricht</string>
+  <string name="select_call_title">Anruflisten auswählen</string>
 </resources>

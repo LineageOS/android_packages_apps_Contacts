@@ -102,6 +102,7 @@
   <string name="exporting_contact_list_progress"><xliff:g id="current_number">%s</xliff:g> of <xliff:g id="total_number">%s</xliff:g> ناوەکان</string>
   <string name="search_settings_description">لسیتی ناوه‌کانت</string>
   <string name="quickcontact_missing_app">هیچ بەرنامەیەک نەدۆزرایەوە بۆ هەڵگرتنی ئەم چالاکیە.</string>
+  <string name="missing_app">هیچ بەرنامەیەک نەدۆزرایەوە بۆ هه‌ڵسوڕانی ئەم چالاکییە.</string>
   <string name="menu_share">په‌رشیکه‌</string>
   <string name="share_via">ناوه‌که‌ په‌رشکه‌ له‌ڕێی</string>
   <string name="dialog_new_group_account">کۆمه‌ڵه‌ دروست بکه‌ له‌ژێر هه‌ژماردا</string>
@@ -109,7 +110,7 @@
   <string name="video_chat">چاتی ڤیدیۆیی</string>
   <string name="connections">پەیوەستەکان</string>
   <string name="add_connection_button">زیادکردنی پەیوەست</string>
-  <string name="recent" msgid="2062236709538790412">تازه‌</string>
+  <string name="recent" msgid="2062236709538790412">نوێ</string>
   <string name="recent_updates" msgid="2018245636796411442">دوایین تازه‌کردنه‌وه‌</string>
   <string name="account_type_format"><xliff:g id="source" example="Gmail">%1$s</xliff:g> ناو</string>
   <string name="from_account_format"><xliff:g id="source" example="user@gmail.com">%1$s</xliff:g></string>
@@ -172,6 +173,7 @@
   <string name="contacts_unavailable_add_account">بچۆره‌ ناو ئه‌کاونتێکه‌وه‌</string>
   <string name="contacts_unavailable_import_contacts">هاوردنی ناوەکان</string>
   <string name="create_group_dialog_title">کۆمه‌ڵه‌ی نوێ دروست بکه‌</string>
+  <string name="create_group_item_label">کۆمه‌ڵه‌یه‌کی نوێ دروست بکه‌</string>
   <string name="delete_group_dialog_message">کۆمه‌ڵه‌که‌ بسڕه‌وه‌
       \"<xliff:g id="group_label" example="Friends">%1$s</xliff:g>\"?
       (ناوەکانە لەخۆیانەوە ناسڕێنەوە.)

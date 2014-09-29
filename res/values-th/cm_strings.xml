@@ -16,4 +16,78 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"คัดลอกไปยังคลิปบอร์ด"</string>
+  <string name="deleteConfirmation_title">ลบ​ราย​ชื่อ?</string>
+  <string name="importConfirmation_title">นำเข้ารายชื่อ?</string>
+  <string name="contactDeletedToast">ลบรายชื่อผู้ติดต่อแล้ว</string>
+  <string name="contactSavedToSimCardError">ไม่สามารถบันทึกรายชื่อที่เลือกไปยังซิมการ์ดได้</string>
+  <string name="airplane_mode_on">ไม่สามารถเข้าถึงการซิมการ์ดในขณะเปิดใช้งานโหมดเครื่องบิน</string>
+  <string name="number_anr_too_long">หมายเลขยาวเกินไป</string>
+  <string name="email_address_too_long">อีเมลยาวเกินไป</string>
+  <string name="sim_card_full">ซิมการ์ดเต็ม</string>
+  <string name="tag_too_long">ชื่อผู้ติดต่อยาวเกินไป</string>
+  <string name="invalid_phone_number">หมายเลขโทรศัพท์ไม่ถูกต้อง</string>
+  <string name="videocall">สนทนาวิดีโอ</string>
+  <string name="unknown">ไม่ทราบ</string>
+  <string name="copy_to_target_sim">ซิมการ์ด</string>
+  <string name="copy_to_target_msim">ซิมการ์ด <xliff:g id="index">%d</xliff:g></string>
+  <string name="search_bar_hint">ค้นหารายชื่อ</string>
+  <string name="delete_group_dialog_title">ลบ​กลุ่ม</string>
+  <string name="edit_before_call">แก้ไข​หมายเลขก่อน​โทร</string>
+  <string name="description_videocall">สนทนาวิดีโอ <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">สนทนา VT <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">ชื่อกลุ่ม</string>
+  <string name="title_group_add">กลุ่มใหม่</string>
+  <string name="group_selector">คลิกเพื่อเลือกกลุ่ม</string>
+  <string name="title_group_picker">เลือกกลุ่ม</string>
+  <string name="noGroupsHelpText">"ไม่มีกลุ่มในนี้"</string>
+  <string name="menu_option_delete">ลบกลุ่ม</string>
+  <string name="toast_not_add">"ไม่สามารถเพิ่มทุกรายชื่อไปยังบัญชีภายนอก"</string>
+  <string name="noMember">ไม่มีสมาชิกในกลุ่มนี้</string>
+  <string name="button_delete">นำออก</string>
+  <string name="title_add_members">เพิ่มสมาชิก</string>
+  <string name="select_all">ทั้งหมด</string>
+  <string name="action_done">เสร็จสิ้น</string>
+  <plurals name="contacts_selected">
+    <item quantity="other">%d ถูกเลือก</item>
+  </plurals>
+  <string name="delete_call_title">ลบบันทึกการโทร</string>
+  <string name="delete_call_message">กำลังลบบันทึการโทร</string>
+  <string name="delete_call_alert">ลบบันทึกการโทรที่เลือก?</string>
+  <string name="title_del_call">ลบ</string>
+  <string name="menu_sendViaSMS">ส่งรายชื่อผ่าน SMS</string>
+  <string name="title_switch_group_remote">กลุ่มภายนอก</string>
+  <string name="title_switch_group_local">กลุ่มภายใน</string>
+  <string name="import_sim_contacts_title">นำเข้ารายชื่อจากซิม</string>
+  <string name="import_sim_contacts_message">กำลังนำเข้ารายชื่อจากซิม\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="other">%d รายชื่อจะถูกนำเข้า</item>
+  </plurals>
+  <string name="import_finish">นำเจ้าเสร็จสิ้น</string>
+  <plurals name="import_stop">
+    <item quantity="other">การนำเข้าถูกยกเลิก, %d รายชื่อถูกนำเข้าแล้ว</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="other">%d รายชื่อจะถูกลบ</item>
+  </plurals>
+  <string name="delete_contacts_title">ลบ​ราย​ชื่อ</string>
+  <string name="delete_contacts_message">กำลังลบรายชื่อ\u2026</string>
+  <string name="error_group_exist">มีกลุ่มชื่อ \'<xliff:g id="name">%s</xliff:g>\' แล้ว</string>
+  <string name="menu_auto_sync_to_baidu_cloud">ซิงค์อัตโนมัติไปยัง Baidu Cloud</string>
+  <string name="menu_sync_to_baidu_cloud">ซิงค์กับ Baidu Clound เดี๋ยวนี้</string>
+  <string name="delete_local_group_dialog_message">ลบกลุ่ม \'<xliff:g id="name">%s</xliff:g>\'?</string>
+  <string name="edit_local_group_dialog_title">เปลี่ยนชื่อกลุ่ม</string>
+  <string name="too_many_contacts_add_to_group">ไม่สามารถเพิ่มรายชื่อได้เกิน <xliff:g id="count">%d</xliff:g> ชื่อ</string>
+  <string name="no_phone_number_or_email">กรุณาใส่หมายเลขโทรศัพท์หรือที่อยู่อีเมล</string>
+  <string name="memory_card_full">รายชื่อผู้ติดต่อไม่ถูกบันทึก, หน่วยความจำโทรศัพท์เต็ม</string>
+  <string name="menu_memory_status">สถานะหน่วยความจำ</string>
+  <string name="memory_status_title">สถานะหน่วยความจำ</string>
+  <string name="memory_size">ทั้งหมด:</string>
+  <string name="memory_used">ใช้แล้ว:</string>
+  <string name="calculating_status_now">กำลังคำนวณสถานะ\u2026</string>
+  <string name="button_moveto">ย้าย</string>
+  <string name="menu_copyTo">คัดลอกไปยัง<xliff:g id="destination">%s</xliff:g></string>
+  <string name="no_empty_email_in_usim">คัดลอกรายชื่อล้มเหลว ที่อยู่อีเมลไม่ถูกต้อง</string>
+  <string name="voicemail">ข้อความเสียง</string>
+  <string name="select_call_title">เลือกประวัติการโทร</string>
+  <string name="invalid_number_type">ชนิดหมายเลขไม่ถูกต้อง</string>
 </resources>

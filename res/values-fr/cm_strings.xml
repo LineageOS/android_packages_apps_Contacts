@@ -16,4 +16,28 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"Copié dans le presse-papier"</string>
+  <string name="deleteConfirmation_title">Supprimer le contact ?</string>
+  <string name="importConfirmation_title">Importer le contact ?</string>
+  <string name="contactDeletedToast">Contact supprimé</string>
+  <string name="number_anr_too_long">Le nombre est trop long</string>
+  <string name="copy_to_target_sim">Carte SIM</string>
+  <string name="copy_to_target_msim">Carte SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="delete_group_dialog_title">Supprimer le groupe</string>
+  <string name="edit_before_call">Modifier le numéro avant l\'appel</string>
+  <string name="description_videocall">Appel vidéo <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">Nom du groupe</string>
+  <string name="title_group_add">Nouveau groupe</string>
+  <string name="group_selector">Cliquez pour sélectionner le groupe</string>
+  <string name="title_del_call">Supprimer</string>
+  <string name="title_switch_group_remote">Groupes distants</string>
+  <string name="title_switch_group_local">Groupes locaux</string>
+  <string name="import_sim_contacts_message">Importation des contacts de la SIM\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">%d contact va être importé.</item>
+    <item quantity="other">%d contacts vont être importés.</item>
+  </plurals>
+  <string name="menu_memory_status">État de la mémoire</string>
+  <string name="memory_status_title">État de la mémoire</string>
+  <string name="memory_size">Total :</string>
+  <string name="memory_used">Utilisé :</string>
 </resources>

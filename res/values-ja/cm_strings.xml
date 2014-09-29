@@ -16,4 +16,78 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"クリップボードにコピーしました"</string>
+  <string name="deleteConfirmation_title">連絡先を削除しますか？</string>
+  <string name="importConfirmation_title">連絡先をインポートしますか？</string>
+  <string name="contactDeletedToast">連絡先を削除しました</string>
+  <string name="contactSavedToSimCardError">選択した連絡先をSIMに保存できませんでした</string>
+  <string name="airplane_mode_on">機内モードが有効になっている間はSIMカードにアクセスできません</string>
+  <string name="number_anr_too_long">番号が長すぎます</string>
+  <string name="email_address_too_long">メールアドレスが長すぎます</string>
+  <string name="sim_card_full">SIMカードがいっぱいです</string>
+  <string name="tag_too_long">連絡先の名前が長すぎます</string>
+  <string name="invalid_phone_number">電話番号が無効です</string>
+  <string name="videocall">ビデオ通話</string>
+  <string name="unknown">不明</string>
+  <string name="copy_to_target_sim">SIMカード</string>
+  <string name="copy_to_target_msim">SIMカード <xliff:g id="index">%d</xliff:g></string>
+  <string name="search_bar_hint">連絡先を検索</string>
+  <string name="delete_group_dialog_title">グループを削除</string>
+  <string name="edit_before_call">発信前に番号を編集</string>
+  <string name="description_videocall">ビデオ通話 <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">ダイヤルVT <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">グループ名</string>
+  <string name="title_group_add">新しいグループ</string>
+  <string name="group_selector">クリックしてグループを選択します</string>
+  <string name="title_group_picker">グループの選択</string>
+  <string name="noGroupsHelpText">"ローカルグループはありません。"</string>
+  <string name="menu_option_delete">グループを削除</string>
+  <string name="toast_not_add">"ローカルでないアカウントにあるすべての連絡先は追加できません"</string>
+  <string name="noMember">このグループにはメンバーがいません。</string>
+  <string name="button_delete">削除</string>
+  <string name="title_add_members">メンバーを追加</string>
+  <string name="select_all">すべて</string>
+  <string name="action_done">完了</string>
+  <plurals name="contacts_selected">
+    <item quantity="other">%d件を選択しています</item>
+  </plurals>
+  <string name="delete_call_title">通話履歴を削除</string>
+  <string name="delete_call_message">通話履歴を削除中\u2026</string>
+  <string name="delete_call_alert">選択した通話履歴を削除しますか？</string>
+  <string name="title_del_call">削除</string>
+  <string name="menu_sendViaSMS">連絡先をSMS経由で送信</string>
+  <string name="title_switch_group_remote">リモートグループ</string>
+  <string name="title_switch_group_local">ローカルグループ</string>
+  <string name="import_sim_contacts_title">SIMの連絡先をインポート</string>
+  <string name="import_sim_contacts_message">SIMの連絡先をインポート中\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="other">%d件の連絡先がインポートされます。</item>
+  </plurals>
+  <string name="import_finish">インポートが完了しました</string>
+  <plurals name="import_stop">
+    <item quantity="other">インポートはキャンセルされました、%d項目がインポートされました</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="other">%d件の連絡先が削除されます。</item>
+  </plurals>
+  <string name="delete_contacts_title">連絡先を削除</string>
+  <string name="delete_contacts_message">連絡先を削除中\u2026</string>
+  <string name="error_group_exist">「<xliff:g id="name">%s</xliff:g>」という名前のグループは既に存在しています</string>
+  <string name="menu_auto_sync_to_baidu_cloud">Baidu Cloudに自動同期</string>
+  <string name="menu_sync_to_baidu_cloud">Baidu Cloudに今すぐ同期</string>
+  <string name="delete_local_group_dialog_message">グループ「<xliff:g id="name">%s</xliff:g>」を削除しますか？</string>
+  <string name="edit_local_group_dialog_title">グループ名の変更</string>
+  <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g>件以上の連絡先は追加できません</string>
+  <string name="no_phone_number_or_email">電話番号またはメールアドレスを入力してください。</string>
+  <string name="memory_card_full">連絡先を保存できませんでした、携帯電話のメモリがいっぱいです</string>
+  <string name="menu_memory_status">メモリの状態</string>
+  <string name="memory_status_title">メモリの状態</string>
+  <string name="memory_size">合計:</string>
+  <string name="memory_used">使用:</string>
+  <string name="calculating_status_now">状態を計算中\u2026</string>
+  <string name="button_moveto">移動</string>
+  <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g>にコピー</string>
+  <string name="no_empty_email_in_usim">連絡先をコピーできませんでした、メールアドレスが無効です</string>
+  <string name="voicemail">ボイスメール</string>
+  <string name="select_call_title">通話履歴を選択</string>
+  <string name="invalid_number_type">番号の種類が無効です</string>
 </resources>

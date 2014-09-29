@@ -16,4 +16,82 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"Αντιγράφηκε στο πρόχειρο"</string>
+  <string name="deleteConfirmation_title">Διαγραφή επαφής;</string>
+  <string name="importConfirmation_title">Εισαγωγή επαφής;</string>
+  <string name="contactDeletedToast">Η επαφή διαγράφηκε</string>
+  <string name="contactSavedToSimCardError">Δεν ήταν δυνατή η αποθήκευση των επιλεγμένων επαφών στην κάρτα SIM</string>
+  <string name="airplane_mode_on">Δεν είναι δυνατή η πρόσβαση της κάρτας SIM ενώ είναι ενεργή η λειτουργία πτήσης</string>
+  <string name="number_anr_too_long">Ο αριθμός είναι πολύ μεγάλος</string>
+  <string name="email_address_too_long">Η διεύθυνση ηλεκτρονικού ταχυδρομείου είναι πολύ μεγάλη</string>
+  <string name="sim_card_full">Η κάρτα SIM είναι γεμάτη</string>
+  <string name="tag_too_long">Το όνομα της επαφής είναι πολύ μεγάλο</string>
+  <string name="invalid_phone_number">Ο αριθμός δεν είναι έγκυρος</string>
+  <string name="videocall">Βίντεο κλήση</string>
+  <string name="unknown">Άγνωστος</string>
+  <string name="copy_to_target_sim">Κάρτα SIM</string>
+  <string name="copy_to_target_msim">Κάρτα SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="search_bar_hint">Αναζήτηση επαφών</string>
+  <string name="delete_group_dialog_title">Διαγραφή ομάδας</string>
+  <string name="edit_before_call">Επεξεργασία αριθμού πριν την κλήση</string>
+  <string name="description_videocall">Βίντεο κλήση <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">Κλήση MB <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">Όνομα ομάδας</string>
+  <string name="title_group_add">Νέα ομάδα</string>
+  <string name="group_selector">Πιέστε για να επιλέξετε ομάδα</string>
+  <string name="title_group_picker">Επιλογή ομάδας</string>
+  <string name="noGroupsHelpText">"Δεν υπάρχουν τοπικές ομάδες."</string>
+  <string name="menu_option_delete">Διαγραφή ομάδας</string>
+  <string name="toast_not_add">"Δεν είναι δυνατή η προσθήκη όλων των επαφών σε μη-τοπικούς λογαριασμούς"</string>
+  <string name="noMember">Δεν υπάρχουν μέλη σε αυτή την ομάδα.</string>
+  <string name="button_delete">Αφαίρεση</string>
+  <string name="title_add_members">Προσθήκη μελών</string>
+  <string name="select_all">Όλες</string>
+  <string name="action_done">Τέλος</string>
+  <plurals name="contacts_selected">
+    <item quantity="one">Επιλέχθηκε %d</item>
+    <item quantity="other">Επιλέχθηκαν %d</item>
+  </plurals>
+  <string name="delete_call_title">Διαγραφή αρχείων κλήσεων</string>
+  <string name="delete_call_message">Διαγραφή αρχείων κλήσεων\u2026</string>
+  <string name="delete_call_alert">Διαγραφή των επιλεγμένων αρχείων κλήσεων;</string>
+  <string name="title_del_call">Διαγραφή</string>
+  <string name="menu_sendViaSMS">Αποστολή επαφής μέσω SMS</string>
+  <string name="title_switch_group_remote">Απομακρυσμένες ομάδες</string>
+  <string name="title_switch_group_local">Τοπικές ομάδες</string>
+  <string name="import_sim_contacts_title">Εισαγωγή επαφών SIM</string>
+  <string name="import_sim_contacts_message">Εισαγωγή επαφών SIM\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">%d επαφή θα εισαχθεί.</item>
+    <item quantity="other">%d επαφές θα εισαχθούν.</item>
+  </plurals>
+  <string name="import_finish">Η εισαγωγή ολοκληρώθηκε</string>
+  <plurals name="import_stop">
+    <item quantity="one">Η εισαγωγή ακυρώθηκε, %d επαφή εισήχθηκε</item>
+    <item quantity="other">Η εισαγωγή ακυρώθηκε, %d επαφές εισήχθηκαν</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">%d επαφή θα διαγραφεί.</item>
+    <item quantity="other">%d επαφές θα διαγραφούν.</item>
+  </plurals>
+  <string name="delete_contacts_title">Διαγραφή επαφών</string>
+  <string name="delete_contacts_message">Διαγραφή επαφών\u2026</string>
+  <string name="error_group_exist">Υπάρχει ήδη μια ομάδα με το όνομα \'<xliff:g id="name">%s</xliff:g>\'</string>
+  <string name="menu_auto_sync_to_baidu_cloud">Αυτόματος συγχρονισμός στο Baidu Cloud</string>
+  <string name="menu_sync_to_baidu_cloud">Συγχρονισμός στο Baidu Cloud τώρα</string>
+  <string name="delete_local_group_dialog_message">Διαγραφή ομάδας \'<xliff:g id="name">%s</xliff:g>\';</string>
+  <string name="edit_local_group_dialog_title">Μετονομασία ομάδας</string>
+  <string name="too_many_contacts_add_to_group">Δεν είναι δυνατή η προσθήκη περισσότερων από <xliff:g id="count">%d</xliff:g> επαφών</string>
+  <string name="no_phone_number_or_email">Παρακαλώ εισάγετε έναν τηλεφωνικό αριθμό ή ηλεκτρονική διεύθυνση.</string>
+  <string name="memory_card_full">Δεν ήταν δυνατή η αποθήκευση της επαφής, η μνήμη του τηλεφώνου είναι πλήρης</string>
+  <string name="menu_memory_status">Κατάσταση μνήμης</string>
+  <string name="memory_status_title">Κατάσταση μνήμης</string>
+  <string name="memory_size">Συνολικά:</string>
+  <string name="memory_used">Σε χρήση:</string>
+  <string name="calculating_status_now">Υπολογισμός κατάστασης\u2026</string>
+  <string name="button_moveto">Μετακίνηση</string>
+  <string name="menu_copyTo">Αντιγραφή σε <xliff:g id="destination">%s</xliff:g></string>
+  <string name="no_empty_email_in_usim">Η αντιγραφή επαφής απέτυχε, η διεύθυνση ηλεκτρονικού ταχυδρομείου δεν είναι έγκυρη</string>
+  <string name="voicemail">Μήνυμα τηλεφωνητή</string>
+  <string name="select_call_title">Επιλογή αρχείων κλήσεων</string>
+  <string name="invalid_number_type">Ο τύπος του αριθμού δεν είναι έγκυρος</string>
 </resources>

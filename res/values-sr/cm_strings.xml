@@ -16,4 +16,90 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"Копирано у привремену меморију"</string>
+  <string name="deleteConfirmation_title">Избриши контакт?</string>
+  <string name="importConfirmation_title">Увези контакт?</string>
+  <string name="contactDeletedToast">Контакт избрисан</string>
+  <string name="contactSavedToSimCardError">Не може да се сачува изабрани контакт на SIM картици</string>
+  <string name="airplane_mode_on">Не може се приступити SIM картици док је режим рада у авиону омогућен</string>
+  <string name="number_anr_too_long">Број је предугачак</string>
+  <string name="email_address_too_long">Адреса е-поште је предугачка</string>
+  <string name="sim_card_full">SIM картица је пуна</string>
+  <string name="tag_too_long">Име контакта је предугачко</string>
+  <string name="invalid_phone_number">Број телефона је неважећи</string>
+  <string name="videocall">Видео позив</string>
+  <string name="unknown">Непознат</string>
+  <string name="copy_to_target_sim">SIM картица</string>
+  <string name="copy_to_target_msim">SIM картица <xliff:g id="index">%d</xliff:g></string>
+  <string name="search_bar_hint">Претражи контакте</string>
+  <string name="delete_group_dialog_title">Избриши групу</string>
+  <string name="edit_before_call">Уреди број пре позива</string>
+  <string name="description_videocall">Видео позив <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">Бирај VT <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">Име групе</string>
+  <string name="title_group_add">Нова група</string>
+  <string name="group_selector">Кликни да изабереш групу</string>
+  <string name="title_group_picker">Изабрана група</string>
+  <string name="noGroupsHelpText">"Нема локалних група."</string>
+  <string name="menu_option_delete">Избриши групу</string>
+  <string name="toast_not_add">"Није могуће додавање свих контаката у не-локалне налоге"</string>
+  <string name="noMember">Нема чланова у овој групи.</string>
+  <string name="button_delete">Премести</string>
+  <string name="title_add_members">Додај чланове</string>
+  <string name="select_all">Све</string>
+  <string name="action_done">Готово</string>
+  <plurals name="contacts_selected">
+    <item quantity="one">%d изабран</item>
+    <item quantity="few">%d изабрана</item>
+    <item quantity="many">%d изабрано</item>
+    <item quantity="other">%d изабрано</item>
+  </plurals>
+  <string name="delete_call_title">Избриши евиденције позива</string>
+  <string name="delete_call_message">Брисање евиденција позива\u2026</string>
+  <string name="delete_call_alert">Избриши изабране евиденције позива?</string>
+  <string name="title_del_call">Избриши</string>
+  <string name="menu_sendViaSMS">Пошаљи контакт преко SMS</string>
+  <string name="title_switch_group_remote">Удаљене групе</string>
+  <string name="title_switch_group_local">Локалне групе</string>
+  <string name="import_sim_contacts_title">Увези SIM контакте</string>
+  <string name="import_sim_contacts_message">Увоз SIM контаката\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">%d контакт ће бити увежен.</item>
+    <item quantity="few">%d контакта ће бити увежена.</item>
+    <item quantity="many">%d контаката ће бити увежено.</item>
+    <item quantity="other">%d контаката ће бити увежено.</item>
+  </plurals>
+  <string name="import_finish">Увоз завршен</string>
+  <plurals name="import_stop">
+    <item quantity="one">Увоз је отказан. %d ставка је увежена</item>
+    <item quantity="few">Увоз је отказан. %d ставке су увежене</item>
+    <item quantity="many">Увоз је отказан. %d ставки је увежено</item>
+    <item quantity="other">Увоз је отказан. %d ставки је увежено</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">%d контакт ће бити избрисан.</item>
+    <item quantity="few">%d контакта ће бити избрисана.</item>
+    <item quantity="many">%d контаката ће бити избрисано.</item>
+    <item quantity="other">%d контаката ће бити избрисано.</item>
+  </plurals>
+  <string name="delete_contacts_title">Избриши контакте</string>
+  <string name="delete_contacts_message">Брисање контаката\u2026</string>
+  <string name="error_group_exist">Група под називом \'<xliff:g id="name">%s</xliff:g>\' већ постоји</string>
+  <string name="menu_auto_sync_to_baidu_cloud">Аутоматска синхронизација на Baidu Cloud</string>
+  <string name="menu_sync_to_baidu_cloud">Синхронизуј на Baidu Cloud сада</string>
+  <string name="delete_local_group_dialog_message">Избриши групу \'<xliff:g id="name">%s</xliff:g>\'?</string>
+  <string name="edit_local_group_dialog_title">Преименуј групу</string>
+  <string name="too_many_contacts_add_to_group">Не више од <xliff:g id="count">%d</xliff:g> контаката може бити додато</string>
+  <string name="no_phone_number_or_email">Унеси број телефона или адресу е-поште.</string>
+  <string name="memory_card_full">Контакт не може бити сачуван, меморија телефона је пуна</string>
+  <string name="menu_memory_status">Статус меморије</string>
+  <string name="memory_status_title">Статус меморије</string>
+  <string name="memory_size">Укупно:</string>
+  <string name="memory_used">Искоришћено:</string>
+  <string name="calculating_status_now">Рачунање статуса\u2026</string>
+  <string name="button_moveto">Премести</string>
+  <string name="menu_copyTo">Копирај на <xliff:g id="destination">%s</xliff:g></string>
+  <string name="no_empty_email_in_usim">Копирање контакта није успело, адреса е-поште је неважећа</string>
+  <string name="voicemail">Говорна пошта</string>
+  <string name="select_call_title">Изабери евиденцију позива</string>
+  <string name="invalid_number_type">Тип броја је неважећи</string>
 </resources>

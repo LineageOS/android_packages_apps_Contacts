@@ -16,4 +16,86 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"Скопировано в буфер обмена"</string>
+  <string name="deleteConfirmation_title">Удалить контакт?</string>
+  <string name="importConfirmation_title">Импортировать контакт?</string>
+  <string name="contactDeletedToast">Контакт удалён</string>
+  <string name="contactSavedToSimCardError">Не удалось сохранить выбранные контакты на SIM-карту</string>
+  <string name="airplane_mode_on">Чтобы получить доступ к SIM-карте, выключите режим полёта.</string>
+  <string name="number_anr_too_long">Слишком длинный номер</string>
+  <string name="email_address_too_long">Слишком длинный адрес электронной почты</string>
+  <string name="sim_card_full">SIM-карта заполнена</string>
+  <string name="tag_too_long">Слишком длинное имя контакта</string>
+  <string name="invalid_phone_number">Неверный номер телефона</string>
+  <string name="videocall">Видеовызов</string>
+  <string name="unknown">Неизвестный</string>
+  <string name="copy_to_target_sim">SIM-карта</string>
+  <string name="copy_to_target_msim">SIM-карта <xliff:g id="index">%d</xliff:g></string>
+  <string name="search_bar_hint">Поиск контактов</string>
+  <string name="delete_group_dialog_title">Удалить группу</string>
+  <string name="edit_before_call">Изменить номер и вызвать</string>
+  <string name="description_videocall">Видеовызов <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">Видеовызов <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">Название группы</string>
+  <string name="title_group_add">Новая группа</string>
+  <string name="group_selector">Нажмите, чтобы выбрать группу</string>
+  <string name="title_group_picker">Выбор группы</string>
+  <string name="noGroupsHelpText">"На устройстве нет групп контактов."</string>
+  <string name="menu_option_delete">Удалить группу</string>
+  <string name="toast_not_add">"Не удалось добавить контакты"</string>
+  <string name="noMember">Здесь пока никого нет.</string>
+  <string name="button_delete">Удалить</string>
+  <string name="title_add_members">Добавить участников</string>
+  <string name="select_all">Все</string>
+  <string name="action_done">Готово</string>
+  <plurals name="contacts_selected">
+    <item quantity="one">%d выбран</item>
+    <item quantity="few">%d выбрано</item>
+    <item quantity="other">%d выбрано</item>
+  </plurals>
+  <string name="delete_call_title">Удалить журналы вызовов</string>
+  <string name="delete_call_message">Удаление журнала вызовов\u2026</string>
+  <string name="delete_call_alert">Удалить выбранные записи из журнала вызовов?</string>
+  <string name="title_del_call">Удалить</string>
+  <string name="menu_sendViaSMS">Отправить контакт по SMS</string>
+  <string name="title_switch_group_remote">Группы аккаунтов</string>
+  <string name="title_switch_group_local">Группы на устройстве</string>
+  <string name="import_sim_contacts_title">Импортировать контакты SIM</string>
+  <string name="import_sim_contacts_message">Импорт контактов SIM\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">Будет импортирован %d контакт.</item>
+    <item quantity="few">Будет импортировано %d контакта.</item>
+    <item quantity="other">Будет импортировано %d контактов.</item>
+  </plurals>
+  <string name="import_finish">Импорт завершён</string>
+  <plurals name="import_stop">
+    <item quantity="one">Процесс отменён, импортирован %d элемент</item>
+    <item quantity="few">Процесс отменён, импортировано %d элемента</item>
+    <item quantity="other">Процесс отменён, импортировано %d элементов</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">Будет удалён %d контакт.</item>
+    <item quantity="few">Будет удалено %d контакта.</item>
+    <item quantity="other">Будет удалено %d контактов.</item>
+  </plurals>
+  <string name="delete_contacts_title">Удалить контакты</string>
+  <string name="delete_contacts_message">Удаление контактов\u2026</string>
+  <string name="error_group_exist">Группа с названием «<xliff:g id="name">%s</xliff:g>» уже существует</string>
+  <string name="menu_auto_sync_to_baidu_cloud">Автосинхронизация с Baidu Cloud</string>
+  <string name="menu_sync_to_baidu_cloud">Синхронизировать с Baidu Cloud</string>
+  <string name="delete_local_group_dialog_message">Удалить группу «<xliff:g id="name">%s</xliff:g>»?</string>
+  <string name="edit_local_group_dialog_title">Переименовать</string>
+  <string name="too_many_contacts_add_to_group">Можно добавить не более <xliff:g id="count">%d</xliff:g> контактов</string>
+  <string name="no_phone_number_or_email">Введите номер телефона или адрес электронной почты.</string>
+  <string name="memory_card_full">Невозможно сохранить контакт, память устройства заполнена</string>
+  <string name="menu_memory_status">Сост. памяти</string>
+  <string name="memory_status_title">Состояние памяти</string>
+  <string name="memory_size">Объём:</string>
+  <string name="memory_used">Используется:</string>
+  <string name="calculating_status_now">Выполняется подсчёт\u2026</string>
+  <string name="button_moveto">Переместить</string>
+  <string name="menu_copyTo">Копировать в <xliff:g id="destination">%s</xliff:g></string>
+  <string name="no_empty_email_in_usim">Не удалось скопировать контакт, неверный адрес электронной почты</string>
+  <string name="voicemail">Голосовая почта</string>
+  <string name="select_call_title">Выберите журналы вызовов</string>
+  <string name="invalid_number_type">Неверный тип номера</string>
 </resources>

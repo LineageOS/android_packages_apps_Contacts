@@ -16,4 +16,82 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"Copiado para a área de transferência"</string>
+  <string name="deleteConfirmation_title">Apagar contacto?</string>
+  <string name="importConfirmation_title">Importar contacto?</string>
+  <string name="contactDeletedToast">Contacto apagado</string>
+  <string name="contactSavedToSimCardError">Não consegui gravar no cartão SIM, os contactos selecionados</string>
+  <string name="airplane_mode_on">O cartão SIM não pode ser acedido quando o modo avião estiver ativado</string>
+  <string name="number_anr_too_long">O número é muito longo</string>
+  <string name="email_address_too_long">O endereço de e-mail é muito longo</string>
+  <string name="sim_card_full">O cartão está cheio</string>
+  <string name="tag_too_long">O nome do contacto é muito longo</string>
+  <string name="invalid_phone_number">O número de telefone é inválido</string>
+  <string name="videocall">Chamada de vídeo</string>
+  <string name="unknown">Desconhecido</string>
+  <string name="copy_to_target_sim">Cartão SIM</string>
+  <string name="copy_to_target_msim">Cartão SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="search_bar_hint">Procurar contactos</string>
+  <string name="delete_group_dialog_title">Apagar grupo</string>
+  <string name="edit_before_call">Editar número antes da chamada</string>
+  <string name="description_videocall">Chamada de vídeo <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">Ligação VT <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">Nome do grupo</string>
+  <string name="title_group_add">Novo grupo</string>
+  <string name="group_selector">Clicar para selecionar o grupo</string>
+  <string name="title_group_picker">Selecione o grupo</string>
+  <string name="noGroupsHelpText">"Não há grupos locais."</string>
+  <string name="menu_option_delete">Apagar grupo</string>
+  <string name="toast_not_add">"Não é possível adicionar todos os contactos em contas não locais"</string>
+  <string name="noMember">Este grupo não tem membros.</string>
+  <string name="button_delete">Remover</string>
+  <string name="title_add_members">Adicionar membros</string>
+  <string name="select_all">Todos</string>
+  <string name="action_done">Concluído</string>
+  <plurals name="contacts_selected">
+    <item quantity="one">%d selecionado</item>
+    <item quantity="other">%d selecionados</item>
+  </plurals>
+  <string name="delete_call_title">Apagar os registos de chamadas</string>
+  <string name="delete_call_message">A apagar registos de chamadas\u2026</string>
+  <string name="delete_call_alert">Apagar os registos de chamadas selecionados?</string>
+  <string name="title_del_call">Apagar</string>
+  <string name="menu_sendViaSMS">Enviar contacto via SMS</string>
+  <string name="title_switch_group_remote">Grupos remotos</string>
+  <string name="title_switch_group_local">Grupos locais</string>
+  <string name="import_sim_contacts_title">Importar contactos do SIM</string>
+  <string name="import_sim_contacts_message">A importar contactos\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">%d contacto será importado.</item>
+    <item quantity="other">%d contactos serão importados.</item>
+  </plurals>
+  <string name="import_finish">Importação terminada</string>
+  <plurals name="import_stop">
+    <item quantity="one">A importação foi cancelada, %d item foi importado</item>
+    <item quantity="other">A importação foi cancelada, %d itens foram importados</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">%d contacto será apagado.</item>
+    <item quantity="other">%d contactos serão apagados.</item>
+  </plurals>
+  <string name="delete_contacts_title">Apagar contactos</string>
+  <string name="delete_contacts_message">A apagar contactos\u2026</string>
+  <string name="error_group_exist">Um grupo chamado \'<xliff:g id="name">%s</xliff:g>\' já existe</string>
+  <string name="menu_auto_sync_to_baidu_cloud">Sincronização automática com Baidu Cloud</string>
+  <string name="menu_sync_to_baidu_cloud">Sincronizar com Baidu Cloud agora</string>
+  <string name="delete_local_group_dialog_message">Apagar o grupo \'<xliff:g id="name">%s</xliff:g>\'?</string>
+  <string name="edit_local_group_dialog_title">Mudar o nome do grupo</string>
+  <string name="too_many_contacts_add_to_group">Não podem ser adicionados mais que <xliff:g id="count">%d</xliff:g> contactos</string>
+  <string name="no_phone_number_or_email">Por favor insira um número de telefone ou endereço de e-mail.</string>
+  <string name="memory_card_full">O contacto não pôde ser guardado, a memória do telefone está cheia</string>
+  <string name="menu_memory_status">Estado da memória</string>
+  <string name="memory_status_title">Estado da memória</string>
+  <string name="memory_size">Total:</string>
+  <string name="memory_used">Utilizada:</string>
+  <string name="calculating_status_now">A calcular estado\u2026</string>
+  <string name="button_moveto">Mover</string>
+  <string name="menu_copyTo">Copiar para <xliff:g id="destination">%s</xliff:g></string>
+  <string name="no_empty_email_in_usim">Copiar o contacto falhou, o endereço de e-mail é inválido</string>
+  <string name="voicemail">Correio de voz</string>
+  <string name="select_call_title">Selecionar os registos de chamadas</string>
+  <string name="invalid_number_type">O tipo de número é inválido</string>
 </resources>

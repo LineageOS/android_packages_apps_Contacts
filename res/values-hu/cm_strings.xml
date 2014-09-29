@@ -16,4 +16,82 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"Vágólapra másolva"</string>
+  <string name="deleteConfirmation_title">Törli a névjegyet?</string>
+  <string name="importConfirmation_title">Importálja a névjegyet?</string>
+  <string name="contactDeletedToast">Névjegy törölve</string>
+  <string name="contactSavedToSimCardError">Nem lehet elmenteni a kiválasztott névjegyeket a SIM kártyára</string>
+  <string name="airplane_mode_on">A SIM kártya nem érhető el, míg a repülőgép üzemmód engedélyezve van</string>
+  <string name="number_anr_too_long">A szám túl hosszú</string>
+  <string name="email_address_too_long">Az e-mail cím túl hosszú</string>
+  <string name="sim_card_full">A SIM kártya megtelt</string>
+  <string name="tag_too_long">A kapcsolat neve túl hosszú</string>
+  <string name="invalid_phone_number">A telefonszám érvénytelen</string>
+  <string name="videocall">Videóhívás</string>
+  <string name="unknown">Ismeretlen</string>
+  <string name="copy_to_target_sim">SIM kártya</string>
+  <string name="copy_to_target_msim">SIM kártya <xliff:g id="index">%d</xliff:g></string>
+  <string name="search_bar_hint">Keresés a névjegyzékben</string>
+  <string name="delete_group_dialog_title">Csoport törlése</string>
+  <string name="edit_before_call">Szám szerkesztése hívás előtt</string>
+  <string name="description_videocall">Videóhívás <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">VT tárcsázás <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">Csoport neve</string>
+  <string name="title_group_add">Új csoport</string>
+  <string name="group_selector">Érintse meg a csoport kiválasztásához</string>
+  <string name="title_group_picker">Csoport kiválasztása</string>
+  <string name="noGroupsHelpText">"Nincsenek helyi csoportok."</string>
+  <string name="menu_option_delete">Csoport törlése</string>
+  <string name="toast_not_add">"Nem lehet hozzáadni az összes névjegyet nem helyi fiókhoz"</string>
+  <string name="noMember">Ennek a csoportnak nincsenek tagjai.</string>
+  <string name="button_delete">Eltávolítás</string>
+  <string name="title_add_members">Tagok hozzáadása</string>
+  <string name="select_all">Mind</string>
+  <string name="action_done">Kész</string>
+  <plurals name="contacts_selected">
+    <item quantity="one">%d kiválasztva</item>
+    <item quantity="other">%d kiválasztva</item>
+  </plurals>
+  <string name="delete_call_title">Hívásnaplók törlése</string>
+  <string name="delete_call_message">Hívásnaplók törlése\u2026</string>
+  <string name="delete_call_alert">Kijelölt hívásnaplók törlése?</string>
+  <string name="title_del_call">Törlés</string>
+  <string name="menu_sendViaSMS">Névjegy küldése SMS-ben</string>
+  <string name="title_switch_group_remote">Távoli csoportok</string>
+  <string name="title_switch_group_local">Helyi csoportok</string>
+  <string name="import_sim_contacts_title">SIM névjegyek importálása</string>
+  <string name="import_sim_contacts_message">SIM névjegyek importálása\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">%d kapcsolat lesz importálva.</item>
+    <item quantity="other">%d kapcsolat lesz importálva.</item>
+  </plurals>
+  <string name="import_finish">Importálás befejeződött</string>
+  <plurals name="import_stop">
+    <item quantity="one">Importálás megszakítva, %d elem lett importálva</item>
+    <item quantity="other">Importálás megszakítva, %d elem lett importálva</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">%d kapcsolat törölve lesz.</item>
+    <item quantity="other">%d kapcsolat törölve lesz.</item>
+  </plurals>
+  <string name="delete_contacts_title">Névjegyek törlése</string>
+  <string name="delete_contacts_message">Névjegyek törlése\u2026</string>
+  <string name="error_group_exist">\"<xliff:g id="name">%s</xliff:g>\" nevű csoport már létezik</string>
+  <string name="menu_auto_sync_to_baidu_cloud">Automatikus szinkronizálás Baidu Cloud-ba</string>
+  <string name="menu_sync_to_baidu_cloud">Baidu Cloud szinkronizálás most</string>
+  <string name="delete_local_group_dialog_message">\"<xliff:g id="name">%s</xliff:g>\" csoport törlése?</string>
+  <string name="edit_local_group_dialog_title">Csoport átnevezése</string>
+  <string name="too_many_contacts_add_to_group">Ennél több névjegy nem adható hozzá: <xliff:g id="count">%d</xliff:g></string>
+  <string name="no_phone_number_or_email">Kérjük, adjon meg telefonszámot vagy e-mail címet.</string>
+  <string name="memory_card_full">A névjegyet nem lehet menteni, a telefon memóriája megtelt</string>
+  <string name="menu_memory_status">Memória állapota</string>
+  <string name="memory_status_title">Memória állapota</string>
+  <string name="memory_size">Teljes:</string>
+  <string name="memory_used">Foglalt:</string>
+  <string name="calculating_status_now">Állapot számítása\u2026</string>
+  <string name="button_moveto">Mozgatás</string>
+  <string name="menu_copyTo">Másolás ide: <xliff:g id="destination">%s</xliff:g></string>
+  <string name="no_empty_email_in_usim">A névjegy másolása sikertelen, az e-mail cím érvénytelen</string>
+  <string name="voicemail">Hangposta</string>
+  <string name="select_call_title">Hívásnaplók kiválasztása</string>
+  <string name="invalid_number_type">A számtípus érvénytelen</string>
 </resources>

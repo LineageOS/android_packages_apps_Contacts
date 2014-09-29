@@ -16,4 +16,80 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"Nukopijuota į iškarpinę"</string>
+  <string name="deleteConfirmation_title">Ištrinti kontaktą?</string>
+  <string name="importConfirmation_title">Importuoti kontaktą?</string>
+  <string name="contactDeletedToast">Kontaktas ištrintas</string>
+  <string name="airplane_mode_on">SIM kortelė negali būti atverta, kai įjungtas lėktuvo režimas</string>
+  <string name="number_anr_too_long">Numeris per ilgas</string>
+  <string name="email_address_too_long">El. pašto adresas per ilgas</string>
+  <string name="sim_card_full">SIM kortelė pilna</string>
+  <string name="tag_too_long">Kontakto vardas per ilgas</string>
+  <string name="invalid_phone_number">Telefono numeris neteisingas</string>
+  <string name="videocall">Vaizdo skambutis</string>
+  <string name="unknown">Nežinomas</string>
+  <string name="copy_to_target_sim">SIM kortelė</string>
+  <string name="copy_to_target_msim">SIM kortelė <xliff:g id="index">%d</xliff:g></string>
+  <string name="search_bar_hint">Ieškoti kontaktų</string>
+  <string name="delete_group_dialog_title">ištrinti grupę</string>
+  <string name="edit_before_call">Redaguoti numerį prieš skambinant</string>
+  <string name="description_videocall">Vaizdo skambutis <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">Rinkti VT <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">Grupės pavadinimas</string>
+  <string name="title_group_add">Nauja grupė</string>
+  <string name="group_selector">Paspauskite, kad pasirinktumėte grupę</string>
+  <string name="title_group_picker">Grupės pasirinkimas</string>
+  <string name="noGroupsHelpText">"Nėra vietinių grupių."</string>
+  <string name="menu_option_delete">ištrinti grupę</string>
+  <string name="toast_not_add">"Negalima pridėti visus ne vietinių paskyrų kontaktus"</string>
+  <string name="noMember">Nėra narių šioje grupėje.</string>
+  <string name="button_delete">Pašalinti</string>
+  <string name="title_add_members">Pridėti narius</string>
+  <string name="select_all">Visi</string>
+  <string name="action_done">Atlikta</string>
+  <string name="delete_call_title">Ištrinti skambučių žurnalus</string>
+  <string name="delete_call_message">Ištrinami skambučių žurnalai\u2026</string>
+  <string name="delete_call_alert">Ištrinti pasirinktus skambučių žurnalus?</string>
+  <string name="title_del_call">Ištrinti</string>
+  <string name="menu_sendViaSMS">Siųsti kontaktą SMS pranešimu</string>
+  <string name="title_switch_group_remote">Nuotolinės grupės</string>
+  <string name="title_switch_group_local">Vietinės grupės</string>
+  <string name="import_sim_contacts_title">Importuoti SIM kontaktus</string>
+  <string name="import_sim_contacts_message">Importuojami SIM kontaktai\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">%d kontaktas bus importuotas.</item>
+    <item quantity="few">%d kontaktai bus importuoti.</item>
+    <item quantity="other">%d kontaktų bus importuota.</item>
+  </plurals>
+  <string name="import_finish">Importavimas baigtas</string>
+  <plurals name="import_stop">
+    <item quantity="one">Importavimas buvo atšauktas, %d elementas buvo importuotas</item>
+    <item quantity="few">Importavimas buvo atšauktas, %d elementai buvo importuoti</item>
+    <item quantity="other">Importavimas buvo atšauktas, %d elementų buvo importuota</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">%d kontaktas bus ištrintas.</item>
+    <item quantity="few">%d kontaktai bus ištrinti.</item>
+    <item quantity="other">%d kontaktų bus ištrinta.</item>
+  </plurals>
+  <string name="delete_contacts_title">Ištrinti kontaktus</string>
+  <string name="delete_contacts_message">Ištrinami kontakai\u2026</string>
+  <string name="error_group_exist">Grupė pavadinimu „<xliff:g id="name">%s</xliff:g>“ jau egzistuoja</string>
+  <string name="menu_auto_sync_to_baidu_cloud">Automatiškai sinchronizuoti su „Baidu Cloud“</string>
+  <string name="menu_sync_to_baidu_cloud">Sinchronizuoti su „Baidu Cloud“ dabar</string>
+  <string name="delete_local_group_dialog_message">Ištrinti grupę „<xliff:g id="name">%s</xliff:g>“?</string>
+  <string name="edit_local_group_dialog_title">Pervadinti grupę</string>
+  <string name="too_many_contacts_add_to_group">Negali būti pridėta daugiau nei <xliff:g id="count">%d</xliff:g> kontaktų</string>
+  <string name="no_phone_number_or_email">Prašome įvesti telefono numerį arba el. pašto adresą.</string>
+  <string name="memory_card_full">Kontaktas negalėjo būti išsaugotas, telefono atmintis pilna</string>
+  <string name="menu_memory_status">Atminties būsena</string>
+  <string name="memory_status_title">Atminties būsena</string>
+  <string name="memory_size">Viso:</string>
+  <string name="memory_used">Naudojama:</string>
+  <string name="calculating_status_now">Apskaičiuojama būsena\u2026</string>
+  <string name="button_moveto">Perkelti</string>
+  <string name="menu_copyTo">Kopijuoti į <xliff:g id="destination">%s</xliff:g></string>
+  <string name="no_empty_email_in_usim">Nukopijuoti kontakto nepavyko, el. pašto adresas yra neteisingas</string>
+  <string name="voicemail">Balso paštas</string>
+  <string name="select_call_title">Pasirinkti skambučių žurnalus</string>
+  <string name="invalid_number_type">Numerio tipas yra neleistinas</string>
 </resources>

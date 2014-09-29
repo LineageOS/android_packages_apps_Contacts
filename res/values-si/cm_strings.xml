@@ -16,4 +16,82 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"පසුරු පුවරුවට පිටපත් කෙරුණි"</string>
+  <string name="deleteConfirmation_title">සම්බන්ධතාව මකන්නද?</string>
+  <string name="importConfirmation_title">සම්බන්ධතාව ආයාත කරන්නද?</string>
+  <string name="contactDeletedToast">සම්බන්ධතාව මකා දැමුණි</string>
+  <string name="contactSavedToSimCardError">තෝරාගත් සම්බන්ධතා සිම් කාඩ් පතට සුරැකීමට නොහැකිවිය</string>
+  <string name="airplane_mode_on">අහස්යානා ප්‍රකාරය සබල විට සිම් පත පරිශීලනය කල නොහැක</string>
+  <string name="number_anr_too_long">අංකය දිග වැඩිය</string>
+  <string name="email_address_too_long">ඊ-තැපැල් ලිපිනය දිග වැඩිය</string>
+  <string name="sim_card_full">සිම් පත පිරී ඇත</string>
+  <string name="tag_too_long">සම්බන්ධතාවේ නම දිග වැඩිය</string>
+  <string name="invalid_phone_number">දුරකථන අංකය අවලංගුය</string>
+  <string name="videocall">වීඩියෝ ඇමතුම</string>
+  <string name="unknown">නොදනී</string>
+  <string name="copy_to_target_sim">සිම් කාඩ්පත</string>
+  <string name="copy_to_target_msim">සිම් කාඩ්පත <xliff:g id="index">%d</xliff:g></string>
+  <string name="search_bar_hint">සම්බන්ධතා සොයන්න</string>
+  <string name="delete_group_dialog_title">කාණ්ඩය මකන්න</string>
+  <string name="edit_before_call">ඇමතීමට පෙර අංකය සකසන්න</string>
+  <string name="description_videocall">වීඩියෝ ඇමතුම <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">ඩයල් VT <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">කාණ්ඩයේ නම</string>
+  <string name="title_group_add">අලුත් කාණ්ඩයක්</string>
+  <string name="group_selector">කාණ්ඩය තේරීමට ඔබන්න</string>
+  <string name="title_group_picker">කාණ්ඩය තෝරන්න</string>
+  <string name="noGroupsHelpText">"පෙදෙසි කාණ්ඩ නොමැත."</string>
+  <string name="menu_option_delete">කාණ්ඩය මකන්න</string>
+  <string name="toast_not_add">"පෙදෙසි-නොවන ගිණුම් තුල ඇති සියලුම සම්බන්ධතා එක් කල නොහැක"</string>
+  <string name="noMember">මෙම කාණ්ඩයේ සාමාජිකයන් නොමැත.</string>
+  <string name="button_delete">ඉවත් කරන්න</string>
+  <string name="title_add_members">සාමාජිකයන් එක් කරන්න</string>
+  <string name="select_all">සියලු</string>
+  <string name="action_done">හරි</string>
+  <plurals name="contacts_selected">
+    <item quantity="one">%d තෝරා ඇත</item>
+    <item quantity="other">%d තෝරා ඇත</item>
+  </plurals>
+  <string name="delete_call_title">ඇමතුම් ලොගයන් මකන්න</string>
+  <string name="delete_call_message">ඇමතුම් ලොගයන් මකමින්\u2026</string>
+  <string name="delete_call_alert">තෝරාගත් ඇමතුම් ලොගයන් මකන්නද?</string>
+  <string name="title_del_call">මකන්න</string>
+  <string name="menu_sendViaSMS">සම්බන්ධතාව SMS මගින් යවන්න</string>
+  <string name="title_switch_group_remote">දුරස්ථ කාණ්ඩ</string>
+  <string name="title_switch_group_local">පෙදෙසි කාණ්ඩ</string>
+  <string name="import_sim_contacts_title">සිම් සම්බන්ධතා ආයාත කරන්න</string>
+  <string name="import_sim_contacts_message">සිම් සම්බන්ධතා ආයාත කරමින්\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">සම්බන්ධතා %d ක් ආයාත වනු ඇත.</item>
+    <item quantity="other">සම්බන්ධතා %d ක් ආයාත වනු ඇත.</item>
+  </plurals>
+  <string name="import_finish">ආයාතය නිමාවුනි</string>
+  <plurals name="import_stop">
+    <item quantity="one">ආයාත කිරීම අවලංගු කෙරුණි, අයිතම %d ක් ආයාත කෙරුණි</item>
+    <item quantity="other">ආයාත කිරීම අවලංගු කෙරුණි, අයිතම %d ක් ආයාත කෙරුණි</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">සම්බන්ධතා %d ක් මකා දැමෙනු ඇත.</item>
+    <item quantity="other">සම්බන්ධතා %d ක් මකා දැමෙනු ඇත.</item>
+  </plurals>
+  <string name="delete_contacts_title">සම්බන්ධතා මකන්න</string>
+  <string name="delete_contacts_message">සම්බන්ධතා මකාදමමින්\u2026</string>
+  <string name="error_group_exist">\'<xliff:g id="name">%s</xliff:g>\' නමින් කාණ්ඩයක් දැනටමත් ඇත</string>
+  <string name="menu_auto_sync_to_baidu_cloud">Baidu Cloud වෙත ස්වයංක්‍රීයව සමමුහුර්ත කරන්න</string>
+  <string name="menu_sync_to_baidu_cloud">Baidu Cloud වෙත දැන් සමමුහුර්ත කරන්න</string>
+  <string name="delete_local_group_dialog_message">\'<xliff:g id="name">%s</xliff:g>\' කාණ්ඩය මකන්නද?</string>
+  <string name="edit_local_group_dialog_title">කාණ්ඩය යලි නම් තබන්න</string>
+  <string name="too_many_contacts_add_to_group">සම්බන්ධතා <xliff:g id="count">%d</xliff:g> ට වඩා එක් කල නොහැක</string>
+  <string name="no_phone_number_or_email">කරුණාකර දුරකථන අංකයක් හෝ ඊ-තැපැල් ලිපිනයක් ඇතුලත් කරන්න.</string>
+  <string name="memory_card_full">සම්බන්ධතාව සුරැකීමට නොහැකි විය, දුරකථනයේ මතකය පිරී ඇත</string>
+  <string name="menu_memory_status">මතකයේ තත්වය</string>
+  <string name="memory_status_title">මතකයේ තත්වය</string>
+  <string name="memory_size">එකතුව:</string>
+  <string name="memory_used">භාවිතාවූ:</string>
+  <string name="calculating_status_now">තත්වය ගණනය කරමින්\u2026</string>
+  <string name="button_moveto">ගෙනයන්න</string>
+  <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g> වෙත පිටපත් කරන්න</string>
+  <string name="no_empty_email_in_usim">සම්බන්ධතාව පිටපත් කිරීම අසමත්විය, ඊ-තැපැල් ලිපිනය අවලංගුය</string>
+  <string name="voicemail">හඬ තැපෑල</string>
+  <string name="select_call_title">ඇමතුම් ලොගය තෝරන්න</string>
+  <string name="invalid_number_type">අංකයේ විලාසය අවලංගුය</string>
 </resources>

@@ -16,4 +16,82 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"Kopioitu leikepöydälle"</string>
+  <string name="deleteConfirmation_title">Poista yhteystieto?</string>
+  <string name="importConfirmation_title">Tuo yhteystieto?</string>
+  <string name="contactDeletedToast">Yhteystieto poistettu</string>
+  <string name="contactSavedToSimCardError">Valittujen yhteystietojen tallennus SIM-kortille epäonnistui</string>
+  <string name="airplane_mode_on">SIM-korttia ei voida käyttää, kun lentokonetila on käytössä</string>
+  <string name="number_anr_too_long">Numero on liian pitkä</string>
+  <string name="email_address_too_long">Sähköpostiosoite on liian pitkä</string>
+  <string name="sim_card_full">SIM-kortti on täynnä</string>
+  <string name="tag_too_long">Yhteystiedon nimi on liian pitkä</string>
+  <string name="invalid_phone_number">Puhelinnumero on virheellinen</string>
+  <string name="videocall">Videopuhelu</string>
+  <string name="unknown">Tuntematon</string>
+  <string name="copy_to_target_sim">SIM-kortti</string>
+  <string name="copy_to_target_msim">SIM-kortti <xliff:g id="index">%d</xliff:g></string>
+  <string name="search_bar_hint">Etsi yhteystietoja</string>
+  <string name="delete_group_dialog_title">Poista ryhmä</string>
+  <string name="edit_before_call">Muokkaa numeroa ennen puhelua</string>
+  <string name="description_videocall">Videopuhelu <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">Soita videopuhelu <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">Ryhmän nimi</string>
+  <string name="title_group_add">Uusi ryhmä</string>
+  <string name="group_selector">Paina valitaksesi ryhmän</string>
+  <string name="title_group_picker">Ryhmän valinta</string>
+  <string name="noGroupsHelpText">"Ei paikallisia ryhmiä."</string>
+  <string name="menu_option_delete">Poista ryhmä</string>
+  <string name="toast_not_add">"Ei voi lisätä kaikkia yhteystietoja muihin kuin paikallisiin tileihin"</string>
+  <string name="noMember">Ei henkilöitä tässä ryhmässä.</string>
+  <string name="button_delete">Poista</string>
+  <string name="title_add_members">Lisää henkilöitä</string>
+  <string name="select_all">Kaikki</string>
+  <string name="action_done">Valmis</string>
+  <plurals name="contacts_selected">
+    <item quantity="one">%d valittu</item>
+    <item quantity="other">%d valittu</item>
+  </plurals>
+  <string name="delete_call_title">Poista puhelulokit</string>
+  <string name="delete_call_message">Poistetaan puhelulokeja\u2026</string>
+  <string name="delete_call_alert">Poista valitut puhelulokit?</string>
+  <string name="title_del_call">Poista</string>
+  <string name="menu_sendViaSMS">Lähetä yhteystieto tekstiviestillä</string>
+  <string name="title_switch_group_remote">Poista ryhmiä</string>
+  <string name="title_switch_group_local">Paikalliset ryhmät</string>
+  <string name="import_sim_contacts_title">Tuo SIM-yhteystietoja</string>
+  <string name="import_sim_contacts_message">Tuodaan SIM-yhteystietoja\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">%d yhteystieto tuodaan.</item>
+    <item quantity="other">%d yhteystietoa tuodaan.</item>
+  </plurals>
+  <string name="import_finish">Tuonti valmis</string>
+  <plurals name="import_stop">
+    <item quantity="one">Tuonti peruttiin, %d kohde tuotiin</item>
+    <item quantity="other">Tuonti peruttiin, %d kohdetta tuotiin</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">%d yhteystieto poistetaan.</item>
+    <item quantity="other">%d yhteystietoa poistetaan.</item>
+  </plurals>
+  <string name="delete_contacts_title">Poista yhteystietoja</string>
+  <string name="delete_contacts_message">Poistetaan yhteystietoja\u2026</string>
+  <string name="error_group_exist">Ryhmä nimeltä \'<xliff:g id="name">%s</xliff:g>\' on jo olemassa</string>
+  <string name="menu_auto_sync_to_baidu_cloud">Automaattinen synkronointi Baidu Cloudiin</string>
+  <string name="menu_sync_to_baidu_cloud">Synkronoi nyt Baidu Cloudiin</string>
+  <string name="delete_local_group_dialog_message">Poista ryhmä \'<xliff:g id="name">%s</xliff:g>\'?</string>
+  <string name="edit_local_group_dialog_title">Nimeä ryhmä uudelleen</string>
+  <string name="too_many_contacts_add_to_group">Enintään <xliff:g id="count">%d</xliff:g> yhteystietoa voidaan lisätä</string>
+  <string name="no_phone_number_or_email">Anna puhelinnumero tai sähköpostiosoite.</string>
+  <string name="memory_card_full">Yhteystietoa ei voitu tallentaa, puhelimen muisti on täynnä</string>
+  <string name="menu_memory_status">Muistin tila</string>
+  <string name="memory_status_title">Muistin tila</string>
+  <string name="memory_size">Yhteensä:</string>
+  <string name="memory_used">Käytetty:</string>
+  <string name="calculating_status_now">Lasketaan tilaa\u2026</string>
+  <string name="button_moveto">Siirrä</string>
+  <string name="menu_copyTo">Kopioi kohteeseen <xliff:g id="destination">%s</xliff:g></string>
+  <string name="no_empty_email_in_usim">Yhteystiedon kopiointi epäonnistui, sähköpostiosoite on virheellinen</string>
+  <string name="voicemail">Vastaaja</string>
+  <string name="select_call_title">Valitse puhelulokit</string>
+  <string name="invalid_number_type">Numeron tyyppi on virheellinen</string>
 </resources>

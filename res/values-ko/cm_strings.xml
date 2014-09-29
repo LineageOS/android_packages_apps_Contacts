@@ -16,4 +16,78 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"클립보드에 복사되었습니다."</string>
+  <string name="deleteConfirmation_title">연락처를 삭제할까요?</string>
+  <string name="importConfirmation_title">연락처를 가져올까요?</string>
+  <string name="contactDeletedToast">연락처가 삭제되었습니다</string>
+  <string name="contactSavedToSimCardError">선택된 연락처를 SIM 카드에 저장하지 못했습니다</string>
+  <string name="airplane_mode_on">비행기 모드가 켜져있어 SIM 카드에 접근할 수 없습니다</string>
+  <string name="number_anr_too_long">번호가 너무 깁니다</string>
+  <string name="email_address_too_long">이메일 주소가 너무 깁니다</string>
+  <string name="sim_card_full">SIM 카드가 가득 찼습니다</string>
+  <string name="tag_too_long">연락처 이름이 너무 깁니다</string>
+  <string name="invalid_phone_number">전화번호가 올바르지 않습니다</string>
+  <string name="videocall">영상통화</string>
+  <string name="unknown">알 수 없음</string>
+  <string name="copy_to_target_sim">SIM 카드</string>
+  <string name="copy_to_target_msim">SIM 카드 <xliff:g id="index">%d</xliff:g></string>
+  <string name="search_bar_hint">연락처 검색</string>
+  <string name="delete_group_dialog_title">그룹 삭제</string>
+  <string name="edit_before_call">전화하기 전에 번호 수정</string>
+  <string name="description_videocall">영상 통화 <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">영상 통화 <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">그룹 이름</string>
+  <string name="title_group_add">새 그룹</string>
+  <string name="group_selector">클릭하여 그룹 선택</string>
+  <string name="title_group_picker">그룹 선택</string>
+  <string name="noGroupsHelpText">"로컬 그룹이 없습니다."</string>
+  <string name="menu_option_delete">그룹 삭제</string>
+  <string name="toast_not_add">"로컬 계정이 아닌 계정의 모든 연락처를 추가할 수 없습니다"</string>
+  <string name="noMember">이 그룹에 구성원이 없습니다.</string>
+  <string name="button_delete">제거</string>
+  <string name="title_add_members">구성원 추가</string>
+  <string name="select_all">전부</string>
+  <string name="action_done">완료</string>
+  <plurals name="contacts_selected">
+    <item quantity="other">%d건 선택됨</item>
+  </plurals>
+  <string name="delete_call_title">통화 기록 삭제</string>
+  <string name="delete_call_message">통화 기록 삭제 중\u2026</string>
+  <string name="delete_call_alert">선택된 통화 기록을 삭제할까요?</string>
+  <string name="title_del_call">삭제</string>
+  <string name="menu_sendViaSMS">SMS로 연락처 보내기</string>
+  <string name="title_switch_group_remote">원격 그룹</string>
+  <string name="title_switch_group_local">로컬 그룹</string>
+  <string name="import_sim_contacts_title">SIM 연락처 가져오기</string>
+  <string name="import_sim_contacts_message">SIM 연락처를 가져오는 중\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="other">%d개의 연락처를 가져올 것입니다.</item>
+  </plurals>
+  <string name="import_finish">가져오기 완료</string>
+  <plurals name="import_stop">
+    <item quantity="other">가져오기가 취소되었으며, %d건의 항목의 가져오기가 완료되었습니다</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="other">%d건의 연락처가 삭제될 것입니다.</item>
+  </plurals>
+  <string name="delete_contacts_title">연락처 삭제</string>
+  <string name="delete_contacts_message">연락처 삭제하는 중\u2026</string>
+  <string name="error_group_exist">\'<xliff:g id="name">%s</xliff:g>\' 이름을 사용하는 그룹이 이미 존재합니다</string>
+  <string name="menu_auto_sync_to_baidu_cloud">Baidu Cloud에 자동으로 동기화</string>
+  <string name="menu_sync_to_baidu_cloud">지금 Baidu Cloud에 동기화</string>
+  <string name="delete_local_group_dialog_message">그룹 \'<xliff:g id="name">%s</xliff:g>\'을(를) 삭제할까요?</string>
+  <string name="edit_local_group_dialog_title">그룹 이름 변경</string>
+  <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g>건보다 많은 수의 연락처는 추가할 수 없습니다</string>
+  <string name="no_phone_number_or_email">전화번호 또는 이메일 주소를 입력해주십시오.</string>
+  <string name="memory_card_full">메모리가 가득 차 있어 연락처를 저장할 수 없습니다</string>
+  <string name="menu_memory_status">메모리 상태</string>
+  <string name="memory_status_title">메모리 상태</string>
+  <string name="memory_size">전체:</string>
+  <string name="memory_used">사용 중:</string>
+  <string name="calculating_status_now">상태 계산 중\u2026</string>
+  <string name="button_moveto">이동</string>
+  <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g>(으)로 복사</string>
+  <string name="no_empty_email_in_usim">이메일 주소가 유효하지 않아 연락처를 복사할 수 없습니다</string>
+  <string name="voicemail">음성 메시지</string>
+  <string name="select_call_title">통화 기록 선택</string>
+  <string name="invalid_number_type">번호 형식이 유효하지 않습니다</string>
 </resources>

@@ -20,7 +20,7 @@
   <string name="importConfirmation_title">Contact importeren?</string>
   <string name="contactDeletedToast">Contact verwijderd</string>
   <string name="contactSavedToSimCardError">Geselecteerde contacten konden niet worden opgeslagen op de simkaart</string>
-  <string name="airplane_mode_on">Simkaart kan niet worden benaderd in vliegmodus</string>
+  <string name="airplane_mode_on">Geen toegang tot simkaart in vliegmodus</string>
   <string name="number_anr_too_long">Nummer is te lang</string>
   <string name="email_address_too_long">E-mailadres is te lang</string>
   <string name="sim_card_full">Simkaart is vol</string>
@@ -61,8 +61,8 @@
   <string name="import_sim_contacts_title">SIM-contacten importeren</string>
   <string name="import_sim_contacts_message">SIM-contacten importeren\u2026</string>
   <plurals name="ContactMultiImportConfirmation">
-    <item quantity="one">%d contact zal worden geïmporteerd.</item>
-    <item quantity="other">%d contacten zullen worden geïmporteerd.</item>
+    <item quantity="one">%d contact wordt geïmporteerd.</item>
+    <item quantity="other">%d contacten worden geïmporteerd.</item>
   </plurals>
   <string name="import_finish">Importeren voltooid</string>
   <plurals name="import_stop">
@@ -70,8 +70,8 @@
     <item quantity="other">Importeren geannuleerd, %d items zijn geïmporteerd</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
-    <item quantity="one">%d contact zal worden verwijderd.</item>
-    <item quantity="other">%d contacten zullen worden verwijderd.</item>
+    <item quantity="one">%d contact wordt verwijderd.</item>
+    <item quantity="other">%d contacten worden verwijderd.</item>
   </plurals>
   <string name="delete_contacts_title">Contacten verwijderen</string>
   <string name="delete_contacts_message">Contacten verwijderen\u2026</string>

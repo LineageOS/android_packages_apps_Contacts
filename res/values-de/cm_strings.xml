@@ -20,6 +20,7 @@
   <string name="importConfirmation_title">Kontakt importieren?</string>
   <string name="contactDeletedToast">Kontakt gelöscht</string>
   <string name="contactSavedToSimCardError">Die ausgewählten Kontakte konnten nicht auf der SIM-Karte gespeichert werden</string>
+  <string name="airplane_mode_on">Bei aktiviertem Flugmodus kann nicht auf die SIM-Karte zugegriffen werden</string>
   <string name="number_anr_too_long">Die Nummer ist zu lang</string>
   <string name="email_address_too_long">Die E-Mail-Adresse ist zu lang</string>
   <string name="sim_card_full">Die SIM-Karte ist voll</string>
@@ -28,14 +29,19 @@
   <string name="videocall">Videoanruf</string>
   <string name="unknown">Unbekannt</string>
   <string name="copy_to_target_sim">SIM-Karte</string>
+  <string name="copy_to_target_msim">SIM-Karte <xliff:g id="index">%d</xliff:g></string>
   <string name="search_bar_hint">Kontakte suchen</string>
   <string name="delete_group_dialog_title">Gruppe löschen</string>
   <string name="edit_before_call">Nummer vor Anruf bearbeiten</string>
   <string name="description_videocall">Videoanruf <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">Videoanruf <xliff:g id="name">%1$s</xliff:g></string>
   <string name="title_group_name">Gruppenname</string>
   <string name="title_group_add">Neue Gruppe</string>
+  <string name="group_selector">Klicken, um Gruppe auszuwählen</string>
   <string name="title_group_picker">Gruppe auswählen</string>
+  <string name="noGroupsHelpText">"Keine lokalen Gruppen vorhanden."</string>
   <string name="menu_option_delete">Gruppe löschen</string>
+  <string name="toast_not_add">"Es konnten nicht alle Kontakte aus nicht-lokalen Konten hinzugefügt werden"</string>
   <string name="noMember">Diese Gruppe hat keine Mitglieder</string>
   <string name="button_delete">Entfernen</string>
   <string name="title_add_members">Mitglieder hinzufügen</string>
@@ -70,10 +76,13 @@
   <string name="delete_contacts_title">Kontakte löschen</string>
   <string name="delete_contacts_message">Kontakte werden gelöscht\u2026</string>
   <string name="error_group_exist">Eine Gruppe mit den Namen  \"<xliff:g id="name">%s</xliff:g>\" existiert bereits</string>
+  <string name="menu_auto_sync_to_baidu_cloud">Automatisch zur Baidu-Cloud synchronisieren</string>
+  <string name="menu_sync_to_baidu_cloud">Baidu-Cloud jetzt synchronisieren</string>
   <string name="delete_local_group_dialog_message">Soll die Gruppe \"<xliff:g id="name">%s</xliff:g>\" gelöscht werden?</string>
   <string name="edit_local_group_dialog_title">Gruppe umbenennen</string>
   <string name="too_many_contacts_add_to_group">Es könnten nicht mehr als <xliff:g id="count">%d</xliff:g> Kontakte hinzugefügt werden</string>
   <string name="no_phone_number_or_email">Bitte eine Telefonnummer oder E-Mail-Adresse eingeben.</string>
+  <string name="memory_card_full">Kontakt konnte nicht gespeichert werden, da der Telefonspeicher voll ist</string>
   <string name="menu_memory_status">Speicherstatus</string>
   <string name="memory_status_title">Speicherstatus</string>
   <string name="memory_size">Gesamt:</string>
@@ -84,4 +93,5 @@
   <string name="no_empty_email_in_usim">Kontakt konnte nicht kopiert werden, da seine E-Mail-Adresse ungültig ist</string>
   <string name="voicemail">Sprachnachricht</string>
   <string name="select_call_title">Anruflisten auswählen</string>
+  <string name="invalid_number_type">Ungültiger Nummerntyp</string>
 </resources>

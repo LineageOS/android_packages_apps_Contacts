@@ -19,6 +19,7 @@
   <string name="deleteConfirmation_title">Ištrinti kontaktą?</string>
   <string name="importConfirmation_title">Importuoti kontaktą?</string>
   <string name="contactDeletedToast">Kontaktas ištrintas</string>
+  <string name="contactSavedToSimCardError">Negalima įrašyti pažymėtų kontaktų į SIM kortelę</string>
   <string name="airplane_mode_on">SIM kortelė negali būti atverta, kai įjungtas lėktuvo režimas</string>
   <string name="number_anr_too_long">Numeris per ilgas</string>
   <string name="email_address_too_long">El. pašto adresas per ilgas</string>
@@ -46,6 +47,11 @@
   <string name="title_add_members">Pridėti narius</string>
   <string name="select_all">Visi</string>
   <string name="action_done">Atlikta</string>
+  <plurals name="contacts_selected">
+    <item quantity="one">%d pažymėtas</item>
+    <item quantity="few">%d pažymėti</item>
+    <item quantity="other">%d pažymėti</item>
+  </plurals>
   <string name="delete_call_title">Ištrinti skambučių žurnalus</string>
   <string name="delete_call_message">Ištrinami skambučių žurnalai\u2026</string>
   <string name="delete_call_alert">Ištrinti pasirinktus skambučių žurnalus?</string>

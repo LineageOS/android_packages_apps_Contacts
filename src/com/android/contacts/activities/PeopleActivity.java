@@ -154,6 +154,9 @@ public class PeopleActivity extends ContactsActivity
     private static final int SUBACTIVITY_EDIT_GROUP = 5;
     private static final int SUBACTIVITY_ACCOUNT_FILTER = 6;
 
+    private static final String EXTRA_STATUS_LOCAL_GROUP = "navbar.isLocalGroup";
+    private static final String PERSISTENT_LAST_SWITCH_GROUP_MENU = "navbar.switchgroup.lastStatus";
+
     private final DialogManager mDialogManager = new DialogManager(this);
 
     private ContactsIntentResolver mIntentResolver;
@@ -507,6 +510,12 @@ public class PeopleActivity extends ContactsActivity
         // Configure action bar
         mActionBarAdapter = new ActionBarAdapter(this, this, getActionBar(), isUsingTwoPanes);
         mActionBarAdapter.initialize(savedState, mRequest);
+        mIsLocalGroupsShown = false;
+        if (savedState != null) {
+            mIsLocalGroupsShown = savedState.getBoolean(EXTRA_STATUS_LOCAL_GROUP);
+        } else {
+            loadLastSwitchGroupMenuPreference();
+        }
 
         invalidateOptionsMenuIfNeeded();
     }
@@ -1761,6 +1770,8 @@ public class PeopleActivity extends ContactsActivity
 
         // Restore groups is only available for local groups
         mRestoreGroupsMenu.setVisible(mIsLocalGroupsShown);
+
+        saveLastSwitchGroupMenuPreference();
     }
 
 
@@ -2005,6 +2016,7 @@ public class PeopleActivity extends ContactsActivity
         if (mContactDetailLayoutController != null) {
             mContactDetailLayoutController.onSaveInstanceState(outState);
         }
+        outState.putBoolean(EXTRA_STATUS_LOCAL_GROUP, mIsLocalGroupsShown);
 
         // Clear the listener to make sure we don't get callbacks after onSaveInstanceState,
         // in order to avoid doing fragment transactions after it.
@@ -2040,5 +2052,20 @@ public class PeopleActivity extends ContactsActivity
     // Visible for testing
     public ContactDetailFragment getDetailFragment() {
         return mContactDetailFragment;
+    }
+
+    private void loadLastSwitchGroupMenuPreference() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        try {
+            mIsLocalGroupsShown = prefs.getInt(PERSISTENT_LAST_SWITCH_GROUP_MENU, 0) == 1;
+        } catch (IllegalArgumentException e) {
+            // Preference is corrupt?
+            mIsLocalGroupsShown = false;
+        }
+    }
+
+    private void saveLastSwitchGroupMenuPreference() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefs.edit().putInt(PERSISTENT_LAST_SWITCH_GROUP_MENU, mIsLocalGroupsShown ? 1 : 0).apply();
     }
 }

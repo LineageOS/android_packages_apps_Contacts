@@ -74,6 +74,7 @@ import com.android.contacts.detail.ContactLoaderFragment;
 import com.android.contacts.detail.ContactLoaderFragment.ContactLoaderFragmentListener;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
+import com.android.contacts.common.dialog.RestoreGroupsDialog;
 import com.android.contacts.common.editor.SelectAccountDialogFragment;
 import com.android.contacts.group.GroupBrowseListFragment;
 import com.android.contacts.group.GroupBrowseListFragment.OnGroupBrowserActionListener;
@@ -180,9 +181,10 @@ public class PeopleActivity extends ContactsActivity
     private ProviderStatusWatcher.Status mProviderStatus;
 
     private boolean mOptionsMenuContactsAvailable;
-    public boolean isLocalGroupsShown;
-    private MenuItem switchGroupsMenu;
-    private MenuItem addGroupMenu;
+    public boolean mIsLocalGroupsShown;
+    private MenuItem mSwitchGroupsMenu;
+    private MenuItem mAddGroupMenu;
+    private MenuItem mRestoreGroupsMenu;
 
     /**
      * Showing a list of Contacts. Also used for showing search results in search mode.
@@ -1519,9 +1521,10 @@ public class PeopleActivity extends ContactsActivity
         // Get references to individual menu items in the menu
         final MenuItem addContactMenu = menu.findItem(R.id.menu_add_contact);
         final MenuItem contactsFilterMenu = menu.findItem(R.id.menu_contacts_filter);
-        switchGroupsMenu = menu.findItem(R.id.menu_switch_group);
+        mRestoreGroupsMenu = menu.findItem(R.id.menu_restore_groups);
+        mSwitchGroupsMenu = menu.findItem(R.id.menu_switch_group);
 
-        addGroupMenu = menu.findItem(R.id.menu_add_group);
+        mAddGroupMenu = menu.findItem(R.id.menu_add_group);
 
         final MenuItem clearFrequentsMenu = menu.findItem(R.id.menu_clear_frequents);
         final MenuItem helpMenu = menu.findItem(R.id.menu_help);
@@ -1529,33 +1532,36 @@ public class PeopleActivity extends ContactsActivity
         final boolean isSearchMode = mActionBarAdapter.isSearchMode();
         if (isSearchMode) {
             addContactMenu.setVisible(false);
-            addGroupMenu.setVisible(false);
+            mAddGroupMenu.setVisible(false);
             contactsFilterMenu.setVisible(false);
-            switchGroupsMenu.setVisible(false);
+            mSwitchGroupsMenu.setVisible(false);
             clearFrequentsMenu.setVisible(false);
             helpMenu.setVisible(false);
+            mRestoreGroupsMenu.setVisible(false);
             makeMenuItemVisible(menu, R.id.menu_delete, false);
         } else {
             switch (mActionBarAdapter.getCurrentTab()) {
                 case TabState.FAVORITES:
                     addContactMenu.setVisible(true);
-                    addGroupMenu.setVisible(false);
+                    mAddGroupMenu.setVisible(false);
                     contactsFilterMenu.setVisible(false);
-                    switchGroupsMenu.setVisible(false);
+                    mSwitchGroupsMenu.setVisible(false);
                     clearFrequentsMenu.setVisible(hasFrequents());
+                    mRestoreGroupsMenu.setVisible(false);
                     break;
                 case TabState.ALL:
                     addContactMenu.setVisible(true);
-                    addGroupMenu.setVisible(false);
+                    mAddGroupMenu.setVisible(false);
                     contactsFilterMenu.setVisible(true);
-                    switchGroupsMenu.setVisible(false);
+                    mSwitchGroupsMenu.setVisible(false);
                     clearFrequentsMenu.setVisible(false);
+                    mRestoreGroupsMenu.setVisible(false);
                     break;
                 case TabState.GROUPS:
                     addContactMenu.setVisible(false);
                     contactsFilterMenu.setVisible(false);
                     clearFrequentsMenu.setVisible(false);
-                    switchGroupsMenu.setVisible(true);
+                    mSwitchGroupsMenu.setVisible(true);
 
                     // Do not display the "new group" button if no accounts are available
                     updateGroupsMenu();
@@ -1658,7 +1664,7 @@ public class PeopleActivity extends ContactsActivity
                 return true;
             }
             case R.id.menu_add_group: {
-                if (isLocalGroupsShown) {
+                if (mIsLocalGroupsShown) {
                     showAddLocalGroupDialog();
                 } else {
                     createNewGroupWithAccountDisambiguation();
@@ -1713,10 +1719,22 @@ public class PeopleActivity extends ContactsActivity
                 return true;
             }
             case R.id.menu_switch_group: {
-                isLocalGroupsShown = !isLocalGroupsShown;
+                mIsLocalGroupsShown = !mIsLocalGroupsShown;
                 updateGroupsMenu();
                 mGroupsFragment.updateGroupData();
                 return true;
+            }
+            case R.id.menu_restore_groups: {
+                // Restore is only allowed for local groups
+                if (mIsLocalGroupsShown) {
+                    RestoreGroupsDialog.showDialogForLocalGroups(getFragmentManager(),
+                            new RestoreGroupsDialog.OnRestoreCompleteListener() {
+                        @Override
+                        public void onRestoreComplete() {
+                            mGroupsFragment.updateGroupData();
+                        }
+                    });
+                }
             }
         }
         return false;
@@ -1729,17 +1747,20 @@ public class PeopleActivity extends ContactsActivity
     }
 
     private void updateGroupsMenu() {
-        if (areGroupWritableAccountsAvailable() || isLocalGroupsShown) {
-            addGroupMenu.setVisible(true);
+        if (areGroupWritableAccountsAvailable() || mIsLocalGroupsShown) {
+            mAddGroupMenu.setVisible(true);
         } else {
-            addGroupMenu.setVisible(false);
+            mAddGroupMenu.setVisible(false);
         }
-        switchGroupsMenu
-            .setTitle(isLocalGroupsShown ? R.string.title_switch_group_remote
+        mSwitchGroupsMenu
+            .setTitle(mIsLocalGroupsShown ? R.string.title_switch_group_remote
                 : R.string.title_switch_group_local);
-        switchGroupsMenu
-            .setIcon(isLocalGroupsShown ? R.drawable.ic_remote_group_holo_light
+        mSwitchGroupsMenu
+            .setIcon(mIsLocalGroupsShown ? R.drawable.ic_remote_group_holo_light
                 : R.drawable.ic_location_group_holo_light);
+
+        // Restore groups is only available for local groups
+        mRestoreGroupsMenu.setVisible(mIsLocalGroupsShown);
     }
 
 

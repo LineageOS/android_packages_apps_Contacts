@@ -145,4 +145,7 @@
     <string name="select_call_title">Select call logs</string>
 
     <string name="invalid_number_type">The number type is invalid</string>
+
+    <!-- In groups tabs, an option menu to restore the default groups -->
+    <string name="menu_restore_groups">Restore groups</string>
 </resources>

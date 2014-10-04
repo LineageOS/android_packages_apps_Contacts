@@ -42,6 +42,10 @@
         android:title="@string/menu_deleteContact" />
 
     <item
+        android:id="@+id/menu_restore_groups"
+        android:title="@string/menu_restore_groups" />
+
+    <item
         android:id="@+id/menu_contacts_filter"
         android:title="@string/menu_contacts_filter" />
 

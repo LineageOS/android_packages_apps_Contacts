@@ -185,7 +185,7 @@ public class GroupBrowseListFragment extends Fragment
     private boolean isLocalShown() {
         PeopleActivity peopleActivity = (PeopleActivity) this.getActivity();
         if (peopleActivity != null) {
-            return peopleActivity.isLocalGroupsShown;
+            return peopleActivity.mIsLocalGroupsShown;
         } else {
             return false;
         }

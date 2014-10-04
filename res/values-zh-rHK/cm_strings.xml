@@ -16,4 +16,5 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"複製到剪貼簿"</string>
+  <string name="copy_to_target_msim">SIM 咭 <xliff:g id="index">%d</xliff:g></string>
 </resources>

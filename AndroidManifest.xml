@@ -505,12 +505,6 @@
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <data android:scheme="tel"/>
             </intent-filter>
-            <intent-filter android:priority="-1">
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:mimeType="vnd.android.cursor.dir/calls"/>
-            </intent-filter>
         </activity>
 
         <!-- Service that is exclusively for the Phone application that sends out a view

@@ -298,9 +298,11 @@ public class MultiPickContactActivity extends ListActivity implements
         mAccountManager = AccountManager.get(this);
 
         mActionBar = getActionBar();
-        mActionBar.setHomeButtonEnabled(true);
-        mActionBar.setDisplayHomeAsUpEnabled(true);
-        mActionBar.setDisplayShowTitleEnabled(true);
+        if (mActionBar != null) {
+            mActionBar.setHomeButtonEnabled(true);
+            mActionBar.setDisplayHomeAsUpEnabled(true);
+            mActionBar.setDisplayShowTitleEnabled(true);
+        }
 
         startQuery();
         //register receiver.
@@ -459,17 +461,19 @@ public class MultiPickContactActivity extends ListActivity implements
     }
 
     private void updateActionBar() {
-        String countTitle = null;
-        if (!mChoiceSet.isEmpty()) {
-            countTitle = getResources().getQuantityString(R.plurals.contacts_selected,
-                    mChoiceSet.size(), mChoiceSet.size());
-        }
-        mActionBar.setSubtitle(countTitle);
-        if (mDoneItem != null) {
-            mDoneItem.setVisible(!mChoiceSet.isEmpty());
-        }
-        if (mSelectAllItem != null) {
-            mSelectAllItem.setChecked(mChoiceSet.size() == mAdapter.getCount());
+        if (mActionBar != null) {
+            String countTitle = null;
+            if (!mChoiceSet.isEmpty()) {
+                countTitle = getResources().getQuantityString(R.plurals.contacts_selected,
+                        mChoiceSet.size(), mChoiceSet.size());
+            }
+            mActionBar.setSubtitle(countTitle);
+            if (mDoneItem != null) {
+                mDoneItem.setVisible(!mChoiceSet.isEmpty());
+            }
+            if (mSelectAllItem != null) {
+                mSelectAllItem.setChecked(mChoiceSet.size() == mAdapter.getCount());
+            }
         }
     }
 

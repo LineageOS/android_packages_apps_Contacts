@@ -68,6 +68,10 @@
         android:title="@string/menu_settings" />
 
     <item
+        android:id="@+id/menu_memory_status"
+        android:title="@string/menu_memory_status" />
+
+    <item
         android:id="@+id/menu_help"
         android:orderInCategory="6"
         android:title="@string/menu_help" />

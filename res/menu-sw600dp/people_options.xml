@@ -37,6 +37,10 @@
         android:title="@string/menu_new_group_action_bar"
         android:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/menu_delete"
+        android:title="@string/menu_deleteContact" />
+
     <!-- Added orderInCategory to keep the following buttons at the end of the menu
          Buttons will be added in the order added/inflated. Ordered buttons will be added
          at the end according to the orderInCategory. This setup insures that the buttons below
@@ -66,6 +70,10 @@
         android:id="@+id/menu_settings"
         android:orderInCategory="5"
         android:title="@string/menu_settings" />
+
+    <item
+        android:id="@+id/menu_memory_status"
+        android:title="@string/menu_memory_status" />
 
     <item
         android:id="@+id/menu_help"

@@ -32,7 +32,31 @@
         android:title="@string/menu_deleteContact" />
 
     <item
+        android:id="@+id/menu_set_ringtone"
+        android:title="@string/menu_set_ring_tone" />
+
+    <item
+        android:id="@+id/menu_copy_to_phone"
+        android:title="@string/menu_copyTo" />
+
+    <item
+        android:id="@+id/menu_copy_to_sim1"
+        android:title="@string/menu_copyTo" />
+
+    <item
+        android:id="@+id/menu_copy_to_sim2"
+        android:title="@string/menu_copyTo" />
+
+    <item
+        android:id="@+id/menu_send_via_sms"
+        android:title="@string/menu_sendViaSMS" />
+
+    <item
+        android:id="@+id/menu_send_to_voicemail"
+        android:checkable="true"
+        android:title="@string/menu_redirect_calls_to_vm" />
+
+    <item
         android:id="@+id/menu_create_contact_shortcut"
         android:title="@string/menu_create_contact_shortcut" />
-
 </menu>

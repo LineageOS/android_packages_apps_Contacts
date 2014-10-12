@@ -23,6 +23,9 @@
 
     <string name="importConfirmation_title">Import contact?</string>
 
+    <!-- Menu item used to delete multiple contacts -->
+    <string name="menu_deleteContacts">Delete contacts</string>
+
     <!-- Toast displayed when a contact is deleted [CHAR LIMIT=NONE] -->
     <string name="contactDeletedToast">Contact deleted</string>
 

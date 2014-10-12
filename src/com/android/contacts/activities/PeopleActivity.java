@@ -1534,7 +1534,7 @@ public class PeopleActivity extends ContactsActivity
             switchGroupsMenu.setVisible(false);
             clearFrequentsMenu.setVisible(false);
             helpMenu.setVisible(false);
-            makeMenuItemVisible(menu, R.id.menu_delete, false);
+            makeMenuItemVisible(menu, R.id.menu_multi_delete, false);
         } else {
             switch (mActionBarAdapter.getCurrentTab()) {
                 case TabState.FAVORITES:
@@ -1666,7 +1666,7 @@ public class PeopleActivity extends ContactsActivity
                 return true;
             }
             // QRD enhancement: multi contact delete
-            case R.id.menu_delete: {
+            case R.id.menu_multi_delete: {
                 final Intent intent = new Intent(Intent.ACTION_DELETE, Contacts.CONTENT_URI);
                 intent.putExtra(EDITABLE_KEY, mActionBarAdapter.getQueryString());
 

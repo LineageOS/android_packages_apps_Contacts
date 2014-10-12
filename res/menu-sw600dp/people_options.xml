@@ -38,8 +38,8 @@
         android:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/menu_delete"
-        android:title="@string/menu_deleteContact" />
+        android:id="@+id/menu_multi_delete"
+        android:title="@string/menu_deleteContacts" />
 
     <!-- Added orderInCategory to keep the following buttons at the end of the menu
          Buttons will be added in the order added/inflated. Ordered buttons will be added

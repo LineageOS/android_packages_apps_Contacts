@@ -38,8 +38,8 @@
         android:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/menu_delete"
-        android:title="@string/menu_deleteContact" />
+        android:id="@+id/menu_multi_delete"
+        android:title="@string/menu_deleteContacts" />
 
     <item
         android:id="@+id/menu_contacts_filter"

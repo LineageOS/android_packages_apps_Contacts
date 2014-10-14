@@ -18,6 +18,7 @@
   <string name="quick_contact_copied_toast">"Panoya kopyalandı"</string>
   <string name="deleteConfirmation_title">Kişi silinsin mi?</string>
   <string name="importConfirmation_title">Kişi alınsın mı?</string>
+  <string name="menu_deleteContacts">Kişileri sil</string>
   <string name="contactDeletedToast">Kişi silindi</string>
   <string name="contactSavedToSimCardError">Seçili kişiler SIM karta kaydedilemedi</string>
   <string name="airplane_mode_on">Uçak modu etkinken SIM karta erişilemez</string>

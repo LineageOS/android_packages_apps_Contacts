@@ -16,4 +16,18 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"已複製至剪貼簿"</string>
+  <string name="deleteConfirmation_title">刪除聯絡人？</string>
+  <string name="importConfirmation_title">匯入聯絡人？</string>
+  <string name="contactDeletedToast">聯絡人已刪除</string>
+  <string name="sim_card_full">SIM 卡已滿</string>
+  <string name="tag_too_long">聯絡人名稱過長</string>
+  <string name="copy_to_target_sim">SIM 卡</string>
+  <string name="copy_to_target_msim">SIM 卡 <xliff:g id="index">%d</xliff:g></string>
+  <string name="delete_group_dialog_title">删除群组</string>
+  <string name="title_group_name">群組名稱</string>
+  <string name="title_group_add">新增群組</string>
+  <string name="title_del_call">刪除</string>
+  <string name="delete_contacts_title">刪除聯絡人</string>
+  <string name="button_moveto">移動</string>
+  <string name="voicemail">語音信箱</string>
 </resources>

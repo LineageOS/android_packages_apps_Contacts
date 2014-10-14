@@ -35,7 +35,7 @@
   <string name="edit_before_call">発信前に番号を編集</string>
   <string name="description_videocall">ビデオ通話 <xliff:g id="name">%1$s</xliff:g></string>
   <string name="description_dial_vt">ダイヤルVT <xliff:g id="name">%1$s</xliff:g></string>
-  <string name="title_group_name">グループ名</string>
+  <string name="title_group_name">グループの名前</string>
   <string name="title_group_add">新しいグループ</string>
   <string name="group_selector">クリックしてグループを選択します</string>
   <string name="title_group_picker">グループの選択</string>
@@ -75,14 +75,14 @@
   <string name="menu_auto_sync_to_baidu_cloud">Baidu Cloudに自動同期</string>
   <string name="menu_sync_to_baidu_cloud">Baidu Cloudに今すぐ同期</string>
   <string name="delete_local_group_dialog_message">グループ「<xliff:g id="name">%s</xliff:g>」を削除しますか？</string>
-  <string name="edit_local_group_dialog_title">グループ名の変更</string>
+  <string name="edit_local_group_dialog_title">グループの名前の変更</string>
   <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g>件以上の連絡先は追加できません</string>
   <string name="no_phone_number_or_email">電話番号またはメールアドレスを入力してください。</string>
   <string name="memory_card_full">連絡先を保存できませんでした、携帯電話のメモリがいっぱいです</string>
   <string name="menu_memory_status">メモリの状態</string>
   <string name="memory_status_title">メモリの状態</string>
   <string name="memory_size">合計:</string>
-  <string name="memory_used">使用:</string>
+  <string name="memory_used">使用数:</string>
   <string name="calculating_status_now">状態を計算中\u2026</string>
   <string name="button_moveto">移動</string>
   <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g>にコピー</string>

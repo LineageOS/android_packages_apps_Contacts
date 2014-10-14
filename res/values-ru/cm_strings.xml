@@ -18,6 +18,7 @@
   <string name="quick_contact_copied_toast">"Скопировано в буфер обмена"</string>
   <string name="deleteConfirmation_title">Удалить контакт?</string>
   <string name="importConfirmation_title">Импортировать контакт?</string>
+  <string name="menu_deleteContacts">Удалить контакты</string>
   <string name="contactDeletedToast">Контакт удалён</string>
   <string name="contactSavedToSimCardError">Не удалось сохранить выбранные контакты на SIM-карту</string>
   <string name="airplane_mode_on">Чтобы получить доступ к SIM-карте, выключите режим полёта.</string>

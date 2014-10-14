@@ -19,7 +19,7 @@
   <string name="deleteConfirmation_title">Ištrinti kontaktą?</string>
   <string name="importConfirmation_title">Importuoti kontaktą?</string>
   <string name="contactDeletedToast">Kontaktas ištrintas</string>
-  <string name="contactSavedToSimCardError">Negalima įrašyti pažymėtų kontaktų į SIM kortelę</string>
+  <string name="contactSavedToSimCardError">Negalima išsaugoti pažymėtų kontaktų į SIM kortelę</string>
   <string name="airplane_mode_on">SIM kortelė negali būti atverta, kai įjungtas lėktuvo režimas</string>
   <string name="number_anr_too_long">Numeris per ilgas</string>
   <string name="email_address_too_long">El. pašto adresas per ilgas</string>

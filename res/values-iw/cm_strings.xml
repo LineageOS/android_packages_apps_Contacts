@@ -16,4 +16,82 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"הועתק ללוח"</string>
+  <string name="deleteConfirmation_title">למחוק איש קשר?</string>
+  <string name="importConfirmation_title">לייבא אנשי קשר?</string>
+  <string name="contactDeletedToast">איש הקשר נמחק</string>
+  <string name="contactSavedToSimCardError">לא ניתן היה לשמור את אנשי הקשר לכרטיס ה-SIM</string>
+  <string name="airplane_mode_on">אין אפשרות לגשת כרטיס ה-SIM בזמן שמצב טיסה מופעל</string>
+  <string name="number_anr_too_long">המספר ארוך מדי</string>
+  <string name="email_address_too_long">כתובת הדוא\"ל ארוכה מדי</string>
+  <string name="sim_card_full">כרטיס ה-SIM מלא</string>
+  <string name="tag_too_long">השם של איש הקשר ארוך מדי</string>
+  <string name="invalid_phone_number">מספר הטלפון אינו נגיש</string>
+  <string name="videocall">שיחת וידאו</string>
+  <string name="unknown">לא ידוע</string>
+  <string name="copy_to_target_sim">כרטיס SIM</string>
+  <string name="copy_to_target_msim">כרטיס SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="search_bar_hint">חפש אנשי קשר</string>
+  <string name="delete_group_dialog_title">מחק קבוצה</string>
+  <string name="edit_before_call">ערוך מספר לפני השיחה</string>
+  <string name="description_videocall">שיחת וידאו <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">חיוג VT <xliff:g id="name"> %1$s </xliff:g></string>
+  <string name="title_group_name">שם הקבוצה</string>
+  <string name="title_group_add">קבוצה חדשה</string>
+  <string name="group_selector">לחץ כדי לבחור קבוצה</string>
+  <string name="title_group_picker">בחירת קבוצה</string>
+  <string name="noGroupsHelpText">"אין קבוצות מקומיות."</string>
+  <string name="menu_option_delete">מחק קבוצה</string>
+  <string name="toast_not_add">"לא ניתן להוסיף את כל אנשי הקשר בחשבונות לא מקומיים"</string>
+  <string name="noMember">אין חברים בקבוצה זו.</string>
+  <string name="button_delete">הסר</string>
+  <string name="title_add_members">הוספת חברים</string>
+  <string name="select_all">הכל</string>
+  <string name="action_done">סיום</string>
+  <plurals name="contacts_selected">
+    <item quantity="one">%d שנבחרו</item>
+    <item quantity="other">%d נבחרו</item>
+  </plurals>
+  <string name="delete_call_title">מחיקת רישומי שיחות</string>
+  <string name="delete_call_message">מוחק רישומי שיחות\u2026</string>
+  <string name="delete_call_alert">האם למחוק את רישומי השיחות שנבחרו?</string>
+  <string name="title_del_call">מחק</string>
+  <string name="menu_sendViaSMS">שלח איש קשר באמצעות SMS</string>
+  <string name="title_switch_group_remote">קבוצות מרוחקות</string>
+  <string name="title_switch_group_local">קבוצות מקומיות</string>
+  <string name="import_sim_contacts_title">ייבוא אנשי קשר מכרטיס SIM</string>
+  <string name="import_sim_contacts_message">מייבא אנשי קשר מכרטיס SIM\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">איש קשר %d ייובא.</item>
+    <item quantity="other">%d אנשי קשר ייובאו.</item>
+  </plurals>
+  <string name="import_finish">הייבוא הסתיים</string>
+  <plurals name="import_stop">
+    <item quantity="one">הייבוא בוטל, פריט %d יובא</item>
+    <item quantity="other">הייבוא בוטל, %d פריטים יובאו</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">איש קשר %d יימחק.</item>
+    <item quantity="other">%d אנשי קשר יימחקו.</item>
+  </plurals>
+  <string name="delete_contacts_title">מחק אנשי קשר</string>
+  <string name="delete_contacts_message">מחיקת אנשי קשר\u2026</string>
+  <string name="error_group_exist">קבוצה בשם \' <xliff:g id="name"> %s\' </xliff:g> כבר קיימת</string>
+  <string name="menu_auto_sync_to_baidu_cloud">סנכרון אוטומטי מענן Baidu</string>
+  <string name="menu_sync_to_baidu_cloud">סנכרן לענן Baidu עכשיו</string>
+  <string name="delete_local_group_dialog_message">מחק קבוצה \' <xliff:g id="name"> %s\'? </xliff:g></string>
+  <string name="edit_local_group_dialog_title">שינוי שם הקבוצה</string>
+  <string name="too_many_contacts_add_to_group">לא ניתן להוסיף יותר מ- <xliff:g id="count"> %d </xliff:g> אנשי קשר</string>
+  <string name="no_phone_number_or_email">נא להכניס מספר טלפון או כתובת דוא\"ל.</string>
+  <string name="memory_card_full">לא ניתן היה לשמור את איש הקשר, זיכרון הטלפון מלא</string>
+  <string name="menu_memory_status">מצב הזיכרון</string>
+  <string name="memory_status_title">מצב הזיכרון</string>
+  <string name="memory_size">סה\"כ:</string>
+  <string name="memory_used">תפוס:</string>
+  <string name="calculating_status_now">מחשב מצב/u2026</string>
+  <string name="button_moveto">העבר</string>
+  <string name="menu_copyTo">העתק אל <xliff:g id="destination"> %s </xliff:g></string>
+  <string name="no_empty_email_in_usim">העתקת איש הקשר נכשלה, כתובת הדואר האלקטרונית לא תקינה</string>
+  <string name="voicemail">תא קולי</string>
+  <string name="select_call_title">בחר רישומי שיחות</string>
+  <string name="invalid_number_type">סוג המספר אינו חוקי</string>
 </resources>

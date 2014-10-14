@@ -19,6 +19,7 @@
   <string name="deleteConfirmation_title">Usunąć kontakt?</string>
   <string name="importConfirmation_title">Zaimportować kontakt?</string>
   <string name="contactDeletedToast">Kontakt usunięty</string>
+  <string name="contactSavedToSimCardError">Nie można zapisać wybranych kontaktów na karcie SIM</string>
   <string name="airplane_mode_on">Nie można uzyskać dostępu do karty SIM, gdy włączony jest tryb samolotowy</string>
   <string name="number_anr_too_long">Numer jest zbyt długi</string>
   <string name="email_address_too_long">Adres e-mail jest zbyt długi</string>
@@ -46,6 +47,11 @@
   <string name="title_add_members">Dodaj członków</string>
   <string name="select_all">Wszystkie</string>
   <string name="action_done">Gotowe</string>
+  <plurals name="contacts_selected">
+    <item quantity="one">%d wybrany</item>
+    <item quantity="few">%d wybrane</item>
+    <item quantity="other">%d wybranych</item>
+  </plurals>
   <string name="delete_call_title">Usuń dzienniki rozmów</string>
   <string name="delete_call_message">Usuń dzienniki rozmów\u2026</string>
   <string name="delete_call_alert">Usunąć zaznaczone dzienniki rozmów?</string>

@@ -1083,10 +1083,12 @@ public class PeopleActivity extends ContactsActivity
         mAllFragment.setFilter(mContactListFilterController.getFilter());
 
         final boolean useTwoPane = PhoneCapabilityTester.isUsingTwoPanes(this);
-
+        final boolean cmccFeature = getResources().
+                getBoolean(R.bool.config_show_quick_call_button);
         mAllFragment.setVerticalScrollbarPosition(getScrollBarPosition(useTwoPane));
         mAllFragment.setSelectionVisible(useTwoPane);
         mAllFragment.setQuickContactEnabled(!useTwoPane);
+        mAllFragment.setQuickCallButtonEnabled(cmccFeature && !useTwoPane);
     }
 
     private int getScrollBarPosition(boolean useTwoPane) {

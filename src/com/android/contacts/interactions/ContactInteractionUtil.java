@@ -72,8 +72,8 @@ public class ContactInteractionUtil {
 
         // compareCalendar is initialized to today
         if (compareCalendarDayYear(interactionCalendar, compareCalendar)) {
-            return DateFormat.getTimeInstance(DateFormat.SHORT).format(
-                    interactionCalendar.getTime());
+            return DateUtils.formatDateTime(context, timestamp,
+                    DateUtils.FORMAT_SHOW_TIME);
         }
 
         // Turn compareCalendar to yesterday

@@ -1947,13 +1947,12 @@ public class QuickContactActivity extends ContactsActivity {
                 throw new IllegalStateException("Failed to load contact", data.getException());
             }
             if (data.isNotFound()) {
-                if (mHasAlreadyBeenOpened) {
-                    finish();
-                } else {
+                if (!mHasAlreadyBeenOpened) {
                     Log.i(TAG, "No contact found: " + ((ContactLoader)loader).getLookupUri());
                     Toast.makeText(QuickContactActivity.this, R.string.invalidContactMessage,
                             Toast.LENGTH_LONG).show();
                 }
+                finish();
                 return;
             }
 

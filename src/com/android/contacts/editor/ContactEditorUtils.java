@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -30,6 +31,8 @@ import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.model.AccountTypeManager;
 import com.android.contacts.common.model.account.AccountType;
 import com.android.contacts.common.model.account.AccountWithDataSet;
+import com.android.contacts.common.SimContactsConstants;
+import com.android.contacts.R;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
@@ -48,6 +51,10 @@ public class ContactEditorUtils {
     private static final String KEY_KNOWN_ACCOUNTS = "ContactEditorUtils_known_accounts";
     // Key to tell the first time launch.
     private static final String KEY_ANYTHING_SAVED = "ContactEditorUtils_anything_saved";
+
+    private static final int DEFAULT_STORAGE_PHONE = 0;
+    private static final int DEFAULT_STORAGE_SIM_1 = 1;
+    private static final int DEFAULT_STORAGE_SIM_2 = 2;
 
     private static final List<AccountWithDataSet> EMPTY_ACCOUNTS = ImmutableList.of();
 
@@ -144,6 +151,41 @@ public class ContactEditorUtils {
      * Also note that the returned account may have been removed already.
      */
     public AccountWithDataSet getDefaultAccount() {
+        // if set the value of store contacts defalut
+        if (mContext.getResources().getBoolean(R.bool.def_storage_behavior_enabled)) {
+            List<AccountWithDataSet> accounts = getWritableAccounts();
+            if (accounts != null && accounts.size() != 0) {
+                String name = "";
+                String type = "";
+                // default Contacts storage postion
+                int store_pos = mContext.getResources().getInteger(R.integer.def_storage_position);
+                switch (store_pos) {
+                    case DEFAULT_STORAGE_PHONE:
+                        name = SimContactsConstants.PHONE_NAME;
+                        type = SimContactsConstants.ACCOUNT_TYPE_PHONE;
+                        break;
+                    case DEFAULT_STORAGE_SIM_1:
+                        name = TelephonyManager.getDefault().isMultiSimEnabled() ?
+                                SimContactsConstants.SIM_NAME_1 : SimContactsConstants.SIM_NAME;
+                        type = SimContactsConstants.ACCOUNT_TYPE_SIM;
+                        break;
+                    case DEFAULT_STORAGE_SIM_2:
+                        name = SimContactsConstants.SIM_NAME_2;
+                        type = SimContactsConstants.ACCOUNT_TYPE_SIM;
+                        break;
+                    default:
+                        Log.e(TAG, "Bad default contacts storage position," +
+                                " def_storage_position is " + store_pos);
+                    break;
+                }
+
+                for (AccountWithDataSet account : accounts) {
+                    if (name.equals(account.name) && type.equals(account.type)) {
+                        return account;
+                    }
+                }
+            }
+        }
         final String saved = mPrefs.getString(KEY_DEFAULT_ACCOUNT, null);
         if (TextUtils.isEmpty(saved)) {
             return null;

@@ -18,6 +18,7 @@
   <string name="quick_contact_copied_toast">"クリップボードにコピーしました"</string>
   <string name="deleteConfirmation_title">連絡先を削除しますか？</string>
   <string name="importConfirmation_title">連絡先をインポートしますか？</string>
+  <string name="menu_deleteContacts">連絡先を削除</string>
   <string name="contactDeletedToast">連絡先を削除しました</string>
   <string name="contactSavedToSimCardError">選択した連絡先をSIMに保存できませんでした</string>
   <string name="airplane_mode_on">機内モードが有効になっている間はSIMカードにアクセスできません</string>

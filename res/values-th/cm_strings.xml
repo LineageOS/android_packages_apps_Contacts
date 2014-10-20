@@ -18,6 +18,7 @@
   <string name="quick_contact_copied_toast">"คัดลอกไปยังคลิปบอร์ด"</string>
   <string name="deleteConfirmation_title">ลบ​ราย​ชื่อ?</string>
   <string name="importConfirmation_title">นำเข้ารายชื่อ?</string>
+  <string name="menu_deleteContacts">ลบ​ราย​ชื่อ</string>
   <string name="contactDeletedToast">ลบรายชื่อผู้ติดต่อแล้ว</string>
   <string name="contactSavedToSimCardError">ไม่สามารถบันทึกรายชื่อที่เลือกไปยังซิมการ์ดได้</string>
   <string name="airplane_mode_on">ไม่สามารถเข้าถึงการซิมการ์ดในขณะเปิดใช้งานโหมดเครื่องบิน</string>

@@ -18,6 +18,7 @@
   <string name="quick_contact_copied_toast">"පසුරු පුවරුවට පිටපත් කෙරුණි"</string>
   <string name="deleteConfirmation_title">සම්බන්ධතාව මකන්නද?</string>
   <string name="importConfirmation_title">සම්බන්ධතාව ආයාත කරන්නද?</string>
+  <string name="menu_deleteContacts">සම්බන්ධතා මකන්න</string>
   <string name="contactDeletedToast">සම්බන්ධතාව මකා දැමුණි</string>
   <string name="contactSavedToSimCardError">තෝරාගත් සම්බන්ධතා සිම් කාඩ් පතට සුරැකීමට නොහැකිවිය</string>
   <string name="airplane_mode_on">අහස්යානා ප්‍රකාරය සබල විට සිම් පත පරිශීලනය කල නොහැක</string>

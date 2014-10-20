@@ -18,6 +18,7 @@
   <string name="quick_contact_copied_toast">"Copiado al portapapeles"</string>
   <string name="deleteConfirmation_title">¿Eliminar contacto?</string>
   <string name="importConfirmation_title">¿Importar contacto?</string>
+  <string name="menu_deleteContacts">Eliminar contactos</string>
   <string name="contactDeletedToast">Contacto eliminado</string>
   <string name="contactSavedToSimCardError">No se han podido guardar los contactos seleccionados en la tarjeta SIM</string>
   <string name="airplane_mode_on">No se puede acceder a la tarjeta SIM mientras el modo avión esté habilitado</string>

@@ -16,4 +16,82 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"Скопійовано в буфер обміну"</string>
+  <string name="deleteConfirmation_title">Видалити контакт?</string>
+  <string name="importConfirmation_title">Імпорт контактів?</string>
+  <string name="menu_deleteContacts">Вилучити контакти</string>
+  <string name="contactDeletedToast">Контакт видалено</string>
+  <string name="contactSavedToSimCardError">Не вдалося зберегти вибрані контакти на SIM-карті</string>
+  <string name="airplane_mode_on">SIM-карта не доступна коли активовано режим польоту</string>
+  <string name="number_anr_too_long">Номер задовгий</string>
+  <string name="email_address_too_long">Адреса електронної пошти задовга</string>
+  <string name="sim_card_full">SIM-карта заповнена</string>
+  <string name="tag_too_long">Ім\'я контакту задовге</string>
+  <string name="invalid_phone_number">Неприпустимий номер телефону</string>
+  <string name="videocall">Відеодзвінок</string>
+  <string name="unknown">Невідомо</string>
+  <string name="copy_to_target_sim">SIM-карта</string>
+  <string name="copy_to_target_msim">SIM-карта <xliff:g id="index">%d</xliff:g></string>
+  <string name="search_bar_hint">Пошук контактів</string>
+  <string name="delete_group_dialog_title">Видалити групу</string>
+  <string name="edit_before_call">Редагування номера перед викликом</string>
+  <string name="description_videocall">Відео дзвінок <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">Набір VT <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">Ім’я групи</string>
+  <string name="title_group_add">Нова група</string>
+  <string name="group_selector">Натисніть, щоб вибрати групу</string>
+  <string name="title_group_picker">Виберіть групу</string>
+  <string name="noGroupsHelpText">"Немає локальних груп."</string>
+  <string name="menu_option_delete">Видалити групу</string>
+  <string name="toast_not_add">"Не вдалося додати всі контакти в нелокальні облікові записи"</string>
+  <string name="noMember">Немає учасників у цій групі.</string>
+  <string name="button_delete">Видалити</string>
+  <string name="title_add_members">Додати учасників</string>
+  <string name="select_all">Усi</string>
+  <string name="action_done">Готово</string>
+  <plurals name="contacts_selected">
+    <item quantity="one">%d обрано</item>
+    <item quantity="few">%d обрано</item>
+    <item quantity="other">%d обрано</item>
+  </plurals>
+  <string name="delete_call_title">Видалення журналів викликів</string>
+  <string name="delete_call_message">Видалення\u2026</string>
+  <string name="delete_call_alert">Вилучити обрані журнали викликів?</string>
+  <string name="title_del_call">Видаляти</string>
+  <string name="menu_sendViaSMS">Надіслати контакт за допомогою SMS</string>
+  <string name="title_switch_group_remote">Віддалені групи</string>
+  <string name="title_switch_group_local">Локальні групи</string>
+  <string name="import_sim_contacts_title">Імпортувати контакти SIM</string>
+  <string name="import_sim_contacts_message">Імпорт контактів SIM\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">%d контакт буде імпортовано.</item>
+    <item quantity="few">%d контакти буде імпортовано.</item>
+    <item quantity="other">%d контактів буде імпортовано.</item>
+  </plurals>
+  <string name="import_finish">Імпортування завершено</string>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">%d контакт буде видалено.</item>
+    <item quantity="few">%d контакти буде видалено.</item>
+    <item quantity="other">%d контактів буде видалено.</item>
+  </plurals>
+  <string name="delete_contacts_title">Видалити контакти</string>
+  <string name="delete_contacts_message">Видалення контактів\u2026</string>
+  <string name="error_group_exist">Група з ім\'ям \'<xliff:g id="name">%s</xliff:g>\' вже існує</string>
+  <string name="menu_auto_sync_to_baidu_cloud">Автоматична синхронізація з Baidu</string>
+  <string name="menu_sync_to_baidu_cloud">Синхронізувати з Baidu зараз</string>
+  <string name="delete_local_group_dialog_message">Видалити групу \'<xliff:g id="name">%s</xliff:g>\'?</string>
+  <string name="edit_local_group_dialog_title">Перейменувати групу</string>
+  <string name="too_many_contacts_add_to_group">Більше ніж <xliff:g id="count">%d</xliff:g> контактів не може бути додано</string>
+  <string name="no_phone_number_or_email">Будь ласка, введіть телефонний номер або електронну адресу.</string>
+  <string name="memory_card_full">Не вдалося зберегти контакт, пам\'ять телефону заповнена</string>
+  <string name="menu_memory_status">Стан пам\'яті</string>
+  <string name="memory_status_title">Стан пам\'яті</string>
+  <string name="memory_size">Всього:</string>
+  <string name="memory_used">Використано:</string>
+  <string name="calculating_status_now">Підрахунок\u2026</string>
+  <string name="button_moveto">Перемістити</string>
+  <string name="menu_copyTo">Копіювати до <xliff:g id="destination">%s</xliff:g></string>
+  <string name="no_empty_email_in_usim">Копіювання контактів не вдалося, адреса електронної пошти недійсна</string>
+  <string name="voicemail">Голосова пошта</string>
+  <string name="select_call_title">Виберіть журнали викликів</string>
+  <string name="invalid_number_type">Неприпустимий тип номера</string>
 </resources>

@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/text"
         android:layout_below="@+id/sub_header"
-        android:layout_toEndOf="@+id/icon_text"
+        android:layout_toEndOf="@+id/call_account_icon"
         android:layout_toStartOf="@+id/icon_alternate"
         android:textAlignment="viewStart"
         android:textColor="@color/quickcontact_entry_sub_header_text_color" />
@@ -84,6 +84,18 @@
         android:layout_below="@+id/sub_header"
         android:layout_marginTop="@dimen/expanding_entry_card_item_text_icon_margin_top"
         android:layout_marginEnd="@dimen/expanding_entry_card_item_text_icon_margin_right" />
+
+    <ImageView
+        android:id="@+id/call_account_icon"
+        android:layout_marginTop="@dimen/expanding_entry_card_item_account_icon_margin_top"
+        android:layout_marginEnd="@dimen/expanding_entry_card_item_text_icon_margin_right"
+        android:layout_toEndOf="@+id/icon_text"
+        android:layout_below="@+id/sub_header"
+        android:layout_width="@dimen/expanding_entry_card_item_icon_size"
+        android:layout_height="@dimen/expanding_entry_card_item_icon_size"
+        android:tint="@color/quickcontact_entry_sub_header_text_color"
+        android:layout_gravity="center_vertical"
+        android:scaleType="centerInside"/>
 
      <ImageView
          android:id="@+id/icon_alternate"

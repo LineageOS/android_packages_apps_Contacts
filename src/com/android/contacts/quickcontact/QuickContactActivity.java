@@ -131,6 +131,7 @@ import com.android.contacts.common.util.ViewUtil;
 import com.android.contacts.detail.ContactDisplayUtils;
 import com.android.contacts.editor.ContactEditorFragment;
 import com.android.contacts.interactions.CalendarInteractionsLoader;
+import com.android.contacts.interactions.CallLogInteraction;
 import com.android.contacts.interactions.CallLogInteractionsLoader;
 import com.android.contacts.interactions.ContactDeletionInteraction;
 import com.android.contacts.interactions.ContactInteraction;
@@ -1763,7 +1764,9 @@ public class QuickContactActivity extends ContactsActivity {
                     /* thirdIcon = */ null,
                     /* thirdIntent = */ null,
                     /* thirdContentDescription = */ null,
-                    interaction.getIconResourceId()));
+                    interaction.getIconResourceId(),
+                    interaction.getAccountComponentName(),
+                    interaction.getAccountId()));
         }
         return entries;
     }

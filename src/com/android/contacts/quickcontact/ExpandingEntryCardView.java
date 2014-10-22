@@ -23,6 +23,7 @@ import android.graphics.ColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
+import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import android.transition.ChangeBounds;
 import android.transition.ChangeScroll;
@@ -47,6 +48,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.contacts.R;
+import com.android.contacts.common.util.TelephonyManagerUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +89,8 @@ public class ExpandingEntryCardView extends CardView {
         private final Intent mThirdIntent;
         private final String mThirdContentDescription;
         private final int mIconResourceId;
+        private final String mAccountComponentName;
+        private final String mAccountId;
 
         public Entry(int id, Drawable icon, String header, String subHeader, String text,
                 String primaryContentDescription, Intent intent, Drawable alternateIcon,
@@ -108,6 +112,21 @@ public class ExpandingEntryCardView extends CardView {
                 boolean shouldApplyColor, boolean isEditable,
                 EntryContextMenuInfo entryContextMenuInfo, Drawable thirdIcon, Intent thirdIntent,
                 String thirdContentDescription, int iconResourceId) {
+            this(id, mainIcon, header, subHeader, subHeaderIcon, text, textIcon,
+                    primaryContentDescription, intent, alternateIcon, alternateIntent,
+                    alternateContentDescription, shouldApplyColor, isEditable,
+                    entryContextMenuInfo, thirdIcon, thirdIntent, thirdContentDescription,
+                    iconResourceId, null, null);
+        }
+
+        public Entry(int id, Drawable mainIcon, String header, String subHeader,
+                Drawable subHeaderIcon, String text, Drawable textIcon,
+                String primaryContentDescription, Intent intent,
+                Drawable alternateIcon, Intent alternateIntent, String alternateContentDescription,
+                boolean shouldApplyColor, boolean isEditable,
+                EntryContextMenuInfo entryContextMenuInfo, Drawable thirdIcon, Intent thirdIntent,
+                String thirdContentDescription, int iconResourceId, String accountComponentName,
+                String accountId) {
             mId = id;
             mIcon = mainIcon;
             mHeader = header;
@@ -127,6 +146,8 @@ public class ExpandingEntryCardView extends CardView {
             mThirdIntent = thirdIntent;
             mThirdContentDescription = thirdContentDescription;
             mIconResourceId = iconResourceId;
+            mAccountComponentName = accountComponentName;
+            mAccountId = accountId;
         }
 
         Drawable getIcon() {
@@ -203,6 +224,14 @@ public class ExpandingEntryCardView extends CardView {
 
         int getIconResourceId() {
             return mIconResourceId;
+        }
+
+        String getAccountComponentName() {
+            return mAccountComponentName;
+        }
+
+        String getAccountId() {
+            return mAccountId;
         }
     }
 
@@ -644,6 +673,28 @@ public class ExpandingEntryCardView extends CardView {
             textIcon.setVisibility(View.GONE);
         }
 
+        final ImageView accountIconView = (ImageView) view.findViewById(R.id.call_account_icon);
+        accountIconView.setVisibility(View.GONE);
+        if (!TextUtils.isEmpty(entry.getAccountComponentName())
+                && entry.getAccountId() != null) {
+            final PhoneAccountHandle accountHandle = TelephonyManagerUtils.getAccount(
+                    entry.getAccountComponentName(), entry.getAccountId());
+            final Drawable accountIcon = TelephonyManagerUtils.getAccountIcon(getContext(),
+                    accountHandle);
+            if (accountIcon != null) {
+                accountIconView.setVisibility(View.VISIBLE);
+                accountIconView.setImageDrawable(accountIcon);
+            }
+        } else if (TextUtils.isEmpty(entry.getAccountComponentName())
+                && entry.getAccountId() != null) {
+            final Drawable accountIcon = TelephonyManagerUtils.getMultiSimIcon(getContext(),
+                    Integer.valueOf(entry.getAccountId()));
+            if (accountIcon != null) {
+                accountIconView.setVisibility(View.VISIBLE);
+                accountIconView.setImageDrawable(accountIcon);
+            }
+        }
+
         if (entry.getIntent() != null) {
             view.setOnClickListener(mOnClickListener);
             view.setTag(new EntryTag(entry.getId(), entry.getIntent()));
@@ -977,7 +1028,6 @@ public class ExpandingEntryCardView extends CardView {
 
         public boolean isSuperPrimary() {
             return mIsSuperPrimary;
-        
         }
 
         public String getData() {

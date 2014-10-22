@@ -1415,6 +1415,15 @@ public class QuickContactActivity extends ContactsActivity {
                     thirdContentDescription =
                             res.getString(R.string.description_video_call);
                 }
+
+                // Add video call button for csvt (ChinaUnicom)
+                if (CallUtil.isCSVTEnabled()) {
+                    thirdIcon = res.getDrawable(R.drawable.ic_videocam);
+                    thirdIntent = CallUtil.getCSVTCallIntent(phone.getNumber());
+                    thirdContentDescription =
+                            res.getString(R.string.description_video_call);
+                }
+
             }
         } else if (dataItem instanceof EmailDataItem) {
             final EmailDataItem email = (EmailDataItem) dataItem;

@@ -178,6 +178,14 @@ public class CallLogInteraction implements ContactInteraction {
         return mValues.getAsInteger(Calls.TYPE);
     }
 
+    public String getAccountComponentName() {
+        return mValues.getAsString(Calls.PHONE_ACCOUNT_COMPONENT_NAME);
+    }
+
+    public String getAccountId() {
+        return mValues.getAsString(Calls.PHONE_ACCOUNT_ID);
+    }
+
     @Override
     public String getContentDescription(Context context) {
         String callDetails = getCallTypeString(context) + ". " + getViewFooter(context) + ". " +

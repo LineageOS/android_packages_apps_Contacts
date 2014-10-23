@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a18252c_feb450d2",
+        "filename": "src/com/android/contacts/activities/MultiPickContactActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 9813
+      },
+      "writtenOn": "2014-10-23T10:04:51Z",
+      "side": 1,
+      "message": "Extra name could be more descriptive as it\u0027s allowing an unlimited quantity of contacts.",
+      "revId": "bb02e0a02fab6e12b814c947399e713e55be546b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

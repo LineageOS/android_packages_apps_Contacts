@@ -1293,6 +1293,7 @@ public class MultiPickContactActivity extends ListActivity implements
                     callerNameText.setVisibility(View.GONE);
                     callerNameText.setText(null);
                     numberText.setVisibility(View.VISIBLE);
+                    numberText.setTextDirection(View.TEXT_DIRECTION_LTR);
                     numberText.setText(getDisplayNumber(number));
                 }
 

@@ -56,7 +56,7 @@
   <string name="blurbJoinContactDataWith">Wiel de Kontakt aus, deen s du mam <xliff:g id="name">%s</xliff:g> fusionéiere wëlls:</string>
   <string name="showAllContactsJoinItem">All d\'Kontakter uweisen</string>
   <string name="separatorJoinAggregateSuggestions">Proposéiert Kontakter</string>
-  <string name="separatorJoinAggregateAll">All Kontakter</string>
+  <string name="separatorJoinAggregateAll">All d\'Kontakter</string>
   <string name="contactsJoinedMessage">Kontakter goufe fusionéiert</string>
   <string name="menu_set_ring_tone">Schelltoun setzen</string>
   <string name="menu_redirect_calls_to_vm">All d\'Uriff un d\'Mailbox</string>
@@ -107,7 +107,7 @@
     <item quantity="one">1 fonnt</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> fonnt</item>
   </plurals>
-  <string name="contactsAllLabel">All Kontakter</string>
+  <string name="contactsAllLabel">All d\'Kontakter</string>
   <string name="contactsGroupsLabel">Gruppen</string>
   <string name="callBack">Zréckuruffen</string>
   <string name="callAgain">Erëm uruffen</string>

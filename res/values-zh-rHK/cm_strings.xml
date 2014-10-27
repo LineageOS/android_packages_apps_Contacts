@@ -20,4 +20,7 @@
   <string name="importConfirmation_title">匯入聯絡人？</string>
   <string name="contactDeletedToast">聯絡人已刪除</string>
   <string name="copy_to_target_msim">SIM 咭 <xliff:g id="index">%d</xliff:g></string>
+  <string name="memory_card_full">無法儲存該聯絡人，手機記憶體已滿</string>
+  <string name="menu_memory_status">記憶體狀態</string>
+  <string name="memory_status_title">記憶體狀態</string>
 </resources>

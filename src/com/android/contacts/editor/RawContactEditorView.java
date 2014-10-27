@@ -237,7 +237,8 @@ public class RawContactEditorView extends BaseRawContactEditorView {
         // Fill in the account info
         if (isProfile) {
             String accountName = state.getAccountName();
-            if (TextUtils.isEmpty(accountName)) {
+            if (TextUtils.isEmpty(accountName)
+                    || TextUtils.equals(state.getAccountType(), PhoneAccountType.ACCOUNT_TYPE)) {
                 mAccountNameTextView.setVisibility(View.GONE);
                 mAccountTypeTextView.setText(R.string.local_profile_title);
             } else {

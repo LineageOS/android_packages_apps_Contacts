@@ -1718,14 +1718,8 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
                 v = mInflater.inflate(R.layout.contact_detail_list_item, parent, false);
 
                 // Cache the children
-                if (MSimTelephonyManager.getDefault().isMultiSimEnabled()
-                        && Phone.CONTENT_ITEM_TYPE.equals(entry.mimetype)) {
-                    viewCache = new DetailViewCache(v, null, mSecondaryActionClickListener,
-                            mThirdActionClickListener);
-                } else {
-                    viewCache = new DetailViewCache(v, mPrimaryActionClickListener,
-                            mSecondaryActionClickListener, mThirdActionClickListener);
-                }
+                viewCache = new DetailViewCache(v, mPrimaryActionClickListener,
+                        mSecondaryActionClickListener, mThirdActionClickListener);
                 v.setTag(viewCache);
             }
 

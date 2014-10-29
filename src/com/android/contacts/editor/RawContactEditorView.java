@@ -242,11 +242,13 @@ public class RawContactEditorView extends BaseRawContactEditorView {
             }
         } else {
             String accountName = state.getAccountName();
-            CharSequence accountType = type.getDisplayLabel(mContext);
+            String account = state.getAccountType();
+            CharSequence accountType = type.getDisplayLabel(mContext, accountName);
             if (TextUtils.isEmpty(accountType)) {
                 accountType = mContext.getString(R.string.account_phone);
             }
-            if (!TextUtils.isEmpty(accountName)) {
+            if (!TextUtils.isEmpty(accountName) && !SimAccountType.ACCOUNT_TYPE.equals(account)
+                    && !PhoneAccountType.ACCOUNT_TYPE.equals(account)) {
                 mAccountNameTextView.setVisibility(View.VISIBLE);
                 mAccountNameTextView.setText(
                         mContext.getString(R.string.from_account_format, accountName));
@@ -257,7 +259,7 @@ public class RawContactEditorView extends BaseRawContactEditorView {
             mAccountTypeTextView.setText(
                     mContext.getString(R.string.account_type_format, accountType));
         }
-        mAccountIcon.setImageDrawable(type.getDisplayIcon(mContext));
+        mAccountIcon.setImageDrawable(type.getDisplayIcon(mContext, state.getAccountName()));
 
         // Show photo editor when supported
         RawContactModifier.ensureKindExists(state, type, Photo.CONTENT_ITEM_TYPE);

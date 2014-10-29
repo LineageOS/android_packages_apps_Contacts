@@ -67,6 +67,7 @@ import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.model.account.AccountType;
 import com.android.contacts.common.model.account.AccountWithDataSet;
+import com.android.contacts.common.model.account.PhoneAccountType;
 import com.android.contacts.common.editor.SelectAccountDialogFragment;
 import com.android.contacts.group.SuggestedMemberListAdapter.SuggestedMember;
 import com.android.contacts.common.model.AccountTypeManager;
@@ -423,9 +424,13 @@ public class GroupEditorFragment extends Fragment implements SelectAccountDialog
             ImageView accountIcon = (ImageView) editorView.findViewById(R.id.account_icon);
             TextView accountTypeTextView = (TextView) editorView.findViewById(R.id.account_type);
             TextView accountNameTextView = (TextView) editorView.findViewById(R.id.account_name);
-            if (!TextUtils.isEmpty(mAccountName)) {
+            if (!TextUtils.isEmpty(mAccountName)
+                    && !SimContactsConstants.PHONE_NAME.equals(mAccountName)) {
                 accountNameTextView.setText(
                         mContext.getString(R.string.from_account_format, mAccountName));
+                accountNameTextView.setVisibility(View.VISIBLE);
+            } else {
+                accountNameTextView.setVisibility(View.GONE);
             }
             accountTypeTextView.setText(accountTypeDisplayLabel);
             accountIcon.setImageDrawable(accountType.getDisplayIcon(mContext));

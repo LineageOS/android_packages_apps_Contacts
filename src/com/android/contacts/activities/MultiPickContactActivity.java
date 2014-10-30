@@ -770,11 +770,14 @@ public class MultiPickContactActivity extends ListActivity implements
                 break;
             case MODE_DEFAULT_SIM:
             case MODE_SEARCH_SIM:
-                if (isMultiSimEnabled() &&
-                        getIntent().getIntExtra(MSimConstants.SUBSCRIPTION_KEY, 0) == SUB2) {
-                    uri = Uri.parse("content://iccmsim/adn_sub2");
+                if (isMultiSimEnabled()) {
+                    if (getIntent().getIntExtra(MSimConstants.SUBSCRIPTION_KEY, 0) == SUB2) {
+                        uri = Uri.parse("content://iccmsim/adn_sub2");
+                    } else {
+                        uri = Uri.parse("content://iccmsim/adn");
+                    }
                 } else {
-                    uri = Uri.parse("content://iccmsim/adn");
+                    uri = Uri.parse("content://icc/adn");
                 }
                 break;
             default:

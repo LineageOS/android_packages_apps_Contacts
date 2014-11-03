@@ -30,17 +30,11 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="?attr/list_item_padding_left"
-    android:paddingStart="?attr/list_item_padding_left"
+    android:paddingLeft="@dimen/group_list_padding"
+    android:paddingStart="@dimen/group_list_padding"
+    android:paddingRight="@dimen/group_list_padding"
+    android:paddingEnd="@dimen/group_list_padding"
     android:minHeight="@dimen/detail_min_line_item_height" >
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dip"
-        android:layout_marginRight="?attr/list_item_padding_right"
-        android:layout_marginEnd="?attr/list_item_padding_right"
-        android:background="@color/secondary_header_separator_color" />
 
     <include
         android:id="@+id/group_list_header"
@@ -51,10 +45,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="8dip"
-        android:paddingLeft="8dip"
-        android:paddingStart="8dip"
         android:paddingBottom="8dip"
         android:orientation="vertical"
+        android:gravity="center_vertical"
         android:duplicateParentState="true"
         android:background="@drawable/group_list_item_background">
 
@@ -62,7 +55,8 @@
             android:id="@+id/label"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="@style/TextAppearanceMedium"
+            android:textColor="@color/group_name_text_color"
             android:ellipsize="end"
             android:singleLine="true" />
 
@@ -70,8 +64,7 @@
             android:id="@+id/count"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="?android:attr/textColorSecondary"
+            android:textAppearance="@style/TextAppearanceSmall"
             android:ellipsize="end"
             android:singleLine="true" />
 

@@ -88,6 +88,12 @@
     <!-- Account title left padding -->
     <dimen name="account_container_left_padding">16dip</dimen>
 
+    <!-- Left and Right padding for group list view -->
+    <dimen name="group_list_padding">16dip</dimen>
+
+    <dimen name="group_detail_title_text_size">20sp</dimen>
+    <dimen name="group_detail_subtitle_text_size">14sp</dimen>
+
     <!-- Left padding for a group member list item -->
     <dimen name="group_member_item_left_padding">4dip</dimen>
 

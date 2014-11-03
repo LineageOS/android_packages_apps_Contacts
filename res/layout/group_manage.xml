@@ -2,6 +2,7 @@
 <!--
  *
  * Copyright (c) 2013, The Linux Foundation. All Rights Reserved.
+ * Copyright (c) 2014, The CyanogenMod Project
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -28,13 +29,7 @@
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  -->
-<TabHost
-        android:id="@android:id/tabhost"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
@@ -58,5 +53,4 @@
         android:visibility="gone"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
-    </LinearLayout>
-</TabHost>
+</LinearLayout>

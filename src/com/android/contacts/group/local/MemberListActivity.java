@@ -278,9 +278,16 @@ public class MemberListActivity extends Activity implements AdapterView.OnItemCl
         emptyText = (TextView) findViewById(R.id.emptyText);
         mListView = (ListView) findViewById(R.id.member_list);
         mListView.setAdapter(mAdapter);
-        mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         mListView.setOnItemClickListener(this);
+        mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         mListView.setMultiChoiceModeListener(mMultiChoiceModeListener);
+        mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> list, View v, int position, long arg3) {
+                mListView.setItemChecked(position, true);
+                return true;
+            }
+        });
         uri = getIntent().getParcelableExtra("data");
         getContentResolver().registerContentObserver(
                 Uri.withAppendedPath(LocalGroup.CONTENT_FILTER_URI,
@@ -288,6 +295,15 @@ public class MemberListActivity extends Activity implements AdapterView.OnItemCl
         mGroup = LocalGroups.Group.restoreGroupById(getContentResolver(),
                 Long.parseLong(uri.getLastPathSegment()));
         actionBar.setSubtitle(mGroup.getTitle());
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+        if (!mListView.isItemChecked(position)) {
+            mListView.setItemChecked(position, true);
+        } else {
+            mListView.setItemChecked(position, false);
+        }
     }
 
     @Override
@@ -389,7 +405,6 @@ public class MemberListActivity extends Activity implements AdapterView.OnItemCl
     @Override
     protected void onPause() {
         super.onPause();
-
         mPaused = true;
         mAdapter.changeCursor(null);
     }
@@ -415,15 +430,15 @@ public class MemberListActivity extends Activity implements AdapterView.OnItemCl
         @Override
         public void onItemCheckedStateChanged(ActionMode mode, int position,
                                               long id, boolean checked) {
-            View v = mListView.getChildAt(position);
-            String contactId = (String) v.getTag();
-            CheckBox checkBox = (CheckBox) v.findViewById(R.id.pick_contact_check);
-            if (mRemoveSet.containsKey(contactId)) {
-                mRemoveSet.remove(contactId);
-            } else {
-                mRemoveSet.putString(contactId, contactId);
+            ContactItem item = mAdapter.getItem(position);
+            if (item != null) {
+                if (mRemoveSet.containsKey(item.toString())) {
+                    mRemoveSet.remove(item.toString());
+                } else {
+                    mRemoveSet.putString(item.toString(), item.toString());
+                }
             }
-            setCheckStatus(contactId, checkBox);
+            mAdapter.notifyDataSetChanged();
         }
 
         @Override
@@ -492,6 +507,15 @@ public class MemberListActivity extends Activity implements AdapterView.OnItemCl
                 null, null);
     }
 
+    class ContactItem {
+        private long rawContactId;
+
+        @Override
+        public String toString() {
+            return String.valueOf(rawContactId);
+        }
+    }
+
     private class QueryHandler extends AsyncQueryHandler {
         protected final WeakReference<MemberListActivity> mActivity;
 
@@ -518,6 +542,20 @@ public class MemberListActivity extends Activity implements AdapterView.OnItemCl
         }
 
         @Override
+        public ContactItem getItem(int position) {
+            Cursor cursor = getCursor();
+            ContactItem contactItem;
+            if (cursor != null && cursor.moveToPosition(position)) {
+                contactItem = new ContactItem();
+                contactItem.rawContactId = cursor.getLong(SUMMARY_RAW_CONTACTS_ID_INDEX);
+            } else {
+                return null;
+            }
+
+            return contactItem;
+        }
+
+        @Override
         public void bindView(View view, Context context, Cursor cursor) {
             long contactId = cursor.getLong(SUMMARY_ID_COLUMN_INDEX);
             String lookupId = cursor.getString(SUMMARY_LOOKUP_KEY_INDEX);
@@ -537,7 +575,6 @@ public class MemberListActivity extends Activity implements AdapterView.OnItemCl
 
             String key = String.valueOf(rawContactsId);
             setCheckStatus(key, checkBox);
-            view.setTag(key);
         }
 
         @Override
@@ -645,15 +682,6 @@ public class MemberListActivity extends Activity implements AdapterView.OnItemCl
         canvas.drawBitmap(photo, src, dst, photoPaint);
 
         return icon;
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-        if (!mListView.isItemChecked(position)) {
-            mListView.setItemChecked(position, true);
-        } else {
-            mListView.setItemChecked(position, false);
-        }
     }
 
     private void pickMembers() {

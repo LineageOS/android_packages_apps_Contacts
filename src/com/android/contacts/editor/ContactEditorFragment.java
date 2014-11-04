@@ -596,7 +596,9 @@ public class ContactEditorFragment extends Fragment implements
                 // For profile contacts, we need a different query URI
                 state.setProfileQueryUri();
                 // Try to find a local profile contact
-                if (state.getValues().getAsString(RawContacts.ACCOUNT_TYPE) == null) {
+                String accountType = state.getValues().getAsString(RawContacts.ACCOUNT_TYPE);
+                if (accountType == null
+                        || TextUtils.equals(accountType, PhoneAccountType.ACCOUNT_TYPE)) {
                     localProfileExists = true;
                 }
             }

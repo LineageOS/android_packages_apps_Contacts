@@ -18,6 +18,7 @@
   <string name="quick_contact_copied_toast">"已复制到剪切板"</string>
   <string name="deleteConfirmation_title">删除联系人？</string>
   <string name="importConfirmation_title">导入联系人？</string>
+  <string name="menu_deleteContacts">删除联系人</string>
   <string name="contactDeletedToast">联系人已删除</string>
   <string name="contactSavedToSimCardError">无法将选择的联系人保存到 SIM 卡</string>
   <string name="airplane_mode_on">飞行模式启用时无法访问 SIM 卡</string>

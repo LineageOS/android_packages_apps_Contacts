@@ -205,6 +205,9 @@ public class MultiPickContactActivity extends ListActivity implements
     public static final String EXTRA_SELECT_CALLLOG = "selectcalllog";
     public static final String EXTRA_NOT_SHOW_SIM_FLAG = "not_sim_show";
 
+    public static final String EXTRA_WANT_EXPORT = "want_export";
+    private boolean wantExport;
+
     private static final int DIALOG_DEL_CALL = 1;
 
     private ContactItemListAdapter mAdapter;
@@ -266,6 +269,7 @@ public class MultiPickContactActivity extends ListActivity implements
         Intent intent = getIntent();
         String action = intent.getAction();
         boolean isContact = intent.getBooleanExtra(EXTRA_IS_CONTACT,false);
+        wantExport = intent.getBooleanExtra(EXTRA_WANT_EXPORT,false);
         mAllowSelectAll = !intent.getBooleanExtra(EXTRA_IS_SELECT_ALL_DISALLOWED, false);
 
         if (Intent.ACTION_DELETE.equals(action)) {
@@ -298,9 +302,11 @@ public class MultiPickContactActivity extends ListActivity implements
         mAccountManager = AccountManager.get(this);
 
         mActionBar = getActionBar();
-        mActionBar.setHomeButtonEnabled(true);
-        mActionBar.setDisplayHomeAsUpEnabled(true);
-        mActionBar.setDisplayShowTitleEnabled(true);
+        if (mActionBar != null) {
+            mActionBar.setHomeButtonEnabled(true);
+            mActionBar.setDisplayHomeAsUpEnabled(true);
+            mActionBar.setDisplayShowTitleEnabled(true);
+        }
 
         startQuery();
         //register receiver.
@@ -357,7 +363,7 @@ public class MultiPickContactActivity extends ListActivity implements
                 }
                 if (mMode == MODE_DEFAULT_CONTACT) {
                     if (ACTION_MULTI_PICK.equals(getIntent().getAction())) {
-                        if (mChoiceSet.size() > MAX_CONTACTS_NUM_TO_SELECT_ONCE) {
+                        if (mChoiceSet.size() > MAX_CONTACTS_NUM_TO_SELECT_ONCE && !wantExport) {
                             String text = getString(R.string.too_many_contacts_add_to_group,
                                     MAX_CONTACTS_NUM_TO_SELECT_ONCE);
                             Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
@@ -459,17 +465,19 @@ public class MultiPickContactActivity extends ListActivity implements
     }
 
     private void updateActionBar() {
-        String countTitle = null;
-        if (!mChoiceSet.isEmpty()) {
-            countTitle = getResources().getQuantityString(R.plurals.contacts_selected,
-                    mChoiceSet.size(), mChoiceSet.size());
-        }
-        mActionBar.setSubtitle(countTitle);
-        if (mDoneItem != null) {
-            mDoneItem.setVisible(!mChoiceSet.isEmpty());
-        }
-        if (mSelectAllItem != null) {
-            mSelectAllItem.setChecked(mChoiceSet.size() == mAdapter.getCount());
+        if (mActionBar != null) {
+            String countTitle = null;
+            if (!mChoiceSet.isEmpty()) {
+                countTitle = getResources().getQuantityString(R.plurals.contacts_selected,
+                        mChoiceSet.size(), mChoiceSet.size());
+            }
+            mActionBar.setSubtitle(countTitle);
+            if (mDoneItem != null) {
+                mDoneItem.setVisible(!mChoiceSet.isEmpty());
+            }
+            if (mSelectAllItem != null) {
+                mSelectAllItem.setChecked(mChoiceSet.size() == mAdapter.getCount());
+            }
         }
     }
 
@@ -762,11 +770,14 @@ public class MultiPickContactActivity extends ListActivity implements
                 break;
             case MODE_DEFAULT_SIM:
             case MODE_SEARCH_SIM:
-                if (isMultiSimEnabled() &&
-                        getIntent().getIntExtra(MSimConstants.SUBSCRIPTION_KEY, 0) == SUB2) {
-                    uri = Uri.parse("content://iccmsim/adn_sub2");
+                if (isMultiSimEnabled()) {
+                    if (getIntent().getIntExtra(MSimConstants.SUBSCRIPTION_KEY, 0) == SUB2) {
+                        uri = Uri.parse("content://iccmsim/adn_sub2");
+                    } else {
+                        uri = Uri.parse("content://iccmsim/adn");
+                    }
                 } else {
-                    uri = Uri.parse("content://iccmsim/adn");
+                    uri = Uri.parse("content://icc/adn");
                 }
                 break;
             default:

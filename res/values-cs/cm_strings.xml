@@ -18,6 +18,7 @@
   <string name="quick_contact_copied_toast">"Zkopírováno do schránky"</string>
   <string name="deleteConfirmation_title">Odstranit kontakt?</string>
   <string name="importConfirmation_title">Importovat kontakt?</string>
+  <string name="menu_deleteContacts">Odstranit kontakty</string>
   <string name="contactDeletedToast">Kontakt odstraněn</string>
   <string name="contactSavedToSimCardError">Nelze uložit vybrané kontakty na SIM kartu</string>
   <string name="airplane_mode_on">SIM karta není dostupná, pokud je zařízení v režimu „V letadle“</string>
@@ -31,7 +32,7 @@
   <string name="copy_to_target_sim">SIM karta</string>
   <string name="copy_to_target_msim">SIM karta <xliff:g id="index">%d</xliff:g></string>
   <string name="search_bar_hint">Prohledávat kontakty</string>
-  <string name="delete_group_dialog_title">Odstranit skupinu</string>
+  <string name="delete_group_dialog_title">Odstranění skupiny</string>
   <string name="edit_before_call">Upravit číslo před voláním</string>
   <string name="description_videocall">Video hovor <xliff:g id="name">%1$s</xliff:g></string>
   <string name="description_dial_vt">Vytáčené VT <xliff:g id="name">%1$s</xliff:g></string>
@@ -53,7 +54,7 @@
     <item quantity="other">%d vybraných</item>
   </plurals>
   <string name="delete_call_title">Odstranit historii volání</string>
-  <string name="delete_call_message">Odstraňování historie volání\u2026</string>
+  <string name="delete_call_message">Odstraňuje se historie volání\u2026</string>
   <string name="delete_call_alert">Odstranit vybrané historie volání?</string>
   <string name="title_del_call">Odstranit</string>
   <string name="menu_sendViaSMS">Odeslat kontakt pomocí SMS</string>
@@ -77,8 +78,8 @@
     <item quantity="few">Budou odstraněny %d kontakty.</item>
     <item quantity="other">Bude odstraněno %d kontaktů.</item>
   </plurals>
-  <string name="delete_contacts_title">Odstranit kontakt</string>
-  <string name="delete_contacts_message">Odstraňování kontaktů\u2026</string>
+  <string name="delete_contacts_title">Odstranit kontakty</string>
+  <string name="delete_contacts_message">Odstraňují se kontakty\u2026</string>
   <string name="error_group_exist">Skupina s názvem „<xliff:g id="name">%s</xliff:g>“ již existuje</string>
   <string name="menu_auto_sync_to_baidu_cloud">Automatická synchronizace s Baidu Cloud</string>
   <string name="menu_sync_to_baidu_cloud">Synchronizovat do Baidu Cloud</string>

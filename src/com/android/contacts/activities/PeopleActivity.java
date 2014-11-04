@@ -1083,10 +1083,12 @@ public class PeopleActivity extends ContactsActivity
         mAllFragment.setFilter(mContactListFilterController.getFilter());
 
         final boolean useTwoPane = PhoneCapabilityTester.isUsingTwoPanes(this);
-
+        final boolean cmccFeature = getResources().
+                getBoolean(R.bool.config_show_quick_call_button);
         mAllFragment.setVerticalScrollbarPosition(getScrollBarPosition(useTwoPane));
         mAllFragment.setSelectionVisible(useTwoPane);
         mAllFragment.setQuickContactEnabled(!useTwoPane);
+        mAllFragment.setQuickCallButtonEnabled(cmccFeature && !useTwoPane);
     }
 
     private int getScrollBarPosition(boolean useTwoPane) {
@@ -1534,7 +1536,7 @@ public class PeopleActivity extends ContactsActivity
             switchGroupsMenu.setVisible(false);
             clearFrequentsMenu.setVisible(false);
             helpMenu.setVisible(false);
-            makeMenuItemVisible(menu, R.id.menu_delete, false);
+            makeMenuItemVisible(menu, R.id.menu_multi_delete, false);
         } else {
             switch (mActionBarAdapter.getCurrentTab()) {
                 case TabState.FAVORITES:
@@ -1666,7 +1668,7 @@ public class PeopleActivity extends ContactsActivity
                 return true;
             }
             // QRD enhancement: multi contact delete
-            case R.id.menu_delete: {
+            case R.id.menu_multi_delete: {
                 final Intent intent = new Intent(Intent.ACTION_DELETE, Contacts.CONTENT_URI);
                 intent.putExtra(EDITABLE_KEY, mActionBarAdapter.getQueryString());
 

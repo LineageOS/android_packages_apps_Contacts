@@ -18,6 +18,7 @@
   <string name="quick_contact_copied_toast">"Copiáu al cartafueyu"</string>
   <string name="deleteConfirmation_title">Desaniciar contautu?</string>
   <string name="importConfirmation_title">Importar contautu?</string>
+  <string name="menu_deleteContacts">Desaniciar contautos</string>
   <string name="contactDeletedToast">Contautu desaniciáu</string>
   <string name="contactSavedToSimCardError">Nun pudieron guardase los contautos seleicionaos na tarxeta SIM</string>
   <string name="airplane_mode_on">Nun pue accedese a la tarxeta SIM mentanto\'l mou avión tea habilitáu</string>

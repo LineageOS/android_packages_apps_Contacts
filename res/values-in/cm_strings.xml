@@ -18,6 +18,7 @@
   <string name="quick_contact_copied_toast">"Disalin ke clipboard"</string>
   <string name="deleteConfirmation_title">Hapus kontak?</string>
   <string name="importConfirmation_title">Impor kontak?</string>
+  <string name="menu_deleteContacts">Hapus kontak</string>
   <string name="contactDeletedToast">Kontak dihapus</string>
   <string name="contactSavedToSimCardError">Tidak dapat menyimpan kontak yang dipilih ke kartu SIM</string>
   <string name="airplane_mode_on">Kartu SIM tidak dapat diakses saat mode pesawat diaktifkan</string>

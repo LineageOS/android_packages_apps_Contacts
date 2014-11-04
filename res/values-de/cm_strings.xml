@@ -18,6 +18,7 @@
   <string name="quick_contact_copied_toast">"In die Zwischenablage kopiert"</string>
   <string name="deleteConfirmation_title">Kontakt löschen?</string>
   <string name="importConfirmation_title">Kontakt importieren?</string>
+  <string name="menu_deleteContacts">Kontakte löschen</string>
   <string name="contactDeletedToast">Kontakt gelöscht</string>
   <string name="contactSavedToSimCardError">Die ausgewählten Kontakte konnten nicht auf der SIM-Karte gespeichert werden</string>
   <string name="airplane_mode_on">Bei aktiviertem Flugmodus kann nicht auf die SIM-Karte zugegriffen werden</string>

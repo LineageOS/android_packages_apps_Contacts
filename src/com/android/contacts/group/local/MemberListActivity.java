@@ -406,7 +406,6 @@ public class MemberListActivity extends Activity implements AdapterView.OnItemCl
     protected void onPause() {
         super.onPause();
         mPaused = true;
-        mAdapter.changeCursor(null);
     }
 
     public void onDestroy() {

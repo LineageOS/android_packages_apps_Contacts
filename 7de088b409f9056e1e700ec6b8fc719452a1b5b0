@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a18252c_526a8c1b",
+        "filename": "src/com/android/contacts/group/local/MemberListActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 9045
+      },
+      "writtenOn": "2014-11-05T06:49:14Z",
+      "side": 1,
+      "message": "could just override toString() here? just a personal preference.",
+      "revId": "7de088b409f9056e1e700ec6b8fc719452a1b5b0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

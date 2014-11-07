@@ -2039,8 +2039,10 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
                     ContextMenu.NONE, getString(R.string.set_default));
             }
         if (Phone.CONTENT_ITEM_TYPE.equals(selectedMimeType)) {
+            final boolean isIPPrefixEnabled =
+                    SystemProperties.getBoolean("persist.radio.ipcall.enabled", false);
             // add limit length to show IP call item
-            if (selectedEntry.data.length() > MAX_NUM_LENGTH) {
+            if (isIPPrefixEnabled && selectedEntry.data.length() > MAX_NUM_LENGTH) {
                 if (MoreContactUtils.isMultiSimEnable(mContext, MSimConstants.SUB1)) {
                     String sub1Name = MoreContactUtils.getMultiSimAliasesName(
                             mContext, MSimConstants.SUB1);

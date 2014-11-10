@@ -23,4 +23,5 @@
   <string name="memory_card_full">無法儲存該聯絡人，手機記憶體已滿</string>
   <string name="menu_memory_status">記憶體狀態</string>
   <string name="memory_status_title">記憶體狀態</string>
+  <string name="button_moveto">移動</string>
 </resources>

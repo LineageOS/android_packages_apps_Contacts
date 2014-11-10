@@ -21,7 +21,7 @@
   <string name="shortcutDialContact">Direkten Telefon</string>
   <string name="shortcutMessageContact">Direkte Message</string>
   <string name="shortcutActivityTitle">Eng Kontaktofkierzung auswielen</string>
-  <string name="callShortcutActivityTitle">Eng Nummer wiele fir unzeruffen</string>
+  <string name="callShortcutActivityTitle">Eng Nummer auswiele fir unzeruffen</string>
   <string name="messageShortcutActivityTitle">Nummer auswiele fir e Message ze schécken</string>
   <string name="contactPickerActivityTitle">E Kontakt auswielen</string>
   <string name="starredList">Markéiert</string>
@@ -227,5 +227,5 @@
   <string name="add_account">Kont dobäisetzen</string>
   <string name="add_new_account">Neie Kont dobäisetzen</string>
   <string name="menu_export_database">Datebankfichieren exportéieren</string>
-  <string name="contact_detail_picture_description">Bild. Auswiele fir ze änneren</string>
+  <string name="contact_detail_picture_description">Bild. Auswiele fir z\'änneren</string>
 </resources>

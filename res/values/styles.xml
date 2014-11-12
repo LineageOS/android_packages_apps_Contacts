@@ -15,20 +15,33 @@
 -->
 <resources>
 
-    <style name="DetailActivityTheme" parent="@android:style/Theme.Holo.Light">
-        <item name="android:actionBarStyle">@style/ContactsActionBarStyle</item>
-        <item name="android:homeAsUpIndicator">@drawable/ic_menu_back</item>
-        <item name="android:actionOverflowButtonStyle">@style/ContactsActionBarOverflow</item>
+    <style name="DetailActivityTheme" parent="@style/PeopleTheme">
+        <item name="android:actionBarStyle">@style/DetailActionBarStyle</item>
         <item name="android:actionBarItemBackground">@drawable/action_bar_item_background</item>
         <item name="android:actionBarWidgetTheme">@style/ContactsActionBarTheme</item>
-        <item name="android:textColorPrimary">@color/primary_text_color</item>
-        <item name="android:textColorSecondary">@color/secondary_text_color</item>
-        <item name="android:listViewStyle">@style/ListViewStyle</item>
     </style>
 
     <style name="EditorActivityTheme" parent="@style/PeopleTheme">
         <item name="android:listViewStyle">@style/ListViewStyle</item>
         <item name="android:actionBarStyle">@style/EditorActionBarStyle</item>
+    </style>
+
+    <style name="GroupDetailActionbarTitle"
+           parent="@android:style/TextAppearance.Material.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/group_detail_actionbar_text_color</item>
+        <item name="android:textSize">@dimen/group_detail_title_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="GroupDetailActionbarSubtitle"
+           parent="@android:style/TextAppearance.Material.Widget.ActionBar.Subtitle">
+        <item name="android:textColor">@color/group_detail_actionbar_text_color</item>
+        <item name="android:textSize">@dimen/group_detail_subtitle_text_size</item>
+    </style>
+
+    <style name="DetailActionBarStyle" parent="@style/ContactsActionBarStyle">
+        <item name="android:titleTextStyle">@style/GroupDetailActionbarTitle</item>
+        <item name="android:subtitleTextStyle">@style/GroupDetailActionbarSubtitle</item>
     </style>
 
     <style name="Theme">

@@ -159,11 +159,10 @@ public class GroupBrowseListAdapter extends BaseAdapter {
             result.setTag(viewCache);
         }
 
-        // Add a header if this is the first group in an account and hide the divider
+        // Add a header if this is the first group in an account
         if (entry.isFirstGroupInAccount()) {
             bindHeaderView(entry, viewCache);
             viewCache.accountHeader.setVisibility(View.VISIBLE);
-            viewCache.divider.setVisibility(View.GONE);
             if (position == 0) {
                 // Have the list's top padding in the first header.
                 //
@@ -176,7 +175,6 @@ public class GroupBrowseListAdapter extends BaseAdapter {
             }
         } else {
             viewCache.accountHeader.setVisibility(View.GONE);
-            viewCache.divider.setVisibility(View.VISIBLE);
             viewCache.accountHeaderExtraTopPadding.setVisibility(View.GONE);
         }
 
@@ -220,7 +218,6 @@ public class GroupBrowseListAdapter extends BaseAdapter {
         public final TextView groupMemberCount;
         public final View accountHeader;
         public final View accountHeaderExtraTopPadding;
-        public final View divider;
         private Uri mUri;
 
         public GroupListItemViewCache(View view) {
@@ -230,7 +227,6 @@ public class GroupBrowseListAdapter extends BaseAdapter {
             groupMemberCount = (TextView) view.findViewById(R.id.count);
             accountHeader = view.findViewById(R.id.group_list_header);
             accountHeaderExtraTopPadding = view.findViewById(R.id.header_extra_top_padding);
-            divider = view.findViewById(R.id.divider);
         }
 
         public void setUri(Uri uri) {

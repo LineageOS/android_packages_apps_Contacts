@@ -69,7 +69,7 @@
 
         <!-- The main Contacts activity with the contact list, favorites, and groups. -->
         <activity android:name=".activities.PeopleActivity"
-            android:label="@string/people"
+            android:label="@string/app_name"
             android:theme="@style/PeopleTheme"
             android:screenOrientation="nosensor"
             android:uiOptions="splitActionBarWhenNarrow"

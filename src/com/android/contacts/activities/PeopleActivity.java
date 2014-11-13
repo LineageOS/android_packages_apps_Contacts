@@ -1141,6 +1141,13 @@ public class PeopleActivity extends ContactsActivity implements
                 startActivity(intent);
                 return true;
             }
+
+            case R.id.menu_memory_status: {
+                final Intent intent = new Intent(this, MemoryStatusActivity.class);
+                startActivity(intent);
+                return true;
+            }
+
         }
         return false;
     }

@@ -681,6 +681,15 @@
     <!-- Menu item shown only when the special debug mode is enabled, which is used to send all contacts database files via email.  [CHAR LIMI=NONE] -->
     <string name="menu_export_database">Export database files</string>
 
+    <!-- add for MemoryStatusActivity -->
+    <string name="menu_memory_status">Memory status</string>
+    <string name="memory_status_title">Memory status</string>
+    <string name="memory_size">Total:</string>
+    <string name="memory_available">Available</string>
+    <string name="memory_used">Used:</string>
+    <string name="calculating_status_now">Calculating Status now...</string>
+    <string name="contact_detail_picture_description">Picture. Select to change</string>
+
     <!-- Content description for the button that adds a new contact
          [CHAR LIMIT=NONE] -->
     <string name="action_menu_add_new_contact_button">add new contact</string>

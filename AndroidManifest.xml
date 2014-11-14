@@ -340,6 +340,7 @@
             android:name=".activities.ContactEditorActivity"
             android:label="@string/launcherActivityLabel"
             android:theme="@style/EditorActivityTheme"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="stateHidden|adjustResize">
 
             <intent-filter android:label="@string/editContactDescription">

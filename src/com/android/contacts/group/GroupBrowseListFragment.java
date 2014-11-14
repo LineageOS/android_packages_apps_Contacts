@@ -159,17 +159,6 @@ public class GroupBrowseListFragment extends Fragment
     private void configureVerticalScrollbar() {
         mListView.setVerticalScrollbarPosition(mVerticalScrollbarPosition);
         mListView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
-        int leftPadding = 0;
-        int rightPadding = 0;
-        if (mVerticalScrollbarPosition == View.SCROLLBAR_POSITION_LEFT) {
-            leftPadding = mContext.getResources().getDimensionPixelOffset(
-                    R.dimen.list_visible_scrollbar_padding);
-        } else {
-            rightPadding = mContext.getResources().getDimensionPixelOffset(
-                    R.dimen.list_visible_scrollbar_padding);
-        }
-        mListView.setPadding(leftPadding, mListView.getPaddingTop(),
-                rightPadding, mListView.getPaddingBottom());
     }
 
     @Override

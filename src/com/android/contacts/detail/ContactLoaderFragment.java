@@ -384,20 +384,19 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
                 }
             } else if (SimContactsConstants.ACCOUNT_TYPE_PHONE.equals(accoutType)) {
                 copyToPhoneMenu.setVisible(false);
-                boolean hasPhoneOrEmail = hasPhoneOrEmailDate(mContactData);
                 if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
-                    if (hasPhoneOrEmail && hasEnabledIccCard(SimContactsConstants.SUB_1)) {
+                    if (hasEnabledIccCard(SimContactsConstants.SUB_1)) {
                         copyToSim1Menu.setTitle(getString(R.string.menu_copyTo,
                                 getString(R.string.copy_to_target_msim, 1)));
                         copyToSim1Menu.setVisible(true);
                     }
-                    if (hasPhoneOrEmail && hasEnabledIccCard(SimContactsConstants.SUB_2)) {
+                    if (hasEnabledIccCard(SimContactsConstants.SUB_2)) {
                         copyToSim2Menu.setTitle(getString(R.string.menu_copyTo,
                                 getString(R.string.copy_to_target_msim, 2)));
                         copyToSim2Menu.setVisible(true);
                     }
                 } else {
-                    if (hasPhoneOrEmail && TelephonyManager.getDefault().hasIccCard()
+                    if (TelephonyManager.getDefault().hasIccCard()
                             && TelephonyManager.getDefault().getSimState()
                                 == TelephonyManager.SIM_STATE_READY) {
                         copyToSim1Menu.setTitle(getString(R.string.menu_copyTo,

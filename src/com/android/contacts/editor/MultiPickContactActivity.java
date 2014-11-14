@@ -1595,7 +1595,7 @@ public class MultiPickContactActivity extends ListActivity implements
             emailAddressArray = null;
         }
         if (!TextUtils.isEmpty(anrs)) {
-            anrArray = anrs.split(",");
+            anrArray = anrs.split(SimContactsConstants.ANR_SEP);
         } else {
             anrArray = null;
         }

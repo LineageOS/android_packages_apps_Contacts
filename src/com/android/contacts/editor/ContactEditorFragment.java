@@ -2022,7 +2022,12 @@ public class ContactEditorFragment extends Fragment implements
                 return;
             }
 
-            mStatus = Status.EDITING;
+            // When background data changed and we have already loaded data,
+            // we do not want to change it. So, we will change the status
+            // only if the mState is empty.
+            if (mState.isEmpty()) {
+                mStatus = Status.EDITING;
+            }
             mLookupUri = data.getLookupUri();
             final long setDataStartTime = SystemClock.elapsedRealtime();
             setData(data);

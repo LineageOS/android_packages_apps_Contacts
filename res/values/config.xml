@@ -15,5 +15,5 @@
 -->
 <resources>
     <!-- CMCC feature -->
-    <bool name="config_show_quick_call_button" translatable="false">true</bool>
+    <bool name="config_show_quick_call_button">false</bool>
 </resources>

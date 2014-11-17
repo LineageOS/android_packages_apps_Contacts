@@ -652,7 +652,7 @@ public class ContactSaveService extends IntentService {
         }
 
         if (!TextUtils.isEmpty(anr)) {
-            String[] anrs = anr.split(",");
+            String[] anrs = anr.split(SimContactsConstants.ANR_SEP);
             if (anrs != null) {
                 if (anrs.length > MoreContactUtils
                         .getOneSimAnrCount(subscription)) {
@@ -672,7 +672,7 @@ public class ContactSaveService extends IntentService {
         }
 
         if (!TextUtils.isEmpty(email)) {
-            String[] emails = email.split(",");
+            String[] emails = email.split(SimContactsConstants.EMAIL_SEP);
             for (String mEmail : emails) {
                 if (mEmail != null && mEmail.length() > MAX_EMAIL_LENGTH) {
                     return RESULT_EMAIL_FAILURE;

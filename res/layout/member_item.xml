@@ -34,6 +34,7 @@
      android:layout_height="wrap_content"
      android:gravity="center_vertical"
      android:minHeight="?android:attr/listPreferredItemHeight"
+     android:background="?android:activatedBackgroundIndicator"
      android:paddingTop="3dip"
      android:paddingBottom="3dip"
      >

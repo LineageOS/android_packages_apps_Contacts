@@ -16,4 +16,6 @@
 <resources>
     <!-- CMCC feature -->
     <bool name="config_show_quick_call_button" translatable="false">false</bool>
+
+    <string name="app_name">@string/people</string>
 </resources>

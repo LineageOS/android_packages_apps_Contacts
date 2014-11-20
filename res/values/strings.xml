@@ -767,4 +767,10 @@
 
     <!-- File Authority for the photo picker -->
     <string name="photo_file_provider_authority" translatable="false">com.android.contacts.files</string>
+    <string name="voicemail">Voicemail</string>
+    <string name="select_call_title">Select call logs</string>
+    <string name="delete_call_title">Delete call logs</string>
+    <string name="delete_call_message">Deleting call logs ...</string>
+    <string name="delete_call_alert">Sure to delete the call logs selected?</string>
+    <string name="title_del_call">Delete</string>
 </resources>

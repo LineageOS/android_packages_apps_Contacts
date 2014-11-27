@@ -17,5 +17,53 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"Kopierat till urklipp"</string>
   <string name="deleteConfirmation_title">Ta bort kontakt?</string>
+  <string name="importConfirmation_title">Importera kontakt?</string>
+  <string name="menu_deleteContacts">Ta bort kontakter</string>
+  <string name="contactDeletedToast">Kontakt borttagen</string>
+  <string name="number_anr_too_long">Numret är för långt</string>
+  <string name="email_address_too_long">E-postadressen är för lång</string>
+  <string name="sim_card_full">SIM-kortet är fullt</string>
+  <string name="tag_too_long">Kontaktens namn är för långt</string>
+  <string name="invalid_phone_number">Telefonnumret är ogiltigt</string>
+  <string name="videocall">Videosamtal</string>
+  <string name="unknown">Okänd</string>
+  <string name="copy_to_target_sim">SIM-kort</string>
+  <string name="copy_to_target_msim">SIM-kort <xliff:g id="index">%d</xliff:g></string>
+  <string name="delete_group_dialog_title">Ta bort grupp</string>
+  <string name="description_videocall">Videosamtal <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">Ring VT <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_add">Ny grupp</string>
+  <string name="menu_option_delete">Ta bort grupp</string>
+  <string name="button_delete">Ta bort</string>
   <string name="select_all">Alla</string>
+  <string name="action_done">Färdig</string>
+  <string name="delete_call_title">Ta bort samtalslistor</string>
+  <string name="delete_call_message">Tar bort samtalslistor\u2026</string>
+  <string name="delete_call_alert">Ta bort valda samtalslistor?</string>
+  <string name="title_del_call">Ta bort</string>
+  <string name="menu_sendViaSMS">Skicka kontakt via SMS</string>
+  <string name="import_sim_contacts_title">Importera kontakter från SIM-kort</string>
+  <string name="import_sim_contacts_message">Importerar SIM-kontakter\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">%d kontakt kommer importeras.</item>
+    <item quantity="other">%d kontakter kommer importeras.</item>
+  </plurals>
+  <string name="import_finish">Import slutförd</string>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">%d kontakt kommer att tas bort.</item>
+    <item quantity="other">%d kontakter kommer att tas bort.</item>
+  </plurals>
+  <string name="delete_contacts_title">Ta bort kontakter</string>
+  <string name="delete_contacts_message">Tar bort kontakter\u2026</string>
+  <string name="delete_local_group_dialog_message">Ta bort grupp \'<xliff:g id="name">%s</xliff:g>\'?</string>
+  <string name="edit_local_group_dialog_title">Byt namn på grupp</string>
+  <string name="menu_memory_status">Minnesstatus</string>
+  <string name="memory_status_title">Minnesstatus</string>
+  <string name="memory_size">Totalt:</string>
+  <string name="memory_used">Använt:</string>
+  <string name="calculating_status_now">Beräknar status\u2026</string>
+  <string name="button_moveto">Flytta</string>
+  <string name="menu_copyTo">Kopiera till <xliff:g id="destination">%s</xliff:g></string>
+  <string name="voicemail">Telefonsvarare</string>
+  <string name="select_call_title">Välj samtalslistor</string>
 </resources>

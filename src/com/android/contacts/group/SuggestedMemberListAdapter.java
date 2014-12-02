@@ -20,12 +20,17 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri.Builder;
+import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.Photo;
 import android.provider.ContactsContract.Contacts.Data;
+import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Directory;
 import android.provider.ContactsContract.RawContacts;
 import android.provider.ContactsContract.RawContactsEntity;
+import android.provider.ContactsContract.SearchSnippets;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,9 +57,9 @@ import java.util.List;
 public class SuggestedMemberListAdapter extends ArrayAdapter<SuggestedMember> {
 
     private static final String[] PROJECTION_FILTERED_MEMBERS = new String[] {
-        RawContacts._ID,                        // 0
-        RawContacts.CONTACT_ID,                 // 1
-        RawContacts.DISPLAY_NAME_PRIMARY        // 2
+        Contacts.NAME_RAW_CONTACT_ID,           // 0
+        Contacts._ID,                           // 1
+        Contacts.DISPLAY_NAME_PRIMARY,          // 2
     };
 
     private static final int RAW_CONTACT_ID_COLUMN_INDEX = 0;
@@ -80,6 +85,8 @@ public class SuggestedMemberListAdapter extends ArrayAdapter<SuggestedMember> {
     private String mAccountType;
     private String mAccountName;
     private String mDataSet;
+
+    private static final String FTS_NAME_ONLY = "fts_name_only";
 
     // TODO: Make this a Map for better performance when we check if a new contact is in the list
     // or not
@@ -188,28 +195,23 @@ public class SuggestedMemberListAdapter extends ArrayAdapter<SuggestedMember> {
             List<SuggestedMember> suggestionsList = new ArrayList<SuggestedMember>();
             HashMap<Long, SuggestedMember> suggestionsMap = new HashMap<Long, SuggestedMember>();
 
-            // First query for all the raw contacts that match the given search query
+            // First query for all the contacts that match the given search query
             // and have the same account name and type as specified in this adapter
-            String searchQuery = prefix.toString() + "%";
-            String accountClause = RawContacts.ACCOUNT_NAME + "=? AND " +
-                    RawContacts.ACCOUNT_TYPE + "=? AND " + RawContacts.DELETED + "!= 1";
-            String[] args;
-            if (mDataSet == null) {
-                accountClause += " AND " + RawContacts.DATA_SET + " IS NULL";
-                args = new String[] {mAccountName, mAccountType, searchQuery, searchQuery};
-            } else {
-                accountClause += " AND " + RawContacts.DATA_SET + "=?";
-                args = new String[] {
-                        mAccountName, mAccountType, mDataSet, searchQuery, searchQuery
-                };
-            }
+            Builder builder = Contacts.CONTENT_FILTER_URI.buildUpon();
+            builder.appendPath(prefix.toString()); // Builder will encode the query
+            builder.appendQueryParameter(ContactsContract.DIRECTORY_PARAM_KEY,
+                    String.valueOf(Directory.DEFAULT));
+            builder.appendQueryParameter(SearchSnippets.DEFERRED_SNIPPETING_KEY, "1");
+            builder.appendQueryParameter(FTS_NAME_ONLY, "1");
+            builder.appendQueryParameter(RawContacts.ACCOUNT_NAME, mAccountName);
+            builder.appendQueryParameter(RawContacts.ACCOUNT_TYPE, mAccountType);
+            if (mDataSet != null)
+                builder.appendQueryParameter(RawContacts.DATA_SET, mDataSet);
 
-            Cursor cursor = mContentResolver.query(
-                    RawContacts.CONTENT_URI, PROJECTION_FILTERED_MEMBERS,
-                    accountClause + " AND (" +
-                    RawContacts.DISPLAY_NAME_PRIMARY + " LIKE ? OR " +
-                    RawContacts.DISPLAY_NAME_ALTERNATIVE + " LIKE ? )",
-                    args, RawContacts.DISPLAY_NAME_PRIMARY + " COLLATE LOCALIZED ASC");
+            Cursor cursor = mContentResolver.query(builder.build(),
+                    PROJECTION_FILTERED_MEMBERS, null, null,
+                    Contacts.DISPLAY_NAME_PRIMARY + " COLLATE LOCALIZED ASC"
+                            + " LIMIT " + SUGGESTIONS_LIMIT);
 
             if (cursor == null) {
                 return results;

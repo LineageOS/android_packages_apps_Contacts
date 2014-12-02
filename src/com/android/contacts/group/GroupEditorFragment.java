@@ -442,6 +442,7 @@ public class GroupEditorFragment extends Fragment implements SelectAccountDialog
         if (mAutoCompleteTextView != null) {
             mAutoCompleteAdapter = new SuggestedMemberListAdapter(mContext,
                     android.R.layout.simple_dropdown_item_1line);
+            mAutoCompleteTextView.setThreshold(1);
             mAutoCompleteAdapter.setContentResolver(mContentResolver);
             mAutoCompleteAdapter.setAccountType(mAccountType);
             mAutoCompleteAdapter.setAccountName(mAccountName);

@@ -39,6 +39,8 @@ import android.preference.PreferenceManager;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.telephony.TelephonyManager;
+import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyCharacterMap;
@@ -57,8 +59,11 @@ import com.android.contacts.ContactsActivity;
 import com.android.contacts.R;
 import com.android.contacts.activities.ActionBarAdapter.TabState;
 import com.android.contacts.common.ContactsUtils;
+import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.contacts.common.editor.SelectAccountDialogFragment;
+import com.android.contacts.common.interactions.ImportSIMContactsDialogFragment;
+import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.group.GroupBrowseListFragment;
 import com.android.contacts.group.GroupBrowseListFragment.OnGroupBrowserActionListener;
 import com.android.contacts.group.GroupDetailFragment;
@@ -478,6 +483,51 @@ public class PeopleActivity extends ContactsActivity implements
         // Current tab may have changed since the last onSaveInstanceState().  Make sure
         // the actual contents match the tab.
         updateFragmentsVisibility();
+
+        // Check if SIM Contacts reload is necessary
+        checkSIMContacts();
+    }
+
+    private void checkSIMContacts() {
+        boolean showImport = getResources().getBoolean(R.bool.config_show_sms_import_dialog);
+
+        if (showImport) {
+            // SIM Serial Number
+            ContactsPreferences contactPrefs = new ContactsPreferences(this);
+            String[] sims = contactPrefs.getImportedSims();
+            boolean shouldImport = false;
+            int count = MoreContactUtils.getEnabledSimCount();
+            for (int i = 0; i < count; i++) {
+                boolean simImported = false;
+                if (TelephonyManager.SIM_STATE_READY == TelephonyManager
+                        .getDefault().getSimState(i)) {
+                    long[] subId = SubscriptionManager.getSubId(i);
+                    if (subId == null) {
+                        continue;
+                    }
+                    String simSN = TelephonyManager.getDefault().getSimSerialNumber(
+                            subId[0]);
+
+                    for (String sn : sims) {
+                        if (sn.equals(simSN)) {
+                            simImported = true;
+                            break;
+                        }
+                    }
+
+                    if (!simImported) {
+                        shouldImport = true;
+                        contactPrefs.addImportedSims(simSN);
+                    }
+                }
+            }
+
+            if (shouldImport) {
+                ImportSIMContactsDialogFragment dialogFragment = new
+                        ImportSIMContactsDialogFragment();
+                dialogFragment.show(getFragmentManager(), PeopleActivity.class.getName());
+            }
+        }
     }
 
     @Override

@@ -1613,19 +1613,23 @@ public class MultiPickContactActivity extends ListActivity implements
         }
         operationList.add(builder.build());
 
-        builder = ContentProviderOperation.newInsert(Data.CONTENT_URI);
-        builder.withValueBackReference(StructuredName.RAW_CONTACT_ID, 0);
-        builder.withValue(Data.MIMETYPE, StructuredName.CONTENT_ITEM_TYPE);
-        builder.withValue(StructuredName.DISPLAY_NAME, name);
-        operationList.add(builder.build());
+        if (!TextUtils.isEmpty(name)) {
+            builder = ContentProviderOperation.newInsert(Data.CONTENT_URI);
+            builder.withValueBackReference(StructuredName.RAW_CONTACT_ID, 0);
+            builder.withValue(Data.MIMETYPE, StructuredName.CONTENT_ITEM_TYPE);
+            builder.withValue(StructuredName.DISPLAY_NAME, name);
+            operationList.add(builder.build());
+        }
 
-        builder = ContentProviderOperation.newInsert(Data.CONTENT_URI);
-        builder.withValueBackReference(Phone.RAW_CONTACT_ID, 0);
-        builder.withValue(Data.MIMETYPE, Phone.CONTENT_ITEM_TYPE);
-        builder.withValue(Phone.TYPE, Phone.TYPE_MOBILE);
-        builder.withValue(Phone.NUMBER, phoneNumber);
-        builder.withValue(Data.IS_PRIMARY, 1);
-        operationList.add(builder.build());
+        if (!TextUtils.isEmpty(phoneNumber)) {
+            builder = ContentProviderOperation.newInsert(Data.CONTENT_URI);
+            builder.withValueBackReference(Phone.RAW_CONTACT_ID, 0);
+            builder.withValue(Data.MIMETYPE, Phone.CONTENT_ITEM_TYPE);
+            builder.withValue(Phone.TYPE, Phone.TYPE_MOBILE);
+            builder.withValue(Phone.NUMBER, phoneNumber);
+            builder.withValue(Data.IS_PRIMARY, 1);
+            operationList.add(builder.build());
+        }
 
         if (anrArray != null) {
             for (String anr : anrArray) {

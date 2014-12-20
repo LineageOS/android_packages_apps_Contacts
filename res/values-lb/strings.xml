@@ -161,6 +161,10 @@
   <string name="group_edit_field_hint_text">Gruppennumm</string>
   <string name="description_star">Favorit</string>
   <string name="edit_contact">Kontakt änneren</string>
+  <plurals name="merge_info">
+    <item quantity="one">net fusionéiert</item>
+    <item quantity="other">net fusionéiert aus <xliff:g id="count">%0$d</xliff:g>-Quellen</item>
+  </plurals>
   <string name="aggregation_suggestion_join_dialog_message">Den
         aktuelle Kontakt mam ausgewielte verknëppen?</string>
   <string name="aggregation_suggestion_edit_dialog_message">De Kontakt beaarbechten? Déi Informatiounen déi s du bis elo uginn hues gi kopéiert.</string>

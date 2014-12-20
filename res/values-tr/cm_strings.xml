@@ -49,6 +49,7 @@
   <string name="select_all">Tümü</string>
   <string name="action_done">Tamamlandı</string>
   <plurals name="contacts_selected">
+    <item quantity="one">%d kişi seçildi</item>
     <item quantity="other">%d kişi seçildi</item>
   </plurals>
   <string name="delete_call_title">Arama kayıtlarını sil</string>
@@ -61,13 +62,16 @@
   <string name="import_sim_contacts_title">SIM kişilerini al</string>
   <string name="import_sim_contacts_message">SIM kişileri alınıyor\u2026</string>
   <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">%d kişi alınacak.</item>
     <item quantity="other">%d kişi alınacak.</item>
   </plurals>
   <string name="import_finish">Alma işi bitti</string>
   <plurals name="import_stop">
+    <item quantity="one">Alma işlemi iptal edildi, %d öge alındı</item>
     <item quantity="other">Alma işlemi iptal edildi, %d öge alındı</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">%d kişi silinecek.</item>
     <item quantity="other">%d kişi silinecek.</item>
   </plurals>
   <string name="delete_contacts_title">Kişileri sil</string>

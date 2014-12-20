@@ -21,6 +21,7 @@
     <original-package android:name="com.android.contacts" />
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.CALL_PRIVILEGED" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
@@ -438,10 +439,10 @@
             android:theme="@style/BackgroundOnlyTheme" />
 
         <activity
-            android:name=".editor.MultiPickContactActivity"
+            android:name=".activities.MultiPickContactActivity"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="nosensor"
-            android:theme="@android:style/Theme.Holo.Light"
+            android:theme="@style/ContactPickerTheme"
             android:configChanges="orientation|keyboardHidden|layoutDirection">
             <intent-filter>
                 <action android:name="com.android.contacts.action.MULTI_PICK" />

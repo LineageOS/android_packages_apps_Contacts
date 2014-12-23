@@ -16,10 +16,10 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"පසුරු පුවරුවට පිටපත් කෙරුණි"</string>
-  <string name="deleteConfirmation_title">සම්බන්ධතාව මකන්නද?</string>
-  <string name="importConfirmation_title">සම්බන්ධතාව ආයාත කරන්නද?</string>
-  <string name="menu_deleteContacts">සම්බන්ධතා මකන්න</string>
-  <string name="contactDeletedToast">සම්බන්ධතාව මකා දැමුණි</string>
+  <string name="deleteConfirmation_title">සබඳතාව මකනවා ද?</string>
+  <string name="importConfirmation_title">සබඳතාව ආයාත කරනවා ද?</string>
+  <string name="menu_deleteContacts">සබඳතා මකන්න</string>
+  <string name="contactDeletedToast">සබඳතාව මැකිණි</string>
   <string name="contactSavedToSimCardError">තෝරාගත් සම්බන්ධතා සිම් කාඩ් පතට සුරැකීමට නොහැකිවිය</string>
   <string name="airplane_mode_on">අහස්යානා ප්‍රකාරය සබල විට සිම් පත පරිශීලනය කල නොහැක</string>
   <string name="number_anr_too_long">අංකය දිග වැඩිය</string>
@@ -47,7 +47,7 @@
   <string name="button_delete">ඉවත් කරන්න</string>
   <string name="title_add_members">සාමාජිකයන් එක් කරන්න</string>
   <string name="select_all">සියලු</string>
-  <string name="action_done">හරි</string>
+  <string name="action_done">නිමයි</string>
   <plurals name="contacts_selected">
     <item quantity="one">%d තෝරා ඇත</item>
     <item quantity="other">%d තෝරා ඇත</item>
@@ -84,10 +84,10 @@
   <string name="too_many_contacts_add_to_group">සම්බන්ධතා <xliff:g id="count">%d</xliff:g> ට වඩා එක් කල නොහැක</string>
   <string name="no_phone_number_or_email">කරුණාකර දුරකථන අංකයක් හෝ ඊ-තැපැල් ලිපිනයක් ඇතුලත් කරන්න.</string>
   <string name="memory_card_full">සම්බන්ධතාව සුරැකීමට නොහැකි විය, දුරකථනයේ මතකය පිරී ඇත</string>
-  <string name="menu_memory_status">මතකයේ තත්වය</string>
-  <string name="memory_status_title">මතකයේ තත්වය</string>
+  <string name="menu_memory_status">මතකයේ තත්ත්වය</string>
+  <string name="memory_status_title">මතකයේ තත්ත්වය</string>
   <string name="memory_size">එකතුව:</string>
-  <string name="memory_used">භාවිතාවූ:</string>
+  <string name="memory_used">භාවිතය:</string>
   <string name="calculating_status_now">තත්වය ගණනය කරමින්\u2026</string>
   <string name="button_moveto">ගෙනයන්න</string>
   <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g> වෙත පිටපත් කරන්න</string>

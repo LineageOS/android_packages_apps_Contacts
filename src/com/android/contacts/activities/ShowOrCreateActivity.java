@@ -196,7 +196,9 @@ public final class ShowOrCreateActivity extends ContactsActivity
                 finish();
 
             } else {
-                showDialog(CREATE_CONTACT_DIALOG);
+                if (!isDestroyed()) {
+                    showDialog(CREATE_CONTACT_DIALOG);
+                }
             }
         }
     }

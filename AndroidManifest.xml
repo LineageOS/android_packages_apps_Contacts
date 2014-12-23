@@ -71,7 +71,7 @@
         <activity android:name=".activities.PeopleActivity"
             android:label="@string/app_name"
             android:theme="@style/PeopleTheme"
-            android:screenOrientation="nosensor"
+            android:screenOrientation="user"
             android:uiOptions="splitActionBarWhenNarrow"
             android:clearTaskOnLaunch="true"
             android:launchMode="singleTop"
@@ -457,7 +457,7 @@
             android:theme="@style/BackgroundOnlyTheme" />
 
         <activity android:name=".group.local.MemberListActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="user"
             android:theme="@android:style/Theme.Holo.Light">
             <intent-filter>
                 <action android:name="android.intent.action.EDIT" />
@@ -470,7 +470,7 @@
         <activity
             android:name=".activities.MultiPickContactActivity"
             android:windowSoftInputMode="stateHidden|adjustResize"
-            android:screenOrientation="nosensor"
+            android:screenOrientation="user"
             android:theme="@style/ContactPickerTheme"
             android:configChanges="orientation|keyboardHidden|layoutDirection">
             <intent-filter>

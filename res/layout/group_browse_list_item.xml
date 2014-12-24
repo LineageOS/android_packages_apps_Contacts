@@ -36,6 +36,12 @@
     android:paddingEnd="@dimen/group_list_padding"
     android:minHeight="@dimen/detail_min_line_item_height" >
 
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/secondary_header_separator_color" />
+
     <include
         android:id="@+id/group_list_header"
         layout="@layout/group_browse_list_account_header"

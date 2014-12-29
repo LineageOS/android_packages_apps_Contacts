@@ -290,6 +290,7 @@ public class GroupDetailFragment extends Fragment implements OnScrollListener {
                 Log.e(TAG, "Failed to load group members");
                 return;
             }
+            getActivity().invalidateOptionsMenu();
             updateSize(data.getCount());
             mAdapter.setContactCursor(data);
             mMemberListView.setEmptyView(mEmptyView);

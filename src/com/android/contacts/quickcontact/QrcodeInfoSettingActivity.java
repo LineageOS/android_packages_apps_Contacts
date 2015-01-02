@@ -197,11 +197,11 @@ public class QrcodeInfoSettingActivity extends Activity {
         if (mRawContact == null)
             return;
 
-        SharedPreferences myQrcodeSharedPreferences = getSharedPreferences(
-                "QrcodePersonalCheckState", Activity.MODE_PRIVATE);
-        String value = myQrcodeSharedPreferences.getString("value", "");
+        SharedPreferences myQrcodeSharedPreferences= getSharedPreferences("QrcodePersonalCheckState",
+              Activity.MODE_PRIVATE);
+        String value = myQrcodeSharedPreferences.getString("value","");
         String[] initChecked = value.split(",");
-        int total = myQrcodeSharedPreferences.getInt("total", 0);
+        int total = myQrcodeSharedPreferences.getInt("total",0);
         String myAccountNumber = "+8613522631112";
         try {
             myAccountNumber = RcsApiManager.getRcsAccoutApi()
@@ -222,34 +222,28 @@ public class QrcodeInfoSettingActivity extends Activity {
             if (dataItem instanceof PhoneDataItem) {
                 int phoneType = ((PhoneDataItem) dataItem).getContentValues()
                         .getAsInteger(Phone.TYPE);
-                if (Phone.TYPE_WORK == phoneType
-                        && !TextUtils.isEmpty(((PhoneDataItem) dataItem)
-                                .getNumber())) {
+                if (Phone.TYPE_WORK == phoneType && !TextUtils.isEmpty(((PhoneDataItem) dataItem)
+                            .getNumber())) {
                     group2_list_key.add(getString(R.string.rcs_company_number));
                     group2_list_value.add(((PhoneDataItem) dataItem)
                             .getNumber());
                     contactType[BUSINESS_ID][group2Typeindex++] = QRCODE_COMPANY_NUMBER;
                     Log.d(TAG, "rcs_company_number=" + QRCODE_COMPANY_NUMBER);
 
-                } else if (Phone.TYPE_FAX_WORK == phoneType
-                        && !TextUtils.isEmpty(((PhoneDataItem) dataItem)
-                                .getNumber())) {
+                } else if (Phone.TYPE_FAX_WORK == phoneType && !TextUtils.isEmpty(((PhoneDataItem) dataItem)
+                        .getNumber())) {
                     group2_list_key.add(getString(R.string.rcs_company_fax));
                     group2_list_value.add(((PhoneDataItem) dataItem)
                             .getNumber());
                     contactType[BUSINESS_ID][group2Typeindex++] = QRCODE_COMPANY_FAX;
                     Log.d(TAG, "rcs_company_fax=" + QRCODE_COMPANY_FAX);
                 }
-            } else if (Email.CONTENT_ITEM_TYPE.equals(mimeType)
-                    && !TextUtils.isEmpty(entryValues
-                            .getAsString(Email.ADDRESS))) {
+            } else if (Email.CONTENT_ITEM_TYPE.equals(mimeType) && !TextUtils.isEmpty(entryValues.getAsString(Email.ADDRESS))) {
                 group2_list_key.add(getString(R.string.rcs_email_address));
                 group2_list_value.add(entryValues.getAsString(Email.ADDRESS));
                 contactType[BUSINESS_ID][group2Typeindex++] = QRCODE_EMAIL;
                 Log.d(TAG, "rcs_email_address=" + QRCODE_EMAIL);
-            } else if (Organization.CONTENT_ITEM_TYPE.equals(mimeType)
-                    && !TextUtils.isEmpty(entryValues
-                            .getAsString(Organization.COMPANY))) {
+            } else if (Organization.CONTENT_ITEM_TYPE.equals(mimeType)&& !TextUtils.isEmpty(entryValues.getAsString(Organization.COMPANY))) {
 
                 String company = entryValues.getAsString(Organization.COMPANY);
                 group2_list_key.add(getString(R.string.rcs_company_name));
@@ -265,9 +259,9 @@ public class QrcodeInfoSettingActivity extends Activity {
                 Log.d("RCSUtil", "title=" + title);
             }
         }
-        for (int i = 0; i < group2_list_key.size(); i++) {
-            for (int j = 0; j < total; j++) {
-                if (group2_list_key.get(i).equals(initChecked[j])) {
+        for(int i = 0; i < group2_list_key.size(); i++){
+            for(int j = 0 ;j < total ; j++){
+                if(group2_list_key.get(i).equals(initChecked[j])){
                     isDataCheck[BUSINESS_ID][i] = true;
                 }
             }
@@ -287,8 +281,7 @@ public class QrcodeInfoSettingActivity extends Activity {
             Log.d(TAG, "childCount" + childCount);
             for (int j = 0; j < childCount; j++) {
                 if (isDataCheck[BUSINESS_ID][j] == true) {
-                    Log.d(TAG, "isDataCheck[i][j] is" + i + j
-                            + isDataCheck[i][j]);
+                    Log.d(TAG, "isDataCheck[i][j] is" + i+j+isDataCheck[i][j]);
                     if (i == BUSINESS_ID) {
                         isHasBusiness = true;
                     }
@@ -654,7 +647,6 @@ public class QrcodeInfoSettingActivity extends Activity {
                                 isDataCheck[groupPosition][childPosition] = false;
                             }
                         }
-
                     });
             return convertView;
         }

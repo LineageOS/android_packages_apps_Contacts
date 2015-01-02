@@ -20,7 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
+
 package com.android.contacts;
 
 import com.suntek.mway.rcs.client.api.RCSServiceListener;
@@ -37,6 +37,7 @@ import com.suntek.mway.rcs.client.api.publicaccount.impl.PublicAccountApi;
 import com.suntek.mway.rcs.client.api.support.RcsSupportApi;
 import com.suntek.mway.rcs.client.api.util.ServiceDisconnectedException;
 import com.suntek.mway.rcs.client.api.voip.impl.RichScreenApi;
+import com.suntek.mway.rcs.client.api.plugincenter.PluginCenterApi;
 
 import android.content.Context;
 import android.os.RemoteException;
@@ -52,6 +53,7 @@ public class RcsApiManager {
     private static CapabilityApi mCapabilityApi = new CapabilityApi();
     private static ConfApi mConfApi = new ConfApi();
     private static RichScreenApi mRichScreenApi = new RichScreenApi(null);
+    private static PluginCenterApi mPluginCenterApi = new PluginCenterApi();
 
     public static void init(Context context) {
         mContext = context;
@@ -120,7 +122,7 @@ public class RcsApiManager {
                 Log.d(TAG, "ConfApi connected");
             }
         });
-        mRichScreenApi.init(context, new RCSServiceListener() {
+        mRichScreenApi.init(context,new RCSServiceListener() {
             @Override
             public void onServiceDisconnected() throws RemoteException {
                 Log.d(TAG, "mRichScreenApi disconnected");
@@ -131,7 +133,18 @@ public class RcsApiManager {
                 Log.d(TAG, "mRichScreenApi connected");
             }
         });
-    }
+        mPluginCenterApi.init(context,new RCSServiceListener() {
+            @Override
+            public void onServiceDisconnected() throws RemoteException {
+                Log.d(TAG, "mPluginCenterApi disconnected");
+            }
+
+            @Override
+            public void onServiceConnected() throws RemoteException {
+                Log.d(TAG, "mPluginCenterApi connected");
+            }
+        });
+     }
 
     public static MessageApi getMessageApi() {
 
@@ -170,6 +183,15 @@ public class RcsApiManager {
             Log.d(TAG, "_______mRichScreenApi init______");
         }
         return mRichScreenApi;
+    }
+
+    public static PluginCenterApi getPluginCenterApi() {
+        if (mPluginCenterApi == null) {
+            mPluginCenterApi = new PluginCenterApi();
+            mPluginCenterApi.init(mContext, null);
+            Log.d(TAG, "mPluginCenterApi init______");
+        }
+        return mPluginCenterApi;
     }
 
     public static CapabilityApi getCapabilityApi() {

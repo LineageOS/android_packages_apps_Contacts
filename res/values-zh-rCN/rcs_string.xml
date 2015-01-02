@@ -68,6 +68,7 @@
     <string name="rcs_confirom_upload_profile">如果更新二维码，将会同时更新服务端的profile文件，是否更新？</string>
     <string name="rcs_create_qrcode_fail_upload_profile_first">获取二维码失败，请先上传profile文件</string>
     <!-- for RCS -->
+    <string name="menu_plugin_center">插件中心</string>
     <string name="menu_qrcode">我的二维码</string>
     <string name="qrcode_setting">设置</string>
     <string name="menu_scan">扫一扫</string>
@@ -85,5 +86,10 @@
     <string name="rcs_resotre_contacts_if_terminal_changed">终端已经改变，需要从云端恢复联系人吗？</string>
     <string name="rcs_update_contact_photos">更新联系人照片</string>
     <string name="rcs_wlan_first_connection_per_week">WLAN每周第一次连接</string>
-
+    <string name="menu_updateenhancedscreen">更新增强屏显</string>
+    <string name="rcs_network_uanvailable">网络不可用</string>
+    <string name="rcs_updateting_enhance_screen">正在更新增强屏显...</string>
+    <string name="btn_ok">"確定"</string>
+    <string name="btn_cancel">"取消"</string>
+    <string name="import_stop">"导入停止"</string>
 </resources>

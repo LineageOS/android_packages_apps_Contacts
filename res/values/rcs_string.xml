@@ -76,5 +76,26 @@
     <string name="rcs_resotre_contacts_if_terminal_changed">The terminal has been changed, do you resotre the contacts from the cloud?</string>
     <string name="rcs_update_contact_photos">Update contact photos</string>
     <string name="rcs_wlan_first_connection_per_week">WLAN first connection per week</string>
-
+    <!-- for RCS -->
+    <string name="menu_plugin_center">Plugin Center</string>
+    <string name="menu_qrcode">My Qrcode</string>
+    <string name="qrcode_setting">Setting</string>
+    <string name="menu_scan">Scan</string>
+    <string name="menu_cloud">Cloud backup/restore</string>
+    <string name="qrcode_private_info">Personal Info</string>
+    <string name="qrcode_business_info">Business Infor</string>
+    <string name="qrcode_setting_complete">Completed</string>
+    <string name="qrcode_setting_private_message">You are not currently set personal info, set it now?</string>
+    <string name="qrcode_setting_business_message">You are not currently fill in the business info, set it now?</string>
+    <string name="menu_enhancedscreen">Enhance Screen</string>
+    <string name="rcs_contact_group_item_grouplist">GroupChat</string>
+    <string name="rcs_group_chat_item_grouplist">GroupChat</string>
+    <string name="group_count">member</string>
+    <string name="menu_create_group_chat">Create GroupChat</string>
+    <string name="menu_updateenhancedscreen">Update enhance screen</string>
+    <string name="rcs_network_unavailable">network is unavailable</string>
+    <string name="rcs_updateting_enhance_screen">updating enhance screen...</string>
+    <string name="btn_ok">Ok</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="import_stop">"Import stopped"</string>
 </resources>

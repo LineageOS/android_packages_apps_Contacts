@@ -20,7 +20,6 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
 package com.android.contacts.util;
 
 import java.io.BufferedInputStream;
@@ -37,6 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.Lock;
+
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.RawContact;
 import com.android.contacts.common.model.dataitem.DataItem;
@@ -47,10 +47,16 @@ import com.android.contacts.common.model.dataitem.PhoneDataItem;
 import com.android.contacts.common.model.dataitem.StructuredNameDataItem;
 import com.android.contacts.common.model.dataitem.StructuredPostalDataItem;
 import com.android.contacts.common.util.ContactsCommonRcsUtil;
+import com.android.contacts.group.GroupBrowseListAdapter;
+import com.android.contacts.group.GroupBrowseListFragment;
+import com.android.contacts.group.GroupListItem;
+import com.android.contacts.quickcontact.MyQrcodeActivity;
+import com.android.contacts.quickcontact.QuickContactActivity;
 import com.suntek.mway.rcs.client.api.plugin.entity.profile.QRCardImg;
 import com.suntek.mway.rcs.client.api.plugin.entity.profile.QRCardInfo;
 import com.suntek.mway.rcs.client.api.profile.callback.QRImgListener;
 import com.suntek.mway.rcs.client.api.plugin.entity.profile.QRCardInfo;
+
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Event;
@@ -82,12 +88,16 @@ import com.suntek.mway.rcs.client.api.autoconfig.RcsAccountApi;
 import com.suntek.mway.rcs.client.api.capability.RCSCapabilities;
 import com.suntek.mway.rcs.client.api.capability.callback.CapabiltyListener;
 import com.android.contacts.RcsApiManager;
+
 import com.android.contacts.R;
+
 import android.app.Activity;
+
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningTaskInfo;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.LoaderManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentProviderOperation;
@@ -108,11 +118,13 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.RemoteException;
@@ -126,12 +138,16 @@ import android.provider.ContactsContract.CommonDataKinds.Photo;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Groups;
+import android.provider.ContactsContract.QuickContact;
 import android.provider.ContactsContract.Contacts.Data;
 import android.provider.ContactsContract.RawContacts;
 import android.provider.Telephony.Threads;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 public class RCSUtil {
@@ -156,8 +172,8 @@ public class RCSUtil {
 
     public static final String PREF_RCS_PROFILE_PHOTO_ETAG = "ProfilePotoEtag";
 
-    // User requset to update enhance screen
-    public static final String UPDATE_ENHANCE_SCREEN_PHONE_EVENT = "9331012000";
+    // User requst to update enhance screen
+    public static final String UPDATE_ENHANCE_SCREEN_PHONE_EVENT = "933 10 12000";
 
     public static final String PREF_DAY_OF_WEEK_LAST_WIFI_CONNECTION = "pref_day_of_week_last_wifi_connection";
 
@@ -193,9 +209,13 @@ public class RCSUtil {
 
     public static final String RCS_CAPABILITY_CHANGED = "rcs_capability_changed";
 
-    public static final String RCS_CAPABILITY_CHANGED_CONTACT_ID = "rcs_capability_changed_contact_id";
+    public static final String RCS_CAPABILITY_CHANGED_CONTACT_ID
+                               = "rcs_capability_changed_contact_id";
 
-    public static final String RCS_CAPABILITY_CHANGED_VALUE = "rcs_capability_changed_value";
+    public static final String RCS_CAPABILITY_CHANGED_VALUE
+                               = "rcs_capability_changed_value";
+
+    private static final int LOADER_GROUPS = 1;
     // RCS capability: sucess.
     public static final int RCS_SUCESS = 200;
 
@@ -207,8 +227,9 @@ public class RCSUtil {
 
     private static boolean isRcsSupport = false;
 
-    // private static final HashMap<Long, Long> latestQuery = new HashMap<Long,
-    // Long>();
+    private static int DEFAULT_NUMBER_LENGTH = 11;
+
+    //private static final HashMap<Long, Long> latestQuery = new HashMap<Long, Long>();
 
     private static final String PUBLIC_ACCOUNT_PACKAGE = "com.suntek.mway.rcs.nativeui";
 
@@ -220,8 +241,7 @@ public class RCSUtil {
         isRcsSupport = flag;
     }
 
-    private static boolean isPackageInstalled(Context context,
-            String packageName) {
+    private static boolean isPackageInstalled(Context context, String packageName) {
         PackageManager pm = context.getPackageManager();
         List<ApplicationInfo> installedApps = pm
                 .getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES);
@@ -384,24 +404,6 @@ public class RCSUtil {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
-
-    /*
-     * public static boolean isRCSUser(Context context, long contactId) { Cursor
-     * c = context.getContentResolver().query(
-     * ContactsContract.RawContacts.CONTENT_URI, new String[] {
-     * ContactsContract.RawContacts._ID }, Contacts._ID + " = ?", new String[] {
-     * String.valueOf(contactId) }, null); ArrayList<Long> rawContactIdList =
-     * new ArrayList<Long>(); try { if (c != null && c.moveToFirst()) { do {
-     * rawContactIdList.add(c.getLong(0)); } while (c.moveToNext()); } } finally
-     * { c.close(); } for(Long rawContactId : rawContactIdList) { c =
-     * context.getContentResolver().query( ContactsContract.Data.CONTENT_URI,
-     * new String[] { ContactsContract.Data.DATA14 }, Data.MIMETYPE +
-     * " = ?  and " + ContactsContract.Data.RAW_CONTACT_ID + " = ?", new
-     * String[] { Phone.CONTENT_ITEM_TYPE, String.valueOf(rawContactId) },
-     * null); try { if (c != null && c.moveToFirst()) { do { if (c.getInt(0) ==
-     * 1) { return true; } } while (c.moveToNext()); } } finally { c.close(); }
-     * } return false; }
-     */
 
     public static void updateRCSCapability(final Activity activity,
             final Contact contactData) {
@@ -654,11 +656,9 @@ public class RCSUtil {
                                             Log.w("RCS_UI", e1);
                                             return;
                                         }
-                                        Log.d("RCS_UI", "The account is "
-                                                + myAccountNumber);
+                                        Log.d("RCS_UI", "The account is " + myAccountNumber);
                                         if (TextUtils.isEmpty(myAccountNumber)) {
-                                            Toast.makeText(
-                                                    context,
+                                            Toast.makeText(context,
                                                     context.getResources()
                                                             .getString(
                                                                     R.string.account_empty),
@@ -676,17 +676,12 @@ public class RCSUtil {
                                                     Toast.LENGTH_SHORT).show();
                                             return;
                                         }
-                                        SharedPreferences myProfileSharedPreferences = context
-                                                .getSharedPreferences(
-                                                        "RcsSharepreferences",
-                                                        Activity.MODE_WORLD_READABLE);
-                                        String TextEtag = myProfileSharedPreferences
-                                                .getString("ProfileTextEtag",
-                                                        null);
+                                        SharedPreferences myProfileSharedPreferences= context.getSharedPreferences(PREF_RCS_FILE_NAME,
+                                                      Activity.MODE_WORLD_READABLE);
+                                        String TextEtag = myProfileSharedPreferences.getString(PREF_RCS_PROFILE_TEXT_ETAG,null);
                                         profile.setEtag(TextEtag);
                                         Log.d("RCS_UI",
-                                                "upload profile ProfileTextEtag: "
-                                                        + TextEtag);
+                                             "upload profile ProfileTextEtag: " + TextEtag);
                                         profile.setAccount(myAccountNumber);
                                         Avatar photoInfo = new Avatar();
                                         Log.d(TAG, "My number is "
@@ -714,16 +709,12 @@ public class RCSUtil {
                                                     Toast.LENGTH_SHORT).show();
                                             return;
                                         }
-                                        String PhotoEtag = myProfileSharedPreferences
-                                                .getString("ProfilePotoEtag",
-                                                        null);
+                                        String PhotoEtag = myProfileSharedPreferences.getString(PREF_RCS_PROFILE_PHOTO_ETAG,null);
                                         photoInfo.setEtag(PhotoEtag);
                                         Log.d("RCS_UI",
-                                                "upload profile ProfilePotoEtag: "
-                                                        + PhotoEtag);
+                                             "upload profile ProfilePotoEtag: " + PhotoEtag);
                                         photoInfo.setImgBase64Str(Base64
-                                                .encodeToString(
-                                                        processPhoto(contactPhoto),
+                                                .encodeToString(processPhoto(contactPhoto),
                                                         Base64.DEFAULT));
                                         RCSUtil.backupLocalProfileInfo(context,
                                                 profileApi, profile, photoInfo);
@@ -803,24 +794,16 @@ public class RCSUtil {
                                                                 photo.getImgBase64Str(),
                                                                 android.util.Base64.DEFAULT);
                                                         for (long rawContactId : rawContactIdList) {
-                                                            /*
-                                                             * updateLocalProfilePhoto
-                                                             * ( mContext,
-                                                             * rawContactId,
-                                                             * contactPhoto,
-                                                             * null);
-                                                             */
-                                                            final Uri outputUri = Uri
-                                                                    .withAppendedPath(
-                                                                            ContentUris
-                                                                                    .withAppendedId(
-                                                                                            RawContacts.CONTENT_URI,
-                                                                                            rawContactId),
-                                                                            RawContacts.DisplayPhoto.CONTENT_DIRECTORY);
-                                                            RCSUtil.setContactPhoto(
+                                                            /*updateLocalProfilePhoto(
                                                                     mContext,
+                                                                    rawContactId,
                                                                     contactPhoto,
-                                                                    outputUri);
+                                                                    null);*/
+                                                            final Uri outputUri = Uri.withAppendedPath(ContentUris
+                                                                    .withAppendedId(RawContacts.CONTENT_URI,
+                                                                            rawContactId),
+                                                                    RawContacts.DisplayPhoto.CONTENT_DIRECTORY);
+                                                            RCSUtil.setContactPhoto(mContext, contactPhoto, outputUri);
                                                         }
                                                     }
                                                     Toast.makeText(
@@ -866,9 +849,7 @@ public class RCSUtil {
                                     }
 
                                     @Override
-                                    public void onQRImgDecode(
-                                            QRCardInfo imgObj, int resultCode,
-                                            String arg2) throws RemoteException {
+                                    public void onQRImgDecode(QRCardInfo imgObj,int resultCode,String arg2) throws RemoteException {
 
                                     }
                                 });
@@ -916,7 +897,7 @@ public class RCSUtil {
 
     public static void newAndEditContactsUpdateEnhanceScreen(ContentResolver resolver,
         long rawContactId){
-
+        Log.d("RCS_UI","new and edit contact rawContactId: "+ rawContactId);
         if (getRcsSupport()){
             Cursor phone = null;
             try{
@@ -929,8 +910,9 @@ public class RCSUtil {
                         String Number = phone.getString(
                                  phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                         if (!TextUtils.isEmpty(Number)){
+                            Number = getFormatNumber(Number);
                             Log.d("RCS_UI","new and edit contact downloadRichScrnObj"+Number);
-                             RcsApiManager.getRichScreenApi().downloadRichScrnObj(Number,
+                            RcsApiManager.getRichScreenApi().downloadRichScrnObj(Number,
                                  UPDATE_ENHANCE_SCREEN_PHONE_EVENT);
                         }
                     }
@@ -962,10 +944,11 @@ public class RCSUtil {
                 }
             }
             try {
-            Log.d("RCS_UI","import contact downloadRichScrnObj"+phoneNumberList.toString());
+                Log.d("RCS_UI","import contact downloadRichScrnObj"+phoneNumberList.toString());
                 for(int i = 0; i < phoneNumberList.size(); i++ ){
-                    RcsApiManager.getRichScreenApi().downloadRichScrnObj(phoneNumberList.get(i)
-                        .replaceAll(",",""),
+                    String phoneNumber = getFormatNumber(phoneNumberList.get(i)
+                        .replaceAll(",",""));
+                    RcsApiManager.getRichScreenApi().downloadRichScrnObj(phoneNumber,
                         UPDATE_ENHANCE_SCREEN_PHONE_EVENT);
                 }
             } catch (Exception e) {
@@ -1107,7 +1090,7 @@ public class RCSUtil {
         }
     }
 
-    public static String GetQrCode(Context context, String rawContactId) {
+    public static String GetQrCode(Context context,String rawContactId) {
 
         Uri uri = Uri.parse("content://com.android.contacts/profile/data/");
         String imgBase64 = null;
@@ -1344,6 +1327,16 @@ public class RCSUtil {
         return rawContactUri;
     }
 
+    public static String getProfileAccountNumber(){
+    String myAccountNumber = "";
+        try {
+            myAccountNumber = RcsApiManager.getRcsAccoutApi()
+                    .getRcsUserProfileInfo().getUserName();
+        } catch (ServiceDisconnectedException e1) {
+            Log.w("RCS_UI", e1);
+        }
+        return myAccountNumber;
+    }
     public static Profile createLocalProfile(RawContact rawContact) {
 
         if (rawContact == null)
@@ -1595,112 +1588,9 @@ public class RCSUtil {
                         .withAppendedId(RawContacts.CONTENT_URI, rawContactId),
                         RawContacts.DisplayPhoto.CONTENT_DIRECTORY);
                 RCSUtil.setContactPhoto(context, contactPhoto, outputUri);
-                // if (listener != null) {
-                // listener.onRestoreFinished();
-                // }
-                /*
-                 * Cursor c = context.getContentResolver().query(
-                 * ContactsContract.Data.CONTENT_URI, new String[] { Photo.PHOTO
-                 * }, Data.RAW_CONTACT_ID + " = ? and " + Data.MIMETYPE +
-                 * " = ?", new String[] { String.valueOf(rawContactId),
-                 * Photo.CONTENT_ITEM_TYPE }, null);
-                 *
-                 * if (c != null && c.getCount() > 0) { try { c.moveToFirst();
-                 * byte[] aContactPhoto = c.getBlob(0); if (aContactPhoto ==
-                 * null) { context.getContentResolver().delete(
-                 * ContactsContract.Data.CONTENT_URI, Data.RAW_CONTACT_ID +
-                 * " = ? and " + Data.MIMETYPE + " = ?", new String[] {
-                 * String.valueOf(rawContactId), Photo.CONTENT_ITEM_TYPE }); }
-                 * else if (!Arrays.equals(aContactPhoto, contactPhoto)) {
-                 * ContentValues contentValues = new ContentValues();
-                 * contentValues.put(Photo.PHOTO, contactPhoto);
-                 * context.getContentResolver().update(
-                 * ContactsContract.Data.CONTENT_URI, contentValues,
-                 * Data.RAW_CONTACT_ID + " = ? and " + Data.MIMETYPE + " = ?",
-                 * new String[] { String.valueOf(rawContactId),
-                 * Photo.CONTENT_ITEM_TYPE }); return; } else { return; } }
-                 * finally { if (c != null) { c.close(); } } }
-                 */
-
-                /*
-                 * ContentValues contentValues = new ContentValues();
-                 * contentValues.put(Data.RAW_CONTACT_ID, rawContactId);
-                 * contentValues.put(Photo.MIMETYPE, Photo.CONTENT_ITEM_TYPE);
-                 * contentValues.put(Photo.PHOTO, contactPhoto);
-                 * context.getContentResolver
-                 * ().insert(ContactsContract.Data.CONTENT_URI, contentValues);
-                 */
             }
         }
     }
-
-    /*
-     * private static class UpdateOnlyOneContactPhotoTask extends
-     * AsyncTask<Void, Void, Void> { private Context mContext; private Contact
-     * mContactData; private byte[] mContactPhoto; RestoreFinishedListener
-     * mListener; UpdateOnlyOneContactPhotoTask(Context context, Contact
-     * contactData, byte[] contactPhoto, RestoreFinishedListener listener) {
-     * mContext = context; mContactData = contactData; mContactPhoto =
-     * contactPhoto; mListener = listener; }
-     *
-     * @Override protected Void doInBackground(Void... params) { if
-     * (mContactPhoto == null) return null; ImmutableList<RawContact>
-     * rawContacts = mContactData .getRawContacts(); for (RawContact rawContact
-     * : rawContacts) { long rawContactId = rawContact.getId(); if
-     * (!RCSUtil.hasLocalSetted(mContext.getContentResolver(), rawContactId)) {
-     * final Uri outputUri = Uri.withAppendedPath(ContentUris
-     * .withAppendedId(RawContacts.CONTENT_URI, rawContactId),
-     * RawContacts.DisplayPhoto.CONTENT_DIRECTORY);
-     * RCSUtil.setContactPhoto(mContext, mContactPhoto, outputUri);
-     */
-    /*
-     * Cursor c = mContext.getContentResolver().query(
-     * ContactsContract.Data.CONTENT_URI, new String[] { "data15" },
-     * "raw_contact_id = ? and mimetype = ?", new String[] {
-     * String.valueOf(rawContactId), Photo.CONTENT_ITEM_TYPE }, null);
-     *
-     * if (c != null && c.getCount() > 0) { try { c.moveToFirst(); byte[]
-     * contactPhoto = c.getBlob(0); if (contactPhoto == null) {
-     * mContext.getContentResolver().delete( ContactsContract.Data.CONTENT_URI,
-     * "raw_contact_id = ? and mimetype = ?", new String[] {
-     * String.valueOf(rawContactId), Photo.CONTENT_ITEM_TYPE }); } else if
-     * (!Arrays.equals(mContactPhoto, contactPhoto)) { ContentValues
-     * contentValues = new ContentValues(); contentValues.put(Photo.PHOTO,
-     * mContactPhoto); mContext.getContentResolver().update(
-     * ContactsContract.Data.CONTENT_URI, contentValues, Data.RAW_CONTACT_ID +
-     * " = ? and " + Data.MIMETYPE + " = ?", new String[] {
-     * String.valueOf(rawContactId), Photo.CONTENT_ITEM_TYPE }); return null; }
-     * } finally { if (c != null) { c.close(); } } } ContentValues contentValues
-     * = new ContentValues(); contentValues.put(Data.RAW_CONTACT_ID,
-     * rawContactId); contentValues.put(Photo.MIMETYPE,
-     * Photo.CONTENT_ITEM_TYPE); contentValues.put(Photo.PHOTO, mContactPhoto);
-     * mContext.getContentResolver().insert(ContactsContract.Data.CONTENT_URI,
-     * contentValues);
-     */
-    /*
-     * if (mListener != null) { try { Thread.sleep(1000); } catch
-     * (InterruptedException e) { e.printStackTrace(); } }
-     */
-    /*
-     * } }
-     *
-     * return null; }
-     *
-     * protected void onPostExecute(Void result) { if (mListener != null) {
-     * mListener.onRestoreFinished(); } } }
-     *
-     * /*private static class UpdateLocalProfileTextTask extends AsyncTask<Void,
-     * Void, Void> { private Context mContext; private Profile mProfile; private
-     * long mRawContactId;
-     *
-     * UpdateLocalProfileTextTask(Context context, long rawContactId, Profile
-     * profile) { mContext = context; mProfile = profile; mRawContactId =
-     * rawContactId; }
-     *
-     * @Override protected Void doInBackground(Void... params) {
-     * saveLocalProfileText(mContext.getContentResolver(), mRawContactId,
-     * mProfile); return null; } }
-     */
 
     private static class SaveLocalProfilePhotoTask extends
             AsyncTask<Void, Void, Void> {
@@ -2141,8 +2031,8 @@ public class RCSUtil {
                     context.getContentResolver().update(
                             PROFILE_DATA_URI,
                             contentValues,
-                            Data.RAW_CONTACT_ID + " = ? and " + Data.MIMETYPE
-                                    + " = ?",
+                            Data.RAW_CONTACT_ID + " = ? and "
+                                    + Data.MIMETYPE + " = ?",
                             new String[] { String.valueOf(rawContactId),
                                     Photo.CONTENT_ITEM_TYPE });
                     return;
@@ -2157,7 +2047,8 @@ public class RCSUtil {
         contentValues.put(Data.RAW_CONTACT_ID, rawContactId);
         contentValues.put(Photo.MIMETYPE, Photo.CONTENT_ITEM_TYPE);
         contentValues.put(Photo.PHOTO, localProfilePhoto);
-        context.getContentResolver().insert(PROFILE_DATA_URI, contentValues);
+        context.getContentResolver().insert(PROFILE_DATA_URI,
+                contentValues);
         if (listener != null) {
             try {
                 Thread.sleep(1000);
@@ -2172,15 +2063,6 @@ public class RCSUtil {
             });
         }
     }
-
-    /*
-     * public static void updateLocalProfileInfo(Context context, long
-     * rawContactId, Profile profile, byte[] localProfilePhoto,
-     * RestoreFinishedListener listener) { //new
-     * UpdateLocalProfileTextTask(context, rawContactId, profile) //.execute();
-     * //saveMyLocalProfileText(mContext.getContentResolver(), mRawContactId,
-     * //mProfile); }
-     */
 
     public static void restoreLocalProfileInfo(final Context context,
             final Contact contactData, ProfileApi profileApi,
@@ -2208,16 +2090,13 @@ public class RCSUtil {
                     Log.d("RCS_Service",
                             "Get profile first name: " + profile.getFirstName());
                     if (resultCode == 0) {
-                        SharedPreferences myProfileSharedPreferences = context
-                                .getSharedPreferences("RcsSharepreferences",
-                                        Activity.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = myProfileSharedPreferences
-                                .edit();
-                        editor.putString("ProfileTextEtag", profile.getEtag());
+                        SharedPreferences myProfileSharedPreferences= context.getSharedPreferences("RcsSharepreferences",
+                              Activity.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = myProfileSharedPreferences.edit();
+                        editor.putString(PREF_RCS_PROFILE_TEXT_ETAG, profile.getEtag());
                         editor.commit();
                         Log.d("RCS_UI",
-                                "download ProfileTextEtag: "
-                                        + profile.getEtag());
+                            "download ProfileTextEtag: " + profile.getEtag());
                         for (RawContact rawContact : contactData
                                 .getRawContacts()) {
                             // new UpdateLocalProfileTextTask(context,
@@ -2412,8 +2291,7 @@ public class RCSUtil {
                 }
 
                 @Override
-                public void onQRImgDecode(QRCardInfo imgObj, int resultCode,
-                        String arg2) throws RemoteException {
+                public void onQRImgDecode(QRCardInfo imgObj,int resultCode,String arg2) throws RemoteException {
 
                 }
             });
@@ -2471,8 +2349,7 @@ public class RCSUtil {
                 }
 
                 @Override
-                public void onQRImgDecode(QRCardInfo imgObj, int resultCode,
-                        String arg2) throws RemoteException {
+                public void onQRImgDecode(QRCardInfo imgObj,int resultCode,String arg2) throws RemoteException {
 
                 }
             });
@@ -2490,24 +2367,13 @@ public class RCSUtil {
         }
     }
 
-    /*
-     * private static boolean hasFinishedQuickContactsActivity(Context context)
-     * { ActivityManager am = (ActivityManager)context
-     * .getSystemService(Context.ACTIVITY_SERVICE); List<RunningTaskInfo> tasks
-     * = am.getRunningTasks(1); if (!tasks.isEmpty()) { ComponentName
-     * topActivity = tasks.get(0).topActivity; String topActivityName =
-     * topActivity.getClassName(); Log.d("com.android.contacts",
-     * topActivityName); return !TextUtils.equals(topActivityName,
-     * QUICK_CONTACTS_ACTIVITY); } return true; }
-     */
     public static void getOneContactPhotoFromServer(final Activity activity,
             final Contact contactData, final ProfileApi profileApi,
             final RestoreFinishedListener listener) {
         if (contactData == null) {
             return;
         }
-        final long contactId = contactData.getRawContacts().get(0)
-                .getContactId();
+        final long contactId = contactData.getRawContacts().get(0).getContactId();
         final Handler handler = new Handler();
         Thread t = new Thread(new Runnable() {
             @Override
@@ -2517,8 +2383,7 @@ public class RCSUtil {
                     if (activity == null || activity.isFinishing()) {
                         return;
                     }
-                    profileApi.getHeadPicByContact(contactId,
-                            new ProfileListener() {
+                    profileApi.getHeadPicByContact(contactId, new ProfileListener() {
                                 @Override
                                 public void onAvatarGet(final Avatar photo,
                                         final int resultCode,
@@ -2735,28 +2600,22 @@ public class RCSUtil {
         return result;
     }
 
-    public static void getQRcodeFromService(Profile profile,
-            final Context context) {
-        Log.d(TAG, "getQRcodeFromService");
-        // boolean isBInfo = getCompanyFromProfile(profile);
-        SharedPreferences myQrcodeSharedPreferences = context
-                .getSharedPreferences("QrcodePersonalCheckState",
-                        Activity.MODE_PRIVATE);
-        boolean isBInfo = myQrcodeSharedPreferences.getBoolean("isHasBusiness",
-                false);
+    public static void getQRcodeFromService(Profile profile, final Context context){
+        Log.d(TAG,"getQRcodeFromService");
+        //boolean isBInfo = getCompanyFromProfile(profile);
+        SharedPreferences myQrcodeSharedPreferences= context.getSharedPreferences("QrcodePersonalCheckState",
+              Activity.MODE_PRIVATE);
+        boolean isBInfo = myQrcodeSharedPreferences.getBoolean("isHasBusiness",false);
         try {
-            RcsApiManager.getProfileApi().refreshMyQRImg(profile, isBInfo,
-                    new QRImgListener() {
+            RcsApiManager.getProfileApi()
+                    .refreshMyQRImg(profile, isBInfo, new QRImgListener() {
 
                         @Override
-                        public void onQRImgDecode(QRCardInfo imgObj,
-                                int resultCode, String arg2)
-                                throws RemoteException {
+                        public void onQRImgDecode(QRCardInfo imgObj,int resultCode,String arg2) throws RemoteException {
 
                         }
 
-                        public void onQRImgGet(QRCardImg imgObj,
-                                int resultCode, String arg2)
+                        public void onQRImgGet(QRCardImg imgObj, int resultCode, String arg2)
                                 throws RemoteException {
                             Log.d(TAG, "get qrcode resultCode= " + resultCode);
                             if (resultCode == 0) {
@@ -2793,5 +2652,324 @@ public class RCSUtil {
             }
         }
         return false;
+    }
+
+    private static boolean needGetPhotoFromServer(Context context, Contact contactData) {
+        for (RawContact rawContact : contactData.getRawContacts()) {
+            if (!RCSUtil.hasLocalSetted(context.getContentResolver(), rawContact.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void updateContactPhotoViaServer(final QuickContactActivity activity,
+            final Contact contactData) {
+        if (RCSUtil.needGetPhotoFromServer(activity, contactData)) {
+            RCSUtil.getOneContactPhotoFromServer(
+                    activity, contactData,
+                    RcsApiManager.getProfileApi(), new RestoreFinishedListener() {
+                        public void onRestoreFinished() {
+                            if (activity != null
+                                    && !activity
+                                            .isFinishing()) {
+                                Intent resultIntent = QuickContact
+                                        .composeQuickContactsIntent(
+                                                activity.getBaseContext(),
+                                             (Rect)null, contactData.getLookupUri(),
+                                              QuickContactActivity.MODE_FULLY_EXPANDED,
+                                              null);
+                                resultIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                activity.startActivity(resultIntent);
+                            }
+                        }
+                    });
+        }
+    }
+
+    public static void initRcsMenu(Menu menu, Contact contactData) {
+        if (contactData == null) {
+            return;
+        }
+        if(contactData.isUserProfile() && RCSUtil.getRcsSupport()){
+            final MenuItem optionsQrcode = menu.findItem(R.id.menu_qrcode);
+            if (optionsQrcode != null) {
+                optionsQrcode.setVisible(true);
+            }
+            final MenuItem optionsPluginCenter = menu.findItem(R.id.menu_plugin_center);
+            if (optionsPluginCenter != null) {
+                optionsPluginCenter.setVisible(true);
+            }
+
+        } else {
+            final MenuItem optionsQrcode = menu.findItem(R.id.menu_qrcode);
+            if (optionsQrcode != null) {
+                optionsQrcode.setVisible(false);
+            }
+            final MenuItem optionsPluginCenter = menu.findItem(R.id.menu_plugin_center);
+            if (optionsPluginCenter != null) {
+                optionsPluginCenter.setVisible(false);
+            }
+        }
+        if(RCSUtil.getRcsSupport()){
+            final MenuItem optionsEnhancedscreen = menu.findItem(R.id.menu_enhancedscreen);
+            if (optionsEnhancedscreen != null) {
+                optionsEnhancedscreen.setVisible(true);
+            }
+            if (!contactData.isUserProfile()){
+                final MenuItem optionsUpdateEnhanceScreen = menu.findItem(R.id.menu_updateenhancedscreen);
+                if (optionsUpdateEnhanceScreen != null) {
+                    optionsUpdateEnhanceScreen.setVisible(true);
+                }
+            } else {
+                final MenuItem optionsUpdateEnhanceScreen = menu.findItem(R.id.menu_updateenhancedscreen);
+                if (optionsUpdateEnhanceScreen != null) {
+                    optionsUpdateEnhanceScreen.setVisible(false);
+                }
+            }
+        } else {
+            final MenuItem optionsEnhancedscreen = menu.findItem(R.id.menu_enhancedscreen);
+            if (optionsEnhancedscreen != null) {
+                optionsEnhancedscreen.setVisible(false);
+            }
+            if (!contactData.isUserProfile()){
+                final MenuItem optionsUpdateEnhanceScreen = menu.findItem(R.id.menu_updateenhancedscreen);
+                if (optionsUpdateEnhanceScreen != null) {
+                    optionsUpdateEnhanceScreen.setVisible(false);
+                }
+
+            }
+        }
+    }
+
+    public static void startQrCodeActivity(Context context, Contact contactData) {
+        Intent intent = new Intent(context, MyQrcodeActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("contact_name", contactData.getDisplayName());
+        RawContact rawContact = contactData.getRawContacts().get(0);
+        bundle.putParcelable("raw_contact", rawContact);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
+
+    private static ArrayList<String> getcontactPhoneList(Contact contactData){
+        String contactPhone = null;
+        ArrayList<String> contactsPhoneList = new ArrayList<String>();
+        if (contactData == null) {
+            return contactsPhoneList;
+        }
+        for (RawContact raw : contactData.getRawContacts()) {
+            for (DataItem dataItem : raw.getDataItems()) {
+                final ContentValues entryValues = dataItem.getContentValues();
+                final String mimeType = dataItem.getMimeType();
+                if (mimeType == null)
+                    continue;
+                if (Phone.CONTENT_ITEM_TYPE.equals(mimeType)) {
+                    contactPhone = entryValues.getAsString(Phone.NUMBER);
+                    if(contactPhone == null)
+                       continue;
+                    contactsPhoneList.add(getFormatNumber(contactPhone));
+                }
+            }
+        }
+        return contactsPhoneList;
+    }
+
+    public static void setEnhanceScreen(Context context, Contact contactData){
+        try {
+             if(getcontactPhoneList(contactData).size() < 1){
+                 Toast.makeText(context, R.string.Unformatted_profile_phone_number,
+                         Toast.LENGTH_SHORT).show();
+             }else{
+                 if(contactData.isUserProfile()){
+                     RcsApiManager.getRichScreenApi().startSiteApk(new ArrayList<String>());
+                 } else {
+                     RcsApiManager.getRichScreenApi()
+                                  .startSiteApk(getcontactPhoneList(contactData));
+                 }
+             }
+         } catch (ServiceDisconnectedException e) {
+             // TODO Auto-generated catch block
+             e.printStackTrace();
+         }
+    }
+    public static void updateEnhanceScreeenFunction(Context context, Contact contactData){
+        try {
+             if(getcontactPhoneList(contactData).size() < 1){
+                 Toast.makeText(context, R.string.Unformatted_profile_phone_number,
+                         Toast.LENGTH_SHORT).show();
+             } else {
+                 if(!RCSUtil.isNetworkConnected(context)){
+                     Toast.makeText(context, R.string.rcs_network_uanvailable,
+                             Toast.LENGTH_SHORT).show();
+                     return;
+                 }
+                 ArrayList<String> phoneNumberList = getcontactPhoneList(contactData);
+                 for (int i = 0; i < phoneNumberList.size(); i++){
+                     if (!TextUtils.isEmpty(phoneNumberList.get(i))){
+                        Log.d("RCS_UI",phoneNumberList.get(i));
+                         RcsApiManager.getRichScreenApi().downloadRichScrnObj(phoneNumberList.get(i),
+                             RCSUtil.UPDATE_ENHANCE_SCREEN_PHONE_EVENT);
+                     }
+                 }
+                 Toast.makeText(context, R.string.rcs_updateting_enhance_screen,
+                     Toast.LENGTH_SHORT).show();
+             }
+         } catch (Exception e) {
+             // TODO Auto-generated catch block
+             e.printStackTrace();
+         }
+
+    }
+
+    public static boolean isLocalProfile(Contact contactData) {
+        return TextUtils.isEmpty(contactData.getDirectoryAccountName())
+                && contactData.isUserProfile();
+    }
+
+    public static void startCreateGroupChatActivity(Context context, String number,
+            String message) {
+        Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+        sendIntent.putExtra("sms_body", message);
+        if (!TextUtils.isEmpty(number)) {
+            sendIntent.putExtra("address", number);
+        }
+        sendIntent.putExtra("isGroupChat", true);
+        sendIntent.setComponent(new ComponentName("com.android.mms",
+                "com.android.mms.ui.ComposeMessageActivity"));
+        if (RCSUtil.isActivityIntentAvailable(context, sendIntent)) {
+            context.startActivity(sendIntent);
+        }
+    }
+
+    public static Cursor queryPhoneNumbers(Context context, long contactId) {
+        Uri baseUri = ContentUris.withAppendedId(Contacts.CONTENT_URI,
+                contactId);
+        Uri dataUri = Uri.withAppendedPath(baseUri,
+                Contacts.Data.CONTENT_DIRECTORY);
+
+        Cursor c = context.getContentResolver().query(dataUri, new String[] { Phone._ID,
+                Phone.NUMBER, Phone.IS_SUPER_PRIMARY }, Data.MIMETYPE + "=?",
+                new String[] { Phone.CONTENT_ITEM_TYPE }, null);
+        if (c != null && c.moveToFirst()) {
+            return c;
+        }
+        return null;
+    }
+
+    public static String getPhoneforContactId(Context context, long contactId) {
+
+        String phone = null;
+        Cursor phonesCursor = null;
+        phonesCursor = RCSUtil.queryPhoneNumbers(context, contactId);
+        if (phonesCursor == null || phonesCursor.getCount() == 0) {
+            // No valid number
+            // signalError();
+            return phone;
+        } else if (phonesCursor.getCount() == 1) {
+            // only one number, call it.
+            phone = phonesCursor.getString(phonesCursor
+                    .getColumnIndex(Phone.NUMBER));
+        } else {
+            phonesCursor.moveToPosition(-1);
+            boolean first = true;
+            while (phonesCursor.moveToNext()) {
+                if (first) {
+                    //
+                    phone = phonesCursor.getString(phonesCursor
+                            .getColumnIndex(Phone.NUMBER));
+                    first = false;
+                }
+                if (phonesCursor.getInt(phonesCursor.getColumnIndex
+
+                (Phone.IS_SUPER_PRIMARY)) != 0) {
+                    // Found super primary, call it.
+                    phone = phonesCursor.getString(phonesCursor
+                            .getColumnIndex(Phone.NUMBER));
+                    break;
+                }
+            }
+        }
+        phonesCursor.close();
+        return phone;
+    }
+
+        public static String getAllPhoneNumberFromContactId(Context context, long contactId) {
+
+        String phone = null;
+        Cursor phonesCursor = null;
+        StringBuilder sb = new StringBuilder();
+        phonesCursor = RCSUtil.queryPhoneNumbers(context, contactId);
+        if (phonesCursor == null || phonesCursor.getCount() == 0) {
+            // No valid number
+            // signalError();
+            phonesCursor.close();
+            return phone;
+        } else if (phonesCursor.getCount() == 1) {
+            // only one number, call it.
+            phone = phonesCursor.getString(phonesCursor
+                    .getColumnIndex(Phone.NUMBER));
+        } else {
+            while (phonesCursor.moveToNext()) {
+                //
+                phone = phonesCursor.getString(phonesCursor
+                        .getColumnIndex(Phone.NUMBER));
+                sb.append(phone).append(";");
+            }
+            phone = sb.toString();
+        }
+        phonesCursor.close();
+        return phone;
+    }
+
+    public static void startChatGroupManagementActivity(Context context, GroupListItem entry) {
+        String groupId = entry.getSystemId();
+        long threadId = RCSUtil.getThreadIdByGroupId(context,
+                groupId);
+        Uri uri = ContentUris.withAppendedId(Threads.CONTENT_URI,
+                threadId);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        if (threadId > 0) {
+            intent.setData(uri);
+        }
+        intent.putExtra("groupId", groupId);
+        intent.putExtra("isGroupChat", true);
+        String address = RCSUtil
+                .getAddressesStringByGroupId(groupId);
+        if (!TextUtils.isEmpty(address)) {
+            intent.putExtra("address", address);
+        }
+        intent.setComponent(new ComponentName("com.android.mms",
+                "com.android.mms.ui.ComposeMessageActivity"));
+        context.startActivity(intent);
+    }
+
+    public static int getMessageChatCount(int position) {
+        int size = 0;
+        try {
+            GroupChatModel groupChat = RcsApiManager.getMessageApi()
+                    .getGroupChatById(String.valueOf(position));
+            if (null != groupChat) {
+                List<GroupChatUser> users = groupChat.getUserList();
+                size = users.size();
+            }
+        } catch (ServiceDisconnectedException e) {
+            Log.w("RCS_UI", "Exception initRcsComponents()" + e);
+        }
+        return size;
+    }
+
+    public static String getFormatNumber(String number){
+        if(null == number){
+            return "";
+        }
+        number = number.replaceAll("-", "");
+        number = number.replaceAll(" ", "");
+        number = number.replaceAll(",", "");
+        int numberLen = number.length();
+        if(numberLen > DEFAULT_NUMBER_LENGTH){
+            number = number.substring(numberLen - DEFAULT_NUMBER_LENGTH, numberLen);
+        }
+        return number;
     }
 }

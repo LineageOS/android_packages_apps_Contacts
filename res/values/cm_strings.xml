@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (c) 2011-2013, The Linux Foundation. All rights reserved.
+     Copyright (C) 2014-2015 The CyanogenMod Project
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="menu_moveGroupMembers">Move group members</string>
+    <string name="importConfirmation_title">Import contact?</string>
+    <!-- Toast displayed when a contact is deleted [CHAR LIMIT=NONE] -->
+    <string name="contactDeletedToast">Contact deleted.</string>
+    <!-- Toast displayed when saving a contact to sim card failed -->
+    <string name="contactSavedToSimCardError">Error, Loading Sim Contacts.</string>
+    <string name="airplane_mode_on">Error, Airplane mode is on.</string>
+    <string name="number_anr_too_long">Error, Number is too long.</string>
+    <string name="email_address_too_long">Error, Email Address is too long.</string>
+    <string name="sim_card_full">Error, Sim Card is full.</string>
+    <string name="tag_too_long">Error, Contact name is too long.</string>
+    <string name="no_phone_number">Please insert phone number.</string>
+    <string name="invalid_phone_number">Error, Number is invalid.</string>
+    <string name="invalid_number_type">Error, Number type is invalid.</string>
+    <string name="no_phone_number_or_email">Please insert phone number or email address.</string>
+    <string name="memory_card_full">Error, Memory is almost full.</string>
+    <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
+    <string name="contacts_groups_label">Groups</string>
+    <string name="title_move_members">Move members</string>
+    <string name="message_add_members">Add members...</string>
+    <string name="message_move_members">Move members...</string>
+    <string name="cancel_operation">Operation is canceled.</string>
+    <string name="message_can_not_move_members">Can not move members</string>
+    <string name="edit_before_call">Edit number before call</string>
+    <string name="select_all">All</string>
+    <string name="menu_sendViaSMS">Send contact via SMS</string>
+    <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
+    <string name="deleteConfirmation_title">Delete contact?</string>
+    <string name="import_sim_contacts_title">Import sim contacts</string>
+    <string name="import_sim_contacts_message">Importing sim contacts\u2026</string>
+    <plurals name="ContactMultiImportConfirmation">
+        <item quantity="one">%d contact will be imported.</item>
+        <item quantity="other">%d contacts will be imported.</item>
+    </plurals>
+    <string name="import_finish">"Import finished"</string>
+    <plurals name="import_progress">
+        <item quantity="one">%d contact imported</item>
+        <item quantity="other">%d contacts imported</item>
+    </plurals>
+    <plurals name="contacts_selected">
+        <item quantity="one">%d contact selected</item>
+        <item quantity="other">%d contacts selected</item>
+    </plurals>
+    <string name="too_many_contacts_add_to_group">Too many contacts, that should be less than <xliff:g id="count">%d</xliff:g></string>
+    <!-- Multi Delete Contacts related strings -->
+    <plurals name="ContactMultiDeleteConfirmation">
+        <item quantity="one">%d contact will be deleted.</item>
+        <item quantity="other">%d contacts will be deleted.</item>
+    </plurals>
+    <string name="delete_contacts_title">Delete Contacts</string>
+    <string name="delete_contacts_message">Deleting Contacts\u2026</string>
+    <string name="delete_termination">"Delete is termination"</string>
+    <!-- add for MemoryStatusActivity -->
+    <string name="menu_memory_status">Memory status</string>
+    <string name="memory_status_title">Memory status</string>
+    <string name="memory_size">Total:</string>
+    <string name="memory_available">Available</string>
+    <string name="memory_used">Used:</string>
+    <string name="calculating_status_now">Calculating Status now...</string>
+    <string name="contact_detail_picture_description">Picture. Select to change</string>
+    <string name="menu_copyTo">"Copy to "</string>
+    <string name="no_empty_email_in_usim">"Email is full, some record copy failed "</string>
+    <string name="add_to_white">Add to whitelist</string>
+    <string name="add_to_black">Add to blacklist</string>
+    <string name="voicemail">Voicemail</string>
+    <string name="select_call_title">Select call logs</string>
+    <string name="delete_call_title">Delete call logs</string>
+    <string name="delete_call_message">Deleting call logs ...</string>
+    <string name="delete_call_alert">Sure to delete the call logs selected?</string>
+    <string name="title_del_call">Delete</string>
+    <string name="title_add_members">Add members</string>
+</resources>

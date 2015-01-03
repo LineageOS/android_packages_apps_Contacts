@@ -276,29 +276,12 @@
 
     <!-- Toast displayed when a contact is saved [CHAR LIMIT=NONE] -->
     <string name="contactSavedToast">Contact saved.</string>
-    <!-- Toast displayed when a contact is deleted [CHAR LIMIT=NONE] -->
-    <string name="contactDeletedToast">Contact deleted.</string>
 
     <!-- Toast displayed when saving a contact failed. [CHAR LIMIT=NONE] -->
     <string name="contactSavedErrorToast">Couldn\'t save contact changes.</string>
 
     <!-- Toast displayed when saving a contact photo failed. [CHAR LIMIT=NONE] -->
     <string name="contactPhotoSavedErrorToast">Couldn\'t save contact photo changes.</string>
-    <!-- Toast displayed when saving a contact to sim card failed -->
-    <string name="contactSavedToSimCardError">Error, Loading Sim Contacts.</string>
-    <string name="airplane_mode_on">Error, Airplane mode is on.</string>
-    <string name="number_anr_too_long">Error, Number is too long.</string>
-    <string name="email_address_too_long">Error, Email Address is too long.</string>
-    <string name="sim_card_full">Error, Sim Card is full.</string>
-    <string name="tag_too_long">Error, Contact name is too long.</string>
-    <string name="no_phone_number">Please insert phone number.</string>
-    <string name="invalid_phone_number">Error, Number is invalid.</string>
-    <string name="invalid_number_type">Error, Number type is invalid.</string>
-    <string name="no_phone_number_or_email">Please insert phone number or email address.</string>
-    <string name="memory_card_full">Error, Memory is almost full.</string>
-    <string name="edit_before_call">Edit number before call</string>
-    <string name="importConfirmation_title">Import contact?</string>
-    <!-- Toast displayed when a group is saved [CHAR LIMIT=NONE] -->
     <!-- Toast displayed when a group is saved [CHAR LIMIT=NONE] -->
     <string name="groupSavedToast">Group saved.</string>
 
@@ -690,36 +673,8 @@
     <!-- Button label to prompt the user to add another account (when there are already existing accounts on the device) [CHAR LIMIT=30] -->
     <string name="add_new_account">Add new account</string>
 
-    <string name="select_all">All</string>
-    <string name="btn_ok">Ok</string>
-    <string name="btn_cancel">Cancel</string>
-    <string name="menu_sendViaSMS">Send contact via SMS</string>
-    <!-- Gray hint displayed in the search field in Contacts when empty -->
-    <string name="search_bar_hint">Search contacts</string>
-    <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
-    <string name="deleteConfirmation_title">Delete contact?</string>
-    <string name="import_sim_contacts_title">Import sim contacts</string>
-    <string name="import_sim_contacts_message">Importing sim contacts ...</string>
-    <string name="ContactMultiImportConfirmation">These contacts will be imported.</string>
-    <string name="import_finish">"Import finished"</string>
-    <string name="import_stop">"Import stopped"</string>
-    <string name="too_many_contacts_add_to_group">Too many contacts, that should be less than <xliff:g id="count">%d</xliff:g></string>
-    <!-- Multi Delete Contacts related strings -->
-    <string name="ContactMultiDeleteConfirmation">These contacts will be deleted.</string>
-    <string name="delete_contacts_title">Delete Contacts</string>
-    <string name="delete_contacts_message">Deleting Contacts ...</string>
-    <string name="delete_termination">"Delete is termination"</string>
     <!-- Menu item shown only when the special debug mode is enabled, which is used to send all contacts database files via email.  [CHAR LIMI=NONE] -->
     <string name="menu_export_database">Export database files</string>
-
-    <!-- add for MemoryStatusActivity -->
-    <string name="menu_memory_status">Memory status</string>
-    <string name="memory_status_title">Memory status</string>
-    <string name="memory_size">Total:</string>
-    <string name="memory_available">Available</string>
-    <string name="memory_used">Used:</string>
-    <string name="calculating_status_now">Calculating Status now...</string>
-    <string name="contact_detail_picture_description">Picture. Select to change</string>
 
     <!-- Content description for the button that adds a new contact
          [CHAR LIMIT=NONE] -->
@@ -825,23 +780,4 @@
 
     <!-- Quick contact display name with phonetic name -->
     <string name="quick_contact_display_name_with_phonetic"><xliff:g id="display_name">%s</xliff:g> (<xliff:g id="phonetic_name">%s</xliff:g>)</string>
-
-    <string name="menu_copyTo">"Copy to "</string>
-    <string name="no_empty_email_in_usim">"Email is full, some record copy failed "</string>
-    <string name="add_to_white">Add to whitelist</string>
-    <string name="add_to_black">Add to blacklist</string>
-    <string name="voicemail">Voicemail</string>
-    <string name="select_call_title">Select call logs</string>
-    <string name="delete_call_title">Delete call logs</string>
-    <string name="delete_call_message">Deleting call logs ...</string>
-    <string name="delete_call_alert">Sure to delete the call logs selected?</string>
-    <string name="title_del_call">Delete</string>
-    <string name="title_add_members">Add members</string>
-    <string name="add_blacklist_success">"This number has been added in blacklist successfully."</string>
-    <string name="add_whitelist_success">"This number has been added in whitelist successfully."</string>
-    <string name="remove_blacklist_success">"This number has been removed from blacklist successfully."</string>
-    <string name="remove_whitelist_success">"This number has been removed from whitelist successfully."</string>
-    <string name="remove_from_black">Remove from blacklist</string>
-    <string name="remove_from_white">Remove from whitelist</string>
-    <string name="firewall_reach_maximun">The list is full and can not be filled in!</string>
 </resources>

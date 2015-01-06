@@ -33,6 +33,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.contacts.R;
+import com.android.contacts.RcsApiManager;
 import com.android.contacts.common.list.ContactListAdapter;
 import com.android.contacts.common.list.ContactListFilter;
 import com.android.contacts.common.list.ContactListFilterController;
@@ -40,7 +41,9 @@ import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.DefaultContactListAdapter;
 import com.android.contacts.common.list.ProfileAndContactsLoader;
 import com.android.contacts.editor.ContactEditorFragment;
+import com.android.contacts.util.RCSUtil;
 import com.android.contacts.common.util.AccountFilterUtil;
+import com.android.contacts.common.util.ContactsCommonRcsUtil;
 
 /**
  * Fragment containing a contact list used for browsing (as compared to
@@ -59,6 +62,7 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment 
     private TextView mProfileTitle;
     private View mSearchProgress;
     private TextView mSearchProgressText;
+    private ContactListItemView mPulicAccountView;
 
     private class FilterHeaderClickListener implements OnClickListener {
         @Override
@@ -101,6 +105,12 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment 
         adapter.setDisplayPhotos(true);
         adapter.setPhotoPosition(
                 ContactListItemView.getDefaultPhotoPosition(/* opposite = */ false));
+        if (ContactsCommonRcsUtil.getIsRcs()) {
+            if (ContactsCommonRcsUtil.RcsCapabilityMap != null
+                    && ContactsCommonRcsUtil.RcsCapabilityMap.isEmpty()) {
+                ContactsCommonRcsUtil.loadRcsCapabilityOfContacts(getContext(), adapter);
+            }
+        }
         return adapter;
     }
 
@@ -118,6 +128,10 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment 
 
         // Create an empty user profile header and hide it for now (it will be visible if the
         // contacts list will have no user profile).
+        if (RCSUtil.getRcsSupport() && RCSUtil.isNativeUiInstalled(getActivity())
+                && RCSUtil.isPluginInstalled(getActivity())) {
+            addPublicAccountView();
+        }
         addEmptyUserProfileHeader(inflater);
         showEmptyUserProfile(false);
 
@@ -178,6 +192,9 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment 
 
     @Override
     protected void setProfileHeader() {
+        if (RCSUtil.getRcsSupport()) {
+            showPublicAccountView(!isSearchMode());
+        }
         mUserProfileExists = getAdapter().hasProfile();
         showEmptyUserProfile(!mUserProfileExists && !isSearchMode());
 
@@ -254,5 +271,27 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment 
                 startActivity(intent);
             }
         });
+    }
+
+    private void addPublicAccountView() {
+        ListView list = getListView();
+        mPulicAccountView = new ContactListItemView(getActivity(), null);
+        mPulicAccountView.getPhotoView().setBackground(getActivity().getDrawable(R.drawable.public_account));
+        mPulicAccountView.setDisplayName(getActivity().getResources().getString(R.string.public_account));
+        mPulicAccountView.setIsSectionHeaderEnabled(true);
+        list.addHeaderView(mPulicAccountView);
+        mPulicAccountView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RCSUtil.ACTION_PUBLIC_ACCOUNT_ACTIVITY);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void showPublicAccountView(boolean show) {
+        if (mPulicAccountView != null) {
+            mPulicAccountView.setVisibility(show ? View.VISIBLE : View.GONE);
+        }
     }
 }

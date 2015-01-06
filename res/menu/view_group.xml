@@ -16,6 +16,15 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/menu_create_group_chat"
+        android:title="@string/menu_create_group_chat" />
+
+    <item
+        android:id="@+id/menu_enhancedscreen"
+        android:title="@string/menu_enhancedscreen"
+        android:alphabeticShortcut="q" />
+
+    <item
         android:id="@+id/menu_edit_group"
         android:title="@string/menu_editGroup"
         android:alphabeticShortcut="e" />

@@ -98,4 +98,6 @@
     <string name="btn_ok">Ok</string>
     <string name="btn_cancel">Cancel</string>
     <string name="import_stop">"Import stopped"</string>
+    <string name="contact_backup_success">Contacts backup successfully!</string>
+    <string name="contact_backup_fail">Contacts backup unsuccessfully!</string>
 </resources>

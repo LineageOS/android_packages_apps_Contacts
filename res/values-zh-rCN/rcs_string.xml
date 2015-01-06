@@ -92,4 +92,6 @@
     <string name="btn_ok">"確定"</string>
     <string name="btn_cancel">"取消"</string>
     <string name="import_stop">"导入停止"</string>
+    <string name="contact_backup_success">联系人备份成功</string>
+    <string name="contact_backup_fail">联系人备份失败</string>
 </resources>

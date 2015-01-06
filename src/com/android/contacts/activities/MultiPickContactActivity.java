@@ -103,6 +103,7 @@ import com.android.contacts.common.list.ContactsSectionIndexer;
 import com.android.contacts.common.list.DefaultContactListAdapter;
 import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.model.account.SimAccountType;
+import com.android.contacts.util.RCSUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -1675,6 +1676,7 @@ public class MultiPickContactActivity extends ListActivity implements
                 operationList.add(builder.build());
             }
         }
+        RCSUtil.importContactUpdateEnhanceScreen(phoneNumber,anrs);
 
         try {
             resolver.applyBatch(ContactsContract.AUTHORITY, operationList);
@@ -1698,7 +1700,12 @@ public class MultiPickContactActivity extends ListActivity implements
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.label_groups));
         ContentResolver resolver = getContentResolver();
-        String selection = Groups.ACCOUNT_TYPE + " =? AND " + Groups.DELETED + " != ?";
+        String selection = Groups.ACCOUNT_TYPE + " =? AND " 
+                           + Groups.DELETED + " != ? AND ("
+                           //+ Groups.SOURCE_ID + " != ?";
+                           + Groups.SOURCE_ID + "!='RCS'"+" OR "
+                           + Groups.SOURCE_ID+" IS NULL)";
+
         ArrayList<String> items = new ArrayList<String>();
 
         mGroupIds.clear();

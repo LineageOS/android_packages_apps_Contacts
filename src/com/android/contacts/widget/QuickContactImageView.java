@@ -92,4 +92,8 @@ public class QuickContactImageView extends ImageView {
     public Drawable getDrawable() {
         return mOriginalDrawable;
     }
+
+    public Drawable getBitmapDrawable() {
+        return mBitmapDrawable;
+    }
 }

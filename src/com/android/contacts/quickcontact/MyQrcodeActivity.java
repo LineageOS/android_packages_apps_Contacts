@@ -20,7 +20,6 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
 package com.android.contacts.quickcontact;
 
 import android.app.ActionBar;
@@ -304,7 +303,6 @@ public class MyQrcodeActivity extends Activity {
         Bundle bundle = new Bundle();
         bundle = getIntent().getExtras();
         mRawContact = (RawContact) bundle.getParcelable("raw_contact");
-        mContactPhoto = bundle.getParcelable("contact_photo");
         for (DataItem dataItem : mRawContact.getDataItems()) {
             final ContentValues entryValues = dataItem.getContentValues();
             final String mimeType = dataItem.getMimeType();

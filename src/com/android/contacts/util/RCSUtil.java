@@ -52,6 +52,9 @@ import com.android.contacts.group.GroupBrowseListFragment;
 import com.android.contacts.group.GroupListItem;
 import com.android.contacts.quickcontact.MyQrcodeActivity;
 import com.android.contacts.quickcontact.QuickContactActivity;
+import com.suntek.mway.rcs.client.api.plugin.callback.IMContactSyncListener;
+import com.suntek.mway.rcs.client.api.plugin.entity.mcontact.Auth;
+import com.suntek.mway.rcs.client.api.plugin.entity.mcontact.SyncAction;
 import com.suntek.mway.rcs.client.api.plugin.entity.profile.QRCardImg;
 import com.suntek.mway.rcs.client.api.plugin.entity.profile.QRCardInfo;
 import com.suntek.mway.rcs.client.api.profile.callback.QRImgListener;
@@ -112,6 +115,7 @@ import android.content.SharedPreferences;
 import android.content.DialogInterface.OnClickListener;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.res.AssetManager;
 import android.database.Cursor;
@@ -231,7 +235,13 @@ public class RCSUtil {
 
     //private static final HashMap<Long, Long> latestQuery = new HashMap<Long, Long>();
 
-    private static final String PUBLIC_ACCOUNT_PACKAGE = "com.suntek.mway.rcs.nativeui";
+    private static final String NATIVE_UI_PACKAGE = "com.suntek.mway.rcs.nativeui";
+
+    private static final String PLUGIN_PACKAGE = "com.suntek.mway.rcs.app.plugin";
+
+    private static final String KEY_BACKUP_ONCE_CHANGED = "key_backup_once_changed";
+
+    private static final String PREF_BACKUP_ONCE_CHANGED_NAME = "pref_backup_once_changed_name";
 
     public static boolean getRcsSupport() {
         return isRcsSupport;
@@ -254,8 +264,12 @@ public class RCSUtil {
         return false;
     }
 
-    public static boolean isPublicAccountApplicationInstalled(Context context) {
-        return isPackageInstalled(context, PUBLIC_ACCOUNT_PACKAGE);
+    public static boolean isNativeUiInstalled(Context context) {
+        return isPackageInstalled(context, NATIVE_UI_PACKAGE);
+    }
+
+    public static boolean isPluginInstalled(Context context) {
+        return isPackageInstalled(context, PLUGIN_PACKAGE);
     }
 
     public static void resotreContactIfTerminalChanged(final Context context) {
@@ -1053,6 +1067,24 @@ public class RCSUtil {
             rawContactId = String.valueOf(ContentUris.parseId(rawContactUri));
         }
         return rawContactId;
+    }
+
+    public static int getLocalGroupsCount(Context context){
+        StringBuilder where = new StringBuilder();
+        where.append(Groups.DELETED + "!=1");
+        where.append(" AND ("+Groups.SOURCE_ID + "!='RCS'"+" OR "+Groups.SOURCE_ID+" IS NULL)");
+        Cursor c = context.getContentResolver().query(
+                  Groups.CONTENT_URI,
+                  null,
+                  where.toString(), null, null);
+        if(c != null){
+            int groupsCount = c.getCount();
+            c.close();
+            return groupsCount;
+        } else {
+            return 0;
+        }
+        
     }
 
     public static void saveQrCode(Context context, String imgBase64, String etag) {
@@ -2737,7 +2769,6 @@ public class RCSUtil {
                 if (optionsUpdateEnhanceScreen != null) {
                     optionsUpdateEnhanceScreen.setVisible(false);
                 }
-
             }
         }
     }
@@ -2946,11 +2977,12 @@ public class RCSUtil {
 
     public static int getMessageChatCount(int position) {
         int size = 0;
+        List<GroupChatUser> users = new ArrayList<GroupChatUser>();
         try {
             GroupChatModel groupChat = RcsApiManager.getMessageApi()
                     .getGroupChatById(String.valueOf(position));
             if (null != groupChat) {
-                List<GroupChatUser> users = groupChat.getUserList();
+                users = groupChat.getUserList();
                 size = users.size();
             }
         } catch (ServiceDisconnectedException e) {
@@ -2972,4 +3004,129 @@ public class RCSUtil {
         }
         return number;
     }
+
+    public static void autoBackupOnceChanged(final Context context) {
+        final Handler handler = new Handler();
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                RCSUtil.sleep(2000);
+                backupContacts(context, handler);
+            }
+        };
+        t.start();
+    }
+
+    private static void backupContacts(final Context context, final Handler handler) {
+        Context nativeUiContext = null;
+        try {
+            nativeUiContext = context.createPackageContext(NATIVE_UI_PACKAGE,
+                    Context.CONTEXT_IGNORE_SECURITY);
+        } catch (NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (nativeUiContext == null)
+            return;
+        SharedPreferences pref = nativeUiContext.getSharedPreferences(
+                PREF_BACKUP_ONCE_CHANGED_NAME, Activity.MODE_WORLD_READABLE
+                        | Activity.MODE_MULTI_PROCESS);
+        boolean isBackup = pref.getBoolean(KEY_BACKUP_ONCE_CHANGED, false);
+        boolean isAutoBackup = false;
+        boolean isOnlySyncViaWifi = false;
+
+        Log.d("RCS_UI", "Calling autoBackupOnceChanged!");
+        try {
+            isAutoBackup = RcsApiManager.getMcontactApi().getEnableAutoSync();
+            isOnlySyncViaWifi = RcsApiManager.getMcontactApi().getOnlySyncEnableViaWifi();
+            if (isBackup && isAutoBackup && isOnlySyncViaWifi) {
+                Log.d("RCS_UI", "Auto backup started!");
+                RcsApiManager.getMcontactApi().doSync(SyncAction.CONTACT_UPLOAD,
+                        new IMContactSyncListener.Stub() {
+
+                            @Override
+                            public void onAuthSession(Auth arg0, boolean arg1)
+                                    throws RemoteException {
+                                // TODO Auto-generated method stub
+
+                            }
+
+                            @Override
+                            public void onExecuting(Auth arg0, int arg1) throws RemoteException {
+                                // TODO Auto-generated method stub
+
+                            }
+
+                            @Override
+                            public void onHttpResponeText(String arg0, String arg1)
+                                    throws RemoteException {
+                                // TODO Auto-generated method stub
+
+                            }
+
+                            @Override
+                            public void onPreExecuteAuthSession(Auth arg0) throws RemoteException {
+                                // TODO Auto-generated method stub
+
+                            }
+
+                            @Override
+                            public void onProgress(Auth arg0, int arg1, int arg2, int arg3)
+                                    throws RemoteException {
+                                // TODO Auto-generated method stub
+
+                            }
+
+                            @Override
+                            public void onRunning() throws RemoteException {
+                                // TODO Auto-generated method stub
+
+                            }
+
+                            @Override
+                            public void onSync(Auth auto, final int action, final boolean isSuccess)
+                                    throws RemoteException {
+                                if (isSuccess) {
+                                    handler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(
+                                                    context,
+                                                    context.getResources().getString(
+                                                            R.string.contact_backup_success),
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                } else {
+                                    handler.post(new Runnable() {
+
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(
+                                                    context,
+                                                    context.getResources().getString(
+                                                            R.string.contact_backup_fail),
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            }
+                        });
+            }
+
+            // startSync(SyncAction.CONTACT_UPLOAD);
+        } catch (ServiceDisconnectedException e) {
+            handler.post(new Runnable() {
+
+                @Override
+                public void run() {
+                    Toast.makeText(
+                            context,
+                            context.getResources().getString(R.string.rcs_service_is_not_available),
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
+            Log.w("RCS_UI", e);
+        }
+    }
+
 }

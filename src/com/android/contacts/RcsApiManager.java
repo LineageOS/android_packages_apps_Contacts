@@ -32,6 +32,7 @@ import com.suntek.mway.rcs.client.api.im.impl.PaMessageApi;
 import com.suntek.mway.rcs.client.api.impl.groupchat.ConfApi;
 import com.suntek.mway.rcs.client.api.login.impl.LoginApi;
 import com.suntek.mway.rcs.client.api.mcloud.McloudFileApi;
+import com.suntek.mway.rcs.client.api.mcontact.McontactApi;
 import com.suntek.mway.rcs.client.api.profile.impl.ProfileApi;
 import com.suntek.mway.rcs.client.api.publicaccount.impl.PublicAccountApi;
 import com.suntek.mway.rcs.client.api.support.RcsSupportApi;
@@ -54,6 +55,7 @@ public class RcsApiManager {
     private static ConfApi mConfApi = new ConfApi();
     private static RichScreenApi mRichScreenApi = new RichScreenApi(null);
     private static PluginCenterApi mPluginCenterApi = new PluginCenterApi();
+    private static McontactApi mMcontactApi = new McontactApi();
 
     public static void init(Context context) {
         mContext = context;
@@ -144,6 +146,15 @@ public class RcsApiManager {
                 Log.d(TAG, "mPluginCenterApi connected");
             }
         });
+        mMcontactApi.init(context, new RCSServiceListener() {
+            @Override
+            public void onServiceDisconnected() throws RemoteException {
+            }
+
+            @Override
+            public void onServiceConnected() throws RemoteException {
+            }
+        });
      }
 
     public static MessageApi getMessageApi() {
@@ -200,6 +211,14 @@ public class RcsApiManager {
             mCapabilityApi.init(mContext, null);
         }
         return mCapabilityApi;
+    }
+
+    public static McontactApi getMcontactApi() {
+        if (mMcontactApi == null) {
+            mMcontactApi = new McontactApi();
+            mMcontactApi.init(mContext, null);
+        }
+        return mMcontactApi;
     }
 
     public static boolean isRcsServiceInstalled() {

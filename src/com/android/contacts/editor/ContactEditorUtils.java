@@ -283,7 +283,12 @@ public class ContactEditorUtils {
     String[] getWritableAccountTypeStrings() {
         final Set<String> types = Sets.newHashSet();
         for (AccountType type : mAccountTypes.getAccountTypes(true)) {
-            types.add(type.accountType);
+            if (type.accountType.equals(SimContactsConstants.ACCOUNT_TYPE_SIM)
+                    || type.accountType.equals(SimContactsConstants.ACCOUNT_TYPE_PHONE)) {
+                continue;
+            } else {
+                types.add(type.accountType);
+            }
         }
         return types.toArray(new String[types.size()]);
     }

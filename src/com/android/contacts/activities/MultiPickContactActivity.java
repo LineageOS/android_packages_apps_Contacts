@@ -299,7 +299,7 @@ public class MultiPickContactActivity extends ListActivity implements
             mMode = MODE_DEFAULT_EMAIL;
         } else if (SimContactsConstants.ACTION_MULTI_PICK_CALL.equals(action)) {
             mMode = MODE_DEFAULT_CALL;
-            setTitle(R.string.delete_call_title);
+            setTitle(android.R.string.delete);
             if (intent.getBooleanExtra(EXTRA_SELECT_CALLLOG, false)) {
                 mSelectCallLog = true;
                 setTitle(R.string.select_call_title);

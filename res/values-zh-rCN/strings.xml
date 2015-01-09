@@ -51,7 +51,6 @@
     <string name="menu_splitAggregate" msgid="8368636463748691868">"拆分"</string>
     <string name="menu_editGroup" msgid="5062005185370983720">"修改"</string>
     <string name="menu_deleteGroup" msgid="3486380004411482874">"删除"</string>
-    <string name="menu_moveGroupMembers">"移动组成员"</string>
     <string name="menu_new_contact_action_bar" msgid="7263362129442119188">"添加联系人"</string>
     <string name="menu_new_group_action_bar" msgid="3520232877587377175">"添加群组"</string>
     <string name="splitConfirmation_title" msgid="633640935430370530">"要拆分联系人吗？"</string>
@@ -63,7 +62,6 @@
     <string name="separatorJoinAggregateSuggestions" msgid="2831414448851313345">"建议的联系人"</string>
     <string name="separatorJoinAggregateAll" msgid="7939932265026181043">"所有联系人"</string>
     <string name="contactsJoinedMessage" msgid="7208148163607047389">"已合并联系人"</string>
-    <string name="importConfirmation_title" msgid="1418215926447642260">"要导入联系人吗？"</string>
     <string name="menu_set_ring_tone" msgid="8728345772068064946">"设置铃声"</string>
     <string name="menu_redirect_calls_to_vm" msgid="4181789196416396656">"所有来电转至语音信箱"</string>
     <string name="readOnlyContactWarning" msgid="7808825687289848259">"您无法删除只读帐户中的联系人，但可以在联系人列表中将他们隐藏。"</string>
@@ -92,19 +90,7 @@
     <string name="addPeopleToGroup" msgid="7879585947222263516">"要添加联系人，请修改该群组。"</string>
     <string name="savingContact" msgid="4075751076741924939">"正在保存联系人…"</string>
     <string name="contactSavedToast" msgid="7152589189385441091">"此联系人已保存。"</string>
-    <string name="contactDeletedToast">"此联系人已删除。"</string>
     <string name="contactSavedErrorToast" msgid="3207250533172944892">"无法保存联系人更改。"</string>
-    <string name="contactSavedToSimCardError">"发生错误，正在载入SIM卡联系人。"</string>
-    <string name="airplane_mode_on">"发生错误，当前处于飞行模式。"</string>
-    <string name="number_anr_too_long">"发生错误，电话号码过长。"</string>
-    <string name="email_address_too_long">"发生错误，邮箱地址过长。"</string>
-    <string name="sim_card_full">"发生错误，SIM卡已满。"</string>
-    <string name="tag_too_long">"发生错误，联系人姓名过长。"</string>
-    <string name="no_phone_number">请输入手机号码。</string>
-    <string name="invalid_phone_number">"发生错误，电话号码不合法。"</string>
-    <string name="invalid_number_type">"发生错误，号码类型不合法。"</string>
-    <string name="no_phone_number_or_email">请输入手机号码或者邮箱地址。</string>
-    <string name="memory_card_full">错误, 内存已满.</string>
     <string name="groupSavedToast" msgid="1168756874239833756">"群组已保存。"</string>
     <string name="groupSavedErrorToast" msgid="7984466936615304740">"无法保存所做的群组更改。"</string>
   <plurals name="listTotalPhoneContacts">
@@ -123,7 +109,6 @@
   </plurals>
     <string name="all_contacts_tab_label" msgid="6250372293594147703">"所有联系人"</string>
     <string name="favorites_tab_label" msgid="1524869648904016414">"收藏"</string>
-    <string name="contacts_groups_label">"群组"</string>
     <string name="callBack" msgid="5498224409038809224">"回电"</string>
     <string name="callAgain" msgid="3197312117049874778">"重拨"</string>
     <string name="returnCall" msgid="8171961914203617813">"回拨"</string>
@@ -219,7 +204,6 @@
     <string name="copy_text" msgid="3257145021583508761">"复制到剪贴板"</string>
     <string name="set_default" msgid="4417505153468300351">"设置默认值"</string>
     <string name="clear_default" msgid="7193185801596678067">"清除默认值"</string>
-    <string name="edit_before_call">"拨号前编辑号码"</string>
     <string name="toast_text_copied" msgid="5143776250008541719">"文本已复制"</string>
     <string name="cancel_confirmation_dialog_message" msgid="5885724679874403115">"要舍弃您所做的更改吗？"</string>
     <string name="call_type_and_date" msgid="747163730039311423">"<xliff:g id="CALL_TYPE">%1$s</xliff:g> <xliff:g id="CALL_SHORT_DATE">%2$s</xliff:g>"</string>
@@ -240,27 +224,6 @@
     <string name="keep_local" msgid="1258761699192993322">"本地保存"</string>
     <string name="add_account" msgid="8201790677994503186">"添加帐户"</string>
     <string name="add_new_account" msgid="5748627740680940264">"添加新帐户"</string>
-    <string name="select_all">"全选"</string>
-    <string name="search_bar_hint">"搜索联系人"</string>
-    <string name="menu_sendViaSMS">通过短信发送联系人</string>
-    <string name="deleteConfirmation_title">"要删除联系人吗？"</string>
-    <string name="ContactMultiDeleteConfirmation">"将会删除这些联系人。"</string>
-    <string name="delete_contacts_title">"删除联系人"</string>
-    <string name="delete_contacts_message">"正在删除..."</string>
-    <string name="delete_termination">"删除结束"</string>
-    <string name="ContactMultiImportConfirmation">"将会导入这些联系人。"</string>
-    <string name="import_sim_contacts_title">"导入联系人"</string>
-    <string name="import_sim_contacts_message">"正在导入..."</string>
-    <!-- Import from sim card -->
-    <string name="import_finish">"导入完成"</string>
-    <string name="too_many_contacts_add_to_group">联系人过多，应该少于<xliff:g id="count">%d</xliff:g>个</string>
-    <!-- add for MemoryStatusActivity -->
-    <string name="menu_memory_status">"存储器状态"</string>
-    <string name="memory_status_title">"存储器状态"</string>
-    <string name="memory_size">"容量:"</string>
-    <string name="memory_available">"可用"</string>
-    <string name="memory_used">"已用:"</string>
-    <string name="calculating_status_now">正在计算存储状态…</string>
     <string name="menu_export_database" msgid="2659719297530170820">"导出数据库文件"</string>
     <string name="action_menu_add_new_contact_button" msgid="3180222523336380017">"添加新联系人"</string>
     <string name="expanding_entry_card_view_see_more" msgid="3779194067124758079">"查看更多"</string>
@@ -291,18 +254,5 @@
     <string name="content_description_recent_call_type_outgoing" msgid="5156553338985232744">"外拨电话"</string>
     <string name="content_description_recent_call_type_missed" msgid="7371810920196048204">"未接电话"</string>
     <string name="content_description_recent_call" msgid="6204048362763219585">"近期通话。<xliff:g id="CALL_DETAILS">%s</xliff:g>。点按可回拨"</string>
-    <string name="menu_copyTo">"复制到"</string>
-    <string name="no_empty_email_in_usim">"卡上电子邮件空间已满，部分邮件信息将不会复制 "</string>
-    <string name="title_del_call">删除</string>
-    <string name="delete_call_title">删除通话记录</string>
-    <string name="delete_call_message">删除通话记录 ...</string>
-    <string name="delete_call_alert">"确定要删除选中的通话记录吗?"</string>
-
-    <string name="title_add_members">"添加成员"</string>
-    <string name="title_move_members">"移动成员"</string>
-    <string name="message_add_members">"添加成员..."</string>
-    <string name="message_move_members">"移动成员..."</string>
-    <string name="cancel_operation">"操作取消"</string>
-    <string name="message_can_not_move_members">"不能移动成员"</string>
     <string name="message_from_you_prefix" msgid="7180706529908434482">"您：<xliff:g id="SMS_BODY">%s</xliff:g>"</string>
 </resources>

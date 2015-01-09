@@ -2228,6 +2228,70 @@ public class QuickContactActivity extends ContactsActivity {
             final MenuItem shortcutMenuItem = menu.findItem(R.id.menu_create_contact_shortcut);
             shortcutMenuItem.setVisible(isShortcutCreatable());
 
+            String accoutName = null;
+            String accoutType = null;
+
+            final RawContact rawContact = mContactData.getRawContacts().get(0);
+            accoutName = rawContact.getAccountName();
+            accoutType = rawContact.getAccountTypeString();
+
+            final MenuItem copyToPhoneMenu = menu.findItem(R.id.menu_copy_to_phone);
+            if (copyToPhoneMenu != null) {
+                copyToPhoneMenu.setVisible(false);
+            }
+
+            final MenuItem copyToSim1Menu = menu.findItem(R.id.menu_copy_to_sim1);
+            if (copyToSim1Menu != null) {
+                copyToSim1Menu.setVisible(false);
+            }
+
+            final MenuItem copyToSim2Menu = menu.findItem(R.id.menu_copy_to_sim2);
+            if (copyToSim2Menu != null) {
+                copyToSim2Menu.setVisible(false);
+            }
+
+            if (!TextUtils.isEmpty(accoutType)) {
+                if (SimContactsConstants.ACCOUNT_TYPE_SIM.equals(accoutType)) {
+                    copyToPhoneMenu.setVisible(true);
+                    copyToPhoneMenu.setTitle(getString(R.string.menu_copyTo,
+                            getString(R.string.phoneLabelsGroup)));
+                    if (TelephonyManager.getDefault().isMultiSimEnabled()) {
+                        if (SimContactsConstants.SIM_NAME_1.equals(accoutName)
+                                && simIsReady(SimContactsConstants.SUB_2)) {
+                            copyToSim2Menu.setTitle(getString(R.string.menu_copyTo,
+                                    getString(R.string.copy_to_target_msim, 2)));
+                            copyToSim2Menu.setVisible(true);
+                        }
+                        if (SimContactsConstants.SIM_NAME_2.equals(accoutName)
+                                && simIsReady(SimContactsConstants.SUB_1)) {
+                            copyToSim1Menu.setTitle(getString(R.string.menu_copyTo,
+                                    getString(R.string.copy_to_target_msim, 1)));
+                            copyToSim1Menu.setVisible(true);
+                        }
+                    }
+                } else if (SimContactsConstants.ACCOUNT_TYPE_PHONE.equals(accoutType)) {
+                    copyToPhoneMenu.setVisible(false);
+                    boolean hasPhoneOrEmail = hasPhoneOrEmailDate(mContactData);
+                    if (TelephonyManager.getDefault().isMultiSimEnabled()) {
+                        if (hasPhoneOrEmail && simIsReady(SimContactsConstants.SUB_1)) {
+                            copyToSim1Menu.setTitle(getString(R.string.menu_copyTo,
+                                    getString(R.string.copy_to_target_msim, 1)));
+                            copyToSim1Menu.setVisible(true);
+                        }
+                        if (hasPhoneOrEmail && simIsReady(SimContactsConstants.SUB_2)) {
+                            copyToSim2Menu.setTitle(getString(R.string.menu_copyTo,
+                                    getString(R.string.copy_to_target_msim, 2)));
+                            copyToSim2Menu.setVisible(true);
+                        }
+                    } else {
+                        if (hasPhoneOrEmail && simIsReady(SimContactsConstants.SUB_1)) {
+                            copyToSim1Menu.setTitle(getString(R.string.menu_copyTo,
+                                    getString(R.string.copy_to_target_sim)));
+                            copyToSim1Menu.setVisible(true);
+                        }
+                    }
+                }
+            }
             return true;
         }
         return false;

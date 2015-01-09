@@ -216,7 +216,7 @@
 
         <activity
             android:name=".activities.MemoryStatusActivity"
-            android:label="@string/memory_status_title"
+            android:label="@string/menu_memory_status"
             android:theme="@style/ContactListFilterTheme" />
 
         <!-- Used to select display and sync groups -->

@@ -114,7 +114,6 @@
   <string name="exporting_contact_list_progress"><xliff:g id="TOTAL_NUMBER">%2$s</xliff:g> دىن <xliff:g id="CURRENT_NUMBER">%1$s</xliff:g> ئالاقەداش</string>
   <string name="search_settings_description">ئالاقەداشنىڭ ئاتى</string>
   <string name="quickcontact_missing_app">بۇ مەشغۇلاتنى بىر تەرەپ قىلىدىغان ئەپ يوق</string>
-  <string name="missing_app">بۇ مەشغۇلاتنى بىر تەرەپ قىلىدىغان ئەپ يوق</string>
   <string name="menu_share">ھەمبەھىر</string>
   <string name="share_via">ئالاقەداش ھەمبەھىر ئۇسۇلى</string>
   <string name="dialog_new_group_account">ھېسابات ئاستىغا گۇرۇپپا قۇر</string>

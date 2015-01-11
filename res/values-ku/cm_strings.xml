@@ -16,4 +16,71 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"ڵه‌به‌رگرایه‌وه‌ بۆ پارێزه‌ر"</string>
+  <string name="deleteConfirmation_title">سڕینەوەی پەیوەندی?</string>
+  <string name="importConfirmation_title">هاوردنی ناوەکان?</string>
+  <string name="menu_deleteContacts">سڕینەوەی پەیوەندی</string>
+  <string name="contactDeletedToast">پەیوەندی سڕایەوە</string>
+  <string name="contactSavedToSimCardError">ناتوانرێت ناوە دیاریکراوەکان پاشەکەوت بکرێت بۆ ناو سیمکارتەکە</string>
+  <string name="airplane_mode_on">ناتوانرێت سیمکارتەکە بەکاربهێنرێت کاتێک لەسەر باری فڕۆکەیە</string>
+  <string name="number_anr_too_long">ژمارەکە زۆر درێژە</string>
+  <string name="email_address_too_long">ناوی هەژمارەکە زۆر درێژە</string>
+  <string name="sim_card_full">سیمکارتەکە پڕە</string>
+  <string name="tag_too_long">ناو زۆر درێژە</string>
+  <string name="invalid_phone_number">ژمارەی تەلەفۆنەکە لەکارە نیە</string>
+  <string name="videocall">پەیوەندی ڤیدۆی</string>
+  <string name="unknown">نەناسراو</string>
+  <string name="copy_to_target_sim">سیمکارت</string>
+  <string name="copy_to_target_msim">سیمکارت <xliff:g id="index">%d</xliff:g></string>
+  <string name="search_bar_hint">گەڕان بۆ پەیوەندییەکان</string>
+  <string name="delete_group_dialog_title">سڕینەوەی گرووپ</string>
+  <string name="edit_before_call">ده‌ستکاریکردنی ژماره‌ پێش په‌یوه‌ندیکردن</string>
+  <string name="description_videocall">پەیوەندی ڤیدۆی <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">پەیوەندی وێنەیی بگرە <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">ناوی گرووپ</string>
+  <string name="title_group_add">گروپی نوێ</string>
+  <string name="group_selector">لێدە بۆ دیاریکردنی گرووپ</string>
+  <string name="title_group_picker">دیاریکردنی گرووپ</string>
+  <string name="noGroupsHelpText">"گرووپی خۆماڵی لێ نییە."</string>
+  <string name="menu_option_delete">سڕینەوەی گرووپ</string>
+  <string name="toast_not_add">"ناتوانا بوو بۆ زێدەکردنی سەرجەم پەیوەندییەکان لە هەژمارە ناخۆماڵییەکانەوە"</string>
+  <string name="noMember">هیچ ئەندامێک نییە لەم گرووپەدا.</string>
+  <string name="button_delete">لابردن</string>
+  <string name="title_add_members">زێدەکردنی ئەندامەکان</string>
+  <string name="select_all">هه‌موو</string>
+  <string name="action_done">ئه‌نجامدرا</string>
+  <string name="delete_call_title">سڕینەوەی تۆمارەکانی پەیوەندیکردن</string>
+  <string name="delete_call_message">سڕینەوەی تۆماری تەلەفۆن\u2026</string>
+  <string name="delete_call_alert">سڕینەوەی تۆماری تەلەفۆن؟</string>
+  <string name="title_del_call">سڕینەوە؟</string>
+  <string name="menu_sendViaSMS">ناردنی پەیوەندی لە ڕێگەی کورتەنامە</string>
+  <string name="title_switch_group_remote">گرووپە دوورەکان</string>
+  <string name="title_switch_group_local">گرووپە خۆماڵییەکان</string>
+  <string name="import_sim_contacts_title">هاوردنی پەیوەندییەکانی سیمکارت</string>
+  <string name="import_sim_contacts_message">هاوردنی ناوەکان لە سیمکارتەوە\u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">%d ناوەکان دەهێنرێت.</item>
+    <item quantity="other">%d ناوەکان دەرئەکرێت.</item>
+  </plurals>
+  <string name="import_finish">هاوردن تەواو بوو</string>
+  <string name="delete_contacts_title">سڕینەوەی پەیوەندی</string>
+  <string name="delete_contacts_message">سڕینەوەی ناوەکان\u2026</string>
+  <string name="error_group_exist">ناوی گروپێک  \'<xliff:g id="name">%s</xliff:g>\' already exists</string>
+  <string name="menu_auto_sync_to_baidu_cloud">هاوکاتسازی خۆکار بۆ Baidu Cloud</string>
+  <string name="menu_sync_to_baidu_cloud">ئێستا هاوکاتسازی بکە بۆ Baidu Cloud</string>
+  <string name="delete_local_group_dialog_message">سڕینەوەی گرووپ \'<xliff:g id="name">%s</xliff:g>\'?</string>
+  <string name="edit_local_group_dialog_title">ناونانەوەی گرووپ</string>
+  <string name="too_many_contacts_add_to_group">زۆرتر لە <xliff:g id="count">%d</xliff:g> پەیوەندی ناتوانرێت زیا بکرێت</string>
+  <string name="no_phone_number_or_email">تکایە ژمارە تەلەفۆن یان ناونیشانی پۆستێکی ئەلەکترۆنی تێبکە.</string>
+  <string name="memory_card_full">پەیوەندییەکە نەتوانرا پاشەکەوت بکرێت، بیرگەی تەلەفۆن پڕە</string>
+  <string name="menu_memory_status">دۆخی بیرگە</string>
+  <string name="memory_status_title">دۆخی بیرگە</string>
+  <string name="memory_size">گشتی:</string>
+  <string name="memory_used">بەکارهاتوو:</string>
+  <string name="calculating_status_now">لێکدانەوەی دۆخ\u2026</string>
+  <string name="button_moveto">جوڵان</string>
+  <string name="menu_copyTo">لەبەرگرتنەوە بۆ <xliff:g id="destination">%s</xliff:g></string>
+  <string name="no_empty_email_in_usim">لەبەرگرتنەوەی پەیوەندییەکە سەرکەوتوو نەبوو، ناونیسانی پۆستی ئەلەکترۆنی نەڕەوایە</string>
+  <string name="voicemail">دەنگەپۆست</string>
+  <string name="select_call_title">تۆمارەکانی پەیوەندی دیاری بکە</string>
+  <string name="invalid_number_type">نوسینی ژمارەکە لەکارە نیە</string>
 </resources>

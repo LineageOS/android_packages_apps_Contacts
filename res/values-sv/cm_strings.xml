@@ -20,6 +20,8 @@
   <string name="importConfirmation_title">Importera kontakt?</string>
   <string name="menu_deleteContacts">Ta bort kontakter</string>
   <string name="contactDeletedToast">Kontakt borttagen</string>
+  <string name="contactSavedToSimCardError">Kunde inte spara de valda kontakterna till SIM-kortet</string>
+  <string name="airplane_mode_on">SIM-kortet kan inte nås när flygplansläge är aktiverat</string>
   <string name="number_anr_too_long">Numret är för långt</string>
   <string name="email_address_too_long">E-postadressen är för lång</string>
   <string name="sim_card_full">SIM-kortet är fullt</string>
@@ -29,10 +31,15 @@
   <string name="unknown">Okänd</string>
   <string name="copy_to_target_sim">SIM-kort</string>
   <string name="copy_to_target_msim">SIM-kort <xliff:g id="index">%d</xliff:g></string>
+  <string name="search_bar_hint">Sök kontakter</string>
   <string name="delete_group_dialog_title">Ta bort grupp</string>
+  <string name="edit_before_call">Redigera nummer innan uppringning</string>
   <string name="description_videocall">Videosamtal <xliff:g id="name">%1$s</xliff:g></string>
   <string name="description_dial_vt">Ring VT <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">Gruppnamn</string>
   <string name="title_group_add">Ny grupp</string>
+  <string name="group_selector">Klicka för att välja grupp</string>
+  <string name="noGroupsHelpText">"Inga lokala grupper."</string>
   <string name="menu_option_delete">Ta bort grupp</string>
   <string name="button_delete">Ta bort</string>
   <string name="select_all">Alla</string>
@@ -42,6 +49,8 @@
   <string name="delete_call_alert">Ta bort valda samtalslistor?</string>
   <string name="title_del_call">Ta bort</string>
   <string name="menu_sendViaSMS">Skicka kontakt via SMS</string>
+  <string name="title_switch_group_remote">Fjärrgrupper</string>
+  <string name="title_switch_group_local">Lokala grupper</string>
   <string name="import_sim_contacts_title">Importera kontakter från SIM-kort</string>
   <string name="import_sim_contacts_message">Importerar SIM-kontakter\u2026</string>
   <plurals name="ContactMultiImportConfirmation">
@@ -49,14 +58,23 @@
     <item quantity="other">%d kontakter kommer importeras.</item>
   </plurals>
   <string name="import_finish">Import slutförd</string>
+  <plurals name="import_stop">
+    <item quantity="one">Importeringen avbröts, %d objekt importerades</item>
+    <item quantity="other">Importeringen avbröts, %d objekt importerades</item>
+  </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="one">%d kontakt kommer att tas bort.</item>
     <item quantity="other">%d kontakter kommer att tas bort.</item>
   </plurals>
   <string name="delete_contacts_title">Ta bort kontakter</string>
   <string name="delete_contacts_message">Tar bort kontakter\u2026</string>
+  <string name="menu_auto_sync_to_baidu_cloud">Säkerhetskopiera till Baidu Cloud</string>
+  <string name="menu_sync_to_baidu_cloud">Synkronisera till Baidu Cloud nu</string>
   <string name="delete_local_group_dialog_message">Ta bort grupp \'<xliff:g id="name">%s</xliff:g>\'?</string>
   <string name="edit_local_group_dialog_title">Byt namn på grupp</string>
+  <string name="too_many_contacts_add_to_group">Maximalt <xliff:g id="count">%d</xliff:g> kontakter kan delas</string>
+  <string name="no_phone_number_or_email">Ange ett telefonnummer eller e-postadress.</string>
+  <string name="memory_card_full">Kontakten kunde inte sparas, telefonens minne är fullt</string>
   <string name="menu_memory_status">Minnesstatus</string>
   <string name="memory_status_title">Minnesstatus</string>
   <string name="memory_size">Totalt:</string>
@@ -64,6 +82,8 @@
   <string name="calculating_status_now">Beräknar status\u2026</string>
   <string name="button_moveto">Flytta</string>
   <string name="menu_copyTo">Kopiera till <xliff:g id="destination">%s</xliff:g></string>
+  <string name="no_empty_email_in_usim">E-postadressen ogiltig, kopiering av kontakten misslyckades</string>
   <string name="voicemail">Telefonsvarare</string>
   <string name="select_call_title">Välj samtalslistor</string>
+  <string name="invalid_number_type">Nummertypen är ogiltig</string>
 </resources>

@@ -61,7 +61,7 @@
   <string name="menu_set_ring_tone">Schelltoun setzen</string>
   <string name="menu_redirect_calls_to_vm">All d\'Uriff un d\'Mailbox</string>
   <string name="readOnlyContactWarning">Du kanns keng Kontakter aus Konte läschen déi schreifgeschützt sinn, awer du kanns s\'an de Kontaktlëschte verstoppen.</string>
-  <string name="readOnlyContactDeleteConfirmation">Dëse Kontakt enthält Informatioune vu verschiddene Konten. Informatiounen aus schreifgeschützte Konte ginn an denge Kontaktlëschte verstoppt, awer net geläscht.</string>
+  <string name="readOnlyContactDeleteConfirmation">Dëse Kontakt huet Informatioune vu verschiddene Konten. Informatiounen aus schreifgeschützte Konte ginn an denge Kontaktlëschte verstoppt, awer net geläscht.</string>
   <string name="multipleContactDeleteConfirmation">Wann s du dëse Kontakt läschs, ginn Informatiounen aus méi Konte geläscht.</string>
   <string name="deleteConfirmation">Dëse Kontakt gëtt geläscht.</string>
   <string name="menu_discard">Verwerfen</string>
@@ -109,9 +109,9 @@
   </plurals>
   <string name="contactsAllLabel">All d\'Kontakter</string>
   <string name="contactsGroupsLabel">Gruppen</string>
-  <string name="callBack">Zréckuruffen</string>
+  <string name="callBack">Zréckruffen</string>
   <string name="callAgain">Erëm uruffen</string>
-  <string name="returnCall">Zréckuruffen</string>
+  <string name="returnCall">Zréckruffen</string>
   <string name="add_contact_dlg_message_fmt">\"<xliff:g id="email">%s</xliff:g>\" bei d\'Kontakter dobäisetzen?</string>
   <string name="description_contact_photo">Kontaktfoto</string>
   <string name="description_plus_button">méi</string>

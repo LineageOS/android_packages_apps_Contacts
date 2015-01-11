@@ -18,6 +18,7 @@
   <string name="quick_contact_copied_toast">"הועתק ללוח"</string>
   <string name="deleteConfirmation_title">למחוק איש קשר?</string>
   <string name="importConfirmation_title">לייבא אנשי קשר?</string>
+  <string name="menu_deleteContacts">מחק אנשי קשר</string>
   <string name="contactDeletedToast">איש הקשר נמחק</string>
   <string name="contactSavedToSimCardError">לא ניתן היה לשמור את אנשי הקשר לכרטיס ה-SIM</string>
   <string name="airplane_mode_on">אין אפשרות לגשת כרטיס ה-SIM בזמן שמצב טיסה מופעל</string>

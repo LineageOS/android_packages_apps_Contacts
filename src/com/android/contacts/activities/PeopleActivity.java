@@ -24,6 +24,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
@@ -51,6 +52,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ImageButton;
 import android.widget.Toolbar;
 import android.widget.Toast;
@@ -80,6 +83,7 @@ import com.android.contacts.list.ContactsIntentResolver;
 import com.android.contacts.list.ContactsRequest;
 import com.android.contacts.list.ContactsUnavailableFragment;
 import com.android.contacts.list.DefaultContactBrowseListFragment;
+import com.android.contacts.common.list.ContactEntryListFragment.ContactListGestureListener;
 import com.android.contacts.common.list.DirectoryListLoader;
 import com.android.contacts.common.preference.DisplayOptionsPreferenceFragment;
 import com.android.contacts.list.OnContactBrowserActionListener;
@@ -115,7 +119,8 @@ public class PeopleActivity extends ContactsActivity implements
         ActionBarAdapter.Listener,
         DialogManager.DialogShowingViewActivity,
         ContactListFilterController.ContactListFilterListener,
-        ProviderStatusListener {
+        ProviderStatusListener,
+        ContactListGestureListener {
 
     private static final String TAG = "PeopleActivity";
 
@@ -191,6 +196,12 @@ public class PeopleActivity extends ContactsActivity implements
     // TODO: we need to refactor the export code in future release.
     // QRD enhancement: contacts list for multi contact pick
     private ArrayList<String[]> mContactList;
+
+    private boolean mFabShowing = true;
+    private View mFab;
+    private int mFabYOffset;
+    private int mFabHeight;
+    private int mFabAnimDuration;
 
     private BroadcastReceiver mExportToSimCompleteListener = null;
 
@@ -342,6 +353,12 @@ public class PeopleActivity extends ContactsActivity implements
 
         setContentView(R.layout.people_activity);
 
+        mFab = findViewById(R.id.floating_action_button_container);
+        Resources res = getResources();
+        mFabHeight = res.getDimensionPixelSize(R.dimen.floating_action_button_height);
+        mFabYOffset = res.getDimensionPixelSize(R.dimen.floating_action_button_margin_bottom);
+        mFabAnimDuration = res.getInteger(R.integer.animation_duration_fast);
+
         final FragmentManager fragmentManager = getFragmentManager();
 
         // Hide all tabs (the current tab will later be reshown once a tab is selected)
@@ -401,6 +418,7 @@ public class PeopleActivity extends ContactsActivity implements
         mFavoritesFragment.setListener(mFavoritesFragmentListener);
 
         mAllFragment.setOnContactListActionListener(new ContactBrowserActionListener());
+        mAllFragment.setContactListGestureListener(this);
 
         mGroupsFragment.setListener(new GroupBrowserActionListener());
 
@@ -1641,4 +1659,35 @@ public class PeopleActivity extends ContactsActivity implements
         }
         return position;
     }
+
+    @Override
+    public void onScroll(int scrollDirection) {
+        // floating action button's visibility is tied to Contacts List
+        if (scrollDirection == ContactListGestureListener.SCROLL_DOWN) {
+            showFab();
+        } else {
+            hideFab();
+        }
+    }
+
+    private void showFab() {
+        if(!mFabShowing) {
+            mFab.animate()
+                    .translationY(0)
+                    .setDuration(mFabAnimDuration)
+                    .setInterpolator(new OvershootInterpolator());
+            mFabShowing = true;
+        }
+    }
+
+    private void hideFab() {
+        if(mFabShowing) {
+            mFab.animate()
+                    .translationY(mFabHeight + mFabYOffset)
+                    .setDuration(mFabAnimDuration)
+                    .setInterpolator(new AccelerateInterpolator());
+            mFabShowing = false;
+        }
+    }
+
 }

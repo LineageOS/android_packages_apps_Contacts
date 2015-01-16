@@ -248,7 +248,10 @@
     <string name="delete_contacts_title">"删除联系人"</string>
     <string name="delete_contacts_message">"正在删除..."</string>
     <string name="delete_termination">"删除结束"</string>
-    <string name="ContactMultiImportConfirmation">"将会导入这些联系人。"</string>
+    <plurals name="ContactMultiImportConfirmation">
+        <item quantity="one">"将会导入 1 个联系人。"</item>
+        <item quantity="other">"将会导入 %d 个联系人。"</item>
+    </plurals>
     <string name="import_sim_contacts_title">"导入联系人"</string>
     <string name="import_sim_contacts_message">"正在导入..."</string>
     <!-- Import from sim card -->

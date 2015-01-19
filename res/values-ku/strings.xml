@@ -68,6 +68,7 @@
   <string name="invalidContactMessage">ناوه‌که‌ بوونی نییه‌.</string>
   <string name="createContactShortcutSuccessful">ورده‌واڵه‌ی ناو زیاد کرا بۆ ڕوونمای ماڵه‌وه‌.</string>
   <string name="pickerNewContactHeader">دروستکردنی ناوی تازە</string>
+  <string name="pickerNewContactText">درووستکردنی ناوی تازە</string>
   <string-array name="otherLabels">
     <item>ڕێکخستن</item>
     <item>تێبینی</item>
@@ -90,6 +91,11 @@
   <string name="groupSavedErrorToast">ناتوانرێت گۆڕانکاریی لە کۆمه‌ڵه‌دا پاشەکەوت بکرێت.</string>
   <string name="listTotalPhoneContactsZero">هیچ ناوێک نییە ژمارە تەلەفۆنی له‌گه‌ڵدا بێت</string>
   <string name="listFoundAllContactsZero">ناو نییە</string>
+  <plurals name="searchFoundContacts">
+    <item quantity="one">١ دانە دۆزرایەوە</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> دانە دۆزرایەوە</item>
+  </plurals>
+  <string name="contactsAllLabel">هەموو ناوەکان</string>
   <string name="contactsGroupsLabel">کۆمه‌ڵه‌کان</string>
   <string name="callBack">زه‌نگی بۆ لێده‌وه‌</string>
   <string name="callAgain">دوبارە تەلەفۆن بکە</string>
@@ -108,6 +114,7 @@
   <string name="video_chat">چاتی ڤیدیۆیی</string>
   <string name="connections">پەیوەستەکان</string>
   <string name="add_connection_button">زیادکردنی پەیوەست</string>
+  <string name="recent" msgid="2062236709538790412">بەم دوایییانە</string>
   <string name="recent_updates" msgid="2018245636796411442">دوایین تازه‌کردنه‌وه‌</string>
   <string name="account_type_format"><xliff:g id="source" example="Gmail">%1$s</xliff:g> ناو</string>
   <string name="from_account_format"><xliff:g id="source" example="user@gmail.com">%1$s</xliff:g></string>

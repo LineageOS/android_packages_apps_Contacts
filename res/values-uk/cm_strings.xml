@@ -20,17 +20,17 @@
   <string name="importConfirmation_title">Імпорт контактів?</string>
   <string name="menu_deleteContacts">Видалити контакти</string>
   <string name="contactDeletedToast">Контакт видалено</string>
-  <string name="contactSavedToSimCardError">Не вдалося зберегти вибрані контакти на SIM-карті</string>
-  <string name="airplane_mode_on">SIM-карта не доступна коли активовано режим польоту</string>
+  <string name="contactSavedToSimCardError">Не вдалося зберегти вибрані контакти на SIM-картці</string>
+  <string name="airplane_mode_on">SIM-картка не доступна коли активовано режим польоту</string>
   <string name="number_anr_too_long">Номер задовгий</string>
   <string name="email_address_too_long">Адреса електронної пошти задовга</string>
-  <string name="sim_card_full">SIM-карта заповнена</string>
+  <string name="sim_card_full">SIM-картка заповнена</string>
   <string name="tag_too_long">Ім\'я контакту задовге</string>
   <string name="invalid_phone_number">Неприпустимий номер телефону</string>
   <string name="videocall">Відеодзвінок</string>
   <string name="unknown">Невідомо</string>
-  <string name="copy_to_target_sim">SIM-карта</string>
-  <string name="copy_to_target_msim">SIM-карта <xliff:g id="index">%d</xliff:g></string>
+  <string name="copy_to_target_sim">SIM-картка</string>
+  <string name="copy_to_target_msim">SIM-картка <xliff:g id="index">%d</xliff:g></string>
   <string name="search_bar_hint">Пошук контактів</string>
   <string name="delete_group_dialog_title">Видалити групу</string>
   <string name="edit_before_call">Редагування номера перед викликом</string>
@@ -75,7 +75,7 @@
   </plurals>
   <string name="delete_contacts_title">Видалити контакти</string>
   <string name="delete_contacts_message">Видалення контактів\u2026</string>
-  <string name="error_group_exist">Група з ім\'ям \'<xliff:g id="name">%s</xliff:g>\' вже існує</string>
+  <string name="error_group_exist">Група з ім\'ям «<xliff:g id="name">%s</xliff:g>» вже існує</string>
   <string name="menu_auto_sync_to_baidu_cloud">Автоматична синхронізація з Baidu</string>
   <string name="menu_sync_to_baidu_cloud">Синхронізувати з Baidu зараз</string>
   <string name="delete_local_group_dialog_message">Видалити групу \'<xliff:g id="name">%s</xliff:g>\'?</string>

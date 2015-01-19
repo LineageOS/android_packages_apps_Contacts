@@ -57,7 +57,7 @@
   <string name="delete_call_message">Se șterg jurnalele de apel\u2026</string>
   <string name="delete_call_alert">Ştergeți jurnalele de apel selectate?</string>
   <string name="title_del_call">Ștergeți</string>
-  <string name="menu_sendViaSMS">Trimite contact prin SMS</string>
+  <string name="menu_sendViaSMS">Trimitere contact prin SMS</string>
   <string name="title_switch_group_remote">Grupuri de la distanţă</string>
   <string name="title_switch_group_local">Grupuri locale</string>
   <string name="import_sim_contacts_title">Import contacte SIM</string>
@@ -94,7 +94,7 @@
   <string name="memory_used">Utilizat:</string>
   <string name="calculating_status_now">Se calculează starea\u2026</string>
   <string name="button_moveto">Mută</string>
-  <string name="menu_copyTo">Copiez la <xliff:g id="destination">%s</xliff:g></string>
+  <string name="menu_copyTo">Copiere pe <xliff:g id="destination">%s</xliff:g></string>
   <string name="no_empty_email_in_usim">Copierea contactului nu a reuşit, adresa de e-mail este incorectă</string>
   <string name="voicemail">Mesagerie vocală</string>
   <string name="select_call_title">Selectați jurnalul de apeluri</string>

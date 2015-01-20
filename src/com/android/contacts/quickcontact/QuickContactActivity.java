@@ -35,6 +35,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -78,6 +79,7 @@ import android.provider.ContactsContract.RawContacts;
 import android.support.v7.graphics.Palette;
 import android.telecom.PhoneAccount;
 import android.telecom.TelecomManager;
+import android.telephony.SubscriptionManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
@@ -2694,6 +2696,29 @@ public class QuickContactActivity extends ContactsActivity {
                     int adnCountInSimContact = 1;
                     int anrCountInSimContact = 0;
                     int emailCountInSimContact = 0;
+
+                    Cursor cr = null;
+                    // call query first, otherwise the count queries will fail
+                    try{
+                        long[] subId = SubscriptionManager.getSubId(sub);
+                        if (subId != null
+                            && TelephonyManager.getDefault().isMultiSimEnabled()) {
+                            cr = getContentResolver().query(
+                                Uri.parse(SimContactsConstants.SIM_SUB_URI
+                                    + subId[0]), null, null, null, null);
+                        } else {
+                            cr = getContentResolver().query(
+                                Uri.parse(SimContactsConstants.SIM_URI), null,
+                                null, null, null);
+                        }
+                    } catch (NullPointerException e) {
+                        Log.e(TAG, "Exception:" + e);
+                    } finally {
+                        if (cr != null) {
+                            cr.close();
+                        }
+                    }
+
                     if (MoreContactUtils.canSaveAnr(sub)) {
                         anrCountInSimContact = MoreContactUtils.getOneSimAnrCount(sub);
                     }

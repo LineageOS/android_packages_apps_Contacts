@@ -253,7 +253,16 @@
     <string name="import_sim_contacts_message">"正在导入..."</string>
     <!-- Import from sim card -->
     <string name="import_finish">"导入完成"</string>
+    <plurals name="contacts_selected">
+        <item quantity="one">选择%d个联系人</item>
+        <item quantity="other">选择%d个联系人</item>
+    </plurals>
     <string name="too_many_contacts_add_to_group">联系人过多，应该少于<xliff:g id="count">%d</xliff:g>个</string>
+    <!-- Multi Delete Contacts related strings -->
+    <plurals name="ContactMultiDeleteConfirmation">
+        <item quantity="one">%d个联系人将被删除</item>
+        <item quantity="other">%d个联系人将被删除</item>
+    </plurals>
     <!-- add for MemoryStatusActivity -->
     <string name="menu_memory_status">"存储器状态"</string>
     <string name="memory_status_title">"存储器状态"</string>

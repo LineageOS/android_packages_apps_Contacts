@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fad55976_deafc592",
+        "filename": "res/values/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 848
+      },
+      "writtenOn": "2015-01-22T14:02:24Z",
+      "side": 1,
+      "message": "Agreed",
+      "parentUuid": "7aa08908_b0474d4a",
+      "revId": "7884fa44160a85bd6c782f31caa09aa54a393241",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aa08908_3b36a352",
         "filename": "res/values/cm_strings.xml",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-01-09T23:19:09Z",
       "side": 1,
       "message": "\\u2026 needed here, and should this perhaps be \"Moving members\\u2026\"?",
+      "revId": "7884fa44160a85bd6c782f31caa09aa54a393241",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad55976_3e954140",
+        "filename": "res/values/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 848
+      },
+      "writtenOn": "2015-01-22T14:02:24Z",
+      "side": 1,
+      "message": "Agreed",
+      "parentUuid": "7aa08908_3b36a352",
       "revId": "7884fa44160a85bd6c782f31caa09aa54a393241",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "fad55976_9e8c2d37",
+        "filename": "res/values/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 848
+      },
+      "writtenOn": "2015-01-22T14:02:24Z",
+      "side": 1,
+      "message": "Agreed",
+      "parentUuid": "7aa08908_10758197",
+      "revId": "7884fa44160a85bd6c782f31caa09aa54a393241",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aa08908_cdf3629d",
         "filename": "res/values/cm_strings.xml",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2015-01-10T06:49:58Z",
       "side": 1,
       "message": "Ideally it should have progressbar instead of this message. This is shown for a second when entering Memory status.",
+      "revId": "7884fa44160a85bd6c782f31caa09aa54a393241",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad55976_3e7c2120",
+        "filename": "res/values/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 848
+      },
+      "writtenOn": "2015-01-22T14:02:24Z",
+      "side": 1,
+      "message": "Can be done in a future change. Would be curious how long this takes on older gen device.",
+      "parentUuid": "7aa08908_cdf3629d",
       "revId": "7884fa44160a85bd6c782f31caa09aa54a393241",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -116,6 +188,24 @@
       "side": 1,
       "message": "This is crap.\n\nThe only idea I have is \"Email database is full, unable to copy messages\", but I still don\u0027t like it.",
       "parentUuid": "7aa08908_cdc5223d",
+      "revId": "7884fa44160a85bd6c782f31caa09aa54a393241",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad55976_dea3454e",
+        "filename": "res/values/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 848
+      },
+      "writtenOn": "2015-01-22T14:02:24Z",
+      "side": 1,
+      "message": "USIM contact does not have an available email field, unable to copy messages.",
+      "parentUuid": "7aa08908_6df4ee86",
       "revId": "7884fa44160a85bd6c782f31caa09aa54a393241",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false

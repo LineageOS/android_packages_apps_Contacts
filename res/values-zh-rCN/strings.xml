@@ -252,6 +252,14 @@
         <item quantity="one">"将会导入 1 个联系人。"</item>
         <item quantity="other">"将会导入 %d 个联系人。"</item>
     </plurals>
+    <plurals name="ContactMultiDeleteConfirmation">
+        <item quantity="one">%d 个联系人将被删除。</item>
+        <item quantity="other">%d 个联系人将被删除。</item>
+    </plurals>
+    <plurals name="contacts_selected">
+        <item quantity="one">%d 个联系人已选择</item>
+        <item quantity="other">%d 个联系人已选择</item>
+    </plurals>
     <string name="import_sim_contacts_title">"导入联系人"</string>
     <string name="import_sim_contacts_message">"正在导入..."</string>
     <!-- Import from sim card -->

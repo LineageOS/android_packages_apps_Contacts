@@ -1050,10 +1050,6 @@ public class QuickContactActivity extends ContactsActivity {
             mHasIntentLaunched = false;
             populateContactAndAboutCard(mCachedCp2DataCardModel);
         }
-        isFireWallInstalled = isFirewalltalled();
-        if (mContactCard != null) {
-            mContactCard.isFireWallInstalled(isFireWallInstalled);
-        }
     }
 
     private void populateContactAndAboutCard(Cp2DataCardModel cp2DataCardModel) {

@@ -75,8 +75,6 @@
     <string name="contact_detail_picture_description">Picture. Select to change</string>
     <string name="menu_copyTo">"Copy to "</string>
     <string name="no_empty_email_in_usim">"Email is full, some record copy failed "</string>
-    <string name="add_to_white">Add to whitelist</string>
-    <string name="add_to_black">Add to blacklist</string>
     <string name="voicemail">Voicemail</string>
     <string name="select_call_title">Select call logs</string>
     <string name="delete_call_title">Delete call logs</string>

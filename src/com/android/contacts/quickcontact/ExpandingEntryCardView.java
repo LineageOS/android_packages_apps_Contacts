@@ -19,12 +19,9 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.database.Cursor;
 import android.graphics.ColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.v7.widget.CardView;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
@@ -277,11 +274,6 @@ public class ExpandingEntryCardView extends CardView {
      */
     private List<View> mSeparators;
     private LinearLayout mContainer;
-    private boolean mIsFireWallInstalled = false;
-    private static final Uri FIREWALL_BLACKLIST_CONTENT_URI = Uri
-            .parse("content://com.android.firewall/blacklistitems");
-    private static final Uri FIREWALL_WHITELIST_CONTENT_URI = Uri
-            .parse("content://com.android.firewall/whitelistitems");
 
     private final OnClickListener mExpandCollapseButtonListener = new OnClickListener() {
         @Override
@@ -631,10 +623,6 @@ public class ExpandingEntryCardView extends CardView {
         }
     }
 
-    public void isFireWallInstalled(boolean isFireWallInstalled) {
-        mIsFireWallInstalled = isFireWallInstalled;
-    }
-
     private View createEntryView(LayoutInflater layoutInflater, final Entry entry,
             int iconVisibility) {
         final EntryView view = (EntryView) layoutInflater.inflate(
@@ -655,44 +643,6 @@ public class ExpandingEntryCardView extends CardView {
             header.setText(entry.getHeader());
         } else {
             header.setVisibility(View.GONE);
-        }
-
-        final ImageView blackWhiteListIndicator = (ImageView) view
-                .findViewById(R.id.black_white_list_indicator);
-
-        if (mIsFireWallInstalled && entry.getIntent() != null) {
-            String actionType = entry.getIntent().getAction();
-            if (Intent.ACTION_CALL.equals(actionType)) {
-                String number = entry.getHeader();
-                number = number.replaceAll(" ", "");
-                number = number.replaceAll("-", "");
-                String selectionString = "number=?";
-                String[] selectionArgs = new String[] { number };
-                Cursor cursorBlack = getContext().getContentResolver().query(
-                        FIREWALL_BLACKLIST_CONTENT_URI, null,
-                        selectionString, selectionArgs, null);
-                if (cursorBlack != null && cursorBlack.getCount() > 0) {// in black list
-                    blackWhiteListIndicator.setVisibility(View.VISIBLE);
-                    blackWhiteListIndicator.setBackgroundResource(R.drawable.number_in_blacklist);
-                }
-                if (cursorBlack != null) {
-                    cursorBlack.close();
-                }
-                Cursor cursorWhite = getContext().getContentResolver().query(
-                        FIREWALL_WHITELIST_CONTENT_URI, null,
-                        selectionString, selectionArgs, null);
-                if (cursorWhite != null && cursorWhite.getCount() > 0) {// in white list
-                    blackWhiteListIndicator.setVisibility(View.VISIBLE);
-                    blackWhiteListIndicator.setBackgroundResource(R.drawable.number_in_whitelist);
-                }
-                if (cursorWhite != null) {
-                    cursorWhite.close();
-                }
-            } else {
-                blackWhiteListIndicator.setVisibility(View.GONE);
-            }
-        } else {
-            blackWhiteListIndicator.setVisibility(View.GONE);
         }
 
         final TextView subHeader = (TextView) view.findViewById(R.id.sub_header);
@@ -1040,8 +990,6 @@ public class ExpandingEntryCardView extends CardView {
         private final long mId;
         private final boolean mIsSuperPrimary;
         private String mData;
-        private Intent mWhiteIntent;
-        private Intent mBlackIntent;
 
         public EntryContextMenuInfo(String copyText, String copyLabel, String mimeType, long id,
                 boolean isSuperPrimary) {
@@ -1052,16 +1000,14 @@ public class ExpandingEntryCardView extends CardView {
             mIsSuperPrimary = isSuperPrimary;
         }
 
-        public EntryContextMenuInfo(String copyText, String copyLabel, String mimeType, long id,
-                boolean isSuperPrimary, String data, Intent whiteIntent, Intent blackIntent) {
+        public EntryContextMenuInfo(String copyText, String copyLabel,String mimeType, long id,
+                boolean isSuperPrimary, String data) {
             mCopyText = copyText;
             mCopyLabel = copyLabel;
             mMimeType = mimeType;
             mId = id;
             mIsSuperPrimary = isSuperPrimary;
             mData = data;
-            mWhiteIntent = whiteIntent;
-            mBlackIntent = blackIntent;
         }
 
         public String getCopyText() {
@@ -1086,14 +1032,6 @@ public class ExpandingEntryCardView extends CardView {
 
         public String getData() {
             return mData;
-        }
-
-        public Intent getWhiteIntent() {
-            return mWhiteIntent;
-        }
-
-        public Intent getBlackIntent() {
-            return mBlackIntent;
         }
     }
 

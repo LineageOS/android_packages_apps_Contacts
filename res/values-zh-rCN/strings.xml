@@ -293,8 +293,6 @@
     <string name="content_description_recent_call" msgid="6204048362763219585">"近期通话。<xliff:g id="CALL_DETAILS">%s</xliff:g>。点按可回拨"</string>
     <string name="menu_copyTo">"复制到"</string>
     <string name="no_empty_email_in_usim">"卡上电子邮件空间已满，部分邮件信息将不会复制 "</string>
-    <string name="add_to_white">加入白名单</string>
-    <string name="add_to_black">加入黑名单</string>
     <string name="title_del_call">删除</string>
     <string name="delete_call_title">删除通话记录</string>
     <string name="delete_call_message">删除通话记录 ...</string>

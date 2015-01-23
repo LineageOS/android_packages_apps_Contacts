@@ -16,5 +16,5 @@
 <resources>
     <!-- CMCC feature -->
     <bool name="config_show_quick_call_button">true</bool>
-    <bool name="config_show_sms_import_dialog">true</bool>
+    <bool name="config_show_sms_import_dialog">false</bool>
 </resources>

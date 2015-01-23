@@ -24,4 +24,7 @@
     <!-- Number of lines the QuickContact title can have -->
     <integer name="quickcontact_title_lines">1</integer>
 
+    <!-- Default duration for fast animation (in ms)-->
+    <integer name="animation_duration_fast">200</integer>
+
 </resources>

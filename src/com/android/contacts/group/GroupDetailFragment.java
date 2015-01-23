@@ -312,7 +312,8 @@ public class GroupDetailFragment extends Fragment implements OnScrollListener {
                 Long id = data.getLong(0);
                 String phoneNumber = RCSUtil.getPhoneforContactId(mContext, id);
                 sb.append(phoneNumber).append(";");
-                String[] groupMemberPhones = RCSUtil.getAllPhoneNumberFromContactId(mContext, id).split(";");
+                String[] groupMemberPhones = RCSUtil.getAllPhoneNumberFromContactId(mContext, id)
+                        .split(";");
                 for (int i = 0 ; i < groupMemberPhones.length; i++) {
                     mGroupMembersPhonesList.add(RCSUtil.getFormatNumber(groupMemberPhones[i]));
                 }
@@ -482,9 +483,12 @@ public class GroupDetailFragment extends Fragment implements OnScrollListener {
         if (RCSUtil.getRcsSupport()) {
             final MenuItem optionsGroupChat = menu.findItem(R.id.menu_create_group_chat);
             optionsGroupChat.setVisible(true);
-
             final MenuItem optionsEnhancedscreen = menu.findItem(R.id.menu_enhancedscreen);
-            optionsEnhancedscreen.setVisible(true);
+            if (RCSUtil.isEnhanceScreenInstalled(mContext)) {
+                optionsEnhancedscreen.setVisible(true);
+            } else {
+                optionsEnhancedscreen.setVisible(false);
+            }
         }
 
         final MenuItem editMenu = menu.findItem(R.id.menu_edit_group);

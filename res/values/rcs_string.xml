@@ -40,6 +40,7 @@
     <string name="upload_photo_profile_failed">Upload photo profile failed!</string>
     <!-- Menu item used to backup or restore the local profile -->
     <string name="menu_local_profile_upload_download">Upload/Download</string>
+    <string name="menu_online_business_hall">Online Business Hall</string>
 
     <string name="menu_contacts_photo_update">Contacts photo update</string>
 

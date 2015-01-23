@@ -523,7 +523,8 @@ public class ContactSaveService extends IntentService {
                                 String.valueOf(rawContactId)
                             });
                     }
-                RCSUtil.newAndEditContactsUpdateEnhanceScreen(resolver,rawContactId);
+                RCSUtil.newAndEditContactsUpdateEnhanceScreen(getApplicationContext(),
+                        resolver, rawContactId);
                 // We can change this back to false later, if we fail to save the contact photo.
                 succeeded = true;
                 break;

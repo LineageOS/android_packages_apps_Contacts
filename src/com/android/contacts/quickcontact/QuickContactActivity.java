@@ -162,7 +162,7 @@ import com.android.contacts.util.ImageViewDrawableSetter;
 import com.android.contacts.util.PhoneCapabilityTester;
 import com.android.contacts.util.RCSUtil;
 import com.android.contacts.util.RCSUtil.RestoreFinishedListener;
-import com.suntek.mway.rcs.client.api.capability.RCSCapabilities;
+import com.suntek.mway.rcs.client.aidl.capability.RCSCapabilities;
 import com.suntek.mway.rcs.client.api.capability.callback.CapabiltyListener;
 import com.suntek.mway.rcs.client.api.profile.impl.ProfileApi;
 import com.suntek.mway.rcs.client.api.util.ServiceDisconnectedException;
@@ -2421,7 +2421,7 @@ public class QuickContactActivity extends ContactsActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         if (mContactData != null) {
-            RCSUtil.initRcsMenu(menu, mContactData);
+            RCSUtil.initRcsMenu(getApplicationContext(), menu, mContactData);
             final MenuItem starredMenuItem = menu.findItem(R.id.menu_star);
             if(!mScanToInsertContact){
                 ContactDisplayUtils.configureStarredMenuItem(starredMenuItem,
@@ -2661,6 +2661,9 @@ public class QuickContactActivity extends ContactsActivity {
                     }, RcsApiManager.getProfileApi()).show();
                 return true;
             }
+            case R.id.menu_online_business_hall:
+                RCSUtil.startOnlineBusinessHallActivity(this);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

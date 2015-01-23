@@ -60,7 +60,7 @@
         android:id="@+id/menu_copy_to_sim1"
         android:title="@string/menu_copyTo" />
 
-        <item
+    <item
         android:id="@+id/menu_copy_to_sim2"
         android:title="@string/menu_copyTo" />
 
@@ -76,5 +76,9 @@
         android:id="@+id/menu_plugin_center"
         android:title="@string/menu_plugin_center"
         android:alphabeticShortcut="p" />
+
+    <item
+        android:id="@+id/menu_online_business_hall"
+        android:title="@string/menu_online_business_hall" />
 
 </menu>

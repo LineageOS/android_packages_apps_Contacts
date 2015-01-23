@@ -1676,7 +1676,7 @@ public class MultiPickContactActivity extends ListActivity implements
                 operationList.add(builder.build());
             }
         }
-        RCSUtil.importContactUpdateEnhanceScreen(phoneNumber,anrs);
+        RCSUtil.importContactUpdateEnhanceScreen(phoneNumber, anrs);
 
         try {
             resolver.applyBatch(ContactsContract.AUTHORITY, operationList);

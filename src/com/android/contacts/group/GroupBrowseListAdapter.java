@@ -38,9 +38,9 @@ import com.android.contacts.common.model.AccountTypeManager;
 import com.android.contacts.util.RCSUtil;
 import com.android.contacts.R;
 import com.google.common.base.Objects;
+import com.suntek.mway.rcs.client.aidl.provider.model.GroupChatModel;
+import com.suntek.mway.rcs.client.aidl.provider.model.GroupChatUser;
 import com.suntek.mway.rcs.client.api.util.ServiceDisconnectedException;
-import com.suntek.mway.rcs.client.api.provider.model.GroupChatUser;
-import com.suntek.mway.rcs.client.api.provider.model.GroupChatModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -246,13 +246,10 @@ public class GroupBrowseListAdapter extends BaseAdapter {
         if (entry.getAccountType().equals("RCS")) {
             holder = (ViewHolder) result.getTag();
             holder.groupName.setText(entry.getTitle());
-            String memberCountString = mContext.getResources()
-                    .getQuantityString(
-                            R.plurals.group_list_num_contacts_in_group,
-                            RCSUtil.getMessageChatCount(Integer.valueOf(entry
-                                    .getSystemId())),
-                            RCSUtil.getMessageChatCount(Integer.valueOf(entry
-                                    .getSystemId())));
+            String memberCountString = mContext.getResources().getQuantityString(
+                    R.plurals.group_list_num_contacts_in_group,
+                    RCSUtil.getMessageChatCount(Integer.valueOf(entry.getSystemId())),
+                    RCSUtil.getMessageChatCount(Integer.valueOf(entry.getSystemId())));
             holder.groupCount.setText(memberCountString);
 
             int res_id;
@@ -329,9 +326,7 @@ public class GroupBrowseListAdapter extends BaseAdapter {
 
     private void bindHeaderView(GroupListItem entry, GroupListItemViewCache viewCache) {
 
-        if (entry.getAccountType().equals("RCS")) {
-
-        } else {
+        if (!entry.getAccountType().equals("RCS")) {
             AccountType accountType = mAccountTypeManager.getAccountType(
                     entry.getAccountType(), entry.getDataSet());
             viewCache.accountType.setText(accountType.getDisplayLabel(mContext));

@@ -1495,23 +1495,7 @@ public class PeopleActivity extends ContactsActivity implements
             }
             case START_CAPTURE:
                 if (resultCode == RESULT_OK) {
-                    Bundle bundle = data.getExtras();
-                    String name = data.getStringExtra("name");
-                    String tel = data.getStringExtra("tel");
-                    String companyTel = data.getStringExtra("companyTel");
-                    String companyFax = data.getStringExtra("companyFax");
-                    String companyName = data.getStringExtra("companyName");
-                    String companyDuty = data.getStringExtra("companyDuty");
-                    String companyEmail = data.getStringExtra("companyEmail");
-                    Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
-                    intent.setType(Contacts.CONTENT_ITEM_TYPE);
-                    intent.putExtra(ContactsContract.Intents.Insert.NAME, name);
-                    intent.putExtra(ContactsContract.Intents.Insert.PHONE, tel);
-                    intent.putExtra(ContactsContract.Intents.Insert.PHONE_TYPE,
-                            ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE);
-                    intent.putExtra(ContactsContract.Intents.Insert.EMAIL, companyEmail);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-                    this.startActivity(intent);
+                    RCSUtil.insertQrcodeContact(this,data);
                 }
                 break;
             case SUBACTIVITY_NEW_GROUP:

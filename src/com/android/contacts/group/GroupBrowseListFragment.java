@@ -60,8 +60,8 @@ import com.android.contacts.group.GroupBrowseListAdapter.GroupListItemViewCache;
 import com.android.contacts.util.RCSUtil;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.list.AutoScrollListView;
-import com.suntek.mway.rcs.client.api.provider.model.GroupChatModel;
-import com.suntek.mway.rcs.client.api.provider.model.GroupChatUser;
+import com.suntek.mway.rcs.client.aidl.provider.model.GroupChatModel;
+import com.suntek.mway.rcs.client.aidl.provider.model.GroupChatUser;
 import com.suntek.mway.rcs.client.api.util.ServiceDisconnectedException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -219,7 +219,8 @@ public class GroupBrowseListFragment extends Fragment
     @Override
     public void onStart() {
         getLoaderManager().initLoader(LOADER_GROUPS, null, mGroupLoaderListener);
-        SharedPreferences groupStatus = mContext.getSharedPreferences("RcsSharepreferences", Context.MODE_PRIVATE);
+        SharedPreferences groupStatus = mContext.getSharedPreferences("RcsSharepreferences",
+                Context.MODE_PRIVATE);
         boolean isRcsGroupDataLoaded = groupStatus.getBoolean("isRcsGroupDataLoaded", false);
         // start to load chat-group data when first initialization.
         if(RCSUtil.getRcsSupport() && (!isRcsGroupDataLoaded)){
@@ -419,7 +420,8 @@ public class GroupBrowseListFragment extends Fragment
                 loaderManager.restartLoader(LOADER_GROUPS, null, mGroupLoaderListener);
             mAdapter.setRcsGroupsData(result,contactCountMap);
             mAdapter.notifyDataSetChanged();
-            SharedPreferences groupStatus = activityContext.getSharedPreferences("RcsSharepreferences", Context.MODE_PRIVATE);
+            SharedPreferences groupStatus = activityContext.getSharedPreferences(
+                    "RcsSharepreferences", Context.MODE_PRIVATE);
             Editor editor = groupStatus.edit();
             editor.putBoolean("isRcsGroupDataLoaded", true);
             editor.commit();

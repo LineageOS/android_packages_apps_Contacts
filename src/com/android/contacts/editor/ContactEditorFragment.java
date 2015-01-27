@@ -73,6 +73,7 @@ import com.android.contacts.R;
 import com.android.contacts.RcsApiManager;
 import com.android.contacts.activities.ContactEditorAccountsChangedActivity;
 import com.android.contacts.activities.ContactEditorActivity;
+import com.android.contacts.common.SimContactsConstants;
 import com.android.contacts.common.model.AccountTypeManager;
 import com.android.contacts.common.model.ValuesDelta;
 import com.android.contacts.common.model.account.AccountType;
@@ -616,7 +617,8 @@ public class ContactEditorFragment extends Fragment implements
                 // For profile contacts, we need a different query URI
                 state.setProfileQueryUri();
                 // Try to find a local profile contact
-                if (state.getValues().getAsString(RawContacts.ACCOUNT_TYPE) == null) {
+                if (SimContactsConstants.ACCOUNT_TYPE_PHONE.equals(state.getValues()
+                        .getAsString(RawContacts.ACCOUNT_TYPE))) {
                     localProfileExists = true;
                 }
             }

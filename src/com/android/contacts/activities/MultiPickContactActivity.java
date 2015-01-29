@@ -1370,7 +1370,9 @@ public class MultiPickContactActivity extends ListActivity implements
                     numberLabel = Phone.getDisplayLabel(context, callerNumberType,
                             callerNumberLabel);
                 } else {
-                    numberLabel = geocodedLocation;
+                    if (context.getResources().getBoolean(R.bool.config_show_location)) {
+                        numberLabel = geocodedLocation;
+                    }
                 }
                 numberLabelText.setText(numberLabel);
                 numberLabelText.setVisibility(TextUtils.isEmpty(numberLabel)

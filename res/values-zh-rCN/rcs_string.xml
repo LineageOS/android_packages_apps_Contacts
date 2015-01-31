@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2014 pci-suntektech Technologies, Inc.  All Rights Reserved.
+ * pci-suntektech Technologies Proprietary and Confidential.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to
+ * deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+ * sell copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ * IN THE SOFTWARE.
+-->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="public_account">公众账号</string>
+    <string name="upload_profile">上传个人信息到服务器</string>
+    <string name="download_profile">从服务器获取个人信息</string>
+    <string name="upload_download_profile">个人信息上传/获取</string>
+    <string name="name_or_account_empty">姓名或账户为空，请重新编辑！</string>
+    <string name="photo_empty">头像为空，请重新编辑！</string>
+    <string name="get_text_profile_successfully">获取文本信息成功！</string>
+    <string name="get_text_profile_failed">获取文本信息失败！</string>
+    <string name="get_photo_profile_successfully">获取头像成功！</string>
+    <string name="get_photo_profile_failed">获取头像失败</string>
+    <string name="upload_text_profile_successfully">上传文本信息成功！</string>
+    <string name="upload_text_profile_failed">上传文本信息失败！</string>
+    <string name="upload_photo_profile_successfully">上传头像成功！</string>
+    <string name="upload_photo_profile_failed">上传头像失败！</string>
+    <!-- Menu item used to backup or restore the local profile -->
+    <string name="menu_local_profile_upload_download">上传/获取</string>
+    <string name="menu_contacts_photo_update">联系人头像更新</string>
+    <string name="profile_test_account">13522631112</string>
+    <string name="rcs_service_is_not_available">融合通信服务器不可用</string>
+    <string name="account_empty">个人信息账号为空！</string>
+    <string name="first_last_name_empty">名字不能为空，请重新编辑！</string>
+    <!-- Menu item used to backup or restore the local profile -->
+    <string name="rcs_capability_query_failed">融合通信能力探测失败！</string>
+    <string name="rcs_capability_query_successfully">融合通信能力探测成功！</string>
+    <string name="qrcode_upload_profile">Profile 没有上传到服务端，不可生成二维码，是否现在上传并生成二维码？</string>
+    <string name="upload_qrcode_faild">上传失败，请确认联系人信息</string>
+    <string name="refresh_qrcode_fail">刷新二维码失败</string>
+    <string name="please_wait">请稍候</string>
+    <string name="rcs_company_number">公司电话</string>
+    <string name="rcs_company_fax">工作传真</string>
+    <string name="rcs_home_number">家庭电话</string>
+    <string name="rcs_work_number">工作电话</string>
+    <string name="rcs_personal_number">个人电话</string>
+    <string name="rcs_other_number">其他电话</string>
+    <string name="rcs_email_address">邮箱地址</string>
+    <string name="rcs_company_name">公司名称</string>
+    <string name="rcs_company_tilte">公司职务</string>
+    <string name="rcs_company_address">公司地址</string>
+    <string name="rcs_home_address">家庭地址</string>
+    <string name="rcs_birthday">生日</string>
+    <string name="rcs_qr_name">姓名</string>
+    <string name="rcs_qr_number">号码</string>
+    <string name="rcs_confirom_upload_profile">如果更新二维码，将会同时更新服务端的profile文件，是否更新？</string>
+    <string name="rcs_create_qrcode_fail_upload_profile_first">获取二维码失败，请先上传profile文件</string>
+    <!-- for RCS -->
+    <string name="menu_qrcode">我的二维码</string>
+    <string name="qrcode_setting">设置</string>
+    <string name="menu_scan">扫一扫</string>
+    <string name="menu_cloud">云备份/恢复</string>
+    <string name="qrcode_private_info">个人信息</string>
+    <string name="qrcode_business_info">商务信息</string>
+    <string name="qrcode_setting_complete">完成</string>
+    <string name="qrcode_setting_private_message">您当前未设置个人资料，是否立即设置？</string>
+    <string name="qrcode_setting_business_message">您当前未填写商务信息，是否立即设置？</string>
+    <string name="menu_enhancedscreen">增强屏显</string>
+    <string name="rcs_contact_group_item_grouplist">群聊</string>
+    <string name="rcs_group_chat_item_grouplist">群聊</string>
+    <string name="group_count">成员</string>
+    <string name="menu_create_group_chat">发起群聊</string>
+    <string name="rcs_resotre_contacts_if_terminal_changed">终端已经改变，需要从云端恢复联系人吗？</string>
+    <string name="rcs_update_contact_photos">更新联系人照片</string>
+    <string name="rcs_wlan_first_connection_per_week">WLAN每周第一次连接</string>
+
+</resources>

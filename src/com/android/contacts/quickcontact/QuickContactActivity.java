@@ -24,6 +24,7 @@ import android.app.Fragment;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.app.SearchManager;
 import android.content.ActivityNotFoundException;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -41,6 +42,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -49,6 +51,7 @@ import android.net.Uri;
 import android.net.WebAddress;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.os.Trace;
 import android.provider.CalendarContract;
 import android.os.Handler;
@@ -101,6 +104,7 @@ import android.widget.Toolbar;
 import com.android.contacts.ContactSaveService;
 import com.android.contacts.ContactsActivity;
 import com.android.contacts.NfcHandler;
+import com.android.contacts.RcsApiManager;
 import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.SimContactsConstants;
 import com.android.contacts.R;
@@ -156,6 +160,12 @@ import com.android.contacts.quickcontact.ExpandingEntryCardView.EntryTag;
 import com.android.contacts.quickcontact.ExpandingEntryCardView.ExpandingEntryCardViewListener;
 import com.android.contacts.util.ImageViewDrawableSetter;
 import com.android.contacts.util.PhoneCapabilityTester;
+import com.android.contacts.util.RCSUtil;
+import com.android.contacts.util.RCSUtil.RestoreFinishedListener;
+import com.suntek.mway.rcs.client.aidl.capability.RCSCapabilities;
+import com.suntek.mway.rcs.client.api.capability.callback.CapabiltyListener;
+import com.suntek.mway.rcs.client.api.profile.impl.ProfileApi;
+import com.suntek.mway.rcs.client.api.util.ServiceDisconnectedException;
 import com.android.contacts.util.SchedulingUtils;
 import com.android.contacts.util.StructuredPostalUtils;
 import com.android.contacts.widget.MultiShrinkScroller;
@@ -198,6 +208,7 @@ public class QuickContactActivity extends ContactsActivity {
     private static final int DEFAULT_SCRIM_ALPHA = 0xC8;
     private static final int SCRIM_COLOR = Color.argb(DEFAULT_SCRIM_ALPHA, 0, 0, 0);
     private static final int REQUEST_CODE_CONTACT_SELECTION_ACTIVITY = 2;
+    private static final int REQUEST_CODE_ADD_CONTACT_FROM_QRCODE = 3;
     private static final String MIMETYPE_SMS = "vnd.android-dir/mms-sms";
 
     /** This is the Intent action to install a shortcut in the launcher. */
@@ -221,6 +232,7 @@ public class QuickContactActivity extends ContactsActivity {
      * instead of referencing this URI.
      */
     private Uri mLookupUri;
+    private ContentResolver mContentResolver;
     private String[] mExcludeMimes;
     private int mExtraMode;
     private int mStatusBarColor;
@@ -262,7 +274,11 @@ public class QuickContactActivity extends ContactsActivity {
     private Contact mContactData;
     private ContactLoader mContactLoader;
     private PorterDuffColorFilter mColorFilter;
-
+    private boolean mNeverQueryRcsPhoto;
+    private boolean mNeverQueryRcsCapability;
+    private boolean mScanToInsertContact;
+    private boolean mIsScanToInsertBtnClicked;
+    private ContentResolver mResolver;
     private final ImageViewDrawableSetter mPhotoSetter = new ImageViewDrawableSetter();
 
     /**
@@ -547,7 +563,7 @@ public class QuickContactActivity extends ContactsActivity {
 
     private void ipCallBySlot(String data, int subscription) {
         String ipCallPrefix = MoreContactUtils.getIPCallPrefix(this,
-		        subscription);
+                subscription);
         if (!TextUtils.isEmpty(ipCallPrefix)) {
             Intent callIntent = CallUtil.getCallIntent(ipCallPrefix + data,
                     MoreContactUtils.getAccount(subscription));
@@ -717,6 +733,11 @@ public class QuickContactActivity extends ContactsActivity {
 
         getWindow().setStatusBarColor(Color.TRANSPARENT);
 
+        if (RCSUtil.getRcsSupport()) {
+             mNeverQueryRcsPhoto = true;
+             mNeverQueryRcsCapability = true;
+        }
+        mResolver = getContentResolver();
         processIntent(getIntent());
 
         // Show QuickContact in front of soft input
@@ -858,6 +879,20 @@ public class QuickContactActivity extends ContactsActivity {
         } else if (requestCode == REQUEST_CODE_CONTACT_SELECTION_ACTIVITY &&
                 resultCode != RESULT_CANCELED) {
             processIntent(data);
+        } else if (requestCode == REQUEST_CODE_ADD_CONTACT_FROM_QRCODE) {
+            if (resultCode == RESULT_OK) {
+                this.finish();
+            } else {
+                StringBuilder where = new StringBuilder();
+                where.append(RawContacts.CONTACT_ID);
+                where.append("=");
+                where.append(ContentUris.parseId(mLookupUri));
+                Log.d(TAG,where.toString());
+                try{
+                    mContentResolver.delete(RawContacts.CONTENT_URI, where.toString(),null);
+                }catch(Exception ex) {
+                }
+            }
         }
     }
 
@@ -867,6 +902,9 @@ public class QuickContactActivity extends ContactsActivity {
         mHasAlreadyBeenOpened = true;
         mIsEntranceAnimationFinished = true;
         mHasComputedThemeColor = false;
+        if (RCSUtil.getRcsSupport()){
+            mNeverQueryRcsCapability = true;
+        }
         processIntent(intent);
     }
 
@@ -884,7 +922,7 @@ public class QuickContactActivity extends ContactsActivity {
             return;
         }
         Uri lookupUri = intent.getData();
-
+        mScanToInsertContact = intent.getBooleanExtra("isScanToInsertContact", false);
         // Check to see whether it comes from the old version.
         if (lookupUri != null && LEGACY_AUTHORITY.equals(lookupUri.getAuthority())) {
             final long rawContactId = ContentUris.parseId(lookupUri);
@@ -1971,7 +2009,17 @@ public class QuickContactActivity extends ContactsActivity {
             }
 
             bindContactData(data);
-
+            if (RCSUtil.getRcsSupport() && !RCSUtil.isLocalProfile(mContactData)) {
+                if (mNeverQueryRcsCapability) {
+                    mNeverQueryRcsCapability = false;
+                    RCSUtil.updateRCSCapability(QuickContactActivity.this,
+                            mContactData);
+                }
+                if (mNeverQueryRcsPhoto) {
+                    mNeverQueryRcsPhoto = false;
+                    RCSUtil.updateContactPhotoViaServer(QuickContactActivity.this, mContactData);
+                }
+            }
             Trace.endSection();
         }
 
@@ -1990,6 +2038,8 @@ public class QuickContactActivity extends ContactsActivity {
 
     @Override
     public void onBackPressed() {
+        mScanToInsertContact = false;
+        mIsScanToInsertBtnClicked = false;
         if (mScroller != null) {
             if (!mIsExitAnimationInProgress) {
                 mScroller.scrollOffBottom();
@@ -2371,23 +2421,38 @@ public class QuickContactActivity extends ContactsActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         if (mContactData != null) {
+            RCSUtil.initRcsMenu(getApplicationContext(), menu, mContactData);
             final MenuItem starredMenuItem = menu.findItem(R.id.menu_star);
-            ContactDisplayUtils.configureStarredMenuItem(starredMenuItem,
-                    mContactData.isDirectoryEntry(), mContactData.isUserProfile(),
-                    mContactData.getStarred());
+            if(!mScanToInsertContact){
+                ContactDisplayUtils.configureStarredMenuItem(starredMenuItem,
+                        mContactData.isDirectoryEntry(), mContactData.isUserProfile(),
+                        mContactData.getStarred());
+            }
 
             // Configure edit MenuItem
             final MenuItem editMenuItem = menu.findItem(R.id.menu_edit);
-            editMenuItem.setVisible(true);
-            if (DirectoryContactUtil.isDirectoryContact(mContactData) || InvisibleContactUtil
-                    .isInvisibleAndAddable(mContactData, this)) {
-                editMenuItem.setIcon(R.drawable.ic_person_add_tinted_24dp);
-                editMenuItem.setTitle(R.string.menu_add_contact);
-            } else if (isContactEditable()) {
-                editMenuItem.setIcon(R.drawable.ic_create_24dp);
-                editMenuItem.setTitle(R.string.menu_editContact);
+            if(!mScanToInsertContact){
+                editMenuItem.setVisible(true);
+                if (DirectoryContactUtil.isDirectoryContact(mContactData) || InvisibleContactUtil
+                        .isInvisibleAndAddable(mContactData, this)) {
+                    editMenuItem.setIcon(R.drawable.ic_person_add_tinted_24dp);
+                    editMenuItem.setTitle(R.string.menu_add_contact);
+                } else if (isContactEditable()) {
+                    editMenuItem.setIcon(R.drawable.ic_create_24dp);
+                    editMenuItem.setTitle(R.string.menu_editContact);
+                } else {
+                    editMenuItem.setVisible(false);
+                }
+            }
+
+            //If RCS function available,add a MenuItem to insert a contact from scanning QR-code.
+            final MenuItem insertContactFromQrcodMenuItem = menu.findItem(R.id.menu_insertContactFromQrcod);
+            if(mScanToInsertContact){
+                insertContactFromQrcodMenuItem.setVisible(true);
+                insertContactFromQrcodMenuItem.setIcon(R.drawable.ic_add_contact_holo_light);
+                insertContactFromQrcodMenuItem.setTitle(R.string.menu_insertContactFromQrcod);
             } else {
-                editMenuItem.setVisible(false);
+                insertContactFromQrcodMenuItem.setVisible(false);
             }
 
             final MenuItem shareMenuItem = menu.findItem(R.id.menu_share);
@@ -2416,6 +2481,13 @@ public class QuickContactActivity extends ContactsActivity {
             final MenuItem copyToSim2Menu = menu.findItem(R.id.menu_copy_to_sim2);
             if (copyToSim2Menu != null) {
                 copyToSim2Menu.setVisible(false);
+            }
+
+            final MenuItem uploadOrDownload = menu.findItem(R.id.menu_upload_download);
+            if (RCSUtil.getRcsSupport() && RCSUtil.isLocalProfile(mContactData)) {
+                uploadOrDownload.setVisible(true);
+            } else {
+                uploadOrDownload.setVisible(false);
             }
 
             if (!TextUtils.isEmpty(accoutType)) {
@@ -2472,9 +2544,33 @@ public class QuickContactActivity extends ContactsActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.menu_qrcode: {
+                RCSUtil.startQrCodeActivity(this, mContactData);
+                break;
+            }
+            case R.id.menu_enhancedscreen: {
+                RCSUtil.setEnhanceScreen(this, mContactData);
+                return true;
+            }
+            case R.id.menu_updateenhancedscreen:{
+                RCSUtil.updateEnhanceScreeenFunction(this, mContactData);
+                return true;
+            }
+            case R.id.menu_plugin_center: {
+                try {
+                    RcsApiManager.getPluginCenterApi().intentApk();
+                } catch (ServiceDisconnectedException e) {
+                    e.printStackTrace();
+                }
+                return true;
+            }
             case R.id.menu_star:
                 toggleStar(item);
                 return true;
+            case R.id.menu_insertContactFromQrcod:{
+                mIsScanToInsertBtnClicked = true;
+                break;
+            }
             case R.id.menu_edit:
                 if (DirectoryContactUtil.isDirectoryContact(mContactData)) {
                     // This action is used to launch the contact selector, with the option of
@@ -2552,9 +2648,26 @@ public class QuickContactActivity extends ContactsActivity {
             case R.id.menu_create_contact_shortcut:
                 createLauncherShortcutWithContact();
                 return true;
+            case R.id.menu_upload_download: {
+                RCSUtil.createLocalProfileBackupRestoreDialog(this, mContactData,
+                    new RestoreFinishedListener() {
+                        public void onRestoreFinished() {
+                            if (QuickContactActivity.this != null
+                                    && !QuickContactActivity.this
+                                            .isFinishing()) {
+                                onNewIntent(getIntent());
+                            }
+                        }
+                    }, RcsApiManager.getProfileApi()).show();
+                return true;
+            }
+            case R.id.menu_online_business_hall:
+                RCSUtil.startOnlineBusinessHallActivity(this);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+        return false;
     }
 
     private boolean hasPhoneOrEmailDate(Contact contact){

@@ -108,6 +108,9 @@
     <!-- Menu item used to edit a specific contact -->
     <string name="menu_editContact">Edit</string>
 
+    <!-- Menu item used to insert a contact from scanning QR-code -->
+    <string name="menu_insertContactFromQrcod">insert</string>
+
     <!-- Menu item used to delete a specific contact -->
     <string name="menu_deleteContact">Delete</string>
 

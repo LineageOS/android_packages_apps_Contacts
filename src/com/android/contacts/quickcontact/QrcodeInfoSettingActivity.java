@@ -20,7 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
+
 package com.android.contacts.quickcontact;
 
 import java.util.ArrayList;
@@ -89,11 +89,11 @@ import com.android.contacts.R;
 import android.util.Log;
 import android.content.SharedPreferences;
 import com.android.contacts.RcsApiManager;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.profile.Avatar;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.profile.Avatar.IMAGE_TYPE;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.profile.Profile;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.profile.TelephoneModel;
 import com.suntek.mway.rcs.client.api.util.ServiceDisconnectedException;
-import com.suntek.mway.rcs.client.api.plugin.entity.profile.Avatar;
-import com.suntek.mway.rcs.client.api.plugin.entity.profile.Avatar.IMAGE_TYPE;
-import com.suntek.mway.rcs.client.api.plugin.entity.profile.Profile;
-import com.suntek.mway.rcs.client.api.plugin.entity.profile.TelephoneModel;
 import com.suntek.mway.rcs.client.api.profile.callback.ProfileListener;
 import com.suntek.mway.rcs.client.api.profile.impl.ProfileApi;
 
@@ -172,7 +172,7 @@ public class QrcodeInfoSettingActivity extends Activity {
                 .getString(R.string.qrcode_setting_complete));
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
                 ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME
-                        | ActionBar.DISPLAY_SHOW_TITLE);
+                | ActionBar.DISPLAY_SHOW_TITLE);
         actionBar.setCustomView(customActionBarView);
         setContentView(R.layout.qrcode_info_setting);
         mChoiceSet = new Bundle();
@@ -224,16 +224,14 @@ public class QrcodeInfoSettingActivity extends Activity {
                         .getAsInteger(Phone.TYPE);
                 if (Phone.TYPE_WORK == phoneType
                         && !TextUtils.isEmpty(((PhoneDataItem) dataItem)
-                                .getNumber())) {
+                        .getNumber())) {
                     group2_list_key.add(getString(R.string.rcs_company_number));
-                    group2_list_value.add(((PhoneDataItem) dataItem)
-                            .getNumber());
+                    group2_list_value.add(((PhoneDataItem) dataItem).getNumber());
                     contactType[BUSINESS_ID][group2Typeindex++] = QRCODE_COMPANY_NUMBER;
                     Log.d(TAG, "rcs_company_number=" + QRCODE_COMPANY_NUMBER);
 
                 } else if (Phone.TYPE_FAX_WORK == phoneType
-                        && !TextUtils.isEmpty(((PhoneDataItem) dataItem)
-                                .getNumber())) {
+                        && !TextUtils.isEmpty(((PhoneDataItem) dataItem).getNumber())) {
                     group2_list_key.add(getString(R.string.rcs_company_fax));
                     group2_list_value.add(((PhoneDataItem) dataItem)
                             .getNumber());
@@ -241,16 +239,13 @@ public class QrcodeInfoSettingActivity extends Activity {
                     Log.d(TAG, "rcs_company_fax=" + QRCODE_COMPANY_FAX);
                 }
             } else if (Email.CONTENT_ITEM_TYPE.equals(mimeType)
-                    && !TextUtils.isEmpty(entryValues
-                            .getAsString(Email.ADDRESS))) {
+                    && !TextUtils.isEmpty(entryValues.getAsString(Email.ADDRESS))) {
                 group2_list_key.add(getString(R.string.rcs_email_address));
                 group2_list_value.add(entryValues.getAsString(Email.ADDRESS));
                 contactType[BUSINESS_ID][group2Typeindex++] = QRCODE_EMAIL;
                 Log.d(TAG, "rcs_email_address=" + QRCODE_EMAIL);
             } else if (Organization.CONTENT_ITEM_TYPE.equals(mimeType)
-                    && !TextUtils.isEmpty(entryValues
-                            .getAsString(Organization.COMPANY))) {
-
+                    && !TextUtils.isEmpty(entryValues.getAsString(Organization.COMPANY))) {
                 String company = entryValues.getAsString(Organization.COMPANY);
                 group2_list_key.add(getString(R.string.rcs_company_name));
                 group2_list_value.add(company);
@@ -361,7 +356,6 @@ public class QrcodeInfoSettingActivity extends Activity {
                     tele.setType(TelephoneModel.TYPE_HOME);
                     tele.setTelephone(value);
                     profile.getOtherTels().add(tele);
-
                     tele = new TelephoneModel();
                     tele.setType(TelephoneModel.TYPE_FIXED);
                     tele.setTelephone(value);
@@ -396,7 +390,6 @@ public class QrcodeInfoSettingActivity extends Activity {
                     profile.setCompanyName(value);
                 } else if (contactType == QRCODE_COMPANY_TITLE) {
                     profile.setCompanyDuty(value);
-
                 } else if (contactType == QRCODE_COMPANY_NUMBER) {
                     profile.setCompanyTel(value);
                 } else if (contactType == QRCODE_COMPANY_ADDRESS) {
@@ -406,7 +399,6 @@ public class QrcodeInfoSettingActivity extends Activity {
                     profile.setCompanyFax(value);
                 }
             }
-
         }
         return profile;
     }
@@ -457,7 +449,7 @@ public class QrcodeInfoSettingActivity extends Activity {
                                         int which) {
                                     startActivityForResult(
                                             new Intent(Intent.ACTION_EDIT,
-                                                    mCurrContactUri),
+                                            mCurrContactUri),
                                             REQUEST_EDIT_CONTACT);
                                 }
                             })
@@ -477,10 +469,9 @@ public class QrcodeInfoSettingActivity extends Activity {
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog,
                                         int which) {
-                                    //
                                     startActivityForResult(
                                             new Intent(Intent.ACTION_EDIT,
-                                                    mCurrContactUri),
+                                            mCurrContactUri),
                                             REQUEST_EDIT_CONTACT);
                                 }
 
@@ -654,7 +645,6 @@ public class QrcodeInfoSettingActivity extends Activity {
                                 isDataCheck[groupPosition][childPosition] = false;
                             }
                         }
-
                     });
             return convertView;
         }

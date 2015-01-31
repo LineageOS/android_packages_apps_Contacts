@@ -20,7 +20,6 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
 package com.android.contacts.quickcontact;
 
 import android.app.ActionBar;
@@ -53,13 +52,13 @@ import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.RawContacts;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import com.android.contacts.util.RCSUtil;
-import com.suntek.mway.rcs.client.api.plugin.entity.profile.Profile;
-import com.suntek.mway.rcs.client.api.plugin.entity.profile.QRCardImg;
-import com.suntek.mway.rcs.client.api.plugin.entity.profile.QRCardInfo;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.profile.Profile;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.profile.QRCardImg;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.profile.QRCardInfo;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.profile.Avatar;
 import com.suntek.mway.rcs.client.api.profile.callback.QRImgListener;
 import com.suntek.mway.rcs.client.api.util.ServiceDisconnectedException;
 import com.suntek.mway.rcs.client.api.profile.callback.ProfileListener;
-import com.suntek.mway.rcs.client.api.plugin.entity.profile.Avatar;
 import com.android.contacts.RcsApiManager;
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.dataitem.DataItem;
@@ -140,7 +139,7 @@ public class MyQrcodeActivity extends Activity {
             actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP
                     | ActionBar.DISPLAY_SHOW_TITLE,
                     ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_TITLE
-                            | ActionBar.DISPLAY_SHOW_HOME);
+                    | ActionBar.DISPLAY_SHOW_HOME);
         }
         photo = (ImageView) findViewById(R.id.photo);
         name = (TextView) findViewById(R.id.name);
@@ -149,8 +148,6 @@ public class MyQrcodeActivity extends Activity {
         introContent = (TextView) findViewById(R.id.intro);
 
         name.setText(mCurrContactName);
-        phone_number.setText(mCurrContactPhone);
-
         long contactId = mRawContact.getContactId();
         mContactPhoto = loadContactPhoto(contactId, null);
         photo.setImageBitmap(mContactPhoto);
@@ -194,15 +191,13 @@ public class MyQrcodeActivity extends Activity {
                         public void run() {
                             // TODO Auto-generated method stub
                             if (mGgetBitmapAction == QRCODE_INIT_GET_QRCODE_BITMAP) {
-                                Toast.makeText(
-                                        mContext,
-                                        getString(R.string.rcs_create_qrcode_fail_upload_profile_first),
+                                Toast.makeText( mContext,
+                                        getString(R.string
+                                        .rcs_create_qrcode_fail_upload_profile_first),
                                         Toast.LENGTH_LONG).show();
                                 finish();
                             } else {
-                                Toast.makeText(
-                                        mContext,
-                                        getString(R.string.refresh_qrcode_fail),
+                                Toast.makeText(mContext, getString(R.string.refresh_qrcode_fail),
                                         Toast.LENGTH_LONG).show();
                             }
                         }
@@ -212,11 +207,11 @@ public class MyQrcodeActivity extends Activity {
         };
         if (mRawContact != null) {
             String rawContactId = String.valueOf(mRawContact.getId());
-            Log.i(TAG, rawContactId);
+            Log.i(TAG, "rawContactId:" + rawContactId);
             String imgString = RCSUtil.GetQrCode(mContext, rawContactId);
-
+            myProfile = RCSUtil.createLocalProfile(mRawContact);
+            updateDisplayNumber(myProfile);
             if (!decodeStringAndSetBitmap(imgString)) {
-                myProfile = RCSUtil.createLocalProfile(mRawContact);
                 if (null != myProfile.getFirstName()
                         || !TextUtils.isEmpty(myProfile.getFirstName())) {
                     createProgressDialog();
@@ -228,6 +223,42 @@ public class MyQrcodeActivity extends Activity {
                 }
             }
         }
+    }
+
+    private void updateDisplayNumber(Profile profile) {
+        if (null == profile) {
+            return;
+        }
+        mCurrContactPhone = "";
+        String myAccountNumber = "+8613522631112";
+        try {
+            myAccountNumber = RcsApiManager.getRcsAccoutApi()
+                    .getRcsUserProfileInfo().getUserName();
+        } catch (ServiceDisconnectedException e1) {
+            Log.w("RCS_UI", e1);
+        }
+        mCurrContactPhone = myAccountNumber;
+        SharedPreferences myQrcodeSharedPreferences = getSharedPreferences(
+                "QrcodePersonalCheckState", Activity.MODE_PRIVATE);
+        String value = myQrcodeSharedPreferences.getString("value", "");
+        String[] initChecked = value.split(",");
+        int total = myQrcodeSharedPreferences.getInt("total", 0);
+        for (int i = 0; i < total; i++) {
+            if (initChecked[i].equals(getString(R.string.rcs_company_number))) {
+                if (null != profile.getCompanyTel()
+                        || !TextUtils.isEmpty(profile.getCompanyTel())) {
+                    mCurrContactPhone += profile.getCompanyTel();
+                }
+            } else if (initChecked[i]
+                    .equals(getString(R.string.rcs_company_fax))) {
+                if (null != profile.getCompanyFax()
+                        || !TextUtils.isEmpty(profile.getCompanyFax())) {
+                    mCurrContactPhone = mCurrContactPhone + ","
+                            + profile.getCompanyFax();
+                }
+            }
+        }
+        phone_number.setText(mCurrContactPhone);
     }
 
     @Override
@@ -251,28 +282,25 @@ public class MyQrcodeActivity extends Activity {
                                             Uri.withAppendedPath(
                                                     RawContacts.CONTENT_URI,
                                                     String.valueOf(mRawContact
-                                                            .getId()))));
+                                                    .getId()))));
                                     finish();
-                                }
-
-                            })
-                    .setNegativeButton(R.string.btn_cancel,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog,
-                                        int whichButton) {
-                                    finish();
-                                }
-                            }).create();
-        } else if (id == DIALOG_UPLOAD_PROFILE) {
+                            }
+                    })
+            .setNegativeButton(R.string.btn_cancel,
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,
+                                int whichButton) {
+                            finish();
+                        }
+                    }).create();
+        } else if (id == DIALOG_UPLOAD_PROFILE){
             dialog = new AlertDialog.Builder(this)
                     .setMessage(R.string.qrcode_upload_profile)
                     .setPositiveButton(R.string.btn_ok,
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog,
                                         int which) {
-
                                 }
-
                             })
                     .setNegativeButton(R.string.btn_cancel,
                             new DialogInterface.OnClickListener() {
@@ -280,7 +308,7 @@ public class MyQrcodeActivity extends Activity {
                                         int whichButton) {
                                     finish();
                                 }
-                            }).create();
+                    }).create();
         }
         return dialog;
     }
@@ -310,38 +338,19 @@ public class MyQrcodeActivity extends Activity {
         }
     }
 
-    /*
-     * public void getQRcodeFromService(Profile profile,boolean isBInfo){
-     * Log.d(TAG,"getQRcodeFromService"+isBInfo); try {
-     * RcsApiManager.getProfileApi() .refreshMyQRImg(profile, isBInfo,
-     * mQrcodeListener); } catch (ServiceDisconnectedException e) {
-     * e.printStackTrace(); } }
-     */
-
     private void processIntent(Intent intent) {
 
         String contactPhone = null;
         Bundle bundle = new Bundle();
         bundle = getIntent().getExtras();
         mRawContact = (RawContact) bundle.getParcelable("raw_contact");
-        mContactPhoto = bundle.getParcelable("contact_photo");
         for (DataItem dataItem : mRawContact.getDataItems()) {
             final ContentValues entryValues = dataItem.getContentValues();
             final String mimeType = dataItem.getMimeType();
             if (mimeType == null)
                 continue;
-            if (Phone.CONTENT_ITEM_TYPE.equals(mimeType)) { // Get phone string
-                if (contactPhone == null) {
-                    contactPhone = entryValues.getAsString(Phone.NUMBER);
-                } else {
-                    contactPhone = contactPhone + ", "
-                            + entryValues.getAsString(Phone.NUMBER);
-                }
-            }
         }
         mCurrContactName = bundle.getString("contact_name");
-        mCurrContactPhone = contactPhone;
-
     }
 
     @Override
@@ -356,19 +365,19 @@ public class MyQrcodeActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-        case android.R.id.home:
-            this.finish();
-            break;
+            case android.R.id.home:
+                this.finish();
+                break;
 
-        case 1:
-            // setting QR code datasource
-            Intent intent = new Intent(this, QrcodeInfoSettingActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putParcelable("raw_contact", mRawContact);
-            bundle.putString("contact_name", mCurrContactName);
-            intent.putExtras(bundle);
-            startActivityForResult(intent, QRCODE_SETTING_REQUST);
-            break;
+            case 1:
+                // setting QR code datasource
+                Intent intent = new Intent(this,QrcodeInfoSettingActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("raw_contact", mRawContact);
+                bundle.putString("contact_name", mCurrContactName);
+                intent.putExtras(bundle);
+                startActivityForResult(intent,QRCODE_SETTING_REQUST);
+                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -409,16 +418,13 @@ public class MyQrcodeActivity extends Activity {
         }
 
         if (bm == null) {
-
         }
-
         return bm;
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d(TAG, "__________resultCode= " + resultCode);
-        Log.d(TAG, "__________data = " + data);
         if (resultCode != RESULT_OK) {
             return;
         }
@@ -441,23 +447,9 @@ public class MyQrcodeActivity extends Activity {
         // getQRcodeFromService(profile,isHasBusiness);
         mGgetBitmapAction = QRCODE_RESULT_BACK_GET_QRCODE_BITMAP;
         name.setText(mCurrContactName);
-        phone_number.setText(mCurrContactPhone);
+        updateDisplayNumber(myProfile);
     }
 
-    /*
-     * private boolean getCompanyFromProfile(Profile profile){ boolean result =
-     * false; if(null != profile.getCompanyName() ||
-     * !TextUtils.isEmpty(profile.getCompanyName())){ result = true; } if(null
-     * != profile.getCompanyDuty() ||
-     * !TextUtils.isEmpty(profile.getCompanyDuty())){ result = true; } if(null
-     * != profile.getCompanyTel() ||
-     * !TextUtils.isEmpty(profile.getCompanyTel())){ result = true; } if(null !=
-     * profile.getCompanyAddress() ||
-     * !TextUtils.isEmpty(profile.getCompanyAddress())){ result = true; }
-     * if(null != profile.getCompanyFax() ||
-     * !TextUtils.isEmpty(profile.getCompanyFax())){ result = true; } return
-     * result; }
-     */
     /*
      * actually we do not need to download the profile first ,because the
      * network issuess, i add download profile first to make sure we can upload
@@ -479,7 +471,6 @@ public class MyQrcodeActivity extends Activity {
                 public void onAvatarUpdated(int arg0, String arg1)
                         throws RemoteException {
                     // TODO Auto-generated method stub
-
                 }
 
                 @Override
@@ -502,22 +493,17 @@ public class MyQrcodeActivity extends Activity {
                             @Override
                             public void run() {
                                 // TODO Auto-generated method stub
-                                Toast.makeText(
-                                        mContext,
-                                        getString(R.string.refresh_qrcode_fail),
+                                Toast.makeText(mContext, getString(R.string.refresh_qrcode_fail),
                                         Toast.LENGTH_LONG).show();
                             }
                         });
-
                     }
-
                 }
 
                 @Override
                 public void onProfileUpdated(int arg0, String arg1)
                         throws RemoteException {
                     // TODO Auto-generated method stub
-
                 }
 
                 @Override
@@ -574,13 +560,11 @@ public class MyQrcodeActivity extends Activity {
                                     @Override
                                     public void run() {
                                         // TODO Auto-generated method stub
-                                        Toast.makeText(
-                                                mContext,
+                                        Toast.makeText(mContext,
                                                 getString(R.string.refresh_qrcode_fail),
                                                 Toast.LENGTH_LONG).show();
                                     }
                                 });
-
                             }
                         }
 
@@ -609,6 +593,7 @@ public class MyQrcodeActivity extends Activity {
     private void dismissProgressDialog() {
         if (mProgressDialog != null) {
             mProgressDialog.dismiss();
+            mProgressDialog = null;
         }
     }
 

@@ -634,6 +634,22 @@ public class MultiPickContactActivity extends ListActivity implements
         return super.onCreateDialog(id, bundle);
     }
 
+    @Override
+    protected void onPrepareDialog(int id, Dialog dialog, Bundle bundle) {
+        switch (id) {
+            case R.id.dialog_delete_contact_confirmation:
+                ((AlertDialog) dialog).setMessage(getResources().getQuantityString(
+                        R.plurals.ContactMultiDeleteConfirmation,
+                        mChoiceSet.size(), mChoiceSet.size()));
+                break;
+            case R.id.dialog_import_sim_contact_confirmation:
+                ((AlertDialog) dialog).setMessage(getResources().getQuantityString(
+                        R.plurals.ContactMultiImportConfirmation,
+                        mChoiceSet.size(), mChoiceSet.size()));
+                break;
+        }
+    }
+
     private class DeleteContactsThread extends Thread implements
             DialogInterface.OnCancelListener, DialogInterface.OnClickListener {
         boolean mCanceled = false;

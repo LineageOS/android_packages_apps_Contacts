@@ -2585,72 +2585,81 @@ public class RCSUtil {
 
     public static String getPhoneforContactId(Context context, long contactId) {
 
-        String phone = null;
+        String phone = "";
         Cursor phonesCursor = null;
         phonesCursor = RCSUtil.queryPhoneNumbers(context, contactId);
-        if (phonesCursor == null) {
-            return "";
-        }
-        if (phonesCursor.getCount() == 0) {
-            // No valid number
-            // signalError();
-            return phone;
-        } else if (phonesCursor.getCount() == 1) {
-            // only one number, call it.
-            phone = phonesCursor.getString(phonesCursor
-                    .getColumnIndex(Phone.NUMBER));
-        } else {
-            phonesCursor.moveToPosition(-1);
-            boolean first = true;
-            while (phonesCursor.moveToNext()) {
-                if (first) {
-                    //
+        try {
+            if(null != phonesCursor) {
+                if (phonesCursor.getCount() == 0) {
+                    // No valid number
+                    // signalError();
+                    if (!phonesCursor.isClosed()) {
+                        phonesCursor.close();
+                    }
+                    return phone;
+                } else if (phonesCursor.getCount() == 1) {
+                    // only one number, call it.
                     phone = phonesCursor.getString(phonesCursor
                             .getColumnIndex(Phone.NUMBER));
-                    first = false;
-                }
-                if (phonesCursor.getInt(phonesCursor.getColumnIndex
+                } else {
+                    phonesCursor.moveToPosition(-1);
+                    boolean first = true;
+                    while (phonesCursor.moveToNext()) {
+                        if (first) {
+                            //
+                            phone = phonesCursor.getString(phonesCursor
+                                    .getColumnIndex(Phone.NUMBER));
+                            first = false;
+                        }
+                        if (phonesCursor.getInt(phonesCursor.getColumnIndex
 
-                (Phone.IS_SUPER_PRIMARY)) != 0) {
-                    // Found super primary, call it.
-                    phone = phonesCursor.getString(phonesCursor
-                            .getColumnIndex(Phone.NUMBER));
-                    break;
+                        (Phone.IS_SUPER_PRIMARY)) != 0) {
+                            // Found super primary, call it.
+                            phone = phonesCursor.getString(phonesCursor
+                                    .getColumnIndex(Phone.NUMBER));
+                            break;
+                        }
+                    }
                 }
             }
+        } finally {
+            if (null != phonesCursor) {
+                phonesCursor.close();
+            }
         }
-        phonesCursor.close();
         return phone;
     }
 
     public static String getAllPhoneNumberFromContactId(Context context, long contactId) {
 
-        String phone = null;
+        String phone = "";
         Cursor phonesCursor = null;
         StringBuilder sb = new StringBuilder();
         phonesCursor = RCSUtil.queryPhoneNumbers(context, contactId);
-        if (phonesCursor == null) {
-            return "";
-        }
-        if (phonesCursor.getCount() == 0) {
-            // No valid number
-            // signalError();
-            phonesCursor.close();
-            return phone;
-        } else if (phonesCursor.getCount() == 1) {
-            // only one number, call it.
-            phone = phonesCursor.getString(phonesCursor
-                    .getColumnIndex(Phone.NUMBER));
-        } else {
-            while (phonesCursor.moveToNext()) {
-                //
-                phone = phonesCursor.getString(phonesCursor
-                        .getColumnIndex(Phone.NUMBER));
-                sb.append(phone).append(";");
+
+        try {
+            if (phonesCursor != null) {
+                if (phonesCursor.getCount() == 0) {
+                    phone = "";
+                } else if (phonesCursor.getCount() == 1) {
+                    // only one number, call it.
+                    phone = phonesCursor.getString(phonesCursor
+                            .getColumnIndex(Phone.NUMBER));
+                } else {
+                    while (phonesCursor.moveToNext()) {
+                        phone = phonesCursor.getString(phonesCursor
+                                .getColumnIndex(Phone.NUMBER));
+                        sb.append(phone).append(";");
+                    }
+                    phone = sb.toString();
+                }
             }
-            phone = sb.toString();
+        } finally {
+            if (null != phonesCursor) {
+                phonesCursor.close();
+            }
+
         }
-        phonesCursor.close();
         return phone;
     }
 

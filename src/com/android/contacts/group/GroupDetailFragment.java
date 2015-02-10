@@ -305,26 +305,39 @@ public class GroupDetailFragment extends Fragment implements OnScrollListener {
             updateSize(data.getCount());
             mAdapter.setContactCursor(data);
             mMemberListView.setEmptyView(mEmptyView);
-            // For starting RCS group-chat.
-            StringBuilder sb = new StringBuilder();
-            mGroupMembersPhonesList.clear();
-            while(data.moveToNext()){
-                Long id = data.getLong(0);
-                String phoneNumber = RCSUtil.getPhoneforContactId(mContext, id);
-                sb.append(phoneNumber).append(";");
-                String[] groupMemberPhones = RCSUtil.getAllPhoneNumberFromContactId(mContext, id)
-                        .split(";");
-                for (int i = 0 ; i < groupMemberPhones.length; i++) {
-                    mGroupMembersPhonesList.add(RCSUtil.getFormatNumber(groupMemberPhones[i]));
-                }
-            }
-            Log.d(TAG,"mGroupMembersPhonesList:"+mGroupMembersPhonesList.toString());
-            mGroupMembersPhones = sb.toString();
+            getGroupMemberPhoneNumber(data);
         }
 
         @Override
         public void onLoaderReset(Loader<Cursor> loader) {}
     };
+
+    private void getGroupMemberPhoneNumber(final Cursor data) {
+        new Thread () {
+            @Override
+            public void run() {
+                // For starting RCS group-chat.
+                StringBuilder sb = new StringBuilder();
+                mGroupMembersPhonesList.clear();
+                while (data.moveToNext()) {
+                    Long id = data.getLong(0);
+                    String phoneNumber = RCSUtil.getPhoneforContactId(mContext,
+                            id);
+                    sb.append(phoneNumber).append(";");
+                    String[] groupMemberPhones = RCSUtil
+                            .getAllPhoneNumberFromContactId(mContext, id)
+                            .split(";");
+                    for (int i = 0; i < groupMemberPhones.length; i++) {
+                        mGroupMembersPhonesList.add(RCSUtil
+                                .getFormatNumber(groupMemberPhones[i]));
+                    }
+                }
+                Log.d(TAG,"mGroupMembersPhonesList:"
+                        + mGroupMembersPhonesList.toString());
+                mGroupMembersPhones = sb.toString();
+            }
+        }.start();
+    }
 
     private void bindGroupMetaData(Cursor cursor) {
         cursor.moveToPosition(-1);

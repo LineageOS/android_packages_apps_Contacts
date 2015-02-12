@@ -53,7 +53,7 @@ public class ContactDeletionInteractionTest
 
     static {
         // AsyncTask class needs to be initialized on the main thread.
-        AsyncTask.init();
+        //AsyncTask.init();
     }
 
     private static final Uri CONTACT_URI = ContentUris.withAppendedId(Contacts.CONTENT_URI, 13);

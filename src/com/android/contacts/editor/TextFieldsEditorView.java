@@ -17,9 +17,12 @@
 package com.android.contacts.editor;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
+import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -35,6 +38,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.android.contacts.util.RCSUtil;
 import com.android.contacts.R;
 import com.android.contacts.common.model.RawContactDelta;
 import com.android.contacts.common.ContactsUtils;
@@ -236,10 +240,6 @@ public class TextFieldsEditorView extends LabeledEditorView {
             final String column = field.column;
             final String value = entry.getAsString(column);
             fieldView.setText(value);
-
-            // Show the delete button if we have a non-null value
-            setDeleteButtonVisible(value != null);
-
             // Prepare listener for writing changes
             fieldView.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -257,8 +257,27 @@ public class TextFieldsEditorView extends LabeledEditorView {
                 }
             });
 
-            fieldView.setEnabled(isEnabled() && !readOnly);
-
+            if (RCSUtil.getRcsSupport()
+                    && null != entry.getAsInteger(ContactsContract.Data.DATA13)
+                    && 1 == entry.getAsInteger(ContactsContract.Data.DATA13)) {
+                String myPhoneNumber = RCSUtil.getMyPhoneNumber(mContext);
+                SharedPreferences prefs = PreferenceManager
+                        .getDefaultSharedPreferences(mContext);
+                String latestTerminal = prefs.getString(RCSUtil.PREF_MY_TEMINAL, "");
+                if (!TextUtils.isEmpty(myPhoneNumber)
+                        && !TextUtils.equals(latestTerminal, myPhoneNumber)) {
+                    fieldView.setText(myPhoneNumber);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putString(RCSUtil.PREF_MY_TEMINAL, myPhoneNumber);
+                    editor.apply();
+                }
+                setDeleteButtonVisible(false);
+                fieldView.setEnabled(false);
+            } else {
+                // Show the delete button if we have a non-null value
+                setDeleteButtonVisible(value != null);
+                fieldView.setEnabled(isEnabled() && !readOnly);
+            }
             if (field.shortForm) {
                 hidePossible = true;
                 mHasShortAndLongForms = true;

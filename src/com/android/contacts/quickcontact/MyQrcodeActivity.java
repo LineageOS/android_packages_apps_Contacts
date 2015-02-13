@@ -230,7 +230,7 @@ public class MyQrcodeActivity extends Activity {
             return;
         }
         mCurrContactPhone = "";
-        String myAccountNumber = "+8613522631112";
+        String myAccountNumber = "";
         try {
             myAccountNumber = RcsApiManager.getRcsAccoutApi()
                     .getRcsUserProfileInfo().getUserName();

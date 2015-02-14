@@ -18,6 +18,7 @@ package com.android.contacts.editor;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.provider.ContactsContract.CommonDataKinds.GroupMembership;
@@ -161,6 +162,14 @@ public class GroupMembershipView extends LinearLayout
         mPrimaryTextColor = resources.getColor(R.color.primary_text_color);
         mSecondaryTextColor = resources.getColor(R.color.secondary_text_color);
         mNoGroupString = mContext.getString(R.string.group_edit_field_hint_text);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        if (mPopup != null) {
+            mPopup.dismiss();
+            mPopup = null;
+        }
     }
 
     @Override

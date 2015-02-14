@@ -34,7 +34,10 @@ import com.android.contacts.common.list.ContactListFilterController;
 import com.android.contacts.common.model.AccountTypeManager;
 import com.android.contacts.common.testing.InjectedServices;
 import com.android.contacts.common.util.Constants;
+import com.android.contacts.common.util.ContactsCommonRcsUtil;
+import com.android.contacts.util.RCSUtil;
 import com.google.common.annotations.VisibleForTesting;
+import com.suntek.mway.rcs.client.api.support.RcsSupportApi;
 
 public final class ContactsApplication extends Application {
     private static final boolean ENABLE_LOADER_LOG = false; // Don't submit with true
@@ -127,6 +130,14 @@ public final class ContactsApplication extends Application {
 
         if (Log.isLoggable(Constants.PERFORMANCE_TAG, Log.DEBUG)) {
             Log.d(Constants.PERFORMANCE_TAG, "ContactsApplication.onCreate finish");
+        }
+        if (RcsSupportApi.isRcsServiceInstalled(this)) {
+            RcsApiManager.init(this);
+            ContactsCommonRcsUtil.setIsRcs(true);
+            RCSUtil.setRcsSupport(true);
+        } else {
+            ContactsCommonRcsUtil.setIsRcs(false);
+            RCSUtil.setRcsSupport(false);
         }
     }
 

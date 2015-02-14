@@ -19,6 +19,7 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.net.Uri;
 import android.provider.ContactsContract.Groups;
+import com.android.contacts.util.RCSUtil;
 
 /**
  * Group loader for the group list that includes details such as the number of contacts per group
@@ -35,6 +36,8 @@ public final class GroupListLoader extends CursorLoader {
         Groups._ID,
         Groups.TITLE,
         Groups.SUMMARY_COUNT,
+        Groups.SOURCE_ID, //RCS
+        Groups.SYSTEM_ID //group id
     };
 
     public final static int ACCOUNT_NAME = 0;
@@ -43,12 +46,32 @@ public final class GroupListLoader extends CursorLoader {
     public final static int GROUP_ID = 3;
     public final static int TITLE = 4;
     public final static int MEMBER_COUNT = 5;
+    public final static int SOURCE_ID = 6;
+    public final static int SYSTEM_ID = 7;
 
     private static final Uri GROUP_LIST_URI = Groups.CONTENT_SUMMARY_URI;
 
     public GroupListLoader(Context context) {
-        super(context, GROUP_LIST_URI, COLUMNS, Groups.ACCOUNT_TYPE + " NOT NULL AND "
+
+        super(context, GROUP_LIST_URI, COLUMNS, createSelection(), null, createSortOrder());
+    }
+
+    private static String createSelection() {
+        StringBuilder where = new StringBuilder();
+        where.append(Groups.ACCOUNT_TYPE + " NOT NULL AND "
                 + Groups.ACCOUNT_NAME + " NOT NULL AND " + Groups.AUTO_ADD + "=0 AND " +
-                Groups.FAVORITES + "=0 AND " + Groups.DELETED + "=0", null, "account_id");
+                Groups.FAVORITES + "=0 AND " + Groups.DELETED + "!=1");
+        if (!RCSUtil.getRcsSupport()) {
+            where.append(" AND ("+Groups.SOURCE_ID + "!='RCS'"+" OR "+Groups.SOURCE_ID+" IS NULL)");
+        }
+        return where.toString();
+    }
+
+    private static String createSortOrder(){
+        if (!RcsApiManager.isRcsServiceInstalled()) {
+            return "account_id";
+        } else {
+            return Groups.SOURCE_ID;
+        }
     }
 }

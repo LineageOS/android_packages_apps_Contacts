@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2014 pci-suntektech Technologies, Inc.  All Rights Reserved.
+ * pci-suntektech Technologies Proprietary and Confidential.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to
+ * deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+ * sell copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ * IN THE SOFTWARE.
+-->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="public_account">Public Account</string>
+    <string name="upload_profile">Upload My Profile</string>
+    <string name="download_profile">Download My Profile</string>
+    <string name="upload_download_profile">Profile Upload/Download</string>
+    <string name="name_or_account_empty">The first name or account is empty!Please imput again!</string>
+    <string name="photo_empty">The photo of profile is empty!Please set it!</string>
+
+    <string name="get_text_profile_successfully">Get text profile successfully!</string>
+    <string name="get_text_profile_failed">get_text_profile_failed</string>
+    <string name="get_photo_profile_successfully">Get photo profile successfully!</string>
+    <string name="get_photo_profile_failed">Get photo profile failed!</string>
+    <string name="upload_text_profile_successfully">Upload text profile successfully!</string>
+    <string name="upload_text_profile_failed">Upload text profile failed!</string>
+    <string name="upload_photo_profile_successfully">Upload photo profile successfully!</string>
+    <string name="upload_photo_profile_failed">Upload photo profile failed!</string>
+    <!-- Menu item used to backup or restore the local profile -->
+    <string name="menu_local_profile_upload_download">Upload/Download</string>
+    <string name="menu_online_business_hall">Online Business Hall</string>
+
+    <string name="menu_contacts_photo_update">Contacts photo update</string>
+
+    <string name="profile_test_account">13522631112</string>
+    <string name="rcs_service_is_not_available">RCS Service is not available.</string>
+    <string name="account_empty">The account of profile is empty， please input again!</string>
+    <string name="first_last_name_empty">The first name is empty, please input again!</string>
+    <!-- Menu item used to backup or restore the local profile -->
+    <string name="menu_local_profile_backup_restore">Backup/restore</string>
+    <string name="rcs_capability_query_failed">Failed to query RCS capability!</string>
+    <string name="rcs_capability_query_successfully">Query RCS capability successfully</string>
+    <string name="qrcode_upload_profile">Profile does not upload to service,it can not create Qrcode,upload and create Qrcode now ?</string>
+    <string name="upload_qrcode_faild">upload Qrcode faild!</string>
+    <string name="refresh_qrcode_fail">Can not get QR code!</string>
+    <string name="please_wait">please wait</string>
+    <string name="rcs_company_number">Company Number</string>
+    <string name="rcs_company_fax">Company Fax</string>
+    <string name="rcs_home_number">Home Number</string>
+    <string name="rcs_work_number">Work Number</string>
+    <string name="rcs_personal_number">Personal Number</string>
+    <string name="rcs_other_number">Other Number</string>
+    <string name="rcs_email_address">Email Address</string>
+    <string name="rcs_company_name">Company Name</string>
+    <string name="rcs_company_tilte">Company Title</string>
+    <string name="rcs_company_address">Company Address</string>
+    <string name="rcs_home_address">Home Address</string>
+    <string name="rcs_birthday">Birthday</string>
+    <string name="rcs_qr_name">Name</string>
+    <string name="rcs_qr_number">Number</string>
+    <string name="rcs_confirom_upload_profile">if you update the qrcode it will update the profile in service,update now?</string>
+    <string name="rcs_create_qrcode_fail_upload_profile_first">create qrcode fail please upload profile first</string>
+    <string name="refresh_qrcode_fail">Can not get QR code!</string>
+    <string name="Unformatted_profile_phone_number">Unformatted phone number!</string>
+    <string name="rcs_resotre_contacts_if_terminal_changed">The terminal has been changed, do you resotre the contacts from the cloud?</string>
+    <string name="rcs_update_contact_photos">Update contact photos</string>
+    <string name="rcs_wlan_first_connection_per_week">WLAN first connection per week</string>
+    <!-- for RCS -->
+    <string name="menu_plugin_center">Plugin Center</string>
+    <string name="menu_qrcode">My Qrcode</string>
+    <string name="qrcode_setting">Setting</string>
+    <string name="menu_scan">Scan</string>
+    <string name="menu_cloud">Cloud backup/restore</string>
+    <string name="qrcode_private_info">Personal Info</string>
+    <string name="qrcode_business_info">Business Infor</string>
+    <string name="qrcode_setting_complete">Completed</string>
+    <string name="qrcode_setting_private_message">You are not currently set personal info, set it now?</string>
+    <string name="qrcode_setting_business_message">You are not currently fill in the business info, set it now?</string>
+    <string name="menu_enhancedscreen">Enhance Screen</string>
+    <string name="rcs_contact_group_item_grouplist">GroupChat</string>
+    <string name="rcs_group_chat_item_grouplist">GroupChat</string>
+    <string name="group_count">member</string>
+    <string name="menu_create_group_chat">Create GroupChat</string>
+    <string name="menu_updateenhancedscreen">Update enhance screen</string>
+    <string name="rcs_network_unavailable">network is unavailable</string>
+    <string name="rcs_updateting_enhance_screen">updating enhance screen...</string>
+    <string name="btn_ok">Ok</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="import_stop">"Import stopped"</string>
+    <string name="contact_backup_success">Contacts backup successfully!</string>
+    <string name="contact_backup_fail">Contacts backup unsuccessfully!</string>
+</resources>

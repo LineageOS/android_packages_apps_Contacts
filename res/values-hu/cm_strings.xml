@@ -21,16 +21,16 @@
   <string name="menu_deleteContacts">Névjegyek törlése</string>
   <string name="contactDeletedToast">Névjegy törölve</string>
   <string name="contactSavedToSimCardError">Nem lehet elmenteni a kiválasztott névjegyeket a SIM kártyára</string>
-  <string name="airplane_mode_on">A SIM kártya nem érhető el, míg a repülőgép üzemmód engedélyezve van</string>
+  <string name="airplane_mode_on">A SIM-kártya nem érhető el, míg a repülőgép üzemmód engedélyezve van</string>
   <string name="number_anr_too_long">A szám túl hosszú</string>
   <string name="email_address_too_long">Az e-mail cím túl hosszú</string>
-  <string name="sim_card_full">A SIM kártya megtelt</string>
-  <string name="tag_too_long">A kapcsolat neve túl hosszú</string>
+  <string name="sim_card_full">A SIM-kártya megtelt</string>
+  <string name="tag_too_long">A névjegynél megadott név túl hosszú</string>
   <string name="invalid_phone_number">A telefonszám érvénytelen</string>
   <string name="videocall">Videóhívás</string>
   <string name="unknown">Ismeretlen</string>
-  <string name="copy_to_target_sim">SIM kártya</string>
-  <string name="copy_to_target_msim">SIM kártya <xliff:g id="index">%d</xliff:g></string>
+  <string name="copy_to_target_sim">SIM-kártya</string>
+  <string name="copy_to_target_msim">SIM-kártya <xliff:g id="index">%d</xliff:g></string>
   <string name="search_bar_hint">Keresés a névjegyzékben</string>
   <string name="delete_group_dialog_title">Csoport törlése</string>
   <string name="edit_before_call">Szám szerkesztése hívás előtt</string>

@@ -19,4 +19,9 @@
   <string name="deleteConfirmation_title">যোগাযোগ মুছে ফেলতে চান?</string>
   <string name="importConfirmation_title">যোগাযোগ আমদানি করবেন?</string>
   <string name="menu_deleteContacts">যোগাযোগ মুছে ফেলুন</string>
+  <string name="contactDeletedToast">যোগাযোগ মুছে ফেলা হয়েছে</string>
+  <string name="email_address_too_long">ই-মেইল ঠিকানাটি অত্যধিক বড়</string>
+  <string name="videocall">ভিডিও কল</string>
+  <string name="unknown">অজানা</string>
+  <string name="copy_to_target_sim">সিম কার্ড</string>
 </resources>

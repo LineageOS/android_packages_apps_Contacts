@@ -17,23 +17,19 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="contacts_selected">
-    <item quantity="one">%d pasirinktas</item>
-    <item quantity="few">%d pasirinkti</item>
-    <item quantity="other">%d pasirinkta</item>
+    <item quantity="one">%d esbilláu</item>
+    <item quantity="other">%d esbillaos</item>
   </plurals>
   <plurals name="ContactMultiImportConfirmation">
-    <item quantity="one">%d kontaktas bus importuotas.</item>
-    <item quantity="few">%d kontaktai bus importuoti.</item>
-    <item quantity="other">%d kontaktų bus importuota.</item>
+    <item quantity="one">Va importase %d contautu.</item>
+    <item quantity="other">Van importase %d contautos.</item>
   </plurals>
   <plurals name="import_progress">
-    <item quantity="one">%d kontaktas importuotas</item>
-    <item quantity="few">%d kontaktai importuoti</item>
-    <item quantity="other">%d kontaktų importuota</item>
+    <item quantity="one">%d contautu importáu</item>
+    <item quantity="other">%d contautos importaos</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
-    <item quantity="one">%d kontaktas bus ištrintas.</item>
-    <item quantity="few">%d kontaktai bus ištrinti.</item>
-    <item quantity="other">%d kontaktų bus ištrinta.</item>
+    <item quantity="one">va desaniciase %d contautu</item>
+    <item quantity="other">van desaniciase %d contautos</item>
   </plurals>
 </resources>

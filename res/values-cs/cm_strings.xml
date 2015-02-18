@@ -27,6 +27,7 @@
   <string name="invalid_number_type">Typ čísla je neplatný</string>
   <string name="no_phone_number_or_email">Zadejte prosím telefonní číslo nebo e-mailovou adresu.</string>
   <string name="memory_card_full">Kontakt nelze uložit, paměť telefonu je plná</string>
+  <string name="contacts_groups_label">Skupiny</string>
   <string name="menu_moveGroupMembers">Přesunout členy skupiny</string>
   <string name="title_move_members">Přesunout členy</string>
   <string name="message_move_members">Přesouvání členů\u2026</string>

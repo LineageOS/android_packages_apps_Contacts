@@ -21,6 +21,9 @@
   <string name="number_anr_too_long">Numărul este prea lung</string>
   <string name="email_address_too_long">Adresa de e-mail este prea lungă</string>
   <string name="sim_card_full">Cartela SIM este plină</string>
+  <string name="tag_too_long">Numele contactului este prea lung</string>
+  <string name="invalid_phone_number">Numărul de telefon nu este valid</string>
+  <string name="invalid_number_type">Tipul numărului nu este valid</string>
   <string name="contacts_groups_label">Grupuri</string>
   <string name="edit_before_call">Editarea numărului înainte de apel</string>
   <string name="menu_sendViaSMS">Trimitere contact prin SMS</string>

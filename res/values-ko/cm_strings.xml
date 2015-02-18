@@ -26,6 +26,7 @@
   <string name="invalid_phone_number">전화번호가 올바르지 않습니다</string>
   <string name="invalid_number_type">전화번호 형식이 올바르지 않습니다</string>
   <string name="no_phone_number_or_email">전화번호 또는 이메일 주소를 입력해주십시오.</string>
+  <string name="memory_card_full">연락처를 저장할 수 없습니다, 휴대전화 메모리가 가득 찼습니다</string>
   <string name="contacts_groups_label">그룹</string>
   <string name="menu_moveGroupMembers">그룹 구성원 이동</string>
   <string name="title_move_members">구성원 이동</string>
@@ -50,6 +51,7 @@
   <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g>(으)로 복사</string>
   <string name="copy_to_target_sim">SIM 카드</string>
   <string name="copy_to_target_msim">SIM 카드 <xliff:g id="index">%d</xliff:g></string>
+  <string name="no_empty_email_in_usim">USIM 연락처가 비어있는 이메일 입력란을 찾지 못하여 메시지를 복사할 수 없습니다.</string>
   <string name="voicemail">음성 메시지</string>
   <string name="select_call_title">통화 기록 선택</string>
   <string name="delete_call_title">통화 기록 삭제</string>

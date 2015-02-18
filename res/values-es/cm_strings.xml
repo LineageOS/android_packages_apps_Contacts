@@ -18,6 +18,20 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="contactSavedToSimCardError">No se han podido guardar los contactos seleccionados en la tarjeta SIM</string>
+  <string name="airplane_mode_on">No se puede acceder a la tarjeta SIM mientras está activado el modo avión</string>
+  <string name="number_anr_too_long">El número es demasiado largo</string>
+  <string name="email_address_too_long">La dirección de correo electrónico es demasiado larga</string>
+  <string name="sim_card_full">La tarjeta SIM está llena</string>
+  <string name="tag_too_long">El nombre del contacto es demasiado largo</string>
+  <string name="invalid_phone_number">El número de teléfono no es válido</string>
+  <string name="invalid_number_type">El tipo de número no es válido</string>
+  <string name="no_phone_number_or_email">Por favor, introduce un número de teléfono o dirección de correo.</string>
+  <string name="memory_card_full">No se puede guardar el contacto. Memoria del teléfono llena</string>
+  <string name="contacts_groups_label">Grupos</string>
+  <string name="menu_moveGroupMembers">Mover miembros del grupo</string>
+  <string name="title_move_members">Mover miembros</string>
+  <string name="message_move_members">Moviendo miembros\u2026</string>
+  <string name="message_can_not_move_members">No se puede mover a los miembros</string>
   <string name="edit_before_call">Editar número antes de llamar</string>
   <string name="menu_sendViaSMS">Enviar contacto vía SMS</string>
   <string name="select_all">Todos</string>
@@ -37,6 +51,7 @@
   <string name="menu_copyTo">Copiar a <xliff:g id="destination">%s</xliff:g></string>
   <string name="copy_to_target_sim">Tarjeta SIM</string>
   <string name="copy_to_target_msim">Tarjeta SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="no_empty_email_in_usim">Contacto USIM no tiene un campo de correo electrónico disponible. No se puede copiar los mensajes.</string>
   <string name="voicemail">Buzón de voz</string>
   <string name="select_call_title">Seleccionar registros de llamadas</string>
   <string name="delete_call_title">Eliminar registros de llamadas</string>

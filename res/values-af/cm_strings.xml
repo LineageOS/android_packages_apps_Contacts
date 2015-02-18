@@ -18,6 +18,20 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="contactSavedToSimCardError">Kon nie die geselekteerde kontakte na die SIM-kaart stoor</string>
+  <string name="airplane_mode_on">Die SIM-kaart kan nie verkry word nie, terwyl vliegtuigmodus geaktiveer is</string>
+  <string name="number_anr_too_long">Nommer is te lank</string>
+  <string name="email_address_too_long">E-pos adres is te lank</string>
+  <string name="sim_card_full">SIM kaart is vol</string>
+  <string name="tag_too_long">Kontak naam is te lank</string>
+  <string name="invalid_phone_number">Foon nommer is ongeldig</string>
+  <string name="invalid_number_type">Nommer tipe is ongeldig</string>
+  <string name="no_phone_number_or_email">Sleutel asseblief \'n telefoonnommer of e-posadres in.</string>
+  <string name="memory_card_full">Kontak kon nie gestoor word nie, die geheue is vol</string>
+  <string name="contacts_groups_label">Groepe</string>
+  <string name="menu_moveGroupMembers">Skuif groep lede</string>
+  <string name="title_move_members">Skyf lede</string>
+  <string name="message_move_members">Besig met skyf van lede\u2026</string>
+  <string name="message_can_not_move_members">Kan nie lede skyf nie</string>
   <string name="edit_before_call">Wysig nommer voor oproep</string>
   <string name="menu_sendViaSMS">Stuur kontak via SMS</string>
   <string name="select_all">Alles</string>
@@ -37,6 +51,7 @@
   <string name="menu_copyTo">Kopieer na<xliff:g id="destination">%s</xliff:g></string>
   <string name="copy_to_target_sim">SIM-kaart</string>
   <string name="copy_to_target_msim">SIM-kaart <xliff:g id="index">%d</xliff:g></string>
+  <string name="no_empty_email_in_usim">USIM kontak het nie \'n beskikbare epos veld nie, kon nie epos kopieer nie.</string>
   <string name="voicemail">Stempos</string>
   <string name="select_call_title">Kies oproep lys</string>
   <string name="delete_call_title">Verwyder oproep lys</string>

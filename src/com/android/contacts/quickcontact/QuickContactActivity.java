@@ -389,8 +389,9 @@ public class QuickContactActivity extends Activity {
         }
         final Uri lookupUri = data.getLookupUri();
 
-        // If this is a json encoded URI, there is no local contact to star
-        if (UriUtils.isEncodedContactUri(lookupUri)) {
+        // If this is a json encoded URI or it is the user profile
+        // there is no local contact to star
+        if (UriUtils.isEncodedContactUri(lookupUri) || mContactData.isUserProfile()) {
             mStarImage.setVisibility(View.GONE);
 
             // If directory export support is not allowed, then don't allow the user to add

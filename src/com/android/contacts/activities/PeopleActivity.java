@@ -536,7 +536,7 @@ public class PeopleActivity extends ContactsActivity implements
                 boolean simImported = false;
                 if (TelephonyManager.SIM_STATE_READY == TelephonyManager
                         .getDefault().getSimState(i)) {
-                    long[] subId = SubscriptionManager.getSubId(i);
+                    int[] subId = SubscriptionManager.getSubId(i);
                     if (subId == null) {
                         continue;
                     }

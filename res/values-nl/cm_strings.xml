@@ -25,7 +25,7 @@
   <string name="number_anr_too_long">Nummer is te lang</string>
   <string name="email_address_too_long">E-mailadres is te lang</string>
   <string name="sim_card_full">Simkaart is vol</string>
-  <string name="tag_too_long">Naam van contactpersoon is te lang</string>
+  <string name="tag_too_long">Naam van contact is te lang</string>
   <string name="invalid_phone_number">Telefoonnummer is ongeldig</string>
   <string name="videocall">Videogesprek</string>
   <string name="unknown">Onbekend</string>

@@ -18,6 +18,20 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="contactSavedToSimCardError">Kunne ikke gemme de markerede kontakter på SIM-kortet</string>
+  <string name="airplane_mode_on">SIM-kortet kan ikke tilgås, mens flytilstand er aktiveret</string>
+  <string name="number_anr_too_long">Tallet er for stort</string>
+  <string name="email_address_too_long">E-mail-adresse er for lang</string>
+  <string name="sim_card_full">SIM-kort er fyldt</string>
+  <string name="tag_too_long">Kontaktnavn er for langt</string>
+  <string name="invalid_phone_number">Telefonnummer er ugyldigt</string>
+  <string name="invalid_number_type">Nummertype er ugyldig</string>
+  <string name="no_phone_number_or_email">Angiv telefonnummer eller e-mail-adresse.</string>
+  <string name="memory_card_full">Kontakt kunne ikke gemmes, telefonens hukommelse er fuld</string>
+  <string name="contacts_groups_label">Grupper</string>
+  <string name="menu_moveGroupMembers">Flyt gruppemedlemmer</string>
+  <string name="title_move_members">Flyt medlemmer</string>
+  <string name="message_move_members">Flytter medlemmer\u2026</string>
+  <string name="message_can_not_move_members">Kan ikke flytte medlemmer</string>
   <string name="edit_before_call">Redigér nummer før opkald</string>
   <string name="menu_sendViaSMS">Send kontakt via SMS</string>
   <string name="select_all">Alle</string>
@@ -37,6 +51,7 @@
   <string name="menu_copyTo">Kopier til <xliff:g id="destination">%s</xliff:g></string>
   <string name="copy_to_target_sim">SIM-kort</string>
   <string name="copy_to_target_msim">SIM-kort <xliff:g id="index">%d</xliff:g></string>
+  <string name="no_empty_email_in_usim">USIM-kontakt har ikke et tilgængeligt E-mail-felt. Kan ikke kopiere beskeder.</string>
   <string name="voicemail">Telefonsvarer</string>
   <string name="select_call_title">Vælg opkaldslog</string>
   <string name="delete_call_title">Slet opkaldslog</string>

@@ -18,6 +18,20 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="contactSavedToSimCardError">Nie można zapisać wybranych kontaktów na karcie SIM</string>
+  <string name="airplane_mode_on">Nie można uzyskać dostępu do karty SIM, gdy włączony jest tryb samolotowy</string>
+  <string name="number_anr_too_long">Numer jest za długi</string>
+  <string name="email_address_too_long">Adres e-mail jest zbyt długi</string>
+  <string name="sim_card_full">Karta SIM jest pełna</string>
+  <string name="tag_too_long">Nazwa kontaktu jest zbyt długa</string>
+  <string name="invalid_phone_number">Numer telefonu jest nieprawidłowy</string>
+  <string name="invalid_number_type">Typ numeru jest nieprawidłowy</string>
+  <string name="no_phone_number_or_email">Proszę podać adres e-mail lub numer telefonu.</string>
+  <string name="memory_card_full">Nie można zapisać kontaktu, pamięć telefonu jest pełna</string>
+  <string name="contacts_groups_label">Grupy</string>
+  <string name="menu_moveGroupMembers">Przenieś członków grupy</string>
+  <string name="title_move_members">Przenieść członków</string>
+  <string name="message_move_members">Przenoszenie członków\u2026</string>
+  <string name="message_can_not_move_members">Nie można przenieść członków</string>
   <string name="edit_before_call">Edytuj numer przed połączeniem</string>
   <string name="menu_sendViaSMS">Wyślij kontakt przez SMS</string>
   <string name="select_all">Wszystkie</string>
@@ -37,6 +51,7 @@
   <string name="menu_copyTo">Skopiuj do <xliff:g id="destination">%s</xliff:g></string>
   <string name="copy_to_target_sim">Karta SIM</string>
   <string name="copy_to_target_msim">Karta SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="no_empty_email_in_usim">Kontakt USIM nie ma pola e-mail, nie można skopiować wiadomości.</string>
   <string name="voicemail">Poczta głosowa</string>
   <string name="select_call_title">Wybierz dzienniki rozmów</string>
   <string name="delete_call_title">Usuń dzienniki rozmów</string>

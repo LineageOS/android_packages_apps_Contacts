@@ -51,7 +51,7 @@
   <string name="menu_copyTo">Kopijuoti į <xliff:g id="destination">%s</xliff:g></string>
   <string name="copy_to_target_sim">SIM kortelė</string>
   <string name="copy_to_target_msim">SIM kortelė <xliff:g id="index">%d</xliff:g></string>
-  <string name="no_empty_email_in_usim">USIM kontaktas neturi prieinamo el. pašto lauko, negalima kopijuoti pranešimų.</string>
+  <string name="no_empty_email_in_usim">USIM kontaktas neturi pasiekiamo el. pašto lauko, negalima kopijuoti pranešimų.</string>
   <string name="voicemail">Balso paštas</string>
   <string name="select_call_title">Pasirinkti skambučių žurnalus</string>
   <string name="delete_call_title">Ištrinti skambučių žurnalus</string>

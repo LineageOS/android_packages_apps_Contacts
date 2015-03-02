@@ -68,10 +68,6 @@ import com.android.contacts.util.PhoneCapabilityTester;
 public class PeopleActivityTest
         extends ActivityInstrumentationTestCase2<PeopleActivity>
 {
-    static {
-        // AsyncTask class needs to be initialized on the main thread.
-        AsyncTask.init();
-    }
 
     private static final String TEST_ACCOUNT = "testAccount";
     private static final String TEST_ACCOUNT_TYPE = "testAccountType";

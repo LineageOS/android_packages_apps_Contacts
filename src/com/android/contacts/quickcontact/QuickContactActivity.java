@@ -2813,7 +2813,7 @@ public class QuickContactActivity extends ContactsActivity {
                     Cursor cr = null;
                     // call query first, otherwise the count queries will fail
                     try{
-                        long[] subId = SubscriptionManager.getSubId(sub);
+                        int[] subId = SubscriptionManager.getSubId(sub);
                         if (subId != null
                             && TelephonyManager.getDefault().isMultiSimEnabled()) {
                             cr = getContentResolver().query(

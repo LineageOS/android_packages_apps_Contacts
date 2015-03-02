@@ -46,15 +46,12 @@ import com.android.contacts.common.test.mocks.MockAccountTypeManager;
  * or
  *   adb shell am instrument \
  *     -w com.android.contacts.tests/android.test.InstrumentationTestRunner
+ *
  */
 @SmallTest
 public class ContactDeletionInteractionTest
         extends ActivityInstrumentationTestCase2<FragmentTestActivity> {
 
-    static {
-        // AsyncTask class needs to be initialized on the main thread.
-        AsyncTask.init();
-    }
 
     private static final Uri CONTACT_URI = ContentUris.withAppendedId(Contacts.CONTENT_URI, 13);
     private static final Uri ENTITY_URI = Uri.withAppendedPath(

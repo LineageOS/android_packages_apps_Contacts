@@ -51,7 +51,7 @@
              be visible when using some of the darker ActionBar tints -->
         <item name="android:actionBarItemBackground">@drawable/item_background_material_borderless_dark</item>
     </style>
-
+    
     <style name="PeopleTheme1" parent="@android:style/Theme.Material.Light">
         <item name="android:textColorPrimary">@color/primary_text_color</item>
         <item name="android:textColorSecondary">@color/secondary_text_color</item>

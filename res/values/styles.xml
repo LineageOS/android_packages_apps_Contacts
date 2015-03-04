@@ -51,6 +51,15 @@
              be visible when using some of the darker ActionBar tints -->
         <item name="android:actionBarItemBackground">@drawable/item_background_material_borderless_dark</item>
     </style>
+    
+    <style name="PeopleTheme1" parent="@android:style/Theme.Material.Light">
+        <item name="android:textColorPrimary">@color/primary_text_color</item>
+        <item name="android:textColorSecondary">@color/secondary_text_color</item>
+        <item name="android:windowBackground">@color/background_primary</item>
+        <item name="android:colorPrimary">@color/primary_color</item>
+        <item name="android:colorPrimaryDark">@color/primary_color_dark</item>
+        <item name="android:colorAccent">@color/primary_color</item>
+    </style>
 
     <style name="PeopleTheme" parent="@android:style/Theme.Material.Light">
         <item name="android:actionBarStyle">@style/ContactsActionBarStyle</item>
@@ -63,14 +72,8 @@
         <!-- Style for the overflow button in the actionbar. -->
         <item name="android:actionOverflowButtonStyle">@style/ContactsActionBarOverflowQP</item>
         <item name="android:fastScrollThumbDrawable">@drawable/fastscroll_thumb</item>
-        <item name="android:textColorPrimary">@color/primary_text_color</item>
-        <item name="android:textColorSecondary">@color/secondary_text_color</item>
         <item name="android:icon">@android:color/transparent</item>
         <item name="android:listViewStyle">@style/ListViewStyle</item>
-        <item name="android:windowBackground">@color/background_primary</item>
-        <item name="android:colorPrimaryDark">@color/primary_color_dark</item>
-        <item name="android:colorPrimary">@color/primary_color</item>
-        <item name="android:colorAccent">@color/primary_color</item>
         <item name="android:alertDialogTheme">@style/ContactsAlertDialogTheme</item>
         <item name="list_item_height">?android:attr/listPreferredItemHeight</item>
         <item name="activated_background">@drawable/list_item_activated_background</item>
@@ -80,13 +83,10 @@
             @dimen/contact_browser_list_item_padding_top_or_bottom
         </item>
         <item name="list_item_padding_right">32dp</item>
-        <item name="list_item_padding_bottom">
-            @dimen/contact_browser_list_item_padding_top_or_bottom
-        </item>
+        <item name="list_item_padding_bottom">@dimen/contact_browser_list_item_padding_top_or_bottom</item>
+        <item name="list_item_name_text_color">@color/list_item_name_text_color</item>
         <item name="list_item_padding_left">16dip</item>
-        <item name="list_item_gap_between_image_and_text">
-            @dimen/contact_browser_list_item_gap_between_image_and_text
-        </item>
+        <item name="list_item_gap_between_image_and_text">@dimen/contact_browser_list_item_gap_between_image_and_text</item>
         <item name="list_item_gap_between_label_and_data">5dip</item>
         <item name="list_item_presence_icon_margin">4dip</item>
         <item name="list_item_presence_icon_size">16dip</item>

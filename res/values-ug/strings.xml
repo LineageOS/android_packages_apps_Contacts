@@ -90,18 +90,18 @@
   <string name="groupSavedToast">گۇرۇپپا ساقلاندى.</string>
   <string name="groupSavedErrorToast">گۇرۇپپا ئۆزگىرىشلىرىنى ساقلىيالمايدۇ.</string>
   <plurals name="listTotalPhoneContacts">
-    <item quantity="other">1 ئالاقەداشنىڭ تېلېفون نومۇرى بار</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> ئالاقەداشنىڭ تېلېفون نومۇرى بار</item>
   </plurals>
   <string name="listTotalPhoneContactsZero">ئالاقەداشنىڭ تېلېفون نومۇرى يوق</string>
   <plurals name="listTotalAllContacts">
-    <item quantity="other">1 ئالاقەداش</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> ئالاقەداش</item>
   </plurals>
   <plurals name="listFoundAllContacts">
-    <item quantity="other">1 نى تاپتى</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> نى تاپتى</item>
   </plurals>
   <string name="listFoundAllContactsZero">ئالاقەداش يوق</string>
   <plurals name="searchFoundContacts">
-    <item quantity="other">1 نى تاپتى</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> نى تاپتى</item>
   </plurals>
   <string name="contactsAllLabel">ھەممە ئالاقەداشلار</string>
   <string name="contactsGroupsLabel">گۇرۇپپا</string>
@@ -185,7 +185,7 @@
   <string name="create_group_dialog_title">يېڭى گۇرۇپپا قۇر</string>
   <string name="create_group_item_label">يېڭى گۇرۇپپا قۇر</string>
   <plurals name="num_groups_in_account">
-    <item quantity="other">1 گۇرۇپپا</item>
+    <item quantity="other"><xliff:g id="count">%0$d</xliff:g> گۇرۇپپا</item>
   </plurals>
   <string name="delete_group_dialog_message"><xliff:g id="GROUP_LABEL">%1$s</xliff:g> گۇرۇپپىنى ئۆچۈرەمسىز؟ (ئالاقەداشنىڭ ئۆزىنى ئۆچۈرەلمەيدۇ.)</string>
   <plurals name="num_contacts_in_group">

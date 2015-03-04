@@ -83,7 +83,7 @@
   <string name="edit_local_group_dialog_title">Groep hernoemen</string>
   <string name="too_many_contacts_add_to_group">Er kunnen niet meer dan <xliff:g id="count">%d</xliff:g> contacten worden toegevoegd</string>
   <string name="no_phone_number_or_email">Voer een telefoonnummer of e-mailadres in.</string>
-  <string name="memory_card_full">Contact kon niet worden opgeslagen, telefoongeheugen is vol</string>
+  <string name="memory_card_full">Contact kan niet worden opgeslagen, telefoongeheugen is vol</string>
   <string name="menu_memory_status">Geheugenstatus</string>
   <string name="memory_status_title">Geheugenstatus</string>
   <string name="memory_size">Totaal:</string>

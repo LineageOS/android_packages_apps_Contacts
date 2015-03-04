@@ -83,6 +83,7 @@
         <item name="list_item_padding_bottom">
             @dimen/contact_browser_list_item_padding_top_or_bottom
         </item>
+        <item name="list_item_name_text_color">@color/list_item_name_text_color</item>
         <item name="list_item_padding_left">16dip</item>
         <item name="list_item_gap_between_image_and_text">
             @dimen/contact_browser_list_item_gap_between_image_and_text

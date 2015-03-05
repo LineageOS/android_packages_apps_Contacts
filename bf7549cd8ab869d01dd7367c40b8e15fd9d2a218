@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ad45d7e_7fbb2a0f",
+        "filename": "res/layout/editor_account_header.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 9444
+      },
+      "writtenOn": "2015-03-05T13:02:35Z",
+      "side": 1,
+      "message": "Something got changed on line 73. Newline char?",
+      "revId": "bf7549cd8ab869d01dd7367c40b8e15fd9d2a218",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ad45d7e_ff455a17",
+        "filename": "res/layout/editor_account_header_with_dropdown.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 9444
+      },
+      "writtenOn": "2015-03-05T13:02:35Z",
+      "side": 1,
+      "message": "Something got changed on line 73. Newline char?",
+      "revId": "bf7549cd8ab869d01dd7367c40b8e15fd9d2a218",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ad45d7e_3f48922d",
+        "filename": "res/values/cm_colors.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 9444
+      },
+      "writtenOn": "2015-03-05T13:02:35Z",
+      "side": 1,
+      "message": "Should have CM copyright as its a new file for CM.\nExample here:\nhttps://raw.githubusercontent.com/CyanogenMod/android_packages_apps_Settings/cm-12.0/res/values/cm_colors.xml",
+      "revId": "bf7549cd8ab869d01dd7367c40b8e15fd9d2a218",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ad45d7e_9f553ec8",
+        "filename": "res/values/cm_colors.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 9444
+      },
+      "writtenOn": "2015-03-05T13:02:35Z",
+      "side": 1,
+      "message": "We follow AOSP coding guidelines. No tabs please. https://source.android.com/source/code-style.html",
+      "revId": "bf7549cd8ab869d01dd7367c40b8e15fd9d2a218",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ad45d7e_7f520adf",
+        "filename": "res/values/styles.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 9444
+      },
+      "writtenOn": "2015-03-05T13:02:35Z",
+      "side": 1,
+      "message": "I\u0027m not sure why this is necessary. A theme should be able to overlay PeopleTheme.",
+      "revId": "bf7549cd8ab869d01dd7367c40b8e15fd9d2a218",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

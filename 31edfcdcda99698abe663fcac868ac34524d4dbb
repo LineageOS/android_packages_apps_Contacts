@@ -16,6 +16,24 @@
       "revId": "31edfcdcda99698abe663fcac868ac34524d4dbb",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ad45d7e_1f35ce45",
+        "filename": "res/values/styles.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 12770
+      },
+      "writtenOn": "2015-03-05T15:22:11Z",
+      "side": 1,
+      "message": "Gotcha, thanks. Merge conflicts with AOSP makes sense. Didn\u0027t think of that. Will upload fix shortly.",
+      "parentUuid": "9ad45d7e_5ff8e67c",
+      "revId": "31edfcdcda99698abe663fcac868ac34524d4dbb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

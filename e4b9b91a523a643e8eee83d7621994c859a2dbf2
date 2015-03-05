@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ad45d7e_ff71dae1",
+        "filename": "res/values/styles.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 9199
+      },
+      "writtenOn": "2015-03-05T16:25:54Z",
+      "side": 1,
+      "message": "Can you check if there is an extra character at the end here?\n\nOther than that I think all is good.",
+      "revId": "e4b9b91a523a643e8eee83d7621994c859a2dbf2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

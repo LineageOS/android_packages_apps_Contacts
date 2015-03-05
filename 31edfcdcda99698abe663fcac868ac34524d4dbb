@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ad45d7e_5ff8e67c",
+        "filename": "res/values/styles.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 9199
+      },
+      "writtenOn": "2015-03-05T15:04:00Z",
+      "side": 1,
+      "message": "The only line that should show up as changed is the one where you added \"list_item_name_text_color\", all others should be returned to their previous formatting.\n\nThis will help reduce the number of conflicts when we merge in updates from AOSP.",
+      "revId": "31edfcdcda99698abe663fcac868ac34524d4dbb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

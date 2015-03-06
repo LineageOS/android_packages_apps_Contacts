@@ -21,12 +21,12 @@
   <string name="airplane_mode_on">Geen toegang tot simkaart in vliegmodus</string>
   <string name="number_anr_too_long">Nummer is te lang</string>
   <string name="email_address_too_long">E-mailadres is te lang</string>
-  <string name="sim_card_full">SIM-kaart is vol</string>
+  <string name="sim_card_full">Simkaart is vol</string>
   <string name="tag_too_long">Naam van contact is te lang</string>
   <string name="invalid_phone_number">Telefoonnummer is ongeldig</string>
   <string name="invalid_number_type">Het soort nummer is ongeldig</string>
   <string name="no_phone_number_or_email">Voer een telefoonnummer of e-mailadres in.</string>
-  <string name="memory_card_full">Contact kon niet worden opgeslagen, telefoongeheugen is vol</string>
+  <string name="memory_card_full">Contact kan niet worden opgeslagen: telefoongeheugen is vol</string>
   <string name="contacts_groups_label">Groepen</string>
   <string name="menu_moveGroupMembers">Leden van de groep verplaatsen</string>
   <string name="title_move_members">Leden verplaatsen</string>

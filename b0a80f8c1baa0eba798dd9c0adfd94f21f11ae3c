@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ad45d7e_7954e553",
+        "filename": "res/values/cm_colors.xml",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2015-03-06T22:18:51Z",
+      "side": 1,
+      "message": "Those comments can go.",
+      "revId": "b0a80f8c1baa0eba798dd9c0adfd94f21f11ae3c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

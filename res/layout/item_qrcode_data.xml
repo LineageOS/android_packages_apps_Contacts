@@ -20,18 +20,19 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
 -->
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginLeft="10dip"
     android:orientation="horizontal" >
 
     <LinearLayout
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:gravity="center_vertical"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:layout_toLeftOf="@+id/checkbox">
 
         <TextView
             android:id="@+id/label"
@@ -40,30 +41,29 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:maxWidth="150dp"
             android:singleLine="true"
             android:textSize="18dp" />
 
         <TextView
             android:id="@+id/data"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="50dip"
             android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:maxWidth="150dp"
             android:singleLine="true"
-            android:textSize="15dp" />
+            android:ellipsize="end"
+            android:textSize="15dp"
+           />
     </LinearLayout>
 
     <CheckBox
         android:id="@+id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
         android:layout_marginRight="18dp"
         android:gravity="center_vertical" />
 
-</LinearLayout>
+</RelativeLayout>

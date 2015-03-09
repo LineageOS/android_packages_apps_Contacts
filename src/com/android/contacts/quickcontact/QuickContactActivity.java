@@ -2658,7 +2658,7 @@ public class QuickContactActivity extends ContactsActivity {
                                 onNewIntent(getIntent());
                             }
                         }
-                    }, RcsApiManager.getProfileApi()).show();
+                    }).show();
                 return true;
             }
             case R.id.menu_online_business_hall:

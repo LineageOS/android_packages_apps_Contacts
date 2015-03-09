@@ -24,31 +24,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:descendantFocusability="blocksDescendants"
     android:minHeight="@dimen/detail_min_line_item_height"
-    android:orientation="vertical"
-    android:paddingBottom="5dip"
-    android:paddingLeft="?attr/list_item_padding_left"
-    android:paddingStart="?attr/list_item_padding_left" >
+    android:paddingLeft="@dimen/group_list_padding"
+    android:paddingStart="@dimen/group_list_padding"
+    android:paddingRight="@dimen/group_list_padding"
+    android:paddingEnd="@dimen/group_list_padding" >
 
     <TextView
         android:id="@+id/title_view"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:paddingBottom="5dip"
-        android:paddingLeft="15dp"
         android:paddingTop="8dip"
+        android:visibility="gone"
+        android:ellipsize="middle"
+        android:singleLine="true"
+        android:textSize="14sp"
+        android:textAllCaps="false"
+        android:textDirection="ltr"
+        android:textStyle="bold"
         android:text="@string/rcs_contact_group_item_grouplist"
-        android:textAppearance="@style/DirectoryHeaderStyle"
-        android:visibility="gone" />
+        android:textAppearance="@style/DirectoryHeaderStyle" />
 
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dip"
-        android:layout_marginEnd="?attr/list_item_padding_right"
-        android:layout_marginRight="?attr/list_item_padding_right"
         android:background="@color/secondary_header_separator_color" />
 
     <RelativeLayout
@@ -59,16 +63,14 @@
         android:descendantFocusability="blocksDescendants"
         android:duplicateParentState="true"
         android:paddingBottom="8dip"
-        android:paddingLeft="8dip"
-        android:paddingStart="8dip"
         android:paddingTop="8dip" >
 
         <View
             android:id="@+id/group_icon_view"
-            android:layout_width="50dip"
-            android:layout_height="50dip"
+            android:layout_width="40dip"
+            android:layout_height="40dip"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dip" />
+            android:layout_marginLeft="0dip" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -84,7 +86,8 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textColor="@color/group_name_text_color"
+                android:textAppearance="@style/TextAppearanceMedium" />
 
             <TextView
                 android:id="@+id/group_count"

@@ -23,6 +23,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnShowListener;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextUtils.TruncateAt;
@@ -52,6 +53,7 @@ import com.android.contacts.common.model.RawContactModifier;
 import com.android.contacts.common.model.account.AccountType.EditType;
 import com.android.contacts.common.model.dataitem.DataKind;
 import com.android.contacts.util.DialogManager;
+import com.android.contacts.util.RCSUtil;
 import com.android.contacts.util.DialogManager.DialogShowingView;
 
 import java.util.List;
@@ -360,7 +362,12 @@ public abstract class LabeledEditorView extends LinearLayout implements Editor, 
         // Display label selector if multiple types available
         final boolean hasTypes = RawContactModifier.hasEditTypes(kind);
         setupLabelButton(hasTypes);
-        mLabel.setEnabled(!readOnly && isEnabled());
+        if (RCSUtil.getRcsSupport() && null != entry.getAsInteger(ContactsContract.Data.DATA13)
+                && 1 == entry.getAsInteger(ContactsContract.Data.DATA13)) {
+            mLabel.setEnabled(false);
+        } else {
+            mLabel.setEnabled(!readOnly && isEnabled());
+        }
         if (hasTypes) {
             mType = RawContactModifier.getCurrentType(entry, kind);
             rebuildLabel();

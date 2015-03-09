@@ -283,7 +283,11 @@ public class ContactSaveService extends IntentService {
             deleteContact(intent);
             if (RCSUtil.getRcsSupport() && RCSUtil.isNativeUiInstalled(this)
                     && RCSUtil.isPluginInstalled(this)) {
-                RCSUtil.autoBackupOnceChanged(this);
+                Uri contactUri = intent.getParcelableExtra(EXTRA_CONTACT_URI);
+                if (!TextUtils.isEmpty(contactUri.getPath())
+                        && !contactUri.getPath().contains("profile")) {
+                    RCSUtil.autoBackupOnceChanged(this);
+                }
             }
         } else if (ACTION_JOIN_CONTACTS.equals(action)) {
             joinContacts(intent);

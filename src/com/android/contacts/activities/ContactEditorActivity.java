@@ -76,7 +76,7 @@ public class ContactEditorActivity extends ContactsActivity
         // editing the contact or if this activity should launch another activity to view the
         // contact's details.
         mFinishActivityOnSaveCompleted = intent.getBooleanExtra(
-                INTENT_KEY_FINISH_ACTIVITY_ON_SAVE_COMPLETED, false);
+                INTENT_KEY_FINISH_ACTIVITY_ON_SAVE_COMPLETED, true);
 
         // The only situation where action could be ACTION_JOIN_COMPLETED is if the
         // user joined the contact with another and closed the activity before

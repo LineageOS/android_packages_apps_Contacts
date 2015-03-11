@@ -901,7 +901,7 @@ public class MultiPickContactActivity extends ListActivity implements
                 String selection = null;
                 int slot = getIntent().getIntExtra(SimContactsConstants.SUB,
                     SimContactsConstants.SUB_INVALID);
-                long[] subIds = SubscriptionManager.getSubId(slot);
+                int[] subIds = SubscriptionManager.getSubId(slot);
                 if (SimContactsConstants.SUB_INVALID != slot
                         && subIds != null && subIds.length > 0) {
                     selection = Calls.PHONE_ACCOUNT_ID + "=" + Long.toString(subIds[0]);
@@ -1319,7 +1319,7 @@ public class MultiPickContactActivity extends ListActivity implements
 
                 int slot = SimContactsConstants.SUB_INVALID;
                 if (subId != null && !subId.equals("E")) {
-                    slot = SubscriptionManager.getSlotId(Long.parseLong(subId));
+                    slot = SubscriptionManager.getSlotId(Integer.parseInt(subId));
                 }
                 // set slot
                 subSlotText.setText(MoreContactUtils.getMultiSimAliasesName(
@@ -1433,7 +1433,7 @@ public class MultiPickContactActivity extends ListActivity implements
                 && subscription != SimContactsConstants.SUB_2) {
             return uri;
         }
-        long[] subId = SubscriptionManager.getSubId(subscription);
+        int[] subId = SubscriptionManager.getSubId(subscription);
         if (subId != null && TelephonyManager.getDefault().isMultiSimEnabled()) {
             uri = Uri.parse(SimContactsConstants.SIM_SUB_URI + subId[0]);
         }

@@ -70,7 +70,7 @@ public class PeopleActivityTest
 {
     static {
         // AsyncTask class needs to be initialized on the main thread.
-        AsyncTask.init();
+        //AsyncTask.init();
     }
 
     private static final String TEST_ACCOUNT = "testAccount";

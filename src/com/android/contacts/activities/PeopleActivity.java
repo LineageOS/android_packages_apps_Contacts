@@ -1485,7 +1485,7 @@ public class PeopleActivity extends ContactsActivity implements
                 this.startActivity(exportIntent);
             }
             break;
-        case ImportExportDialogFragment.SUBACTIVITY_SHARE_VISILBLE_CONTACTS:
+        case ImportExportDialogFragment.SUBACTIVITY_SHARE_VISIBLE_CONTACTS:
             if (resultCode == RESULT_OK) {
                 Bundle result = data.getExtras().getBundle(
                         SimContactsConstants.RESULT_KEY);

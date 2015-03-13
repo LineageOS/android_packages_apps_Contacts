@@ -227,7 +227,7 @@ public class ContactSaveService extends IntentService {
         if (0 != mSimMaxCount[subscription]) {
             return mSimMaxCount[subscription];
         }
-        long[] subId = SubscriptionManager.getSubId(subscription);
+        int[] subId = SubscriptionManager.getSubId(subscription);
         try {
             IIccPhoneBook iccIpb = IIccPhoneBook.Stub.asInterface(
                 ServiceManager.getService("simphonebook"));
@@ -690,7 +690,7 @@ public class ContactSaveService extends IntentService {
             int count = 0;
             Cursor c = null;
             Uri iccUri;
-            long[] subId = SubscriptionManager.getSubId(subscription);
+            int[] subId = SubscriptionManager.getSubId(subscription);
             if (!TelephonyManager.getDefault().isMultiSimEnabled()) {
                 iccUri = Uri.parse(SimContactsConstants.SIM_URI);
             } else {

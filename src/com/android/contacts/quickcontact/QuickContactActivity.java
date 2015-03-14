@@ -1854,7 +1854,7 @@ public class QuickContactActivity extends ContactsActivity {
             @Override
             protected MaterialPalette doInBackground(Void... params) {
 
-                if (imageViewDrawable instanceof BitmapDrawable
+                if (imageViewDrawable instanceof BitmapDrawable && mContactData != null
                         && mContactData.getThumbnailPhotoBinaryData() != null
                         && mContactData.getThumbnailPhotoBinaryData().length > 0) {
                     // Perform the color analysis on the thumbnail instead of the full sized

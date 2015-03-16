@@ -15,18 +15,18 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="quick_contact_copied_toast">"Copié dans le presse-papier"</string>
-  <string name="deleteConfirmation_title">Supprimer le contact ?</string>
-  <string name="importConfirmation_title">Importer le contact ?</string>
+  <string name="quick_contact_copied_toast">"Copié dans le presse-papiers"</string>
+  <string name="deleteConfirmation_title">Supprimer le contact?</string>
+  <string name="importConfirmation_title">Importer le contact?</string>
   <string name="menu_deleteContacts">Supprimer les contacts</string>
   <string name="contactDeletedToast">Contact supprimé</string>
   <string name="contactSavedToSimCardError">Enregistrement impossible des contacts sélectionnés sur la carte SIM</string>
   <string name="airplane_mode_on">La carte SIM n\'est pas accessible lorsque le mode avion est activé</string>
   <string name="number_anr_too_long">Le numéro est trop long</string>
-  <string name="email_address_too_long">L\'adresse e-mail est trop longue</string>
-  <string name="sim_card_full">La carte SIM est saturée</string>
+  <string name="email_address_too_long">L\'adresse courriel est trop longue</string>
+  <string name="sim_card_full">La carte SIM est pleine</string>
   <string name="tag_too_long">Le nom du contact est trop long</string>
-  <string name="invalid_phone_number">Le numéro de téléphone est incorrect</string>
+  <string name="invalid_phone_number">Le numéro de téléphone est invalide</string>
   <string name="videocall">Appel vidéo</string>
   <string name="unknown">Inconnu</string>
   <string name="copy_to_target_sim">Carte SIM</string>
@@ -34,33 +34,33 @@
   <string name="search_bar_hint">Rechercher des contacts</string>
   <string name="delete_group_dialog_title">Supprimer le groupe</string>
   <string name="edit_before_call">Modifier le numéro avant l\'appel</string>
-  <string name="description_videocall">Appel vidéo <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_videocall">Appel vidéo <xliff:g id="name"> %1$s </xliff:g></string>
   <string name="description_dial_vt">Appel vidéo vers <xliff:g id="name">%1$s</xliff:g></string>
   <string name="title_group_name">Nom du groupe</string>
   <string name="title_group_add">Nouveau groupe</string>
-  <string name="group_selector">Appuyez pour sélectionner le groupe</string>
-  <string name="title_group_picker">Sélectionner un groupe</string>
+  <string name="group_selector">Cliquer pour sélectionner le groupe</string>
+  <string name="title_group_picker">Sélectionner groupe</string>
   <string name="noGroupsHelpText">"Aucun groupe local."</string>
   <string name="menu_option_delete">Supprimer le groupe</string>
   <string name="toast_not_add">"Impossible d'ajouter tous les contacts dans les comptes non locaux"</string>
   <string name="noMember">Aucun membre dans ce groupe.</string>
   <string name="button_delete">Supprimer</string>
   <string name="title_add_members">Ajouter des membres</string>
-  <string name="select_all">Tous</string>
+  <string name="select_all">Tout</string>
   <string name="action_done">Terminé</string>
   <plurals name="contacts_selected">
     <item quantity="one">%d sélectionné</item>
     <item quantity="other">%d sélectionnés</item>
   </plurals>
   <string name="delete_call_title">Supprimer le journal d\'appels</string>
-  <string name="delete_call_message">Suppression du journal d\'appels\u2026</string>
-  <string name="delete_call_alert">Supprimer le journal d\'appels ?</string>
+  <string name="delete_call_message">Suppression du journal d\'appels en cours\u2026</string>
+  <string name="delete_call_alert">Supprimer le journal d\'appels?</string>
   <string name="title_del_call">Supprimer</string>
-  <string name="menu_sendViaSMS">Envoyer le contact par SMS</string>
+  <string name="menu_sendViaSMS">Envoyer contact par SMS</string>
   <string name="title_switch_group_remote">Groupes distants</string>
   <string name="title_switch_group_local">Groupes locaux</string>
   <string name="import_sim_contacts_title">Importer les contacts de la carte SIM</string>
-  <string name="import_sim_contacts_message">Importation des contacts de la SIM\u2026</string>
+  <string name="import_sim_contacts_message">Importation des contacts de la carte SIM en cours\u2026</string>
   <plurals name="ContactMultiImportConfirmation">
     <item quantity="one">%d contact sera importé.</item>
     <item quantity="other">%d contacts seront importés.</item>
@@ -79,20 +79,20 @@
   <string name="error_group_exist">Un groupe nommé \'<xliff:g id="name">%s</xliff:g>\' existe déjà</string>
   <string name="menu_auto_sync_to_baidu_cloud">Synchronisation automatique avec Baidu Cloud</string>
   <string name="menu_sync_to_baidu_cloud">Synchroniser maintenant avec Baidu Cloud</string>
-  <string name="delete_local_group_dialog_message">Supprimer le groupe \'<xliff:g id="name">%s</xliff:g>\' ?</string>
+  <string name="delete_local_group_dialog_message">Supprimer le groupe \'<xliff:g id="name">%s</xliff:g>\'?</string>
   <string name="edit_local_group_dialog_title">Renommer le groupe</string>
   <string name="too_many_contacts_add_to_group">Impossible d\'ajouter plus de <xliff:g id="count">%d</xliff:g> contacts</string>
-  <string name="no_phone_number_or_email">Veuillez entrer un numéro de téléphone ou une adresse e-mail.</string>
+  <string name="no_phone_number_or_email">Veuillez entrer un numéro de téléphone ou une adresse courriel.</string>
   <string name="memory_card_full">Le contact n\'a pas pu être enregistré, la mémoire du téléphone est saturée</string>
   <string name="menu_memory_status">État de la mémoire</string>
   <string name="memory_status_title">État de la mémoire</string>
   <string name="memory_size">Total :</string>
   <string name="memory_used">Utilisé :</string>
-  <string name="calculating_status_now">Calcul du statut\u2026</string>
+  <string name="calculating_status_now">Calcul du statut en cours\u2026</string>
   <string name="button_moveto">Déplacer</string>
   <string name="menu_copyTo">Copier dans <xliff:g id="destination">%s</xliff:g></string>
-  <string name="no_empty_email_in_usim">La copie du contact a échoué, l\'adresse e-mail est incorrecte</string>
+  <string name="no_empty_email_in_usim">La copie du contact a échoué, l\'adresse courriel est invalide</string>
   <string name="voicemail">Messagerie vocale</string>
   <string name="select_call_title">Sélectionner le journal d\'appels</string>
-  <string name="invalid_number_type">Le type de numéro est incorrect</string>
+  <string name="invalid_number_type">Le type de numéro est invalide</string>
 </resources>

@@ -1309,7 +1309,8 @@ public class MultiPickContactActivity extends ListActivity implements
                 cache.anrs = cursor.getString(SIM_COLUMN_ANRS);
 
                 cliv.setDisplayName(cache.name);
-                cliv.removePhotoView();
+                mContactPhotoManager.loadThumbnail(cliv.getPhotoView(), -1, null, false, true,
+                        new DefaultImageRequest(cache.name, cache.lookupKey, true));
                 if (!TextUtils.isEmpty(cache.number)) {
                     cliv.setPhoneNumber(cache.number, null);
                 } else if (!TextUtils.isEmpty(cache.email)) {
@@ -1318,6 +1319,7 @@ public class MultiPickContactActivity extends ListActivity implements
                 } else {
                     cliv.setPhoneNumber(null, null);
                 }
+                cliv.setChecked(mChoiceSet.containsKey(String.valueOf(cache.id)), true);
             } else if (isPickEmail()) {
                 cache.id = cursor.getLong(EMAIL_COLUMN_ID);
                 cache.email = cursor.getString(EMAIL_COLUMN_ADDRESS);

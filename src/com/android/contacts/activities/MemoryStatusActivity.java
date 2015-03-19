@@ -30,6 +30,7 @@ import android.os.Handler;
 import android.os.Bundle;
 import android.os.Message;
 import android.provider.ContactsContract.RawContacts;
+import android.telecom.PhoneAccount;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -49,6 +50,7 @@ import com.android.contacts.common.model.AccountTypeManager;
 import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.SimContactsConstants;
 import com.android.contacts.R;
+import com.android.contacts.common.model.account.PhoneAccountType;
 import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
@@ -156,6 +158,10 @@ public class MemoryStatusActivity extends ContactsActivity {
         List<AccountWithDataSet> accounts = accountTypes.getAccounts(true);
         ContentResolver cr = context.getContentResolver();
 
+        // Add the local account first, this is a special case.
+        accounts.add(0, new AccountWithDataSet(SimContactsConstants.PHONE_NAME,
+                                               PhoneAccountType.ACCOUNT_TYPE,
+                                               null));
         for (AccountWithDataSet account : accounts) {
             AccountType accountType = accountTypes.getAccountType(account.type, account.dataSet);
             if (accountType.isExtension() && !account.hasData(context)) {

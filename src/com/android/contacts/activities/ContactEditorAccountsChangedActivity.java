@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract.Intents;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -117,6 +118,8 @@ public class ContactEditorAccountsChangedActivity extends Activity {
             // This button allows the user to add a new account to the device and return to
             // this app afterwards.
             leftButton.setText(getString(R.string.add_new_account));
+            leftButton.setSingleLine(true);
+            leftButton.setEllipsize(TextUtils.TruncateAt.END_SMALL);
             leftButton.setOnClickListener(mAddAccountClickListener);
 
             // This button allows the user to continue creating the contact in the specified

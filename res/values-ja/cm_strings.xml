@@ -65,7 +65,7 @@
   </plurals>
   <string name="import_finish">インポートが完了しました</string>
   <plurals name="import_stop">
-    <item quantity="other">インポートはキャンセルされました、%d項目がインポートされました</item>
+    <item quantity="other">インポートはキャンセルされました、%d個のアイテムがインポートされました</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="other">%d件の連絡先が削除されます。</item>

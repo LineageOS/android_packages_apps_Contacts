@@ -20,6 +20,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
@@ -52,6 +53,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageButton;
+import android.widget.Toast;
 import android.widget.Toolbar;
 import android.widget.Toast;
 
@@ -705,7 +707,7 @@ public class PeopleActivity extends ContactsActivity implements
 
     private void showEmptyStateForTab(int tab) {
         if (mContactsUnavailableFragment != null) {
-            switch (tab) {
+            switch (getTabPositionForTextDirection(tab)) {
                 case TabState.FAVORITES:
                     mContactsUnavailableFragment.setMessageText(
                             R.string.listTotalAllContactsZeroStarred, -1);
@@ -1245,7 +1247,7 @@ public class PeopleActivity extends ContactsActivity implements
             helpMenu.setVisible(false);
             makeMenuItemVisible(menu, R.id.menu_delete, false);
         } else {
-            switch (mActionBarAdapter.getCurrentTab()) {
+            switch (getTabPositionForTextDirection(mActionBarAdapter.getCurrentTab())) {
                 case TabState.FAVORITES:
                     addGroupMenu.setVisible(false);
                     contactsFilterMenu.setVisible(false);
@@ -1548,8 +1550,8 @@ public class PeopleActivity extends ContactsActivity implements
                         && !Character.isWhitespace(unicodeChar)) {
                     String query = new String(new int[]{ unicodeChar }, 0, 1);
                     if (!mActionBarAdapter.isSearchMode()) {
-                        mActionBarAdapter.setQueryString(query);
                         mActionBarAdapter.setSearchMode(true);
+                        mActionBarAdapter.setQueryString(query);
                         return true;
                     }
                 }
@@ -1623,7 +1625,12 @@ public class PeopleActivity extends ContactsActivity implements
                 if (extras != null) {
                     intent.putExtras(extras);
                 }
-                startActivity(intent);
+                try {
+                    startActivity(intent);
+                } catch (ActivityNotFoundException ex) {
+                    Toast.makeText(PeopleActivity.this, R.string.missing_app,
+                            Toast.LENGTH_SHORT).show();
+                }
                 break;
         default:
             Log.wtf(TAG, "Unexpected onClick event from " + view);

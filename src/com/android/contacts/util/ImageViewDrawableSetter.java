@@ -171,8 +171,14 @@ public class ImageViewDrawableSetter {
     }
 
     private BitmapDrawable decodedBitmapDrawable(byte[] compressed) {
+        if (compressed == null) {
+            return null;
+        }
         final Resources rsrc = mTarget.getResources();
         Bitmap bitmap = BitmapFactory.decodeByteArray(compressed, 0, compressed.length);
+        if (bitmap == null) {
+            return null;
+        }
         if (bitmap.getHeight() != bitmap.getWidth()) {
             // Crop the bitmap into a square.
             final int size = Math.min(bitmap.getWidth(), bitmap.getHeight());

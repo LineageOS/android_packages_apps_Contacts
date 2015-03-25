@@ -93,7 +93,6 @@
         android:layout_below="@+id/sub_header"
         android:layout_width="@dimen/expanding_entry_card_item_icon_size"
         android:layout_height="@dimen/expanding_entry_card_item_icon_size"
-        android:tint="@color/quickcontact_entry_sub_header_text_color"
         android:layout_gravity="center_vertical"
         android:scaleType="centerInside"/>
 

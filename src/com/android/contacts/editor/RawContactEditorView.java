@@ -400,10 +400,6 @@ public class RawContactEditorView extends BaseRawContactEditorView {
             }
         }
 
-        if (mGroupMembershipView != null) {
-            mFields.addView(mGroupMembershipView);
-        }
-
         addToDefaultGroupIfNeeded();
     }
 

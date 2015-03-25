@@ -499,9 +499,7 @@ public class MultiPickContactActivity extends ListActivity implements
             case R.id.dialog_delete_contact_confirmation:
                 return new AlertDialog.Builder(this)
                         .setTitle(R.string.deleteConfirmation_title)
-                        .setMessage(getResources().getQuantityString(
-                                R.plurals.ContactMultiDeleteConfirmation,
-                                mChoiceSet.size(), mChoiceSet.size()))
+                        .setMessage("")
                         .setNegativeButton(android.R.string.cancel, null)
                         .setPositiveButton(android.R.string.ok, this)
                         .create();
@@ -515,15 +513,35 @@ public class MultiPickContactActivity extends ListActivity implements
             case R.id.dialog_import_sim_contact_confirmation:
                 return new AlertDialog.Builder(this)
                         .setTitle(R.string.importConfirmation_title)
-                        .setMessage(getResources().getQuantityString(
-                                R.plurals.ContactMultiImportConfirmation,
-                                mChoiceSet.size(), mChoiceSet.size()))
+                        .setMessage("")
                         .setNegativeButton(android.R.string.cancel, null)
                         .setPositiveButton(android.R.string.ok, this)
                         .create();
         }
 
         return super.onCreateDialog(id, bundle);
+    }
+
+    @Override
+    protected void onPrepareDialog(int id, Dialog dialog, Bundle bundle) {
+        CharSequence message = null;
+        int size = mChoiceSet.size();
+
+        switch (id) {
+            case R.id.dialog_delete_contact_confirmation:
+                message = getResources().getQuantityString(
+                        R.plurals.ContactMultiDeleteConfirmation, size, size);
+                break;
+            case R.id.dialog_import_sim_contact_confirmation:
+                message = getResources().getQuantityString(
+                        R.plurals.ContactMultiImportConfirmation, size, size);
+                break;
+            default:
+                super.onPrepareDialog(id, dialog);
+                return;
+        }
+
+        ((AlertDialog)dialog).setMessage(message);
     }
 
     private class DeleteContactsThread extends Thread implements

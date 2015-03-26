@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ac665da_3c441773",
+        "filename": "src/com/android/contacts/activities/MultiPickContactActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2015-03-26T06:44:08Z",
+      "side": 1,
+      "message": "same as below",
+      "revId": "9dcab785d450a1d54ac487b203c992d404d83fb2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac665da_dc4ea395",
+        "filename": "src/com/android/contacts/activities/MultiPickContactActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2015-03-26T06:44:08Z",
+      "side": 1,
+      "message": "Delete the line, the default is null which will do what you want.",
+      "revId": "9dcab785d450a1d54ac487b203c992d404d83fb2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac665da_bc580758",
+        "filename": "src/com/android/contacts/activities/MultiPickContactActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2015-03-26T06:44:08Z",
+      "side": 1,
+      "message": "curly braces are not needed on case statements.",
+      "revId": "9dcab785d450a1d54ac487b203c992d404d83fb2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac665da_9c554b1f",
+        "filename": "src/com/android/contacts/activities/MultiPickContactActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2015-03-26T06:44:08Z",
+      "side": 1,
+      "message": "\u003cspacing nitpick\u003e the android guidelines don\u0027t include spaces on cast items or before/after ().",
+      "revId": "9dcab785d450a1d54ac487b203c992d404d83fb2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

@@ -1687,8 +1687,15 @@ public class QuickContactActivity extends ContactsActivity {
     private Entry groupDataItemsToEntry(List<DataItem> dataItems) {
         final List<String> titles = new ArrayList<>();
         for (DataItem dataItem : dataItems) {
-            final String title = dataItem instanceof GroupMembershipDataItem
-                    ? ((GroupMembershipDataItem) dataItem).getGroupTitle() : null;
+            if (!(dataItem instanceof GroupMembershipDataItem)) {
+                continue;
+            }
+
+            final GroupMembershipDataItem groupItem = (GroupMembershipDataItem) dataItem;
+            if (groupItem.isDefaultGroup() || groupItem.isFavoritesGroup()) {
+                continue;
+            }
+            final String title = groupItem.getGroupTitle();
             if (title != null) {
                 titles.add(title);
             }

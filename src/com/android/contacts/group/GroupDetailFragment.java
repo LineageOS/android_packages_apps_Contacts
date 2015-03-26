@@ -518,7 +518,7 @@ public class GroupDetailFragment extends Fragment implements OnScrollListener {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_create_group_chat:{
-                startCreateGroupChatActivity(mContext, mGroupMembersPhones, "");
+                startCreateGroupChatActivity(mGroupMembersPhones);
                 break;
             }
             case R.id.menu_enhancedscreen:{
@@ -564,18 +564,10 @@ public class GroupDetailFragment extends Fragment implements OnScrollListener {
         this.getActivity().invalidateOptionsMenu();
     }
 
-    public void startCreateGroupChatActivity(Context context, String number, String message) {
-        Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-        sendIntent.putExtra("sms_body", message);
-        if (!TextUtils.isEmpty(number)) {
-            sendIntent.putExtra("address", number);
-        }
-        sendIntent.putExtra("isGroupChat", true);
-        sendIntent.setComponent(new ComponentName("com.android.mms",
-                "com.android.mms.ui.ComposeMessageActivity"));
-        if (RCSUtil.isActivityIntentAvailable(context, sendIntent)) {
-            mContext.startActivity(sendIntent);
-        }
+    public void startCreateGroupChatActivity(String number) {
+        Intent intent = new Intent("com.android.mms.rcs.CREATR_GROUP_CHAT");
+        intent.putExtra("recipients", number);
+        mContext.startActivity(intent);
     }
 
     public void closeActivityAfterDelete(boolean closeActivity) {

@@ -98,7 +98,11 @@
     <string name="rcs_updateting_enhance_screen">updating enhance screen...</string>
     <string name="btn_ok">Ok</string>
     <string name="btn_cancel">Cancel</string>
+    <string name="rcs_network_uanvailable">network unvailable</string>
     <string name="import_stop">"Import stopped"</string>
     <string name="contact_backup_success">Contacts backup successfully!</string>
     <string name="contact_backup_fail">Contacts backup unsuccessfully!</string>
+    <string name="first_name_max_length">the first name must not exceed 20 bytes.</string>
+    <string name="last_name_max_length">the last name must not exceed 20 bytes.</string>
+    <string name="full_name_max_length">the full name must not exceed 40 bytes.</string>
 </resources>

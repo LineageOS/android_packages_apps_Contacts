@@ -47,6 +47,12 @@ import java.util.Map;
  */
 public class StructuredNameEditorView extends TextFieldsEditorView {
 
+    public interface ExpandListener {
+        public void onExpand(boolean isExpand);
+    }
+
+    private ExpandListener mExpandListener;
+
     private StructuredNameDataItem mSnapshot;
     private boolean mChanged;
 
@@ -60,6 +66,10 @@ public class StructuredNameEditorView extends TextFieldsEditorView {
 
     public StructuredNameEditorView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+    }
+
+    public void setExpandListener(ExpandListener expandListener) {
+        this.mExpandListener = expandListener;
     }
 
     @Override
@@ -108,7 +118,9 @@ public class StructuredNameEditorView extends TextFieldsEditorView {
                 switchFromStructuredNameToFullName();
             }
         }
-
+        if(mExpandListener != null){
+            mExpandListener.onExpand(areOptionalFieldsVisible());
+        }
         super.onOptionalFieldVisibilityChange();
     }
 

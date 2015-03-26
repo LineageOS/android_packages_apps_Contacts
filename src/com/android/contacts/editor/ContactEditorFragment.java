@@ -32,6 +32,7 @@ import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -40,6 +41,8 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
+import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Event;
 import android.provider.ContactsContract.CommonDataKinds.Organization;
@@ -85,6 +88,7 @@ import com.android.contacts.common.util.AccountsListAdapter.AccountListFilter;
 import com.android.contacts.detail.PhotoSelectionHandler;
 import com.android.contacts.editor.AggregationSuggestionEngine.Suggestion;
 import com.android.contacts.editor.Editor.EditorListener;
+import com.android.contacts.editor.StructuredNameEditorView.ExpandListener;
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.ContactLoader;
 import com.android.contacts.common.model.RawContact;
@@ -350,6 +354,7 @@ public class ContactEditorFragment extends Fragment implements
     private boolean mNewLocalProfile = false;
     private boolean mIsUserProfile = false;
     private boolean mDisableDeleteMenuOption = false;
+    private boolean mEditorsIsExpand = false;
 
     public ContactEditorFragment() {
     }
@@ -802,7 +807,7 @@ public class ContactEditorFragment extends Fragment implements
 
         // Ensure we have some default fields (if the account type does not support a field,
         // ensureKind will not add it, so it is safe to add e.g. Event)
-        RawContactModifier.ensureKindExists(insert, newAccountType, Phone.CONTENT_ITEM_TYPE);
+        ValuesDelta phoneChild = RawContactModifier.ensureKindExists(insert, newAccountType, Phone.CONTENT_ITEM_TYPE);
         RawContactModifier.ensureKindExists(insert, newAccountType, Email.CONTENT_ITEM_TYPE);
         RawContactModifier.ensureKindExists(insert, newAccountType, Organization.CONTENT_ITEM_TYPE);
         RawContactModifier.ensureKindExists(insert, newAccountType, Event.CONTENT_ITEM_TYPE);
@@ -812,6 +817,21 @@ public class ContactEditorFragment extends Fragment implements
         // Set the correct URI for saving the contact as a profile
         if (mNewLocalProfile) {
             insert.setProfileQueryUri();
+            if (RCSUtil.getRcsSupport()) {
+                String myPhoneNumber = RCSUtil.getMyPhoneNumber(mContext);
+                if (!TextUtils.isEmpty(myPhoneNumber)) {
+                    phoneChild.put(Phone.NUMBER, myPhoneNumber);
+                    phoneChild.put(ContactsContract.Data.DATA13, 1);
+                }
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+                String latestTerminal = prefs.getString(RCSUtil.PREF_MY_TEMINAL, "");
+                if (!TextUtils.isEmpty(myPhoneNumber)
+                        && !TextUtils.equals(latestTerminal, myPhoneNumber)) {
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putString(RCSUtil.PREF_MY_TEMINAL, myPhoneNumber);
+                    editor.apply();
+                }
+            }
         }
 
         mState.add(insert);
@@ -910,6 +930,12 @@ public class ContactEditorFragment extends Fragment implements
                     public void onDeleteRequested(Editor removedEditor) {
                     }
                 };
+                ExpandListener expandListener = new ExpandListener(){
+                    @Override
+                    public void onExpand(boolean isExpand) {
+                        mEditorsIsExpand = isExpand;
+                    }
+                };
 
                 final StructuredNameEditorView nameEditor = rawContactEditor.getNameEditor();
                 if (mRequestFocus) {
@@ -917,6 +943,7 @@ public class ContactEditorFragment extends Fragment implements
                     mRequestFocus = false;
                 }
                 nameEditor.setEditorListener(listener);
+                nameEditor.setExpandListener(expandListener);
                 if (!TextUtils.isEmpty(mDefaultDisplayName)) {
                     nameEditor.setDisplayName(mDefaultDisplayName);
                 }
@@ -1207,7 +1234,13 @@ public class ContactEditorFragment extends Fragment implements
         if (!hasValidState() || mStatus != Status.EDITING) {
             return false;
         }
-
+        if (mIsUserProfile || (mIntentExtras != null &&
+                mIntentExtras.getBoolean(INTENT_EXTRA_NEW_LOCAL_PROFILE))) {
+            if (!RCSUtil
+                    .judgeUserNameLength(mContext, mState, mEditorsIsExpand)) {
+                return false;
+            }
+        }
         // If we are about to close the editor - there is no need to refresh the data
         if (saveMode == SaveMode.CLOSE || saveMode == SaveMode.SPLIT) {
             getLoaderManager().destroyLoader(LOADER_DATA);
@@ -1355,7 +1388,7 @@ public class ContactEditorFragment extends Fragment implements
                         Toast.makeText(mContext, R.string.contactSavedToast, Toast.LENGTH_SHORT)
                                 .show();
                         if (RCSUtil.getRcsSupport() && RCSUtil.isNativeUiInstalled(mContext)
-                                && RCSUtil.isPluginInstalled(mContext)) {
+                                && RCSUtil.isPluginInstalled(mContext) && !isEditingUserProfile()) {
                             RCSUtil.autoBackupOnceChanged(mContext);
                         }
                     } else {

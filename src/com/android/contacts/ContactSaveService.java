@@ -229,7 +229,7 @@ public class ContactSaveService extends IntentService {
         if (0 != mSimMaxCount[subscription]) {
             return mSimMaxCount[subscription];
         }
-        long[] subId = SubscriptionManager.getSubId(subscription);
+        int[] subId = SubscriptionManager.getSubId(subscription);
         try {
             IIccPhoneBook iccIpb = IIccPhoneBook.Stub.asInterface(
                 ServiceManager.getService("simphonebook"));
@@ -283,7 +283,11 @@ public class ContactSaveService extends IntentService {
             deleteContact(intent);
             if (RCSUtil.getRcsSupport() && RCSUtil.isNativeUiInstalled(this)
                     && RCSUtil.isPluginInstalled(this)) {
-                RCSUtil.autoBackupOnceChanged(this);
+                Uri contactUri = intent.getParcelableExtra(EXTRA_CONTACT_URI);
+                if (!TextUtils.isEmpty(contactUri.getPath())
+                        && !contactUri.getPath().contains("profile")) {
+                    RCSUtil.autoBackupOnceChanged(this);
+                }
             }
         } else if (ACTION_JOIN_CONTACTS.equals(action)) {
             joinContacts(intent);
@@ -736,7 +740,7 @@ public class ContactSaveService extends IntentService {
             int count = 0;
             Cursor c = null;
             Uri iccUri;
-            long[] subId = SubscriptionManager.getSubId(subscription);
+            int[] subId = SubscriptionManager.getSubId(subscription);
             if (!TelephonyManager.getDefault().isMultiSimEnabled()) {
                 iccUri = Uri.parse(SimContactsConstants.SIM_URI);
             } else {

@@ -1010,7 +1010,7 @@ public class QuickContactActivity extends ContactsActivity {
             // the name mimetype.
             final List<Entry> aboutEntries = dataItemsToEntries(mimeTypeItems,
                     /* aboutCardTitleOut = */ null);
-            if (aboutEntries.size() > 0) {
+            if (aboutEntries != null && aboutEntries.size() > 0) {
                 aboutCardEntries.add(aboutEntries);
             }
         }

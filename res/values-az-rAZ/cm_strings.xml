@@ -17,7 +17,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="airplane_mode_on">Uçuş rejimi fəal olduqda SIM karta giriş mümkün deyil</string>
+  <string name="contactSavedToSimCardError">Seçilən şəxslər SIM kartda saxlanılmadı</string>
+  <string name="airplane_mode_on">Uçuş rejimi fəal olduqda SIM karta müraciət mümkün deyil</string>
   <string name="edit_before_call">Zəngdən əvvəl nömrəyə düzəliş et</string>
   <string name="menu_sendViaSMS">Şəxsi SMS ilə göndər</string>
   <string name="select_all">Hamısı</string>

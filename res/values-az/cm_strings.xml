@@ -21,7 +21,7 @@
   <string name="menu_deleteContacts">Şəxsləri sil</string>
   <string name="contactDeletedToast">Şəxs silindi</string>
   <string name="contactSavedToSimCardError">Seçilən şəxslər SIM kartda saxlanılmadı</string>
-  <string name="airplane_mode_on">Uçuş modu açıq olarkən SIM karta giriş mümkün deyil</string>
+  <string name="airplane_mode_on">Uçuş rejimi fəal olduqda SIM karta müraciət mümkün deyil</string>
   <string name="number_anr_too_long">Nömrə çox uzundur</string>
   <string name="email_address_too_long">E-poçt ünvanı çox uzundur</string>
   <string name="sim_card_full">SIM kart doludur</string>

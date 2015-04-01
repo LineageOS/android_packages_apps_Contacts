@@ -28,6 +28,14 @@
     <include
         layout="@layout/editor_account_selector" />
 
+    <TextView
+        android:id="@+id/attribution_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/editor_attribution_text_size"
+        android:layout_marginLeft="@dimen/editor_attribution_text_margin_start"
+        android:visibility="gone"/>
+
     <LinearLayout
         android:id="@+id/collapsable_section"
         android:layout_width="match_parent"

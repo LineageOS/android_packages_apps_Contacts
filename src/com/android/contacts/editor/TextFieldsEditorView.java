@@ -17,6 +17,7 @@
 package com.android.contacts.editor;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -61,6 +62,7 @@ public class TextFieldsEditorView extends LabeledEditorView {
     private int mPreviousViewHeight;
     private int mHintTextColor;
     private int mHintTextColorUnfocused;
+    private int mOriginalEditTextColor;
 
     public TextFieldsEditorView(Context context) {
         super(context);
@@ -218,8 +220,8 @@ public class TextFieldsEditorView extends LabeledEditorView {
 
     @Override
     public void setValues(DataKind kind, ValuesDelta entry, RawContactDelta state, boolean readOnly,
-            ViewIdGenerator vig) {
-        super.setValues(kind, entry, state, readOnly, vig);
+            ViewIdGenerator vig, final DrawingOptions drawingOptions) {
+        super.setValues(kind, entry, state, readOnly, vig, drawingOptions);
         // Remove edit texts that we currently have
         if (mFieldEditTexts != null) {
             for (EditText fieldEditText : mFieldEditTexts) {
@@ -269,6 +271,12 @@ public class TextFieldsEditorView extends LabeledEditorView {
             final String column = field.column;
             final String value = entry.getAsString(column);
             fieldView.setText(value);
+            if (!TextUtils.isEmpty(value)) {
+                if (drawingOptions != null && drawingOptions.getTextColor() != null) {
+                    mOriginalEditTextColor = fieldView.getCurrentTextColor();
+                    fieldView.setTextColor(drawingOptions.getTextColor());
+                }
+            }
 
             // Show the delete button if we have a non-null value
             setDeleteButtonVisible(value != null);
@@ -287,6 +295,10 @@ public class TextFieldsEditorView extends LabeledEditorView {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if (drawingOptions != null &&
+                            Boolean.TRUE.equals(drawingOptions.getIsTextColorTransient())) {
+                        fieldView.setTextColor(mOriginalEditTextColor);
+                    }
                 }
             });
 

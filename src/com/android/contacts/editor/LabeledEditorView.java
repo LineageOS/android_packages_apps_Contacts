@@ -87,6 +87,7 @@ public abstract class LabeledEditorView extends LinearLayout implements Editor, 
     private DialogManager mDialogManager = null;
     private EditorListener mListener;
     protected int mMinLineItemHeight;
+    private DrawingOptions mDrawingOptions;
 
     /**
      * A marker in the spinner adapter of the currently selected custom type.
@@ -333,7 +334,7 @@ public abstract class LabeledEditorView extends LinearLayout implements Editor, 
     }
 
     protected void rebuildValues() {
-        setValues(mKind, mEntry, mState, mReadOnly, mViewIdGenerator);
+        setValues(mKind, mEntry, mState, mReadOnly, mViewIdGenerator, mDrawingOptions);
     }
 
     /**
@@ -342,7 +343,7 @@ public abstract class LabeledEditorView extends LinearLayout implements Editor, 
      */
     @Override
     public void setValues(DataKind kind, ValuesDelta entry, RawContactDelta state, boolean readOnly,
-            ViewIdGenerator vig) {
+            ViewIdGenerator vig, DrawingOptions drawingOptions) {
         mKind = kind;
         mEntry = entry;
         mState = state;

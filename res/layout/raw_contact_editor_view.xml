@@ -24,6 +24,15 @@
     <include
         layout="@layout/editor_account_header_with_dropdown" />
 
+    <TextView
+        android:id="@+id/attribution_space"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="3dp"
+        android:visibility="gone" />
+
     <LinearLayout
         android:id="@+id/body"
         android:layout_width="match_parent"

@@ -64,8 +64,8 @@ public class StructuredNameEditorView extends TextFieldsEditorView {
 
     @Override
     public void setValues(DataKind kind, ValuesDelta entry, RawContactDelta state, boolean readOnly,
-            ViewIdGenerator vig) {
-        super.setValues(kind, entry, state, readOnly, vig);
+            ViewIdGenerator vig, DrawingOptions drawingOptions) {
+        super.setValues(kind, entry, state, readOnly, vig, drawingOptions);
         if (mSnapshot == null) {
             mSnapshot = (StructuredNameDataItem) DataItem.createFrom(
                     new ContentValues(getValues().getCompleteValues()));

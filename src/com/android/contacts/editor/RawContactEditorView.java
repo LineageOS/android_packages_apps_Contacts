@@ -180,7 +180,7 @@ public class RawContactEditorView extends BaseRawContactEditorView {
      */
     @Override
     public void setState(RawContactDelta state, AccountType type, ViewIdGenerator vig,
-            boolean isProfile) {
+            boolean isProfile, DrawingOptions drawingOptions) {
 
         mState = state;
 
@@ -300,11 +300,11 @@ public class RawContactEditorView extends BaseRawContactEditorView {
                 // Handle special case editor for structured name
                 final ValuesDelta primary = state.getPrimaryEntry(mimeType);
                 DataKind dataKind = type.getKindForMimetype(DataKind.PSEUDO_MIME_TYPE_DISPLAY_NAME);
-                mName.setValues(dataKind, primary, state, false, vig);
+                mName.setValues(dataKind, primary, state, false, vig, drawingOptions);
                 if (!(SimContactsConstants.ACCOUNT_TYPE_SIM).equals(type.accountType)) {
                     mPhoneticName.setValues(
                         type.getKindForMimetype(DataKind.PSEUDO_MIME_TYPE_PHONETIC_NAME),
-                        primary, state, false, vig);
+                        primary, state, false, vig, drawingOptions);
                     // It is useful to use Nickname outside of a KindSectionView so that we can treat it
                     // as a part of StructuredName's fake KindSectionView, even though it uses a
                     // different CP2 mime-type. We do a bit of extra work below to make this possible.
@@ -314,7 +314,8 @@ public class RawContactEditorView extends BaseRawContactEditorView {
                         if (primaryNickNameEntry == null) {
                             primaryNickNameEntry = RawContactModifier.insertChild(state, nickNameKind);
                         }
-                        mNickName.setValues(nickNameKind, primaryNickNameEntry, state, false, vig);
+                        mNickName.setValues(nickNameKind, primaryNickNameEntry, state, false, vig,
+                                drawingOptions);
                         mNickName.setDeletable(false);
                     } else {
                         mPhoneticName.setPadding(0, 0, 0, (int) getResources().getDimension(
@@ -327,7 +328,7 @@ public class RawContactEditorView extends BaseRawContactEditorView {
             } else if (Photo.CONTENT_ITEM_TYPE.equals(mimeType)) {
                 // Handle special case editor for photos
                 final ValuesDelta primary = state.getPrimaryEntry(mimeType);
-                getPhotoEditor().setValues(kind, primary, state, false, vig);
+                getPhotoEditor().setValues(kind, primary, state, false, vig, drawingOptions);
             } else if (GroupMembership.CONTENT_ITEM_TYPE.equals(mimeType)) {
                 if (mGroupMembershipView != null) {
                     mGroupMembershipView.setState(state);
@@ -337,7 +338,7 @@ public class RawContactEditorView extends BaseRawContactEditorView {
                 final KindSectionView section = (KindSectionView)mInflater.inflate(
                     R.layout.item_kind_section, mFields, false);
                 section.setEnabled(isEnabled());
-                section.setState(kind, state, false, vig);
+                section.setState(kind, state, false, vig, drawingOptions);
                 mFields.addView(section);
                 if (SimContactsConstants.ACCOUNT_TYPE_SIM.equals(type.accountType) ) {
                     String accountName = state.getAccountName();
@@ -380,7 +381,7 @@ public class RawContactEditorView extends BaseRawContactEditorView {
                     }
                 }
                 section.setEnabled(isEnabled());
-                section.setState(kind, state, false, vig);
+                section.setState(kind, state, false, vig, drawingOptions);
                 mFields.addView(section);
             } else if (DataKind.PSEUDO_MIME_TYPE_DISPLAY_NAME.equals(mimeType)
                     || DataKind.PSEUDO_MIME_TYPE_PHONETIC_NAME.equals(mimeType)
@@ -395,7 +396,7 @@ public class RawContactEditorView extends BaseRawContactEditorView {
                 final KindSectionView section = (KindSectionView)mInflater.inflate(
                         R.layout.item_kind_section, mFields, false);
                 section.setEnabled(isEnabled());
-                section.setState(kind, state, false, vig);
+                section.setState(kind, state, false, vig, drawingOptions);
                 mFields.addView(section);
             }
         }

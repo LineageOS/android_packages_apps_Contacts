@@ -115,10 +115,11 @@ public abstract class BaseRawContactEditorView extends LinearLayout {
     /**
      * Set the internal state for this view, given a current
      * {@link RawContactDelta} state and the {@link AccountType} that
-     * apply to that state.
+     * apply to that state. Also takes in an additional {@link DrawingOptions}
+     * parameter to customize the final look of the UI.
      */
     public abstract void setState(RawContactDelta state, AccountType source, ViewIdGenerator vig,
-            boolean isProfile);
+            boolean isProfile, DrawingOptions drawingOptions);
 
     /* package */ void setExpanded(boolean value) {
         // only allow collapsing if we are one of several children

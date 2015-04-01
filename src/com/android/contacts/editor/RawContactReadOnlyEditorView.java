@@ -113,7 +113,7 @@ public class RawContactReadOnlyEditorView extends BaseRawContactEditorView
      */
     @Override
     public void setState(RawContactDelta state, AccountType type, ViewIdGenerator vig,
-            boolean isProfile) {
+            boolean isProfile, DrawingOptions drawingOptions) {
         // Remove any existing sections
         mGeneral.removeAllViews();
 
@@ -172,7 +172,8 @@ public class RawContactReadOnlyEditorView extends BaseRawContactEditorView
             boolean hasPhotoEditor = type.getKindForMimetype(Photo.CONTENT_ITEM_TYPE) != null;
             setHasPhotoEditor(hasPhotoEditor);
             primary = state.getPrimaryEntry(Photo.CONTENT_ITEM_TYPE);
-            getPhotoEditor().setValues(kind, primary, state, !type.areContactsWritable(), vig);
+            getPhotoEditor().setValues(kind, primary, state, !type.areContactsWritable(), vig,
+                    drawingOptions);
         }
 
         // Name

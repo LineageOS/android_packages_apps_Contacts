@@ -349,7 +349,7 @@ public abstract class LabeledEditorView extends LinearLayout implements Editor, 
     }
 
     protected void rebuildValues() {
-        setValues(mKind, mEntry, mState, mReadOnly, mViewIdGenerator);
+        setValues(mKind, mEntry, mState, mReadOnly, mViewIdGenerator, null);
     }
 
     /**
@@ -359,7 +359,7 @@ public abstract class LabeledEditorView extends LinearLayout implements Editor, 
      */
     @Override
     public void setValues(DataKind kind, ValuesDelta entry, RawContactDelta state, boolean readOnly,
-            ViewIdGenerator vig) {
+            ViewIdGenerator vig, DrawingOptions drawingOptions) {
         mKind = kind;
         mEntry = entry;
         mState = state;

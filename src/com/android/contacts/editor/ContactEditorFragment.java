@@ -64,6 +64,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListPopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.contacts.ContactSaveService;
@@ -152,6 +153,10 @@ public class ContactEditorFragment extends Fragment implements
 
     public static final String INTENT_EXTRA_DISABLE_DELETE_MENU_OPTION =
             "disableDeleteMenuOption";
+
+    public static final String INTENT_EXTRA_SUGGESTED_TEXT_COLOR = "suggestedTextColor";
+    public static final String INTENT_EXTRA_CONTACT_INFO_SOURCE = "contactInfoSource";
+    public static final String INTENT_EXTRA_TEXT_COLOR_TRANSIENT = "textColorTransient";
 
     /**
      * Modes that specify what the AsyncTask has to perform after saving
@@ -289,6 +294,9 @@ public class ContactEditorFragment extends Fragment implements
     private View mAggregationSuggestionView;
 
     private ListPopupWindow mAggregationSuggestionPopup;
+
+    private String mContactInfoAttribution;
+    private DrawingOptions mDrawingOptions;
 
     private static final class AggregationSuggestionAdapter extends BaseAdapter {
         private final Activity mActivity;
@@ -487,12 +495,26 @@ public class ContactEditorFragment extends Fragment implements
         mAction = action;
         mLookupUri = lookupUri;
         mIntentExtras = intentExtras;
-        mAutoAddToDefaultGroup = mIntentExtras != null
-                && mIntentExtras.containsKey(INTENT_EXTRA_ADD_TO_DEFAULT_DIRECTORY);
-        mNewLocalProfile = mIntentExtras != null
-                && mIntentExtras.getBoolean(INTENT_EXTRA_NEW_LOCAL_PROFILE);
-        mDisableDeleteMenuOption = mIntentExtras != null
-                && mIntentExtras.getBoolean(INTENT_EXTRA_DISABLE_DELETE_MENU_OPTION);
+
+        if (mIntentExtras != null) {
+            mAutoAddToDefaultGroup = mIntentExtras
+                    .containsKey(INTENT_EXTRA_ADD_TO_DEFAULT_DIRECTORY);
+            mNewLocalProfile = mIntentExtras.getBoolean(INTENT_EXTRA_NEW_LOCAL_PROFILE);
+            mDisableDeleteMenuOption = mIntentExtras
+                    .getBoolean(INTENT_EXTRA_DISABLE_DELETE_MENU_OPTION);
+
+            mDrawingOptions = new DrawingOptions();
+            if (mIntentExtras.containsKey(INTENT_EXTRA_SUGGESTED_TEXT_COLOR)) {
+                mDrawingOptions.setTextColor(
+                        intentExtras.getInt(INTENT_EXTRA_SUGGESTED_TEXT_COLOR));
+            }
+            if (mIntentExtras.containsKey(INTENT_EXTRA_TEXT_COLOR_TRANSIENT)) {
+                mDrawingOptions.setIsTextColorTransient(
+                        intentExtras.getBoolean(INTENT_EXTRA_TEXT_COLOR_TRANSIENT));
+            }
+
+            mContactInfoAttribution = mIntentExtras.getString(INTENT_EXTRA_CONTACT_INFO_SOURCE);
+        }
     }
 
     public void setListener(Listener value) {
@@ -887,9 +909,20 @@ public class ContactEditorFragment extends Fragment implements
                 editor.setCollapsed(i != 0);
             }
 
+            // add contact source attribution
+            if (!TextUtils.isEmpty(mContactInfoAttribution)) {
+                TextView attributionText = (TextView) editor.findViewById(R.id.attribution_text);
+                attributionText.setText(mContactInfoAttribution);
+                if (mDrawingOptions.getTextColor() != null) {
+                    attributionText.setTextColor(mDrawingOptions.getTextColor());
+                }
+                attributionText.setVisibility(View.VISIBLE);
+            }
+
             mContent.addView(editor);
 
-            editor.setState(rawContactDelta, type, mViewIdGenerator, isEditingUserProfile());
+            editor.setState(rawContactDelta, type, mViewIdGenerator, isEditingUserProfile(),
+                    mDrawingOptions);
             editor.setCollapsible(numRawContacts > 1);
 
             // Set up the photo handler.

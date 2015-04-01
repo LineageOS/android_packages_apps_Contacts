@@ -115,7 +115,7 @@ public class PhotoEditorView extends LinearLayout implements Editor {
     /** {@inheritDoc} */
     @Override
     public void setValues(DataKind kind, ValuesDelta values, RawContactDelta state, boolean readOnly,
-            ViewIdGenerator vig) {
+            ViewIdGenerator vig, DrawingOptions drawingOptions) {
         mEntry = values;
         mReadOnly = readOnly;
 

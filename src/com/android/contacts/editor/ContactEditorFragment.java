@@ -35,6 +35,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -65,6 +66,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListPopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.contacts.ContactSaveService;
@@ -97,12 +99,15 @@ import com.android.contacts.util.PhoneCapabilityTester;
 import com.android.contacts.util.UiClosables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import org.w3c.dom.Text;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class ContactEditorFragment extends Fragment implements
         SplitContactConfirmationDialogFragment.Listener,
@@ -151,6 +156,10 @@ public class ContactEditorFragment extends Fragment implements
 
     public static final String INTENT_EXTRA_DISABLE_DELETE_MENU_OPTION =
             "disableDeleteMenuOption";
+
+    public static final String INTENT_EXTRA_SUGGESTED_TEXT_COLOR = "suggestedTextColor";
+    public static final String INTENT_EXTRA_CONTACT_INFO_SOURCE = "contactInfoSource";
+    public static final String INTENT_EXTRA_TEXT_COLOR_TRANSIENT = "textColorTransient";
 
     /**
      * Modes that specify what the AsyncTask has to perform after saving
@@ -285,6 +294,9 @@ public class ContactEditorFragment extends Fragment implements
     private View mAggregationSuggestionView;
 
     private ListPopupWindow mAggregationSuggestionPopup;
+
+    private String mContactInfoAttribution;
+    private DrawingOptions mDrawingOptions;
 
     private static final class AggregationSuggestionAdapter extends BaseAdapter {
         private final Activity mActivity;
@@ -483,12 +495,25 @@ public class ContactEditorFragment extends Fragment implements
         mAction = action;
         mLookupUri = lookupUri;
         mIntentExtras = intentExtras;
-        mAutoAddToDefaultGroup = mIntentExtras != null
-                && mIntentExtras.containsKey(INTENT_EXTRA_ADD_TO_DEFAULT_DIRECTORY);
-        mNewLocalProfile = mIntentExtras != null
-                && mIntentExtras.getBoolean(INTENT_EXTRA_NEW_LOCAL_PROFILE);
-        mDisableDeleteMenuOption = mIntentExtras != null
-                && mIntentExtras.getBoolean(INTENT_EXTRA_DISABLE_DELETE_MENU_OPTION);
+
+        if (mIntentExtras != null) {
+            mAutoAddToDefaultGroup = mIntentExtras
+                    .containsKey(INTENT_EXTRA_ADD_TO_DEFAULT_DIRECTORY);
+            mNewLocalProfile = mIntentExtras.getBoolean(INTENT_EXTRA_NEW_LOCAL_PROFILE);
+            mDisableDeleteMenuOption = mIntentExtras
+                    .getBoolean(INTENT_EXTRA_DISABLE_DELETE_MENU_OPTION);
+
+            mDrawingOptions = new DrawingOptions();
+            if (mIntentExtras.containsKey(INTENT_EXTRA_SUGGESTED_TEXT_COLOR)) {
+                mDrawingOptions.setTextColor(intentExtras.getInt(INTENT_EXTRA_SUGGESTED_TEXT_COLOR));
+            }
+            if (mIntentExtras.containsKey(INTENT_EXTRA_TEXT_COLOR_TRANSIENT)) {
+                mDrawingOptions.setIsTextColorTransient(
+                        intentExtras.getBoolean(INTENT_EXTRA_TEXT_COLOR_TRANSIENT));
+            }
+
+            mContactInfoAttribution = mIntentExtras.getString(INTENT_EXTRA_CONTACT_INFO_SOURCE);
+        }
     }
 
     public void setListener(Listener value) {
@@ -875,9 +900,20 @@ public class ContactEditorFragment extends Fragment implements
 
             editor.setEnabled(mEnabled);
 
+            // add attribution
+            if (!TextUtils.isEmpty(mContactInfoAttribution)) {
+                TextView attributionView = (TextView) editor.findViewById(R.id.attribution_space);
+                attributionView.setText(mContactInfoAttribution);
+                if (mDrawingOptions.getTextColor() != null) {
+                    attributionView.setTextColor(mDrawingOptions.getTextColor());
+                }
+                attributionView.setVisibility(View.VISIBLE);
+            }
+
             mContent.addView(editor);
 
-            editor.setState(rawContactDelta, type, mViewIdGenerator, isEditingUserProfile());
+            editor.setState(rawContactDelta, type, mViewIdGenerator, isEditingUserProfile(),
+                    mDrawingOptions);
 
             // Set up the photo handler.
             bindPhotoHandler(editor, type, mState);

@@ -719,7 +719,8 @@ public class ConfirmAddDetailActivity extends Activity implements
             Editor editor = (Editor) view;
             // Don't allow deletion of the field because there is only 1 detail in this editor.
             editor.setDeletable(false);
-            editor.setValues(dataKind, valuesDelta, state, false, new ViewIdGenerator());
+            // TODO : null the right choice ?
+            editor.setValues(dataKind, valuesDelta, state, false, new ViewIdGenerator(), null);
         }
 
         mEditorContainerView.addView(view);

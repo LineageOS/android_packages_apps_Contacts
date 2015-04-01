@@ -210,7 +210,7 @@ public class RawContactEditorView extends BaseRawContactEditorView {
      */
     @Override
     public void setState(RawContactDelta state, AccountType type, ViewIdGenerator vig,
-            boolean isProfile) {
+            boolean isProfile, DrawingOptions drawingOptions) {
 
         mState = state;
 
@@ -323,11 +323,11 @@ public class RawContactEditorView extends BaseRawContactEditorView {
                 // Handle special case editor for structured name
                 final ValuesDelta primary = state.getPrimaryEntry(mimeType);
                 DataKind dataKind = type.getKindForMimetype(DataKind.PSEUDO_MIME_TYPE_DISPLAY_NAME);
-                mName.setValues(dataKind, primary, state, false, vig);
+                mName.setValues(dataKind, primary, state, false, vig, drawingOptions);
                 if (!(SimContactsConstants.ACCOUNT_TYPE_SIM).equals(type.accountType)) {
                     mPhoneticName.setValues(
                         type.getKindForMimetype(DataKind.PSEUDO_MIME_TYPE_PHONETIC_NAME),
-                        primary, state, false, vig);
+                        primary, state, false, vig, drawingOptions);
                 }
                 else {
                     mPhoneticName.setVisibility(View.GONE);
@@ -335,7 +335,7 @@ public class RawContactEditorView extends BaseRawContactEditorView {
             } else if (Photo.CONTENT_ITEM_TYPE.equals(mimeType)) {
                 // Handle special case editor for photos
                 final ValuesDelta primary = state.getPrimaryEntry(mimeType);
-                getPhotoEditor().setValues(kind, primary, state, false, vig);
+                getPhotoEditor().setValues(kind, primary, state, false, vig, drawingOptions);
             } else if (GroupMembership.CONTENT_ITEM_TYPE.equals(mimeType)) {
                 if (mGroupMembershipView != null) {
                     mGroupMembershipView.setState(state);
@@ -344,7 +344,7 @@ public class RawContactEditorView extends BaseRawContactEditorView {
                 final KindSectionView section = (KindSectionView)mInflater.inflate(
                     R.layout.item_kind_section, mFields, false);
                 section.setEnabled(isEnabled());
-                section.setState(kind, state, false, vig);
+                section.setState(kind, state, false, vig, drawingOptions);
                 mFields.addView(section);
                 if (SimContactsConstants.ACCOUNT_TYPE_SIM.equals(type.accountType) ) {
                     String accountName = state.getAccountName();
@@ -387,7 +387,7 @@ public class RawContactEditorView extends BaseRawContactEditorView {
                     }
                 }
                 section.setEnabled(isEnabled());
-                section.setState(kind, state, false, vig);
+                section.setState(kind, state, false, vig, drawingOptions);
                 mFields.addView(section);
             } else if (Organization.CONTENT_ITEM_TYPE.equals(mimeType)) {
                 // Create the organization section
@@ -395,7 +395,7 @@ public class RawContactEditorView extends BaseRawContactEditorView {
                         R.layout.item_kind_section, mFields, false);
                 section.setTitleVisible(false);
                 section.setEnabled(isEnabled());
-                section.setState(kind, state, false, vig);
+                section.setState(kind, state, false, vig, drawingOptions);
 
                 // If there is organization info for the contact already, display it
                 if (!section.isEmpty()) {
@@ -426,7 +426,7 @@ public class RawContactEditorView extends BaseRawContactEditorView {
                 final KindSectionView section = (KindSectionView)mInflater.inflate(
                         R.layout.item_kind_section, mFields, false);
                 section.setEnabled(isEnabled());
-                section.setState(kind, state, false, vig);
+                section.setState(kind, state, false, vig, drawingOptions);
                 mFields.addView(section);
             }
         }

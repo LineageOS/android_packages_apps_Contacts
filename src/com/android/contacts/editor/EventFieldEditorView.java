@@ -106,9 +106,9 @@ public class EventFieldEditorView extends LabeledEditorView {
 
     @Override
     public void setValues(DataKind kind, ValuesDelta entry, RawContactDelta state, boolean readOnly,
-            ViewIdGenerator vig) {
+            ViewIdGenerator vig, DrawingOptions drawingOptions) {
         if (kind.fieldList.size() != 1) throw new IllegalStateException("kind must have 1 field");
-        super.setValues(kind, entry, state, readOnly, vig);
+        super.setValues(kind, entry, state, readOnly, vig, drawingOptions);
 
         mDateView.setEnabled(isEnabled() && !readOnly);
 

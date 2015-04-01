@@ -53,6 +53,8 @@ public class KindSectionView extends LinearLayout implements EditorListener {
     private RawContactDelta mState;
     private boolean mReadOnly;
 
+    private DrawingOptions mDrawingOptions;
+
     private ViewIdGenerator mViewIdGenerator;
 
     private LayoutInflater mInflater;
@@ -130,11 +132,13 @@ public class KindSectionView extends LinearLayout implements EditorListener {
         }
     }
 
-    public void setState(DataKind kind, RawContactDelta state, boolean readOnly, ViewIdGenerator vig) {
+    public void setState(DataKind kind, RawContactDelta state, boolean readOnly,
+            ViewIdGenerator vig, DrawingOptions drawingOptions) {
         mKind = kind;
         mState = state;
         mReadOnly = readOnly;
         mViewIdGenerator = vig;
+        mDrawingOptions = drawingOptions;
 
         setId(mViewIdGenerator.getId(state, kind, null, ViewIdGenerator.NO_VIEW_INDEX));
 
@@ -201,7 +205,7 @@ public class KindSectionView extends LinearLayout implements EditorListener {
         if (view instanceof Editor) {
             Editor editor = (Editor) view;
             editor.setDeletable(true);
-            editor.setValues(mKind, entry, mState, mReadOnly, mViewIdGenerator);
+            editor.setValues(mKind, entry, mState, mReadOnly, mViewIdGenerator, mDrawingOptions);
             editor.setEditorListener(this);
         }
         mEditors.addView(view);

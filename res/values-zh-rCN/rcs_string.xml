@@ -98,4 +98,5 @@
     <string name="first_name_max_length">姓氏不能超过二十个字节。</string>
     <string name="last_name_max_length">名字不能超过二十个字节。</string>
     <string name="full_name_max_length">姓名不能超过四十个字节。</string>
+    <string name="Unformatted_profile_phone_number">当前联系人不支持增强屏显!</string>
 </resources>

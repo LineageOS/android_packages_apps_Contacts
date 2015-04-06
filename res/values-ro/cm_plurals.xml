@@ -21,4 +21,9 @@
     <item quantity="few">%d selectate</item>
     <item quantity="other">%d selectate</item>
   </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">%d contact va fi şters.</item>
+    <item quantity="few">%d contacte vor fi şterse.</item>
+    <item quantity="other">%d contacte vor fi şterse.</item>
+  </plurals>
 </resources>

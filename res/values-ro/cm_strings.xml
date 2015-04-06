@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="contactSavedToSimCardError">Nu s-au putut salva contactele selectate pe cartela SIM</string>
+  <string name="airplane_mode_on">Cartela SIM nu poate fi accesată în timp ce modul avion este activat</string>
   <string name="number_anr_too_long">Numărul este prea lung</string>
   <string name="email_address_too_long">Adresa de e-mail este prea lungă</string>
   <string name="sim_card_full">Cartela SIM este plină</string>

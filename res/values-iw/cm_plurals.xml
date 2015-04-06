@@ -17,7 +17,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="contacts_selected">
-    <item quantity="one">נבחר %d</item>
+    <item quantity="one">%d נבחר</item>
     <item quantity="other">%d נבחרו</item>
   </plurals>
   <plurals name="ContactMultiImportConfirmation">

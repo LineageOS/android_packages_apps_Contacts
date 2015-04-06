@@ -24,7 +24,7 @@
   <string name="airplane_mode_on">Uçuş rejimi fəal olduqda SIM karta müraciət mümkün deyil</string>
   <string name="number_anr_too_long">Nömrə çox uzundur</string>
   <string name="email_address_too_long">E-poçt ünvanı çox uzundur</string>
-  <string name="sim_card_full">SIM kart doludur</string>
+  <string name="sim_card_full">SIM kart dolub</string>
   <string name="tag_too_long">Şəxs adı çox uzundur</string>
   <string name="invalid_phone_number">Telefon nömrəsi etibarsızdır</string>
   <string name="videocall">Görüntülü zəng</string>
@@ -77,22 +77,22 @@
   <string name="delete_contacts_title">Şəxsləri sil</string>
   <string name="delete_contacts_message">Şəxslər silinir\u2026</string>
   <string name="error_group_exist">Artıq \'<xliff:g id="name">%s</xliff:g>\' adlı bir qrup mövcuddur</string>
-  <string name="menu_auto_sync_to_baidu_cloud">Baidu Cloud ilə avtomatik sinxronizasiya</string>
+  <string name="menu_auto_sync_to_baidu_cloud">Baidu Cloud ilə avto sinxronizasiya</string>
   <string name="menu_sync_to_baidu_cloud">Baidu Cloud ilə indi sinxronlaşdır</string>
   <string name="delete_local_group_dialog_message">\'<xliff:g id="name">%s</xliff:g>\' qrupu silinsin?</string>
   <string name="edit_local_group_dialog_title">Qrupu yenidən adlandır</string>
   <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g> \'dən çox şəxs əlavə etmək olmaz</string>
   <string name="no_phone_number_or_email">Zəhmət olmasa telefon nömrəsi və ya e-poçt ünvanı daxil edin.</string>
-  <string name="memory_card_full">Şəxsi saxlamaq mümkün olmadı, telefon yaddaşı doludur</string>
+  <string name="memory_card_full">Şəxsi saxlamaq mümkün olmadı, telefon yaddaşı dolub</string>
   <string name="menu_memory_status">Yaddaş durumu</string>
   <string name="memory_status_title">Yaddaş durumu</string>
   <string name="memory_size">Cəmi:</string>
-  <string name="memory_used">İşlədilən:</string>
+  <string name="memory_used">İstf. olunan:</string>
   <string name="calculating_status_now">Durum hesablanır\u2026</string>
   <string name="button_moveto">Köçür</string>
   <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g> yerinə kopyala</string>
   <string name="no_empty_email_in_usim">Şəxs kopyalanmadı, e-poçt ünvanı etibarsızdır</string>
   <string name="voicemail">Səsli poçt</string>
-  <string name="select_call_title">Axtarış qeydlərini seç</string>
+  <string name="select_call_title">Zəng qeydlərini seç</string>
   <string name="invalid_number_type">Nömrə növü etibarsızdır</string>
 </resources>

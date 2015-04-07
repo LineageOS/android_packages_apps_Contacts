@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ac371cc_ea6c830a",
+        "filename": "src/com/android/contacts/editor/DrawingOptions.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 10293
+      },
+      "writtenOn": "2015-04-07T10:15:39Z",
+      "side": 1,
+      "message": "is there a particular reason you wanted to back this with a map vs just using regular data members?",
+      "revId": "51f676d655206a15714022eb0eeee8db4c4a15bc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

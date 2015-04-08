@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.BroadcastReceiver;
@@ -27,8 +28,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Loader;
+import android.database.Cursor;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -580,197 +583,237 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
                         SimContactsConstants.SUB_INVALID);
     }
 
-    private Handler mHandler = null;
-
     private void copyToCard(final int sub) {
-        final int MSG_COPY_DONE = 0;
-        final int MSG_COPY_FAILURE = 1;
-        final int MSG_CARD_NO_SPACE = 2;
-        final int MSG_NO_EMPTY_EMAIL = 3;
-        if (mHandler == null) {
-            mHandler = new Handler() {
-                public void handleMessage(Message msg) {
-                    switch (msg.what) {
-                        case MSG_COPY_DONE:
-                            Toast.makeText(mContext, R.string.copy_done, Toast.LENGTH_SHORT)
-                                    .show();
-                            break;
-                        case MSG_COPY_FAILURE:
-                            Toast.makeText(mContext, R.string.copy_failure, Toast.LENGTH_SHORT)
-                                    .show();
-                            break;
-                        case MSG_CARD_NO_SPACE:
-                            Toast.makeText(mContext, R.string.card_no_space, Toast.LENGTH_SHORT)
-                                    .show();
-                            break;
-                        case MSG_NO_EMPTY_EMAIL:
-                            Toast.makeText(mContext, R.string.no_empty_email_in_usim,
-                                    Toast.LENGTH_SHORT).show();
-                            break;
-                    }
-                }
-            };
+        new CopySIMToCardTask(mContext, mContactData, sub).execute();
+    }
+
+    private class CopySIMToCardTask extends AsyncTask<String, Void, Integer> {
+        private static final int MSG_COPY_DONE = 0;
+        private static final int MSG_COPY_FAILURE = 1;
+        private static final int MSG_CARD_NO_SPACE = 2;
+        private static final int MSG_NO_EMPTY_EMAIL = 3;
+
+        private static final int SUB1 = 0;
+        private static final int SUB2 = 1;
+
+        private ProgressDialog mProgressDialog;
+        private int mSubId;
+        private Context mContext;
+        private Contact mContactData;
+
+        public CopySIMToCardTask(Context context, Contact contactData, int subId) {
+            mContext = context;
+            mContactData = contactData;
+            mSubId = subId;
         }
 
-        new Thread(new Runnable() {
-            public void run() {
-                synchronized (this) {
-                    int adnCountInSimContact = 1;
-                    int anrCountInSimContact = 1;
-                    int emailCountInSimContact = 0;
-                    if (!MoreContactUtils.canSaveAnr(sub)) {
-                        anrCountInSimContact = 0;
+        @Override
+        protected void onPostExecute(Integer integer) {
+            if (mProgressDialog != null) {
+                mProgressDialog.dismiss();
+            }
+
+            switch (integer) {
+                case MSG_COPY_DONE:
+                    Toast.makeText(mContext, R.string.copy_done, Toast.LENGTH_SHORT)
+                            .show();
+                    break;
+                case MSG_COPY_FAILURE:
+                    Toast.makeText(mContext, R.string.copy_failure, Toast.LENGTH_SHORT)
+                            .show();
+                    break;
+                case MSG_CARD_NO_SPACE:
+                    Toast.makeText(mContext, R.string.card_no_space, Toast.LENGTH_SHORT)
+                            .show();
+                    break;
+                case MSG_NO_EMPTY_EMAIL:
+                    Toast.makeText(mContext, R.string.no_empty_email_in_usim,
+                            Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+
+        @Override
+        protected Integer doInBackground(String... strings) {
+            int adnCountInSimContact = 1;
+            int anrCountInSimContact = 1;
+            int emailCountInSimContact = 0;
+
+            Cursor cr = null;
+            try {
+                if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
+                    Uri uri;
+                    if (mSubId == SUB2) {
+                        uri = Uri.parse("content://iccmsim/adn_sub2");
                     } else {
-                        anrCountInSimContact = MoreContactUtils.getOneSimAnrCount(sub);
+                        uri = Uri.parse("content://iccmsim/adn");
                     }
-                    if (MoreContactUtils.canSaveEmail(sub)) {
-                        emailCountInSimContact = MoreContactUtils.getOneSimEmailCount(sub);
+                    cr = mContext.getContentResolver().query(
+                            uri, null, null, null, null);
+                } else {
+                    cr = mContext.getContentResolver().query(
+                            Uri.parse("content://icc/adn"), null, null, null, null);
+                }
+            } catch (NullPointerException e) {
+                Log.e(TAG, "Exception: " + e);
+            } finally {
+                if (cr != null) {
+                    cr.close();
+                }
+            }
+
+            if (!MoreContactUtils.canSaveAnr(mSubId)) {
+                anrCountInSimContact = 0;
+            } else {
+                anrCountInSimContact = MoreContactUtils.getOneSimAnrCount(mSubId);
+            }
+            if (MoreContactUtils.canSaveEmail(mSubId)) {
+                emailCountInSimContact = MoreContactUtils.getOneSimEmailCount(mSubId);
+            }
+            int totalEmptyAdn = MoreContactUtils.getSimFreeCount(mContext, mSubId);
+            int totalEmptyAnr = MoreContactUtils.getSpareAnrCount(mSubId);
+            int totalEmptyEmail = MoreContactUtils.getSpareEmailCount(mSubId);
+
+            if (totalEmptyAdn <= 0) {
+                return MSG_CARD_NO_SPACE;
+            }
+
+            //to indicate how many number in one ADN can saved to SIM card,
+            //1 means can only save one number,2 means can save anr
+            int numEntitySize = adnCountInSimContact + anrCountInSimContact;
+
+            //empty number is equals to the sum of adn and anr
+            int emptyNumTotal = totalEmptyAdn + totalEmptyAnr;
+
+            // Get name string
+            String strName = mContactData.getDisplayName();
+
+            ArrayList<String> arrayNumber = new ArrayList<String>();
+            ArrayList<String> arrayEmail = new ArrayList<String>();
+
+            for (RawContact rawContact : mContactData.getRawContacts()) {
+                for (DataItem dataItem : rawContact.getDataItems()) {
+                    if (dataItem.getMimeType() == null) {
+                        continue;
                     }
-                    int totalEmptyAdn = MoreContactUtils.getSimFreeCount(mContext, sub);
-                    int totalEmptyAnr = MoreContactUtils.getSpareAnrCount(sub);
-                    int totalEmptyEmail = MoreContactUtils.getSpareEmailCount(sub);
-
-                    Message msg = Message.obtain();
-                    if (totalEmptyAdn <= 0) {
-                        msg.what = MSG_CARD_NO_SPACE;
-                        mHandler.sendMessage(msg);
-                        return;
-                    }
-
-                    //to indiacate how many number in one ADN can saved to SIM card,
-                    //1 means can only save one number,2 means can save anr
-                    int numEntitySize = adnCountInSimContact + anrCountInSimContact;
-
-                    //empty number is equals to the sum of adn and anr
-                    int emptyNumTotal = totalEmptyAdn + totalEmptyAnr;
-
-                    // Get name string
-                    String strName = mContactData.getDisplayName();
-
-                    ArrayList<String> arrayNumber = new ArrayList<String>();
-                    ArrayList<String> arrayEmail = new ArrayList<String>();
-
-                    for (RawContact rawContact : mContactData.getRawContacts()) {
-                        for (DataItem dataItem : rawContact.getDataItems()) {
-                            if (dataItem.getMimeType() == null) {
-                                continue;
-                            }
-                            if (dataItem instanceof PhoneDataItem) {
-                                // Get phone string
-                                PhoneDataItem phoneNum = (PhoneDataItem) dataItem;
-                                final String number = phoneNum.getNumber();
-                                if (!TextUtils.isEmpty(number) && emptyNumTotal-- > 0) {
-                                    arrayNumber.add(number);
-                                }
-                            } else if (dataItem instanceof EmailDataItem) {
-                                // Get email string
-                                EmailDataItem emailData = (EmailDataItem) dataItem;
-                                final String address = emailData.getData();
-                                if (!TextUtils.isEmpty(address) && totalEmptyEmail-- > 0) {
-                                    arrayEmail.add(address);
-                                }
-                            }
+                    if (dataItem instanceof PhoneDataItem) {
+                        // Get phone string
+                        PhoneDataItem phoneNum = (PhoneDataItem) dataItem;
+                        final String number = phoneNum.getNumber();
+                        if (!TextUtils.isEmpty(number) && emptyNumTotal-- > 0) {
+                            arrayNumber.add(number);
                         }
-                    }
-
-                    //calculate how many ADN needed according to the number name,phone,email,
-                    //and uses the max of them
-                    int nameCount = (strName != null && !strName.equals("")) ? 1 : 0;
-                    int groupNumCount = (arrayNumber.size() % numEntitySize) != 0 ? (arrayNumber
-                            .size() / numEntitySize + 1) : (arrayNumber.size() / numEntitySize);
-                    int groupEmailCount = emailCountInSimContact == 0 ? 0
-                            : ((arrayEmail.size() % emailCountInSimContact) != 0 ? (arrayEmail
-                                    .size() / emailCountInSimContact + 1)
-                                    : (arrayEmail.size() / emailCountInSimContact));
-
-                    int groupCount = Math.max(groupEmailCount, Math.max(nameCount, groupNumCount));
-
-                    ArrayList<UsimEntity> results = new ArrayList<UsimEntity>();
-                    for (int i = 0; i < groupCount; i++) {
-                        results.add(new UsimEntity());
-                    }
-
-                    UsimEntity value;
-                    //get the phone number for each ADN from arrayNumber,put them in UsimEntity
-                    for (int i = 0; i < groupNumCount; i++) {
-                        value = results.get(i);
-                        ArrayList<String> numberItem = new ArrayList<String>();
-                        for (int j = 0; j < numEntitySize; j++) {
-                            if ((i * numEntitySize + j) < arrayNumber.size()) {
-                                numberItem.add(arrayNumber.get(i * numEntitySize + j));
-                            }
+                    } else if (dataItem instanceof EmailDataItem) {
+                        // Get email string
+                        EmailDataItem emailData = (EmailDataItem) dataItem;
+                        final String address = emailData.getData();
+                        if (!TextUtils.isEmpty(address) && totalEmptyEmail-- > 0) {
+                            arrayEmail.add(address);
                         }
-                        value.putNumberList(numberItem);
-                    }
-
-                    for (int i = 0; i < groupEmailCount; i++) {
-                        value = results.get(i);
-                        ArrayList<String> emailItem = new ArrayList<String>();
-                        for (int j = 0; j < emailCountInSimContact; j++) {
-                            if ((i * emailCountInSimContact + j) < arrayEmail.size()) {
-                                emailItem.add(arrayEmail.get(i * emailCountInSimContact + j));
-                            }
-                        }
-                        value.putEmailList(emailItem);
-                    }
-
-                    ArrayList<String> emptyList = new ArrayList<String>();
-                    Uri itemUri = null;
-                    if (totalEmptyEmail < 0 && MoreContactUtils.canSaveEmail(sub)) {
-                        Message e_msg = Message.obtain();
-                        e_msg.what = MSG_NO_EMPTY_EMAIL;
-                        mHandler.sendMessage(e_msg);
-                    }
-
-                    //get phone number from UsimEntity,then insert to SIM card
-                    for (int i = 0; i < groupCount; i++) {
-                        value = results.get(i);
-                        if (value.containsNumber()) {
-                            arrayNumber = (ArrayList<String>) value.getNumberList();
-                        } else {
-                            arrayNumber = emptyList;
-                        }
-
-                        if (value.containsEmail()) {
-                            arrayEmail = (ArrayList<String>) value.getEmailList();
-                        } else {
-                            arrayEmail = emptyList;
-                        }
-                        String strNum = arrayNumber.size() > 0 ? arrayNumber.get(0) : null;
-                        StringBuilder strAnrNum = new StringBuilder();
-                        for (int j = 1; j < arrayNumber.size(); j++) {
-                            String s = arrayNumber.get(j);
-                            if (s.length() > MoreContactUtils.MAX_LENGTH_NUMBER_IN_SIM) {
-                                s = s.substring(
-                                        0, MoreContactUtils.MAX_LENGTH_NUMBER_IN_SIM);
-                            }
-                            strAnrNum.append(s);
-                            strAnrNum.append(",");
-                        }
-                        StringBuilder strEmail = new StringBuilder();
-                        for (int j = 0; j < arrayEmail.size(); j++) {
-                            String s = arrayEmail.get(j);
-                            if (s.length() > MoreContactUtils.MAX_LENGTH_EMAIL_IN_SIM) {
-                                s = s.substring(
-                                        0, MoreContactUtils.MAX_LENGTH_EMAIL_IN_SIM);
-                            }
-                            strEmail.append(s);
-                            strEmail.append(",");
-                        }
-                        itemUri = MoreContactUtils.insertToCard(mContext, strName, strNum,
-                                strEmail.toString(), strAnrNum.toString(), sub);
-                    }
-                    if (itemUri != null) {
-                        msg.what = MSG_COPY_DONE;
-                        mHandler.sendMessage(msg);
-                    } else {
-                        msg.what = MSG_COPY_FAILURE;
-                        mHandler.sendMessage(msg);
                     }
                 }
             }
-        }).start();
 
+            //calculate how many ADN needed according to the number name,phone,email,
+            //and uses the max of them
+            int nameCount = (strName != null && !strName.equals("")) ? 1 : 0;
+            int groupNumCount = (arrayNumber.size() % numEntitySize) != 0 ? (arrayNumber
+                    .size() / numEntitySize + 1) : (arrayNumber.size() / numEntitySize);
+            int groupEmailCount = emailCountInSimContact == 0 ? 0
+                    : ((arrayEmail.size() % emailCountInSimContact) != 0 ? (arrayEmail
+                    .size() / emailCountInSimContact + 1)
+                    : (arrayEmail.size() / emailCountInSimContact));
+
+            int groupCount = Math.max(groupEmailCount, Math.max(nameCount, groupNumCount));
+
+            ArrayList<UsimEntity> results = new ArrayList<UsimEntity>();
+            for (int i = 0; i < groupCount; i++) {
+                results.add(new UsimEntity());
+            }
+
+            UsimEntity value;
+            //get the phone number for each ADN from arrayNumber,put them in UsimEntity
+            for (int i = 0; i < groupNumCount; i++) {
+                value = results.get(i);
+                ArrayList<String> numberItem = new ArrayList<String>();
+                for (int j = 0; j < numEntitySize; j++) {
+                    if ((i * numEntitySize + j) < arrayNumber.size()) {
+                        numberItem.add(arrayNumber.get(i * numEntitySize + j));
+                    }
+                }
+                value.putNumberList(numberItem);
+            }
+
+            for (int i = 0; i < groupEmailCount; i++) {
+                value = results.get(i);
+                ArrayList<String> emailItem = new ArrayList<String>();
+                for (int j = 0; j < emailCountInSimContact; j++) {
+                    if ((i * emailCountInSimContact + j) < arrayEmail.size()) {
+                        emailItem.add(arrayEmail.get(i * emailCountInSimContact + j));
+                    }
+                }
+                value.putEmailList(emailItem);
+            }
+
+            ArrayList<String> emptyList = new ArrayList<String>();
+            Uri itemUri = null;
+            if (totalEmptyEmail < 0 && MoreContactUtils.canSaveEmail(mSubId)) {
+                return MSG_NO_EMPTY_EMAIL;
+            }
+
+            //get phone number from UsimEntity,then insert to SIM card
+            for (int i = 0; i < groupCount; i++) {
+                value = results.get(i);
+                if (value.containsNumber()) {
+                    arrayNumber = (ArrayList<String>) value.getNumberList();
+                } else {
+                    arrayNumber = emptyList;
+                }
+
+                if (value.containsEmail()) {
+                    arrayEmail = (ArrayList<String>) value.getEmailList();
+                } else {
+                    arrayEmail = emptyList;
+                }
+                String strNum = arrayNumber.size() > 0 ? arrayNumber.get(0) : null;
+                StringBuilder strAnrNum = new StringBuilder();
+                for (int j = 1; j < arrayNumber.size(); j++) {
+                    String s = arrayNumber.get(j);
+                    if (s.length() > MoreContactUtils.MAX_LENGTH_NUMBER_IN_SIM) {
+                        s = s.substring(
+                                0, MoreContactUtils.MAX_LENGTH_NUMBER_IN_SIM);
+                    }
+                    strAnrNum.append(s);
+                    strAnrNum.append(",");
+                }
+                StringBuilder strEmail = new StringBuilder();
+                for (int j = 0; j < arrayEmail.size(); j++) {
+                    String s = arrayEmail.get(j);
+                    if (s.length() > MoreContactUtils.MAX_LENGTH_EMAIL_IN_SIM) {
+                        s = s.substring(
+                                0, MoreContactUtils.MAX_LENGTH_EMAIL_IN_SIM);
+                    }
+                    strEmail.append(s);
+                    strEmail.append(",");
+                }
+                itemUri = MoreContactUtils.insertToCard(mContext, strName, strNum,
+                        strEmail.toString(), strAnrNum.toString(), mSubId);
+            }
+            if (itemUri != null) {
+                return MSG_COPY_DONE;
+            } else {
+                return MSG_COPY_FAILURE;
+            }
+        }
+
+        @Override
+        protected void onPreExecute() {
+            mProgressDialog = new ProgressDialog(mContext);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            mProgressDialog.setIndeterminate(true);
+            mProgressDialog.setMessage(getString(R.string.copying_contact_to_sim));
+            mProgressDialog.show();
+        }
     }
 
     /**

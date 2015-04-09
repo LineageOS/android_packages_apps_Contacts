@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ac371cc_2b6a1a1b",
+        "filename": "src/com/android/contacts/detail/ContactLoaderFragment.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2015-04-09T11:21:01Z",
+      "side": 1,
+      "message": "Is this URI not a constant somewhere?",
+      "revId": "bb3770c4094adc9f0ae483b3c231564015cc9dec",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ac371cc_8b77ce01",
+        "filename": "src/com/android/contacts/detail/ContactLoaderFragment.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2015-04-09T11:21:01Z",
+      "side": 1,
+      "message": "Same here",
+      "revId": "bb3770c4094adc9f0ae483b3c231564015cc9dec",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ac371cc_6b7412fd",
+        "filename": "src/com/android/contacts/detail/ContactLoaderFragment.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2015-04-09T11:21:01Z",
+      "side": 1,
+      "message": "Same here",
+      "revId": "bb3770c4094adc9f0ae483b3c231564015cc9dec",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

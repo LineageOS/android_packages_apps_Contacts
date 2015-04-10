@@ -1228,8 +1228,12 @@ public class MultiPickContactActivity extends ListActivity implements
         protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
             mAdapter.changeCursor(cursor);
             if (cursor == null || cursor.getCount() == 0) {
-                Toast.makeText(MultiPickContactActivity.this,
-                        R.string.listFoundAllContactsZero, Toast.LENGTH_SHORT).show();
+                if (isPickCall()) {
+                    log("no call found");
+                } else {
+                    Toast.makeText(MultiPickContactActivity.this,
+                            R.string.listFoundAllContactsZero, Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }

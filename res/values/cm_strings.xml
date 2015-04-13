@@ -46,7 +46,7 @@
 
     <string name="copy_to_target_sim">SIM card</string>
     <string name="copy_to_target_msim">SIM card <xliff:g id="index">%d</xliff:g></string>
-    <string name="copying_contact_to_sim">Copying contact to SIM</string>
+    <string name="copying_contact_to_sim">Copying contact to SIM\u2026</string>
 
     <!-- Gray hint displayed in the search field in Contacts when empty -->
     <string name="search_bar_hint">Search contacts</string>

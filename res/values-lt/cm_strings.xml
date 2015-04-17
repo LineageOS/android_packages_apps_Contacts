@@ -24,7 +24,7 @@
   <string name="sim_card_full">SIM kortelė yra pilna</string>
   <string name="tag_too_long">Kontakto vardas yra per ilgas</string>
   <string name="invalid_phone_number">Telefono numeris yra neleistinas</string>
-  <string name="invalid_number_type">Numerio tipas yra neleistinas</string>
+  <string name="invalid_number_type">Numerio tipas yra neteisingas</string>
   <string name="no_phone_number_or_email">Prašome įvesti telefono numerį arba el. pašto adresą.</string>
   <string name="memory_card_full">Kontaktas negali būti išsaugotas, telefono atmintis pilna</string>
   <string name="contacts_groups_label">Grupės</string>

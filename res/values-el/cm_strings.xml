@@ -31,6 +31,7 @@
   <string name="unknown">Άγνωστος</string>
   <string name="copy_to_target_sim">Κάρτα SIM</string>
   <string name="copy_to_target_msim">Κάρτα SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="copying_contact_to_sim">Αντιγραφή επαφής στη SIM\u2026</string>
   <string name="search_bar_hint">Αναζήτηση επαφών</string>
   <string name="delete_group_dialog_title">Διαγραφή ομάδας</string>
   <string name="edit_before_call">Επεξεργασία αριθμού πριν την κλήση</string>

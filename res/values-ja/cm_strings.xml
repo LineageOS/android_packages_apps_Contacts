@@ -31,6 +31,7 @@
   <string name="unknown">不明</string>
   <string name="copy_to_target_sim">SIMカード</string>
   <string name="copy_to_target_msim">SIMカード <xliff:g id="index">%d</xliff:g></string>
+  <string name="copying_contact_to_sim">SIMに連絡先をコピーしています\u2026</string>
   <string name="search_bar_hint">連絡先を検索</string>
   <string name="delete_group_dialog_title">グループを削除</string>
   <string name="edit_before_call">発信前に番号を編集</string>

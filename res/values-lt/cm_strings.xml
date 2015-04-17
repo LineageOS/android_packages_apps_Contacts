@@ -31,6 +31,7 @@
   <string name="unknown">Nežinomas</string>
   <string name="copy_to_target_sim">SIM kortelė</string>
   <string name="copy_to_target_msim">SIM kortelė <xliff:g id="index">%d</xliff:g></string>
+  <string name="copying_contact_to_sim">Kontaktas kopijuojamas į SIM\u2026</string>
   <string name="search_bar_hint">Ieškoti kontaktų</string>
   <string name="delete_group_dialog_title">ištrinti grupę</string>
   <string name="edit_before_call">Redaguoti numerį prieš skambinant</string>

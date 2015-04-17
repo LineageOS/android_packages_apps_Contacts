@@ -31,6 +31,7 @@
   <string name="unknown">Tuntematon</string>
   <string name="copy_to_target_sim">SIM-kortti</string>
   <string name="copy_to_target_msim">SIM-kortti <xliff:g id="index">%d</xliff:g></string>
+  <string name="copying_contact_to_sim">Kopioidaan yhteystietoa SIM-kortille\u2026</string>
   <string name="search_bar_hint">Etsi yhteystietoja</string>
   <string name="delete_group_dialog_title">Poista ryhmä</string>
   <string name="edit_before_call">Muokkaa numeroa ennen puhelua</string>

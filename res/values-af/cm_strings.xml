@@ -31,6 +31,7 @@
   <string name="unknown">Onbekend</string>
   <string name="copy_to_target_sim">SIM-kaart</string>
   <string name="copy_to_target_msim">SIM-kaart <xliff:g id="index">%d</xliff:g></string>
+  <string name="copying_contact_to_sim">Kopieer kontak na SIM\u2026</string>
   <string name="search_bar_hint">Soek kontakte</string>
   <string name="delete_group_dialog_title">Verwyder groep</string>
   <string name="edit_before_call">Wysig nommer voor oproep</string>

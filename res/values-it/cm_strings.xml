@@ -31,6 +31,7 @@
   <string name="unknown">Sconosciuto</string>
   <string name="copy_to_target_sim">SIM</string>
   <string name="copy_to_target_msim">SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="copying_contact_to_sim">Copia del contatto sulla SIM\u2026</string>
   <string name="search_bar_hint">Cerca contatti</string>
   <string name="delete_group_dialog_title">Elimina gruppo</string>
   <string name="edit_before_call">Modifica il numero prima di chiamare</string>

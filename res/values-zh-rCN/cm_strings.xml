@@ -31,6 +31,7 @@
   <string name="unknown">未知号码</string>
   <string name="copy_to_target_sim">SIM 卡</string>
   <string name="copy_to_target_msim">SIM 卡 <xliff:g id="index">%d</xliff:g></string>
+  <string name="copying_contact_to_sim">正在复制联系人到 SIM 卡\u2026</string>
   <string name="search_bar_hint">搜索联系人</string>
   <string name="delete_group_dialog_title">删除群组</string>
   <string name="edit_before_call">呼叫之前编辑号码</string>

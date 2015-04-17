@@ -31,6 +31,7 @@
   <string name="unknown">Nieznany</string>
   <string name="copy_to_target_sim">Karta SIM</string>
   <string name="copy_to_target_msim">Karta SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="copying_contact_to_sim">Kopiowanie kontaktów do SIM\u2026</string>
   <string name="search_bar_hint">Szukaj kontaktów</string>
   <string name="delete_group_dialog_title">Usuń grupę</string>
   <string name="edit_before_call">Edytuj numer przed połączeniem</string>

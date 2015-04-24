@@ -48,6 +48,10 @@
   <string name="title_add_members">Lägg till medlemmar</string>
   <string name="select_all">Alla</string>
   <string name="action_done">Färdig</string>
+  <plurals name="contacts_selected">
+    <item quantity="one">%d vald</item>
+    <item quantity="other">%d valda</item>
+  </plurals>
   <string name="delete_call_title">Ta bort samtalslistor</string>
   <string name="delete_call_message">Tar bort samtalslistor\u2026</string>
   <string name="delete_call_alert">Ta bort valda samtalslistor?</string>

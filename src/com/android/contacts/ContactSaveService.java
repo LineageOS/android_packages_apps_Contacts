@@ -179,6 +179,7 @@ public class ContactSaveService extends IntentService {
     private final int MAX_EMAIL_LENGTH = 40;
     private final int MAX_EN_LENGTH = 14;
     private final int MAX_CH_LENGTH = 6;
+    private static final int BUFFER_LENGTH = 500;
 
     // Only for request accessing SIM card
     // when device is in the "AirPlane" mode.
@@ -258,6 +259,10 @@ public class ContactSaveService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        if (intent == null) {
+            Log.d(TAG, "onHandleIntent: could not handle null intent");
+            return;
+        }
         // Call an appropriate method. If we're sure it affects how incoming phone calls are
         // handled, then notify the fact to in-call screen.
         String action = intent.getAction();
@@ -796,8 +801,12 @@ public class ContactSaveService extends IntentService {
     private long getInsertedRawContactId(
             final ArrayList<ContentProviderOperation> diff,
             final ContentProviderResult[] results) {
+        if (results == null) {
+            return -1;
+        }
         final int diffSize = diff.size();
-        for (int i = 0; i < diffSize; i++) {
+        final int numResults = results.length;
+        for (int i = 0; i < diffSize && i < numResults; i++) {
             ContentProviderOperation operation = diff.get(i);
             if (operation.getType() == ContentProviderOperation.TYPE_INSERT
                     && operation.getUri().getEncodedPath().contains(
@@ -1008,49 +1017,58 @@ public class ContactSaveService extends IntentService {
         if (rawContactsToAdd == null) {
             return;
         }
+
+        ArrayList<Long> rawContactIdInDb = Lists.newArrayList();
+        final Cursor c = resolver.query(Data.CONTENT_URI, new String[] {Data.RAW_CONTACT_ID},
+                Data.MIMETYPE + "=? AND " + GroupMembership.GROUP_ROW_ID + "=?",
+                new String[] {GroupMembership.CONTENT_ITEM_TYPE, String.valueOf(groupId)},
+                Data.RAW_CONTACT_ID);
+        try {
+            while (c != null && c.moveToNext()) {
+                final long id = c.getLong(0);
+                rawContactIdInDb.add(id);
+            }
+        } finally {
+            c.close();
+        }
+
+        ArrayList<Long> rawContactIdToAdd = Lists.newArrayList();
         for (long rawContactId : rawContactsToAdd) {
-            try {
-                final ArrayList<ContentProviderOperation> rawContactOperations =
-                        new ArrayList<ContentProviderOperation>();
+            if (!rawContactIdInDb.contains(rawContactId)) {
+                rawContactIdToAdd.add(rawContactId);
+            }
+        }
 
-                // Build an assert operation to ensure the contact is not already in the group
-                final ContentProviderOperation.Builder assertBuilder = ContentProviderOperation
-                        .newAssertQuery(Data.CONTENT_URI);
-                assertBuilder.withSelection(Data.RAW_CONTACT_ID + "=? AND " +
-                        Data.MIMETYPE + "=? AND " + GroupMembership.GROUP_ROW_ID + "=?",
-                        new String[] { String.valueOf(rawContactId),
-                        GroupMembership.CONTENT_ITEM_TYPE, String.valueOf(groupId)});
-                assertBuilder.withExpectedCount(0);
-                rawContactOperations.add(assertBuilder.build());
+        final ArrayList<ContentProviderOperation> rawContactOperations =
+                new ArrayList<ContentProviderOperation>();
+        for (long rawContactId : rawContactIdToAdd) {
+            // Build an insert operation to add the contact to the group
+            final ContentProviderOperation.Builder insertBuilder = ContentProviderOperation
+                    .newInsert(Data.CONTENT_URI);
+            insertBuilder.withValue(Data.RAW_CONTACT_ID, rawContactId);
+            insertBuilder.withValue(Data.MIMETYPE, GroupMembership.CONTENT_ITEM_TYPE);
+            insertBuilder.withValue(GroupMembership.GROUP_ROW_ID, groupId);
+            rawContactOperations.add(insertBuilder.build());
 
-                // Build an insert operation to add the contact to the group
-                final ContentProviderOperation.Builder insertBuilder = ContentProviderOperation
-                        .newInsert(Data.CONTENT_URI);
-                insertBuilder.withValue(Data.RAW_CONTACT_ID, rawContactId);
-                insertBuilder.withValue(Data.MIMETYPE, GroupMembership.CONTENT_ITEM_TYPE);
-                insertBuilder.withValue(GroupMembership.GROUP_ROW_ID, groupId);
-                rawContactOperations.add(insertBuilder.build());
-
-                if (DEBUG) {
-                    for (ContentProviderOperation operation : rawContactOperations) {
-                        Log.v(TAG, operation.toString());
-                    }
-                }
-
-                // Apply batch
-                if (!rawContactOperations.isEmpty()) {
+            int size = rawContactOperations.size();
+            if (size > 0 && BUFFER_LENGTH - size < 10) {
+                try {
                     resolver.applyBatch(ContactsContract.AUTHORITY, rawContactOperations);
+                } catch (Exception e) {
+                    Log.e(TAG, String.format("%s: %s", e.toString(), e.getMessage()));
+                } finally {
+                    rawContactOperations.clear();
                 }
-            } catch (RemoteException e) {
-                // Something went wrong, bail without success
-                Log.e(TAG, "Problem persisting user edits for raw contact ID " +
-                        String.valueOf(rawContactId), e);
-            } catch (OperationApplicationException e) {
-                // The assert could have failed because the contact is already in the group,
-                // just continue to the next contact
-                Log.w(TAG, "Assert failed in adding raw contact ID " +
-                        String.valueOf(rawContactId) + ". Already exists in group " +
-                        String.valueOf(groupId), e);
+            }
+        }
+        // There maybe some sim operations left after the while loop
+        if (!rawContactOperations.isEmpty()) {
+            try {
+                resolver.applyBatch(ContactsContract.AUTHORITY, rawContactOperations);
+            } catch (Exception e) {
+                Log.e(TAG, String.format("%s: %s", e.toString(), e.getMessage()));
+            } finally {
+                rawContactOperations.clear();
             }
         }
     }
@@ -1098,6 +1116,9 @@ public class ContactSaveService extends IntentService {
         // Undemote the contact if necessary
         final Cursor c = getContentResolver().query(contactUri, new String[] {Contacts._ID},
                 null, null, null);
+        if (c == null) {
+            return;
+        }
         try {
             if (c.moveToFirst()) {
                 final long id = c.getLong(0);
@@ -1300,6 +1321,11 @@ public class ContactSaveService extends IntentService {
                 JoinContactQuery.PROJECTION,
                 JoinContactQuery.SELECTION,
                 new String[]{String.valueOf(contactId1), String.valueOf(contactId2)}, null);
+        if (c == null) {
+            Log.e(TAG, "Unable to open Contacts DB cursor");
+            showToast(R.string.contactSavedErrorToast);
+            return;
+        }
 
         long rawContactIds[];
         long verifiedNameRawContactId = -1;

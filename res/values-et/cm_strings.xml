@@ -16,4 +16,76 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"Kopeeritud lõikelauale"</string>
+  <string name="deleteConfirmation_title">Kustuta kontakt?</string>
+  <string name="importConfirmation_title">Impordi kontakt?</string>
+  <string name="menu_deleteContacts">Kontaktide kustutamine</string>
+  <string name="contactDeletedToast">Kontakt kustutatud</string>
+  <string name="contactSavedToSimCardError">Valitud kontakte ei saanud salvestada SIM kaardile</string>
+  <string name="airplane_mode_on">SIM kaardile ei pääse juurde kui lennukirežiim on lubatud</string>
+  <string name="number_anr_too_long">See number on liiga pikk</string>
+  <string name="email_address_too_long">Email aadress on liiga pikk</string>
+  <string name="sim_card_full">SIM kaart on täis</string>
+  <string name="tag_too_long">Kontakti nimi on liiga pikk</string>
+  <string name="invalid_phone_number">Telefoninumber on kehtetu</string>
+  <string name="videocall">Videokõne</string>
+  <string name="unknown">Teadmata</string>
+  <string name="copy_to_target_sim">SIM kaart</string>
+  <string name="copy_to_target_msim">SIM kaart <xliff:g id="index">%d</xliff:g></string>
+  <string name="copying_contact_to_sim">Kopeerin kontakti SIMile\u2026</string>
+  <string name="search_bar_hint">Otsi kontakte</string>
+  <string name="delete_group_dialog_title">Kustuta grupp</string>
+  <string name="edit_before_call">Redigeeri numbrit enne kõne</string>
+  <string name="description_videocall">Videokõne kontaktile <xliff:g id="name">%1$s </xliff:g></string>
+  <string name="description_dial_vt">Helista VT <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">Grupi nimetus</string>
+  <string name="title_group_add">Uus grupp</string>
+  <string name="group_selector">Kliki et valida grupp</string>
+  <string name="title_group_picker">Valige rühm</string>
+  <string name="noGroupsHelpText">"Kohalikke rühmi pole."</string>
+  <string name="menu_option_delete">Rühma kustutamine</string>
+  <string name="toast_not_add">"Kõikide kontaktide lisamise võimalus puudub"</string>
+  <string name="noMember">Selles grupis pole liikmeid.</string>
+  <string name="button_delete">Eemalda</string>
+  <string name="title_add_members">Lisa liikmeid</string>
+  <string name="select_all">Kõik</string>
+  <string name="action_done">Valmis</string>
+  <plurals name="contacts_selected">
+    <item quantity="one">%d valitud</item>
+    <item quantity="other">%d valitud</item>
+  </plurals>
+  <string name="delete_call_title">Kustuta kõnelogid</string>
+  <string name="delete_call_message">Kõnede ajaloo kustutamine\u2026</string>
+  <string name="delete_call_alert">Kustutada valitud logid?</string>
+  <string name="title_del_call">Kustuta</string>
+  <string name="menu_sendViaSMS">Saada kontakt SMS-ga</string>
+  <string name="title_switch_group_remote">Võrgu rühmad</string>
+  <string name="title_switch_group_local">Kohalikud rühmad</string>
+  <string name="import_sim_contacts_title">SIM-kaardi kontaktide importimine</string>
+  <string name="import_sim_contacts_message">SIM-kaardi kontaktide importimine</string>
+  <string name="import_finish">Importimine lõpetatud</string>
+  <plurals name="import_stop">
+    <item quantity="one">Importimine on tühistatud, imporditi %d üksus</item>
+    <item quantity="other">Importimine on tühistatud, imporditi %d üksust</item>
+  </plurals>
+  <string name="delete_contacts_title">Kontaktide kustutamine</string>
+  <string name="delete_contacts_message">Kontaktide kustutamine\u2026</string>
+  <string name="error_group_exist">Rühm nimega \' <xliff:g id="name">%s\' </xliff:g> on juba olemas</string>
+  <string name="menu_auto_sync_to_baidu_cloud">Aut. sünkr. Baidu Cloud</string>
+  <string name="menu_sync_to_baidu_cloud">Sünkr. Baidu Cloud nüüd</string>
+  <string name="delete_local_group_dialog_message">Kustuta rühm \"<xliff:g id="name">%s </xliff:g>\"?</string>
+  <string name="edit_local_group_dialog_title">Nimeta ümber</string>
+  <string name="too_many_contacts_add_to_group">Enam kui <xliff:g id="count">%d </xliff:g> kontakti ei saa lisada</string>
+  <string name="no_phone_number_or_email">Sisestage telefoninumber või e-posti aadress.</string>
+  <string name="memory_card_full">Kontakti ei salvestatud, telefonimälu on täis</string>
+  <string name="menu_memory_status">Mälu olek</string>
+  <string name="memory_status_title">Mälu olek</string>
+  <string name="memory_size">Kokku:</string>
+  <string name="memory_used">Kasutatud:</string>
+  <string name="calculating_status_now">Oleku arvutamine\u2026</string>
+  <string name="button_moveto">Teisalda</string>
+  <string name="menu_copyTo">Asukohta <xliff:g id="destination"> %s </xliff:g> kopeerimine</string>
+  <string name="no_empty_email_in_usim">Kontakti kopeerimine ebaõnnestus, vigane e-maili aadress</string>
+  <string name="voicemail">Kõnepost</string>
+  <string name="select_call_title">Valige kõne logid</string>
+  <string name="invalid_number_type">Numbri tüüp ei sobi</string>
 </resources>

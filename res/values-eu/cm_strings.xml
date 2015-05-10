@@ -16,4 +16,39 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"Paper zorrora kopiatuta"</string>
+  <string name="deleteConfirmation_title">Ezabatu kontaktua?</string>
+  <string name="importConfirmation_title">Inportatu kontaktua?</string>
+  <string name="menu_deleteContacts">Ezabatu kontaktuak</string>
+  <string name="contactDeletedToast">Kontaktua ezabatu da</string>
+  <string name="contactSavedToSimCardError">Ezin izan dira SIM txartelean gorde aukeratutako kontaktuak</string>
+  <string name="airplane_mode_on">Ezin da SIM txartela atzitu hegaldi moduan</string>
+  <string name="number_anr_too_long">Zenbakia luzeegia da</string>
+  <string name="email_address_too_long">Posta helbidea luzeegia da</string>
+  <string name="tag_too_long">Kontaktuaren izena luzeegia da</string>
+  <string name="invalid_phone_number">Telefono zenbakia ez da zuzena</string>
+  <string name="videocall">Bideo-deia</string>
+  <string name="unknown">Ezezaguna</string>
+  <string name="copy_to_target_sim">SIM txartela</string>
+  <string name="delete_group_dialog_title">Ezabatu taldea</string>
+  <string name="menu_option_delete">Ezabatu taldea</string>
+  <string name="button_delete">Ezabatu</string>
+  <string name="delete_call_title">Ezabatu deien erregistroa</string>
+  <string name="delete_call_alert">Ezabatu aukeratutako deien erregistroak?</string>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">kontaktu %d ezabatuko da.</item>
+    <item quantity="other">%d kontaktu ezabatuko dira.</item>
+  </plurals>
+  <string name="delete_contacts_title">Ezabatu kontaktuak</string>
+  <string name="delete_contacts_message">Kontaktuak ezabatzen \u2026</string>
+  <string name="error_group_exist"><xliff:g id="name">%s</xliff:g> izeneko taldea badago aurretik</string>
+  <string name="delete_local_group_dialog_message">Ezabatu \'<xliff:g id="name">%s</xliff:g>\' taldea?</string>
+  <string name="edit_local_group_dialog_title">Izena aldatu taldeari</string>
+  <string name="too_many_contacts_add_to_group">Ezin dira <xliff:g id="count">%d</xliff:g> kontaktu baino gehiago gehitu</string>
+  <string name="no_phone_number_or_email">Sartu telefono zenbakia edo posta helbidea.</string>
+  <string name="memory_card_full">Kontaktua ezin izan da gorde, telefonoaren memoria beteta dago</string>
+  <string name="menu_memory_status">Memoriaren egoera</string>
+  <string name="memory_status_title">Memoriaren egoera</string>
+  <string name="memory_size">Guztira:</string>
+  <string name="memory_used">Erabilita:</string>
+  <string name="button_moveto">Mugitu</string>
 </resources>

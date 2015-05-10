@@ -62,10 +62,18 @@
   <string name="title_switch_group_local">Kohalikud rühmad</string>
   <string name="import_sim_contacts_title">SIM-kaardi kontaktide importimine</string>
   <string name="import_sim_contacts_message">SIM-kaardi kontaktide importimine</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">%d kontakt imporditakse.</item>
+    <item quantity="other">%d kontakti imporditakse.</item>
+  </plurals>
   <string name="import_finish">Importimine lõpetatud</string>
   <plurals name="import_stop">
     <item quantity="one">Importimine on tühistatud, imporditi %d üksus</item>
     <item quantity="other">Importimine on tühistatud, imporditi %d üksust</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">%d kontakt kustutatakse.</item>
+    <item quantity="other">%d kontakti kustutatakse.</item>
   </plurals>
   <string name="delete_contacts_title">Kontaktide kustutamine</string>
   <string name="delete_contacts_message">Kontaktide kustutamine\u2026</string>

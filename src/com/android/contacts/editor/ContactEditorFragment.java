@@ -1299,7 +1299,7 @@ public class ContactEditorFragment extends Fragment implements
         // Show only ringtones
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_RINGTONE);
         // Allow the user to pick a silent ringtone
-        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, true);
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
 
         final Uri ringtoneUri;
         if (mCustomRingtone != null) {

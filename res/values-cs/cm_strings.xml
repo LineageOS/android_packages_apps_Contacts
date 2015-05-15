@@ -47,6 +47,7 @@
   <string name="menu_memory_status">Stav paměti</string>
   <string name="memory_size">Celkem:</string>
   <string name="memory_used">Použito:</string>
+  <string name="contact_detail_picture_description">Obrázek. Výběrem změnit</string>
   <string name="calculating_status_now">Zjišťuje se stav\u2026</string>
   <string name="menu_copyTo">Zkopírovat do <xliff:g id="destination">%s</xliff:g></string>
   <string name="copy_to_target_sim">SIM karta</string>

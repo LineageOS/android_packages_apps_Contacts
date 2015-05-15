@@ -113,7 +113,6 @@
   <string name="recent_updates" msgid="2018245636796411442">دوایین تازه‌کردنه‌وه‌</string>
   <string name="account_type_format"><xliff:g id="source" example="Gmail">%1$s</xliff:g> ناو</string>
   <string name="from_account_format"><xliff:g id="source" example="user@gmail.com">%1$s</xliff:g></string>
-  <string name="use_photo_as_primary">ئه‌م وێنه‌یه‌ به‌کاربێنه‌</string>
   <string name="contact_read_only">ناتوانرێت ده‌ستکاریی بکرێت لەم بەرنامەیەدا.</string>
   <string name="group_read_only">ناتوانرێت دەستکاری بکرێت لەسەر ئەم ئامێره‌.</string>
   <string name="take_photo">وێنە بگرە</string>
@@ -130,7 +129,6 @@
   <string name="menu_display_all">"پیشاندانی گشت"</string>
   <string name="menu_select_all">"دیاریکردنی گشت"</string>
   <string name="menu_select_none">"دیاریی نەکردنی گشت"</string>
-  <string name="add_field">خانەیەکی تر زیاد بکه‌</string>
   <string name="add_new_entry_for_section">نوێ زیاد بکه‌</string>
   <string name="add_organization">ڕێکخر‌او زیاد بکه‌</string>
   <string name="event_edit_field_hint_text">به‌روار</string>

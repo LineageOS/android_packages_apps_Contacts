@@ -47,6 +47,7 @@
   <string name="menu_memory_status">Стан пам\'яті</string>
   <string name="memory_size">Всього:</string>
   <string name="memory_used">Використано:</string>
+  <string name="contact_detail_picture_description">Малюнок. Виберіть для заміни</string>
   <string name="calculating_status_now">Підрахунок\u2026</string>
   <string name="menu_copyTo">Копіювати до <xliff:g id="destination">%s</xliff:g></string>
   <string name="copy_to_target_sim">SIM-картка</string>

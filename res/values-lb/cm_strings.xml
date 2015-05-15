@@ -47,6 +47,7 @@
   <string name="menu_memory_status">Späicherstatus</string>
   <string name="memory_size">Total:</string>
   <string name="memory_used">Benotzt:</string>
+  <string name="contact_detail_picture_description">Bild. Auswiele fir z\'änneren</string>
   <string name="calculating_status_now">Status gëtt berechent\u2026</string>
   <string name="menu_copyTo">Kopéieren op <xliff:g id="destination">%s</xliff:g></string>
   <string name="copy_to_target_sim">SIM-Kaart</string>

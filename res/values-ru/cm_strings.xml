@@ -47,6 +47,7 @@
   <string name="menu_memory_status">Сост. памяти</string>
   <string name="memory_size">Объём:</string>
   <string name="memory_used">Используется:</string>
+  <string name="contact_detail_picture_description">Фотография (нажмите, чтобы изменить)</string>
   <string name="calculating_status_now">Выполняется подсчёт\u2026</string>
   <string name="menu_copyTo">Копировать в <xliff:g id="destination">%s</xliff:g></string>
   <string name="copy_to_target_sim">SIM-карта</string>

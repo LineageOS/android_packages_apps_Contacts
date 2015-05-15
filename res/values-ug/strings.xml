@@ -117,7 +117,6 @@
   <string name="recent_updates" msgid="2018245636796411442">يېقىنقى يېڭىلانمىلار</string>
   <string name="account_type_format"><xliff:g id="SOURCE">%1$s</xliff:g> ئالاقەداش</string>
   <string name="from_account_format"><xliff:g id="source" example="user@gmail.com">%1$s</xliff:g></string>
-  <string name="use_photo_as_primary">بۇ سۈرەتنى ئىشلەت</string>
   <string name="contact_read_only">بۇ ئەپتە تەھرىرلىيەلمەيدۇ.</string>
   <string name="group_read_only">بۇ ئۈسكۈنىدە تەھرىرلىيەلمەيدۇ</string>
   <string name="take_photo">رەسىم تارت</string>
@@ -132,7 +131,6 @@
   <string name="menu_display_all">"ھەممىنى كۆرسەت"</string>
   <string name="menu_select_all">"ھەممىنى تاللا"</string>
   <string name="menu_select_none">"ھەممىنى تاللىما"</string>
-  <string name="add_field">باشقا سۆز بۆلىكى قوش</string>
   <string name="add_new_entry_for_section">يېڭىدىن قوش</string>
   <string name="add_organization">تەشكىل قوش</string>
   <string name="event_edit_field_hint_text">چېسلا</string>

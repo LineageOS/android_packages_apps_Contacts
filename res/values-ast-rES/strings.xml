@@ -133,7 +133,6 @@
   <string name="recent_updates" msgid="2018245636796411442">Anovamientos recientes</string>
   <string name="account_type_format">Contautu de <xliff:g id="SOURCE">%1$s</xliff:g></string>
   <string name="from_account_format"><xliff:g id="source" example="user@gmail.com">%1$s</xliff:g></string>
-  <string name="use_photo_as_primary">Usar esta semeya</string>
   <string name="contact_read_only">Nun pue editase dende l\'aplicación.</string>
   <string name="group_read_only">Nun pue editase nesti preséu.</string>
   <string name="take_photo">Facer una semeya</string>
@@ -150,7 +149,6 @@
   <string name="menu_display_all">"Amosar toos"</string>
   <string name="menu_select_all">"Seleicionar too"</string>
   <string name="menu_select_none">"Desmarcalo too"</string>
-  <string name="add_field">Amestar otru campu</string>
   <string name="add_new_entry_for_section">Amestar nuevu</string>
   <string name="add_organization">Amestar organización</string>
   <string name="event_edit_field_hint_text">Data</string>
@@ -247,10 +245,8 @@
   <string name="header_event_entry">Eventu</string>
   <string name="header_relation_entry">Rellación</string>
   <string name="content_description_directions">direiciones a llocalización</string>
-  <string name="content_description_recent_sms">sms recientes. <xliff:g id="message_details">%s</xliff:g>. clic pa responder</string>
   <string name="content_description_recent_call_type_incoming">entrante</string>
   <string name="content_description_recent_call_type_outgoing">saliente</string>
   <string name="content_description_recent_call_type_missed">perdíes</string>
-  <string name="content_description_recent_call">llamada reciente. <xliff:g id="call_details">%s</xliff:g>. clic pa responder</string>
   <string name="message_from_you_prefix">Tu: <xliff:g id="sms_body">%s</xliff:g></string>
 </resources>

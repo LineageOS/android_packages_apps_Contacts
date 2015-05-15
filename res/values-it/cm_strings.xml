@@ -47,6 +47,7 @@
   <string name="menu_memory_status">Stato memoria</string>
   <string name="memory_size">Totale:</string>
   <string name="memory_used">Usato:</string>
+  <string name="contact_detail_picture_description">Foto. Seleziona per cambiare</string>
   <string name="calculating_status_now">Calcolo stato\u2026</string>
   <string name="menu_copyTo">Copia in <xliff:g id="destination">%s</xliff:g></string>
   <string name="copy_to_target_sim">SIM</string>

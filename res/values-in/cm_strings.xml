@@ -47,6 +47,7 @@
   <string name="menu_memory_status">Status memori</string>
   <string name="memory_size">Total:</string>
   <string name="memory_used">Digunakan:</string>
+  <string name="contact_detail_picture_description">Gambar. Pilih untuk mengubah</string>
   <string name="calculating_status_now">Menghitung status\u2026</string>
   <string name="menu_copyTo">Salin ke <xliff:g id="destination">%s</xliff:g></string>
   <string name="copy_to_target_sim">Kartu SIM</string>

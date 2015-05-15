@@ -17,23 +17,19 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="contacts_selected">
-    <item quantity="one">%d selectat</item>
-    <item quantity="few">%d selectate</item>
-    <item quantity="other">%d selectate</item>
+    <item quantity="one">%d hautatuta</item>
+    <item quantity="other">%d hautatuta</item>
   </plurals>
   <plurals name="ContactMultiImportConfirmation">
-    <item quantity="one">%d contact va fi importat.</item>
-    <item quantity="few">%d contacte vor fi importate.</item>
-    <item quantity="other">%d contacte vor fi importate.</item>
+    <item quantity="one">Kontaktu %d  inportatuko da.</item>
+    <item quantity="other">%d kontaktu inportatuko dira.</item>
   </plurals>
   <plurals name="import_progress">
-    <item quantity="one">%d contact importat</item>
-    <item quantity="few">%d contacte importate</item>
-    <item quantity="other">%d contacte importate</item>
+    <item quantity="one">Kontaktu %d inportatu da</item>
+    <item quantity="other">%d kontaktu inportatu dira</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
-    <item quantity="one">%d contact va fi şters.</item>
-    <item quantity="few">%d contacte vor fi şterse.</item>
-    <item quantity="other">%d contacte vor fi şterse.</item>
+    <item quantity="one">kontaktu %d ezabatuko da.</item>
+    <item quantity="other">%d kontaktu ezabatuko dira.</item>
   </plurals>
 </resources>

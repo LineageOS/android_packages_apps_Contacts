@@ -18,6 +18,20 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="contactSavedToSimCardError">ไม่สามารถบันทึกรายชื่อที่เลือกไปยังซิมการ์ดได้</string>
+  <string name="airplane_mode_on">ไม่สามารถเข้าถึงการซิมการ์ดในขณะเปิดใช้งานโหมดเครื่องบิน</string>
+  <string name="number_anr_too_long">หมายเลขยาวเกินไป</string>
+  <string name="email_address_too_long">อีเมลยาวเกินไป</string>
+  <string name="sim_card_full">ซิมการ์ดเต็ม</string>
+  <string name="tag_too_long">ชื่อผู้ติดต่อยาวเกินไป</string>
+  <string name="invalid_phone_number">หมายเลขโทรศัพท์ไม่ถูกต้อง</string>
+  <string name="invalid_number_type">รูปแบบหมายเลขไม่ถูกต้อง</string>
+  <string name="no_phone_number_or_email">กรุณาใส่หมายเลขโทรศัพท์หรือที่อยู่อีเมล</string>
+  <string name="memory_card_full">ไม่สามารถบันทึกผู้ติดต่อได้ โทรศัพท์หน่วยความจำเต็ม</string>
+  <string name="contacts_groups_label">กลุ่ม</string>
+  <string name="menu_moveGroupMembers">ย้ายสมาชิกกลุ่ม</string>
+  <string name="title_move_members">ย้ายสมาชิก</string>
+  <string name="message_move_members">ย้ายสมาชิก\u2026</string>
+  <string name="message_can_not_move_members">ไม่สามารถย้ายสมาชิก</string>
   <string name="edit_before_call">แก้ไข​หมายเลขก่อน​โทร</string>
   <string name="menu_sendViaSMS">ส่งรายชื่อผ่าน SMS</string>
   <string name="select_all">ทั้งหมด</string>
@@ -33,10 +47,12 @@
   <string name="menu_memory_status">สถานะหน่วยความจำ</string>
   <string name="memory_size">ทั้งหมด:</string>
   <string name="memory_used">ใช้แล้ว:</string>
+  <string name="contact_detail_picture_description">รูปภาพ เลือกการเปลี่ยนแปลง</string>
   <string name="calculating_status_now">กำลังคำนวณสถานะ\u2026</string>
   <string name="menu_copyTo">คัดลอกไปยัง<xliff:g id="destination">%s</xliff:g></string>
   <string name="copy_to_target_sim">ซิมการ์ด</string>
   <string name="copy_to_target_msim">ซิมการ์ด <xliff:g id="index">%d</xliff:g></string>
+  <string name="no_empty_email_in_usim">รายชื่อ USIM ไม่มีช่องอีเมบ ดังนั้นไม่สามารถคัดลอกข้อความได้</string>
   <string name="voicemail">ข้อความเสียง</string>
   <string name="select_call_title">เลือกประวัติการโทร</string>
   <string name="delete_call_title">ลบบันทึกการโทร</string>

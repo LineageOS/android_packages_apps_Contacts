@@ -17,23 +17,15 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="contacts_selected">
-    <item quantity="one">%d selectat</item>
-    <item quantity="few">%d selectate</item>
-    <item quantity="other">%d selectate</item>
+    <item quantity="other">%d ถูกเลือก</item>
   </plurals>
   <plurals name="ContactMultiImportConfirmation">
-    <item quantity="one">%d contact va fi importat.</item>
-    <item quantity="few">%d contacte vor fi importate.</item>
-    <item quantity="other">%d contacte vor fi importate.</item>
+    <item quantity="other">%d รายชื่อจะถูกนำเข้า</item>
   </plurals>
   <plurals name="import_progress">
-    <item quantity="one">%d contact importat</item>
-    <item quantity="few">%d contacte importate</item>
-    <item quantity="other">%d contacte importate</item>
+    <item quantity="other">%d รายชื่อถูกนำเข้าแล้ว</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
-    <item quantity="one">%d contact va fi şters.</item>
-    <item quantity="few">%d contacte vor fi şterse.</item>
-    <item quantity="other">%d contacte vor fi şterse.</item>
+    <item quantity="other">%d รายชื่อจะถูกลบ</item>
   </plurals>
 </resources>

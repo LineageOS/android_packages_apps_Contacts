@@ -47,6 +47,7 @@
   <string name="menu_memory_status">Κατάσταση μνήμης</string>
   <string name="memory_size">Συνολικά:</string>
   <string name="memory_used">Σε χρήση:</string>
+  <string name="contact_detail_picture_description">Εικόνα. Επιλέξτε για αλλαγή</string>
   <string name="calculating_status_now">Υπολογισμός κατάστασης\u2026</string>
   <string name="menu_copyTo">Αντιγραφή σε <xliff:g id="destination">%s</xliff:g></string>
   <string name="copy_to_target_sim">Κάρτα SIM</string>

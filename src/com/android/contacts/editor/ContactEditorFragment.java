@@ -1301,12 +1301,9 @@ public class ContactEditorFragment extends Fragment implements
         // Allow the user to pick a silent ringtone
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, true);
 
-        final Uri ringtoneUri;
+        Uri ringtoneUri = null;
         if (mCustomRingtone != null) {
             ringtoneUri = Uri.parse(mCustomRingtone);
-        } else {
-            // Otherwise pick default ringtone Uri so that something is selected.
-            ringtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
         }
 
         // Put checkmark next to the current ringtone for this contact
@@ -1321,7 +1318,7 @@ public class ContactEditorFragment extends Fragment implements
     }
 
     private void handleRingtonePicked(Uri pickedUri) {
-        if (pickedUri == null || RingtoneManager.isDefault(pickedUri)) {
+        if (pickedUri == null) {
             mCustomRingtone = null;
         } else {
             mCustomRingtone = pickedUri.toString();

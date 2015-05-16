@@ -75,6 +75,7 @@ import android.provider.ContactsContract.DataUsageFeedback;
 import android.provider.ContactsContract.Intents;
 import android.provider.ContactsContract.QuickContact;
 import android.provider.ContactsContract.RawContacts;
+import android.provider.Telephony;
 import android.support.v7.graphics.Palette;
 import android.telecom.PhoneAccount;
 import android.telecom.TelecomManager;
@@ -2421,9 +2422,13 @@ public class QuickContactActivity extends ContactsActivity {
                 + ":" + organization + "\r\n";
         sipAddress = (sipAddress == null) ? "" : getString(R.string.label_sip_address) + ":"
                 + sipAddress + "\r\n";
-        Intent intent = new Intent(Intent.ACTION_VIEW);
+        String defaultSmsPackageName = Telephony.Sms.getDefaultSmsPackage(this);
+        Intent intent = new Intent(Intent.ACTION_SEND);
         intent.putExtra("sms_body", name + phone + email + postal + organization + sipAddress);
-        intent.setType("vnd.android-dir/mms-sms");
+        intent.setType("text/plain");
+        if (defaultSmsPackageName != null) {
+            intent.setPackage(defaultSmsPackageName);
+        }
         startActivity(intent);
     }
 

@@ -1276,6 +1276,7 @@ public class PeopleActivity extends ContactsActivity implements
         makeMenuItemVisible(menu, R.id.menu_search, showMiscOptions);
         makeMenuItemVisible(menu, R.id.menu_import_export, showMiscOptions);
         makeMenuItemVisible(menu, R.id.menu_accounts, showMiscOptions);
+        makeMenuItemVisible(menu, R.id.menu_memory_status, showMiscOptions);
         makeMenuItemVisible(menu, R.id.menu_settings,
                 showMiscOptions && !ContactsPreferenceActivity.isEmpty(this));
 

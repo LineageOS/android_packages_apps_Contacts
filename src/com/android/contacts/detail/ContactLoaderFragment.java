@@ -184,8 +184,11 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(KEY_CONTACT_URI, mLookupUri);
-        if (mCopyToCardDialogFragment != null) {
-            getChildFragmentManager().saveFragmentInstanceState(mCopyToCardDialogFragment);
+        FragmentManager fragmentManager = getChildFragmentManager();
+
+        if (mCopyToCardDialogFragment != null &&
+                fragmentManager.findFragmentByTag(COPY_CONTACT_FRAGMENT) != null) {
+            fragmentManager.saveFragmentInstanceState(mCopyToCardDialogFragment);
         }
     }
 

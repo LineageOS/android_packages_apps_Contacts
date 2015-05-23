@@ -47,6 +47,7 @@
   <string name="menu_memory_status">Geheue status</string>
   <string name="memory_size">Totaal:</string>
   <string name="memory_used">Gebruik:</string>
+  <string name="contact_detail_picture_description">Foto. Kies om te verander</string>
   <string name="calculating_status_now">Berekening van status\u2026</string>
   <string name="menu_copyTo">Kopieer na<xliff:g id="destination">%s</xliff:g></string>
   <string name="copy_to_target_sim">SIM-kaart</string>

@@ -47,6 +47,7 @@
   <string name="menu_memory_status">Статус меморије</string>
   <string name="memory_size">Укупно:</string>
   <string name="memory_used">Искоришћено:</string>
+  <string name="contact_detail_picture_description">Слика. Изабери да промениш</string>
   <string name="calculating_status_now">Рачунање статуса\u2026</string>
   <string name="menu_copyTo">Копирај на <xliff:g id="destination">%s</xliff:g></string>
   <string name="copy_to_target_sim">SIM картица</string>

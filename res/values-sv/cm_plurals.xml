@@ -28,4 +28,8 @@
     <item quantity="one">%d kontakt importerades</item>
     <item quantity="other">%d kontakter importerades</item>
   </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">%d kontakt kommer att tas bort.</item>
+    <item quantity="other">%d kontakter kommer att tas bort.</item>
+  </plurals>
 </resources>

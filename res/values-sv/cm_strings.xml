@@ -18,7 +18,13 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="contactSavedToSimCardError">Kunde inte spara de valda kontakterna till SIM-kortet</string>
+  <string name="airplane_mode_on">SIM-kortet kan inte nås när flygplansläge är aktiverat</string>
+  <string name="number_anr_too_long">Numret är för lång</string>
   <string name="email_address_too_long">E-postadress är för lång</string>
+  <string name="sim_card_full">SIM-kortet är fullt</string>
+  <string name="invalid_phone_number">Telefonnumret är ogiltigt</string>
+  <string name="contacts_groups_label">Grupper</string>
+  <string name="title_move_members">Flytta medlemmar</string>
   <string name="edit_before_call">Redigera nummer innan uppringning</string>
   <string name="menu_sendViaSMS">Skicka kontakt via SMS</string>
   <string name="select_all">Alla</string>
@@ -34,6 +40,7 @@
   <string name="menu_memory_status">Minnesstatus</string>
   <string name="memory_size">Totalt:</string>
   <string name="memory_used">Använt:</string>
+  <string name="contact_detail_picture_description">Bild. Välj om du vill ändra</string>
   <string name="calculating_status_now">Beräknar status\u2026</string>
   <string name="menu_copyTo">Kopiera till <xliff:g id="destination">%s</xliff:g></string>
   <string name="copy_to_target_sim">SIM-kort</string>

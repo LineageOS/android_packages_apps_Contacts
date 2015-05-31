@@ -47,6 +47,7 @@
   <string name="menu_memory_status">메모리 상태</string>
   <string name="memory_size">전체:</string>
   <string name="memory_used">사용 중:</string>
+  <string name="contact_detail_picture_description">그림. 변경하러면 선택하세요</string>
   <string name="calculating_status_now">상태 계산 중\u2026</string>
   <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g>(으)로 복사</string>
   <string name="copy_to_target_sim">SIM 카드</string>

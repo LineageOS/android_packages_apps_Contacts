@@ -22,7 +22,11 @@
   <string name="number_anr_too_long">Numret är för lång</string>
   <string name="email_address_too_long">E-postadress är för lång</string>
   <string name="sim_card_full">SIM-kortet är fullt</string>
+  <string name="tag_too_long">Kontaktnamnet är för långt</string>
   <string name="invalid_phone_number">Telefonnumret är ogiltigt</string>
+  <string name="invalid_number_type">Nummertypen är ogiltig</string>
+  <string name="no_phone_number_or_email">Vänligen ange ett telefonnummer eller e-postadress.</string>
+  <string name="memory_card_full">Kontakten kunde inte sparas, telefonens minne är fullt</string>
   <string name="contacts_groups_label">Grupper</string>
   <string name="title_move_members">Flytta medlemmar</string>
   <string name="edit_before_call">Redigera nummer innan uppringning</string>

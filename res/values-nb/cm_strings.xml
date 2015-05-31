@@ -31,6 +31,7 @@
   <string name="unknown">Ukjent</string>
   <string name="copy_to_target_sim">SIM-kort</string>
   <string name="copy_to_target_msim">SIM card <xliff:g id="index">%d</xliff:g></string>
+  <string name="copying_contact_to_sim">Kopierer kontakt til SIM\u2026</string>
   <string name="search_bar_hint">Søk etter kontakter</string>
   <string name="delete_group_dialog_title">Slett gruppe</string>
   <string name="edit_before_call">Rediger nummer før samtalen</string>

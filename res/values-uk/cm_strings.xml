@@ -31,6 +31,7 @@
   <string name="unknown">Невідомо</string>
   <string name="copy_to_target_sim">SIM-картка</string>
   <string name="copy_to_target_msim">SIM-картка <xliff:g id="index">%d</xliff:g></string>
+  <string name="copying_contact_to_sim">Копіювання контактів на SIM\u2026</string>
   <string name="search_bar_hint">Пошук контактів</string>
   <string name="delete_group_dialog_title">Видалити групу</string>
   <string name="edit_before_call">Редагування номера перед викликом</string>
@@ -68,6 +69,11 @@
     <item quantity="other">%d контактів буде імпортовано.</item>
   </plurals>
   <string name="import_finish">Імпортування завершено</string>
+  <plurals name="import_stop">
+    <item quantity="one">Процес скасовано, імпортовано %d елемент</item>
+    <item quantity="few">Процес скасовано, імпортовано %d елемента</item>
+    <item quantity="other">Процес скасовано, імпортовано %d елементів</item>
+  </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="one">%d контакт буде видалено.</item>
     <item quantity="few">%d контакти буде видалено.</item>

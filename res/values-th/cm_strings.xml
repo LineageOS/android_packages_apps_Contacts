@@ -31,6 +31,7 @@
   <string name="unknown">ไม่ทราบ</string>
   <string name="copy_to_target_sim">ซิมการ์ด</string>
   <string name="copy_to_target_msim">ซิมการ์ด <xliff:g id="index">%d</xliff:g></string>
+  <string name="copying_contact_to_sim">คัดลอกรายชื่อไปยังซิม\u2026</string>
   <string name="search_bar_hint">ค้นหารายชื่อ</string>
   <string name="delete_group_dialog_title">ลบ​กลุ่ม</string>
   <string name="edit_before_call">แก้ไข​หมายเลขก่อน​โทร</string>

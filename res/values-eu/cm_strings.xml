@@ -20,20 +20,57 @@
   <string name="importConfirmation_title">Inportatu kontaktua?</string>
   <string name="menu_deleteContacts">Ezabatu kontaktuak</string>
   <string name="contactDeletedToast">Kontaktua ezabatu da</string>
-  <string name="contactSavedToSimCardError">Ezin izan dira SIM txartelean gorde aukeratutako kontaktuak</string>
+  <string name="contactSavedToSimCardError">Ezin izan dira SIM txartelean gorde hautatutako kontaktuak</string>
   <string name="airplane_mode_on">Ezin da SIM txartela atzitu hegaldi moduan</string>
   <string name="number_anr_too_long">Zenbakia luzeegia da</string>
   <string name="email_address_too_long">Posta helbidea luzeegia da</string>
+  <string name="sim_card_full">SIM txartela beteta dago</string>
   <string name="tag_too_long">Kontaktuaren izena luzeegia da</string>
   <string name="invalid_phone_number">Telefono zenbakia ez da zuzena</string>
   <string name="videocall">Bideo-deia</string>
   <string name="unknown">Ezezaguna</string>
   <string name="copy_to_target_sim">SIM txartela</string>
+  <string name="copy_to_target_msim">SIM txartela <xliff:g id="index">%d</xliff:g></string>
+  <string name="copying_contact_to_sim">Kontaktua SIM txartelera kopiatzen\u2026</string>
+  <string name="search_bar_hint">Bilatu kontaktuak</string>
   <string name="delete_group_dialog_title">Ezabatu taldea</string>
+  <string name="edit_before_call">Editatu zenbakia deitu aurretik</string>
+  <string name="description_videocall">Bideo-deia <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_dial_vt">Bideo-deia egin <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="title_group_name">Taldearen izena</string>
+  <string name="title_group_add">Talde berria</string>
+  <string name="group_selector">Sakatu taldea hautatzeko</string>
+  <string name="title_group_picker">Talde hautapena</string>
+  <string name="noGroupsHelpText">"Tokiko talderik ez."</string>
   <string name="menu_option_delete">Ezabatu taldea</string>
+  <string name="toast_not_add">"Ezin izan dira tokikoak ez diren kontuetako kontaktu guztiak gehitu"</string>
+  <string name="noMember">Ez dago kiderik talde honetan.</string>
   <string name="button_delete">Ezabatu</string>
+  <string name="title_add_members">Gehitu kideak</string>
+  <string name="select_all">Denak</string>
+  <string name="action_done">Eginda</string>
+  <plurals name="contacts_selected">
+    <item quantity="one">%d hautatuta</item>
+    <item quantity="other">%d hautatuta</item>
+  </plurals>
   <string name="delete_call_title">Ezabatu deien erregistroa</string>
-  <string name="delete_call_alert">Ezabatu aukeratutako deien erregistroak?</string>
+  <string name="delete_call_message">Deien erregistroa ezabatzen\u2026</string>
+  <string name="delete_call_alert">Ezabatu hautatutako deien erregistroak?</string>
+  <string name="title_del_call">Ezabatu</string>
+  <string name="menu_sendViaSMS">Bidali kontaktua SMS bidez</string>
+  <string name="title_switch_group_remote">Urrutiko taldeak</string>
+  <string name="title_switch_group_local">Tokiko taldeak</string>
+  <string name="import_sim_contacts_title">Inportatu SIM txarteleko kontaktuak</string>
+  <string name="import_sim_contacts_message">SIMeko kontaktuak inportatzen \u2026</string>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">Kontaktu %d  inportatuko da.</item>
+    <item quantity="other">%d kontaktu inportatuko dira.</item>
+  </plurals>
+  <string name="import_finish">Inportazioa burutu da</string>
+  <plurals name="import_stop">
+    <item quantity="one">Inportazioa bertan behera utzi da, %d inportatu da</item>
+    <item quantity="other">Inportazioa bertan behera utzi da, %d inportatu dira</item>
+  </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="one">kontaktu %d ezabatuko da.</item>
     <item quantity="other">%d kontaktu ezabatuko dira.</item>
@@ -41,6 +78,8 @@
   <string name="delete_contacts_title">Ezabatu kontaktuak</string>
   <string name="delete_contacts_message">Kontaktuak ezabatzen \u2026</string>
   <string name="error_group_exist"><xliff:g id="name">%s</xliff:g> izeneko taldea badago aurretik</string>
+  <string name="menu_auto_sync_to_baidu_cloud">Automatikoki sinkronizatu Baidu Cloud</string>
+  <string name="menu_sync_to_baidu_cloud">Baidu Cloud-ra sinkronizatu</string>
   <string name="delete_local_group_dialog_message">Ezabatu \'<xliff:g id="name">%s</xliff:g>\' taldea?</string>
   <string name="edit_local_group_dialog_title">Izena aldatu taldeari</string>
   <string name="too_many_contacts_add_to_group">Ezin dira <xliff:g id="count">%d</xliff:g> kontaktu baino gehiago gehitu</string>
@@ -50,5 +89,11 @@
   <string name="memory_status_title">Memoriaren egoera</string>
   <string name="memory_size">Guztira:</string>
   <string name="memory_used">Erabilita:</string>
+  <string name="calculating_status_now">Egoera zenbatesten\u2026</string>
   <string name="button_moveto">Mugitu</string>
+  <string name="menu_copyTo">Kopiatu hona <xliff:g id="destination">%s</xliff:g></string>
+  <string name="no_empty_email_in_usim">Kontaktua ez da kopiatu, posta helbide baliogabea</string>
+  <string name="voicemail">Ahots postontzia</string>
+  <string name="select_call_title">Hautatu deien erregistroa</string>
+  <string name="invalid_number_type">Zenbaki mota baliogabea da</string>
 </resources>

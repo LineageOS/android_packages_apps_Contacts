@@ -31,6 +31,7 @@
   <string name="unknown">알 수 없음</string>
   <string name="copy_to_target_sim">SIM 카드</string>
   <string name="copy_to_target_msim">SIM 카드 <xliff:g id="index">%d</xliff:g></string>
+  <string name="copying_contact_to_sim">연락처를 SIM으로 복사중\u2026</string>
   <string name="search_bar_hint">연락처 검색</string>
   <string name="delete_group_dialog_title">그룹 삭제</string>
   <string name="edit_before_call">전화하기 전에 번호 수정</string>

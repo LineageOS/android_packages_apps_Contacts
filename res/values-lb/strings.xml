@@ -41,7 +41,7 @@
   <string name="menu_removeStar">Aus de Favoritte läschen</string>
   <string name="menu_editContact">Änneren</string>
   <string name="menu_deleteContact">Läschen</string>
-  <string name="menu_create_contact_shortcut">Um Heemschierm ofleeën</string>
+  <string name="menu_create_contact_shortcut">Um Startschierm ofleeën</string>
   <string name="menu_call">Kontakt uruffen</string>
   <string name="menu_sendSMS">Kontakt uschreiwen</string>
   <string name="menu_splitAggregate">Opsplécken</string>
@@ -66,7 +66,7 @@
   <string name="deleteConfirmation">Dëse Kontakt gëtt geläscht.</string>
   <string name="menu_discard">Verwerfen</string>
   <string name="invalidContactMessage">De Kontakt existéiert net.</string>
-  <string name="createContactShortcutSuccessful">Kontakt-Widget op den Heemschierm dobäisetzen.</string>
+  <string name="createContactShortcutSuccessful">Kontakt-Widget op de Startschierm dobäisetzen.</string>
   <string name="pickerNewContactHeader">Neie Kontakt erstellen</string>
   <string name="pickerNewContactText">Neie Kontakt erstellen</string>
   <string-array name="otherLabels">

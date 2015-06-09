@@ -47,6 +47,7 @@
   <string name="menu_memory_status">メモリの状態</string>
   <string name="memory_size">合計:</string>
   <string name="memory_used">使用数:</string>
+  <string name="contact_detail_picture_description">写真です。選択して変更します。</string>
   <string name="calculating_status_now">状態を計算中\u2026</string>
   <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g>にコピー</string>
   <string name="copy_to_target_sim">SIMカード</string>

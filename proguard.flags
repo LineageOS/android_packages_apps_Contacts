@@ -1,3 +1,7 @@
+-dontwarn com.cyanogen.**
+-dontwarn com.squareup.**
+-dontwarn com.squareup.okhttp.**
+
 -keep class com.android.contacts.model.Sources {
   public <init>(...);
 }

@@ -24,7 +24,7 @@
     android:layout_marginStart="@dimen/quickcontact_title_initial_margin"
     android:layout_marginEnd="@dimen/quickcontact_title_initial_margin"
     android:layout_marginBottom="@dimen/quickcontact_title_initial_margin"
-    android:layout_gravity="top|start"
+    android:layout_gravity="bottom|start"
     android:orientation="vertical">
     <!-- The importantForAccessibility is set to "no" since we want the ViewGroup that pretends to be
         this View's parent (contact photo overlay) to provide the content description for Talkback. -->

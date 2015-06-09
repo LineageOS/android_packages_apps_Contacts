@@ -159,6 +159,8 @@ import com.android.contacts.util.StructuredPostalUtils;
 import com.android.contacts.widget.MultiShrinkScroller;
 import com.android.contacts.widget.MultiShrinkScroller.MultiShrinkScrollerListener;
 import com.android.contacts.widget.QuickContactImageView;
+import com.squareup.picasso.Picasso;
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.ImmutableList;
 
@@ -215,6 +217,9 @@ public class QuickContactActivity extends ContactsActivity {
     private static final String HANGOUTS_DATA_5_MESSAGE = "conversation";
     private static final String CALL_ORIGIN_QUICK_CONTACTS_ACTIVITY =
             "com.android.contacts.quickcontact.QuickContactActivity";
+
+    // URI for contact lookup
+    public static final String CONTACT_URI_EXTRA = "contact_uri_extra";
 
     /**
      * The URI used to load the the Contact. Once the contact is loaded, use Contact#getLookupUri()
@@ -659,7 +664,6 @@ public class QuickContactActivity extends ContactsActivity {
 
         getWindow().setStatusBarColor(Color.TRANSPARENT);
 
-        processIntent(getIntent());
 
         // Show QuickContact in front of soft input
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
@@ -774,7 +778,7 @@ public class QuickContactActivity extends ContactsActivity {
                         }
                     });
         }
-
+        processIntent(getIntent());
         Trace.endSection();
     }
 
@@ -822,15 +826,28 @@ public class QuickContactActivity extends ContactsActivity {
         }
         mExtraMode = getIntent().getIntExtra(QuickContact.EXTRA_MODE,
                 QuickContact.MODE_LARGE);
+
         final Uri oldLookupUri = mLookupUri;
 
-        if (lookupUri == null) {
+        mLookupUri = lookupUri;
+        mExcludeMimes = intent.getStringArrayExtra(QuickContact.EXTRA_EXCLUDE_MIMES);
+
+        Contact contact = null;
+        if (mLookupUri == null) {
+            // See if a URI has been attached as an extra
+            mLookupUri = intent.getParcelableExtra(CONTACT_URI_EXTRA);
+            contact = ContactLoader.parseEncodedContactEntity(mLookupUri,
+                    ContactLoader.EncodedContactEntitySchemaVersion.ENHANCED_CALLER_META_DATA);
+        }
+
+        if (mLookupUri == null) {
             finish();
             return;
         }
-        mLookupUri = lookupUri;
-        mExcludeMimes = intent.getStringArrayExtra(QuickContact.EXTRA_EXCLUDE_MIMES);
-        if (oldLookupUri == null) {
+
+        if (contact != null) {
+            bindContactData(contact);
+        } else if (oldLookupUri == null) {
             mContactLoader = (ContactLoader) getLoaderManager().initLoader(
                     LOADER_CONTACT_ID, null, mLoaderContactCallbacks);
         } else if (oldLookupUri != mLookupUri) {
@@ -875,6 +892,21 @@ public class QuickContactActivity extends ContactsActivity {
         }
     }
 
+    private void setAttributionText(String value) {
+        if (!TextUtils.isEmpty(value)) {
+            if (mScroller != null) {
+                mScroller.setAttributionText(getString(R.string.powered_by_provider, value));
+            }
+        }
+    }
+
+    private void setSpamCountText(int value) {
+        if (mScroller != null && value > 0) {
+            mScroller.setSpamCountText(
+                    getResources().getQuantityString(R.plurals.spam_count_text, value, value));
+        }
+    }
+
     /**
      * Check if the given MIME-type appears in the list of excluded MIME-types
      * that the most-recent caller requested.
@@ -901,10 +933,27 @@ public class QuickContactActivity extends ContactsActivity {
         Trace.beginSection("Set display photo & name");
 
         mPhotoView.setIsBusiness(mContactData.isDisplayNameFromOrganization());
-        mPhotoSetter.setupContactPhoto(data, mPhotoView);
+        if (mContactData.getPhotoBinaryData() == null && mContactData.getPhotoUri() != null) {
+            Picasso.with(getApplicationContext())
+                    .load(mContactData.getPhotoUri())
+                    .noPlaceholder()
+                    .centerCrop()
+                    .resize(480, 640) // Just a reasonable default
+                    .into(mPhotoView);
+        } else {
+            mPhotoSetter.setupContactPhoto(data, mPhotoView);
+        }
         extractAndApplyTintFromPhotoViewAsynchronously();
         setHeaderNameText(ContactDisplayUtils.getDisplayName(this, data).toString());
-
+        setAttributionText(data.getProviderName());
+        final int spamCount = data.getSpamCount();
+        if (spamCount > 0) {
+            mHasComputedThemeColor = true;
+            setThemeColor(mMaterialColorMapUtils
+                    .calculatePrimaryAndSecondaryColor(getResources()
+                            .getColor(R.color.letter_tile_red_color)));
+            setSpamCountText(spamCount);
+        }
         Trace.endSection();
 
         mEntriesAndActionsTask = new AsyncTask<Void, Void, Cp2DataCardModel>() {

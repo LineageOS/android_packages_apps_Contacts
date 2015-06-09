@@ -21,7 +21,9 @@ import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
 import android.hardware.display.DisplayManagerGlobal;
 import android.os.Trace;
+import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.DisplayInfo;
@@ -110,6 +112,9 @@ public class MultiShrinkScroller extends FrameLayout {
     private View mTransparentView;
     private MultiShrinkScrollerListener mListener;
     private TextView mLargeTextView;
+    private TextView mAttributionTextView;
+    private TextView mSpamCountTextView;
+    private View mContactInfo;
     private View mPhotoTouchInterceptOverlay;
     /** Contains desired size & vertical offset of the title, once the header is fully compressed */
     private TextView mInvisiblePlaceholderTextView;
@@ -132,6 +137,7 @@ public class MultiShrinkScroller extends FrameLayout {
      */
     private boolean mIsOpenContactSquare;
     private int mMaximumHeaderTextSize;
+    private int mMaximumHeaderInfoSize;
     private int mCollapsedTitleBottomMargin;
     private int mCollapsedTitleStartMargin;
     private int mMinimumPortraitHeaderHeight;
@@ -177,7 +183,7 @@ public class MultiShrinkScroller extends FrameLayout {
     };
 
     private final PathInterpolator mTextSizePathInterpolator
-            = new PathInterpolator(0.16f, 0.4f, 0.2f, 1);
+            = new PathInterpolator(0.19f, 0.0f, 0.2f, 1);
 
     private final int[] mGradientColors = new int[] {0,0x88000000};
     private GradientDrawable mTitleGradientDrawable = new GradientDrawable(
@@ -289,7 +295,10 @@ public class MultiShrinkScroller extends FrameLayout {
         mToolbar = findViewById(R.id.toolbar_parent);
         mPhotoViewContainer = findViewById(R.id.toolbar_parent);
         mTransparentView = findViewById(R.id.transparent_view);
+        mContactInfo = findViewById(R.id.contact_info);
         mLargeTextView = (TextView) findViewById(R.id.large_title);
+        mAttributionTextView = (TextView) findViewById(R.id.contact_info_attribution);
+        mSpamCountTextView = (TextView) findViewById(R.id.contact_spam_count);
         mInvisiblePlaceholderTextView = (TextView) findViewById(R.id.placeholder_textview);
         mStartColumn = findViewById(R.id.empty_start_column);
         // Touching the empty space should close the card
@@ -341,6 +350,7 @@ public class MultiShrinkScroller extends FrameLayout {
                         : mPhotoViewContainer.getWidth();
                 setHeaderHeight(getMaximumScrollableHeaderHeight());
                 mMaximumHeaderTextSize = mLargeTextView.getHeight();
+                mMaximumHeaderInfoSize = mContactInfo.getHeight();
                 if (mIsTwoPanel) {
                     mMaximumHeaderHeight = getHeight();
                     mMinimumHeaderHeight = mMaximumHeaderHeight;
@@ -354,8 +364,8 @@ public class MultiShrinkScroller extends FrameLayout {
                     mPhotoViewContainer.setLayoutParams(photoLayoutParams);
 
                     // Permanently set title width and margin.
-                    final FrameLayout.LayoutParams largeTextLayoutParams
-                            = (FrameLayout.LayoutParams) mLargeTextView.getLayoutParams();
+                    final LinearLayout.LayoutParams largeTextLayoutParams
+                            = (LinearLayout.LayoutParams) mLargeTextView.getLayoutParams();
                     largeTextLayoutParams.width = photoLayoutParams.width -
                             largeTextLayoutParams.leftMargin - largeTextLayoutParams.rightMargin;
                     largeTextLayoutParams.gravity = Gravity.BOTTOM | Gravity.START;
@@ -383,8 +393,8 @@ public class MultiShrinkScroller extends FrameLayout {
                 = (FrameLayout.LayoutParams) mTitleGradientView.getLayoutParams();
         final float TITLE_GRADIENT_SIZE_COEFFICIENT = 1.25f;
         final FrameLayout.LayoutParams largeTextLayoutParms
-                = (FrameLayout.LayoutParams) mLargeTextView.getLayoutParams();
-        titleGradientLayoutParams.height = (int) ((mLargeTextView.getHeight()
+                = (FrameLayout.LayoutParams) mContactInfo.getLayoutParams();
+        titleGradientLayoutParams.height = (int) ((mContactInfo.getHeight()
                 + largeTextLayoutParms.bottomMargin) * TITLE_GRADIENT_SIZE_COEFFICIENT);
         mTitleGradientView.setLayoutParams(titleGradientLayoutParams);
     }
@@ -392,6 +402,24 @@ public class MultiShrinkScroller extends FrameLayout {
     public void setTitle(String title) {
         mLargeTextView.setText(title);
         mPhotoTouchInterceptOverlay.setContentDescription(title);
+    }
+
+    public void setAttributionText(String attribution) {
+        if (!TextUtils.isEmpty(attribution)) {
+            mAttributionTextView.setText(attribution);
+            mAttributionTextView.setVisibility(View.VISIBLE);
+        } else {
+            mAttributionTextView.setVisibility(View.GONE);
+        }
+    }
+
+    public void setSpamCountText(String spamCount) {
+        if (!TextUtils.isEmpty(spamCount)) {
+            mSpamCountTextView.setText(spamCount);
+            mSpamCountTextView.setVisibility(View.VISIBLE);
+        } else {
+            mSpamCountTextView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -997,7 +1025,7 @@ public class MultiShrinkScroller extends FrameLayout {
         } else {
             mLargeTextView.setPivotX(0);
         }
-        mLargeTextView.setPivotY(mLargeTextView.getHeight() / 2);
+        mLargeTextView.setPivotY(mContactInfo.getHeight() / 2);
 
         final int toolbarHeight = mToolbar.getLayoutParams().height;
         mPhotoTouchInterceptOverlay.setClickable(toolbarHeight != mMaximumHeaderHeight);
@@ -1009,7 +1037,7 @@ public class MultiShrinkScroller extends FrameLayout {
             setInterpolatedTitleMargins(1);
             return;
         }
-
+        mMaximumHeaderInfoSize = mContactInfo.getHeight();
         final float ratio = (toolbarHeight  - mMinimumHeaderHeight)
                 / (float)(mMaximumHeaderHeight - mMinimumHeaderHeight);
         final float minimumSize = mInvisiblePlaceholderTextView.getHeight();
@@ -1019,8 +1047,8 @@ public class MultiShrinkScroller extends FrameLayout {
 
         // Clamp to reasonable/finite values before passing into framework. The values
         // can be wacky before the first pre-render.
-        bezierOutput = (float) Math.min(bezierOutput, 1.0f);
-        scale = (float) Math.min(scale, 1.0f);
+        bezierOutput = Math.min(bezierOutput, 1.0f);
+        scale = Math.min(scale, 1.0f);
 
         mLargeTextView.setScaleX(scale);
         mLargeTextView.setScaleY(scale);
@@ -1051,7 +1079,7 @@ public class MultiShrinkScroller extends FrameLayout {
      */
     private void setInterpolatedTitleMargins(float x) {
         final FrameLayout.LayoutParams titleLayoutParams
-                = (FrameLayout.LayoutParams) mLargeTextView.getLayoutParams();
+                = (FrameLayout.LayoutParams) mContactInfo.getLayoutParams();
         final LinearLayout.LayoutParams toolbarLayoutParams
                 = (LinearLayout.LayoutParams) mToolbar.getLayoutParams();
 
@@ -1067,11 +1095,12 @@ public class MultiShrinkScroller extends FrameLayout {
         // calling mLargeTextView.getHeight() use the mMaximumHeaderTextSize for this calculation.
         // The getHeight() value acts unexpectedly when mLargeTextView is partially clipped by
         // its parent.
-        titleLayoutParams.topMargin = getTransparentViewHeight()
-                + toolbarLayoutParams.height - pretendBottomMargin
-                - mMaximumHeaderTextSize;
+        final int minHeaderInfoTopMargin = getTransparentViewHeight()
+                + toolbarLayoutParams.height - pretendBottomMargin - mMaximumHeaderInfoSize;
+        final int topMargin = Math.max(minHeaderInfoTopMargin, 0);
+        titleLayoutParams.topMargin = topMargin;
         titleLayoutParams.bottomMargin = 0;
-        mLargeTextView.setLayoutParams(titleLayoutParams);
+        mContactInfo.setLayoutParams(titleLayoutParams);
     }
 
     private void updatePhotoTintAndDropShadow() {
@@ -1148,7 +1177,11 @@ public class MultiShrinkScroller extends FrameLayout {
         mPhotoView.setTint(mHeaderTintColor);
         mTitleGradientDrawable.setAlpha(gradientAlpha);
         mActionBarGradientDrawable.setAlpha(gradientAlpha);
-
+        final int attributionAlpha = calculateAttributionTextAlpha(toolbarHeight);
+        mAttributionTextView
+                .setTextColor(mAttributionTextView.getTextColors().withAlpha(attributionAlpha));
+        mSpamCountTextView
+                .setTextColor(mSpamCountTextView.getTextColors().withAlpha(attributionAlpha));
         Trace.endSection();
     }
 
@@ -1165,6 +1198,16 @@ public class MultiShrinkScroller extends FrameLayout {
             return 0;
         }
         return (intermediateHeight - height) / interpolatingHeightRange;
+    }
+
+    private int calculateAttributionTextAlpha(int height) {
+        final float ratio = calculateHeightRatioToBlendingStartHeight(height);
+        final float alpha = 1.0f - (float) Math.min(Math.pow(ratio, 1.5f) * 2f, 1f);
+        final float tint = (float) Math.min(Math.pow(ratio, 1.5f) * 3f, 1f);
+        mColorMatrix.setSaturation(alpha);
+        mColorMatrix.postConcat(alphaMatrix(alpha, Color.WHITE));
+        mColorMatrix.postConcat(multiplyBlendMatrix(mHeaderTintColor, tint));
+        return (int) (255 * alpha);
     }
 
     /**

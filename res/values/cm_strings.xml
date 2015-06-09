@@ -103,6 +103,7 @@
     <string name="delete_call_message">Deleting call logs\u2026</string>
     <string name="delete_call_alert">Delete selected call logs?</string>
     <string name="title_del_call">Delete</string>
+
     <string name="title_add_members">Add members</string>
     <string name="add_blacklist_success">"This number has been added in blacklist successfully."</string>
     <string name="add_whitelist_success">"This number has been added in whitelist successfully."</string>
@@ -111,5 +112,7 @@
     <string name="remove_from_black">Remove from blacklist</string>
     <string name="remove_from_white">Remove from whitelist</string>
     <string name="firewall_reach_maximun">The list is full and can not be filled in!</string>
+
+    <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
 
 </resources>

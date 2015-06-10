@@ -3117,6 +3117,7 @@ public class QuickContactActivity extends ContactsActivity {
     private Handler mHandler = null;
 
     private void copyToCard(final int sub) {
+        final Contact contactData = mContactData;
         final int MSG_COPY_DONE = 0;
         final int MSG_COPY_FAILURE = 1;
         final int MSG_CARD_NO_SPACE = 2;
@@ -3202,12 +3203,12 @@ public class QuickContactActivity extends ContactsActivity {
                     int emptyNumTotal = totalEmptyAdn + totalEmptyAnr;
 
                     // Get name string
-                    String strName = mContactData.getDisplayName();
+                    String strName = contactData.getDisplayName();
 
                     ArrayList<String> arrayNumber = new ArrayList<String>();
                     ArrayList<String> arrayEmail = new ArrayList<String>();
 
-                    for (RawContact rawContact : mContactData.getRawContacts()) {
+                    for (RawContact rawContact : contactData.getRawContacts()) {
                         for (DataItem dataItem : rawContact.getDataItems()) {
                             if (dataItem.getMimeType() == null) {
                                 continue;

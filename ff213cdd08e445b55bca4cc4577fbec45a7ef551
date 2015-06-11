@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a57fde8_52b9f22d",
+        "filename": "src/com/android/contacts/quickcontact/QuickContactActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2753,
+      "author": {
+        "id": 10631
+      },
+      "writtenOn": "2015-06-11T10:06:35Z",
+      "side": 1,
+      "message": "is it possible that it is alreadyalreadyalreadyalready null at this point of setting the local instance?",
+      "revId": "ff213cdd08e445b55bca4cc4577fbec45a7ef551",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

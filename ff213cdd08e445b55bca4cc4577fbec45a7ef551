@@ -16,6 +16,24 @@
       "revId": "ff213cdd08e445b55bca4cc4577fbec45a7ef551",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a57fde8_92819a50",
+        "filename": "src/com/android/contacts/quickcontact/QuickContactActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2753,
+      "author": {
+        "id": 9621
+      },
+      "writtenOn": "2015-06-11T10:09:41Z",
+      "side": 1,
+      "message": "Every place above that calls this method already does a null check, so it should not be null here.",
+      "parentUuid": "9a57fde8_52b9f22d",
+      "revId": "ff213cdd08e445b55bca4cc4577fbec45a7ef551",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

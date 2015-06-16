@@ -131,6 +131,7 @@
     <style name="EditorActionBarStyle" parent="@style/ContactsActionBarStyle">
         <!-- Do not use a contentInsetStart, since we are setting a custom ActionBar view -->
         <item name="android:contentInsetStart">0dp</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_check_white</item>
     </style>
 
     <!-- When this style was added, android:toolbarStyle was private. Therefore, this style

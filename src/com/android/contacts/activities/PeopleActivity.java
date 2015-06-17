@@ -1265,7 +1265,6 @@ public class PeopleActivity extends ContactsActivity implements
                     } else {
                         addGroupMenu.setVisible(false);
                     }
-                    addGroupMenu.setVisible(true);
                     contactsFilterMenu.setVisible(false);
                     clearFrequentsMenu.setVisible(false);
                     break;

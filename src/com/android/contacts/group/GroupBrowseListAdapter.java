@@ -202,6 +202,8 @@ public class GroupBrowseListAdapter extends BaseAdapter {
         // According to the UI SPEC, we will not show the account name for Phone account
         if (!PhoneAccountType.ACCOUNT_TYPE.equals(entry.getAccountType())) {
             viewCache.accountName.setText(entry.getAccountName());
+        } else {
+            viewCache.accountName.setText("");
         }
     }
 

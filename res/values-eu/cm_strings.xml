@@ -47,7 +47,7 @@
   <string name="noMember">Ez dago kiderik talde honetan.</string>
   <string name="button_delete">Ezabatu</string>
   <string name="title_add_members">Gehitu kideak</string>
-  <string name="select_all">Denak</string>
+  <string name="select_all">Guztiak</string>
   <string name="action_done">Eginda</string>
   <plurals name="contacts_selected">
     <item quantity="one">%d hautatuta</item>

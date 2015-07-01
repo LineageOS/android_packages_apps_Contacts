@@ -23,8 +23,8 @@
   <string name="email_address_too_long">כתובת הדוא\"ל ארוכה מדי</string>
   <string name="sim_card_full">כרטיס ה-SIM מלא</string>
   <string name="tag_too_long">שם איש הקשר ארוך מדי</string>
-  <string name="invalid_phone_number">מספר הטלפון אינו קיים</string>
-  <string name="invalid_number_type">סוג המספר אינו קיים</string>
+  <string name="invalid_phone_number">מספר הטלפון אינו חוקי</string>
+  <string name="invalid_number_type">סוג המספר אינו חוקי</string>
   <string name="no_phone_number_or_email">אנא הכנס מספר טלפון או כתובת דוא\"ל.</string>
   <string name="memory_card_full">לא ניתן לשמור את איש הקשר, זיכרון המכשיר מלא</string>
   <string name="contacts_groups_label">קבוצות</string>
@@ -35,18 +35,18 @@
   <string name="edit_before_call">ערוך מספר לפני השיחה</string>
   <string name="menu_sendViaSMS">שלח איש קשר באמצעות SMS</string>
   <string name="select_all">הכל</string>
-  <string name="import_sim_contacts_title">ייבוא אנשי קשר מכרטיס SIM</string>
-  <string name="import_sim_contacts_message">מייבא אנשי קשר מכרטיס SIM\u2026</string>
+  <string name="import_sim_contacts_title">ייבא אנשי קשר מה-SIM</string>
+  <string name="import_sim_contacts_message">מייבא אנשי קשר מה-SIM\u2026</string>
   <string name="importConfirmation_title">לייבא אנשי קשר?</string>
   <string name="import_finish">הייבוא הסתיים</string>
   <string name="too_many_contacts_add_to_group">לא ניתן להוסיף יותר מ- <xliff:g id="count"> %d </xliff:g> אנשי קשר</string>
   <string name="delete_contacts_title">מחק אנשי קשר</string>
-  <string name="delete_contacts_message">מחיקת אנשי קשר\u2026</string>
+  <string name="delete_contacts_message">מוחק אנשי קשר\u2026</string>
   <string name="deleteConfirmation_title">למחוק איש קשר?</string>
   <string name="contactDeletedToast">איש הקשר נמחק</string>
   <string name="menu_memory_status">מצב הזיכרון</string>
   <string name="memory_size">סה\"כ:</string>
-  <string name="memory_used">תפוס:</string>
+  <string name="memory_used">בשימוש:</string>
   <string name="contact_detail_picture_description">תמונה. לחץ לשינוי</string>
   <string name="calculating_status_now">מחשב מצב/u2026</string>
   <string name="menu_copyTo">העתק אל <xliff:g id="destination"> %s </xliff:g></string>
@@ -55,7 +55,7 @@
   <string name="no_empty_email_in_usim">לאיש הקשר בכרטיס USIM אין שדה דוא\"ל זמין. לא ניתן להעתיק את ההודעה.</string>
   <string name="voicemail">תא קולי</string>
   <string name="select_call_title">בחר רישומי שיחות</string>
-  <string name="delete_call_title">מחיקת רישומי שיחות</string>
+  <string name="delete_call_title">מחק רישומי שיחות</string>
   <string name="delete_call_message">מוחק רישומי שיחות\u2026</string>
   <string name="delete_call_alert">האם למחוק את רישומי השיחות שנבחרו?</string>
   <string name="title_del_call">מחק</string>

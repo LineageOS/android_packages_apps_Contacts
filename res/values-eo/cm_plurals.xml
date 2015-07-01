@@ -24,4 +24,12 @@
     <item quantity="one">%d kontaktuloj estos importitaj.</item>
     <item quantity="other">%d kontaktuloj estos importitaj.</item>
   </plurals>
+  <plurals name="import_progress">
+    <item quantity="one">%d kontaktuloj estis importitaj</item>
+    <item quantity="other">%d kontaktuloj estis importitaj</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">%d kontaktuloj estos forigitaj.</item>
+    <item quantity="other">%d kontaktuloj estos forigitaj.</item>
+  </plurals>
 </resources>

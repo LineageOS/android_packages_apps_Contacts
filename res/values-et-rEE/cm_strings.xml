@@ -47,6 +47,7 @@
   <string name="menu_memory_status">Mälu olek</string>
   <string name="memory_size">Kokku:</string>
   <string name="memory_used">Kasutusel:</string>
+  <string name="contact_detail_picture_description">Pilt. Valige muutmiseks</string>
   <string name="calculating_status_now">Oleku arvutamine\u2026</string>
   <string name="menu_copyTo">Asukohta <xliff:g id="destination"> %s </xliff:g> kopeerimine</string>
   <string name="copy_to_target_sim">SIM-kaart</string>

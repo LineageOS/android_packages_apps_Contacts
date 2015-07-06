@@ -901,7 +901,7 @@ public class MultiPickContactActivity extends ListActivity implements
                 switch (operation) {
                     case GROUP_ACTION_ADD_MEMBER:
                     case GROUP_ACTION_MOVE_MEMBER:
-                        Uri.Builder builder = Contacts.CONTENT_GROUP_URI.buildUpon();
+                        Uri.Builder builder = Contacts.CONTENT_URI.buildUpon();
                         builder.appendQueryParameter(ADD_GROUP_MEMBERS,
                                 operation == GROUP_ACTION_ADD_MEMBER ? "true" : "false");
                         builder.appendQueryParameter(Groups._ID, String.valueOf(groupId));

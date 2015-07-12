@@ -20,12 +20,12 @@
   <string name="contactSavedToSimCardError">Ezin izan dira SIM txartelean gorde hautatutako kontaktuak</string>
   <string name="airplane_mode_on">Ezin da SIM txartela atzitu hegaldi moduan</string>
   <string name="number_anr_too_long">Zenbakia luzeegia da</string>
-  <string name="email_address_too_long">Posta helbidea luzeegia da</string>
+  <string name="email_address_too_long">Eposta helbidea luzeegia da</string>
   <string name="sim_card_full">SIM txartela beteta dago</string>
   <string name="tag_too_long">Kontaktuaren izena luzeegia da</string>
   <string name="invalid_phone_number">Telefono zenbakia baliogabea da</string>
   <string name="invalid_number_type">Zenbaki mota baliogabea da</string>
-  <string name="no_phone_number_or_email">Idatzi telefono zenbakia edo posta helbidea.</string>
+  <string name="no_phone_number_or_email">Idatzi telefono zenbakia edo eposta helbidea.</string>
   <string name="memory_card_full">Ezin izan da kontaktua gorde, telefonoaren memoria beteta dago</string>
   <string name="contacts_groups_label">Taldeak</string>
   <string name="menu_moveGroupMembers">Mugitu taldekideak</string>
@@ -52,7 +52,7 @@
   <string name="menu_copyTo">Kopiatu hona <xliff:g id="destination">%s</xliff:g></string>
   <string name="copy_to_target_sim">SIM txartela</string>
   <string name="copy_to_target_msim">SIM txartela <xliff:g id="index">%d</xliff:g></string>
-  <string name="no_empty_email_in_usim">USIM kontaktuak ez du posta elektroniko eremurik eskuragarri, ezin dira mezuak kopiatu.</string>
+  <string name="no_empty_email_in_usim">USIM kontaktuak ez du eposta eremurik eskuragarri, ezin dira mezuak kopiatu.</string>
   <string name="voicemail">Ahots postontzia</string>
   <string name="select_call_title">Aukeratu deien erregistroa</string>
   <string name="delete_call_title">Ezabatu deien erregistroak</string>

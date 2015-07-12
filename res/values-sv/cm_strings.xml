@@ -28,6 +28,7 @@
   <string name="no_phone_number_or_email">Vänligen ange ett telefonnummer eller e-postadress.</string>
   <string name="memory_card_full">Kontakten kunde inte sparas, telefonens minne är fullt</string>
   <string name="contacts_groups_label">Grupper</string>
+  <string name="menu_moveGroupMembers">Flytta gruppmedlemmar</string>
   <string name="title_move_members">Flytta medlemmar</string>
   <string name="message_move_members">Flytta medlemmar\u2026</string>
   <string name="message_can_not_move_members">Kan inte flytta medlemmar</string>

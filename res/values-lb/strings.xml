@@ -51,6 +51,7 @@
   <string name="menu_splitAggregate">Opsplécken</string>
   <string name="menu_editGroup">Änneren</string>
   <string name="menu_deleteGroup">Läschen</string>
+  <string name="menu_moveGroupMembers">Gruppemembere réckelen</string>
   <string name="menu_new_contact_action_bar">Kontakt dobäisetzen</string>
   <string name="menu_new_group_action_bar">Grupp dobäisetzen</string>
   <string name="splitConfirmation_title">Kontakt opsplécken?</string>
@@ -109,6 +110,7 @@
   </plurals>
   <string name="all_contacts_tab_label">All d\'Kontakter</string>
   <string name="favorites_tab_label">Favoritten</string>
+  <string name="contacts_groups_label">Gruppen</string>
   <string name="callBack">Zréckruffen</string>
   <string name="callAgain">Erëm uruffen</string>
   <string name="returnCall">Zréckruffen</string>
@@ -126,6 +128,11 @@
   <string name="menu_add_contact">Bei d\'Kontakter dobäisetzen</string>
   <string name="share_via">Kontakter deelen iwwer</string>
   <string name="dialog_new_group_account">Grupp ënner dësem Kont erstellen</string>
+  <string name="title_move_members">Membere réckelen</string>
+  <string name="message_add_members">Memberen dobäisetzen...</string>
+  <string name="message_move_members">Membere réckelen...</string>
+  <string name="cancel_operation">Operatioun ass ofgebrach.</string>
+  <string name="message_can_not_move_members">Kann d\'Memberen net réckelen</string>
   <string name="audio_chat">Stëmmchat</string>
   <string name="video_chat">Videochat</string>
   <string name="connections">Connectiounen</string>
@@ -154,6 +161,8 @@
   <string name="add_organization">Organisatioun dobäisetzen</string>
   <string name="event_edit_field_hint_text">Datum</string>
   <string name="group_edit_field_hint_text">Gruppennumm</string>
+  <string name="change_photo">Änneren</string>
+  <string name="primary_photo">Haaptfoto</string>
   <string name="description_star">Favorit</string>
   <string name="edit_contact">Kontakt änneren</string>
   <plurals name="merge_info">
@@ -250,9 +259,19 @@
   <string name="header_website_entry">Websäit</string>
   <string name="header_event_entry">Rendezvous</string>
   <string name="header_relation_entry">Relatioun</string>
+  <string name="header_account_entry">Kont</string>
+  <string name="header_name_entry">Numm</string>
+  <string name="header_email_entry">E-Mail</string>
+  <string name="header_phone_entry">Telefon</string>
+  <string name="header_photo_entry">Foto</string>
+  <string name="content_description_expand_editor">Dréck fir de Kontakt-Editor opzeklappen.</string>
+  <string name="content_description_collapse_editor">Dréck fir de Kontakt-Editor zouzeklappen.</string>
   <string name="content_description_directions">Weebeschreiwung</string>
+  <string name="content_description_recent_sms">Rezent SMS. <xliff:g id="message_body">%s</xliff:g>. <xliff:g id="phone_number">%s</xliff:g>. <xliff:g id="date">%s</xliff:g>. Dréck fir z\'äntweren</string>
   <string name="content_description_recent_call_type_incoming">Erakommend</string>
   <string name="content_description_recent_call_type_outgoing">Erausgoend</string>
   <string name="content_description_recent_call_type_missed">Verpasst</string>
+  <string name="content_description_recent_call">Rezenten Uruff. <xliff:g id="call_type">%s</xliff:g>. <xliff:g id="phone_number">%s</xliff:g>. <xliff:g id="date">%s</xliff:g>. Dréck fir zréckzeruffen</string>
   <string name="message_from_you_prefix">Du: <xliff:g id="sms_body">%s</xliff:g></string>
+  <string name="contact_editor_hangouts_im_alert">Hangouts funktionéiert besser, wann s de d\'Hangouts-ID vun der Persoun an d\'E-Mail- oder Telefonsfeld agëss.</string>
 </resources>

@@ -36,7 +36,7 @@
   <string name="importConfirmation_title">Importare persoană de contact?</string>
   <string name="import_finish">Importul s-a terminat</string>
   <string name="too_many_contacts_add_to_group">Nu mai mult de <xliff:g id="count">%d</xliff:g> persoane de contact pot fi adăugate</string>
-  <string name="delete_contacts_title">Şterge contacte</string>
+  <string name="delete_contacts_title">Ștergere contacte</string>
   <string name="delete_contacts_message">Se șterg contacte\u2026</string>
   <string name="deleteConfirmation_title">Ştergeţi contact?</string>
   <string name="contactDeletedToast">Contact șters</string>

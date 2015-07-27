@@ -47,6 +47,7 @@
   <string name="menu_memory_status">स्मृति की स्थिति</string>
   <string name="memory_size">कुल:</string>
   <string name="memory_used">प्रयुक्त:</string>
+  <string name="contact_detail_picture_description">चित्र। बदलने के लिए चुनें</string>
   <string name="calculating_status_now">स्थिति की गणना कर रहे हैं\u2026</string>
   <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g> में कॉपी करें</string>
   <string name="copy_to_target_sim">सिम कार्ड</string>

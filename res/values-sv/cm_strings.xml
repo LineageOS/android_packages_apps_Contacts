@@ -52,6 +52,7 @@
   <string name="menu_copyTo">Kopiera till <xliff:g id="destination">%s</xliff:g></string>
   <string name="copy_to_target_sim">SIM-kort</string>
   <string name="copy_to_target_msim">SIM-kort <xliff:g id="index">%d</xliff:g></string>
+  <string name="no_empty_email_in_usim">USIM-kontakten har inte ett tillgänglig epostfält, kan inte kopiera meddelanden.</string>
   <string name="voicemail">Telefonsvarare</string>
   <string name="select_call_title">Välj samtalslistor</string>
   <string name="delete_call_title">Ta bort samtalslistor</string>

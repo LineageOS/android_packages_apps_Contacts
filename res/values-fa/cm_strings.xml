@@ -18,8 +18,45 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="contactSavedToSimCardError">مخاطبین انتخاب شده را نمی توان در سیم کارت ذخیره کرد</string>
+  <string name="airplane_mode_on">سیم‌کارت در حالت پرواز قابل استفاده نیست</string>
+  <string name="number_anr_too_long">شماره بسیار طولانی است</string>
+  <string name="email_address_too_long">آدرس ایمیل بسیار طولانی است</string>
   <string name="sim_card_full">سیم کارت پر است</string>
+  <string name="tag_too_long">نام مخاطب بسیار طولانی است</string>
+  <string name="invalid_phone_number">شماره تلفن نامعتبر است</string>
+  <string name="invalid_number_type">نوع شماره تلفن نامعتبر است</string>
+  <string name="no_phone_number_or_email">لطفا آدرس ایمیل یا شماره تلفن را وارد نمایید.</string>
+  <string name="memory_card_full">مخاطب ذخیره نمی‌شود، حافظه گوشی پر است</string>
+  <string name="contacts_groups_label">گروه‌ها</string>
   <string name="menu_moveGroupMembers">انتقال اعضای گروه</string>
+  <string name="title_move_members">انتقال اعضا</string>
+  <string name="message_move_members">در حال انتقال اعضا\u2026</string>
+  <string name="message_can_not_move_members">انتقال اعضا انجام نمی‌شود</string>
+  <string name="edit_before_call">ویرایش شماره قبل از تماس</string>
+  <string name="menu_sendViaSMS">ارسال مخاطب از طریق پیامک</string>
+  <string name="select_all">همه</string>
+  <string name="import_sim_contacts_title">درون‌ریزی مخاطبین سیمکارت</string>
+  <string name="import_sim_contacts_message">در حال درون‌ریزی مخاطبین سیمکارت\u2026</string>
+  <string name="importConfirmation_title">مخاطب درون‌ریزی شود؟</string>
+  <string name="import_finish">درون‌ریزی تمام شد</string>
+  <string name="too_many_contacts_add_to_group">افزودن بیش از <xliff:g id="count">%d</xliff:g> مخاطب ممکن نیست</string>
+  <string name="delete_contacts_title">حذف مخاطبین</string>
+  <string name="delete_contacts_message">در حال حذف مخاطبین\u2026</string>
+  <string name="deleteConfirmation_title">مخاطب حذف شود؟</string>
+  <string name="contactDeletedToast">مخاطب حذف شد</string>
+  <string name="menu_memory_status">وضعیت حافظه</string>
+  <string name="memory_size">مجموع:</string>
+  <string name="memory_used">استفاده شده:</string>
+  <string name="contact_detail_picture_description">تصویر. برای تغییر انتخاب کنید</string>
+  <string name="calculating_status_now">در حال محاسبه وضعیت\u2026</string>
+  <string name="menu_copyTo">کپی به <xliff:g id="destination">%s</xliff:g></string>
   <string name="copy_to_target_sim">سیم کارت</string>
+  <string name="copy_to_target_msim">سیم کارت <xliff:g id="index">%d</xliff:g></string>
+  <string name="no_empty_email_in_usim">مخاطب یوسیم دارای قسمت ایمیل نیست. کپی‎کردن پیام‌ها انجام نمی‌شود.</string>
+  <string name="voicemail">پست صوتی</string>
+  <string name="select_call_title">انتخاب گزارشات تماس</string>
+  <string name="delete_call_title">حذف گزارشات تماس</string>
+  <string name="delete_call_message">در حال حذف گزارشات تماس\u2026</string>
+  <string name="delete_call_alert">گزارشات تماس انتخاب شده حذف شود؟</string>
   <string name="title_del_call">حذف</string>
 </resources>

@@ -18,7 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="contactSavedToSimCardError">ಆಯ್ಕೆಮಾಡಿದ ಸಂಪರ್ಕಗಳನ್ನು ಸಿಮ್ ಕಾರ್ಡ್‍ಗೆ ಉಳಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ</string>
-  <string name="airplane_mode_on">ಏರ್‍ಪ್ಲೇನ್ ಮೋಡ್ ಸಕ್ರಿಯವಿರುವಾಗ ಸಿಮ್ ಕಾರ್ಡ್ ಪ್ರವೇಶಿಸಲಾಗುವುದಿಲ್ಲ</string>
+  <string name="airplane_mode_on">ಏರೋಪ್ಲೇನ್ ಮೋಡ್ ಸಕ್ರಿಯವಿರುವಾಗ ಸಿಮ್ ಕಾರ್ಡ್ ಪ್ರವೇಶಿಸಲಾಗುವುದಿಲ್ಲ</string>
   <string name="number_anr_too_long">ಸಂಖ್ಯೆ ಬಹಳ ಉದ್ದವಾಯಿತು</string>
   <string name="email_address_too_long">ಇಮೇಲ್ ವಿಳಾಸ ಬಹಳ ಉದ್ದವಾಯಿತು</string>
   <string name="sim_card_full">ಸಿಮ್ ಕಾರ್ಡ್ ಭರ್ತಿಯಾಗಿದೆ</string>

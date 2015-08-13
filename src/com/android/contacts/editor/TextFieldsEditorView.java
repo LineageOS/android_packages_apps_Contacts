@@ -377,10 +377,12 @@ public class TextFieldsEditorView extends LabeledEditorView {
 
         mHideOptional = ss.mHideOptional;
 
-        int numChildren = Math.min(mFieldEditTexts == null ? 0 : mFieldEditTexts.length,
-                ss.mVisibilities == null ? 0 : ss.mVisibilities.length);
-        for (int i = 0; i < numChildren; i++) {
-            mFieldEditTexts[i].setVisibility(ss.mVisibilities[i]);
+        if (mFieldEditTexts != null) {
+            int numChildren = Math.min(mFieldEditTexts == null ? 0 : mFieldEditTexts.length,
+                    ss.mVisibilities == null ? 0 : ss.mVisibilities.length);
+            for (int i = 0; i < numChildren; i++) {
+                mFieldEditTexts[i].setVisibility(ss.mVisibilities[i]);
+            }
         }
     }
 
@@ -428,5 +430,14 @@ public class TextFieldsEditorView extends LabeledEditorView {
                 fieldEditText.setText("");
             }
         }
+    }
+    /**
+     * use for account type is ACCOUNT_TYPE_SIM only because that sim card
+     * can not store expand fields.
+     */
+
+    public void setExpansionViewContainerDisabled() {
+        mExpansionViewContainer.setEnabled(false);
+        mExpansionView.setVisibility(View.INVISIBLE);
     }
 }

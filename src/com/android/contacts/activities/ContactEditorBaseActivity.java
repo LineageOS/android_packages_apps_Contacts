@@ -172,7 +172,7 @@ abstract public class ContactEditorBaseActivity extends ContactsActivity
          */
         void onSaveCompleted(boolean hadChanges, int saveMode, boolean saveSucceeded,
                 Uri contactLookupUri, Bundle updatedPhotos, boolean backPressed, long photoId,
-                long nameId);
+                long nameId, int result);
 
         /**
          * Invoked after the contact is joined.
@@ -264,7 +264,8 @@ abstract public class ContactEditorBaseActivity extends ContactsActivity
                     intent.getBooleanExtra(ContactEditorFragment.INTENT_EXTRA_SAVE_BACK_PRESSED,
                             false),
                     intent.getLongExtra(ContactEditorFragment.INTENT_EXTRA_PHOTO_ID, -1),
-                    intent.getLongExtra(ContactEditorFragment.INTENT_EXTRA_NAME_ID, -1));
+                    intent.getLongExtra(ContactEditorFragment.INTENT_EXTRA_NAME_ID, -1),
+                    intent.getIntExtra(ContactSaveService.SAVE_CONTACT_RESULT, 0));
         } else if (ACTION_JOIN_COMPLETED.equals(action)) {
             mFragment.onJoinCompleted(intent.getData());
         }

@@ -380,7 +380,7 @@ public class ContactEditorFragment extends ContactEditorBaseFragment implements
                 final RawContactEditorView rawContactEditorView = (RawContactEditorView) view;
                 final PhoneticNameEditorView phoneticNameEditorView =
                         (PhoneticNameEditorView) rawContactEditorView.getPhoneticNameEditor();
-                if (phoneticNameEditorView != null) {
+                if (phoneticNameEditorView != null && phoneticNameEditorView.getEntry() != null) {
                     final String phoneticName = phoneticNameEditorView.getPhoneticName();
                     if (!TextUtils.isEmpty(phoneticName)) {
                         return phoneticName;

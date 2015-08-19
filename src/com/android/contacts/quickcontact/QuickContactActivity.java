@@ -97,6 +97,8 @@ import android.widget.Toolbar;
 import com.android.contacts.ContactSaveService;
 import com.android.contacts.ContactsActivity;
 import com.android.contacts.NfcHandler;
+import com.android.contacts.common.MoreContactUtils;
+import com.android.contacts.common.SimContactsConstants;
 import com.android.contacts.R;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.ClipboardUtils;
@@ -322,6 +324,7 @@ public class QuickContactActivity extends ContactsActivity {
     private static final int CARD_ENTRY_ID_EDIT_CONTACT = -2;
 
 
+    private static final int MAX_NUM_LENGTH = 3; // add limit length to show IP call item
     private static final int[] mRecentLoaderIds = new int[]{
         LOADER_SMS_ID,
         LOADER_CALENDAR_ID,
@@ -458,6 +461,8 @@ public class QuickContactActivity extends ContactsActivity {
         static final int CLEAR_DEFAULT = 1;
         static final int SET_DEFAULT = 2;
         static final int EDIT_BEFORE_CALL = 3;
+        static final int IPCALL1 = 4;
+        static final int IPCALL2 = 5; // add for new feature: ip call prefix
     }
 
     private final OnCreateContextMenuListener mEntryContextMenuListener =
@@ -500,6 +505,25 @@ public class QuickContactActivity extends ContactsActivity {
             if (Phone.CONTENT_ITEM_TYPE.equals(info.getMimeType())) {
                 menu.add(ContextMenu.NONE, ContextMenuIds.EDIT_BEFORE_CALL,
                         ContextMenu.NONE, getString(R.string.edit_before_call));
+                // add limit length to show IP call item
+                if (info.getData().length() > MAX_NUM_LENGTH) {
+                    if (MoreContactUtils.isMultiSimEnable(QuickContactActivity.this,
+                            PhoneConstants.SUB1)) {
+                        String sub1Name = MoreContactUtils.getMultiSimAliasesName(
+                                getApplicationContext(), PhoneConstants.SUB1);
+                        menu.add(ContextMenu.NONE, ContextMenuIds.IPCALL1, ContextMenu.NONE,
+                                getApplicationContext().getString(
+                                com.android.contacts.common.R.string.ip_call_by_slot, sub1Name));
+                    }
+                    if (MoreContactUtils.isMultiSimEnable(QuickContactActivity.this,
+                            PhoneConstants.SUB2)) {
+                        String sub2Name = MoreContactUtils.getMultiSimAliasesName(
+                                getApplicationContext(), PhoneConstants.SUB2);
+                        menu.add(ContextMenu.NONE, ContextMenuIds.IPCALL2, ContextMenu.NONE,
+                                getApplicationContext().getString(
+                                com.android.contacts.common.R.string.ip_call_by_slot, sub2Name));
+                    }
+                }
             }
         }
     };
@@ -532,8 +556,26 @@ public class QuickContactActivity extends ContactsActivity {
             case ContextMenuIds.EDIT_BEFORE_CALL:
                 callByEdit(menuInfo.getData());
                 return true;
+            case ContextMenuIds.IPCALL1:
+                ipCallBySlot(menuInfo.getData(), PhoneConstants.SUB1);
+                return true;
+            case ContextMenuIds.IPCALL2:
+                ipCallBySlot(menuInfo.getData(), PhoneConstants.SUB2);
+                return true;
             default:
                 throw new IllegalArgumentException("Unknown menu option " + item.getItemId());
+        }
+    }
+
+    private void ipCallBySlot(String data, int subscription) {
+        String ipCallPrefix = MoreContactUtils.getIPCallPrefix(this,
+                subscription);
+        if (!TextUtils.isEmpty(ipCallPrefix)) {
+            Intent callIntent = CallUtil.getCallIntent(ipCallPrefix + data,
+                    MoreContactUtils.getAccount(subscription));
+            startActivity(callIntent);
+        } else {
+            MoreContactUtils.showNoIPNumberDialog(this, subscription);
         }
     }
 

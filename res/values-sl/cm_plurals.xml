@@ -17,23 +17,27 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="contacts_selected">
-    <item quantity="one">%d selectat</item>
-    <item quantity="few">%d selectate</item>
-    <item quantity="other">%d selectate</item>
+    <item quantity="one">Izbran %d</item>
+    <item quantity="two">Izbrana %d</item>
+    <item quantity="few">Izbrani %d</item>
+    <item quantity="other">Izbranih %d</item>
   </plurals>
   <plurals name="ContactMultiImportConfirmation">
-    <item quantity="one">%d contact va fi importat.</item>
-    <item quantity="few">%d contacte vor fi importate.</item>
-    <item quantity="other">%d contacte vor fi importate.</item>
+    <item quantity="one">Uvožen bo %d stik.</item>
+    <item quantity="two">Uvožena bosta %d stika.</item>
+    <item quantity="few">Uvoženi bodo %d stiki.</item>
+    <item quantity="other">Uvoženih bo %d stikov.</item>
   </plurals>
   <plurals name="import_progress">
-    <item quantity="one">%d contact importat</item>
-    <item quantity="few">%d contacte importate</item>
-    <item quantity="other">%d contacte importate</item>
+    <item quantity="one">Uvožen %d stik</item>
+    <item quantity="two">Uvožena %d stika</item>
+    <item quantity="few">Uvoženi %d stiki</item>
+    <item quantity="other">Uvoženih %d stikov</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
-    <item quantity="one">%d contact va fi şters.</item>
-    <item quantity="few">%d contacte vor fi şterse.</item>
-    <item quantity="other">%d contacte vor fi şterse.</item>
+    <item quantity="one">Izbrisan bo %d stik.</item>
+    <item quantity="two">Izbrisana bosta %d stika.</item>
+    <item quantity="few">Izbrisani bodo %d stiki.</item>
+    <item quantity="other">Izbrisanih bo %d stikov.</item>
   </plurals>
 </resources>

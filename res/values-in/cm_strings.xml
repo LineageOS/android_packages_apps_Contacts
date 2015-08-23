@@ -31,6 +31,7 @@
   <string name="unknown">Tidak dikenal</string>
   <string name="copy_to_target_sim">Kartu SIM</string>
   <string name="copy_to_target_msim">Kartu SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="copying_contact_to_sim">Menyalin kontak ke SIM\u2026</string>
   <string name="search_bar_hint">Cari kontak</string>
   <string name="delete_group_dialog_title">Hapus Grup</string>
   <string name="edit_before_call">Edit nomor sebelum panggilan</string>

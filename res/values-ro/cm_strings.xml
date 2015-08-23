@@ -16,7 +16,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="quick_contact_copied_toast">"Copiat în clipboard"</string>
-  <string name="deleteConfirmation_title">Ştergeţi contact?</string>
+  <string name="deleteConfirmation_title">Ștergeți contact?</string>
   <string name="importConfirmation_title">Importare persoană de contact?</string>
   <string name="menu_deleteContacts">Șterge contacte</string>
   <string name="contactDeletedToast">Contact șters</string>
@@ -31,6 +31,7 @@
   <string name="unknown">Necunoscut</string>
   <string name="copy_to_target_sim">Cartelă SIM</string>
   <string name="copy_to_target_msim">Card SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="copying_contact_to_sim">Copiere contact pe SIM\u2026</string>
   <string name="search_bar_hint">Caută contacte</string>
   <string name="delete_group_dialog_title">Șterge grup</string>
   <string name="edit_before_call">Editarea numărului înainte de apel</string>
@@ -38,8 +39,8 @@
   <string name="description_dial_vt">Apel VT <xliff:g id="name"> %1$s </xliff:g></string>
   <string name="title_group_name">Nume de grup</string>
   <string name="title_group_add">Grup nou</string>
-  <string name="group_selector">Faceţi clic pentru a selecta grup</string>
-  <string name="title_group_picker">Selectaţi Grupul</string>
+  <string name="group_selector">Faceți clic pentru a selecta grup</string>
+  <string name="title_group_picker">Selectați grupul</string>
   <string name="noGroupsHelpText">"Nu există grupuri locale."</string>
   <string name="menu_option_delete">Șterge grup</string>
   <string name="toast_not_add">"Imposibil de adăugat toate persoanele de contact în conturi non-locale"</string>
@@ -53,12 +54,12 @@
     <item quantity="few">%d selectate</item>
     <item quantity="other">%d selectate</item>
   </plurals>
-  <string name="delete_call_title">Şterge jurnalele de apel</string>
+  <string name="delete_call_title">Șterge jurnalele de apel</string>
   <string name="delete_call_message">Se șterg jurnalele de apel\u2026</string>
-  <string name="delete_call_alert">Ştergeți jurnalele de apel selectate?</string>
+  <string name="delete_call_alert">Ștergeți jurnalele de apel selectate?</string>
   <string name="title_del_call">Ștergeți</string>
   <string name="menu_sendViaSMS">Trimitere contact prin SMS</string>
-  <string name="title_switch_group_remote">Grupuri de la distanţă</string>
+  <string name="title_switch_group_remote">Grupuri de la distanță</string>
   <string name="title_switch_group_local">Grupuri locale</string>
   <string name="import_sim_contacts_title">Import contacte SIM</string>
   <string name="import_sim_contacts_message">Se importă contacte SIM\u2026</string>
@@ -74,19 +75,19 @@
     <item quantity="other">Importul a fost anulat, %d elemente au fost importate</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
-    <item quantity="one">%d contact va fi şters.</item>
-    <item quantity="few">%d contacte vor fi şterse.</item>
-    <item quantity="other">%d contacte vor fi şterse.</item>
+    <item quantity="one">%d contact va fi șters.</item>
+    <item quantity="few">%d contacte vor fi șterse.</item>
+    <item quantity="other">%d contacte vor fi șterse.</item>
   </plurals>
-  <string name="delete_contacts_title">Şterge contacte</string>
+  <string name="delete_contacts_title">Șterge contacte</string>
   <string name="delete_contacts_message">Se șterg contacte\u2026</string>
   <string name="error_group_exist">Un grup numit \'<xliff:g id="name">%s</xliff:g>\' deja există</string>
   <string name="menu_auto_sync_to_baidu_cloud">Auto sincronizare Baidu Cloud</string>
   <string name="menu_sync_to_baidu_cloud">Sincronizare Baidu Cloud acum</string>
-  <string name="delete_local_group_dialog_message">Ştergeți grupul \'<xliff:g id="name">%s</xliff:g>\'?</string>
+  <string name="delete_local_group_dialog_message">Ștergeți grupul \'<xliff:g id="name">%s</xliff:g>\'?</string>
   <string name="edit_local_group_dialog_title">Redenumire grup</string>
   <string name="too_many_contacts_add_to_group">Nu mai mult de <xliff:g id="count">%d</xliff:g> persoane de contact pot fi adăugate</string>
-  <string name="no_phone_number_or_email">Introduceţi un număr de telefon sau adresă de email.</string>
+  <string name="no_phone_number_or_email">Introduceți un număr de telefon sau adresă de email.</string>
   <string name="memory_card_full">Persoana de contact nu a putut fi salvată, memoria telefonului este plină</string>
   <string name="menu_memory_status">Stare memorie</string>
   <string name="memory_status_title">Stare memorie</string>
@@ -95,7 +96,7 @@
   <string name="calculating_status_now">Se calculează starea\u2026</string>
   <string name="button_moveto">Mută</string>
   <string name="menu_copyTo">Copiere pe <xliff:g id="destination">%s</xliff:g></string>
-  <string name="no_empty_email_in_usim">Copierea contactului nu a reuşit, adresa de e-mail este incorectă</string>
+  <string name="no_empty_email_in_usim">Copierea contactului nu a reușit, adresa de e-mail este incorectă</string>
   <string name="voicemail">Mesagerie vocală</string>
   <string name="select_call_title">Selectați jurnalul de apeluri</string>
   <string name="invalid_number_type">Tipul de număr este incorect</string>

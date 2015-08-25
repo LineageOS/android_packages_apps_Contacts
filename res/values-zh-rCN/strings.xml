@@ -315,7 +315,13 @@
     <string name="delete_call_title">删除通话记录</string>
     <string name="delete_call_message">删除通话记录 ...</string>
     <string name="delete_call_alert">"确定要删除选中的通话记录吗?"</string>
-
+    <string name="add_blacklist_success">"这个号码已经成功添加到黑名单。"</string>
+    <string name="add_whitelist_success">"这个号码已经成功添加到白名单。"</string>
+    <string name="remove_blacklist_success">"这个号码已经成功从黑名单移除。"</string>
+    <string name="remove_whitelist_success">"这个号码已经成功从白名单移除。"</string>
+    <string name="remove_from_black">"移除黑名单"</string>
+    <string name="remove_from_white">"移除白名单"</string>
+    <string name="firewall_reach_maximun">"列表已满!"</string>
     <string name="title_add_members">"添加成员"</string>
     <string name="title_move_members">"移动成员"</string>
     <string name="message_add_members">"添加成员..."</string>

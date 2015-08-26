@@ -33,6 +33,7 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.ProviderStatus;
 import android.provider.Settings;
+import android.preference.PreferenceManager;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -61,6 +62,7 @@ import com.android.contacts.common.widget.FloatingActionButtonController;
 import com.android.contacts.editor.EditorIntents;
 import com.android.contacts.interactions.ContactDeletionInteraction;
 import com.android.contacts.common.interactions.ImportExportDialogFragment;
+import com.android.contacts.common.list.AccountFilterActivity;
 import com.android.contacts.common.list.ContactEntryListFragment;
 import com.android.contacts.common.list.ContactListFilter;
 import com.android.contacts.common.list.ContactListFilterController;
@@ -110,6 +112,7 @@ public class PeopleActivity extends ContactsActivity implements
 
     private static final String TAG = "PeopleActivity";
 
+    public static String EDITABLE_KEY = "search_contacts";
     private static final String ENABLE_DEBUG_OPTIONS_HIDDEN_CODE = "debug debug!";
 
     // These values needs to start at 2. See {@link ContactEntryListFragment}.
@@ -1090,6 +1093,7 @@ public class PeopleActivity extends ContactsActivity implements
             contactsFilterMenu.setVisible(false);
             clearFrequentsMenu.setVisible(false);
             helpMenu.setVisible(false);
+            makeMenuItemVisible(menu, R.id.menu_delete, false);
         } else {
             switch (getTabPositionForTextDirection(mActionBarAdapter.getCurrentTab())) {
                 case TabState.FAVORITES:
@@ -1113,7 +1117,6 @@ public class PeopleActivity extends ContactsActivity implements
         final boolean showSelectedContactOptions = mActionBarAdapter.isSelectionMode()
                 && mAllFragment.getSelectedContactIds().size() != 0;
         makeMenuItemVisible(menu, R.id.menu_share, showSelectedContactOptions);
-        makeMenuItemVisible(menu, R.id.menu_delete, showSelectedContactOptions);
         makeMenuItemVisible(menu, R.id.menu_join, showSelectedContactOptions);
         makeMenuItemEnabled(menu, R.id.menu_join, mAllFragment.getSelectedContactIds().size() > 1);
 
@@ -1191,9 +1194,17 @@ public class PeopleActivity extends ContactsActivity implements
             case R.id.menu_join:
                 joinSelectedContacts();
                 return true;
-            case R.id.menu_delete:
-                deleteSelectedContacts();
+            case R.id.menu_delete: {
+                final Intent intent = new Intent(Intent.ACTION_DELETE, Contacts.CONTENT_URI);
+                intent.putExtra(EDITABLE_KEY, mActionBarAdapter.getQueryString());
+
+                ContactListFilter filter = ContactListFilter.restoreDefaultPreferences(
+                    PreferenceManager.getDefaultSharedPreferences(this));
+                intent.putExtra(AccountFilterActivity.KEY_EXTRA_CONTACT_LIST_FILTER, filter);
+
+                startActivity(intent);
                 return true;
+            }
             case R.id.menu_import_export: {
                 ImportExportDialogFragment.show(getFragmentManager(), areContactsAvailable(),
                         PeopleActivity.class);

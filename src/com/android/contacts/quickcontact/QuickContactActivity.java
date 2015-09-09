@@ -446,6 +446,7 @@ public class QuickContactActivity extends ContactsActivity {
         static final int COPY_TEXT = 0;
         static final int CLEAR_DEFAULT = 1;
         static final int SET_DEFAULT = 2;
+        static final int EDIT_BEFORE_CALL = 3;
     }
 
     private final OnCreateContextMenuListener mEntryContextMenuListener =
@@ -485,6 +486,10 @@ public class QuickContactActivity extends ContactsActivity {
                 menu.add(ContextMenu.NONE, ContextMenuIds.SET_DEFAULT,
                         ContextMenu.NONE, getString(R.string.set_default));
             }
+            if (Phone.CONTENT_ITEM_TYPE.equals(info.getMimeType())) {
+                menu.add(ContextMenu.NONE, ContextMenuIds.EDIT_BEFORE_CALL,
+                        ContextMenu.NONE, getString(R.string.edit_before_call));
+            }
         }
     };
 
@@ -512,6 +517,9 @@ public class QuickContactActivity extends ContactsActivity {
                 final Intent clearIntent = ContactSaveService.createClearPrimaryIntent(this,
                         menuInfo.getId());
                 this.startService(clearIntent);
+                return true;
+            case ContextMenuIds.EDIT_BEFORE_CALL:
+                callByEdit(menuInfo.getData());
                 return true;
             default:
                 throw new IllegalArgumentException("Unknown menu option " + item.getItemId());
@@ -1487,7 +1495,7 @@ public class QuickContactActivity extends ContactsActivity {
                         TextDirectionHeuristics.LTR);
                 entryContextMenuInfo = new EntryContextMenuInfo(header,
                         res.getString(R.string.phoneLabelsGroup), dataItem.getMimeType(),
-                        dataItem.getId(), dataItem.isSuperPrimary());
+                        dataItem.getId(), dataItem.isSuperPrimary(), header);
                 if (phone.hasKindTypeColumn(kind)) {
                     final int kindTypeColumn = phone.getKindTypeColumn(kind);
                     final String label = phone.getLabel();
@@ -2289,6 +2297,12 @@ public class QuickContactActivity extends ContactsActivity {
         } catch (final ActivityNotFoundException ex) {
             Toast.makeText(this, R.string.share_error, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void callByEdit(String data) {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts(PhoneAccount.SCHEME_TEL,
+                data, null));
+        startActivity(intent);
     }
 
     /**

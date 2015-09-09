@@ -35,6 +35,10 @@
         android:alphabeticShortcut="s" />
 
     <item
+        android:id="@+id/menu_send_via_sms"
+        android:title="@string/menu_sendViaSMS" />
+
+    <item
         android:id="@+id/menu_create_contact_shortcut"
         android:title="@string/menu_create_contact_shortcut" />
 

@@ -24,6 +24,7 @@ import android.app.Fragment;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.app.SearchManager;
 import android.content.ActivityNotFoundException;
+import android.content.ContentValues;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -56,6 +57,7 @@ import android.provider.ContactsContract.CommonDataKinds.Organization;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.Relation;
 import android.provider.ContactsContract.CommonDataKinds.SipAddress;
+import android.provider.ContactsContract.CommonDataKinds.Organization;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.CommonDataKinds.Website;
 import android.provider.ContactsContract.Contacts;
@@ -2326,6 +2328,84 @@ public class QuickContactActivity extends ContactsActivity {
         return receivers != null && receivers.size() > 0;
     }
 
+    private void sendContactViaSMS() {
+        // Get name string
+        String name = mContactData.getDisplayName();
+        String phone = null;
+        String email = null;
+        String postal = null;
+        String organization = null;
+        String sipAddress = null;
+
+        Log.d(TAG, "Contact name: " + name);
+
+        for (RawContact raw: mContactData.getRawContacts()) {
+            for (DataItem dataItem : raw.getDataItems()) {
+                final ContentValues entryValues = dataItem.getContentValues();
+                final String mimeType = dataItem.getMimeType();
+
+                Log.d(TAG, "    entryValues:" + entryValues);
+
+                if (mimeType == null) continue;
+
+                if (Phone.CONTENT_ITEM_TYPE.equals(mimeType)) { // Get phone string
+                    if (phone == null) {
+                        phone = entryValues.getAsString(Phone.NUMBER);
+                    } else {
+                        phone = phone + ", " + entryValues.getAsString(Phone.NUMBER);
+                    }
+                } else if (Email.CONTENT_ITEM_TYPE.equals(mimeType)) { // Get email string
+                    if (email == null) {
+                        email = entryValues.getAsString(Email.ADDRESS);
+                    } else {
+                        email = email + ", " + entryValues.getAsString(Email.ADDRESS);
+                    }
+                } else if (StructuredPostal.CONTENT_ITEM_TYPE.equals(mimeType)) {
+                    if (postal == null) {
+                        postal = entryValues.getAsString(StructuredPostal.FORMATTED_ADDRESS);
+                    } else {
+                        postal = postal + ", " + entryValues.getAsString(
+                                 StructuredPostal.FORMATTED_ADDRESS);
+                    }
+                } else if (Organization.CONTENT_ITEM_TYPE.equals(mimeType)) {
+                    if (organization == null) {
+                        organization = entryValues.getAsString(Organization.COMPANY);
+                    } else {
+                        organization = organization + ", " + entryValues
+                                     .getAsString(Organization.COMPANY);
+                    }
+                } else if (SipAddress.CONTENT_ITEM_TYPE.equals(mimeType)) {
+                    if (sipAddress == null) {
+                        sipAddress = entryValues.getAsString(SipAddress.SIP_ADDRESS);
+                    } else {
+                        sipAddress = sipAddress + ", " + entryValues
+                                    .getAsString(SipAddress.SIP_ADDRESS);
+                    }
+                }
+            }
+        }
+
+        if (TextUtils.isEmpty(name)) {
+            name = getResources().getString(R.string.missing_name);
+        }
+
+        name = getString(R.string.nameLabelsGroup) + ":" + name + "\r\n";
+        phone = (phone == null) ? "" : getString(R.string.phoneLabelsGroup)
+                + ":" + phone + "\r\n";
+        email = (email == null )? "" : getString(R.string.emailLabelsGroup)
+                + ":" + email + "\r\n";
+        postal = (postal == null) ? "" : getString(R.string.postalLabelsGroup)
+                + ":" + postal + "\r\n";
+        organization = (organization == null) ? "" : getString(R.string.organizationLabelsGroup)
+                + ":" + organization + "\r\n";
+        sipAddress = (sipAddress == null) ? "" : getString(R.string.label_sip_address) + ":"
+                + sipAddress + "\r\n";
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.putExtra("sms_body", name + phone + email + postal + organization + sipAddress);
+        intent.setType("vnd.android-dir/mms-sms");
+        startActivity(intent);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         final MenuInflater inflater = getMenuInflater();
@@ -2456,6 +2536,15 @@ public class QuickContactActivity extends ContactsActivity {
             case R.id.menu_help:
                 HelpUtils.launchHelpAndFeedbackForContactScreen(this);
                 return true;
+
+            case R.id.menu_send_via_sms: {
+                if (mContactData == null) {
+                    return false;
+                }
+                sendContactViaSMS();
+                return true;
+            }
+
             default:
                 return super.onOptionsItemSelected(item);
         }

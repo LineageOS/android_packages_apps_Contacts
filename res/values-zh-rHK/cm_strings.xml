@@ -17,9 +17,43 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="airplane_mode_on">飛航模式啟用時無法存取 SIM 卡</string>
+  <string name="sim_card_full">SIM 卡已滿</string>
+  <string name="tag_too_long">聯絡人名稱過長</string>
+  <string name="invalid_phone_number">電話號碼無效</string>
+  <string name="invalid_number_type">號碼類型無效</string>
+  <string name="no_phone_number_or_email">請輸入一個電話號碼或電子郵件地址。</string>
+  <string name="memory_card_full">無法儲存聯絡人，裝置記憶體已滿</string>
+  <string name="contacts_groups_label">群組</string>
+  <string name="menu_moveGroupMembers">移動群組成員</string>
+  <string name="title_move_members">移動成員</string>
+  <string name="message_move_members">正在移動成員\u2026</string>
+  <string name="message_can_not_move_members">無法移動成員</string>
+  <string name="edit_before_call">通話前先編輯號碼</string>
+  <string name="menu_sendViaSMS">透過短訊傳送聯絡人</string>
+  <string name="select_all">所有</string>
+  <string name="import_sim_contacts_title">匯入 SIM 卡聯絡人</string>
+  <string name="import_sim_contacts_message">正在匯入 SIM 卡聯絡人\u2026</string>
   <string name="importConfirmation_title">匯入聯絡人？</string>
+  <string name="import_finish">匯入完成</string>
+  <string name="too_many_contacts_add_to_group">可添加的聯絡人不超過 <xliff:g id="count">%d</xliff:g> 個</string>
+  <string name="delete_contacts_title">刪除聯絡人</string>
+  <string name="delete_contacts_message">正在刪除聯絡人\u2026</string>
   <string name="deleteConfirmation_title">刪除聯絡人？</string>
   <string name="contactDeletedToast">聯絡人已刪除</string>
   <string name="menu_memory_status">記憶體狀態</string>
+  <string name="memory_size">總數：</string>
+  <string name="memory_used">已用：</string>
+  <string name="contact_detail_picture_description">圖片。選擇以變更</string>
+  <string name="calculating_status_now">正在計算狀態\u2026</string>
+  <string name="menu_copyTo">複製到 <xliff:g id="destination">%s</xliff:g></string>
+  <string name="copy_to_target_sim">SIM 卡</string>
   <string name="copy_to_target_msim">SIM 咭 <xliff:g id="index">%d</xliff:g></string>
+  <string name="no_empty_email_in_usim">USIM 聯絡人沒有可用的電子郵件欄位，無法複製訊息。</string>
+  <string name="voicemail">語音信箱</string>
+  <string name="select_call_title">選擇通話記錄</string>
+  <string name="delete_call_title">刪除通話記錄</string>
+  <string name="delete_call_message">正在刪除通話記錄\u2026</string>
+  <string name="delete_call_alert">是否刪除所選的通話記錄？</string>
+  <string name="title_del_call">刪除</string>
 </resources>

@@ -155,7 +155,8 @@ public class MemoryStatusActivity extends ContactsActivity {
     private List<AccountListItem> loadAccountFilters(Context context) {
         final ArrayList<AccountListItem> accountFilters = Lists.newArrayList();
         final AccountTypeManager accountTypes = AccountTypeManager.getInstance(context);
-        List<AccountWithDataSet> accounts = accountTypes.getAccounts(true);
+        List<AccountWithDataSet> accounts = accountTypes.getAccounts(true,
+                AccountTypeManager.FLAG_ALL_ACCOUNTS_WITHOUT_LOCAL);
         ContentResolver cr = context.getContentResolver();
 
         // Add the local account first, this is a special case.

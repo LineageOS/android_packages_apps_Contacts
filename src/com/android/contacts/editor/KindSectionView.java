@@ -40,6 +40,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.android.contacts.R;
+import com.android.contacts.common.model.account.AccountType;
 import com.android.contacts.editor.Editor.EditorListener;
 import com.android.contacts.common.model.RawContactModifier;
 import com.android.contacts.common.model.RawContactDelta;
@@ -221,6 +222,18 @@ public class KindSectionView extends LinearLayout implements EditorListener {
     private void updateEmptyEditors(boolean shouldAnimate) {
 
         final List<View> emptyEditors = getEmptyEditors();
+
+        // Check for primary best type
+        AccountType.EditType bestType = RawContactModifier.getBestValidType(mState, mKind, false,
+                Integer.MIN_VALUE);
+        if (bestType == null) {
+            // Fall back to seconday best type
+            bestType = RawContactModifier.getBestValidType(mState, mKind, true, Integer.MIN_VALUE);
+        }
+        // If no type then we don't need an empty for it
+        if (bestType == null) {
+            return;
+        }
 
         // If there is more than 1 empty editor, then remove it from the list of editors.
         if (emptyEditors.size() > 1) {

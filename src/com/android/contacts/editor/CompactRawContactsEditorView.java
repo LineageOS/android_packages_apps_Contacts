@@ -28,6 +28,8 @@ import com.android.contacts.common.model.account.AccountType;
 import com.android.contacts.common.model.account.AccountType.EditField;
 import com.android.contacts.common.model.account.AccountType.EditType;
 import com.android.contacts.common.model.account.AccountWithDataSet;
+import com.android.contacts.common.model.account.PhoneAccountType;
+import com.android.contacts.common.model.account.SimAccountType;
 import com.android.contacts.common.model.dataitem.DataKind;
 import com.android.contacts.common.SimContactsConstants;
 import com.android.contacts.common.MoreContactUtils;
@@ -372,7 +374,8 @@ public class CompactRawContactsEditorView extends LinearLayout implements View.O
             return;
         }
         vlog("Account info loaded");
-        if (accountInfo.first == null) {
+        if (accountInfo.first == null || SimAccountType.ACCOUNT_TYPE.equals(accountType.
+                accountType)|| PhoneAccountType.ACCOUNT_TYPE.equals(accountType.accountType)) {
             mAccountNameView.setVisibility(View.GONE);
         } else {
             mAccountNameView.setVisibility(View.VISIBLE);

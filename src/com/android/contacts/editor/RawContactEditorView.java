@@ -37,6 +37,8 @@ import android.widget.TextView;
 import com.android.contacts.GroupMetaDataLoader;
 import com.android.contacts.R;
 import com.android.contacts.common.model.account.AccountType;
+import com.android.contacts.common.model.account.PhoneAccountType;
+import com.android.contacts.common.model.account.SimAccountType;
 import com.android.contacts.common.model.account.AccountType.EditType;
 import com.android.contacts.common.model.dataitem.DataKind;
 import com.android.contacts.common.model.RawContactDelta;
@@ -197,7 +199,8 @@ public class RawContactEditorView extends BaseRawContactEditorView {
             // Hide this view so the other text view will be centered vertically
             mAccountHeaderNameTextView.setVisibility(View.GONE);
         } else {
-            if (accountInfo.first == null) {
+            if (accountInfo.first == null || SimAccountType.ACCOUNT_TYPE.equals(type.accountType)
+                    || PhoneAccountType.ACCOUNT_TYPE.equals(type.accountType)) {
                 mAccountHeaderNameTextView.setVisibility(View.GONE);
             } else {
                 mAccountHeaderNameTextView.setVisibility(View.VISIBLE);

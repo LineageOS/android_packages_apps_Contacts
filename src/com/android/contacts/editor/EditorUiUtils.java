@@ -88,7 +88,7 @@ public class EditorUiUtils {
      */
     public static Pair<String,String> getAccountInfo(Context context, boolean isProfile,
             String accountName, AccountType accountType) {
-        CharSequence accountTypeDisplayLabel = accountType.getDisplayLabel(context, accountName);
+        CharSequence accountTypeDisplayLabel = accountType.getDisplayLabel(context);
 
         if (isProfile) {
             if (TextUtils.isEmpty(accountName)) {

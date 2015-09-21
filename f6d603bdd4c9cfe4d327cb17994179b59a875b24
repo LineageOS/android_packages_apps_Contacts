@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "df3967d1_34f23e08",
+        "filename": "res/values/cm_plurals.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1448
+      },
+      "writtenOn": "2015-09-21T22:49:27Z",
+      "side": 1,
+      "message": "I just copied this from Dialer",
+      "parentUuid": "df3967d1_d43772e3",
+      "revId": "f6d603bdd4c9cfe4d327cb17994179b59a875b24",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "df3967d1_145bba2e",
         "filename": "src/com/android/contacts/quickcontact/QuickContactActivity.java",
         "patchSetId": 2
@@ -53,6 +71,30 @@
       "writtenOn": "2015-09-21T22:35:00Z",
       "side": 1,
       "message": "Magical values. Don\u0027t know if re-use warrants a constant, but would probably appreciate some comments if someone down the line needs to update this code or fix a bug here.",
+      "range": {
+        "startLine": 1205,
+        "startChar": 8,
+        "endLine": 1206,
+        "endChar": 76
+      },
+      "revId": "f6d603bdd4c9cfe4d327cb17994179b59a875b24",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df3967d1_14f73af8",
+        "filename": "src/com/android/contacts/widget/MultiShrinkScroller.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1206,
+      "author": {
+        "id": 1448
+      },
+      "writtenOn": "2015-09-21T22:49:27Z",
+      "side": 1,
+      "message": "This is just a re-use of the math in updatePhotoTintAndDropShadow()",
+      "parentUuid": "df3967d1_945faa0d",
       "range": {
         "startLine": 1205,
         "startChar": 8,

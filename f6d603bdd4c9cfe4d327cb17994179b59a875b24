@@ -60,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "df3967d1_54d6e251",
+        "filename": "src/com/android/contacts/quickcontact/QuickContactActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 941,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2015-09-21T22:50:53Z",
+      "side": 1,
+      "message": "Discussed, IRL. Looks fine.",
+      "parentUuid": "df3967d1_145bba2e",
+      "range": {
+        "startLine": 941,
+        "startChar": 28,
+        "endLine": 941,
+        "endChar": 37
+      },
+      "revId": "f6d603bdd4c9cfe4d327cb17994179b59a875b24",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "df3967d1_945faa0d",
         "filename": "src/com/android/contacts/widget/MultiShrinkScroller.java",
         "patchSetId": 2

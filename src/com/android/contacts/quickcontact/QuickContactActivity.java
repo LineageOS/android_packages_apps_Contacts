@@ -2746,7 +2746,8 @@ public class QuickContactActivity extends ContactsActivity {
 
     private boolean isShortcutCreatable() {
         if (mContactData == null || mContactData.isUserProfile() ||
-                mContactData.isDirectoryEntry()) {
+                mContactData.isDirectoryEntry() ||
+                !TextUtils.isEmpty(mContactData.getProviderName())) {
             return false;
         }
         final Intent createShortcutIntent = new Intent();

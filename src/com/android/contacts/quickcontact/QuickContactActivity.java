@@ -136,6 +136,7 @@ import com.android.contacts.common.model.dataitem.SipAddressDataItem;
 import com.android.contacts.common.model.dataitem.StructuredNameDataItem;
 import com.android.contacts.common.model.dataitem.StructuredPostalDataItem;
 import com.android.contacts.common.model.dataitem.WebsiteDataItem;
+import com.android.contacts.common.util.BitmapUtil;
 import com.android.contacts.common.util.DateUtils;
 import com.android.contacts.common.util.MaterialColorMapUtils;
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
@@ -160,6 +161,7 @@ import com.android.contacts.widget.MultiShrinkScroller;
 import com.android.contacts.widget.MultiShrinkScroller.MultiShrinkScrollerListener;
 import com.android.contacts.widget.QuickContactImageView;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.ImmutableList;
@@ -269,6 +271,8 @@ public class QuickContactActivity extends ContactsActivity {
     private PorterDuffColorFilter mColorFilter;
 
     private final ImageViewDrawableSetter mPhotoSetter = new ImageViewDrawableSetter();
+
+    private Target mContactBitmapTarget;
 
     /**
      * {@link #LEADING_MIMETYPES} is used to sort MIME-types.
@@ -934,12 +938,24 @@ public class QuickContactActivity extends ContactsActivity {
 
         mPhotoView.setIsBusiness(mContactData.isDisplayNameFromOrganization());
         if (mContactData.getPhotoBinaryData() == null && mContactData.getPhotoUri() != null) {
-            Picasso.with(getApplicationContext())
-                    .load(mContactData.getPhotoUri())
-                    .noPlaceholder()
-                    .centerCrop()
-                    .resize(480, 640) // Just a reasonable default
-                    .into(mPhotoView);
+            mContactBitmapTarget = new Target() {
+                @Override
+                public void onPrepareLoad(Drawable d){}
+                @Override
+                public void onBitmapLoaded(Bitmap result, Picasso.LoadedFrom from) {
+                    if (result != null) {
+                        mContactData.setPhotoBinaryData(BitmapUtil.bitmapToByteArray(result));
+                        mPhotoSetter.setupContactPhoto(data, mPhotoView);
+                    }
+                    mContactBitmapTarget = null;
+                }
+                @Override
+                public void onBitmapFailed(Drawable drawable) {
+                    mPhotoSetter.setupContactPhoto(data, mPhotoView);
+                    mContactBitmapTarget = null;
+                }
+            };
+            Picasso.with(this).load(mContactData.getPhotoUri()).into(mContactBitmapTarget);
         } else {
             mPhotoSetter.setupContactPhoto(data, mPhotoView);
         }

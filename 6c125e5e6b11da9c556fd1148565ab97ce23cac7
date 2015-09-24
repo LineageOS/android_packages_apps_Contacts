@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "df3967d1_65c24eec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1448
+      },
+      "writtenOn": "2015-09-24T06:19:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df3967d1_a5ef16af",
+      "range": {
+        "startLine": 7,
+        "startChar": 25,
+        "endLine": 7,
+        "endChar": 32
+      },
+      "revId": "6c125e5e6b11da9c556fd1148565ab97ce23cac7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "df3967d1_852ad2e4",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "df3967d1_45b74a88",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1448
+      },
+      "writtenOn": "2015-09-24T06:19:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df3967d1_852ad2e4",
+      "range": {
+        "startLine": 9,
+        "startChar": 64,
+        "endLine": 9,
+        "endChar": 101
+      },
+      "revId": "6c125e5e6b11da9c556fd1148565ab97ce23cac7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "df3967d1_a54b96ae",
         "filename": "src/com/android/contacts/quickcontact/QuickContactActivity.java",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2015-09-24T05:20:52Z",
       "side": 1,
       "message": "isn\u0027t the ticket requesting that the shortcut work, rather than to avoid creating one for temporary contacts ?",
+      "range": {
+        "startLine": 2393,
+        "startChar": 17,
+        "endLine": 2393,
+        "endChar": 67
+      },
+      "revId": "6c125e5e6b11da9c556fd1148565ab97ce23cac7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df3967d1_85bd326a",
+        "filename": "src/com/android/contacts/quickcontact/QuickContactActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2393,
+      "author": {
+        "id": 1448
+      },
+      "writtenOn": "2015-09-24T06:19:08Z",
+      "side": 1,
+      "message": "I spoke with Aaron. We agreed the the option should be removed instead.",
+      "parentUuid": "df3967d1_a54b96ae",
       "range": {
         "startLine": 2393,
         "startChar": 17,

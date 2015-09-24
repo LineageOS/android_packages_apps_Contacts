@@ -28,4 +28,7 @@
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="other">%d مخاطب حذف خواهد شد.</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="other">%d نفر این را به عنوان هرزنامه علامت‌گذاری کردند</item>
+  </plurals>
 </resources>

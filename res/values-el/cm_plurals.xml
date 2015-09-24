@@ -32,4 +32,8 @@
     <item quantity="one">%d επαφή θα διαγραφεί.</item>
     <item quantity="other">%d επαφές θα διαγραφούν.</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="one">%d άτομο το χαρακτήρισε ως spam</item>
+    <item quantity="other">%d άτομα το χαρακτήρισαν ως spam</item>
+  </plurals>
 </resources>

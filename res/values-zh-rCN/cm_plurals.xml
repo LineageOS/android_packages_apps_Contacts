@@ -28,4 +28,7 @@
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="other">将删除 %d 个联系人。</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="other">%d 位用户将其标记为垃圾</item>
+  </plurals>
 </resources>

@@ -32,4 +32,8 @@
     <item quantity="one">איש קשר %d יימחק.</item>
     <item quantity="other">%d אנשי קשר יימחקו.</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="one">אדם %d סימן את זה כספאם</item>
+    <item quantity="other">%d אנשים סימן את זה כספאם</item>
+  </plurals>
 </resources>

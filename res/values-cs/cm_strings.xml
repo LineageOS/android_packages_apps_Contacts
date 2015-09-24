@@ -59,4 +59,5 @@
   <string name="delete_call_message">Odstraňuje se historie volání\u2026</string>
   <string name="delete_call_alert">Odstranit vybrané historie volání?</string>
   <string name="title_del_call">Odstranit</string>
+  <string name="powered_by_provider">Využívá služby <xliff:g id="provider">%s</xliff:g></string>
 </resources>

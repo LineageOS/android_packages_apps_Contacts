@@ -40,4 +40,10 @@
     <item quantity="many">%d контаката ће бити избрисано.</item>
     <item quantity="other">%d контаката ће бити избрисано.</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="one">%d особа је означила као спам</item>
+    <item quantity="few">%d особе су означиле као спам</item>
+    <item quantity="many">%d особе су означиле као спам</item>
+    <item quantity="other">%d особе су означиле као спам</item>
+  </plurals>
 </resources>

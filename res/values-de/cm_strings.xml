@@ -59,4 +59,5 @@
   <string name="delete_call_message">Anruflisten werden gelöscht\u2026</string>
   <string name="delete_call_alert">Sollen die ausgewählten Anruflisten gelöscht werden?</string>
   <string name="title_del_call">Löschen</string>
+  <string name="powered_by_provider">Zur Verfügung gestellt von <xliff:g id="provider">%s</xliff:g></string>
 </resources>

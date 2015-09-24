@@ -32,4 +32,8 @@
     <item quantity="one">%d contatto verrà eliminato.</item>
     <item quantity="other">%d contatti verranno eliminati.</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="one">%d persona ha segnato questo come indesiderato</item>
+    <item quantity="other">%d persone hanno segnato questo come indesiderato</item>
+  </plurals>
 </resources>

@@ -36,4 +36,9 @@
     <item quantity="few">Budou smazány %d kontakty.</item>
     <item quantity="other">Bude smazáno %d kontaktů.</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="one">%d osoba toto označila jako spam</item>
+    <item quantity="few">%d osoby toto označili jako spam</item>
+    <item quantity="other">%d osob toto označilo jako spam</item>
+  </plurals>
 </resources>

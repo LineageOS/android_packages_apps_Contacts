@@ -220,9 +220,6 @@ public class QuickContactActivity extends ContactsActivity {
     private static final String CALL_ORIGIN_QUICK_CONTACTS_ACTIVITY =
             "com.android.contacts.quickcontact.QuickContactActivity";
 
-    // URI for contact lookup
-    public static final String CONTACT_URI_EXTRA = "contact_uri_extra";
-
     /**
      * The URI used to load the the Contact. Once the contact is loaded, use Contact#getLookupUri()
      * instead of referencing this URI.
@@ -839,7 +836,7 @@ public class QuickContactActivity extends ContactsActivity {
         Contact contact = null;
         if (mLookupUri == null) {
             // See if a URI has been attached as an extra
-            mLookupUri = intent.getParcelableExtra(CONTACT_URI_EXTRA);
+            mLookupUri = intent.getParcelableExtra(Contact.CONTACT_URI_EXTRA);
             contact = ContactLoader.parseEncodedContactEntity(mLookupUri,
                     ContactLoader.EncodedContactEntitySchemaVersion.ENHANCED_CALLER_META_DATA);
         }

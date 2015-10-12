@@ -19,9 +19,26 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="contactSavedToSimCardError">Seçilən şəxslər SIM kartda saxlanılmadı</string>
   <string name="airplane_mode_on">Uçuş rejimi fəal olduqda SIM karta müraciət mümkün deyil</string>
+  <string name="number_anr_too_long">Nömrə çox uzundur</string>
+  <string name="email_address_too_long">E-poçt ünvanı çox uzundur</string>
+  <string name="sim_card_full">SIM kart dolub</string>
+  <string name="tag_too_long">Şəxs adı çox uzundur</string>
+  <string name="invalid_phone_number">Telefon nömrəsi etibarsızdır</string>
+  <string name="invalid_number_type">Nömrə növü etibarsızdır</string>
+  <string name="no_phone_number_or_email">Zəhmət olmasa telefon nömrəsi və ya e-poçt ünvanı daxil edin.</string>
+  <string name="memory_card_full">Şəxs saxlanılmadı, telefon yaddaşı dolub</string>
+  <string name="contacts_groups_label">Qruplar</string>
+  <string name="menu_moveGroupMembers">Qrup üzvlərini köçür</string>
+  <string name="title_move_members">Üzvləri köçür</string>
+  <string name="message_move_members">Üzvlər köçürülür\u2026</string>
+  <string name="message_can_not_move_members">Üzvlər köçürülə bilmir</string>
   <string name="edit_before_call">Zəngdən əvvəl nömrəyə düzəliş et</string>
   <string name="menu_sendViaSMS">Şəxsi SMS ilə göndər</string>
   <string name="select_all">Hamısı</string>
+  <string name="import_sim_contacts_title">SIM şəxslərini idxal et</string>
+  <string name="import_sim_contacts_message">SIM şəxsləri idxal edilir\u2026</string>
+  <string name="importConfirmation_title">Şəxs idxal edilsin?</string>
+  <string name="import_finish">İdxal başa çatdı</string>
   <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g> \'dən çox şəxs əlavə etmək olmaz</string>
   <string name="delete_contacts_title">Şəxsləri sil</string>
   <string name="delete_contacts_message">Şəxslər silinir\u2026</string>
@@ -30,12 +47,17 @@
   <string name="menu_memory_status">Yaddaş durumu</string>
   <string name="memory_size">Cəmi:</string>
   <string name="memory_used">İşlədilən:</string>
+  <string name="contact_detail_picture_description">Şəkil. Dəyişdirmək üçün seçin</string>
+  <string name="calculating_status_now">Durum hesablanır\u2026</string>
   <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g> yerinə kopyala</string>
   <string name="copy_to_target_sim">SIM kart</string>
   <string name="copy_to_target_msim">SIM kart <xliff:g id="index">%d</xliff:g></string>
+  <string name="no_empty_email_in_usim">USIM şəxsinin mövcud e-poçt sahəsi yoxdur, mesaj kopyalana bilmir.</string>
+  <string name="voicemail">Səsli poçt</string>
   <string name="select_call_title">Axtarış qeydlərini seç</string>
   <string name="delete_call_title">Zəng qeydlərini sil</string>
   <string name="delete_call_message">Zəng qeydləri silinir\u2026</string>
   <string name="delete_call_alert">Seçilən zəng qeydləri silinsin?</string>
   <string name="title_del_call">Sil</string>
+  <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g> tərəfindən dəstəklənir</string>
 </resources>

@@ -32,4 +32,8 @@
     <item quantity="one">kontaktu %d ezabatuko da.</item>
     <item quantity="other">%d kontaktu ezabatuko dira.</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="one">Pertsona batek spam gisa markatu du hau</item>
+    <item quantity="other">%d pertsonek spam gisa markatu dute hau</item>
+  </plurals>
 </resources>

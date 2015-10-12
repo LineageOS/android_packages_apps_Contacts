@@ -32,4 +32,8 @@
     <item quantity="one">va desaniciase %d contautu</item>
     <item quantity="other">van desaniciase %d contautos</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="one">%d persona marcó esto como spam</item>
+    <item quantity="other">%d persones marcaron esto como spam</item>
+  </plurals>
 </resources>

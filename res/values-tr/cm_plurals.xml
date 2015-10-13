@@ -32,4 +32,8 @@
     <item quantity="one">%d kişi silinecek.</item>
     <item quantity="other">%d kişi silinecek.</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="one">%d kişi bunu spam olarak işaretledi</item>
+    <item quantity="other">%d kişi bunu spam olarak işaretledi</item>
+  </plurals>
 </resources>

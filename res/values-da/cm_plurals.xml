@@ -32,4 +32,8 @@
     <item quantity="one">%d kontakt vil blive slettet.</item>
     <item quantity="other">%d kontakter vil blive slettet.</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="one">%d person markerede dette som spam</item>
+    <item quantity="other">%d personer markerede dette som spam</item>
+  </plurals>
 </resources>

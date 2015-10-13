@@ -136,6 +136,7 @@ import com.android.contacts.common.model.dataitem.SipAddressDataItem;
 import com.android.contacts.common.model.dataitem.StructuredNameDataItem;
 import com.android.contacts.common.model.dataitem.StructuredPostalDataItem;
 import com.android.contacts.common.model.dataitem.WebsiteDataItem;
+import com.android.contacts.common.util.BitmapUtil;
 import com.android.contacts.common.util.DateUtils;
 import com.android.contacts.common.util.MaterialColorMapUtils;
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
@@ -160,6 +161,7 @@ import com.android.contacts.widget.MultiShrinkScroller;
 import com.android.contacts.widget.MultiShrinkScroller.MultiShrinkScrollerListener;
 import com.android.contacts.widget.QuickContactImageView;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.ImmutableList;
@@ -218,9 +220,6 @@ public class QuickContactActivity extends ContactsActivity {
     private static final String CALL_ORIGIN_QUICK_CONTACTS_ACTIVITY =
             "com.android.contacts.quickcontact.QuickContactActivity";
 
-    // URI for contact lookup
-    public static final String CONTACT_URI_EXTRA = "contact_uri_extra";
-
     /**
      * The URI used to load the the Contact. Once the contact is loaded, use Contact#getLookupUri()
      * instead of referencing this URI.
@@ -269,6 +268,8 @@ public class QuickContactActivity extends ContactsActivity {
     private PorterDuffColorFilter mColorFilter;
 
     private final ImageViewDrawableSetter mPhotoSetter = new ImageViewDrawableSetter();
+
+    private Target mContactBitmapTarget;
 
     /**
      * {@link #LEADING_MIMETYPES} is used to sort MIME-types.
@@ -835,7 +836,7 @@ public class QuickContactActivity extends ContactsActivity {
         Contact contact = null;
         if (mLookupUri == null) {
             // See if a URI has been attached as an extra
-            mLookupUri = intent.getParcelableExtra(CONTACT_URI_EXTRA);
+            mLookupUri = intent.getParcelableExtra(Contact.CONTACT_URI_EXTRA);
             contact = ContactLoader.parseEncodedContactEntity(mLookupUri,
                     ContactLoader.EncodedContactEntitySchemaVersion.ENHANCED_CALLER_META_DATA);
         }
@@ -934,12 +935,24 @@ public class QuickContactActivity extends ContactsActivity {
 
         mPhotoView.setIsBusiness(mContactData.isDisplayNameFromOrganization());
         if (mContactData.getPhotoBinaryData() == null && mContactData.getPhotoUri() != null) {
-            Picasso.with(getApplicationContext())
-                    .load(mContactData.getPhotoUri())
-                    .noPlaceholder()
-                    .centerCrop()
-                    .resize(480, 640) // Just a reasonable default
-                    .into(mPhotoView);
+            mContactBitmapTarget = new Target() {
+                @Override
+                public void onPrepareLoad(Drawable d){}
+                @Override
+                public void onBitmapLoaded(Bitmap result, Picasso.LoadedFrom from) {
+                    if (result != null) {
+                        mContactData.setPhotoBinaryData(BitmapUtil.bitmapToByteArray(result));
+                        mPhotoSetter.setupContactPhoto(data, mPhotoView);
+                    }
+                    mContactBitmapTarget = null;
+                }
+                @Override
+                public void onBitmapFailed(Drawable drawable) {
+                    mPhotoSetter.setupContactPhoto(data, mPhotoView);
+                    mContactBitmapTarget = null;
+                }
+            };
+            Picasso.with(this).load(mContactData.getPhotoUri()).into(mContactBitmapTarget);
         } else {
             mPhotoSetter.setupContactPhoto(data, mPhotoView);
         }
@@ -2389,7 +2402,8 @@ public class QuickContactActivity extends ContactsActivity {
     }
 
     private boolean isShortcutCreatable() {
-        if (mContactData == null || mContactData.isUserProfile()) {
+        if (mContactData == null || mContactData.isUserProfile() ||
+                !TextUtils.isEmpty(mContactData.getProviderName())) {
             return false;
         }
         final Intent createShortcutIntent = new Intent();

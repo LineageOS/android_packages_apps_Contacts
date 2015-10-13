@@ -47,6 +47,7 @@
   <string name="menu_memory_status">Trạng thái bộ nhớ</string>
   <string name="memory_size">Tổng:</string>
   <string name="memory_used">Dùng:</string>
+  <string name="contact_detail_picture_description">Hình ảnh. Chọn để thay đổi</string>
   <string name="calculating_status_now">Đang tính trạng thái\u2026</string>
   <string name="menu_copyTo">Chép vào <xliff:g id="destination">%s </xliff:g></string>
   <string name="copy_to_target_sim">Thẻ SIM</string>

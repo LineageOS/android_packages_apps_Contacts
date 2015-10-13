@@ -32,4 +32,8 @@
     <item quantity="one">%d yhteystieto poistetaan.</item>
     <item quantity="other">%d yhteystietoa poistetaan.</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="one">%d henkilö merkkasi tämän spam-puheluksi</item>
+    <item quantity="other">%d henkilöä merkkasi tämän spam-puheluksi</item>
+  </plurals>
 </resources>

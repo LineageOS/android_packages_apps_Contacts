@@ -59,4 +59,5 @@
   <string name="delete_call_message">Брисање евиденција позива\u2026</string>
   <string name="delete_call_alert">Избриши изабране евиденције позива?</string>
   <string name="title_del_call">Избриши</string>
+  <string name="powered_by_provider">Омогућено од <xliff:g id="provider">%s</xliff:g></string>
 </resources>

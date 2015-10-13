@@ -28,4 +28,7 @@
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="other">%d件の連絡先が削除されます。</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="other">%d人がこの連絡先をスパムとしてマークしました</item>
+  </plurals>
 </resources>

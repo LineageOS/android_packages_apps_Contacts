@@ -32,4 +32,8 @@
     <item quantity="one">%d Kontakt wird gelöscht.</item>
     <item quantity="other">%d Kontakte werden gelöscht.</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="one">Von %d Person als Spam markiert</item>
+    <item quantity="other">Von %d Personen als Spam markiert</item>
+  </plurals>
 </resources>

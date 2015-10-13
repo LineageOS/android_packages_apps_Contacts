@@ -20,4 +20,20 @@
     <item quantity="one">%d şəxs seçildi</item>
     <item quantity="other">%d şəxs seçildi</item>
   </plurals>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">%d şəxs idxal ediləcək.</item>
+    <item quantity="other">%d şəxs idxal ediləcək.</item>
+  </plurals>
+  <plurals name="import_progress">
+    <item quantity="one">%d şəxs idxal edildi</item>
+    <item quantity="other">%d şəxs idxal edildi</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">%d şəxs silinəcək.</item>
+    <item quantity="other">%d şəxs silinəcək.</item>
+  </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="one">%d şəxs bunu spam olaraq işarələdi</item>
+    <item quantity="other">%d şəxs bunu spam olaraq işarələdi</item>
+  </plurals>
 </resources>

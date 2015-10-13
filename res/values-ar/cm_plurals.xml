@@ -24,6 +24,14 @@
     <item quantity="many">تم تحديد %d</item>
     <item quantity="other">تم تحديد %d</item>
   </plurals>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="zero">سيتم استيراد %d جهة اتصال.</item>
+    <item quantity="one">سيتم استيراد %d جهات اتصال.</item>
+    <item quantity="two">سيتم استيراد %d جهات اتصال.</item>
+    <item quantity="few">سيتم استيراد %d جهات اتصال.</item>
+    <item quantity="many">سيتم استيراد %d جهات اتصال.</item>
+    <item quantity="other">سيتم استيراد %d جهات اتصال.</item>
+  </plurals>
   <plurals name="import_progress">
     <item quantity="zero">سيتم استيراد %d جهة اتصال</item>
     <item quantity="one">سيتم استيراد %d جهات اتصال</item>

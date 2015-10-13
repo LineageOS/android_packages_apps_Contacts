@@ -32,4 +32,8 @@
     <item quantity="one">%d contacte serà esborrat.</item>
     <item quantity="other">%d contactes seran esborrats.</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="one">%d persona marcada com a brossa</item>
+    <item quantity="other">%d persones marcades com a brossa</item>
+  </plurals>
 </resources>

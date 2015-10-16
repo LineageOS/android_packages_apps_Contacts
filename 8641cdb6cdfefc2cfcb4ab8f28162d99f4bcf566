@@ -16,6 +16,24 @@
       "revId": "8641cdb6cdfefc2cfcb4ab8f28162d99f4bcf566",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f287b81_61ab3c1d",
+        "filename": "src/com/android/contacts/editor/LabeledEditorView.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 11035
+      },
+      "writtenOn": "2015-10-16T20:53:56Z",
+      "side": 1,
+      "message": "yeah alll of the editor views extend a common base class",
+      "parentUuid": "7f287b81_61e69c47",
+      "revId": "8641cdb6cdfefc2cfcb4ab8f28162d99f4bcf566",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

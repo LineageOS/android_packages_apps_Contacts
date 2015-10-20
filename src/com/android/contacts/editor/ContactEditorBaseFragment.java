@@ -25,6 +25,7 @@ import com.android.contacts.R;
 import com.android.contacts.activities.ContactEditorAccountsChangedActivity;
 import com.android.contacts.activities.ContactEditorBaseActivity;
 import com.android.contacts.activities.ContactEditorBaseActivity.ContactEditor;
+import com.android.contacts.common.SimContactsConstants;
 import com.android.contacts.common.model.AccountTypeManager;
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.ContactLoader;
@@ -35,6 +36,7 @@ import com.android.contacts.common.model.RawContactModifier;
 import com.android.contacts.common.model.ValuesDelta;
 import com.android.contacts.common.model.account.AccountType;
 import com.android.contacts.common.model.account.AccountWithDataSet;
+import com.android.contacts.common.model.account.SimAccountType;
 import com.android.contacts.common.util.ImplicitIntentsUtil;
 import com.android.contacts.common.util.MaterialColorMapUtils;
 import com.android.contacts.editor.AggregationSuggestionEngine.Suggestion;
@@ -652,6 +654,14 @@ abstract public class ContactEditorBaseFragment extends Fragment implements
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (Intent.ACTION_EDIT.equals(mAction)) {
+            mHasNewContact = false;
+        }
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
 
@@ -786,10 +796,18 @@ abstract public class ContactEditorBaseFragment extends Fragment implements
             // even if they have never added their own information and splitting will create a
             // name only contact.
             final boolean isSingleReadOnlyContact = mHasNewContact && mState.size() == 2;
+            String accountType = null;
+            if (mState.size() > 0) {
+                accountType = mState.get(0).getAccountType();
+            }
             splitMenu.setVisible(mState.size() > 1 && !isEditingUserProfile()
                     && !isSingleReadOnlyContact);
             // Cannot join a user profile
-            joinMenu.setVisible(!isEditingUserProfile());
+            if (accountType != null && SimAccountType.ACCOUNT_TYPE.equals(accountType)) {
+                joinMenu.setVisible(false);
+            } else {
+                joinMenu.setVisible(!isEditingUserProfile());
+            }
             deleteMenu.setVisible(!mDisableDeleteMenuOption);
         } else {
             // something else, so don't show the help menu
@@ -950,7 +968,9 @@ abstract public class ContactEditorBaseFragment extends Fragment implements
             }
             onSaveCompleted(/* hadChanges =*/ false, saveMode,
                     /* saveSucceeded =*/ mLookupUri != null, mLookupUri,
-                    /* updatedPhotos =*/ null, backPressed, mPhotoId, mNameId);
+                    /* updatedPhotos =*/ null, backPressed, mPhotoId, mNameId,
+                    getActivity().getIntent().getIntExtra(
+                            ContactSaveService.SAVE_CONTACT_RESULT, 0));
             return true;
         }
 
@@ -1275,7 +1295,8 @@ abstract public class ContactEditorBaseFragment extends Fragment implements
                 // For profile contacts, we need a different query URI
                 rawContactDelta.setProfileQueryUri();
                 // Try to find a local profile contact
-                if (rawContactDelta.getValues().getAsString(RawContacts.ACCOUNT_TYPE) == null) {
+                if (SimContactsConstants.ACCOUNT_TYPE_PHONE
+                        .equals(rawContactDelta.getAccountType())) {
                     localProfileExists = true;
                 }
             }
@@ -1401,20 +1422,81 @@ abstract public class ContactEditorBaseFragment extends Fragment implements
     @Override
     public void onJoinCompleted(Uri uri) {
         onSaveCompleted(false, SaveMode.RELOAD, uri != null, uri, /* updatedPhotos =*/ null,
-                /* backPressed =*/ false, mPhotoId, mNameId);
+                /* backPressed =*/ false, mPhotoId, mNameId,
+                getActivity().getIntent().getIntExtra(ContactSaveService.SAVE_CONTACT_RESULT,
+                        0));
     }
 
     @Override
     public void onSaveCompleted(boolean hadChanges, int saveMode, boolean saveSucceeded,
             Uri contactLookupUri, Bundle updatedPhotos, boolean backPressed, long photoId,
-            long nameId) {
+            long nameId, int result) {
+        Log.d(TAG, "onSaveCompleted(" + saveMode + ", " + contactLookupUri + ", saveResult:"
+                + result);
         if (hadChanges) {
             if (saveSucceeded) {
                 if (saveMode != SaveMode.JOIN) {
-                    Toast.makeText(mContext, R.string.contactSavedToast, Toast.LENGTH_SHORT).show();
+                    if (null != contactLookupUri) {
+                        Toast.makeText(mContext, R.string.contactSavedToast,
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(mContext, R.string.contacts_deleted_toast,
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
             } else {
-                Toast.makeText(mContext, R.string.contactSavedErrorToast, Toast.LENGTH_LONG).show();
+                if (result == ContactSaveService.RESULT_AIR_PLANE_MODE) {
+                    // Access SIM card in the "AirPlane"
+                    // mode prompt a toast to alert user.
+                    Toast.makeText(mContext, R.string.airplane_mode_on, Toast.LENGTH_LONG).show();
+                } else if (result == ContactSaveService.RESULT_SIM_FAILURE) {
+                    Toast.makeText(mContext, R.string.contactSavedToSimCardError,
+                            Toast.LENGTH_LONG).show();
+                } else if (result == ContactSaveService.RESULT_NUMBER_ANR_FAILURE) {
+                    Toast.makeText(mContext, R.string.number_anr_too_long, Toast.LENGTH_LONG)
+                            .show();
+                    mStatus = Status.EDITING;
+                    setEnabled(true);
+                    bindEditors();
+                    return;
+                } else if (result == ContactSaveService.RESULT_EMAIL_FAILURE) {
+                    Toast.makeText(mContext, R.string.email_address_too_long, Toast.LENGTH_LONG)
+                            .show();
+                    mStatus = Status.EDITING;
+                    setEnabled(true);
+                    bindEditors();
+                    return;
+                } else if (result == ContactSaveService.RESULT_SIM_FULL_FAILURE) {
+                    Toast.makeText(mContext, R.string.sim_card_full, Toast.LENGTH_LONG).show();
+                } else if (result == ContactSaveService.RESULT_TAG_FAILURE) {
+                    Toast.makeText(mContext, R.string.tag_too_long, Toast.LENGTH_SHORT).show();
+                    mStatus = Status.EDITING;
+                    setEnabled(true);
+                    bindEditors();
+                    return;
+                } else if (result == ContactSaveService.RESULT_NO_NUMBER_AND_EMAIL) {
+                    Toast.makeText(mContext, R.string.no_phone_number_or_email, Toast.LENGTH_SHORT)
+                            .show();
+                    mStatus = Status.EDITING;
+                    setEnabled(true);
+                    bindEditors();
+                    return;
+                } else if (result == ContactSaveService.RESULT_NUMBER_INVALID) {
+                    Toast.makeText(mContext, R.string.invalid_phone_number, Toast.LENGTH_SHORT)
+                            .show();
+                    mStatus = Status.EDITING;
+                    setEnabled(true);
+                    return;
+                } else if (result == ContactSaveService.RESULT_MEMORY_FULL_FAILURE) {
+                    Toast.makeText(mContext, R.string.memory_card_full, Toast.LENGTH_SHORT)
+                            .show();
+                } else if(result == ContactSaveService.RESULT_NUMBER_TYPE_FAILURE) {
+                    Toast.makeText(mContext, R.string.invalid_number_type, Toast.LENGTH_SHORT)
+                    .show();
+                } else {
+                    Toast.makeText(mContext, R.string.contactSavedErrorToast, Toast.LENGTH_LONG)
+                            .show();
+                }
             }
         }
         switch (saveMode) {

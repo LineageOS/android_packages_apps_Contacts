@@ -29,12 +29,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.OperationApplicationException;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteFullException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Parcelable;
 import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.AggregationExceptions;
 import android.provider.ContactsContract.CommonDataKinds.GroupMembership;
@@ -46,6 +48,10 @@ import android.provider.ContactsContract.PinnedPositions;
 import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
 import android.provider.ContactsContract.RawContactsEntity;
+import android.text.TextUtils;
+import android.telephony.PhoneNumberUtils;
+import android.telephony.TelephonyManager;
+import android.telephony.SubscriptionManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -56,15 +62,22 @@ import com.android.contacts.common.model.RawContactDeltaList;
 import com.android.contacts.common.model.RawContactModifier;
 import com.android.contacts.common.model.account.AccountWithDataSet;
 import com.android.contacts.common.util.PermissionsUtil;
+import com.android.contacts.common.SimContactsConstants;
+import com.android.contacts.common.SimContactsOperation;
+import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.editor.ContactEditorFragment;
 import com.android.contacts.util.ContactPhotoUtils;
 
+import com.android.internal.telephony.uicc.AdnRecord;
+import com.android.internal.telephony.uicc.IccConstants;
+import com.android.internal.telephony.IIccPhoneBook;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.HashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -90,6 +103,7 @@ public class ContactSaveService extends IntentService {
     public static final String EXTRA_SAVE_IS_PROFILE = "saveIsProfile";
     public static final String EXTRA_SAVE_SUCCEEDED = "saveSucceeded";
     public static final String EXTRA_UPDATED_PHOTOS = "updatedPhotos";
+    public static final String SAVE_CONTACT_RESULT = "saveResult";
 
     public static final String ACTION_CREATE_GROUP = "createGroup";
     public static final String ACTION_RENAME_GROUP = "renameGroup";
@@ -143,6 +157,33 @@ public class ContactSaveService extends IntentService {
     );
 
     private static final int PERSIST_TRIES = 3;
+    private static int count = TelephonyManager.getDefault().getPhoneCount();
+    private static int[] mSimMaxCount = new int[count];
+
+    public static final int RESULT_UNCHANGED = 0;
+    public static final int RESULT_SUCCESS = 1;
+    public static final int RESULT_FAILURE = 2;
+    public static final int RESULT_NO_NUMBER_AND_EMAIL = 3;
+    public static final int RESULT_SIM_FAILURE = 4;   //only for sim operation failure
+    public static final int RESULT_EMAIL_FAILURE = 5; // only for sim email operation failure
+    // only for sim failure of number or anr is too long
+    public static final int RESULT_NUMBER_ANR_FAILURE = 6;
+    public static final int RESULT_SIM_FULL_FAILURE = 7; // only for sim card is full
+    public static final int RESULT_TAG_FAILURE = 8; // only for sim failure of name is too long
+    public static final int RESULT_NUMBER_INVALID = 9; // only for sim failure of number is valid
+
+    public static final int RESULT_MEMORY_FULL_FAILURE = 11; //for memory full exception
+    public static final int RESULT_NUMBER_TYPE_FAILURE =12;  //only for sim failure of number TYPE
+
+    private final int MAX_NUM_LENGTH = 20;
+    private final int MAX_EMAIL_LENGTH = 40;
+    private final int MAX_EN_LENGTH = 14;
+    private final int MAX_CH_LENGTH = 6;
+
+    // Only for request accessing SIM card
+    // when device is in the "AirPlane" mode.
+    public static final int RESULT_AIR_PLANE_MODE = 10;
+    public static SimContactsOperation mSimContactsOperation;
 
     private static final int MAX_CONTACTS_PROVIDER_BATCH_SIZE = 499;
 
@@ -181,6 +222,40 @@ public class ContactSaveService extends IntentService {
         }
 
         return getApplicationContext().getSystemService(name);
+    }
+
+    /**
+     * when isMultiSimEnabled is true,get the maximum how many contacts can save to sim card
+     */
+    private int getMSimCardMaxCount(int subscription) {
+        if (0 != mSimMaxCount[subscription]) {
+            return mSimMaxCount[subscription];
+        }
+        int[] subId = SubscriptionManager.getSubId(subscription);
+        try {
+            IIccPhoneBook iccIpb = IIccPhoneBook.Stub.asInterface(
+                ServiceManager.getService("simphonebook"));
+
+            if (iccIpb != null) {
+                if (subId != null
+                        && TelephonyManager.getDefault().isMultiSimEnabled()) {
+                    List<AdnRecord> list = iccIpb.getAdnRecordsInEfForSubscriber(
+                            subId[0], IccConstants.EF_ADN);
+                    if (null != list) {
+                        mSimMaxCount[subscription] = list.size();
+                    }
+                } else {
+                    List<AdnRecord> list = iccIpb
+                            .getAdnRecordsInEf(IccConstants.EF_ADN);
+                    if (null != list) {
+                        mSimMaxCount[subscription] = list.size();
+                    }
+                }
+            }
+        } catch (RemoteException ex) {
+            Log.e(TAG, "Failed to IIccPhoneBookMSim", ex);
+        }
+        return mSimMaxCount[subscription];
     }
 
     @Override
@@ -378,8 +453,28 @@ public class ContactSaveService extends IntentService {
         long insertedRawContactId = -1;
 
         // Attempt to persist changes
+        Integer result = RESULT_FAILURE;
+
+        ArrayList<Long> rawContactsList = new ArrayList<Long>();
+        boolean isCardOperation = false;
+        for (int i=0; i < state.size(); i++) {
+            final RawContactDelta entity = state.get(i);
+            final String accountType = entity.getValues().getAsString(RawContacts.ACCOUNT_TYPE);
+            final String accountName = entity.getValues().getAsString(RawContacts.ACCOUNT_NAME);
+            rawContactsList.add(entity.getRawContactId());
+
+            final int subscription = MoreContactUtils.getSubscription(
+                accountType, accountName);
+            isCardOperation = (subscription != SubscriptionManager.INVALID_SUBSCRIPTION_ID) ?
+                    true : false;
+            if (isCardOperation) {
+                result = doSaveToSimCard(entity, resolver, subscription);
+                Log.d(TAG, "doSaveToSimCard result is  " + result);
+            }
+        }
         int tries = 0;
         while (tries++ < PERSIST_TRIES) {
+            if (result == RESULT_SUCCESS || result == RESULT_FAILURE) {
             try {
                 // Build operations and try applying
                 final ArrayList<ContentProviderOperation> diff = state.buildDiff();
@@ -449,7 +544,17 @@ public class ContactSaveService extends IntentService {
                 Log.e(TAG, "Problem persisting user edits", e);
                 showToast(R.string.contactSavedErrorToast);
                 break;
-
+            } catch (SQLiteFullException e) {
+                // Memory is full. don't do any thing
+                Log.e(TAG, "Memory is full", e);
+                Intent callbackIntent = intent.getParcelableExtra(EXTRA_CALLBACK_INTENT);
+                if (callbackIntent != null) {
+                    callbackIntent.putExtra(EXTRA_SAVE_SUCCEEDED, false);
+                    callbackIntent.setData(null);
+                    callbackIntent.putExtra(SAVE_CONTACT_RESULT, RESULT_MEMORY_FULL_FAILURE);
+                    deliverCallback(callbackIntent);
+                }
+                return;
             } catch (OperationApplicationException e) {
                 // Version consistency failed, re-parent change and try again
                 Log.w(TAG, "Version consistency failed, re-parenting: " + e.toString());
@@ -484,6 +589,7 @@ public class ContactSaveService extends IntentService {
                 if (isProfile) {
                     for (RawContactDelta delta : state) {
                         delta.setProfileQueryUri();
+                       }
                     }
                 }
             }
@@ -518,6 +624,8 @@ public class ContactSaveService extends IntentService {
                 callbackIntent.putExtra(EXTRA_SAVE_SUCCEEDED, true);
             }
             callbackIntent.setData(lookupUri);
+            callbackIntent.putExtra(SAVE_CONTACT_RESULT, result);
+
             deliverCallback(callbackIntent);
         }
     }
@@ -534,7 +642,124 @@ public class ContactSaveService extends IntentService {
         return ContactPhotoUtils.savePhotoFromUriToUri(this, photoUri, outputUri, true);
     }
 
-    /**
+    private Integer doSaveToSimCard(RawContactDelta entity, ContentResolver resolver,
+        int subscription) {
+        // Return Error code to indicate caller that device is in
+        // the "AirPlane" mode and application can't access SIM card.
+        if (MoreContactUtils.isAPMOnAndSIMPowerDown(this)) {
+            return RESULT_AIR_PLANE_MODE;
+        }
+
+        boolean isInsert = entity.isContactInsert();
+        Integer result = RESULT_SIM_FAILURE;
+        mSimContactsOperation = new SimContactsOperation(this);
+
+        ContentValues values = entity.buildSimDiff();
+        String tag = null;
+        String number = null;
+        String anr = null;
+        String email = null;
+
+        if(entity.isContactInsert()){
+            tag = values.getAsString(SimContactsConstants.STR_TAG);
+            number = values.getAsString(SimContactsConstants.STR_NUMBER);
+            anr = values.getAsString(SimContactsConstants.STR_ANRS);
+            email = values.getAsString(SimContactsConstants.STR_EMAILS);
+        } else {
+            tag = values.getAsString(SimContactsConstants.STR_NEW_TAG);
+            number = values.getAsString(SimContactsConstants.STR_NEW_NUMBER);
+            anr = values.getAsString(SimContactsConstants.STR_NEW_ANRS);
+            email = values.getAsString(SimContactsConstants.STR_NEW_EMAILS);
+        }
+
+        if (TextUtils.isEmpty(number) && TextUtils.isEmpty(anr) && TextUtils.isEmpty(email)) {
+            return RESULT_NO_NUMBER_AND_EMAIL;
+        }
+
+        if (!TextUtils.isEmpty(number)) {
+            if (number.length() > MAX_NUM_LENGTH) {
+                return RESULT_NUMBER_ANR_FAILURE;
+            } else if (number.contains(SimContactsConstants.STR_ANRS)) {
+                return RESULT_NUMBER_TYPE_FAILURE;
+            }
+        }
+
+        if (!TextUtils.isEmpty(anr)) {
+            String[] anrs = anr.split(SimContactsConstants.ANR_SEP);
+            if (anrs != null) {
+                if (anrs.length > MoreContactUtils
+                        .getOneSimAnrCount(subscription)) {
+                    return RESULT_NUMBER_TYPE_FAILURE;
+                }
+                for (String mAnr : anrs) {
+                    if (mAnr.length() > MAX_NUM_LENGTH) {
+                        return RESULT_NUMBER_ANR_FAILURE;
+                    }
+                }
+            }
+        }
+
+        if (!TextUtils.isEmpty(number) && TextUtils.isEmpty(PhoneNumberUtils
+                .stripSeparators(number))) {
+            return RESULT_NUMBER_INVALID;
+        }
+
+        if (!TextUtils.isEmpty(email)) {
+            String[] emails = email.split(SimContactsConstants.EMAIL_SEP);
+            for (String mEmail : emails) {
+                if (mEmail != null && mEmail.length() > MAX_EMAIL_LENGTH) {
+                    return RESULT_EMAIL_FAILURE;
+                }
+            }
+        }
+
+        if (!TextUtils.isEmpty(tag)) {
+            if (tag.getBytes().length > MAX_EN_LENGTH) {
+                return RESULT_TAG_FAILURE;
+            }
+        }
+
+        if (entity.isContactInsert()) {
+            int count = 0;
+            Cursor c = null;
+            Uri iccUri;
+            int[] subId = SubscriptionManager.getSubId(subscription);
+            if (!TelephonyManager.getDefault().isMultiSimEnabled()) {
+                iccUri = Uri.parse(SimContactsConstants.SIM_URI);
+            } else {
+                iccUri = Uri.parse(SimContactsConstants.SIM_SUB_URI + subId[0]);
+            }
+            try {
+                c = resolver.query(iccUri, null, null, null, null);
+                if (c != null) {
+                    count = c.getCount();
+                }
+            } finally {
+                if (c != null) {
+                    c.close();
+                }
+            }
+
+            if (count == getMSimCardMaxCount(subscription)) {
+                return RESULT_SIM_FULL_FAILURE;
+            }
+        }
+
+        if (isInsert) {
+            Uri resultUri = mSimContactsOperation.insert(values,
+                    subscription);
+            if (resultUri != null)
+                result = RESULT_SUCCESS;
+        } else {
+            int resultInt = mSimContactsOperation.update(values,
+                    subscription);
+            if (resultInt == 1)
+                result = RESULT_SUCCESS;
+        }
+        return result;
+    }
+
+     /**
      * Find the ID of an existing or newly-inserted raw-contact.  If none exists, return -1.
      */
     private long getRawContactId(RawContactDeltaList state,
@@ -998,12 +1223,27 @@ public class ContactSaveService extends IntentService {
 
     private void deleteContact(Intent intent) {
         Uri contactUri = intent.getParcelableExtra(EXTRA_CONTACT_URI);
+        mSimContactsOperation = new SimContactsOperation(this);
         if (contactUri == null) {
             Log.e(TAG, "Invalid arguments for deleteContact request");
             return;
         }
 
-        getContentResolver().delete(contactUri, null, null);
+        final List<String> segments = contactUri.getPathSegments();
+        // Contains an Id.
+        final long uriContactId = Long.parseLong(segments.get(3));
+        int subscription = mSimContactsOperation
+                .getSimSubscription(uriContactId);
+        if (subscription != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            ContentValues values = mSimContactsOperation
+                    .getSimAccountValues(uriContactId);
+            int result = mSimContactsOperation.delete(values, subscription);
+            if (result == RESULT_SUCCESS) {
+                getContentResolver().delete(contactUri, null, null);
+            }
+        } else {
+            getContentResolver().delete(contactUri, null, null);
+        }
     }
 
     private void deleteMultipleContacts(Intent intent) {

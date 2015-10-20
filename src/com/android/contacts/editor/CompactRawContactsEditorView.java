@@ -17,6 +17,8 @@
 package com.android.contacts.editor;
 
 import com.android.contacts.R;
+import com.android.contacts.common.model.account.PhoneAccountType;
+import com.android.contacts.common.model.account.SimAccountType;
 import com.android.contacts.common.model.AccountTypeManager;
 import com.android.contacts.common.model.RawContactDelta;
 import com.android.contacts.common.model.RawContactDeltaList;
@@ -24,14 +26,21 @@ import com.android.contacts.common.model.RawContactModifier;
 import com.android.contacts.common.model.ValuesDelta;
 import com.android.contacts.common.model.account.AccountType;
 import com.android.contacts.common.model.account.AccountType.EditField;
+import com.android.contacts.common.model.account.AccountType.EditType;
 import com.android.contacts.common.model.account.AccountWithDataSet;
+import com.android.contacts.common.model.account.PhoneAccountType;
+import com.android.contacts.common.model.account.SimAccountType;
 import com.android.contacts.common.model.dataitem.DataKind;
+import com.android.contacts.common.SimContactsConstants;
+import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.util.MaterialColorMapUtils;
 import com.android.contacts.editor.CompactContactEditorFragment.PhotoHandler;
+import com.android.internal.telephony.PhoneConstants;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.GroupMembership;
 import android.provider.ContactsContract.CommonDataKinds.Nickname;
@@ -365,7 +374,8 @@ public class CompactRawContactsEditorView extends LinearLayout implements View.O
             return;
         }
         vlog("Account info loaded");
-        if (accountInfo.first == null) {
+        if (accountInfo.first == null || SimAccountType.ACCOUNT_TYPE.equals(accountType.
+                accountType)|| PhoneAccountType.ACCOUNT_TYPE.equals(accountType.accountType)) {
             mAccountNameView.setVisibility(View.GONE);
         } else {
             mAccountNameView.setVisibility(View.VISIBLE);
@@ -640,7 +650,7 @@ public class CompactRawContactsEditorView extends LinearLayout implements View.O
         for (RawContactDelta rawContactDelta : rawContactDeltas) {
             if (!rawContactDelta.isVisible()) continue;
             final AccountType accountType = rawContactDelta.getAccountType(mAccountTypeManager);
-
+            final String accountName = rawContactDelta.getAccountName();
             for (DataKind dataKind : accountType.getSortedDataKinds()) {
                 if (!dataKind.editable) continue;
 
@@ -658,7 +668,7 @@ public class CompactRawContactsEditorView extends LinearLayout implements View.O
                     final ValuesDelta valuesDelta = rawContactDelta.getSuperPrimaryEntry(
                             StructuredName.CONTENT_ITEM_TYPE, /* forceSelection =*/ true);
                     if (hasNonEmptyValue(dataKind, valuesDelta)) {
-                        mPhoneticNames.addView(inflatePhoneticNameEditorView(
+                            mPhoneticNames.addView(inflatePhoneticNameEditorView(
                                 mPhoneticNames, accountType, valuesDelta, rawContactDelta));
                     }
                 } else if (Nickname.CONTENT_ITEM_TYPE.equals(mimeType)) {
@@ -667,7 +677,7 @@ public class CompactRawContactsEditorView extends LinearLayout implements View.O
                             rawContactDelta, Nickname.CONTENT_ITEM_TYPE, dataKind);
                     if (valuesDeltas != null && !valuesDeltas.isEmpty()) {
                         for (ValuesDelta valuesDelta : valuesDeltas) {
-                            mNicknames.addView(inflateNicknameEditorView(
+                                mNicknames.addView(inflateNicknameEditorView(
                                     mNicknames, dataKind, valuesDelta, rawContactDelta));
                         }
                     }
@@ -687,6 +697,31 @@ public class CompactRawContactsEditorView extends LinearLayout implements View.O
                             updateKindEditorIcons(mPhoneNumbers);
                         }
                     });
+                    if (SimContactsConstants.ACCOUNT_TYPE_SIM
+                            .equals(accountType.accountType)) {
+                        int sub = PhoneConstants.SUB1;
+                        if (SimContactsConstants.SIM_NAME_2.equals(accountName)) {
+                            sub = PhoneConstants.SUB2;
+                        }
+                        EditType typeHome = new EditType(Phone.TYPE_HOME,
+                            Phone.getTypeLabelResource(Phone.TYPE_HOME));
+                        if (!MoreContactUtils.canSaveAnr(sub)) {
+                            dataKind.typeOverallMax = 1;
+                            if (null != dataKind.typeList) {
+                                // When the sim card is not 3g the interface should
+                                // remove the TYPE_HOME number view.
+                                dataKind.typeList.remove(typeHome);
+                            }
+                        } else {
+                            dataKind.typeOverallMax = MoreContactUtils.getOneSimAnrCount(sub) + 1;
+                            if (null != dataKind.typeList && !dataKind.typeList.contains(
+                                    typeHome)) {
+                                // When the sim card is 3g the interface should
+                                // add the TYPE_HOME number view.
+                                dataKind.typeList.add(typeHome);
+                            }
+                        }
+                    }
                     mPhoneNumbers.addView(kindSectionView);
                 } else if (Email.CONTENT_ITEM_TYPE.equals(mimeType)) {
                     final KindSectionView kindSectionView =
@@ -704,7 +739,19 @@ public class CompactRawContactsEditorView extends LinearLayout implements View.O
                             updateKindEditorIcons(mEmails);
                         }
                     });
-                    mEmails.addView(kindSectionView);
+                    if (SimContactsConstants.ACCOUNT_TYPE_SIM.equals(
+                            accountType.accountType)) {
+                        int sub = PhoneConstants.SUB1;
+                        if (SimContactsConstants.SIM_NAME_2.equals(accountName)) {
+                            sub = PhoneConstants.SUB2;
+                        }
+                        if (MoreContactUtils.canSaveEmail(sub)) {
+                            dataKind.typeOverallMax = MoreContactUtils.getOneSimEmailCount(sub);
+                            mEmails.addView(kindSectionView);
+                        }
+                    } else {
+                        mEmails.addView(kindSectionView);
+                    }
                 } else if (hasNonEmptyValuesDelta(rawContactDelta, mimeType, dataKind)) {
                     final LinearLayout otherTypeViewGroup;
                     if (mOtherTypesMap.containsKey(mimeType)) {
@@ -842,6 +889,10 @@ public class CompactRawContactsEditorView extends LinearLayout implements View.O
                 rawContactDelta,
                 readOnly,
                 mViewIdGenerator);
+        if (rawContactDelta.getAccountType() != null && rawContactDelta.getAccountType().equals(
+                SimContactsConstants.ACCOUNT_TYPE_SIM)) {
+            result.setExpansionViewContainerDisabled();
+        }
         return result;
     }
 

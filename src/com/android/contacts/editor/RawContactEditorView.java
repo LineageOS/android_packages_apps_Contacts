@@ -37,11 +37,14 @@ import android.widget.TextView;
 import com.android.contacts.GroupMetaDataLoader;
 import com.android.contacts.R;
 import com.android.contacts.common.model.account.AccountType;
+import com.android.contacts.common.model.account.PhoneAccountType;
+import com.android.contacts.common.model.account.SimAccountType;
 import com.android.contacts.common.model.account.AccountType.EditType;
 import com.android.contacts.common.model.dataitem.DataKind;
 import com.android.contacts.common.model.RawContactDelta;
 import com.android.contacts.common.model.ValuesDelta;
 import com.android.contacts.common.model.RawContactModifier;
+import com.android.contacts.common.SimContactsConstants;
 
 import com.google.common.base.Objects;
 
@@ -196,7 +199,8 @@ public class RawContactEditorView extends BaseRawContactEditorView {
             // Hide this view so the other text view will be centered vertically
             mAccountHeaderNameTextView.setVisibility(View.GONE);
         } else {
-            if (accountInfo.first == null) {
+            if (accountInfo.first == null || SimAccountType.ACCOUNT_TYPE.equals(type.accountType)
+                    || PhoneAccountType.ACCOUNT_TYPE.equals(type.accountType)) {
                 mAccountHeaderNameTextView.setVisibility(View.GONE);
             } else {
                 mAccountHeaderNameTextView.setVisibility(View.VISIBLE);
@@ -249,23 +253,34 @@ public class RawContactEditorView extends BaseRawContactEditorView {
                 mName.setValues(
                         type.getKindForMimetype(DataKind.PSEUDO_MIME_TYPE_DISPLAY_NAME),
                         primary, state, false, vig);
-                mPhoneticName.setValues(
-                        type.getKindForMimetype(DataKind.PSEUDO_MIME_TYPE_PHONETIC_NAME),
-                        primary, state, false, vig);
-                // It is useful to use Nickname outside of a KindSectionView so that we can treat it
-                // as a part of StructuredName's fake KindSectionView, even though it uses a
-                // different CP2 mime-type. We do a bit of extra work below to make this possible.
-                final DataKind nickNameKind = type.getKindForMimetype(Nickname.CONTENT_ITEM_TYPE);
-                if (nickNameKind != null) {
-                    ValuesDelta primaryNickNameEntry = state.getPrimaryEntry(nickNameKind.mimeType);
-                    if (primaryNickNameEntry == null) {
-                        primaryNickNameEntry = RawContactModifier.insertChild(state, nickNameKind);
+                if (!(SimContactsConstants.ACCOUNT_TYPE_SIM).equals(type.accountType)) {
+                    mPhoneticName.setValues(
+                            type.getKindForMimetype(DataKind.PSEUDO_MIME_TYPE_PHONETIC_NAME),
+                            primary, state, false, vig);
+                    // It is useful to use Nickname outside of a KindSectionView so that we can
+                    // treat it as a part of StructuredName's fake KindSectionView, even though
+                    // it uses adifferent CP2 mime-type. We do a bit of extra work below to make
+                    // this possible.
+                    final DataKind nickNameKind = type
+                            .getKindForMimetype(Nickname.CONTENT_ITEM_TYPE);
+                    if (nickNameKind != null) {
+                        ValuesDelta primaryNickNameEntry = state
+                                .getPrimaryEntry(nickNameKind.mimeType);
+                        if (primaryNickNameEntry == null) {
+                            primaryNickNameEntry = RawContactModifier
+                                    .insertChild(state, nickNameKind);
+                        }
+                        mNickName.setValues(nickNameKind, primaryNickNameEntry, state, false, vig);
+                        mNickName.setDeletable(false);
+                    } else {
+                        mPhoneticName.setPadding(0, 0, 0, (int) getResources().getDimension(
+                                R.dimen.editor_padding_between_editor_views));
+                        mNickName.setVisibility(View.GONE);
                     }
-                    mNickName.setValues(nickNameKind, primaryNickNameEntry, state, false, vig);
-                    mNickName.setDeletable(false);
                 } else {
-                    mPhoneticName.setPadding(0, 0, 0, (int) getResources().getDimension(
-                            R.dimen.editor_padding_between_editor_views));
+                  //sim card can't store expand fields,so set it disabled.
+                    mName.setExpansionViewContainerDisabled();
+                    mPhoneticName.setVisibility(View.GONE);
                     mNickName.setVisibility(View.GONE);
                 }
             } else if (Photo.CONTENT_ITEM_TYPE.equals(mimeType)) {

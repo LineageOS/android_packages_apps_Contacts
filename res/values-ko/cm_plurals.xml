@@ -28,4 +28,7 @@
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="other">%d건의 연락처가 삭제됩니다.</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="other">%d명이 스팸으로 분류했습니다.</item>
+  </plurals>
 </resources>

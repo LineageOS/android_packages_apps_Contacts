@@ -32,4 +32,8 @@
     <item quantity="one">%d ಸಂಪರ್ಕವನ್ನು ಅಳಿಸಲಾಗುತ್ತದೆ.</item>
     <item quantity="other">%d ಸಂಪರ್ಕಗಳನ್ನು ಅಳಿಸಲಾಗುತ್ತದೆ.</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="one">%d ವ್ಯಕ್ತಿ ಇದನ್ನು ಸ್ಪಾಮ್ ಎಂದು ಗುರುತಿಸಿದ್ದಾರೆ</item>
+    <item quantity="other">%d ಜನರು ಇದನ್ನು ಸ್ಪಾಮ್ ಎಂದು ಗುರುತಿಸಿದ್ದಾರೆ</item>
+  </plurals>
 </resources>

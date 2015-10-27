@@ -223,16 +223,14 @@ public class KindSectionView extends LinearLayout implements EditorListener {
 
         final List<View> emptyEditors = getEmptyEditors();
 
-        // Check for primary best type
-        AccountType.EditType bestType = RawContactModifier.getBestValidType(mState, mKind, false,
-                Integer.MIN_VALUE);
-        if (bestType == null) {
-            // Fall back to seconday best type
-            bestType = RawContactModifier.getBestValidType(mState, mKind, true, Integer.MIN_VALUE);
-        }
-        // If no type then we don't need an empty for it
-        if (bestType == null) {
-            return;
+        // If a type is attached to our kind, see whether there are more types we can add
+        if (mKind != null && mKind.typeColumn != null) {
+            AccountType.EditType bestType = RawContactModifier.getBestValidType(mState,
+                    mKind, true, Integer.MIN_VALUE);
+            if (bestType == null) {
+                // No more types to add
+                return;
+            }
         }
 
         // If there is more than 1 empty editor, then remove it from the list of editors.

@@ -32,4 +32,8 @@
     <item quantity="one">%d Kontakt gëtt geläscht.</item>
     <item quantity="other">%d Kontakter gi geläscht.</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="one">Vun %d Persoun als Spam markéiert</item>
+    <item quantity="other">Vu(n) %d Persounen als Spam markéiert</item>
+  </plurals>
 </resources>

@@ -31,6 +31,7 @@ import com.android.contacts.util.ContactPhotoUtils;
 import com.android.contacts.util.SchedulingUtils;
 import com.android.contacts.widget.QuickContactImageView;
 
+import android.accounts.Account;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -291,8 +292,8 @@ public class CompactPhotoEditorView extends RelativeLayout implements View.OnCli
         if (photoUri != null) {
             final DefaultImageProvider fallbackToPreviousImage = new DefaultImageProvider() {
                 @Override
-                public void applyDefaultImage(ImageView view, int extent, boolean darkTheme,
-                        DefaultImageRequest defaultImageRequest) {
+                public void applyDefaultImage(ImageView view, Account account, int extent,
+                        boolean darkTheme, DefaultImageRequest defaultImageRequest) {
                     // Before we finish setting the full sized image, don't change the current
                     // image that is set in any way.
                 }

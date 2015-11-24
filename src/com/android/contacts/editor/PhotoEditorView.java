@@ -16,6 +16,7 @@
 
 package com.android.contacts.editor;
 
+import android.accounts.Account;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -208,8 +209,8 @@ public class PhotoEditorView extends LinearLayout implements Editor {
         if (photoUri != null) {
             final DefaultImageProvider fallbackToPreviousImage = new DefaultImageProvider() {
                 @Override
-                public void applyDefaultImage(ImageView view, int extent, boolean darkTheme,
-                        DefaultImageRequest defaultImageRequest) {
+                public void applyDefaultImage(ImageView view, Account account, int extent,
+                        boolean darkTheme, DefaultImageRequest defaultImageRequest) {
                     // Before we finish setting the full sized image, don't change the current
                     // image that is set in any way.
                 }

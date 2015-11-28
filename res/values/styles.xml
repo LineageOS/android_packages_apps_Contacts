@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2009 The Android Open Source Project
+<!-- Copyright (C) 2015 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -97,6 +97,7 @@
         <item name="list_item_header_text_color">@color/people_app_theme_color</item>
         <item name="list_item_header_text_size">14sp</item>
         <item name="list_item_header_height">30dip</item>
+        <item name="list_item_name_text_color">@color/list_item_name_text_color</item>
         <item name="list_item_data_width_weight">5</item>
         <item name="list_item_label_width_weight">3</item>
         <item name="list_item_header_text_indent">8dip</item>

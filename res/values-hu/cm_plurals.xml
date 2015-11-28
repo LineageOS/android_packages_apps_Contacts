@@ -32,4 +32,8 @@
     <item quantity="one">%d névjegy törölve lesz.</item>
     <item quantity="other">%d névjegy törölve lesz.</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="one">%d személy jelölte ezt levélszemétként</item>
+    <item quantity="other">%d személy jelölte ezt levélszemétként</item>
+  </plurals>
 </resources>

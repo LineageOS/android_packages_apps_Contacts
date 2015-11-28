@@ -19,26 +19,26 @@
   <plurals name="contacts_selected">
     <item quantity="one">%d изабран</item>
     <item quantity="few">%d изабрана</item>
-    <item quantity="other">%d изабрана</item>
+    <item quantity="other">%d изабрано</item>
   </plurals>
   <plurals name="ContactMultiImportConfirmation">
-    <item quantity="one">%d контакт ће бити увежен.</item>
-    <item quantity="few">%d контакта ће бити увежена.</item>
-    <item quantity="other">%d контакта ће бити увежена.</item>
+    <item quantity="one">%d контакт ће бити увезен.</item>
+    <item quantity="few">%d контакта ће бити увезена.</item>
+    <item quantity="other">%d контаката ће бити увезено.</item>
   </plurals>
   <plurals name="import_progress">
-    <item quantity="one">%d контакт увежен</item>
-    <item quantity="few">%d контакта увежено</item>
-    <item quantity="other">%d контакта увежено</item>
+    <item quantity="one">%d контакт увезен</item>
+    <item quantity="few">%d контакта увезена</item>
+    <item quantity="other">%d контаката увезено</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="one">%d контакт ће бити избрисан.</item>
-    <item quantity="few">%d контаката ће бити избрисано.</item>
+    <item quantity="few">%d контакта ће бити избрисана.</item>
     <item quantity="other">%d контаката ће бити избрисано.</item>
   </plurals>
   <plurals name="spam_count_text">
-    <item quantity="one">%d особа је означила као спам</item>
-    <item quantity="few">%d особе су означиле као спам</item>
-    <item quantity="other">%d особе су означиле као спам</item>
+    <item quantity="one">%d особа је ово означила као нежељено</item>
+    <item quantity="few">%d особе су ово означиле као нежељено</item>
+    <item quantity="other">%d особа је ово означило као нежељено</item>
   </plurals>
 </resources>

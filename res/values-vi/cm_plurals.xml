@@ -28,4 +28,7 @@
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="other">%d liên lạc sẽ bị xóa.</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="other">%d người đã đánh dấu là tin rác</item>
+  </plurals>
 </resources>

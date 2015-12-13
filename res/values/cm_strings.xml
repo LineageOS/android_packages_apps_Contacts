@@ -51,24 +51,9 @@
     <string name="delete_contacts_message">Deleting contacts\u2026</string>
     <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
     <string name="deleteConfirmation_title">Delete contact?</string>
-    <plurals name="ContactMultiImportConfirmation">
-        <item quantity="one">%d contact will be imported.</item>
-        <item quantity="other">%d contacts will be imported.</item>
-    </plurals>
-    <plurals name="import_progress">
-        <item quantity="one">%d contact imported</item>
-        <item quantity="other">%d contacts imported</item>
-    </plurals>
-    <plurals name="contacts_selected">
-        <item quantity="one">%d contact selected</item>
-        <item quantity="other">%d contacts selected</item>
-    </plurals>
+
     <string name="too_many_contacts_add_to_group">Too many contacts, that should be less than <xliff:g id="count">%d</xliff:g></string>
     <!-- Multi Delete Contacts related strings -->
-    <plurals name="ContactMultiDeleteConfirmation">
-        <item quantity="one">%d contact will be deleted.</item>
-        <item quantity="other">%d contacts will be deleted.</item>
-    </plurals>
     <string name="ContactMultiDeleteConfirmation">These contacts will be deleted.</string>
     <string name="delete_termination">"Delete is termination"</string>
     <!-- Toast displayed when a contact is deleted [CHAR LIMIT=NONE] -->

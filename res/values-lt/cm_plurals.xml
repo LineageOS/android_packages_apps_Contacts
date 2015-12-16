@@ -36,4 +36,9 @@
     <item quantity="few">%d kontaktai bus ištrinti.</item>
     <item quantity="other">%d kontaktų bus ištrinta.</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="one">%d asmuo pažymėjo tai kaip šlamštą</item>
+    <item quantity="few">%d asmenys pažymėjo tai kaip šlamštą</item>
+    <item quantity="other">%d asmenų pažymėjo tai kaip šlamštą</item>
+  </plurals>
 </resources>

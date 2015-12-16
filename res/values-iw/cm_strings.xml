@@ -39,13 +39,13 @@
   <string name="import_sim_contacts_message">מייבא אנשי קשר מה-SIM\u2026</string>
   <string name="importConfirmation_title">לייבא אנשי קשר?</string>
   <string name="import_finish">הייבוא הסתיים</string>
-  <string name="too_many_contacts_add_to_group">לא ניתן להוסיף יותר מ- <xliff:g id="count"> %d </xliff:g> אנשי קשר</string>
+  <string name="too_many_contacts_add_to_group">לא ניתן להוסיף יותר מ-<xliff:g id="count">%d</xliff:g> אנשי קשר</string>
   <string name="delete_contacts_title">מחק אנשי קשר</string>
   <string name="delete_contacts_message">מוחק אנשי קשר\u2026</string>
   <string name="deleteConfirmation_title">למחוק איש קשר?</string>
   <string name="contactDeletedToast">איש הקשר נמחק</string>
   <string name="menu_memory_status">מצב הזיכרון</string>
-  <string name="memory_size">סה\"כ:</string>
+  <string name="memory_size">סך הכל:</string>
   <string name="memory_used">בשימוש:</string>
   <string name="contact_detail_picture_description">תמונה. לחץ לשינוי</string>
   <string name="calculating_status_now">מחשב מצב/u2026</string>

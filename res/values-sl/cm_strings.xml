@@ -18,7 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="contactSavedToSimCardError">Izbranih stikov ni bilo mogoče shraniti na kartico SIM</string>
-  <string name="airplane_mode_on">Ni mogoče dostopati do kartice SIM, ko je način letenja omogočen</string>
+  <string name="airplane_mode_on">Ni mogoče dostopati do kartice SIM, ko je način za letalo omogočen</string>
   <string name="number_anr_too_long">Število je predolgo</string>
   <string name="email_address_too_long">E-poštni naslov je predolg</string>
   <string name="sim_card_full">Kartica SIM je polna</string>

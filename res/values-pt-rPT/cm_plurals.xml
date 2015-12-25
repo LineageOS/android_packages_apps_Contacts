@@ -33,7 +33,7 @@
     <item quantity="other">%d contactos serão apagados.</item>
   </plurals>
   <plurals name="spam_count_text">
-    <item quantity="one">%d pessoa marcou como spam</item>
-    <item quantity="other">%d pessoas marcaram como spam</item>
+    <item quantity="one">%d pessoa marcou isto como spam</item>
+    <item quantity="other">%d pessoas marcaram isto como spam</item>
   </plurals>
 </resources>

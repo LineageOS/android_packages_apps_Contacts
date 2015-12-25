@@ -17,7 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="contactSavedToSimCardError">Não consegui gravar no cartão SIM, os contactos selecionados</string>
+  <string name="contactSavedToSimCardError">Não foi possível gravar os contactos selecionados no cartão SIM</string>
   <string name="airplane_mode_on">Não é possível aceder ao cartão SIM enquanto o modo avião estiver ativado</string>
   <string name="number_anr_too_long">O número é muito longo</string>
   <string name="email_address_too_long">O endereço de e-mail é muito longo</string>
@@ -25,12 +25,12 @@
   <string name="tag_too_long">O nome do contacto é muito longo</string>
   <string name="invalid_phone_number">O número de telefone é inválido</string>
   <string name="invalid_number_type">O tipo de número é inválido</string>
-  <string name="no_phone_number_or_email">Por favor insira um número de telefone ou endereço de e-mail.</string>
-  <string name="memory_card_full">O contacto não pôde ser guardado, a memória do telefone está cheia</string>
+  <string name="no_phone_number_or_email">Por favor, insira um número de telefone ou endereço de e-mail.</string>
+  <string name="memory_card_full">O contacto não pôde ser guardado porque a memória do telefone está cheia</string>
   <string name="contacts_groups_label">Grupos</string>
   <string name="menu_moveGroupMembers">Mover membros do grupo</string>
   <string name="title_move_members">Mover membros</string>
-  <string name="message_move_members">A mover\u2026</string>
+  <string name="message_move_members">A mover membros\u2026</string>
   <string name="message_can_not_move_members">Não é possível mover os membros</string>
   <string name="edit_before_call">Editar número antes da chamada</string>
   <string name="menu_sendViaSMS">Enviar contacto via SMS</string>
@@ -47,12 +47,12 @@
   <string name="menu_memory_status">Estado da memória</string>
   <string name="memory_size">Total:</string>
   <string name="memory_used">Utilizada:</string>
-  <string name="contact_detail_picture_description">Imagem. Selecione esta opção para mudar</string>
+  <string name="contact_detail_picture_description">Imagem. Selecione para mudar</string>
   <string name="calculating_status_now">A calcular estado\u2026</string>
   <string name="menu_copyTo">Copiar para <xliff:g id="destination">%s</xliff:g></string>
   <string name="copy_to_target_sim">Cartão SIM</string>
   <string name="copy_to_target_msim">Cartão SIM <xliff:g id="index">%d</xliff:g></string>
-  <string name="no_empty_email_in_usim">O contacto USIM não tem um campo de e-mail disponível, não é possível copiar mensagens.</string>
+  <string name="no_empty_email_in_usim">O contacto USIM não tem um campo de e-mail disponível. Não é possível copiar mensagens.</string>
   <string name="voicemail">Correio de voz</string>
   <string name="select_call_title">Selecionar os registos de chamadas</string>
   <string name="delete_call_title">Apagar os registos de chamadas</string>

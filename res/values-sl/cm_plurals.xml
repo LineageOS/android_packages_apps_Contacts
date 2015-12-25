@@ -17,10 +17,10 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="contacts_selected">
-    <item quantity="one">Izbran %d</item>
-    <item quantity="two">Izbrana %d</item>
-    <item quantity="few">Izbrani %d</item>
-    <item quantity="other">Izbranih %d</item>
+    <item quantity="one">%d izbran</item>
+    <item quantity="two">%d izbrana</item>
+    <item quantity="few">%d izbrani</item>
+    <item quantity="other">%d izbranih</item>
   </plurals>
   <plurals name="ContactMultiImportConfirmation">
     <item quantity="one">Uvožen bo %d stik.</item>

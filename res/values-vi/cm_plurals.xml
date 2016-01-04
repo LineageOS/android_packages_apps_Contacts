@@ -17,23 +17,18 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="contacts_selected">
-    <item quantity="one">%d selected</item>
-    <item quantity="other">%d selected</item>
+    <item quantity="other">%d được chọn</item>
   </plurals>
   <plurals name="ContactMultiImportConfirmation">
-    <item quantity="one">%d contact will be imported.</item>
-    <item quantity="other">%d contacts will be imported.</item>
+    <item quantity="other">%d số liên lạc sẽ được nhập.</item>
   </plurals>
   <plurals name="import_progress">
-    <item quantity="one">%d contact imported</item>
-    <item quantity="other">%d contacts imported</item>
+    <item quantity="other">%d số liên lạc đã được nhập</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
-    <item quantity="one">%d contact will be deleted.</item>
-    <item quantity="other">%d contacts will be deleted.</item>
+    <item quantity="other">%d số liên lạc sẽ bị xóa.</item>
   </plurals>
   <plurals name="spam_count_text">
-    <item quantity="one">%d person marked this as spam</item>
-    <item quantity="other">%d people marked this as spam</item>
+    <item quantity="other">%d người đã đánh dấu là tin rác</item>
   </plurals>
 </resources>

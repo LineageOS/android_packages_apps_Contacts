@@ -17,9 +17,18 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="contacts_selected">
-    <item quantity="other">%d ถูกเลือก</item>
+    <item quantity="other">%d รายชื่อถูกเลือก</item>
   </plurals>
   <plurals name="ContactMultiImportConfirmation">
     <item quantity="other">%d รายชื่อติดต่อจะถูกนำเข้า</item>
+  </plurals>
+  <plurals name="import_progress">
+    <item quantity="other">%d รายชื่อถูกนำเข้าแล้ว</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="other">%d รายชื่อจะถูกลบ</item>
+  </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="other">%d คนระบุว่าสิ่งนี้เป็นสแปม</item>
   </plurals>
 </resources>

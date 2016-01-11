@@ -43,21 +43,11 @@
   <string name="delete_contacts_message">Poistetaan yhteystietoja\u2026</string>
   <string name="deleteConfirmation_title">Poista yhteystieto?</string>
   <string name="too_many_contacts_add_to_group">Enintään <xliff:g id="count">%d</xliff:g> yhteystietoa voidaan lisätä</string>
-  <string name="ContactMultiDeleteConfirmation">Nämä yhteystiedot poistetaan.</string>
-  <string name="contactDeletedToast">Yhteystieto poistettu</string>
   <string name="menu_memory_status">Muistin tila</string>
   <string name="memory_size">Yhteensä:</string>
   <string name="memory_used">Käytetty:</string>
-  <string name="contact_detail_picture_description">Kuva. Valitse vaihtaaksesi</string>
-  <string name="btn_ok">OK</string>
-  <string name="btn_cancel">Peruuta</string>
-  <string name="search_bar_hint">Etsi yhteystietoja</string>
-  <string name="ContactMultiImportConfirmation">Nämä yhteystiedot tuodaan.</string>
-  <string name="import_stop">"Tuonti pysäytetty"</string>
   <string name="calculating_status_now">Lasketaan tilaa\u2026</string>
   <string name="menu_copyTo">Kopioi kohteeseen <xliff:g id="destination">%s</xliff:g></string>
-  <string name="copy_to_target_sim">SIM-kortti</string>
-  <string name="copy_to_target_msim">SIM-kortti <xliff:g id="index">%d</xliff:g></string>
   <string name="no_empty_email_in_usim">USIM-yhteystiedolla ei ole saatavilla sähköpostiosoitekenttää, viestejä ei voida kopioida.</string>
   <string name="voicemail">Vastaaja</string>
   <string name="select_call_title">Valitse puhelulokit</string>

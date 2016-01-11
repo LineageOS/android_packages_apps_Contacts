@@ -43,21 +43,11 @@
   <string name="delete_contacts_message">Usuwanie kontaktów\u2026</string>
   <string name="deleteConfirmation_title">Usunąć kontakt?</string>
   <string name="too_many_contacts_add_to_group">Nie więcej niż <xliff:g id="count"> %d </xliff:g> kontaktów może być dodanych</string>
-  <string name="ContactMultiDeleteConfirmation">Te kontakty zostaną usunięte.</string>
-  <string name="contactDeletedToast">Kontakt usunięty</string>
   <string name="menu_memory_status">Stan pamięci</string>
   <string name="memory_size">Łącznie:</string>
   <string name="memory_used">Zajęte:</string>
-  <string name="contact_detail_picture_description">Zdjęcie. Wybierz, aby zmienić</string>
-  <string name="btn_ok">Ok</string>
-  <string name="btn_cancel">Anuluj</string>
-  <string name="search_bar_hint">Szukaj kontaktów</string>
-  <string name="ContactMultiImportConfirmation">Te kontakty zostaną zaimportowane.</string>
-  <string name="import_stop">"Import zatrzymany"</string>
   <string name="calculating_status_now">Obliczanie statusu\u2026</string>
   <string name="menu_copyTo">Skopiuj do <xliff:g id="destination">%s</xliff:g></string>
-  <string name="copy_to_target_sim">Karta SIM</string>
-  <string name="copy_to_target_msim">Karta SIM <xliff:g id="index">%d</xliff:g></string>
   <string name="no_empty_email_in_usim">Kontakt USIM nie ma pola e-mail, nie można skopiować wiadomości.</string>
   <string name="voicemail">Poczta głosowa</string>
   <string name="select_call_title">Wybierz dzienniki rozmów</string>

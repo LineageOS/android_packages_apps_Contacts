@@ -43,17 +43,11 @@
   <string name="delete_contacts_message">Διαγραφή επαφών\u2026</string>
   <string name="deleteConfirmation_title">Διαγραφή επαφής;</string>
   <string name="too_many_contacts_add_to_group">Δεν είναι δυνατή η προσθήκη περισσότερων από <xliff:g id="count">%d</xliff:g> επαφών</string>
-  <string name="contactDeletedToast">Η επαφή διαγράφηκε</string>
   <string name="menu_memory_status">Κατάσταση μνήμης</string>
   <string name="memory_size">Συνολικά:</string>
   <string name="memory_used">Σε χρήση:</string>
-  <string name="contact_detail_picture_description">Εικόνα. Επιλέξτε για αλλαγή</string>
-  <string name="search_bar_hint">Αναζήτηση επαφών</string>
-  <string name="import_stop">"Η εισαγωγή σταμάτησε"</string>
   <string name="calculating_status_now">Υπολογισμός κατάστασης\u2026</string>
   <string name="menu_copyTo">Αντιγραφή σε <xliff:g id="destination">%s</xliff:g></string>
-  <string name="copy_to_target_sim">Κάρτα SIM</string>
-  <string name="copy_to_target_msim">Κάρτα SIM <xliff:g id="index">%d</xliff:g></string>
   <string name="no_empty_email_in_usim">Η επαφή USIM δεν έχει κανένα διαθέσιμο πεδίο ηλεκτρονικού ταχυδρομείου, δεν είναι δυνατή η αντιγραφή των μηνυμάτων.</string>
   <string name="voicemail">Μήνυμα τηλεφωνητή</string>
   <string name="select_call_title">Επιλογή αρχείων κλήσεων</string>

@@ -43,21 +43,11 @@
   <string name="delete_contacts_message">正在删除联系人\u2026</string>
   <string name="deleteConfirmation_title">删除联系人？</string>
   <string name="too_many_contacts_add_to_group">可以共享不超过 <xliff:g id="count">%d</xliff:g> 个联系人</string>
-  <string name="ContactMultiDeleteConfirmation">这些联系人将被删除。</string>
-  <string name="contactDeletedToast">联系人已删除</string>
   <string name="menu_memory_status">内存状态</string>
   <string name="memory_size">总共：</string>
   <string name="memory_used">已用：</string>
-  <string name="contact_detail_picture_description">选择以更改图片。</string>
-  <string name="btn_ok">确定</string>
-  <string name="btn_cancel">取消</string>
-  <string name="search_bar_hint">搜索联系人</string>
-  <string name="ContactMultiImportConfirmation">这些联系人将被导入。</string>
-  <string name="import_stop">"导入已停止"</string>
   <string name="calculating_status_now">正在计算状态\u2026</string>
   <string name="menu_copyTo">复制到 <xliff:g id="destination">%s</xliff:g></string>
-  <string name="copy_to_target_sim">SIM 卡</string>
-  <string name="copy_to_target_msim">SIM 卡 <xliff:g id="index">%d</xliff:g></string>
   <string name="no_empty_email_in_usim">USIM 联系人没有可用的电子邮件字段，无法复制信息。</string>
   <string name="voicemail">语音邮件</string>
   <string name="select_call_title">选择呼叫记录</string>

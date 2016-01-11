@@ -16,11 +16,23 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <plurals name="contacts_selected">
+    <item quantity="one">%d izbran</item>
+    <item quantity="two">%d izbrana</item>
+    <item quantity="few">%d izbrani</item>
+    <item quantity="other">%d izbranih</item>
+  </plurals>
   <plurals name="ContactMultiImportConfirmation">
     <item quantity="one">Uvožen bo %d stik.</item>
     <item quantity="two">Uvožena bosta %d stika.</item>
     <item quantity="few">Uvoženi bodo %d stiki.</item>
     <item quantity="other">Uvoženih bo %d stikov.</item>
+  </plurals>
+  <plurals name="import_progress">
+    <item quantity="one">Uvožen %d stik</item>
+    <item quantity="two">Uvožena %d stika</item>
+    <item quantity="few">Uvoženi %d stiki</item>
+    <item quantity="other">Uvoženih %d stikov</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="one">Izbrisan bo %d stik.</item>

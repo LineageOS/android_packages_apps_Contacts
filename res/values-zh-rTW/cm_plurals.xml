@@ -16,8 +16,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <plurals name="contacts_selected">
+    <item quantity="other">已選取 %d 個</item>
+  </plurals>
   <plurals name="ContactMultiImportConfirmation">
     <item quantity="other">將會匯入 %d 個連絡人。</item>
+  </plurals>
+  <plurals name="import_progress">
+    <item quantity="other">已匯入 %d 個連絡人。</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="other">將會刪除 %d 個連絡人。</item>

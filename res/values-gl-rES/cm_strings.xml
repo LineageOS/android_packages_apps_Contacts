@@ -43,15 +43,11 @@
   <string name="delete_contacts_message">Eliminando contactos\u2026</string>
   <string name="deleteConfirmation_title">Eliminar o contacto?</string>
   <string name="too_many_contacts_add_to_group">Non se poden engadir máis de <xliff:g id="count">%d</xliff:g> contactos</string>
-  <string name="contactDeletedToast">Contacto eliminado</string>
   <string name="menu_memory_status">Estado da memoria</string>
   <string name="memory_size">Total:</string>
   <string name="memory_used">Usado:</string>
-  <string name="contact_detail_picture_description">Imaxe. Seleccionar para mudar</string>
   <string name="calculating_status_now">Calculando o estado\u2026</string>
   <string name="menu_copyTo">Copiar a <xliff:g id="destination">%s</xliff:g></string>
-  <string name="copy_to_target_sim">Tarxeta SIM</string>
-  <string name="copy_to_target_msim">Tarxeta SIM <xliff:g id="index">%d</xliff:g></string>
   <string name="no_empty_email_in_usim">O contacto USIM non ten un campo de correo electrónico dispoñíbel, no se poden copiar as mensaxes.</string>
   <string name="voicemail">Caixa de voz</string>
   <string name="select_call_title">Seleccionar rexistros de chamadas</string>

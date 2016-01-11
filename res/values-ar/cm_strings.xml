@@ -44,15 +44,11 @@
   <string name="delete_contacts_message">جاري حذف جهات الاتصال\u2026</string>
   <string name="deleteConfirmation_title">حذف جهة اتصال؟</string>
   <string name="too_many_contacts_add_to_group">لا يمكن اضافة أكثر من <xliff:g id="count">%d</xliff:g> جهة اتصال</string>
-  <string name="contactDeletedToast">جهة الاتصال تم حذفها</string>
   <string name="menu_memory_status">حالة الذاكرة</string>
   <string name="memory_size">الإجمالي:</string>
   <string name="memory_used">المستخدم:</string>
-  <string name="contact_detail_picture_description">الصورة. حدد هذا الخيار للتغيير</string>
   <string name="calculating_status_now">جاري حساب الحالة\u2026</string>
   <string name="menu_copyTo">نسخ إلى <xliff:g id="destination">%s </xliff:g></string>
-  <string name="copy_to_target_sim">شريحة SIM</string>
-  <string name="copy_to_target_msim">شريحة SIM <xliff:g id="index"> %d </xliff:g></string>
   <string name="no_empty_email_in_usim">جهة الاتصال من USIM ليس لديها حقل للبريد الإلكتروني، تعذر نسخ الرسائل.</string>
   <string name="voicemail">البريد الصوتي</string>
   <string name="select_call_title">تحديد سجلات المكالمات</string>

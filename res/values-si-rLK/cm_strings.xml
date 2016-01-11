@@ -29,14 +29,11 @@
   <string name="delete_contacts_message">සම්බන්ධතා මකාදමමින්\u2026</string>
   <string name="deleteConfirmation_title">සබඳතාව මකනවා ද?</string>
   <string name="too_many_contacts_add_to_group">සම්බන්ධතා <xliff:g id="count">%d</xliff:g> ට වඩා එක් කල නොහැක</string>
-  <string name="contactDeletedToast">සබඳතාව මැකිණි</string>
   <string name="menu_memory_status">මතකයේ තත්ත්වය</string>
   <string name="memory_size">එකතුව:</string>
   <string name="memory_used">භාවිතය:</string>
   <string name="calculating_status_now">තත්වය ගණනය කරමින්\u2026</string>
   <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g> වෙත පිටපත් කරන්න</string>
-  <string name="copy_to_target_sim">සිම් කාඩ්පත</string>
-  <string name="copy_to_target_msim">සිම් කාඩ්පත <xliff:g id="index">%d</xliff:g></string>
   <string name="voicemail">හඬ තැපෑල</string>
   <string name="select_call_title">ඇමතුම් ලොගය තෝරන්න</string>
   <string name="delete_call_title">ඇමතුම් ලොගයන් මකන්න</string>

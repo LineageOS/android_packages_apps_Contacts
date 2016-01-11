@@ -43,21 +43,11 @@
   <string name="delete_contacts_message">連絡先を削除中\u2026</string>
   <string name="deleteConfirmation_title">連絡先を削除しますか？</string>
   <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g>件以上の連絡先は追加できません</string>
-  <string name="ContactMultiDeleteConfirmation">これらの連絡先が削除されます。</string>
-  <string name="contactDeletedToast">連絡先を削除しました</string>
   <string name="menu_memory_status">メモリの状態</string>
   <string name="memory_size">合計:</string>
   <string name="memory_used">使用数:</string>
-  <string name="contact_detail_picture_description">写真です。選択して変更します。</string>
-  <string name="btn_ok">OK</string>
-  <string name="btn_cancel">キャンセル</string>
-  <string name="search_bar_hint">連絡帳を検索</string>
-  <string name="ContactMultiImportConfirmation">これらの連絡先がインポートされます。</string>
-  <string name="import_stop">"インポートは停止しました"</string>
   <string name="calculating_status_now">状態を計算中\u2026</string>
   <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g>にコピー</string>
-  <string name="copy_to_target_sim">SIMカード</string>
-  <string name="copy_to_target_msim">SIMカード <xliff:g id="index">%d</xliff:g></string>
   <string name="no_empty_email_in_usim">USIMの連絡先にはメールアドレスの欄がないので、メッセージをコピーできません。</string>
   <string name="voicemail">ボイスメール</string>
   <string name="select_call_title">通話履歴を選択</string>

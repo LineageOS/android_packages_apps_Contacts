@@ -43,21 +43,11 @@
   <string name="delete_contacts_message">מוחק אנשי קשר\u2026</string>
   <string name="deleteConfirmation_title">למחוק איש קשר?</string>
   <string name="too_many_contacts_add_to_group">לא ניתן להוסיף יותר מ-<xliff:g id="count">%d</xliff:g> אנשי קשר</string>
-  <string name="ContactMultiDeleteConfirmation">אנשי קשר אלה יימחקו.</string>
-  <string name="contactDeletedToast">איש הקשר נמחק</string>
   <string name="menu_memory_status">מצב הזיכרון</string>
   <string name="memory_size">סך הכל:</string>
   <string name="memory_used">בשימוש:</string>
-  <string name="contact_detail_picture_description">תמונה. לחץ לשינוי</string>
-  <string name="btn_ok">אישור</string>
-  <string name="btn_cancel">ביטול</string>
-  <string name="search_bar_hint">חפש אנשי קשר</string>
-  <string name="ContactMultiImportConfirmation">אנשי קשר אלה ייובאו.</string>
-  <string name="import_stop">"הייבוא נעצר"</string>
   <string name="calculating_status_now">מחשב מצב/u2026</string>
   <string name="menu_copyTo">העתק אל <xliff:g id="destination"> %s </xliff:g></string>
-  <string name="copy_to_target_sim">כרטיס SIM</string>
-  <string name="copy_to_target_msim">כרטיס SIM <xliff:g id="index">%d</xliff:g></string>
   <string name="no_empty_email_in_usim">לאיש הקשר בכרטיס USIM אין שדה דוא\"ל זמין. לא ניתן להעתיק את ההודעה.</string>
   <string name="voicemail">תא קולי</string>
   <string name="select_call_title">בחר רישומי שיחות</string>

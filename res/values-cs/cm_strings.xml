@@ -43,15 +43,11 @@
   <string name="delete_contacts_message">Odstraňují se kontakty\u2026</string>
   <string name="deleteConfirmation_title">Odstranit kontakt?</string>
   <string name="too_many_contacts_add_to_group">Nelze přidat více než <xliff:g id="count">%d</xliff:g> kontaktů</string>
-  <string name="contactDeletedToast">Kontakt odstraněn</string>
   <string name="menu_memory_status">Stav paměti</string>
   <string name="memory_size">Celkem:</string>
   <string name="memory_used">Použito:</string>
-  <string name="contact_detail_picture_description">Obrázek. Výběrem změnit</string>
   <string name="calculating_status_now">Zjišťuje se stav\u2026</string>
   <string name="menu_copyTo">Zkopírovat do <xliff:g id="destination">%s</xliff:g></string>
-  <string name="copy_to_target_sim">SIM karta</string>
-  <string name="copy_to_target_msim">SIM karta <xliff:g id="index">%d</xliff:g></string>
   <string name="no_empty_email_in_usim">Kontakty USIM nemají k dispozici e-mailové pole - nelze kopírovat zprávy.</string>
   <string name="voicemail">Hlasová schránka</string>
   <string name="select_call_title">Vyberte historii hovorů</string>

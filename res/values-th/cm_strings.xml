@@ -19,4 +19,41 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="contactSavedToSimCardError">ไม่สามารถบันทึกรายชื่อติดต่อที่เลือกไปยังซิมการ์ดได้</string>
   <string name="airplane_mode_on">ไม่สามารถเข้าถึงซิมการ์ดในขณะเปิดใช้งานโหมดเครื่องบิน</string>
+  <string name="number_anr_too_long">หมายเลขยาวเกินไป</string>
+  <string name="email_address_too_long">ที่อยู่อีเมลยาวเกินไป</string>
+  <string name="sim_card_full">ซิมการ์ดเต็ม</string>
+  <string name="tag_too_long">ชื่อผู้ติดต่อยาวเกินไป</string>
+  <string name="invalid_phone_number">หมายเลขโทรศัพท์ไม่ถูกต้อง</string>
+  <string name="invalid_number_type">รูปแบบหมายเลขไม่ถูกต้อง</string>
+  <string name="no_phone_number_or_email">กรุณาใส่หมายเลขโทรศัพท์หรือที่อยู่อีเมล</string>
+  <string name="memory_card_full">ไม่สามารถบันทึกรายชื่อผู้ติดต่อได้ หน่วยความจำโทรศัพท์เต็ม</string>
+  <string name="contacts_groups_label">กลุ่ม</string>
+  <string name="menu_moveGroupMembers">ย้ายสมาชิกกลุ่ม</string>
+  <string name="title_move_members">ย้ายสมาชิก</string>
+  <string name="message_move_members">กำลังย้ายสมาชิก\u2026</string>
+  <string name="message_can_not_move_members">ไม่สามารถย้ายสมาชิก</string>
+  <string name="edit_before_call">แก้ไข​หมายเลขก่อน​โทร</string>
+  <string name="menu_sendViaSMS">ส่งรายชื่อติดต่อผ่าน SMS</string>
+  <string name="select_all">ทั้งหมด</string>
+  <string name="import_sim_contacts_title">นำเข้ารายชื่อติดต่อจากซิม</string>
+  <string name="import_sim_contacts_message">กำลังนำเข้ารายชื่อติดต่อจากซิม\u2026</string>
+  <string name="importConfirmation_title">นำเข้ารายชื่อติดต่อหรือไม่</string>
+  <string name="import_finish">นำเข้าเสร็จสิ้น</string>
+  <string name="delete_contacts_title">ลบ​ราย​ชื่อ</string>
+  <string name="delete_contacts_message">กำลังลบรายชื่อ\u2026</string>
+  <string name="deleteConfirmation_title">ลบ​ราย​ชื่อหรือไม่</string>
+  <string name="too_many_contacts_add_to_group">ไม่สามารถเพิ่มรายชื่อติดต่อได้เกิน <xliff:g id="count">%d</xliff:g> ชื่อ</string>
+  <string name="menu_memory_status">สถานะหน่วยความจำ</string>
+  <string name="memory_size">ทั้งหมด:</string>
+  <string name="memory_used">ใช้แล้ว:</string>
+  <string name="calculating_status_now">กำลังคำนวณสถานะ\u2026</string>
+  <string name="menu_copyTo">คัดลอกไปยัง<xliff:g id="destination">%s</xliff:g></string>
+  <string name="no_empty_email_in_usim">รายชื่อติดต่อ USIM ไม่มีช่องอีเมลให้ใช้งาน ไม่สามารถคัดลอกข้อความได้</string>
+  <string name="voicemail">ข้อความเสียง</string>
+  <string name="select_call_title">เลือกประวัติการโทร</string>
+  <string name="delete_call_title">ลบประวัติการโทร</string>
+  <string name="delete_call_message">กำลังลบประวัติการโทร\u2026</string>
+  <string name="delete_call_alert">ลบประวัติการโทรที่เลือกหรือไม่</string>
+  <string name="title_del_call">ลบ</string>
+  <string name="powered_by_provider">ดำเนินงานโดย <xliff:g id="provider">%s</xliff:g></string>
 </resources>

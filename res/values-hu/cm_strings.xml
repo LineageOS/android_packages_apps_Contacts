@@ -43,15 +43,11 @@
   <string name="delete_contacts_message">Névjegyek törlése\u2026</string>
   <string name="deleteConfirmation_title">Törli a névjegyet?</string>
   <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g> névjegynél több nem adható hozzá</string>
-  <string name="contactDeletedToast">Névjegy törölve</string>
   <string name="menu_memory_status">Memória állapota</string>
   <string name="memory_size">Teljes:</string>
   <string name="memory_used">Foglalt:</string>
-  <string name="contact_detail_picture_description">Kép. Válasszon a módosításhoz</string>
   <string name="calculating_status_now">Állapot számítása\u2026</string>
   <string name="menu_copyTo">Másolás ide: <xliff:g id="destination">%s</xliff:g></string>
-  <string name="copy_to_target_sim">SIM-kártya</string>
-  <string name="copy_to_target_msim">SIM-kártya <xliff:g id="index">%d</xliff:g></string>
   <string name="no_empty_email_in_usim">Az USIM kapcsolat nem rendelkezik e-mail címmel, nem lehet másolni az üzeneteket.</string>
   <string name="voicemail">Hangposta</string>
   <string name="select_call_title">Hívásnaplók kiválasztása</string>

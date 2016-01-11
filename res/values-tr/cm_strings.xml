@@ -42,16 +42,12 @@
   <string name="delete_contacts_title">Kişileri sil</string>
   <string name="delete_contacts_message">Kişiler siliniyor\u2026</string>
   <string name="deleteConfirmation_title">Kişi silinsin mi?</string>
-  <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g> \'den fazla kişi eklenemez</string>
-  <string name="contactDeletedToast">Kişi silindi</string>
+  <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g>\'den fazla kişi eklenemez</string>
   <string name="menu_memory_status">Hafıza durumu</string>
   <string name="memory_size">Toplam:</string>
   <string name="memory_used">Kullanılan:</string>
-  <string name="contact_detail_picture_description">Resim. Değiştirmek için seçin</string>
   <string name="calculating_status_now">Durum hesaplanıyor\u2026</string>
   <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g> konumuna kopyala</string>
-  <string name="copy_to_target_sim">SIM kart</string>
-  <string name="copy_to_target_msim">SIM kart <xliff:g id="index">%d</xliff:g></string>
   <string name="no_empty_email_in_usim">USIM kişisinin mevcut e-posta alanı yok, mesajlar kopyalanamıyor.</string>
   <string name="voicemail">Sesli mesaj</string>
   <string name="select_call_title">Arama kayıtlarını seç</string>

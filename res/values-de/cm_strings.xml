@@ -43,19 +43,11 @@
   <string name="delete_contacts_message">Kontakte werden gelöscht\u2026</string>
   <string name="deleteConfirmation_title">Kontakt löschen?</string>
   <string name="too_many_contacts_add_to_group">Es könnten nicht mehr als <xliff:g id="count">%d</xliff:g> Kontakte hinzugefügt werden</string>
-  <string name="ContactMultiDeleteConfirmation">Diese Kontakte werden gelöscht.</string>
-  <string name="contactDeletedToast">Kontakt gelöscht</string>
   <string name="menu_memory_status">Speicherstatus</string>
   <string name="memory_size">Gesamt:</string>
   <string name="memory_used">Belegt:</string>
-  <string name="contact_detail_picture_description">Bild. Zum Ändern auswählen</string>
-  <string name="btn_ok">Ok</string>
-  <string name="btn_cancel">Abbrechen</string>
-  <string name="ContactMultiImportConfirmation">Diese Kontakte werden importiert.</string>
   <string name="calculating_status_now">Status wird berechnet\u2026</string>
   <string name="menu_copyTo">Nach <xliff:g id="destination">%s</xliff:g> kopieren</string>
-  <string name="copy_to_target_sim">SIM-Karte</string>
-  <string name="copy_to_target_msim">SIM-Karte <xliff:g id="index">%d</xliff:g></string>
   <string name="no_empty_email_in_usim">Die Nachricht kann nicht kopiert werden, da der USIM-Kontakt über kein E-Mail-Feld verfügt.</string>
   <string name="voicemail">Sprachnachricht</string>
   <string name="select_call_title">Anruflisten auswählen</string>

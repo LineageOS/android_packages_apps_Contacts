@@ -16,10 +16,20 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <plurals name="contacts_selected">
+    <item quantity="one">%d обраний</item>
+    <item quantity="few">%d обрано</item>
+    <item quantity="other">%d обрано</item>
+  </plurals>
   <plurals name="ContactMultiImportConfirmation">
     <item quantity="one">%d контакт буде імпортований.</item>
     <item quantity="few">%d контакти будуть імпортовані.</item>
     <item quantity="other">%d контактів буде імпортовано.</item>
+  </plurals>
+  <plurals name="import_progress">
+    <item quantity="one">%d контакт імпортований</item>
+    <item quantity="few">%d контакти імпортовано</item>
+    <item quantity="other">%d контактів імпортовано</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="one">%d контакт буде видалений.</item>

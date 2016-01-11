@@ -43,15 +43,11 @@
   <string name="delete_contacts_message">Sletter kontakter\u2026</string>
   <string name="deleteConfirmation_title">Slette kontakt?</string>
   <string name="too_many_contacts_add_to_group">Ikke mer enn <xliff:g id="count">%d</xliff:g> kontakter kan legges til</string>
-  <string name="contactDeletedToast">Kontakt slettet</string>
   <string name="menu_memory_status">Minnestatus</string>
   <string name="memory_size">Totalt:</string>
   <string name="memory_used">Brukt:</string>
-  <string name="contact_detail_picture_description">Bilde. Velg for å endre</string>
   <string name="calculating_status_now">Beregner status\u2026</string>
   <string name="menu_copyTo">Kopiere til <xliff:g id="destination">%s</xliff:g></string>
-  <string name="copy_to_target_sim">SIM-kort</string>
-  <string name="copy_to_target_msim">SIM card <xliff:g id="index">%d</xliff:g></string>
   <string name="no_empty_email_in_usim">USIM kontakten har ikke ett tilgjengelig e-felt, kan ikke kopiere meldinger.</string>
   <string name="voicemail">Talepostkasse</string>
   <string name="select_call_title">Velg Anropslister</string>

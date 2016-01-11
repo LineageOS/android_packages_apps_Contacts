@@ -43,21 +43,11 @@
   <string name="delete_contacts_message">Kontaktuak ezabatzen \u2026</string>
   <string name="deleteConfirmation_title">Ezabatu kontaktua?</string>
   <string name="too_many_contacts_add_to_group">Ezin dira <xliff:g id="count">%d</xliff:g> kontaktu baino gehiago gehitu</string>
-  <string name="ContactMultiDeleteConfirmation">Kontaktu hauek ezabatuko dira.</string>
-  <string name="contactDeletedToast">Kontaktua ezabatu da</string>
   <string name="menu_memory_status">Memoriaren egoera</string>
   <string name="memory_size">Guztira:</string>
   <string name="memory_used">Erabilita:</string>
-  <string name="contact_detail_picture_description">Irudia. Aukeratu aldatzeko</string>
-  <string name="btn_ok">Ados</string>
-  <string name="btn_cancel">Utzi</string>
-  <string name="search_bar_hint">Bilatu kontaktuak</string>
-  <string name="ContactMultiImportConfirmation">Kontaktu hauek inportatuko dira.</string>
-  <string name="import_stop">"Inportazioa gelditu da"</string>
   <string name="calculating_status_now">Egoera zenbatesten\u2026</string>
   <string name="menu_copyTo">Kopiatu hona <xliff:g id="destination">%s</xliff:g></string>
-  <string name="copy_to_target_sim">SIM txartela</string>
-  <string name="copy_to_target_msim">SIM txartela <xliff:g id="index">%d</xliff:g></string>
   <string name="no_empty_email_in_usim">USIM kontaktuak ez du eposta eremurik eskuragarri, ezin dira mezuak kopiatu.</string>
   <string name="voicemail">Ahots postontzia</string>
   <string name="select_call_title">Aukeratu deien erregistroa</string>

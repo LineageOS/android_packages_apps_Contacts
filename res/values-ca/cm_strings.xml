@@ -43,21 +43,11 @@
   <string name="delete_contacts_message">S\'estan esborrant els contactes\u2026</string>
   <string name="deleteConfirmation_title">Vols esborrar el contacte?</string>
   <string name="too_many_contacts_add_to_group">Només hi ha <xliff:g id="count">%d</xliff:g> contactes que puguin ser afegits</string>
-  <string name="ContactMultiDeleteConfirmation">Aquests contactes seran esborrats.</string>
-  <string name="contactDeletedToast">Contacte esborrat</string>
   <string name="menu_memory_status">Estat de la memòria</string>
   <string name="memory_size">Total:</string>
   <string name="memory_used">Usats:</string>
-  <string name="contact_detail_picture_description">Fotografia. Selecciona per canviar</string>
-  <string name="btn_ok">D\'acord</string>
-  <string name="btn_cancel">Cancel·la</string>
-  <string name="search_bar_hint">Cerca als contactes</string>
-  <string name="ContactMultiImportConfirmation">Aquests contactes s\'importaran.</string>
-  <string name="import_stop">"S'ha aturat la importació"</string>
   <string name="calculating_status_now">S\'està calculant l\'estat\u2026</string>
   <string name="menu_copyTo">Còpia a <xliff:g id="destination">%s</xliff:g></string>
-  <string name="copy_to_target_sim">Targeta SIM</string>
-  <string name="copy_to_target_msim">Targeta SIM <xliff:g id="index">%d</xliff:g></string>
   <string name="no_empty_email_in_usim">El contacte USIM no té un camp de correu electrònic disponible, no es poden copiar els missatges.</string>
   <string name="voicemail">Contestador</string>
   <string name="select_call_title">Selecciona registres de trucades</string>

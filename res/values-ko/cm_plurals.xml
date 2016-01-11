@@ -16,8 +16,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <plurals name="contacts_selected">
+    <item quantity="other">%d건 선택됨</item>
+  </plurals>
   <plurals name="ContactMultiImportConfirmation">
     <item quantity="other">%d건의 연락처를 가져옵니다.</item>
+  </plurals>
+  <plurals name="import_progress">
+    <item quantity="other">%d건의 연락처 가져옴</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="other">%d건의 연락처가 삭제됩니다.</item>

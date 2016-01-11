@@ -36,30 +36,24 @@
   <string name="menu_sendViaSMS">Enviar contacto vía SMS</string>
   <string name="select_all">Todos</string>
   <string name="import_sim_contacts_title">Importar contactos de SIM</string>
+  <string name="import_sim_contacts_message">Importando contactos de SIM\u2026</string>
   <string name="importConfirmation_title">¿Importar contacto?</string>
   <string name="import_finish">Importación finalizada</string>
   <string name="delete_contacts_title">Eliminar contactos</string>
   <string name="delete_contacts_message">Eliminando contactos\u2026</string>
   <string name="deleteConfirmation_title">¿Eliminar contacto?</string>
   <string name="too_many_contacts_add_to_group">No se pueden añadir más de <xliff:g id="count">%d</xliff:g> contactos</string>
-  <string name="ContactMultiDeleteConfirmation">Estos contactos serán eliminados.</string>
-  <string name="contactDeletedToast">Contacto eliminado</string>
   <string name="menu_memory_status">Estado de la memoria</string>
   <string name="memory_size">Total:</string>
   <string name="memory_used">Usado:</string>
-  <string name="contact_detail_picture_description">Foto. Selecciona para cambiar</string>
-  <string name="btn_ok">Aceptar</string>
-  <string name="btn_cancel">Cancelar</string>
-  <string name="search_bar_hint">Buscar contactos</string>
-  <string name="ContactMultiImportConfirmation">Estos contactos seran importados.</string>
   <string name="calculating_status_now">Calculando estado\u2026</string>
   <string name="menu_copyTo">Copiar a <xliff:g id="destination">%s</xliff:g></string>
-  <string name="copy_to_target_sim">Tarjeta SIM</string>
-  <string name="copy_to_target_msim">Tarjeta SIM <xliff:g id="index">%d</xliff:g></string>
   <string name="no_empty_email_in_usim">Contacto USIM no tiene un campo de correo electrónico disponible. No se pueden copiar los mensajes.</string>
+  <string name="voicemail">Buzón de voz</string>
   <string name="select_call_title">Seleccionar registros de llamadas</string>
   <string name="delete_call_title">Eliminar registros de llamadas</string>
   <string name="delete_call_message">Eliminando registros de llamadas\u2026</string>
   <string name="delete_call_alert">¿Eliminar registros de llamadas seleccionados?</string>
-  <string name="powered_by_provider">Patrocinado por <xliff:g id="provider">%s</xliff:g></string>
+  <string name="title_del_call">Eliminar</string>
+  <string name="powered_by_provider">Proporcionado por <xliff:g id="provider">%s</xliff:g></string>
 </resources>

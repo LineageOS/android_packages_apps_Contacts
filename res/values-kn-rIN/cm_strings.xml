@@ -43,15 +43,11 @@
   <string name="delete_contacts_message">ಸಂಪರ್ಕಗಳನ್ನು ಅಳಿಸಲಾಗುತ್ತಿದೆ\u2026</string>
   <string name="deleteConfirmation_title">ಸಂಪರ್ಕ ಅಳಿಸು?</string>
   <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g>ಕ್ಕಿಂತ ಹೆಚ್ಚು ಸಂಪರ್ಕಗಳನ್ನು ಸೇರಿಸಲು ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ</string>
-  <string name="contactDeletedToast">ಸಂಪರ್ಕ ಅಳಿಸಲಾಗಿದೆ</string>
   <string name="menu_memory_status">ಮೆಮೊರಿ ಸ್ಥಿತಿ</string>
   <string name="memory_size">ಒಟ್ಟು:</string>
   <string name="memory_used">ಉಪಯೋಗಿಸಿದ್ದು:</string>
-  <string name="contact_detail_picture_description">ಚಿತ್ರ. ಬದಲಾಯಿಸಲು ಆಯ್ಕೆಮಾಡಿ</string>
   <string name="calculating_status_now">ಸ್ಥಿತಿಯನ್ನು ಲೆಕ್ಕಿಸುತ್ತಿದೆ\u2026</string>
   <string name="menu_copyTo">ಇಲ್ಲಿಗೆ ನಕಲಿಸು <xliff:g id="destination">%s</xliff:g></string>
-  <string name="copy_to_target_sim">ಸಿಮ್ ಕಾರ್ಡ್</string>
-  <string name="copy_to_target_msim">ಸಿಮ್ ಕಾರ್ಡ್ <xliff:g id="index">%d</xliff:g></string>
   <string name="no_empty_email_in_usim">USIM ಸಂಪರ್ಕವು ಒಂದು ಲಭ್ಯವಿರುವ ಇಮೇಲ್ ಕ್ಷೇತ್ರವನ್ನು ಹೊಂದಿಲ್ಲ. ಸಂದೇಶಗಳನ್ನು ನಕಲಿಸಲು ಆಗುವುದಿಲ್ಲ.</string>
   <string name="voicemail">ಧ್ವನಿಮೇಲ್</string>
   <string name="select_call_title">ಕರೆ ಲಾಗ್ಸ್ ಆಯ್ಕೆಮಾಡಿ</string>

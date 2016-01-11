@@ -43,15 +43,11 @@
   <string name="delete_contacts_message">संपर्कों को हटा रहे हैं\u2026</string>
   <string name="deleteConfirmation_title">संपर्क को हटा दें?</string>
   <string name="too_many_contacts_add_to_group">केवल <xliff:g id="count">%d</xliff:g> संपर्क और जोड़े जा सकते हैं</string>
-  <string name="contactDeletedToast">संपर्क हटा दिया गया</string>
   <string name="menu_memory_status">स्मृति की स्थिति</string>
   <string name="memory_size">कुल:</string>
   <string name="memory_used">प्रयुक्त:</string>
-  <string name="contact_detail_picture_description">चित्र। बदलने के लिए चुनें</string>
   <string name="calculating_status_now">स्थिति की गणना कर रहे हैं\u2026</string>
   <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g> में कॉपी करें</string>
-  <string name="copy_to_target_sim">सिम कार्ड</string>
-  <string name="copy_to_target_msim">सिम कार्ड <xliff:g id="index">%d</xliff:g></string>
   <string name="no_empty_email_in_usim">यूसिम संपर्क में ईमेल फ़ील्ड उपलब्ध नहीं है, संदेशों को कॉपी करने में असमर्थ।</string>
   <string name="voicemail">ध्वनि डाक</string>
   <string name="select_call_title">सभी लॉगों को चुनें</string>

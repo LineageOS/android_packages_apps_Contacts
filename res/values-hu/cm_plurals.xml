@@ -16,9 +16,17 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <plurals name="contacts_selected">
+    <item quantity="one">%d kiválasztva</item>
+    <item quantity="other">%d kiválasztva</item>
+  </plurals>
   <plurals name="ContactMultiImportConfirmation">
     <item quantity="one">%d névjegy lesz importálva.</item>
     <item quantity="other">%d névjegy lesz importálva.</item>
+  </plurals>
+  <plurals name="import_progress">
+    <item quantity="one">%d névjegy importálva</item>
+    <item quantity="other">%d névjegy importálva</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="one">%d névjegy törölve lesz.</item>

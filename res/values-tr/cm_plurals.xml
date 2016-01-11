@@ -17,23 +17,23 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="contacts_selected">
-    <item quantity="one">%d valgt</item>
-    <item quantity="other">%d valgt</item>
+    <item quantity="one">%d kişi seçildi</item>
+    <item quantity="other">%d kişi seçildi</item>
   </plurals>
   <plurals name="ContactMultiImportConfirmation">
-    <item quantity="one">%d Kontakt vil bli importert.</item>
-    <item quantity="other">%d Kontakter vil bli importert.</item>
+    <item quantity="one">%d kişi alınacak.</item>
+    <item quantity="other">%d kişi alınacak.</item>
   </plurals>
   <plurals name="import_progress">
-    <item quantity="one">%d kontakt importert</item>
-    <item quantity="other">%d kontakter importert</item>
+    <item quantity="one">%d kişi alındı</item>
+    <item quantity="other">%d kişi alındı</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
-    <item quantity="one">%d Kontakt vil bli slettet.</item>
-    <item quantity="other">%d Kontakter vil bli slettet.</item>
+    <item quantity="one">%d kişi silinecek.</item>
+    <item quantity="other">%d kişi silinecek.</item>
   </plurals>
   <plurals name="spam_count_text">
-    <item quantity="one">%d person har markert dette som spam</item>
-    <item quantity="other">%d personer har markert dette som spam</item>
+    <item quantity="one">%d kişi bunu spam olarak işaretledi</item>
+    <item quantity="other">%d kişi bunu spam olarak işaretledi</item>
   </plurals>
 </resources>

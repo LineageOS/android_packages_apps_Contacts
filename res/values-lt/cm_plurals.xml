@@ -16,10 +16,20 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <plurals name="contacts_selected">
+    <item quantity="one">%d pasirinktas</item>
+    <item quantity="few">%d pasirinkti</item>
+    <item quantity="other">%d pasirinkta</item>
+  </plurals>
   <plurals name="ContactMultiImportConfirmation">
     <item quantity="one">%d kontaktas bus importuotas.</item>
     <item quantity="few">%d kontaktai bus importuoti.</item>
     <item quantity="other">%d kontaktų bus importuota.</item>
+  </plurals>
+  <plurals name="import_progress">
+    <item quantity="one">%d kontaktas importuotas</item>
+    <item quantity="few">%d kontaktai importuoti</item>
+    <item quantity="other">%d kontaktų importuota</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="one">%d kontaktas bus ištrintas.</item>

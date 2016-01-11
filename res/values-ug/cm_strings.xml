@@ -43,14 +43,11 @@
   <string name="delete_contacts_message">ئالاقەداشلارنى ئۆچۈرۈۋاتىدۇ\u2026</string>
   <string name="deleteConfirmation_title">ئالاقەداش ئۆچۈرەمدۇ؟</string>
   <string name="too_many_contacts_add_to_group">قوشىدىغان ئالاقەداش <xliff:g id="count">%d</xliff:g> دىن ئاشسا بولمايدۇ</string>
-  <string name="contactDeletedToast">ئالاقەداش ئۆچۈرۈلدى</string>
   <string name="menu_memory_status">ئەسلەك ھالىتى</string>
   <string name="memory_size">جەمئىي:</string>
   <string name="memory_used">ئىشلىتىلگىنى:</string>
   <string name="calculating_status_now">ھالىتىنى ھېسابلاۋاتىدۇ\u2026</string>
   <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g> غا كۆچۈر</string>
-  <string name="copy_to_target_sim">SIM كارتا</string>
-  <string name="copy_to_target_msim">SIM كارتا <xliff:g id="index">%d</xliff:g></string>
   <string name="no_empty_email_in_usim">USIM ئالاقەداشنىڭ ئىشلەتكىلى بولىدىغان تورخەت سۆز بۆلىكى يوق، ئۇچۇرنى كۆچۈرەلمەيدۇ.</string>
   <string name="voicemail">ئۈنخەت</string>
   <string name="select_call_title">چاقىرىش خاتىرىسىنى تاللاش</string>

@@ -43,15 +43,11 @@
   <string name="delete_contacts_message">正在刪除聯絡人\u2026</string>
   <string name="deleteConfirmation_title">刪除聯絡人？</string>
   <string name="too_many_contacts_add_to_group">不可以新增超過 <xliff:g id="count">%d</xliff:g> 個聯絡人</string>
-  <string name="contactDeletedToast">聯絡人已刪除</string>
   <string name="menu_memory_status">記憶體狀態</string>
   <string name="memory_size">總計：</string>
   <string name="memory_used">已用：</string>
-  <string name="contact_detail_picture_description">圖片。選擇以變更</string>
   <string name="calculating_status_now">正在計算狀態\u2026</string>
   <string name="menu_copyTo">複製至「<xliff:g id="destination">%s</xliff:g>」</string>
-  <string name="copy_to_target_sim">SIM 卡</string>
-  <string name="copy_to_target_msim">SIM 卡 <xliff:g id="index">%d</xliff:g></string>
   <string name="no_empty_email_in_usim">USIM 聯絡人沒有可用的電子郵件欄位，無法複製訊息。</string>
   <string name="voicemail">語音信箱</string>
   <string name="select_call_title">選取通話紀錄</string>

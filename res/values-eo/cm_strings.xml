@@ -43,15 +43,11 @@
   <string name="delete_contacts_message">Forigado de kontaktuloj\u2026</string>
   <string name="deleteConfirmation_title">Ĉu forigi kontaktulojn?</string>
   <string name="too_many_contacts_add_to_group">Ne eblas aldoni pli ol <xliff:g id="count">%d</xliff:g> kontaktuloj</string>
-  <string name="contactDeletedToast">Kontaktulo forigita</string>
   <string name="menu_memory_status">Memora stato</string>
   <string name="memory_size">Sumo:</string>
   <string name="memory_used">Uzata:</string>
-  <string name="contact_detail_picture_description">Bildo. Elektu por ŝangi</string>
   <string name="calculating_status_now">Kalkulado de la stato\u2026</string>
   <string name="menu_copyTo">Kopii al <xliff:g id="destination">%s</xliff:g></string>
-  <string name="copy_to_target_sim">SIM-karto</string>
-  <string name="copy_to_target_msim">SIM-karto <xliff:g id="index">%d</xliff:g></string>
   <string name="no_empty_email_in_usim">USIM-kontaktulo ne havas disponeblan retradresan kampon, neeblas kopii mesaĝojn.</string>
   <string name="voicemail">Voĉa mesaĝilo</string>
   <string name="select_call_title">Elekti ĉiujn vokajn protokolojn</string>

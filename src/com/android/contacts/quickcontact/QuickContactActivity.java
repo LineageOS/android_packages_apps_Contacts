@@ -2746,21 +2746,21 @@ public class QuickContactActivity extends ContactsActivity {
             if (!TextUtils.isEmpty(accoutType)) {
                 if (SimContactsConstants.ACCOUNT_TYPE_SIM.equals(accoutType)) {
                     copyToPhoneMenu.setVisible(true);
-                    copyToPhoneMenu.setTitle(getString(R.string.menu_copyTo)
-                            + getString(R.string.phoneLabelsGroup));
+                    copyToPhoneMenu.setTitle(getString(R.string.menu_copyTo,
+                            getString(R.string.phoneLabelsGroup)));
                     if (TelephonyManager.getDefault().isMultiSimEnabled()) {
                         if (SimContactsConstants.SIM_NAME_1.equals(accoutName)
                                 && simIsReady(PhoneConstants.SUB2)) {
-                            copyToSim2Menu.setTitle(getString(R.string.menu_copyTo)
-                                    + MoreContactUtils.getMultiSimAliasesName(
-                                            this, PhoneConstants.SUB2));
+                            copyToSim2Menu.setTitle(getString(R.string.menu_copyTo,
+                                    MoreContactUtils.getMultiSimAliasesName(
+                                            this, PhoneConstants.SUB2)));
                             copyToSim2Menu.setVisible(true);
                         }
                         if (SimContactsConstants.SIM_NAME_2.equals(accoutName)
                                 && simIsReady(PhoneConstants.SUB1)) {
-                            copyToSim1Menu.setTitle(getString(R.string.menu_copyTo)
-                                    + MoreContactUtils.getMultiSimAliasesName(
-                                                this, PhoneConstants.SUB1));
+                            copyToSim1Menu.setTitle(getString(R.string.menu_copyTo,
+                                    MoreContactUtils.getMultiSimAliasesName(
+                                                this, PhoneConstants.SUB1)));
                             copyToSim1Menu.setVisible(true);
                         }
                     }
@@ -2769,21 +2769,21 @@ public class QuickContactActivity extends ContactsActivity {
                     boolean hasPhoneOrEmail = hasPhoneOrEmailDate(mContactData);
                     if (TelephonyManager.getDefault().isMultiSimEnabled()) {
                         if (hasPhoneOrEmail && simIsReady(PhoneConstants.SUB1)) {
-                            copyToSim1Menu.setTitle(getString(R.string.menu_copyTo)
-                                    + MoreContactUtils.getMultiSimAliasesName(
-                                            this, PhoneConstants.SUB1));
+                            copyToSim1Menu.setTitle(getString(R.string.menu_copyTo,
+                                    MoreContactUtils.getMultiSimAliasesName(
+                                            this, PhoneConstants.SUB1)));
                             copyToSim1Menu.setVisible(true);
                         }
                         if (hasPhoneOrEmail && simIsReady(PhoneConstants.SUB2)) {
-                            copyToSim2Menu.setTitle(getString(R.string.menu_copyTo)
-                                    + MoreContactUtils.getMultiSimAliasesName(
-                                            this, PhoneConstants.SUB2));
+                            copyToSim2Menu.setTitle(getString(R.string.menu_copyTo,
+                                    MoreContactUtils.getMultiSimAliasesName(
+                                            this, PhoneConstants.SUB2)));
                             copyToSim2Menu.setVisible(true);
                         }
                     } else {
                         if (hasPhoneOrEmail && simIsReady(PhoneConstants.SUB1)) {
-                            copyToSim1Menu.setTitle(getString(R.string.menu_copyTo)
-                                    + SimContactsConstants.SIM_NAME);
+                            copyToSim1Menu.setTitle(getString(R.string.menu_copyTo,
+                                    SimContactsConstants.SIM_NAME));
                             copyToSim1Menu.setVisible(true);
                         }
                     }

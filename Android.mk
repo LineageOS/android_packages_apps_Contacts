@@ -37,6 +37,10 @@ LOCAL_PRIVILEGED_MODULE := true
 
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags
 
+# utilize ContactsCommon's phone-number-based contact-info lookup
+CONTACTS_COMMON_LOOKUP_PROVIDER ?= $(LOCAL_PATH)/$(contacts_common_dir)/info_lookup
+include $(CONTACTS_COMMON_LOOKUP_PROVIDER)/phonenumber_lookup_provider.mk
+
 include $(BUILD_PACKAGE)
 
 # Use the folloing include to make our test apk.

@@ -2935,8 +2935,8 @@ public class QuickContactActivity extends ContactsActivity implements
                 // block contact dialog fragment
                 DialogFragment f = mBlockContactHelper.getBlockContactDialog(
                         mBlockContactHelper.isContactBlacklisted() ?
-                                BlockContactHelper.BlockMode.UNBLOCK :
-                                BlockContactHelper.BlockMode.BLOCK
+                                BlockContactHelper.BlockOperation.UNBLOCK :
+                                BlockContactHelper.BlockOperation.BLOCK
                 );
                 f.show(getFragmentManager(), "block_contact");
                 return true;

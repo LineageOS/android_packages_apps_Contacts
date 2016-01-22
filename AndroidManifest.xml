@@ -49,6 +49,11 @@
     <uses-permission android:name="android.permission.READ_PHONE_BLACKLIST" />
     <uses-permission android:name="android.permission.CHANGE_PHONE_BLACKLIST" />
 
+    <!-- Receive plugin status changes -->
+    <uses-permission android:name="com.cyanogen.ambient.permission.PLUGIN_STATUS_CHANGED" />
+    <!-- Connect to AmbientCore to use InCall Plugins -->
+    <uses-permission android:name="com.cyanogen.ambient.permission.BIND_INCALL_SERVICE" />
+
     <application
         android:name="com.android.contacts.ContactsApplication"
         android:label="@string/applicationLabel"

@@ -73,8 +73,10 @@ public class ActionBarAdapter implements OnCloseListener {
     private static final String EXTRA_KEY_QUERY = "navBar.query";
     private static final String EXTRA_KEY_SELECTED_TAB = "navBar.selectedTab";
     private static final String EXTRA_KEY_SELECTED_MODE = "navBar.selectionMode";
+    private static final String EXTRA_KEY_TAB_COUNT = "navBar.tabCount";
 
     private static final String PERSISTENT_LAST_TAB = "actionBarAdapter.lastTab";
+    private static final String PERSISTENT_LAST_TAB_COUNT = "actionBarAdapter.lastTabCount";
 
     private boolean mSelectionMode;
     private boolean mSearchMode;
@@ -117,6 +119,7 @@ public class ActionBarAdapter implements OnCloseListener {
     }
 
     private int mCurrentTab = TabState.DEFAULT;
+    private int mTabCount = TabState.COUNT;
 
     public ActionBarAdapter(Activity activity, Listener listener, ActionBar actionBar,
             View portraitTabs, View landscapeTabs, Toolbar toolbar) {
@@ -193,12 +196,13 @@ public class ActionBarAdapter implements OnCloseListener {
                 });
     }
 
-    public void initialize(Bundle savedState, ContactsRequest request) {
+
+    public void initialize(Bundle savedState, ContactsRequest request, int newTabCount) {
         if (savedState == null) {
             mSearchMode = request.isSearchMode();
             mQueryString = request.getQueryString();
             mCurrentTab = loadLastTabPreference();
-            mSelectionMode = false;
+            mTabCount = loadLastTabCountPreference();
         } else {
             mSearchMode = savedState.getBoolean(EXTRA_KEY_SEARCH_MODE);
             mSelectionMode = savedState.getBoolean(EXTRA_KEY_SELECTED_MODE);
@@ -206,8 +210,14 @@ public class ActionBarAdapter implements OnCloseListener {
 
             // Just set to the field here.  The listener will be notified by update().
             mCurrentTab = savedState.getInt(EXTRA_KEY_SELECTED_TAB);
+            mTabCount = savedState.getInt(EXTRA_KEY_TAB_COUNT);
         }
-        if (mCurrentTab >= TabState.COUNT || mCurrentTab < 0) {
+        if (mTabCount != newTabCount) {
+            mTabCount = newTabCount;
+            saveLastTabCountPreference(mTabCount);
+            mCurrentTab = TabState.DEFAULT;
+        }
+        if (mCurrentTab >= mTabCount || mCurrentTab < 0) {
             // Invalid tab index was saved (b/12938207). Restore the default.
             mCurrentTab = TabState.DEFAULT;
         }
@@ -254,21 +264,23 @@ public class ActionBarAdapter implements OnCloseListener {
     /**
      * Save the current tab selection, and notify the listener.
      */
-    public void setCurrentTab(int tab) {
-        setCurrentTab(tab, true);
+    public void setCurrentTab(int tab, int tabCount) {
+        setCurrentTab(tab, tabCount, true);
     }
 
     /**
      * Save the current tab selection.
      */
-    public void setCurrentTab(int tab, boolean notifyListener) {
-        if (tab == mCurrentTab) {
+    public void setCurrentTab(int tab, int tabCount, boolean notifyListener) {
+        if (tab == mCurrentTab && tabCount == mTabCount) {
             return;
         }
         mCurrentTab = tab;
+        mTabCount = tabCount;
 
         if (notifyListener && mListener != null) mListener.onSelectedTabChanged();
         saveLastTabPreference(mCurrentTab);
+        saveLastTabCountPreference(mTabCount);
     }
 
     public int getCurrentTab() {
@@ -550,6 +562,7 @@ public class ActionBarAdapter implements OnCloseListener {
         outState.putBoolean(EXTRA_KEY_SELECTED_MODE, mSelectionMode);
         outState.putString(EXTRA_KEY_QUERY, mQueryString);
         outState.putInt(EXTRA_KEY_SELECTED_TAB, mCurrentTab);
+        outState.putInt(EXTRA_KEY_TAB_COUNT, mTabCount);
     }
 
     public void setFocusOnSearchView() {
@@ -575,6 +588,18 @@ public class ActionBarAdapter implements OnCloseListener {
         } catch (IllegalArgumentException e) {
             // Preference is corrupt?
             return TabState.DEFAULT;
+        }
+    }
+
+    private void saveLastTabCountPreference(int tabCount) {
+        mPrefs.edit().putInt(PERSISTENT_LAST_TAB_COUNT, tabCount).apply();
+    }
+
+    private int loadLastTabCountPreference() {
+        try {
+            return mPrefs.getInt(PERSISTENT_LAST_TAB_COUNT, TabState.COUNT);
+        } catch (ClassCastException e) {
+            return TabState.COUNT;
         }
     }
 

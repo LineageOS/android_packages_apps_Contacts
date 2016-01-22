@@ -6,7 +6,10 @@ LOCAL_MODULE_TAGS := optional
 contacts_common_dir := ../ContactsCommon
 phone_common_dir := ../PhoneCommon
 
-src_dirs := src $(contacts_common_dir)/src $(phone_common_dir)/src
+src_dirs := src $(contacts_common_dir)/src \
+    $(phone_common_dir)/src \
+    $(phone_common_dir)/src-ambient
+
 res_dirs := res $(contacts_common_dir)/res $(phone_common_dir)/res
 
 LOCAL_SRC_FILES := $(call all-java-files-under, $(src_dirs))
@@ -17,7 +20,8 @@ LOCAL_AAPT_FLAGS := \
     --auto-add-overlay \
     --extra-packages com.android.contacts.common \
     --extra-packages com.android.phone.common \
-    --extra-packages android.support.v7.cardview
+    --extra-packages android.support.v7.cardview \
+    --extra-packages com.cyanogen.ambient
 
 LOCAL_JAVA_LIBRARIES := telephony-common voip-common
 LOCAL_STATIC_JAVA_LIBRARIES := \

@@ -16,6 +16,7 @@
 package com.android.contacts.interactions;
 
 import android.content.AsyncTaskLoader;
+import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -26,25 +27,31 @@ import android.provider.CallLog.Calls;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
+import com.android.contacts.incall.InCallPluginHelper;
 import com.google.common.annotations.VisibleForTesting;
 
 import com.android.contacts.common.util.PermissionsUtil;
+import com.android.phone.common.incall.CallMethodInfo;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 public class CallLogInteractionsLoader extends AsyncTaskLoader<List<ContactInteraction>> {
-
+    private final Context mContext;
     private final String[] mPhoneNumbers;
     private final int mMaxToRetrieve;
     private List<ContactInteraction> mData;
+    private HashMap<ComponentName, List<String>> mPluginAccountsMap;
 
-    public CallLogInteractionsLoader(Context context, String[] phoneNumbers,
-            int maxToRetrieve) {
+    public CallLogInteractionsLoader(Context context, String[] phoneNumbers, HashMap<ComponentName,
+                List<String>> pluginAccountsMap, int maxToRetrieve) {
         super(context);
+        mContext = context;
         mPhoneNumbers = phoneNumbers;
+        mPluginAccountsMap = pluginAccountsMap;
         mMaxToRetrieve = maxToRetrieve;
     }
 
@@ -53,13 +60,31 @@ public class CallLogInteractionsLoader extends AsyncTaskLoader<List<ContactInter
         if (!PermissionsUtil.hasPhonePermissions(getContext())
                 || !getContext().getPackageManager()
                         .hasSystemFeature(PackageManager.FEATURE_TELEPHONY)
-                || mPhoneNumbers == null || mPhoneNumbers.length <= 0 || mMaxToRetrieve <= 0) {
+                || (mPhoneNumbers == null || mPhoneNumbers.length <= 0 || mMaxToRetrieve <= 0)) {
             return Collections.emptyList();
         }
 
         final List<ContactInteraction> interactions = new ArrayList<>();
-        for (String number : mPhoneNumbers) {
-            interactions.addAll(getCallLogInteractions(number));
+        if (mPhoneNumbers != null) {
+            for (String number : mPhoneNumbers) {
+                interactions.addAll(getCallLogInteractions(number, null));
+            }
+        }
+        // add plugin entries
+        if (InCallPluginHelper.infoReady()) {
+            HashMap<ComponentName, CallMethodInfo> inCallPlugins = InCallPluginHelper
+                    .getAllEnabledCallMethods();
+            if (inCallPlugins != null) {
+                for (ComponentName cn : inCallPlugins.keySet()) {
+                    List<String> accountList = mPluginAccountsMap.get(cn);
+                    CallMethodInfo cmi = inCallPlugins.get(cn);
+                    if (cmi == null) continue;
+                    if (accountList == null || cmi == null) continue;
+                    for (int i = 0; i < accountList.size(); i++) {
+                        interactions.addAll(getCallLogInteractions(accountList.get(i), cmi));
+                    }
+                }
+            }
         }
         // Sort the call log interactions by date for duplicate removal
         Collections.sort(interactions, new Comparator<ContactInteraction>() {
@@ -75,7 +100,7 @@ public class CallLogInteractionsLoader extends AsyncTaskLoader<List<ContactInter
             }
         });
         // Duplicates only occur because of fuzzy matching. No need to dedupe a single number.
-        if (mPhoneNumbers.length == 1) {
+        if (interactions.size() == 1) {
             return interactions;
         }
         return pruneDuplicateCallLogInteractions(interactions, mMaxToRetrieve);
@@ -106,10 +131,13 @@ public class CallLogInteractionsLoader extends AsyncTaskLoader<List<ContactInter
         return subsetInteractions;
     }
 
-    private List<ContactInteraction> getCallLogInteractions(String phoneNumber) {
+    private List<ContactInteraction> getCallLogInteractions(String phoneNumber, CallMethodInfo
+            cmi) {
         // TODO: the phone number added to the ContactInteractions result should retain their
         // original formatting since TalkBack is not reading the normalized number correctly
-        final String normalizedNumber = PhoneNumberUtils.normalizeNumber(phoneNumber);
+        String pluginComponent = cmi == null ? "" : cmi.mComponent.flattenToString();
+        final String normalizedNumber = TextUtils.isEmpty(pluginComponent) ?
+                PhoneNumberUtils.normalizeNumber(phoneNumber) : phoneNumber;
         // If the number contains only symbols, we can skip it
         if (TextUtils.isEmpty(normalizedNumber)) {
             return Collections.emptyList();
@@ -131,7 +159,27 @@ public class CallLogInteractionsLoader extends AsyncTaskLoader<List<ContactInter
             while (cursor.moveToNext()) {
                 final ContentValues values = new ContentValues();
                 DatabaseUtils.cursorRowToContentValues(cursor, values);
-                interactions.add(new CallLogInteraction(values));
+                CallLogInteraction interaction = new CallLogInteraction(values);
+                // loadInBackground calls this function twice
+                // First pass: argument phoneNumber: PSTN number, pluginComponent: null
+                // (if the PSTN number was dialed through a plugin, the queried cursor entry should
+                // contain the plugin component in the "plugin_package_name" column)
+                // Second pass: argument phoneNumber: plugin user handle, pluginComponent: valid
+                if ((TextUtils.isEmpty(pluginComponent) &&
+                        !TextUtils.isEmpty(interaction.getPluginPkgName())) ||
+                        (!TextUtils.isEmpty(pluginComponent) &&
+                                TextUtils.equals(interaction.getPluginPkgName(), pluginComponent)))
+                {
+                    // PSTN dialed through a plugin
+                    if (cmi == null) {
+                        cmi = InCallPluginHelper.getCallMethod(ComponentName.unflattenFromString
+                                (interaction.getPluginPkgName()));
+                    }
+                    // No matching plugin, skip
+                    if (cmi == null) continue;
+                    interaction.setPluginInfo(mContext, cmi.mBrandIconId, cmi.mName);
+                }
+                interactions.add(interaction);
             }
             return interactions;
         } finally {

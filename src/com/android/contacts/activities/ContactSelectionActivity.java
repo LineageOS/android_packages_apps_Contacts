@@ -499,6 +499,11 @@ public class ContactSelectionActivity extends ContactsActivity
         }
 
         @Override
+        public void onCallNumberDirectly(String phoneNumber, boolean isVideoCall, String mimeType) {
+            Log.w(TAG, "Unsupported call.");
+        }
+
+        @Override
         public void onShortcutIntentCreated(Intent intent) {
             returnPickerResult(intent);
         }

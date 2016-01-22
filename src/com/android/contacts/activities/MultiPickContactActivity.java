@@ -104,6 +104,7 @@ import com.android.contacts.common.list.ContactsSectionIndexer;
 import com.android.contacts.common.list.DefaultContactListAdapter;
 import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.model.account.SimAccountType;
+import com.cyanogen.ambient.incall.CallLogConstants;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -928,7 +929,7 @@ public class MultiPickContactActivity extends ListActivity implements
                 break;
             case MODE_DEFAULT_CALL:
             case MODE_SEARCH_CALL:
-                uri = Calls.CONTENT_URI_WITH_VOICEMAIL;
+                uri = CallLogConstants.CONTENT_ALL_URI_WITH_VOICEMAIL;
                 break;
             case MODE_DEFAULT_SIM:
             case MODE_SEARCH_SIM: {

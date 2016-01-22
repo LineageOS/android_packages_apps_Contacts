@@ -232,7 +232,7 @@ public class ContactTileListFragment extends Fragment {
         }
 
         @Override
-        public void onCallNumberDirectly(String phoneNumber) {
+        public void onCallNumberDirectly(String phoneNumber, String mimeType) {
             if (mListener != null) {
                 mListener.onCallNumberDirectly(phoneNumber);
             }

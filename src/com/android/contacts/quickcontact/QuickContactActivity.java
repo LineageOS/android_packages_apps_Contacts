@@ -23,14 +23,16 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.ContentUris;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
@@ -47,9 +49,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Trace;
+import android.preference.PreferenceManager;
 import android.provider.CalendarContract;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Event;
 import android.provider.ContactsContract.CommonDataKinds.GroupMembership;
@@ -61,7 +65,7 @@ import android.provider.ContactsContract.CommonDataKinds.Organization;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.Relation;
 import android.provider.ContactsContract.CommonDataKinds.SipAddress;
-import android.provider.ContactsContract.CommonDataKinds.Organization;
+import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.CommonDataKinds.Website;
 import android.provider.ContactsContract.Contacts;
@@ -139,8 +143,6 @@ import com.android.contacts.common.model.dataitem.StructuredPostalDataItem;
 import com.android.contacts.common.model.dataitem.WebsiteDataItem;
 import com.android.contacts.common.util.BlockContactHelper;
 import com.android.contacts.common.util.ImplicitIntentsUtil;
-import com.android.contacts.common.MoreContactUtils;
-import com.android.contacts.common.SimContactsConstants;
 import com.android.contacts.common.util.BitmapUtil;
 import com.android.contacts.common.util.DateUtils;
 import com.android.contacts.common.util.MaterialColorMapUtils;
@@ -150,7 +152,10 @@ import com.android.contacts.common.util.ViewUtil;
 import com.android.contacts.detail.ContactDisplayUtils;
 import com.android.contacts.editor.ContactEditorFragment;
 import com.android.contacts.editor.EditorIntents;
+import com.android.contacts.incall.InCallPluginHelper;
+import com.android.contacts.incall.InCallPluginUtils;
 import com.android.contacts.interactions.CalendarInteractionsLoader;
+import com.android.contacts.interactions.CallLogInteraction;
 import com.android.contacts.interactions.CallLogInteractionsLoader;
 import com.android.contacts.interactions.ContactDeletionInteraction;
 import com.android.contacts.interactions.ContactInteraction;
@@ -168,6 +173,10 @@ import com.android.contacts.util.StructuredPostalUtils;
 import com.android.contacts.widget.MultiShrinkScroller;
 import com.android.contacts.widget.MultiShrinkScroller.MultiShrinkScrollerListener;
 import com.android.contacts.widget.QuickContactImageView;
+import com.android.phone.common.incall.CallMethodHelper;
+import com.android.phone.common.incall.CallMethodInfo;
+import com.cyanogen.ambient.incall.extension.OriginCodes;
+import com.cyanogen.ambient.plugin.PluginStatus;
 import com.android.contactsbind.HelpUtils;
 
 import com.cyanogen.lookup.phonenumber.provider.LookupProviderImpl;
@@ -183,9 +192,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Mostly translucent {@link Activity} that shows QuickContact dialog. It loads
@@ -203,6 +215,7 @@ public class QuickContactActivity extends ContactsActivity implements
     public static final int MODE_FULLY_EXPANDED = 4;
 
     private static final String TAG = "QuickContact";
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     private static final String KEY_THEME_COLOR = "theme_color";
 
@@ -215,6 +228,16 @@ public class QuickContactActivity extends ContactsActivity implements
     /** This is the Intent action to install a shortcut in the launcher. */
     private static final String ACTION_INSTALL_SHORTCUT =
             "com.android.launcher.action.INSTALL_SHORTCUT";
+    public static final String ACTION_INCALL_PLUGIN_LOGIN =
+            "com.android.contacts.quickcontact.INCALL_PLUGIN_LOGIN";
+    public static final String ACTION_INCALL_PLUGIN_INVITE =
+            "com.android.contacts.quickcontact.INCALL_PLUGIN_INVITE";
+    public static final String ACTION_INCALL_PLUGIN_DIRECTORY_SEARCH =
+            "com.android.contacts.quickcontact.INCALL_PLUGIN_DIRECTORY_SEARCH";
+    public static final String ACTION_INCALL_PLUGIN_INSTALL =
+            "com.android.contacts.quickcontact.ACTION_INCALL_PLUGIN_INSTALL";
+    public static final String ACTION_INCALL_PLUGIN_DISMISS_NUDGE =
+            "com.android.contacts.quickcontact.ACTION_INCALL_PLUGIN_DISMISS_NUDGE";
 
     @SuppressWarnings("deprecation")
     private static final String LEGACY_AUTHORITY = android.provider.Contacts.AUTHORITY;
@@ -250,8 +273,11 @@ public class QuickContactActivity extends ContactsActivity implements
     private ExpandingEntryCardView mAboutCard;
     private MultiShrinkScroller mScroller;
     private SelectAccountDialogFragmentListener mSelectAccountFragmentListener;
-    private AsyncTask<Void, Void, Cp2DataCardModel> mEntriesAndActionsTask;
+    private AsyncTask<Contact, Void, Cp2DataCardModel> mEntriesAndActionsTask;
     private AsyncTask<Void, Void, Void> mRecentDataTask;
+    private AtomicBoolean mIsUpdating;
+    private boolean mNeedPluginUpdate = false;
+    private static final String CALL_METHOD_SUBSCRIBER_ID = TAG;
     /**
      * The last copy of Cp2DataCardModel that was passed to {@link #populateContactAndAboutCard}.
      */
@@ -283,7 +309,7 @@ public class QuickContactActivity extends ContactsActivity implements
 
     private Target mContactBitmapTarget;
     private BlockContactHelper mBlockContactHelper;
-
+    private Object mLock = new Object();
     /**
      * {@link #LEADING_MIMETYPES} is used to sort MIME-types.
      *
@@ -307,10 +333,22 @@ public class QuickContactActivity extends ContactsActivity implements
             Identity.CONTENT_ITEM_TYPE,
             Note.CONTENT_ITEM_TYPE);
 
+    // Common mime types that are loaded and present to users before plugins load to avoid delays
+    private static final List<String> COMMON_MIMETYPES = Lists.newArrayList(
+            Email.CONTENT_ITEM_TYPE,
+            Nickname.CONTENT_ITEM_TYPE,
+            Phone.CONTENT_ITEM_TYPE,
+            SipAddress.CONTENT_ITEM_TYPE,
+            StructuredName.CONTENT_ITEM_TYPE,
+            StructuredPostal.CONTENT_ITEM_TYPE);
+
     private static final BidiFormatter sBidiFormatter = BidiFormatter.getInstance();
 
     /** Id for the background contact loader */
     private static final int LOADER_CONTACT_ID = 0;
+
+    private static final String KEY_LOADER_EXTRA_PLUGIN_INFO =
+            QuickContactActivity.class.getCanonicalName() + ".KEY_LOADER_EXTRA_PLUGIN_INFO";
 
     private static final String KEY_LOADER_EXTRA_PHONES =
             QuickContactActivity.class.getCanonicalName() + ".KEY_LOADER_EXTRA_PHONES";
@@ -336,7 +374,8 @@ public class QuickContactActivity extends ContactsActivity implements
     private static final int MIN_NUM_CONTACT_ENTRIES_SHOWN = 3;
     private static final int MIN_NUM_COLLAPSED_RECENT_ENTRIES_SHOWN = 3;
     private static final int CARD_ENTRY_ID_EDIT_CONTACT = -2;
-
+    private static final int CARD_ENTRY_ID_INCALL_PLUGIN = -3;
+    public static final int CARD_ENTRY_ID_INCALL_PLUGIN_CALL = -4;
 
     private static final int MAX_NUM_LENGTH = 3; // add limit length to show IP call item
     private static final int[] mRecentLoaderIds = new int[]{
@@ -363,11 +402,26 @@ public class QuickContactActivity extends ContactsActivity implements
             }
             final EntryTag entryTag = (EntryTag) entryTagObject;
             final Intent intent = entryTag.getIntent();
-            final int dataId = entryTag.getId();
+            int dataId = entryTag.getId();
 
             if (dataId == CARD_ENTRY_ID_EDIT_CONTACT) {
                 editContact();
                 return;
+            }
+
+            // InCall plugin invite or nudges entries
+            if (dataId == CARD_ENTRY_ID_INCALL_PLUGIN) {
+                handleInCallPluginAction(entryTag);
+                return;
+            }
+
+            boolean isPlugin = false;
+            // InCall plugin callable entries, need to retrieve the data id
+            if (dataId == CARD_ENTRY_ID_INCALL_PLUGIN_CALL) {
+                dataId = (int) intent.getLongExtra(InCallPluginUtils.KEY_DATA_ID, -1);
+                if (intent.getAction() == null) {
+                    isPlugin = true;
+                }
             }
 
             // Default to USAGE_TYPE_CALL. Usage is summed among all types for sorting each data id
@@ -414,7 +468,29 @@ public class QuickContactActivity extends ContactsActivity implements
 
             mHasIntentLaunched = true;
             try {
-                ImplicitIntentsUtil.startActivityInAppIfPossible(QuickContactActivity.this, intent);
+                if (isPlugin) {
+                    // it's an entry from plugin, route to this call
+                    CallMethodInfo cmi = null;
+                    if (entryTag.getEntry() == null ||
+                            entryTag.getEntry().getCallMethodInfo() == null) {
+                        cmi = InCallPluginHelper.getCallMethod(ComponentName.unflattenFromString(
+                                intent.getStringExtra(InCallPluginUtils.KEY_COMPONENT)));
+                        cmi.placeCall(OriginCodes.CONTACTS_CARD,
+                                intent.getStringExtra(InCallPluginUtils.KEY_NUMBER),
+                                getBaseContext(), false, false,
+                                intent.getStringExtra(InCallPluginUtils.KEY_MIMETYPE));
+                    } else {
+                        cmi = entryTag.getEntry().getCallMethodInfo();
+                        cmi.placeCall(OriginCodes.CONTACTS_CARD,
+                                intent.getStringExtra(InCallPluginUtils.KEY_NUMBER),
+                                getBaseContext(), false,
+                                TextUtils.isEmpty(intent.getStringExtra(InCallPluginUtils
+                                        .KEY_MIMETYPE)), null);
+                    }
+                } else {
+                    ImplicitIntentsUtil
+                            .startActivityInAppIfPossible(QuickContactActivity.this, intent);
+                }
             } catch (SecurityException ex) {
                 Toast.makeText(QuickContactActivity.this, R.string.missing_app,
                         Toast.LENGTH_SHORT).show();
@@ -872,6 +948,7 @@ public class QuickContactActivity extends ContactsActivity implements
                         }
                     });
         }
+        mIsUpdating = new AtomicBoolean(false);
         processIntent(getIntent());
         mBlockContactHelper = new BlockContactHelper(this, new LookupProviderImpl(this));
         if (mContactData != null) {
@@ -930,7 +1007,18 @@ public class QuickContactActivity extends ContactsActivity implements
         mLookupUri = lookupUri;
         mExcludeMimes = intent.getStringArrayExtra(QuickContact.EXTRA_EXCLUDE_MIMES);
 
+        Contact contact = null;
         if (mLookupUri == null) {
+            // See if a URI has been attached as an extra
+            mLookupUri = intent.getParcelableExtra(Contact.CONTACT_URI_EXTRA);
+            if (mLookupUri != null) {
+                contact = ContactLoader.parseEncodedContactEntity(mLookupUri,
+                        ContactLoader.EncodedContactEntitySchemaVersion.ENHANCED_CALLER_META_DATA);
+            }
+        }
+
+        if (mLookupUri == null) {
+            if (DEBUG) Log.d(TAG, "mLookupUri null!");
             finish();
             return;
         }
@@ -943,7 +1031,8 @@ public class QuickContactActivity extends ContactsActivity implements
         }
 
         if (contact != null) {
-            bindContactData(contact);
+            // looked up encoded contact
+            checkAndBindContactData(contact, false, false);
         } else if (oldLookupUri == null) {
             mContactLoader = (ContactLoader) getLoaderManager().initLoader(
                     LOADER_CONTACT_ID, null, mLoaderContactCallbacks);
@@ -1076,36 +1165,58 @@ public class QuickContactActivity extends ContactsActivity implements
 
         Trace.endSection();
 
-        mEntriesAndActionsTask = new AsyncTask<Void, Void, Cp2DataCardModel>() {
+        mEntriesAndActionsTask = new EntriesAndActionTask().execute(data);
+    }
 
-            @Override
-            protected Cp2DataCardModel doInBackground(
-                    Void... params) {
-                return generateDataModelFromContact(data);
-            }
+    private class EntriesAndActionTask extends AsyncTask<Contact, Void, Cp2DataCardModel> {
+        private Contact mData;
 
-            @Override
-            protected void onPostExecute(Cp2DataCardModel cardDataModel) {
-                super.onPostExecute(cardDataModel);
-                // Check that original AsyncTask parameters are still valid and the activity
-                // is still running before binding to UI. A new intent could invalidate
-                // the results, for example.
-                if (data == mContactData && !isCancelled()) {
-                    bindDataToCards(cardDataModel);
-                    showActivity();
-                }
+        @Override
+        protected Cp2DataCardModel doInBackground(Contact... params) {
+            // gather plugin information
+            if (DEBUG) Log.d(TAG, "+++doInBackground");
+            if (isCancelled()) {
+                // onCancelled will be called upon return
+                if (DEBUG) Log.d(TAG, "+++doInBackground cancelled");
+                return null;
             }
-        };
-        mEntriesAndActionsTask.execute();
+            mData = params[0];
+            Cp2DataCardModel model = generateDataModelFromContact(mData);
+            if (DEBUG) Log.d(TAG, "---doInBackground");
+            return model;
+        }
+
+        @Override
+        protected void onPostExecute(Cp2DataCardModel cardDataModel) {
+            super.onPostExecute(cardDataModel);
+            // Check that original AsyncTask parameters are still valid and the activity
+            // is still running before binding to UI. A new intent could invalidate
+            // the results, for example.
+            if (DEBUG) Log.d(TAG, "+++onPostExecute");
+            if (mData == mContactData && !isCancelled() && cardDataModel != null) {
+                bindDataToCards(cardDataModel);
+                showActivity();
+                mIsUpdating.set(false);
+            }
+            if (mNeedPluginUpdate) {
+                mNeedPluginUpdate = false;
+                updatePlugins(null);
+            }
+            if (DEBUG) Log.d(TAG, "---onPostExecute");
+        }
     }
 
     private void bindDataToCards(Cp2DataCardModel cp2DataCardModel) {
+        if (DEBUG) Log.d(TAG, "+++bindDataToCards");
         startInteractionLoaders(cp2DataCardModel);
         populateContactAndAboutCard(cp2DataCardModel);
+        if (DEBUG) Log.d(TAG, "---bindDataToCards");
     }
 
     private void startInteractionLoaders(Cp2DataCardModel cp2DataCardModel) {
         final Map<String, List<DataItem>> dataItemsMap = cp2DataCardModel.dataItemsMap;
+        final Map<ComponentName, List<String>> pluginAccountsMap = cp2DataCardModel
+                .pluginAccountsMap;
         final List<DataItem> phoneDataItems = dataItemsMap.get(Phone.CONTENT_ITEM_TYPE);
         if (phoneDataItems != null && phoneDataItems.size() == 1) {
             mOnlyOnePhoneNumber = true;
@@ -1119,7 +1230,7 @@ public class QuickContactActivity extends ContactsActivity implements
         }
         final Bundle phonesExtraBundle = new Bundle();
         phonesExtraBundle.putStringArray(KEY_LOADER_EXTRA_PHONES, phoneNumbers);
-
+        phonesExtraBundle.putSerializable(KEY_LOADER_EXTRA_PLUGIN_INFO, (HashMap)pluginAccountsMap);
         Trace.beginSection("start sms loader");
         getLoaderManager().initLoader(
                 LOADER_SMS_ID,
@@ -1190,6 +1301,12 @@ public class QuickContactActivity extends ContactsActivity implements
     @Override
     protected void onResume() {
         super.onResume();
+        if (InCallPluginHelper.subscribe(CALL_METHOD_SUBSCRIBER_ID, pluginsUpdatedReceiver)) {
+            if (DEBUG) Log.d(TAG, "InCallPluginHelper infoReady");
+            InCallPluginHelper.refreshDynamicItems();
+        } else {
+            if (DEBUG) Log.d(TAG, "InCallPluginHelper info NOT Ready");
+        }
         // If returning from a launched activity, repopulate the contact and about card
         if (mHasIntentLaunched) {
             mHasIntentLaunched = false;
@@ -1205,7 +1322,14 @@ public class QuickContactActivity extends ContactsActivity implements
         }
     }
 
-    private void populateContactAndAboutCard(Cp2DataCardModel cp2DataCardModel) {
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        InCallPluginHelper.unsubscribe(CALL_METHOD_SUBSCRIBER_ID);
+    }
+
+    private synchronized void populateContactAndAboutCard(Cp2DataCardModel cp2DataCardModel) {
         mCachedCp2DataCardModel = cp2DataCardModel;
         if (mHasIntentLaunched || cp2DataCardModel == null) {
             return;
@@ -1283,7 +1407,7 @@ public class QuickContactActivity extends ContactsActivity implements
                 mExpandingEntryCardViewListener,
                 mScroller);
 
-        if (contactCardEntries.size() == 0 && aboutCardEntries.size() == 0) {
+        if ((contactCardEntries.size() == 0 && aboutCardEntries.size() == 0)) {
             initializeNoContactDetailCard();
         } else {
             mNoContactDetailsCard.setVisibility(View.GONE);
@@ -1379,13 +1503,31 @@ public class QuickContactActivity extends ContactsActivity implements
      *  amongst mimetype. The map goes from mimetype string to the sorted list of data items within
      *  mimetype
      */
-    private Cp2DataCardModel generateDataModelFromContact(
-            Contact data) {
+    private Cp2DataCardModel generateDataModelFromContact(Contact data) {
         Trace.beginSection("Build data items map");
 
         final Map<String, List<DataItem>> dataItemsMap = new HashMap<>();
 
         final ResolveCache cache = ResolveCache.getInstance(this);
+        Set<String> pluginMimeExcluded;
+        Set<String> pluginMimeIncluded;
+        if (InCallPluginHelper.infoReady()) {
+            mCallMethodMap = (HashMap<ComponentName, CallMethodInfo>)
+                    InCallPluginHelper.getAllEnabledAndHiddenCallMethods();
+            pluginMimeExcluded = InCallPluginHelper.getAllEnabledVideoImMimeSet();
+            pluginMimeIncluded = InCallPluginHelper.getAllEnabledVoiceMimeSet();
+            if (DEBUG) {
+                Log.d(TAG, "plugins size:" + mCallMethodMap.size());
+                Log.d(TAG, "mimeExcluded size:" + pluginMimeExcluded.size());
+                Log.d(TAG, "mimeIncluded size:" + pluginMimeIncluded.size());
+            }
+        } else {
+            mCallMethodMap = new HashMap<ComponentName, CallMethodInfo>();
+            pluginMimeExcluded = new HashSet<String>();
+            pluginMimeIncluded = new HashSet<String>();
+        }
+
+        HashMap<String, RawContact> pluginRawContactsMap = new HashMap<String, RawContact>();
         for (RawContact rawContact : data.getRawContacts()) {
             for (DataItem dataItem : rawContact.getDataItems()) {
                 dataItem.setRawContactId(rawContact.getId());
@@ -1402,6 +1544,11 @@ public class QuickContactActivity extends ContactsActivity implements
 
                 final boolean hasData = !TextUtils.isEmpty(dataItem.buildDataString(this,
                         dataKind));
+                // the mime type has been consolidated in the plugin entry, skip
+                if (pluginMimeExcluded.contains(mimeType)) continue;
+                if (pluginMimeIncluded.contains(mimeType)) {
+                    pluginRawContactsMap.put(mimeType, rawContact);
+                }
 
                 if (isMimeExcluded(mimeType) || !hasData) continue;
 
@@ -1443,13 +1590,25 @@ public class QuickContactActivity extends ContactsActivity implements
         final List<List<Entry>> contactCardEntries = new ArrayList<>();
         final List<List<Entry>> aboutCardEntries = buildAboutCardEntries(dataItemsMap);
         final MutableString aboutCardName = new MutableString();
-
+        HashMap<ComponentName, List<String>> pluginAccountsMap = new HashMap<ComponentName,
+                List<String>>();
         for (int i = 0; i < dataItemsList.size(); ++i) {
             final List<DataItem> dataItemsByMimeType = dataItemsList.get(i);
             final DataItem topDataItem = dataItemsByMimeType.get(0);
             if (SORTED_ABOUT_CARD_MIMETYPES.contains(topDataItem.getMimeType())) {
                 // About card mimetypes are built in buildAboutCardEntries, skip here
                 continue;
+            } else if (pluginRawContactsMap.containsKey(topDataItem.getMimeType())) {
+                    List<Entry> pluginEntries = incallPluginDataItemsToEntries(dataItemsByMimeType,
+                            data, pluginRawContactsMap.get(topDataItem.getMimeType()),
+                            contactCardEntries, pluginAccountsMap);
+                if (pluginEntries.size() > 0) {
+                    if (DEBUG) {
+                        Log.d(TAG, "pluginEntries added to contactCardEntries:" +
+                                pluginEntries.size());
+                    }
+                    contactCardEntries.add(pluginEntries);
+                }
             } else {
                 List<Entry> contactEntries = dataItemsToEntries(dataItemsList.get(i),
                         aboutCardName);
@@ -1457,6 +1616,10 @@ public class QuickContactActivity extends ContactsActivity implements
                     contactCardEntries.add(contactEntries);
                 }
             }
+        }
+        if (!mContactData.isUserProfile() && InCallPluginHelper.infoReady() && mCallMethodMap
+                .size() > 0) {
+            addAllInCallPluginOtherEntries(contactCardEntries, pluginRawContactsMap);
         }
 
         Trace.endSection();
@@ -1466,6 +1629,7 @@ public class QuickContactActivity extends ContactsActivity implements
         dataModel.aboutCardEntries = aboutCardEntries;
         dataModel.contactCardEntries = contactCardEntries;
         dataModel.dataItemsMap = dataItemsMap;
+        dataModel.pluginAccountsMap = pluginAccountsMap;
         return dataModel;
     }
 
@@ -1479,9 +1643,11 @@ public class QuickContactActivity extends ContactsActivity implements
          * are in sorted order using mWithinMimeTypeDataItemComparator.
          */
         public Map<String, List<DataItem>> dataItemsMap;
+        public Map<String, List<DataItem>> hideDataItemsMap;
         public List<List<Entry>> aboutCardEntries;
         public List<List<Entry>> contactCardEntries;
         public String customAboutCardName;
+        public Map<ComponentName, List<String>> pluginAccountsMap;
     }
 
     private static class MutableString {
@@ -2220,7 +2386,18 @@ public class QuickContactActivity extends ContactsActivity implements
             if (interaction == null) {
                 continue;
             }
-            entries.add(new Entry(/* id = */ -1,
+            boolean applyColor = true;
+            int dataId = -1;
+            // only CallLogInteraction classes can be from plugin (not SmsInteraction
+            // and CalendarInteraction)
+            if (CallLogInteraction.class.isInstance(interaction) && !TextUtils.isEmpty(
+                    ((CallLogInteraction)interaction).getPluginPkgName())) {
+                applyColor = false;
+                dataId = CARD_ENTRY_ID_INCALL_PLUGIN_CALL;
+            }
+
+            // need to associate number as well
+            entries.add(new Entry(dataId,
                     interaction.getIcon(this),
                     interaction.getViewHeader(this),
                     interaction.getViewBody(this),
@@ -2232,7 +2409,7 @@ public class QuickContactActivity extends ContactsActivity implements
                     /* alternateIcon = */ null,
                     /* alternateIntent = */ null,
                     /* alternateContentDescription = */ null,
-                    /* shouldApplyColor = */ true,
+                   applyColor,
                     /* isEditable = */ false,
                     /* EntryContextMenuInfo = */ null,
                     /* thirdIcon = */ null,
@@ -2276,10 +2453,7 @@ public class QuickContactActivity extends ContactsActivity implements
                     finish();
                     return;
                 }
-                mBlockContactHelper.setContactInfo(data);
-                mBlockContactHelper.gatherDataInBackground();
-                bindContactData(data);
-
+                checkAndBindContactData(data, true, false);
             } finally {
                 Trace.endSection();
             }
@@ -2297,6 +2471,33 @@ public class QuickContactActivity extends ContactsActivity implements
                     true /*postViewNotification*/, true /*computeFormattedPhoneNumber*/);
         }
     };
+
+    private synchronized void checkAndBindContactData(Contact contact, boolean withBlockHelper,
+        boolean onlyStartAsyncTask) {
+        if (DEBUG) Log.d(TAG, "checkAndBindContactData," + withBlockHelper + " " +
+                onlyStartAsyncTask);
+        // Update pending Intents
+        InCallPluginHelper.refreshPendingIntents(InCallPluginUtils.getInCallContactInfo(contact));
+
+        if (mIsUpdating.get() && mEntriesAndActionsTask != null && !mEntriesAndActionsTask
+                .isCancelled()) {
+            mEntriesAndActionsTask.cancel(true);
+        }
+        mIsUpdating.set(true);
+        if (withBlockHelper) {
+            destroyInteractionLoaders();
+            mBlockContactHelper.setContactInfo(contact);
+            mBlockContactHelper.gatherDataInBackground();
+            bindContactData(contact);
+        } else {
+            destroyInteractionLoaders();
+            if (onlyStartAsyncTask) {
+                mEntriesAndActionsTask = new EntriesAndActionTask().execute(contact);
+            } else {
+                bindContactData(contact);
+            }
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -2351,6 +2552,7 @@ public class QuickContactActivity extends ContactsActivity implements
                     loader = new CallLogInteractionsLoader(
                             QuickContactActivity.this,
                             args.getStringArray(KEY_LOADER_EXTRA_PHONES),
+                            (HashMap) args.getSerializable(KEY_LOADER_EXTRA_PLUGIN_INFO),
                             MAX_CALL_LOG_RETRIEVE);
             }
             return loader;
@@ -2461,6 +2663,7 @@ public class QuickContactActivity extends ContactsActivity implements
     protected void onStop() {
         super.onStop();
 
+        mIsUpdating.set(false);
         if (mEntriesAndActionsTask != null) {
             // Once the activity is stopped, we will no longer want to bind mEntriesAndActionsTask's
             // results on the UI thread. In some circumstances Activities are killed without
@@ -3244,5 +3447,287 @@ public class QuickContactActivity extends ContactsActivity implements
                 == TelephonyManager.SIM_STATE_READY)
             return true;
         return false;
+    }
+
+    private void addAllInCallPluginOtherEntries(List<List<Entry>> parentList,
+            HashMap<String, RawContact>  pluginRawContactMap) {
+        for (ComponentName cn : mCallMethodMap.keySet()) {
+            CallMethodInfo cmi = mCallMethodMap.get(cn);
+            addInCallPluginEntries(cmi, parentList, pluginRawContactMap.containsKey(cmi.mMimeType));
+        }
+    }
+
+    private void addInCallPluginEntries(CallMethodInfo cmi, List<List<Entry>> parentList,
+            boolean hasPluginAccount) {
+        final Resources res = getResources();
+        List<Entry> containerList;
+        Entry entry;
+        if (cmi.mStatus == PluginStatus.HIDDEN) {
+            if (cmi.mLoginNudgeEnable) {
+                containerList = new ArrayList<Entry>();
+                // install nudge
+                entry = new Entry(CARD_ENTRY_ID_INCALL_PLUGIN,
+                        cmi.mBrandIcon,
+                        null,
+                        cmi.mInstallNudgeSubtitle,
+                        null,
+                        cmi.mInstallNudgeActionText,
+                        new Intent(ACTION_INCALL_PLUGIN_INSTALL),
+                        res.getDrawable(R.drawable.ic_close),
+                        new Intent(ACTION_INCALL_PLUGIN_DISMISS_NUDGE),
+                        null,
+                        null,
+                        null,
+                        cmi.mBrandIconId,
+                        cmi,
+                        containerList, parentList);
+                if (DEBUG) Log.d(TAG, "Adding INSTALL NUDGE");
+                containerList.add(entry);
+                parentList.add(containerList);
+            }
+        } else if (cmi.mStatus == PluginStatus.ENABLED) {
+            if (!hasPluginAccount) {
+                if (cmi.mIsAuthenticated) {
+                    // Invite
+                    containerList = new ArrayList<Entry>();
+                    entry = new Entry(CARD_ENTRY_ID_INCALL_PLUGIN,
+                            cmi.mBrandIcon,
+                            res.getString(R.string.incall_plugin_directory_search, cmi.mName),
+                            null,
+                            null,
+                            null,
+                            new Intent(ACTION_INCALL_PLUGIN_DIRECTORY_SEARCH),
+                            null,
+                            null,
+                            res.getString(R.string.incall_plugin_invite),
+                            null,
+                            new Intent(ACTION_INCALL_PLUGIN_INVITE),
+                            cmi.mBrandIconId,
+                            cmi,
+                            containerList, parentList);
+                    if (DEBUG) Log.d(TAG, "Adding INVITE ENTRY");
+                    containerList.add(entry);
+                    parentList.add(containerList);
+                } else {
+                    // login nudge
+                    if (cmi.mLoginNudgeEnable) {
+                        containerList = new ArrayList<Entry>();
+                        entry = new Entry(CARD_ENTRY_ID_INCALL_PLUGIN,
+                                cmi.mBrandIcon,
+                                null,
+                                cmi.mInstallNudgeSubtitle,
+                                null,
+                                cmi.mInstallNudgeActionText,
+                                new Intent(ACTION_INCALL_PLUGIN_LOGIN),
+                                res.getDrawable(R.drawable.ic_close),
+                                new Intent(ACTION_INCALL_PLUGIN_DISMISS_NUDGE),
+                                null,
+                                null,
+                                null,
+                                cmi.mBrandIconId,
+                                cmi,
+                                containerList, parentList);
+                        if (DEBUG) Log.d(TAG, "Adding LOGIN NUDGE");
+                        containerList.add(entry);
+                        parentList.add(containerList);
+                    }
+                }
+            }
+        }
+    }
+
+    // Create new Entries
+    private List<Entry> incallPluginDataItemsToEntries(List<DataItem> dataItems, Contact contact,
+            RawContact rawContact, List<List<Entry>> parentList, HashMap<ComponentName,
+            List<String>> pluginAccountMap) {
+        List<Entry> entries = new ArrayList<Entry>();
+        for (DataItem dataItem : dataItems) {
+            CallMethodInfo cmi =
+                    InCallPluginHelper.getMethodForMimeType(dataItem.getMimeType(), true);
+            Entry entry;
+            String contactAccountHandle = rawContact.getSourceId();
+            if (cmi.mIsAuthenticated) {
+                // user signed in, consolidate entries
+                InCallPluginUtils.PresenceInfo presenceInfo = InCallPluginUtils.lookupPresenceInfo(
+                        this, contact, rawContact);
+                Intent callIntent = InCallPluginUtils.getVoiceMimeIntent(cmi.mMimeType, dataItem,
+                        cmi, contactAccountHandle);
+                entry = new Entry(CARD_ENTRY_ID_INCALL_PLUGIN_CALL,
+                        cmi.mBrandIcon,
+                        contactAccountHandle,
+                        presenceInfo.mStatusMsg,
+                        presenceInfo.mPresenceIcon,
+                        null,
+                        callIntent,
+                        cmi.mImIcon,
+                        InCallPluginUtils.getImMimeIntent(cmi.mImMimeType, rawContact),
+                        null,
+                        cmi.mVoiceIcon,
+                        callIntent,
+                        cmi.mBrandIconId,
+                        cmi,
+                        entries, parentList);
+               if (DEBUG) Log.d(TAG, "Adding CALL ENTRY");
+            } else {
+                // user signed out, list the contact's account name, and action set to
+                // launch sign in
+                final Resources res = getResources();
+                entry = new Entry(CARD_ENTRY_ID_INCALL_PLUGIN,
+                        cmi.mBrandIcon,
+                        contactAccountHandle,
+                        res.getString(R.string.incall_plugin_account_subheader, cmi.mName),
+                        null, null,
+                        new Intent(ACTION_INCALL_PLUGIN_LOGIN),
+                        null, null, null, null,
+                        null, cmi.mBrandIconId,
+                        cmi, entries, parentList);
+                if (DEBUG) Log.d(TAG, "Adding ACCOUNT ENTRY");
+            }
+            entries.add(entry);
+            // gather account list for interactions
+            List<String> accountsList;
+            if (!pluginAccountMap.containsKey(cmi.mComponent)) {
+                accountsList = new ArrayList<String>();
+                pluginAccountMap.put(cmi.mComponent, accountsList);
+            } else {
+                accountsList = pluginAccountMap.get(cmi.mComponent);
+            }
+            accountsList.add(contactAccountHandle);
+
+        }
+        return entries;
+    }
+
+    private void handleInCallPluginAction(EntryTag tag) {
+        if (tag == null) {
+            return;
+        }
+        Entry entry = tag.getEntry();
+        if (entry == null) {
+            return;
+        }
+        CallMethodInfo cmiStored = entry.getCallMethodInfo();
+        CallMethodInfo cmi = InCallPluginHelper.getCallMethod(cmiStored.mComponent);
+        Intent intent = tag.getIntent();
+        if (cmi == null || intent == null) {
+            return;
+        }
+        try {
+            if(intent.getAction().equals(ACTION_INCALL_PLUGIN_INSTALL)) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" +
+                        cmi.mDependentPackage)));
+            } else if (intent.getAction().equals(ACTION_INCALL_PLUGIN_DISMISS_NUDGE)) {
+                String nudgeKey = intent.getStringExtra(InCallPluginUtils
+                        .KEY_NUDGE_KEY);
+                dismissNudge(tag, nudgeKey);
+            } else if (intent.getAction().equals(ACTION_INCALL_PLUGIN_LOGIN)) {
+                if (cmi.mLoginIntent != null) {
+                    cmi.mLoginIntent.send();
+                }
+            } else if (intent.getAction().equals(ACTION_INCALL_PLUGIN_INVITE)) {
+                if (cmi.mInviteIntent != null) {
+                    cmi.mInviteIntent.send();
+                } else {
+                    cmi.mInviteIntent = InCallPluginHelper.getInviteIntentSync(cmi.mComponent,
+                            InCallPluginUtils.getInCallContactInfo(mContactData));
+                    if (cmi.mInviteIntent != null) {
+                        cmi.mInviteIntent.send();
+                    }
+                }
+            } else if (intent.getAction().equals(ACTION_INCALL_PLUGIN_DIRECTORY_SEARCH)) {
+                if (cmi.mDirectorySearchIntent != null) {
+                    cmi.mDirectorySearchIntent.send();
+                } else {
+                    cmi.mDirectorySearchIntent =
+                    InCallPluginHelper.getDirectorySearchIntentSync(cmi.mComponent,
+                            InCallPluginUtils.getInCallContactInfo(mContactData).mLookupUri);
+                    if (cmi.mDirectorySearchIntent != null) {
+                        cmi.mDirectorySearchIntent.send();
+                    }
+                }
+            }
+        } catch (PendingIntent.CanceledException e) {
+            if (DEBUG) Log.d(TAG, "handleInCallPluginAction ", e);
+        }
+    }
+
+    private void dismissNudge(EntryTag tag, String nudgeKey) {
+        // Write the dimissal to preferences
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sp.edit();
+        if (tag == null) {
+            return;
+        }
+        Entry entry = tag.getEntry();
+        CallMethodInfo cmi = entry.getCallMethodInfo();
+        final List<List<Entry>> cardEntries = entry.getParentList();
+        List<Entry> containerList = entry.getContainerList();
+
+        // disable the nudge type
+        editor.putBoolean(cmi.mComponent.getClassName() + "." + nudgeKey, false);
+        editor.apply();
+        // Find the entry and remove it
+        cardEntries.remove(containerList);
+
+        // Repopulate the view
+        mContactCard.initialize(cardEntries,
+                MIN_NUM_CONTACT_ENTRIES_SHOWN,
+                mContactCard.isExpanded(),
+                false,
+                mExpandingEntryCardViewListener,
+                mScroller);
+        mContactCard.setVisibility(View.VISIBLE);
+    }
+
+    private CallMethodHelper.CallMethodReceiver pluginsUpdatedReceiver =
+            new CallMethodHelper.CallMethodReceiver() {
+                @Override
+                public void onChanged(HashMap<ComponentName, CallMethodInfo> callMethodInfos) {
+                    updatePlugins(callMethodInfos);
+                }
+            };
+
+    // Global CallMethod map that keeps track of the currently displayed plugins
+    HashMap<ComponentName, CallMethodInfo> mCallMethodMap = new HashMap<ComponentName, CallMethodInfo>();
+
+    private void updatePlugins(HashMap<ComponentName, CallMethodInfo> callMethods) {
+        if (DEBUG) Log.d(TAG, "+++updatePlugins");
+        HashMap<ComponentName, CallMethodInfo> newCmMap = (HashMap<ComponentName, CallMethodInfo>)
+                InCallPluginHelper.getAllEnabledAndHiddenCallMethods();
+        boolean updateNeeded = false;
+        if (mContactData == null) {
+            return;
+        }
+        if (mIsUpdating.get() || mCachedCp2DataCardModel == null) {
+            if (DEBUG) Log.d(TAG, "---updatePlugins null return");
+            checkAndBindContactData(mContactData, false, true);
+            return;
+        }
+        // Check if update or removal is needed
+        for (ComponentName cn : mCallMethodMap.keySet()) {
+            CallMethodInfo cmi = mCallMethodMap.get(cn);
+            if (newCmMap.containsKey(cn)) {
+                // Check if update needed
+                CallMethodInfo newCmi = newCmMap.remove(cn);
+                if (!newCmi.equals(cmi) || newCmi.mIsAuthenticated != cmi.mIsAuthenticated) {
+                    updateNeeded = true;
+                }
+            } else {
+                // need to remove plugins
+                if (DEBUG) Log.d(TAG, "updatePlugins removed");
+                updateNeeded = true;
+            }
+        }
+        // Check if need to add new plugins
+        if (newCmMap.size() > 0) {
+            if (DEBUG) Log.d(TAG, "updatePlugins new plugins");
+            updateNeeded = true;
+        }
+
+        if (updateNeeded) {
+            if (DEBUG) Log.d(TAG, "updatePlugins updateNeeded");
+            checkAndBindContactData(mContactData, false, true);
+        }
+        if (DEBUG) Log.d(TAG, "---updatePlugins return");
     }
 }

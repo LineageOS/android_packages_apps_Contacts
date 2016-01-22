@@ -226,7 +226,7 @@ public class GroupDetailFragment extends Fragment implements OnScrollListener {
         }
 
         @Override
-        public void onCallNumberDirectly(String phoneNumber) {
+        public void onCallNumberDirectly(String phoneNumber, String mimeType) {
             // No need to call phone number directly from People app.
             Log.w(TAG, "unexpected invocation of onCallNumberDirectly()");
         }

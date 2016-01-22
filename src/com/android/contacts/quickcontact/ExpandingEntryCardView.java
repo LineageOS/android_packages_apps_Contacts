@@ -29,7 +29,10 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
+
 import android.transition.ChangeBounds;
 import android.transition.Fade;
 import android.transition.Transition;
@@ -53,6 +56,8 @@ import android.widget.TextView;
 
 import com.android.contacts.R;
 import com.android.contacts.common.dialog.CallSubjectDialog;
+
+import com.android.phone.common.incall.CallMethodInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,27 +102,34 @@ public class ExpandingEntryCardView extends CardView {
         // Button action will open the call with subject dialog.
         public static final int ACTION_CALL_WITH_SUBJECT = 3;
 
-        private final int mId;
-        private final Drawable mIcon;
-        private final String mHeader;
-        private final String mSubHeader;
-        private final Drawable mSubHeaderIcon;
-        private final String mText;
-        private final Drawable mTextIcon;
+        private int mId;
+        private Drawable mIcon;
+        private String mHeader;
+        private String mSubHeader;
+        private Drawable mSubHeaderIcon;
+        private String mActionText;
+        private String mText;
+        private Drawable mTextIcon;
         private Spannable mPrimaryContentDescription;
-        private final Intent mIntent;
-        private final Drawable mAlternateIcon;
-        private final Intent mAlternateIntent;
-        private final String mAlternateContentDescription;
-        private final boolean mShouldApplyColor;
-        private final boolean mIsEditable;
-        private final EntryContextMenuInfo mEntryContextMenuInfo;
-        private final Drawable mThirdIcon;
-        private final Intent mThirdIntent;
-        private final String mThirdContentDescription;
-        private final int mIconResourceId;
-        private final int mThirdAction;
-        private final Bundle mThirdExtras;
+        private Intent mIntent;
+        private Drawable mAlternateIcon;
+        private Intent mAlternateIntent;
+        private String mAlternateContentDescription;
+        private boolean mShouldApplyColor;
+        private boolean mIsEditable;
+        private EntryContextMenuInfo mEntryContextMenuInfo;
+        private String mThirdText;
+        private Drawable mThirdIcon;
+        private Intent mThirdIntent;
+        private String mThirdContentDescription;
+        private int mThirdAction;
+        private Bundle mThirdExtras;
+        private int mIconResourceId;
+        private CallMethodInfo mCallMethodInfo;
+        private List<Entry> mContainerList;
+        private List<List<Entry>> mParentList;
+
+        public Entry () {}
 
         public Entry(int id, Drawable mainIcon, String header, String subHeader,
                 Drawable subHeaderIcon, String text, Drawable textIcon,
@@ -132,6 +144,7 @@ public class ExpandingEntryCardView extends CardView {
             mHeader = header;
             mSubHeader = subHeader;
             mSubHeaderIcon = subHeaderIcon;
+            mActionText = null;
             mText = text;
             mTextIcon = textIcon;
             mPrimaryContentDescription = primaryContentDescription;
@@ -142,12 +155,46 @@ public class ExpandingEntryCardView extends CardView {
             mShouldApplyColor = shouldApplyColor;
             mIsEditable = isEditable;
             mEntryContextMenuInfo = entryContextMenuInfo;
+            mThirdText = null;
             mThirdIcon = thirdIcon;
             mThirdIntent = thirdIntent;
             mThirdContentDescription = thirdContentDescription;
             mThirdAction = thirdAction;
             mThirdExtras = thirdExtras;
             mIconResourceId = iconResourceId;
+        }
+
+        public Entry(int id, Drawable mainIcon, String header, String subHeader, Drawable
+                subHeaderIcon, String actionText, Intent intent, Drawable alternateIcon, Intent
+                alternateIntent, String thirdText, Drawable thirdIcon, Intent thirdIntent, int
+                iconResourceId, CallMethodInfo cmi, List<Entry> containerList,
+                List<List<Entry>> parentList) {
+            mId = id;
+            mIcon = mainIcon;
+            mHeader = header;
+            mSubHeader = subHeader;
+            mSubHeaderIcon = subHeaderIcon;
+            mActionText = actionText;
+            mText = null;
+            mTextIcon = null;
+            mPrimaryContentDescription = null;
+            mIntent = intent;
+            mAlternateIcon = alternateIcon;
+            mAlternateIntent = alternateIntent;
+            mAlternateContentDescription = null;
+            mShouldApplyColor = false;
+            mIsEditable = false;
+            mEntryContextMenuInfo = null;
+            mThirdText = thirdText;
+            mThirdIcon = thirdIcon;
+            mThirdIntent = thirdIntent;
+            mThirdContentDescription = null;
+            mThirdAction = -1;
+            mThirdExtras = null;
+            mIconResourceId = iconResourceId;
+            mCallMethodInfo = cmi;
+            mContainerList = containerList;
+            mParentList = parentList;
         }
 
         Drawable getIcon() {
@@ -164,6 +211,10 @@ public class ExpandingEntryCardView extends CardView {
 
         Drawable getSubHeaderIcon() {
             return mSubHeaderIcon;
+        }
+
+        public String getActionText() {
+            return mActionText;
         }
 
         public String getText() {
@@ -210,6 +261,10 @@ public class ExpandingEntryCardView extends CardView {
             return mEntryContextMenuInfo;
         }
 
+        String getThirdText() {
+            return mThirdText;
+        }
+
         Drawable getThirdIcon() {
             return mThirdIcon;
         }
@@ -232,6 +287,18 @@ public class ExpandingEntryCardView extends CardView {
 
         public Bundle getThirdExtras() {
             return mThirdExtras;
+        }
+
+        CallMethodInfo getCallMethodInfo() {
+            return mCallMethodInfo;
+        }
+
+        List<List<Entry>> getParentList() {
+            return mParentList;
+        }
+
+        List<Entry> getContainerList() {
+            return mContainerList;
         }
     }
 
@@ -667,12 +734,17 @@ public class ExpandingEntryCardView extends CardView {
                         Drawable alternateIcon = entry.getAlternateIcon();
                         if (alternateIcon != null) {
                             alternateIcon.mutate();
-                            alternateIcon.setColorFilter(mThemeColorFilter);
+                            if (entry.getCallMethodInfo() == null) {
+                                // not from a plugin
+                                alternateIcon.setColorFilter(mThemeColorFilter);
+                            }
                         }
                         Drawable thirdIcon = entry.getThirdIcon();
                         if (thirdIcon != null) {
                             thirdIcon.mutate();
-                            thirdIcon.setColorFilter(mThemeColorFilter);
+                            if (entry.getCallMethodInfo() == null) {
+                                thirdIcon.setColorFilter(mThemeColorFilter);
+                            }
                         }
                     }
                 }
@@ -708,7 +780,11 @@ public class ExpandingEntryCardView extends CardView {
 
         final TextView subHeader = (TextView) view.findViewById(R.id.sub_header);
         if (!TextUtils.isEmpty(entry.getSubHeader())) {
-            subHeader.setText(entry.getSubHeader());
+            if (entry.getActionText() == null) {
+                subHeader.setText(entry.getSubHeader());
+            } else {
+                subHeader.setText(entry.getSubHeader(), TextView.BufferType.SPANNABLE);
+            }
         } else {
             subHeader.setVisibility(View.GONE);
         }
@@ -718,6 +794,13 @@ public class ExpandingEntryCardView extends CardView {
             subHeaderIcon.setImageDrawable(entry.getSubHeaderIcon());
         } else {
             subHeaderIcon.setVisibility(View.GONE);
+        }
+
+        if (!TextUtils.isEmpty(entry.getActionText())) {
+            Spannable actionText = new SpannableString(" " + entry.getActionText());
+            actionText.setSpan(new ForegroundColorSpan(mThemeColor), 0, actionText.length(),
+                    Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+            subHeader.append(actionText);
         }
 
         final TextView text = (TextView) view.findViewById(R.id.text);
@@ -736,7 +819,7 @@ public class ExpandingEntryCardView extends CardView {
 
         if (entry.getIntent() != null) {
             view.setOnClickListener(mOnClickListener);
-            view.setTag(new EntryTag(entry.getId(), entry.getIntent()));
+            view.setTag(new EntryTag(entry.getId(), entry.getIntent(), entry));
         }
 
         if (entry.getIntent() == null && entry.getEntryContextMenuInfo() == null) {
@@ -774,11 +857,12 @@ public class ExpandingEntryCardView extends CardView {
 
         final ImageView alternateIcon = (ImageView) view.findViewById(R.id.icon_alternate);
         final ImageView thirdIcon = (ImageView) view.findViewById(R.id.third_icon);
+        final TextView thirdTextView = (TextView) view.findViewById(R.id.third_text);
 
         if (entry.getAlternateIcon() != null && entry.getAlternateIntent() != null) {
             alternateIcon.setImageDrawable(entry.getAlternateIcon());
             alternateIcon.setOnClickListener(mOnClickListener);
-            alternateIcon.setTag(new EntryTag(entry.getId(), entry.getAlternateIntent()));
+            alternateIcon.setTag(new EntryTag(entry.getId(), entry.getAlternateIntent(), entry));
             alternateIcon.setVisibility(View.VISIBLE);
             alternateIcon.setContentDescription(entry.getAlternateContentDescription());
         }
@@ -787,7 +871,7 @@ public class ExpandingEntryCardView extends CardView {
             thirdIcon.setImageDrawable(entry.getThirdIcon());
             if (entry.getThirdAction() == Entry.ACTION_INTENT) {
                 thirdIcon.setOnClickListener(mOnClickListener);
-                thirdIcon.setTag(new EntryTag(entry.getId(), entry.getThirdIntent()));
+                thirdIcon.setTag(new EntryTag(entry.getId(), entry.getThirdIntent(), entry));
             } else if (entry.getThirdAction() == Entry.ACTION_CALL_WITH_SUBJECT) {
                 thirdIcon.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -807,6 +891,16 @@ public class ExpandingEntryCardView extends CardView {
             }
             thirdIcon.setVisibility(View.VISIBLE);
             thirdIcon.setContentDescription(entry.getThirdContentDescription());
+        }
+
+        if (!TextUtils.isEmpty(entry.getThirdText()) && entry.getThirdIntent() != null) {
+            thirdTextView.setText(entry.getThirdText());
+            thirdTextView.setOnClickListener(mOnClickListener);
+            thirdTextView.setTag(new EntryTag(entry.getId(), entry.getThirdIntent(), entry));
+            thirdTextView.setTextColor(mThemeColor);
+            thirdTextView.setVisibility(View.VISIBLE);
+        } else {
+            thirdTextView.setVisibility(View.GONE);
         }
 
         // Set a custom touch listener for expanding the extra icon touch areas
@@ -842,8 +936,10 @@ public class ExpandingEntryCardView extends CardView {
                     && mEntries.get(0).size() > 1) {
                 numberOfMimeTypesShown--;
             }
-            // Inflate badges if not yet created
+            // Inflate badges if not yet created or not up to date
             if (mBadges.size() < mEntries.size() - numberOfMimeTypesShown) {
+                mBadges.clear();
+                mBadgeIds.clear();
                 for (int i = numberOfMimeTypesShown; i < mEntries.size(); i++) {
                     Drawable badgeDrawable = mEntries.get(i).get(0).getIcon();
                     int badgeResourceId = mEntries.get(i).get(0).getIconResourceId();
@@ -1105,10 +1201,18 @@ public class ExpandingEntryCardView extends CardView {
     static final class EntryTag {
         private final int mId;
         private final Intent mIntent;
+        private final Entry mEntry;
 
         public EntryTag(int id, Intent intent) {
             mId = id;
             mIntent = intent;
+            mEntry = null;
+        }
+
+        public EntryTag(int id, Intent intent, Entry entry) {
+            mId = id;
+            mIntent = intent;
+            mEntry = entry;
         }
 
         public int getId() {
@@ -1117,6 +1221,10 @@ public class ExpandingEntryCardView extends CardView {
 
         public Intent getIntent() {
             return mIntent;
+        }
+
+        public Entry getEntry() {
+            return mEntry;
         }
     }
 

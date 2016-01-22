@@ -85,28 +85,38 @@
         android:layout_marginTop="@dimen/expanding_entry_card_item_text_icon_margin_top"
         android:layout_marginEnd="@dimen/expanding_entry_card_item_text_icon_margin_right" />
 
-     <ImageView
-         android:id="@+id/icon_alternate"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentTop="true"
-         android:layout_toStartOf="@+id/third_icon"
-         android:layout_alignWithParentIfMissing="true"
-         android:visibility="gone"
-         android:background="?android:attr/selectableItemBackgroundBorderless"
-         android:paddingTop="@dimen/expanding_entry_card_item_icon_margin_top"
-         android:paddingBottom="@dimen/expanding_entry_card_item_alternate_icon_margin_bottom"
-         android:layout_marginStart="@dimen/expanding_entry_card_item_alternate_icon_start_margin" />
+    <ImageView
+        android:id="@+id/icon_alternate"
+        android:layout_width="@dimen/expanding_entry_card_item_icon_width"
+        android:layout_height="@dimen/expanding_entry_card_item_icon_height"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/third_icon"
+        android:layout_alignWithParentIfMissing="true"
+        android:visibility="gone"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:layout_marginTop="@dimen/expanding_entry_card_item_icon_margin_top"
+        android:layout_marginBottom="@dimen/expanding_entry_card_item_alternate_icon_margin_bottom"
+        android:layout_marginStart="@dimen/expanding_entry_card_item_alternate_icon_start_margin" />
 
-     <ImageView
-         android:id="@+id/third_icon"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentEnd="true"
-         android:layout_alignParentTop="true"
-         android:visibility="gone"
-         android:background="?android:attr/selectableItemBackgroundBorderless"
-         android:paddingTop="@dimen/expanding_entry_card_item_icon_margin_top"
-         android:paddingBottom="@dimen/expanding_entry_card_item_alternate_icon_margin_bottom"
-         android:layout_marginStart="@dimen/expanding_entry_card_item_alternate_icon_start_margin" />
+    <ImageView
+        android:id="@+id/third_icon"
+        android:layout_width="@dimen/expanding_entry_card_item_icon_width"
+        android:layout_height="@dimen/expanding_entry_card_item_icon_height"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:visibility="gone"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:layout_marginTop="@dimen/expanding_entry_card_item_icon_margin_top"
+        android:layout_marginBottom="@dimen/expanding_entry_card_item_alternate_icon_margin_bottom"
+        android:layout_marginStart="@dimen/expanding_entry_card_item_alternate_icon_start_margin" />
+
+    <TextView
+        android:id="@+id/third_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/expanding_entry_card_item_alternate_icon_start_margin"
+        style="@android:style/TextAppearance.Material.Body2"
+        android:visibility="gone" />
 </view>

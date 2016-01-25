@@ -29,6 +29,8 @@
   <string name="memory_card_full">Imposibil de salvat contactul, memoria telefonului este plină</string>
   <string name="contacts_groups_label">Grupuri</string>
   <string name="menu_moveGroupMembers">Mută membrii grupului</string>
+  <string name="title_move_members">Mută membri</string>
+  <string name="message_move_members">Se mută membri\u2026</string>
   <string name="message_can_not_move_members">Nu se pot muta membri</string>
   <string name="edit_before_call">Editarea numărului înainte de apel</string>
   <string name="menu_sendViaSMS">Trimitere contact prin SMS</string>

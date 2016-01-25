@@ -48,4 +48,12 @@
     <item quantity="many">سيتم حذف %d جهات اتصال.</item>
     <item quantity="other">سيتم حذف %d جهات اتصال.</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="zero">%d شخص تم وضع علامة عليه كغير هام</item>
+    <item quantity="one">%d أشخاص تم وضع علامة عليهم كغير هام</item>
+    <item quantity="two">%d شخص تم وضع علامة عليه كغير هام</item>
+    <item quantity="few">%d أشخاص تم وضع علامة عليهم كغير هام</item>
+    <item quantity="many">%d شخص تم وضع علامة عليه كغير هام</item>
+    <item quantity="other">%d أشخاص تم وضع علامة عليهم كغير هام</item>
+  </plurals>
 </resources>

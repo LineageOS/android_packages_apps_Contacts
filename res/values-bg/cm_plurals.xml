@@ -17,23 +17,23 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="contacts_selected">
-    <item quantity="one">%d markerad</item>
-    <item quantity="other">%d markerade</item>
+    <item quantity="one">%d избран</item>
+    <item quantity="other">%d избрани</item>
   </plurals>
   <plurals name="ContactMultiImportConfirmation">
-    <item quantity="one">%d kontakt kommer importeras.</item>
-    <item quantity="other">%d kontakter kommer importeras.</item>
+    <item quantity="one">%d контакт ще бъде импортиран.</item>
+    <item quantity="other">%d контакта ще бъдат импортирани.</item>
   </plurals>
   <plurals name="import_progress">
-    <item quantity="one">%d kontakt importerades</item>
-    <item quantity="other">%d kontakter importerades</item>
+    <item quantity="one">%d контакт е внесен</item>
+    <item quantity="other">%d контакта са внесени</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
-    <item quantity="one">%d kontakt kommer att tas bort.</item>
-    <item quantity="other">%d kontakter kommer att tas bort.</item>
+    <item quantity="one">%d контакт ще бъде изтрит.</item>
+    <item quantity="other">%d контакта ще бъдат изтрити.</item>
   </plurals>
   <plurals name="spam_count_text">
-    <item quantity="one">%d person markerade detta som skräppost</item>
-    <item quantity="other">%d personer markerade detta som skräppost</item>
+    <item quantity="one">%d човек маркиран като спам</item>
+    <item quantity="other">%d човека маркирани като спам</item>
   </plurals>
 </resources>

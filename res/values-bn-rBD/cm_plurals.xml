@@ -17,28 +17,23 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="contacts_selected">
-    <item quantity="one">%d selectat</item>
-    <item quantity="few">%d selectate</item>
-    <item quantity="other">%d selectate</item>
+    <item quantity="one">%d টি নির্বাচিত</item>
+    <item quantity="other">%d টি নির্বাচিত</item>
   </plurals>
   <plurals name="ContactMultiImportConfirmation">
-    <item quantity="one">%d contact va fi importat.</item>
-    <item quantity="few">%d contacte vor fi importate.</item>
-    <item quantity="other">%d contacte vor fi importate.</item>
+    <item quantity="one">%d টি যোগাযোগ আমদানি করা হবে।</item>
+    <item quantity="other">%d টি যোগাযোগ আমদানি করা হবে।</item>
   </plurals>
   <plurals name="import_progress">
-    <item quantity="one">%d contact importat</item>
-    <item quantity="few">%d contacte importate</item>
-    <item quantity="other">%d contacte importate</item>
+    <item quantity="one">%d টি যোগাযোগ আমদানি করা হয়েছে</item>
+    <item quantity="other">%d টি যোগাযোগ আমদানি করা হয়েছে</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
-    <item quantity="one">%d contact va fi șters.</item>
-    <item quantity="few">%d contacte vor fi șterse.</item>
-    <item quantity="other">%d contacte vor fi șterse.</item>
+    <item quantity="one">%d টি যোগাযোগ মুছে ফেলা হবে।</item>
+    <item quantity="other">%d টি যোগাযোগ মুছে ফেলা হবে।</item>
   </plurals>
   <plurals name="spam_count_text">
-    <item quantity="one">%d persoană a marcat aceasta ca spam</item>
-    <item quantity="few">%d persoane au marcat aceasta ca spam</item>
-    <item quantity="other">%d persoane au marcat aceasta ca spam</item>
+    <item quantity="one">%d জন স্প্যাম হিসেবে চিহ্নিত</item>
+    <item quantity="other">%d জন স্প্যাম হিসেবে চিহ্নিত</item>
   </plurals>
 </resources>

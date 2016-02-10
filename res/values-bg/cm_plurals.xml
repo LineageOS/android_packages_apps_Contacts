@@ -21,19 +21,19 @@
     <item quantity="other">%d избрани</item>
   </plurals>
   <plurals name="ContactMultiImportConfirmation">
-    <item quantity="one">%d контактът ще бъде импортиран.</item>
-    <item quantity="other">%d контактите ще бъдат импортирани.</item>
+    <item quantity="one">%d контакт ще бъде импортиран.</item>
+    <item quantity="other">%d контакта ще бъдат импортирани.</item>
   </plurals>
   <plurals name="import_progress">
-    <item quantity="one">%d контакт е внесен</item>
-    <item quantity="other">%d контакта са внесени</item>
+    <item quantity="one">%d контакт е импортиран</item>
+    <item quantity="other">%d контакта са импортирани</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
-    <item quantity="one">%d контактът ще бъде изтрит.</item>
-    <item quantity="other">%d контактите ще бъдат изтрити.</item>
+    <item quantity="one">%d контакт ще бъде изтрит.</item>
+    <item quantity="other">%d контакта ще бъдат изтрити.</item>
   </plurals>
   <plurals name="spam_count_text">
     <item quantity="one">%d човек маркиран като спам</item>
-    <item quantity="other">%d хора маркирани като спам</item>
+    <item quantity="other">%d човека маркирани като спам</item>
   </plurals>
 </resources>

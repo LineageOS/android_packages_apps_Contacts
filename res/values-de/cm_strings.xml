@@ -17,21 +17,21 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="contactSavedToSimCardError">Die ausgewählten Kontakte konnten nicht auf der SIM-Karte gespeichert werden</string>
+  <string name="contactSavedToSimCardError">Die ausgewählten Kontakte konnten nicht auf der SIM-Karte gespeichert werden.</string>
   <string name="airplane_mode_on">Bei aktiviertem Flugmodus kann nicht auf die SIM-Karte zugegriffen werden</string>
   <string name="number_anr_too_long">Nummer ist zu lang</string>
-  <string name="email_address_too_long">E-Mail-Adresse ist zu lang</string>
+  <string name="email_address_too_long">Die E-Mail-Adresse ist zu lang.</string>
   <string name="sim_card_full">SIM-Karte ist voll</string>
   <string name="tag_too_long">Kontaktname ist zu lang</string>
   <string name="invalid_phone_number">Telefonnummer ist ungültig</string>
   <string name="invalid_number_type">Nummerntyp ist ungültig</string>
   <string name="no_phone_number_or_email">Bitte Telefonnummer oder E-Mail-Adresse eingeben.</string>
-  <string name="memory_card_full">Der Kontakt konnte nicht gespeichert werden, da der Telefonspeicher voll ist</string>
+  <string name="memory_card_full">Der Kontakt konnte nicht gespeichert werden, da der Telefonspeicher voll ist.</string>
   <string name="contacts_groups_label">Gruppen</string>
   <string name="menu_moveGroupMembers">Gruppenmitglieder verschieben</string>
   <string name="title_move_members">Mitglieder verschieben</string>
-  <string name="message_move_members">Verschiebe Mitglieder\u2026</string>
-  <string name="message_can_not_move_members">Mitglieder können nicht verschoben werden</string>
+  <string name="message_move_members">Mitglieder werden verschoben\u2026</string>
+  <string name="message_can_not_move_members">Mitglieder können nicht verschoben werden.</string>
   <string name="edit_before_call">Nummer vor Anruf bearbeiten</string>
   <string name="menu_sendViaSMS">Kontakt per SMS senden</string>
   <string name="select_all">Alle</string>

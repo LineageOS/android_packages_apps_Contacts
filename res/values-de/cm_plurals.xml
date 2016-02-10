@@ -25,8 +25,8 @@
     <item quantity="other">%d Kontakte werden importiert.</item>
   </plurals>
   <plurals name="import_progress">
-    <item quantity="one">%d Kontakt importiert</item>
-    <item quantity="other">%d Kontakte importiert</item>
+    <item quantity="one">%d Kontakt wurde importiert</item>
+    <item quantity="other">%d Kontakte wurden importiert</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="one">%d Kontakt wird gelöscht.</item>

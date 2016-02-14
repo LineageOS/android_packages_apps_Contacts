@@ -17,11 +17,11 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="contactSavedToSimCardError">Избраните контакти не могат да бъдат записани в SIM картата</string>
-  <string name="airplane_mode_on">SIM картата е недостъпна при включен самолетен режим</string>
+  <string name="contactSavedToSimCardError">Избраните контакти не могат да бъдат записани в СИМ картата</string>
+  <string name="airplane_mode_on">СИМ картата е недостъпна при включен самолетен режим</string>
   <string name="number_anr_too_long">Номерът е твърде дълъг</string>
   <string name="email_address_too_long">Имейл адресът е твърде дълъг</string>
-  <string name="sim_card_full">SIM картата е пълна</string>
+  <string name="sim_card_full">СИМ картата е пълна</string>
   <string name="tag_too_long">Името на контакта е твърде дълго</string>
   <string name="invalid_phone_number">Телефонният номер е невалиден</string>
   <string name="invalid_number_type">Типът на номера е невалиден</string>
@@ -35,8 +35,8 @@
   <string name="edit_before_call">Редактиране на номера преди повикване</string>
   <string name="menu_sendViaSMS">Изпращане на контакта чрез SMS</string>
   <string name="select_all">Всички</string>
-  <string name="import_sim_contacts_title">Импортиране на контакти от SIM карта</string>
-  <string name="import_sim_contacts_message">Импортиране на контакти от SIM\u2026</string>
+  <string name="import_sim_contacts_title">Импортиране на контакти от СИМ карта</string>
+  <string name="import_sim_contacts_message">Импортиране на контакти от СИМ\u2026</string>
   <string name="importConfirmation_title">Да бъдат ли импортирани контактите?</string>
   <string name="import_finish">Импортирането завърши</string>
   <string name="delete_contacts_title">Изтриване на контакти</string>

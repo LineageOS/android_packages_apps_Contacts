@@ -25,8 +25,8 @@
     <item quantity="other">%d контакта ще бъдат импортирани.</item>
   </plurals>
   <plurals name="import_progress">
-    <item quantity="one">%d контакт е внесен</item>
-    <item quantity="other">%d контакта са внесени</item>
+    <item quantity="one">%d контакт е импортиран</item>
+    <item quantity="other">%d контакта са импортирани</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="one">%d контакт ще бъде изтрит.</item>

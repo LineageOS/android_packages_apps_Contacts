@@ -18,11 +18,11 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="contactSavedToSimCardError">Die ausgewählten Kontakte konnten nicht auf der SIM-Karte gespeichert werden.</string>
-  <string name="airplane_mode_on">Bei aktiviertem Flugmodus kann nicht auf die SIM-Karte zugegriffen werden</string>
+  <string name="airplane_mode_on">Bei aktiviertem Flugmodus kann nicht auf die SIM-Karte zugegriffen werden.</string>
   <string name="number_anr_too_long">Nummer ist zu lang</string>
   <string name="email_address_too_long">Die E-Mail-Adresse ist zu lang.</string>
   <string name="sim_card_full">SIM-Karte ist voll</string>
-  <string name="tag_too_long">Kontaktname ist zu lang</string>
+  <string name="tag_too_long">Der Kontaktname ist zu lang.</string>
   <string name="invalid_phone_number">Telefonnummer ist ungültig</string>
   <string name="invalid_number_type">Nummerntyp ist ungültig</string>
   <string name="no_phone_number_or_email">Bitte Telefonnummer oder E-Mail-Adresse eingeben.</string>
@@ -39,7 +39,7 @@
   <string name="import_sim_contacts_message">SIM-Kontakte werden importiert\u2026</string>
   <string name="importConfirmation_title">Kontakt importieren?</string>
   <string name="import_finish">Importieren abgeschlossen</string>
-  <string name="too_many_contacts_add_to_group">Es könnten nicht mehr als <xliff:g id="count">%d</xliff:g> Kontakte hinzugefügt werden</string>
+  <string name="too_many_contacts_add_to_group">Es können maximal <xliff:g id="count">%d</xliff:g> Kontakte hinzugefügt werden.</string>
   <string name="delete_contacts_title">Kontakte löschen</string>
   <string name="delete_contacts_message">Kontakte werden gelöscht\u2026</string>
   <string name="deleteConfirmation_title">Kontakt löschen?</string>
@@ -52,12 +52,12 @@
   <string name="menu_copyTo">Nach <xliff:g id="destination">%s</xliff:g> kopieren</string>
   <string name="copy_to_target_sim">SIM-Karte</string>
   <string name="copy_to_target_msim">SIM-Karte <xliff:g id="index">%d</xliff:g></string>
-  <string name="no_empty_email_in_usim">Die Nachricht kann nicht kopiert werden, da der USIM-Kontakt über kein E-Mail-Feld verfügt.</string>
+  <string name="no_empty_email_in_usim">Nachrichten können nicht kopiert werden, da der USIM-Kontakt nicht über ein E-Mail-Feld verfügt.</string>
   <string name="voicemail">Sprachnachricht</string>
-  <string name="select_call_title">Anruflisten auswählen</string>
-  <string name="delete_call_title">Anrufslisten löschen</string>
-  <string name="delete_call_message">Anruflisten werden gelöscht\u2026</string>
-  <string name="delete_call_alert">Sollen die ausgewählten Anruflisten gelöscht werden?</string>
+  <string name="select_call_title">Anrufprotokolle auswählen</string>
+  <string name="delete_call_title">Anrufprotokolle löschen</string>
+  <string name="delete_call_message">Anrufprotokolle werden gelöscht\u2026</string>
+  <string name="delete_call_alert">Sollen die ausgewählten Anrufprotokolle gelöscht werden?</string>
   <string name="title_del_call">Löschen</string>
   <string name="powered_by_provider">Zur Verfügung gestellt von <xliff:g id="provider">%s</xliff:g></string>
 </resources>

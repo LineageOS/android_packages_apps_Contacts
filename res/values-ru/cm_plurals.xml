@@ -24,12 +24,12 @@
   <plurals name="ContactMultiImportConfirmation">
     <item quantity="one">Будет импортирован %d контакт.</item>
     <item quantity="few">Будут импортированы %d контакта.</item>
-    <item quantity="other">Будет импортировано %d контактов.</item>
+    <item quantity="other">Будут импортированы %d контактов.</item>
   </plurals>
   <plurals name="import_progress">
     <item quantity="one">Импортирован %d контакт</item>
     <item quantity="few">Импортированы %d контакта</item>
-    <item quantity="other">Импортировано %d контактов</item>
+    <item quantity="other">Импортированы %d контактов</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="one">%d контакт будет удален.</item>

@@ -50,8 +50,8 @@
   <string name="contact_detail_picture_description">Снимка. Изберете за промяна</string>
   <string name="calculating_status_now">Изчисляване на състоянието\u2026</string>
   <string name="menu_copyTo">Копиране в <xliff:g id="destination">%s </xliff:g></string>
-  <string name="copy_to_target_sim">SIM карта</string>
-  <string name="copy_to_target_msim">SIM карта <xliff:g id="index">%d </xliff:g></string>
+  <string name="copy_to_target_sim">СИМ карта</string>
+  <string name="copy_to_target_msim">СИМ карта <xliff:g id="index">%d </xliff:g></string>
   <string name="no_empty_email_in_usim">USIM контактите нямат поле за имейл. Съобщенията няма да бъдат копирани.</string>
   <string name="voicemail">Гласова поща</string>
   <string name="select_call_title">Избери регистрите с повикванията</string>

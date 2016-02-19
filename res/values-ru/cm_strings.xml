@@ -35,11 +35,11 @@
   <string name="edit_before_call">Изменить номер и вызвать</string>
   <string name="menu_sendViaSMS">Отправить контакт по SMS</string>
   <string name="select_all">Все</string>
-  <string name="import_sim_contacts_title">Импортировать контакты SIM</string>
-  <string name="import_sim_contacts_message">Импорт контактов SIM\u2026</string>
+  <string name="import_sim_contacts_title">Импорт. контакты с SIM-карты</string>
+  <string name="import_sim_contacts_message">Импорт контактов с SIM-карты\u2026</string>
   <string name="importConfirmation_title">Импортировать контакт?</string>
   <string name="import_finish">Импорт завершён</string>
-  <string name="too_many_contacts_add_to_group">Можно добавить не более <xliff:g id="count">%d</xliff:g> контактов</string>
+  <string name="too_many_contacts_add_to_group">Можно добавить не более <xliff:g id="count">%d</xliff:g> контакт.</string>
   <string name="delete_contacts_title">Удалить контакты</string>
   <string name="delete_contacts_message">Удаление контактов\u2026</string>
   <string name="deleteConfirmation_title">Удалить контакт?</string>
@@ -52,7 +52,7 @@
   <string name="menu_copyTo">Копировать в <xliff:g id="destination">%s</xliff:g></string>
   <string name="copy_to_target_sim">SIM-карта</string>
   <string name="copy_to_target_msim">SIM-карта <xliff:g id="index">%d</xliff:g></string>
-  <string name="no_empty_email_in_usim">Контакт USIM не имеет доступного поля электронной почты, не удается скопировать сообщения.</string>
+  <string name="no_empty_email_in_usim">У контакта USIM нет поля электронной почты. Не удается скопировать сообщения.</string>
   <string name="voicemail">Голосовая почта</string>
   <string name="select_call_title">Выберите журналы вызовов</string>
   <string name="delete_call_title">Удалить журналы вызовов</string>

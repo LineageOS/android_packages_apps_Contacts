@@ -18,11 +18,11 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="contactSavedToSimCardError">Die ausgewählten Kontakte konnten nicht auf der SIM-Karte gespeichert werden.</string>
-  <string name="airplane_mode_on">Bei aktiviertem Flugmodus kann nicht auf die SIM-Karte zugegriffen werden</string>
+  <string name="airplane_mode_on">Bei aktiviertem Flugmodus kann nicht auf die SIM-Karte zugegriffen werden.</string>
   <string name="number_anr_too_long">Nummer ist zu lang</string>
   <string name="email_address_too_long">Die E-Mail-Adresse ist zu lang.</string>
   <string name="sim_card_full">SIM-Karte ist voll</string>
-  <string name="tag_too_long">Kontaktname ist zu lang</string>
+  <string name="tag_too_long">Der Kontaktname ist zu lang.</string>
   <string name="invalid_phone_number">Telefonnummer ist ungültig</string>
   <string name="invalid_number_type">Nummerntyp ist ungültig</string>
   <string name="no_phone_number_or_email">Bitte Telefonnummer oder E-Mail-Adresse eingeben.</string>
@@ -42,7 +42,7 @@
   <string name="delete_contacts_title">Kontakte löschen</string>
   <string name="delete_contacts_message">Kontakte werden gelöscht\u2026</string>
   <string name="deleteConfirmation_title">Kontakt löschen?</string>
-  <string name="too_many_contacts_add_to_group">Es könnten nicht mehr als <xliff:g id="count">%d</xliff:g> Kontakte hinzugefügt werden</string>
+  <string name="too_many_contacts_add_to_group">Es können maximal <xliff:g id="count">%d</xliff:g> Kontakte hinzugefügt werden.</string>
   <string name="menu_memory_status">Speicherstatus</string>
   <string name="memory_size">Gesamt:</string>
   <string name="memory_used">Belegt:</string>

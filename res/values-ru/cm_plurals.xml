@@ -29,7 +29,7 @@
   <plurals name="import_progress">
     <item quantity="one">Импортирован %d контакт</item>
     <item quantity="few">Импортированы %d контакта</item>
-    <item quantity="other">Импортировано %d контактов</item>
+    <item quantity="other">Импортированы %d контактов</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="one">%d контакт будет удален.</item>

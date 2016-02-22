@@ -45,15 +45,15 @@
   <string name="too_many_contacts_add_to_group">Impossible d\'ajouter plus de <xliff:g id="count">%d</xliff:g> contacts</string>
   <string name="menu_memory_status">État de la mémoire</string>
   <string name="memory_size">Total :</string>
-  <string name="memory_used">Utilisé :</string>
-  <string name="calculating_status_now">Calcul du statut\u2026</string>
+  <string name="memory_used">Utilisée :</string>
+  <string name="calculating_status_now">Calcul de l\'état\u2026</string>
   <string name="menu_copyTo">Copier dans <xliff:g id="destination">%s</xliff:g></string>
   <string name="no_empty_email_in_usim">Un contact USIM n\'a pas de champ e-mail disponible, impossible de copier les messages.</string>
   <string name="voicemail">Messagerie vocale</string>
-  <string name="select_call_title">Sélectionner le journal d\'appels</string>
-  <string name="delete_call_title">Supprimer le journal d\'appels</string>
-  <string name="delete_call_message">Suppression du journal d\'appels\u2026</string>
-  <string name="delete_call_alert">Supprimer le journal d\'appels ?</string>
+  <string name="select_call_title">Sélectionner les journaux d\'appels</string>
+  <string name="delete_call_title">Supprimer les journaux d\'appels</string>
+  <string name="delete_call_message">Suppression des journaux d\'appels\u2026</string>
+  <string name="delete_call_alert">Supprimer les journaux d\'appels sélectionnés ?</string>
   <string name="title_del_call">Supprimer</string>
   <string name="powered_by_provider">Proposé par <xliff:g id="provider">%s</xliff:g></string>
 </resources>

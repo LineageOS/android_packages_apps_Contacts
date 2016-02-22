@@ -20,7 +20,7 @@
   <string name="contactSavedToSimCardError">Kunde inte spara de valda kontakterna till SIM-kortet</string>
   <string name="airplane_mode_on">SIM-kortet kan inte nås när flygplansläge är aktiverat</string>
   <string name="number_anr_too_long">Numret är för lång</string>
-  <string name="email_address_too_long">E-postadress är för lång</string>
+  <string name="email_address_too_long">E-postadressen är för lång</string>
   <string name="sim_card_full">SIM-kortet är fullt</string>
   <string name="tag_too_long">Kontaktnamnet är för långt</string>
   <string name="invalid_phone_number">Telefonnumret är ogiltigt</string>

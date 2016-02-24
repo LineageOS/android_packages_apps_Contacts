@@ -2315,6 +2315,7 @@ public class QuickContactActivity extends ContactsActivity implements
 
         // override transitions to skip the standard window animations
         overridePendingTransition(0, 0);
+        mBlockContactHelper.destroy();
     }
 
     private final LoaderCallbacks<List<ContactInteraction>> mLoaderInteractionsCallbacks =

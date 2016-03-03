@@ -57,10 +57,10 @@ public class CallLogInteractionsLoader extends AsyncTaskLoader<List<ContactInter
 
     @Override
     public List<ContactInteraction> loadInBackground() {
-        if (!PermissionsUtil.hasPhonePermissions(getContext())
-                || !getContext().getPackageManager()
-                        .hasSystemFeature(PackageManager.FEATURE_TELEPHONY)
-                || (mPhoneNumbers == null || mPhoneNumbers.length <= 0 || mMaxToRetrieve <= 0)) {
+        if (!PermissionsUtil.hasPhonePermissions(getContext()) || !getContext().getPackageManager()
+                .hasSystemFeature(PackageManager.FEATURE_TELEPHONY)
+                || (((mPhoneNumbers == null || mPhoneNumbers.length <= 0 || mMaxToRetrieve <= 0))
+                && (mPluginAccountsMap == null || mPluginAccountsMap.size() == 0))) {
             return Collections.emptyList();
         }
 

@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">選択した連絡先をSIMに保存できませんでした</string>
   <string name="airplane_mode_on">機内モードが有効になっている間はSIMカードにアクセスできません</string>
   <string name="number_anr_too_long">電話番号が長すぎます</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">番号の種類が無効です</string>
   <string name="no_phone_number_or_email">電話番号またはメールアドレスを入力してください。</string>
   <string name="memory_card_full">連絡先を保存できませんでした、携帯電話のメモリがいっぱいです</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">グループ</string>
   <string name="menu_moveGroupMembers">グループのメンバーを移動</string>
   <string name="title_move_members">メンバーを移動</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">発信前に番号を編集</string>
   <string name="menu_sendViaSMS">連絡先をSMS経由で送信</string>
   <string name="select_all">すべて</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">SIMの連絡先をインポート</string>
   <string name="import_sim_contacts_message">SIMの連絡先をインポート中\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">連絡先をインポートしますか？</string>
   <string name="import_finish">インポートが完了しました</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">連絡先を削除</string>
   <string name="delete_contacts_message">連絡先を削除中\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">連絡先を削除しますか？</string>
   <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g>件以上の連絡先は追加できません</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">メモリの状態</string>
   <string name="memory_size">合計:</string>
   <string name="memory_used">使用数:</string>

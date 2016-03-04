@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">No s\'han pogut desar els contactes seleccionats a la targeta SIM</string>
   <string name="airplane_mode_on">No es pot accedir a la targeta SIM mentre el mode avió està activat</string>
   <string name="number_anr_too_long">El número és massa llarg</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">El tipus de número no és vàlid</string>
   <string name="no_phone_number_or_email">Si us plau, introdueix un número de telèfon o una adreça de correu electrònic.</string>
   <string name="memory_card_full">No s\'ha pogut desar el contacte, la memòria del telèfon és plena</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Grups</string>
   <string name="menu_moveGroupMembers">Mou els membres del grup</string>
   <string name="title_move_members">Mou els membres</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Edita el número abans de trucar</string>
   <string name="menu_sendViaSMS">Envia contacte mitjançant SMS</string>
   <string name="select_all">Tot</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">Importa contactes de la SIM</string>
   <string name="import_sim_contacts_message">S\'estan Important els contactes de la SIM\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Vols importar el contacte?</string>
   <string name="import_finish">S\'ha finalitzat la importació</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Esborra contactes</string>
   <string name="delete_contacts_message">S\'estan esborrant els contactes\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Vols esborrar el contacte?</string>
   <string name="too_many_contacts_add_to_group">Només hi ha <xliff:g id="count">%d</xliff:g> contactes que puguin ser afegits</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Estat de la memòria</string>
   <string name="memory_size">Total:</string>
   <string name="memory_used">Usats:</string>

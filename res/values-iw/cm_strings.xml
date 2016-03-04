@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">לא ניתן היה לשמור את אנשי הקשר לכרטיס ה-SIM</string>
   <string name="airplane_mode_on">לא ניתן לגשת לכרטיס ה-SIM כאשר מצב טיסה מופעל</string>
   <string name="number_anr_too_long">המספר ארוך מדי</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">סוג המספר אינו חוקי</string>
   <string name="no_phone_number_or_email">אנא הכנס מספר טלפון או כתובת דוא\"ל.</string>
   <string name="memory_card_full">לא ניתן לשמור את איש הקשר, זיכרון המכשיר מלא</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">קבוצות</string>
   <string name="menu_moveGroupMembers">העבר חברי קבוצה</string>
   <string name="title_move_members">העבר חברים</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">ערוך מספר לפני השיחה</string>
   <string name="menu_sendViaSMS">שלח איש קשר באמצעות SMS</string>
   <string name="select_all">הכל</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">ייבא אנשי קשר מה-SIM</string>
   <string name="import_sim_contacts_message">מייבא אנשי קשר מה-SIM\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">לייבא אנשי קשר?</string>
   <string name="import_finish">הייבוא הסתיים</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">מחק אנשי קשר</string>
   <string name="delete_contacts_message">מוחק אנשי קשר\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">למחוק איש קשר?</string>
   <string name="too_many_contacts_add_to_group">לא ניתן להוסיף יותר מ-<xliff:g id="count">%d</xliff:g> אנשי קשר</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">מצב הזיכרון</string>
   <string name="memory_size">סך הכל:</string>
   <string name="memory_used">בשימוש:</string>

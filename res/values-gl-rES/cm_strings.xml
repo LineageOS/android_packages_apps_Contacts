@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Non foi posíbel gardar os contactos seleccionados na tarxeta SIM</string>
   <string name="airplane_mode_on">Non é posíbel acceder á tarxeta SIM mentres estea activado o modo avión</string>
   <string name="number_anr_too_long">O número é pongo de máis</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">O tipo de número non é correcto</string>
   <string name="no_phone_number_or_email">Escriba un número de teléfono ou un enderezo de correo.</string>
   <string name="memory_card_full">Non se puido gardar o contacto, a memoria do móbil está chea</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Grupos</string>
   <string name="menu_moveGroupMembers">Mover os membros do grupo</string>
   <string name="title_move_members">Mover membros</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Editar o número antes de chamar</string>
   <string name="menu_sendViaSMS">Enviar contacto vía SMS</string>
   <string name="select_all">Todo</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">Importar contactos do SIM</string>
   <string name="import_sim_contacts_message">Importando os contactos da SIM\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Importar o contacto?</string>
   <string name="import_finish">Finalizou a importación</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Eliminar os contactos</string>
   <string name="delete_contacts_message">Eliminando contactos\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Eliminar o contacto?</string>
   <string name="too_many_contacts_add_to_group">Non se poden engadir máis de <xliff:g id="count">%d</xliff:g> contactos</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Estado da memoria</string>
   <string name="memory_size">Total:</string>
   <string name="memory_used">Usado:</string>

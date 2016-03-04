@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Valitud kontakte ei saanud salvestada SIM kaardile</string>
   <string name="airplane_mode_on">SIM-kaardile ei pääse juurde kui lennukirežiim on aktiivne</string>
   <string name="number_anr_too_long">Number on liiga pikk</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">Numbri tüüp on vale</string>
   <string name="no_phone_number_or_email">Sisestage telefoninumber või e-posti aadress.</string>
   <string name="memory_card_full">Kontakti ei saa salvestada, telefoni mälu on täis</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Grupid</string>
   <string name="menu_moveGroupMembers">Liiguta grupi liikmeid</string>
   <string name="title_move_members">Liiguta liikmeid</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Muuda numbrit enne helistamist</string>
   <string name="menu_sendViaSMS">Saada kontakt SMS-iga</string>
   <string name="select_all">Kõik</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">Impordi SIM-kaardi kontaktid</string>
   <string name="import_sim_contacts_message">SIM-kaardi kontaktide importimine</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Impordi kontakt?</string>
   <string name="import_finish">Importimine lõpetatud</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Kontaktide kustutamine</string>
   <string name="delete_contacts_message">Kontaktide kustutamine\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Kustuta kontakt?</string>
   <string name="too_many_contacts_add_to_group">Enam kui <xliff:g id="count">%d </xliff:g> kontakti ei saa lisada</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Mälu olek</string>
   <string name="memory_size">Kokku:</string>
   <string name="memory_used">Kasutusel:</string>

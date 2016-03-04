@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Nelze uložit vybrané kontakty na SIM kartu</string>
   <string name="airplane_mode_on">Při režimu letadlo není dostupná karta SIM</string>
   <string name="number_anr_too_long">Číslo je moc dlouhé</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">Typ čísla je neplatný</string>
   <string name="no_phone_number_or_email">Zadejte prosím telefonní číslo nebo e-mailovou adresu.</string>
   <string name="memory_card_full">Kontakt nelze uložit, paměť telefonu je plná</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Skupiny</string>
   <string name="menu_moveGroupMembers">Přesunout členy skupiny</string>
   <string name="title_move_members">Přesunout členy</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Upravit číslo před voláním</string>
   <string name="menu_sendViaSMS">Odeslat kontakt pomocí SMS</string>
   <string name="select_all">Vše</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">Importovat kontakty ze SIM karty</string>
   <string name="import_sim_contacts_message">Importování kontaktů ze SIM karty\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Importovat kontakt?</string>
   <string name="import_finish">Import dokončen</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Odstranit kontakty</string>
   <string name="delete_contacts_message">Odstraňují se kontakty\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Odstranit kontakt?</string>
   <string name="too_many_contacts_add_to_group">Nelze přidat více než <xliff:g id="count">%d</xliff:g> kontaktů</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Stav paměti</string>
   <string name="memory_size">Celkem:</string>
   <string name="memory_used">Použito:</string>

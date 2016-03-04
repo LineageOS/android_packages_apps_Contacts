@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Ne sukcesis konservi la elektitajn kontaktulojn en la SD-karto</string>
   <string name="airplane_mode_on">La SD-karto ne estas atingebla kiam avialila reĝimo estas ŝaltita</string>
   <string name="number_anr_too_long">La nombro estas tro longa</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">La nombro estas nevalida</string>
   <string name="no_phone_number_or_email">Bonvolu tajpi telefonnumeron aŭ retadreson.</string>
   <string name="memory_card_full">Ne sukcesis konservi la kontaktulon ĉar la telefon-memoro estas plena</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Grupoj</string>
   <string name="menu_moveGroupMembers">Movi membrojn de la grupo</string>
   <string name="title_move_members">Movi membrojn</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Redakti la numeron antaŭ ol alvoki</string>
   <string name="menu_sendViaSMS">Sendi kontaktulon per SMS</string>
   <string name="select_all">Ĉio</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">Importi SIM kontaktulojn</string>
   <string name="import_sim_contacts_message">Importado de SIM kontaktuloj\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Ĉu importi kontaktulon?</string>
   <string name="import_finish">Importado finita</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Forigi kontaktulojn</string>
   <string name="delete_contacts_message">Forigado de kontaktuloj\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Ĉu forigi kontaktulojn?</string>
   <string name="too_many_contacts_add_to_group">Ne eblas aldoni pli ol <xliff:g id="count">%d</xliff:g> kontaktuloj</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Memora stato</string>
   <string name="memory_size">Sumo:</string>
   <string name="memory_used">Uzata:</string>

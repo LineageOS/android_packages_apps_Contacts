@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Valittujen yhteystietojen tallennus SIM-kortille epäonnistui</string>
   <string name="airplane_mode_on">SIM-korttia ei voida käyttää, kun lentokonetila on käytössä</string>
   <string name="number_anr_too_long">Numero on liian pitkä</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">Numerotyyppi on virheellinen</string>
   <string name="no_phone_number_or_email">Anna puhelinnumero tai sähköpostiosoite.</string>
   <string name="memory_card_full">Yhteystietoa ei voitu tallentaa, puhelimen muisti on täynnä</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Ryhmät</string>
   <string name="menu_moveGroupMembers">Siirrä ryhmän jäsenet</string>
   <string name="title_move_members">Siirrä jäsenet</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Muokkaa numeroa ennen puhelua</string>
   <string name="menu_sendViaSMS">Lähetä yhteystieto tekstiviestillä</string>
   <string name="select_all">Kaikki</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">Tuo SIM-yhteystietoja</string>
   <string name="import_sim_contacts_message">Tuodaan SIM-yhteystietoja\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Tuo yhteystieto?</string>
   <string name="import_finish">Tuonti valmis</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Poista yhteystietoja</string>
   <string name="delete_contacts_message">Poistetaan yhteystietoja\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Poista yhteystieto?</string>
   <string name="too_many_contacts_add_to_group">Enintään <xliff:g id="count">%d</xliff:g> yhteystietoa voidaan lisätä</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Muistin tila</string>
   <string name="memory_size">Yhteensä:</string>
   <string name="memory_used">Käytetty:</string>

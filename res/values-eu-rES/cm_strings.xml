@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Ezin izan dira SIM txartelean gorde hautatutako kontaktuak</string>
   <string name="airplane_mode_on">Ezin da SIM txartela atzitu hegaldi moduan</string>
   <string name="number_anr_too_long">Zenbakia luzeegia da</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">Zenbaki mota baliogabea da</string>
   <string name="no_phone_number_or_email">Idatzi telefono zenbakia edo eposta helbidea.</string>
   <string name="memory_card_full">Ezin izan da kontaktua gorde, telefonoaren memoria beteta dago</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Taldeak</string>
   <string name="menu_moveGroupMembers">Mugitu taldekideak</string>
   <string name="title_move_members">Mugitu kideak</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Editatu zenbakia deitu aurretik</string>
   <string name="menu_sendViaSMS">Bidali kontaktua SMS bidez</string>
   <string name="select_all">Guztiak</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">Inportatu SIM txarteleko kontaktuak</string>
   <string name="import_sim_contacts_message">SIMeko kontaktuak inportatzen \u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Inportatu kontaktua?</string>
   <string name="import_finish">Inportazioa burutu da</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Ezabatu kontaktuak</string>
   <string name="delete_contacts_message">Kontaktuak ezabatzen \u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Ezabatu kontaktua?</string>
   <string name="too_many_contacts_add_to_group">Ezin dira <xliff:g id="count">%d</xliff:g> kontaktu baino gehiago gehitu</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Memoriaren egoera</string>
   <string name="memory_size">Guztira:</string>
   <string name="memory_used">Erabilita:</string>

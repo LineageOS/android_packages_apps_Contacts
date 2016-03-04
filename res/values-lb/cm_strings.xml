@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Déi ausgewielt Kontakter konnten net op d\'SIM-Kaart gespäichert ginn</string>
   <string name="airplane_mode_on">Bei aktivéiertem Fligermodus kann net op d\'SIM-Kaart zougegraff ginn</string>
   <string name="number_anr_too_long">Nummer ze laang</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">Nummerentyp ass ongëlteg</string>
   <string name="no_phone_number_or_email">Gëff w.e.g. eng Telefonsnummer oder E-Mail-Adress an.</string>
   <string name="memory_card_full">Kontakt konnt net gespäichert ginn, den Telefonsspäicher ass voll</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Gruppen</string>
   <string name="menu_moveGroupMembers">Gruppemembere réckelen</string>
   <string name="title_move_members">Membere réckelen</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Nummer virum Uruff änneren</string>
   <string name="menu_sendViaSMS">Kontakt iwwer SMS schécken</string>
   <string name="select_all">All</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">SIM-Kontakter importéieren</string>
   <string name="import_sim_contacts_message">SIM-Kontakter ginn importéiert\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Kontakt importéieren?</string>
   <string name="import_finish">Import fäerdeg</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Kontakter läschen</string>
   <string name="delete_contacts_message">Kontakter gi geläscht\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Kontakt läschen?</string>
   <string name="too_many_contacts_add_to_group">Et kënne just <xliff:g id="count">%d</xliff:g> Kontakter agedroe ginn</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Späicherstatus</string>
   <string name="memory_size">Total:</string>
   <string name="memory_used">Benotzt:</string>

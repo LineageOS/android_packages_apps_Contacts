@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Neizdevās saglabāt izvēlēto kontaktu SIM kartē</string>
   <string name="airplane_mode_on">SIM kartei nevar piekļūt, kamēr ir ieslēgts lidmašīnas režīms</string>
   <string name="number_anr_too_long">Numurs ir pārāk garš</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">Numura tips ir nederīgs</string>
   <string name="no_phone_number_or_email">Lūdzu, ievadiet telefona numuru vai e-pasta adresi.</string>
   <string name="memory_card_full">Nevar saglabāt kontaktpersonu, telefona atmiņa ir pilna</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Grupas</string>
   <string name="menu_moveGroupMembers">Pārvietot grupas dalībniekus</string>
   <string name="title_move_members">Pārvietot dalībniekus</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Labot numuru pirms zvana</string>
   <string name="menu_sendViaSMS">Nosūtīt kontaktu ar īsziņu</string>
   <string name="select_all">Visi</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">Importēt SIM kontaktus</string>
   <string name="import_sim_contacts_message">Importēju SIM kontaktus\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Importēt kontaktus?</string>
   <string name="import_finish">Importēšana pabeigta</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Dzēst kontaktus</string>
   <string name="delete_contacts_message">Dzēš kontaktus\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Dzēst kontaktpersonu?</string>
   <string name="too_many_contacts_add_to_group">Var pievienot ne vairāk kā <xliff:g id="count">%d</xliff:g> kontaktus</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Atmiņas statuss</string>
   <string name="memory_size">Kopā:</string>
   <string name="memory_used">Izmantots:</string>

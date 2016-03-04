@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Δεν ήταν δυνατή η αποθήκευση των επιλεγμένων επαφών στην κάρτα SIM</string>
   <string name="airplane_mode_on">Δεν είναι δυνατή η πρόσβαση της κάρτας SIM ενώ είναι ενεργή η λειτουργία πτήσης</string>
   <string name="number_anr_too_long">Ο αριθμός είναι πολύ μεγάλος</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">Ο τύπος του αριθμού δεν είναι έγκυρος</string>
   <string name="no_phone_number_or_email">Παρακαλώ εισάγετε έναν τηλεφωνικό αριθμό ή ηλεκτρονική διεύθυνση.</string>
   <string name="memory_card_full">Δεν ήταν δυνατή η αποθήκευση της επαφής, η μνήμη του τηλεφώνου είναι πλήρης</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Ομάδες</string>
   <string name="menu_moveGroupMembers">Μετακίνηση μελών ομάδας</string>
   <string name="title_move_members">Μετακίνηση μελών</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Επεξεργασία αριθμού πριν την κλήση</string>
   <string name="menu_sendViaSMS">Αποστολή επαφής μέσω SMS</string>
   <string name="select_all">Όλες</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">Εισαγωγή επαφών SIM</string>
   <string name="import_sim_contacts_message">Εισαγωγή επαφών SIM\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Εισαγωγή επαφής;</string>
   <string name="import_finish">Η εισαγωγή ολοκληρώθηκε</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Διαγραφή επαφών</string>
   <string name="delete_contacts_message">Διαγραφή επαφών\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Διαγραφή επαφής;</string>
   <string name="too_many_contacts_add_to_group">Δεν είναι δυνατή η προσθήκη περισσότερων από <xliff:g id="count">%d</xliff:g> επαφών</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Κατάσταση μνήμης</string>
   <string name="memory_size">Συνολικά:</string>
   <string name="memory_used">Σε χρήση:</string>

@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">선택된 연락처를 SIM 카드에 저장하지 못했습니다</string>
   <string name="airplane_mode_on">비행기 모드를 사용중일 때에는 SIM 카드에 접근할 수 없습니다</string>
   <string name="number_anr_too_long">전화번호가 너무 깁니다</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">전화번호 형식이 올바르지 않습니다</string>
   <string name="no_phone_number_or_email">전화번호 또는 이메일 주소를 입력해주십시오.</string>
   <string name="memory_card_full">연락처를 저장할 수 없습니다, 휴대전화 메모리가 가득 찼습니다</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">그룹</string>
   <string name="menu_moveGroupMembers">그룹 구성원 이동</string>
   <string name="title_move_members">구성원 이동</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">전화하기 전에 번호 수정</string>
   <string name="menu_sendViaSMS">SMS로 연락처 보내기</string>
   <string name="select_all">전부</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">SIM 연락처 가져오기</string>
   <string name="import_sim_contacts_message">SIM 연락처를 가져오는 중\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">연락처를 가져올까요?</string>
   <string name="import_finish">가져오기 완료</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">연락처 삭제</string>
   <string name="delete_contacts_message">연락처 삭제하는 중\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">연락처를 삭제할까요?</string>
   <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g>건보다 많은 수의 연락처는 추가할 수 없습니다</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">메모리 상태</string>
   <string name="memory_size">전체:</string>
   <string name="memory_used">사용 중:</string>

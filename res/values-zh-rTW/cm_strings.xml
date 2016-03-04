@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">不能將已選取的聯絡人儲存至 SIM 卡</string>
   <string name="airplane_mode_on">當飛航模式啟用時不能存取 SIM 卡</string>
   <string name="number_anr_too_long">號碼過長</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">無效的號碼類型</string>
   <string name="no_phone_number_or_email">請輸入一個電話號碼或電子郵件地址。</string>
   <string name="memory_card_full">無法儲存聯絡人，裝置記憶體已滿</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">群組</string>
   <string name="menu_moveGroupMembers">移動群組成員</string>
   <string name="title_move_members">移動成員</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">撥打前編輯電話號碼</string>
   <string name="menu_sendViaSMS">透過簡訊傳送聯絡人資料</string>
   <string name="select_all">全部</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">匯入 SIM 卡中的聯絡人</string>
   <string name="import_sim_contacts_message">正在匯入 SIM 卡中的聯絡人\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">匯入聯絡人？</string>
   <string name="import_finish">匯入完成</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">刪除聯絡人</string>
   <string name="delete_contacts_message">正在刪除聯絡人\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">刪除聯絡人？</string>
   <string name="too_many_contacts_add_to_group">不可以新增超過 <xliff:g id="count">%d</xliff:g> 個聯絡人</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">記憶體狀態</string>
   <string name="memory_size">總計：</string>
   <string name="memory_used">已用：</string>

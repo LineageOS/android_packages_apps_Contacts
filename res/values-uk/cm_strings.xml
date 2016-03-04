@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Не вдалося зберегти вибрані контакти на SIM-картці</string>
   <string name="airplane_mode_on">SIM-картка не доступна коли активовано режим польоту</string>
   <string name="number_anr_too_long">Номер задовгий</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">Неприпустимий тип номера</string>
   <string name="no_phone_number_or_email">Будь ласка, введіть телефонний номер або електронну адресу.</string>
   <string name="memory_card_full">Не вдалося зберегти контакт, пам\'ять телефону заповнена</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Групи</string>
   <string name="menu_moveGroupMembers">Перемістити контакти групи</string>
   <string name="title_move_members">Перемістити контакти</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Редагування номера перед викликом</string>
   <string name="menu_sendViaSMS">Надіслати контакт за допомогою SMS</string>
   <string name="select_all">Усi</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">Імпортувати контакти SIM</string>
   <string name="import_sim_contacts_message">Імпорт контактів SIM\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Імпорт контактів?</string>
   <string name="import_finish">Імпортування завершено</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Видалити контакти</string>
   <string name="delete_contacts_message">Видалення контактів\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Видалити контакт?</string>
   <string name="too_many_contacts_add_to_group">Більше ніж <xliff:g id="count">%d</xliff:g> контактів не може бути додано</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Стан пам\'яті</string>
   <string name="memory_size">Всього:</string>
   <string name="memory_used">Використано:</string>

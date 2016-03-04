@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Nem lehet elmenteni a kiválasztott névjegyeket a SIM-kártyára</string>
   <string name="airplane_mode_on">A SIM-kártya nem érhető el, míg a repülőgép üzemmód engedélyezve van</string>
   <string name="number_anr_too_long">A szám túl hosszú</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">Érvénytelen szám-típus</string>
   <string name="no_phone_number_or_email">Kérjük, adjon meg telefonszámot vagy e-mail címet.</string>
   <string name="memory_card_full">A névjegyet nem lehet menteni, a telefon memóriája megtelt</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Csoportok</string>
   <string name="menu_moveGroupMembers">Csoport tagjainak áthelyezése</string>
   <string name="title_move_members">Tagok áthelyezése</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Szám szerkesztése hívás előtt</string>
   <string name="menu_sendViaSMS">Névjegy küldése SMS-ben</string>
   <string name="select_all">Mind</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">SIM névjegyek importálása</string>
   <string name="import_sim_contacts_message">SIM névjegyek importálása\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Importálja a névjegyet?</string>
   <string name="import_finish">Importálás befejeződött</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Névjegyek törlése</string>
   <string name="delete_contacts_message">Névjegyek törlése\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Törli a névjegyet?</string>
   <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g> névjegynél több nem adható hozzá</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Memória állapota</string>
   <string name="memory_size">Teljes:</string>
   <string name="memory_used">Foglalt:</string>

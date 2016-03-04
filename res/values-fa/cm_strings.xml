@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">مخاطبین انتخاب شده را نمی توان در سیم کارت ذخیره کرد</string>
   <string name="airplane_mode_on">سیم‌کارت در حالت پرواز قابل استفاده نیست</string>
   <string name="number_anr_too_long">شماره بسیار طولانی است</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">نوع شماره تلفن نامعتبر است</string>
   <string name="no_phone_number_or_email">لطفا آدرس ایمیل یا شماره تلفن را وارد نمایید.</string>
   <string name="memory_card_full">مخاطب ذخیره نمی‌شود، حافظه گوشی پر است</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">گروه‌ها</string>
   <string name="menu_moveGroupMembers">انتقال اعضای گروه</string>
   <string name="title_move_members">انتقال اعضا</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">ویرایش شماره قبل از تماس</string>
   <string name="menu_sendViaSMS">ارسال مخاطب از طریق پیامک</string>
   <string name="select_all">همه</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">وارد کردن مخاطبین سیم کارت</string>
   <string name="import_sim_contacts_message">وارد کردن مخاطبین سیم کارت\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">مخاطب وارد شود؟</string>
   <string name="import_finish">وارد کردن تمام شد</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">حذف مخاطبین</string>
   <string name="delete_contacts_message">حذف مخاطبین\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">مخاطب حذف شود؟</string>
   <string name="too_many_contacts_add_to_group">نمی توان بیشتر از <xliff:g id="count">%d</xliff:g> مخاطب اضافه کرد</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">وضعیت حافظه</string>
   <string name="memory_size">مجموع:</string>
   <string name="memory_used">استفاده شده:</string>

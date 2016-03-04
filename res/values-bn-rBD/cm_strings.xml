@@ -17,6 +17,13 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
+  <!-- Choose Sim Card to Import -->
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">যোগাযোগ আমদানি করবেন?</string>
+  <!-- Multi Delete Contacts related strings -->
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">যোগাযোগ মুছে ফেলতে চান?</string>
+  <!-- add for MemoryStatusActivity -->
 </resources>

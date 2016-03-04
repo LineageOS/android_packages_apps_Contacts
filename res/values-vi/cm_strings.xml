@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Không thể lưu các số liên lạc đã chọn vào thẻ SIM</string>
   <string name="airplane_mode_on">Thẻ SIM không thể truy cập được khi chế độ máy bay được kích hoạt</string>
   <string name="number_anr_too_long">Số quá dài</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">Kiểu số không hợp lệ</string>
   <string name="no_phone_number_or_email">Vui lòng nhập địa chỉ email hoặc số điện thoại.</string>
   <string name="memory_card_full">Không thể lưu số liên lạc, bộ nhớ điện thoại đã đầy</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Nhóm</string>
   <string name="menu_moveGroupMembers">Chuyển thành viên nhóm</string>
   <string name="title_move_members">Chuyển thành viên</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Sửa số trước khi gọi</string>
   <string name="menu_sendViaSMS">Gửi số liên lạc qua SMS</string>
   <string name="select_all">Tất cả</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">Nhập các số liên lạc từ SIM</string>
   <string name="import_sim_contacts_message">Đang nhập các số liên lạc từ SIM\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Nhập số liên lạc?</string>
   <string name="import_finish">Nhập hoàn tất</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Xoá số liên lạc</string>
   <string name="delete_contacts_message">Đang xoá số liên lạc\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Xoá số liên lạc?</string>
   <string name="too_many_contacts_add_to_group">Không được thêm vào nhiều hơn <xliff:g id="count">%d</xliff:g> số liên lạc</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Trạng thái bộ nhớ</string>
   <string name="memory_size">Tổng:</string>
   <string name="memory_used">Đã dùng:</string>

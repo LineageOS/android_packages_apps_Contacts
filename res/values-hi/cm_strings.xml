@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">चयनित संपर्कों को सिम कार्ड में सहेज नहीं सके</string>
   <string name="airplane_mode_on">जब विमान मोड सक्षम हो, सिम कार्ड तक पहुँचना संभव नहीं है</string>
   <string name="number_anr_too_long">संख्या बहुत लंबी है</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">संख्या प्रकार अमान्य है</string>
   <string name="no_phone_number_or_email">कृपया फ़ोन नंबर या ईमेल पता दर्ज करें।</string>
   <string name="memory_card_full">संपर्क को सहेजा नहीं जा सका, फ़ोन स्मृति भर चुकी है</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">समूह</string>
   <string name="menu_moveGroupMembers">समूह सदस्यों को स्थानांतरित करें</string>
   <string name="title_move_members">सदस्यों को स्थानांतरित करें</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">कॉल करने से पहले नंबर को संपादित करें</string>
   <string name="menu_sendViaSMS">संपर्क एसएमएस से भेजें</string>
   <string name="select_all">सब</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">सिम संपर्कों को आयात करें</string>
   <string name="import_sim_contacts_message">सिम संपर्कों को आयात कर रहे हैं\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">संपर्क को आयात करें?</string>
   <string name="import_finish">आयात पूर्ण</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">संपर्कों को हटाएँ</string>
   <string name="delete_contacts_message">संपर्कों को हटा रहे हैं\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">संपर्क को हटा दें?</string>
   <string name="too_many_contacts_add_to_group">केवल <xliff:g id="count">%d</xliff:g> संपर्क और जोड़े जा सकते हैं</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">स्मृति की स्थिति</string>
   <string name="memory_size">कुल:</string>
   <string name="memory_used">प्रयुक्त:</string>

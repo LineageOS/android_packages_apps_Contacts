@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Не атрымалася захаваць абраныя кантакты на SIM-картку</string>
   <string name="airplane_mode_on">Каб атрымаць доступ да SIM-карткі, адключыце рэжым самалёту</string>
   <string name="number_anr_too_long">Задоўгі нумар</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">Няправільны тып нумара</string>
   <string name="no_phone_number_or_email">Калі ласка, увядзіце нумар тэлефону альбо адрас электроннай пошты.</string>
   <string name="memory_card_full">Немагчыма захаваць кантакт, памяць прылады запоўнена</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Гурты</string>
   <string name="menu_moveGroupMembers">Перасунуць удзельнікаў гурта</string>
   <string name="title_move_members">Перасунуць кантакты</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Змяніць нумар і выклікаць</string>
   <string name="menu_sendViaSMS">Даслаць кантакт па SMS</string>
   <string name="select_all">Усё</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">Імпартаваць кантакты SIM</string>
   <string name="import_sim_contacts_message">Імпарт кантактаў SIM\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Імпартаваць кантакт?</string>
   <string name="import_finish">Імпартаванне скончана</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Выдаліць кантакты</string>
   <string name="delete_contacts_message">Выдаленне кантактаў\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Выдаліць кантакт?</string>
   <string name="too_many_contacts_add_to_group">Можна дадаць не больш за <xliff:g id="count">%d</xliff:g> кантактаў</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Стан памяці</string>
   <string name="memory_size">Усяго:</string>
   <string name="memory_used">Выкарыстоўваецца:</string>

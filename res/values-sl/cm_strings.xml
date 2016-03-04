@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Izbranih stikov ni bilo mogoče shraniti na kartico SIM</string>
   <string name="airplane_mode_on">Ni mogoče dostopati do kartice SIM, ko je način za letalo omogočen</string>
   <string name="number_anr_too_long">Število je predolgo</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">Vrsta številke je neveljavna</string>
   <string name="no_phone_number_or_email">Vstavite tel. številko ali e-poštni naslov.</string>
   <string name="memory_card_full">Stika ni bilo mogoče shraniti, pomnilnik telefona je poln</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Skupine</string>
   <string name="menu_moveGroupMembers">Premakni člane skupine</string>
   <string name="title_move_members">Premakni člane</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Uredi številko pred klicem</string>
   <string name="menu_sendViaSMS">Pošlji stik preko SMS-a</string>
   <string name="select_all">Vse</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">Uvozi stike SIM</string>
   <string name="import_sim_contacts_message">Uvažanje stikov SIM \u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Uvozi stik?</string>
   <string name="import_finish">Uvoz končan</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Izbriši stike</string>
   <string name="delete_contacts_message">Brisanje stikov \u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Izbriši stik?</string>
   <string name="too_many_contacts_add_to_group">Dodanih ne more bite več kot <xliff:g id="count">%d</xliff:g> stikov</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Stanje pomnilnika</string>
   <string name="memory_size">Skupaj:</string>
   <string name="memory_used">Uporabljeno:</string>

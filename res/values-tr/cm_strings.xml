@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Seçili kişiler SIM karta kaydedilemedi</string>
   <string name="airplane_mode_on">Uçak modu etkinken SIM karta erişilemez</string>
   <string name="number_anr_too_long">Numara çok uzun</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">Numara türü geçersiz</string>
   <string name="no_phone_number_or_email">Lütfen bir telefon numarası ya da e-posta adresi girin.</string>
   <string name="memory_card_full">Kişi kaydedilemedi, telefon belleği dolu</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Gruplar</string>
   <string name="menu_moveGroupMembers">Grup üyelerini taşı </string>
   <string name="title_move_members">Üyeleri taşı </string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Çağrıdan önce numarayı düzenle</string>
   <string name="menu_sendViaSMS">Kişiyi SMS ile gönder</string>
   <string name="select_all">Tümü</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">SIM kişilerini al</string>
   <string name="import_sim_contacts_message">SIM kişileri alınıyor\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Kişi alınsın mı?</string>
   <string name="import_finish">Alma işi bitti</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Kişileri sil</string>
   <string name="delete_contacts_message">Kişiler siliniyor\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Kişi silinsin mi?</string>
   <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g>\'den fazla kişi eklenemez</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Hafıza durumu</string>
   <string name="memory_size">Toplam:</string>
   <string name="memory_used">Kullanılan:</string>

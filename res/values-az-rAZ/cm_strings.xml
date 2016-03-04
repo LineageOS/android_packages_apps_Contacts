@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Seçilən şəxslər SIM kartda saxlanılmadı</string>
   <string name="airplane_mode_on">Uçuş rejimi fəal olduqda SIM karta müraciət mümkün deyil</string>
   <string name="number_anr_too_long">Nömrə çox uzundur</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">Nömrə növü etibarsızdır</string>
   <string name="no_phone_number_or_email">Zəhmət olmasa telefon nömrəsi və ya e-poçt ünvanı daxil edin.</string>
   <string name="memory_card_full">Şəxs saxlanılmadı, telefon yaddaşı dolub</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Qruplar</string>
   <string name="menu_moveGroupMembers">Qrup üzvlərini köçür</string>
   <string name="title_move_members">Üzvləri köçür</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Zəngdən əvvəl nömrəyə düzəliş et</string>
   <string name="menu_sendViaSMS">Şəxsi SMS ilə göndər</string>
   <string name="select_all">Hamısı</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">SIM şəxslərini idxal et</string>
   <string name="import_sim_contacts_message">SIM şəxsləri idxal edilir\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Şəxs idxal edilsin?</string>
   <string name="import_finish">İdxal başa çatdı</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Şəxsləri sil</string>
   <string name="delete_contacts_message">Şəxslər silinir\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Şəxsi sil?</string>
   <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g> \'dən çox şəxs əlavə etmək olmaz</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Yaddaş durumu</string>
   <string name="memory_size">Cəmi:</string>
   <string name="memory_used">İşlədilən:</string>

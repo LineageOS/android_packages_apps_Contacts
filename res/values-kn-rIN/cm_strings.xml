@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">ಆಯ್ಕೆಮಾಡಿದ ಸಂಪರ್ಕಗಳನ್ನು ಸಿಮ್ ಕಾರ್ಡ್‍ಗೆ ಉಳಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ</string>
   <string name="airplane_mode_on">ಏರೋಪ್ಲೇನ್ ಮೋಡ್ ಸಕ್ರಿಯವಿರುವಾಗ ಸಿಮ್ ಕಾರ್ಡ್ ಪ್ರವೇಶಿಸಲಾಗುವುದಿಲ್ಲ</string>
   <string name="number_anr_too_long">ಸಂಖ್ಯೆ ಬಹಳ ಉದ್ದವಾಯಿತು</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">ಸಂಖ್ಯೆ ಸ್ವರೂಪ ಅಮಾನ್ಯವಾಗಿದೆ</string>
   <string name="no_phone_number_or_email">ದಯವಿಟ್ಟು ದೂರವಾಣಿ ಸಂಖ್ಯೆ ಅಥವ ಇಮೇಲ್ ವಿಳಾಸವನ್ನು ಹಾಕಿ.</string>
   <string name="memory_card_full">ಸಂಪರ್ಕ ಉಳಿಸಲಾಗಲಿಲ್ಲ. ಫೋನ್ ಸ್ಮರಣೆ ಭರ್ತಿಯಾಗಿದೆ</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">ಗುಂಪುಗಳು</string>
   <string name="menu_moveGroupMembers">ಗುಂಪಿನ ಸದಸ್ಯರನ್ನು ಸ್ಥಳಾಂತರಿಸು</string>
   <string name="title_move_members">ಸದಸ್ಯರನ್ನು ಸ್ಥಳಾಂತರಿಸು</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">ಕರೆಗೆ ಮೊದಲು ಸಂಖ್ಯೆಯನ್ನು ಸಂಪಾದಿಸಿ</string>
   <string name="menu_sendViaSMS">ಸಂಪರ್ಕವನ್ನು ಎಸ್ಎಂಎಸ್ ಮೂಲಕ ಕಳುಹಿಸು</string>
   <string name="select_all">ಎಲ್ಲಾ</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">ಸಿಮ್ ಸಂಪರ್ಕಗಳನ್ನು ಆಮದುಮಾಡು</string>
   <string name="import_sim_contacts_message">ಸಿಮ್ ಸಂಪರ್ಕಗಳನ್ನು ಆಮದುಮಾಡಲಾಗುತ್ತಿದೆ\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">ಸಂಪರ್ಕವನ್ನು ಆಮದುಮಾಡು?</string>
   <string name="import_finish">ಆಮದು ಮುಗಿದಿದೆ</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">ಸಂಪರ್ಕಗಳನ್ನು ಅಳಿಸು</string>
   <string name="delete_contacts_message">ಸಂಪರ್ಕಗಳನ್ನು ಅಳಿಸಲಾಗುತ್ತಿದೆ\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">ಸಂಪರ್ಕ ಅಳಿಸು?</string>
   <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g>ಕ್ಕಿಂತ ಹೆಚ್ಚು ಸಂಪರ್ಕಗಳನ್ನು ಸೇರಿಸಲು ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">ಮೆಮೊರಿ ಸ್ಥಿತಿ</string>
   <string name="memory_size">ಒಟ್ಟು:</string>
   <string name="memory_used">ಉಪಯೋಗಿಸಿದ್ದು:</string>

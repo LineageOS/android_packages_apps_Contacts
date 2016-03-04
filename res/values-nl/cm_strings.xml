@@ -17,8 +17,9 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Geselecteerde contacten konden niet worden opgeslagen op de simkaart</string>
-  <string name="airplane_mode_on">Geen toegang tot simkaart in vliegmodus</string>
+  <string name="airplane_mode_on">Geen toegang tot simkaart in vliegtuigmodus</string>
   <string name="number_anr_too_long">Nummer is te lang</string>
   <string name="email_address_too_long">E-mailadres is te lang</string>
   <string name="sim_card_full">Simkaart is vol</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">Het soort nummer is ongeldig</string>
   <string name="no_phone_number_or_email">Voer een telefoonnummer of e-mailadres in.</string>
   <string name="memory_card_full">Contact kan niet worden opgeslagen: telefoongeheugen is vol</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Groepen</string>
   <string name="menu_moveGroupMembers">Leden van de groep verplaatsen</string>
   <string name="title_move_members">Leden verplaatsen</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Nummer bewerken voor bellen</string>
   <string name="menu_sendViaSMS">Contact via sms verzenden</string>
   <string name="select_all">Alles</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">SIM-contacten importeren</string>
   <string name="import_sim_contacts_message">SIM-contacten importeren\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Contact importeren?</string>
   <string name="import_finish">Importeren voltooid</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Contacten verwijderen</string>
   <string name="delete_contacts_message">Contacten verwijderen\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Contact verwijderen?</string>
   <string name="too_many_contacts_add_to_group">Er kunnen niet meer dan <xliff:g id="count">%d</xliff:g> contacten worden toegevoegd</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Geheugenstatus</string>
   <string name="memory_size">Totaal:</string>
   <string name="memory_used">Gebruikt:</string>

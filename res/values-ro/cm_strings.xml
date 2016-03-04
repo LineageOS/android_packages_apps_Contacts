@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Nu s-au putut salva contactele selectate pe cartela SIM</string>
   <string name="airplane_mode_on">Cartela SIM nu poate fi accesată în timp ce modul avion este activat</string>
   <string name="number_anr_too_long">Numărul este prea lung</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">Tipul numărului nu este valid</string>
   <string name="no_phone_number_or_email">Introduceți un număr de telefon sau adresă de email.</string>
   <string name="memory_card_full">Imposibil de salvat contactul, memoria telefonului este plină</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Grupuri</string>
   <string name="menu_moveGroupMembers">Mută membrii grupului</string>
   <string name="title_move_members">Mută membri</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Editarea numărului înainte de apel</string>
   <string name="menu_sendViaSMS">Trimitere contact prin SMS</string>
   <string name="select_all">Toate</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">Import contacte SIM</string>
   <string name="import_sim_contacts_message">Se importă contacte SIM\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Importare persoană de contact?</string>
   <string name="import_finish">Importul s-a terminat</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Ștergere contacte</string>
   <string name="delete_contacts_message">Se șterg contacte\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Ștergeți contact?</string>
   <string name="too_many_contacts_add_to_group">Nu mai mult de <xliff:g id="count">%d</xliff:g> persoane de contact pot fi adăugate</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Stare memorie</string>
   <string name="memory_size">Total:</string>
   <string name="memory_used">Utilizat:</string>

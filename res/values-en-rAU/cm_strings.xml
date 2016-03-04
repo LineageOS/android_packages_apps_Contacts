@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Could not save the selected contacts to the SIM card</string>
   <string name="airplane_mode_on">SIM card cannot be accessed while aeroplane mode is enabled</string>
   <string name="number_anr_too_long">Number is too long</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">Number type is invalid</string>
   <string name="no_phone_number_or_email">Please insert phone number or email address.</string>
   <string name="memory_card_full">Contact could not be saved, phone memory is full</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Groups</string>
   <string name="menu_moveGroupMembers">Move group members</string>
   <string name="title_move_members">Move members</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Edit number before call</string>
   <string name="menu_sendViaSMS">Send contact via SMS</string>
   <string name="select_all">All</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">Import SIM contacts</string>
   <string name="import_sim_contacts_message">Importing SIM contacts\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Import contact?</string>
   <string name="import_finish">Import finished</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Delete contacts</string>
   <string name="delete_contacts_message">Deleting contacts\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Delete contact?</string>
   <string name="too_many_contacts_add_to_group">No more than <xliff:g id="count">%d</xliff:g> contacts can be added</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Memory status</string>
   <string name="memory_size">Total:</string>
   <string name="memory_used">Used:</string>

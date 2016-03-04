@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Nije moguće spremiti odabrane kontakte na SIM karticu</string>
   <string name="airplane_mode_on">Nije moguće pristupiti SIM kartici kada je uključen Zrakoplovni način</string>
   <string name="number_anr_too_long">Broj je predug</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">Tip broja nije ispravan</string>
   <string name="no_phone_number_or_email">Molimo unesite telefonski broj ili e-mail adresu.</string>
   <string name="memory_card_full">Kontakt nije moguće spremiti, memorija telefona je puna</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Grupe</string>
   <string name="menu_moveGroupMembers">Premjesti članove grupa</string>
   <string name="title_move_members">Premjesti članove</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Uredi broj prije poziva</string>
   <string name="menu_sendViaSMS">Pošalji kontakt putem SMS-a</string>
   <string name="select_all">Svi pozivi</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">Uvezi SIM kontakte</string>
   <string name="import_sim_contacts_message">Uvozim SIM kontakte\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Želite li uvesti kontakte?</string>
   <string name="import_finish">Uvoz je dovršen</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Izbriši kontakte</string>
   <string name="delete_contacts_message">Brišem kontakte\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Izbriši kontakt?</string>
   <string name="too_many_contacts_add_to_group">Nije moguće dodati više od <xliff:g id="count">%d</xliff:g> kontakata</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Stanje memorije</string>
   <string name="memory_size">Ukupno:</string>
   <string name="memory_used">Iskorišteno:</string>

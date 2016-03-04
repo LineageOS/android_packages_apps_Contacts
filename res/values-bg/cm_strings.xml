@@ -17,8 +17,9 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Избраните контакти не могат да бъдат записани в СИМ картата</string>
-  <string name="airplane_mode_on">СИМ картата е недостъпна при включен самолетен режим</string>
+  <string name="airplane_mode_on">СИМ картата не може да бъде достъпна, докато е активен самолетен режим</string>
   <string name="number_anr_too_long">Номерът е твърде дълъг</string>
   <string name="email_address_too_long">Имейл адресът е твърде дълъг</string>
   <string name="sim_card_full">СИМ картата е пълна</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">Типът на номера е невалиден</string>
   <string name="no_phone_number_or_email">Моля, въведете телефонен номер или имейл адрес.</string>
   <string name="memory_card_full">Контактът не може да бъде записан - паметта на телефона е пълна</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Групи</string>
   <string name="menu_moveGroupMembers">Преместване на членове от групата</string>
   <string name="title_move_members">Премести членове</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Редактиране на номера преди повикване</string>
   <string name="menu_sendViaSMS">Изпращане на контакта чрез SMS</string>
   <string name="select_all">Всички</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">Импортиране на контакти от СИМ карта</string>
   <string name="import_sim_contacts_message">Импортиране на контакти от СИМ карта\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Да бъдат ли импортирани контактите?</string>
   <string name="import_finish">Импортирането завърши</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Изтриване на контакти</string>
   <string name="delete_contacts_message">Изтриване на контакти\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Да бъде ли изтрит контакта?</string>
   <string name="too_many_contacts_add_to_group">Не може да добавите повече от <xliff:g id="count">%d</xliff:g> контакта</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Състояние на паметта</string>
   <string name="memory_size">Общо:</string>
   <string name="memory_used">Използвана:</string>

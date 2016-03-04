@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">تعذر حفظ جهات الاتصال المحددة إلى شريحة SIM</string>
   <string name="airplane_mode_on">شريحة SIM لا يمكن الوصول إليها أثناء وضع الطيران</string>
   <string name="number_anr_too_long">الرقم طويل جداً</string>
@@ -28,6 +29,7 @@
   <string name="no_phone_number_or_email">الرجاء إدخال رقم هاتف أو عنوان البريد الإلكتروني.
 </string>
   <string name="memory_card_full">تعذر حفظ جهة الاتصال، ذاكرة الهاتف ممتلئة</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">المجموعات</string>
   <string name="menu_moveGroupMembers">نقل أعضاء المجموعة</string>
   <string name="title_move_members">نقل الأعضاء </string>
@@ -36,14 +38,19 @@
   <string name="edit_before_call">تحرير الرقم قبل الاتصال</string>
   <string name="menu_sendViaSMS">إرسال جهة الاتصال عن طريق الرسائل القصيرة</string>
   <string name="select_all">الكل</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">استيراد جهات الاتصال من شريحة SIM</string>
   <string name="import_sim_contacts_message">جاري استيراد جهات الاتصال من SIM\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">استيراد جهات الاتصال؟</string>
   <string name="import_finish">انتهى الاستيراد</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">حذف جهات الاتصال</string>
   <string name="delete_contacts_message">جاري حذف جهات الاتصال\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">حذف جهة اتصال؟</string>
   <string name="too_many_contacts_add_to_group">لا يمكن اضافة أكثر من <xliff:g id="count">%d</xliff:g> جهة اتصال</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">حالة الذاكرة</string>
   <string name="memory_size">الإجمالي:</string>
   <string name="memory_used">المستخدم:</string>

@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Не може да се сачува изабрани контакт на SIM картици</string>
   <string name="airplane_mode_on">Не може се приступити SIM картици док је режим рада у авиону омогућен</string>
   <string name="number_anr_too_long">Број је предуг</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">Тип броја је неважећи</string>
   <string name="no_phone_number_or_email">Унеси број телефона или адресу е-поште.</string>
   <string name="memory_card_full">Контакт не може бити сачуван, меморија телефона је пуна</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Групе</string>
   <string name="menu_moveGroupMembers">Премести чланове групе</string>
   <string name="title_move_members">Премести чланове</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Уреди број пре позива</string>
   <string name="menu_sendViaSMS">Пошаљи контакт преко SMS</string>
   <string name="select_all">Све</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">Увези SIM контакте</string>
   <string name="import_sim_contacts_message">Увоз SIM контаката\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Увези контакт?</string>
   <string name="import_finish">Увоз завршен</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Избриши контакте</string>
   <string name="delete_contacts_message">Брисање контаката\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Избриши контакт?</string>
   <string name="too_many_contacts_add_to_group">Не више од <xliff:g id="count">%d</xliff:g> контаката може бити додато</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Статус меморије</string>
   <string name="memory_size">Укупно:</string>
   <string name="memory_used">Искоришћено:</string>

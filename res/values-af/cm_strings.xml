@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Kon nie die geselekteerde kontakte na die SIM-kaart stoor</string>
   <string name="airplane_mode_on">Die SIM-kaart kan nie verkry word nie, terwyl vliegtuigmodus geaktiveer is</string>
   <string name="number_anr_too_long">Nommer is te lank</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">Nommer tipe is ongeldig</string>
   <string name="no_phone_number_or_email">Sleutel asseblief \'n telefoonnommer of e-posadres in.</string>
   <string name="memory_card_full">Kontak kon nie gestoor word nie, die geheue is vol</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Groepe</string>
   <string name="menu_moveGroupMembers">Skuif groep lede</string>
   <string name="title_move_members">Skyf lede</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Wysig nommer voor oproep</string>
   <string name="menu_sendViaSMS">Stuur kontak via SMS</string>
   <string name="select_all">Alles</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">Voer SIM kontakte in</string>
   <string name="import_sim_contacts_message">Besig om SIM kontakte in te voer\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Invoer kontak?</string>
   <string name="import_finish">Invoering klaar</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Verwyder kontak</string>
   <string name="delete_contacts_message">Verwydering van kontakte\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Verwyder kontak?</string>
   <string name="too_many_contacts_add_to_group">Nie mees as <xliff:g id="count">%d</xliff:g> kontakte kan gedeel word nie</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Geheue status</string>
   <string name="memory_size">Totaal:</string>
   <string name="memory_used">Gebruik:</string>

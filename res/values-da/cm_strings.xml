@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Kunne ikke gemme de markerede kontakter på SIM-kortet</string>
   <string name="airplane_mode_on">SIM-kortet kan ikke tilgås, mens flytilstand er aktiveret</string>
   <string name="number_anr_too_long">Tallet er for stort</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">Nummertype er ugyldig</string>
   <string name="no_phone_number_or_email">Angiv telefonnummer eller e-mail-adresse.</string>
   <string name="memory_card_full">Kontakt kunne ikke gemmes, telefonens hukommelse er fuld</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Grupper</string>
   <string name="menu_moveGroupMembers">Flyt gruppemedlemmer</string>
   <string name="title_move_members">Flyt medlemmer</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Redigér nummer før opkald</string>
   <string name="menu_sendViaSMS">Send kontakt via SMS</string>
   <string name="select_all">Alle</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">Importér SIM-kontakter</string>
   <string name="import_sim_contacts_message">Importerer SIM-kontakter\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Importér kontakt?</string>
   <string name="import_finish">Import afsluttet</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Slet kontaktpersoner</string>
   <string name="delete_contacts_message">Sletter kontaktpersoner\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Slet kontakt?</string>
   <string name="too_many_contacts_add_to_group">Ikke flere end <xliff:g id="count">%d</xliff:g> kontakter kan tilføjes</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Hukommelsesstatus</string>
   <string name="memory_size">Total:</string>
   <string name="memory_used">I brug:</string>

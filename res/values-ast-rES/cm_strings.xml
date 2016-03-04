@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Nun pudieron guardase los contautos seleicionaos na tarxeta SIM</string>
   <string name="airplane_mode_on">Nun pue accedese a la tarxeta SIM mentanto\'l mou avión tea habilitáu</string>
   <string name="number_anr_too_long">El númberu ye enforma llargu</string>
@@ -27,6 +28,7 @@
   <string name="invalid_number_type">El tipu de númberu ye inválidu</string>
   <string name="no_phone_number_or_email">Introduz un númberu de teléfonu o direición de corréu-e.</string>
   <string name="memory_card_full">Nun pue guardase\'l contautu. Memoria de teléfonu enllena</string>
+  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Grupos</string>
   <string name="menu_moveGroupMembers">Mover miembros del grupu</string>
   <string name="title_move_members">Mover miembros</string>
@@ -35,14 +37,19 @@
   <string name="edit_before_call">Editar númberu enantes de llamar</string>
   <string name="menu_sendViaSMS">Unviar contautu vía SMS</string>
   <string name="select_all">Too</string>
+  <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">Importar contautos de SIM</string>
   <string name="import_sim_contacts_message">Importando contautos de SIM\u2026</string>
+  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Importar contautu?</string>
   <string name="import_finish">Finó la importación</string>
+  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Desaniciar contautos</string>
   <string name="delete_contacts_message">Desaniciando contautos\u2026</string>
+  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">Desaniciar contautu?</string>
   <string name="too_many_contacts_add_to_group">Nun puen amestase más de <xliff:g id="count">%d</xliff:g> contautos</string>
+  <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Estáu de la memoria</string>
   <string name="memory_size">Total:</string>
   <string name="memory_used">Usáu:</string>

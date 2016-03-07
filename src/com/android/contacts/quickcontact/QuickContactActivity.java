@@ -1007,16 +1007,6 @@ public class QuickContactActivity extends ContactsActivity implements
         mLookupUri = lookupUri;
         mExcludeMimes = intent.getStringArrayExtra(QuickContact.EXTRA_EXCLUDE_MIMES);
 
-        Contact contact = null;
-        if (mLookupUri == null) {
-            // See if a URI has been attached as an extra
-            mLookupUri = intent.getParcelableExtra(Contact.CONTACT_URI_EXTRA);
-            if (mLookupUri != null) {
-                contact = ContactLoader.parseEncodedContactEntity(mLookupUri,
-                        ContactLoader.EncodedContactEntitySchemaVersion.ENHANCED_CALLER_META_DATA);
-            }
-        }
-
         if (mLookupUri == null) {
             if (DEBUG) Log.d(TAG, "mLookupUri null!");
             finish();

@@ -64,7 +64,6 @@ public class PluginContactBrowseListFragment extends ContactEntryListFragment<Co
         implements View.OnClickListener {
     private static final String TAG = PluginContactBrowseListFragment.class.getSimpleName();
     private boolean DEBUG = false;
-    private Context mContext;
     private InCallPluginInfo mInCallPluginInfo;
     private View mLayout;
     private View mListView;
@@ -96,6 +95,10 @@ public class PluginContactBrowseListFragment extends ContactEntryListFragment<Co
     private int mLastSelectedPosition = -1;
     private boolean mRefreshingContactUri;
     private ContactListFilter mFilter;
+    private boolean mInitialized = false;
+    private boolean mAuthenticated = false;
+    private String mAccountType = "";
+    private String mAccountHandle = "";
     private String mPersistentSelectionPrefix = PERSISTENT_SELECTION_PREFIX;
 
     protected OnContactBrowserActionListener mListener;
@@ -202,7 +205,9 @@ public class PluginContactBrowseListFragment extends ContactEntryListFragment<Co
         super.onActivityCreated(savedInstanceState);
         mPrefs = getActivity().getSharedPreferences(mPrefsFileName, Context.MODE_PRIVATE);
         updatePluginView(); // this is execute again reflect change in plugin info
-        restoreFilter();
+        if (savedInstanceState != null) {
+            restoreFilter();
+        }
         restoreSelectedUri(false);
     }
 
@@ -665,49 +670,54 @@ public class PluginContactBrowseListFragment extends ContactEntryListFragment<Co
         if (mInCallPluginInfo != null) {
             if (DEBUG) Log.d(TAG, "updatePluginView: " + mInCallPluginInfo.mCallMethodInfo.mName);
             if (mListView != null && mLoginView != null) {
-                if (mInCallPluginInfo.mCallMethodInfo.mIsAuthenticated) {
-                    // Show list view
-                    mLoginView.setVisibility(View.GONE);
-                    mListView.setVisibility(View.VISIBLE);
-                    if (mEmptyView != null) {
-                        mEmptyView.setVisibility(View.VISIBLE);
-                        ((ListView) mListView).setEmptyView(mEmptyView);
-                        initEmptyView();
-                    }
-                } else {
-                    // Show login view
-                    ((ListView)mListView).setEmptyView(null);
-                    mListView.setVisibility(View.GONE);
-                    if (mEmptyView != null) {
-                        mEmptyView.setVisibility(View.GONE);
-                    }
-                    mLoginView.setVisibility(View.VISIBLE);
-                    if (mLoginIconView != null) {
-                        if (mInCallPluginInfo.mCallMethodInfo.mLoginIconId == 0) {
-                            // plugin does not provide a valid icon
-                            mLoginIconView.setVisibility(View.GONE);
-                        } else {
-                            // plugin provides a valid icon, this method is called from the main
-                            // thread so needs to start an AsyncTask to look up the Drawable from
-                            // resource Id
-                            if (mInCallPluginInfo.mCallMethodInfo.mLoginIcon != null) {
-                                // TODO: may need to self load in the case of restore before plugin
-                                // update
-                                mLoginIconView.setImageDrawable(
-                                        mInCallPluginInfo.mCallMethodInfo.mLoginIcon);
+                // if the UI auth state is initialized the first time or the auth state has changed
+                if (!mInitialized || mInCallPluginInfo.mCallMethodInfo.mIsAuthenticated !=
+                        mAuthenticated) {
+                    mInitialized = true;
+                    mAuthenticated = mInCallPluginInfo.mCallMethodInfo.mIsAuthenticated;
+                    if (mInCallPluginInfo.mCallMethodInfo.mIsAuthenticated) {
+                        // Show list view
+                        mLoginView.setVisibility(View.GONE);
+                        mListView.setVisibility(View.VISIBLE);
+                        if (mEmptyView != null) {
+                            mEmptyView.setVisibility(View.VISIBLE);
+                            ((ListView) mListView).setEmptyView(mEmptyView);
+                            initEmptyView();
+                        }
+                    } else {
+                        // Show login view
+                        ((ListView) mListView).setEmptyView(null);
+                        mListView.setVisibility(View.GONE);
+                        if (mEmptyView != null) {
+                            mEmptyView.setVisibility(View.GONE);
+                        }
+                        mLoginView.setVisibility(View.VISIBLE);
+                        if (mLoginIconView != null) {
+                            if (mInCallPluginInfo.mCallMethodInfo.mLoginIconId == 0) {
+                                // plugin does not provide a valid icon
+                                mLoginIconView.setVisibility(View.GONE);
                             } else {
-                                if (mInCallPluginInfo.mCallMethodInfo.mLoginIconId != 0) {
-                                    new GetDrawableAsyncTask().execute();
+                                if (mInCallPluginInfo.mCallMethodInfo.mLoginIcon != null) {
+                                    mLoginIconView.setImageDrawable(
+                                            mInCallPluginInfo.mCallMethodInfo.mLoginIcon);
+                                } else {
+                                    // The fragment has been restored so only the icon id is
+                                    // a valid value, need to manually load
+                                    if (mInCallPluginInfo.mCallMethodInfo.mLoginIconId != 0) {
+                                        new GetDrawableAsyncTask().execute();
+                                    }
                                 }
                             }
                         }
-                    }
-                    if (mLoginMsg != null) {
-                        if (!TextUtils.isEmpty(mInCallPluginInfo.mCallMethodInfo.mLoginSubtitle)) {
-                            mLoginMsg.setText(mInCallPluginInfo.mCallMethodInfo.mLoginSubtitle);
-                        } else {
-                            mLoginMsg.setText(getResources().getString(R.string.plugin_login_msg,
-                                    mInCallPluginInfo.mCallMethodInfo.mName));
+                        if (mLoginMsg != null) {
+                            if (!TextUtils
+                                    .isEmpty(mInCallPluginInfo.mCallMethodInfo.mLoginSubtitle)) {
+                                mLoginMsg.setText(mInCallPluginInfo.mCallMethodInfo.mLoginSubtitle);
+                            } else {
+                                mLoginMsg
+                                        .setText(getResources().getString(R.string.plugin_login_msg,
+                                                mInCallPluginInfo.mCallMethodInfo.mName));
+                            }
                         }
                     }
                 }
@@ -715,11 +725,19 @@ public class PluginContactBrowseListFragment extends ContactEntryListFragment<Co
             mPrefsFileName = PREFS_FILE_PREFIX +
                     mInCallPluginInfo.mCallMethodInfo.mComponent.getClassName();
             if (mPrefs != null) {
-                setFilter(ContactListFilter.createAccountFilter(
-                        mInCallPluginInfo.mCallMethodInfo.mAccountType,
-                        mInCallPluginInfo.mCallMethodInfo.mAccountHandle,
-                        null,
-                        null));
+                // Account filter should be updated
+                if (mInCallPluginInfo.mCallMethodInfo.mIsAuthenticated && (!TextUtils.equals
+                        (mAccountType, mInCallPluginInfo.mCallMethodInfo.mAccountType) ||
+                        TextUtils.equals(mAccountHandle,
+                        mInCallPluginInfo.mCallMethodInfo.mAccountHandle))) {
+                    mAccountType = mInCallPluginInfo.mCallMethodInfo.mAccountType;
+                    mAccountHandle = mInCallPluginInfo.mCallMethodInfo.mAccountHandle;
+                    setFilter(ContactListFilter.createAccountFilter(
+                            mInCallPluginInfo.mCallMethodInfo.mAccountType,
+                            mInCallPluginInfo.mCallMethodInfo.mAccountHandle,
+                            null,
+                            null));
+                }
             }
         }
     }

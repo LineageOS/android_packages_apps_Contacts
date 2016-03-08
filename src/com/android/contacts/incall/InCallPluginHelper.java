@@ -24,16 +24,18 @@ import android.util.Log;
 import com.android.phone.common.ambient.AmbientConnection;
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodInfo;
+import com.cyanogen.ambient.common.api.PendingResult;
 import com.cyanogen.ambient.common.api.ResultCallback;
 import com.cyanogen.ambient.discovery.util.NudgeKey;
 import com.cyanogen.ambient.incall.extension.InCallContactInfo;
+import com.cyanogen.ambient.incall.extension.StatusCodes;
 import com.cyanogen.ambient.incall.InCallServices;
 import com.cyanogen.ambient.incall.results.InstalledPluginsResult;
 
+import java.util.HashMap;
+
 public class InCallPluginHelper extends CallMethodHelper {
     private static final String TAG = InCallPluginHelper.class.getSimpleName();
-
-    private static final int EXPECTED_CALL_BACKS = 11;
 
     protected static synchronized InCallPluginHelper getInstance() {
         if (sInstance == null) {
@@ -44,7 +46,6 @@ public class InCallPluginHelper extends CallMethodHelper {
 
     public static void init(Context context) {
         InCallPluginHelper helper = getInstance();
-        helper.expectedCallbacks = EXPECTED_CALL_BACKS;
         helper.mContext = context;
         helper.mClient = AmbientConnection.CLIENT.get(context);
         helper.mInCallApi = InCallServices.getInstance();
@@ -58,9 +59,13 @@ public class InCallPluginHelper extends CallMethodHelper {
     }
 
     public static void refreshDynamicItems() {
+        HashMap<ResultCallback, PendingResult> apiCallbacks = new HashMap<ResultCallback,
+                PendingResult>();
         for (ComponentName cn : mCallMethodInfos.keySet()) {
-            getCallMethodAuthenticated(cn, true);
+            getCallMethodAuthenticated(cn, apiCallbacks);
+            getCallMethodAccountHandle(cn, apiCallbacks);
         }
+        executeAll(apiCallbacks);
     }
 
     public static void refreshPendingIntents(InCallContactInfo contactInfo) {
@@ -84,27 +89,32 @@ public class InCallPluginHelper extends CallMethodHelper {
                         }
 
                         if (mInstalledPlugins.size() == 0) {
-                            broadcast(false);
+                            broadcast();
                         }
-
+                        HashMap<ResultCallback, PendingResult> apiCallbacks =
+                                new HashMap<ResultCallback, PendingResult>();
                         for (ComponentName cn : mInstalledPlugins) {
                             mCallMethodInfos.put(cn, new CallMethodInfo());
-                            getCallMethodInfo(cn);
-                            getCallMethodMimeType(cn);
-                            getCallMethodStatus(cn);
-                            getCallMethodVideoCallableMimeType(cn);
-                            getCallMethodImMimeType(cn);
-                            getCallMethodAuthenticated(cn, false);
-                            getLoginIntent(cn);
-                            getNudgeConfiguration(cn, NudgeKey.INCALL_CONTACT_FRAGMENT_LOGIN);
-                            getNudgeConfiguration(cn, NudgeKey.INCALL_CONTACT_CARD_LOGIN);
-                            getNudgeConfiguration(cn, NudgeKey.INCALL_CONTACT_CARD_DOWNLOAD);
-                            getDefaultDirectorySearchIntent(cn);
+                            getCallMethodInfo(cn, apiCallbacks);
+                            getCallMethodMimeType(cn, apiCallbacks);
+                            getCallMethodStatus(cn, apiCallbacks);
+                            getCallMethodVideoCallableMimeType(cn, apiCallbacks);
+                            getCallMethodImMimeType(cn, apiCallbacks);
+                            getCallMethodAuthenticated(cn, apiCallbacks);
+                            getLoginIntent(cn, apiCallbacks);
+                            getNudgeConfiguration(cn, NudgeKey.INCALL_CONTACT_FRAGMENT_LOGIN,
+                                    apiCallbacks);
+                            getNudgeConfiguration(cn, NudgeKey.INCALL_CONTACT_CARD_LOGIN,
+                                    apiCallbacks);
+                            getNudgeConfiguration(cn, NudgeKey.INCALL_CONTACT_CARD_DOWNLOAD,
+                                    apiCallbacks);
+                            getDefaultDirectorySearchIntent(cn, apiCallbacks);
                             // If you add any more callbacks, be sure to update
                             // EXPECTED_RESULT_CALLBACKS
                             // and EXPECTED_DYNAMIC_RESULT_CALLBACKS if the callback is dynamic
                             // with the proper count.
                         }
+                        executeAll(apiCallbacks);
                     }
                 });
     }

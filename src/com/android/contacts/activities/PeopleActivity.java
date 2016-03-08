@@ -394,6 +394,8 @@ public class PeopleActivity extends ContactsActivity implements
             mPluginLength = mPluginTabInfo.size();
             for (int i = 0; i < mPluginLength; i++) {
                 InCallPluginInfo pluginInfo = mPluginTabInfo.get(i);
+                mCallMethodMap.put(pluginInfo.mCallMethodInfo.mComponent, pluginInfo
+                        .mCallMethodInfo);
                 mTabTitles.add(TabState.GROUPS + i, new TabEntry(pluginInfo.mTabTag,
                         pluginInfo.mCallMethodInfo.mName));
                 pluginInfo.mFragment = (PluginContactBrowseListFragment) fragmentManager
@@ -1883,7 +1885,7 @@ public class PeopleActivity extends ContactsActivity implements
     private synchronized void updatePlugins(HashMap<ComponentName, CallMethodInfo>
                                                      callMethodInfo) {
         HashMap<ComponentName, CallMethodInfo> newCmMap = (HashMap<ComponentName,
-                CallMethodInfo>) CallMethodHelper.getAllEnabledCallMethods().clone();
+                CallMethodInfo>) CallMethodHelper.getAllEnabledCallMethods();
         if (DEBUG) Log.d(TAG, "updatePlugins newCmMap size:" + newCmMap.size());
         boolean updateTabs = false;
         String lastSelectedTabTag = mTabTitles.get(mActionBarAdapter.getCurrentTab()).mTag;
@@ -1892,16 +1894,14 @@ public class PeopleActivity extends ContactsActivity implements
         FragmentManager fragmentManager = getFragmentManager();
 
         for (ComponentName cn : mCallMethodMap.keySet()) {
-            CallMethodInfo cm = mCallMethodMap.get(cn);
             if (newCmMap.containsKey(cn)) {
-                // Check if update needed
+                // Update plugin info only, the plugin fragment keeps track of its state to
+                // determine if a UI update is necessary
                 CallMethodInfo newCm = newCmMap.remove(cn);
-                if (!newCm.equals(cm) || newCm.mIsAuthenticated != cm.mIsAuthenticated) {
-                    InCallPluginInfo pluginInfo = getPluginInfo(cn);
-                    pluginInfo.mCallMethodInfo = newCm;
-                    pluginInfo.mFragment.updateInCallPluginInfo(pluginInfo);
-                    mCallMethodMap.put(cn, newCm);
-                }
+                InCallPluginInfo pluginInfo = getPluginInfo(cn);
+                pluginInfo.mCallMethodInfo = newCm;
+                pluginInfo.mFragment.updateInCallPluginInfo(pluginInfo);
+                mCallMethodMap.put(cn, newCm);
             } else {
                 // Remove the tab associated with a plugin that's no longer available
                 updateTabs = true;
@@ -1916,7 +1916,7 @@ public class PeopleActivity extends ContactsActivity implements
                 }
             }
         }
-        // add newly added tab from newCmMap (existing tab already removed in the logic above)
+        // add newly added tab from newCmMap
         for (ComponentName cn : newCmMap.keySet()) {
             InCallPluginInfo newInfo = new InCallPluginInfo();
             newInfo.mTabTag = cn.toShortString();
@@ -1940,11 +1940,10 @@ public class PeopleActivity extends ContactsActivity implements
                 executeFragTransact = true;
             }
         }
-
         if (executeFragTransact) {
             fragmentManager.executePendingTransactions();
         }
-        // update holders
+        // update view pager
         if (updateTabs) {
             mPluginLength = mPluginTabInfo.size();
             mPageStateCount = TabState.COUNT + mPluginLength;

@@ -17,4 +17,7 @@
     <!-- CMCC feature -->
     <bool name="config_show_quick_call_button">false</bool>
     <bool name="config_show_sms_import_dialog">false</bool>
+
+    <!-- Max number of contacts allowed to be exported -->
+    <integer name="max_contacts_num_to_select_once">500</integer>
 </resources>

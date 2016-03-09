@@ -267,7 +267,7 @@ public class MultiPickContactActivity extends ListActivity implements
     private static final int SIM_COLUMN_ANRS = 3;
     private static final int SIM_COLUMN_ID = 4;
 
-    private int MAX_CONTACTS_NUM_TO_SELECT_ONCE = 500;
+    private int mMaxContactsToExportLimit;
 
     //registerReceiver to update content when airplane mode change.
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
@@ -308,7 +308,8 @@ public class MultiPickContactActivity extends ListActivity implements
         } else if (SimContactsConstants.ACTION_MULTI_PICK_SIM.equals(action)) {
             mMode = MODE_DEFAULT_SIM;
         }
-
+        mMaxContactsToExportLimit = getResources().getInteger(R.integer.
+                max_contacts_num_to_select_once);
         mChoiceSet = new Bundle();
         mAdapter = new ContactItemListAdapter(this);
         getListView().setAdapter(mAdapter);
@@ -397,9 +398,9 @@ public class MultiPickContactActivity extends ListActivity implements
                 }
                 if (mMode == MODE_DEFAULT_CONTACT) {
                     if (SimContactsConstants.ACTION_MULTI_PICK.equals(getIntent().getAction())) {
-                        if (mChoiceSet.size() > MAX_CONTACTS_NUM_TO_SELECT_ONCE) {
+                        if (mChoiceSet.size() > mMaxContactsToExportLimit) {
                             String text = getString(R.string.too_many_contacts_add_to_group,
-                                    MAX_CONTACTS_NUM_TO_SELECT_ONCE);
+                                    mMaxContactsToExportLimit);
                             Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
                         } else {
                             int memberAction = getIntent().getIntExtra(EXTRA_GROUP_ACTION,

@@ -24,6 +24,7 @@ LOCAL_AAPT_FLAGS := \
     --extra-packages com.cyanogen.ambient
 
 LOCAL_JAVA_LIBRARIES := telephony-common voip-common
+LOCAL_FULL_LIBS_MANIFEST_FILES := $(LOCAL_PATH)/AndroidManifest_cm.xml
 LOCAL_STATIC_JAVA_LIBRARIES := \
     com.android.vcard \
     android-common \

@@ -1864,13 +1864,13 @@ public class PeopleActivity extends ContactsActivity implements
         return null;
     }
 
-    private void removePluginInfo(ComponentName cn) {
+    private InCallPluginInfo removePluginInfo(ComponentName cn) {
         for (int i = 0; i < mPluginTabInfo.size(); i++) {
             if (mPluginTabInfo.get(i).mCallMethodInfo.mComponent.equals(cn)) {
-                mPluginTabInfo.remove(i);
-                break;
+                return mPluginTabInfo.remove(i);
             }
         }
+        return null;
     }
 
     private void removeTabTitle(ComponentName cn) {
@@ -1905,9 +1905,9 @@ public class PeopleActivity extends ContactsActivity implements
             } else {
                 // Remove the tab associated with a plugin that's no longer available
                 updateTabs = true;
+                mCallMethodMap.remove(cn);
                 removeTabTitle(cn);
-                removePluginInfo(cn);
-                InCallPluginInfo removePlugin = getPluginInfo(cn);
+                InCallPluginInfo removePlugin = removePluginInfo(cn);
                 if (removePlugin != null) {
                     transaction = fragmentManager.beginTransaction();
                     transaction.remove(removePlugin.mFragment);

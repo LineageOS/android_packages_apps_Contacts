@@ -267,7 +267,7 @@ public class MultiPickContactActivity extends ListActivity implements
     private static final int SIM_COLUMN_ANRS = 3;
     private static final int SIM_COLUMN_ID = 4;
 
-    private int MAX_CONTACTS_NUM_TO_SELECT_ONCE = 500;
+    private int MAX_CONTACTS_NUM_TO_SELECT_ONCE = 2000;
 
     //registerReceiver to update content when airplane mode change.
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {

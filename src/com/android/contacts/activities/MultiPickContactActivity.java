@@ -267,7 +267,7 @@ public class MultiPickContactActivity extends ListActivity implements
     private static final int SIM_COLUMN_ANRS = 3;
     private static final int SIM_COLUMN_ID = 4;
 
-    private int MAX_CONTACTS_NUM_TO_SELECT_ONCE = 500;
+    private int MAX_CONTACTS_NUM_TO_SELECT_ONCE;
 
     //registerReceiver to update content when airplane mode change.
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
@@ -308,7 +308,7 @@ public class MultiPickContactActivity extends ListActivity implements
         } else if (SimContactsConstants.ACTION_MULTI_PICK_SIM.equals(action)) {
             mMode = MODE_DEFAULT_SIM;
         }
-
+        MAX_CONTACTS_NUM_TO_SELECT_ONCE = getResources().getInteger(R.integer.max_contacts_num_to_select_once);
         mChoiceSet = new Bundle();
         mAdapter = new ContactItemListAdapter(this);
         getListView().setAdapter(mAdapter);

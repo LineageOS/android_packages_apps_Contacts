@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ffb9cba7_b2f05d69",
+        "filename": "src/com/android/contacts/activities/MultiPickContactActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1448
+      },
+      "writtenOn": "2016-03-10T01:19:10Z",
+      "side": 1,
+      "message": "Since this is no longer a constant, you should rename the variable to match the android/java convention.",
+      "revId": "ca1fc289226a2b878703de5f51c2dbac3c518ee0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffb9cba7_12e04996",
+        "filename": "src/com/android/contacts/activities/MultiPickContactActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1448
+      },
+      "writtenOn": "2016-03-10T01:19:10Z",
+      "side": 1,
+      "message": "Wrap this line.",
+      "range": {
+        "startLine": 311,
+        "startChar": 78,
+        "endLine": 311,
+        "endChar": 109
+      },
+      "revId": "ca1fc289226a2b878703de5f51c2dbac3c518ee0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

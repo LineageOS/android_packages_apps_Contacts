@@ -175,6 +175,7 @@ import com.android.contacts.widget.MultiShrinkScroller.MultiShrinkScrollerListen
 import com.android.contacts.widget.QuickContactImageView;
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodInfo;
+import com.cyanogen.ambient.discovery.util.NudgeKey;
 import com.cyanogen.ambient.incall.extension.OriginCodes;
 import com.cyanogen.ambient.plugin.PluginStatus;
 import com.android.contactsbind.HelpUtils;
@@ -3452,19 +3453,28 @@ public class QuickContactActivity extends ContactsActivity implements
         final Resources res = getResources();
         List<Entry> containerList;
         Entry entry;
+        Intent dismissIntent;
+        String nudgeKey;
         if (cmi.mStatus == PluginStatus.HIDDEN) {
-            if (cmi.mLoginNudgeEnable) {
+            nudgeKey = NudgeKey.INCALL_CONTACT_CARD_DOWNLOAD;
+            if (!PreferenceManager.getDefaultSharedPreferences(this)
+                    .getBoolean(cmi.mComponent.getClassName() + "." + nudgeKey, true)) {
+                return;
+            }
+            if (cmi.mInstallNudgeEnable) {
                 containerList = new ArrayList<Entry>();
                 // install nudge
+                dismissIntent = new Intent(ACTION_INCALL_PLUGIN_DISMISS_NUDGE);
+                dismissIntent.putExtra(InCallPluginUtils.KEY_NUDGE_KEY, nudgeKey);
                 entry = new Entry(CARD_ENTRY_ID_INCALL_PLUGIN,
                         cmi.mBrandIcon,
                         null,
-                        cmi.mInstallNudgeSubtitle,
+                        cmi.mInstallNudgeTitle,
                         null,
                         cmi.mInstallNudgeActionText,
                         new Intent(ACTION_INCALL_PLUGIN_INSTALL),
                         res.getDrawable(R.drawable.ic_close),
-                        new Intent(ACTION_INCALL_PLUGIN_DISMISS_NUDGE),
+                        dismissIntent,
                         null,
                         null,
                         null,
@@ -3500,17 +3510,24 @@ public class QuickContactActivity extends ContactsActivity implements
                     parentList.add(containerList);
                 } else {
                     // login nudge
+                    nudgeKey = NudgeKey.INCALL_CONTACT_CARD_LOGIN;
+                    if (!PreferenceManager.getDefaultSharedPreferences(this)
+                            .getBoolean(cmi.mComponent.getClassName() + "." + nudgeKey, true)) {
+                        return;
+                    }
                     if (cmi.mLoginNudgeEnable) {
                         containerList = new ArrayList<Entry>();
+                        dismissIntent = new Intent(ACTION_INCALL_PLUGIN_DISMISS_NUDGE);
+                        dismissIntent.putExtra(InCallPluginUtils.KEY_NUDGE_KEY, nudgeKey);
                         entry = new Entry(CARD_ENTRY_ID_INCALL_PLUGIN,
                                 cmi.mBrandIcon,
                                 null,
-                                cmi.mInstallNudgeSubtitle,
+                                cmi.mLoginNudgeTitle,
                                 null,
-                                cmi.mInstallNudgeActionText,
+                                cmi.mLoginNudgeActionText,
                                 new Intent(ACTION_INCALL_PLUGIN_LOGIN),
                                 res.getDrawable(R.drawable.ic_close),
-                                new Intent(ACTION_INCALL_PLUGIN_DISMISS_NUDGE),
+                                dismissIntent,
                                 null,
                                 null,
                                 null,
@@ -3607,8 +3624,7 @@ public class QuickContactActivity extends ContactsActivity implements
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" +
                         cmi.mDependentPackage)));
             } else if (intent.getAction().equals(ACTION_INCALL_PLUGIN_DISMISS_NUDGE)) {
-                String nudgeKey = intent.getStringExtra(InCallPluginUtils
-                        .KEY_NUDGE_KEY);
+                String nudgeKey = intent.getStringExtra(InCallPluginUtils.KEY_NUDGE_KEY);
                 dismissNudge(tag, nudgeKey);
             } else if (intent.getAction().equals(ACTION_INCALL_PLUGIN_LOGIN)) {
                 if (cmi.mLoginIntent != null) {

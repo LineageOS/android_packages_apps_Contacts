@@ -205,7 +205,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * {@link Intent#getSourceBounds()}.
  */
 public class QuickContactActivity extends ContactsActivity implements
-        BlockContactDialogFragment.BlockContactCallbacks {
+        BlockContactDialogFragment.Callbacks {
 
     /**
      * QuickContacts immediately takes up the full screen. All possible information is shown.
@@ -522,12 +522,12 @@ public class QuickContactActivity extends ContactsActivity implements
     };
 
     @Override
-    public void onBlockContact(boolean notifyLookupProvider) {
+    public void onBlockSelected(boolean notifyLookupProvider) {
         mBlockContactHelper.blockContactAsync(notifyLookupProvider);
     }
 
     @Override
-    public void onUnblockContact(boolean notifyLookupProvider) {
+    public void onUnblockSelected(boolean notifyLookupProvider) {
         mBlockContactHelper.unblockContactAsync(notifyLookupProvider);
     }
 

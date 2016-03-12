@@ -1518,7 +1518,7 @@ public class QuickContactActivity extends ContactsActivity implements
             pluginMimeIncluded = new HashSet<String>();
         }
 
-        HashMap<String, RawContact> pluginRawContactsMap = new HashMap<String, RawContact>();
+        HashMap<DataItem, RawContact> dataItemAccountMap = new HashMap<DataItem, RawContact>();
         for (RawContact rawContact : data.getRawContacts()) {
             for (DataItem dataItem : rawContact.getDataItems()) {
                 dataItem.setRawContactId(rawContact.getId());
@@ -1538,7 +1538,7 @@ public class QuickContactActivity extends ContactsActivity implements
                 // the mime type has been consolidated in the plugin entry, skip
                 if (pluginMimeExcluded.contains(mimeType)) continue;
                 if (pluginMimeIncluded.contains(mimeType)) {
-                    pluginRawContactsMap.put(mimeType, rawContact);
+                    dataItemAccountMap.put(dataItem, rawContact);
                 }
 
                 if (isMimeExcluded(mimeType) || !hasData) continue;
@@ -1589,10 +1589,9 @@ public class QuickContactActivity extends ContactsActivity implements
             if (SORTED_ABOUT_CARD_MIMETYPES.contains(topDataItem.getMimeType())) {
                 // About card mimetypes are built in buildAboutCardEntries, skip here
                 continue;
-            } else if (pluginRawContactsMap.containsKey(topDataItem.getMimeType())) {
+            } else if (pluginMimeIncluded.contains(topDataItem.getMimeType())) {
                     List<Entry> pluginEntries = incallPluginDataItemsToEntries(dataItemsByMimeType,
-                            data, pluginRawContactsMap.get(topDataItem.getMimeType()),
-                            contactCardEntries, pluginAccountsMap);
+                            data, dataItemAccountMap, contactCardEntries, pluginAccountsMap);
                 if (pluginEntries.size() > 0) {
                     if (DEBUG) {
                         Log.d(TAG, "pluginEntries added to contactCardEntries:" +
@@ -1610,7 +1609,7 @@ public class QuickContactActivity extends ContactsActivity implements
         }
         if (!mContactData.isUserProfile() && InCallPluginHelper.infoReady() && mCallMethodMap
                 .size() > 0) {
-            addAllInCallPluginOtherEntries(contactCardEntries, pluginRawContactsMap);
+            addAllInCallPluginOtherEntries(contactCardEntries, pluginAccountsMap);
         }
 
         Trace.endSection();
@@ -1634,7 +1633,6 @@ public class QuickContactActivity extends ContactsActivity implements
          * are in sorted order using mWithinMimeTypeDataItemComparator.
          */
         public Map<String, List<DataItem>> dataItemsMap;
-        public Map<String, List<DataItem>> hideDataItemsMap;
         public List<List<Entry>> aboutCardEntries;
         public List<List<Entry>> contactCardEntries;
         public String customAboutCardName;
@@ -3441,10 +3439,10 @@ public class QuickContactActivity extends ContactsActivity implements
     }
 
     private void addAllInCallPluginOtherEntries(List<List<Entry>> parentList,
-            HashMap<String, RawContact>  pluginRawContactMap) {
+            HashMap<ComponentName, List<String>> pluginAccountMap) {
         for (ComponentName cn : mCallMethodMap.keySet()) {
             CallMethodInfo cmi = mCallMethodMap.get(cn);
-            addInCallPluginEntries(cmi, parentList, pluginRawContactMap.containsKey(cmi.mMimeType));
+            addInCallPluginEntries(cmi, parentList, pluginAccountMap.containsKey(cmi.mComponent));
         }
     }
 
@@ -3545,13 +3543,14 @@ public class QuickContactActivity extends ContactsActivity implements
 
     // Create new Entries
     private List<Entry> incallPluginDataItemsToEntries(List<DataItem> dataItems, Contact contact,
-            RawContact rawContact, List<List<Entry>> parentList, HashMap<ComponentName,
-            List<String>> pluginAccountMap) {
+            HashMap<DataItem, RawContact> dataItemMap, List<List<Entry>> parentList,
+            HashMap<ComponentName, List<String>> pluginAccountMap) {
         List<Entry> entries = new ArrayList<Entry>();
         for (DataItem dataItem : dataItems) {
             CallMethodInfo cmi =
                     InCallPluginHelper.getMethodForMimeType(dataItem.getMimeType(), true);
             Entry entry;
+            RawContact rawContact = dataItemMap.get(dataItem);
             String contactAccountHandle = rawContact.getSourceId();
             if (cmi.mIsAuthenticated) {
                 // user signed in, consolidate entries

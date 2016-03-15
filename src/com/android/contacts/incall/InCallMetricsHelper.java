@@ -36,6 +36,7 @@ import com.cyanogen.ambient.analytics.AnalyticsServices;
 import com.cyanogen.ambient.analytics.Event;
 import com.cyanogen.ambient.incall.InCallServices;
 import com.google.common.base.Joiner;
+import cyanogenmod.providers.CMSettings;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -122,7 +123,6 @@ public class InCallMetricsHelper {
 
     public static void init(Context context) {
         InCallMetricsHelper helper = getInstance(context);
-
         AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, InCallMetricsService.class);
 
@@ -147,11 +147,16 @@ public class InCallMetricsHelper {
     }
 
     /**
-     * Gather all metrics entries from tables and send to Ambient.
+     * Gather all metrics entries from tables and send to Ambient. Called from
+     * InCallMetricsService (IntentService)
      *
      * @param  context  context to be used in db
      */
     public static void prepareAndSend(Context context) {
+        if (!statsOptIn(context)) {
+            return;
+        }
+
         InCallMetricsHelper helper = getInstance(context);
         // In App events
         List<ContentValues> allList = helper.mDbHelper.getAllEntries(Categories.INAPP_NUDGES, true);
@@ -284,6 +289,9 @@ public class InCallMetricsHelper {
         helper.mHandler.post(new Runnable() {
             @Override
             public void run() {
+                if (!statsOptIn(context)) {
+                    return;
+                }
                 helper.mDbHelper.incrementUserActionsParam(provider, "",
                         Events.INVITES_SENT.value(),
                         Categories.USER_ACTIONS.value(),
@@ -310,6 +318,9 @@ public class InCallMetricsHelper {
         helper.mHandler.post(new Runnable() {
             @Override
             public void run() {
+                if (!statsOptIn(context)) {
+                    return;
+                }
                 switch (cat) {
                     case INAPP_NUDGES:
                         switch (param) {
@@ -344,6 +355,9 @@ public class InCallMetricsHelper {
         helper.mHandler.post(new Runnable() {
             @Override
             public void run() {
+                if (!statsOptIn(context)) {
+                    return;
+                }
                 switch (event) {
                     case INAPP_NUDGE_CONTACTS_INSTALL:
                         helper.mDbHelper.incrementInAppParam(cmi.mComponent.flattenToString(),
@@ -379,6 +393,9 @@ public class InCallMetricsHelper {
         helper.mHandler.post(new Runnable() {
             @Override
             public void run() {
+                if (!statsOptIn(context)) {
+                    return;
+                }
                 CallMethodInfo cmi = pluginInfo.mCallMethodInfo;
                 if (!cmi.mIsAuthenticated) {
                     helper.mDbHelper.incrementInAppParam(cmi.mComponent.flattenToString(),
@@ -403,6 +420,9 @@ public class InCallMetricsHelper {
         helper.mHandler.post(new Runnable() {
             @Override
             public void run() {
+                if (!statsOptIn(context)) {
+                    return;
+                }
                 HashMap<ComponentName, CallMethodInfo> plugins = InCallPluginHelper
                         .getAllCallMethods();
                 HashMap<String, String> pluginMap = new HashMap<String, String>();
@@ -432,6 +452,9 @@ public class InCallMetricsHelper {
         helper.mHandler.post(new Runnable() {
             @Override
             public void run() {
+                if (!statsOptIn(context)) {
+                    return;
+                }
                 String[] rawIdArray = rawIds.split(",");
                 Arrays.sort(rawIdArray);
                 Set<String> providerSet = queryContactProviderByRawContactIds(context, rawIdArray);
@@ -501,5 +524,10 @@ public class InCallMetricsHelper {
 
     public static String generateNudgeId(String data) {
         return java.util.UUID.nameUUIDFromBytes(data.getBytes()).toString();
+    }
+
+    private static boolean statsOptIn(Context context) {
+        return CMSettings.Secure.getInt(context.getContentResolver(),
+                CMSettings.Secure.STATS_COLLECTION, 1) == 1;
     }
 }

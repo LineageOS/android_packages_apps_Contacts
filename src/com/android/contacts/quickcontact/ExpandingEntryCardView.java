@@ -304,7 +304,8 @@ public class ExpandingEntryCardView extends CardView {
         mEntriesViewGroup = (LinearLayout)
                 expandingEntryCardView.findViewById(R.id.content_area_linear_layout);
         mTitleTextView = (TextView) expandingEntryCardView.findViewById(R.id.title);
-        mContainer = (LinearLayout) expandingEntryCardView.findViewById(R.id.container);
+        mContainer = (LinearLayout) expandingEntryCardView.findViewById(R.id
+                .content_area_linear_layout);
 
         mExpandCollapseButton = inflater.inflate(
                 R.layout.quickcontact_expanding_entry_card_button, this, false);

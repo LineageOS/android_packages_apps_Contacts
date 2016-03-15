@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bfb3d3c7_cbd9e9f4",
+        "filename": "src/com/android/contacts/quickcontact/ExpandingEntryCardView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 11035
+      },
+      "writtenOn": "2016-03-15T21:18:37Z",
+      "side": 1,
+      "message": "removeView and what you are doing seem equivalent on the surface .. any reason one works over the other ?",
+      "range": {
+        "startLine": 419,
+        "startChar": 8,
+        "endLine": 421,
+        "endChar": 9
+      },
+      "revId": "e84935d4a7fcce10a933faffb36bdb95f02cfdaf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

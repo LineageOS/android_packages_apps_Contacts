@@ -37,6 +37,7 @@ import com.android.contacts.common.testing.InjectedServices;
 import com.android.contacts.common.util.Constants;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.contacts.incall.InCallPluginHelper;
+import com.android.contacts.incall.InCallMetricsHelper;
 import com.android.phone.common.incall.CallMethodHelper;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -127,6 +128,7 @@ public final class ContactsApplication extends Application {
 
         AnalyticsUtil.initialize(this);
         InCallPluginHelper.init(this);
+        InCallMetricsHelper.init(this);
     }
 
     private class DelayedInitializer extends AsyncTask<Void, Void, Void> {

@@ -152,6 +152,7 @@ import com.android.contacts.common.util.ViewUtil;
 import com.android.contacts.detail.ContactDisplayUtils;
 import com.android.contacts.editor.ContactEditorFragment;
 import com.android.contacts.editor.EditorIntents;
+import com.android.contacts.incall.InCallMetricsHelper;
 import com.android.contacts.incall.InCallPluginHelper;
 import com.android.contacts.incall.InCallPluginUtils;
 import com.android.contacts.interactions.CalendarInteractionsLoader;
@@ -3483,6 +3484,8 @@ public class QuickContactActivity extends ContactsActivity implements
                 if (DEBUG) Log.d(TAG, "Adding INSTALL NUDGE");
                 containerList.add(entry);
                 parentList.add(containerList);
+                InCallMetricsHelper.increaseImpressionCount(this, cmi,
+                        InCallMetricsHelper.Events.INAPP_NUDGE_CONTACTS_INSTALL);
             }
         } else if (cmi.mStatus == PluginStatus.ENABLED) {
             if (!hasPluginAccount) {
@@ -3536,6 +3539,8 @@ public class QuickContactActivity extends ContactsActivity implements
                         if (DEBUG) Log.d(TAG, "Adding LOGIN NUDGE");
                         containerList.add(entry);
                         parentList.add(containerList);
+                        InCallMetricsHelper.increaseImpressionCount(this, cmi,
+                                InCallMetricsHelper.Events.INAPP_NUDGE_CONTACTS_LOGIN);
                     }
                 }
             }
@@ -3623,13 +3628,48 @@ public class QuickContactActivity extends ContactsActivity implements
             if(intent.getAction().equals(ACTION_INCALL_PLUGIN_INSTALL)) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" +
                         cmi.mDependentPackage)));
+                InCallMetricsHelper.setValue(
+                        this,
+                        cmi.mComponent,
+                        InCallMetricsHelper.Categories.INAPP_NUDGES,
+                        InCallMetricsHelper.Events.INAPP_NUDGE_CONTACTS_INSTALL,
+                        InCallMetricsHelper.Parameters.EVENT_ACCEPTANCE,
+                        InCallMetricsHelper.EVENT_ACCEPT,
+                        InCallMetricsHelper.generateNudgeId(cmi.mInstallNudgeSubtitle));
             } else if (intent.getAction().equals(ACTION_INCALL_PLUGIN_DISMISS_NUDGE)) {
                 String nudgeKey = intent.getStringExtra(InCallPluginUtils.KEY_NUDGE_KEY);
                 dismissNudge(tag, nudgeKey);
+                if (TextUtils.equals(nudgeKey, NudgeKey.INCALL_CONTACT_CARD_LOGIN)) {
+                    InCallMetricsHelper.setValue(
+                            this,
+                            cmi.mComponent,
+                            InCallMetricsHelper.Categories.INAPP_NUDGES,
+                            InCallMetricsHelper.Events.INAPP_NUDGE_CONTACTS_LOGIN,
+                            InCallMetricsHelper.Parameters.EVENT_ACCEPTANCE,
+                            InCallMetricsHelper.EVENT_DISMISS,
+                            InCallMetricsHelper.generateNudgeId(cmi.mLoginNudgeSubtitle));
+                } else if (TextUtils.equals(nudgeKey, NudgeKey.INCALL_CONTACT_CARD_DOWNLOAD)) {
+                    InCallMetricsHelper.setValue(
+                            this,
+                            cmi.mComponent,
+                            InCallMetricsHelper.Categories.INAPP_NUDGES,
+                            InCallMetricsHelper.Events.INAPP_NUDGE_CONTACTS_INSTALL,
+                            InCallMetricsHelper.Parameters.EVENT_ACCEPTANCE,
+                            InCallMetricsHelper.EVENT_DISMISS,
+                            InCallMetricsHelper.generateNudgeId(cmi.mInstallNudgeSubtitle));
+                }
             } else if (intent.getAction().equals(ACTION_INCALL_PLUGIN_LOGIN)) {
                 if (cmi.mLoginIntent != null) {
                     cmi.mLoginIntent.send();
                 }
+                InCallMetricsHelper.setValue(
+                        this,
+                        cmi.mComponent,
+                        InCallMetricsHelper.Categories.INAPP_NUDGES,
+                        InCallMetricsHelper.Events.INAPP_NUDGE_CONTACTS_LOGIN,
+                        InCallMetricsHelper.Parameters.EVENT_ACCEPTANCE,
+                        InCallMetricsHelper.EVENT_ACCEPT,
+                        InCallMetricsHelper.generateNudgeId(cmi.mLoginNudgeSubtitle));
             } else if (intent.getAction().equals(ACTION_INCALL_PLUGIN_INVITE)) {
                 if (cmi.mInviteIntent != null) {
                     cmi.mInviteIntent.send();
@@ -3640,6 +3680,7 @@ public class QuickContactActivity extends ContactsActivity implements
                         cmi.mInviteIntent.send();
                     }
                 }
+                InCallMetricsHelper.increaseInviteCount(this, cmi.mComponent.flattenToString());
             } else if (intent.getAction().equals(ACTION_INCALL_PLUGIN_DIRECTORY_SEARCH)) {
                 if (cmi.mDirectorySearchIntent != null) {
                     cmi.mDirectorySearchIntent.send();

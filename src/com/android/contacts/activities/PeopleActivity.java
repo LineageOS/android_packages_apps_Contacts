@@ -58,6 +58,7 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.android.contacts.ContactsActivity;
+import com.android.contacts.incall.InCallMetricsHelper;
 import com.android.contacts.incall.InCallPluginHelper;
 import com.android.contacts.incall.InCallPluginInfo;
 import com.android.contacts.R;
@@ -970,6 +971,10 @@ public class PeopleActivity extends ContactsActivity implements
                 }
                 if (fragment != null) {
                     fragment.setUserVisibleHint(true);
+                }
+                if (mCurrentPrimaryItem instanceof PluginContactBrowseListFragment) {
+                    InCallMetricsHelper.increaseImpressionCount(PeopleActivity.this,
+                        ((PluginContactBrowseListFragment) mCurrentPrimaryItem).getPluginInfo());
                 }
                 mCurrentPrimaryItem = fragment;
             }

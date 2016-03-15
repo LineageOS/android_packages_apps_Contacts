@@ -46,6 +46,7 @@ import com.android.contacts.common.util.AccountsListAdapter;
 import com.android.contacts.common.util.AccountsListAdapter.AccountListFilter;
 import com.android.contacts.detail.PhotoSelectionHandler;
 import com.android.contacts.editor.Editor.EditorListener;
+import com.android.contacts.incall.InCallMetricsHelper;
 import com.android.contacts.util.ContactPhotoUtils;
 import com.android.contacts.util.UiClosables;
 
@@ -535,6 +536,7 @@ public class ContactEditorFragment extends ContactEditorBaseFragment implements
                 mContext, mContactIdForJoin, contactId, ContactEditorActivity.class,
                 ContactEditorActivity.ACTION_JOIN_COMPLETED);
         mContext.startService(intent);
+        InCallMetricsHelper.increaseContactManualMergeCount(mContext, mContactIdForJoin, contactId);
     }
 
     /**

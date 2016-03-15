@@ -15,14 +15,15 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android.dialer">
+    package="com.android.contacts">
 
     <!-- Connect to AmbientCore to use InCall Plugins -->
     <uses-permission android:name="com.cyanogen.ambient.permission.BIND_INCALL_SERVICE" />
     <uses-permission android:name="com.cyanogen.ambient.permission.PLUGIN_STATUS_CHANGED" />
+    <permission android:name="com.android.contacts.incall.METRICS_PERMISSION"
+                android:protectionLevel="signatureOrSystem" />
     <application>
-
-        <receiver android:name="com.android.contacts.incall.CallMethodStatusReceiver"
+        <receiver android:name=".incall.CallMethodStatusReceiver"
                   android:enabled="true"
                   android:exported="true">
             <intent-filter>
@@ -30,5 +31,16 @@
             </intent-filter>
         </receiver>
 
+        <!-- IntentService for InCall plugin metrics update -->
+        <service android:name=".incall.InCallMetricsService" android:exported="false"/>
+        <receiver android:name=".incall.InCallMetricsReceiver"
+                  android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.contacts.incall.CONTACTS_AUTO_MERGE"/>
+            </intent-filter>
+        </receiver>
+
+        <meta-data android:name="com.cyanogen.ambient.analytics.key"
+                   android:value="e8d60c6f3e05621d6437e67db27ef3b1d8b94e43"/>
     </application>
 </manifest>

@@ -28,11 +28,12 @@ import com.cyanogen.ambient.common.api.PendingResult;
 import com.cyanogen.ambient.common.api.ResultCallback;
 import com.cyanogen.ambient.discovery.util.NudgeKey;
 import com.cyanogen.ambient.incall.extension.InCallContactInfo;
-import com.cyanogen.ambient.incall.extension.StatusCodes;
 import com.cyanogen.ambient.incall.InCallServices;
 import com.cyanogen.ambient.incall.results.InstalledPluginsResult;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class InCallPluginHelper extends CallMethodHelper {
     private static final String TAG = InCallPluginHelper.class.getSimpleName();
@@ -117,5 +118,14 @@ public class InCallPluginHelper extends CallMethodHelper {
                         executeAll(apiCallbacks);
                     }
                 });
+    }
+
+    public static Set<String> getAllPluginComponentNames() {
+        Set<String> names = new HashSet<String>();
+        HashMap<ComponentName, CallMethodInfo> plugins = InCallPluginHelper.getAllCallMethods();
+        for (ComponentName cn : plugins.keySet()) {
+            names.add(cn.flattenToString());
+        }
+        return names;
     }
 }

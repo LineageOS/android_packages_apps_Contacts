@@ -49,6 +49,7 @@ import com.android.contacts.common.list.AutoScrollListView;
 import com.android.contacts.common.list.ContactEntryListFragment;
 import com.android.contacts.common.list.DirectoryPartition;
 import com.android.contacts.common.util.ContactLoaderUtils;
+import com.android.contacts.incall.InCallMetricsHelper;
 import com.android.contacts.incall.InCallPluginInfo;
 import com.android.contacts.R;
 import com.android.contacts.common.list.ContactListAdapter;
@@ -649,6 +650,15 @@ public class PluginContactBrowseListFragment extends ContactEntryListFragment<Co
                 if (view == mLoginBtn) {
                     if (mInCallPluginInfo.mCallMethodInfo.mLoginIntent != null) {
                         mInCallPluginInfo.mCallMethodInfo.mLoginIntent.send();
+                        InCallMetricsHelper.setValue(
+                                getActivity(),
+                                mInCallPluginInfo.mCallMethodInfo.mComponent,
+                                InCallMetricsHelper.Categories.INAPP_NUDGES,
+                                InCallMetricsHelper.Events.INAPP_NUDGE_CONTACTS_TAB_LOGIN,
+                                InCallMetricsHelper.Parameters.EVENT_ACCEPTANCE,
+                                InCallMetricsHelper.EVENT_ACCEPT,
+                                InCallMetricsHelper.generateNudgeId(mInCallPluginInfo
+                                        .mCallMethodInfo.mLoginSubtitle));
                     }
                 } else if (view == mEmptyView) {
                     if (mInCallPluginInfo.mCallMethodInfo.mDefaultDirectorySearchIntent != null) {

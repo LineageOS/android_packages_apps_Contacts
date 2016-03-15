@@ -26,6 +26,7 @@ import com.android.contacts.common.model.ValuesDelta;
 import com.android.contacts.common.model.account.AccountType;
 import com.android.contacts.common.util.ImplicitIntentsUtil;
 import com.android.contacts.detail.PhotoSelectionHandler;
+import com.android.contacts.incall.InCallMetricsHelper;
 import com.android.contacts.util.ContactPhotoUtils;
 
 import android.app.Activity;
@@ -325,6 +326,7 @@ public class CompactContactEditorFragment extends ContactEditorBaseFragment impl
                 mContext, mContactIdForJoin, contactId, CompactContactEditorActivity.class,
                 CompactContactEditorActivity.ACTION_JOIN_COMPLETED);
         mContext.startService(intent);
+        InCallMetricsHelper.increaseContactManualMergeCount(mContext, mContactIdForJoin, contactId);
     }
 
     @Override

@@ -416,7 +416,7 @@ public class ExpandingEntryCardView extends CardView {
             mEntriesViewGroup.addView(view);
         }
 
-        removeView(mExpandCollapseButton);
+        mContainer.removeView(mExpandCollapseButton);
         if (mCollapsedEntriesCount < mNumEntries
                 && mExpandCollapseButton.getParent() == null && !mIsAlwaysExpanded) {
             mContainer.addView(mExpandCollapseButton, -1);

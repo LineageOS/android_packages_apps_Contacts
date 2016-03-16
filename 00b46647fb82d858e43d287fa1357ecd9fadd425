@@ -16,6 +16,24 @@
       "revId": "00b46647fb82d858e43d287fa1357ecd9fadd425",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9fb8cfa7_8a620bd8",
+        "filename": "src/com/android/contacts/quickcontact/ExpandingEntryCardView.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 14113
+      },
+      "writtenOn": "2016-03-16T19:01:49Z",
+      "side": 1,
+      "message": "Tell that to IntelliJ auto format :)",
+      "parentUuid": "9fb8cfa7_4a4c1376",
+      "revId": "00b46647fb82d858e43d287fa1357ecd9fadd425",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

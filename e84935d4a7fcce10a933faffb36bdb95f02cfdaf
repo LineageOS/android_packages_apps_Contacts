@@ -46,6 +46,30 @@
       "revId": "e84935d4a7fcce10a933faffb36bdb95f02cfdaf",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9fb8cfa7_e73ae232",
+        "filename": "src/com/android/contacts/quickcontact/ExpandingEntryCardView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 14113
+      },
+      "writtenOn": "2016-03-16T16:18:33Z",
+      "side": 1,
+      "message": "Need to look at layout.expanding_entry_card_view.xml to to see why I think mContainer is not properly initialized.",
+      "parentUuid": "9fb8cfa7_672fd2f6",
+      "range": {
+        "startLine": 419,
+        "startChar": 8,
+        "endLine": 421,
+        "endChar": 9
+      },
+      "revId": "e84935d4a7fcce10a933faffb36bdb95f02cfdaf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

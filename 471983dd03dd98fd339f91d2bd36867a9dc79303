@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9fb8cfa7_2a2c3f46",
+        "filename": "src/com/android/contacts/quickcontact/ExpandingEntryCardView.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 11035
+      },
+      "writtenOn": "2016-03-16T19:54:10Z",
+      "side": 1,
+      "message": "don\u0027t think this is the cause of the bug .. mContainer was set correctly to the right view group (R.id.container)\n\nthe removeView() call was the problematic one\n\nthe Expand / collapse button was added to mContainer , but removeView of ExpandingCardView has no resolution to that view , so it won\u0027t be removed",
+      "range": {
+        "startLine": 307,
+        "startChar": 11,
+        "endLine": 308,
+        "endChar": 49
+      },
+      "revId": "471983dd03dd98fd339f91d2bd36867a9dc79303",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

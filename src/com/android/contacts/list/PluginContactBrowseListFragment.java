@@ -729,7 +729,9 @@ public class PluginContactBrowseListFragment extends ContactEntryListFragment<Co
                 if (mInCallPluginInfo.mCallMethodInfo.mIsAuthenticated && (!TextUtils.equals
                         (mAccountType, mInCallPluginInfo.mCallMethodInfo.mAccountType) ||
                         TextUtils.equals(mAccountHandle,
-                        mInCallPluginInfo.mCallMethodInfo.mAccountHandle))) {
+                        mInCallPluginInfo.mCallMethodInfo.mAccountHandle)) &&
+                        !TextUtils.isEmpty(mInCallPluginInfo.mCallMethodInfo.mAccountType) &&
+                        !TextUtils.isEmpty(mInCallPluginInfo.mCallMethodInfo.mAccountHandle)) {
                     mAccountType = mInCallPluginInfo.mCallMethodInfo.mAccountType;
                     mAccountHandle = mInCallPluginInfo.mCallMethodInfo.mAccountHandle;
                     setFilter(ContactListFilter.createAccountFilter(

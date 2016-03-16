@@ -22,6 +22,30 @@
       "revId": "e84935d4a7fcce10a933faffb36bdb95f02cfdaf",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9fb8cfa7_672fd2f6",
+        "filename": "src/com/android/contacts/quickcontact/ExpandingEntryCardView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 14113
+      },
+      "writtenOn": "2016-03-16T16:14:39Z",
+      "side": 1,
+      "message": "It seems that mContainer was not properly initialized in the constructor. I am uploading a new patch that changes mContainer initialization and the original removeView() now works.",
+      "parentUuid": "bfb3d3c7_cbd9e9f4",
+      "range": {
+        "startLine": 419,
+        "startChar": 8,
+        "endLine": 421,
+        "endChar": 9
+      },
+      "revId": "e84935d4a7fcce10a933faffb36bdb95f02cfdaf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

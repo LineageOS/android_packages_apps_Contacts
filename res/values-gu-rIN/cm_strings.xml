@@ -18,10 +18,49 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Toast displayed when saving a contact to sim card failed -->
+  <string name="contactSavedToSimCardError">SIM કાર્ડના પસંદ કરેલ સંપર્કો સેવ ન કરી શકાયા</string>
+  <string name="airplane_mode_on">એરપ્લેન મોડ સક્ષમ હોય ત્યારે SIM કાર્ડનો ઍક્સેસ થઈ શકે નહીં</string>
+  <string name="number_anr_too_long">નંબર અતિ લાંબો છે</string>
+  <string name="email_address_too_long">ઈમેલ સરનામું અતિ લાંબુ છે</string>
+  <string name="sim_card_full">SIM કાર્ડ પૂર્ણ ભરેલ છે</string>
+  <string name="tag_too_long">સંપર્ક નામ ઘણું લાંબુ છે</string>
+  <string name="invalid_phone_number">ફોન નંબર અપ્રમાણિત છે</string>
+  <string name="invalid_number_type">નંબરનો પ્રકાર અપ્રમાણિત છે</string>
+  <string name="no_phone_number_or_email">કૃપા કરીને ફોન નંબર અથવા ઈમેલ સરનામું દાખલ કરો.</string>
+  <string name="memory_card_full">સંપર્ક સેવ થઈ શકશે નહીં; ફોન મેમરી પૂર્ણ ભરેલ છે</string>
   <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
+  <string name="contacts_groups_label">જૂથો</string>
+  <string name="menu_moveGroupMembers">જૂથ સદસ્યો ખસેડો</string>
+  <string name="title_move_members">સદસ્યો ખસેડો</string>
+  <string name="message_move_members">સદસ્યો ખસેડી રહ્યા છીએ\u2026</string>
+  <string name="message_can_not_move_members">સદસ્યો ખસેડી શકાતા નથી</string>
+  <string name="edit_before_call">કોલ પહેલાં નંબર સંપાદન કરો</string>
+  <string name="menu_sendViaSMS">SMS મારફત સંપર્ક મોકલો</string>
+  <string name="select_all">તમામ</string>
   <!-- Choose Sim Card to Import -->
+  <string name="import_sim_contacts_title">SIM સંપર્કો આયાત કરો</string>
+  <string name="import_sim_contacts_message">SIM સંપર્કો\u2026 આયાત થાય છે</string>
   <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
+  <string name="importConfirmation_title">સંપર્ક આયાત કરવા છે?</string>
+  <string name="import_finish">આયાત સમાપ્ત થયું</string>
   <!-- Multi Delete Contacts related strings -->
+  <string name="delete_contacts_title">સંપર્કો રદ કરો</string>
+  <string name="delete_contacts_message">સંપર્કો\u2026 ભૂંસી રહ્યા છીએ</string>
   <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
+  <string name="deleteConfirmation_title">સંપર્ક હટાવીએ?</string>
+  <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g> કરતા વધુ સંપર્કો ઉમેરી શકાશે નહીં</string>
   <!-- add for MemoryStatusActivity -->
+  <string name="menu_memory_status">મેમરી સ્થિતિ</string>
+  <string name="memory_size">કુલ:</string>
+  <string name="memory_used">વપરાયેલ:</string>
+  <string name="calculating_status_now">સ્થિતિની ગણતરી થાય છે\u2026</string>
+  <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g>પર કૉપિ કરો</string>
+  <string name="no_empty_email_in_usim">USIM સંપર્ક પાસે ઉપલબ્ધ ફિલ્ડ નથી, સંદેશા કૉપિ કરવામાં અક્ષમ.</string>
+  <string name="voicemail">વૉઇસમેઇલ</string>
+  <string name="select_call_title">કૉલ લૉગ્સ પસંદ કરો</string>
+  <string name="delete_call_title">કૉલ લૉગ્સ રદ કરો</string>
+  <string name="delete_call_message">કૉલ લૉગ્સ\u2026 ભૂંસી રહ્યા છીએ</string>
+  <string name="delete_call_alert">શું પસંદ કરેલ કૉલ લૉગ્સ ભૂંસવા છે?</string>
+  <string name="title_del_call">હટાવો</string>
+  <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g> દ્વારા સશક્તિકરણ</string>
 </resources>

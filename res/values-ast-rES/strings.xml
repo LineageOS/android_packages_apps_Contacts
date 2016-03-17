@@ -193,12 +193,24 @@
   <!-- Toast displayed when saving a group failed [CHAR LIMIT=NONE] -->
   <string name="groupSavedErrorToast">Nun se guardaron los cambeos del grupu.</string>
   <!-- Displayed at the top of the contacts showing the total number of contacts visible when "Only contacts with phones" is selected -->
+  <plurals name="listTotalPhoneContacts">
+    <item quantity="one">Un (1) contautu con númberu de teléfonu</item>
+    <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> contautos con númberos de teléfonu\"</item>
+  </plurals>
   <!-- Displayed at the top of the contacts showing the zero as total number of contacts visible when "Only contacts with phones" is selected [CHAR LIMIT=64]-->
   <string name="listTotalPhoneContactsZero">Nengún contautu con númberu de teléfonu</string>
   <!-- Displayed at the top of the contacts showing the total number of contacts found when "Only contacts with phones" not selected [CHAR LIMIT=30] -->
+  <plurals name="listFoundAllContacts">
+    <item quantity="one">1 alcontráu</item>
+    <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> alcontraos</item>
+  </plurals>
   <!-- Displayed at the top of the contacts showing the zero total number of contacts found when "Only contacts with phones" not selected. [CHAR LIMIT=30] -->
   <string name="listFoundAllContactsZero">Nun hai contautos.</string>
   <!-- Displayed at the top of the contacts showing the total number of contacts found when typing search query -->
+  <plurals name="searchFoundContacts">
+    <item quantity="one">1 alcontráu</item>
+    <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> alcontraos</item>
+  </plurals>
   <!-- The title of "all contacts" tab. [CHAR LIMIT=14] -->
   <string name="all_contacts_tab_label">Tolos contautos</string>
   <!-- The title of "favorites" tab. [CHAR LIMIT=14] -->
@@ -308,6 +320,10 @@
   <string name="edit_contact">Editar contautu</string>
   <!-- Shows how many contacts have been merged. The value 1 is not shown but should be translated
          anyway if we change our mind later -->
+  <plurals name="merge_info">
+    <item quantity="one">ensin fusionar</item>
+    <item quantity="other">fusionaos dende <xliff:g id="COUNT">%0$d</xliff:g> fontes</item>
+  </plurals>
   <!-- The message in a confirmation dialog shown when the user selects a
         contact aggregation suggestion in Contact editor. [CHAR LIMIT=512]-->
   <string name="aggregation_suggestion_join_dialog_message">¿Quies agrupar el contautu actual col contautu seleicionáu?</string>
@@ -365,10 +381,22 @@
   <!-- An item in the popup list of groups that triggers creation of a contact group [CHAR LIMIT=128] -->
   <string name="create_group_item_label">Crear grupu nuevu</string>
   <!-- Shows how many groups are from the specified account [CHAR LIMIT=15] -->
+  <plurals name="num_groups_in_account">
+    <item quantity="one">Un grupu</item>
+    <item quantity="other"><xliff:g id="COUNT">%0$d</xliff:g> grupos</item>
+  </plurals>
   <!-- Confirmation message of the dialog that allows deletion of a contact group  [CHAR LIMIT=256] -->
   <string name="delete_group_dialog_message">¿De xuru que quies desaniciar el grupu \"<xliff:g id="GROUP_LABEL">%1$s</xliff:g>\"? Los contautos nun van desaniciase.</string>
   <!-- Subtitle of the group detail page that describes how many people are in the current group [CHAR LIMIT=30] -->
+  <plurals name="num_contacts_in_group">
+    <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> persona de <xliff:g id="ACCOUNT_TYPE">%2$s</xliff:g></item>
+    <item quantity="other"><xliff:g id="COUNT_0">%1$d</xliff:g> persones de <xliff:g id="ACCOUNT_TYPE">%2$s</xliff:g></item>
+  </plurals>
   <!-- Subtitle of a group (in the group list) that describes how many people are in the current group [CHAR LIMIT=30] -->
+  <plurals name="group_list_num_contacts_in_group">
+    <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> persona</item>
+    <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> persones</item>
+  </plurals>
   <!-- Toast displayed when the user creates a new contact and attempts to join it
       with another before entering any data  [CHAR LIMIT=256] -->
   <string name="toast_join_with_empty_contact">P\'agrupar el contautu, tienes d\'introducir el nome del otru contautu.</string>

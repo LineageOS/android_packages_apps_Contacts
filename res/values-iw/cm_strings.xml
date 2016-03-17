@@ -24,10 +24,10 @@
   <string name="email_address_too_long">כתובת הדוא\"ל ארוכה מדי</string>
   <string name="sim_card_full">כרטיס ה-SIM מלא</string>
   <string name="tag_too_long">שם איש הקשר ארוך מדי</string>
-  <string name="invalid_phone_number">מספר הטלפון אינו חוקי</string>
+  <string name="invalid_phone_number">מספר טלפון לא חוקי</string>
   <string name="invalid_number_type">סוג המספר אינו חוקי</string>
-  <string name="no_phone_number_or_email">אנא הכנס מספר טלפון או כתובת דוא\"ל.</string>
-  <string name="memory_card_full">לא ניתן לשמור את איש הקשר, זיכרון המכשיר מלא</string>
+  <string name="no_phone_number_or_email">הזן מספר טלפון או כתובת דוא\"ל.</string>
+  <string name="memory_card_full">לא ניתן לשמור את איש הקשר, זיכרון הטלפון מלא</string>
   <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">קבוצות</string>
   <string name="menu_moveGroupMembers">העבר חברי קבוצה</string>
@@ -51,7 +51,7 @@
   <string name="too_many_contacts_add_to_group">לא ניתן להוסיף יותר מ-<xliff:g id="count">%d</xliff:g> אנשי קשר</string>
   <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">מצב הזיכרון</string>
-  <string name="memory_size">סך הכל:</string>
+  <string name="memory_size">סך הכול:</string>
   <string name="memory_used">בשימוש:</string>
   <string name="calculating_status_now">מחשב מצב/u2026</string>
   <string name="menu_copyTo">העתק אל <xliff:g id="destination"> %s </xliff:g></string>
@@ -60,7 +60,7 @@
   <string name="select_call_title">בחר רישומי שיחות</string>
   <string name="delete_call_title">מחק רישומי שיחות</string>
   <string name="delete_call_message">מוחק רישומי שיחות\u2026</string>
-  <string name="delete_call_alert">האם למחוק את רישומי השיחות שנבחרו?</string>
+  <string name="delete_call_alert">למחוק את רישומי השיחות שנבחרו?</string>
   <string name="title_del_call">מחק</string>
   <string name="powered_by_provider">מופעל על-ידי <xliff:g id="provider">%s</xliff:g></string>
 </resources>

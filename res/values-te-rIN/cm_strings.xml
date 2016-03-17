@@ -18,10 +18,49 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Toast displayed when saving a contact to sim card failed -->
+  <string name="contactSavedToSimCardError">ఎంచుకోబడిన పరిచయాలను SIM కార్డుకు  భద్రపరచడం సాధ్యపడలేదు</string>
+  <string name="airplane_mode_on">విమాన మోడ్ చేతనపరచబడినప్పుడు SIM కార్డుకు ప్రాప్యత వీలుపడదు</string>
+  <string name="number_anr_too_long">నంబర్ చాలా పెద్దదిగా ఉంది</string>
+  <string name="email_address_too_long">ఇమెయిల్ చిరునామా చాలా పెద్దదిగా ఉంది</string>
+  <string name="sim_card_full">SIM కార్డ్ నిండినది</string>
+  <string name="tag_too_long">పరిచయం పేరు చాలా పెద్దదిగా ఉంది</string>
+  <string name="invalid_phone_number">ఫోన్ నంబర్ చెల్లుబాటు కాదు</string>
+  <string name="invalid_number_type">నంబర్ రకం చెల్లుబాటు కాదు</string>
+  <string name="no_phone_number_or_email">దయచేసి ఫోన్ నంబర్ లేదా ఇమెయిల్ చిరునామాను ఎంటర్ చేయండి.</string>
+  <string name="memory_card_full">పరిచయాన్ని భద్రపరచడం సాధ్యపడదు, ఫోన్ మెమరీ నిండిపోయింది</string>
   <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
+  <string name="contacts_groups_label">సమూహాలు</string>
+  <string name="menu_moveGroupMembers">సమూహ సభ్యులను తరలించుము</string>
+  <string name="title_move_members">సభ్యులను తరలించుము</string>
+  <string name="message_move_members">సభ్యులను తరలిస్తూ ఉంది\u2026</string>
+  <string name="message_can_not_move_members">సభ్యులను తరలించడం సాధ్యపడదు</string>
+  <string name="edit_before_call">కాల్‌కు ముందు సంఖ్యను ఎడిట్ చేయి</string>
+  <string name="menu_sendViaSMS">SMS ద్వారా పరిచయాన్ని పంపుము</string>
+  <string name="select_all">అన్నీ</string>
   <!-- Choose Sim Card to Import -->
+  <string name="import_sim_contacts_title">SIM పరిచయాలను దిగుమతి చేయుము</string>
+  <string name="import_sim_contacts_message">SIM పరిచయాల దిగుమతి జరుగుతోంది\u2026</string>
   <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
+  <string name="importConfirmation_title">పరిచయాన్ని దిగుమతి చేయాలా?</string>
+  <string name="import_finish">దిగుమతి పూర్తయింది</string>
   <!-- Multi Delete Contacts related strings -->
+  <string name="delete_contacts_title">పరిచయాలను తొలిగించుము</string>
+  <string name="delete_contacts_message">పరిచయాలు తొలిగించబడుతున్నాయి\u2026</string>
   <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
+  <string name="deleteConfirmation_title">పరిచయాన్ని తొలిగించాలా?</string>
+  <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g> పరిచయాల కంటే ఎక్కువ జోడించడం సాధ్యపడదు</string>
   <!-- add for MemoryStatusActivity -->
+  <string name="menu_memory_status">మెమరీ స్థితి</string>
+  <string name="memory_size">మొత్తం:</string>
+  <string name="memory_used">వినియోగించబడిన:</string>
+  <string name="calculating_status_now">స్థితిని గణిస్తోంది\u2026</string>
+  <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g> కు కాపీ చేయుము</string>
+  <string name="no_empty_email_in_usim">USIM పరిచయంలో ఇమెయిల్ క్షేత్రం అందుబాటులో లేదు, సందేశాలను కాపీ చేయడం కుదరలేదు.</string>
+  <string name="voicemail">వాయిస్‌మెయిల్</string>
+  <string name="select_call_title">కాల్ లాగులను ఎంచుకొనుము</string>
+  <string name="delete_call_title">కాల్ లాగులను తొలగించుము</string>
+  <string name="delete_call_message">కాల్ లాగులు తొలగించబడుతున్నాయి\u2026</string>
+  <string name="delete_call_alert">ఎంచుకోబడిన కాల్ లాగులను తొలగించాలా?</string>
+  <string name="title_del_call">తొలగించు</string>
+  <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g> చే ఆధారితం</string>
 </resources>

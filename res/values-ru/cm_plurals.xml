@@ -38,7 +38,7 @@
   </plurals>
   <plurals name="spam_count_text">
     <item quantity="one">%d человек пометил как спам</item>
-    <item quantity="few">%d человека отметили как спам</item>
+    <item quantity="few">%d человека пометили как спам</item>
     <item quantity="other">%d человек пометили как спам</item>
   </plurals>
 </resources>

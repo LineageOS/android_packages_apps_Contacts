@@ -193,6 +193,10 @@
   <!-- Displayed at the top of the contacts showing the zero total number of contacts found when "Only contacts with phones" not selected. [CHAR LIMIT=30] -->
   <string name="listFoundAllContactsZero">ناو نییە</string>
   <!-- Displayed at the top of the contacts showing the total number of contacts found when typing search query -->
+  <plurals name="searchFoundContacts">
+    <item quantity="one">١ دانە دۆزرایەوە</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> دانە دۆزرایەوە</item>
+  </plurals>
   <!-- The title of "all contacts" tab. [CHAR LIMIT=14] -->
   <!-- The title of "favorites" tab. [CHAR LIMIT=14] -->
   <!-- Action string for calling back a number in the call log -->

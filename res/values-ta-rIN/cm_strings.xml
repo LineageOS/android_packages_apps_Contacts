@@ -18,10 +18,49 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Toast displayed when saving a contact to sim card failed -->
+  <string name="contactSavedToSimCardError">தேர்ந்தெடுக்கப்பட்ட தொடர்புகளை SIM கார்டிடம் சேமிக்க முடியவில்லை</string>
+  <string name="airplane_mode_on">விமான பயன்முறை செயல்படுத்தப்பட்டு இருக்கும்போது SIM கார்டு அணுகப்பட முடியாது</string>
+  <string name="number_anr_too_long">இந்த எண் மிகவும் நீளம்</string>
+  <string name="email_address_too_long">மின்னஞ்சல் முகவரி மிகவும் நீளம்</string>
+  <string name="sim_card_full">SIM கார்டு நிரம்பிவிட்டது</string>
+  <string name="tag_too_long">தொடர்பு பெயர் மிக நீளம்</string>
+  <string name="invalid_phone_number">தொலைப்பேசி எண் செல்லுபடியாகாது</string>
+  <string name="invalid_number_type">எண் வகை செல்லுபடியாகாது</string>
+  <string name="no_phone_number_or_email">தயவுசெய்து தொலைப்பேசி எண் அல்லது மின்னஞ்சல் முகவரியை செருகவும்.</string>
+  <string name="memory_card_full">தொடர்பை சேமிக்க முடியாது, தொலைப்பேசி நினைவகம் நிரம்பியுள்ளது</string>
   <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
+  <string name="contacts_groups_label">குழுக்கள்</string>
+  <string name="menu_moveGroupMembers">குழு உறுப்பினர்களை நகர்த்து</string>
+  <string name="title_move_members">உறுப்பினர்களை நகர்த்து</string>
+  <string name="message_move_members">உறுப்பினர்கள் நகர்த்தப்படுகின்றனர்\u2026</string>
+  <string name="message_can_not_move_members">உறுப்பினர்களை நகர்த்த முடியாது</string>
+  <string name="edit_before_call">அழைப்பதற்கு முன் எண்ணைத் திருத்து</string>
+  <string name="menu_sendViaSMS">தொடர்பை SMS வழியாக அனுப்பு</string>
+  <string name="select_all">எல்லாம்</string>
   <!-- Choose Sim Card to Import -->
+  <string name="import_sim_contacts_title">SIM தொடர்புகளை இறக்குமதிசெய்</string>
+  <string name="import_sim_contacts_message">SIM தொடர்புகள் இறக்குமதிசெய்யப்படுகின்றன\u2026</string>
   <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
+  <string name="importConfirmation_title">தொடர்பை இறக்குமதிசெய்யவா?</string>
+  <string name="import_finish">இறக்குமதி முடிந்தது</string>
   <!-- Multi Delete Contacts related strings -->
+  <string name="delete_contacts_title">தொடர்புகளை நீக்கு</string>
+  <string name="delete_contacts_message">தொடர்புகள் நீக்கப்படுகின்றன\u2026</string>
   <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
+  <string name="deleteConfirmation_title">தொடர்பை நீக்கவா?</string>
+  <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g> தொடர்புகளுக்கு மேல் சேர்க்க முடியாது</string>
   <!-- add for MemoryStatusActivity -->
+  <string name="menu_memory_status">நினைவக நிலை</string>
+  <string name="memory_size">மொத்தம்:</string>
+  <string name="memory_used">பயன்படுத்தப்பட்டது:</string>
+  <string name="calculating_status_now">நிலை கணக்கிடப்படுகிறது\u2026</string>
+  <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g>க்கு நகலெடு</string>
+  <string name="no_empty_email_in_usim">USIM தொடர்பிலே கிடைக்கின்ற மின்னஞ்சல் புலம் இல்லை, செய்திகளை நகல்செய்ய முடியவில்லை</string>
+  <string name="voicemail">குரலஞ்சல்</string>
+  <string name="select_call_title">அழைப்பு பதிவுகளை தேர்ந்தெடு</string>
+  <string name="delete_call_title">அழைப்பு பதிவுகளை நீக்கு</string>
+  <string name="delete_call_message">அனைத்து அழைப்பு பதிவுகளையும் நீக்குகிறது\u2026</string>
+  <string name="delete_call_alert">தேர்ந்தெடுக்கப்பட்ட அழைப்பு பதிவுகளை நீக்கவா?</string>
+  <string name="title_del_call">நீக்கு</string>
+  <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g> ஆல் சக்தியூட்டப்படுகிறது</string>
 </resources>

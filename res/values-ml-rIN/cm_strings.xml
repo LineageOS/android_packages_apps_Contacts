@@ -18,10 +18,49 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Toast displayed when saving a contact to sim card failed -->
+  <string name="contactSavedToSimCardError">തിരഞ്ഞെടുത്ത ആളുകളെ സിം കാര്‍ഡിലെക് മാട്ടാന്‍ കഴിഞ്ഞില്ല</string>
+  <string name="airplane_mode_on">സിം കാര്‍ട് നോക്കാന്‍ പട്റ്റ്ല്ല കാരനം ഫൊനിപ്പൊള്‍ ഐര്‍പലയ്ന് മോഡിലാണ്‍</string>
+  <string name="number_anr_too_long">നുംബെര്‍ വളരെ വലുതാണ്</string>
+  <string name="email_address_too_long">ഇമെയില് ഐഡി വളരെ വലുതാണ്‍</string>
+  <string name="sim_card_full">സിം കാര്‍ട് ഫുല്ല് ആണ്‍</string>
+  <string name="tag_too_long">ആളുടെ പേര് വലുതാണ്‍</string>
+  <string name="invalid_phone_number">ഫൊണ്‍ നംബര്‍ തെറ്റാണ്</string>
+  <string name="invalid_number_type">ന്ംബര്‍ ട്യ്പ് തെറ്റാണ്</string>
+  <string name="no_phone_number_or_email">ഫൊണ്‍ നുംബരൊ ഇമെയിലൊ രെഗപെടുതുക.</string>
+  <string name="memory_card_full">സ്യവ് ചെയ്യാന്‍ സാദിക്കില്ല കാരണം ഫൊണ്‍ മെമ്രി ഫുല്ല് ആണ്</string>
   <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
+  <string name="contacts_groups_label">കൂട്ടങ്ങള്‍</string>
+  <string name="menu_moveGroupMembers">ഗരൂപ്പിലെ ആളുകളെ മൂവ് ചെയ്യുക</string>
+  <string name="title_move_members">ആല്ളുകളെ മൂവ് ചെയ്യുക</string>
+  <string name="message_move_members">ആളുകളെ മൂവ് ചെയ്യുക\u2026</string>
+  <string name="message_can_not_move_members">മൂവ് ചെയ്യാന്‍ പട്റ്റില്ല</string>
+  <string name="edit_before_call">കാളിനു മുന്നെ നുമ്ബെര് തിരുട്തുക</string>
+  <string name="menu_sendViaSMS">കൊന്റാക്ട് എസ്ംസ് ചെയ്യുക</string>
+  <string name="select_all">എല്ലാം തിരഞ്ഞെടുക്കുക</string>
   <!-- Choose Sim Card to Import -->
+  <string name="import_sim_contacts_title">ഇംപൊര്‍ട് സിം കൊന്റാക്ട്സ്</string>
+  <string name="import_sim_contacts_message">ഇംമ്പൊര്ടിങ്ങ് സിം കൊന്റക്ട്സ്\u2026</string>
   <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
+  <string name="importConfirmation_title">ഇംമ്പൊര്ട് കൊന്റക്ട്?</string>
+  <string name="import_finish">ഇംമ്പൊര്ട് ഫിനിഷെട്</string>
   <!-- Multi Delete Contacts related strings -->
+  <string name="delete_contacts_title">ആല്ളുകളെ ഒഴിവാക്കുക</string>
+  <string name="delete_contacts_message">ആളുകളെ ഒഴിവാക്കുന്നു\u2026</string>
   <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
+  <string name="deleteConfirmation_title">ആല്ളുകളെ ഒഴിവാക്കുക?</string>
+  <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g> ഇത്രെം ആലുകളെ മാത്രെ ഗ്രൂപ്പില് ഉല്പ്പെടുതാന് പട്റ്റൂ</string>
   <!-- add for MemoryStatusActivity -->
+  <string name="menu_memory_status">മെമറി സ്ടാടസ്</string>
+  <string name="memory_size">മെമറിടെ വലുപ്പം:</string>
+  <string name="memory_used">ഉപയൊഗിച്ച മെമറി:</string>
+  <string name="calculating_status_now">സ്ടാടസ് ക്ംമ്ബൂട് ചെയ്യുക</string>
+  <string name="menu_copyTo">കൊപി ചെയ്യുക <xliff:g id="destination">%s</xliff:g></string>
+  <string name="no_empty_email_in_usim">യൂസിം കൊന്റക്ടുകല്ക്ക് ഇമൈല് ഐഡി ഇല്ല, അതുകൊന്ടു സന്ദെഷം കൊപ്പി ചെയാന്ന്‍ പട്റ്റില്ല.</string>
+  <string name="voicemail">വൊഇസ് മയില്</string>
+  <string name="select_call_title">എല്ലാ കാള്‍ ലോഗ്സും തിരഞ്ഞ് എടുക്കുക</string>
+  <string name="delete_call_title">എല്ലാ കാള്‍ ലോഗ്സും ഒഴിവക്കുക</string>
+  <string name="delete_call_message">എല്ലാ കാള്‍ ലൊഗ്സും ഒഴിവാക്കുന്നു\u2026</string>
+  <string name="delete_call_alert">തിരഞ്ഞെടുത്ത കാള്‍ ലൊഗ്സ് എല്ലാം ഒഴിവാക്കട്ടെ?</string>
+  <string name="title_del_call">മായ്‌ചുകളയുക</string>
+  <string name="powered_by_provider">ലബ്യമാക്കിയത് <xliff:g id="provider">%s</xliff:g></string>
 </resources>

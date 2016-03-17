@@ -19,7 +19,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Não foi possível gravar os contactos selecionados no cartão SIM</string>
-  <string name="airplane_mode_on">Não é possível aceder ao cartão SIM enquanto o modo avião estiver ativado</string>
+  <string name="airplane_mode_on">Não é possível aceder ao cartão SIM enquanto o modo de voo estiver ativado</string>
   <string name="number_anr_too_long">O número é muito longo</string>
   <string name="email_address_too_long">O endereço de e-mail é muito longo</string>
   <string name="sim_card_full">O cartão SIM está cheio</string>

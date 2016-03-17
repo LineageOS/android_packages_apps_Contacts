@@ -17,18 +17,23 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="contacts_selected">
-    <item quantity="other">%d تاللاندى</item>
+    <item quantity="one">%d বাচনিকৃত</item>
+    <item quantity="other">%d বাচনিকৃত</item>
   </plurals>
   <plurals name="ContactMultiImportConfirmation">
-    <item quantity="other">%d ئالاقەداش ئەكىرىلىدۇ.</item>
+    <item quantity="one">%d যোগাযোগ আমদানি কৰা হ\'ব।</item>
+    <item quantity="other">%d যোগাযোগ আমদানি কৰা হ\'ব।</item>
   </plurals>
   <plurals name="import_progress">
-    <item quantity="other">%d ئالاقەداش ئەكىرىلدى</item>
+    <item quantity="one">%d যোগাযোগ আমদানি কৰা হৈছে।</item>
+    <item quantity="other">%d যোগাযোগ আমদানি কৰা হৈছে।</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
-    <item quantity="other">%d ئالاقەداش ئۆچۈرۈلىدۇ.</item>
+    <item quantity="one">%d যোগাযোগ বিলোপ কৰা হ\'ব।</item>
+    <item quantity="other">%d যোগাযোগ বিলোপ কৰা হ\'ব।</item>
   </plurals>
   <plurals name="spam_count_text">
-    <item quantity="other">%d نەپەر ئابونتقا ئەخلەت قىلىپ بەلگە سېلىندى</item>
+    <item quantity="one">%d জন ব্যক্তিয়ে ইয়াক স্পাম হিচাপে চিহ্নিত কৰিছে</item>
+    <item quantity="other">%d জন ব্যক্তিয়ে ইয়াক স্পাম হিচাপে চিহ্নিত কৰিছে</item>
   </plurals>
 </resources>

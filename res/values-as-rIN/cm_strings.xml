@@ -18,10 +18,49 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Toast displayed when saving a contact to sim card failed -->
+  <string name="contactSavedToSimCardError">SIM কাৰ্ডত চয়ন কৰা যোগাযোগবোৰ সংৰক্ষণ কৰিব নোৱাৰিলে</string>
+  <string name="airplane_mode_on">এয়াৰপ্লেন মোড সক্ষম কৰা থাকিলে SIM কাৰ্ডত প্ৰৱেশ কৰিব নোৱাৰি</string>
+  <string name="number_anr_too_long">নম্বৰটো খুব দীঘল</string>
+  <string name="email_address_too_long">ই-মেইল ঠিকনা অতি দীঘল</string>
+  <string name="sim_card_full">SIM কাৰ্ড পূৰ্ণ হৈ আছে</string>
+  <string name="tag_too_long">যোগাযোগৰ নাম অতি দীঘল</string>
+  <string name="invalid_phone_number">ফোন নম্বৰটো অবৈধ</string>
+  <string name="invalid_number_type">নম্বৰৰ প্ৰকাৰটো অবৈধ</string>
+  <string name="no_phone_number_or_email">অনুগ্ৰহ কৰি ফোন নম্বৰ বা ই-মেইল ঠিকনা আন্তঃসংযোগ কৰক।</string>
+  <string name="memory_card_full">যোগাযোগ সংৰক্ষণ কৰিব পৰা নগ\'ল, ফোন মেম\'ৰী পূৰ্ণ হৈ আছে</string>
   <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
+  <string name="contacts_groups_label">গোটসমূহ</string>
+  <string name="menu_moveGroupMembers">গোটৰ সদস্যসকলক স্থানান্তৰ কৰক</string>
+  <string name="title_move_members">সদস্যসকলক স্থানান্তৰ কৰক</string>
+  <string name="message_move_members">সদস্যসকলক স্থানান্তৰ কৰি আছে\u2026</string>
+  <string name="message_can_not_move_members">সদস্যসকলক স্থানান্তৰ কৰিব নোৱাৰি</string>
+  <string name="edit_before_call">কল কৰাৰ আগতে নম্বৰ সম্পাদনা কৰা</string>
+  <string name="menu_sendViaSMS">SMS ৰ মাধ্যমেৰে যোগাযোগ প্ৰেৰণ কৰক</string>
+  <string name="select_all">সকলোবোৰ</string>
   <!-- Choose Sim Card to Import -->
+  <string name="import_sim_contacts_title">SIM যোগাযোগবোৰ আমদানি কৰক</string>
+  <string name="import_sim_contacts_message">SIM যোগাযোগবোৰ আমদানি কৰি আছে\u2026</string>
   <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
+  <string name="importConfirmation_title">যোগাযোগ আমদানি কৰিব?</string>
+  <string name="import_finish">আমদানি সমাপ্ত হৈছে</string>
   <!-- Multi Delete Contacts related strings -->
+  <string name="delete_contacts_title">যোগাযোগ বিলোপ কৰক</string>
+  <string name="delete_contacts_message">যোগাযোগ বিলোপ কৰি আছে\u2026</string>
   <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
+  <string name="deleteConfirmation_title">কনটেক্ট মচি দিব?</string>
+  <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g> তকৈ অধিক যোগাযোগ যোগ কৰিব নোৱাৰি</string>
   <!-- add for MemoryStatusActivity -->
+  <string name="menu_memory_status">মেম\'ৰী স্থিতি</string>
+  <string name="memory_size">মুঠ:</string>
+  <string name="memory_used">ব্যৱহৃত:</string>
+  <string name="calculating_status_now">স্থিতি গণনা কৰি আছে\u2026</string>
+  <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g> লৈ কপি কৰক</string>
+  <string name="no_empty_email_in_usim">USIM যোগাযোগৰ উপলব্ধ ই-মেইল ফিল্ড নাই, বাৰ্তাবোৰ কপি কৰিবলৈ অক্ষম।</string>
+  <string name="voicemail">ভইচমেইল</string>
+  <string name="select_call_title">কল লগ চয়ন কৰক</string>
+  <string name="delete_call_title">কল লগ বিলোপ কৰক</string>
+  <string name="delete_call_message">কল লগ বিলোপ কৰি আছে\u2026</string>
+  <string name="delete_call_alert">চয়ন কৰা কল লগবোৰ বিলোপ কৰিব?</string>
+  <string name="title_del_call">মচি দিয়া</string>
+  <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g> ৰ দ্বাৰা চালিত</string>
 </resources>

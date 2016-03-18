@@ -175,6 +175,7 @@ import com.android.contacts.widget.MultiShrinkScroller.MultiShrinkScrollerListen
 import com.android.contacts.widget.QuickContactImageView;
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodInfo;
+import com.android.phone.common.incall.CallMethodUtils;
 import com.cyanogen.ambient.discovery.util.NudgeKey;
 import com.cyanogen.ambient.incall.extension.OriginCodes;
 import com.cyanogen.ambient.plugin.PluginStatus;
@@ -3552,17 +3553,17 @@ public class QuickContactActivity extends ContactsActivity implements
             Entry entry;
             RawContact rawContact = dataItemMap.get(dataItem);
             String contactAccountHandle = rawContact.getSourceId();
-            if (cmi.mIsAuthenticated) {
-                // user signed in, consolidate entries
-                InCallPluginUtils.PresenceInfo presenceInfo = InCallPluginUtils.lookupPresenceInfo(
-                        this, contact, rawContact);
+            if (cmi.mIsAuthenticated || CallMethodUtils.isSoftLoggedOut(this, cmi)) {
+                // user signed in or soft logged out, show consolidate entries
+                InCallPluginUtils.PresenceInfo presenceInfo = cmi.mIsAuthenticated ?
+                InCallPluginUtils.lookupPresenceInfo(this, contact, rawContact) : null;
                 Intent callIntent = InCallPluginUtils.getVoiceMimeIntent(cmi.mMimeType, dataItem,
                         cmi, contactAccountHandle);
                 entry = new Entry(CARD_ENTRY_ID_INCALL_PLUGIN_CALL,
                         cmi.mBrandIcon,
                         contactAccountHandle,
-                        presenceInfo.mStatusMsg,
-                        presenceInfo.mPresenceIcon,
+                        presenceInfo == null ? "" : presenceInfo.mStatusMsg,
+                        presenceInfo == null ? null : presenceInfo.mPresenceIcon,
                         null,
                         callIntent,
                         cmi.mImIcon,
@@ -3573,9 +3574,9 @@ public class QuickContactActivity extends ContactsActivity implements
                         cmi.mBrandIconId,
                         cmi,
                         entries, parentList);
-               if (DEBUG) Log.d(TAG, "Adding CALL ENTRY");
+                if (DEBUG) Log.d(TAG, "Adding CALL ENTRY");
             } else {
-                // user signed out, list the contact's account name, and action set to
+                // user hard signed out, list the contact's account name, and action set to
                 // launch sign in
                 final Resources res = getResources();
                 entry = new Entry(CARD_ENTRY_ID_INCALL_PLUGIN,

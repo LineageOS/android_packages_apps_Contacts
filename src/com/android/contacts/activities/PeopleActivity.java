@@ -889,7 +889,7 @@ public class PeopleActivity extends ContactsActivity implements
                 }
                 if ((!mAccountUnavailable && object == mGroupsFragment) || (mAccountUnavailable &&
                         object == mGroupsUnavailableFragment)) {
-                    return mTabStateGroup;
+                    return getTabPositionForTextDirection(mTabStateGroup);
                 }
             }
             return POSITION_NONE;

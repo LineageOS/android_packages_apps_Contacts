@@ -955,7 +955,7 @@ public class QuickContactActivity extends ContactsActivity implements
         }
         mIsUpdating = new AtomicBoolean(false);
         processIntent(getIntent());
-        mBlockContactHelper = new BlockContactHelper(this, new LookupProviderImpl(this));
+        mBlockContactHelper = new BlockContactHelper(this);
         if (mContactData != null) {
             mBlockContactHelper.setContactInfo(mContactData);
             mBlockContactHelper.gatherDataInBackground();

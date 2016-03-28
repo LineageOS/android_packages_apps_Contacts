@@ -112,6 +112,7 @@ import com.android.contacts.util.DialogManager;
 import com.android.contactsbind.HelpUtils;
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodInfo;
+import com.android.phone.common.incall.CallMethodUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -225,8 +226,6 @@ public class PeopleActivity extends ContactsActivity implements
     private ArrayList<String[]> mContactList;
 
     private BroadcastReceiver mExportToSimCompleteListener = null;
-    private BroadcastReceiver mListenForPluginUpdates = null;
-    private BroadcastReceiver mAuthUpdateListener = null;
 
     final String FAVORITE_TAG = "tab-pager-favorite";
     final String ALL_TAG = "tab-pager-all";
@@ -1363,7 +1362,8 @@ public class PeopleActivity extends ContactsActivity implements
                 int pluginIndex = tabPosition - TabState.GROUPS;
                 InCallPluginInfo pluginInfo = mPluginTabInfo.get(pluginIndex);
                 // floating button state
-                if (pluginInfo.mCallMethodInfo.mIsAuthenticated) {
+                if (pluginInfo.mCallMethodInfo.mIsAuthenticated ||
+                        CallMethodUtils.isSoftLoggedOut(this, pluginInfo.mCallMethodInfo)) {
                     mFloatingActionButtonContainer.setVisibility(View.VISIBLE);
                 } else {
                     mFloatingActionButtonContainer.setVisibility(View.GONE);

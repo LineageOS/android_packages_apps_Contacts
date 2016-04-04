@@ -488,7 +488,7 @@ public class QuickContactActivity extends ContactsActivity implements
                                 intent.getStringExtra(InCallPluginUtils.KEY_NUMBER),
                                 getBaseContext(), false,
                                 TextUtils.isEmpty(intent.getStringExtra(InCallPluginUtils
-                                        .KEY_MIMETYPE)), null);
+                                        .KEY_MIMETYPE)), (String) null);
                     }
                 } else {
                     ImplicitIntentsUtil

@@ -971,9 +971,11 @@ public class PeopleActivity extends ContactsActivity implements
                 if (fragment != null) {
                     fragment.setUserVisibleHint(true);
                 }
-                if (mCurrentPrimaryItem instanceof PluginContactBrowseListFragment) {
-                    InCallMetricsHelper.increaseImpressionCount(PeopleActivity.this,
-                        ((PluginContactBrowseListFragment) mCurrentPrimaryItem).getPluginInfo());
+                if (fragment != null && fragment instanceof PluginContactBrowseListFragment) {
+                    CallMethodInfo cmi = ((PluginContactBrowseListFragment) fragment)
+                            .getPluginInfo().mCallMethodInfo;
+                    InCallMetricsHelper.increaseImpressionCount(PeopleActivity.this, cmi,
+                        InCallMetricsHelper.Events.INAPP_NUDGE_CONTACTS_TAB_LOGIN);
                 }
                 mCurrentPrimaryItem = fragment;
             }
@@ -1794,6 +1796,9 @@ public class PeopleActivity extends ContactsActivity implements
                         } catch (PendingIntent.CanceledException e) {
                             Log.d(TAG, "directory search exception: ", e);
                         }
+                        InCallMetricsHelper.increaseCount(this,
+                                InCallMetricsHelper.Events.DIRECTORY_SEARCH,
+                                pluginInfo.mCallMethodInfo.mComponent.flattenToString());
                     }
                 } else {
                     Intent intent = new Intent(Intent.ACTION_INSERT, Contacts.CONTENT_URI);

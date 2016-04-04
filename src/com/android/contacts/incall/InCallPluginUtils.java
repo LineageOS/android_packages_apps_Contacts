@@ -205,4 +205,21 @@ public class InCallPluginUtils {
                 phoneNumber, lookupUri);
 
     }
+
+    public static HashMap<String, String> getPluginAccountComponentPairs(Context context) {
+        HashMap<ComponentName, CallMethodInfo> plugins = CallMethodFilters
+                .getAllEnabledAndHiddenCallMethods(context);
+        HashMap<String, String> pluginMap = new HashMap<String, String>();
+        for (CallMethodInfo cmi : plugins.values()) {
+            if (DEBUG) {
+                Log.d(TAG, "increaseContactMergeCount:" + cmi.mAccountType + " " +
+                        cmi.mComponent.flattenToString());
+            }
+            if (cmi.mComponent == null) {
+                continue;
+            }
+            pluginMap.put(cmi.mAccountType, cmi.mComponent.flattenToString());
+        }
+        return pluginMap;
+    }
 }

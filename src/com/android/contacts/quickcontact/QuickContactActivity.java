@@ -3689,11 +3689,14 @@ public class QuickContactActivity extends ContactsActivity implements
                 if (cmi.mInviteIntent != null) {
                     cmi.mInviteIntent.send();
                 }
-                InCallMetricsHelper.increaseInviteCount(this, cmi.mComponent.flattenToString());
+                InCallMetricsHelper.increaseCount(this, InCallMetricsHelper.Events.INVITES_SENT,
+                        cmi.mComponent.flattenToString());
             } else if (intent.getAction().equals(ACTION_INCALL_PLUGIN_DIRECTORY_SEARCH)) {
                 if (cmi.mDirectorySearchIntent != null) {
                     cmi.mDirectorySearchIntent.send();
                 }
+                InCallMetricsHelper.increaseCount(this, InCallMetricsHelper.Events.DIRECTORY_SEARCH,
+                        cmi.mComponent.flattenToString());
             }
         } catch (PendingIntent.CanceledException e) {
             if (DEBUG) Log.d(TAG, "handleInCallPluginAction ", e);

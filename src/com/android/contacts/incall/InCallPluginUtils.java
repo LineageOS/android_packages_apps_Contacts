@@ -211,4 +211,21 @@ public class InCallPluginUtils {
     public static void displayPendingIntentError(View parentView, String msg) {
         Snackbar.make(parentView, msg, Snackbar.LENGTH_SHORT).show();
     }
+
+    public static HashMap<String, String> getPluginAccountComponentPairs(Context context) {
+        HashMap<ComponentName, CallMethodInfo> plugins = CallMethodFilters
+                .getAllEnabledAndHiddenCallMethods(ContactsDataSubscription.get(context));
+        HashMap<String, String> pluginMap = new HashMap<String, String>();
+        for (CallMethodInfo cmi : plugins.values()) {
+            if (DEBUG) {
+                Log.d(TAG, "getPluginAccountComponentPairs:" + cmi.mAccountType + " " +
+                        cmi.mComponent.flattenToString());
+            }
+            if (cmi.mComponent == null) {
+                continue;
+            }
+            pluginMap.put(cmi.mAccountType, cmi.mComponent.flattenToString());
+        }
+        return pluginMap;
+    }
 }

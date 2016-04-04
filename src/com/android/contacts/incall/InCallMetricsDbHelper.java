@@ -24,8 +24,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.google.common.base.Preconditions;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -45,6 +43,11 @@ public class InCallMetricsDbHelper extends SQLiteOpenHelper {
             InAppColumns.NUDGE_ID + "==? AND " + InAppColumns.EVENT_ACCEPTANCE_TIME + " ==? ";
     private static final String SELECT_PROVIDER_AND_EVENT =
             UserActionsColumns.PROVIDER_NAME + "==? AND " + UserActionsColumns.EVENT_NAME + " ==?";
+    private static final String SELECT_PROVIDER_AND_EVENT_AND_RAWID =
+            UserActionsColumns.PROVIDER_NAME + "==? AND " + UserActionsColumns.EVENT_NAME +
+                    " ==? AND " + UserActionsColumns.RAW_ID + " ==?";
+    private static final String SELECT_EVENT_AND_RAWID = UserActionsColumns.EVENT_NAME + " ==? AND "
+            + UserActionsColumns.RAW_ID + " ==?";
 
     public interface Tables {
         // stores events in the INAPP_ACTIONS category
@@ -116,24 +119,28 @@ public class InCallMetricsDbHelper extends SQLiteOpenHelper {
         entry.put(InAppColumns.PROVIDER_NAME, provider);
         String[] selectionArgs = new String[] {nudgeId, String.valueOf(0)};
         SQLiteDatabase db = getWritableDatabase();
-        Cursor queryCursor = db.query(
+        try (Cursor queryCursor = db.query(
                 Tables.INAPP_TABLE,
                 INAPP_PROJECTION,
                 SELECT_NUDGE_ID_AND_ACCEPT_TIME,
                 selectionArgs,
                 null,
                 null,
-                null);
-        if (queryCursor != null && queryCursor.moveToFirst()) {
-            // increment existing entry
-            entry.put(colName, queryCursor.getInt(queryCursor.getColumnIndex(colName)) + 1);
-            db.update(Tables.INAPP_TABLE, entry, SELECT_NUDGE_ID_AND_ACCEPT_TIME, selectionArgs);
-        } else {
-            // no entry where acceptance time is not set
-            entry.put(colName, 1);
-            db.insert(Tables.INAPP_TABLE, null, entry);
+                null)) {
+            if (queryCursor != null && queryCursor.moveToFirst()) {
+                // increment existing entry
+                entry.put(colName, queryCursor.getInt(queryCursor.getColumnIndex(colName)) + 1);
+                db.update(Tables.INAPP_TABLE, entry, SELECT_NUDGE_ID_AND_ACCEPT_TIME,
+                        selectionArgs);
+            } else {
+                // no entry where acceptance time is not set
+                entry.put(colName, 1);
+                db.insert(Tables.INAPP_TABLE, null, entry);
+            }
+        } catch (RuntimeException e) {
+            Log.e(TAG, "incrementInAppParam exception: ", e);
         }
-        queryCursor.close();
+
     }
 
     /**
@@ -159,27 +166,34 @@ public class InCallMetricsDbHelper extends SQLiteOpenHelper {
         }
         String[] selectionArgs = new String[] {nudgeId, String.valueOf(0)};
         SQLiteDatabase db = getWritableDatabase();
-        Cursor queryCursor = db.query(
-                Tables.INAPP_TABLE,
-                INAPP_PROJECTION,
-                SELECT_NUDGE_ID_AND_ACCEPT_TIME,
-                selectionArgs,
-                null,
-                null,
-                null);
-        ContentValues entry = new ContentValues();
-        entry.put(InAppColumns.EVENT_NAME, event);
-        entry.put(InAppColumns.CATEGORY, cat);
-        entry.put(InAppColumns.NUDGE_ID, nudgeId);
-        entry.put(InAppColumns.PROVIDER_NAME, provider);
-        entry.put(InAppColumns.EVENT_ACCEPTANCE, accept);
-        entry.put(InAppColumns.EVENT_ACCEPTANCE_TIME, System.currentTimeMillis());
-        if (queryCursor != null && queryCursor.moveToFirst()) {
-            db.update(Tables.INAPP_TABLE, entry, SELECT_NUDGE_ID_AND_ACCEPT_TIME, selectionArgs);
-        } else {
-            db.insert(Tables.INAPP_TABLE, null, entry);
+        try (
+            Cursor queryCursor = db.query(
+                    Tables.INAPP_TABLE,
+                    INAPP_PROJECTION,
+                    SELECT_NUDGE_ID_AND_ACCEPT_TIME,
+                    selectionArgs,
+                    null,
+                    null,
+                    null)) {
+
+            ContentValues entry = new ContentValues();
+            entry.put(InAppColumns.EVENT_NAME, event);
+            entry.put(InAppColumns.CATEGORY, cat);
+            entry.put(InAppColumns.NUDGE_ID, nudgeId);
+            entry.put(InAppColumns.PROVIDER_NAME, provider);
+            entry.put(InAppColumns.EVENT_ACCEPTANCE, accept);
+            entry.put(InAppColumns.EVENT_ACCEPTANCE_TIME, System.currentTimeMillis());
+            if (queryCursor != null && queryCursor.moveToFirst()) {
+                db.update(Tables.INAPP_TABLE, entry, SELECT_NUDGE_ID_AND_ACCEPT_TIME,
+                        selectionArgs);
+            } else {
+                entry.put(InAppColumns.COUNT, 1);
+                db.insert(Tables.INAPP_TABLE, null, entry);
+            }
+            queryCursor.close();
+        } catch (RuntimeException e) {
+            Log.e(TAG, "setInAppAcceptance exception: ", e);
         }
-        queryCursor.close();
     }
 
     /**
@@ -187,51 +201,84 @@ public class InCallMetricsDbHelper extends SQLiteOpenHelper {
      * If there's an existing entry that matches the PROVIDER_NAME and the EVENT_NAME,
      * increment the count stored in the "colName" column. Otherwise, create a new entry.
      *
-     * @param  provider  component name of the InCall provider
-     * @param  event     metric event
-     * @param  cat       metric category
-     * @param  colName   database column name to increment
+     * @param  provider component name of the InCall provider
+     * @param  rawIds   raw Ids of the contacts that are merged (auto or manual)
+     * @param  event    metric event
+     * @param  cat      metric category
+     * @param  colName  database column name to increment
      */
     public void incrementUserActionsParam(String provider, String rawIds, String event, String
             cat, String colName) {
         // query for event type, update, if not found insert
         ContentValues entry = new ContentValues();
-        entry.put(UserActionsColumns.EVENT_NAME, event);
         entry.put(UserActionsColumns.CATEGORY, cat);
         entry.put(UserActionsColumns.PROVIDER_NAME, provider);
         entry.put(UserActionsColumns.RAW_ID, rawIds);
 
+        String selectionString;
         String[] selectionArgs = new String[] {provider, event};
         SQLiteDatabase db = getWritableDatabase();
-        Cursor queryCursor = db.query(
-                Tables.USER_ACTIONS_TABLE,
-                USER_ACTIONS_PROJECTION,
-                SELECT_PROVIDER_AND_EVENT,
-                selectionArgs,
-                null,
-                null,
-                null);
-        if (queryCursor != null && queryCursor.moveToFirst()) {
-            // increment existing entry, only increment if it's manual merge
-            if (event.equals(InCallMetricsHelper.Events.CONTACTS_MANUAL_MERGED)) {
-                entry.put(colName,
-                        queryCursor.getInt(queryCursor.getColumnIndex(colName)) + 1);
-                db.update(Tables.USER_ACTIONS_TABLE, entry, SELECT_PROVIDER_AND_EVENT,
-                        selectionArgs);
+        boolean isMergeEvent = event.equals(InCallMetricsHelper.Events.CONTACTS_AUTO_MERGED.value())
+                || event.equals(InCallMetricsHelper.Events.CONTACTS_MANUAL_MERGED.value());
+        if (event.equals(InCallMetricsHelper.Events.CONTACTS_AUTO_MERGED.value())) {
+            // contacts provider fires the auto aggregation intent even after a manual merge,
+            // need to check if there's an existing manual merge entry first
+            try (Cursor queryCursor = db.query(
+                        Tables.USER_ACTIONS_TABLE,
+                        USER_ACTIONS_PROJECTION,
+                        SELECT_EVENT_AND_RAWID,
+                        new String[]
+                                {InCallMetricsHelper.Events.CONTACTS_MANUAL_MERGED.value(), rawIds},
+                        null,
+                        null,
+                        null)) {
+                if (queryCursor != null && queryCursor.moveToFirst()) {
+                    // there's already a manual entry, return
+                    return;
+                }
+            } catch (RuntimeException e) {
+                Log.e(TAG, "incrementUserActionsParam query existing entry exception: ", e);
             }
-        } else {
-            // no existing entry, create one
-            entry.put(colName, 1);
-            db.insert(Tables.USER_ACTIONS_TABLE, null, entry);
         }
-        queryCursor.close();
+        entry.put(UserActionsColumns.EVENT_NAME, event);
+        if (isMergeEvent) {
+            selectionString = SELECT_PROVIDER_AND_EVENT_AND_RAWID;
+            selectionArgs = new String[] {provider, event, rawIds};
+        } else {
+            selectionString = SELECT_PROVIDER_AND_EVENT;
+            selectionArgs = new String[] {provider, event};
+        }
+        try (Cursor cursor = db.query(
+                    Tables.USER_ACTIONS_TABLE,
+                    USER_ACTIONS_PROJECTION,
+                    selectionString,
+                    selectionArgs,
+                    null,
+                    null,
+                    null)) {
+            if (cursor != null && cursor.moveToFirst()) {
+                // increment count for an existing entry
+                if (!isMergeEvent) {
+                    // do not update existing merge count entries
+                    entry.put(colName,
+                            cursor.getInt(cursor.getColumnIndex(colName)) + 1);
+                    db.update(Tables.USER_ACTIONS_TABLE, entry, selectionString, selectionArgs);
+                }
+            } else {
+                // no existing entry, create a new one
+                entry.put(colName, 1);
+                db.insert(Tables.USER_ACTIONS_TABLE, null, entry);
+            }
+        } catch (RuntimeException e) {
+            Log.e(TAG, "incrementUserActionsParam query and update exception: ", e);
+        }
     }
 
     /**
      * Return all entries in the table storing events from the corresponding category
      *
-     * @param  cat     metric category
-     * @param  clear   if the database table should be cleared afterwards
+     * @param  cat    metric category
+     * @param  clear  if the database table should be cleared afterwards
      * @return List of ContentValues in the respective table
      */
     public List<ContentValues> getAllEntries(InCallMetricsHelper.Categories cat, boolean clear) {
@@ -248,18 +295,20 @@ public class InCallMetricsDbHelper extends SQLiteOpenHelper {
                 return list;
         }
         SQLiteDatabase db = getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + table, null);
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-                ContentValues entry = new ContentValues();
-                DatabaseUtils.cursorRowToContentValues(cursor, entry);
-                list.add(entry);
-            } while (cursor.moveToNext());
+        try (Cursor cursor = db.rawQuery("SELECT * FROM " + table, null)) {
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    ContentValues entry = new ContentValues();
+                    DatabaseUtils.cursorRowToContentValues(cursor, entry);
+                    list.add(entry);
+                } while (cursor.moveToNext());
+            }
+            if (!DEBUG && clear) {
+                db.delete(table, null, null);
+            }
+        } catch (RuntimeException e) {
+            Log.e(TAG, "getAllEntries exception: ", e);
         }
-        if (!DEBUG && clear) {
-            db.delete(table, null, null);
-        }
-        cursor.close();
         return list;
     }
 
@@ -274,7 +323,7 @@ public class InCallMetricsDbHelper extends SQLiteOpenHelper {
             Log.e(TAG, "Malformed database version..recreating database");
         }
 
-        if (oldVersion <= newVersion) {
+        if (oldVersion < newVersion) {
             setupTables(db);
         }
     }
@@ -303,28 +352,36 @@ public class InCallMetricsDbHelper extends SQLiteOpenHelper {
 
     private void setupTables(SQLiteDatabase db) {
         dropTables(db);
-        db.execSQL("CREATE TABLE " + Tables.INAPP_TABLE + " (" +
-                InAppColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                InAppColumns.CATEGORY + " TEXT, " +
-                InAppColumns.EVENT_NAME + " TEXT, " +
-                InAppColumns.COUNT + " INTEGER DEFAULT 0, " +
-                InAppColumns.NUDGE_ID + " TEXT, " +
-                InAppColumns.EVENT_ACCEPTANCE + " INTEGER DEFAULT -1, " +
-                InAppColumns.EVENT_ACCEPTANCE_TIME + " INTEGER DEFAULT 0, " +
-                InAppColumns.PROVIDER_NAME + " TEXT" +
-                ");");
-        db.execSQL("CREATE TABLE " + Tables.USER_ACTIONS_TABLE + " (" +
-                UserActionsColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                UserActionsColumns.CATEGORY + " TEXT, " +
-                UserActionsColumns.EVENT_NAME + " TEXT, " +
-                UserActionsColumns.COUNT + " INTEGER DEFAULT 0, " +
-                UserActionsColumns.PROVIDER_NAME + " TEXT, " +
-                UserActionsColumns.RAW_ID + " INTEGER DEFAULT 0" +
-                ");");
+        try {
+            db.execSQL("CREATE TABLE " + Tables.INAPP_TABLE + " (" +
+                    InAppColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    InAppColumns.CATEGORY + " TEXT, " +
+                    InAppColumns.EVENT_NAME + " TEXT, " +
+                    InAppColumns.COUNT + " INTEGER DEFAULT 0, " +
+                    InAppColumns.NUDGE_ID + " TEXT, " +
+                    InAppColumns.EVENT_ACCEPTANCE + " INTEGER DEFAULT -1, " +
+                    InAppColumns.EVENT_ACCEPTANCE_TIME + " INTEGER DEFAULT 0, " +
+                    InAppColumns.PROVIDER_NAME + " TEXT" +
+                    ");");
+            db.execSQL("CREATE TABLE " + Tables.USER_ACTIONS_TABLE + " (" +
+                    UserActionsColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    UserActionsColumns.CATEGORY + " TEXT, " +
+                    UserActionsColumns.EVENT_NAME + " TEXT, " +
+                    UserActionsColumns.COUNT + " INTEGER DEFAULT 0, " +
+                    UserActionsColumns.PROVIDER_NAME + " TEXT, " +
+                    UserActionsColumns.RAW_ID + " INTEGER DEFAULT 0" +
+                    ");");
+        } catch (RuntimeException e) {
+            Log.e(TAG, "setupTables exception: ", e);
+        }
     }
 
     public void dropTables(SQLiteDatabase db) {
-        db.execSQL("DROP TABLE IF EXISTS " + Tables.INAPP_TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + Tables.USER_ACTIONS_TABLE);
+        try {
+            db.execSQL("DROP TABLE IF EXISTS " + Tables.INAPP_TABLE);
+            db.execSQL("DROP TABLE IF EXISTS " + Tables.USER_ACTIONS_TABLE);
+        } catch (RuntimeException e) {
+            Log.e(TAG, "dropTables exception: ", e);
+        }
     }
 }

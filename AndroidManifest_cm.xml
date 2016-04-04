@@ -34,7 +34,8 @@
         <!-- IntentService for InCall plugin metrics update -->
         <service android:name=".incall.InCallMetricsService" android:exported="false"/>
         <receiver android:name=".incall.InCallMetricsReceiver"
-                  android:exported="true">
+                  android:exported="true"
+                  android:permission="com.android.contacts.incall.METRICS_PERMISSION">
             <intent-filter>
                 <action android:name="com.android.contacts.incall.CONTACTS_AUTO_MERGE"/>
             </intent-filter>

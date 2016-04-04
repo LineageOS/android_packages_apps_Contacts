@@ -22,6 +22,7 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.common.base.Preconditions;
@@ -45,6 +46,11 @@ public class InCallMetricsDbHelper extends SQLiteOpenHelper {
             InAppColumns.NUDGE_ID + "==? AND " + InAppColumns.EVENT_ACCEPTANCE_TIME + " ==? ";
     private static final String SELECT_PROVIDER_AND_EVENT =
             UserActionsColumns.PROVIDER_NAME + "==? AND " + UserActionsColumns.EVENT_NAME + " ==?";
+    private static final String SELECT_PROVIDER_AND_EVENT_AND_RAWID =
+            UserActionsColumns.PROVIDER_NAME + "==? AND " + UserActionsColumns.EVENT_NAME +
+                    " ==? AND " + UserActionsColumns.RAW_ID + " ==?";
+    private static final String SELECT_EVENT_AND_RAWID = UserActionsColumns.EVENT_NAME + " ==? AND "
+            + UserActionsColumns.RAW_ID + " ==?";
 
     public interface Tables {
         // stores events in the INAPP_ACTIONS category
@@ -133,7 +139,9 @@ public class InCallMetricsDbHelper extends SQLiteOpenHelper {
             entry.put(colName, 1);
             db.insert(Tables.INAPP_TABLE, null, entry);
         }
-        queryCursor.close();
+        if (queryCursor != null) {
+            queryCursor.close();
+        }
     }
 
     /**
@@ -177,9 +185,12 @@ public class InCallMetricsDbHelper extends SQLiteOpenHelper {
         if (queryCursor != null && queryCursor.moveToFirst()) {
             db.update(Tables.INAPP_TABLE, entry, SELECT_NUDGE_ID_AND_ACCEPT_TIME, selectionArgs);
         } else {
+            entry.put(InAppColumns.COUNT, 1);
             db.insert(Tables.INAPP_TABLE, null, entry);
         }
-        queryCursor.close();
+        if (queryCursor != null) {
+            queryCursor.close();
+        }
     }
 
     /**
@@ -187,44 +198,76 @@ public class InCallMetricsDbHelper extends SQLiteOpenHelper {
      * If there's an existing entry that matches the PROVIDER_NAME and the EVENT_NAME,
      * increment the count stored in the "colName" column. Otherwise, create a new entry.
      *
-     * @param  provider  component name of the InCall provider
-     * @param  event     metric event
-     * @param  cat       metric category
-     * @param  colName   database column name to increment
+     * @param  provider         component name of the InCall provider
+     * @param  rawIds           raw Ids of the contacts that are merged (auto or manual)
+     * @param  event            metric event
+     * @param  cat              metric category
+     * @param  colName          database column name to increment
      */
     public void incrementUserActionsParam(String provider, String rawIds, String event, String
             cat, String colName) {
         // query for event type, update, if not found insert
         ContentValues entry = new ContentValues();
-        entry.put(UserActionsColumns.EVENT_NAME, event);
         entry.put(UserActionsColumns.CATEGORY, cat);
         entry.put(UserActionsColumns.PROVIDER_NAME, provider);
         entry.put(UserActionsColumns.RAW_ID, rawIds);
 
+        String selectionString;
         String[] selectionArgs = new String[] {provider, event};
         SQLiteDatabase db = getWritableDatabase();
-        Cursor queryCursor = db.query(
+        Cursor queryCursor;
+        boolean isMergeEvent = event.equals(InCallMetricsHelper.Events.CONTACTS_AUTO_MERGED.value())
+                || event.equals(InCallMetricsHelper.Events.CONTACTS_MANUAL_MERGED.value());
+        if (event.equals(InCallMetricsHelper.Events.CONTACTS_AUTO_MERGED.value())) {
+            // contacts provider fires the auto aggregation intent even after a manual merge,
+            // need to check if there's an existing manual merge entry first
+            queryCursor = db.query(
+                    Tables.USER_ACTIONS_TABLE,
+                    USER_ACTIONS_PROJECTION,
+                    SELECT_EVENT_AND_RAWID,
+                    new String[]
+                            {InCallMetricsHelper.Events.CONTACTS_MANUAL_MERGED.value(), rawIds},
+                    null,
+                    null,
+                    null);
+            if (queryCursor != null & queryCursor.moveToFirst()) {
+                // there's already a manual entry, return
+                queryCursor.close();
+                return;
+            }
+        }
+        entry.put(UserActionsColumns.EVENT_NAME, event);
+        if (isMergeEvent) {
+            selectionString = SELECT_PROVIDER_AND_EVENT_AND_RAWID;
+            selectionArgs = new String[] {provider, event, rawIds};
+        } else {
+            selectionString = SELECT_PROVIDER_AND_EVENT;
+            selectionArgs = new String[] {provider, event};
+        }
+        queryCursor = db.query(
                 Tables.USER_ACTIONS_TABLE,
                 USER_ACTIONS_PROJECTION,
-                SELECT_PROVIDER_AND_EVENT,
+                selectionString,
                 selectionArgs,
                 null,
                 null,
                 null);
         if (queryCursor != null && queryCursor.moveToFirst()) {
-            // increment existing entry, only increment if it's manual merge
-            if (event.equals(InCallMetricsHelper.Events.CONTACTS_MANUAL_MERGED)) {
+            // increment count for an existing entry
+            if (!isMergeEvent) {
+                // do not update existing merge count entries
                 entry.put(colName,
                         queryCursor.getInt(queryCursor.getColumnIndex(colName)) + 1);
-                db.update(Tables.USER_ACTIONS_TABLE, entry, SELECT_PROVIDER_AND_EVENT,
-                        selectionArgs);
+                db.update(Tables.USER_ACTIONS_TABLE, entry, selectionString, selectionArgs);
             }
         } else {
-            // no existing entry, create one
+            // no existing entry, create a new one
             entry.put(colName, 1);
             db.insert(Tables.USER_ACTIONS_TABLE, null, entry);
         }
-        queryCursor.close();
+        if (queryCursor != null) {
+            queryCursor.close();
+        }
     }
 
     /**
@@ -259,7 +302,9 @@ public class InCallMetricsDbHelper extends SQLiteOpenHelper {
         if (!DEBUG && clear) {
             db.delete(table, null, null);
         }
-        cursor.close();
+        if (cursor != null) {
+            cursor.close();
+        }
         return list;
     }
 

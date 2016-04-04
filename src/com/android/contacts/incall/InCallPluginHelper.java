@@ -130,4 +130,20 @@ public class InCallPluginHelper extends CallMethodHelper {
         }
         return names;
     }
+
+    public static HashMap<String, String> getPluginAccountComponentPairs() {
+        HashMap<ComponentName, CallMethodInfo> plugins = InCallPluginHelper.getAllCallMethods();
+        HashMap<String, String> pluginMap = new HashMap<String, String>();
+        for (CallMethodInfo cmi : plugins.values()) {
+            if (DEBUG) {
+                Log.d(TAG, "increaseContactMergeCount:" + cmi.mAccountType + " " +
+                        cmi.mComponent.flattenToString());
+            }
+            if (cmi.mComponent == null) {
+                continue;
+            }
+            pluginMap.put(cmi.mAccountType, cmi.mComponent.flattenToString());
+        }
+        return pluginMap;
+    }
 }

@@ -28,6 +28,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.SystemClock;
 import android.provider.ContactsContract.RawContacts;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.phone.common.ambient.AmbientConnection;
@@ -41,6 +42,7 @@ import cyanogenmod.providers.CMSettings;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -82,6 +84,7 @@ public class InCallMetricsHelper {
         CONTACTS_MANUAL_MERGED("CONTACTS_MANUAL_MERGED"),
         CONTACTS_AUTO_MERGED("CONTACTS_AUTO_MERGED"),
         INVITES_SENT("INVITES_SENT"),
+        DIRECTORY_SEARCH("DIRECTORY_SEARCH"),
         INAPP_NUDGE_CONTACTS_LOGIN("INAPP_NUDGE_CONTACTS_LOGIN"),
         INAPP_NUDGE_CONTACTS_INSTALL("INAPP_NUDGE_CONTACTS_INSTALL"),
         INAPP_NUDGE_CONTACTS_TAB_LOGIN("INAPP_NUDGE_CONTACTS_TAB_LOGIN"),
@@ -284,7 +287,8 @@ public class InCallMetricsHelper {
         return true;
     }
 
-    public static void increaseInviteCount(final Context context, final String provider) {
+    public static void increaseCount(final Context context, final Events event, final String
+            provider) {
         final InCallMetricsHelper helper = getInstance(context);
         helper.mHandler.post(new Runnable() {
             @Override
@@ -292,8 +296,7 @@ public class InCallMetricsHelper {
                 if (!statsOptIn(context)) {
                     return;
                 }
-                helper.mDbHelper.incrementUserActionsParam(provider, "",
-                        Events.INVITES_SENT.value(),
+                helper.mDbHelper.incrementUserActionsParam(provider, "", event.value(),
                         Categories.USER_ACTIONS.value(),
                         Parameters.COUNT.value().toLowerCase());
             }
@@ -340,7 +343,7 @@ public class InCallMetricsHelper {
     }
 
     /**
-     * Increases the impression count for different nudges in contacts card
+     * Increases the impression count for different nudges in
      *
      * @param  context  context
      * @param  cmi      CallMethodInfo for the entry
@@ -348,7 +351,7 @@ public class InCallMetricsHelper {
      */
     public static void increaseImpressionCount(final Context context, final CallMethodInfo cmi,
             final Events event) {
-        if (cmi == null) {
+        if (cmi == null || cmi.mComponent == null) {
             return;
         }
         final InCallMetricsHelper helper = getInstance(context);
@@ -371,6 +374,14 @@ public class InCallMetricsHelper {
                                 generateNudgeId(cmi.mLoginNudgeSubtitle),
                                 Parameters.COUNT.toCol());
                         break;
+                    case INAPP_NUDGE_CONTACTS_TAB_LOGIN:
+                        if (!cmi.mIsAuthenticated) {
+                            helper.mDbHelper.incrementInAppParam(cmi.mComponent.flattenToString(),
+                                    event.value(),
+                                    Categories.INAPP_NUDGES.value(),
+                                    generateNudgeId(cmi.mLoginSubtitle),
+                                    Parameters.COUNT.toCol());
+                        }
                     default:
                         break;
                 }
@@ -379,36 +390,7 @@ public class InCallMetricsHelper {
     }
 
     /**
-     * Increases the impression count for contacts tab login
-     *
-     * @param  context    context
-     * @param  pluginInfo list of plugin info
-     */
-    public static void increaseImpressionCount(final Context context, final InCallPluginInfo
-            pluginInfo) {
-        final InCallMetricsHelper helper = getInstance(context);
-        if (pluginInfo == null) {
-            return;
-        }
-        helper.mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                if (!statsOptIn(context)) {
-                    return;
-                }
-                CallMethodInfo cmi = pluginInfo.mCallMethodInfo;
-                if (!cmi.mIsAuthenticated) {
-                    helper.mDbHelper.incrementInAppParam(cmi.mComponent.flattenToString(),
-                            Events.INAPP_NUDGE_CONTACTS_TAB_LOGIN.value(),
-                            Categories.INAPP_NUDGES.value(), generateNudgeId(cmi.mLoginSubtitle),
-                            Parameters.COUNT.toCol());
-                }
-            }
-        });
-    }
-
-    /**
-     * Increases contact merge counts
+     * Increases manual contact merge counts
      *
      * @param  context          context
      * @param  contactIdForJoin the primary contact ID to be merged
@@ -423,30 +405,30 @@ public class InCallMetricsHelper {
                 if (!statsOptIn(context)) {
                     return;
                 }
-                HashMap<ComponentName, CallMethodInfo> plugins = InCallPluginHelper
-                        .getAllCallMethods();
-                HashMap<String, String> pluginMap = new HashMap<String, String>();
-                for (CallMethodInfo cmi : plugins.values()) {
-                    if (DEBUG) {
-                        Log.d(TAG, "increaseContactMergeCount:" + cmi.mAccountType + " " +
-                                cmi.mComponent.flattenToString());
-                    }
-                    pluginMap.put(cmi.mAccountType, cmi.mComponent.flattenToString());
-                }
+                Set<String> rawIdSet = new HashSet<String>();
                 Set<String> providerSet = queryContactProviderByContactIds(context,
-                        contactIdForJoin, contactId, pluginMap);
-
+                        contactIdForJoin, contactId, rawIdSet);
+                String[] rawIdArray = rawIdSet.toArray(new String[rawIdSet.size()]);
+                Arrays.sort(rawIdArray, mRawIdComparator);
                 List<String> providerList = new ArrayList<String>(providerSet);
                 Collections.sort(providerList);
                 String joinedProvider = providerList.size() == 0 ? "" :
                         Joiner.on(",").skipNulls().join(providerList);
-                helper.mDbHelper.incrementUserActionsParam(joinedProvider, "",
+                String joinedRawIds = rawIdArray.length == 0 ? "" :
+                        Joiner.on(",").skipNulls().join(rawIdArray);
+                helper.mDbHelper.incrementUserActionsParam(joinedProvider, joinedRawIds,
                         InCallMetricsHelper.Events.CONTACTS_MANUAL_MERGED.value(),
                         Categories.USER_ACTIONS.value(), Parameters.COUNT.toCol());
             }
         });
     }
 
+    /**
+     * Increases auto contact merge counts
+     *
+     * @param  context          context
+     * @param  rawIds           the merged raw contact IDs
+     */
     public static void increaseContactAutoMergeCount(final Context context, final String rawIds) {
         final InCallMetricsHelper helper = getInstance(context);
         helper.mHandler.post(new Runnable() {
@@ -456,7 +438,7 @@ public class InCallMetricsHelper {
                     return;
                 }
                 String[] rawIdArray = rawIds.split(",");
-                Arrays.sort(rawIdArray);
+                Arrays.sort(rawIdArray, mRawIdComparator);
                 Set<String> providerSet = queryContactProviderByRawContactIds(context, rawIdArray);
 
                 List<String> providerList = new ArrayList<String>(providerSet);
@@ -475,34 +457,51 @@ public class InCallMetricsHelper {
     }
 
     /**
-     * Check if the provided contact IDs is from an account type that matches a InCall
-     * provider.
+     * Check if the provided contact IDs is from an account type that matches a InCall provider.
      *
      * @param  context          context
      * @param  contactId        the primary contact ID to be merged
      * @param  contactId2       the secondary contact ID to be merged
-     * @parma  pluginMap        the <accountType, plugin name> pairs for lookup
+     * @param  rawIdSet         merged raw contac ID set filled by this method
      */
     private static Set<String> queryContactProviderByContactIds(Context context, long contactId,
-            long contactId2, HashMap<String, String> pluginMap) {
+            long contactId2, Set<String> rawIdSet) {
         Set<String> providerSet = new HashSet<String>();
+        HashMap<String, String> pluginMap = InCallPluginHelper.getPluginAccountComponentPairs();
         Cursor cursor = context.getContentResolver().query(RawContacts.CONTENT_URI,
-                new String[] {RawContacts.ACCOUNT_TYPE},
+                new String[]{RawContacts.ACCOUNT_TYPE, RawContacts._ID},
                 RawContacts.CONTACT_ID + "=? OR " + RawContacts.CONTACT_ID + "=?",
                 new String[]{String.valueOf(contactId), String.valueOf(contactId2)}, null);
         if (cursor != null && cursor.moveToFirst()) {
             do {
-                providerSet.add(cursor.getString(0));
+                if (pluginMap.containsKey(cursor.getString(0))) {
+                    // a plugin, use component name
+                    providerSet.add(pluginMap.get(cursor.getString(0)));
+                } else {
+                    // not a plugin, use account type instead
+                    providerSet.add(cursor.getString(0));
+                }
+                rawIdSet.add(String.valueOf(cursor.getInt(1))); // _ID
                 if (DEBUG) Log.d(TAG, "queryContactProvider:" + cursor.getString(0));
             } while (cursor.moveToNext());
         }
-        cursor.close();
+        if (cursor != null)
+        {
+            cursor.close();
+        }
         return providerSet;
     }
 
+    /**
+     * Check if the provided raw contact IDs is from an account type that matches a InCall provider.
+     *
+     * @param  context      context
+     * @param  rawIds       raw contac IDs of the contacts
+     */
     private static Set<String> queryContactProviderByRawContactIds(Context context, String[]
             rawIds) {
         Set<String> providerSet = new HashSet<String>();
+        HashMap<String, String> pluginMap = InCallPluginHelper.getPluginAccountComponentPairs();
         Cursor cursor = null;
         for (String rawId : rawIds) {
             cursor = context.getContentResolver().query(RawContacts.CONTENT_URI,
@@ -511,6 +510,11 @@ public class InCallMetricsHelper {
                     new String[]{rawId}, null);
             if (cursor != null && cursor.moveToFirst()) {
                 do {
+                    if (pluginMap.containsKey(cursor.getString(0))) {
+                        providerSet.add(pluginMap.get(cursor.getString(0)));
+                    } else {
+                        providerSet.add(cursor.getString(0));
+                    }
                     providerSet.add(cursor.getString(0));
                     if (DEBUG) Log.d(TAG, "queryContactProvider:" + cursor.getString(0));
                 } while (cursor.moveToNext());
@@ -523,6 +527,9 @@ public class InCallMetricsHelper {
     }
 
     public static String generateNudgeId(String data) {
+        if (TextUtils.isEmpty(data)) {
+            return "";
+        }
         return java.util.UUID.nameUUIDFromBytes(data.getBytes()).toString();
     }
 
@@ -530,4 +537,11 @@ public class InCallMetricsHelper {
         return CMSettings.Secure.getInt(context.getContentResolver(),
                 CMSettings.Secure.STATS_COLLECTION, 1) == 1;
     }
+
+    private static Comparator<String> mRawIdComparator = new Comparator<String> () {
+        @Override
+        public int compare(String o1, String o2)  {
+            return Integer.valueOf(o1) - Integer.valueOf(o2);
+        }
+    };
 }

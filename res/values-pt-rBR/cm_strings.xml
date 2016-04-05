@@ -34,7 +34,7 @@
   <string name="title_move_members">Mover membros</string>
   <string name="message_move_members">Movendo membros\u2026</string>
   <string name="message_can_not_move_members">Não é possível mover os membros</string>
-  <string name="edit_before_call">Editar número antes de chamar</string>
+  <string name="edit_before_call">Editar número antes de ligar</string>
   <string name="menu_sendViaSMS">Enviar contato via SMS</string>
   <string name="select_all">Todos</string>
   <!-- Choose Sim Card to Import -->
@@ -55,7 +55,7 @@
   <string name="memory_used">Usado:</string>
   <string name="calculating_status_now">Calculando estado\u2026</string>
   <string name="menu_copyTo">Copiar para <xliff:g id="destination">%s</xliff:g></string>
-  <string name="no_empty_email_in_usim">O contato USIM não tem um campo de e-mail disponível, não é possível copiar mensagens.</string>
+  <string name="no_empty_email_in_usim">O contato USIM não tem um campo de e-mail disponível, impossível copiar mensagens.</string>
   <string name="voicemail">Correio de voz</string>
   <string name="select_call_title">Selecione os registros de chamadas</string>
   <string name="delete_call_title">Apagar registros de chamadas</string>

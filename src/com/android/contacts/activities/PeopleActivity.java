@@ -1898,7 +1898,11 @@ public class PeopleActivity extends ContactsActivity implements
         FragmentTransaction transaction;
         FragmentManager fragmentManager = getFragmentManager();
 
-        for (ComponentName cn : mCallMethodMap.keySet()) {
+        Iterator<Map.Entry<ComponentName, CallMethodInfo>> itr = mCallMethodMap.entrySet()
+                .iterator();
+        while (itr.hasNext()) {
+            Map.Entry<ComponentName, CallMethodInfo> entry = itr.next();
+            ComponentName cn = entry.getKey();
             if (newCmMap.containsKey(cn)) {
                 // Update plugin info only, the plugin fragment keeps track of its state to
                 // determine if a UI update is necessary
@@ -1910,7 +1914,7 @@ public class PeopleActivity extends ContactsActivity implements
             } else {
                 // Remove the tab associated with a plugin that's no longer available
                 updateTabs = true;
-                mCallMethodMap.remove(cn);
+                itr.remove();
                 removeTabTitle(cn);
                 InCallPluginInfo removePlugin = removePluginInfo(cn);
                 if (removePlugin != null) {

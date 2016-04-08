@@ -23,7 +23,7 @@ LOCAL_AAPT_FLAGS := \
     --extra-packages android.support.v7.cardview \
     --extra-packages com.cyanogen.ambient
 
-LOCAL_JAVA_LIBRARIES := telephony-common voip-common
+LOCAL_JAVA_LIBRARIES := telephony-common voip-common ims-common
 LOCAL_FULL_LIBS_MANIFEST_FILES := $(LOCAL_PATH)/AndroidManifest_cm.xml
 LOCAL_STATIC_JAVA_LIBRARIES := \
     com.android.vcard \

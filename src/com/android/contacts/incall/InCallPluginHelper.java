@@ -89,9 +89,11 @@ public class InCallPluginHelper extends CallMethodHelper {
                             mCallMethodInfos.clear();
                         }
 
-                        if (mInstalledPlugins.size() == 0) {
+                        if (mInstalledPlugins == null || mInstalledPlugins.size() == 0) {
                             broadcast();
+                            return;
                         }
+
                         HashMap<ResultCallback, PendingResult> apiCallbacks =
                                 new HashMap<ResultCallback, PendingResult>();
                         for (ComponentName cn : mInstalledPlugins) {

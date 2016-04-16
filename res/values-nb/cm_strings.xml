@@ -63,4 +63,5 @@
   <string name="delete_call_alert">Slett valgte Anropslister?</string>
   <string name="title_del_call">Slett</string>
   <string name="powered_by_provider">Drevet av <xliff:g id="provider">%s</xliff:g></string>
+  <!-- InCall plugin directory search & invite -->
 </resources>

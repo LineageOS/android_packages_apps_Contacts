@@ -63,4 +63,9 @@
   <string name="delete_call_alert">Ezabatu hautatutako deien erregistroak?</string>
   <string name="title_del_call">Ezabatu</string>
   <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g>k indartua</string>
+  <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">Bilatu %1$s direktorioan</string>
+  <string name="incall_plugin_invite">GONBIDATU</string>
+  <string name="incall_plugin_account_subheader">%1$s izena</string>
+  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g>(e)k ezin du dei hau egin</string>
 </resources>

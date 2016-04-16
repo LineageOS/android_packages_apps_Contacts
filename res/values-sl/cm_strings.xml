@@ -63,4 +63,9 @@
   <string name="delete_call_alert">Izbriši izbrane dnevnike klicev?</string>
   <string name="title_del_call">Izbriši</string>
   <string name="powered_by_provider">Omogoča <xliff:g id="provider">%s</xliff:g></string>
+  <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">Išči v mapi %1$s</string>
+  <string name="incall_plugin_invite">POVABI</string>
+  <string name="incall_plugin_account_subheader">%1$s ime</string>
+  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> ne more opraviti tega klica</string>
 </resources>

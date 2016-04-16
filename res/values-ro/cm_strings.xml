@@ -62,4 +62,5 @@
   <string name="delete_call_message">Se șterg jurnalele de apel\u2026</string>
   <string name="delete_call_alert">Ștergeți jurnalele de apel selectate?</string>
   <string name="title_del_call">Ștergeți</string>
+  <!-- InCall plugin directory search & invite -->
 </resources>

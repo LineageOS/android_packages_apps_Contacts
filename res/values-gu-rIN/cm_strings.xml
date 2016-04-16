@@ -63,4 +63,5 @@
   <string name="delete_call_alert">શું પસંદ કરેલ કૉલ લૉગ્સ ભૂંસવા છે?</string>
   <string name="title_del_call">હટાવો</string>
   <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g> દ્વારા સશક્તિકરણ</string>
+  <!-- InCall plugin directory search & invite -->
 </resources>

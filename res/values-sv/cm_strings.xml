@@ -63,4 +63,5 @@
   <string name="delete_call_alert">Ta bort valda samtalslistor?</string>
   <string name="title_del_call">Ta bort</string>
   <string name="powered_by_provider">Drivs av <xliff:g id="provider">%s</xliff:g></string>
+  <!-- InCall plugin directory search & invite -->
 </resources>

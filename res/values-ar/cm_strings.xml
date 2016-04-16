@@ -64,4 +64,5 @@
   <string name="delete_call_alert">حذف سجلات المكالمات المحددة؟</string>
   <string name="title_del_call">حذف</string>
   <string name="powered_by_provider">مشغل بواسطة <xliff:g id="provider">%s</xliff:g></string>
+  <!-- InCall plugin directory search & invite -->
 </resources>

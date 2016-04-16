@@ -62,4 +62,5 @@
   <string name="delete_call_message">Deleting call logs\u2026</string>
   <string name="delete_call_alert">Delete selected call logs?</string>
   <string name="title_del_call">Delete</string>
+  <!-- InCall plugin directory search & invite -->
 </resources>

@@ -63,4 +63,5 @@
   <string name="delete_call_alert">Déi ausgewielten Uruffprotokoller läschen?</string>
   <string name="title_del_call">Läschen</string>
   <string name="powered_by_provider">Bereetgestallt vu(n) <xliff:g id="provider">%s</xliff:g></string>
+  <!-- InCall plugin directory search & invite -->
 </resources>

@@ -63,4 +63,5 @@
   <string name="delete_call_alert">ଚୟନିତ କଲ୍‍ ସୂଚୀ ବିଲୋପ କରିବେ କି?</string>
   <string name="title_del_call">ବିଲୋପ କରନ୍ତୁ</string>
   <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g>ଦ୍ୱାରା ଚାଳିତ</string>
+  <!-- InCall plugin directory search & invite -->
 </resources>

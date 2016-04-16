@@ -63,4 +63,5 @@
   <string name="delete_call_alert">¿Desaniciar rexistros de llamaes esbillaes?</string>
   <string name="title_del_call">Desaniciar</string>
   <string name="powered_by_provider">Cola potencia de <xliff:g id="provider">%s</xliff:g></string>
+  <!-- InCall plugin directory search & invite -->
 </resources>

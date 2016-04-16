@@ -63,4 +63,7 @@
   <string name="delete_call_alert">Sollen die ausgewählten Anrufprotokolle gelöscht werden?</string>
   <string name="title_del_call">Löschen</string>
   <string name="powered_by_provider">Zur Verfügung gestellt von <xliff:g id="provider">%s</xliff:g></string>
+  <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_invite">EINLADEN</string>
+  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> kann diesen Anruf nicht tätigen</string>
 </resources>

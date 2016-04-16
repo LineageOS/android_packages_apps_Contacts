@@ -47,4 +47,5 @@
   <string name="delete_call_message">ඇමතුම් ලොගයන් මකමින්\u2026</string>
   <string name="delete_call_alert">තෝරාගත් ඇමතුම් ලොගයන් මකන්නද?</string>
   <string name="title_del_call">මකන්න</string>
+  <!-- InCall plugin directory search & invite -->
 </resources>

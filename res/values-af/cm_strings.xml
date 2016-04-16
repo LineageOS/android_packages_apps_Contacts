@@ -63,4 +63,5 @@
   <string name="delete_call_alert">Verwyder gekose oproep lys?</string>
   <string name="title_del_call">Verwyder</string>
   <string name="powered_by_provider">Aangedryf deur <xliff:g id="provider">%s</xliff:g></string>
+  <!-- InCall plugin directory search & invite -->
 </resources>

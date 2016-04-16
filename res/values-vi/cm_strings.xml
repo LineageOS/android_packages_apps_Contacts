@@ -63,4 +63,5 @@
   <string name="delete_call_alert">Xoá nhật ký cuộc gọi đã chọn?</string>
   <string name="title_del_call">Xoá</string>
   <string name="powered_by_provider">Được hỗ trợ bởi <xliff:g id="provider">%s</xliff:g></string>
+  <!-- InCall plugin directory search & invite -->
 </resources>

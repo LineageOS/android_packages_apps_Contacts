@@ -63,4 +63,5 @@
   <string name="delete_call_alert">Želite li izbrisati odabrane zapise poziva?</string>
   <string name="title_del_call">Obriši</string>
   <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
+  <!-- InCall plugin directory search & invite -->
 </resources>

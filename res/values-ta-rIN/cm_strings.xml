@@ -63,4 +63,5 @@
   <string name="delete_call_alert">தேர்ந்தெடுக்கப்பட்ட அழைப்பு பதிவுகளை நீக்கவா?</string>
   <string name="title_del_call">நீக்கு</string>
   <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g> ஆல் சக்தியூட்டப்படுகிறது</string>
+  <!-- InCall plugin directory search & invite -->
 </resources>

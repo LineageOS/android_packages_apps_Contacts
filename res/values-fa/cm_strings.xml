@@ -63,4 +63,5 @@
   <string name="delete_call_alert">گزارش‌های تماس انتخاب شده حذف شوند؟</string>
   <string name="title_del_call">حذف</string>
   <string name="powered_by_provider">برگرفته از <xliff:g id="provider">%s</xliff:g></string>
+  <!-- InCall plugin directory search & invite -->
 </resources>

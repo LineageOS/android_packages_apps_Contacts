@@ -63,4 +63,5 @@
   <string name="delete_call_alert">選択した通話履歴を削除しますか？</string>
   <string name="title_del_call">削除</string>
   <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g>提供</string>
+  <!-- InCall plugin directory search & invite -->
 </resources>

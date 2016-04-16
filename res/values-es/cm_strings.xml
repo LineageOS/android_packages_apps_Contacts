@@ -63,4 +63,5 @@
   <string name="delete_call_alert">¿Eliminar registros de llamadas seleccionados?</string>
   <string name="title_del_call">Eliminar</string>
   <string name="powered_by_provider">Proporcionado por <xliff:g id="provider">%s</xliff:g></string>
+  <!-- InCall plugin directory search & invite -->
 </resources>

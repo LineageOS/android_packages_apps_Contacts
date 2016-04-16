@@ -63,4 +63,9 @@
   <string name="delete_call_alert">Да изтрия ли регистрите с повикванията?</string>
   <string name="title_del_call">Изтрий</string>
   <string name="powered_by_provider">Осъществено от <xliff:g id="provider">%s </xliff:g></string>
+  <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">Търси в директория %1$s</string>
+  <string name="incall_plugin_invite">ПОКАНИ</string>
+  <string name="incall_plugin_account_subheader">%1$s име</string>
+  <string name="incall_plugin_call_error"><xliff:g id="name">%s </xliff:g> разговорът не може да се осъществи</string>
 </resources>

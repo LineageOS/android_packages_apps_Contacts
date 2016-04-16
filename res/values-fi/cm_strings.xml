@@ -63,4 +63,9 @@
   <string name="delete_call_alert">Poista valitut puhelulokit?</string>
   <string name="title_del_call">Poista</string>
   <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
+  <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">Etsi %1$s hakemistosta</string>
+  <string name="incall_plugin_invite">KUTSU</string>
+  <string name="incall_plugin_account_subheader">%1$s nimi</string>
+  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> ei voi soittaa tätä puhelua</string>
 </resources>

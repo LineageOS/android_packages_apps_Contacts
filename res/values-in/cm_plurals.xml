@@ -28,4 +28,7 @@
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="other">%d kontak akan dihapus.</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="other">%d orang ditandai sebagai spam</item>
+  </plurals>
 </resources>

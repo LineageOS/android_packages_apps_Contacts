@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_085ff141",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-04-25T19:39:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_583f04d6",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 27
+      },
+      "revId": "10d2b25c2cc5c3d7c39eaa8a6863429168790e32",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_f887d0b5",
         "filename": "src/com/android/contacts/activities/PeopleActivity.java",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2016-04-20T21:06:45Z",
       "side": 1,
       "message": "is this null check necessary ? Can an Object other than a Fragment be called w/ this method ?",
+      "range": {
+        "startLine": 974,
+        "startChar": 20,
+        "endLine": 974,
+        "endChar": 37
+      },
+      "revId": "10d2b25c2cc5c3d7c39eaa8a6863429168790e32",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_285c2d4a",
+        "filename": "src/com/android/contacts/activities/PeopleActivity.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-04-25T19:39:14Z",
+      "side": 1,
+      "message": "yes I was hitting a null condition and added this check in. The Fragment can be different types, and this check was particularly for the InCall plugin Fragment type.",
+      "parentUuid": "5faad753_f887d0b5",
       "range": {
         "startLine": 974,
         "startChar": 20,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_c858f957",
+        "filename": "src/com/android/contacts/activities/PeopleActivity.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 977,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-04-25T19:39:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_d8f9b44d",
+      "range": {
+        "startLine": 976,
+        "startChar": 24,
+        "endLine": 977,
+        "endChar": 48
+      },
+      "revId": "10d2b25c2cc5c3d7c39eaa8a6863429168790e32",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_38b7a889",
         "filename": "src/com/android/contacts/incall/InCallMetricsDbHelper.java",
         "patchSetId": 4
@@ -82,6 +154,30 @@
       "writtenOn": "2016-04-20T21:06:45Z",
       "side": 1,
       "message": "this multi-tab formatting b/w the param name and description isn\u0027t whats followed within the rest of this file nor the rest of the project",
+      "range": {
+        "startLine": 201,
+        "startChar": 20,
+        "endLine": 201,
+        "endChar": 34
+      },
+      "revId": "10d2b25c2cc5c3d7c39eaa8a6863429168790e32",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_8830c109",
+        "filename": "src/com/android/contacts/incall/InCallMetricsDbHelper.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-04-25T19:39:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_38b7a889",
       "range": {
         "startLine": 201,
         "startChar": 20,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_a8357df9",
+        "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-04-25T19:39:14Z",
+      "side": 1,
+      "message": "There are already similar Enum definitions in Dialer along with Categories and Parameters with the same naming schemes, it\u0027s preferable to keep them as is.",
+      "parentUuid": "5faad753_f87590cd",
+      "range": {
+        "startLine": 292,
+        "startChar": 66,
+        "endLine": 292,
+        "endChar": 72
+      },
+      "revId": "10d2b25c2cc5c3d7c39eaa8a6863429168790e32",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_b8587856",
         "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
         "patchSetId": 4
@@ -128,6 +248,30 @@
       "writtenOn": "2016-04-20T21:06:45Z",
       "side": 1,
       "message": "use a sorted set maybe ? alleviates having to manually sort entries later",
+      "range": {
+        "startLine": 410,
+        "startChar": 43,
+        "endLine": 410,
+        "endChar": 50
+      },
+      "revId": "10d2b25c2cc5c3d7c39eaa8a6863429168790e32",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_fcd9fa21",
+        "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-04-25T19:39:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_b8587856",
       "range": {
         "startLine": 410,
         "startChar": 43,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_483ac9e7",
+        "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-04-25T19:39:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_584aa480",
+      "range": {
+        "startLine": 432,
+        "startChar": 18,
+        "endLine": 432,
+        "endChar": 34
+      },
+      "revId": "10d2b25c2cc5c3d7c39eaa8a6863429168790e32",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_d855341f",
         "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
         "patchSetId": 4
@@ -186,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_dc2f5ef4",
+        "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-04-25T19:39:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_d855341f",
+      "range": {
+        "startLine": 480,
+        "startChar": 42,
+        "endLine": 480,
+        "endChar": 61
+      },
+      "revId": "10d2b25c2cc5c3d7c39eaa8a6863429168790e32",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_7830c008",
         "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
         "patchSetId": 4
@@ -197,6 +389,30 @@
       "writtenOn": "2016-04-20T21:06:45Z",
       "side": 1,
       "message": "formatting - opening brace",
+      "range": {
+        "startLine": 491,
+        "startChar": 8,
+        "endLine": 492,
+        "endChar": 9
+      },
+      "revId": "10d2b25c2cc5c3d7c39eaa8a6863429168790e32",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_dc0afe88",
+        "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-04-25T19:39:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_7830c008",
       "range": {
         "startLine": 491,
         "startChar": 8,
@@ -255,6 +471,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_5cf60e92",
+        "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-04-25T19:39:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_98357cfa",
+      "range": {
+        "startLine": 527,
+        "startChar": 8,
+        "endLine": 529,
+        "endChar": 9
+      },
+      "revId": "10d2b25c2cc5c3d7c39eaa8a6863429168790e32",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_78ef6087",
         "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
         "patchSetId": 4
@@ -278,6 +518,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_7cff4a67",
+        "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-04-25T19:39:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_78ef6087",
+      "range": {
+        "startLine": 545,
+        "startChar": 38,
+        "endLine": 545,
+        "endChar": 54
+      },
+      "revId": "10d2b25c2cc5c3d7c39eaa8a6863429168790e32",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_58ee2489",
         "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
         "patchSetId": 4
@@ -289,6 +553,30 @@
       "writtenOn": "2016-04-20T21:06:45Z",
       "side": 1,
       "message": "parseInt might be more handy as you would get an \u0027int\u0027 back and you wouldn\u0027t have to auto-unbox to do the subtraction",
+      "range": {
+        "startLine": 548,
+        "startChar": 19,
+        "endLine": 548,
+        "endChar": 61
+      },
+      "revId": "10d2b25c2cc5c3d7c39eaa8a6863429168790e32",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_9c04867d",
+        "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-04-25T19:39:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_58ee2489",
       "range": {
         "startLine": 548,
         "startChar": 19,

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_9c180682",
+        "filename": "src/com/android/contacts/incall/InCallMetricsDbHelper.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 11035
+      },
+      "writtenOn": "2016-04-25T20:45:06Z",
+      "side": 1,
+      "message": "you might want to add CursorUtils to ContactsCommon so that you can utilize it here too",
+      "range": {
+        "startLine": 142,
+        "startChar": 8,
+        "endLine": 144,
+        "endChar": 9
+      },
+      "revId": "f964b0a0e71ed8d90f813f9bd07beed6a299f390",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

@@ -105,10 +105,14 @@ public class CallLogInteraction implements ContactInteraction {
     public String getViewBody(Context context) {
         Integer numberType = getCachedNumberType();
         if (numberType == null) {
-            return null;
+            numberType = Phone.TYPE_CUSTOM;
         }
-        return Phone.getTypeLabel(context.getResources(), getCachedNumberType(),
-                getCachedNumberLabel()).toString();
+
+        final String cachedNumberLabel = getCachedNumberLabel();
+        final String label = ContactDisplayUtils.getLabelForCall(context, getNumber(), numberType,
+                cachedNumberLabel, mPluginName);
+
+        return label;
     }
 
     @Override

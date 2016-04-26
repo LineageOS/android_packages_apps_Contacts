@@ -105,9 +105,9 @@ public class CallLogInteraction implements ContactInteraction {
     public String getViewBody(Context context) {
         Integer numberType = getCachedNumberType();
         if (numberType == null) {
-            return null;
+            numberType = Phone.TYPE_CUSTOM;
         }
-        return Phone.getTypeLabel(context.getResources(), getCachedNumberType(),
+        return Phone.getTypeLabel(context.getResources(), numberType,
                 getCachedNumberLabel()).toString();
     }
 

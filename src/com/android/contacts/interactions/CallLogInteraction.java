@@ -17,6 +17,7 @@ package com.android.contacts.interactions;
 
 import com.android.contacts.R;
 import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.list.PhoneNumberListAdapter;
 import com.android.contacts.common.util.BitmapUtil;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.contacts.incall.InCallPluginUtils;
@@ -105,10 +106,22 @@ public class CallLogInteraction implements ContactInteraction {
     public String getViewBody(Context context) {
         Integer numberType = getCachedNumberType();
         if (numberType == null) {
-            return null;
+            numberType = Phone.TYPE_CUSTOM;
         }
-        return Phone.getTypeLabel(context.getResources(), getCachedNumberType(),
-                getCachedNumberLabel()).toString();
+
+        final String cachedNumberLabel = getCachedNumberLabel();
+        String label = null;
+        if (numberType == Phone.TYPE_CUSTOM &&
+                !PhoneNumberUtils.isGlobalPhoneNumber(getNumber())) {
+            label = mPluginName;
+        }
+
+        if (TextUtils.isEmpty(label)) {
+            label = Phone.getTypeLabel(context.getResources(), numberType,
+                    cachedNumberLabel).toString();
+        }
+
+        return label;
     }
 
     @Override

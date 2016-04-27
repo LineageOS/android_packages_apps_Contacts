@@ -16,6 +16,24 @@
       "revId": "5ca635f32901ec8fca6301dbaf1be8466ccfbcbd",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_4b695e23",
+        "filename": "src/com/android/contacts/incall/InCallPluginUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 3134
+      },
+      "writtenOn": "2016-04-27T08:19:25Z",
+      "side": 1,
+      "message": "In fact, it this method is an utility method, then the string should be passed as parameter. Otherwise, this method doesn\u0027t made sense here though.",
+      "parentUuid": "5faad753_cb0a2e89",
+      "revId": "5ca635f32901ec8fca6301dbaf1be8466ccfbcbd",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

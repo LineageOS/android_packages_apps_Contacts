@@ -22,6 +22,30 @@
       "revId": "f964b0a0e71ed8d90f813f9bd07beed6a299f390",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_a11353b8",
+        "filename": "src/com/android/contacts/incall/InCallMetricsDbHelper.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-04-27T19:47:42Z",
+      "side": 1,
+      "message": "Wrap all db.query in try/catch statements so return Cursors would never be null, unless in an exception, in which case we don\u0027t need to close it.",
+      "parentUuid": "5faad753_9c180682",
+      "range": {
+        "startLine": 142,
+        "startChar": 8,
+        "endLine": 144,
+        "endChar": 9
+      },
+      "revId": "f964b0a0e71ed8d90f813f9bd07beed6a299f390",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

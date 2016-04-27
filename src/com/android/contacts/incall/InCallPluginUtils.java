@@ -16,6 +16,7 @@
 
 package com.android.contacts.incall;
 
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -28,6 +29,7 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.contacts.common.ContactPresenceIconUtil;
 import com.android.contacts.common.ContactStatusUtil;
@@ -204,5 +206,10 @@ public class InCallPluginUtils {
         return new InCallContactInfo(contact.getDisplayName(),
                 phoneNumber, lookupUri);
 
+    }
+
+    public static void displayPendingIntentError(Context context) {
+        Toast toast = Toast.makeText(context, "Unable to complete the action", Toast.LENGTH_SHORT);
+        toast.show();
     }
 }

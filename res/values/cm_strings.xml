@@ -78,4 +78,5 @@
     <string name="incall_plugin_invite">INVITE</string>
     <string name="incall_plugin_account_subheader">%1$s name</string>
     <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> cannot make this call</string>
+    <string name="incall_plugin_intent_error">Unable to complete this action. Try again later.</string>
 </resources>

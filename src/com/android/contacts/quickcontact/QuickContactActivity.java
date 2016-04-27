@@ -174,6 +174,7 @@ import com.android.contacts.widget.MultiShrinkScroller.MultiShrinkScrollerListen
 import com.android.contacts.widget.QuickContactImageView;
 import com.android.phone.common.incall.ContactsDataSubscription;
 import com.android.phone.common.incall.CallMethodInfo;
+import com.android.phone.common.incall.ContactsPendingIntents;
 import com.android.phone.common.incall.utils.CallMethodFilters;
 import com.android.phone.common.incall.utils.CallMethodUtils;
 import com.android.phone.common.incall.utils.MimeTypeUtils;
@@ -1508,9 +1509,8 @@ public class QuickContactActivity extends ContactsActivity implements
         Set<String> pluginMimeExcluded;
         Set<String> pluginMimeIncluded;
         if (ContactsDataSubscription.infoReady()) {
-            mCallMethodMap = (HashMap<ComponentName, CallMethodInfo>)
-                    CallMethodFilters.getAllEnabledAndHiddenCallMethods(
-                            ContactsDataSubscription.get(this));
+            mCallMethodMap = CallMethodFilters.getAllEnabledAndHiddenCallMethods(
+                    ContactsDataSubscription.get(this));
             pluginMimeExcluded = MimeTypeUtils.getAllEnabledVideoImMimeSet(
                     ContactsDataSubscription.get(this));
             pluginMimeIncluded = MimeTypeUtils.getAllEnabledVoiceMimeSet(
@@ -2475,8 +2475,8 @@ public class QuickContactActivity extends ContactsActivity implements
         if (DEBUG) Log.d(TAG, "checkAndBindContactData," + withBlockHelper + " " +
                 onlyStartAsyncTask);
         // Update pending Intents
-        ContactsDataSubscription.refreshPendingIntents(
-                InCallPluginUtils.getInCallContactInfo(contact));
+        ContactsDataSubscription.get(this).updatePendingIntents(
+                mIntentMap, InCallPluginUtils.getInCallContactInfo(contact));
 
         if (mIsUpdating.get() && mEntriesAndActionsTask != null && !mEntriesAndActionsTask
                 .isCancelled()) {
@@ -3635,8 +3635,11 @@ public class QuickContactActivity extends ContactsActivity implements
         CallMethodInfo cmiStored = entry.getCallMethodInfo();
         CallMethodInfo cmi = ContactsDataSubscription.get(this).getPluginIfExists(cmiStored
                 .mComponent);
+        ContactsPendingIntents cpi = mIntentMap.get(cmiStored.mComponent);
         Intent intent = tag.getIntent();
         if (cmi == null || intent == null) {
+            InCallPluginUtils.displayPendingIntentError(mScroller,
+                    getResources().getString(R.string.incall_plugin_intent_error));
             return;
         }
         try {
@@ -3676,6 +3679,9 @@ public class QuickContactActivity extends ContactsActivity implements
             } else if (intent.getAction().equals(ACTION_INCALL_PLUGIN_LOGIN)) {
                 if (cmi.mLoginIntent != null) {
                     cmi.mLoginIntent.send();
+                } else {
+                    InCallPluginUtils.displayPendingIntentError(mScroller,
+                            getResources().getString(R.string.incall_plugin_intent_error));
                 }
                 InCallMetricsHelper.setValue(
                         this,
@@ -3686,13 +3692,19 @@ public class QuickContactActivity extends ContactsActivity implements
                         InCallMetricsHelper.EVENT_ACCEPT,
                         InCallMetricsHelper.generateNudgeId(cmi.mLoginNudgeSubtitle));
             } else if (intent.getAction().equals(ACTION_INCALL_PLUGIN_INVITE)) {
-                if (cmi.mInviteIntent != null) {
-                    cmi.mInviteIntent.send();
+                if (cpi != null && cpi.mInviteIntent != null) {
+                    cpi.mInviteIntent.send();
+                } else {
+                    InCallPluginUtils.displayPendingIntentError(mScroller,
+                            getResources().getString(R.string.incall_plugin_intent_error));
                 }
                 InCallMetricsHelper.increaseInviteCount(this, cmi.mComponent.flattenToString());
             } else if (intent.getAction().equals(ACTION_INCALL_PLUGIN_DIRECTORY_SEARCH)) {
-                if (cmi.mDirectorySearchIntent != null) {
-                    cmi.mDirectorySearchIntent.send();
+                if (cpi != null && cpi.mDirectorySearchIntent != null) {
+                    cpi.mDirectorySearchIntent.send();
+                } else {
+                    InCallPluginUtils.displayPendingIntentError(mScroller,
+                            getResources().getString(R.string.incall_plugin_intent_error));
                 }
             }
         } catch (PendingIntent.CanceledException e) {
@@ -3737,7 +3749,8 @@ public class QuickContactActivity extends ContactsActivity implements
             };
 
     // Global CallMethod map that keeps track of the currently displayed plugins
-    HashMap<ComponentName, CallMethodInfo> mCallMethodMap = new HashMap<ComponentName, CallMethodInfo>();
+    HashMap<ComponentName, CallMethodInfo> mCallMethodMap = new HashMap<>();
+    HashMap<ComponentName, ContactsPendingIntents> mIntentMap = new HashMap<>();
 
     private void updatePlugins(HashMap<ComponentName, CallMethodInfo> callMethods) {
         if (DEBUG) Log.d(TAG, "+++updatePlugins");
@@ -3759,7 +3772,7 @@ public class QuickContactActivity extends ContactsActivity implements
             if (newCmMap.containsKey(cn)) {
                 // Check if update needed
                 CallMethodInfo newCmi = newCmMap.remove(cn);
-                if (!newCmi.equals(cmi) || newCmi.mIsAuthenticated != cmi.mIsAuthenticated) {
+                if (newCmi.mIsAuthenticated != cmi.mIsAuthenticated) {
                     updateNeeded = true;
                 }
             } else {

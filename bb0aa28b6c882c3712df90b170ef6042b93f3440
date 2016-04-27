@@ -22,6 +22,30 @@
       "revId": "bb0aa28b6c882c3712df90b170ef6042b93f3440",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_2c767708",
+        "filename": "src/com/android/contacts/incall/InCallMetricsDbHelper.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-04-27T22:43:23Z",
+      "side": 1,
+      "message": "it\u0027d be catastrophic, none of the metrics entries can be written (query and update would throw exceptions too), but it\u0027s rare it\u0027d ever come to this (maybe the device runs out of storage space).",
+      "parentUuid": "5faad753_e175cbfb",
+      "range": {
+        "startLine": 387,
+        "startChar": 12,
+        "endLine": 387,
+        "endChar": 48
+      },
+      "revId": "bb0aa28b6c882c3712df90b170ef6042b93f3440",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

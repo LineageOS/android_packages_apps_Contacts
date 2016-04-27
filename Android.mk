@@ -14,20 +14,23 @@ res_dirs := res $(contacts_common_dir)/res $(phone_common_dir)/res
 
 LOCAL_SRC_FILES := $(call all-java-files-under, $(src_dirs))
 LOCAL_RESOURCE_DIR := $(addprefix $(LOCAL_PATH)/, $(res_dirs)) \
-    frameworks/support/v7/cardview/res
+    frameworks/support/v7/cardview/res \
+    external/uicommon/res
 
 LOCAL_AAPT_FLAGS := \
     --auto-add-overlay \
     --extra-packages com.android.contacts.common \
     --extra-packages com.android.phone.common \
     --extra-packages android.support.v7.cardview \
-    --extra-packages com.cyanogen.ambient
+    --extra-packages com.cyanogen.ambient \
+    --extra-packages com.cyngn.uicommon
 
 LOCAL_JAVA_LIBRARIES := telephony-common voip-common ims-common
 LOCAL_FULL_LIBS_MANIFEST_FILES := $(LOCAL_PATH)/AndroidManifest_cm.xml
 LOCAL_STATIC_JAVA_LIBRARIES := \
     com.android.vcard \
     android-common \
+    uicommon \
     guava \
     android-support-v13 \
     android-support-v7-cardview \

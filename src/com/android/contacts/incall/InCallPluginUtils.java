@@ -28,6 +28,7 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import com.android.contacts.common.ContactPresenceIconUtil;
 import com.android.contacts.common.ContactStatusUtil;
@@ -41,6 +42,7 @@ import com.android.phone.common.incall.ContactsDataSubscription;
 import com.android.phone.common.incall.utils.CallMethodFilters;
 import com.cyanogen.ambient.incall.extension.InCallContactInfo;
 
+import com.cyngn.uicommon.view.Snackbar;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
@@ -204,5 +206,9 @@ public class InCallPluginUtils {
         return new InCallContactInfo(contact.getDisplayName(),
                 phoneNumber, lookupUri);
 
+    }
+
+    public static void displayPendingIntentError(View parentView, String msg) {
+        Snackbar.make(parentView, msg, Snackbar.LENGTH_SHORT).show();
     }
 }

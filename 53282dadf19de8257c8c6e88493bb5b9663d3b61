@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_c17d2fe8",
+        "filename": "src/com/android/contacts/interactions/CallLogInteraction.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-04-27T19:50:55Z",
+      "side": 1,
+      "message": "this looks super similar to the other code i mentioned that you were duplicating in the other patch. can we put this in contactscommon or something?",
+      "range": {
+        "startLine": 109,
+        "startChar": 3,
+        "endLine": 124,
+        "endChar": 21
+      },
+      "revId": "53282dadf19de8257c8c6e88493bb5b9663d3b61",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

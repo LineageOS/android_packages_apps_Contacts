@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_e175cbfb",
+        "filename": "src/com/android/contacts/incall/InCallMetricsDbHelper.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-04-27T19:55:35Z",
+      "side": 1,
+      "message": "what happens if these tables fail to create?",
+      "range": {
+        "startLine": 387,
+        "startChar": 12,
+        "endLine": 387,
+        "endChar": 48
+      },
+      "revId": "bb0aa28b6c882c3712df90b170ef6042b93f3440",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

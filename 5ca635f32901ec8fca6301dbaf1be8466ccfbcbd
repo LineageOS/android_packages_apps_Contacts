@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_cb0a2e89",
+        "filename": "src/com/android/contacts/incall/InCallPluginUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2016-04-27T06:53:44Z",
+      "side": 1,
+      "message": "This should use a string resource, ideally with a string more telling to the user ;-)\n(pointing him towards what he can do to remedy the situation or explaining the failure reason)",
+      "revId": "5ca635f32901ec8fca6301dbaf1be8466ccfbcbd",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

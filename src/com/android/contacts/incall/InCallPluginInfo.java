@@ -58,8 +58,6 @@ public class InCallPluginInfo implements Parcelable {
         mCallMethodInfo.mStatus = in.readInt();
         mCallMethodInfo.mDefaultDirectorySearchIntent = in.readParcelable(PendingIntent.class
                 .getClassLoader());
-        mCallMethodInfo.mDirectorySearchIntent =
-                in.readParcelable(PendingIntent.class.getClassLoader());
         mCallMethodInfo.mLoginIntent = in.readParcelable(PendingIntent.class.getClassLoader());
         mCallMethodInfo.mName = in.readString();
         mCallMethodInfo.mBrandIconId = in.readInt();
@@ -78,7 +76,6 @@ public class InCallPluginInfo implements Parcelable {
         dest.writeInt(mCallMethodInfo.mIsAuthenticated ? 1 : 0);
         dest.writeInt(mCallMethodInfo.mStatus);
         dest.writeParcelable(mCallMethodInfo.mDefaultDirectorySearchIntent, flags);
-        dest.writeParcelable(mCallMethodInfo.mDirectorySearchIntent, flags);
         dest.writeParcelable(mCallMethodInfo.mLoginIntent, flags);
         dest.writeString(mCallMethodInfo.mName);
         dest.writeInt(mCallMethodInfo.mBrandIconId);

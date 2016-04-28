@@ -64,4 +64,8 @@
   <string name="title_del_call">Apagar</string>
   <string name="powered_by_provider">Distribuído por <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">Pesquisar na pasta %1$s</string>
+  <string name="incall_plugin_invite">CONVIDAR</string>
+  <string name="incall_plugin_account_subheader">%1$s nome</string>
+  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> não consegue realizar esta chamada</string>
 </resources>

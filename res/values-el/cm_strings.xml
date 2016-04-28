@@ -68,4 +68,5 @@
   <string name="incall_plugin_invite">ΠΡΟΣΚΛΗΣΗ</string>
   <string name="incall_plugin_account_subheader">Όνομα %1$s</string>
   <string name="incall_plugin_call_error">Το <xliff:g id="name">%s</xliff:g> δεν μπορεί να πραγματοποιήσει αυτή την κλήση</string>
+  <string name="incall_plugin_intent_error">Δεν είναι δυνατή η ολοκλήρωση αυτής της ενέργειας. Δοκιμάστε ξανά αργότερα.</string>
 </resources>

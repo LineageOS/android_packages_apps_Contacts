@@ -22,6 +22,30 @@
       "revId": "53282dadf19de8257c8c6e88493bb5b9663d3b61",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_2c92f7f7",
+        "filename": "src/com/android/contacts/interactions/CallLogInteraction.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-04-28T14:13:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_c17d2fe8",
+      "range": {
+        "startLine": 109,
+        "startChar": 3,
+        "endLine": 124,
+        "endChar": 21
+      },
+      "revId": "53282dadf19de8257c8c6e88493bb5b9663d3b61",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

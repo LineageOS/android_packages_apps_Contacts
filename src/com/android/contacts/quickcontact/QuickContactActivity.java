@@ -1297,10 +1297,10 @@ public class QuickContactActivity extends ContactsActivity implements
     @Override
     protected void onResume() {
         super.onResume();
-        if (ContactsDataSubscription.get(this)
-                .subscribe(CALL_METHOD_SUBSCRIBER_ID, pluginsUpdatedReceiver)) {
+        ContactsDataSubscription subscription = ContactsDataSubscription.get(this);
+        if (subscription.subscribe(CALL_METHOD_SUBSCRIBER_ID, pluginsUpdatedReceiver)) {
             if (DEBUG) Log.d(TAG, "ContactsDataSubscription infoReady");
-            ContactsDataSubscription.get(this).refreshDynamicItems();
+            subscription.refreshDynamicItems();
         } else {
             if (DEBUG) Log.d(TAG, "ContactsDataSubscription info NOT Ready");
         }
@@ -1508,13 +1508,11 @@ public class QuickContactActivity extends ContactsActivity implements
         final ResolveCache cache = ResolveCache.getInstance(this);
         Set<String> pluginMimeExcluded;
         Set<String> pluginMimeIncluded;
-        if (ContactsDataSubscription.infoReady()) {
-            mCallMethodMap = CallMethodFilters.getAllEnabledAndHiddenCallMethods(
-                    ContactsDataSubscription.get(this));
-            pluginMimeExcluded = MimeTypeUtils.getAllEnabledVideoImMimeSet(
-                    ContactsDataSubscription.get(this));
-            pluginMimeIncluded = MimeTypeUtils.getAllEnabledVoiceMimeSet(
-                    ContactsDataSubscription.get(this));
+        ContactsDataSubscription subscription = ContactsDataSubscription.get(this);
+        if (subscription.infoReady()) {
+            mCallMethodMap = CallMethodFilters.getAllEnabledAndHiddenCallMethods(subscription);
+            pluginMimeExcluded = MimeTypeUtils.getAllEnabledVideoImMimeSet(subscription);
+            pluginMimeIncluded = MimeTypeUtils.getAllEnabledVoiceMimeSet(subscription);
 
             if (DEBUG) {
                 Log.d(TAG, "plugins size:" + mCallMethodMap.size());
@@ -1616,8 +1614,8 @@ public class QuickContactActivity extends ContactsActivity implements
                 }
             }
         }
-        if (!mContactData.isUserProfile() && ContactsDataSubscription.infoReady() && mCallMethodMap
-                .size() > 0) {
+        if (!mContactData.isUserProfile() && subscription.infoReady()
+                && !mCallMethodMap.isEmpty()) {
             addAllInCallPluginOtherEntries(contactCardEntries, pluginAccountsMap);
         }
 

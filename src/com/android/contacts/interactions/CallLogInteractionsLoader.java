@@ -72,9 +72,10 @@ public class CallLogInteractionsLoader extends AsyncTaskLoader<List<ContactInter
             }
         }
         // add plugin entries
-        if (ContactsDataSubscription.infoReady()) {
-            HashMap<ComponentName, CallMethodInfo> inCallPlugins = CallMethodFilters
-                    .getAllEnabledCallMethods(ContactsDataSubscription.get(getContext()));
+        ContactsDataSubscription subscription = ContactsDataSubscription.get(getContext());
+        if (subscription.infoReady()) {
+            HashMap<ComponentName, CallMethodInfo> inCallPlugins =
+                    CallMethodFilters.getAllEnabledCallMethods(subscription);
             if (inCallPlugins != null) {
                 for (ComponentName cn : inCallPlugins.keySet()) {
                     List<String> accountList = mPluginAccountsMap.get(cn);

@@ -1,4 +1,5 @@
 -dontwarn com.cyanogen.**
+-dontwarn com.cyngn.**
 -dontwarn com.squareup.**
 -dontwarn com.squareup.okhttp.**
 

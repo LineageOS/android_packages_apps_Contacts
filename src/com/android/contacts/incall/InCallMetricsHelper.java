@@ -525,6 +525,9 @@ public class InCallMetricsHelper {
     }
 
     public static String generateNudgeId(String data) {
+        if (data == null) {
+            return null;
+        }
         return java.util.UUID.nameUUIDFromBytes(data.getBytes()).toString();
     }
 

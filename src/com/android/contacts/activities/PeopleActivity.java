@@ -556,9 +556,15 @@ public class PeopleActivity extends ContactsActivity implements
         super.onResume();
 
         onResumeInit();
-        if (ContactsDataSubscription.get(this).subscribe(CALL_METHOD_HELPER_SUBSCRIBER_ID,
+        ContactsDataSubscription dataSubscription = ContactsDataSubscription.get(this);
+        if (dataSubscription.subscribe(CALL_METHOD_HELPER_SUBSCRIBER_ID,
                 pluginsUpdatedReceiver)) {
-            ContactsDataSubscription.get(this).refreshDynamicItems();
+            if (CallMethodFilters.getAllEnabledCallMethods(dataSubscription).size() > 0) {
+                dataSubscription.refreshDynamicItems();
+            } else {
+                // double check if the UI needs to update in case of plugin state changes
+                updatePlugins(null);
+            }
         }
     }
 
@@ -1887,8 +1893,7 @@ public class PeopleActivity extends ContactsActivity implements
         }
     }
 
-    private synchronized void updatePlugins(HashMap<ComponentName, CallMethodInfo>
-                                                     callMethodInfo) {
+    private synchronized void updatePlugins(HashMap<ComponentName, CallMethodInfo> callMethodInfo) {
         HashMap<ComponentName, CallMethodInfo> newCmMap = (HashMap<ComponentName,
                 CallMethodInfo>) CallMethodFilters.getAllEnabledCallMethods(
                 ContactsDataSubscription.get(this));

@@ -1297,10 +1297,17 @@ public class QuickContactActivity extends ContactsActivity implements
     @Override
     protected void onResume() {
         super.onResume();
-        if (ContactsDataSubscription.get(this)
-                .subscribe(CALL_METHOD_SUBSCRIBER_ID, pluginsUpdatedReceiver)) {
+        ContactsDataSubscription dataSubscription = ContactsDataSubscription.get(this);
+        if (dataSubscription.subscribe(CALL_METHOD_SUBSCRIBER_ID, pluginsUpdatedReceiver)) {
             if (DEBUG) Log.d(TAG, "ContactsDataSubscription infoReady");
-            ContactsDataSubscription.get(this).refreshDynamicItems();
+            if (CallMethodFilters.getAllEnabledCallMethods(dataSubscription).size() > 0) {
+                // only refresh if there are ENABLED plugins
+                dataSubscription.refreshDynamicItems();
+            } else {
+                // double check if UI needs update in case plugin status changes between
+                // ENABLED and DISABLED or ENABLED and HIDDEN or DISABLED and HIDDEN
+                updatePlugins(null);
+            }
         } else {
             if (DEBUG) Log.d(TAG, "ContactsDataSubscription info NOT Ready");
         }
@@ -3772,7 +3779,8 @@ public class QuickContactActivity extends ContactsActivity implements
             if (newCmMap.containsKey(cn)) {
                 // Check if update needed
                 CallMethodInfo newCmi = newCmMap.remove(cn);
-                if (newCmi.mIsAuthenticated != cmi.mIsAuthenticated) {
+                if (newCmi.mStatus != cmi.mStatus ||
+                        newCmi.mIsAuthenticated != cmi.mIsAuthenticated) {
                     updateNeeded = true;
                 }
             } else {

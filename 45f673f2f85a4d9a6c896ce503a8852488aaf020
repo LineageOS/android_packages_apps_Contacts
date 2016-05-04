@@ -1,0 +1,158 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_6ce459ad",
+        "filename": "src/com/android/contacts/incall/InCallMetricsDbHelper.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-04T22:15:07Z",
+      "side": 1,
+      "message": "the formatting here is a little awkward, should this on the previous line?",
+      "revId": "45f673f2f85a4d9a6c896ce503a8852488aaf020",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_ecd049cc",
+        "filename": "src/com/android/contacts/incall/InCallMetricsDbHelper.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-04T22:15:07Z",
+      "side": 1,
+      "message": "don\u0027t think you can get rid of the null check here. query can still return null here.",
+      "revId": "45f673f2f85a4d9a6c896ce503a8852488aaf020",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_ece92980",
+        "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-04T22:15:07Z",
+      "side": 1,
+      "message": "isn\u0027t there a stringcomparator or something we can use here instead? I found some references to it online, but I don\u0027t think it\u0027s packaged with the JDK... just think it\u0027s a little awkward for us to define our own string comparator that\u0027s all.",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 6
+      },
+      "revId": "45f673f2f85a4d9a6c896ce503a8852488aaf020",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_6cfd3939",
+        "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-04T22:15:07Z",
+      "side": 1,
+      "message": "pretty sure arrays.sort will handle some objects correctly (strings being one of them). but i could be wrong, can you look into this?",
+      "revId": "45f673f2f85a4d9a6c896ce503a8852488aaf020",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_8cfaf53f",
+        "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-04T22:15:07Z",
+      "side": 1,
+      "message": "an*",
+      "range": {
+        "startLine": 505,
+        "startChar": 82,
+        "endLine": 505,
+        "endChar": 84
+      },
+      "revId": "45f673f2f85a4d9a6c896ce503a8852488aaf020",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_2c9501e5",
+        "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-04T22:15:07Z",
+      "side": 1,
+      "message": "contact*",
+      "range": {
+        "startLine": 508,
+        "startChar": 28,
+        "endLine": 508,
+        "endChar": 34
+      },
+      "revId": "45f673f2f85a4d9a6c896ce503a8852488aaf020",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_4c9abd14",
+        "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-04T22:15:07Z",
+      "side": 1,
+      "message": "try with resources.",
+      "revId": "45f673f2f85a4d9a6c896ce503a8852488aaf020",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_ec9e0906",
+        "filename": "src/com/android/contacts/incall/InCallPluginUtils.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-04T22:15:07Z",
+      "side": 1,
+      "message": "extra white space",
+      "revId": "45f673f2f85a4d9a6c896ce503a8852488aaf020",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

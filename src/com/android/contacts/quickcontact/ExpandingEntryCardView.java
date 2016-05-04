@@ -166,8 +166,8 @@ public class ExpandingEntryCardView extends CardView {
 
         public Entry(int id, Drawable mainIcon, String header, String subHeader, Drawable
                 subHeaderIcon, String actionText, Intent intent, Drawable alternateIcon, Intent
-                alternateIntent, String thirdText, Drawable thirdIcon, Intent thirdIntent, int
-                iconResourceId, CallMethodInfo cmi, List<Entry> containerList,
+                alternateIntent, String thirdText, Drawable thirdIcon, Intent thirdIntent,
+                int thirdAction, int iconResourceId, CallMethodInfo cmi, List<Entry> containerList,
                 List<List<Entry>> parentList) {
             mId = id;
             mIcon = mainIcon;
@@ -189,7 +189,7 @@ public class ExpandingEntryCardView extends CardView {
             mThirdIcon = thirdIcon;
             mThirdIntent = thirdIntent;
             mThirdContentDescription = null;
-            mThirdAction = -1;
+            mThirdAction = thirdAction;
             mThirdExtras = null;
             mIconResourceId = iconResourceId;
             mCallMethodInfo = cmi;

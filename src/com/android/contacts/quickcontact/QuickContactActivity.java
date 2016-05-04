@@ -3486,6 +3486,7 @@ public class QuickContactActivity extends ContactsActivity implements
                         null,
                         null,
                         null,
+                        Entry.ACTION_INTENT,
                         cmi.mBrandIconId,
                         cmi,
                         containerList, parentList);
@@ -3512,6 +3513,7 @@ public class QuickContactActivity extends ContactsActivity implements
                             res.getString(R.string.incall_plugin_invite),
                             null,
                             new Intent(ACTION_INCALL_PLUGIN_INVITE),
+                            Entry.ACTION_INTENT,
                             cmi.mBrandIconId,
                             cmi,
                             containerList, parentList);
@@ -3541,6 +3543,7 @@ public class QuickContactActivity extends ContactsActivity implements
                                 null,
                                 null,
                                 null,
+                                Entry.ACTION_INTENT,
                                 cmi.mBrandIconId,
                                 cmi,
                                 containerList, parentList);
@@ -3585,6 +3588,7 @@ public class QuickContactActivity extends ContactsActivity implements
                         null,
                         cmi.mVoiceIcon,
                         callIntent,
+                        Entry.ACTION_INTENT,
                         cmi.mBrandIconId,
                         cmi,
                         entries, parentList);
@@ -3597,11 +3601,19 @@ public class QuickContactActivity extends ContactsActivity implements
                         cmi.mBrandIcon,
                         contactAccountHandle,
                         res.getString(R.string.incall_plugin_account_subheader, cmi.mName),
-                        null, null,
+                        null,
+                        null,
                         new Intent(ACTION_INCALL_PLUGIN_LOGIN),
-                        null, null, null, null,
-                        null, cmi.mBrandIconId,
-                        cmi, entries, parentList);
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        Entry.ACTION_INTENT,
+                        cmi.mBrandIconId,
+                        cmi,
+                        entries,
+                        parentList);
                 if (DEBUG) Log.d(TAG, "Adding ACCOUNT ENTRY");
             }
             entries.add(entry);

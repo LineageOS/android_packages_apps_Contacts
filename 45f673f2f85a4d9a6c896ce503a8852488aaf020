@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_8ca8b51f",
+        "filename": "src/com/android/contacts/incall/InCallMetricsDbHelper.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-04T22:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_6ce459ad",
+      "revId": "45f673f2f85a4d9a6c896ce503a8852488aaf020",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_ecd049cc",
         "filename": "src/com/android/contacts/incall/InCallMetricsDbHelper.java",
         "patchSetId": 12
@@ -30,6 +48,24 @@
       "writtenOn": "2016-05-04T22:15:07Z",
       "side": 1,
       "message": "don\u0027t think you can get rid of the null check here. query can still return null here.",
+      "revId": "45f673f2f85a4d9a6c896ce503a8852488aaf020",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_2c63c11c",
+        "filename": "src/com/android/contacts/incall/InCallMetricsDbHelper.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-04T22:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_ecd049cc",
       "revId": "45f673f2f85a4d9a6c896ce503a8852488aaf020",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_6c2e99a6",
+        "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-04T22:59:54Z",
+      "side": 1,
+      "message": "I\u0027ve done some research, it seems like we have to define our own comparator to overwrite the default String lexical sort behavior.",
+      "parentUuid": "5faad753_ece92980",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 6
+      },
+      "revId": "45f673f2f85a4d9a6c896ce503a8852488aaf020",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_6cfd3939",
         "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
         "patchSetId": 12
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_4c363d06",
+        "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-04T22:59:54Z",
+      "side": 1,
+      "message": "Array.sort(String[]) would sort them alphabetically, not treating them as Integers. eg for an array of raw ID\u0027s this would be the sorted results, where \"7\" goes before \"1\" and \"2\" {\"101\", \"200\", \"70\"}",
+      "parentUuid": "5faad753_6cfd3939",
+      "revId": "45f673f2f85a4d9a6c896ce503a8852488aaf020",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_8cfaf53f",
         "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
         "patchSetId": 12
@@ -87,6 +165,30 @@
       "writtenOn": "2016-05-04T22:15:07Z",
       "side": 1,
       "message": "an*",
+      "range": {
+        "startLine": 505,
+        "startChar": 82,
+        "endLine": 505,
+        "endChar": 84
+      },
+      "revId": "45f673f2f85a4d9a6c896ce503a8852488aaf020",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_6c80d98c",
+        "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-04T22:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_8cfaf53f",
       "range": {
         "startLine": 505,
         "startChar": 82,
@@ -122,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_8c7d15b3",
+        "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-04T22:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_2c9501e5",
+      "range": {
+        "startLine": 508,
+        "startChar": 28,
+        "endLine": 508,
+        "endChar": 34
+      },
+      "revId": "45f673f2f85a4d9a6c896ce503a8852488aaf020",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_4c9abd14",
         "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
         "patchSetId": 12
@@ -139,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_ac76d1d7",
+        "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-04T22:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_4c9abd14",
+      "revId": "45f673f2f85a4d9a6c896ce503a8852488aaf020",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_ec9e0906",
         "filename": "src/com/android/contacts/incall/InCallPluginUtils.java",
         "patchSetId": 12
@@ -150,6 +294,24 @@
       "writtenOn": "2016-05-04T22:15:07Z",
       "side": 1,
       "message": "extra white space",
+      "revId": "45f673f2f85a4d9a6c896ce503a8852488aaf020",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_2c4c219d",
+        "filename": "src/com/android/contacts/incall/InCallPluginUtils.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-04T22:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_ec9e0906",
       "revId": "45f673f2f85a4d9a6c896ce503a8852488aaf020",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false

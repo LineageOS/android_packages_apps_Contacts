@@ -16,6 +16,7 @@
 
 package com.android.contacts.quickcontact;
 
+import android.Manifest;
 import android.accounts.Account;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
@@ -184,6 +185,7 @@ import com.cyanogen.ambient.plugin.PluginStatus;
 import com.android.contactsbind.HelpUtils;
 
 import com.cyanogen.lookup.phonenumber.provider.LookupProviderImpl;
+import com.cyngn.uicommon.view.Snackbar;
 import com.google.common.collect.Lists;
 import com.google.common.collect.ImmutableList;
 import com.squareup.picasso.Picasso;
@@ -386,6 +388,10 @@ public class QuickContactActivity extends ContactsActivity implements
         LOADER_SMS_ID,
         LOADER_CALENDAR_ID,
         LOADER_CALL_LOG_ID};
+    private int mSmsPermission = PackageManager.PERMISSION_DENIED;
+    private boolean mSmsPermissionRequested = false; // flag to ensure permission only prompts once
+    private static final int SMS_REQUEST_CODE = 1;
+
     /**
      * ConcurrentHashMap constructor params: 4 is initial table size, 0.9f is
      * load factor before resizing, 1 means we only expect a single thread to
@@ -1221,13 +1227,15 @@ public class QuickContactActivity extends ContactsActivity implements
         }
         final Bundle phonesExtraBundle = new Bundle();
         phonesExtraBundle.putStringArray(KEY_LOADER_EXTRA_PHONES, phoneNumbers);
-        phonesExtraBundle.putSerializable(KEY_LOADER_EXTRA_PLUGIN_INFO, (HashMap)pluginAccountsMap);
-        Trace.beginSection("start sms loader");
-        getLoaderManager().initLoader(
-                LOADER_SMS_ID,
-                phonesExtraBundle,
-                mLoaderInteractionsCallbacks);
-        Trace.endSection();
+        phonesExtraBundle.putSerializable(KEY_LOADER_EXTRA_PLUGIN_INFO, (HashMap) pluginAccountsMap);
+        if (mSmsPermission == PackageManager.PERMISSION_GRANTED) {
+            Trace.beginSection("start sms loader");
+            getLoaderManager().initLoader(
+                    LOADER_SMS_ID,
+                    phonesExtraBundle,
+                    mLoaderInteractionsCallbacks);
+            Trace.endSection();
+        }
 
         Trace.beginSection("start call log loader");
         getLoaderManager().initLoader(
@@ -1319,6 +1327,7 @@ public class QuickContactActivity extends ContactsActivity implements
             destroyInteractionLoaders();
             startInteractionLoaders(mCachedCp2DataCardModel);
         }
+        requestPermission();
     }
 
     @Override
@@ -2574,7 +2583,9 @@ public class QuickContactActivity extends ContactsActivity implements
     };
 
     private boolean isAllRecentDataLoaded() {
-        return mRecentLoaderResults.size() == mRecentLoaderIds.length;
+        int loaderSize = (mSmsPermission == PackageManager.PERMISSION_GRANTED) ?
+                mRecentLoaderIds.length : mRecentLoaderIds.length - 1;
+        return mRecentLoaderResults.size() == loaderSize;
     }
 
     private void bindRecentData() {
@@ -3808,5 +3819,69 @@ public class QuickContactActivity extends ContactsActivity implements
             checkAndBindContactData(mContactData, false, true);
         }
         if (DEBUG) Log.d(TAG, "---updatePlugins return");
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[],
+            int[] grantResults) {
+        switch (requestCode) {
+            case SMS_REQUEST_CODE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (mSmsPermission != PackageManager.PERMISSION_GRANTED) {
+                        mSmsPermission = PackageManager.PERMISSION_GRANTED;
+                        reloadInteraction();
+                    }
+                }
+                break;
+            }
+            default:
+                break;
+        }
+    }
+
+    private void requestPermission() {
+        mSmsPermission = checkSelfPermission(Manifest.permission.READ_SMS);
+        if (mSmsPermission != PackageManager.PERMISSION_GRANTED && !mSmsPermissionRequested) {
+            if (shouldShowRequestPermissionRationale(Manifest.permission.READ_SMS)) {
+                // return true if the user has turned down the permission in the past, but
+                // didn't choose "Don't ask again"
+                Resources rs = getResources();
+                Snackbar permissionSnackbar =
+                Snackbar.make(mScroller, rs.getString(R.string.sms_permission_rationale),
+                        Snackbar.LENGTH_LONG);
+                if (!mSmsPermissionRequested) {
+                    permissionSnackbar.setAction(rs.getString(R.string.sms_rationale_view),
+                            new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (!mSmsPermissionRequested) {
+                                // only request the permission once in one Resume lifecycle
+                                mSmsPermissionRequested = true;
+                                requestSmsPermission();
+                            }
+                        }
+                    }).show();
+                }
+            } else {
+                // First time showing permission or users chose "Don't ask again" previously
+                // the flag to ensure we only prompt once in one onResume lifecycle
+                mSmsPermissionRequested = true;
+                // if "Don't ask again" was chosen, requestPermissions call does not prompt users
+                requestSmsPermission();
+            }
+        }
+    }
+
+    private void reloadInteraction() {
+        if (mCachedCp2DataCardModel != null) {
+            destroyInteractionLoaders();
+            startInteractionLoaders(mCachedCp2DataCardModel);
+        }
+    }
+
+    private void requestSmsPermission() {
+        requestPermissions(new String[]{Manifest.permission.READ_SMS}, SMS_REQUEST_CODE);
     }
 }

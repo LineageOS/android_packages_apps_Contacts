@@ -72,7 +72,8 @@
     <string name="title_del_call">Delete</string>
 
     <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
-
+    <string name="sms_permission_rationale">SMS permission is required to display contact SMS history.</string>
+    <string name="sms_rationale_view">VIEW</string>
     <!-- InCall plugin directory search & invite -->
     <string name="incall_plugin_directory_search">Search %1$s directory</string>
     <string name="incall_plugin_invite">INVITE</string>

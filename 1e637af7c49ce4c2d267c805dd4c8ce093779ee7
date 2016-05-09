@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_56c1dd7f",
+        "filename": "src/com/android/contacts/activities/PeopleActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-09T22:29:15Z",
+      "side": 1,
+      "message": "not used any more?",
+      "revId": "1e637af7c49ce4c2d267c805dd4c8ce093779ee7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_16bb650e",
+        "filename": "src/com/android/contacts/incall/InCallPluginUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-09T22:29:15Z",
+      "side": 1,
+      "message": "not used any more?",
+      "revId": "1e637af7c49ce4c2d267c805dd4c8ce093779ee7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_9644351d",
+        "filename": "src/com/android/contacts/list/PluginContactBrowseListFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-09T22:29:15Z",
+      "side": 1,
+      "message": "not used any more?",
+      "revId": "1e637af7c49ce4c2d267c805dd4c8ce093779ee7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

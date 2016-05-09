@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "5faad753_4246f823",
+        "filename": "androidTest/Android.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-09T19:46:46Z",
+      "side": 1,
+      "message": "I\u0027m not sure - but this appears to be defined in frameworks.  I get a build failure unless I remove this guy from the build file....  Could be an issue with my local configuration, but worth a check?",
+      "revId": "fd952b241adc86fad76fc1db507bacf0e650e1ba",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_c7667a2a",
         "filename": "androidTest/README.md",
         "patchSetId": 7

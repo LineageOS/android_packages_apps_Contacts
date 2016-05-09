@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_d6506d0d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-09T22:12:46Z",
+      "side": 1,
+      "message": "Requesting this intent may cause plugins to request permissions at odd times. Instead, requesting this intent when the button is clicked will give the user some context when plugin permission dialogs come up.\n\nNote that the delay caused by requesting this intent when the button is clicked is fairly indiscernible from caching this intent at application creation. This action is only presented to the user once other metadata from the plugin has already been captured, so this call will happen after the plugin has been instantiated, and should be performant.",
+      "revId": "12699d6ccc6616bdeb8a63f8e5bd307848ae3b08",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_76573904",
+        "filename": "src/com/android/contacts/activities/PeopleActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1800,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-09T22:12:46Z",
+      "side": 1,
+      "message": "startDefaultDirectorySearch*",
+      "range": {
+        "startLine": 1800,
+        "startChar": 34,
+        "endLine": 1800,
+        "endChar": 66
+      },
+      "revId": "12699d6ccc6616bdeb8a63f8e5bd307848ae3b08",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_563c7dbe",
+        "filename": "src/com/android/contacts/list/PluginContactBrowseListFragment.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-09T22:12:46Z",
+      "side": 1,
+      "message": "don\u0027t see where these are used",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 63
+      },
+      "revId": "12699d6ccc6616bdeb8a63f8e5bd307848ae3b08",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

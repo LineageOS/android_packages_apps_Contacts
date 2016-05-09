@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_a7633e1a",
+        "filename": "androidTest/.gitignore",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-09T19:02:20Z",
+      "side": 1,
+      "message": "I don\u0027t think we\u0027re supposed to add .gitignores for aosp code?",
+      "revId": "fd952b241adc86fad76fc1db507bacf0e650e1ba",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_c7667a2a",
+        "filename": "androidTest/README.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-09T19:02:20Z",
+      "side": 1,
+      "message": "maybe some more info on what this means?",
+      "revId": "fd952b241adc86fad76fc1db507bacf0e650e1ba",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_676d4603",
+        "filename": "androidTest/README.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-09T19:02:20Z",
+      "side": 1,
+      "message": "Line Length?",
+      "revId": "fd952b241adc86fad76fc1db507bacf0e650e1ba",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_877082de",
+        "filename": "androidTest/README.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-09T19:02:20Z",
+      "side": 1,
+      "message": "Line Length",
+      "revId": "fd952b241adc86fad76fc1db507bacf0e650e1ba",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_27774ed7",
+        "filename": "androidTest/README.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-09T19:02:20Z",
+      "side": 1,
+      "message": "Line Length",
+      "revId": "fd952b241adc86fad76fc1db507bacf0e650e1ba",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_077c92b3",
+        "filename": "androidTest/src/com/android/contacts/androidtest/InCallMetricsContactTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-09T19:02:20Z",
+      "side": 1,
+      "message": "Not sure how much we care about import order here, but android.content should be before android.support I think...",
+      "revId": "fd952b241adc86fad76fc1db507bacf0e650e1ba",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_c7343afe",
+        "filename": "androidTest/src/com/android/contacts/androidtest/InCallMetricsContactTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-09T19:02:20Z",
+      "side": 1,
+      "message": "up with other com.androids.",
+      "revId": "fd952b241adc86fad76fc1db507bacf0e650e1ba",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_a24d6c73",
+        "filename": "androidTest/src/com/android/contacts/androidtest/InCallMetricsTestDbUtils.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-09T19:02:20Z",
+      "side": 1,
+      "message": "if(",
+      "revId": "fd952b241adc86fad76fc1db507bacf0e650e1ba",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

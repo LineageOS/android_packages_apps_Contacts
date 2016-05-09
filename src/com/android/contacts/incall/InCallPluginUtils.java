@@ -16,6 +16,7 @@
 
 package com.android.contacts.incall;
 
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -39,9 +40,14 @@ import com.android.contacts.common.util.DataStatus;
 import com.android.contacts.common.util.UriUtils;
 import com.android.phone.common.incall.CallMethodInfo;
 import com.android.phone.common.incall.ContactsDataSubscription;
+import com.android.phone.common.incall.api.InCallQueries;
 import com.android.phone.common.incall.utils.CallMethodFilters;
+import com.cyanogen.ambient.common.api.AmbientApiClient;
+import com.cyanogen.ambient.common.api.Result;
+import com.cyanogen.ambient.common.api.ResultCallback;
 import com.cyanogen.ambient.incall.extension.InCallContactInfo;
 
+import com.cyanogen.ambient.incall.results.PendingIntentResult;
 import com.cyngn.uicommon.view.Snackbar;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -227,5 +233,27 @@ public class InCallPluginUtils {
             pluginMap.put(cmi.mAccountType, cmi.mComponent.flattenToString());
         }
         return pluginMap;
+    }
+
+    public static void startDirectoryDefaultSearch(final Context context, AmbientApiClient client,
+            final ComponentName componentName) {
+
+        InCallQueries.getDefaultDirectorySearchIntent(client, componentName).setResultCallback(
+                new ResultCallback() {
+                    @Override
+                    public void onResult(Result result) {
+                        PendingIntentResult pendingIntent = (PendingIntentResult) result;
+                        try {
+                            if (pendingIntent.intent != null) {
+                                pendingIntent.intent.send();
+                                InCallMetricsHelper.increaseCount(context,
+                                        InCallMetricsHelper.Events.DIRECTORY_SEARCH,
+                                        componentName.flattenToString());
+                            }
+                        } catch (PendingIntent.CanceledException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
     }
 }

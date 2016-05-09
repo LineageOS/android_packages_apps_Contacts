@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_165045d4",
+        "filename": "src/com/android/contacts/incall/InCallPluginUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-09T22:30:07Z",
+      "side": 1,
+      "message": "still not needed",
+      "revId": "1e3688946393df09168fed993097164505f7af2b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_f65489cc",
+        "filename": "src/com/android/contacts/incall/InCallPluginUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-09T22:30:07Z",
+      "side": 1,
+      "message": "nooo",
+      "revId": "1e3688946393df09168fed993097164505f7af2b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

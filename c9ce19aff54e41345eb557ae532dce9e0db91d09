@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_760f39e1",
+        "filename": "src/com/android/contacts/incall/InCallPluginUtils.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-09T22:34:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_566f9d91",
+      "range": {
+        "startLine": 245,
+        "startChar": 44,
+        "endLine": 245,
+        "endChar": 57
+      },
+      "revId": "c9ce19aff54e41345eb557ae532dce9e0db91d09",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_f66d6998",
         "filename": "src/com/android/contacts/incall/InCallPluginUtils.java",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2016-05-09T22:32:20Z",
       "side": 1,
       "message": "can pendingIntent itself be null here?",
+      "range": {
+        "startLine": 247,
+        "startChar": 32,
+        "endLine": 247,
+        "endChar": 45
+      },
+      "revId": "c9ce19aff54e41345eb557ae532dce9e0db91d09",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_d6086dda",
+        "filename": "src/com/android/contacts/incall/InCallPluginUtils.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-09T22:34:24Z",
+      "side": 1,
+      "message": "it wasn\u0027t in the original code, might not hurt to check though.",
+      "parentUuid": "5faad753_f66d6998",
       "range": {
         "startLine": 247,
         "startChar": 32,

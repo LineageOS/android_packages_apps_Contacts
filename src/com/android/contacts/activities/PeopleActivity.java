@@ -111,6 +111,7 @@ import com.android.contacts.util.DialogManager;
 import com.android.contactsbind.HelpUtils;
 import com.android.phone.common.incall.ContactsDataSubscription;
 import com.android.phone.common.incall.CallMethodInfo;
+import com.android.phone.common.incall.api.InCallQueries;
 import com.android.phone.common.incall.utils.CallMethodFilters;
 import com.android.phone.common.incall.utils.CallMethodUtils;
 
@@ -1796,16 +1797,9 @@ public class PeopleActivity extends ContactsActivity implements
                     // plugin tab
                     int pluginIndex = tabPosition - TabState.GROUPS;
                     InCallPluginInfo pluginInfo = mPluginTabInfo.get(pluginIndex);
-                    if (pluginInfo.mCallMethodInfo.mDefaultDirectorySearchIntent != null) {
-                        try {
-                            pluginInfo.mCallMethodInfo.mDefaultDirectorySearchIntent.send();
-                        } catch (PendingIntent.CanceledException e) {
-                            Log.d(TAG, "directory search exception: ", e);
-                        }
-                        InCallMetricsHelper.increaseCount(this,
-                                InCallMetricsHelper.Events.DIRECTORY_SEARCH,
-                                pluginInfo.mCallMethodInfo.mComponent.flattenToString());
-                    }
+                    InCallQueries.fireDefaultDirectorySearchIntent(this,
+                            ContactsDataSubscription.get(this).mClient,
+                            pluginInfo.mCallMethodInfo.mComponent);
                 } else {
                     Intent intent = new Intent(Intent.ACTION_INSERT, Contacts.CONTENT_URI);
                     Bundle extras = getIntent().getExtras();

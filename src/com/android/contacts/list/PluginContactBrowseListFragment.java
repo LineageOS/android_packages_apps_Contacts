@@ -58,7 +58,12 @@ import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.DefaultContactListAdapter;
 import com.android.contacts.common.list.ProfileAndContactsLoader;
 import com.android.contacts.incall.InCallPluginUtils;
+import com.android.phone.common.incall.ContactsDataSubscription;
+import com.android.phone.common.incall.api.InCallQueries;
 import com.android.phone.common.incall.utils.CallMethodUtils;
+import com.cyanogen.ambient.common.api.Result;
+import com.cyanogen.ambient.common.api.ResultCallback;
+import com.cyanogen.ambient.incall.results.PendingIntentResult;
 
 import java.util.List;
 
@@ -662,9 +667,9 @@ public class PluginContactBrowseListFragment extends ContactEntryListFragment<Co
                                         .mCallMethodInfo.mLoginSubtitle));
                     }
                 } else if (view == mEmptyView) {
-                    if (mInCallPluginInfo.mCallMethodInfo.mDefaultDirectorySearchIntent != null) {
-                        mInCallPluginInfo.mCallMethodInfo.mDefaultDirectorySearchIntent.send();
-                    }
+                    InCallQueries.fireDefaultDirectorySearchIntent(getActivity(),
+                            ContactsDataSubscription.get(getActivity()).mClient,
+                            mInCallPluginInfo.mCallMethodInfo.mComponent);
                 }
             } catch (PendingIntent.CanceledException e) {
                 Log.e(TAG, "PendingIntent exception", e);

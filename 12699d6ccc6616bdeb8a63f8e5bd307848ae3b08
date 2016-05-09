@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_7641790b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-09T22:29:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_d6506d0d",
+      "revId": "12699d6ccc6616bdeb8a63f8e5bd307848ae3b08",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_76573904",
         "filename": "src/com/android/contacts/activities/PeopleActivity.java",
         "patchSetId": 1
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_168da57a",
+        "filename": "src/com/android/contacts/activities/PeopleActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1800,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-09T22:29:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_76573904",
+      "range": {
+        "startLine": 1800,
+        "startChar": 34,
+        "endLine": 1800,
+        "endChar": 66
+      },
+      "revId": "12699d6ccc6616bdeb8a63f8e5bd307848ae3b08",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_563c7dbe",
         "filename": "src/com/android/contacts/list/PluginContactBrowseListFragment.java",
         "patchSetId": 1
@@ -53,6 +95,30 @@
       "writtenOn": "2016-05-09T22:12:46Z",
       "side": 1,
       "message": "don\u0027t see where these are used",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 63
+      },
+      "revId": "12699d6ccc6616bdeb8a63f8e5bd307848ae3b08",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_3698e1be",
+        "filename": "src/com/android/contacts/list/PluginContactBrowseListFragment.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-09T22:29:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_563c7dbe",
       "range": {
         "startLine": 64,
         "startChar": 0,

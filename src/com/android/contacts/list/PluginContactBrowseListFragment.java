@@ -58,6 +58,7 @@ import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.DefaultContactListAdapter;
 import com.android.contacts.common.list.ProfileAndContactsLoader;
 import com.android.contacts.incall.InCallPluginUtils;
+import com.android.phone.common.incall.ContactsDataSubscription;
 import com.android.phone.common.incall.utils.CallMethodUtils;
 
 import java.util.List;
@@ -662,9 +663,9 @@ public class PluginContactBrowseListFragment extends ContactEntryListFragment<Co
                                         .mCallMethodInfo.mLoginSubtitle));
                     }
                 } else if (view == mEmptyView) {
-                    if (mInCallPluginInfo.mCallMethodInfo.mDefaultDirectorySearchIntent != null) {
-                        mInCallPluginInfo.mCallMethodInfo.mDefaultDirectorySearchIntent.send();
-                    }
+                    InCallPluginUtils.startDirectoryDefaultSearch(getActivity(),
+                            ContactsDataSubscription.get(getActivity()).mClient,
+                            mInCallPluginInfo.mCallMethodInfo.mComponent);
                 }
             } catch (PendingIntent.CanceledException e) {
                 Log.e(TAG, "PendingIntent exception", e);

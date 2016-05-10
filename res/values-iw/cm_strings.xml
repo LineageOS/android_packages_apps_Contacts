@@ -64,4 +64,9 @@
   <string name="title_del_call">מחק</string>
   <string name="powered_by_provider">מופעל על-ידי <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">חפש בתיקיה %1$s</string>
+  <string name="incall_plugin_invite">הזמנה</string>
+  <string name="incall_plugin_account_subheader">שם %1$s</string>
+  <string name="incall_plugin_call_error"><xliff:g id="name">%s </xliff:g> אינו יכול לבצע את השיחה</string>
+  <string name="incall_plugin_intent_error">לא ניתן להשלים פעולה זו. נסה שוב מאוחר יותר.</string>
 </resources>

@@ -64,4 +64,9 @@
   <string name="title_del_call">Hapus</string>
   <string name="powered_by_provider">Didukung oleh <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">Cari direktori %1$s</string>
+  <string name="incall_plugin_invite">UNDANG</string>
+  <string name="incall_plugin_account_subheader">Nama %1$s</string>
+  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> tidak dapat melakukan panggilan ini</string>
+  <string name="incall_plugin_intent_error">Tidak dapat menyelesaikan tindakan ini. Coba lagi nanti.</string>
 </resources>

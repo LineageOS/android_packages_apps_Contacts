@@ -64,4 +64,9 @@
   <string name="title_del_call">Verwyder</string>
   <string name="powered_by_provider">Aangedryf deur <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">Soek %1$s vouer</string>
+  <string name="incall_plugin_invite">UITNODIGING</string>
+  <string name="incall_plugin_account_subheader">%1$s naam</string>
+  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> kan nie die oproep maak nie</string>
+  <string name="incall_plugin_intent_error">Kon nie hierdie aksie voltooi nie. Probeer weer later.</string>
 </resources>

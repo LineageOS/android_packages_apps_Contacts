@@ -68,4 +68,5 @@
   <string name="incall_plugin_invite">เชิญ</string>
   <string name="incall_plugin_account_subheader">%1$s ราชื่อ</string>
   <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> ไม่สามารถเรียกสายนี้ได้</string>
+  <string name="incall_plugin_intent_error">ไม่สามารถดำเนินการสิ่งนี้ได้ ลองอีกครั้งภายหลัง</string>
 </resources>

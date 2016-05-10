@@ -68,4 +68,5 @@
   <string name="incall_plugin_invite">CONVIDAR</string>
   <string name="incall_plugin_account_subheader">%1$s nome</string>
   <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> não consegue realizar esta chamada</string>
+  <string name="incall_plugin_intent_error">Não é possível concluir esta ação. Tente novamente mais tarde.</string>
 </resources>

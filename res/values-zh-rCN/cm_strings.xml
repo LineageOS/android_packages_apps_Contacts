@@ -68,4 +68,5 @@
   <string name="incall_plugin_invite">邀请</string>
   <string name="incall_plugin_account_subheader">%1$s 名称</string>
   <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> 无法拨打电话</string>
+  <string name="incall_plugin_intent_error">无法完成此操作。请稍后再试。</string>
 </resources>

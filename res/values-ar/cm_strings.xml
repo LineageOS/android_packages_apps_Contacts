@@ -65,4 +65,9 @@
   <string name="title_del_call">حذف</string>
   <string name="powered_by_provider">مشغل بواسطة <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">بحث عن الدليل %1$s</string>
+  <string name="incall_plugin_invite">دعوة</string>
+  <string name="incall_plugin_account_subheader">اسم %1$s</string>
+  <string name="incall_plugin_call_error">لا يمكن لـ <xliff:g id="name">%s</xliff:g> إجراء هذه المكالمة</string>
+  <string name="incall_plugin_intent_error">تعذر إتمام هذا الإجراء. حاول مرة أخرى لاحقاً.</string>
 </resources>

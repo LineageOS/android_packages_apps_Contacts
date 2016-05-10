@@ -64,4 +64,9 @@
   <string name="title_del_call">Sil</string>
   <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g> tarafından desteklenmektedir</string>
   <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">%1$s dizinini ara</string>
+  <string name="incall_plugin_invite">DAVET</string>
+  <string name="incall_plugin_account_subheader">%1$s adı</string>
+  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> bu aramayı yapamıyor</string>
+  <string name="incall_plugin_intent_error">Bu eylem tamamlanamıyor. Lütfen daha sonra tekrar deneyiniz.</string>
 </resources>

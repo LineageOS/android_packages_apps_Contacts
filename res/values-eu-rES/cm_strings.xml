@@ -68,4 +68,5 @@
   <string name="incall_plugin_invite">GONBIDATU</string>
   <string name="incall_plugin_account_subheader">%1$s izena</string>
   <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g>(e)k ezin du dei hau egin</string>
+  <string name="incall_plugin_intent_error">Ezin izan da ekintza hau bete. Saiatu berriro geroago.</string>
 </resources>

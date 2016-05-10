@@ -66,6 +66,7 @@
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_directory_search">Pesquisar na pasta %1$s</string>
   <string name="incall_plugin_invite">CONVIDAR</string>
-  <string name="incall_plugin_account_subheader">Nome %1$s</string>
-  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> não pode realizar esta ligação</string>
+  <string name="incall_plugin_account_subheader">Nome no %1$s</string>
+  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> não pode realizar esta chamada</string>
+  <string name="incall_plugin_intent_error">Não foi possível concluir esta ação. Tente novamente mais tarde.</string>
 </resources>

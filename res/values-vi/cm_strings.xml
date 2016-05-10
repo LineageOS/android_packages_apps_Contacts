@@ -64,4 +64,9 @@
   <string name="title_del_call">Xoá</string>
   <string name="powered_by_provider">Được hỗ trợ bởi <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">Tìm kiếm thư mục %1$s</string>
+  <string name="incall_plugin_invite">MỜI</string>
+  <string name="incall_plugin_account_subheader">Tên %1$s</string>
+  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> không thể thực hiện cuộc gọi này</string>
+  <string name="incall_plugin_intent_error">Không thể hoàn tất thao tác này. Thử lại sau.</string>
 </resources>

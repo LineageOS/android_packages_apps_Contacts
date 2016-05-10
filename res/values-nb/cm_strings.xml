@@ -64,4 +64,9 @@
   <string name="title_del_call">Slett</string>
   <string name="powered_by_provider">Drevet av <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">Søk %1$s katalog</string>
+  <string name="incall_plugin_invite">INVITER</string>
+  <string name="incall_plugin_account_subheader">%1$s navn</string>
+  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> kunne ikke lage denne samtalen</string>
+  <string name="incall_plugin_intent_error">Kunne ikke fullføre denne handlingen. Prøv igjen senere.</string>
 </resources>

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_aaa8deda",
+        "filename": "androidTest/.gitignore",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-10T17:51:40Z",
+      "side": 1,
+      "message": "Not sure, I\u0027ve seen it done before like this patch\nhttp://review.cyanogenmod.org/#/c/102828/",
+      "parentUuid": "5faad753_a7633e1a",
+      "revId": "fd952b241adc86fad76fc1db507bacf0e650e1ba",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_4246f823",
         "filename": "androidTest/Android.mk",
         "patchSetId": 7
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_aa81be4c",
+        "filename": "androidTest/README.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-10T17:51:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_c7667a2a",
+      "revId": "fd952b241adc86fad76fc1db507bacf0e650e1ba",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_676d4603",
         "filename": "androidTest/README.md",
         "patchSetId": 7
@@ -64,6 +100,24 @@
       "writtenOn": "2016-05-09T19:02:20Z",
       "side": 1,
       "message": "Line Length?",
+      "revId": "fd952b241adc86fad76fc1db507bacf0e650e1ba",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_4aafeae2",
+        "filename": "androidTest/README.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-10T17:51:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_676d4603",
       "revId": "fd952b241adc86fad76fc1db507bacf0e650e1ba",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_6aaae6d2",
+        "filename": "androidTest/README.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-10T17:51:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_877082de",
+      "revId": "fd952b241adc86fad76fc1db507bacf0e650e1ba",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_27774ed7",
         "filename": "androidTest/README.md",
         "patchSetId": 7
@@ -98,6 +170,24 @@
       "writtenOn": "2016-05-09T19:02:20Z",
       "side": 1,
       "message": "Line Length",
+      "revId": "fd952b241adc86fad76fc1db507bacf0e650e1ba",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_0ab9f22c",
+        "filename": "androidTest/README.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-10T17:51:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_27774ed7",
       "revId": "fd952b241adc86fad76fc1db507bacf0e650e1ba",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -121,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_0a92529f",
+        "filename": "androidTest/src/com/android/contacts/androidtest/InCallMetricsContactTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-10T17:51:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_077c92b3",
+      "revId": "fd952b241adc86fad76fc1db507bacf0e650e1ba",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_c7343afe",
         "filename": "androidTest/src/com/android/contacts/androidtest/InCallMetricsContactTest.java",
         "patchSetId": 7
@@ -138,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_4a984abf",
+        "filename": "androidTest/src/com/android/contacts/androidtest/InCallMetricsContactTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-10T17:51:40Z",
+      "side": 1,
+      "message": "Done, fixed all import order",
+      "parentUuid": "5faad753_c7343afe",
+      "revId": "fd952b241adc86fad76fc1db507bacf0e650e1ba",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_a24d6c73",
         "filename": "androidTest/src/com/android/contacts/androidtest/InCallMetricsTestDbUtils.java",
         "patchSetId": 7
@@ -149,6 +275,24 @@
       "writtenOn": "2016-05-09T19:02:20Z",
       "side": 1,
       "message": "if(",
+      "revId": "fd952b241adc86fad76fc1db507bacf0e650e1ba",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_6a93c6a4",
+        "filename": "androidTest/src/com/android/contacts/androidtest/InCallMetricsTestDbUtils.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-10T17:51:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_a24d6c73",
       "revId": "fd952b241adc86fad76fc1db507bacf0e650e1ba",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false

@@ -64,4 +64,9 @@
   <string name="title_del_call">Desaniciar</string>
   <string name="powered_by_provider">Cola potencia de <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">Guetar el direutoriu %1$s</string>
+  <string name="incall_plugin_invite">CONVIDAR</string>
+  <string name="incall_plugin_account_subheader">Nome de %1$s</string>
+  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> nun pue facer esta llamada</string>
+  <string name="incall_plugin_intent_error">Nun pudo completase esta aición. Inténtalo dempués.</string>
 </resources>

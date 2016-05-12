@@ -21,6 +21,7 @@
     <uses-permission android:name="com.cyanogen.ambient.permission.BIND_INCALL_SERVICE" />
     <uses-permission android:name="com.cyanogen.ambient.permission.PLUGIN_STATUS_CHANGED" />
     <uses-permission android:name="com.cyanogen.ambient.permission.BIND_CALLER_INFO" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <permission android:name="com.android.contacts.incall.METRICS_PERMISSION"
                 android:protectionLevel="signatureOrSystem" />
     <application>
@@ -32,8 +33,10 @@
             </intent-filter>
         </receiver>
 
-        <!-- IntentService for InCall plugin metrics update -->
-        <service android:name=".incall.InCallMetricsService" android:exported="false"/>
+        <!-- job to send InCall plugin metrics -->
+        <service android:name=".incall.InCallMetricsJobService"
+                 android:permission="android.permission.BIND_JOB_SERVICE" />
+
         <receiver android:name=".incall.InCallMetricsReceiver"
                   android:exported="true"
                   android:permission="com.android.contacts.incall.METRICS_PERMISSION">

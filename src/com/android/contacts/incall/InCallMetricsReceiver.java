@@ -19,15 +19,22 @@ package com.android.contacts.incall;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 
 public class InCallMetricsReceiver extends BroadcastReceiver {
     private static final String CONTACT_AUTO_MERGE_KEY_RAW_IDS = "RAW_IDS";
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        String rawIds = intent.getStringExtra(CONTACT_AUTO_MERGE_KEY_RAW_IDS);
-        if (rawIds != null) {
-            InCallMetricsHelper.increaseContactAutoMergeCount(context, rawIds);
+        String action = intent.getAction();
+        if (TextUtils.isEmpty(action)) {
+            return;
+        }
+        if (action.equals("com.android.contacts.incall.CONTACTS_AUTO_MERGE")) {
+            String rawIds = intent.getStringExtra(CONTACT_AUTO_MERGE_KEY_RAW_IDS);
+            if (rawIds != null) {
+                InCallMetricsHelper.increaseContactAutoMergeCount(context, rawIds);
+            }
         }
     }
 }

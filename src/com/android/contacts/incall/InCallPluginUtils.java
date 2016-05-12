@@ -22,10 +22,12 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
@@ -55,6 +57,7 @@ import com.google.common.collect.ImmutableMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 
 public class InCallPluginUtils {
     private static final String TAG = InCallPluginUtils.class.getSimpleName();
@@ -72,6 +75,9 @@ public class InCallPluginUtils {
             ".number";
     public static final String KEY_NUDGE_KEY = InCallPluginUtils.class.getPackage().getName() + ""
             + ".nudge_key";
+    // SharedPreferences key to keep track of current locale, in case of a locale caused
+    // configuration change, we need to update plugin provided strings
+    private static final String PREF_LAST_GLOBAL_LOCALE = "last_global_locale";
 
     public static Drawable getDrawable(Context context, int resourceId,
             ComponentName componentName) {
@@ -259,5 +265,41 @@ public class InCallPluginUtils {
                         }
                     }
                 });
+    }
+
+    // if provided locale is null or empty, look up the current locale
+    public static void updateSavedLocale(Context context, String locale) {
+        if (TextUtils.isEmpty(locale)) {
+            locale = getCurrentLocale(context);
+        }
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs.edit().putString(InCallPluginUtils.PREF_LAST_GLOBAL_LOCALE, locale).apply();
+        if (DEBUG) {
+            Log.d(TAG, "current locale:" + context.getResources().getConfiguration().locale
+                    .toString());
+        }
+    }
+
+    private static String getSavedLocale(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context).getString
+                (PREF_LAST_GLOBAL_LOCALE, "");
+    }
+
+    public static String getCurrentLocale(Context context) {
+        Locale current = context.getResources().getConfiguration().locale;
+        return current == null ? "" : current.toString();
+    }
+
+    public static void refreshInCallPlugins(Context context, boolean configChanged,
+            ContactsDataSubscription subscription) {
+        String currentLocale = getCurrentLocale(context);
+        if (configChanged && !TextUtils.equals(currentLocale, getSavedLocale(context))) {
+            // locale has changed, refresh all plugin info and update saved locale
+            subscription.refresh();
+            updateSavedLocale(context, currentLocale);
+        } else {
+            // only refresh dynamic plugin info
+            subscription.refreshDynamicItems();
+        }
     }
 }

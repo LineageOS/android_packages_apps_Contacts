@@ -722,16 +722,17 @@ public class PluginContactBrowseListFragment extends ContactEntryListFragment<Co
                                 }
                             }
                         }
-                        if (mLoginMsg != null) {
-                            if (!TextUtils
-                                    .isEmpty(mInCallPluginInfo.mCallMethodInfo.mLoginSubtitle)) {
-                                mLoginMsg.setText(mInCallPluginInfo.mCallMethodInfo.mLoginSubtitle);
-                            } else {
-                                mLoginMsg
-                                        .setText(getResources().getString(R.string.plugin_login_msg,
-                                                mInCallPluginInfo.mCallMethodInfo.mName));
-                            }
-                        }
+                    }
+                }
+                // always update login message just in case of locale change
+                if (mLoginMsg != null && !mAuthenticated) {
+                    if (!TextUtils
+                            .isEmpty(mInCallPluginInfo.mCallMethodInfo.mLoginSubtitle)) {
+                        mLoginMsg.setText(mInCallPluginInfo.mCallMethodInfo.mLoginSubtitle);
+                    } else {
+                        mLoginMsg
+                                .setText(getResources().getString(R.string.plugin_login_msg,
+                                        mInCallPluginInfo.mCallMethodInfo.mName));
                     }
                 }
             }

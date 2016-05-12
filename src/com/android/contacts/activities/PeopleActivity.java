@@ -20,7 +20,6 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.ContentUris;
@@ -143,7 +142,6 @@ public class PeopleActivity extends ContactsActivity implements
 
     public static String EDITABLE_KEY = "search_contacts";
     private static final String ENABLE_DEBUG_OPTIONS_HIDDEN_CODE = "debug debug!";
-    private static final int INCALL_PLUGIN_LOADER_ID = 0;
 
     // These values needs to start at 2. See {@link ContactEntryListFragment}.
     private static final int SUBACTIVITY_ACCOUNT_FILTER = 2;
@@ -205,6 +203,8 @@ public class PeopleActivity extends ContactsActivity implements
      * This is set in {@link #onCreate} for later use in {@link #onStart}.
      */
     private boolean mIsRecreatedInstance;
+    // flag to track if the onResume cycle is directly from a configuration change
+    private boolean mConfigurationChanged;
 
     /**
      * If {@link #configureFragments(boolean)} is already called.  Used to avoid calling it twice
@@ -284,6 +284,7 @@ public class PeopleActivity extends ContactsActivity implements
         mProviderStatusWatcher.addListener(this);
 
         mIsRecreatedInstance = (savedState != null);
+        mConfigurationChanged = (savedState != null);
         createViewsAndFragments(savedState);
 
         if (Log.isLoggable(Constants.PERFORMANCE_TAG, Log.DEBUG)) {
@@ -359,7 +360,6 @@ public class PeopleActivity extends ContactsActivity implements
     private void createViewsAndFragments(Bundle savedState) {
         // Disable the ActionBar so that we can use a Toolbar. This needs to be called before
         // setContentView().
-
         getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.people_activity);
@@ -382,7 +382,7 @@ public class PeopleActivity extends ContactsActivity implements
                 .favorites_tab_label)));
         mTabTitles.add(TabState.ALL, new TabEntry(ALL_TAG, getString(R.string
                 .all_contacts_tab_label)));
-        mTabTitles.add(TabState.GROUPS,new TabEntry(GROUPS_TAG, getString(R.string
+        mTabTitles.add(TabState.GROUPS, new TabEntry(GROUPS_TAG, getString(R.string
                 .contacts_groups_label)));
 
         if (savedState != null) {
@@ -410,6 +410,7 @@ public class PeopleActivity extends ContactsActivity implements
             mPluginTabInfo.clear();
             mPluginLength = 0;
         }
+
         mPageStateCount = TabState.COUNT + mPluginLength;
         mTabStateGroup = TabState.GROUPS + mPluginLength;
 
@@ -550,18 +551,20 @@ public class PeopleActivity extends ContactsActivity implements
         super.onPause();
         dismissDialog(ImportExportDialogFragment.TAG);
         dismissDialog(SelectAccountDialogFragment.TAG);
+        // reset the configuration change flag
+        mConfigurationChanged = false;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
         onResumeInit();
         ContactsDataSubscription dataSubscription = ContactsDataSubscription.get(this);
         if (dataSubscription.subscribe(CALL_METHOD_HELPER_SUBSCRIBER_ID,
                 pluginsUpdatedReceiver)) {
             if (CallMethodFilters.getAllEnabledCallMethods(dataSubscription).size() > 0) {
-                dataSubscription.refreshDynamicItems();
+                InCallPluginUtils.refreshInCallPlugins(this, mConfigurationChanged,
+                        dataSubscription);
             } else {
                 // double check if the UI needs to update in case of plugin state changes
                 updatePlugins(null);
@@ -1913,6 +1916,10 @@ public class PeopleActivity extends ContactsActivity implements
                 // determine if a UI update is necessary
                 CallMethodInfo newCm = newCmMap.remove(cn);
                 InCallPluginInfo pluginInfo = getPluginInfo(cn);
+                if (!TextUtils.equals(newCm.mName, pluginInfo.mCallMethodInfo.mName)) {
+                    // plugin name has changed (may be due to locale change), need to update tabs
+                    updateTabs = true;
+                }
                 pluginInfo.mCallMethodInfo = newCm;
                 pluginInfo.mFragment.updateInCallPluginInfo(pluginInfo);
                 mCallMethodMap.put(cn, newCm);

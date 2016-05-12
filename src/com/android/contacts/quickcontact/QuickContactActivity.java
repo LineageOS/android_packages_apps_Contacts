@@ -281,6 +281,8 @@ public class QuickContactActivity extends ContactsActivity implements
     private AsyncTask<Void, Void, Void> mRecentDataTask;
     private AtomicBoolean mIsUpdating;
     private static final String CALL_METHOD_SUBSCRIBER_ID = TAG;
+    // flag to track if the onResume cycle is directly from a configuration change
+    private boolean mConfigurationChanged;
     /**
      * The last copy of Cp2DataCardModel that was passed to {@link #populateContactAndAboutCard}.
      */
@@ -960,6 +962,7 @@ public class QuickContactActivity extends ContactsActivity implements
             mBlockContactHelper.setContactInfo(mContactData);
             mBlockContactHelper.gatherDataInBackground();
         }
+        mConfigurationChanged = (savedInstanceState != null);
         Trace.endSection();
     }
 
@@ -1295,9 +1298,15 @@ public class QuickContactActivity extends ContactsActivity implements
         ContactsDataSubscription dataSubscription = ContactsDataSubscription.get(this);
         if (dataSubscription.subscribe(CALL_METHOD_SUBSCRIBER_ID, pluginsUpdatedReceiver)) {
             if (DEBUG) Log.d(TAG, "ContactsDataSubscription infoReady");
-            if (CallMethodFilters.getAllEnabledCallMethods(dataSubscription).size() > 0) {
+            if (CallMethodFilters.getAllEnabledAndHiddenCallMethods(dataSubscription).size() > 0) {
                 // only refresh if there are ENABLED plugins
-                dataSubscription.refreshDynamicItems();
+                if (mConfigurationChanged) {
+                    // locale may have changed, refresh all plugin info
+                    dataSubscription.refresh();
+                } else {
+                    // only refresh dynamic plugin info
+                    dataSubscription.refreshDynamicItems();
+                }
             } else {
                 // double check if UI needs update in case plugin status changes between
                 // ENABLED and DISABLED or ENABLED and HIDDEN or DISABLED and HIDDEN
@@ -1324,7 +1333,7 @@ public class QuickContactActivity extends ContactsActivity implements
     @Override
     protected void onPause() {
         super.onPause();
-
+        mConfigurationChanged = false;
         ContactsDataSubscription.get(this).unsubscribe(CALL_METHOD_SUBSCRIBER_ID);
     }
 

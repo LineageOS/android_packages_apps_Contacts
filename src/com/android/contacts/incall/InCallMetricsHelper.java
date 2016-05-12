@@ -17,16 +17,16 @@
 package com.android.contacts.incall;
 
 import android.app.AlarmManager;
-import android.app.PendingIntent;
+import android.app.job.JobInfo;
+import android.app.job.JobParameters;
+import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.os.SystemClock;
 import android.provider.ContactsContract.RawContacts;
 import android.text.TextUtils;
 import android.util.Log;
@@ -36,6 +36,7 @@ import com.android.phone.common.incall.CallMethodInfo;
 import com.android.phone.common.incall.ContactsDataSubscription;
 import com.cyanogen.ambient.analytics.AnalyticsServices;
 import com.cyanogen.ambient.analytics.Event;
+import com.cyanogen.ambient.common.CyanogenAmbientUtil;
 import com.cyanogen.ambient.incall.InCallServices;
 import com.google.common.base.Joiner;
 import cyanogenmod.providers.CMSettings;
@@ -54,7 +55,6 @@ public class InCallMetricsHelper {
 
     private static final boolean DEBUG = false;
     private static final String CATEGORY_PREFIX = "contacts.incall.";
-    private static final int REQUEST_CODE = 777;
 
     public static final String NUDGE_ID_INVALID = "-1";
     public static final int EVENT_DISMISS = 0;
@@ -66,6 +66,7 @@ public class InCallMetricsHelper {
     private HandlerThread mHandlerThread;
     private Handler mHandler;
     private Context mContext;
+    private static final int SCHEDULER_JOB_ID = 1;
 
     public enum Categories {
         USER_ACTIONS("USER_ACTIONS"),
@@ -132,15 +133,28 @@ public class InCallMetricsHelper {
     };
 
     public static void init(Context context) {
-        InCallMetricsHelper helper = getInstance(context);
-        AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        Intent i = new Intent(context, InCallMetricsService.class);
-
-        // scheduled every 24h
-        PendingIntent pendingIntent = PendingIntent.getService(context, REQUEST_CODE, i,
-                PendingIntent.FLAG_UPDATE_CURRENT);
-        am.setInexactRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime(),
-                AlarmManager.INTERVAL_DAY, pendingIntent);
+        boolean scheduleJob = true;
+        JobScheduler jobScheduler =
+                (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
+        if (jobScheduler == null) {
+            Log.e(TAG, "JOB_SCHEDULER_SERVICE error, cannot schedule metrics collection.");
+            return;
+        }
+        for (JobInfo jobInfo : jobScheduler.getAllPendingJobs()) {
+            if (jobInfo.getId() == SCHEDULER_JOB_ID) {
+                scheduleJob = false;
+                break;
+            }
+        }
+        if (scheduleJob) {
+            JobInfo.Builder jobBuilder = new JobInfo.Builder(SCHEDULER_JOB_ID,
+                    new ComponentName(context, InCallMetricsJobService.class));
+            jobBuilder.setPeriodic(AlarmManager.INTERVAL_DAY)
+                    .setPersisted(true)
+                    .setBackoffCriteria(AlarmManager.INTERVAL_FIFTEEN_MINUTES,
+                            JobInfo.BACKOFF_POLICY_EXPONENTIAL);
+            jobScheduler.schedule(jobBuilder.build());
+        }
     }
 
     public static synchronized InCallMetricsHelper getInstance(Context context) {
@@ -157,32 +171,49 @@ public class InCallMetricsHelper {
     }
 
     /**
-     * Gather all metrics entries from tables and send to Ambient. Called from
-     * InCallMetricsService (IntentService)
+     * Gather all metrics entries from tables and send to Ambient.
      *
      * @param  context  context to be used in db
+     * @return the posted Runnable
      */
-    public static void prepareAndSend(Context context) {
-        if (!statsOptIn(context)) {
-            return;
-        }
-
+    public static Runnable prepareAndSend(final Context context, final InCallMetricsJobService
+            .JobDoneCallback jobDoneCallback, final JobParameters params) {
         InCallMetricsHelper helper = getInstance(context);
-        // In App events
-        List<ContentValues> allList = helper.mDbHelper.getAllEntries(Categories.INAPP_NUDGES, true);
-        // User Actions events
-        allList.addAll(helper.mDbHelper.getAllEntries(Categories.USER_ACTIONS, true));
-        for (ContentValues cv : allList) {
-            Categories cat = cv.containsKey(Parameters.CATEGORY.toCol()) ?
-                    Categories.valueOf(cv.getAsString(Parameters.CATEGORY.toCol())) :
-                    Categories.UNKNOWN;
-            Events event = cv.containsKey(Parameters.EVENT_NAME.toCol()) ?
-                    Events.valueOf(cv.getAsString(Parameters.EVENT_NAME.toCol())) :
-                    Events.UNKNOWN;
-            Set<String> plugins = ContactsDataSubscription.get(context)
-                    .getAllPluginComponentNames();
-            sendEvent(context, cat, event, getExtraFields(cat, event, cv), plugins);
-        }
+        Runnable sendTask = new Runnable() {
+            @Override
+            public void run() {
+                if (!statsOptIn(context)) {
+                    if (jobDoneCallback != null) {
+                        jobDoneCallback.callback(params, false);
+                    }
+                    return;
+                }
+
+                InCallMetricsHelper helper = getInstance(context);
+                // In App events
+                List<ContentValues> allList =
+                        helper.mDbHelper.getAllEntries(Categories.INAPP_NUDGES, true);
+                // User Actions events
+                allList.addAll(helper.mDbHelper.getAllEntries(Categories.USER_ACTIONS, true));
+                for (ContentValues cv : allList) {
+                    Categories cat = cv.containsKey(Parameters.CATEGORY.toCol()) ?
+                            Categories.valueOf(cv.getAsString(Parameters.CATEGORY.toCol())) :
+                            Categories.UNKNOWN;
+                    Events event = cv.containsKey(Parameters.EVENT_NAME.toCol()) ?
+                            Events.valueOf(cv.getAsString(Parameters.EVENT_NAME.toCol())) :
+                            Events.UNKNOWN;
+                    Set<String> plugins = ContactsDataSubscription.get(context)
+                            .getAllPluginComponentNames();
+                    sendEvent(context, cat, event, getExtraFields(cat, event, cv), plugins);
+
+                }
+                if (jobDoneCallback != null) {
+                    jobDoneCallback.callback(params, false);
+                }
+            }
+        };
+        helper.mHandler.post(sendTask);
+        return sendTask;
     }
 
     /**
@@ -545,5 +576,10 @@ public class InCallMetricsHelper {
     private static boolean statsOptIn(Context context) {
         return CMSettings.Secure.getInt(context.getContentResolver(),
                 CMSettings.Secure.STATS_COLLECTION, 1) == 1;
+    }
+
+    public static void stopTask(Context context, Runnable task) {
+        final InCallMetricsHelper helper = getInstance(context);
+        helper.mHandler.removeCallbacks(task);
     }
 }

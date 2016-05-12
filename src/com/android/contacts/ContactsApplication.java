@@ -23,10 +23,12 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract.Contacts;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.contacts.common.ContactPhotoManager;
@@ -35,6 +37,7 @@ import com.android.contacts.common.testing.InjectedServices;
 import com.android.contacts.common.util.Constants;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.contacts.incall.InCallMetricsHelper;
+import com.android.contacts.incall.InCallPluginUtils;
 import com.android.phone.common.incall.ContactsDataSubscription;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -126,6 +129,8 @@ public final class ContactsApplication extends Application {
         AnalyticsUtil.initialize(this);
         ContactsDataSubscription.init(this);
         InCallMetricsHelper.init(this);
+        // store the current locale to detect future locale configuration changes
+        InCallPluginUtils.updateSavedLocale(this, "");
     }
 
     private class DelayedInitializer extends AsyncTask<Void, Void, Void> {

@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_6a65fd44",
+        "filename": "androidTest/Android.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-13T15:30:43Z",
+      "side": 1,
+      "message": "Fixed, jenkins build also passed.",
+      "parentUuid": "5faad753_4246f823",
+      "revId": "fd952b241adc86fad76fc1db507bacf0e650e1ba",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_c7667a2a",
         "filename": "androidTest/README.md",
         "patchSetId": 7

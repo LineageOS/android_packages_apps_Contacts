@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_8adab914",
+        "filename": "androidTest/.gitignore",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-13T15:07:22Z",
+      "side": 1,
+      "message": "I\u0027m convinced.",
+      "parentUuid": "5faad753_aaa8deda",
+      "revId": "fd952b241adc86fad76fc1db507bacf0e650e1ba",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_4246f823",
         "filename": "androidTest/Android.mk",
         "patchSetId": 7

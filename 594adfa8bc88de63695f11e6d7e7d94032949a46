@@ -46,6 +46,30 @@
       "revId": "594adfa8bc88de63695f11e6d7e7d94032949a46",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_4a060189",
+        "filename": "res/values/cm_strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2016-05-13T15:08:25Z",
+      "side": 1,
+      "message": "It should be in all caps then, so translators can translate it correctly (eg. some languages don\u0027t need accentuation in capital letters)",
+      "parentUuid": "5faad753_e71b7618",
+      "range": {
+        "startLine": 76,
+        "startChar": 41,
+        "endLine": 76,
+        "endChar": 48
+      },
+      "revId": "594adfa8bc88de63695f11e6d7e7d94032949a46",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

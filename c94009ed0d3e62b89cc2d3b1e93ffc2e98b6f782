@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_355a0a2a",
+        "filename": "AndroidManifest_cm.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-13T16:38:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_6fd66f2a",
+      "range": {
+        "startLine": 38,
+        "startChar": 76,
+        "endLine": 39,
+        "endChar": 62
+      },
+      "revId": "c94009ed0d3e62b89cc2d3b1e93ffc2e98b6f782",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_cfe68317",
         "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2016-05-12T20:23:18Z",
       "side": 1,
       "message": "this sometimes leads to some gnarly crashes on non ambient devices...why are we adding it now?",
+      "range": {
+        "startLine": 582,
+        "startChar": 0,
+        "endLine": 583,
+        "endChar": 44
+      },
+      "revId": "c94009ed0d3e62b89cc2d3b1e93ffc2e98b6f782",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_954ade52",
+        "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-13T16:38:38Z",
+      "side": 1,
+      "message": "Removed, let\u0027s not use this for the time being.",
+      "parentUuid": "5faad753_cfe68317",
       "range": {
         "startLine": 582,
         "startChar": 0,

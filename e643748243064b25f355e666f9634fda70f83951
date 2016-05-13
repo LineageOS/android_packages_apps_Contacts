@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_4ab841c7",
+        "filename": "src/com/android/contacts/quickcontact/QuickContactActivity.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 3819,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-13T14:47:38Z",
+      "side": 1,
+      "message": "line spacing here is kinda weird.",
+      "revId": "e643748243064b25f355e666f9634fda70f83951",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

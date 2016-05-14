@@ -63,4 +63,5 @@
   <string name="delete_call_alert">চয়ন কৰা কল লগবোৰ বিলোপ কৰিব?</string>
   <string name="title_del_call">মচি দিয়া</string>
   <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g> ৰ দ্বাৰা চালিত</string>
+  <!-- InCall plugin directory search & invite -->
 </resources>

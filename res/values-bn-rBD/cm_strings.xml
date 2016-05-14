@@ -26,4 +26,5 @@
   <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">যোগাযোগ মুছে ফেলতে চান?</string>
   <!-- add for MemoryStatusActivity -->
+  <!-- InCall plugin directory search & invite -->
 </resources>

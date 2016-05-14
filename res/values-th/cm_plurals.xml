@@ -29,6 +29,6 @@
     <item quantity="other">%d รายชื่อจะถูกลบ</item>
   </plurals>
   <plurals name="spam_count_text">
-    <item quantity="other">%d คน ระบุว่าสิ่งนี้เป็นสแปม</item>
+    <item quantity="other">%d คนระบุว่าสิ่งนี้เป็นสแปม</item>
   </plurals>
 </resources>

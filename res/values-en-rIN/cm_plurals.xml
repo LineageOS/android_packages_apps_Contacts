@@ -34,6 +34,6 @@
   </plurals>
   <plurals name="spam_count_text">
     <item quantity="one">%d person marked this as spam</item>
-    <item quantity="other">%d person marked this as spam</item>
+    <item quantity="other">%d people marked this as spam</item>
   </plurals>
 </resources>

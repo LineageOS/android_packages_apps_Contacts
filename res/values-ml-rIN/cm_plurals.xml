@@ -34,6 +34,6 @@
   </plurals>
   <plurals name="spam_count_text">
     <item quantity="one">%d ആള്‍ ഇത് സ്പാം ആയി അടയാളപ്പെടുത്തി</item>
-    <item quantity="other">%d ആള്‍ക്കാര്‍ ഇത് സ്പാം ആയി അടയാളപ്പെടുത്തി</item>
+    <item quantity="other">%d ആളുകള്‍ ഇത് സ്പാം ആയി അടയാളപ്പെടുത്തി</item>
   </plurals>
 </resources>

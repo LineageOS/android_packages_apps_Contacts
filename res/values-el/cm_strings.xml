@@ -63,4 +63,10 @@
   <string name="delete_call_alert">Διαγραφή των επιλεγμένων αρχείων κλήσεων;</string>
   <string name="title_del_call">Διαγραφή</string>
   <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
+  <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">Αναζήτηση καταλόγου %1$s</string>
+  <string name="incall_plugin_invite">ΠΡΟΣΚΛΗΣΗ</string>
+  <string name="incall_plugin_account_subheader">Όνομα %1$s</string>
+  <string name="incall_plugin_call_error">Το <xliff:g id="name">%s</xliff:g> δεν μπορεί να πραγματοποιήσει αυτή την κλήση</string>
+  <string name="incall_plugin_intent_error">Δεν είναι δυνατή η ολοκλήρωση αυτής της ενέργειας. Δοκιμάστε ξανά αργότερα.</string>
 </resources>

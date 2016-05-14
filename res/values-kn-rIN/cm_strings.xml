@@ -63,4 +63,5 @@
   <string name="delete_call_alert">ಆಯ್ಕೆಮಾಡಿರುವ ಕರೆ ಲಾಗ್ಸನ್ನು ಅಳಿಸುವುದೇ?</string>
   <string name="title_del_call">ಅಳಿಸು</string>
   <string name="powered_by_provider">ನಡೆಸಲ್ಪಡುತ್ತಿರುವವರು <xliff:g id="provider">%s</xliff:g></string>
+  <!-- InCall plugin directory search & invite -->
 </resources>

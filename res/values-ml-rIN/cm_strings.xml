@@ -63,4 +63,5 @@
   <string name="delete_call_alert">തിരഞ്ഞെടുത്ത കാള്‍ ലൊഗ്സ് എല്ലാം ഒഴിവാക്കട്ടെ?</string>
   <string name="title_del_call">മായ്‌ചുകളയുക</string>
   <string name="powered_by_provider">ലബ്യമാക്കിയത് <xliff:g id="provider">%s</xliff:g></string>
+  <!-- InCall plugin directory search & invite -->
 </resources>

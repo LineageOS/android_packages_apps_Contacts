@@ -63,4 +63,5 @@
   <string name="delete_call_alert">Seçilən zəng qeydləri silinsin?</string>
   <string name="title_del_call">Sil</string>
   <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g> tərəfindən dəstəklənir</string>
+  <!-- InCall plugin directory search & invite -->
 </resources>

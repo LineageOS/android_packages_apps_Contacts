@@ -63,4 +63,5 @@
   <string name="delete_call_alert">ఎంచుకోబడిన కాల్ లాగులను తొలగించాలా?</string>
   <string name="title_del_call">తొలగించు</string>
   <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g> చే ఆధారితం</string>
+  <!-- InCall plugin directory search & invite -->
 </resources>

@@ -63,4 +63,5 @@
   <string name="delete_call_alert">Ištrinti pasirinktus skambučių žurnalus?</string>
   <string name="title_del_call">Ištrinti</string>
   <string name="powered_by_provider">Parengta pagal <xliff:g id="provider">%s</xliff:g></string>
+  <!-- InCall plugin directory search & invite -->
 </resources>

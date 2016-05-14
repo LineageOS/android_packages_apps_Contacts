@@ -24,4 +24,5 @@
   <!-- Multi Delete Contacts related strings -->
   <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <!-- add for MemoryStatusActivity -->
+  <!-- InCall plugin directory search & invite -->
 </resources>

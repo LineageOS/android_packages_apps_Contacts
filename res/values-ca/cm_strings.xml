@@ -21,7 +21,7 @@
   <string name="contactSavedToSimCardError">No s\'han pogut desar els contactes seleccionats a la targeta SIM</string>
   <string name="airplane_mode_on">No es pot accedir a la targeta SIM mentre el mode avió està activat</string>
   <string name="number_anr_too_long">El número és massa llarg</string>
-  <string name="email_address_too_long">L\'adreça de correu es massa llarga</string>
+  <string name="email_address_too_long">L\'adreça de correu electrònic és massa llarga</string>
   <string name="sim_card_full">La targeta SIM és plena</string>
   <string name="tag_too_long">El nom del contacte és massa llarg</string>
   <string name="invalid_phone_number">El número de telèfon no és vàlid</string>
@@ -39,7 +39,7 @@
   <string name="select_all">Tot</string>
   <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">Importa contactes de la SIM</string>
-  <string name="import_sim_contacts_message">S\'estan Important els contactes de la SIM\u2026</string>
+  <string name="import_sim_contacts_message">S\'estan important els contactes de la SIM\u2026</string>
   <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Vols importar el contacte?</string>
   <string name="import_finish">S\'ha finalitzat la importació</string>
@@ -63,9 +63,4 @@
   <string name="delete_call_alert">Vols esborrar els registres de trucades seleccionats?</string>
   <string name="title_del_call">Esborra</string>
   <string name="powered_by_provider">Proveït per <xliff:g id="provider">%s</xliff:g></string>
-  <!-- InCall plugin directory search & invite -->
-  <string name="incall_plugin_directory_search">Cerca %1$s al directori</string>
-  <string name="incall_plugin_invite">CONVIDA</string>
-  <string name="incall_plugin_account_subheader">Nom de %1$s</string>
-  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> no pot fer aquesta trucada</string>
 </resources>

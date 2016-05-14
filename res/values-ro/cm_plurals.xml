@@ -37,8 +37,8 @@
     <item quantity="other">%d contacte vor fi șterse.</item>
   </plurals>
   <plurals name="spam_count_text">
-    <item quantity="one">%d persoană a fost marcată ca spam</item>
-    <item quantity="few">%d persoane au fost marcate ca spam</item>
-    <item quantity="other">%d persoane au fost marcate ca spam</item>
+    <item quantity="one">%d persoană a marcat aceasta ca spam</item>
+    <item quantity="few">%d persoane au marcat aceasta ca spam</item>
+    <item quantity="other">%d persoane au marcat aceasta ca spam</item>
   </plurals>
 </resources>

@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_24d659c5",
+        "filename": "src/com/android/contacts/ContactsApplication.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-05-14T03:07:27Z",
+      "side": 1,
+      "message": "having one of the util method\u0027s parameters be a return value from another method of the same util is a little weird.",
+      "range": {
+        "startLine": 133,
+        "startChar": 8,
+        "endLine": 133,
+        "endChar": 92
+      },
+      "revId": "da8f868a70211bfa38ddccb9685bf0a4a5f11a84",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_64ed318a",
+        "filename": "src/com/android/contacts/incall/InCallPluginUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-05-14T03:07:27Z",
+      "side": 1,
+      "message": "you\u0027re always passing context.getResources().getConfiguration().locale.toString() into this method. save yourself a parameter.",
+      "revId": "da8f868a70211bfa38ddccb9685bf0a4a5f11a84",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_c4e425af",
+        "filename": "src/com/android/contacts/incall/InCallPluginUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-05-14T03:07:27Z",
+      "side": 1,
+      "message": "this can and probably should be null",
+      "range": {
+        "startLine": 281,
+        "startChar": 42,
+        "endLine": 281,
+        "endChar": 44
+      },
+      "revId": "da8f868a70211bfa38ddccb9685bf0a4a5f11a84",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_a498091b",
+        "filename": "src/com/android/contacts/incall/InCallPluginUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-05-14T03:07:27Z",
+      "side": 1,
+      "message": "this seemed silly at first, but now i\u0027m thinking i should do something similar in my dialer patch.",
+      "range": {
+        "startLine": 286,
+        "startChar": 15,
+        "endLine": 286,
+        "endChar": 30
+      },
+      "revId": "da8f868a70211bfa38ddccb9685bf0a4a5f11a84",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_e4dfe1d3",
+        "filename": "src/com/android/contacts/incall/InCallPluginUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-05-14T03:07:27Z",
+      "side": 1,
+      "message": "no need to specify self here",
+      "range": {
+        "startLine": 291,
+        "startChar": 31,
+        "endLine": 291,
+        "endChar": 48
+      },
+      "revId": "da8f868a70211bfa38ddccb9685bf0a4a5f11a84",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

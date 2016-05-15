@@ -63,6 +63,8 @@
   <string name="delete_call_alert">Izbriši izbrane dnevnike klicev?</string>
   <string name="title_del_call">Izbriši</string>
   <string name="powered_by_provider">Omogoča <xliff:g id="provider">%s</xliff:g></string>
+  <string name="sms_permission_rationale">Za prikaz zgodovine SMS-ov za stike je zahtevano dovoljenje za SMS-e.</string>
+  <string name="sms_rationale_view">POKAŽI</string>
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_directory_search">Išči v mapi %1$s</string>
   <string name="incall_plugin_invite">POVABI</string>

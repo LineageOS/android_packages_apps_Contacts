@@ -63,6 +63,8 @@
   <string name="delete_call_alert">Ezabatu hautatutako deien erregistroak?</string>
   <string name="title_del_call">Ezabatu</string>
   <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g>k indartua</string>
+  <string name="sms_permission_rationale">SMS baimena behar da kontaktuaren SMS historiala bistaratzeko.</string>
+  <string name="sms_rationale_view">IKUSI</string>
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_directory_search">Bilatu %1$s direktorioan</string>
   <string name="incall_plugin_invite">GONBIDATU</string>

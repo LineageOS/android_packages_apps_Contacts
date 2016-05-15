@@ -63,6 +63,8 @@
   <string name="delete_call_alert">Διαγραφή των επιλεγμένων αρχείων κλήσεων;</string>
   <string name="title_del_call">Διαγραφή</string>
   <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
+  <string name="sms_permission_rationale">Απαιτείται το δικαίωμα ανάγνωσης SMS για εμφάνιση του ιστορικού SMS της επαφής.</string>
+  <string name="sms_rationale_view">ΠΡΟΒΟΛΗ</string>
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_directory_search">Αναζήτηση καταλόγου %1$s</string>
   <string name="incall_plugin_invite">ΠΡΟΣΚΛΗΣΗ</string>

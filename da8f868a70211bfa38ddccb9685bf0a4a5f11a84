@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_0ed6d4c4",
+        "filename": "src/com/android/contacts/ContactsApplication.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-16T19:04:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_24d659c5",
+      "range": {
+        "startLine": 133,
+        "startChar": 8,
+        "endLine": 133,
+        "endChar": 92
+      },
+      "revId": "da8f868a70211bfa38ddccb9685bf0a4a5f11a84",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_64ed318a",
         "filename": "src/com/android/contacts/incall/InCallPluginUtils.java",
         "patchSetId": 3
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_aee460ad",
+        "filename": "src/com/android/contacts/incall/InCallPluginUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-16T19:04:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_64ed318a",
+      "revId": "da8f868a70211bfa38ddccb9685bf0a4a5f11a84",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_c4e425af",
         "filename": "src/com/android/contacts/incall/InCallPluginUtils.java",
         "patchSetId": 3
@@ -53,6 +95,30 @@
       "writtenOn": "2016-05-14T03:07:27Z",
       "side": 1,
       "message": "this can and probably should be null",
+      "range": {
+        "startLine": 281,
+        "startChar": 42,
+        "endLine": 281,
+        "endChar": 44
+      },
+      "revId": "da8f868a70211bfa38ddccb9685bf0a4a5f11a84",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_ce8d1cd4",
+        "filename": "src/com/android/contacts/incall/InCallPluginUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-16T19:04:52Z",
+      "side": 1,
+      "message": "I want to avoid NPE whenever I can.",
+      "parentUuid": "5faad753_c4e425af",
       "range": {
         "startLine": 281,
         "startChar": 42,
@@ -99,6 +165,30 @@
       "writtenOn": "2016-05-14T03:07:27Z",
       "side": 1,
       "message": "no need to specify self here",
+      "range": {
+        "startLine": 291,
+        "startChar": 31,
+        "endLine": 291,
+        "endChar": 48
+      },
+      "revId": "da8f868a70211bfa38ddccb9685bf0a4a5f11a84",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_cedf5cd4",
+        "filename": "src/com/android/contacts/incall/InCallPluginUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-16T19:04:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_e4dfe1d3",
       "range": {
         "startLine": 291,
         "startChar": 31,

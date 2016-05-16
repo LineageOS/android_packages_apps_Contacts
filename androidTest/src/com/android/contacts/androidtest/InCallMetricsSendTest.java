@@ -74,7 +74,7 @@ public class InCallMetricsSendTest {
     public void sendTest() {
         populateMetricsInDb();
         InCallMetricsTestUtils.waitFor(500);
-        InCallMetricsHelper.prepareAndSend(mContext);
+        InCallMetricsHelper.prepareAndSend(mContext, null, null);
     }
 
     private void populateMetricsInDb() {

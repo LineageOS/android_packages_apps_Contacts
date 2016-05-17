@@ -64,6 +64,7 @@
   <string name="title_del_call">Verwijderen</string>
   <string name="powered_by_provider">Mogelijk gemaakt door <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">Zoeken in %1$s-map</string>
   <string name="incall_plugin_invite">UITNODIGEN</string>
   <string name="incall_plugin_account_subheader">%1$s naam</string>
   <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> kan deze oproep niet voltooien</string>

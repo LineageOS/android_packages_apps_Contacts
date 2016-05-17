@@ -63,6 +63,8 @@
   <string name="delete_call_alert">Vols esborrar els registres de trucades seleccionats?</string>
   <string name="title_del_call">Esborra</string>
   <string name="powered_by_provider">Proveït per <xliff:g id="provider">%s</xliff:g></string>
+  <string name="sms_permission_rationale">Es necessita el permís de SMS per mostrar l\'historial de contactes SMS.</string>
+  <string name="sms_rationale_view">VEURE</string>
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_directory_search">Cerca %1$s al directori</string>
   <string name="incall_plugin_invite">CONVIDA</string>

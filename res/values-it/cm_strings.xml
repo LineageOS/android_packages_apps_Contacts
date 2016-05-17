@@ -63,6 +63,8 @@
   <string name="delete_call_alert">Eliminare i registri chiamate selezionati?</string>
   <string name="title_del_call">Elimina</string>
   <string name="powered_by_provider">Offerto da <xliff:g id="provider">%s</xliff:g></string>
+  <string name="sms_permission_rationale">Permesso lettura SMS necessario per mostrare la cronologia dei messaggi per il contatto.</string>
+  <string name="sms_rationale_view">VEDI</string>
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_directory_search">Cerca in directory %1$s</string>
   <string name="incall_plugin_invite">INVITO</string>

@@ -1159,7 +1159,8 @@ public class QuickContactActivity extends ContactsActivity implements
 
         setAttributionText(data.getProviderName());
         final int spamCount = data.getSpamCount();
-        if (spamCount > 0) {
+        final boolean isSpam = data.isSpam();
+        if (isSpam) {
             mHasComputedThemeColor = true;
             setThemeColor(mMaterialColorMapUtils
                     .calculatePrimaryAndSecondaryColor(getResources()

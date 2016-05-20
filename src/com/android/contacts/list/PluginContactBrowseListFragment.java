@@ -100,6 +100,8 @@ public class PluginContactBrowseListFragment extends ContactEntryListFragment<Co
     private ContactListFilter mFilter;
     private boolean mInitialized = false;
     private boolean mAuthenticated = false;
+    // flag to track soft signed out (show contacts list) vs hard signed out (show sign in UI)
+    private boolean mSoftLoggedOut = false;
     private String mAccountType = "";
     private String mAccountHandle = "";
     private String mPersistentSelectionPrefix = PERSISTENT_SELECTION_PREFIX;
@@ -682,13 +684,18 @@ public class PluginContactBrowseListFragment extends ContactEntryListFragment<Co
         if (mInCallPluginInfo != null) {
             if (DEBUG) Log.d(TAG, "updatePluginView: " + mInCallPluginInfo.mCallMethodInfo.mName);
             if (mListView != null && mLoginView != null) {
-                // if the UI auth state is initialized the first time or the auth state has changed
+                // if the UI auth state is initialized the first time or the auth state has changed,
+                // also need to update the UI if the status changes from soft logged out (shows
+                // contacts list) to hard logged state (show the sign-in UI)
+                boolean isSoftLoggedOut = mInCallPluginInfo.mCallMethodInfo.mIsAuthenticated ?
+                        false : CallMethodUtils.isSoftLoggedOut(getContext(),
+                        mInCallPluginInfo.mCallMethodInfo);
                 if (!mInitialized || mInCallPluginInfo.mCallMethodInfo.mIsAuthenticated !=
-                        mAuthenticated) {
+                        mAuthenticated || isSoftLoggedOut != mSoftLoggedOut) {
                     mInitialized = true;
                     mAuthenticated = mInCallPluginInfo.mCallMethodInfo.mIsAuthenticated;
-                    if (mAuthenticated || CallMethodUtils.isSoftLoggedOut(getContext(),
-                            mInCallPluginInfo.mCallMethodInfo)) {
+                    mSoftLoggedOut = isSoftLoggedOut;
+                    if (mAuthenticated || mSoftLoggedOut) {
                         // Show list view
                         mLoginView.setVisibility(View.GONE);
                         mListView.setVisibility(View.VISIBLE);

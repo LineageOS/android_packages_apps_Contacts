@@ -63,6 +63,8 @@
   <string name="delete_call_alert">Odstranit vybrané historie volání?</string>
   <string name="title_del_call">Odstranit</string>
   <string name="powered_by_provider">Využívá služby <xliff:g id="provider">%s</xliff:g></string>
+  <string name="sms_permission_rationale">Oprávnění SMS je nutné k zobrazení kontaktů z historie SMS.</string>
+  <string name="sms_rationale_view">POHLED</string>
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_directory_search">Prohledávat adresář %1$s</string>
   <string name="incall_plugin_invite">POZVAT</string>

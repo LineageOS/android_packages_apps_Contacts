@@ -28,4 +28,7 @@
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="other">%d ئالاقەداش ئۆچۈرۈلىدۇ.</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="other">%d نەپەر ئابونتقا ئەخلەت قىلىپ بەلگە سېلىندى</item>
+  </plurals>
 </resources>

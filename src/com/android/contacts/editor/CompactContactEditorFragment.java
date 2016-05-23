@@ -30,7 +30,6 @@ import com.android.contacts.incall.InCallMetricsHelper;
 import com.android.contacts.util.ContactPhotoUtils;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -110,11 +109,11 @@ public class CompactContactEditorFragment extends ContactEditorBaseFragment impl
         private PhotoListener mPhotoListener;
         private int mPhotoMode;
 
-        public PhotoHandler(Context context, int photoMode, RawContactDeltaList state) {
+        public PhotoHandler(Activity activity, int photoMode, RawContactDeltaList state) {
             // We pass a null changeAnchorView since we are overriding onClick so that we
             // can show the photo options in a dialog instead of a ListPopupWindow (which would
             // be anchored at changeAnchorView).
-            super(context, /* changeAnchorView =*/ null, photoMode, /* isDirectoryContact =*/ false,
+            super(activity, /* changeAnchorView =*/ null, photoMode, /* isDirectoryContact =*/ false,
                     state);
             mPhotoListener = new PhotoListener();
             mPhotoMode = photoMode;
@@ -180,6 +179,14 @@ public class CompactContactEditorFragment extends ContactEditorBaseFragment impl
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[],
+                                           int[] grantResults) {
+        if (mPhotoHandler != null) {
+            mPhotoHandler.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 
     @Override

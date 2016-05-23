@@ -435,7 +435,7 @@ public class ContactEditorFragment extends ContactEditorBaseFragment implements
             editor.getPhotoEditor().setShowPrimary(false);
             return;
         }
-        final PhotoHandler photoHandler = new PhotoHandler(mContext, editor, mode, state);
+        final PhotoHandler photoHandler = new PhotoHandler(getActivity(), editor, mode, state);
         editor.getPhotoEditor().setEditorListener(
                 (PhotoHandler.PhotoEditorListener) photoHandler.getListener());
         editor.getPhotoEditor().setShowPrimary(showIsPrimaryOption);
@@ -528,6 +528,15 @@ public class ContactEditorFragment extends ContactEditorBaseFragment implements
         }
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[],
+                                           int[] grantResults) {
+        if (mCurrentPhotoHandler != null) {
+            mCurrentPhotoHandler.onRequestPermissionsResult(
+                    requestCode, permissions, grantResults);
+        }
     }
 
     @Override
@@ -641,9 +650,9 @@ public class ContactEditorFragment extends ContactEditorBaseFragment implements
         private final BaseRawContactEditorView mEditor;
         private final PhotoActionListener mPhotoEditorListener;
 
-        public PhotoHandler(Context context, BaseRawContactEditorView editor, int photoMode,
+        public PhotoHandler(Activity activity, BaseRawContactEditorView editor, int photoMode,
                 RawContactDeltaList state) {
-            super(context, editor.getPhotoEditor().getChangeAnchorView(), photoMode, false, state);
+            super(activity, editor.getPhotoEditor().getChangeAnchorView(), photoMode, false, state);
             mEditor = editor;
             mRawContactId = editor.getRawContactId();
             mPhotoEditorListener = new PhotoEditorListener();

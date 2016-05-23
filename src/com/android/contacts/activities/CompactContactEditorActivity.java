@@ -16,6 +16,7 @@
 
 package com.android.contacts.activities;
 
+import android.app.Fragment;
 import com.android.contacts.R;
 import com.android.contacts.editor.CompactContactEditorFragment;
 import com.android.contacts.common.activity.RequestPermissionsActivity;
@@ -61,6 +62,17 @@ public class CompactContactEditorActivity extends ContactEditorBaseActivity {
     public void onBackPressed() {
         if (mFragment != null) {
             mFragment.revert();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
+        if (mFragment != null) {
+            ((Fragment) mFragment).onRequestPermissionsResult(
+                    requestCode, permissions, grantResults);
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }

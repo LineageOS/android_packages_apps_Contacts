@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_59efa1af",
+        "filename": "src/com/android/contacts/activities/PeopleActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1374,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-24T23:09:53Z",
+      "side": 1,
+      "message": "refactor updating of FAB into a function updatePluginFab(int tabPosition) below",
+      "revId": "b095d349b17469ee541630b57b6e87d92c542d28",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_f92bede7",
+        "filename": "src/com/android/contacts/activities/PeopleActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1983,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-24T23:09:53Z",
+      "side": 1,
+      "message": "Always check after this plugin update callback, while all the plugin auth data has been refreshed",
+      "revId": "b095d349b17469ee541630b57b6e87d92c542d28",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_39f42586",
+        "filename": "src/com/android/contacts/activities/PeopleActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1987,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-24T23:09:53Z",
+      "side": 1,
+      "message": "when the tabposition is after the \"ALLCONTACTS TAB\" (offset 1) or before the GROUPS tab (offset \u003d TabState.GROUPS + mPluginLength) then a plugin is in focus",
+      "revId": "b095d349b17469ee541630b57b6e87d92c542d28",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

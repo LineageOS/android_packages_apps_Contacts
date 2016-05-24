@@ -16,6 +16,24 @@
       "revId": "5391aedac2e13155f95e667918ae0956f4d12261",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_d37052df",
+        "filename": "src/com/android/contacts/detail/PhotoSelectionHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 14474
+      },
+      "writtenOn": "2016-05-24T16:08:38Z",
+      "side": 1,
+      "message": "Permissions can only be requested from an Activity.",
+      "parentUuid": "5faad753_d3bb726f",
+      "revId": "5391aedac2e13155f95e667918ae0956f4d12261",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

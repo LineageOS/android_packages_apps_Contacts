@@ -71,6 +71,27 @@ public class InCallMetricsSendTest {
     }
 
     @Test
+    public void populateMerge() {
+        int i = 0;
+        while (i < 1000) {
+            InCallMetricsDbHelper.getInstance(mContext).incrementUserActionsParam(
+                    String.valueOf(i),
+                    String.valueOf(i),
+                    InCallMetricsHelper.Events.CONTACTS_MANUAL_MERGED.value(),
+                    InCallMetricsHelper.Categories.USER_ACTIONS.value(),
+                    InCallMetricsHelper.Parameters.COUNT.toCol());
+            // CONTACTS_AUTO_MERGED
+            InCallMetricsDbHelper.getInstance(mContext).incrementUserActionsParam(
+                    String.valueOf(i),
+                    String.valueOf(i),
+                    InCallMetricsHelper.Events.CONTACTS_AUTO_MERGED.value(),
+                    InCallMetricsHelper.Categories.USER_ACTIONS.value(),
+                    InCallMetricsHelper.Parameters.COUNT.toCol());
+            i++;
+        }
+    }
+
+    @Test
     public void sendTest() {
         populateMetricsInDb();
         InCallMetricsTestUtils.waitFor(500);

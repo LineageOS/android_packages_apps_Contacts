@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_d3bb726f",
+        "filename": "src/com/android/contacts/detail/PhotoSelectionHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-24T15:46:23Z",
+      "side": 1,
+      "message": "why change all Context to Activity in this patch?",
+      "revId": "5391aedac2e13155f95e667918ae0956f4d12261",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

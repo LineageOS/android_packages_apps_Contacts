@@ -66,6 +66,7 @@ public class InCallMetricsHelper {
     private HandlerThread mHandlerThread;
     private Handler mHandler;
     private Context mContext;
+    private int mAmbientStatus = CyanogenAmbientUtil.MISSING;
     private static final int SCHEDULER_JOB_ID = 1;
 
     public enum Categories {
@@ -133,23 +134,38 @@ public class InCallMetricsHelper {
     };
 
     public static void init(Context context) {
-        boolean scheduleJob = true;
+        InCallMetricsHelper helper = getInstance(context);
+        helper.mAmbientStatus = CyanogenAmbientUtil.isCyanogenAmbientAvailable(context);
+        // only set job schedule flag default to true if there is Ambient
+        boolean scheduleJob = (helper.mAmbientStatus == CyanogenAmbientUtil.SUCCESS);
         JobScheduler jobScheduler =
                 (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
         if (jobScheduler == null) {
             Log.e(TAG, "JOB_SCHEDULER_SERVICE error, cannot schedule metrics collection.");
             return;
         }
+        // check for outstanding job
         for (JobInfo jobInfo : jobScheduler.getAllPendingJobs()) {
             if (jobInfo.getId() == SCHEDULER_JOB_ID) {
+                if (helper.mAmbientStatus != CyanogenAmbientUtil.SUCCESS) {
+                    // cancel job if Ambient is not available
+                    jobScheduler.cancel(SCHEDULER_JOB_ID);
+                }
+                // there's already pending job scheduled, no need to schedule a new one
                 scheduleJob = false;
+                if (DEBUG) {
+                    Log.d(TAG, "init, Job already scheduled");
+                }
                 break;
             }
         }
         if (scheduleJob) {
+            if (DEBUG) {
+                Log.d(TAG, "init, schedule new Job");
+            }
             JobInfo.Builder jobBuilder = new JobInfo.Builder(SCHEDULER_JOB_ID,
                     new ComponentName(context, InCallMetricsJobService.class));
-            jobBuilder.setPeriodic(AlarmManager.INTERVAL_DAY)
+            jobBuilder.setPeriodic(AlarmManager.INTERVAL_HALF_HOUR)
                     .setPersisted(true)
                     .setBackoffCriteria(AlarmManager.INTERVAL_FIFTEEN_MINUTES,
                             JobInfo.BACKOFF_POLICY_EXPONENTIAL);
@@ -468,6 +484,9 @@ public class InCallMetricsHelper {
      */
     public static void increaseContactAutoMergeCount(final Context context, final String rawIds) {
         final InCallMetricsHelper helper = getInstance(context);
+        if (helper.mAmbientStatus != CyanogenAmbientUtil.SUCCESS) {
+            return;
+        }
         helper.mHandler.post(new Runnable() {
             @Override
             public void run() {

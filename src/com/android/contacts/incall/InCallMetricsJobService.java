@@ -31,7 +31,9 @@ public class InCallMetricsJobService extends JobService {
     private JobDoneCallback mCallback = new JobDoneCallback() {
         @Override
         public void callback(JobParameters params, boolean reschedule) {
-            if (DEBUG) Log.d(TAG, "JobDoneCallback");
+            if (DEBUG) {
+                Log.d(TAG, "JobDoneCallback");
+            }
             mScheduledTask = null;
             jobFinished(params, reschedule);
         }
@@ -39,14 +41,18 @@ public class InCallMetricsJobService extends JobService {
 
     @Override
     public boolean onStartJob(JobParameters params) {
-        if (DEBUG) Log.d(TAG, "onStartJob");
+        if (DEBUG) {
+            Log.d(TAG, "onStartJob");
+        }
         mScheduledTask = InCallMetricsHelper.prepareAndSend(this, mCallback, params);
         return true;
     }
 
     @Override
     public boolean onStopJob(JobParameters params) {
-        if (DEBUG) Log.d(TAG, "onStopJob");
+        if (DEBUG){
+            Log.d(TAG, "onStopJob");
+        }
         if (mScheduledTask != null) {
             InCallMetricsHelper.stopTask(this, mScheduledTask);
             mScheduledTask = null;

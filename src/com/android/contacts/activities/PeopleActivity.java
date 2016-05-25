@@ -1371,15 +1371,7 @@ public class PeopleActivity extends ContactsActivity implements
                     clearFrequentsMenu.setVisible(false);
             } else if (mPluginLength > 0 && tabPosition >= TabState.GROUPS){
                 // plugin tab
-                int pluginIndex = tabPosition - TabState.GROUPS;
-                InCallPluginInfo pluginInfo = mPluginTabInfo.get(pluginIndex);
-                // floating button state
-                if (pluginInfo.mCallMethodInfo.mIsAuthenticated ||
-                        CallMethodUtils.isSoftLoggedOut(this, pluginInfo.mCallMethodInfo)) {
-                    mFloatingActionButtonContainer.setVisibility(View.VISIBLE);
-                } else {
-                    mFloatingActionButtonContainer.setVisibility(View.GONE);
-                }
+                updatePluginFab(tabPosition);
                 // menu
                 addGroupMenu.setVisible(false);
                 contactsFilterMenu.setVisible(false);
@@ -1987,6 +1979,24 @@ public class PeopleActivity extends ContactsActivity implements
             // force the tabs' underline to be cleared and redrawn
             mViewPagerTabs.onPageScrolled(mActionBarAdapter.getCurrentTab(), 0, 0);
             onResumeInit();
+        }
+        updatePluginFab(getTabPositionForTextDirection(mActionBarAdapter.getCurrentTab()));
+    }
+
+    private void updatePluginFab(int tabPosition) {
+        if (mPluginLength > 0 && tabPosition >= TabState.GROUPS && tabPosition < mTabStateGroup) {
+            // it's a plugin tab, update the FAB
+            int pluginIndex = tabPosition - TabState.GROUPS;
+            if (pluginIndex < mPluginTabInfo.size()) {
+                InCallPluginInfo pluginInfo = mPluginTabInfo.get(pluginIndex);
+                // floating button state
+                if (pluginInfo.mCallMethodInfo.mIsAuthenticated ||
+                        CallMethodUtils.isSoftLoggedOut(this, pluginInfo.mCallMethodInfo)) {
+                    mFloatingActionButtonContainer.setVisibility(View.VISIBLE);
+                } else {
+                    mFloatingActionButtonContainer.setVisibility(View.GONE);
+                }
+            }
         }
     }
 }

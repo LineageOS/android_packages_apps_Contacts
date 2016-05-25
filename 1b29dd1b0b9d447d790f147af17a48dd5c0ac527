@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_e862343e",
+        "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 10581
+      },
+      "writtenOn": "2016-05-25T18:33:56Z",
+      "side": 1,
+      "message": "maybe initialize with CyanogenAmbientUtil.MISSING?",
+      "range": {
+        "startLine": 69,
+        "startChar": 16,
+        "endLine": 69,
+        "endChar": 30
+      },
+      "revId": "1b29dd1b0b9d447d790f147af17a48dd5c0ac527",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

@@ -68,4 +68,5 @@
   <string name="incall_plugin_invite">INVITÉR</string>
   <string name="incall_plugin_account_subheader">%1$s navn</string>
   <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> kan ikke foretage dette opkald</string>
+  <string name="incall_plugin_intent_error">Kan ikke fuldføre denne handling. Prøv igen senere.</string>
 </resources>

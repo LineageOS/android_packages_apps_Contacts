@@ -63,6 +63,7 @@
   <string name="delete_call_alert">Geselecteerde gespreksstatistieken verwijderen?</string>
   <string name="title_del_call">Verwijderen</string>
   <string name="powered_by_provider">Mogelijk gemaakt door <xliff:g id="provider">%s</xliff:g></string>
+  <string name="sms_rationale_view">BEKIJKEN</string>
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_directory_search">Zoeken in %1$s-map</string>
   <string name="incall_plugin_invite">UITNODIGEN</string>

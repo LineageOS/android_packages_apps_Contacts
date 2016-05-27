@@ -63,6 +63,7 @@
   <string name="delete_call_alert">Ta bort valda samtalslistor?</string>
   <string name="title_del_call">Ta bort</string>
   <string name="powered_by_provider">Drivs av <xliff:g id="provider">%s</xliff:g></string>
+  <string name="sms_rationale_view">VISA</string>
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_invite">BJUD IN</string>
   <string name="incall_plugin_account_subheader">%1$s namn</string>

@@ -63,6 +63,8 @@
   <string name="delete_call_alert">Slett valgte Anropslister?</string>
   <string name="title_del_call">Slett</string>
   <string name="powered_by_provider">Drevet av <xliff:g id="provider">%s</xliff:g></string>
+  <string name="sms_permission_rationale">SMS tillatelse er nødvendig for å vise kontakt SMS historikk.</string>
+  <string name="sms_rationale_view">VIS</string>
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_directory_search">Søk %1$s katalog</string>
   <string name="incall_plugin_invite">INVITER</string>

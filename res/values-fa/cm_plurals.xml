@@ -17,18 +17,23 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="contacts_selected">
+    <item quantity="one">%d مورد انتخاب شد</item>
     <item quantity="other">%d مورد انتخاب شد</item>
   </plurals>
   <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">%d مخاطب وارد خواهد شد.</item>
     <item quantity="other">%d مخاطب وارد خواهد شد.</item>
   </plurals>
   <plurals name="import_progress">
+    <item quantity="one">%d مخاطب وارد شد</item>
     <item quantity="other">%d مخاطب وارد شد</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">%d مخاطب حذف خواهد شد.</item>
     <item quantity="other">%d مخاطب حذف خواهد شد.</item>
   </plurals>
   <plurals name="spam_count_text">
+    <item quantity="one">%d نفر این را به عنوان هرزنامه علامت‌گذاری کردند</item>
     <item quantity="other">%d نفر این را به عنوان هرزنامه علامت‌گذاری کردند</item>
   </plurals>
 </resources>

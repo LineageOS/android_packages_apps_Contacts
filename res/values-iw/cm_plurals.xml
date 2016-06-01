@@ -18,22 +18,32 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="contacts_selected">
     <item quantity="one">%d נבחר</item>
+    <item quantity="two">%d נבחרו</item>
+    <item quantity="many">%d נבחרו</item>
     <item quantity="other">%d נבחרו</item>
   </plurals>
   <plurals name="ContactMultiImportConfirmation">
     <item quantity="one">איש קשר %d יובא.</item>
+    <item quantity="two">%d אנשי קשר יובאו.</item>
+    <item quantity="many">%d אנשי קשר יובאו.</item>
     <item quantity="other">%d אנשי קשר יובאו.</item>
   </plurals>
   <plurals name="import_progress">
     <item quantity="one">איש קשר %d יובא</item>
+    <item quantity="two">%d אנשי קשר יובאו</item>
+    <item quantity="many">%d אנשי קשר יובאו</item>
     <item quantity="other">%d אנשי קשר יובאו</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="one">איש קשר %d יימחק.</item>
+    <item quantity="two">%d אנשי קשר יימחקו.</item>
+    <item quantity="many">%d אנשי קשר יימחקו.</item>
     <item quantity="other">%d אנשי קשר יימחקו.</item>
   </plurals>
   <plurals name="spam_count_text">
     <item quantity="one">אדם %d סימן את זה כזבל</item>
+    <item quantity="two">%d אנשים סימנו את זה כזבל</item>
+    <item quantity="many">%d אנשים סימנו את זה כזבל</item>
     <item quantity="other">%d אנשים סימנו את זה כזבל</item>
   </plurals>
 </resources>

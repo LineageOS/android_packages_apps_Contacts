@@ -63,9 +63,12 @@
   <string name="delete_call_alert">Kijelölt hívásnaplók törlése?</string>
   <string name="title_del_call">Törlés</string>
   <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g> üzemeltetésével</string>
+  <string name="sms_permission_rationale">SMS engedély szükséges a kapcsolat SMS történetének megjelenítéséhez.</string>
+  <string name="sms_rationale_view">NÉZET</string>
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_directory_search">Keresés a(z) %1$s könyvtárban</string>
   <string name="incall_plugin_invite">MEGHÍV</string>
   <string name="incall_plugin_account_subheader">%1$s név</string>
   <string name="incall_plugin_call_error">Ez a hívás nem hajtható végre: <xliff:g id="name">%s</xliff:g></string>
+  <string name="incall_plugin_intent_error">Nem lehet befejezni ezt a műveletet. Próbálja újra később.</string>
 </resources>

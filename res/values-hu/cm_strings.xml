@@ -68,4 +68,5 @@
   <string name="incall_plugin_invite">MEGHÍV</string>
   <string name="incall_plugin_account_subheader">%1$s név</string>
   <string name="incall_plugin_call_error">Ez a hívás nem hajtható végre: <xliff:g id="name">%s</xliff:g></string>
+  <string name="incall_plugin_intent_error">Nem lehet befejezni ezt a műveletet. Próbálja újra később.</string>
 </resources>

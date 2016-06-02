@@ -16,6 +16,24 @@
       "revId": "9f74f9c10c482ef97a0d1ec4100f138ff136c971",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_9e964c93",
+        "filename": "src/com/android/contacts/editor/ContactEditorBaseFragment.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 14187
+      },
+      "writtenOn": "2016-06-02T19:28:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_1e8b3c6e",
+      "revId": "9f74f9c10c482ef97a0d1ec4100f138ff136c971",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

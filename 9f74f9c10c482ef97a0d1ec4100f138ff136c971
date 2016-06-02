@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_1e8b3c6e",
+        "filename": "src/com/android/contacts/editor/ContactEditorBaseFragment.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 13956
+      },
+      "writtenOn": "2016-06-02T19:24:25Z",
+      "side": 1,
+      "message": "Change the comment also to matches it ?",
+      "revId": "9f74f9c10c482ef97a0d1ec4100f138ff136c971",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

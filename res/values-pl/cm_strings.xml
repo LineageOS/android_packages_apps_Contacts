@@ -63,6 +63,8 @@
   <string name="delete_call_alert">Usunąć zaznaczone dzienniki rozmów?</string>
   <string name="title_del_call">Usuń</string>
   <string name="powered_by_provider">Wpierane przez <xliff:g id="provider">%s</xliff:g></string>
+  <string name="sms_permission_rationale">Uprawnienia SMS są wymagane, aby wyświetlić historię konwersacji.</string>
+  <string name="sms_rationale_view">WIDOK</string>
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_directory_search">Szukaj w katalogu %1$s</string>
   <string name="incall_plugin_invite">ZAPROŚ</string>

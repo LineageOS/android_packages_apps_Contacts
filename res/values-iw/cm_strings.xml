@@ -63,6 +63,8 @@
   <string name="delete_call_alert">למחוק את רישומי השיחות שנבחרו?</string>
   <string name="title_del_call">מחק</string>
   <string name="powered_by_provider">מופעל על-ידי <xliff:g id="provider">%s</xliff:g></string>
+  <string name="sms_permission_rationale">הרשאת SMS דרושה להצגת היסטוריית ההודעות מול איש הקשר.</string>
+  <string name="sms_rationale_view">תצוגה</string>
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_directory_search">חפש בתיקיה %1$s</string>
   <string name="incall_plugin_invite">הזמנה</string>

@@ -63,6 +63,8 @@
   <string name="delete_call_alert">¿Desaniciar rexistros de llamaes esbillaes?</string>
   <string name="title_del_call">Desaniciar</string>
   <string name="powered_by_provider">Cola potencia de <xliff:g id="provider">%s</xliff:g></string>
+  <string name="sms_permission_rationale">Ríquese\'l permisu de SMS p\'amosar l\'historial de contautos de SMS.</string>
+  <string name="sms_rationale_view">VER</string>
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_directory_search">Guetar el direutoriu %1$s</string>
   <string name="incall_plugin_invite">CONVIDAR</string>

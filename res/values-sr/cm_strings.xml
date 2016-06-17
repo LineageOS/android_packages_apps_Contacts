@@ -63,6 +63,8 @@
   <string name="delete_call_alert">Избриши изабране евиденције позива?</string>
   <string name="title_del_call">Избриши</string>
   <string name="powered_by_provider">Омогућено од <xliff:g id="provider">%s</xliff:g></string>
+  <string name="sms_permission_rationale">SMS дозвола је неопходна за приказ SMS историје контакта.</string>
+  <string name="sms_rationale_view">ПРИКАЗ</string>
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_directory_search">Претражи %1$s директоријум</string>
   <string name="incall_plugin_invite">ПОЗОВИ</string>

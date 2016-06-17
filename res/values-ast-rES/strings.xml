@@ -85,6 +85,7 @@
   <!-- Menu item used to delete a specific contact -->
   <string name="menu_deleteContact">Desaniciar</string>
   <!-- Menu item used to change the photo for a specific contact [CHAR LIMIT=30]-->
+  <string name="menu_change_photo">Camudar semeya</string>
   <!-- Menu item used to create a contact shortcut when viewing contact details. [CHAR LIMIT=30] -->
   <string name="menu_create_contact_shortcut">Amestar al escritoriu</string>
   <!-- Menu item used to call a specific contact when viewing the details of that contact. -->
@@ -106,7 +107,9 @@
   <!-- Confirmation dialog for separating contacts into multiple instances [CHAR LIMIT=NONE] -->
   <string name="splitConfirmation">Esti contautu va dividise en dellos contautos.</string>
   <!-- Menu item that joins an aggregate with another aggregate -->
+  <string name="menu_joinAggregate">Mecer</string>
   <!-- Menu item (in the action bar) to indicate that changes should be saved [CHAR LIMIT=20] -->
+  <string name="menu_save">Guardar</string>
   <!-- Heading of the Join Contact screen -->
   <string name="titleJoinContactDataWith">Agrupar contautos</string>
   <!-- Info blurb on the Join Contact screen [CHAR LIMIT=NONE]-->
@@ -118,7 +121,9 @@
   <!-- List separator for the Join Contact list: A-Z -->
   <string name="separatorJoinAggregateAll">Tolos contautos</string>
   <!-- Toast shown after two contacts have been joined by a user action. [CHAR LIMIT=NONE] -->
+  <string name="contactsJoinedMessage">Contautos mecíos</string>
   <!-- Toast shown after contacts that the user has selected are deleted by a user action. [CHAR LIMIT=NONE] -->
+  <string name="contacts_deleted_toast">Contautos desaniciaos</string>
   <!-- Menu item that opens the Options activity for a given contact [CHAR LIMIT=15] -->
   <string name="menu_set_ring_tone">Afitar tonu</string>
   <!-- Menu item that opens the Options activity for a given contact [CHAR LIMIT=30] -->
@@ -128,10 +133,15 @@
   <!-- Warning dialog contents after users selects to delete a contact with ReadOnly and Writable sources. -->
   <string name="readOnlyContactDeleteConfirmation">Esti contautu contién información de delles cuentes. La información de les cuentes de namái-llectura va anubrise nes llistes de contautos, pero nun va desaniciase.</string>
   <!-- Warning dialog. Shown if user selects a single contact to merge. [CHAR LIMIT=NONE]  -->
+  <string name="batch_merge_single_contact_warning">Precises polo menos dos contautos esbillaos pa facer una mecedura.</string>
   <!-- Confirmation dialog. Shown after user selects to merge contacts. [CHAR LIMIT=NONE]  -->
+  <string name="batch_merge_confirmation">Los contautos esbillaos meceránse nún.</string>
   <!-- Confirmation dialog. Shown after user selects to delete writable contacts. [CHAR LIMIT=NONE]  -->
+  <string name="batch_delete_confirmation">Desaniciaránse los contautos esbillaos.</string>
   <!-- Confirmation dialog. Shown after user selects to delete readonly contacts. [CHAR LIMIT=NONE] -->
+  <string name="batch_delete_read_only_contact_confirmation">La información de cuentes de namái llectura anubriráse nes tos llistes de contautos, pero non desaniciase.</string>
   <!-- Confirmation dialog. Shown after user selects to delete contacts from multiple accounts. [CHAR LIMIT=NONE]  -->
+  <string name="batch_delete_multiple_accounts_confirmation">Estos contautos contienen información de múltiples cuentes, la información de cuentes de namái llectura anubriráse nes tos llistes de contautos, pero non desaniciase.</string>
   <!-- Warning dialog contents after users selects to delete a contact with multiple Writable sources. -->
   <string name="multipleContactDeleteConfirmation">Si se desanicia esti contautu, va desaniciase la información de delles cuentes.</string>
   <!-- Confirmation dialog contents after users selects to delete a Writable contact. -->
@@ -188,6 +198,7 @@
   <!-- Toast displayed when saving a contact failed. [CHAR LIMIT=NONE] -->
   <string name="contactSavedErrorToast">Nun se guardaron los cambeos del contautu.</string>
   <!-- Toast displayed when saving a contact photo failed. [CHAR LIMIT=NONE] -->
+  <string name="contactPhotoSavedErrorToast">Nun pudieron guardase les camudancies de semeya del contautu.</string>
   <!-- Toast displayed when a group is saved [CHAR LIMIT=NONE] -->
   <string name="groupSavedToast">Grupu guardáu</string>
   <!-- Toast displayed when saving a group failed [CHAR LIMIT=NONE] -->
@@ -275,6 +286,7 @@
   <!-- String describing which account type a contact came from when editing it -->
   <string name="account_type_format">Contautu de <xliff:g id="SOURCE">%1$s</xliff:g></string>
   <!-- String describing that a contact came from the google account type when editing it.  -->
+  <string name="google_account_type_format">Cuenta de <xliff:g id="source" example="Google">%1$s</xliff:g></string>
   <!-- String describing which account a contact came from when editing it -->
   <string name="from_account_format"><xliff:g id="source" example="user@gmail.com">%1$s</xliff:g></string>
   <!-- Text used to explain that a contact cannot be edited from the People application since the data is read only [CHAR LIMIT=40] -->
@@ -346,6 +358,7 @@
   <!-- Menu item for the settings activity [CHAR LIMIT=64] -->
   <string name="menu_settings" msgid="377929915873428211">Axustes</string>
   <!-- Menu item for invoking contextual Help & Feedback [CHAR LIMIT=64] -->
+  <string name="menu_help">Ayuda y feedback</string>
   <!-- The preference section title for contact display options [CHAR LIMIT=128] -->
   <string name="preference_displayOptions">Opciones de visualización</string>
   <!-- Text used to show a organization that has both a company and title. This is used in the Detail-View
@@ -525,6 +538,9 @@
   <!-- File Authority for the photo picker -->
   <!-- When a user tries to create an IM Hangouts field, an alert dialog pops up displaying this message. We don't want users entering email addresses of phone numbers into the IM field. [CHAR LIMIT=200] -->
   <!-- Button to expand the compact contact editor to show all available input fields. [CHAR LIMIT=60] -->
+  <string name="compact_editor_more_fields">Más campos</string>
   <!-- Content description for the compact contact editor photo overlay which, when clicked, shows a dialog with the options for changing the contact photo. [CHAR LIMIT=30] -->
+  <string name="compact_editor_change_photo_content_description">Camudar semeya</string>
   <!-- Quick contact display name with phonetic name -->
+  <string name="quick_contact_display_name_with_phonetic"><xliff:g id="display_name">%s</xliff:g> (<xliff:g id="phonetic_name">%s</xliff:g>)</string>
 </resources>

@@ -63,8 +63,6 @@
   <string name="delete_call_alert">删除选定的呼叫记录吗？</string>
   <string name="title_del_call">删除</string>
   <string name="powered_by_provider">由 <xliff:g id="provider">%s</xliff:g> 强力驱动</string>
-  <string name="sms_permission_rationale">显示联系人的短信记录需要短信权限。</string>
-  <string name="sms_rationale_view">查看</string>
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_directory_search">搜索 %1$s 目录</string>
   <string name="incall_plugin_invite">邀请</string>

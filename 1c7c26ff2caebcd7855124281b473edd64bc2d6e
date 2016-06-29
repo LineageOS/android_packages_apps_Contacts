@@ -22,6 +22,30 @@
       "revId": "1c7c26ff2caebcd7855124281b473edd64bc2d6e",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3fa7e38b_9eb7ad3b",
+        "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-06-29T16:00:22Z",
+      "side": 1,
+      "message": "Currently these 4 cases are the only cases in the Contacts USER_ACTIONS metrics category.",
+      "parentUuid": "3fa7e38b_d302fe3e",
+      "range": {
+        "startLine": 272,
+        "startChar": 20,
+        "endLine": 272,
+        "endChar": 27
+      },
+      "revId": "1c7c26ff2caebcd7855124281b473edd64bc2d6e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

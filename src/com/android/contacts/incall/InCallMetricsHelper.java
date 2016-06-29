@@ -266,6 +266,7 @@ public class InCallMetricsHelper {
                     case CONTACTS_AUTO_MERGED:
                     case CONTACTS_MANUAL_MERGED:
                     case INVITES_SENT:
+                    case DIRECTORY_SEARCH:
                         map.put(Parameters.COUNT, cv.getAsInteger(Parameters.COUNT.toCol()));
                         break;
                     default:

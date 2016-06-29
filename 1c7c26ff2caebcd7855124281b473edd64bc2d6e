@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fa7e38b_d302fe3e",
+        "filename": "src/com/android/contacts/incall/InCallMetricsHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-06-29T14:28:08Z",
+      "side": 1,
+      "message": "why is the default case to not do anything? do any of metrics in the USER_ACTIONS table not have a count? the DB seems to enforce a count",
+      "range": {
+        "startLine": 272,
+        "startChar": 20,
+        "endLine": 272,
+        "endChar": 27
+      },
+      "revId": "1c7c26ff2caebcd7855124281b473edd64bc2d6e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

@@ -79,18 +79,18 @@ public class InCallMetricsSendTest {
 
     private void populateMetricsInDb() {
         // Category: USER_ACTIONS
-        // CONTACTS_MANUAL_MERGED
-        InCallMetricsDbHelper.getInstance(mContext).incrementUserActionsParam(
-                mCm.mComponent.flattenToString(),
-                "",
-                InCallMetricsHelper.Events.CONTACTS_MANUAL_MERGED.value(),
-                InCallMetricsHelper.Categories.USER_ACTIONS.value(),
-                InCallMetricsHelper.Parameters.COUNT.toCol());
         // CONTACTS_AUTO_MERGED
         InCallMetricsDbHelper.getInstance(mContext).incrementUserActionsParam(
                 mCm.mComponent.flattenToString(),
                 "",
                 InCallMetricsHelper.Events.CONTACTS_AUTO_MERGED.value(),
+                InCallMetricsHelper.Categories.USER_ACTIONS.value(),
+                InCallMetricsHelper.Parameters.COUNT.toCol());
+        // CONTACTS_MANUAL_MERGED
+        InCallMetricsDbHelper.getInstance(mContext).incrementUserActionsParam(
+                mCm.mComponent.flattenToString(),
+                "",
+                InCallMetricsHelper.Events.CONTACTS_MANUAL_MERGED.value(),
                 InCallMetricsHelper.Categories.USER_ACTIONS.value(),
                 InCallMetricsHelper.Parameters.COUNT.toCol());
         // INVITES_SENT

@@ -63,4 +63,9 @@
   <string name="delete_call_alert">刪除已選取的通話紀錄？</string>
   <string name="title_del_call">刪除</string>
   <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">搜索 %1$s 目錄</string>
+  <string name="incall_plugin_invite">邀請</string>
+  <string name="incall_plugin_account_subheader">%1$s 名稱</string>
+  <string name="incall_plugin_call_error"><xliff:g id="name">%s </xliff:g> 無法撥打電話</string>
+  <string name="incall_plugin_intent_error">無法完成此操作，請稍後再試。</string>
 </resources>

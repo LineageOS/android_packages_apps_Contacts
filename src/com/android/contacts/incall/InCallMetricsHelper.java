@@ -165,7 +165,7 @@ public class InCallMetricsHelper {
             }
             JobInfo.Builder jobBuilder = new JobInfo.Builder(SCHEDULER_JOB_ID,
                     new ComponentName(context, InCallMetricsJobService.class));
-            jobBuilder.setPeriodic(AlarmManager.INTERVAL_HALF_HOUR)
+            jobBuilder.setPeriodic(AlarmManager.INTERVAL_DAY)
                     .setPersisted(true)
                     .setBackoffCriteria(AlarmManager.INTERVAL_FIFTEEN_MINUTES,
                             JobInfo.BACKOFF_POLICY_EXPONENTIAL);

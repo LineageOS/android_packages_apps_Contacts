@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fa7e38b_c8bc736b",
+        "filename": "src/com/android/contacts/quickcontact/QuickContactActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-07-12T20:10:35Z",
+      "side": 1,
+      "message": "// Do nothing?",
+      "revId": "8023ef6251a9ed1c8f130b72b6822a1073c3ba72",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

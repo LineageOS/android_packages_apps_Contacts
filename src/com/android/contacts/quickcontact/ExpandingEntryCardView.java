@@ -899,6 +899,13 @@ public class ExpandingEntryCardView extends CardView {
             thirdTextView.setTag(new EntryTag(entry.getId(), entry.getThirdIntent(), entry));
             thirdTextView.setTextColor(mThemeColor);
             thirdTextView.setVisibility(View.VISIBLE);
+            // set rule to make sure the header wraps before the third text
+            if (header != null) {
+                RelativeLayout.LayoutParams headerLayoutParams =
+                        (RelativeLayout.LayoutParams) header.getLayoutParams();
+                headerLayoutParams.addRule(RelativeLayout.START_OF, thirdTextView.getId());
+                header.setLayoutParams(headerLayoutParams);
+            }
         } else {
             thirdTextView.setVisibility(View.GONE);
         }

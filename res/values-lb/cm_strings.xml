@@ -63,5 +63,12 @@
   <string name="delete_call_alert">Déi ausgewielten Uruffprotokoller läschen?</string>
   <string name="title_del_call">Läschen</string>
   <string name="powered_by_provider">Bereetgestallt vu(n) <xliff:g id="provider">%s</xliff:g></string>
+  <string name="sms_permission_rationale">SMS-Berechtegung gëtt gebraucht, fir den SMS-Verlaf vun de Kontakter unzeweisen.</string>
+  <string name="sms_rationale_view">UWEISEN</string>
   <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">Sich am Verzeechnes %1$s</string>
+  <string name="incall_plugin_invite">ALUEDEN</string>
+  <string name="incall_plugin_account_subheader">%1$s-Numm</string>
+  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> kann dësen Uruff net maachen</string>
+  <string name="incall_plugin_intent_error">Aktioun kann net duerchgefouert ginn. Probéiert méi spéit nees.</string>
 </resources>

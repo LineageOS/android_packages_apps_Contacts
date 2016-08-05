@@ -32,4 +32,8 @@
     <item quantity="one">%d kontakt kustutatakse.</item>
     <item quantity="other">%d kontakti kustutatakse.</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="one">%d inimene märkis selle kui rämpsposti</item>
+    <item quantity="other">%d inimest märkis selle kui rämpsposti</item>
+  </plurals>
 </resources>

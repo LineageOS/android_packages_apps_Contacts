@@ -63,8 +63,6 @@
   <string name="delete_call_alert">Slet valgte opkaldslog?</string>
   <string name="title_del_call">Slet</string>
   <string name="powered_by_provider">Drevet af <xliff:g id="provider">%s</xliff:g></string>
-  <string name="sms_permission_rationale">SMS-tilladelsen er påkrævet for at vise SMS-historik for kontakter.</string>
-  <string name="sms_rationale_view">SE</string>
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_directory_search">Søg i %1$s adressebog</string>
   <string name="incall_plugin_invite">INVITÉR</string>

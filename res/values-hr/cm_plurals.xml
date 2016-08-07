@@ -37,8 +37,8 @@
     <item quantity="other">%d kontakata će biti izbrisano.</item>
   </plurals>
   <plurals name="spam_count_text">
-    <item quantity="one">%d osoba označena kao spam</item>
-    <item quantity="few">%d osoba označena kao spam</item>
-    <item quantity="other">%d osobe označene kao spam</item>
+    <item quantity="one">%d osobe označena kao spam</item>
+    <item quantity="few">%d osobe označena kao spam</item>
+    <item quantity="other">%d osobe označena kao spam</item>
   </plurals>
 </resources>

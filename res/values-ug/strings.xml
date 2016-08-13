@@ -17,8 +17,10 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Application name used in Settings/Apps. Default label for activities
          that don't specify a label. -->
+  <string name="applicationLabel">ئالاقەداشلار</string>
   <!-- Title for the activity that launches Contacts.  This is the name
          used in the Launcher icon. -->
+  <string name="launcherActivityLabel">ئالاقەداشلار</string>
   <!-- Directory partition name -->
   <string name="contactsList">ئالاقەداشلار</string>
   <!-- Name of activity that allows users to create shortcuts on the home screen to a contact.

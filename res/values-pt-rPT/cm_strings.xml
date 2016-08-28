@@ -63,7 +63,7 @@
   <string name="delete_call_alert">Apagar os registos de chamadas selecionados?</string>
   <string name="title_del_call">Apagar</string>
   <string name="powered_by_provider">Distribuído por <xliff:g id="provider">%s</xliff:g></string>
-  <string name="sms_permission_rationale">É necessária permissão para aceder às SMS para exibir o histórico de mensagens.</string>
+  <string name="sms_permission_rationale">É necessária permissão para aceder às SMS de forma a mostrar o histórico de mensagens.</string>
   <string name="sms_rationale_view">VISTA</string>
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_directory_search">Pesquisar na pasta %1$s</string>

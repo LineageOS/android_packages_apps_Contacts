@@ -19,14 +19,14 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">Tidak dapat menyimpan kontak yang dipilih ke kartu SIM</string>
-  <string name="airplane_mode_on">Kartu SIM tidak dapat diakses saat modus pesawat diaktifkan</string>
+  <string name="airplane_mode_on">Kartu SIM tidak dapat diakses saat mode pesawat diaktifkan</string>
   <string name="number_anr_too_long">Nomor terlalu panjang</string>
-  <string name="email_address_too_long">Alamat surel terlalu panjang</string>
+  <string name="email_address_too_long">Alamat email terlalu panjang</string>
   <string name="sim_card_full">Kartu SIM penuh</string>
   <string name="tag_too_long">Nama kontak terlalu panjang</string>
   <string name="invalid_phone_number">Nomor telepon tidak valid</string>
   <string name="invalid_number_type">Jenis nomor tidak valid</string>
-  <string name="no_phone_number_or_email">Mohon masukkan nomor telepon atau alamat surel.</string>
+  <string name="no_phone_number_or_email">Harap masukkan nomor telepon atau alamat email.</string>
   <string name="memory_card_full">Kontak tidak bisa disimpan, memori telepon penuh</string>
   <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">Kelompok</string>
@@ -38,7 +38,7 @@
   <string name="menu_sendViaSMS">Kirim kontak melalui SMS</string>
   <string name="select_all">Semua</string>
   <!-- Choose Sim Card to Import -->
-  <string name="import_sim_contacts_title">Mengimpor kontak SIM</string>
+  <string name="import_sim_contacts_title">Impor kontak SIM</string>
   <string name="import_sim_contacts_message">Mengimpor kontak SIM\u2026</string>
   <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">Impor kontak?</string>
@@ -55,7 +55,7 @@
   <string name="memory_used">Digunakan:</string>
   <string name="calculating_status_now">Menghitung status\u2026</string>
   <string name="menu_copyTo">Salin ke <xliff:g id="destination">%s</xliff:g></string>
-  <string name="no_empty_email_in_usim">Kontak USIM tidak memiliki kolom surel yang tersedia, maka tidak dapat menyalin pesan.</string>
+  <string name="no_empty_email_in_usim">Kontak USIM tidak memiliki bidang email yang tersedia, tidak dapat menyalin pesan.</string>
   <string name="voicemail">Pesan suara</string>
   <string name="select_call_title">Pilih log panggilan</string>
   <string name="delete_call_title">Hapus log panggilan</string>
@@ -63,6 +63,8 @@
   <string name="delete_call_alert">Hapus log panggilan yang dipilih?</string>
   <string name="title_del_call">Hapus</string>
   <string name="powered_by_provider">Didukung oleh <xliff:g id="provider">%s</xliff:g></string>
+  <string name="sms_permission_rationale">Izin SMS diperlukan untuk menampilkan riwayat kontak SMS.</string>
+  <string name="sms_rationale_view">LIHAT</string>
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_directory_search">Cari direktori %1$s</string>
   <string name="incall_plugin_invite">UNDANG</string>

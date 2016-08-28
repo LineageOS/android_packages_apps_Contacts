@@ -63,5 +63,12 @@
   <string name="delete_call_alert">Kustuta valitud kõnede ajalood?</string>
   <string name="title_del_call">Kustuta</string>
   <string name="powered_by_provider">Hoitakse töös <xliff:g id="provider">%s</xliff:g> poolt</string>
+  <string name="sms_permission_rationale">SMS ajaloo kuvamiseks on vaja õigusi.</string>
+  <string name="sms_rationale_view">VAATA</string>
   <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">Otsi %1$s kataloog</string>
+  <string name="incall_plugin_invite">KUTSU</string>
+  <string name="incall_plugin_account_subheader">%1$s nimi</string>
+  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> ei saa alustada kõnet</string>
+  <string name="incall_plugin_intent_error">Ei saa seda toimingut lõpule viia. Proovige hiljem uuesti.</string>
 </resources>

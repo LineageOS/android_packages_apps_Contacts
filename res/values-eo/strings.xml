@@ -17,9 +17,12 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Application name used in Settings/Apps. Default label for activities
          that don't specify a label. -->
+  <string name="applicationLabel">Kontaktoj</string>
   <!-- Title for the activity that launches Contacts.  This is the name
          used in the Launcher icon. -->
+  <string name="launcherActivityLabel">Kontaktoj</string>
   <!-- Directory partition name -->
+  <string name="contactsList">Kontaktoj</string>
   <!-- Name of activity that allows users to create shortcuts on the home screen to a contact.
          This shows up in a list of things like bookmark, folder, music playlist, etc -->
   <!-- Name of activity that allows users to create shortcuts on the home screen to dial a contact.
@@ -43,6 +46,7 @@
          creating a new contact. This string represents the built in way to create the contact. -->
   <!-- The description presented to the user in the Intent choose when there are multiple activities that allow
          editing a group. This string represents the built in way to edit the group. [CHAR LIMIT=NONE] -->
+  <string name="editGroupDescription">Redakti grupon</string>
   <!-- The description presented to the user in the Intent choose when there are multiple activities that allow
          creating a new group. This string represents the built in way to create the group. [CHAR LIMIT=NONE] -->
   <!-- The tab label for the contact detail activity that displays information about the contact [CHAR LIMIT=15] -->
@@ -54,6 +58,7 @@
   <!-- Description of what happens when you click on the unstar MenuItem. [CHAR LIMIT=NONE] -->
   <!-- Description of what happens when you click on the star MenuItem. [CHAR LIMIT=NONE] -->
   <!-- Menu item used to edit a specific contact -->
+  <string name="menu_editContact">Redakti</string>
   <!-- Menu item used to delete a specific contact -->
   <!-- Menu item used to change the photo for a specific contact [CHAR LIMIT=30]-->
   <!-- Menu item used to create a contact shortcut when viewing contact details. [CHAR LIMIT=30] -->
@@ -61,9 +66,11 @@
   <!-- Menu item used to send an SMS or MMS message to a specific phone number or a contacts default phone number -->
   <!-- Menu item that splits an item from the contact detail into a separate aggregate -->
   <!-- Menu item that edits the currently selected group [CHAR LIMIT=30] -->
+  <string name="menu_editGroup">Redakti</string>
   <!-- Menu item that deletes the currently selected group [CHAR LIMIT=30] -->
   <!-- Menu item (in the action bar) that creates a new contact [CHAR LIMIT=30] -->
   <!-- Menu item (in the action bar) that creates a new group [CHAR LIMIT=30] -->
+  <string name="menu_new_group_action_bar">Aldoni grupon</string>
   <!-- Title of the confirmation dialog for separating contacts into multiple instances [CHAR LIMIT=26] -->
   <!-- Confirmation dialog for separating contacts into multiple instances [CHAR LIMIT=NONE] -->
   <!-- Menu item that joins an aggregate with another aggregate -->
@@ -196,7 +203,9 @@
   <!-- The description of the directory where the contact was found [CHAR LIMIT=100]-->
   <!-- Contact list filter indicating that the list shows groups chosen by the user [CHAR LIMIT=64] -->
   <!-- Title of the settings activity [CHAR LIMIT=64] -->
+  <string name="activity_title_settings">Agordoj</string>
   <!-- Menu item for the settings activity [CHAR LIMIT=64] -->
+  <string name="menu_settings" msgid="377929915873428211">Agordoj</string>
   <!-- Menu item for invoking contextual Help & Feedback [CHAR LIMIT=64] -->
   <!-- The preference section title for contact display options [CHAR LIMIT=128] -->
   <!-- Text used to show a organization that has both a company and title. This is used in the Detail-View
@@ -205,6 +214,7 @@
   <!-- Button to add a phone number to contacts [CHAR LIMIT=25] -->
   <!-- Title of the activity that allows the user to confirm the addition of a detail to 1 existing contact [CHAR LIMIT=25] -->
   <!-- Button to close without add a phone number to contacts [CHAR LIMIT=25] -->
+  <string name="non_phone_close">Fermi</string>
   <!-- Format string that combines the name and the phonetic name for the widget. if the phonetic name is empty, only the display name is used instead [CHAR LIMIT=25] -->
   <!-- Checkbox whether to provide a year for a birthday [CHAR LIMIT=30] -->
   <!-- Label for the widget that shows picture and social status of a contact [CHAR LIMIT=20] -->
@@ -216,6 +226,7 @@
   <!-- Button shown on the main contacts screen when there are no contacts on the device.
     Initiates a contact import dialog [CHAR LIMIT=128] -->
   <!-- Title of the dialog that allows creation of a contact group [CHAR LIMIT=128] -->
+  <string name="create_group_dialog_title">Krei novan grupon</string>
   <!-- An item in the popup list of groups that triggers creation of a contact group [CHAR LIMIT=128] -->
   <!-- Shows how many groups are from the specified account [CHAR LIMIT=15] -->
   <!-- Confirmation message of the dialog that allows deletion of a contact group  [CHAR LIMIT=256] -->
@@ -263,13 +274,17 @@
   <!-- Title of sms action entry. [CHAR LIMIT=60] -->
   <!-- Toast that appears when you are copying a directory contact into your personal contacts -->
   <!-- Timestamp string for interactions from yesterday. [CHAR LIMIT=40] -->
+  <string name="yesterday">Hieraŭ</string>
+  <string name="tomorrow">Morgaŭ</string>
   <!-- Timestamp string for interactions from today. [CHAR LIMIT=40] -->
+  <string name="today">Hodiaŭ</string>
   <!-- Text for an event starting on the current day with a start and end time.
          For ex, "Today at 5:00pm-6:00pm" [CHAR LIMIT=NONE] -->
   <!-- Text for an event starting on the next day with a start and end time.
          For ex, "Tomorrow at 5:00pm-6:00pm" [CHAR LIMIT=NONE] -->
   <!-- Format string for a date and time description.  For ex:
          "April 19, 2012, 3:00pm - 4:00pm" [CHAR LIMIT=NONE] -->
+  <string name="date_time_fmt">"<xliff:g id="date">%s</xliff:g>, <xliff:g id="time_interval">%s</xliff:g>"</string>
   <!-- Title for untitled calendar interactions [CHAR LIMIT=40] -->
   <!-- Name of the button in the date/time picker to accept the date/time change [CHAR LIMIT=15] -->
   <!-- Header for the IM entry [CHAR LIMIT=40] -->
@@ -277,12 +292,16 @@
   <!-- Header for the Nickname entry [CHAR LIMIT=40] -->
   <!-- Header for the Note entry [CHAR LIMIT=40] -->
   <!-- Header for the Website entry [CHAR LIMIT=40] -->
+  <string name="header_website_entry">Retejo</string>
   <!-- Header for the Event entry [CHAR LIMIT=40] -->
   <!-- Header for the Relation entry [CHAR LIMIT=40] -->
   <!-- Content description for the account field header image. Example accounts listed in this field: Google, Hotmail and Exchange. [CHAR LIMIT=NONE] -->
+  <string name="header_account_entry">Konto</string>
   <!-- Content description for the name fields header entry [CHAR LIMIT=NONE] -->
+  <string name="header_name_entry">Nomo</string>
   <!-- Content description for the email fields header entry [CHAR LIMIT=NONE] -->
   <!-- Content description for the phone fields header entry [CHAR LIMIT=NONE] -->
+  <string name="header_phone_entry">Telefono</string>
   <!-- Content description for the camera icon beside the photo section in the Raw Contact Editor [CHAR LIMIT=NONE] -->
   <!-- Content description for the expand button inside the raw contact editor's header. [CHAR LIMIT=NONE] -->
   <!-- Content description for the collapse button inside the raw contact editor's header. [CHAR LIMIT=NONE] -->

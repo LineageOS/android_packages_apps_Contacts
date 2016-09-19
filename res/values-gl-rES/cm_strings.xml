@@ -64,4 +64,9 @@
   <string name="title_del_call">Eliminar</string>
   <string name="powered_by_provider">Fornecido por <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">Buscar o cartafol %1$s</string>
+  <string name="incall_plugin_invite">CONVIDAR</string>
+  <string name="incall_plugin_account_subheader">Nome de %1$s</string>
+  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> non se pode realizar esta chamada</string>
+  <string name="incall_plugin_intent_error">Non foi posible completar esta acción. Ténteo de novo máis adiante.</string>
 </resources>

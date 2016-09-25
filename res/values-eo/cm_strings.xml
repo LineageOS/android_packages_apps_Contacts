@@ -18,7 +18,6 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Toast displayed when saving a contact to sim card failed -->
-  <string name="contactSavedToSimCardError">Ne sukcesis konservi la elektitajn kontaktulojn en la SD-karto</string>
   <string name="airplane_mode_on">La SD-karto ne estas atingebla kiam avialila reĝimo estas ŝaltita</string>
   <string name="number_anr_too_long">La nombro estas tro longa</string>
   <string name="email_address_too_long">La retadreso estas tro longa</string>

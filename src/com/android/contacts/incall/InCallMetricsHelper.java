@@ -571,7 +571,7 @@ public class InCallMetricsHelper {
                         RawContacts._ID + "=?",
                         new String[]{rawId}, null)) {
                 if (cursor != null) {
-                    while (cursor.moveToFirst()) {
+                    while (cursor.moveToNext()) {
                         String accountType = cursor.getString(0); // RawContacts.ACCOUNT_TYPE
                         if (pluginMap.containsKey(accountType)) {
                             providerSet.add(pluginMap.get(accountType));

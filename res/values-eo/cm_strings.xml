@@ -18,48 +18,12 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Toast displayed when saving a contact to sim card failed -->
-  <string name="airplane_mode_on">La SD-karto ne estas atingebla kiam avialila reĝimo estas ŝaltita</string>
-  <string name="number_anr_too_long">La nombro estas tro longa</string>
-  <string name="email_address_too_long">La retadreso estas tro longa</string>
-  <string name="sim_card_full">La SIM-karto estas plena</string>
-  <string name="tag_too_long">La nomo de la kontaktulo estas tro longa</string>
-  <string name="invalid_phone_number">La telefonnumero estas nevalida</string>
-  <string name="invalid_number_type">La nombro estas nevalida</string>
-  <string name="no_phone_number_or_email">Bonvolu tajpi telefonnumeron aŭ retadreson.</string>
-  <string name="memory_card_full">Ne sukcesis konservi la kontaktulon ĉar la telefon-memoro estas plena</string>
   <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
-  <string name="contacts_groups_label">Grupoj</string>
-  <string name="menu_moveGroupMembers">Movi membrojn de la grupo</string>
-  <string name="title_move_members">Movi membrojn</string>
-  <string name="message_move_members">Movado de membroj\u2026</string>
-  <string name="message_can_not_move_members">Ne eblas movi membrojn</string>
-  <string name="edit_before_call">Redakti la numeron antaŭ ol alvoki</string>
-  <string name="menu_sendViaSMS">Sendi kontaktulon per SMS</string>
-  <string name="select_all">Ĉio</string>
   <!-- Choose Sim Card to Import -->
-  <string name="import_sim_contacts_title">Importi SIM kontaktulojn</string>
-  <string name="import_sim_contacts_message">Importado de SIM kontaktuloj\u2026</string>
   <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
-  <string name="importConfirmation_title">Ĉu importi kontaktulon?</string>
-  <string name="import_finish">Importado finita</string>
   <!-- Multi Delete Contacts related strings -->
-  <string name="delete_contacts_title">Forigi kontaktulojn</string>
-  <string name="delete_contacts_message">Forigado de kontaktuloj\u2026</string>
   <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
-  <string name="deleteConfirmation_title">Ĉu forigi kontaktulojn?</string>
-  <string name="too_many_contacts_add_to_group">Ne eblas aldoni pli ol <xliff:g id="count">%d</xliff:g> kontaktuloj</string>
   <!-- add for MemoryStatusActivity -->
-  <string name="menu_memory_status">Memora stato</string>
-  <string name="memory_size">Sumo:</string>
-  <string name="memory_used">Uzata:</string>
-  <string name="calculating_status_now">Kalkulado de la stato\u2026</string>
-  <string name="menu_copyTo">Kopii al <xliff:g id="destination">%s</xliff:g></string>
-  <string name="no_empty_email_in_usim">USIM-kontaktulo ne havas disponeblan retradresan kampon, neeblas kopii mesaĝojn.</string>
-  <string name="voicemail">Voĉa mesaĝilo</string>
-  <string name="select_call_title">Elekti ĉiujn vokajn protokolojn</string>
-  <string name="delete_call_title">Forigi ĉiujn vokajn protokolojn</string>
-  <string name="delete_call_message">Forigi vokajn protokolojn\u2026</string>
-  <string name="delete_call_alert">Ĉiu forigi elektitajn vokajn protokolojn?</string>
-  <string name="title_del_call">Foriga klavo</string>
+  <string name="title_del_call">Forigi</string>
   <!-- InCall plugin directory search & invite -->
 </resources>

@@ -20,9 +20,7 @@
   <!-- Title for the activity that launches Contacts.  This is the name
          used in the Launcher icon. -->
   <!-- Title for Quick Contact activity. -->
-  <string name="quickContactActivityLabel">Prikaži kontakt</string>
   <!-- Title for Edit Contact activity. -->
-  <string name="editContactActivityLabel">Uredi kontakt</string>
   <!-- Directory partition name -->
   <!-- Name of activity that allows users to create shortcuts on the home screen to a contact.
          This shows up in a list of things like bookmark, folder, music playlist, etc -->
@@ -64,75 +62,45 @@
   <!-- Menu item used to call a specific contact when viewing the details of that contact. -->
   <!-- Menu item used to send an SMS or MMS message to a specific phone number or a contacts default phone number -->
   <!-- Menu item that splits an item from the contact detail into a separate aggregate -->
-  <string name="menu_splitAggregate">Razdvoji</string>
   <!-- Menu item that edits the currently selected group [CHAR LIMIT=30] -->
   <!-- Menu item that deletes the currently selected group [CHAR LIMIT=30] -->
   <!-- Menu item (in the action bar) that creates a new contact [CHAR LIMIT=30] -->
   <!-- Menu item (in the action bar) that creates a new group [CHAR LIMIT=30] -->
   <!-- Confirmation dialog for unlinking contacts into multiple instances [CHAR LIMIT=NONE] -->
-  <string name="splitConfirmation">Razdvojiti ovaj kontakt na više kontakata?</string>
   <!-- Positive button text from the confirmation dialog for unlinking contacts [CHAR LIMIT = 30] -->
-  <string name="splitConfirmation_positive_button">Razdvoji</string>
   <!-- Confirmation dialog for unlinking contacts into multiple instances when there are also unsaved changes for the current contact. [CHAR LIMIT=NONE] -->
-  <string name="splitConfirmationWithPendingChanges">Želite li sačuvati promjene koje ste već načinili i razdvojiti ovaj kontakt na više kontakata?</string>
   <!-- Positive button text from the confirmation dialog for unlinking contacts with pending changes [CHAR LIMIT = 60] -->
-  <string name="splitConfirmationWithPendingChanges_positive_button">Sačuvaj i razdvoji</string>
   <!-- Confirmation dialog message for joining contacts when there are unsaved changes. [CHAR LIMIT=NONE] -->
-  <string name="joinConfirmation">Želite li sačuvati promjene koje ste već načinili i povezati s odabranim kontaktom?</string>
   <!-- Positive button text from the confirmation dialog for joining contacts when there are unsaved changes. [CHAR LIMIT = 60] -->
-  <string name="joinConfirmation_positive_button">Sačuvaj i poveži</string>
   <!-- Menu item that links an aggregate with another aggregate -->
-  <string name="menu_joinAggregate">Poveži</string>
   <!-- Menu item (in the action bar) to indicate that changes should be saved [CHAR LIMIT=20] -->
   <!-- Heading of the Link Contact screen -->
-  <string name="titleJoinContactDataWith">Poveži kontakte</string>
   <!-- Info blurb on the Link Contact screen [CHAR LIMIT=NONE]-->
-  <string name="blurbJoinContactDataWith">Izaberite kontakt koji želite povezati s kontaktom <xliff:g id="NAME">%s</xliff:g>:</string>
   <!-- An item in the Join Contact activity that opens up the full contact A-Z list -->
   <!-- List separator for the Join Contact list: Suggestions -->
   <!-- List separator for the Join Contact list: A-Z -->
   <!-- Toast shown after two contacts have been linked by a user action. [CHAR LIMIT=NONE] -->
-  <string name="contactsJoinedMessage">Kontakti su povezani</string>
   <!-- Toast shown after contacts that the user has selected are deleted by a user action. [CHAR LIMIT=30] -->
-  <plurals name="contacts_deleted_toast">
-    <item quantity="one">Kontakti su izbrisani</item>
-    <item quantity="few">Kontakti su izbrisani</item>
-    <item quantity="other">Kontakti su izbrisani</item>
-  </plurals>
   <!-- Menu item that opens the Options activity for a given contact [CHAR LIMIT=15] -->
   <!-- Menu item that opens the Options activity for a given contact [CHAR LIMIT=30] -->
   <!-- Warning dialog contents after users select to delete a ReadOnly contact. [CHAR LIMIT=NONE] -->
-  <string name="readOnlyContactWarning">Kontakti s računa koji su samo za čitanje se ne mogu izbrisati, ali se mogu sakriti.</string>
   <!-- Positive button text of the warning dialog contents after users select to delete a ReadOnly contact. [CHAR LIMIT=30]-->
-  <string name="readOnlyContactWarning_positive_button">Sakrij</string>
   <!-- Warning dialog contents after users selects to delete a contact with ReadOnly and Writable sources. [CHAR LIMIT=NONE]-->
-  <string name="readOnlyContactDeleteConfirmation">Kontakt kojeg želite izbrisati sadrži detalje s više računa. Detalji s računa koji su samo za čitanje se neće izbrisati, već sakriti.</string>
   <!-- Warning dialog. Shown if user selects a single contact to link. [CHAR LIMIT=NONE]  -->
-  <string name="batch_link_single_contact_warning">Trebate odabrati najmanje dva kontakta da obavite povezivanje.</string>
   <!-- Confirmation dialog. Shown after user selects to link contacts. [CHAR LIMIT=NONE]  -->
-  <string name="batch_link_confirmation">Povezati odabrane kontakte?</string>
   <!-- Positive button text from confirmation dialog. Shown after user selects to link contacts. [CHAR LIMIT=40]  -->
-  <string name="batch_link_confirmation_positive_button">Poveži</string>
   <!-- Confirmation dialog. Shown after user selects to delete one writable contact [CHAR LIMIT=NONE]  -->
-  <string name="single_delete_confirmation">Izbrisati ovaj kontakt?</string>
   <!-- Confirmation dialog. Shown after user selects to delete multimple writable contacts. [CHAR LIMIT=NONE]  -->
-  <string name="batch_delete_confirmation">Izbrisati odabrane kontakte?</string>
   <!-- Confirmation dialog. Shown after user selects to delete readonly contacts. [CHAR LIMIT=NONE] -->
-  <string name="batch_delete_read_only_contact_confirmation">Kontakti s računa koji su samo za čitanje se ne mogu izbrisati, ali se mogu sakriti.</string>
   <!-- Confirmation dialog. Shown after user selects to delete contacts from multiple accounts. [CHAR LIMIT=NONE]  -->
-  <string name="batch_delete_multiple_accounts_confirmation">Kontakti koje želite izbrisati sadrže detalje s više računa. Detalji s računa koji su samo za čitanje se neće izbrisati, već sakriti.</string>
   <!-- Warning dialog contents after users selects to delete a contact with multiple Writable sources. -->
-  <string name="multipleContactDeleteConfirmation">Brisanjem ovog kontakta ćete izbrisati detalje s više računa.</string>
   <!-- Confirmation dialog contents after users selects to delete a Writable contact. -->
-  <string name="deleteConfirmation">Izbrisati ovaj kontakt?</string>
   <!-- Positive button text of confirmation dialog contents after users selects to delete a Writable contact. [CHAR LIMIT=30] -->
   <!-- Menu item to indicate you want to stop editing a contact and NOT save the changes you've made [CHAR LIMIT=30] -->
   <!-- Message displayed in a toast when you try to view the details of a contact that
          for some reason doesn't exist anymore. [CHAR LIMIT=NONE]-->
   <!-- Message without name displayed in a toast after you create a contact shortcut in the launcher [CHAR LIMIT=NONE]-->
-  <string name="createContactShortcutSuccessful_NoName">Kontakt je dodan na Početni ekran.</string>
   <!-- Message with name displayed in a toast after you create a contact shortcut in the launcher [CHAR LIMIT=NONE]-->
-  <string name="createContactShortcutSuccessful">Kontakt <xliff:g id="NAME">%s</xliff:g> je dodan na Početni ekran.</string>
   <!-- When picking a contact from a list of all contacts there is an entry at the top of the
          list that allows the user to create a new contact, which this string is used for -->
   <!-- Text for a "create new contact" button on the bottom of the contact picker screen.
@@ -154,17 +122,12 @@
   <!-- The text displayed to instruct users to add members to a group (when viewing a group detail page for a group with no members) [CHAR LIMIT=50] -->
   <!-- Displayed in a spinner dialog after the user creates a contact and it's being saved to the database -->
   <!-- Toast displayed when a contact is saved [CHAR LIMIT=NONE] -->
-  <string name="contactSavedToast">Kontakt je sačuvan</string>
   <!-- Toast displayed when linked contacts get unlinked [CHAR LIMIT=NONE] -->
-  <string name="contactUnlinkedToast">Kontakti su razdvojeni</string>
   <!-- Toast displayed when a contact is deleted [CHAR LIMIT=NONE] -->
   <!-- Toast displayed when saving a contact failed. [CHAR LIMIT=NONE] -->
   <!-- Toast displayed when unlinking a contact failed. [CHAR LIMIT=NONE] -->
-  <string name="contactUnlinkErrorToast">Nije moguće razdvojiti kontakt.</string>
   <!-- Toast displayed when linking a contact failed. [CHAR LIMIT=NONE] -->
-  <string name="contactJoinErrorToast">Nije moguće povezati kontakt.</string>
   <!-- Generic error default clause displayed when saving a contact failed. [CHAR LIMIT=NONE] -->
-  <string name="contactGenericErrorToast">Greška prilikom čuvanja kontakta.</string>
   <!-- Toast displayed when saving a contact photo failed. [CHAR LIMIT=NONE] -->
   <!-- Toast displayed when saving a contact to sim card failed -->
   <!-- Toast displayed when a group is saved [CHAR LIMIT=NONE] -->
@@ -176,7 +139,6 @@
   <!-- Displayed at the top of the contacts showing the zero total number of contacts found when "Only contacts with phones" not selected. [CHAR LIMIT=30] -->
   <!-- Displayed at the top of the contacts showing the total number of contacts found when typing search query -->
   <!-- The title of "all contacts" tab. [CHAR LIMIT=14] -->
-  <string name="all_contacts_tab_label">Sve</string>
   <!-- The title of "favorites" tab. [CHAR LIMIT=14] -->
   <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <!-- Action string for calling back a number in the call log -->
@@ -241,7 +203,6 @@
   <!-- The title of the Edit-Contact screen -->
   <!-- The message in a confirmation dialog shown when the user selects a
         contact aggregation suggestion in Contact editor. [CHAR LIMIT=512]-->
-  <string name="aggregation_suggestion_join_dialog_message">Povezati trenutni kontakt s odabranim kontaktom?</string>
   <!-- The message in a confirmation dialog shown when the user selects a
         contact aggregation suggestion in Contact editor. [CHAR LIMIT=512]-->
   <!-- The button that creates a local copy of a corporate contact. [CHAR LIMIT=40]-->
@@ -263,7 +224,6 @@
   <!-- Button to close without add a phone number to contacts [CHAR LIMIT=25] -->
   <!-- Format string that combines the name and the phonetic name for the widget. if the phonetic name is empty, only the display name is used instead [CHAR LIMIT=25] -->
   <!-- Checkbox whether to include a year for a birthday [CHAR LIMIT=30] -->
-  <string name="date_year_toggle">Uključi godine</string>
   <!-- Label for the widget that shows picture and social status of a contact [CHAR LIMIT=20] -->
   <!-- Message of widget while it is loading data [CHAR LIMIT=20] -->
   <!-- Button shown on the main contacts screen when there are no contacts on the device.
@@ -280,21 +240,17 @@
   <!-- Subtitle of a group (in the group list) that describes how many people are in the current group [CHAR LIMIT=30] -->
   <!-- Toast displayed when the user creates a new contact and attempts to link it
       with another before entering any data  [CHAR LIMIT=256] -->
-  <string name="toast_join_with_empty_contact">Upišite ime kontakta prije povezivanja s drugim kontaktom.</string>
   <!-- Option displayed in context menu to copy long pressed item to clipboard [CHAR LIMIT=64] -->
   <!-- Option displayed in context menu to set long pressed item as default contact method [CHAR LIMIT=64] -->
   <!-- Option displayed in context menu to clear long pressed item as default contact method [CHAR LIMIT=64] -->
   <!-- Toast shown when text is copied to the clipboard [CHAR LIMIT=64] -->
   <!-- Contents of the alert dialog when the user hits the Cancel button in the editor [CHAR LIMIT=128] -->
-  <string name="cancel_confirmation_dialog_message">Želite li odbaciti napravljene promjene i prekinuti uređivanje?</string>
   <!-- Positive button text for the cancel editing confirmation dialog.
       Pushing this button indicates that the user wishes to discard the changes they have already
       made and close the editor. [CHAR LIMIT=20] -->
-  <string name="cancel_confirmation_dialog_cancel_editing_button">Odbaci</string>
   <!-- Negative button text for the cancel editing confirmation dialog.
       Pushing this button indicates that the user wishes to continue editing
       and return to the editor [CHAR LIMIT=30] -->
-  <string name="cancel_confirmation_dialog_keep_editing_button">Nastavi uređivanje</string>
   <!-- Description of a call log entry, made of a call type and a date -->
   <!-- Text displayed in place of the display name for the contact that represents the user's
       personal profile entry [CHAR LIMIT=64] -->
@@ -308,9 +264,7 @@
   <!-- Title of the screen that encourages the user to add any account (non Google-specific) for a better Contacts app experience [CHAR LIMIT=20] -->
   <!-- Message in the contact editor prompt that notifies the user that the newly created contact will not be saved to any account, and prompts addition of an account [CHAR LIMIT=NONE] -->
   <!-- Message in the contact editor prompt that asks the user if it's okay to save the newly created contact to the account shown. [CHAR LIMIT=NONE] -->
-  <string name="contact_editor_prompt_one_account">Novi kontakti će biti sačuvani na račun <xliff:g id="ACCOUNT_NAME">%1$s</xliff:g>.</string>
   <!-- Message in the contact editor prompt that asks the user which account they want to save the newly created contact to. [CHAR LIMIT=NONE] -->
-  <string name="contact_editor_prompt_multiple_accounts">Izaberite zadani račun za nove kontakte:</string>
   <!-- Title of the ContactEditorActivity when creating a new contact. The char
          limit is short and cannot be increased, since this needs to be displayed in a single line
          at a pre-determined text size. [CHAR LIMIT=20] -->
@@ -366,85 +320,41 @@
   <!-- Prefix for messages that you sent [CHAR LIMIT=40] -->
   <!-- When a user tries to create an IM Hangouts field, an alert dialog pops up displaying this message. We don't want users entering email addresses of phone numbers into the IM field. [CHAR LIMIT=200] -->
   <!-- Button to expand the compact contact editor to show all available input fields. [CHAR LIMIT=60] -->
-  <string name="compact_editor_more_fields">Više polja</string>
   <!-- Content description for the compact contact editor photo overlay which, when clicked, shows a dialog with the options for changing the contact photo. [CHAR LIMIT=30] -->
   <!-- Toast message displayed when the editor fails to load for a contacts. [CHAR LIMIT=NONE] -->
-  <string name="compact_editor_failed_to_load">Otvaranje uređivača nije uspjelo.</string>
   <!-- Label for the account selector to indicate which account a contact will be saved to. [CHAR LIMIT=30] -->
-  <string name="compact_editor_account_selector_title">Sačuvati na</string>
   <!-- Content description for the account selector to indicate which account a contact will be saved to. [CHAR LIMIT=NONE] -->
-  <string name="compact_editor_account_selector_description">Trenutno se sprema na račun <xliff:g id="ACCOUNT_NAME">%s</xliff:g>. Dodirnite dvaput da izaberete drugi račun.</string>
   <!-- Label for the linked contacts selector which indicates the number of raw contacts which have been linked together into the aggregate being viewed. [CHAR LIMIT=40] -->
-  <plurals name="compact_editor_linked_contacts_selector_title">
-    <item quantity="one">Povezani kontakti (<xliff:g id="COUNT">%d</xliff:g>)</item>
-    <item quantity="few">Povezani kontakti (<xliff:g id="COUNT">%d</xliff:g>)</item>
-    <item quantity="other">Povezani kontakti (<xliff:g id="COUNT">%d</xliff:g>)</item>
-  </plurals>
   <!-- Number of linked contacts of the current contact, only shown when there are more than 2 linked contacts (plural only!!!) [CHAR LIMIT=60] -->
-  <string name="quickcontact_contacts_number">Povezani kontakti: <xliff:g id="COUNT">%d</xliff:g></string>
   <!-- Quick contact display name with phonetic name -->
   <!-- Menu item used to refresh a specific contact -->
   <!-- Button used in quick contact suggestion card to link selected contacts. [CHAR LIMIT=30]-->
-  <string name="quickcontact_suggestion_link_button">POVEŽI KONTAKTE</string>
   <!-- Button used in quick contact suggestion card to collapse suggestion card. [CHAR LIMIT=30]-->
-  <string name="quickcontact_suggestion_cancel_button">OTKAŽI</string>
   <!-- Suggestion card title in quick contact UI [CHAR LIMIT=100] -->
-  <plurals name="quickcontact_suggestion_card_title">
-    <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> Mogući duplikat</item>
-    <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> Moguća duplikata</item>
-    <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> Mogućih duplikata</item>
-  </plurals>
   <!-- Suggestions number in quick contact suggestion card [CHAR LIMIT=60] -->
-  <plurals name="quickcontact_suggestions_number">
-    <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> povezan kontakt</item>
-    <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> povezana kontakta</item>
-    <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> povezanih kontakata</item>
-  </plurals>
   <!-- Account type number for suggestions in quick contact suggestion card [CHAR LIMIT=30]-->
-  <plurals name="quickcontact_suggestion_account_type_number">
-    <item quantity="one">(<xliff:g id="COUNT">%d</xliff:g>)</item>
-    <item quantity="few">(<xliff:g id="COUNT">%d</xliff:g>)</item>
-    <item quantity="other">(<xliff:g id="COUNT">%d</xliff:g>)</item>
-  </plurals>
   <!-- Account type with number in quick contact suggestion card [CHAR LIMIT=30]-->
-  <string name="quickcontact_suggestion_account_type"><xliff:g id="ACCOUNT_TYPE_0">%s</xliff:g><xliff:g id="ACCOUNT_TYPE_NUMBER">%s</xliff:g></string>
   <!-- "This contact" title showing in suggestion card in Quick contact. [CHAR LIMIT=30]-->
-  <string name="suggestion_card_this_contact_title">Ovaj kontakt</string>
   <!-- "Duplicates" title showing in suggestion card in Quick contact. [CHAR LIMIT=30]-->
-  <string name="suggestion_card_duplicates_title">Mogući duplikati</string>
   <!-- Help message showing in suggestion card in Quick contact. [CHAR LIMIT=NONE]-->
-  <string name="suggestion_card_help_message">Moguće je da su ovi kontakti ista osoba. Možete ih povezati u jedan kontakt.</string>
   <!-- Linked contacts title showing in contact editor UI. [CHAR LIMIT=30]-->
-  <string name="compact_editor_linked_contacts_title">Povezani kontakti</string>
   <!-- Title of profile photos that are from your various accounts -->
-  <string name="from_your_accounts">S vaših računa</string>
   <!-- Button used in photo picker to open camera [CHAR LIMIT=30]-->
-  <string name="take_a_photo_button">Snimi fotografiju</string>
   <!-- Button used in photo picker to open photo/gallery [CHAR LIMIT=20]-->
-  <string name="all_photos_button">Sve fotografije</string>
   <!-- Title of photo picker [CHAR LIMIT=30]-->
   <!-- Message below contact name, showing from which account [CHAR LIMIT=NONE]-->
-  <string name="contact_from_account_name">Od kontakta <xliff:g id="ACCOUNT_NAME">%s</xliff:g></string>
   <!-- Content description of delete button to the right of each section in editor, including
     data type. For example: Delete Home Phone, Delete Work Email, etc [CHAR LIMIT=30]-->
-  <string name="editor_delete_view_description">Izbriši <xliff:g id="DATA_TYPE">%s </xliff:g><xliff:g id="DATA_KIND">%s</xliff:g></string>
   <!-- Content description of delete button to the right of each section in editor, without data
     type. For example: Delete Website, Delete SIP, etc [CHAR LIMIT=30]-->
-  <string name="editor_delete_view_description_short">Izbriši <xliff:g id="DATA_KIND">%s</xliff:g></string>
   <!-- Content description of photo in photo picker indicating a photo from a specific account is *not* selected.
          For example: Photo from Google abc@gmail.com not checked. [CHAR LIMIT=60]-->
-  <string name="photo_view_description_not_checked">Fotografija s računa <xliff:g id="ACCOUNT_TYPE">%s </xliff:g><xliff:g id="USER_NAME">%s </xliff:g>nije označena</string>
   <!-- Content description of photo in photo picker indicating a photo from a specific account is selected.
          For example: Photo from Google abc@gmail.com checked. [CHAR LIMIT=60]-->
-  <string name="photo_view_description_checked">Fotografija s računa <xliff:g id="ACCOUNT_TYPE">%s </xliff:g><xliff:g id="USER_NAME">%s </xliff:g>je označena</string>
   <!-- Content description of photo in photo picker indicating a photo from unknown account is *not* selected.-->
-  <string name="photo_view_description_not_checked_no_info">Fotografija s nepoznatog računa nije označena</string>
   <!-- Content description of photo in photo picker indicating a photo from unknown account is selected. -->
-  <string name="photo_view_description_checked_no_info">Fotografija s nepoznatog računa je označena</string>
   <!-- Text shown in the contacts app while the background process updates contacts after a locale change [CHAR LIMIT=150]-->
-  <string name="locale_change_in_progress">Lista kontakata se ažurira u skladu s promjenom jezika.\n\nPričekajte...</string>
   <!-- The menu item to open blocked numbers activity [CHAR LIMIT=60]-->
-  <string name="menu_blocked_numbers">Blokirani brojevi</string>
   <!-- MultiPickActivity -->
   <!-- The hint text in search-view.-->
   <!-- The call-log's clear button text in pick call mode. -->

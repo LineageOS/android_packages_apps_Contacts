@@ -20,9 +20,7 @@
   <!-- Title for the activity that launches Contacts.  This is the name
          used in the Launcher icon. -->
   <!-- Title for Quick Contact activity. -->
-  <string name="quickContactActivityLabel">Прагледзець кантакт</string>
   <!-- Title for Edit Contact activity. -->
-  <string name="editContactActivityLabel">Рэдагаваць кантакт</string>
   <!-- Directory partition name -->
   <!-- Name of activity that allows users to create shortcuts on the home screen to a contact.
          This shows up in a list of things like bookmark, folder, music playlist, etc -->
@@ -64,75 +62,45 @@
   <!-- Menu item used to call a specific contact when viewing the details of that contact. -->
   <!-- Menu item used to send an SMS or MMS message to a specific phone number or a contacts default phone number -->
   <!-- Menu item that splits an item from the contact detail into a separate aggregate -->
-  <string name="menu_splitAggregate">Выдаліць сувязь</string>
   <!-- Menu item that edits the currently selected group [CHAR LIMIT=30] -->
   <!-- Menu item that deletes the currently selected group [CHAR LIMIT=30] -->
   <!-- Menu item (in the action bar) that creates a new contact [CHAR LIMIT=30] -->
   <!-- Menu item (in the action bar) that creates a new group [CHAR LIMIT=30] -->
   <!-- Confirmation dialog for unlinking contacts into multiple instances [CHAR LIMIT=NONE] -->
-  <string name="splitConfirmation">Раз\'яднаць гэты кантакт на некалькі кантактаў?</string>
   <!-- Positive button text from the confirmation dialog for unlinking contacts [CHAR LIMIT = 30] -->
-  <string name="splitConfirmation_positive_button">Выдаліць сувязь</string>
   <!-- Confirmation dialog for unlinking contacts into multiple instances when there are also unsaved changes for the current contact. [CHAR LIMIT=NONE] -->
-  <string name="splitConfirmationWithPendingChanges">Жадаеце захаваць змяненні, якія вы ўжо зрабілі, і развязаць гэты кантакт на некалькі кантактаў?</string>
   <!-- Positive button text from the confirmation dialog for unlinking contacts with pending changes [CHAR LIMIT = 60] -->
-  <string name="splitConfirmationWithPendingChanges_positive_button">Захаваць і развязаць</string>
   <!-- Confirmation dialog message for joining contacts when there are unsaved changes. [CHAR LIMIT=NONE] -->
-  <string name="joinConfirmation">Жадаеце захаваць змяненні, якія вы ўжо зрабілі, і спасылку на выбраны кантакт?</string>
   <!-- Positive button text from the confirmation dialog for joining contacts when there are unsaved changes. [CHAR LIMIT = 60] -->
-  <string name="joinConfirmation_positive_button">Захаваць і звязаць</string>
   <!-- Menu item that links an aggregate with another aggregate -->
-  <string name="menu_joinAggregate">Звязаць</string>
   <!-- Menu item (in the action bar) to indicate that changes should be saved [CHAR LIMIT=20] -->
   <!-- Heading of the Link Contact screen -->
-  <string name="titleJoinContactDataWith">Звязаць кантакты</string>
   <!-- Info blurb on the Link Contact screen [CHAR LIMIT=NONE]-->
-  <string name="blurbJoinContactDataWith">Выберыце кантакт, які хочаце звязаць з iмем <xliff:g id="NAME">%s</xliff:g>:</string>
   <!-- An item in the Join Contact activity that opens up the full contact A-Z list -->
   <!-- List separator for the Join Contact list: Suggestions -->
   <!-- List separator for the Join Contact list: A-Z -->
   <!-- Toast shown after two contacts have been linked by a user action. [CHAR LIMIT=NONE] -->
-  <string name="contactsJoinedMessage">Кантакты звязаны</string>
   <!-- Toast shown after contacts that the user has selected are deleted by a user action. [CHAR LIMIT=30] -->
-  <plurals name="contacts_deleted_toast">
-    <item quantity="one">Кантакты выдалены</item>
-    <item quantity="few">Кантакты выдалены</item>
-    <item quantity="other">Кантакты выдалены</item>
-  </plurals>
   <!-- Menu item that opens the Options activity for a given contact [CHAR LIMIT=15] -->
   <!-- Menu item that opens the Options activity for a given contact [CHAR LIMIT=30] -->
   <!-- Warning dialog contents after users select to delete a ReadOnly contact. [CHAR LIMIT=NONE] -->
-  <string name="readOnlyContactWarning">Кантакты з уліковых запісаў, даступных толькі для чытання, нельга выдаліць, але іх можна схаваць.</string>
   <!-- Positive button text of the warning dialog contents after users select to delete a ReadOnly contact. [CHAR LIMIT=30]-->
-  <string name="readOnlyContactWarning_positive_button">Схаваць</string>
   <!-- Warning dialog contents after users selects to delete a contact with ReadOnly and Writable sources. [CHAR LIMIT=NONE]-->
-  <string name="readOnlyContactDeleteConfirmation">Кантакт на выдаленне мае інфармацыю з некалькіх уліковых запісаў. Інфармацыя з уліковых запісаў, даступных толькі для чытання, будзе схавана, а не выдалена.</string>
   <!-- Warning dialog. Shown if user selects a single contact to link. [CHAR LIMIT=NONE]  -->
-  <string name="batch_link_single_contact_warning">Трэба, па меншай меры, два кантакты, каб выканаць звязванне.</string>
   <!-- Confirmation dialog. Shown after user selects to link contacts. [CHAR LIMIT=NONE]  -->
-  <string name="batch_link_confirmation">Звязаць выдаленыя кантакты?</string>
   <!-- Positive button text from confirmation dialog. Shown after user selects to link contacts. [CHAR LIMIT=40]  -->
-  <string name="batch_link_confirmation_positive_button">Звязаць</string>
   <!-- Confirmation dialog. Shown after user selects to delete one writable contact [CHAR LIMIT=NONE]  -->
-  <string name="single_delete_confirmation">Выдаліць гэты кантакт?</string>
   <!-- Confirmation dialog. Shown after user selects to delete multimple writable contacts. [CHAR LIMIT=NONE]  -->
-  <string name="batch_delete_confirmation">Выдаліць выбраныя кантакты?</string>
   <!-- Confirmation dialog. Shown after user selects to delete readonly contacts. [CHAR LIMIT=NONE] -->
-  <string name="batch_delete_read_only_contact_confirmation">Кантакты з уліковых запісаў, даступных толькі для чытання, нельга выдаліць, але іх можна схаваць.</string>
   <!-- Confirmation dialog. Shown after user selects to delete contacts from multiple accounts. [CHAR LIMIT=NONE]  -->
-  <string name="batch_delete_multiple_accounts_confirmation">Кантакты на выдаленне змяшчаюць інфармацыю з некалькіх уліковых запісаў. Інфармацыя з уліковых запісаў, даступных толькі для чытання, будзе схавана, а не выдалена.</string>
   <!-- Warning dialog contents after users selects to delete a contact with multiple Writable sources. -->
-  <string name="multipleContactDeleteConfirmation">Выдаленне гэтага кантакту выдаліць інфармацыю з некалькіх уліковых запісаў.</string>
   <!-- Confirmation dialog contents after users selects to delete a Writable contact. -->
-  <string name="deleteConfirmation">Выдаліць гэты кантакт?</string>
   <!-- Positive button text of confirmation dialog contents after users selects to delete a Writable contact. [CHAR LIMIT=30] -->
   <!-- Menu item to indicate you want to stop editing a contact and NOT save the changes you've made [CHAR LIMIT=30] -->
   <!-- Message displayed in a toast when you try to view the details of a contact that
          for some reason doesn't exist anymore. [CHAR LIMIT=NONE]-->
   <!-- Message without name displayed in a toast after you create a contact shortcut in the launcher [CHAR LIMIT=NONE]-->
-  <string name="createContactShortcutSuccessful_NoName">Кантакт дададзены на Галоўны экран.</string>
   <!-- Message with name displayed in a toast after you create a contact shortcut in the launcher [CHAR LIMIT=NONE]-->
-  <string name="createContactShortcutSuccessful"><xliff:g id="NAME">%s</xliff:g> дададзены на Галоўны экран.</string>
   <!-- When picking a contact from a list of all contacts there is an entry at the top of the
          list that allows the user to create a new contact, which this string is used for -->
   <!-- Text for a "create new contact" button on the bottom of the contact picker screen.
@@ -154,17 +122,12 @@
   <!-- The text displayed to instruct users to add members to a group (when viewing a group detail page for a group with no members) [CHAR LIMIT=50] -->
   <!-- Displayed in a spinner dialog after the user creates a contact and it's being saved to the database -->
   <!-- Toast displayed when a contact is saved [CHAR LIMIT=NONE] -->
-  <string name="contactSavedToast">Кантакт захаваны</string>
   <!-- Toast displayed when linked contacts get unlinked [CHAR LIMIT=NONE] -->
-  <string name="contactUnlinkedToast">Кантакты адлучаны</string>
   <!-- Toast displayed when a contact is deleted [CHAR LIMIT=NONE] -->
   <!-- Toast displayed when saving a contact failed. [CHAR LIMIT=NONE] -->
   <!-- Toast displayed when unlinking a contact failed. [CHAR LIMIT=NONE] -->
-  <string name="contactUnlinkErrorToast">Не ўдалося скасаваць сувязь з кантактам.</string>
   <!-- Toast displayed when linking a contact failed. [CHAR LIMIT=NONE] -->
-  <string name="contactJoinErrorToast">Не ўдалося падлучыць кантакт.</string>
   <!-- Generic error default clause displayed when saving a contact failed. [CHAR LIMIT=NONE] -->
-  <string name="contactGenericErrorToast">Памылка пры захаванні кантакту.</string>
   <!-- Toast displayed when saving a contact photo failed. [CHAR LIMIT=NONE] -->
   <!-- Toast displayed when saving a contact to sim card failed -->
   <!-- Toast displayed when a group is saved [CHAR LIMIT=NONE] -->
@@ -176,7 +139,6 @@
   <!-- Displayed at the top of the contacts showing the zero total number of contacts found when "Only contacts with phones" not selected. [CHAR LIMIT=30] -->
   <!-- Displayed at the top of the contacts showing the total number of contacts found when typing search query -->
   <!-- The title of "all contacts" tab. [CHAR LIMIT=14] -->
-  <string name="all_contacts_tab_label">Усе</string>
   <!-- The title of "favorites" tab. [CHAR LIMIT=14] -->
   <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <!-- Action string for calling back a number in the call log -->
@@ -241,7 +203,6 @@
   <!-- The title of the Edit-Contact screen -->
   <!-- The message in a confirmation dialog shown when the user selects a
         contact aggregation suggestion in Contact editor. [CHAR LIMIT=512]-->
-  <string name="aggregation_suggestion_join_dialog_message">Звязаць бягучы кантакт з выбраным кантактам?</string>
   <!-- The message in a confirmation dialog shown when the user selects a
         contact aggregation suggestion in Contact editor. [CHAR LIMIT=512]-->
   <!-- The button that creates a local copy of a corporate contact. [CHAR LIMIT=40]-->
@@ -263,7 +224,6 @@
   <!-- Button to close without add a phone number to contacts [CHAR LIMIT=25] -->
   <!-- Format string that combines the name and the phonetic name for the widget. if the phonetic name is empty, only the display name is used instead [CHAR LIMIT=25] -->
   <!-- Checkbox whether to include a year for a birthday [CHAR LIMIT=30] -->
-  <string name="date_year_toggle">Уключыць год</string>
   <!-- Label for the widget that shows picture and social status of a contact [CHAR LIMIT=20] -->
   <!-- Message of widget while it is loading data [CHAR LIMIT=20] -->
   <!-- Button shown on the main contacts screen when there are no contacts on the device.
@@ -280,21 +240,17 @@
   <!-- Subtitle of a group (in the group list) that describes how many people are in the current group [CHAR LIMIT=30] -->
   <!-- Toast displayed when the user creates a new contact and attempts to link it
       with another before entering any data  [CHAR LIMIT=256] -->
-  <string name="toast_join_with_empty_contact">Перад звязваннем кантакту з іншым увядзіце імя кантакту.</string>
   <!-- Option displayed in context menu to copy long pressed item to clipboard [CHAR LIMIT=64] -->
   <!-- Option displayed in context menu to set long pressed item as default contact method [CHAR LIMIT=64] -->
   <!-- Option displayed in context menu to clear long pressed item as default contact method [CHAR LIMIT=64] -->
   <!-- Toast shown when text is copied to the clipboard [CHAR LIMIT=64] -->
   <!-- Contents of the alert dialog when the user hits the Cancel button in the editor [CHAR LIMIT=128] -->
-  <string name="cancel_confirmation_dialog_message">Адхіліць змены і скончыць рэдагаванне?</string>
   <!-- Positive button text for the cancel editing confirmation dialog.
       Pushing this button indicates that the user wishes to discard the changes they have already
       made and close the editor. [CHAR LIMIT=20] -->
-  <string name="cancel_confirmation_dialog_cancel_editing_button">Адхіліць</string>
   <!-- Negative button text for the cancel editing confirmation dialog.
       Pushing this button indicates that the user wishes to continue editing
       and return to the editor [CHAR LIMIT=30] -->
-  <string name="cancel_confirmation_dialog_keep_editing_button">Працягнуць рэдагаванне</string>
   <!-- Description of a call log entry, made of a call type and a date -->
   <!-- Text displayed in place of the display name for the contact that represents the user's
       personal profile entry [CHAR LIMIT=64] -->
@@ -308,9 +264,7 @@
   <!-- Title of the screen that encourages the user to add any account (non Google-specific) for a better Contacts app experience [CHAR LIMIT=20] -->
   <!-- Message in the contact editor prompt that notifies the user that the newly created contact will not be saved to any account, and prompts addition of an account [CHAR LIMIT=NONE] -->
   <!-- Message in the contact editor prompt that asks the user if it's okay to save the newly created contact to the account shown. [CHAR LIMIT=NONE] -->
-  <string name="contact_editor_prompt_one_account">Новыя кантакты будуць захаваны ва ўліковы запіс <xliff:g id="ACCOUNT_NAME">%1$s</xliff:g>.</string>
   <!-- Message in the contact editor prompt that asks the user which account they want to save the newly created contact to. [CHAR LIMIT=NONE] -->
-  <string name="contact_editor_prompt_multiple_accounts">Выбраць уліковы запіс па змаўчанні для новых кантактаў:</string>
   <!-- Title of the ContactEditorActivity when creating a new contact. The char
          limit is short and cannot be increased, since this needs to be displayed in a single line
          at a pre-determined text size. [CHAR LIMIT=20] -->
@@ -366,85 +320,41 @@
   <!-- Prefix for messages that you sent [CHAR LIMIT=40] -->
   <!-- When a user tries to create an IM Hangouts field, an alert dialog pops up displaying this message. We don't want users entering email addresses of phone numbers into the IM field. [CHAR LIMIT=200] -->
   <!-- Button to expand the compact contact editor to show all available input fields. [CHAR LIMIT=60] -->
-  <string name="compact_editor_more_fields">Дадатковыя палі</string>
   <!-- Content description for the compact contact editor photo overlay which, when clicked, shows a dialog with the options for changing the contact photo. [CHAR LIMIT=30] -->
   <!-- Toast message displayed when the editor fails to load for a contacts. [CHAR LIMIT=NONE] -->
-  <string name="compact_editor_failed_to_load">Збой адкрыцця рэдактара.</string>
   <!-- Label for the account selector to indicate which account a contact will be saved to. [CHAR LIMIT=30] -->
-  <string name="compact_editor_account_selector_title">Куды захоўваць:</string>
   <!-- Content description for the account selector to indicate which account a contact will be saved to. [CHAR LIMIT=NONE] -->
-  <string name="compact_editor_account_selector_description">Зараз ідзе захаванне ва ўліковы запіс <xliff:g id="ACCOUNT_NAME">%s</xliff:g>. Двойчы дакраніцеся, каб выбраць іншы ўліковы запіс.</string>
   <!-- Label for the linked contacts selector which indicates the number of raw contacts which have been linked together into the aggregate being viewed. [CHAR LIMIT=40] -->
-  <plurals name="compact_editor_linked_contacts_selector_title">
-    <item quantity="one">Звязаны кантакт (<xliff:g id="COUNT">%d</xliff:g>)</item>
-    <item quantity="few">Звязаныя кантакты (<xliff:g id="COUNT">%d</xliff:g>)</item>
-    <item quantity="other">Звязаныя кантакты (<xliff:g id="COUNT">%d</xliff:g>)</item>
-  </plurals>
   <!-- Number of linked contacts of the current contact, only shown when there are more than 2 linked contacts (plural only!!!) [CHAR LIMIT=60] -->
-  <string name="quickcontact_contacts_number">Звязаных кантактаў: <xliff:g id="COUNT">%d</xliff:g></string>
   <!-- Quick contact display name with phonetic name -->
   <!-- Menu item used to refresh a specific contact -->
   <!-- Button used in quick contact suggestion card to link selected contacts. [CHAR LIMIT=30]-->
-  <string name="quickcontact_suggestion_link_button">ЗВЯЗАЦЬ КАНТАКТЫ</string>
   <!-- Button used in quick contact suggestion card to collapse suggestion card. [CHAR LIMIT=30]-->
-  <string name="quickcontact_suggestion_cancel_button">СКАСАВАЦЬ</string>
   <!-- Suggestion card title in quick contact UI [CHAR LIMIT=100] -->
-  <plurals name="quickcontact_suggestion_card_title">
-    <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> магчымы дублікат</item>
-    <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> магчымыя дублікаты</item>
-    <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> магчымага дубліката</item>
-  </plurals>
   <!-- Suggestions number in quick contact suggestion card [CHAR LIMIT=60] -->
-  <plurals name="quickcontact_suggestions_number">
-    <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> звязаны кантакт</item>
-    <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> звязаныя кантакты</item>
-    <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> звязанага кантакта</item>
-  </plurals>
   <!-- Account type number for suggestions in quick contact suggestion card [CHAR LIMIT=30]-->
-  <plurals name="quickcontact_suggestion_account_type_number">
-    <item quantity="one">(<xliff:g id="COUNT">%d</xliff:g>)</item>
-    <item quantity="few">(<xliff:g id="COUNT">%d</xliff:g>)</item>
-    <item quantity="other">(<xliff:g id="COUNT">%d</xliff:g>)</item>
-  </plurals>
   <!-- Account type with number in quick contact suggestion card [CHAR LIMIT=30]-->
-  <string name="quickcontact_suggestion_account_type"><xliff:g id="ACCOUNT_TYPE_0">%s</xliff:g><xliff:g id="ACCOUNT_TYPE_NUMBER">%s</xliff:g></string>
   <!-- "This contact" title showing in suggestion card in Quick contact. [CHAR LIMIT=30]-->
-  <string name="suggestion_card_this_contact_title">Гэты кантакт</string>
   <!-- "Duplicates" title showing in suggestion card in Quick contact. [CHAR LIMIT=30]-->
-  <string name="suggestion_card_duplicates_title">Магчымыя дублікаты</string>
   <!-- Help message showing in suggestion card in Quick contact. [CHAR LIMIT=NONE]-->
-  <string name="suggestion_card_help_message">Гэтыя кантакты могуць датычыць адной асобы. Іх можна звязаць, каб стварыць адзіны кантакт.</string>
   <!-- Linked contacts title showing in contact editor UI. [CHAR LIMIT=30]-->
-  <string name="compact_editor_linked_contacts_title">Падлучаныя кантакты</string>
   <!-- Title of profile photos that are from your various accounts -->
-  <string name="from_your_accounts">З вашых уліковых запісаў</string>
   <!-- Button used in photo picker to open camera [CHAR LIMIT=30]-->
-  <string name="take_a_photo_button">Зрабіць фотаздымак</string>
   <!-- Button used in photo picker to open photo/gallery [CHAR LIMIT=20]-->
-  <string name="all_photos_button">Усе фота</string>
   <!-- Title of photo picker [CHAR LIMIT=30]-->
   <!-- Message below contact name, showing from which account [CHAR LIMIT=NONE]-->
-  <string name="contact_from_account_name">З уліковага запісу <xliff:g id="ACCOUNT_NAME">%s</xliff:g></string>
   <!-- Content description of delete button to the right of each section in editor, including
     data type. For example: Delete Home Phone, Delete Work Email, etc [CHAR LIMIT=30]-->
-  <string name="editor_delete_view_description">Выдаліць <xliff:g id="DATA_TYPE">%s </xliff:g><xliff:g id="DATA_KIND">%s</xliff:g></string>
   <!-- Content description of delete button to the right of each section in editor, without data
     type. For example: Delete Website, Delete SIP, etc [CHAR LIMIT=30]-->
-  <string name="editor_delete_view_description_short">Выдаліць <xliff:g id="DATA_KIND">%s</xliff:g></string>
   <!-- Content description of photo in photo picker indicating a photo from a specific account is *not* selected.
          For example: Photo from Google abc@gmail.com not checked. [CHAR LIMIT=60]-->
-  <string name="photo_view_description_not_checked">Фота з уліковага запісу <xliff:g id="ACCOUNT_TYPE">%s </xliff:g><xliff:g id="USER_NAME">%s </xliff:g>не пазначана</string>
   <!-- Content description of photo in photo picker indicating a photo from a specific account is selected.
          For example: Photo from Google abc@gmail.com checked. [CHAR LIMIT=60]-->
-  <string name="photo_view_description_checked">Фота з уліковага запісу <xliff:g id="ACCOUNT_TYPE">%s </xliff:g><xliff:g id="USER_NAME">%s </xliff:g>пазначана</string>
   <!-- Content description of photo in photo picker indicating a photo from unknown account is *not* selected.-->
-  <string name="photo_view_description_not_checked_no_info">Фота з невядомага ўліковага запісу не пазначана</string>
   <!-- Content description of photo in photo picker indicating a photo from unknown account is selected. -->
-  <string name="photo_view_description_checked_no_info">Пазначана фота з невядомага ўліковага запісу</string>
   <!-- Text shown in the contacts app while the background process updates contacts after a locale change [CHAR LIMIT=150]-->
-  <string name="locale_change_in_progress">Спіс кантактаў абнаўляецца, каб адлюстраваць змяненне мовы.\n\nПачакайце...</string>
   <!-- The menu item to open blocked numbers activity [CHAR LIMIT=60]-->
-  <string name="menu_blocked_numbers">Заблакіраваныя нумары</string>
   <!-- MultiPickActivity -->
   <!-- The hint text in search-view.-->
   <!-- The call-log's clear button text in pick call mode. -->

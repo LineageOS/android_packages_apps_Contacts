@@ -182,6 +182,7 @@
   <!-- Displayed in a spinner dialog after the user creates a contact and it's being saved to the database -->
   <string name="savingContact">ئالاقەداش ساقلاۋاتىدۇ…</string>
   <!-- Toast displayed when a contact is saved [CHAR LIMIT=NONE] -->
+  <string name="contactSavedToast">ئالاقەداش ساقلاندى.</string>
   <!-- Toast displayed when linked contacts get unlinked [CHAR LIMIT=NONE] -->
   <string name="contactSavedToast">ئالاقەداش ساقلاندى.</string>
   <!-- Toast displayed when a contact is deleted [CHAR LIMIT=NONE] -->

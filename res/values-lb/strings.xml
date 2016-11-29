@@ -188,6 +188,7 @@
   <!-- Displayed in a spinner dialog after the user creates a contact and it's being saved to the database -->
   <string name="savingContact">Kontakt gëtt gespäichert\u2026</string>
   <!-- Toast displayed when a contact is saved [CHAR LIMIT=NONE] -->
+  <string name="contactSavedToast">Kontakt gespäichert.</string>
   <!-- Toast displayed when linked contacts get unlinked [CHAR LIMIT=NONE] -->
   <string name="contactSavedToast">Kontakt gespäichert.</string>
   <!-- Toast displayed when a contact is deleted [CHAR LIMIT=NONE] -->

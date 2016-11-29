@@ -62,6 +62,11 @@
   <string name="delete_call_message">通話履歴を削除中\u2026</string>
   <string name="delete_call_alert">選択した通話履歴を削除しますか？</string>
   <string name="title_del_call">削除</string>
-  <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g>提供</string>
+  <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">%1$sの連絡先を検索</string>
+  <string name="incall_plugin_invite">招待</string>
+  <string name="incall_plugin_account_subheader">%1$s名</string>
+  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g>はこの通話を発信できません</string>
+  <string name="incall_plugin_intent_error">この操作を完了できませんでした。後で再試行して下さい。</string>
 </resources>

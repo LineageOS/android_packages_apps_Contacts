@@ -25,5 +25,4 @@
   <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <!-- Toast displayed when a contact is deleted [CHAR LIMIT=NONE] -->
   <!-- add for MemoryStatusActivity -->
-  <string name="title_del_call">Forigi</string>
 </resources>

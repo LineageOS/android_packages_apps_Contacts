@@ -18,7 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Toast displayed when saving a contact to sim card failed -->
-  <string name="contactSavedToSimCardError">Kunne ikke lagre valgte kontakter på SIMkortet</string>
+  <string name="contactSavedToSimCardError">Kunne ikke lagre valgte kontakter på SIM-kortet</string>
   <string name="airplane_mode_on">SIM-kortet kan ikke åpnes mens Flymodus er aktivert</string>
   <string name="number_anr_too_long">Nummeret er for langt</string>
   <string name="email_address_too_long">E-postadressen er for lang</string>

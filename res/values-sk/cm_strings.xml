@@ -63,5 +63,12 @@
   <string name="delete_call_alert">Vymazať vybrané denníky hovorov?</string>
   <string name="title_del_call">Vymazať</string>
   <string name="powered_by_provider">Používa služby <xliff:g id="provider">%s</xliff:g></string>
+  <string name="sms_permission_rationale">SMS povolenie je potrebné na zobrazenie kontaktov z histórie SMS.</string>
+  <string name="sms_rationale_view">Zobraziť</string>
   <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">Prehľadávať adresár %1$s</string>
+  <string name="incall_plugin_invite">POZVAŤ</string>
+  <string name="incall_plugin_account_subheader">meno %1$s</string>
+  <string name="incall_plugin_call_error"><xliff:g id="name">%s </xliff:g> nemôže vykonať tento hovor</string>
+  <string name="incall_plugin_intent_error">Nie je možné dokončiť túto akciu. Skúste to znova neskôr.</string>
 </resources>

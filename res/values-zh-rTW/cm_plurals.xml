@@ -23,9 +23,12 @@
     <item quantity="other">將會匯入 %d 個連絡人。</item>
   </plurals>
   <plurals name="import_progress">
-    <item quantity="other">已匯入 %d 個連絡人。</item>
+    <item quantity="other">已匯入 %d 個聯絡人。</item>
   </plurals>
   <plurals name="ContactMultiDeleteConfirmation">
     <item quantity="other">將會刪除 %d 個連絡人。</item>
+  </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="other">%d 個人將此標示為垃圾郵件</item>
   </plurals>
 </resources>

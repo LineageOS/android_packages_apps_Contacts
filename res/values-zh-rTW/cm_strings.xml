@@ -41,21 +41,21 @@
   <string name="import_sim_contacts_title">匯入 SIM 卡中的聯絡人</string>
   <string name="import_sim_contacts_message">正在匯入 SIM 卡中的聯絡人\u2026</string>
   <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
-  <string name="importConfirmation_title">匯入聯絡人？</string>
+  <string name="importConfirmation_title">是否匯入聯絡人？</string>
   <string name="import_finish">匯入完成</string>
   <string name="too_many_contacts_add_to_group">不可以新增超過 <xliff:g id="count">%d</xliff:g> 個聯絡人</string>
   <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">刪除聯絡人</string>
   <string name="delete_contacts_message">正在刪除聯絡人\u2026</string>
   <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
-  <string name="deleteConfirmation_title">刪除聯絡人？</string>
+  <string name="deleteConfirmation_title">是否刪除聯絡人？</string>
   <!-- Toast displayed when a contact is deleted [CHAR LIMIT=NONE] -->
   <string name="contactDeletedToast">聯絡人已刪除</string>
   <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">記憶體狀態</string>
   <string name="memory_size">總計：</string>
   <string name="memory_used">已用：</string>
-  <string name="contact_detail_picture_description">圖片。選擇以變更</string>
+  <string name="contact_detail_picture_description">圖片。選擇即可更改</string>
   <string name="calculating_status_now">正在計算狀態\u2026</string>
   <string name="menu_copyTo">複製至「<xliff:g id="destination">%s</xliff:g>」</string>
   <string name="copy_to_target_sim">SIM 卡</string>
@@ -65,6 +65,7 @@
   <string name="select_call_title">選取通話紀錄</string>
   <string name="delete_call_title">刪除通話紀錄</string>
   <string name="delete_call_message">正在刪除電話紀錄\u2026</string>
-  <string name="delete_call_alert">刪除已選取的通話紀錄？</string>
+  <string name="delete_call_alert">是否刪除已選取的通話紀錄？</string>
   <string name="title_del_call">刪除</string>
+  <string name="powered_by_provider">由 <xliff:g id="provider">%s</xliff:g> 提供支援</string>
 </resources>

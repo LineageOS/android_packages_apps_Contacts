@@ -23,6 +23,7 @@
   <string name="launcherActivityLabel">Kontakter</string>
   <!-- Title for Quick Contact activity. -->
   <!-- Title for Edit Contact activity. -->
+  <string name="editContactActivityLabel">Kontakt änneren</string>
   <!-- Directory partition name -->
   <string name="contactsList">Kontakter</string>
   <!-- Name of activity that allows users to create shortcuts on the home screen to a contact.
@@ -108,12 +109,17 @@
   <!-- Positive button text from the confirmation dialog for unlinking contacts [CHAR LIMIT = 30] -->
   <!-- Confirmation dialog for unlinking contacts into multiple instances when there are also unsaved changes for the current contact. [CHAR LIMIT=NONE] -->
   <!-- Positive button text from the confirmation dialog for unlinking contacts with pending changes [CHAR LIMIT = 60] -->
+  <string name="splitConfirmationWithPendingChanges_positive_button">Späicheren an trennen</string>
   <!-- Confirmation dialog message for joining contacts when there are unsaved changes. [CHAR LIMIT=NONE] -->
   <!-- Positive button text from the confirmation dialog for joining contacts when there are unsaved changes. [CHAR LIMIT = 60] -->
+  <string name="joinConfirmation_positive_button">Späicheren a fusionéieren</string>
   <!-- Menu item that links an aggregate with another aggregate -->
+  <string name="menu_joinAggregate">Fusionéieren</string>
   <!-- Menu item (in the action bar) to indicate that changes should be saved [CHAR LIMIT=20] -->
   <!-- Heading of the Link Contact screen -->
+  <string name="titleJoinContactDataWith">Kontakter fusionéieren</string>
   <!-- Info blurb on the Link Contact screen [CHAR LIMIT=NONE]-->
+  <string name="blurbJoinContactDataWith">Wiel de Kontakt aus, deen s du mam <xliff:g id="name">%s</xliff:g> fusionéiere wëlls:</string>
   <!-- An item in the Join Contact activity that opens up the full contact A-Z list -->
   <string name="showAllContactsJoinItem">All d\'Kontakter uweisen</string>
   <!-- List separator for the Join Contact list: Suggestions -->
@@ -121,19 +127,28 @@
   <!-- List separator for the Join Contact list: A-Z -->
   <string name="separatorJoinAggregateAll">All d\'Kontakter</string>
   <!-- Toast shown after two contacts have been linked by a user action. [CHAR LIMIT=NONE] -->
+  <string name="contactsJoinedMessage">Kontakter fusionéiert</string>
   <!-- Toast shown after contacts that the user has selected are deleted by a user action. [CHAR LIMIT=30] -->
+  <plurals name="contacts_deleted_toast">
+    <item quantity="one">Kontakt geläscht</item>
+    <item quantity="other">Kontakter geläscht</item>
+  </plurals>
   <!-- Menu item that opens the Options activity for a given contact [CHAR LIMIT=15] -->
   <string name="menu_set_ring_tone">Schelltoun setzen</string>
   <!-- Menu item that opens the Options activity for a given contact [CHAR LIMIT=30] -->
   <string name="menu_redirect_calls_to_vm">All d\'Uriff un d\'Mailbox</string>
   <!-- Warning dialog contents after users select to delete a ReadOnly contact. [CHAR LIMIT=NONE] -->
   <!-- Positive button text of the warning dialog contents after users select to delete a ReadOnly contact. [CHAR LIMIT=30]-->
+  <string name="readOnlyContactWarning_positive_button">Verstoppen</string>
   <!-- Warning dialog contents after users selects to delete a contact with ReadOnly and Writable sources. [CHAR LIMIT=NONE]-->
   <!-- Warning dialog. Shown if user selects a single contact to link. [CHAR LIMIT=NONE]  -->
   <!-- Confirmation dialog. Shown after user selects to link contacts. [CHAR LIMIT=NONE]  -->
   <!-- Positive button text from confirmation dialog. Shown after user selects to link contacts. [CHAR LIMIT=40]  -->
+  <string name="batch_link_confirmation_positive_button">Fusionéieren</string>
   <!-- Confirmation dialog. Shown after user selects to delete one writable contact [CHAR LIMIT=NONE]  -->
+  <string name="single_delete_confirmation">Kontakt läschen?</string>
   <!-- Confirmation dialog. Shown after user selects to delete multimple writable contacts. [CHAR LIMIT=NONE]  -->
+  <string name="batch_delete_confirmation">Ausgewielt Kontakter läschen?</string>
   <!-- Confirmation dialog. Shown after user selects to delete readonly contacts. [CHAR LIMIT=NONE] -->
   <!-- Confirmation dialog. Shown after user selects to delete contacts from multiple accounts. [CHAR LIMIT=NONE]  -->
   <!-- Warning dialog contents after users selects to delete a contact with multiple Writable sources. -->
@@ -191,12 +206,16 @@
   <!-- Toast displayed when a contact is saved [CHAR LIMIT=NONE] -->
   <string name="contactSavedToast">Kontakt gespäichert.</string>
   <!-- Toast displayed when linked contacts get unlinked [CHAR LIMIT=NONE] -->
+  <string name="contactUnlinkedToast">Kontakter getrennt</string>
   <string name="contactSavedToast">Kontakt gespäichert.</string>
   <!-- Toast displayed when a contact is deleted [CHAR LIMIT=NONE] -->
+  <string name="contactDeletedToast">Kontakt geläscht.</string>
   <!-- Toast displayed when saving a contact failed. [CHAR LIMIT=NONE] -->
   <string name="contactSavedErrorToast">Kontaktännerunge konnten net gespäichert ginn.</string>
   <!-- Toast displayed when unlinking a contact failed. [CHAR LIMIT=NONE] -->
+  <string name="contactUnlinkErrorToast">Kontakt kann net getrennt ginn.</string>
   <!-- Toast displayed when linking a contact failed. [CHAR LIMIT=NONE] -->
+  <string name="contactJoinErrorToast">Kontakt kann net fusionéiert ginn.</string>
   <!-- Generic error default clause displayed when saving a contact failed. [CHAR LIMIT=NONE] -->
   <!-- Toast displayed when saving a contact photo failed. [CHAR LIMIT=NONE] -->
   <!-- Toast displayed when saving a contact to sim card failed -->
@@ -427,9 +446,11 @@
   <!-- Positive button text for the cancel editing confirmation dialog.
       Pushing this button indicates that the user wishes to discard the changes they have already
       made and close the editor. [CHAR LIMIT=20] -->
+  <string name="cancel_confirmation_dialog_cancel_editing_button">Verwerfen</string>
   <!-- Negative button text for the cancel editing confirmation dialog.
       Pushing this button indicates that the user wishes to continue editing
       and return to the editor [CHAR LIMIT=30] -->
+  <string name="cancel_confirmation_dialog_keep_editing_button">Weider editéieren</string>
   <!-- Description of a call log entry, made of a call type and a date -->
   <string name="call_type_and_date">        <xliff:g id="call_type" example="Friends">%1$s</xliff:g> <xliff:g id="call_short_date" example="Friends">%2$s</xliff:g>
     </string>
@@ -560,22 +581,33 @@
   <!-- Label for the account selector to indicate which account a contact will be saved to. [CHAR LIMIT=30] -->
   <!-- Content description for the account selector to indicate which account a contact will be saved to. [CHAR LIMIT=NONE] -->
   <!-- Label for the linked contacts selector which indicates the number of raw contacts which have been linked together into the aggregate being viewed. [CHAR LIMIT=40] -->
+  <plurals name="compact_editor_linked_contacts_selector_title">
+    <item quantity="one">Fusionéierte Kontakt</item>
+    <item quantity="other">Fusionéiert Kontakter (<xliff:g id="count">%d</xliff:g>)</item>
+  </plurals>
   <!-- Number of linked contacts of the current contact, only shown when there are more than 2 linked contacts (plural only!!!) [CHAR LIMIT=60] -->
+  <string name="quickcontact_contacts_number"><xliff:g id="count">%d</xliff:g> fusionéiert Kontakter</string>
   <!-- Quick contact display name with phonetic name -->
   <!-- Menu item used to refresh a specific contact -->
+  <string name="menu_refresh">Opfrëschen</string>
   <!-- Button used in quick contact suggestion card to link selected contacts. [CHAR LIMIT=30]-->
   <!-- Button used in quick contact suggestion card to collapse suggestion card. [CHAR LIMIT=30]-->
+  <string name="quickcontact_suggestion_cancel_button">OFBRIECHEN</string>
   <!-- Suggestion card title in quick contact UI [CHAR LIMIT=100] -->
   <!-- Suggestions number in quick contact suggestion card [CHAR LIMIT=60] -->
   <!-- Account type number for suggestions in quick contact suggestion card [CHAR LIMIT=30]-->
   <!-- Account type with number in quick contact suggestion card [CHAR LIMIT=30]-->
   <!-- "This contact" title showing in suggestion card in Quick contact. [CHAR LIMIT=30]-->
+  <string name="suggestion_card_this_contact_title">Dëse Kontakt</string>
   <!-- "Duplicates" title showing in suggestion card in Quick contact. [CHAR LIMIT=30]-->
   <!-- Help message showing in suggestion card in Quick contact. [CHAR LIMIT=NONE]-->
   <!-- Linked contacts title showing in contact editor UI. [CHAR LIMIT=30]-->
+  <string name="compact_editor_linked_contacts_title">Fusionéiert Kontakter</string>
   <!-- Title of profile photos that are from your various accounts -->
   <!-- Button used in photo picker to open camera [CHAR LIMIT=30]-->
+  <string name="take_a_photo_button">Foto maachen</string>
   <!-- Button used in photo picker to open photo/gallery [CHAR LIMIT=20]-->
+  <string name="all_photos_button">All d\'Fotoen</string>
   <!-- Title of photo picker [CHAR LIMIT=30]-->
   <string name="photo_picker_title">Foto auswielen</string>
   <!-- Message below contact name, showing from which account [CHAR LIMIT=NONE]-->
@@ -593,12 +625,21 @@
   <!-- The menu item to open blocked numbers activity [CHAR LIMIT=60]-->
   <string name="title_del_call">Läschen</string>
   <!-- MultiPickActivity -->
+  <string name="contact_info_text_as_name">Numm:</string>
+  <string name="contact_info_text_as_phone">Tel:</string>
+  <string name="contact_info_text_as_email">E-Mail:</string>
   <!-- The hint text in search-view.-->
+  <string name="search_menu_search">Sichen</string>
   <!-- The call-log's clear button text in pick call mode. -->
   <!-- String used to display calls from unknown numbers in the call log -->
+  <string name="unknown">Onbekannt</string>
   <!-- String used to display calls from private numbers in the call log -->
+  <string name="private_num">Privat Nummer</string>
   <!-- String used to display calls from pay phone in the call log -->
+  <string name="payphone">Telefonskabinn</string>
   <!-- Call-log count in one call-log group. Call location and call date. -->
+  <string name="description_list_delimiter">", "</string>
   <!--Toast msg when user select too many contacts to merge-->
   <!-- merge contacts -->
+  <string name="cancel">"Ofbriechen"</string>
 </resources>

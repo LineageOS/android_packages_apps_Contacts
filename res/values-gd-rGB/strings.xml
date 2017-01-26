@@ -96,7 +96,6 @@
          The text will be all capitalized.
          [CHAR LIMIT=30] -->
   <!-- The order of the items below is important, don't reorder without changing EditContactActivity.java -->
-  <skip></skip>
   <!-- The labels that are under the otherLabelsGroup when editing a contact. [CHAR LIMIT=20] -->
   <!-- Description in the dialog that appears if there are no pictures from which to create an icon for a contact -->
   <!-- Description in the dialog that appears if there are no pictures from which to create an icon for a contact -->

@@ -62,5 +62,13 @@
   <string name="delete_call_message">Se șterg jurnalele de apel\u2026</string>
   <string name="delete_call_alert">Ștergeți jurnalele de apel selectate?</string>
   <string name="title_del_call">Ștergeți</string>
+  <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
+  <string name="sms_permission_rationale">Permisiunea de SMS este necesară pentru a afişa istoria SMS a contactelor.</string>
+  <string name="sms_rationale_view">VIZUALIZAȚI</string>
   <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">Căutați directorul %1$s</string>
+  <string name="incall_plugin_invite">INVITAȚI</string>
+  <string name="incall_plugin_account_subheader">%1$s nume</string>
+  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> nu a putut efectua acest apel</string>
+  <string name="incall_plugin_intent_error">Imposibil de terminat acțiunea. Încercaţi din nou mai târziu.</string>
 </resources>

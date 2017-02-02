@@ -63,6 +63,8 @@
   <string name="delete_call_alert">Удалить выбранные записи из журнала вызовов?</string>
   <string name="title_del_call">Удалить</string>
   <string name="powered_by_provider">Технологии <xliff:g id="provider">%s</xliff:g></string>
+  <string name="sms_permission_rationale">Чтобы увидеть историю переписки с контактом, разрешите приложению доступ к сообщениям.</string>
+  <string name="sms_rationale_view">ПРОСМОТР</string>
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_directory_search">Поиск в каталоге %1$s</string>
   <string name="incall_plugin_invite">ПРИГЛАСИТЬ</string>

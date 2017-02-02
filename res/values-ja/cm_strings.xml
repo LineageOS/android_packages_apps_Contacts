@@ -32,20 +32,20 @@
   <string name="contacts_groups_label">グループ</string>
   <string name="menu_moveGroupMembers">グループのメンバーを移動</string>
   <string name="title_move_members">メンバーを移動</string>
-  <string name="message_move_members">メンバーを移動中\u2026</string>
+  <string name="message_move_members">メンバーを移動中...</string>
   <string name="message_can_not_move_members">メンバーを移動できませんでした</string>
   <string name="edit_before_call">発信前に番号を編集</string>
   <string name="menu_sendViaSMS">連絡先をSMS経由で送信</string>
   <string name="select_all">すべて</string>
   <!-- Choose Sim Card to Import -->
   <string name="import_sim_contacts_title">SIMの連絡先をインポート</string>
-  <string name="import_sim_contacts_message">SIMの連絡先をインポート中\u2026</string>
+  <string name="import_sim_contacts_message">SIMの連絡先をインポート中...</string>
   <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
   <string name="importConfirmation_title">連絡先をインポートしますか？</string>
   <string name="import_finish">インポートが完了しました</string>
   <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">連絡先を削除</string>
-  <string name="delete_contacts_message">連絡先を削除中\u2026</string>
+  <string name="delete_contacts_message">連絡先を削除中...</string>
   <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">連絡先を削除しますか？</string>
   <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g>件以上の連絡先は追加できません</string>
@@ -53,7 +53,7 @@
   <string name="menu_memory_status">メモリの状態</string>
   <string name="memory_size">合計:</string>
   <string name="memory_used">使用数:</string>
-  <string name="calculating_status_now">状態を計算中\u2026</string>
+  <string name="calculating_status_now">状態を計算中...</string>
   <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g>にコピー</string>
   <string name="no_empty_email_in_usim">USIMの連絡先にはメールアドレスの欄がないので、メッセージをコピーできません。</string>
   <string name="voicemail">ボイスメール</string>
@@ -63,6 +63,8 @@
   <string name="delete_call_alert">選択した通話履歴を削除しますか？</string>
   <string name="title_del_call">削除</string>
   <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
+  <string name="sms_permission_rationale">SMS の履歴を表示するには SMS の権限が必要です。</string>
+  <string name="sms_rationale_view">表示</string>
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_directory_search">%1$sの連絡先を検索</string>
   <string name="incall_plugin_invite">招待</string>

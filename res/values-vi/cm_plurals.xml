@@ -19,7 +19,16 @@
   <plurals name="contacts_selected">
     <item quantity="other">%d được chọn</item>
   </plurals>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="other">%d liên hệ sẽ được nhập.</item>
+  </plurals>
   <plurals name="import_progress">
     <item quantity="other">%d số liên lạc đã được nhập</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="other">%d liên hệ sẽ bị xóa.</item>
+  </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="other">%d người đã đánh dấu là spam</item>
   </plurals>
 </resources>

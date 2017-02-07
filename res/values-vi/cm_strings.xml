@@ -63,6 +63,8 @@
   <string name="delete_call_alert">Xoá nhật ký cuộc gọi đã chọn?</string>
   <string name="title_del_call">Xoá</string>
   <string name="powered_by_provider">Được hỗ trợ bởi <xliff:g id="provider">%s</xliff:g></string>
+  <string name="sms_permission_rationale">Quyền SMS được yêu cầu để hiển thị lịch sử SMS liên lạc.</string>
+  <string name="sms_rationale_view">XEM</string>
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_directory_search">Tìm kiếm thư mục %1$s</string>
   <string name="incall_plugin_invite">MỜI</string>

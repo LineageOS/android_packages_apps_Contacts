@@ -63,5 +63,12 @@
   <string name="delete_call_alert">Видалити обрані журнали викликів?</string>
   <string name="title_del_call">Видаляти</string>
   <string name="powered_by_provider">За допомогою <xliff:g id="provider">%s</xliff:g></string>
+  <string name="sms_permission_rationale">Для перегляду історії повідомлень з контактом, надайте дозвіл додатку до SMS повідомлень.</string>
+  <string name="sms_rationale_view">ПЕРЕГЛЯД</string>
   <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">Пошук в папці %1$s</string>
+  <string name="incall_plugin_invite">ЗАПРОСИТИ</string>
+  <string name="incall_plugin_account_subheader">ім\'я %1$s</string>
+  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> не може зробити цей виклик</string>
+  <string name="incall_plugin_intent_error">Не вдається завершити цю дію. Спробуйте пізніше.</string>
 </resources>

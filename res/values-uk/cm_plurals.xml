@@ -36,4 +36,9 @@
     <item quantity="few">%d контакти будуть видалені.</item>
     <item quantity="other">%d контактів буде видалено.</item>
   </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="one">%d людина позначила це як спам</item>
+    <item quantity="few">%d людини позначили це як спам</item>
+    <item quantity="other">%d людей позначили це як спам</item>
+  </plurals>
 </resources>

@@ -48,6 +48,7 @@
   <string name="delete_call_alert">선택된 통화 기록을 삭제할까요?</string>
   <string name="title_del_call">삭제</string>
   <!-- MultiPickActivity -->
+  <string name="contact_info_text_as_name">이름:</string>
   <!-- The hint text in search-view.-->
   <!-- The call-log's clear button text in pick call mode. -->
   <!-- String used to display calls from unknown numbers in the call log -->

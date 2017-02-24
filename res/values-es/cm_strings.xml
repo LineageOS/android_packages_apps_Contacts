@@ -40,6 +40,7 @@
   <string name="import_sim_contacts_message">Importando contactos de SIM\u2026</string>
   <string name="ContactMultiImportConfirmation">Se importarán los contactos seleccionados.</string>
   <string name="import_finish">Importación finalizada</string>
+  <string name="import_stop">Se canceló la importación</string>
   <string name="too_many_contacts_add_to_group">No se pueden añadir más de <xliff:g id="count">%d</xliff:g> contactos</string>
   <!-- Multi Delete Contacts related strings -->
   <string name="ContactMultiDeleteConfirmation">Se eliminarán los contactos seleccionados.</string>

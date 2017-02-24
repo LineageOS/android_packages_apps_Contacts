@@ -40,6 +40,7 @@
   <string name="import_sim_contacts_message">A importar contactos\u2026</string>
   <string name="ContactMultiImportConfirmation">Os contactos selecionados vão ser importados.</string>
   <string name="import_finish">Importação terminada</string>
+  <string name="import_stop">A importação foi cancelada</string>
   <string name="too_many_contacts_add_to_group">Não podem ser adicionados mais que <xliff:g id="count">%d</xliff:g> contactos</string>
   <!-- Multi Delete Contacts related strings -->
   <string name="ContactMultiDeleteConfirmation">Os contactos selecionados vão ser apagados.</string>

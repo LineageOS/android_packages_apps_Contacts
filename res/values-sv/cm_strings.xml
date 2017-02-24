@@ -15,6 +15,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Toast displayed when a contact is deleted [CHAR LIMIT=NONE] -->
+  <string name="contactDeletedToast">Kontakt borttagen.</string>
   <string name="menu_moveGroupMembers">Flytta gruppmedlemmar</string>
   <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="number_anr_too_long">Numret är för lång</string>
@@ -38,6 +39,8 @@
   <string name="import_finish">Import slutförd</string>
   <string name="too_many_contacts_add_to_group">Maximalt <xliff:g id="count">%d</xliff:g> kontakter kan delas</string>
   <!-- Multi Delete Contacts related strings -->
+  <string name="delete_contacts_title">Ta bort kontakter</string>
+  <string name="delete_contacts_message">Tar bort Kontakter\u2026</string>
   <!-- Menu item used to refresh a specific contact -->
   <string name="menu_copyTo">Kopiera till <xliff:g id="destination">%s</xliff:g></string>
   <string name="no_empty_email_in_usim">USIM-kontakten har inte ett tillgänglig epostfält, kan inte kopiera meddelanden.</string>

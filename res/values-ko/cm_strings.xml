@@ -31,6 +31,7 @@
   <string name="message_move_members">구성원 이동 중\u2026</string>
   <string name="message_can_not_move_members">구성원을 이동시킬 수 없음</string>
   <!-- Gray hint displayed in the search field in Contacts when empty -->
+  <string name="search_bar_hint">연락처 검색</string>
   <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">연락처를 삭제할까요?</string>
   <string name="import_sim_contacts_title">SIM 연락처 가져오기</string>
@@ -38,7 +39,9 @@
   <string name="import_finish">가져오기 완료</string>
   <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g>건보다 많은 수의 연락처는 추가할 수 없습니다</string>
   <!-- Multi Delete Contacts related strings -->
+  <string name="delete_contacts_title">연락처 삭제</string>
   <!-- Menu item used to refresh a specific contact -->
+  <string name="menu_refresh">새로 고침</string>
   <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g>(으)로 복사</string>
   <string name="no_empty_email_in_usim">USIM 연락처가 비어있는 이메일 입력란을 찾지 못하여 메시지를 복사할 수 없습니다.</string>
   <string name="voicemail">음성 메시지</string>
@@ -57,4 +60,6 @@
   <!-- Call-log count in one call-log group. Call location and call date. -->
   <!--Toast msg when user select too many contacts to merge-->
   <!-- merge contacts -->
+  <string name="sim_email_full">SIM 카드의 이메일 저장소가 가득 찼습니다.</string>
+  <string name="sim_anr_full">SIM 카드의 번호 저장소가 가득 찼습니다.</string>
 </resources>

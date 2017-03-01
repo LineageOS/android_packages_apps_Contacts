@@ -44,11 +44,10 @@
   <string name="too_many_contacts_add_to_group">不可新增超過 <xliff:g id="count">%d</xliff:g> 個聯絡人</string>
   <!-- Multi Delete Contacts related strings -->
   <string name="ContactMultiDeleteConfirmation">已選取的聯絡人將被刪除。</string>
-  <string name="delete_contacts_title">删除聯絡人</string>
+  <string name="delete_contacts_title">刪除聯絡人</string>
   <string name="delete_contacts_message">正在刪除聯絡人\u2026</string>
   <!-- Menu item used to refresh a specific contact -->
   <string name="menu_refresh">重新整理</string>
-  <string name="video_call">視訊通話</string>
   <string name="menu_copyTo">複製到「<xliff:g id="destination">%s</xliff:g>」</string>
   <string name="no_empty_email_in_usim">USIM 聯絡人沒有可用的電子郵件欄位，無法複製訊息。</string>
   <string name="voicemail">語音信箱</string>

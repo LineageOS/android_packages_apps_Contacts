@@ -18,7 +18,7 @@
   <string name="contactDeletedToast">連絡先を削除しました。</string>
   <string name="menu_moveGroupMembers">グループのメンバーを移動</string>
   <!-- Toast displayed when saving a contact to sim card failed -->
-  <string name="contactSavedToSimCardError">選択した連絡先を SIM に保存できませんでした</string>
+  <string name="contactSavedToSimCardError">選択した連絡先をSIMに保存できませんでした</string>
   <string name="number_anr_too_long">電話番号が長すぎます</string>
   <string name="email_address_too_long">メールアドレスが長すぎます</string>
   <string name="sim_card_full">SIMカードがいっぱいです</string>
@@ -48,7 +48,6 @@
   <string name="delete_contacts_message">連絡先を削除中...</string>
   <!-- Menu item used to refresh a specific contact -->
   <string name="menu_refresh">再読み込み</string>
-  <string name="video_call">ビデオ通話</string>
   <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g>にコピー</string>
   <string name="no_empty_email_in_usim">USIMの連絡先にはメールアドレスの欄がないので、メッセージをコピーできません。</string>
   <string name="voicemail">ボイスメール</string>

@@ -48,7 +48,6 @@
   <string name="delete_contacts_message">Изтриване на контакти\u2026</string>
   <!-- Menu item used to refresh a specific contact -->
   <string name="menu_refresh">Опресняване</string>
-  <string name="video_call">Видео повикване</string>
   <string name="menu_copyTo">Копиране в <xliff:g id="destination">%s </xliff:g></string>
   <string name="no_empty_email_in_usim">USIM контактите нямат поле за имейл. Съобщенията няма да бъдат копирани.</string>
   <string name="voicemail">Гласова поща</string>

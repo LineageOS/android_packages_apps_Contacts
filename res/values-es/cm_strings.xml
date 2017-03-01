@@ -18,7 +18,7 @@
   <string name="contactDeletedToast">Contacto eliminado.</string>
   <string name="menu_moveGroupMembers">Mover miembros del grupo</string>
   <!-- Toast displayed when saving a contact to sim card failed -->
-  <string name="contactSavedToSimCardError">No se pudieron guardar los contactos seleccionados en la tarjeta SIM</string>
+  <string name="contactSavedToSimCardError">No se han podido guardar los contactos seleccionados en la tarjeta SIM</string>
   <string name="number_anr_too_long">El número es demasiado largo</string>
   <string name="email_address_too_long">La dirección de correo electrónico es demasiado larga</string>
   <string name="sim_card_full">La tarjeta SIM está llena</string>
@@ -48,7 +48,6 @@
   <string name="delete_contacts_message">Eliminando contactos\u2026</string>
   <!-- Menu item used to refresh a specific contact -->
   <string name="menu_refresh">Recargar</string>
-  <string name="video_call">Videollamada</string>
   <string name="menu_copyTo">Copiar a <xliff:g id="destination">%s</xliff:g></string>
   <string name="no_empty_email_in_usim">Contacto USIM no tiene un campo de correo electrónico disponible. No se pueden copiar los mensajes.</string>
   <string name="voicemail">Buzón de voz</string>

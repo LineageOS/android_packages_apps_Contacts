@@ -48,7 +48,6 @@
   <string name="delete_contacts_message">正在删除联系人\u2026</string>
   <!-- Menu item used to refresh a specific contact -->
   <string name="menu_refresh">刷新</string>
-  <string name="video_call">视频通话</string>
   <string name="menu_copyTo">复制到 <xliff:g id="destination">%s</xliff:g></string>
   <string name="no_empty_email_in_usim">USIM 联系人没有可用的电子邮件字段，无法复制信息。</string>
   <string name="voicemail">语音邮件</string>

@@ -48,7 +48,6 @@
   <string name="delete_contacts_message">A apagar contactos\u2026</string>
   <!-- Menu item used to refresh a specific contact -->
   <string name="menu_refresh">Atualizar</string>
-  <string name="video_call">Chamada de vídeo</string>
   <string name="menu_copyTo">Copiar para <xliff:g id="destination">%s</xliff:g></string>
   <string name="no_empty_email_in_usim">O contacto USIM não tem um campo de e-mail disponível. Não é possível copiar mensagens.</string>
   <string name="voicemail">Correio de voz</string>

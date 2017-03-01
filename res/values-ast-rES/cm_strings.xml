@@ -17,6 +17,7 @@
   <!-- Toast displayed when a contact is deleted [CHAR LIMIT=NONE] -->
   <string name="menu_moveGroupMembers">Mover miembros del grupu</string>
   <!-- Toast displayed when saving a contact to sim card failed -->
+  <string name="contactSavedToSimCardError">Nun pudieron guardase los contautos seleicionaos na tarxeta SIM</string>
   <string name="number_anr_too_long">El númberu ye enforma llargu</string>
   <string name="email_address_too_long">La direición de corréu ye enforma llarga</string>
   <string name="sim_card_full">La tarxeta SIM ta enllena</string>
@@ -38,6 +39,8 @@
   <string name="import_finish">Finó la importación</string>
   <string name="too_many_contacts_add_to_group">Nun puen amestase más de <xliff:g id="count">%d</xliff:g> contautos</string>
   <!-- Multi Delete Contacts related strings -->
+  <string name="delete_contacts_title">Desaniciar contautos</string>
+  <string name="delete_contacts_message">Desaniciando contautos\u2026</string>
   <!-- Menu item used to refresh a specific contact -->
   <string name="menu_copyTo">Copiar a <xliff:g id="destination">%s</xliff:g></string>
   <string name="no_empty_email_in_usim">Contautu USIM nun tien un campu de corréu-e disponible. Nun puen copiase los mensaxes.</string>

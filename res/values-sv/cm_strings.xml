@@ -18,6 +18,7 @@
   <string name="contactDeletedToast">Kontakt borttagen.</string>
   <string name="menu_moveGroupMembers">Flytta gruppmedlemmar</string>
   <!-- Toast displayed when saving a contact to sim card failed -->
+  <string name="contactSavedToSimCardError">Kunde inte spara de valda kontakterna till SIM-kortet</string>
   <string name="number_anr_too_long">Numret är för lång</string>
   <string name="email_address_too_long">E-postadressen är för lång</string>
   <string name="sim_card_full">SIM-kortet är fullt</string>
@@ -40,7 +41,7 @@
   <string name="too_many_contacts_add_to_group">Maximalt <xliff:g id="count">%d</xliff:g> kontakter kan delas</string>
   <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">Ta bort kontakter</string>
-  <string name="delete_contacts_message">Tar bort Kontakter\u2026</string>
+  <string name="delete_contacts_message">Tar bort kontakter\u2026</string>
   <!-- Menu item used to refresh a specific contact -->
   <string name="menu_refresh">Uppdatera</string>
   <string name="menu_copyTo">Kopiera till <xliff:g id="destination">%s</xliff:g></string>

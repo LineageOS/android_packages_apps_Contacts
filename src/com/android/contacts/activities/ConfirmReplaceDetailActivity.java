@@ -32,10 +32,8 @@ package com.android.contacts.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.Intents.Insert;
@@ -45,11 +43,9 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.content.res.Configuration;
 
 import com.android.contacts.R;
-import com.android.contacts.activities.ConfirmAddDetailActivity;
 import com.android.contacts.common.model.RawContactDeltaList;
 import com.android.contacts.common.model.RawContactDelta;
 import com.android.contacts.common.model.ValuesDelta;
@@ -68,7 +64,7 @@ public class ConfirmReplaceDetailActivity extends Activity implements
     private RawContactDeltaList mEntityDeltaList;
     private RawContactDelta mRawContactDelta;
     private String mMimeType = Phone.CONTENT_ITEM_TYPE;
-    private Bundle extras;
+    private Bundle mExtras;
 
     private List<String> mList;
 
@@ -95,15 +91,15 @@ public class ConfirmReplaceDetailActivity extends Activity implements
     }
 
     private void resolveIntent(Intent intent) {
-        extras = intent.getExtras();
+        mExtras = intent.getExtras();
 
         mEntityDeltaList = intent.getParcelableExtra(
                 ConfirmAddDetailActivity.RAWCONTACTS_DELTA_LIST);
         mRawContactDelta = mEntityDeltaList.getFirstWritableRawContact(this);
 
-        if (extras.containsKey(Insert.PHONE)) {
+        if (mExtras.containsKey(Insert.PHONE)) {
             mMimeType = Phone.CONTENT_ITEM_TYPE;
-        } else if (extras.containsKey(Insert.EMAIL)) {
+        } else if (mExtras.containsKey(Insert.EMAIL)) {
             mMimeType = Email.CONTENT_ITEM_TYPE;
         }
     }
@@ -153,10 +149,10 @@ public class ConfirmReplaceDetailActivity extends Activity implements
 
         String newNumber = null;
         if (mMimeType.equals(Phone.CONTENT_ITEM_TYPE)) {
-            newNumber = extras.getString(Insert.PHONE);
+            newNumber = mExtras.getString(Insert.PHONE);
             valuesDelta.getAfter().put(Phone.NUMBER, newNumber);
         } else {
-            newNumber = extras.getString(Insert.EMAIL);
+            newNumber = mExtras.getString(Insert.EMAIL);
             valuesDelta.getAfter().put(Email.ADDRESS, newNumber);
         }
 

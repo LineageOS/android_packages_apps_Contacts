@@ -148,11 +148,11 @@ public class ConfirmAddDetailActivity extends Activity implements
 
     private String mMimetype = Phone.CONTENT_ITEM_TYPE;
 
-    private boolean isSimAccount;
+    private boolean mIsSimAccount;
 
     // This flag is used to avoid always start new activity ConfirmReplaceDetailActivity
     // after device rotate.
-    private boolean hasStartActivity;
+    private boolean mHasStartActivity;
 
     /**
      * DialogManager may be needed if the user wants to apply a "custom" label to the contact detail
@@ -250,7 +250,7 @@ public class ConfirmAddDetailActivity extends Activity implements
         super.onCreate(icicle);
 
         if (icicle != null) {
-            hasStartActivity = icicle.getBoolean(FLAG_HAS_START_ACTIVITY, false);
+            mHasStartActivity = icicle.getBoolean(FLAG_HAS_START_ACTIVITY, false);
         }
 
         mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -631,9 +631,9 @@ public class ConfirmAddDetailActivity extends Activity implements
 
             if (mEditableAccountType != null && SimContactsConstants.ACCOUNT_TYPE_SIM.equals(
                     mEditableAccountType.accountType)) {
-                isSimAccount = true;
+                mIsSimAccount = true;
                 handleSimAccount(mRawContactDelta);
-                if (hasStartActivity) {
+                if (mHasStartActivity) {
                     return;
                 }
             }
@@ -641,7 +641,7 @@ public class ConfirmAddDetailActivity extends Activity implements
             // Handle any incoming values that should be inserted
             final Bundle extras = getIntent().getExtras();
             if (extras != null && extras.size() > 0) {
-                if (isSimAccount) {
+                if (mIsSimAccount) {
                     //As Sim card don't support to save two mobile number,
                     //so here remove the phone type.
                     extras.remove(ContactsContract.Intents.Insert.PHONE_TYPE);
@@ -673,12 +673,12 @@ public class ConfirmAddDetailActivity extends Activity implements
                     ConfirmAddDetailActivity.this, slot);
         }
 
-        if (count >= maxNumber && !hasStartActivity) {
+        if (count >= maxNumber && !mHasStartActivity) {
             Intent intent = new Intent(this, ConfirmReplaceDetailActivity.class);
             intent.putExtras(getIntent().getExtras());
             intent.putExtra(RAWCONTACTS_DELTA_LIST, (Parcelable) mEntityDeltaList);
             startActivityForResult(intent, SUBACTIVITY_REPLACE_TO_EXISTING_CONTACT);
-            hasStartActivity = true;
+            mHasStartActivity = true;
         }
     }
 
@@ -840,7 +840,7 @@ public class ConfirmAddDetailActivity extends Activity implements
      * finishes the activity.
      */
     private void doSaveAction() {
-        final PersistTask task = new PersistTask(this, mAccountTypeManager, isSimAccount);
+        final PersistTask task = new PersistTask(this, mAccountTypeManager, mIsSimAccount);
         task.execute(mEntityDeltaList);
     }
 
@@ -1009,6 +1009,6 @@ public class ConfirmAddDetailActivity extends Activity implements
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBoolean(FLAG_HAS_START_ACTIVITY, hasStartActivity);
+        outState.putBoolean(FLAG_HAS_START_ACTIVITY, mHasStartActivity);
     }
 }

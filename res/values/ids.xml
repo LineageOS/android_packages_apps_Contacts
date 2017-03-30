@@ -47,6 +47,9 @@
     <!-- An ID to be used for tagging text for copy in legacy fields. -->
     <item name="text_to_copy" type="id"/>
 
+    <!-- Menu ID for profile item -->
+    <item type="id" name="nav_myprofile" />
+
     <!-- Menu group ID for settings and help & feedback  -->
     <item type="id" name="nav_misc" />
 

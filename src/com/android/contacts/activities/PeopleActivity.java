@@ -1233,6 +1233,15 @@ public class PeopleActivity extends AppCompatContactsActivity implements
         }
     }
 
+    /*
+     * Behavior when select Emergency information on Navigation drawer.
+     */
+    @Override
+    public void onEmergencyViewSelected() {
+        ImplicitIntentsUtil.startActivityOutsideApp(this,
+                ImplicitIntentsUtil.getIntentForEmergencyInfo(this));
+    }
+
     public boolean isGroupView() {
         return mCurrentView == ContactsView.GROUP_VIEW;
     }

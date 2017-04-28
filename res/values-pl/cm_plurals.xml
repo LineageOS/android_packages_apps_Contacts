@@ -31,4 +31,14 @@
     <item quantity="few">Zaimpotowano %d kontakty</item>
     <item quantity="other">Zaimpotowano %d kontaktów</item>
   </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">%d kontakt zostanie usunięty.</item>
+    <item quantity="few">%d kontakty zostaną usunięte.</item>
+    <item quantity="other">%d kontaktów zostanie usuniętych.</item>
+  </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="one">%d osoba oznaczona jako spam</item>
+    <item quantity="few">%d osoby oznaczone jako spam</item>
+    <item quantity="other">%d osób oznaczono jako spam</item>
+  </plurals>
 </resources>

@@ -27,7 +27,7 @@
   <string name="invalid_phone_number">電話番号が無効です</string>
   <string name="invalid_number_type">番号の種類が無効です</string>
   <string name="no_phone_number_or_email">電話番号またはメールアドレスを入力してください。</string>
-  <string name="memory_card_full">連絡先を保存できませんでした、携帯電話のメモリがいっぱいです</string>
+  <string name="memory_card_full">連絡先を保存できませんでした。端末のメモリがいっぱいです</string>
   <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">グループ</string>
   <string name="menu_moveGroupMembers">グループのメンバーを移動</string>

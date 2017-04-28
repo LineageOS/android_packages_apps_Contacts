@@ -18,11 +18,57 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Toast displayed when saving a contact to sim card failed -->
+  <string name="contactSavedToSimCardError">Kontaktet e zgjedhur nuk mund të ruheshin në kartën SIM</string>
+  <string name="airplane_mode_on">Karta SIM nuk mund të aksesohet kur profili Avion është i aktivizuar</string>
+  <string name="number_anr_too_long">Numri është shumë i gjatë</string>
+  <string name="email_address_too_long">Adresa e email-it është shumë e gjatë</string>
+  <string name="sim_card_full">Karta SIM është plot</string>
+  <string name="tag_too_long">Emri i kontaktit është shumë i gjatë</string>
+  <string name="invalid_phone_number">Numri i telefonit nuk është i saktë</string>
+  <string name="invalid_number_type">Lloji i numrit nuk është i saktë</string>
+  <string name="no_phone_number_or_email">Vendosni numrin e telefonit ose adresën e email-it.</string>
+  <string name="memory_card_full">Kontakti nuk u ruajt dot. Memoria e telefonit është plot</string>
   <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
+  <string name="contacts_groups_label">Grupet</string>
+  <string name="menu_moveGroupMembers">Zhvendos pjesëtarët e grupit</string>
+  <string name="title_move_members">Zhvendos pjesëtarët</string>
+  <string name="message_move_members">Duke zhvendosur pjesëtarët\u2026</string>
+  <string name="message_can_not_move_members">Pjesëtarët nuk mund të zhvendosen</string>
+  <string name="edit_before_call">Redakto numrin përpara se t\'i biesh</string>
+  <string name="menu_sendViaSMS">Dërgo kontaktin me SMS</string>
+  <string name="select_all">Të gjithë</string>
   <!-- Choose Sim Card to Import -->
+  <string name="import_sim_contacts_title">Importo kontaktet e kartës SIM</string>
+  <string name="import_sim_contacts_message">Duke importuar kontaktet e kartës SIM\u2026</string>
   <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
+  <string name="importConfirmation_title">Dëshiron të importosh kontaktin?</string>
+  <string name="import_finish">Importimi mbaroi</string>
   <!-- Multi Delete Contacts related strings -->
+  <string name="delete_contacts_title">Fshi kontaktet</string>
+  <string name="delete_contacts_message">Duke fshirë kontaktet\u2026</string>
   <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
+  <string name="deleteConfirmation_title">Dëshiron ta fshish kontaktin?</string>
+  <string name="too_many_contacts_add_to_group">Nuk mund të shtohen më shumë se <xliff:g id="count">%d</xliff:g> kontakte</string>
   <!-- add for MemoryStatusActivity -->
+  <string name="menu_memory_status">Statusi i memories</string>
+  <string name="memory_size">Në total:</string>
+  <string name="memory_used">Përdorur:</string>
+  <string name="calculating_status_now">Duke llogaritur statusin\u2026</string>
+  <string name="menu_copyTo">Kopjo në <xliff:g id="destination">%s</xliff:g></string>
+  <string name="no_empty_email_in_usim">Kontakti USIM nuk ka një fushë email-i të disponueshme. Kopjimi i mesazheve nuk mund të kryhet.</string>
+  <string name="voicemail">Posta zanore</string>
+  <string name="select_call_title">Zgjidh listat e thirrjeve</string>
+  <string name="delete_call_title">Fshi listat e thirrjeve</string>
+  <string name="delete_call_message">Duke fshirë listat e thirrjeve\u2026</string>
+  <string name="delete_call_alert">Do që të fshish listën e zgjedhur të thirrjeve?</string>
+  <string name="title_del_call">Fshi</string>
+  <string name="powered_by_provider">Mundësuar nga <xliff:g id="provider">%s</xliff:g></string>
+  <string name="sms_permission_rationale">Leja SMS nevojitet për të shfaqur historikun e mesazheve SMS të kontakteve.</string>
+  <string name="sms_rationale_view">SHIKO</string>
   <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">Kërko dosjen %1$s</string>
+  <string name="incall_plugin_invite">FTO</string>
+  <string name="incall_plugin_account_subheader">emri i %1$s</string>
+  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> nuk mund ta bëjë dot këtë thirrje</string>
+  <string name="incall_plugin_intent_error">E pamundur për ta kryer këtë veprim. Provo përsëri më vonë.</string>
 </resources>

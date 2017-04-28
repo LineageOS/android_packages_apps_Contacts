@@ -48,7 +48,7 @@
   <string name="delete_contacts_message">正在刪除聯絡人\u2026</string>
   <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">刪除聯絡人？</string>
-  <string name="too_many_contacts_add_to_group">不可以新增超過 <xliff:g id="count">%d</xliff:g> 個聯絡人</string>
+  <string name="too_many_contacts_add_to_group">不可新增超過 <xliff:g id="count">%d</xliff:g> 個聯絡人</string>
   <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">記憶體狀態</string>
   <string name="memory_size">總計：</string>

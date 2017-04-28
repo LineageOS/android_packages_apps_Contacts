@@ -63,6 +63,8 @@
   <string name="delete_call_alert">선택된 통화 기록을 삭제할까요?</string>
   <string name="title_del_call">삭제</string>
   <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g>이(가) 제공함</string>
+  <string name="sms_permission_rationale">연락처 SMS 기록을 보려면 SMS 권한이 필요합니다.</string>
+  <string name="sms_rationale_view">보기</string>
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_directory_search">%1$s 디렉터리 검색</string>
   <string name="incall_plugin_invite">초대</string>

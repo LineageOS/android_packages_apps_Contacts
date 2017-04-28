@@ -15,4 +15,25 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <plurals name="contacts_selected">
+    <item quantity="one">%d i zgjedhur</item>
+    <item quantity="other">%d të zgjedhur</item>
+  </plurals>
+  <plurals name="ContactMultiImportConfirmation">
+    <item quantity="one">%d kontakt do të importohet.</item>
+    <item quantity="other">%d kontakte do të importohen.</item>
+  </plurals>
+  <plurals name="import_progress">
+    <item quantity="one">%d kontakt u importua</item>
+    <item quantity="other">%d kontakte u importuan</item>
+  </plurals>
+  <plurals name="ContactMultiDeleteConfirmation">
+    <item quantity="one">%d kontakt do të fshihet.</item>
+    <item quantity="other">%d kontakte do të fshihen.</item>
+  </plurals>
+  <plurals name="spam_count_text">
+    <item quantity="one">%d person e shënoi këtë si spam</item>
+    <item quantity="other">%d persona e shënuan këtë si spam</item>
+  </plurals>
+</resources>

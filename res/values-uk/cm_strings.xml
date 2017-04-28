@@ -18,11 +18,11 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Toast displayed when saving a contact to sim card failed -->
-  <string name="contactSavedToSimCardError">Не вдалося зберегти вибрані контакти на SIM-картці</string>
-  <string name="airplane_mode_on">SIM-картка не доступна коли активовано режим польоту</string>
+  <string name="contactSavedToSimCardError">Не вдалося зберегти вибрані контакти на SIM-карті</string>
+  <string name="airplane_mode_on">SIM-карта недоступна коли активовано режим польоту</string>
   <string name="number_anr_too_long">Номер задовгий</string>
   <string name="email_address_too_long">Адреса електронної пошти задовга</string>
-  <string name="sim_card_full">SIM-картка заповнена</string>
+  <string name="sim_card_full">SIM-карта заповнена</string>
   <string name="tag_too_long">Задовге ім\'я контакту</string>
   <string name="invalid_phone_number">Неприпустимий номер телефону</string>
   <string name="invalid_number_type">Неприпустимий тип номера</string>

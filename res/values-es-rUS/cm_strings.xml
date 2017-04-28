@@ -44,10 +44,10 @@
   <string name="importConfirmation_title">¿Importar contacto?</string>
   <string name="import_finish">Importación finalizada</string>
   <!-- Multi Delete Contacts related strings -->
-  <string name="delete_contacts_title">Eliminar contactos</string>
+  <string name="delete_contacts_title">Borrar contactos</string>
   <string name="delete_contacts_message">Eliminando contactos\u2026</string>
   <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
-  <string name="deleteConfirmation_title">¿Eliminar contacto?</string>
+  <string name="deleteConfirmation_title">¿Borrar contacto?</string>
   <string name="too_many_contacts_add_to_group">No se pueden añadir más de <xliff:g id="count">%d</xliff:g> contactos</string>
   <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Estado de la memoria</string>
@@ -58,10 +58,10 @@
   <string name="no_empty_email_in_usim">El contacto USIM no tiene un campo de correo electrónico disponible, no se pueden copiar los mensajes.</string>
   <string name="voicemail">Correo de voz</string>
   <string name="select_call_title">Seleccionar registros de llamadas</string>
-  <string name="delete_call_title">Eliminar registros de llamadas</string>
+  <string name="delete_call_title">Borrar registros de llamadas</string>
   <string name="delete_call_message">Eliminando registro de llamadas\u2026</string>
-  <string name="delete_call_alert">¿Eliminar los registros de llamadas seleccionados?</string>
-  <string name="title_del_call">Eliminar</string>
+  <string name="delete_call_alert">¿Borrar los registros de llamadas seleccionados?</string>
+  <string name="title_del_call">Borrar</string>
   <string name="powered_by_provider">Con tecnología <xliff:g id="provider">%s</xliff:g></string>
   <string name="sms_permission_rationale">Se requiere el permiso de SMS para mostrar el historial de SMS de contactos.</string>
   <string name="sms_rationale_view">VER</string>

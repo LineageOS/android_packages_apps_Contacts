@@ -65,6 +65,7 @@
   <string name="powered_by_provider">Drivs av <xliff:g id="provider">%s</xliff:g></string>
   <string name="sms_rationale_view">VISA</string>
   <!-- InCall plugin directory search & invite -->
+  <string name="incall_plugin_directory_search">Sök efter %1$s mapp</string>
   <string name="incall_plugin_invite">BJUD IN</string>
   <string name="incall_plugin_account_subheader">%1$s namn</string>
   <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> kan inte ringa det här samtalet</string>

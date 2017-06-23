@@ -18,13 +18,13 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Toast displayed when saving a contact to sim card failed -->
-  <string name="contactSavedToSimCardError">Не може да се сачува изабрани контакт на SIM картици</string>
+  <string name="contactSavedToSimCardError">Не могу да сачувам изабране контакте на SIM картицу</string>
   <string name="airplane_mode_on">Не може се приступити SIM картици док је режим рада у авиону омогућен</string>
-  <string name="number_anr_too_long">Број је предуг</string>
-  <string name="email_address_too_long">Адреса Е-поште је предуга</string>
+  <string name="number_anr_too_long">Број је предугачак</string>
+  <string name="email_address_too_long">Адреса е-поште је предугачка</string>
   <string name="sim_card_full">SIM картица је пуна</string>
-  <string name="tag_too_long">Име контакта је предуго</string>
-  <string name="invalid_phone_number">Телефонски број је неважећи</string>
+  <string name="tag_too_long">Име контакта је предугачко</string>
+  <string name="invalid_phone_number">Број телефона је неважећи</string>
   <string name="invalid_number_type">Тип броја је неважећи</string>
   <string name="no_phone_number_or_email">Унеси број телефона или адресу е-поште.</string>
   <string name="memory_card_full">Контакт не може бити сачуван, меморија телефона је пуна</string>
@@ -32,35 +32,35 @@
   <string name="contacts_groups_label">Групе</string>
   <string name="menu_moveGroupMembers">Премести чланове групе</string>
   <string name="title_move_members">Премести чланове</string>
-  <string name="message_move_members">Премештање чланова\u2026</string>
-  <string name="message_can_not_move_members">Не могу преместити чланове</string>
+  <string name="message_move_members">Премештам чланове\u2026</string>
+  <string name="message_can_not_move_members">Не могу да преместим чланове</string>
   <string name="edit_before_call">Уреди број пре позива</string>
   <string name="menu_sendViaSMS">Пошаљи контакт преко SMS</string>
   <string name="select_all">Све</string>
   <!-- Choose Sim Card to Import -->
-  <string name="import_sim_contacts_title">Увези SIM контакте</string>
+  <string name="import_sim_contacts_title">Увези контакте са SIM картице</string>
   <string name="import_sim_contacts_message">Увоз SIM контаката\u2026</string>
   <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
-  <string name="importConfirmation_title">Увези контакт?</string>
-  <string name="import_finish">Увоз завршен</string>
+  <string name="importConfirmation_title">Увести контакт?</string>
+  <string name="import_finish">Увоз је завршен</string>
   <!-- Multi Delete Contacts related strings -->
-  <string name="delete_contacts_title">Избриши контакте</string>
+  <string name="delete_contacts_title">Обриши контакте</string>
   <string name="delete_contacts_message">Брисање контаката\u2026</string>
   <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
-  <string name="deleteConfirmation_title">Избриши контакт?</string>
-  <string name="too_many_contacts_add_to_group">Не више од <xliff:g id="count">%d</xliff:g> контаката може бити додато</string>
+  <string name="deleteConfirmation_title">Обрисати контакт?</string>
+  <string name="too_many_contacts_add_to_group">Није могуће додати више од <xliff:g id="count">%d</xliff:g> контаката</string>
   <!-- add for MemoryStatusActivity -->
   <string name="menu_memory_status">Статус меморије</string>
   <string name="memory_size">Укупно:</string>
   <string name="memory_used">Искоришћено:</string>
   <string name="calculating_status_now">Рачунање статуса\u2026</string>
-  <string name="menu_copyTo">Копирај на <xliff:g id="destination">%s</xliff:g></string>
-  <string name="no_empty_email_in_usim">USIM контакт нема доступно поље е-поште, не могу копирати поруке.</string>
+  <string name="menu_copyTo">Копирај у <xliff:g id="destination">%s</xliff:g></string>
+  <string name="no_empty_email_in_usim">Контакт са USIM картице нема доступно поље за е-пошту. Не могу да копирам поруке.</string>
   <string name="voicemail">Говорна пошта</string>
   <string name="select_call_title">Изабери евиденцију позива</string>
-  <string name="delete_call_title">Избриши евиденције позива</string>
+  <string name="delete_call_title">Избриши евиденцију позива</string>
   <string name="delete_call_message">Брисање евиденција позива\u2026</string>
-  <string name="delete_call_alert">Избриши изабране евиденције позива?</string>
+  <string name="delete_call_alert">Избрисати изабрану евиденцију позива?</string>
   <string name="title_del_call">Избриши</string>
   <string name="powered_by_provider">Омогућено од <xliff:g id="provider">%s</xliff:g></string>
   <string name="sms_permission_rationale">SMS дозвола је неопходна за приказ SMS историје контакта.</string>

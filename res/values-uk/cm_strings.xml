@@ -68,6 +68,7 @@
   <!-- InCall plugin directory search & invite -->
   <string name="incall_plugin_directory_search">Пошук в папці %1$s</string>
   <string name="incall_plugin_invite">ЗАПРОСИТИ</string>
+  <string name="incall_plugin_account_subheader">назва %1$s</string>
   <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> не може зробити цей виклик</string>
   <string name="incall_plugin_intent_error">Не вдається завершити цю дію. Спробуйте пізніше.</string>
 </resources>

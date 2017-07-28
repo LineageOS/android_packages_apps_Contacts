@@ -34,7 +34,7 @@
   <string name="title_move_members">Üyeleri taşı </string>
   <string name="message_move_members">Üyeler taşınıyor\u2026</string>
   <string name="message_can_not_move_members">Üyeler taşınamıyor</string>
-  <string name="edit_before_call">Çağrıdan önce numarayı düzenle</string>
+  <string name="edit_before_call">Aramadan önce numarayı düzenle</string>
   <string name="menu_sendViaSMS">Kişiyi SMS ile gönder</string>
   <string name="select_all">Tümü</string>
   <!-- Choose Sim Card to Import -->

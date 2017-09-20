@@ -17,21 +17,16 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Application name used in Settings/Apps. Default label for activities
          that don't specify a label. -->
-  <string name="applicationLabel">Contautos</string>
   <!-- Title for the activity that launches Contacts.  This is the name
          used in the Launcher icon. -->
-  <string name="launcherActivityLabel">Contautos</string>
   <!-- Directory partition name -->
-  <string name="contactsList">Contautos</string>
   <!-- Name of activity that allows users to create shortcuts on the home screen to a contact.
          This shows up in a list of things like bookmark, folder, music playlist, etc -->
-  <string name="shortcutContact">Contautu</string>
   <!-- Name of activity that allows users to create shortcuts on the home screen to dial a contact.
          This shows up in a list of things like bookmark, folder, music playlist, etc -->
   <string name="shortcutDialContact">Marcación direuta</string>
   <!-- Name of activity that allows users to create shortcuts on the home screen to message (SMS) a contact.
          This shows up in a list of things like bookmark, folder, music playlist, etc -->
-  <string name="shortcutMessageContact">Mensaxe direutu</string>
   <!-- Activity title when the user is selecting a contact for a shortcut. -->
   <string name="shortcutActivityTitle">Escoyer un atayu pal contautu</string>
   <!-- Activity title when the user is selecting a contact for a direct dial shortcut. -->
@@ -44,7 +39,6 @@
   <!-- Title for the activity that shows only frequently contacted contacts -->
   <!-- Title for the activity that shows a mix of starred contacts and frequently contacted
          contacts. -->
-  <string name="strequentList">Favoritos</string>
   <!-- The title bar when viewing the contact details activity -->
   <!-- The description presented to the user in the Intent choose when there are multiple activities that allow
          editing a contact. This string represents the built in way to edit the contact. -->
@@ -71,16 +65,14 @@
   <!-- Menu item used to send an SMS or MMS message to a specific phone number or a contacts default phone number -->
   <!-- Menu item that splits an item from the contact detail into a separate aggregate -->
   <!-- Menu item that edits the currently selected group [CHAR LIMIT=30] -->
-  <string name="menu_editGroup">Editar</string>
   <!-- Menu item that deletes the currently selected group [CHAR LIMIT=30] -->
-  <string name="menu_deleteGroup">Desaniciar</string>
   <!-- Menu item (in the action bar) that creates a new contact [CHAR LIMIT=30] -->
   <!-- Menu item (in the action bar) that creates a new group [CHAR LIMIT=30] -->
   <!-- Title of the confirmation dialog for separating contacts into multiple instances [CHAR LIMIT=26] -->
+  <string name="splitConfirmation_title">¿Separtar contautu?</string>
   <!-- Confirmation dialog for separating contacts into multiple instances [CHAR LIMIT=NONE] -->
   <!-- Menu item that joins an aggregate with another aggregate -->
   <!-- Menu item (in the action bar) to indicate that changes should be saved [CHAR LIMIT=20] -->
-  <string name="menu_save">Guardar</string>
   <!-- Heading of the Join Contact screen -->
   <!-- Info blurb on the Join Contact screen [CHAR LIMIT=NONE]-->
   <!-- An item in the Join Contact activity that opens up the full contact A-Z list -->
@@ -91,6 +83,7 @@
   <!-- Menu item that opens the Options activity for a given contact [CHAR LIMIT=15] -->
   <string name="menu_set_ring_tone">Afitar timbre</string>
   <!-- Menu item that opens the Options activity for a given contact [CHAR LIMIT=30] -->
+  <string name="menu_redirect_calls_to_vm">Toles llamaes al buzón de voz</string>
   <!-- Warning dialog contents after users selects to delete a ReadOnly contact. [CHAR LIMIT=NONE] -->
   <!-- Warning dialog contents after users selects to delete a contact with ReadOnly and Writable sources. -->
   <!-- Warning dialog. Shown if user selects a single contact to merge. [CHAR LIMIT=NONE]  -->
@@ -103,6 +96,7 @@
   <!-- Menu item to indicate you want to stop editing a contact and NOT save the changes you've made [CHAR LIMIT=30] -->
   <!-- Message displayed in a toast when you try to view the details of a contact that
          for some reason doesn't exist anymore. [CHAR LIMIT=NONE]-->
+  <string name="invalidContactMessage">El contautu nun esiste.</string>
   <!-- Message displayed in a toast after you create a contact shortcut in the launcher [CHAR LIMIT=NONE]-->
   <!-- When picking a contact from a list of all contacts there is an entry at the top of the
          list that allows the user to create a new contact, which this string is used for -->
@@ -136,7 +130,6 @@
   <!-- Displayed at the top of the contacts showing the total number of contacts found when typing search query -->
   <!-- The title of "all contacts" tab. [CHAR LIMIT=14] -->
   <!-- The title of "favorites" tab. [CHAR LIMIT=14] -->
-  <string name="favorites_tab_label">Favoritos</string>
   <!-- Action string for calling back a number in the call log -->
   <!-- Action string for calling a number in the call log again -->
   <!-- Action string for returning a missed call in the call log -->
@@ -166,7 +159,9 @@
   <!-- Dialog title when picking the application to share a contact with. -->
   <!-- Title for the disambiguation dialog that requests the user choose an account for the new group to be created under [CHAR LIMIT=NONE] -->
   <!-- Generic action string for starting an audio chat. Used by AccessibilityService to announce the purpose of the view. [CHAR LIMIT=NONE] -->
+  <string name="audio_chat">Charra de voz</string>
   <!-- Generic action string for starting a video chat. Used by AccessibilityService to announce the purpose of the view. [CHAR LIMIT=NONE] -->
+  <string name="video_chat">Charra de videu</string>
   <!-- Title for the list of all contact details that come from third-party sources (including a corporate directory) [CHAR LIMIT=20] -->
   <!-- Label of the button to open the "add connection" popup where the user can invite a contact to other social networks or services [CHAR LIMIT=32] -->
   <!-- Section title for the page containing the contact's social updates on the contact card (this abbreviated version of "Recent updates" is used when "updates" is already shown as the title of the page) [CHAR LIMIT=20]-->
@@ -176,7 +171,6 @@
   <!-- String describing which account a contact came from when editing it -->
   <!-- Text used to explain that a contact cannot be edited from the People application since the data is read only [CHAR LIMIT=40] -->
   <!-- Text used to explain that a group cannot be edited since the data is read only [CHAR LIMIT=40] -->
-  <string name="group_read_only">Nun pue editase nesti preséu.</string>
   <!-- An option in the 'Contact photo' dialog, if there is no photo yet [CHAR LIMIT=50] -->
   <!-- An option in the 'Contact photo' dialog, if there is already a photo [CHAR LIMIT=50] -->
   <!-- An option in the 'Contact photo' dialog, if there is no photo yet [CHAR LIMIT=50] -->
@@ -192,7 +186,9 @@
   <!-- The button to add an organization field to a contact in the Raw Contact Editor [CHAR LIMIT=12] -->
   <!-- The button to add an organization field to a contact in the Raw Contact Editor [CHAR LIMIT=15] -->
   <!-- Button used for changing a photo in the Raw Contact Editor [CHAR LIMIT=15] -->
+  <string name="change_photo">Camudar</string>
   <!-- RadioButton that determines whether a raw contact's photo should be used for the entire contact [CHAR LIMIT=25] -->
+  <string name="primary_photo">Semeya primaria</string>
   <!-- String describing the Star/Favorite checkbox
 
          Used by AccessibilityService to announce the purpose of the view.
@@ -212,19 +208,21 @@
   <!-- The description of the directory where the contact was found [CHAR LIMIT=100]-->
   <!-- Contact list filter indicating that the list shows groups chosen by the user [CHAR LIMIT=64] -->
   <!-- Title of the settings activity [CHAR LIMIT=64] -->
-  <string name="activity_title_settings">Axustes</string>
   <!-- Menu item for the settings activity [CHAR LIMIT=64] -->
-  <string name="menu_settings" msgid="377929915873428211">Axustes</string>
   <!-- Menu item for invoking contextual Help & Feedback [CHAR LIMIT=64] -->
   <!-- The preference section title for contact display options [CHAR LIMIT=128] -->
   <!-- Text used to show a organization that has both a company and title. This is used in the Detail-View
     of a Contact. This is mostly about the formatting of the two elements, so it should be kept small [CHAR LIMIT=79] -->
+  <string name="organization_company_and_title"><xliff:g id="company" example="Technical Program Manager">%2$s</xliff:g>, <xliff:g id="company" example="Google Inc.">%1$s</xliff:g></string>
   <!-- Title shown for the phone number when the number tries to call on a device that it not a phone [CHAR LIMIT=30] -->
+  <string name="non_phone_caption">Númberu telefónicu</string>
   <!-- Button to add a phone number to contacts [CHAR LIMIT=25] -->
   <!-- Title of the activity that allows the user to confirm the addition of a detail to 1 existing contact [CHAR LIMIT=25] -->
   <!-- Button to close without add a phone number to contacts [CHAR LIMIT=25] -->
   <!-- Format string that combines the name and the phonetic name for the widget. if the phonetic name is empty, only the display name is used instead [CHAR LIMIT=25] -->
+  <string name="widget_name_and_phonetic"><xliff:g id="display_name" example="John Huber">%1$s</xliff:g> (<xliff:g id="phonetic_name">%2$s</xliff:g>)</string>
   <!-- Checkbox whether to provide a year for a birthday [CHAR LIMIT=30] -->
+  <string name="date_year_toggle">Apurri un añu</string>
   <!-- Label for the widget that shows picture and social status of a contact [CHAR LIMIT=20] -->
   <!-- Message of widget while it is loading data [CHAR LIMIT=20] -->
   <!-- Button shown on the main contacts screen when there are no contacts on the device.
@@ -243,9 +241,11 @@
       with another before entering any data  [CHAR LIMIT=256] -->
   <!-- Option displayed in context menu to copy long pressed item to clipboard [CHAR LIMIT=64] -->
   <!-- Option displayed in context menu to set long pressed item as default contact method [CHAR LIMIT=64] -->
+  <string name="set_default">Predeterminar</string>
   <!-- Option displayed in context menu to clear long pressed item as default contact method [CHAR LIMIT=64] -->
   <!-- Toast shown when text is copied to the clipboard [CHAR LIMIT=64] -->
   <!-- Contents of the alert dialog when the user hits the Cancel button in the editor [CHAR LIMIT=128] -->
+  <string name="cancel_confirmation_dialog_message">¿Escartar les camudancies?</string>
   <!-- Description of a call log entry, made of a call type and a date -->
   <!-- Text displayed in place of the display name for the contact that represents the user's
       personal profile entry [CHAR LIMIT=64] -->
@@ -278,7 +278,6 @@
   <!-- Button Label to see all on an ExpandingEntryCardView [CHAR LIMIT=40] -->
   <!-- Title of recent card. [CHAR LIMIT=60] -->
   <!-- Title of recent card. [CHAR LIMIT=40] -->
-  <string name="about_card_title">Tocante a</string>
   <!-- Title of sms action entry. [CHAR LIMIT=60] -->
   <!-- Toast that appears when you are copying a directory contact into your personal contacts -->
   <!-- Timestamp string for interactions from yesterday. [CHAR LIMIT=40] -->
@@ -301,22 +300,30 @@
   <!-- Content description for the account field header image. Example accounts listed in this field: Google, Hotmail and Exchange. [CHAR LIMIT=NONE] -->
   <string name="header_account_entry">Cuenta</string>
   <!-- Content description for the name fields header entry [CHAR LIMIT=NONE] -->
+  <string name="header_name_entry">Nome</string>
   <!-- Content description for the email fields header entry [CHAR LIMIT=NONE] -->
+  <string name="header_email_entry">Corréu</string>
   <!-- Content description for the phone fields header entry [CHAR LIMIT=NONE] -->
+  <string name="header_phone_entry">Teléfonu</string>
   <!-- Content description for the camera icon beside the photo section in the Raw Contact Editor [CHAR LIMIT=NONE] -->
+  <string name="header_photo_entry">Semeya</string>
   <!-- Content description for the expand button inside the raw contact editor's header. [CHAR LIMIT=NONE] -->
+  <string name="content_description_expand_editor">Clic pa espander l\'editor de contautos.</string>
   <!-- Content description for the collapse button inside the raw contact editor's header. [CHAR LIMIT=NONE] -->
+  <string name="content_description_collapse_editor">Clic pa recoyer l\'editor de contautos.</string>
   <!-- Content description for directions secondary button [CHAR LIMIT=NONE] -->
   <!-- Content description for recent sms interaction [CHAR LIMIT=NONE] -->
+  <string name="content_description_recent_sms">sms recién. <xliff:g id="message_body">%s</xliff:g>. <xliff:g id="phone_number">%s</xliff:g>. <xliff:g id="date">%s</xliff:g>. primi pa responder</string>
   <!-- Header for the Relation entry [CHAR LIMIT=NONE] -->
   <!-- Header for the Relation entry [CHAR LIMIT=NONE] -->
   <!-- Header for the Relation entry [CHAR LIMIT=NONE] -->
   <!-- Content description for recent sms interaction [CHAR LIMIT=NONE] -->
+  <string name="content_description_recent_call">llamada recién. <xliff:g id="call_type">%s</xliff:g>. <xliff:g id="phone_number">%s</xliff:g>. <xliff:g id="date">%s</xliff:g>. primi pa devolvela</string>
   <!-- Prefix for messages that you sent [CHAR LIMIT=40] -->
   <!-- File Authority for the photo picker -->
   <!-- When a user tries to create an IM Hangouts field, an alert dialog pops up displaying this message. We don't want users entering email addresses of phone numbers into the IM field. [CHAR LIMIT=200] -->
+  <string name="contact_editor_hangouts_im_alert">Hangouts funciona meyor al introducir l\'identificador Hangouts de la persona nel campu de corréu o teléfonu.</string>
   <!-- Button to expand the compact contact editor to show all available input fields. [CHAR LIMIT=60] -->
-  <string name="compact_editor_more_fields">Más campos</string>
   <!-- Content description for the compact contact editor photo overlay which, when clicked, shows a dialog with the options for changing the contact photo. [CHAR LIMIT=30] -->
   <!-- Quick contact display name with phonetic name -->
 </resources>

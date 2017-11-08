@@ -38,6 +38,7 @@ import com.android.contacts.model.account.AccountDisplayInfoFactory;
 import com.android.contacts.profile.ProfileItem;
 import com.android.contacts.util.ImplicitIntentsUtil;
 import com.android.contacts.util.SharedPreferenceUtil;
+import com.android.contactsbind.HelpUtils;
 import com.android.contactsbind.ObjectFactory;
 
 import java.util.ArrayList;
@@ -138,8 +139,10 @@ public class DrawerAdapter extends BaseAdapter {
         mMiscItems.add(new DividerItem());
         mMiscItems.add(new MiscItem(R.id.nav_settings, R.string.menu_settings,
                 R.drawable.quantum_ic_settings_vd_theme_24));
-        mMiscItems.add(new MiscItem(R.id.nav_help, R.string.menu_help,
-                R.drawable.quantum_ic_help_vd_theme_24));
+        if (HelpUtils.isHelpAndFeedbackAvailable()) {
+            mMiscItems.add(new MiscItem(R.id.nav_help, R.string.menu_help,
+                    R.drawable.quantum_ic_help_vd_theme_24));
+        }
         rebuildItemsList();
     }
 

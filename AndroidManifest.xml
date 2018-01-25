@@ -66,6 +66,7 @@
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_contacts_launcher"
         android:label="@string/applicationLabel"
+        android:appCategory="social"
         android:supportsRtl="true"
         android:taskAffinity="android.task.contacts"
         android:usesCleartextTraffic="false">

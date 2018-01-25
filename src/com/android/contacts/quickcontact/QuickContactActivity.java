@@ -2827,8 +2827,10 @@ public class QuickContactActivity extends ContactsActivity {
             sendToVoiceMailMenuItem.setTitle(mSendToVoicemailState
                     ? R.string.menu_unredirect_calls_to_vm : R.string.menu_redirect_calls_to_vm);
 
+/*
             final MenuItem helpMenu = menu.findItem(R.id.menu_help);
             helpMenu.setVisible(HelpUtils.isHelpAndFeedbackAvailable());
+*/
 
             return true;
         }
@@ -2949,10 +2951,12 @@ public class QuickContactActivity extends ContactsActivity {
             final Intent intent = ContactSaveService.createSetSendToVoicemail(
                     this, mLookupUri, mSendToVoicemailState);
             this.startService(intent);
+/*
         } else if (id == R.id.menu_help) {
             Logger.logQuickContactEvent(mReferrer, mContactType, CardType.UNKNOWN_CARD,
-                    ActionType.HELP, /* thirdPartyAction */ null);
+                    ActionType.HELP, /* thirdPartyAction * / null);
             HelpUtils.launchHelpAndFeedbackForContactScreen(this);
+*/
         } else {
             Logger.logQuickContactEvent(mReferrer, mContactType, CardType.UNKNOWN_CARD,
                     ActionType.UNKNOWN_ACTION, /* thirdPartyAction */ null);

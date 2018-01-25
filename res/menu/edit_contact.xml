@@ -34,7 +34,9 @@
         android:id="@+id/menu_delete"
         android:title="@string/menu_deleteContact" />
 
+<!--
     <item
         android:id="@+id/menu_help"
         android:title="@string/menu_help" />
+-->
 </menu>

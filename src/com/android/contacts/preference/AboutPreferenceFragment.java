@@ -64,6 +64,7 @@ public class AboutPreferenceFragment extends PreferenceFragment {
                 getString(R.string.pref_open_source_licenses_key));
         licensePreference.setIntent(new Intent(getActivity(), LicenseActivity.class));
 
+/*
         final Preference privacyPolicyPreference = findPreference("pref_privacy_policy");
         final Preference termsOfServicePreference = findPreference("pref_terms_of_service");
 
@@ -87,6 +88,7 @@ public class AboutPreferenceFragment extends PreferenceFragment {
 
         privacyPolicyPreference.setOnPreferenceClickListener(listener);
         termsOfServicePreference.setOnPreferenceClickListener(listener);
+*/
     }
 
     @Override

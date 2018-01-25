@@ -776,9 +776,11 @@ public class ContactEditorFragment extends Fragment implements
             return doSplitContactAction();
         } else if (id == R.id.menu_join) {
             return doJoinContactAction();
+/*
         } else if (id == R.id.menu_help) {
             HelpUtils.launchHelpAndFeedbackForContactScreen(getActivity());
             return true;
+*/
         }
 
         return false;

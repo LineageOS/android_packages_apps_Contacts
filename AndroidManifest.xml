@@ -20,7 +20,7 @@
           android:versionName="1.7.33">
 
     <uses-sdk
-        android:minSdkVersion="21"
+        android:minSdkVersion="26"
         android:targetSdkVersion="30"/>
 
     <original-package android:name="com.android.contacts"/>
@@ -62,7 +62,7 @@
     <application
         android:name="com.android.contacts.ContactsApplication"
         android:hardwareAccelerated="true"
-        android:icon="@mipmap/ic_contacts_launcher"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/applicationLabel"
         android:appCategory="social"
         android:supportsRtl="true"

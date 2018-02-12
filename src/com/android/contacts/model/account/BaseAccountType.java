@@ -121,7 +121,7 @@ public abstract class BaseAccountType extends AccountType {
         this.accountType = null;
         this.dataSet = null;
         this.titleRes = R.string.account_phone;
-        this.iconRes = R.mipmap.ic_contacts_launcher;
+        this.iconRes = R.mipmap.ic_launcher;
     }
 
     protected static EditType buildPhoneType(int type) {

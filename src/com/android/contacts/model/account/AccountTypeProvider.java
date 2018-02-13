@@ -82,6 +82,9 @@ public class AccountTypeProvider {
      * </p>
      */
     public List<AccountType> getAccountTypes(String accountType) {
+        if (mContext.getPackageName().equals(accountType)) {
+            accountType = null;
+        }
         // ConcurrentHashMap doesn't support null keys
         if (accountType == null) {
             AccountType type = mLocalAccountTypeFactory.getAccountType(accountType);

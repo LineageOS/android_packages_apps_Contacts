@@ -23,7 +23,6 @@ import android.provider.ContactsContract;
 
 import com.android.contacts.Experiments;
 import com.android.contacts.model.account.AccountWithDataSet;
-import com.android.contacts.model.account.GoogleAccountType;
 import com.android.contactsbind.ObjectFactory;
 import com.android.contactsbind.experiments.Flags;
 
@@ -71,7 +70,7 @@ public abstract class DeviceLocalAccountLocator {
             return new Cp2DeviceLocalAccountLocator(context.getContentResolver(),
                     ObjectFactory.getDeviceLocalAccountTypeFactory(context), knownTypes);
         } else {
-            return new NexusDeviceAccountLocator(context, accountManager);
+            return new NexusDeviceAccountLocator(context);
         }
     }
 
@@ -85,21 +84,14 @@ public abstract class DeviceLocalAccountLocator {
      */
     public static class NexusDeviceAccountLocator extends DeviceLocalAccountLocator {
         private final Context mContext;
-        private final AccountManager mAccountManager;
 
-
-        public NexusDeviceAccountLocator(Context context, AccountManager accountManager) {
+        public NexusDeviceAccountLocator(Context context) {
             mContext = context;
-            mAccountManager = accountManager;
         }
 
         @Override
         public List<AccountWithDataSet> getDeviceLocalAccounts() {
-            @SuppressWarnings("MissingPermission")
-            final Account[] accounts = mAccountManager
-                    .getAccountsByType(GoogleAccountType.ACCOUNT_TYPE);
-
-            if (accounts.length > 0 && !AccountWithDataSet.getNullAccount().hasData(mContext)) {
+            if (!AccountWithDataSet.getNullAccount().hasData(mContext)) {
                 return Collections.emptyList();
             } else {
                 return Collections.singletonList(AccountWithDataSet.getNullAccount());

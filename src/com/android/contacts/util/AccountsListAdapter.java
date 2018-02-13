@@ -95,6 +95,8 @@ public final class AccountsListAdapter extends BaseAdapter {
 
         text1.setText(mAccounts.get(position).getTypeLabel());
         text2.setText(mAccounts.get(position).getNameLabel());
+        text2.setVisibility(mAccounts.get(position).getNameLabel().equals(
+                mAccounts.get(position).getTypeLabel()) ? View.GONE : View.VISIBLE);
 
         icon.setImageDrawable(mAccounts.get(position).getIcon());
 

@@ -125,7 +125,7 @@ public class AccountSelectionUtil {
                 final Context context = getContext();
 
                 text1.setText(accountType.getDisplayLabel(context));
-                text2.setText(account.name);
+                text2.setText(context.getPackageName().equals(account.type) ? null : account.name);
                 icon.setImageDrawable(accountType.getDisplayIcon(getContext()));
 
                 return convertView;

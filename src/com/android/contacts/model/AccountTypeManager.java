@@ -80,7 +80,6 @@ public abstract class AccountTypeManager {
 
     public static final String BROADCAST_ACCOUNTS_CHANGED = AccountTypeManager.class.getName() +
             ".AccountsChanged";
-    public static final String DEVICE_ACCOUNT_NAME = "DEVICE";
 
     public enum AccountFilter implements Predicate<AccountInfo> {
         ALL {
@@ -591,22 +590,14 @@ class AccountTypeManagerImpl extends AccountTypeManager
     private List<AccountWithDataSet> getAccountsWithDataSets(Account[] accounts,
             AccountTypeProvider typeProvider) {
         List<AccountWithDataSet> result = new ArrayList<>();
-        // add local device account
-        populateAccountsDataSet(typeProvider, new Account(DEVICE_ACCOUNT_NAME,
-                mContext.getPackageName()), result);
         for (Account account : accounts) {
-            populateAccountsDataSet(typeProvider, account, result);
+            final List<AccountType> types = typeProvider.getAccountTypes(account.type);
+            for (AccountType type : types) {
+                result.add(new AccountWithDataSet(
+                        account.name, account.type, type.dataSet));
+            }
         }
         return result;
-    }
-
-    private void populateAccountsDataSet(AccountTypeProvider typeProvider, Account account,
-            List<AccountWithDataSet> result) {
-        final List<AccountType> types = typeProvider.getAccountTypes(account.type);
-        for (AccountType type : types) {
-            result.add(new AccountWithDataSet(
-                    account.name, account.type, type.dataSet));
-        }
     }
 
     /**

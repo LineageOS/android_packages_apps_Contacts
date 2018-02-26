@@ -276,8 +276,7 @@ public class DrawerAdapter extends BaseAdapter {
         }
         final ContactListFilter account = item.account;
         final TextView textView = ((TextView) result.findViewById(R.id.title));
-        textView.setText(mActivity.getPackageName().equals(account.accountType) ?
-                mActivity.getString(R.string.account_phone) : account.accountName);
+        textView.setText(account.accountName);
         final boolean activated = account.equals(mSelectedAccount)
                 && mSelectedView == ContactsView.ACCOUNT_VIEW;
         textView.setTextAppearance(mActivity, activated

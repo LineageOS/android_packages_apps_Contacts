@@ -21,7 +21,6 @@ import android.content.Context;
 
 import com.android.contacts.Experiments;
 import com.android.contacts.model.account.AccountWithDataSet;
-import com.android.contacts.model.account.GoogleAccountType;
 import com.android.contactsbind.ObjectFactory;
 import com.android.contactsbind.experiments.Flags;
 
@@ -91,15 +90,7 @@ public abstract class DeviceLocalAccountLocator {
 
         @Override
         public List<AccountWithDataSet> getDeviceLocalAccounts() {
-            @SuppressWarnings("MissingPermission")
-            final Account[] accounts = mAccountManager
-                    .getAccountsByType(GoogleAccountType.ACCOUNT_TYPE);
-
-            if (accounts.length > 0) {
-                return Collections.emptyList();
-            } else {
-                return Collections.singletonList(AccountWithDataSet.getNullAccount());
-            }
+            return Collections.emptyList();
         }
     }
 }

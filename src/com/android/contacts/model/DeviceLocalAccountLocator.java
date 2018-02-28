@@ -84,6 +84,7 @@ public abstract class DeviceLocalAccountLocator {
     public static class NexusDeviceAccountLocator extends DeviceLocalAccountLocator {
 
         private final AccountManager mAccountManager;
+        private final boolean mIgnoreNullAccount = true;
 
         public NexusDeviceAccountLocator(AccountManager accountManager) {
             mAccountManager = accountManager;
@@ -95,7 +96,7 @@ public abstract class DeviceLocalAccountLocator {
             final Account[] accounts = mAccountManager
                     .getAccountsByType(GoogleAccountType.ACCOUNT_TYPE);
 
-            if (accounts.length > 0) {
+            if (mIgnoreNullAccount || accounts.length > 0) {
                 return Collections.emptyList();
             } else {
                 return Collections.singletonList(AccountWithDataSet.getNullAccount());

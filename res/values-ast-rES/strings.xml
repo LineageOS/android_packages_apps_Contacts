@@ -17,15 +17,19 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Application name used in Settings/Apps. Default label for activities
          that don't specify a label. -->
+  <string name="applicationLabel">Contautos</string>
   <!-- Directory partition name -->
+  <string name="contactsList">Contautos</string>
   <!-- Name of the dynamic shortcut that creates a new contact [CHAR LIMIT=30] -->
   <!-- Name of activity that allows users to create shortcuts on the home screen to a contact.
          This shows up in a list of things like bookmark, folder, music playlist, etc -->
+  <string name="shortcutContact">Contautu</string>
   <!-- Name of activity that allows users to create shortcuts on the home screen to dial a contact.
          This shows up in a list of things like bookmark, folder, music playlist, etc -->
   <string name="shortcutDialContact">Marcación direuta</string>
   <!-- Name of activity that allows users to create shortcuts on the home screen to message (SMS) a contact.
          This shows up in a list of things like bookmark, folder, music playlist, etc -->
+  <string name="shortcutMessageContact">Mensaxe direutu</string>
   <!-- Activity title when the user is selecting a contact for a shortcut. -->
   <!-- Activity title when the user is inserting into an existing contact, or creating a new one.  [CHAR LIMIT=128] -->
   <string name="contactInsertOrEditActivityTitle">Amestar al contautu</string>
@@ -34,12 +38,17 @@
   <!-- Entry that prompts user to select a newly created contact.  [CHAR LIMIT=30] -->
   <!-- Hint text in the search box when the user hits the Search key while in the contacts app -->
   <!-- Menu item used to add a star to a contact, which makes that contact show up at the top of favorites -->
+  <string name="menu_addStar">Amestar a Favoritos</string>
   <!-- Menu item used to remove a star from a contact, making the contact no longer show up at the top of favorites -->
+  <string name="menu_removeStar">Desaniciar de Favoritos</string>
   <!-- Description of what happens when you click on the unstar MenuItem. [CHAR LIMIT=NONE] -->
   <!-- Description of what happens when you click on the star MenuItem. [CHAR LIMIT=NONE] -->
   <!-- Menu item used to edit a specific contact -->
+  <string name="menu_editContact">Editar</string>
   <!-- Menu item used to delete a specific contact -->
+  <string name="menu_deleteContact">Desaniciar</string>
   <!-- Menu item used to change the photo for a specific contact [CHAR LIMIT=30]-->
+  <string name="menu_change_photo">Camudar semeya</string>
   <!-- Menu item used to create a contact shortcut when viewing contact details. [CHAR LIMIT=30] -->
   <!-- Menu item that splits an item from the contact detail into a separate aggregate -->
   <!-- Menu item that edits the currently selected label [CHAR LIMIT=30] -->
@@ -68,6 +77,7 @@
   <!-- Info blurb on the Link Contact screen [CHAR LIMIT=NONE]-->
   <!-- List separator for the Join Contact list: Suggestions -->
   <!-- List separator for the Join Contact list: A-Z -->
+  <string name="separatorJoinAggregateAll">Tolos contautos</string>
   <!-- Toast shown after two contacts have been linked by a user action with a name. [CHAR LIMIT=NONE] -->
   <!-- Toast shown after two contacts have been linked by a user action without a name. [CHAR LIMIT=NONE] -->
   <!-- Toast shown with names after user selected contacts are deleted by user action. [CHAR LIMIT=50] -->
@@ -96,6 +106,7 @@
   <!-- Confirmation dialog contents after users selects to delete a Writable contact. -->
   <string name="deleteConfirmation">¿Desaniciar esti contautu?</string>
   <!-- Positive button text of confirmation dialog contents after users selects to delete a Writable contact. [CHAR LIMIT=30] -->
+  <string name="deleteConfirmation_positive_button">Desaniciar</string>
   <!-- Message displayed in a toast when you try to view the details of a contact that
          for some reason doesn't exist anymore. [CHAR LIMIT=NONE]-->
   <string name="invalidContactMessage">El contautu nun esiste.</string>
@@ -140,13 +151,16 @@
   <!-- The string used to describe Contacts as a searchable item within system search settings. -->
   <!-- Content description for the transparent views around the visible section of QuickContacts.
          Clicking this view causes Quick Contacts to close. [CHAR LIMIT=NONE] -->
+  <string name="quickcontact_transparent_view_description">Primi pa volver a la pantalla anterior</string>
   <!-- When a contact has no data, we prompt the user to add a phone number for the contact. [CHAR LIMIT=40] -->
   <!-- When a contact has no data, we prompt the user to add an email for the contact. [CHAR LIMIT=40] -->
   <!-- Shown as a toast when the user attempts an action (add contact, edit
          contact, etc) and no application was found that could perform that
          action. [CHAR LIMIT=NONE] -->
   <!-- The menu item to share the currently viewed contact [CHAR LIMIT=30] -->
+  <string name="menu_share">Compartir</string>
   <!-- The menu item to add the the currently viewed contact to your contacts [CHAR LIMIT=30] -->
+  <string name="menu_add_contact">Amestar a contautos</string>
   <!-- The menu item to add the the currently selected contacts to a label [CHAR LIMIT=10] -->
   <!-- Dialog title when picking the application to share one or multiple contacts with. [CHAR LIMIT=40] -->
   <!-- Title for the disambiguation dialog that requests the user choose an account for the new label to be created under [CHAR LIMIT=NONE] -->
@@ -175,7 +189,9 @@
         contact aggregation suggestion in Contact editor. [CHAR LIMIT=512]-->
   <!-- The description of the directory where the contact was found [CHAR LIMIT=100]-->
   <!-- Title of the settings activity [CHAR LIMIT=64] -->
+  <string name="activity_title_settings">Axustes</string>
   <!-- Menu item for the settings activity [CHAR LIMIT=64] -->
+  <string name="menu_settings" msgid="377929915873428211">Axustes</string>
   <!-- Menu item for invoking contextual Help & Feedback [CHAR LIMIT=64] -->
   <!-- Text used to show a organization that has both a company and title. This is used in the Detail-View
     of a Contact. This is mostly about the formatting of the two elements, so it should be kept small [CHAR LIMIT=79] -->
@@ -366,6 +382,7 @@
   <!-- The label in section header in the contact list for a contact directory [CHAR LIMIT=128] -->
   <!-- The label in section header in the contact list for a work contact directory [CHAR LIMIT=128] -->
   <!-- The label in section header in the contact list for a local contacts [CHAR LIMIT=128] -->
+  <string name="local_search_label">Tolos contautos</string>
   <!-- String describing the text for photo of a contact in a contacts list.
 
         Note: AccessibilityServices use this attribute to announce what the view represents.
@@ -469,11 +486,14 @@
   <!-- A11y announcement text for when a expand fields button is actioned. [CHAR LIMIT=NONE] -->
   <!-- A11y announcement text for when a collapse fields button is actioned. [CHAR LIMIT=NONE] -->
   <!-- Contact list filter label indicating that the list is showing all available accounts [CHAR LIMIT=64] -->
+  <string name="list_filter_all_accounts">Tolos contautos</string>
   <!-- Contact list filter label indicating that the list is showing all starred contacts [CHAR LIMIT=64] -->
   <!-- Contact list filter selection indicating that the list shows groups chosen by the user [CHAR LIMIT=64] -->
   <!-- Contact list filter selection indicating that the list shows only the selected contact [CHAR LIMIT=64] -->
+  <string name="list_filter_single">Contautu</string>
   <!-- List title for a special contacts group that covers all contacts. [CHAR LIMIT=25] -->
   <!-- List title for a special contacts group that covers all contacts that aren't members of any other group. [CHAR LIMIT=25] -->
+  <string name="display_all_contacts">Tolos contautos</string>
   <!-- Menu item to remove a contacts sync group. [CHAR LIMIT=40] -->
   <!-- Menu item to add a contacts sync group. [CHAR LIMIT=40] -->
   <!-- Text displayed in the sync groups footer view for unknown sync groups. [CHAR LIMIT=40 -->
@@ -644,6 +664,7 @@
 
          [CHAR LIMIT=NONE]-->
   <!-- Content description of delete contact button [CHAR LIMIT=30]-->
+  <string name="description_delete_contact">Desaniciar</string>
   <!-- Content description for (...) in no name header [CHAR LIMIT=30]-->
   <!-- Formatted call duration displayed in recent card in QuickContact, for duration less than 1 minute -->
   <!-- Formatted call duration displayed in recent card in QuickContact, for duration less than 1 hour -->

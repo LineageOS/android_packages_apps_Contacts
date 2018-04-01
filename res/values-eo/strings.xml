@@ -677,4 +677,5 @@
   <!-- Notification message shown when importing SIM contacts failed [CHAR LIMIT=NONE] -->
   <!-- The notification title shown while SIM contacts are being imported [CHAR LIMIT=40] -->
   <!-- Text shown when viewing channel settings for default Contacts notifications [CHAR LIMIT=50] -->
+  <!--Explanation with icon of Drawer in Contacts. Your medical information ie. Date of birth, Bloodtype, allergic details can be recorded for reference. -->
 </resources>

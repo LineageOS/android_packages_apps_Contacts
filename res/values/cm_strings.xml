@@ -118,4 +118,6 @@
     <string name="sim_email_full">SIM card email storage is full.</string>
     <string name="sim_anr_full">SIM card number storage is full.</string>
     <string name="merge_fail">Merge failed.</string>
+
+    <string name="call_via_template">Call via <xliff:g id="account">%1$s</xliff:g></string>
 </resources>

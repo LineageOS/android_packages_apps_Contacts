@@ -34,7 +34,6 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Directory;
 import android.provider.ContactsContract.Groups;
-import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
 import android.text.TextUtils;
 import android.util.Log;
@@ -51,7 +50,6 @@ import com.android.contacts.model.dataitem.PhotoDataItem;
 import com.android.contacts.util.Constants;
 import com.android.contacts.util.ContactLoaderUtils;
 import com.android.contacts.util.DataStatus;
-import com.android.contacts.util.LocalProfile;
 import com.android.contacts.util.UriUtils;
 
 import com.google.common.collect.ImmutableList;
@@ -321,9 +319,6 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
                 result = new Contact(mRequestedUri, cachedResult);
                 resultIsCached = true;
             } else {
-                if (mRequestedUri != null && Profile.CONTENT_URI.equals(mRequestedUri)) {
-                    LocalProfile.updateProfileWithSimNumber(getContext());
-                }
                 if (uriCurrentFormat.getLastPathSegment().equals(Constants.LOOKUP_URI_ENCODED)) {
                     result = loadEncodedContactEntity(uriCurrentFormat, mLookupUri);
                 } else {

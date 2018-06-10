@@ -34,7 +34,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.contacts.R;
-import com.android.contacts.activities.RequestPermissionsActivity;
 import com.android.contacts.editor.SelectAccountDialogFragment;
 import com.android.contacts.interactions.ImportDialogFragment;
 import com.android.contacts.list.ProviderStatusWatcher;
@@ -68,8 +67,6 @@ public final class ContactsPreferenceActivity extends PreferenceActivity
         super.onCreate(savedInstanceState);
         mCompatDelegate.onCreate(savedInstanceState);
 
-        // Request Requireied permission if needed
-        RequestPermissionsActivity.startPermissionActivityIfNeeded(this);
 
         final ActionBar actionBar = mCompatDelegate.getSupportActionBar();
         if (actionBar != null) {

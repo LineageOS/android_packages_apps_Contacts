@@ -113,6 +113,7 @@ import com.android.contacts.activities.RequestPermissionsActivity;
 import com.android.contacts.compat.CompatUtils;
 import com.android.contacts.compat.EventCompat;
 import com.android.contacts.compat.MultiWindowCompat;
+import com.android.contacts.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.detail.ContactDisplayUtils;
 import com.android.contacts.dialog.CallSubjectDialog;
 import com.android.contacts.editor.ContactEditorFragment;
@@ -430,6 +431,7 @@ public class QuickContactActivity extends ContactsActivity {
         static final int COPY_TEXT = 0;
         static final int CLEAR_DEFAULT = 1;
         static final int SET_DEFAULT = 2;
+        static final int CALL_VIA = 3;
     }
 
     private final OnCreateContextMenuListener mEntryContextMenuListener =
@@ -440,7 +442,13 @@ public class QuickContactActivity extends ContactsActivity {
                 return;
             }
             final EntryContextMenuInfo info = (EntryContextMenuInfo) menuInfo;
+            final String selectedMimeType = info.getMimeType();
             menu.setHeaderTitle(info.getCopyText());
+
+            if (Phone.CONTENT_ITEM_TYPE.equals(selectedMimeType)) {
+                addPhoneAccountsToMenu(QuickContactActivity.this, menu, info);
+            }
+
             menu.add(ContextMenu.NONE, ContextMenuIds.COPY_TEXT,
                     ContextMenu.NONE, getString(R.string.copy_text));
 
@@ -448,8 +456,6 @@ public class QuickContactActivity extends ContactsActivity {
             if (!isContactEditable()) {
                 return;
             }
-
-            final String selectedMimeType = info.getMimeType();
 
             // Defaults to true will only enable the detail to be copied to the clipboard.
             boolean onlyOneOfMimeType = true;
@@ -468,6 +474,25 @@ public class QuickContactActivity extends ContactsActivity {
             } else if (!onlyOneOfMimeType) {
                 menu.add(ContextMenu.NONE, ContextMenuIds.SET_DEFAULT,
                         ContextMenu.NONE, getString(R.string.set_default));
+            }
+        }
+
+        private void addPhoneAccountsToMenu(Context context,
+                Menu menu, EntryContextMenuInfo info) {
+            final String number = PhoneNumberUtilsCompat.normalizeNumber(info.getCopyText());
+            final List<PhoneAccount> accounts = CallUtil.getCallCapablePhoneAccounts(context,
+                    PhoneAccount.SCHEME_TEL);
+            if (accounts == null || accounts.size() <= 1) {
+                return;
+            }
+
+            for (PhoneAccount account : accounts) {
+                final String text = context.getString(R.string.call_via_template,
+                        account.getLabel());
+                final Intent intent = CallUtil.getCallWithSubjectIntent(number,
+                        account.getAccountHandle(), null);
+                menu.add(ContextMenu.NONE, ContextMenuIds.CALL_VIA, ContextMenu.NONE, text)
+                        .setIntent(intent);
             }
         }
     };
@@ -496,6 +521,9 @@ public class QuickContactActivity extends ContactsActivity {
                 final Intent clearIntent = ContactSaveService.createClearPrimaryIntent(this,
                         menuInfo.getId());
                 this.startService(clearIntent);
+                return true;
+            case ContextMenuIds.CALL_VIA:
+                startActivity(item.getIntent());
                 return true;
             default:
                 throw new IllegalArgumentException("Unknown menu option " + item.getItemId());

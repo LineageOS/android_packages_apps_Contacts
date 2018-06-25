@@ -19,4 +19,6 @@
     <!--Explanation with icon of Drawer in Contacts. Your medical information ie. Date of birth, Bloodtype, allergic details can be recorded for reference. -->
     <string name="menu_emergency_information_txt">Emergency information</string>
 
+    <string name="call_via_template">Call via <xliff:g id="account">%1$s</xliff:g></string>
+
 </resources>

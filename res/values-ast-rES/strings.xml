@@ -264,6 +264,7 @@
   <!-- Format string for a date and time description.  For ex:
          "April 19, 2012, 3:00pm - 4:00pm" [CHAR LIMIT=NONE] -->
   <!-- Title for untitled calendar interactions [CHAR LIMIT=40] -->
+  <string name="untitled_event">(Eventu ensin títulu)</string>
   <!-- Name of the button in the date/time picker to accept the date/time change [CHAR LIMIT=15] -->
   <!-- Header for the IM entry [CHAR LIMIT=40] -->
   <!-- Header for the Organization entry [CHAR LIMIT=40] -->

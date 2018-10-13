@@ -114,13 +114,14 @@
   <!-- Activity title indicating contacts are from a Google account [CHAR LIMIT=30] -->
   <!-- Activity title indicating contacts are from a specific account [CHAR LIMIT=15] -->
   <!-- Menu item to set ring tone for a given contact [CHAR LIMIT=15] -->
-  <string name="menu_set_ring_tone">Gosod tôn canu</string>
+  <string name="menu_set_ring_tone">Gosod tôn caniad</string>
   <!-- Menu item to route all calls from a given contact to voice mail [CHAR LIMIT=30] -->
   <!-- Menu item to unroute all calls from a given contact to voice mail [CHAR LIMIT=30] -->
   <!-- Warning dialog contents after users select to delete a ReadOnly contact. [CHAR LIMIT=NONE] -->
   <!-- Positive button text of the warning dialog contents after users select to delete a ReadOnly contact. [CHAR LIMIT=30]-->
   <!-- Warning dialog contents after users selects to delete a contact with ReadOnly and Writable data sources.
          Tells the user that data from the read-only accounts will be hidden and not deleted. [CHAR LIMIT=NONE]-->
+  <string name="readOnlyContactDeleteConfirmation">Caiff cyfrifon darllen-yn-unig y cyswllt hwn eu cuddio, nid eu dileu.</string>
   <!-- Confirmation dialog. Shown after user selects to delete one writable contact [CHAR LIMIT=NONE]  -->
   <string name="single_delete_confirmation">Dileu\'r cyswllt hwn?</string>
   <!-- Confirmation dialog. Shown after user selects to delete multimple writable contacts. [CHAR LIMIT=NONE]  -->
@@ -157,6 +158,7 @@
   <!-- The text displayed when there's no contacts in the main contacts list [CHAR LIMIT=70] -->
   <!-- Toast displayed when a contact is saved [CHAR LIMIT=30] -->
   <!-- Toast displayed when a contact is saved [CHAR LIMIT=NONE] -->
+  <string name="contactSavedToast">Cadwyd y cyswllt</string>
   <!-- Toast displayed when linked contacts get unlinked [CHAR LIMIT=NONE] -->
   <string name="contactUnlinkedToast">Cysylltiadau wedi eu datgyfuno</string>
   <!-- Toast displayed when saving a contact failed. [CHAR LIMIT=NONE] -->
@@ -233,7 +235,9 @@
   <string name="event_edit_field_hint_text">Dyddiad</string>
   <!-- The button to add an label field to a contact in the Raw Contact Editor [CHAR LIMIT=15] -->
   <!-- Content description for a cancel button. [CHAR LIMIT=NONE] -->
+  <string name="cancel_button_content_description">Diddymu</string>
   <!-- Content description for a back button. [CHAR LIMIT=NONE] -->
+  <string name="back_arrow_content_description">Nôl</string>
   <!-- Content description for the fake action menu up button as used
          inside edit or select. [CHAR LIMIT=NONE] -->
   <!-- The message in a confirmation dialog shown when the user selects a
@@ -415,6 +419,7 @@
   <!-- Content description of label name in navigation drawer. For example: Coworker Label, Friends Label [CHAR LIMIT=30] -->
   <!-- Menu section title of "labels" [CHAR LIMIT=20] -->
   <!-- Menu section title of "accounts" [CHAR LIMIT=20] -->
+  <string name="menu_title_filters">Cyfrifon</string>
   <!-- Contacts app asking for permissions in QuickContact activity,
          in order to display calendar and SMS history [CHAR LIMIT=60] -->
   <!-- Content displayed in QuickContact activity after Contacts app receiving
@@ -429,12 +434,18 @@
          The user can click on the action to rollback the modification-->
   <!-- Action string for calling a custom phone number -->
   <!-- Action string for calling a home phone number -->
+  <string name="call_home">Galw cartref</string>
   <!-- Action string for calling a mobile phone number -->
+  <string name="call_mobile">Galw symudol</string>
   <!-- Action string for calling a work phone number -->
+  <string name="call_work">Galw gwaith</string>
   <!-- Action string for calling a work fax phone number -->
+  <string name="call_fax_work">Galw ffacs gwaith</string>
   <!-- Action string for calling a home fax phone number -->
+  <string name="call_fax_home">Galw ffacs cartref</string>
   <!-- Action string for calling a pager phone number -->
   <!-- Action string for calling an other phone number -->
+  <string name="call_other">Galw</string>
   <!-- Action string for calling a callback number -->
   <!-- Action string for calling a car phone number -->
   <!-- Action string for calling a company main phone number -->
@@ -477,7 +488,9 @@
   <string name="clearFrequentsConfirmation">Mi fydd hyn yn clirio\'r rhestr o gysylltiadau rwyt mewn cyswllt gyda nhw amlach o\'r rhestr yn yr apiau Cysylltiadau a Ffôn. Mi fydd hefyd yn gorfodi apiau e-bost i ail-ddysgu dy ddulliau cyfeirio atynt.    </string>
   <!-- Title of the "Clearing frequently contacted" progress-dialog [CHAR LIMIT=60] -->
   <!--  Used to display as default status when the contact is available for chat [CHAR LIMIT=19] -->
+  <string name="status_available">Ar gael</string>
   <!--  Used to display as default status when the contact is away or idle for chat [CHAR LIMIT=19] -->
+  <string name="status_away">I ffwrdd</string>
   <!--  Used to display as default status when the contact is busy or Do not disturb for chat [CHAR LIMIT=19] -->
   <!-- The name of the invisible local contact directory -->
   <!-- The label in section header in the contact list for a contact directory [CHAR LIMIT=128] -->
@@ -490,8 +503,10 @@
               This is especially valuable for views without textual representation like ImageView.
     -->
   <!-- Shown as the display name for a person when the name is missing or unknown. [CHAR LIMIT=18]-->
+  <string name="missing_name">(Dim enw)</string>
   <!-- The text displayed on the divider for the Favorites tab in People app indicating that items below it are frequently contacted [CHAR LIMIT = 39] -->
   <!-- Contact list filter selection indicating that the list shows all contacts with phone numbers [CHAR LIMIT=64] -->
+  <string name="list_filter_phones">Pob cyswllt gyda rhif ffôn</string>
   <!-- Contact list filter selection indicating that the list shows all work contacts with phone numbers [CHAR LIMIT=64] -->
   <!-- Button to view the updates from the current group on the group detail page [CHAR LIMIT=25] -->
   <!-- Title for data source when creating or editing a contact that doesn't
@@ -507,9 +522,12 @@
          [CHAR LIMIT=20] -->
   <string name="nicknameLabelsGroup">Llysenw</string>
   <!-- Field title for the given name of a contact -->
+  <string name="name_given">Enw cyntaf</string>
   <!-- Field title for the family name of a contact -->
+  <string name="name_family">Cyfenw</string>
   <!-- Field title for the prefix name of a contact -->
   <!-- Field title for the middle name of a contact -->
+  <string name="name_middle">Enw canol</string>
   <!-- Field title for the suffix name of a contact -->
   <!-- Field title for the phonetic name of a contact [CHAR LIMIT=64]-->
   <!-- Field title for the phonetic given name of a contact -->
@@ -523,6 +541,7 @@
   <string name="emailLabelsGroup">Ebost</string>
   <!-- Header that expands to list all of the types of postal addresses when editing or creating
          an postal address for a contact [CHAR LIMIT=20] -->
+  <string name="postalLabelsGroup">Cyfeiriad</string>
   <!-- Header that expands to list all of the types of IM account when editing or creating an IM
          account for a contact [CHAR LIMIT=20] -->
   <string name="imLabelsGroup">IM</string>
@@ -535,6 +554,7 @@
   <!-- Generic action string for text messaging a contact. Used by AccessibilityService to
          announce the purpose of the view. [CHAR LIMIT=NONE] -->
   <!-- Field title for the full postal address of a contact [CHAR LIMIT=64]-->
+  <string name="postal_address">Cyfeiriad</string>
   <!-- Hint text for the organization name when editing a business/work contact. [CHAR LIMIT=64] -->
   <!-- Hint text for the organization title when editing a business/work contact. [CHAR LIMIT=64] -->
   <!-- The label describing the Notes field of a contact. This field allows free form text entry
@@ -601,6 +621,7 @@
   <!-- Contact list filter selection indicating that the list shows only the selected contact [CHAR LIMIT=64] -->
   <string name="list_filter_single">Cyswllt</string>
   <!-- List title for a special contacts group that covers all contacts. [CHAR LIMIT=25] -->
+  <string name="display_ungrouped">Pob cyswllt arall</string>
   <!-- List title for a special contacts group that covers all contacts that aren't members of any other group. [CHAR LIMIT=25] -->
   <string name="display_all_contacts">Pob cyswllt</string>
   <!-- Menu item to remove a contacts sync group. [CHAR LIMIT=40] -->
@@ -617,11 +638,20 @@
   <!-- Secondary string showing the number of SIM contacts for the SIM card on the action for
          importing from that SIM. Only shown if there is no phone number available for the SIM card
          [CHAR LIMIT=25] -->
+  <plurals name="import_from_sim_secondary_contact_count_fmt">
+    <item quantity="zero">%1$d cysylltiadau</item>
+    <item quantity="one">1 cyswllt</item>
+    <item quantity="two">%1$d gyswllt</item>
+    <item quantity="few">%1$d chyswllt</item>
+    <item quantity="many">%1$d chyswllt</item>
+    <item quantity="other">%1$d cyswllt</item>
+  </plurals>
   <!-- Secondary string showing the number of SIM contacts and phone number for the SIM card
          on the action for importing that SIM. Note that the bullet character is purely a visual
          separator between the contact count and phone number; it has no grammatical meaning in
          this string [CHAR LIMIT=35]-->
   <!-- Action string for selecting a .vcf file to import contacts from [CHAR LIMIT=30] -->
+  <string name="import_from_vcf_file">ffeil .vcf</string>
   <!-- Message shown on Import from dialog when there is nothing available to import (no .vcf option or SIM cards) [CHAR LIMIT=NONE] -->
   <!-- Dialog message asking the user for confirmation before starting to import contacts from a .vcf file. [CHAR LIMIT=NONE] -->
   <!-- Message shown in a Dialog confirming a user's cancel request toward existing vCard import.
@@ -710,15 +740,19 @@
   <!-- Option to initially hide the phonetic name input fields on the contact editor if the
     contact being edited doesn't have a phonetic name. [CHAR LIMIT=25]  -->
   <!-- An allowable value for the "sort list by" contact display option  -->
+  <string name="display_options_sort_by_given_name">Enw cyntaf</string>
   <!-- An allowable value for the "sort list by" contact display option  -->
+  <string name="display_options_sort_by_family_name">Cyfenw</string>
   <!-- Label of the "name format" display option [CHAR LIMIT=64]-->
   <!-- An allowable value for the "view names as" contact display option  -->
   <!-- An allowable value for the "view names as" contact display option  -->
   <!--Lable of the "Accounts" in settings [CHAR LIMIT=30]-->
+  <string name="settings_accounts">Cyfrifon</string>
   <!--Label of the "default account" setting option to set default editor account. [CHAR LIMIT=80]-->
   <!-- Title of my info preference, showing the name of user's personal profile [CHAR LIMIT=30]-->
   <!-- Displayed below my info for user to set up the user's personal profile entry [CHAR LIMIT=64] -->
   <!-- Label of the "About" setting -->
+  <string name="setting_about">Ymghylch Cysylltiadau</string>
   <!-- Action that shares favorite contacts [CHAR LIMIT=40]-->
   <!-- Action that shares contacts [CHAR LIMIT=30]-->
   <!-- A framework exception can be thrown while attempting to share all contacts. If so, show this toast. [CHAR LIMIT=40]-->
@@ -796,6 +830,7 @@
   <!-- Title of the SIM import activity; this isn't displayed but is announced by talkback
          when the window is first opened [CHAR LIMIT=40] -->
   <!-- Content description of the cancel navigation icon shown in SIM import screen toolbar [CHAR LIMIT=NONE]-->
+  <string name="sim_import_cancel_content_description">Diddymu</string>
   <!-- Alert for letting user know that their device auto-sync setting is turned off,
          in case they are wondering why they are not seeing any contact. [CHAR LIMIT=150] -->
   <!-- Content description for the "X" image icon for dismissing an alert.[CHAR LIMIT=50] -->
@@ -805,7 +840,9 @@
   <!-- Title of dialog to turn auto-sync on [CHAR LIMIT=100] -->
   <!-- Text of dialog to turn auto-sync on [CHAR LIMIT=500] -->
   <!-- Confirm button text for dialog to turn auto-sync on [CHAR LIMIT=30] -->
+  <string name="turn_auto_sync_on_dialog_confirm_btn">Troi ymlaen</string>
   <!-- No network connection error message [CHAR LIMIT=50] -->
+  <string name="connection_error_message">Dim cysylltiad</string>
   <!-- Generic label for the SIM card when there is only a single SIM in the device [CHAR LIMIT=10]-->
   <!-- Content description for dropdown arrow (https://material.io/icons/#ic_arrow_drop_down)
          This is used to indicate that a list of options can be opened by tapping on it.

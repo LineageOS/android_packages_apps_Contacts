@@ -39,7 +39,7 @@
   <string name="import_sim_contacts_title">Импорт. контакты с SIM-карты</string>
   <string name="import_sim_contacts_message">Импорт контактов с SIM-карты\u2026</string>
   <string name="ContactMultiImportConfirmation">Выбранные контакты будут импортированы.</string>
-  <string name="import_finish">Импорт завершён</string>
+  <string name="import_finish">Импорт завершен</string>
   <string name="import_stop">Импорт отменен</string>
   <string name="too_many_contacts_add_to_group">Можно добавить не более <xliff:g id="count">%d</xliff:g> контакт.</string>
   <!-- Multi Delete Contacts related strings -->

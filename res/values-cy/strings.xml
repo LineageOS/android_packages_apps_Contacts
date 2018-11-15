@@ -273,7 +273,8 @@
     <!-- Confirmation message of the dialog that allows deletion of a contact label  [CHAR LIMIT=256] -->
     <!-- Toast displayed when the user creates a new contact and attempts to link it
       with another before entering any data  [CHAR LIMIT=256] -->
-    <string name="toast_join_with_empty_contact">Rho enw gyswllt cyn ei gyfuno gyda chyswllt arall.</string>
+    <string name="toast_join_with_empty_contact">Rho enw gyswllt cyn ei gyfuno gyda chyswllt arall.
+    </string>
     <!-- Option displayed in context menu to copy long pressed item to clipboard [CHAR LIMIT=64] -->
     <string name="copy_text">Copïo i\'r clipfwrdd</string>
     <!-- Option displayed in context menu to set long pressed item as default contact method [CHAR LIMIT=64] -->
@@ -486,7 +487,7 @@
     <!-- Description string for an action button to initiate a video call. -->
     <!-- Title of the confirmation dialog for clearing frequents. [CHAR LIMIT=60] -->
     <!-- Confirmation dialog for clearing frequents. [CHAR LIMIT=NONE] -->
-    <string name="clearFrequentsConfirmation">Mi fydd hyn yn clirio\'r rhestr o gysylltiadau rwyt mewn cyswllt gyda nhw amlach o\'r rhestr yn yr apiau Cysylltiadau a Ffôn. Mi fydd hefyd yn gorfodi apiau e-bost i ail-ddysgu dy ddulliau cyfeirio atynt.</string>
+    <string name="clearFrequentsConfirmation">Mi fydd hyn yn clirio\'r rhestr o gysylltiadau rwyt mewn cyswllt gyda nhw amlach o\'r rhestr yn yr apiau Cysylltiadau a Ffôn. Mi fydd hefyd yn gorfodi apiau e-bost i ail-ddysgu dy ddulliau cyfeirio atynt.    </string>
     <!-- Title of the "Clearing frequently contacted" progress-dialog [CHAR LIMIT=60] -->
     <!--  Used to display as default status when the contact is available for chat [CHAR LIMIT=19] -->
     <string name="status_available">Ar gael</string>

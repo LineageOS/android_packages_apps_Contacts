@@ -220,7 +220,7 @@
         contact aggregation suggestion in Contact editor. [CHAR LIMIT=512]-->
     <string name="aggregation_suggestion_edit_dialog_message">De Kontakt beaarbechten? Déi Informatiounen déi s du bis elo uginn hues gi kopéiert.</string>
     <!-- The description of the directory where the contact was found [CHAR LIMIT=100]-->
-    <string name="contact_directory_description"><xliff:g id="type" example="Corporate Directory">%1$s</xliff:g>-Verzeechnes</string>
+    <string name="contact_directory_description"><xliff:g id="type" example="Corporate Directory">%1$s</xliff:g>-Verzeechnes </string>
     <!-- Title of the settings activity [CHAR LIMIT=64] -->
     <string name="activity_title_settings">Astellungen</string>
     <!-- Menu item for the settings activity [CHAR LIMIT=64] -->

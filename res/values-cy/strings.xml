@@ -798,6 +798,7 @@
     <!-- String used to build a phone number bype and phone number string.
          Example: Mobile • 650-555-1212  -->
     <!-- Build version title in About preference. [CHAR LIMIT=40]-->
+    <string name="about_build_version">Fersiwn adeiledd</string>
     <!-- Open source licenses title in About preference. [CHAR LIMIT=60] -->
     <!-- Open source licenses summary in About preference. [CHAR LIMIT=NONE] -->
     <!-- Privacy policy title in About preference. [CHAR LIMIT=40]-->

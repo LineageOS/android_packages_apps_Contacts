@@ -18,7 +18,6 @@
 package com.android.contacts.util;
 
 import android.content.ClipData;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -28,8 +27,10 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
+
 import com.android.contacts.R;
 import com.google.common.io.Closeables;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -147,7 +148,7 @@ public class ContactPhotoUtils {
      */
     public static boolean savePhotoFromUriToUri(Context context, Uri inputUri, Uri outputUri,
             boolean deleteAfterSave) {
-        if (inputUri == null || outputUri == null || isFilePathAndNotStorage(inputUri)) {
+        if (inputUri == null || outputUri == null) {
             return false;
         }
         FileOutputStream outputStream = null;
@@ -177,21 +178,5 @@ public class ContactPhotoUtils {
             }
         }
         return true;
-    }
-
-    /**
-     * Returns {@code true} if the {@code inputUri} is a FILE scheme and it does not point to
-     * the storage directory.
-     */
-    private static boolean isFilePathAndNotStorage(Uri inputUri) {
-        if (ContentResolver.SCHEME_FILE.equals(inputUri.getScheme())) {
-            try {
-                File file = new File(inputUri.getPath()).getCanonicalFile();
-                return !file.getCanonicalPath().startsWith("/storage/");
-            } catch (IOException e) {
-                return false;
-            }
-        }
-        return false;
     }
 }

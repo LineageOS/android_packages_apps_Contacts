@@ -17,4 +17,6 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!--Explanation with icon of Drawer in Contacts. Your medical information ie. Date of birth, Bloodtype, allergic details can be recorded for reference. -->
+    <string name="menu_emergency_information_txt">Nouzové informace</string>
+    <string name="call_via_template">Volat pomocí <xliff:g id="account">%1$s</xliff:g></string>
 </resources>

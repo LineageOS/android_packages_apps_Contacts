@@ -14,83 +14,67 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Toast displayed when a contact is deleted [CHAR LIMIT=NONE] -->
-  <string name="contactDeletedToast">Contact deleted.</string>
-  <string name="menu_moveGroupMembers">Move group members</string>
-  <!-- Toast displayed when saving a contact to sim card failed -->
-  <string name="contactSavedToSimCardError">Could not save the selected contacts to the SIM card</string>
-  <string name="number_anr_too_long">Number is too long</string>
-  <string name="email_address_too_long">Email address is too long</string>
-  <string name="sim_card_full">SIM card is full</string>
-  <string name="tag_too_long">Contact name is too long</string>
-  <string name="invalid_phone_number">Phone number is invalid</string>
-  <string name="invalid_number_type">Number type is invalid</string>
-  <string name="no_phone_number_or_email">Please insert phone number or email address.</string>
-  <string name="importConfirmation_title">Import contact?</string>
-  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
-  <string name="contacts_groups_label">Groups</string>
-  <string name="title_move_members">Move members</string>
-  <string name="message_move_members">Moving members\u2026</string>
-  <string name="message_can_not_move_members">Cannot move members</string>
-  <!-- Gray hint displayed in the search field in Contacts when empty -->
-  <string name="search_bar_hint">Search contacts</string>
-  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
-  <string name="deleteConfirmation_title">Delete contact?</string>
-  <string name="import_sim_contacts_title">Import SIM contacts</string>
-  <string name="import_sim_contacts_message">Importing SIM contacts\u2026</string>
-  <string name="ContactMultiImportConfirmation">The selected contacts will be imported.</string>
-  <string name="import_finish">Import finished</string>
-  <string name="import_stop">Import was cancelled</string>
-  <string name="too_many_contacts_add_to_group">No more than <xliff:g id="count">%d</xliff:g> contacts can be added</string>
-  <!-- Multi Delete Contacts related strings -->
-  <string name="ContactMultiDeleteConfirmation">The selected contacts will be deleted.</string>
-  <string name="delete_contacts_title">Delete contacts</string>
-  <string name="delete_contacts_message">Deleting contacts\u2026</string>
-  <!-- Menu item used to refresh a specific contact -->
-  <string name="menu_refresh">Refresh</string>
-  <string name="video_call">Video calling</string>
-  <string name="menu_copyTo">Copy to <xliff:g id="destination">%s</xliff:g></string>
-  <string name="no_empty_email_in_usim">USIM contact does not have an available email field, unable to copy messages.</string>
-  <string name="voicemail">Voicemail</string>
-  <string name="select_call_title">Select call logs</string>
-  <string name="delete_call_title">Delete call logs</string>
-  <string name="delete_call_message">Deleting call logs\u2026</string>
-  <string name="delete_call_alert">Delete selected call logs?</string>
-  <string name="title_del_call">Delete</string>
-  <!-- MultiPickActivity -->
-  <string name="multi_pick_recent_title">RECENT</string>
-  <string name="multi_pick_contacts_title">CONTACTS</string>
-  <string name="multi_pick_group_title">GROUP</string>
-  <string name="contacts_selected">%d selected</string>
-  <string name="summary_count_numbers">%s numbers</string>
-  <string name="contact_info_text_as_name">Name:</string>
-  <string name="contact_info_text_as_phone">Tel:</string>
-  <string name="contact_info_text_as_email">Email:</string>
-  <!-- The hint text in search-view.-->
-  <string name="search_menu_search">Search</string>
-  <!-- The call-log's clear button text in pick call mode. -->
-  <string name="clear_call_log_button_text">CLEAR</string>
-  <!-- String used to display calls from unknown numbers in the call log -->
-  <string name="unknown">Unknown</string>
-  <!-- String used to display calls from private numbers in the call log -->
-  <string name="private_num">Private number</string>
-  <!-- String used to display calls from pay phone in the call log -->
-  <string name="payphone">Payphone</string>
-  <!-- Call-log count in one call-log group. Call location and call date. -->
-  <!--Toast msg when user select too many contacts to merge-->
-  <string name="too_many_contacts_to_merge_message">No more than <xliff:g id="count">%d</xliff:g> contacts can be merged</string>
-  <string name="replace_number_title_1">Replace the previous number</string>
-  <string name="replace_number_title_2">Replace the previous number?</string>
-  <string name="replace_button">REPLACE</string>
-  <!-- merge contacts -->
-  <string name="merge_contacts">Merge contacts</string>
-  <string name="merging_contacts">Merging contacts\u2026</string>
-  <string name="searching_duplicated_contacts">Searching for duplicated contacts\u2026</string>
-  <string name="no_duplicated_contacts">No duplicated contacts</string>
-  <string name="give_up_merging">Stop merging contacts?</string>
-  <string name="give_up">Stop merge</string>
-  <string name="merge_complete">Merge complete.</string>
-  <string name="sim_email_full">SIM card email storage is full.</string>
-  <string name="sim_anr_full">SIM card number storage is full.</string>
-  <string name="merge_fail">Merge failed.</string>
+    <string name="contactDeletedToast">Contact deleted.</string>
+    <string name="menu_moveGroupMembers">Move group members</string>
+    <string name="contactSavedToSimCardError">Could not save the selected contacts to the SIM card</string>
+    <string name="number_anr_too_long">Number is too long</string>
+    <string name="email_address_too_long">Email address is too long</string>
+    <string name="sim_card_full">SIM card is full</string>
+    <string name="tag_too_long">Contact name is too long</string>
+    <string name="invalid_phone_number">Phone number is invalid</string>
+    <string name="invalid_number_type">Number type is invalid</string>
+    <string name="no_phone_number_or_email">Please insert phone number or email address.</string>
+    <string name="importConfirmation_title">Import contact?</string>
+    <string name="contacts_groups_label">Groups</string>
+    <string name="title_move_members">Move members</string>
+    <string name="message_move_members">Moving members\u2026</string>
+    <string name="message_can_not_move_members">Cannot move members</string>
+    <string name="search_bar_hint">Search contacts</string>
+    <string name="deleteConfirmation_title">Delete contact?</string>
+    <string name="import_sim_contacts_title">Import SIM contacts</string>
+    <string name="import_sim_contacts_message">Importing SIM contacts\u2026</string>
+    <string name="ContactMultiImportConfirmation">The selected contacts will be imported.</string>
+    <string name="import_finish">Import finished</string>
+    <string name="import_stop">Import was cancelled</string>
+    <string name="too_many_contacts_add_to_group">No more than <xliff:g id="count">%d</xliff:g> contacts can be added</string>
+    <string name="ContactMultiDeleteConfirmation">The selected contacts will be deleted.</string>
+    <string name="delete_contacts_title">Delete contacts</string>
+    <string name="delete_contacts_message">Deleting contacts\u2026</string>
+    <string name="menu_refresh">Refresh</string>
+    <string name="video_call">Video calling</string>
+    <string name="menu_copyTo">Copy to <xliff:g id="destination">%s</xliff:g></string>
+    <string name="no_empty_email_in_usim">USIM contact does not have an available email field, unable to copy messages.</string>
+    <string name="voicemail">Voicemail</string>
+    <string name="select_call_title">Select call logs</string>
+    <string name="delete_call_title">Delete call logs</string>
+    <string name="delete_call_message">Deleting call logs\u2026</string>
+    <string name="delete_call_alert">Delete selected call logs?</string>
+    <string name="title_del_call">Delete</string>
+    <string name="multi_pick_recent_title">RECENT</string>
+    <string name="multi_pick_contacts_title">CONTACTS</string>
+    <string name="multi_pick_group_title">GROUP</string>
+    <string name="contacts_selected">%d selected</string>
+    <string name="summary_count_numbers">%s numbers</string>
+    <string name="contact_info_text_as_name">Name:</string>
+    <string name="contact_info_text_as_phone">Tel:</string>
+    <string name="contact_info_text_as_email">Email:</string>
+    <string name="search_menu_search">Search</string>
+    <string name="clear_call_log_button_text">CLEAR</string>
+    <string name="unknown">Unknown</string>
+    <string name="private_num">Private number</string>
+    <string name="payphone">Payphone</string>
+    <string name="too_many_contacts_to_merge_message">No more than <xliff:g id="count">%d</xliff:g> contacts can be merged</string>
+    <string name="replace_number_title_1">Replace the previous number</string>
+    <string name="replace_number_title_2">Replace the previous number?</string>
+    <string name="replace_button">REPLACE</string>
+    <string name="merge_contacts">Merge contacts</string>
+    <string name="merging_contacts">Merging contacts\u2026</string>
+    <string name="searching_duplicated_contacts">Searching for duplicated contacts\u2026</string>
+    <string name="no_duplicated_contacts">No duplicated contacts</string>
+    <string name="give_up_merging">Stop merging contacts?</string>
+    <string name="give_up">Stop merge</string>
+    <string name="merge_complete">Merge complete.</string>
+    <string name="sim_email_full">SIM card email storage is full.</string>
+    <string name="sim_anr_full">SIM card number storage is full.</string>
+    <string name="merge_fail">Merge failed.</string>
 </resources>

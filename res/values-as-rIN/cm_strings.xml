@@ -14,9 +14,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Toast displayed when a contact is deleted [CHAR LIMIT=NONE] -->
   <string name="menu_moveGroupMembers">গোটৰ সদস্যসকলক স্থানান্তৰ কৰক</string>
-  <!-- Toast displayed when saving a contact to sim card failed -->
   <string name="contactSavedToSimCardError">SIM কাৰ্ডত চয়ন কৰা যোগাযোগবোৰ সংৰক্ষণ কৰিব নোৱাৰিলে</string>
   <string name="number_anr_too_long">নম্বৰটো খুব দীঘল</string>
   <string name="email_address_too_long">ই-মেইল ঠিকনা অতি দীঘল</string>
@@ -26,22 +24,17 @@
   <string name="invalid_number_type">নম্বৰৰ প্ৰকাৰটো অবৈধ</string>
   <string name="no_phone_number_or_email">অনুগ্ৰহ কৰি ফোন নম্বৰ বা ই-মেইল ঠিকনা আন্তঃসংযোগ কৰক।</string>
   <string name="importConfirmation_title">যোগাযোগ আমদানি কৰিব?</string>
-  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
   <string name="contacts_groups_label">গোটসমূহ</string>
   <string name="title_move_members">সদস্যসকলক স্থানান্তৰ কৰক</string>
   <string name="message_move_members">সদস্যসকলক স্থানান্তৰ কৰি আছে\u2026</string>
   <string name="message_can_not_move_members">সদস্যসকলক স্থানান্তৰ কৰিব নোৱাৰি</string>
-  <!-- Gray hint displayed in the search field in Contacts when empty -->
-  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
   <string name="deleteConfirmation_title">কনটেক্ট মচি দিব?</string>
   <string name="import_sim_contacts_title">SIM যোগাযোগবোৰ আমদানি কৰক</string>
   <string name="import_sim_contacts_message">SIM যোগাযোগবোৰ আমদানি কৰি আছে\u2026</string>
   <string name="import_finish">আমদানি সমাপ্ত হৈছে</string>
   <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g> তকৈ অধিক যোগাযোগ যোগ কৰিব নোৱাৰি</string>
-  <!-- Multi Delete Contacts related strings -->
   <string name="delete_contacts_title">যোগাযোগ বিলোপ কৰক</string>
   <string name="delete_contacts_message">যোগাযোগ বিলোপ কৰি আছে\u2026</string>
-  <!-- Menu item used to refresh a specific contact -->
   <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g> লৈ কপি কৰক</string>
   <string name="no_empty_email_in_usim">USIM যোগাযোগৰ উপলব্ধ ই-মেইল ফিল্ড নাই, বাৰ্তাবোৰ কপি কৰিবলৈ অক্ষম।</string>
   <string name="voicemail">ভইচমেইল</string>
@@ -50,13 +43,4 @@
   <string name="delete_call_message">কল লগ বিলোপ কৰি আছে\u2026</string>
   <string name="delete_call_alert">চয়ন কৰা কল লগবোৰ বিলোপ কৰিব?</string>
   <string name="title_del_call">মচি দিয়া</string>
-  <!-- MultiPickActivity -->
-  <!-- The hint text in search-view.-->
-  <!-- The call-log's clear button text in pick call mode. -->
-  <!-- String used to display calls from unknown numbers in the call log -->
-  <!-- String used to display calls from private numbers in the call log -->
-  <!-- String used to display calls from pay phone in the call log -->
-  <!-- Call-log count in one call-log group. Call location and call date. -->
-  <!--Toast msg when user select too many contacts to merge-->
-  <!-- merge contacts -->
 </resources>

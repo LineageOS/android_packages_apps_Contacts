@@ -14,22 +14,6 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Toast displayed when a contact is deleted [CHAR LIMIT=NONE] -->
-  <!-- Toast displayed when saving a contact to sim card failed -->
-  <string name="importConfirmation_title">যোগাযোগ আমদানি করবেন?</string>
-  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
-  <!-- Gray hint displayed in the search field in Contacts when empty -->
-  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
-  <string name="deleteConfirmation_title">যোগাযোগ মুছে ফেলতে চান?</string>
-  <!-- Multi Delete Contacts related strings -->
-  <!-- Menu item used to refresh a specific contact -->
-  <!-- MultiPickActivity -->
-  <!-- The hint text in search-view.-->
-  <!-- The call-log's clear button text in pick call mode. -->
-  <!-- String used to display calls from unknown numbers in the call log -->
-  <!-- String used to display calls from private numbers in the call log -->
-  <!-- String used to display calls from pay phone in the call log -->
-  <!-- Call-log count in one call-log group. Call location and call date. -->
-  <!--Toast msg when user select too many contacts to merge-->
-  <!-- merge contacts -->
+    <string name="importConfirmation_title">যোগাযোগ আমদানি করবেন?</string>
+    <string name="deleteConfirmation_title">যোগাযোগ মুছে ফেলতে চান?</string>
 </resources>

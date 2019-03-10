@@ -14,21 +14,67 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Toast displayed when a contact is deleted [CHAR LIMIT=NONE] -->
-  <!-- Toast displayed when saving a contact to sim card failed -->
-  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
-  <!-- Gray hint displayed in the search field in Contacts when empty -->
-  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
-  <!-- Multi Delete Contacts related strings -->
-  <!-- Menu item used to refresh a specific contact -->
-  <!-- MultiPickActivity -->
-  <string name="summary_count_numbers">%s rhif</string>
-  <!-- The hint text in search-view.-->
-  <!-- The call-log's clear button text in pick call mode. -->
-  <!-- String used to display calls from unknown numbers in the call log -->
-  <!-- String used to display calls from private numbers in the call log -->
-  <!-- String used to display calls from pay phone in the call log -->
-  <!-- Call-log count in one call-log group. Call location and call date. -->
-  <!--Toast msg when user select too many contacts to merge-->
-  <!-- merge contacts -->
+    <string name="contactDeletedToast">Cyswllt wedi ei ddileu.</string>
+    <string name="menu_moveGroupMembers">Symud aelodau\'r grŵp</string>
+    <string name="contactSavedToSimCardError">Methwyd â chadw\'r cysylltiadau a ddewiswyd i\'r cerdyn SIM</string>
+    <string name="number_anr_too_long">Rhif yn rhy hir</string>
+    <string name="email_address_too_long">Cyfeiriad ebost yn rhy hir</string>
+    <string name="sim_card_full">Cerdyn SIM yn llawn</string>
+    <string name="tag_too_long">Enw cyswllt yn rhy hir</string>
+    <string name="invalid_phone_number">Rhif ffôn yn annilys</string>
+    <string name="invalid_number_type">Math y rhif yn annilys</string>
+    <string name="no_phone_number_or_email">Rho rif ffôn neu gyfeiriad e-bost.</string>
+    <string name="importConfirmation_title">Mewnforio\'r cyswllt?</string>
+    <string name="contacts_groups_label">Grwpiau</string>
+    <string name="title_move_members">Symud aelodau</string>
+    <string name="message_move_members">Yn symud aelodau\u2026</string>
+    <string name="message_can_not_move_members">Methu â symud aelodau</string>
+    <string name="search_bar_hint">Chwilio cysylltiadau</string>
+    <string name="deleteConfirmation_title">Dileu cyswllt?</string>
+    <string name="import_sim_contacts_title">Mewnforio cysylltiadau o\'r SIM</string>
+    <string name="import_sim_contacts_message">Yn mewnforio cysylltiadau o\u2019r SIM\u2026</string>
+    <string name="ContactMultiImportConfirmation">Caiff y cysylltiadau a ddewiswyd eu mewnforio.</string>
+    <string name="import_finish">Wedi gorffen mewnforio</string>
+    <string name="import_stop">Diddymwyd y mewnforio</string>
+    <string name="too_many_contacts_add_to_group">Ni ellir ychwanegu mwy na <xliff:g id="count">%d</xliff:g> cyswllt</string>
+    <string name="ContactMultiDeleteConfirmation">Caiff y cysylltiadau a ddewiswyd eu dileu.</string>
+    <string name="delete_contacts_title">Dileu cysylltiadau</string>
+    <string name="delete_contacts_message">Yn dileu cysylltiadau\u2026</string>
+    <string name="menu_refresh">Ail-lwytho</string>
+    <string name="video_call">Galwad fideo</string>
+    <string name="menu_copyTo">Copïo i <xliff:g id="destination">%s</xliff:g></string>
+    <string name="no_empty_email_in_usim">Nid oes gan y cyswllt USIM maes e-bost ar gael. Methu â chopïo negeseuon.</string>
+    <string name="voicemail">Lleisbost</string>
+    <string name="select_call_title">Dewis logiau galwadau</string>
+    <string name="delete_call_title">Dileu cofnodion galwadau</string>
+    <string name="delete_call_message">Yn dileu cofnodion galwadau\u2026</string>
+    <string name="delete_call_alert">Dileu\'r cofnodion galwadau a ddewiswyd?</string>
+    <string name="title_del_call">Dileu</string>
+    <string name="multi_pick_recent_title">DIWEDDAR</string>
+    <string name="multi_pick_contacts_title">CYSYLLTIADAU</string>
+    <string name="multi_pick_group_title">GRŴP</string>
+    <string name="contacts_selected">%d wedi\'u dewis</string>
+    <string name="summary_count_numbers">%s rhif</string>
+    <string name="contact_info_text_as_name">Enw:</string>
+    <string name="contact_info_text_as_phone">Ffôn:</string>
+    <string name="contact_info_text_as_email">Ebost:</string>
+    <string name="search_menu_search">Chwilio</string>
+    <string name="clear_call_log_button_text">CLIRIO</string>
+    <string name="unknown">Anhysybys</string>
+    <string name="private_num">Rhif preifat</string>
+    <string name="payphone">Ffôn cyhoeddus</string>
+    <string name="too_many_contacts_to_merge_message">Ni ellir cyfuno mwy na <xliff:g id="count">%d</xliff:g> cyswllt</string>
+    <string name="replace_number_title_1">Disodli\'r rhif diwethaf</string>
+    <string name="replace_number_title_2">Disodli\'r rhif diwethaf?</string>
+    <string name="replace_button">DISODLI</string>
+    <string name="merge_contacts">Cyfuno cysylltiadau</string>
+    <string name="merging_contacts">Yn cyfuno cysylltiadau\u2026</string>
+    <string name="searching_duplicated_contacts">Yn chwilio am gysylltiadau dyblyg\u2026</string>
+    <string name="no_duplicated_contacts">Dim cysylltiadau dyblyg</string>
+    <string name="give_up_merging">Stopio cyfuno\'r cysylltiadau?</string>
+    <string name="give_up">Stopio cyfuno</string>
+    <string name="merge_complete">Cyfuno wedi cwblhau.</string>
+    <string name="sim_email_full">Mae storfa e-bost y SIM yn llawn.</string>
+    <string name="sim_anr_full">Mae storfa rhifau\'r SIM yn llawn.</string>
+    <string name="merge_fail">Methodd y cyfuno.</string>
 </resources>

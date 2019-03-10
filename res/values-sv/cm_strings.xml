@@ -14,74 +14,58 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Toast displayed when a contact is deleted [CHAR LIMIT=NONE] -->
-  <string name="contactDeletedToast">Kontakt borttagen.</string>
-  <string name="menu_moveGroupMembers">Flytta gruppmedlemmar</string>
-  <!-- Toast displayed when saving a contact to sim card failed -->
-  <string name="contactSavedToSimCardError">Kunde inte spara de valda kontakterna till SIM-kortet</string>
-  <string name="number_anr_too_long">Numret är för lång</string>
-  <string name="email_address_too_long">E-postadressen är för lång</string>
-  <string name="sim_card_full">SIM-kortet är fullt</string>
-  <string name="tag_too_long">Kontaktnamnet är för långt</string>
-  <string name="invalid_phone_number">Telefonnumret är ogiltigt</string>
-  <string name="invalid_number_type">Nummertypen är ogiltig</string>
-  <string name="no_phone_number_or_email">Vänligen ange ett telefonnummer eller e-postadress.</string>
-  <string name="importConfirmation_title">Importera kontakt?</string>
-  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
-  <string name="contacts_groups_label">Grupper</string>
-  <string name="title_move_members">Flytta medlemmar</string>
-  <string name="message_move_members">Flytta medlemmar\u2026</string>
-  <string name="message_can_not_move_members">Kan inte flytta medlemmar</string>
-  <!-- Gray hint displayed in the search field in Contacts when empty -->
-  <string name="search_bar_hint">Sök kontakter</string>
-  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
-  <string name="deleteConfirmation_title">Ta bort kontakt?</string>
-  <string name="import_sim_contacts_title">Importera kontakter från SIM-kort</string>
-  <string name="import_sim_contacts_message">Importerar SIM-kontakter\u2026</string>
-  <string name="ContactMultiImportConfirmation">Valda kontakter kommer importeras.</string>
-  <string name="import_finish">Import slutförd</string>
-  <string name="import_stop">Importering avbruten</string>
-  <string name="too_many_contacts_add_to_group">Maximalt <xliff:g id="count">%d</xliff:g> kontakter kan delas</string>
-  <!-- Multi Delete Contacts related strings -->
-  <string name="delete_contacts_title">Ta bort kontakter</string>
-  <string name="delete_contacts_message">Tar bort kontakter\u2026</string>
-  <!-- Menu item used to refresh a specific contact -->
-  <string name="menu_refresh">Uppdatera</string>
-  <string name="video_call">Videosamtal</string>
-  <string name="menu_copyTo">Kopiera till <xliff:g id="destination">%s</xliff:g></string>
-  <string name="no_empty_email_in_usim">USIM-kontakten har inte ett tillgänglig epostfält, kan inte kopiera meddelanden.</string>
-  <string name="voicemail">Telefonsvarare</string>
-  <string name="select_call_title">Välj samtalslistor</string>
-  <string name="delete_call_title">Ta bort samtalslistor</string>
-  <string name="delete_call_message">Tar bort samtalslistor\u2026</string>
-  <string name="delete_call_alert">Ta bort valda samtalslistor?</string>
-  <string name="title_del_call">Ta bort</string>
-  <!-- MultiPickActivity -->
-  <string name="multi_pick_recent_title">SENASTE</string>
-  <string name="multi_pick_contacts_title">KONTAKTER</string>
-  <string name="multi_pick_group_title">GRUPP</string>
-  <string name="contacts_selected">%d valda</string>
-  <string name="summary_count_numbers">%s siffror</string>
-  <string name="contact_info_text_as_name">Namn:</string>
-  <string name="contact_info_text_as_phone">Tel:</string>
-  <string name="contact_info_text_as_email">E-post:</string>
-  <!-- The hint text in search-view.-->
-  <string name="search_menu_search">Sök</string>
-  <!-- The call-log's clear button text in pick call mode. -->
-  <string name="clear_call_log_button_text">RENSA</string>
-  <!-- String used to display calls from unknown numbers in the call log -->
-  <string name="unknown">Okänt</string>
-  <!-- String used to display calls from private numbers in the call log -->
-  <string name="private_num">Privat nummer</string>
-  <!-- String used to display calls from pay phone in the call log -->
-  <!-- Call-log count in one call-log group. Call location and call date. -->
-  <!--Toast msg when user select too many contacts to merge-->
-  <string name="replace_number_title_1">Ersätt det tidigare numret</string>
-  <string name="replace_number_title_2">Ersätt det tidigare numret?</string>
-  <string name="replace_button">ERSÄTT</string>
-  <!-- merge contacts -->
-  <string name="merge_contacts">Sammanfoga kontakter</string>
-  <string name="merging_contacts">Sammanfogar kontakter\u2026</string>
-  <string name="no_duplicated_contacts">Inga dubblerade kontakter</string>
-  <string name="merge_fail">Sammanfogningen misslyckades.</string>
+    <string name="contactDeletedToast">Kontakt borttagen.</string>
+    <string name="menu_moveGroupMembers">Flytta gruppmedlemmar</string>
+    <string name="contactSavedToSimCardError">Kunde inte spara de valda kontakterna till SIM-kortet</string>
+    <string name="number_anr_too_long">Numret är för lång</string>
+    <string name="email_address_too_long">E-postadressen är för lång</string>
+    <string name="sim_card_full">SIM-kortet är fullt</string>
+    <string name="tag_too_long">Kontaktnamnet är för långt</string>
+    <string name="invalid_phone_number">Telefonnumret är ogiltigt</string>
+    <string name="invalid_number_type">Nummertypen är ogiltig</string>
+    <string name="no_phone_number_or_email">Vänligen ange ett telefonnummer eller e-postadress.</string>
+    <string name="importConfirmation_title">Importera kontakt?</string>
+    <string name="contacts_groups_label">Grupper</string>
+    <string name="title_move_members">Flytta medlemmar</string>
+    <string name="message_move_members">Flytta medlemmar\u2026</string>
+    <string name="message_can_not_move_members">Kan inte flytta medlemmar</string>
+    <string name="search_bar_hint">Sök kontakter</string>
+    <string name="deleteConfirmation_title">Ta bort kontakt?</string>
+    <string name="import_sim_contacts_title">Importera kontakter från SIM-kort</string>
+    <string name="import_sim_contacts_message">Importerar SIM-kontakter\u2026</string>
+    <string name="ContactMultiImportConfirmation">Valda kontakter kommer importeras.</string>
+    <string name="import_finish">Import slutförd</string>
+    <string name="import_stop">Importering avbruten</string>
+    <string name="too_many_contacts_add_to_group">Maximalt <xliff:g id="count">%d</xliff:g> kontakter kan delas</string>
+    <string name="delete_contacts_title">Ta bort kontakter</string>
+    <string name="delete_contacts_message">Tar bort kontakter\u2026</string>
+    <string name="menu_refresh">Uppdatera</string>
+    <string name="video_call">Videosamtal</string>
+    <string name="menu_copyTo">Kopiera till <xliff:g id="destination">%s</xliff:g></string>
+    <string name="no_empty_email_in_usim">USIM-kontakten har inte ett tillgänglig epostfält, kan inte kopiera meddelanden.</string>
+    <string name="voicemail">Telefonsvarare</string>
+    <string name="select_call_title">Välj samtalslistor</string>
+    <string name="delete_call_title">Ta bort samtalslistor</string>
+    <string name="delete_call_message">Tar bort samtalslistor\u2026</string>
+    <string name="delete_call_alert">Ta bort valda samtalslistor?</string>
+    <string name="title_del_call">Ta bort</string>
+    <string name="multi_pick_recent_title">SENASTE</string>
+    <string name="multi_pick_contacts_title">KONTAKTER</string>
+    <string name="multi_pick_group_title">GRUPP</string>
+    <string name="contacts_selected">%d valda</string>
+    <string name="summary_count_numbers">%s siffror</string>
+    <string name="contact_info_text_as_name">Namn:</string>
+    <string name="contact_info_text_as_phone">Tel:</string>
+    <string name="contact_info_text_as_email">E-post:</string>
+    <string name="search_menu_search">Sök</string>
+    <string name="clear_call_log_button_text">RENSA</string>
+    <string name="unknown">Okänt</string>
+    <string name="private_num">Privat nummer</string>
+    <string name="replace_number_title_1">Ersätt det tidigare numret</string>
+    <string name="replace_number_title_2">Ersätt det tidigare numret?</string>
+    <string name="replace_button">ERSÄTT</string>
+    <string name="merge_contacts">Sammanfoga kontakter</string>
+    <string name="merging_contacts">Sammanfogar kontakter\u2026</string>
+    <string name="no_duplicated_contacts">Inga dubblerade kontakter</string>
+    <string name="merge_fail">Sammanfogningen misslyckades.</string>
 </resources>

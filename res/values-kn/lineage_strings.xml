@@ -16,5 +16,5 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!--Explanation with icon of Drawer in Contacts. Your medical information ie. Date of birth, Bloodtype, allergic details can be recorded for reference. -->
+    <string name="menu_emergency_information_txt">ತುರ್ತುಸ್ಥಿತಿ ಮಾಹಿತಿ</string>
 </resources>

@@ -22,7 +22,7 @@
     <string name="shortcutDialContact">Deialu uniongyrchol</string>
     <string name="shortcutMessageContact">Neges uniongyrchol</string>
     <string name="shortcutActivityTitle">Dewis cyswllt</string>
-    <string name="contactInsertOrEditActivityTitle">Ychwanegu at y cyswllt</string>
+    <string name="contactInsertOrEditActivityTitle">Ychwanegu at gyswllt</string>
     <string name="contactPickerActivityTitle">Dewis cyswllt</string>
     <string name="groupMemberPickerActivityTitle">Dewis</string>
     <string name="header_entry_contact_list_adapter_header_title">Creu cyswllt newydd</string>

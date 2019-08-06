@@ -26,7 +26,7 @@
     <string name="shortcutActivityTitle">Dewis llwybr byr at gyswllt</string>
     <string name="callShortcutActivityTitle">Dewis rhif i\'w galw</string>
     <string name="messageShortcutActivityTitle">Dewis rhif i anfon neges iddo</string>
-    <string name="contactInsertOrEditActivityTitle">Ychwanegu at y cyswllt</string>
+    <string name="contactInsertOrEditActivityTitle">Ychwanegu at gyswllt</string>
     <string name="contactPickerActivityTitle">Dewis cyswllt</string>
     <string name="header_entry_contact_list_adapter_header_title">Creu cyswllt newydd</string>
     <string name="starredList">Serennog</string>
@@ -211,7 +211,7 @@
     <string name="organization_company_and_title"><xliff:g id="company" example="Swyddog Iaith Gymraeg">%2$s</xliff:g>, <xliff:g id="company" example="Cyngor Cymuned Annwfn">%1$s</xliff:g></string>
     <string name="non_phone_caption">Rhif ffôn</string>
     <string name="non_phone_add_to_contacts">Ychwanegu at gysylltiadau</string>
-    <string name="activity_title_confirm_add_detail">Ychwanegu at y cyswllt</string>
+    <string name="activity_title_confirm_add_detail">Ychwanegu at gyswllt</string>
     <string name="non_phone_close">Cau</string>
     <string name="widget_name_and_phonetic"><xliff:g id="display_name" example="Pwyll Pen Annwfn">%1$s</xliff:g> (<xliff:g id="phonetic_name">%2$s</xliff:g>)</string>
     <string name="date_year_toggle">Cynnwys y flwyddyn</string>

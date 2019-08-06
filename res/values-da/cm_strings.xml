@@ -15,40 +15,40 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="contactDeletedToast">Kontakt slettet.</string>
-    <string name="menu_moveGroupMembers">Flyt gruppemedlemmer</string>
-    <string name="contactSavedToSimCardError">Kunne ikke gemme de markerede kontakter på SIM-kortet</string>
-    <string name="number_anr_too_long">Tallet er for stort</string>
-    <string name="email_address_too_long">E-mail-adresse er for lang</string>
+    <string name="menu_moveGroupMembers">Flyt gruppe-medlemmer</string>
+    <string name="contactSavedToSimCardError">Kunne ikke gemme de markerede kontaktpersoner til SIM-kortet</string>
+    <string name="number_anr_too_long">Nummer er for langt</string>
+    <string name="email_address_too_long">E-post adresse er for lang</string>
     <string name="sim_card_full">SIM-kort er fyldt</string>
-    <string name="tag_too_long">Kontaktnavn er for langt</string>
+    <string name="tag_too_long">Navn på kontaktperson er for langt</string>
     <string name="invalid_phone_number">Telefonnummer er ugyldigt</string>
     <string name="invalid_number_type">Nummertype er ugyldig</string>
-    <string name="no_phone_number_or_email">Angiv telefonnummer eller e-mail-adresse.</string>
-    <string name="importConfirmation_title">Importér kontakt?</string>
+    <string name="no_phone_number_or_email">Indsæt venligst telefonnummer, eller e-post adresse.</string>
+    <string name="importConfirmation_title">Importér kontaktperson?</string>
     <string name="contacts_groups_label">Grupper</string>
     <string name="title_move_members">Flyt medlemmer</string>
     <string name="message_move_members">Flytter medlemmer\u2026</string>
     <string name="message_can_not_move_members">Kan ikke flytte medlemmer</string>
-    <string name="search_bar_hint">Søg i kontakter</string>
-    <string name="deleteConfirmation_title">Slet kontakt?</string>
-    <string name="import_sim_contacts_title">Importér SIM-kontakter</string>
-    <string name="import_sim_contacts_message">Importerer SIM-kontakter\u2026</string>
+    <string name="search_bar_hint">Søg i kontaktpersoner</string>
+    <string name="deleteConfirmation_title">Slet kontaktperson?</string>
+    <string name="import_sim_contacts_title">Importér SIM-kontaktpersoner</string>
+    <string name="import_sim_contacts_message">Importerer SIM-kontaktpersoner\u2026</string>
     <string name="ContactMultiImportConfirmation">De valgte kontakter vil blive importeret.</string>
-    <string name="import_finish">Import afsluttet</string>
+    <string name="import_finish">Import færdig</string>
     <string name="import_stop">Import blev annulleret</string>
-    <string name="too_many_contacts_add_to_group">Ikke flere end <xliff:g id="count">%d</xliff:g> kontakter kan tilføjes</string>
+    <string name="too_many_contacts_add_to_group">Der kan ikke tilføjes mere end <xliff:g id="count">%d</xliff:g> kontaktpersoner</string>
     <string name="ContactMultiDeleteConfirmation">De valgte kontakter slettes.</string>
     <string name="delete_contacts_title">Slet kontaktpersoner</string>
     <string name="delete_contacts_message">Sletter kontaktpersoner\u2026</string>
     <string name="menu_refresh">Opdatér</string>
     <string name="video_call">Videoopkald</string>
-    <string name="menu_copyTo">Kopier til <xliff:g id="destination">%s</xliff:g></string>
-    <string name="no_empty_email_in_usim">USIM-kontakt har ikke et tilgængeligt E-mail-felt. Kan ikke kopiere beskeder.</string>
+    <string name="menu_copyTo">Kopiér til <xliff:g id="destination">%s</xliff:g></string>
+    <string name="no_empty_email_in_usim">USIM-kontaktperson har ikke et tilgængeligt e-post felt. Ude af stand til at kopiere meddelelser.</string>
     <string name="voicemail">Telefonsvarer</string>
-    <string name="select_call_title">Vælg opkaldslog</string>
-    <string name="delete_call_title">Slet opkaldslog</string>
-    <string name="delete_call_message">Sletter opkaldslog\u2026</string>
-    <string name="delete_call_alert">Slet valgte opkaldslog?</string>
+    <string name="select_call_title">Vælg opkaldshistorik</string>
+    <string name="delete_call_title">Slet opkaldshistorik</string>
+    <string name="delete_call_message">Sletter opkaldshistorik\u2026</string>
+    <string name="delete_call_alert">Slet valgte opkaldshistorik?</string>
     <string name="title_del_call">Slet</string>
     <string name="multi_pick_recent_title">SENESTE</string>
     <string name="multi_pick_contacts_title">KONTAKTER</string>

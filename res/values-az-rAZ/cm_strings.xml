@@ -14,6 +14,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="contactDeletedToast">Şəxs silindi.</string>
     <string name="menu_moveGroupMembers">Qrup üzvlərini köçür</string>
     <string name="contactSavedToSimCardError">Seçilən şəxslər SIM kartda saxlanılmadı</string>
     <string name="number_anr_too_long">Nömrə çox uzundur</string>
@@ -23,24 +24,57 @@
     <string name="invalid_phone_number">Telefon nömrəsi etibarsızdır</string>
     <string name="invalid_number_type">Nömrə növü etibarsızdır</string>
     <string name="no_phone_number_or_email">Zəhmət olmasa telefon nömrəsi və ya e-poçt ünvanı daxil edin.</string>
-    <string name="importConfirmation_title">Şəxs idxal edilsin?</string>
+    <string name="importConfirmation_title">Şəxs götürülsün?</string>
     <string name="contacts_groups_label">Qruplar</string>
     <string name="title_move_members">Üzvləri köçür</string>
     <string name="message_move_members">Üzvlər köçürülür\u2026</string>
     <string name="message_can_not_move_members">Üzvlər köçürülə bilmir</string>
+    <string name="search_bar_hint">Şəxsləri axtar</string>
     <string name="deleteConfirmation_title">Şəxsi sil?</string>
-    <string name="import_sim_contacts_title">SIM şəxslərini idxal et</string>
+    <string name="import_sim_contacts_title">SIM şəxslərini götür</string>
     <string name="import_sim_contacts_message">SIM şəxsləri idxal edilir\u2026</string>
-    <string name="import_finish">İdxal başa çatdı</string>
+    <string name="ContactMultiImportConfirmation">Seçilmiş şəxslər götürüləcək.</string>
+    <string name="import_finish">Götürmə bitdi</string>
+    <string name="import_stop">Götürmə ləğv edildi</string>
     <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g> \'dən çox şəxs əlavə etmək olmaz</string>
+    <string name="ContactMultiDeleteConfirmation">Seçilmiş şəxslər silinəcək.</string>
     <string name="delete_contacts_title">Şəxsləri sil</string>
     <string name="delete_contacts_message">Şəxslər silinir\u2026</string>
+    <string name="menu_refresh">Təzələ</string>
+    <string name="video_call">Görüntülü zəng</string>
     <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g> yerinə kopyala</string>
     <string name="no_empty_email_in_usim">USIM şəxsinin mövcud e-poçt sahəsi yoxdur, mesaj kopyalana bilmir.</string>
     <string name="voicemail">Səsli poçt</string>
-    <string name="select_call_title">Axtarış qeydlərini seç</string>
-    <string name="delete_call_title">Zəng qeydlərini sil</string>
-    <string name="delete_call_message">Zəng qeydləri silinir\u2026</string>
-    <string name="delete_call_alert">Seçilən zəng qeydləri silinsin?</string>
+    <string name="select_call_title">Zəng jurnallarını seç</string>
+    <string name="delete_call_title">Zəng jurnallarını sil</string>
+    <string name="delete_call_message">Zəng jurnallarını silinir\u2026</string>
+    <string name="delete_call_alert">Seçilən zəng jurnalları silinsin?</string>
     <string name="title_del_call">Sil</string>
+    <string name="multi_pick_recent_title">ƏN SON</string>
+    <string name="multi_pick_contacts_title">ŞƏXSLƏR</string>
+    <string name="multi_pick_group_title">QRUP</string>
+    <string name="contacts_selected">%d seçildi</string>
+    <string name="summary_count_numbers">%s nömrə</string>
+    <string name="contact_info_text_as_name">Ad:</string>
+    <string name="contact_info_text_as_phone">Tel:</string>
+    <string name="contact_info_text_as_email">E-poçt:</string>
+    <string name="search_menu_search">Axtar</string>
+    <string name="clear_call_log_button_text">TƏMİZLƏ</string>
+    <string name="unknown">Bilinmir</string>
+    <string name="private_num">Gizli nömrə</string>
+    <string name="payphone">Taksafon</string>
+    <string name="too_many_contacts_to_merge_message"><xliff:g id="count">%d</xliff:g> \'dən çox şəxs əlavə etmək olmaz</string>
+    <string name="replace_number_title_1">Əvvəlki nömrəni dəyişdir</string>
+    <string name="replace_number_title_2">Əvvəlki nömrə dəyişdirilsin?</string>
+    <string name="replace_button">DƏYİŞDİR</string>
+    <string name="merge_contacts">Şəxsləri birləşdir</string>
+    <string name="merging_contacts">Şəxslər birləşdirilir\u2026</string>
+    <string name="searching_duplicated_contacts">Təkrarlanan şəxslər axtarılır\u2026</string>
+    <string name="no_duplicated_contacts">Təkrarlanan şəxs yoxdur</string>
+    <string name="give_up_merging">Şəxslərin birləşdirilməsi dayandırılsın?</string>
+    <string name="give_up">Birləşdirməni dayandır</string>
+    <string name="merge_complete">Birləşdirmə bitdi.</string>
+    <string name="sim_email_full">SIM kart e-poçt yaddaşı dolub.</string>
+    <string name="sim_anr_full">SIM kart nömrə yaddaşı dolub.</string>
+    <string name="merge_fail">Birləşdirmə uğursuz oldu.</string>
 </resources>

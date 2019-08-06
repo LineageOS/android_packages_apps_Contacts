@@ -51,25 +51,48 @@
     <string name="menu_create_contact_shortcut">Allugar n\'Aniciu</string>
     <string name="menu_call">Llamar al contautu</string>
     <string name="menu_sendSMS">Unviar SMS al contautu</string>
+    <string name="menu_splitAggregate">Desenllazar</string>
     <string name="menu_editGroup">Editar</string>
     <string name="menu_deleteGroup">Desaniciar</string>
     <string name="menu_new_contact_action_bar">Amestar contautu</string>
     <string name="menu_new_group_action_bar">Amestar grupu</string>
+    <string name="splitConfirmation">¿Desenllazar esti contautu en múltiples contautos?</string>
+    <string name="splitConfirmation_positive_button">Desenllazar</string>
+    <string name="splitConfirmationWithPendingChanges">¿Prestaríate guardar les camudancies que yá fixeres y desenllazar esti contautu en múltiples contautos?</string>
+    <string name="splitConfirmationWithPendingChanges_positive_button">Guardar y desenllazar</string>
+    <string name="joinConfirmation">¿Prestaríate guardar les camudancies que yá fixeres y enllazar con contautu esbilláu?</string>
     <string name="joinConfirmation_positive_button">Guardar y enllazar</string>
+    <string name="menu_joinAggregate">Enllaz</string>
     <string name="menu_save">Guardar</string>
+    <string name="titleJoinContactDataWith">Enllazar contautos</string>
+    <string name="blurbJoinContactDataWith">Ecueyi\'l contautu que quies enllazar con <xliff:g id="name">%s</xliff:g>:</string>
     <string name="showAllContactsJoinItem">Amosar tolos contautos</string>
     <string name="separatorJoinAggregateSuggestions">Contautos suxeríos</string>
     <string name="separatorJoinAggregateAll">Tolos contautos</string>
+    <string name="contactsJoinedMessage">Enllazáronse los contautos</string>
+    <plurals name="contacts_deleted_toast">
+        <item quantity="one">Contautu desaniciáu</item>
+        <item quantity="other">Contautos desaniciaos</item>
+    </plurals>
     <string name="menu_set_ring_tone">Afitar timbre</string>
     <string name="menu_redirect_calls_to_vm">Toles llamaes al buzón de voz</string>
     <string name="readOnlyContactWarning">Nun puen desaniciase los contautos de les tos cuentes de namái llectura, pero puen anubrise.</string>
     <string name="readOnlyContactWarning_positive_button">Anubrir</string>
+    <string name="readOnlyContactDeleteConfirmation">El contautu pa desaniciar tien detalles de múltiples cuentes. Anubriránse los detalles de les cuentes de namái llectura, non desaniciase.</string>
+    <string name="batch_link_single_contact_warning">Precises polo menos dos contautos esbillaos pa facer un enllaz.</string>
+    <string name="batch_link_confirmation">¿Enllazar los contautos esbillaos?</string>
+    <string name="batch_link_confirmation_positive_button">Enllaz</string>
     <string name="single_delete_confirmation">¿Desaniciar esti contautu?</string>
     <string name="batch_delete_confirmation">¿Desaniciar contautos esbillaos?</string>
+    <string name="batch_delete_read_only_contact_confirmation">Nun puen desaniciase los contautos de les tos cuentes de namái llectura, pero puen anubrise.</string>
+    <string name="batch_delete_multiple_accounts_confirmation">El contautu pa desaniciar tien detalles de múltiples cuentes. Anubriránse los detalles de les cuentes de namái llectura, non desaniciase.</string>
+    <string name="multipleContactDeleteConfirmation">Desaniciar esti contautu desaniciará detalles de múltiples cuentes.</string>
     <string name="deleteConfirmation">¿Desaniciar esti contautu?</string>
     <string name="deleteConfirmation_positive_button">Desaniciar</string>
     <string name="menu_discard">Escartar cambeos</string>
     <string name="invalidContactMessage">El contautu nun esiste.</string>
+    <string name="createContactShortcutSuccessful_NoName">Amestóse\'l contautu a la pantalla d\'aniciu.</string>
+    <string name="createContactShortcutSuccessful"><xliff:g id="name">%s</xliff:g>amestose a la pantalla d\'aniciu.</string>
     <string name="pickerNewContactHeader">Crear contautu nuevu</string>
     <string name="pickerNewContactText">Crear contautu nuevu</string>
     <string-array name="otherLabels">
@@ -88,8 +111,11 @@
     <string name="emptyGroup">Esti grupu ta baleru.</string>
     <string name="addPeopleToGroup">P\'amestar contautos al grupu, edítalu.</string>
     <string name="savingContact">Guardando contautu\u2026</string>
+    <string name="contactUnlinkedToast">Desenllazáronse los contautos</string>
     <string name="contactSavedToast">Guardóse\'l contautu.</string>
     <string name="contactSavedErrorToast">Nun se guardaron los cambeos del contautu.</string>
+    <string name="contactUnlinkErrorToast">Nun pudo enllazase\'l contautu.</string>
+    <string name="contactJoinErrorToast">Nun pudo enllazase\'l contautu.</string>
     <string name="contactGenericErrorToast">Fallu guardando\'l contautu.</string>
     <string name="contactPhotoSavedErrorToast">Nun pudieron guardase les camudancies de semeya del contautu.</string>
     <string name="groupSavedToast">Grupu guardáu</string>
@@ -156,6 +182,7 @@
     <string name="primary_photo">Semeya primaria</string>
     <string name="description_star">favoritos</string>
     <string name="edit_contact">Editar contautu</string>
+    <string name="aggregation_suggestion_join_dialog_message">¿Quies enllazar el contautu actual col contautu esbilláu?</string>
     <string name="aggregation_suggestion_edit_dialog_message">¿Quies editar el contautu seleicionáu? Va copiase la información qu\'introduxeras hasta\'l momentu.</string>
     <string name="menu_copyContact">Copiar a los mios contautos</string>
     <string name="add_to_my_contacts">Amestar a Los mios contautos</string>
@@ -192,6 +219,7 @@
         <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> persona</item>
         <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> persones</item>
     </plurals>
+    <string name="toast_join_with_empty_contact">Pa enllazar el contautu, tienes d\'introducir el nome del otru contautu.    </string>
     <string name="copy_text">Copiar nel cartafueyu</string>
     <string name="set_default">Predeterminar</string>
     <string name="clear_default">Desaniciar predetermináu</string>
@@ -211,6 +239,7 @@
     <string name="generic_no_account_prompt_title">Amestar una cuenta</string>
     <string name="contact_editor_prompt_zero_accounts">Nun va facese una copia de seguranza del contautu nuevu. ¿Quies amestar una cuenta pa facer copies de seguranza online de los tos contautos?</string>
     <string name="contact_editor_prompt_one_account">Los contautos nuevos guardaránse en <xliff:g id="account_name">%1$s</xliff:g>.</string>
+    <string name="contact_editor_prompt_multiple_accounts">Escueyi la cuenta por defeutu pa contautos nuevos:</string>
     <string name="contact_editor_title_new_contact">Amestar contautu nuevu</string>
     <string name="contact_editor_title_existing_contact">Editar contautu</string>
     <string name="keep_local">Guardar llocalmente</string>
@@ -259,20 +288,43 @@
     <string name="compact_editor_change_photo_content_description">Camudar semeya</string>
     <string name="compact_editor_failed_to_load">Fallu al abrir l\'editor.</string>
     <string name="compact_editor_account_selector_title">Guardando en</string>
+    <string name="compact_editor_account_selector_description">Anguaño guardando en <xliff:g id="account_name">%s</xliff:g>. Calcu doblu pa escoyer una cuenta diferente.</string>
+    <plurals name="compact_editor_linked_contacts_selector_title">
+        <item quantity="one">Contautu enllazáu</item>
+        <item quantity="other">Contautos enllazaos <xliff:g id="count">%d</xliff:g></item>
+    </plurals>
+    <string name="quickcontact_contacts_number"><xliff:g id="count">%d</xliff:g> contautos enllazaos</string>
     <string name="quick_contact_display_name_with_phonetic"><xliff:g id="display_name">%s</xliff:g> (<xliff:g id="phonetic_name">%s</xliff:g>)</string>
+    <string name="quickcontact_suggestion_link_button">ENLLAZAR CONTAUTOS</string>
     <string name="quickcontact_suggestion_cancel_button">ENCABOXAR</string>
+    <plurals name="quickcontact_suggestion_card_title">
+        <item quantity="one">1 posible duplicáu</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> posibles duplicaos</item>
+    </plurals>
+    <plurals name="quickcontact_suggestions_number">
+        <item quantity="one">1 contautu enllazáu</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> contautos enllazaos</item>
+    </plurals>
     <plurals name="quickcontact_suggestion_account_type_number">
         <item quantity="one">(<xliff:g id="count">%d</xliff:g>)</item>
         <item quantity="other">(<xliff:g id="count">%d</xliff:g>)</item>
     </plurals>
+    <string name="quickcontact_suggestion_account_type"><xliff:g id="account_type">%s</xliff:g><xliff:g id="account_type_number">%s</xliff:g></string>
     <string name="suggestion_card_this_contact_title">Esti contautu</string>
     <string name="suggestion_card_duplicates_title">Posibles duplicaos</string>
+    <string name="suggestion_card_help_message">Estos contautos puede que seyan la mesma persona. Puedes venceyalos como un solu contautu.</string>
+    <string name="compact_editor_linked_contacts_title">Contautos enllazaos</string>
     <string name="from_your_accounts">De les tos cuentes</string>
     <string name="take_a_photo_button">Facer semeya</string>
     <string name="all_photos_button">Toles semeyes</string>
     <string name="photo_picker_title">Escoyer semeya</string>
     <string name="contact_from_account_name">De <xliff:g id="account_name">%s</xliff:g></string>
+    <string name="editor_delete_view_description">Desaniciar <xliff:g id="data_type">%s </xliff:g><xliff:g id="data_kind">%s</xliff:g></string>
     <string name="editor_delete_view_description_short">Desaniciar <xliff:g id="data_kind">%s</xliff:g></string>
+    <string name="photo_view_description_not_checked">Semeya de <xliff:g id="account_type">%s </xliff:g><xliff:g id="user_name">%s </xliff:g>ensin xequiar</string>
+    <string name="photo_view_description_checked">Semeya de <xliff:g id="account_type">%s </xliff:g><xliff:g id="user_name">%s </xliff:g> xequiada</string>
+    <string name="photo_view_description_not_checked_no_info">Semeya d\'una cuenta desconocida ensin xequiar</string>
+    <string name="photo_view_description_checked_no_info">Semeya d\'una cuenta desconocida xequiada</string>
     <string name="locale_change_in_progress">Ta anovándose\'l llistáu de contautos pa reflexar el cambéu de llingua.\n\nEspera, por favor...</string>
     <string name="menu_blocked_numbers">Númberos bloquiaos</string>
 </resources>

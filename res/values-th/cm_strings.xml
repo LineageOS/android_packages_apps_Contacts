@@ -14,6 +14,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="contactDeletedToast">ลบรายชื่อผู้ติดต่อแล้ว</string>
     <string name="menu_moveGroupMembers">ย้ายสมาชิกกลุ่ม</string>
     <string name="contactSavedToSimCardError">ไม่สามารถบันทึกรายชื่อติดต่อที่เลือกไปยังซิมการ์ดได้</string>
     <string name="number_anr_too_long">หมายเลขยาวเกินไป</string>
@@ -28,13 +29,19 @@
     <string name="title_move_members">ย้ายสมาชิก</string>
     <string name="message_move_members">กำลังย้ายสมาชิก\u2026</string>
     <string name="message_can_not_move_members">ไม่สามารถย้ายสมาชิก</string>
+    <string name="search_bar_hint">ค้นหาผู้ติดต่อ</string>
     <string name="deleteConfirmation_title">ลบ​ราย​ชื่อหรือไม่</string>
     <string name="import_sim_contacts_title">นำเข้ารายชื่อติดต่อจากซิม</string>
     <string name="import_sim_contacts_message">กำลังนำเข้ารายชื่อติดต่อจากซิม\u2026</string>
+    <string name="ContactMultiImportConfirmation">รายชื่อติดต่อที่เลือกจะถูกนำเข้า</string>
     <string name="import_finish">นำเข้าเสร็จสิ้น</string>
+    <string name="import_stop">การนำเข้าถูกยกเลิก</string>
     <string name="too_many_contacts_add_to_group">ไม่สามารถเพิ่มรายชื่อติดต่อได้เกิน <xliff:g id="count">%d</xliff:g> ชื่อ</string>
+    <string name="ContactMultiDeleteConfirmation">รายชื่อที่เลือกจะถูกลบ</string>
     <string name="delete_contacts_title">ลบ​ราย​ชื่อ</string>
     <string name="delete_contacts_message">กำลังลบรายชื่อ\u2026</string>
+    <string name="menu_refresh">รีเฟรช</string>
+    <string name="video_call">สนทนาวิดีโอ</string>
     <string name="menu_copyTo">คัดลอกไปยัง<xliff:g id="destination">%s</xliff:g></string>
     <string name="no_empty_email_in_usim">รายชื่อติดต่อ USIM ไม่มีช่องอีเมลให้ใช้งาน ไม่สามารถคัดลอกข้อความได้</string>
     <string name="voicemail">ข้อความเสียง</string>
@@ -43,4 +50,31 @@
     <string name="delete_call_message">กำลังลบประวัติการโทร\u2026</string>
     <string name="delete_call_alert">ลบประวัติการโทรที่เลือกหรือไม่</string>
     <string name="title_del_call">ลบ</string>
+    <string name="multi_pick_recent_title">ล่าสุด</string>
+    <string name="multi_pick_contacts_title">ติดต่อ</string>
+    <string name="multi_pick_group_title">กลุ่ม</string>
+    <string name="contacts_selected">%d ถูกเลือก</string>
+    <string name="summary_count_numbers">%s หมายเลข</string>
+    <string name="contact_info_text_as_name">ชื่อ:</string>
+    <string name="contact_info_text_as_phone">โทร:</string>
+    <string name="contact_info_text_as_email">อีเมล:</string>
+    <string name="search_menu_search">ค้นหา</string>
+    <string name="clear_call_log_button_text">เคลียร์</string>
+    <string name="unknown">ไม่รู้จัก</string>
+    <string name="private_num">หมายเลขส่วนตัว</string>
+    <string name="payphone">โทรศัพท์สาธารณะ</string>
+    <string name="too_many_contacts_to_merge_message">ไม่สามารถผสานรวมที่อยู่ติดต่อได้เกิน <xliff:g id="count">%d</xliff:g> รายการ</string>
+    <string name="replace_number_title_1">แทนที่หมายเลขก่อนหน้า</string>
+    <string name="replace_number_title_2">แทนที่หมายเลขก่อนหน้านี้หรือไม่</string>
+    <string name="replace_button">แทนที่</string>
+    <string name="merge_contacts">รวมรายชื่อติดต่อ</string>
+    <string name="merging_contacts">กำลังรวมรายชื่อติดต่อ\u2026</string>
+    <string name="searching_duplicated_contacts">กำลังค้นหารายชื่อติดต่อที่ซ้ำกัน\u2026</string>
+    <string name="no_duplicated_contacts">ไม่มีรายชื่อติดต่อที่ซ้ำกัน</string>
+    <string name="give_up_merging">หยุดการรวมรายชื่อหรือไม่?</string>
+    <string name="give_up">หยุดการรวมรายชื่อ</string>
+    <string name="merge_complete">รวมเสร็จสมบูรณ์</string>
+    <string name="sim_email_full">พื้นที่เก็บอีเมลของซิมการ์ดเต็ม</string>
+    <string name="sim_anr_full">พื้นที่เก็บหมายเลขของซิมการ์ดเต็ม</string>
+    <string name="merge_fail">การรวมล้มเหลว</string>
 </resources>

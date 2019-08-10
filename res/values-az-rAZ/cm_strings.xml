@@ -17,51 +17,50 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Toast displayed when saving a contact to sim card failed -->
-  <string name="contactSavedToSimCardError">Seçilən şəxslər SIM kartda saxlanılmadı</string>
-  <string name="airplane_mode_on">Uçuş rejimi fəal olduqda SIM karta müraciət mümkün deyil</string>
-  <string name="number_anr_too_long">Nömrə çox uzundur</string>
-  <string name="email_address_too_long">E-poçt ünvanı çox uzundur</string>
-  <string name="sim_card_full">SIM kart dolub</string>
-  <string name="tag_too_long">Şəxs adı çox uzundur</string>
-  <string name="invalid_phone_number">Telefon nömrəsi etibarsızdır</string>
-  <string name="invalid_number_type">Nömrə növü etibarsızdır</string>
-  <string name="no_phone_number_or_email">Zəhmət olmasa telefon nömrəsi və ya e-poçt ünvanı daxil edin.</string>
-  <string name="memory_card_full">Şəxs saxlanılmadı, telefon yaddaşı dolub</string>
-  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
-  <string name="contacts_groups_label">Qruplar</string>
-  <string name="menu_moveGroupMembers">Qrup üzvlərini köçür</string>
-  <string name="title_move_members">Üzvləri köçür</string>
-  <string name="message_move_members">Üzvlər köçürülür\u2026</string>
-  <string name="message_can_not_move_members">Üzvlər köçürülə bilmir</string>
-  <string name="edit_before_call">Zəngdən əvvəl nömrəyə düzəliş et</string>
-  <string name="menu_sendViaSMS">Şəxsi SMS ilə göndər</string>
-  <string name="select_all">Hamısı</string>
-  <!-- Choose Sim Card to Import -->
-  <string name="import_sim_contacts_title">SIM şəxslərini idxal et</string>
-  <string name="import_sim_contacts_message">SIM şəxsləri idxal edilir\u2026</string>
-  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
-  <string name="importConfirmation_title">Şəxs idxal edilsin?</string>
-  <string name="import_finish">İdxal başa çatdı</string>
-  <!-- Multi Delete Contacts related strings -->
-  <string name="delete_contacts_title">Şəxsləri sil</string>
-  <string name="delete_contacts_message">Şəxslər silinir\u2026</string>
-  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
-  <string name="deleteConfirmation_title">Şəxsi sil?</string>
-  <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g> \'dən çox şəxs əlavə etmək olmaz</string>
-  <!-- add for MemoryStatusActivity -->
-  <string name="menu_memory_status">Yaddaş durumu</string>
-  <string name="memory_size">Cəmi:</string>
-  <string name="memory_used">İşlədilən:</string>
-  <string name="calculating_status_now">Durum hesablanır\u2026</string>
-  <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g> yerinə kopyala</string>
-  <string name="no_empty_email_in_usim">USIM şəxsinin mövcud e-poçt sahəsi yoxdur, mesaj kopyalana bilmir.</string>
-  <string name="voicemail">Səsli poçt</string>
-  <string name="select_call_title">Axtarış qeydlərini seç</string>
-  <string name="delete_call_title">Zəng qeydlərini sil</string>
-  <string name="delete_call_message">Zəng qeydləri silinir\u2026</string>
-  <string name="delete_call_alert">Seçilən zəng qeydləri silinsin?</string>
-  <string name="title_del_call">Sil</string>
-  <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g> tərəfindən dəstəklənir</string>
-  <!-- InCall plugin directory search & invite -->
+    <string name="contactSavedToSimCardError">Seçilən şəxslər SIM kartda saxlanılmadı</string>
+    <string name="airplane_mode_on">Təyyarə rejimi fəal olduqda SIM karta müraciət mümkün deyil</string>
+    <string name="number_anr_too_long">Nömrə çox uzundur</string>
+    <string name="email_address_too_long">E-poçt ünvanı çox uzundur</string>
+    <string name="sim_card_full">SIM kart dolub</string>
+    <string name="tag_too_long">Şəxs adı çox uzundur</string>
+    <string name="invalid_phone_number">Telefon nömrəsi etibarsızdır</string>
+    <string name="invalid_number_type">Nömrə növü etibarsızdır</string>
+    <string name="no_phone_number_or_email">Zəhmət olmasa telefon nömrəsi və ya e-poçt ünvanı daxil edin.</string>
+    <string name="memory_card_full">Şəxs saxlanılmadı, telefon yaddaşı dolub</string>
+    <string name="contacts_groups_label">Qruplar</string>
+    <string name="menu_moveGroupMembers">Qrup üzvlərini köçür</string>
+    <string name="title_move_members">Üzvləri köçür</string>
+    <string name="message_move_members">Üzvlər köçürülür\u2026</string>
+    <string name="message_can_not_move_members">Üzvlər köçürülə bilmir</string>
+    <string name="edit_before_call">Zəngdən əvvəl nömrəyə düzəliş et</string>
+    <string name="menu_sendViaSMS">Şəxsi SMS ilə göndər</string>
+    <string name="select_all">Hamısı</string>
+    <string name="import_sim_contacts_title">SIM şəxslərini götür</string>
+    <string name="import_sim_contacts_message">SIM şəxsləri idxal edilir\u2026</string>
+    <string name="importConfirmation_title">Şəxs götürülsün?</string>
+    <string name="import_finish">Götürmə bitdi</string>
+    <string name="delete_contacts_title">Şəxsləri sil</string>
+    <string name="delete_contacts_message">Şəxslər silinir\u2026</string>
+    <string name="deleteConfirmation_title">Şəxsi sil?</string>
+    <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g> \'dən çox şəxs əlavə etmək olmaz</string>
+    <string name="menu_memory_status">Yaddaş vəziyyəti</string>
+    <string name="memory_size">Cəmi:</string>
+    <string name="memory_used">İşlədilən:</string>
+    <string name="calculating_status_now">Vəziyyət hesablanır\u2026</string>
+    <string name="menu_copyTo"><xliff:g id="destination">%s</xliff:g> yerinə kopyala</string>
+    <string name="no_empty_email_in_usim">USIM şəxsinin mövcud e-poçt sahəsi yoxdur, mesaj kopyalana bilmir.</string>
+    <string name="voicemail">Səsli poçt</string>
+    <string name="select_call_title">Zəng jurnallarını seç</string>
+    <string name="delete_call_title">Zəng jurnallarını sil</string>
+    <string name="delete_call_message">Zəng jurnallarını silinir\u2026</string>
+    <string name="delete_call_alert">Seçilən zəng jurnalları silinsin?</string>
+    <string name="title_del_call">Sil</string>
+    <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g> tərəfindən dəstəklənir</string>
+    <string name="sms_permission_rationale">SMS tarixçəsini göstərmək üçün SMS icazələrini vermək lazımdır.</string>
+    <string name="sms_rationale_view">GÖRÜNÜŞ</string>
+    <string name="incall_plugin_directory_search">%1$s kataloqunu axtar</string>
+    <string name="incall_plugin_invite">DƏVƏT</string>
+    <string name="incall_plugin_account_subheader">%1$s adı</string>
+    <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> bu zəngi edə bilmir</string>
+    <string name="incall_plugin_intent_error">Bu əməliyyat edilə bilmir. Daha sonra yenidən sınayın.</string>
 </resources>

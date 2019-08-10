@@ -17,58 +17,50 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Toast displayed when saving a contact to sim card failed -->
-  <string name="contactSavedToSimCardError">Kunne ikke gemme de markerede kontakter på SIM-kortet</string>
-  <string name="airplane_mode_on">SIM-kortet kan ikke tilgås, mens flytilstand er aktiveret</string>
-  <string name="number_anr_too_long">Tallet er for stort</string>
-  <string name="email_address_too_long">E-mail-adresse er for lang</string>
-  <string name="sim_card_full">SIM-kort er fyldt</string>
-  <string name="tag_too_long">Kontaktnavn er for langt</string>
-  <string name="invalid_phone_number">Telefonnummer er ugyldigt</string>
-  <string name="invalid_number_type">Nummertype er ugyldig</string>
-  <string name="no_phone_number_or_email">Angiv telefonnummer eller e-mail-adresse.</string>
-  <string name="memory_card_full">Kontakt kunne ikke gemmes, telefonens hukommelse er fuld</string>
-  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
-  <string name="contacts_groups_label">Grupper</string>
-  <string name="menu_moveGroupMembers">Flyt gruppemedlemmer</string>
-  <string name="title_move_members">Flyt medlemmer</string>
-  <string name="message_move_members">Flytter medlemmer\u2026</string>
-  <string name="message_can_not_move_members">Kan ikke flytte medlemmer</string>
-  <string name="edit_before_call">Redigér nummer før opkald</string>
-  <string name="menu_sendViaSMS">Send kontakt via SMS</string>
-  <string name="select_all">Alle</string>
-  <!-- Choose Sim Card to Import -->
-  <string name="import_sim_contacts_title">Importér SIM-kontakter</string>
-  <string name="import_sim_contacts_message">Importerer SIM-kontakter\u2026</string>
-  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
-  <string name="importConfirmation_title">Importér kontakt?</string>
-  <string name="import_finish">Import afsluttet</string>
-  <!-- Multi Delete Contacts related strings -->
-  <string name="delete_contacts_title">Slet kontaktpersoner</string>
-  <string name="delete_contacts_message">Sletter kontaktpersoner\u2026</string>
-  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
-  <string name="deleteConfirmation_title">Slet kontakt?</string>
-  <string name="too_many_contacts_add_to_group">Ikke flere end <xliff:g id="count">%d</xliff:g> kontakter kan tilføjes</string>
-  <!-- add for MemoryStatusActivity -->
-  <string name="menu_memory_status">Hukommelsesstatus</string>
-  <string name="memory_size">Total:</string>
-  <string name="memory_used">I brug:</string>
-  <string name="calculating_status_now">Beregner status\u2026</string>
-  <string name="menu_copyTo">Kopier til <xliff:g id="destination">%s</xliff:g></string>
-  <string name="no_empty_email_in_usim">USIM-kontakt har ikke et tilgængeligt E-mail-felt. Kan ikke kopiere beskeder.</string>
-  <string name="voicemail">Telefonsvarer</string>
-  <string name="select_call_title">Vælg opkaldslog</string>
-  <string name="delete_call_title">Slet opkaldslog</string>
-  <string name="delete_call_message">Sletter opkaldslog\u2026</string>
-  <string name="delete_call_alert">Slet valgte opkaldslog?</string>
-  <string name="title_del_call">Slet</string>
-  <string name="powered_by_provider">Drevet af <xliff:g id="provider">%s</xliff:g></string>
-  <string name="sms_permission_rationale">SMS-tilladelsen er påkrævet for at vise SMS-historik for kontakter.</string>
-  <string name="sms_rationale_view">SE</string>
-  <!-- InCall plugin directory search & invite -->
-  <string name="incall_plugin_directory_search">Søg i %1$s adressebog</string>
-  <string name="incall_plugin_invite">INVITÉR</string>
-  <string name="incall_plugin_account_subheader">%1$s navn</string>
-  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> kan ikke foretage dette opkald</string>
-  <string name="incall_plugin_intent_error">Kan ikke fuldføre denne handling. Prøv igen senere.</string>
+    <string name="contactSavedToSimCardError">Kunne ikke gemme de markerede kontaktpersoner til SIM-kortet</string>
+    <string name="airplane_mode_on">SIM-kort kan ikke tilgås, imens flytilstand er aktiveret</string>
+    <string name="number_anr_too_long">Nummer er for langt</string>
+    <string name="email_address_too_long">E-post adresse er for lang</string>
+    <string name="sim_card_full">SIM-kort er fyldt</string>
+    <string name="tag_too_long">Navn på kontaktperson er for langt</string>
+    <string name="invalid_phone_number">Telefonnummer er ugyldigt</string>
+    <string name="invalid_number_type">Nummertype er ugyldig</string>
+    <string name="no_phone_number_or_email">Indsæt venligst telefonnummer, eller e-post adresse.</string>
+    <string name="memory_card_full">Kontaktperson kunne ikke gemmes, telefon-hukommelse er fyldt</string>
+    <string name="contacts_groups_label">Grupper</string>
+    <string name="menu_moveGroupMembers">Flyt gruppe-medlemmer</string>
+    <string name="title_move_members">Flyt medlemmer</string>
+    <string name="message_move_members">Flytter medlemmer\u2026</string>
+    <string name="message_can_not_move_members">Kan ikke flytte medlemmer</string>
+    <string name="edit_before_call">Redigér nummer før opkald</string>
+    <string name="menu_sendViaSMS">Send kontaktperson via SMS</string>
+    <string name="select_all">Alle</string>
+    <string name="import_sim_contacts_title">Importér SIM-kontaktpersoner</string>
+    <string name="import_sim_contacts_message">Importerer SIM-kontaktpersoner\u2026</string>
+    <string name="importConfirmation_title">Importér kontaktperson?</string>
+    <string name="import_finish">Import færdig</string>
+    <string name="delete_contacts_title">Slet kontaktpersoner</string>
+    <string name="delete_contacts_message">Sletter kontaktpersoner\u2026</string>
+    <string name="deleteConfirmation_title">Slet kontaktperson?</string>
+    <string name="too_many_contacts_add_to_group">Der kan ikke tilføjes mere end <xliff:g id="count">%d</xliff:g> kontaktpersoner</string>
+    <string name="menu_memory_status">Hukommelsesstatus</string>
+    <string name="memory_size">Samlet:</string>
+    <string name="memory_used">Brugt:</string>
+    <string name="calculating_status_now">Beregner status\u2026</string>
+    <string name="menu_copyTo">Kopiér til <xliff:g id="destination">%s</xliff:g></string>
+    <string name="no_empty_email_in_usim">USIM-kontaktperson har ikke et tilgængeligt e-post felt. Ude af stand til at kopiere meddelelser.</string>
+    <string name="voicemail">Telefonsvarer</string>
+    <string name="select_call_title">Vælg opkaldshistorik</string>
+    <string name="delete_call_title">Slet opkaldshistorik</string>
+    <string name="delete_call_message">Sletter opkaldshistorik\u2026</string>
+    <string name="delete_call_alert">Slet valgte opkaldshistorik?</string>
+    <string name="title_del_call">Slet</string>
+    <string name="powered_by_provider">Leveret af <xliff:g id="provider">%s</xliff:g></string>
+    <string name="sms_permission_rationale">SMS-tilladelse kræves for at vise kontaktpersons SMS-historik.</string>
+    <string name="sms_rationale_view">VIS</string>
+    <string name="incall_plugin_directory_search">Søg i %1$s adressebog</string>
+    <string name="incall_plugin_invite">INVITÉR</string>
+    <string name="incall_plugin_account_subheader">%1$s navn</string>
+    <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> kan ikke foretage dette opkald</string>
+    <string name="incall_plugin_intent_error">Ude af stand til at fuldføre denne handling. Prøv igen senere.</string>
 </resources>

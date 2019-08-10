@@ -17,12 +17,50 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Toast displayed when saving a contact to sim card failed -->
-  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
-  <!-- Choose Sim Card to Import -->
-  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
-  <!-- Multi Delete Contacts related strings -->
-  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
-  <!-- add for MemoryStatusActivity -->
-  <!-- InCall plugin directory search & invite -->
+    <string name="contactSavedToSimCardError">Methwyd â chadw\'r cysylltiadau a ddewiswyd i\'r cerdyn SIM</string>
+    <string name="airplane_mode_on">Ni ellir darllen y cerdyn SIM tra bod modd Awyren wedi\'i alluogi.</string>
+    <string name="number_anr_too_long">Rhif yn rhy hir</string>
+    <string name="email_address_too_long">Cyfeiriad ebost yn rhy hir</string>
+    <string name="sim_card_full">Cerdyn SIM yn llawn</string>
+    <string name="tag_too_long">Enw cyswllt yn rhy hir</string>
+    <string name="invalid_phone_number">Rhif ffôn yn annilys</string>
+    <string name="invalid_number_type">Math y rhif yn annilys</string>
+    <string name="no_phone_number_or_email">Rho rif ffôn neu gyfeiriad e-bost.</string>
+    <string name="memory_card_full">Methwyd â chadw\'r cyswllt. Mae storfa\'r ffôn yn llawn.</string>
+    <string name="contacts_groups_label">Grwpiau</string>
+    <string name="menu_moveGroupMembers">Symud aelodau\'r grŵp</string>
+    <string name="title_move_members">Symud aelodau</string>
+    <string name="message_move_members">Yn symud aelodau\u2026</string>
+    <string name="message_can_not_move_members">Methu â symud aelodau</string>
+    <string name="edit_before_call">Golygu\'r rhif cyn galw</string>
+    <string name="menu_sendViaSMS">Anfon cyswllt trwy SMS</string>
+    <string name="select_all">Y cwbl</string>
+    <string name="import_sim_contacts_title">Mewnforio cysylltiadau o\'r SIM</string>
+    <string name="import_sim_contacts_message">Yn mewnforio cysylltiadau o\u2019r SIM\u2026</string>
+    <string name="importConfirmation_title">Mewnforio\'r cyswllt?</string>
+    <string name="import_finish">Wedi gorffen mewnforio</string>
+    <string name="delete_contacts_title">Dileu cysylltiadau</string>
+    <string name="delete_contacts_message">Yn dileu cysylltiadau\u2026</string>
+    <string name="deleteConfirmation_title">Dileu cyswllt?</string>
+    <string name="too_many_contacts_add_to_group">Ni ellir ychwanegu mwy na <xliff:g id="count">%d</xliff:g> cyswllt</string>
+    <string name="menu_memory_status">Statws cof</string>
+    <string name="memory_size">Cyfanswm:</string>
+    <string name="memory_used">Defnyddiwyd:</string>
+    <string name="calculating_status_now">Yn cyfrifo statws\u2026</string>
+    <string name="menu_copyTo">Copïo i <xliff:g id="destination">%s</xliff:g></string>
+    <string name="no_empty_email_in_usim">Nid oes gan y cyswllt USIM maes e-bost ar gael. Methu â chopïo negeseuon.</string>
+    <string name="voicemail">Lleisbost</string>
+    <string name="select_call_title">Dewis logiau galwadau</string>
+    <string name="delete_call_title">Dileu cofnodion galwadau</string>
+    <string name="delete_call_message">Yn dileu cofnodion galwadau\u2026</string>
+    <string name="delete_call_alert">Dileu\'r cofnodion galwadau a ddewiswyd?</string>
+    <string name="title_del_call">Dileu</string>
+    <string name="powered_by_provider">Pwerwyd gan <xliff:g id="provider">%s</xliff:g></string>
+    <string name="sms_permission_rationale">Mae angen caniatâd SMS i ddangos hanes SMS cysylltiadau.</string>
+    <string name="sms_rationale_view">GWELD</string>
+    <string name="incall_plugin_directory_search">Chwilio cyfeiriadur %1$s</string>
+    <string name="incall_plugin_invite">GWAHODD</string>
+    <string name="incall_plugin_account_subheader">enw %1$s</string>
+    <string name="incall_plugin_call_error">Ni all <xliff:g id="name">%s</xliff:g> wneud yr alwad hon</string>
+    <string name="incall_plugin_intent_error">Methu â chwblhau\'r weithred hon. Rho gynnig arall arni\'n hwyrach.</string>
 </resources>

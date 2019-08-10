@@ -16,44 +16,44 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="contacts_selected">
-    <item quantity="zero">تم تحديد %d</item>
-    <item quantity="one">تم تحديد %d</item>
-    <item quantity="two">تم تحديد %d</item>
-    <item quantity="few">تم تحديد %d</item>
-    <item quantity="many">تم تحديد %d</item>
-    <item quantity="other">تم تحديد %d</item>
-  </plurals>
-  <plurals name="ContactMultiImportConfirmation">
-    <item quantity="zero">سيتم استيراد %d جهة اتصال.</item>
-    <item quantity="one">سيتم استيراد %d جهات اتصال.</item>
-    <item quantity="two">سيتم استيراد %d جهات اتصال.</item>
-    <item quantity="few">سيتم استيراد %d جهات اتصال.</item>
-    <item quantity="many">سيتم استيراد %d جهات اتصال.</item>
-    <item quantity="other">سيتم استيراد %d جهات اتصال.</item>
-  </plurals>
-  <plurals name="import_progress">
-    <item quantity="zero">سيتم استيراد %d جهة اتصال</item>
-    <item quantity="one">سيتم استيراد %d جهات اتصال</item>
-    <item quantity="two">سيتم استيراد %d جهات اتصال</item>
-    <item quantity="few">سيتم استيراد %d جهات اتصال</item>
-    <item quantity="many">سيتم استيراد %d جهات اتصال</item>
-    <item quantity="other">سيتم استيراد %d جهات اتصال</item>
-  </plurals>
-  <plurals name="ContactMultiDeleteConfirmation">
-    <item quantity="zero">سيتم حذف %d جهة اتصال.</item>
-    <item quantity="one">سيتم حذف %d جهات اتصال.</item>
-    <item quantity="two">سيتم حذف %d جهات اتصال.</item>
-    <item quantity="few">سيتم حذف %d جهات اتصال.</item>
-    <item quantity="many">سيتم حذف %d جهات اتصال.</item>
-    <item quantity="other">سيتم حذف %d جهات اتصال.</item>
-  </plurals>
-  <plurals name="spam_count_text">
-    <item quantity="zero">%d شخص تم وضع علامة عليه كغير هام</item>
-    <item quantity="one">%d أشخاص تم وضع علامة عليهم كغير هام</item>
-    <item quantity="two">%d شخص تم وضع علامة عليه كغير هام</item>
-    <item quantity="few">%d أشخاص تم وضع علامة عليهم كغير هام</item>
-    <item quantity="many">%d شخص تم وضع علامة عليه كغير هام</item>
-    <item quantity="other">%d أشخاص تم وضع علامة عليهم كغير هام</item>
-  </plurals>
+    <plurals name="contacts_selected">
+        <item quantity="zero">تم تحديد %d</item>
+        <item quantity="one">تم تحديد %d</item>
+        <item quantity="two">تم تحديد %d</item>
+        <item quantity="few">تم تحديد %d</item>
+        <item quantity="many">تم تحديد %d</item>
+        <item quantity="other">تم تحديد %d</item>
+    </plurals>
+    <plurals name="ContactMultiImportConfirmation">
+        <item quantity="zero">سيتم استيراد %d جهة اتصال.</item>
+        <item quantity="one">سيتم استيراد %d جهات اتصال.</item>
+        <item quantity="two">سيتم استيراد %d جهات اتصال.</item>
+        <item quantity="few">سيتم استيراد %d جهات اتصال.</item>
+        <item quantity="many">سيتم استيراد %d جهات اتصال.</item>
+        <item quantity="other">سيتم استيراد %d جهات اتصال.</item>
+    </plurals>
+    <plurals name="import_progress">
+        <item quantity="zero">سيتم استيراد %d جهة اتصال</item>
+        <item quantity="one">سيتم استيراد %d جهات اتصال</item>
+        <item quantity="two">سيتم استيراد %d جهات اتصال</item>
+        <item quantity="few">سيتم استيراد %d جهات اتصال</item>
+        <item quantity="many">سيتم استيراد %d جهات اتصال</item>
+        <item quantity="other">سيتم استيراد %d جهات اتصال</item>
+    </plurals>
+    <plurals name="ContactMultiDeleteConfirmation">
+        <item quantity="zero">سيتم حذف %d جهة اتصال.</item>
+        <item quantity="one">سيتم حذف %d جهات اتصال.</item>
+        <item quantity="two">سيتم حذف %d جهات اتصال.</item>
+        <item quantity="few">سيتم حذف %d جهات اتصال.</item>
+        <item quantity="many">سيتم حذف %d جهات اتصال.</item>
+        <item quantity="other">سيتم حذف %d جهات اتصال.</item>
+    </plurals>
+    <plurals name="spam_count_text">
+        <item quantity="zero">%d شخص تم وضع علامة عليه كغير هام</item>
+        <item quantity="one">%d أشخاص تم وضع علامة عليهم كغير هام</item>
+        <item quantity="two">%d شخص تم وضع علامة عليه كغير هام</item>
+        <item quantity="few">%d أشخاص تم وضع علامة عليهم كغير هام</item>
+        <item quantity="many">%d شخص تم وضع علامة عليه كغير هام</item>
+        <item quantity="other">%d أشخاص تم وضع علامة عليهم كغير هام</item>
+    </plurals>
 </resources>

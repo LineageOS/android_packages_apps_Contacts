@@ -16,29 +16,34 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="contacts_selected">
-    <item quantity="one">Wybrano %d</item>
-    <item quantity="few">Wybrano %d</item>
-    <item quantity="other">Wybrano %d</item>
-  </plurals>
-  <plurals name="ContactMultiImportConfirmation">
-    <item quantity="one">Zostanie zaimportowany %d kontakt.</item>
-    <item quantity="few">Zostaną zaimportowane %d kontakty.</item>
-    <item quantity="other">Zostanie zaimportowane %d kontaktów.</item>
-  </plurals>
-  <plurals name="import_progress">
-    <item quantity="one">Zaimportowano %d kontakt</item>
-    <item quantity="few">Zaimpotowano %d kontakty</item>
-    <item quantity="other">Zaimpotowano %d kontaktów</item>
-  </plurals>
-  <plurals name="ContactMultiDeleteConfirmation">
-    <item quantity="one">%d kontakt zostanie usunięty.</item>
-    <item quantity="few">%d kontakty zostaną usunięte.</item>
-    <item quantity="other">%d kontaktów zostanie usuniętych.</item>
-  </plurals>
-  <plurals name="spam_count_text">
-    <item quantity="one">%d osoba oznaczona jako spam</item>
-    <item quantity="few">%d osoby oznaczone jako spam</item>
-    <item quantity="other">%d osób oznaczono jako spam</item>
-  </plurals>
+    <plurals name="contacts_selected">
+        <item quantity="one">Wybrano %d</item>
+        <item quantity="few">Wybrano %d</item>
+        <item quantity="many">Wybrano %d</item>
+        <item quantity="other">Wybrano %d</item>
+    </plurals>
+    <plurals name="ContactMultiImportConfirmation">
+        <item quantity="one">Zostanie zaimportowany %d kontakt.</item>
+        <item quantity="few">Zostaną zaimportowane %d kontakty.</item>
+        <item quantity="many">Zostanie zaimportowane %d kontaktów.</item>
+        <item quantity="other">Zostanie zaimportowane %d kontaktów.</item>
+    </plurals>
+    <plurals name="import_progress">
+        <item quantity="one">Zaimportowano %d kontakt</item>
+        <item quantity="few">Zaimportowano %d kontakty</item>
+        <item quantity="many">Zaimportowano %d kontaktów</item>
+        <item quantity="other">Zaimpotowano %d kontaktów</item>
+    </plurals>
+    <plurals name="ContactMultiDeleteConfirmation">
+        <item quantity="one">%d kontakt zostanie usunięty.</item>
+        <item quantity="few">%d kontakty zostaną usunięte.</item>
+        <item quantity="many">%d kontaktów zostanie usuniętych.</item>
+        <item quantity="other">%d kontaktów zostanie usuniętych.</item>
+    </plurals>
+    <plurals name="spam_count_text">
+        <item quantity="one">%d osoba oznaczona jako spam</item>
+        <item quantity="few">%d osoby oznaczone jako spam</item>
+        <item quantity="many">%d osób oznaczonych jako spam</item>
+        <item quantity="other">%d osób oznaczono jako spam</item>
+    </plurals>
 </resources>

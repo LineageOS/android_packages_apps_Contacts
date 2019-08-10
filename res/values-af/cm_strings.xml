@@ -17,58 +17,50 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Toast displayed when saving a contact to sim card failed -->
-  <string name="contactSavedToSimCardError">Kon nie die geselekteerde kontakte na die SIM-kaart stoor</string>
-  <string name="airplane_mode_on">Die SIM-kaart kan nie verkry word nie, terwyl vliegtuigmodus geaktiveer is</string>
-  <string name="number_anr_too_long">Nommer is te lank</string>
-  <string name="email_address_too_long">E-pos adres is te lank</string>
-  <string name="sim_card_full">SIM kaart is vol</string>
-  <string name="tag_too_long">Kontak naam is te lank</string>
-  <string name="invalid_phone_number">Foon nommer is ongeldig</string>
-  <string name="invalid_number_type">Nommer tipe is ongeldig</string>
-  <string name="no_phone_number_or_email">Sleutel asseblief \'n telefoonnommer of e-posadres in.</string>
-  <string name="memory_card_full">Kontak kon nie gestoor word nie, die geheue is vol</string>
-  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
-  <string name="contacts_groups_label">Groepe</string>
-  <string name="menu_moveGroupMembers">Skuif groep lede</string>
-  <string name="title_move_members">Skyf lede</string>
-  <string name="message_move_members">Besig met skyf van lede\u2026</string>
-  <string name="message_can_not_move_members">Kan nie lede skyf nie</string>
-  <string name="edit_before_call">Wysig nommer voor oproep</string>
-  <string name="menu_sendViaSMS">Stuur kontak via SMS</string>
-  <string name="select_all">Alles</string>
-  <!-- Choose Sim Card to Import -->
-  <string name="import_sim_contacts_title">Voer SIM kontakte in</string>
-  <string name="import_sim_contacts_message">Besig om SIM kontakte in te voer\u2026</string>
-  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
-  <string name="importConfirmation_title">Invoer kontak?</string>
-  <string name="import_finish">Invoering klaar</string>
-  <!-- Multi Delete Contacts related strings -->
-  <string name="delete_contacts_title">Verwyder kontak</string>
-  <string name="delete_contacts_message">Verwydering van kontakte\u2026</string>
-  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
-  <string name="deleteConfirmation_title">Verwyder kontak?</string>
-  <string name="too_many_contacts_add_to_group">Nie mees as <xliff:g id="count">%d</xliff:g> kontakte kan gedeel word nie</string>
-  <!-- add for MemoryStatusActivity -->
-  <string name="menu_memory_status">Geheue status</string>
-  <string name="memory_size">Totaal:</string>
-  <string name="memory_used">Gebruik:</string>
-  <string name="calculating_status_now">Berekening van status\u2026</string>
-  <string name="menu_copyTo">Kopieer na<xliff:g id="destination">%s</xliff:g></string>
-  <string name="no_empty_email_in_usim">USIM kontak het nie \'n beskikbare epos veld nie, kon nie epos kopieer nie.</string>
-  <string name="voicemail">Stempos</string>
-  <string name="select_call_title">Kies oproep lys</string>
-  <string name="delete_call_title">Verwyder oproep lys</string>
-  <string name="delete_call_message">Verwydering van oproep lys\u2026</string>
-  <string name="delete_call_alert">Verwyder gekose oproep lys?</string>
-  <string name="title_del_call">Verwyder</string>
-  <string name="powered_by_provider">Aangedryf deur <xliff:g id="provider">%s</xliff:g></string>
-  <string name="sms_permission_rationale">SMS toestemming is nodig om kontak SMS geskiedenis te vertoon.</string>
-  <string name="sms_rationale_view">BEKYK</string>
-  <!-- InCall plugin directory search & invite -->
-  <string name="incall_plugin_directory_search">Soek %1$s vouer</string>
-  <string name="incall_plugin_invite">UITNODIGING</string>
-  <string name="incall_plugin_account_subheader">%1$s naam</string>
-  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> kan nie die oproep maak nie</string>
-  <string name="incall_plugin_intent_error">Kon nie hierdie aksie voltooi nie. Probeer weer later.</string>
+    <string name="contactSavedToSimCardError">Kon nie die geselekteerde kontakte na die SIM-kaart stoor</string>
+    <string name="airplane_mode_on">Die SIM-kaart kan nie verkry word nie, terwyl vliegtuigmodus geaktiveer is</string>
+    <string name="number_anr_too_long">Nommer is te lank</string>
+    <string name="email_address_too_long">E-pos adres is te lank</string>
+    <string name="sim_card_full">SIM kaart is vol</string>
+    <string name="tag_too_long">Kontak naam is te lank</string>
+    <string name="invalid_phone_number">Foon nommer is ongeldig</string>
+    <string name="invalid_number_type">Nommer tipe is ongeldig</string>
+    <string name="no_phone_number_or_email">Sleutel asseblief \'n telefoonnommer of e-posadres in.</string>
+    <string name="memory_card_full">Kontak kon nie gestoor word nie, die geheue is vol</string>
+    <string name="contacts_groups_label">Groepe</string>
+    <string name="menu_moveGroupMembers">Skuif groep lede</string>
+    <string name="title_move_members">Skyf lede</string>
+    <string name="message_move_members">Besig met skyf van lede\u2026</string>
+    <string name="message_can_not_move_members">Kan nie lede skyf nie</string>
+    <string name="edit_before_call">Wysig nommer voor oproep</string>
+    <string name="menu_sendViaSMS">Stuur kontak via SMS</string>
+    <string name="select_all">Alles</string>
+    <string name="import_sim_contacts_title">Voer SIM kontakte in</string>
+    <string name="import_sim_contacts_message">Besig om SIM kontakte in te voer\u2026</string>
+    <string name="importConfirmation_title">Invoer kontak?</string>
+    <string name="import_finish">Invoering klaar</string>
+    <string name="delete_contacts_title">Verwyder kontak</string>
+    <string name="delete_contacts_message">Verwydering van kontakte\u2026</string>
+    <string name="deleteConfirmation_title">Verwyder kontak?</string>
+    <string name="too_many_contacts_add_to_group">Nie mees as <xliff:g id="count">%d</xliff:g> kontakte kan gedeel word nie</string>
+    <string name="menu_memory_status">Geheue status</string>
+    <string name="memory_size">Totaal:</string>
+    <string name="memory_used">Gebruik:</string>
+    <string name="calculating_status_now">Berekening van status\u2026</string>
+    <string name="menu_copyTo">Kopieer na<xliff:g id="destination">%s</xliff:g></string>
+    <string name="no_empty_email_in_usim">USIM kontak het nie \'n beskikbare epos veld nie, kon nie epos kopieer nie.</string>
+    <string name="voicemail">Stempos</string>
+    <string name="select_call_title">Kies oproep lys</string>
+    <string name="delete_call_title">Verwyder oproep lys</string>
+    <string name="delete_call_message">Verwydering van oproep lys\u2026</string>
+    <string name="delete_call_alert">Verwyder gekose oproep lys?</string>
+    <string name="title_del_call">Verwyder</string>
+    <string name="powered_by_provider">Aangedryf deur <xliff:g id="provider">%s</xliff:g></string>
+    <string name="sms_permission_rationale">SMS toestemming is nodig om kontak SMS geskiedenis te vertoon.</string>
+    <string name="sms_rationale_view">BEKYK</string>
+    <string name="incall_plugin_directory_search">Soek %1$s vouer</string>
+    <string name="incall_plugin_invite">UITNODIGING</string>
+    <string name="incall_plugin_account_subheader">%1$s naam</string>
+    <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> kan nie die oproep maak nie</string>
+    <string name="incall_plugin_intent_error">Kon nie hierdie aksie voltooi nie. Probeer weer later.</string>
 </resources>

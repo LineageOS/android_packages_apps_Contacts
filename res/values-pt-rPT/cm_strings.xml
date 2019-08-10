@@ -17,58 +17,50 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Toast displayed when saving a contact to sim card failed -->
-  <string name="contactSavedToSimCardError">Não foi possível gravar os contactos selecionados no cartão SIM</string>
-  <string name="airplane_mode_on">Não é possível aceder ao cartão SIM enquanto o modo de avião estiver ativado</string>
-  <string name="number_anr_too_long">O número é muito longo</string>
-  <string name="email_address_too_long">O endereço de e-mail é muito longo</string>
-  <string name="sim_card_full">O cartão SIM está cheio</string>
-  <string name="tag_too_long">O nome do contacto é muito longo</string>
-  <string name="invalid_phone_number">O número de telefone é inválido</string>
-  <string name="invalid_number_type">O tipo de número é inválido</string>
-  <string name="no_phone_number_or_email">Por favor, insira um número de telefone ou endereço de e-mail.</string>
-  <string name="memory_card_full">O contacto não pôde ser guardado porque a memória do telefone está cheia</string>
-  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
-  <string name="contacts_groups_label">Grupos</string>
-  <string name="menu_moveGroupMembers">Mover membros do grupo</string>
-  <string name="title_move_members">Mover membros</string>
-  <string name="message_move_members">A mover membros\u2026</string>
-  <string name="message_can_not_move_members">Não é possível mover os membros</string>
-  <string name="edit_before_call">Editar número antes da chamada</string>
-  <string name="menu_sendViaSMS">Enviar contacto via SMS</string>
-  <string name="select_all">Todos</string>
-  <!-- Choose Sim Card to Import -->
-  <string name="import_sim_contacts_title">Importar contactos do SIM</string>
-  <string name="import_sim_contacts_message">A importar contactos\u2026</string>
-  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
-  <string name="importConfirmation_title">Importar contacto?</string>
-  <string name="import_finish">Importação terminada</string>
-  <!-- Multi Delete Contacts related strings -->
-  <string name="delete_contacts_title">Apagar contactos</string>
-  <string name="delete_contacts_message">A apagar contactos\u2026</string>
-  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
-  <string name="deleteConfirmation_title">Apagar contacto?</string>
-  <string name="too_many_contacts_add_to_group">Não podem ser adicionados mais que <xliff:g id="count">%d</xliff:g> contactos</string>
-  <!-- add for MemoryStatusActivity -->
-  <string name="menu_memory_status">Estado da memória</string>
-  <string name="memory_size">Total:</string>
-  <string name="memory_used">Utilizada:</string>
-  <string name="calculating_status_now">A calcular estado\u2026</string>
-  <string name="menu_copyTo">Copiar para <xliff:g id="destination">%s</xliff:g></string>
-  <string name="no_empty_email_in_usim">O contacto USIM não tem um campo de e-mail disponível. Não é possível copiar mensagens.</string>
-  <string name="voicemail">Correio de voz</string>
-  <string name="select_call_title">Selecionar os registos de chamadas</string>
-  <string name="delete_call_title">Apagar os registos de chamadas</string>
-  <string name="delete_call_message">A apagar registos de chamadas\u2026</string>
-  <string name="delete_call_alert">Apagar os registos de chamadas selecionados?</string>
-  <string name="title_del_call">Apagar</string>
-  <string name="powered_by_provider">Distribuído por <xliff:g id="provider">%s</xliff:g></string>
-  <string name="sms_permission_rationale">É necessária permissão para aceder às SMS de forma a mostrar o histórico de mensagens.</string>
-  <string name="sms_rationale_view">VISTA</string>
-  <!-- InCall plugin directory search & invite -->
-  <string name="incall_plugin_directory_search">Pesquisar na pasta %1$s</string>
-  <string name="incall_plugin_invite">CONVIDAR</string>
-  <string name="incall_plugin_account_subheader">%1$s nome</string>
-  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> não consegue realizar esta chamada</string>
-  <string name="incall_plugin_intent_error">Não é possível concluir esta ação. Tente novamente mais tarde.</string>
+    <string name="contactSavedToSimCardError">Não foi possível gravar os contactos selecionados no cartão SIM</string>
+    <string name="airplane_mode_on">Não é possível aceder ao cartão SIM enquanto o modo de voo estiver ativado</string>
+    <string name="number_anr_too_long">O número é muito longo</string>
+    <string name="email_address_too_long">O endereço de e-mail é muito longo</string>
+    <string name="sim_card_full">O cartão SIM está cheio</string>
+    <string name="tag_too_long">O nome do contacto é muito longo</string>
+    <string name="invalid_phone_number">O número de telefone é inválido</string>
+    <string name="invalid_number_type">O tipo de número é inválido</string>
+    <string name="no_phone_number_or_email">Por favor, insira um número de telefone ou endereço de e-mail.</string>
+    <string name="memory_card_full">O contacto não pôde ser guardado porque a memória do telefone está cheia</string>
+    <string name="contacts_groups_label">Grupos</string>
+    <string name="menu_moveGroupMembers">Mover membros do grupo</string>
+    <string name="title_move_members">Mover membros</string>
+    <string name="message_move_members">A mover membros\u2026</string>
+    <string name="message_can_not_move_members">Não é possível mover os membros</string>
+    <string name="edit_before_call">Editar número antes da chamada</string>
+    <string name="menu_sendViaSMS">Enviar contacto via SMS</string>
+    <string name="select_all">Todos</string>
+    <string name="import_sim_contacts_title">Importar contactos do SIM</string>
+    <string name="import_sim_contacts_message">A importar contactos\u2026</string>
+    <string name="importConfirmation_title">Importar contacto?</string>
+    <string name="import_finish">Importação terminada</string>
+    <string name="delete_contacts_title">Apagar contactos</string>
+    <string name="delete_contacts_message">A apagar contactos\u2026</string>
+    <string name="deleteConfirmation_title">Apagar contacto?</string>
+    <string name="too_many_contacts_add_to_group">Não podem ser adicionados mais que <xliff:g id="count">%d</xliff:g> contactos</string>
+    <string name="menu_memory_status">Estado da memória</string>
+    <string name="memory_size">Total:</string>
+    <string name="memory_used">Utilizada:</string>
+    <string name="calculating_status_now">A calcular estado\u2026</string>
+    <string name="menu_copyTo">Copiar para <xliff:g id="destination">%s</xliff:g></string>
+    <string name="no_empty_email_in_usim">O contacto USIM não tem um campo de e-mail disponível. Não é possível copiar mensagens.</string>
+    <string name="voicemail">Correio de voz</string>
+    <string name="select_call_title">Selecionar os registos de chamadas</string>
+    <string name="delete_call_title">Apagar os registos de chamadas</string>
+    <string name="delete_call_message">A apagar registos de chamadas\u2026</string>
+    <string name="delete_call_alert">Apagar os registos de chamadas selecionados?</string>
+    <string name="title_del_call">Apagar</string>
+    <string name="powered_by_provider">Distribuído por <xliff:g id="provider">%s</xliff:g></string>
+    <string name="sms_permission_rationale">É necessária permissão para aceder às SMS de forma a mostrar o histórico de mensagens.</string>
+    <string name="sms_rationale_view">VISTA</string>
+    <string name="incall_plugin_directory_search">Pesquisar na pasta %1$s</string>
+    <string name="incall_plugin_invite">CONVIDAR</string>
+    <string name="incall_plugin_account_subheader">%1$s nome</string>
+    <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> não consegue realizar esta chamada</string>
+    <string name="incall_plugin_intent_error">Não é possível concluir esta ação. Tente novamente mais tarde.</string>
 </resources>

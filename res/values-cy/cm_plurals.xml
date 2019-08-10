@@ -15,4 +15,45 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <plurals name="contacts_selected">
+        <item quantity="zero">%d wedi\'u dewis</item>
+        <item quantity="one">%d wedi\'i ddewis</item>
+        <item quantity="two">%d wedi\'u dewis</item>
+        <item quantity="few">%d wedi\'u dewis</item>
+        <item quantity="many">%d wedi\'u dewis</item>
+        <item quantity="other">%d wedi\'u dewis</item>
+    </plurals>
+    <plurals name="ContactMultiImportConfirmation">
+        <item quantity="zero">Caiff %d cysylltiadau eu mewnforio.</item>
+        <item quantity="one">Caiff %d cyswllt ei fewnforio.</item>
+        <item quantity="two">Caiff %d gyswllt eu mewnforio.</item>
+        <item quantity="few">Caiff %d cyswllt eu mewnforio.</item>
+        <item quantity="many">Caiff %d chyswllt eu mewnforio.</item>
+        <item quantity="other">Caiff %d cyswllt eu mewnforio.</item>
+    </plurals>
+    <plurals name="import_progress">
+        <item quantity="zero">%d cysylltiadau wedi\'u mewnforio</item>
+        <item quantity="one">%d cyswllt wedi\'i fewnforio</item>
+        <item quantity="two">%d gyswllt wedi\'u mewnforio</item>
+        <item quantity="few">%d cyswllt wedi\'u mewnforio</item>
+        <item quantity="many">%d chyswllt wedi\'u mewnforio</item>
+        <item quantity="other">%d cyswllt wedi\'u mewnforio</item>
+    </plurals>
+    <plurals name="ContactMultiDeleteConfirmation">
+        <item quantity="zero">Caiff %d cysylltiadau eu dileu.</item>
+        <item quantity="one">Caiff %d cyswllt ei ddileu.</item>
+        <item quantity="two">Caiff %d gyswllt eu dileu.</item>
+        <item quantity="few">Caiff %d cyswllt eu dileu.</item>
+        <item quantity="many">Caiff %d chyswllt eu dileu.</item>
+        <item quantity="other">Caiff %d cyswllt eu dileu.</item>
+    </plurals>
+    <plurals name="spam_count_text">
+        <item quantity="zero">Nodwyd hwn fel sbam gan %d pobol</item>
+        <item quantity="one">Nodwyd hwn fel sbam gan %d person</item>
+        <item quantity="two">Nodwyd hwn fel sbam gan %d berson</item>
+        <item quantity="few">Nodwyd hwn fel sbam gan %d pherson</item>
+        <item quantity="many">Nodwyd hwn fel sbam gan %d pherson</item>
+        <item quantity="other">Nodwyd hwn fel sbam gan %d person</item>
+    </plurals>
+</resources>

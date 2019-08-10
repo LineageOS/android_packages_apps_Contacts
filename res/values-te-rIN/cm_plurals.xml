@@ -16,24 +16,24 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="contacts_selected">
-    <item quantity="one">%d ఎంచుకోబడింది</item>
-    <item quantity="other">%d ఎంచుకోబడింది</item>
-  </plurals>
-  <plurals name="ContactMultiImportConfirmation">
-    <item quantity="one">%d పరిచయం దిగుమతి చేయబడుతుంది.</item>
-    <item quantity="other">%d పరిచయాలు దిగుమతి చేయబడతాయి.</item>
-  </plurals>
-  <plurals name="import_progress">
-    <item quantity="one">%d పరిచయం దిగుమతి అయ్యింది</item>
-    <item quantity="other">%d పరిచయాలు దిగుమతి అయ్యాయి</item>
-  </plurals>
-  <plurals name="ContactMultiDeleteConfirmation">
-    <item quantity="one">%d పరిచయం తొలిగించబడుతుంది.</item>
-    <item quantity="other">%d పరిచయాలు తొలిగించబడతాయి.</item>
-  </plurals>
-  <plurals name="spam_count_text">
-    <item quantity="one">%d వ్యక్తి దీనిని స్పామ్ గా గుర్తించారు</item>
-    <item quantity="other">%d వ్యక్తులు దీనిని స్పామ్ గా గుర్తించారు</item>
-  </plurals>
+    <plurals name="contacts_selected">
+        <item quantity="one">%d ఎంచుకోబడింది</item>
+        <item quantity="other">%d ఎంచుకోబడింది</item>
+    </plurals>
+    <plurals name="ContactMultiImportConfirmation">
+        <item quantity="one">%d పరిచయం దిగుమతి చేయబడుతుంది.</item>
+        <item quantity="other">%d పరిచయాలు దిగుమతి చేయబడతాయి.</item>
+    </plurals>
+    <plurals name="import_progress">
+        <item quantity="one">%d పరిచయం దిగుమతి అయ్యింది</item>
+        <item quantity="other">%d పరిచయాలు దిగుమతి అయ్యాయి</item>
+    </plurals>
+    <plurals name="ContactMultiDeleteConfirmation">
+        <item quantity="one">%d పరిచయం తొలిగించబడుతుంది.</item>
+        <item quantity="other">%d పరిచయాలు తొలిగించబడతాయి.</item>
+    </plurals>
+    <plurals name="spam_count_text">
+        <item quantity="one">%d వ్యక్తి దీనిని స్పామ్ గా గుర్తించారు</item>
+        <item quantity="other">%d వ్యక్తులు దీనిని స్పామ్ గా గుర్తించారు</item>
+    </plurals>
 </resources>

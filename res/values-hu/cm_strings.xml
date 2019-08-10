@@ -17,58 +17,50 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Toast displayed when saving a contact to sim card failed -->
-  <string name="contactSavedToSimCardError">Nem lehet elmenteni a kiválasztott névjegyeket a SIM-kártyára</string>
-  <string name="airplane_mode_on">A SIM-kártya nem érhető el, míg a repülőgép üzemmód engedélyezve van</string>
-  <string name="number_anr_too_long">A szám túl hosszú</string>
-  <string name="email_address_too_long">Az e-mail cím túl hosszú</string>
-  <string name="sim_card_full">SIM-kártya megtelt</string>
-  <string name="tag_too_long">A névjegynél megadott név túl hosszú</string>
-  <string name="invalid_phone_number">Érvénytelen telefonszám</string>
-  <string name="invalid_number_type">Érvénytelen szám-típus</string>
-  <string name="no_phone_number_or_email">Kérjük, adjon meg telefonszámot vagy e-mail címet.</string>
-  <string name="memory_card_full">A névjegyet nem lehet menteni, a telefon memóriája megtelt</string>
-  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
-  <string name="contacts_groups_label">Csoportok</string>
-  <string name="menu_moveGroupMembers">Csoport tagjainak áthelyezése</string>
-  <string name="title_move_members">Tagok áthelyezése</string>
-  <string name="message_move_members">Tagok áthelyezése\u2026</string>
-  <string name="message_can_not_move_members">Nem lehet áthelyezni a tagokat</string>
-  <string name="edit_before_call">Szám szerkesztése hívás előtt</string>
-  <string name="menu_sendViaSMS">Névjegy küldése SMS-ben</string>
-  <string name="select_all">Mind</string>
-  <!-- Choose Sim Card to Import -->
-  <string name="import_sim_contacts_title">SIM névjegyek importálása</string>
-  <string name="import_sim_contacts_message">SIM névjegyek importálása\u2026</string>
-  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
-  <string name="importConfirmation_title">Importálja a névjegyet?</string>
-  <string name="import_finish">Importálás befejeződött</string>
-  <!-- Multi Delete Contacts related strings -->
-  <string name="delete_contacts_title">Névjegyek törlése</string>
-  <string name="delete_contacts_message">Névjegyek törlése\u2026</string>
-  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
-  <string name="deleteConfirmation_title">Törli a névjegyet?</string>
-  <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g> névjegynél több nem adható hozzá</string>
-  <!-- add for MemoryStatusActivity -->
-  <string name="menu_memory_status">Memória állapota</string>
-  <string name="memory_size">Teljes:</string>
-  <string name="memory_used">Foglalt:</string>
-  <string name="calculating_status_now">Állapot számítása\u2026</string>
-  <string name="menu_copyTo">Másolás ide: <xliff:g id="destination">%s</xliff:g></string>
-  <string name="no_empty_email_in_usim">Az USIM kapcsolat nem rendelkezik e-mail címmel, nem lehet másolni az üzeneteket.</string>
-  <string name="voicemail">Hangposta</string>
-  <string name="select_call_title">Hívásnaplók kiválasztása</string>
-  <string name="delete_call_title">Hívásnaplók törlése</string>
-  <string name="delete_call_message">Hívásnaplók törlése\u2026</string>
-  <string name="delete_call_alert">Kijelölt hívásnaplók törlése?</string>
-  <string name="title_del_call">Törlés</string>
-  <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g> üzemeltetésével</string>
-  <string name="sms_permission_rationale">SMS engedély szükséges a kapcsolat SMS történetének megjelenítéséhez.</string>
-  <string name="sms_rationale_view">NÉZET</string>
-  <!-- InCall plugin directory search & invite -->
-  <string name="incall_plugin_directory_search">Keresés a(z) %1$s könyvtárban</string>
-  <string name="incall_plugin_invite">MEGHÍV</string>
-  <string name="incall_plugin_account_subheader">%1$s név</string>
-  <string name="incall_plugin_call_error">Ez a hívás nem hajtható végre: <xliff:g id="name">%s</xliff:g></string>
-  <string name="incall_plugin_intent_error">Nem lehet befejezni ezt a műveletet. Próbálja újra később.</string>
+    <string name="contactSavedToSimCardError">Nem lehet elmenteni a kiválasztott névjegyeket a SIM-kártyára</string>
+    <string name="airplane_mode_on">A SIM-kártya nem érhető el, míg a repülőgép üzemmód engedélyezve van</string>
+    <string name="number_anr_too_long">A szám túl hosszú</string>
+    <string name="email_address_too_long">Az e-mail cím túl hosszú</string>
+    <string name="sim_card_full">SIM-kártya megtelt</string>
+    <string name="tag_too_long">A névjegynél megadott név túl hosszú</string>
+    <string name="invalid_phone_number">Érvénytelen telefonszám</string>
+    <string name="invalid_number_type">Érvénytelen szám-típus</string>
+    <string name="no_phone_number_or_email">Kérjük, adjon meg telefonszámot vagy e-mail címet.</string>
+    <string name="memory_card_full">A névjegyet nem lehet menteni, a telefon memóriája megtelt</string>
+    <string name="contacts_groups_label">Csoportok</string>
+    <string name="menu_moveGroupMembers">Csoport tagjainak áthelyezése</string>
+    <string name="title_move_members">Tagok áthelyezése</string>
+    <string name="message_move_members">Tagok áthelyezése\u2026</string>
+    <string name="message_can_not_move_members">Nem lehet áthelyezni a tagokat</string>
+    <string name="edit_before_call">Szám szerkesztése hívás előtt</string>
+    <string name="menu_sendViaSMS">Névjegy küldése SMS-ben</string>
+    <string name="select_all">Mind</string>
+    <string name="import_sim_contacts_title">SIM névjegyek importálása</string>
+    <string name="import_sim_contacts_message">SIM névjegyek importálása\u2026</string>
+    <string name="importConfirmation_title">Importálja a névjegyet?</string>
+    <string name="import_finish">Importálás befejeződött</string>
+    <string name="delete_contacts_title">Névjegyek törlése</string>
+    <string name="delete_contacts_message">Névjegyek törlése\u2026</string>
+    <string name="deleteConfirmation_title">Törli a névjegyet?</string>
+    <string name="too_many_contacts_add_to_group"><xliff:g id="count">%d</xliff:g> névjegynél több nem adható hozzá</string>
+    <string name="menu_memory_status">Memória állapota</string>
+    <string name="memory_size">Teljes:</string>
+    <string name="memory_used">Foglalt:</string>
+    <string name="calculating_status_now">Állapot számítása\u2026</string>
+    <string name="menu_copyTo">Másolás ide: <xliff:g id="destination">%s</xliff:g></string>
+    <string name="no_empty_email_in_usim">Az USIM kapcsolat nem rendelkezik e-mail címmel, nem lehet másolni az üzeneteket.</string>
+    <string name="voicemail">Hangposta</string>
+    <string name="select_call_title">Hívásnaplók kiválasztása</string>
+    <string name="delete_call_title">Hívásnaplók törlése</string>
+    <string name="delete_call_message">Hívásnaplók törlése\u2026</string>
+    <string name="delete_call_alert">Kijelölt hívásnaplók törlése?</string>
+    <string name="title_del_call">Törlés</string>
+    <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g> üzemeltetésével</string>
+    <string name="sms_permission_rationale">SMS engedély szükséges a kapcsolat SMS történetének megjelenítéséhez.</string>
+    <string name="sms_rationale_view">NÉZET</string>
+    <string name="incall_plugin_directory_search">Keresés a(z) %1$s könyvtárban</string>
+    <string name="incall_plugin_invite">MEGHÍV</string>
+    <string name="incall_plugin_account_subheader">%1$s név</string>
+    <string name="incall_plugin_call_error">Ez a hívás nem hajtható végre: <xliff:g id="name">%s</xliff:g></string>
+    <string name="incall_plugin_intent_error">Nem lehet befejezni ezt a műveletet. Próbálja újra később.</string>
 </resources>

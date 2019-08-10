@@ -16,29 +16,34 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="contacts_selected">
-    <item quantity="one">%d контакт</item>
-    <item quantity="few">%d контакта</item>
-    <item quantity="other">%d контактов</item>
-  </plurals>
-  <plurals name="ContactMultiImportConfirmation">
-    <item quantity="one">Будет импортирован %d контакт.</item>
-    <item quantity="few">Будут импортированы %d контакта.</item>
-    <item quantity="other">Будут импортированы %d контактов.</item>
-  </plurals>
-  <plurals name="import_progress">
-    <item quantity="one">Импортирован %d контакт</item>
-    <item quantity="few">Импортированы %d контакта</item>
-    <item quantity="other">Импортированы %d контактов</item>
-  </plurals>
-  <plurals name="ContactMultiDeleteConfirmation">
-    <item quantity="one">%d контакт будет удален.</item>
-    <item quantity="few">%d контакта будут удалены.</item>
-    <item quantity="other">%d контактов будут удалены.</item>
-  </plurals>
-  <plurals name="spam_count_text">
-    <item quantity="one">%d человек пометил как спам</item>
-    <item quantity="few">%d человека пометили как спам</item>
-    <item quantity="other">%d человек пометили как спам</item>
-  </plurals>
+    <plurals name="contacts_selected">
+        <item quantity="one">%d контакт</item>
+        <item quantity="few">%d контакта</item>
+        <item quantity="many">%d контактов</item>
+        <item quantity="other">%d контактов</item>
+    </plurals>
+    <plurals name="ContactMultiImportConfirmation">
+        <item quantity="one">Будет импортирован %d контакт.</item>
+        <item quantity="few">Будут импортированы %d контакта.</item>
+        <item quantity="many">Будут импортированы %d контактов.</item>
+        <item quantity="other">Будут импортированы %d контактов.</item>
+    </plurals>
+    <plurals name="import_progress">
+        <item quantity="one">Импортирован %d контакт</item>
+        <item quantity="few">Импортированы %d контакта</item>
+        <item quantity="many">Импортированы %d контактов</item>
+        <item quantity="other">Импортированы %d контактов</item>
+    </plurals>
+    <plurals name="ContactMultiDeleteConfirmation">
+        <item quantity="one">%d контакт будет удален.</item>
+        <item quantity="few">%d контакта будут удалены.</item>
+        <item quantity="many">%d контактов будут удалены.</item>
+        <item quantity="other">%d контактов будут удалены.</item>
+    </plurals>
+    <plurals name="spam_count_text">
+        <item quantity="one">%d человек пометил как спам</item>
+        <item quantity="few">%d человека пометили как спам</item>
+        <item quantity="many">%d человек пометили как спам</item>
+        <item quantity="other">%d человек пометили как спам</item>
+    </plurals>
 </resources>

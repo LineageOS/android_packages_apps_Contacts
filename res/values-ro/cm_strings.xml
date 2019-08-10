@@ -17,58 +17,50 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Toast displayed when saving a contact to sim card failed -->
-  <string name="contactSavedToSimCardError">Nu s-au putut salva contactele selectate pe cartela SIM</string>
-  <string name="airplane_mode_on">Cartela SIM nu poate fi accesată în timp ce modul avion este activat</string>
-  <string name="number_anr_too_long">Numărul este prea lung</string>
-  <string name="email_address_too_long">Adresa de e-mail este prea lungă</string>
-  <string name="sim_card_full">Cartela SIM este plină</string>
-  <string name="tag_too_long">Numele contactului este prea lung</string>
-  <string name="invalid_phone_number">Numărul de telefon nu este valid</string>
-  <string name="invalid_number_type">Tipul numărului nu este valid</string>
-  <string name="no_phone_number_or_email">Introduceți un număr de telefon sau adresă de email.</string>
-  <string name="memory_card_full">Imposibil de salvat contactul, memoria telefonului este plină</string>
-  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
-  <string name="contacts_groups_label">Grupuri</string>
-  <string name="menu_moveGroupMembers">Mută membrii grupului</string>
-  <string name="title_move_members">Mută membri</string>
-  <string name="message_move_members">Se mută membri\u2026</string>
-  <string name="message_can_not_move_members">Nu se pot muta membri</string>
-  <string name="edit_before_call">Editarea numărului înainte de apel</string>
-  <string name="menu_sendViaSMS">Trimitere contact prin SMS</string>
-  <string name="select_all">Toate</string>
-  <!-- Choose Sim Card to Import -->
-  <string name="import_sim_contacts_title">Import contacte SIM</string>
-  <string name="import_sim_contacts_message">Se importă contacte SIM\u2026</string>
-  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
-  <string name="importConfirmation_title">Importare persoană de contact?</string>
-  <string name="import_finish">Importul s-a terminat</string>
-  <!-- Multi Delete Contacts related strings -->
-  <string name="delete_contacts_title">Ștergere contacte</string>
-  <string name="delete_contacts_message">Se șterg contacte\u2026</string>
-  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
-  <string name="deleteConfirmation_title">Ștergeți contact?</string>
-  <string name="too_many_contacts_add_to_group">Nu mai mult de <xliff:g id="count">%d</xliff:g> persoane de contact pot fi adăugate</string>
-  <!-- add for MemoryStatusActivity -->
-  <string name="menu_memory_status">Stare memorie</string>
-  <string name="memory_size">Total:</string>
-  <string name="memory_used">Utilizat:</string>
-  <string name="calculating_status_now">Se calculează starea\u2026</string>
-  <string name="menu_copyTo">Copiere pe <xliff:g id="destination">%s</xliff:g></string>
-  <string name="no_empty_email_in_usim">Contactul USIM nu are un câmp de email disponibil, mesajele nu pot fi copiate.</string>
-  <string name="voicemail">Mesagerie vocală</string>
-  <string name="select_call_title">Selectați jurnalul de apeluri</string>
-  <string name="delete_call_title">Ștergere jurnale de apel</string>
-  <string name="delete_call_message">Se șterg jurnalele de apel\u2026</string>
-  <string name="delete_call_alert">Ștergeți jurnalele de apel selectate?</string>
-  <string name="title_del_call">Ștergeți</string>
-  <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
-  <string name="sms_permission_rationale">Permisiunea de SMS este necesară pentru a afişa istoria SMS a contactelor.</string>
-  <string name="sms_rationale_view">VIZUALIZAȚI</string>
-  <!-- InCall plugin directory search & invite -->
-  <string name="incall_plugin_directory_search">Căutați directorul %1$s</string>
-  <string name="incall_plugin_invite">INVITAȚI</string>
-  <string name="incall_plugin_account_subheader">%1$s nume</string>
-  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> nu a putut efectua acest apel</string>
-  <string name="incall_plugin_intent_error">Imposibil de terminat acțiunea. Încercaţi din nou mai târziu.</string>
+    <string name="contactSavedToSimCardError">Nu s-au putut salva contactele selectate pe cartela SIM</string>
+    <string name="airplane_mode_on">Cartela SIM nu poate fi accesată în timp ce modul avion este activat</string>
+    <string name="number_anr_too_long">Numărul este prea lung</string>
+    <string name="email_address_too_long">Adresa de e-mail este prea lungă</string>
+    <string name="sim_card_full">Cartela SIM este plină</string>
+    <string name="tag_too_long">Numele contactului este prea lung</string>
+    <string name="invalid_phone_number">Numărul de telefon nu este valid</string>
+    <string name="invalid_number_type">Tipul numărului nu este valid</string>
+    <string name="no_phone_number_or_email">Introduceți un număr de telefon sau adresă de email.</string>
+    <string name="memory_card_full">Imposibil de salvat contactul, memoria telefonului este plină</string>
+    <string name="contacts_groups_label">Grupuri</string>
+    <string name="menu_moveGroupMembers">Mută membrii grupului</string>
+    <string name="title_move_members">Mută membri</string>
+    <string name="message_move_members">Se mută membri\u2026</string>
+    <string name="message_can_not_move_members">Nu se pot muta membri</string>
+    <string name="edit_before_call">Editarea numărului înainte de apel</string>
+    <string name="menu_sendViaSMS">Trimitere contact prin SMS</string>
+    <string name="select_all">Toate</string>
+    <string name="import_sim_contacts_title">Import contacte SIM</string>
+    <string name="import_sim_contacts_message">Se importă contacte SIM\u2026</string>
+    <string name="importConfirmation_title">Importare persoană de contact?</string>
+    <string name="import_finish">Importul s-a terminat</string>
+    <string name="delete_contacts_title">Ștergere contacte</string>
+    <string name="delete_contacts_message">Se șterg contacte\u2026</string>
+    <string name="deleteConfirmation_title">Ștergeți contact?</string>
+    <string name="too_many_contacts_add_to_group">Nu mai mult de <xliff:g id="count">%d</xliff:g> persoane de contact pot fi adăugate</string>
+    <string name="menu_memory_status">Stare memorie</string>
+    <string name="memory_size">Total:</string>
+    <string name="memory_used">Utilizat:</string>
+    <string name="calculating_status_now">Se calculează starea\u2026</string>
+    <string name="menu_copyTo">Copiere pe <xliff:g id="destination">%s</xliff:g></string>
+    <string name="no_empty_email_in_usim">Contactul USIM nu are un câmp de email disponibil, mesajele nu pot fi copiate.</string>
+    <string name="voicemail">Mesagerie vocală</string>
+    <string name="select_call_title">Selectați jurnalul de apeluri</string>
+    <string name="delete_call_title">Ștergere jurnale de apel</string>
+    <string name="delete_call_message">Se șterg jurnalele de apel\u2026</string>
+    <string name="delete_call_alert">Ștergeți jurnalele de apel selectate?</string>
+    <string name="title_del_call">Ștergeți</string>
+    <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
+    <string name="sms_permission_rationale">Permisiunea de SMS este necesară pentru a afişa istoria SMS a contactelor.</string>
+    <string name="sms_rationale_view">VIZUALIZAȚI</string>
+    <string name="incall_plugin_directory_search">Căutați directorul %1$s</string>
+    <string name="incall_plugin_invite">INVITAȚI</string>
+    <string name="incall_plugin_account_subheader">%1$s nume</string>
+    <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> nu a putut efectua acest apel</string>
+    <string name="incall_plugin_intent_error">Imposibil de terminat acțiunea. Încercaţi din nou mai târziu.</string>
 </resources>

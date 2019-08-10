@@ -15,4 +15,25 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <plurals name="contacts_selected">
+        <item quantity="one">%d selektearre</item>
+        <item quantity="other">%d selektearre</item>
+    </plurals>
+    <plurals name="ContactMultiImportConfirmation">
+        <item quantity="one">%d kontakt wurdt ymportearre.</item>
+        <item quantity="other">%d kontakten wurde ymportearre.</item>
+    </plurals>
+    <plurals name="import_progress">
+        <item quantity="one">%d kontakt ymportearre</item>
+        <item quantity="other">%d kontakten ymportearre</item>
+    </plurals>
+    <plurals name="ContactMultiDeleteConfirmation">
+        <item quantity="one">%d kontakt wurdt fuortsmiten.</item>
+        <item quantity="other">%d kontakten wurde fuortsmiten.</item>
+    </plurals>
+    <plurals name="spam_count_text">
+        <item quantity="one">%d persoan markearre as net-winske</item>
+        <item quantity="other">%d persoanen markearre as net-winske</item>
+    </plurals>
+</resources>

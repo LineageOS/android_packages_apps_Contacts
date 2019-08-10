@@ -17,57 +17,50 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Toast displayed when saving a contact to sim card failed -->
-  <string name="contactSavedToSimCardError">تعذر حفظ جهات الاتصال المحددة إلى شريحة SIM</string>
-  <string name="airplane_mode_on">شريحة SIM لا يمكن الوصول إليها أثناء وضع الطيران</string>
-  <string name="number_anr_too_long">الرقم طويل جداً</string>
-  <string name="email_address_too_long">عنوان البريد الإلكتروني طويل جداً</string>
-  <string name="sim_card_full">شريحة SIM ممتلئة</string>
-  <string name="tag_too_long">اسم جهة الاتصال طويل جداً</string>
-  <string name="invalid_phone_number">رقم الهاتف غير صحيح</string>
-  <string name="invalid_number_type">نوع الرقم غير صحيح</string>
-  <string name="no_phone_number_or_email">الرجاء إدخال رقم هاتف أو عنوان البريد الإلكتروني.
-</string>
-  <string name="memory_card_full">تعذر حفظ جهة الاتصال، ذاكرة الهاتف ممتلئة</string>
-  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
-  <string name="contacts_groups_label">المجموعات</string>
-  <string name="menu_moveGroupMembers">نقل أعضاء المجموعة</string>
-  <string name="title_move_members">نقل الأعضاء </string>
-  <string name="message_move_members">جاري نقل الأعضاء\u2026</string>
-  <string name="message_can_not_move_members">لا يمكن نقل الأعضاء</string>
-  <string name="edit_before_call">تحرير الرقم قبل الاتصال</string>
-  <string name="menu_sendViaSMS">إرسال جهة الاتصال عن طريق الرسائل القصيرة</string>
-  <string name="select_all">الكل</string>
-  <!-- Choose Sim Card to Import -->
-  <string name="import_sim_contacts_title">استيراد جهات الاتصال من شريحة SIM</string>
-  <string name="import_sim_contacts_message">جاري استيراد جهات الاتصال من SIM\u2026</string>
-  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
-  <string name="importConfirmation_title">استيراد جهات الاتصال؟</string>
-  <string name="import_finish">انتهى الاستيراد</string>
-  <!-- Multi Delete Contacts related strings -->
-  <string name="delete_contacts_title">حذف جهات الاتصال</string>
-  <string name="delete_contacts_message">جاري حذف جهات الاتصال\u2026</string>
-  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
-  <string name="deleteConfirmation_title">حذف جهة اتصال؟</string>
-  <string name="too_many_contacts_add_to_group">لا يمكن اضافة أكثر من <xliff:g id="count">%d</xliff:g> جهة اتصال</string>
-  <!-- add for MemoryStatusActivity -->
-  <string name="menu_memory_status">حالة الذاكرة</string>
-  <string name="memory_size">الإجمالي:</string>
-  <string name="memory_used">المستخدم:</string>
-  <string name="calculating_status_now">جاري حساب الحالة\u2026</string>
-  <string name="menu_copyTo">نسخ إلى <xliff:g id="destination">%s </xliff:g></string>
-  <string name="no_empty_email_in_usim">جهة الاتصال من USIM ليس لديها حقل للبريد الإلكتروني، تعذر نسخ الرسائل.</string>
-  <string name="voicemail">البريد الصوتي</string>
-  <string name="select_call_title">تحديد سجلات المكالمات</string>
-  <string name="delete_call_title">حذف سجل المكالمات</string>
-  <string name="delete_call_message">جاري حذف سجل المكالمات\u2026</string>
-  <string name="delete_call_alert">حذف سجلات المكالمات المحددة؟</string>
-  <string name="title_del_call">حذف</string>
-  <string name="powered_by_provider">مشغل بواسطة <xliff:g id="provider">%s</xliff:g></string>
-  <!-- InCall plugin directory search & invite -->
-  <string name="incall_plugin_directory_search">بحث عن الدليل %1$s</string>
-  <string name="incall_plugin_invite">دعوة</string>
-  <string name="incall_plugin_account_subheader">اسم %1$s</string>
-  <string name="incall_plugin_call_error">لا يمكن لـ <xliff:g id="name">%s</xliff:g> إجراء هذه المكالمة</string>
-  <string name="incall_plugin_intent_error">تعذر إتمام هذا الإجراء. حاول مرة أخرى لاحقاً.</string>
+    <string name="contactSavedToSimCardError">تعذر حفظ جهات الاتصال المحددة إلى شريحة SIM</string>
+    <string name="airplane_mode_on">شريحة SIM لا يمكن الوصول إليها أثناء وضع الطيران</string>
+    <string name="number_anr_too_long">الرقم طويل جداً</string>
+    <string name="email_address_too_long">عنوان البريد الإلكتروني طويل جداً</string>
+    <string name="sim_card_full">شريحة SIM ممتلئة</string>
+    <string name="tag_too_long">اسم جهة الاتصال طويل جداً</string>
+    <string name="invalid_phone_number">رقم الهاتف غير صحيح</string>
+    <string name="invalid_number_type">نوع الرقم غير صحيح</string>
+    <string name="no_phone_number_or_email">الرجاء إدخال رقم هاتف أو عنوان البريد الإلكتروني.</string>
+    <string name="memory_card_full">تعذر حفظ جهة الاتصال، ذاكرة الهاتف ممتلئة</string>
+    <string name="contacts_groups_label">المجموعات</string>
+    <string name="menu_moveGroupMembers">نقل أعضاء المجموعة</string>
+    <string name="title_move_members">نقل الأعضاء </string>
+    <string name="message_move_members">جاري نقل الأعضاء\u2026</string>
+    <string name="message_can_not_move_members">لا يمكن نقل الأعضاء</string>
+    <string name="edit_before_call">تحرير الرقم قبل الاتصال</string>
+    <string name="menu_sendViaSMS">إرسال جهة الاتصال عن طريق الرسائل القصيرة</string>
+    <string name="select_all">الكل</string>
+    <string name="import_sim_contacts_title">استيراد جهات الاتصال من شريحة SIM</string>
+    <string name="import_sim_contacts_message">جاري استيراد جهات الاتصال من SIM\u2026</string>
+    <string name="importConfirmation_title">استيراد جهات الاتصال؟</string>
+    <string name="import_finish">انتهى الاستيراد</string>
+    <string name="delete_contacts_title">حذف جهات الاتصال</string>
+    <string name="delete_contacts_message">جاري حذف جهات الاتصال\u2026</string>
+    <string name="deleteConfirmation_title">حذف جهة اتصال؟</string>
+    <string name="too_many_contacts_add_to_group">لا يمكن اضافة أكثر من <xliff:g id="count">%d</xliff:g> جهة اتصال</string>
+    <string name="menu_memory_status">حالة الذاكرة</string>
+    <string name="memory_size">الإجمالي:</string>
+    <string name="memory_used">المستخدم:</string>
+    <string name="calculating_status_now">جاري حساب الحالة\u2026</string>
+    <string name="menu_copyTo">نسخ إلى <xliff:g id="destination">%s </xliff:g></string>
+    <string name="no_empty_email_in_usim">جهة الاتصال من USIM ليس لديها حقل للبريد الإلكتروني، تعذر نسخ الرسائل.</string>
+    <string name="voicemail">البريد الصوتي</string>
+    <string name="select_call_title">تحديد سجلات المكالمات</string>
+    <string name="delete_call_title">حذف سجل المكالمات</string>
+    <string name="delete_call_message">جاري حذف سجل المكالمات\u2026</string>
+    <string name="delete_call_alert">حذف سجلات المكالمات المحددة؟</string>
+    <string name="title_del_call">حذف</string>
+    <string name="powered_by_provider">مشغل بواسطة <xliff:g id="provider">%s</xliff:g></string>
+    <string name="sms_permission_rationale">إذن الرسائل القصيرة مطلوب لعرض محفوظات الرسائل القصيرة لجهة الاتصال.</string>
+    <string name="sms_rationale_view">العرض</string>
+    <string name="incall_plugin_directory_search">بحث عن الدليل %1$s</string>
+    <string name="incall_plugin_invite">دعوة</string>
+    <string name="incall_plugin_account_subheader">اسم %1$s</string>
+    <string name="incall_plugin_call_error">لا يمكن لـ <xliff:g id="name">%s</xliff:g> إجراء هذه المكالمة</string>
+    <string name="incall_plugin_intent_error">تعذر إتمام هذا الإجراء. حاول مرة أخرى لاحقاً.</string>
 </resources>

@@ -16,24 +16,24 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="contacts_selected">
-    <item quantity="one">%d valittu</item>
-    <item quantity="other">%d valittu</item>
-  </plurals>
-  <plurals name="ContactMultiImportConfirmation">
-    <item quantity="one">%d yhteystieto tuodaan.</item>
-    <item quantity="other">%d yhteystietoa tuodaan.</item>
-  </plurals>
-  <plurals name="import_progress">
-    <item quantity="one">%d yhteystieto tuotu</item>
-    <item quantity="other">%d yhteystietoa tuotu</item>
-  </plurals>
-  <plurals name="ContactMultiDeleteConfirmation">
-    <item quantity="one">%d yhteystieto poistetaan.</item>
-    <item quantity="other">%d yhteystietoa poistetaan.</item>
-  </plurals>
-  <plurals name="spam_count_text">
-    <item quantity="one">%d henkilö merkkasi tämän spam-puheluksi</item>
-    <item quantity="other">%d henkilöä merkkasi tämän spam-puheluksi</item>
-  </plurals>
+    <plurals name="contacts_selected">
+        <item quantity="one">%d valittu</item>
+        <item quantity="other">%d valittu</item>
+    </plurals>
+    <plurals name="ContactMultiImportConfirmation">
+        <item quantity="one">%d yhteystieto tuodaan.</item>
+        <item quantity="other">%d yhteystietoa tuodaan.</item>
+    </plurals>
+    <plurals name="import_progress">
+        <item quantity="one">%d yhteystieto tuotu</item>
+        <item quantity="other">%d yhteystietoa tuotu</item>
+    </plurals>
+    <plurals name="ContactMultiDeleteConfirmation">
+        <item quantity="one">%d yhteystieto poistetaan.</item>
+        <item quantity="other">%d yhteystietoa poistetaan.</item>
+    </plurals>
+    <plurals name="spam_count_text">
+        <item quantity="one">%d henkilö merkkasi tämän spam-puheluksi</item>
+        <item quantity="other">%d henkilöä merkkasi tämän spam-puheluksi</item>
+    </plurals>
 </resources>

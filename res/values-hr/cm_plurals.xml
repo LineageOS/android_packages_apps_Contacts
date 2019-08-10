@@ -16,29 +16,29 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="contacts_selected">
-    <item quantity="one">%d odabran</item>
-    <item quantity="few">%d odabrana</item>
-    <item quantity="other">%d odabrano</item>
-  </plurals>
-  <plurals name="ContactMultiImportConfirmation">
-    <item quantity="one">%d kontakt će biti uvezen.</item>
-    <item quantity="few">%d kontakt će biti uvezen.</item>
-    <item quantity="other">%d kontakata će biti uvezeno.</item>
-  </plurals>
-  <plurals name="import_progress">
-    <item quantity="one">%d kontakt uvezen</item>
-    <item quantity="few">%d kontakt uvezen</item>
-    <item quantity="other">%d kontakata uvezeno</item>
-  </plurals>
-  <plurals name="ContactMultiDeleteConfirmation">
-    <item quantity="one">%d kontakt će biti izbrisan.</item>
-    <item quantity="few">%d kontakt će biti izbrisan.</item>
-    <item quantity="other">%d kontakata će biti izbrisano.</item>
-  </plurals>
-  <plurals name="spam_count_text">
-    <item quantity="one">%d osoba označena kao spam</item>
-    <item quantity="few">%d osoba označena kao spam</item>
-    <item quantity="other">%d osobe označene kao spam</item>
-  </plurals>
+    <plurals name="contacts_selected">
+        <item quantity="one">%d odabran</item>
+        <item quantity="few">%d odabrana</item>
+        <item quantity="other">%d odabrano</item>
+    </plurals>
+    <plurals name="ContactMultiImportConfirmation">
+        <item quantity="one">%d kontakt će biti uvezen.</item>
+        <item quantity="few">%d kontakt će biti uvezen.</item>
+        <item quantity="other">%d kontakata će biti uvezeno.</item>
+    </plurals>
+    <plurals name="import_progress">
+        <item quantity="one">%d kontakt uvezen</item>
+        <item quantity="few">%d kontakt uvezen</item>
+        <item quantity="other">%d kontakata uvezeno</item>
+    </plurals>
+    <plurals name="ContactMultiDeleteConfirmation">
+        <item quantity="one">%d kontakt će biti izbrisan.</item>
+        <item quantity="few">%d kontakt će biti izbrisan.</item>
+        <item quantity="other">%d kontakata će biti izbrisano.</item>
+    </plurals>
+    <plurals name="spam_count_text">
+        <item quantity="one">%d osoba označena kao spam</item>
+        <item quantity="few">%d osoba označena kao spam</item>
+        <item quantity="other">%d osobe označene kao spam</item>
+    </plurals>
 </resources>

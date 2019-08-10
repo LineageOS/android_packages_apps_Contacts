@@ -17,58 +17,50 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Toast displayed when saving a contact to sim card failed -->
-  <string name="contactSavedToSimCardError">Kunne ikke lagre valgte kontakter på SIM-kortet</string>
-  <string name="airplane_mode_on">SIM-kortet kan ikke åpnes mens Flymodus er aktivert</string>
-  <string name="number_anr_too_long">Nummeret er for langt</string>
-  <string name="email_address_too_long">E-postadressen er for lang</string>
-  <string name="sim_card_full">SIM-kortet er fullt</string>
-  <string name="tag_too_long">Navn på kontakt er for langt</string>
-  <string name="invalid_phone_number">Telefonnummeret er ugyldig</string>
-  <string name="invalid_number_type">Nummer er ugyldig</string>
-  <string name="no_phone_number_or_email">Angi et telefonnummer eller e-postadresse.</string>
-  <string name="memory_card_full">Kontakt kan ikke lagres, telefonminnet er full</string>
-  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
-  <string name="contacts_groups_label">Grupper</string>
-  <string name="menu_moveGroupMembers">Flytt medlemmer</string>
-  <string name="title_move_members">Flytt medlemmer</string>
-  <string name="message_move_members">Flytter kontakter\u2026</string>
-  <string name="message_can_not_move_members">Kan ikke flytte medlemmer</string>
-  <string name="edit_before_call">Rediger nummer før samtalen</string>
-  <string name="menu_sendViaSMS">Sende kontakten via SMS</string>
-  <string name="select_all">Alle</string>
-  <!-- Choose Sim Card to Import -->
-  <string name="import_sim_contacts_title">Importer SIM-kontakter</string>
-  <string name="import_sim_contacts_message">Importerer SIM kontakter\u2026</string>
-  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
-  <string name="importConfirmation_title">Importere kontakt?</string>
-  <string name="import_finish">Import fullført</string>
-  <!-- Multi Delete Contacts related strings -->
-  <string name="delete_contacts_title">Slette kontakter</string>
-  <string name="delete_contacts_message">Sletter kontakter\u2026</string>
-  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
-  <string name="deleteConfirmation_title">Slette kontakt?</string>
-  <string name="too_many_contacts_add_to_group">Ikke mer enn <xliff:g id="count">%d</xliff:g> kontakter kan legges til</string>
-  <!-- add for MemoryStatusActivity -->
-  <string name="menu_memory_status">Minnestatus</string>
-  <string name="memory_size">Totalt:</string>
-  <string name="memory_used">Brukt:</string>
-  <string name="calculating_status_now">Beregner status\u2026</string>
-  <string name="menu_copyTo">Kopiere til <xliff:g id="destination">%s</xliff:g></string>
-  <string name="no_empty_email_in_usim">USIM kontakten har ikke ett tilgjengelig e-felt, kan ikke kopiere meldinger.</string>
-  <string name="voicemail">Talepostkasse</string>
-  <string name="select_call_title">Velg Anropslister</string>
-  <string name="delete_call_title">Slette Anropslister</string>
-  <string name="delete_call_message">Sletter anropslister\u2026</string>
-  <string name="delete_call_alert">Slett valgte Anropslister?</string>
-  <string name="title_del_call">Slett</string>
-  <string name="powered_by_provider">Drevet av <xliff:g id="provider">%s</xliff:g></string>
-  <string name="sms_permission_rationale">SMS tillatelse er nødvendig for å vise kontakt SMS historikk.</string>
-  <string name="sms_rationale_view">VIS</string>
-  <!-- InCall plugin directory search & invite -->
-  <string name="incall_plugin_directory_search">Søk %1$s katalog</string>
-  <string name="incall_plugin_invite">INVITER</string>
-  <string name="incall_plugin_account_subheader">%1$s navn</string>
-  <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> kunne ikke lage denne samtalen</string>
-  <string name="incall_plugin_intent_error">Kunne ikke fullføre denne handlingen. Prøv igjen senere.</string>
+    <string name="contactSavedToSimCardError">Kunne ikke lagre valgte kontakter på SIM-kortet</string>
+    <string name="airplane_mode_on">SIM-kortet kan ikke åpnes mens Flymodus er aktivert</string>
+    <string name="number_anr_too_long">Nummeret er for langt</string>
+    <string name="email_address_too_long">E-postadressen er for lang</string>
+    <string name="sim_card_full">SIM-kortet er fullt</string>
+    <string name="tag_too_long">Navn på kontakt er for langt</string>
+    <string name="invalid_phone_number">Telefonnummeret er ugyldig</string>
+    <string name="invalid_number_type">Nummer er ugyldig</string>
+    <string name="no_phone_number_or_email">Angi et telefonnummer eller e-postadresse.</string>
+    <string name="memory_card_full">Kontakt kan ikke lagres, telefonminnet er full</string>
+    <string name="contacts_groups_label">Grupper</string>
+    <string name="menu_moveGroupMembers">Flytt medlemmer</string>
+    <string name="title_move_members">Flytt medlemmer</string>
+    <string name="message_move_members">Flytter kontakter\u2026</string>
+    <string name="message_can_not_move_members">Kan ikke flytte medlemmer</string>
+    <string name="edit_before_call">Rediger nummer før samtalen</string>
+    <string name="menu_sendViaSMS">Sende kontakten via SMS</string>
+    <string name="select_all">Alle</string>
+    <string name="import_sim_contacts_title">Importer SIM-kontakter</string>
+    <string name="import_sim_contacts_message">Importerer SIM kontakter\u2026</string>
+    <string name="importConfirmation_title">Importere kontakt?</string>
+    <string name="import_finish">Import fullført</string>
+    <string name="delete_contacts_title">Slette kontakter</string>
+    <string name="delete_contacts_message">Sletter kontakter\u2026</string>
+    <string name="deleteConfirmation_title">Slette kontakt?</string>
+    <string name="too_many_contacts_add_to_group">Ikke mer enn <xliff:g id="count">%d</xliff:g> kontakter kan legges til</string>
+    <string name="menu_memory_status">Minnestatus</string>
+    <string name="memory_size">Totalt:</string>
+    <string name="memory_used">Brukt:</string>
+    <string name="calculating_status_now">Beregner status\u2026</string>
+    <string name="menu_copyTo">Kopiere til <xliff:g id="destination">%s</xliff:g></string>
+    <string name="no_empty_email_in_usim">USIM kontakten har ikke ett tilgjengelig e-felt, kan ikke kopiere meldinger.</string>
+    <string name="voicemail">Talepostkasse</string>
+    <string name="select_call_title">Velg Anropslister</string>
+    <string name="delete_call_title">Slette Anropslister</string>
+    <string name="delete_call_message">Sletter anropslister\u2026</string>
+    <string name="delete_call_alert">Slett valgte Anropslister?</string>
+    <string name="title_del_call">Slett</string>
+    <string name="powered_by_provider">Drevet av <xliff:g id="provider">%s</xliff:g></string>
+    <string name="sms_permission_rationale">SMS tillatelse er nødvendig for å vise kontakt SMS historikk.</string>
+    <string name="sms_rationale_view">VIS</string>
+    <string name="incall_plugin_directory_search">Søk %1$s katalog</string>
+    <string name="incall_plugin_invite">INVITER</string>
+    <string name="incall_plugin_account_subheader">%1$s navn</string>
+    <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> kunne ikke lage denne samtalen</string>
+    <string name="incall_plugin_intent_error">Kunne ikke fullføre denne handlingen. Prøv igjen senere.</string>
 </resources>

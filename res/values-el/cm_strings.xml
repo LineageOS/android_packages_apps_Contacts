@@ -17,58 +17,50 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Toast displayed when saving a contact to sim card failed -->
-  <string name="contactSavedToSimCardError">Δεν ήταν δυνατή η αποθήκευση των επιλεγμένων επαφών στην κάρτα SIM</string>
-  <string name="airplane_mode_on">Δεν είναι δυνατή η πρόσβαση της κάρτας SIM ενώ είναι ενεργή η λειτουργία πτήσης</string>
-  <string name="number_anr_too_long">Ο αριθμός είναι πολύ μεγάλος</string>
-  <string name="email_address_too_long">Η διεύθυνση ηλεκτρονικού ταχυδρομείου είναι πολύ μεγάλη</string>
-  <string name="sim_card_full">Η κάρτα SIM είναι γεμάτη</string>
-  <string name="tag_too_long">Το όνομα της επαφής είναι πολύ μεγάλο</string>
-  <string name="invalid_phone_number">Ο αριθμός τηλεφώνου δεν είναι έγκυρος</string>
-  <string name="invalid_number_type">Ο τύπος του αριθμού δεν είναι έγκυρος</string>
-  <string name="no_phone_number_or_email">Παρακαλώ εισάγετε έναν τηλεφωνικό αριθμό ή ηλεκτρονική διεύθυνση.</string>
-  <string name="memory_card_full">Δεν ήταν δυνατή η αποθήκευση της επαφής, η μνήμη του τηλεφώνου είναι πλήρης</string>
-  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
-  <string name="contacts_groups_label">Ομάδες</string>
-  <string name="menu_moveGroupMembers">Μετακίνηση μελών ομάδας</string>
-  <string name="title_move_members">Μετακίνηση μελών</string>
-  <string name="message_move_members">Μετακίνηση μελών\u2026</string>
-  <string name="message_can_not_move_members">Δεν είναι δυνατή η μετακίνηση των μελών</string>
-  <string name="edit_before_call">Επεξεργασία αριθμού πριν την κλήση</string>
-  <string name="menu_sendViaSMS">Αποστολή επαφής μέσω SMS</string>
-  <string name="select_all">Όλες</string>
-  <!-- Choose Sim Card to Import -->
-  <string name="import_sim_contacts_title">Εισαγωγή επαφών SIM</string>
-  <string name="import_sim_contacts_message">Εισαγωγή επαφών SIM\u2026</string>
-  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
-  <string name="importConfirmation_title">Εισαγωγή επαφής;</string>
-  <string name="import_finish">Η εισαγωγή ολοκληρώθηκε</string>
-  <!-- Multi Delete Contacts related strings -->
-  <string name="delete_contacts_title">Διαγραφή επαφών</string>
-  <string name="delete_contacts_message">Διαγραφή επαφών\u2026</string>
-  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
-  <string name="deleteConfirmation_title">Διαγραφή επαφής;</string>
-  <string name="too_many_contacts_add_to_group">Δεν είναι δυνατή η προσθήκη περισσότερων από <xliff:g id="count">%d</xliff:g> επαφών</string>
-  <!-- add for MemoryStatusActivity -->
-  <string name="menu_memory_status">Κατάσταση μνήμης</string>
-  <string name="memory_size">Συνολικά:</string>
-  <string name="memory_used">Σε χρήση:</string>
-  <string name="calculating_status_now">Υπολογισμός κατάστασης\u2026</string>
-  <string name="menu_copyTo">Αντιγραφή σε <xliff:g id="destination">%s</xliff:g></string>
-  <string name="no_empty_email_in_usim">Η επαφή USIM δεν έχει κανένα διαθέσιμο πεδίο ηλεκτρονικού ταχυδρομείου, δεν είναι δυνατή η αντιγραφή των μηνυμάτων.</string>
-  <string name="voicemail">Μήνυμα τηλεφωνητή</string>
-  <string name="select_call_title">Επιλογή αρχείων κλήσεων</string>
-  <string name="delete_call_title">Διαγραφή αρχείων κλήσεων</string>
-  <string name="delete_call_message">Διαγραφή αρχείων κλήσεων\u2026</string>
-  <string name="delete_call_alert">Διαγραφή των επιλεγμένων αρχείων κλήσεων;</string>
-  <string name="title_del_call">Διαγραφή</string>
-  <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
-  <string name="sms_permission_rationale">Απαιτείται το δικαίωμα ανάγνωσης SMS για εμφάνιση του ιστορικού SMS της επαφής.</string>
-  <string name="sms_rationale_view">ΠΡΟΒΟΛΗ</string>
-  <!-- InCall plugin directory search & invite -->
-  <string name="incall_plugin_directory_search">Αναζήτηση καταλόγου %1$s</string>
-  <string name="incall_plugin_invite">ΠΡΟΣΚΛΗΣΗ</string>
-  <string name="incall_plugin_account_subheader">Όνομα %1$s</string>
-  <string name="incall_plugin_call_error">Το <xliff:g id="name">%s</xliff:g> δεν μπορεί να πραγματοποιήσει αυτή την κλήση</string>
-  <string name="incall_plugin_intent_error">Δεν είναι δυνατή η ολοκλήρωση αυτής της ενέργειας. Δοκιμάστε ξανά αργότερα.</string>
+    <string name="contactSavedToSimCardError">Δεν ήταν δυνατή η αποθήκευση των επιλεγμένων επαφών στην κάρτα SIM</string>
+    <string name="airplane_mode_on">Δεν είναι δυνατή η πρόσβαση της κάρτας SIM ενώ είναι ενεργή η λειτουργία πτήσης</string>
+    <string name="number_anr_too_long">Ο αριθμός είναι πολύ μεγάλος</string>
+    <string name="email_address_too_long">Η διεύθυνση ηλεκτρονικού ταχυδρομείου είναι πολύ μεγάλη</string>
+    <string name="sim_card_full">Η κάρτα SIM είναι γεμάτη</string>
+    <string name="tag_too_long">Το όνομα της επαφής είναι πολύ μεγάλο</string>
+    <string name="invalid_phone_number">Ο αριθμός τηλεφώνου δεν είναι έγκυρος</string>
+    <string name="invalid_number_type">Ο τύπος του αριθμού δεν είναι έγκυρος</string>
+    <string name="no_phone_number_or_email">Παρακαλώ εισάγετε έναν τηλεφωνικό αριθμό ή ηλεκτρονική διεύθυνση.</string>
+    <string name="memory_card_full">Δεν ήταν δυνατή η αποθήκευση της επαφής, η μνήμη του τηλεφώνου είναι πλήρης</string>
+    <string name="contacts_groups_label">Ομάδες</string>
+    <string name="menu_moveGroupMembers">Μετακίνηση μελών ομάδας</string>
+    <string name="title_move_members">Μετακίνηση μελών</string>
+    <string name="message_move_members">Μετακίνηση μελών\u2026</string>
+    <string name="message_can_not_move_members">Δεν είναι δυνατή η μετακίνηση των μελών</string>
+    <string name="edit_before_call">Επεξεργασία αριθμού πριν την κλήση</string>
+    <string name="menu_sendViaSMS">Αποστολή επαφής μέσω SMS</string>
+    <string name="select_all">Όλες</string>
+    <string name="import_sim_contacts_title">Εισαγωγή επαφών SIM</string>
+    <string name="import_sim_contacts_message">Εισαγωγή επαφών SIM\u2026</string>
+    <string name="importConfirmation_title">Εισαγωγή επαφής;</string>
+    <string name="import_finish">Η εισαγωγή ολοκληρώθηκε</string>
+    <string name="delete_contacts_title">Διαγραφή επαφών</string>
+    <string name="delete_contacts_message">Διαγραφή επαφών\u2026</string>
+    <string name="deleteConfirmation_title">Διαγραφή επαφής;</string>
+    <string name="too_many_contacts_add_to_group">Δεν είναι δυνατή η προσθήκη περισσότερων από <xliff:g id="count">%d</xliff:g> επαφών</string>
+    <string name="menu_memory_status">Κατάσταση μνήμης</string>
+    <string name="memory_size">Συνολικά:</string>
+    <string name="memory_used">Σε χρήση:</string>
+    <string name="calculating_status_now">Υπολογισμός κατάστασης\u2026</string>
+    <string name="menu_copyTo">Αντιγραφή σε <xliff:g id="destination">%s</xliff:g></string>
+    <string name="no_empty_email_in_usim">Η επαφή USIM δεν έχει κανένα διαθέσιμο πεδίο ηλεκτρονικού ταχυδρομείου, δεν είναι δυνατή η αντιγραφή των μηνυμάτων.</string>
+    <string name="voicemail">Μήνυμα τηλεφωνητή</string>
+    <string name="select_call_title">Επιλογή αρχείων κλήσεων</string>
+    <string name="delete_call_title">Διαγραφή αρχείων κλήσεων</string>
+    <string name="delete_call_message">Διαγραφή αρχείων κλήσεων\u2026</string>
+    <string name="delete_call_alert">Διαγραφή των επιλεγμένων αρχείων κλήσεων;</string>
+    <string name="title_del_call">Διαγραφή</string>
+    <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
+    <string name="sms_permission_rationale">Απαιτείται το δικαίωμα ανάγνωσης SMS για εμφάνιση του ιστορικού SMS της επαφής.</string>
+    <string name="sms_rationale_view">ΠΡΟΒΟΛΗ</string>
+    <string name="incall_plugin_directory_search">Αναζήτηση καταλόγου %1$s</string>
+    <string name="incall_plugin_invite">ΠΡΟΣΚΛΗΣΗ</string>
+    <string name="incall_plugin_account_subheader">Όνομα %1$s</string>
+    <string name="incall_plugin_call_error">Το <xliff:g id="name">%s</xliff:g> δεν μπορεί να πραγματοποιήσει αυτή την κλήση</string>
+    <string name="incall_plugin_intent_error">Δεν είναι δυνατή η ολοκλήρωση αυτής της ενέργειας. Δοκιμάστε ξανά αργότερα.</string>
 </resources>

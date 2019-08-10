@@ -17,12 +17,50 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Toast displayed when saving a contact to sim card failed -->
-  <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
-  <!-- Choose Sim Card to Import -->
-  <!-- Confirmation dialog title after users selects to import a contact. [CHAR LIMIT=25]-->
-  <!-- Multi Delete Contacts related strings -->
-  <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
-  <!-- add for MemoryStatusActivity -->
-  <!-- InCall plugin directory search & invite -->
+    <string name="contactSavedToSimCardError">Selektearre kontakten koene net op de simkaart bewarre wurde</string>
+    <string name="airplane_mode_on">Gjin tagong ta simkaart yn fleatúchmodus</string>
+    <string name="number_anr_too_long">Nûmer is te lang</string>
+    <string name="email_address_too_long">E-mailadres is te lang</string>
+    <string name="sim_card_full">Simkaart is fol</string>
+    <string name="tag_too_long">Namme fan kontakt is te lang</string>
+    <string name="invalid_phone_number">Telefoannûmer is ûnjildich</string>
+    <string name="invalid_number_type">It soarte nûmer is ûnjildich</string>
+    <string name="no_phone_number_or_email">Fier in telefoannûmer of e-mailadres yn.</string>
+    <string name="memory_card_full">Kontakt kin net bewarre wurde: telefoanûnthâld is fol</string>
+    <string name="contacts_groups_label">Groepen</string>
+    <string name="menu_moveGroupMembers">Leden fan de groep ferpleatse</string>
+    <string name="title_move_members">Leden ferpleatse</string>
+    <string name="message_move_members">Leden ferpleatse\u2026</string>
+    <string name="message_can_not_move_members">Kin leden net ferpleatse</string>
+    <string name="edit_before_call">Nûmer bewurkje foar bellen</string>
+    <string name="menu_sendViaSMS">Kontakt fia sms ferstjoere</string>
+    <string name="select_all">Alles</string>
+    <string name="import_sim_contacts_title">Sim-kontakten ymportearje</string>
+    <string name="import_sim_contacts_message">Sim-kontakten ymportearje\u2026</string>
+    <string name="importConfirmation_title">Kontakt ymportearje?</string>
+    <string name="import_finish">Ymportearjen foltôge</string>
+    <string name="delete_contacts_title">Kontakten fuortsmite</string>
+    <string name="delete_contacts_message">Kontakten fuortsmite\u2026</string>
+    <string name="deleteConfirmation_title">Kontakt fuortsmite?</string>
+    <string name="too_many_contacts_add_to_group">Der kinne net mear as <xliff:g id="count">%d</xliff:g> kontakten tafoege wurde</string>
+    <string name="menu_memory_status">Unthâldsteat</string>
+    <string name="memory_size">Totaal:</string>
+    <string name="memory_used">Brûkt:</string>
+    <string name="calculating_status_now">Steat berekkenje\u2026</string>
+    <string name="menu_copyTo">Kopiearje nei <xliff:g id="destination">%s</xliff:g></string>
+    <string name="no_empty_email_in_usim">Usim-kontakt hat gjin e-mailfjild beskikber, kin berjochten net kopiearje.</string>
+    <string name="voicemail">Voicemail</string>
+    <string name="select_call_title">Oproppen selektearje</string>
+    <string name="delete_call_title">Oproppen fuortsmite</string>
+    <string name="delete_call_message">Oproppen fuortsmite\u2026</string>
+    <string name="delete_call_alert">Selektearre oproppen fuortsmite?</string>
+    <string name="title_del_call">Fuortsmite</string>
+    <string name="powered_by_provider">Mooglik makke troch <xliff:g id="provider">%s</xliff:g></string>
+    <string name="sms_permission_rationale">Sms-machtiging is nedich om sms-skiednis fan kontakten wer te jaan.</string>
+    <string name="sms_rationale_view">BESJEN</string>
+    <string name="incall_plugin_directory_search">Sykje yn map %1$s</string>
+    <string name="incall_plugin_invite">ÚTNÛGJE</string>
+    <string name="incall_plugin_account_subheader">%1$s-namme</string>
+    <string name="incall_plugin_call_error"><xliff:g id="name">%s</xliff:g> kin dizze oprop net foltôgje</string>
+    <string name="incall_plugin_intent_error">Kin dizze aksje net foltôgje. Probearje it letter nochris.</string>
 </resources>

@@ -16,24 +16,24 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="contacts_selected">
-    <item quantity="one">%d valgt</item>
-    <item quantity="other">%d valgt</item>
-  </plurals>
-  <plurals name="ContactMultiImportConfirmation">
-    <item quantity="one">%d kontaktperson vil blive importeret.</item>
-    <item quantity="other">%d kontaktpersoner vil blive importeret.</item>
-  </plurals>
-  <plurals name="import_progress">
-    <item quantity="one">%d kontakt importeret</item>
-    <item quantity="other">%d kontakter importeret</item>
-  </plurals>
-  <plurals name="ContactMultiDeleteConfirmation">
-    <item quantity="one">%d kontakt vil blive slettet.</item>
-    <item quantity="other">%d kontakter vil blive slettet.</item>
-  </plurals>
-  <plurals name="spam_count_text">
-    <item quantity="one">%d person markerede dette som spam</item>
-    <item quantity="other">%d personer markerede dette som spam</item>
-  </plurals>
+    <plurals name="contacts_selected">
+        <item quantity="one">%d valgt</item>
+        <item quantity="other">%d valgte</item>
+    </plurals>
+    <plurals name="ContactMultiImportConfirmation">
+        <item quantity="one">%d kontaktperson vil blive importeret.</item>
+        <item quantity="other">%d kontaktpersoner vil blive importeret.</item>
+    </plurals>
+    <plurals name="import_progress">
+        <item quantity="one">%d kontaktperson importeret</item>
+        <item quantity="other">%d kontaktpersoner importeret</item>
+    </plurals>
+    <plurals name="ContactMultiDeleteConfirmation">
+        <item quantity="one">%d kontaktperson vil blive slettet.</item>
+        <item quantity="other">%d kontaktpersoner vil blive slettet.</item>
+    </plurals>
+    <plurals name="spam_count_text">
+        <item quantity="one">%d person markerede dette som uønsket</item>
+        <item quantity="other">%d personer markerede dette som uønsket</item>
+    </plurals>
 </resources>

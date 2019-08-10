@@ -16,24 +16,24 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="contacts_selected">
-    <item quantity="one">%d ಆಯ್ಕೆಮಾಡಿದೆ</item>
-    <item quantity="other">%d ಆಯ್ಕೆಮಾಡಿದೆ</item>
-  </plurals>
-  <plurals name="ContactMultiImportConfirmation">
-    <item quantity="one">%d ಸಂಪರ್ಕವನ್ನು ಆಮದು ಮಾಡಲಾಗುತ್ತದೆ.</item>
-    <item quantity="other">%d ಸಂಪರ್ಕಗಳನ್ನು ಆಮದು ಮಾಡಲಾಗುತ್ತದೆ.</item>
-  </plurals>
-  <plurals name="import_progress">
-    <item quantity="one">%d ಸಂಪರ್ಕವನ್ನು ಆಮದುಮಾಡಲಾಗಿದೆ</item>
-    <item quantity="other">%d ಸಂಪರ್ಕಗಳನ್ನು ಆಮದುಮಾಡಲಾಗಿದೆ</item>
-  </plurals>
-  <plurals name="ContactMultiDeleteConfirmation">
-    <item quantity="one">%d ಸಂಪರ್ಕವನ್ನು ಅಳಿಸಲಾಗುತ್ತದೆ.</item>
-    <item quantity="other">%d ಸಂಪರ್ಕಗಳನ್ನು ಅಳಿಸಲಾಗುತ್ತದೆ.</item>
-  </plurals>
-  <plurals name="spam_count_text">
-    <item quantity="one">%d ವ್ಯಕ್ತಿ ಇದನ್ನು ಸ್ಪಾಮ್ ಎಂದು ಗುರುತಿಸಿದ್ದಾರೆ</item>
-    <item quantity="other">%d ಜನರು ಇದನ್ನು ಸ್ಪಾಮ್ ಎಂದು ಗುರುತಿಸಿದ್ದಾರೆ</item>
-  </plurals>
+    <plurals name="contacts_selected">
+        <item quantity="one">%d ಆಯ್ಕೆಮಾಡಿದೆ</item>
+        <item quantity="other">%d ಆಯ್ಕೆಮಾಡಿದೆ</item>
+    </plurals>
+    <plurals name="ContactMultiImportConfirmation">
+        <item quantity="one">%d ಸಂಪರ್ಕವನ್ನು ಆಮದು ಮಾಡಲಾಗುತ್ತದೆ.</item>
+        <item quantity="other">%d ಸಂಪರ್ಕಗಳನ್ನು ಆಮದು ಮಾಡಲಾಗುತ್ತದೆ.</item>
+    </plurals>
+    <plurals name="import_progress">
+        <item quantity="one">%d ಸಂಪರ್ಕವನ್ನು ಆಮದುಮಾಡಲಾಗಿದೆ</item>
+        <item quantity="other">%d ಸಂಪರ್ಕಗಳನ್ನು ಆಮದುಮಾಡಲಾಗಿದೆ</item>
+    </plurals>
+    <plurals name="ContactMultiDeleteConfirmation">
+        <item quantity="one">%d ಸಂಪರ್ಕವನ್ನು ಅಳಿಸಲಾಗುತ್ತದೆ.</item>
+        <item quantity="other">%d ಸಂಪರ್ಕಗಳನ್ನು ಅಳಿಸಲಾಗುತ್ತದೆ.</item>
+    </plurals>
+    <plurals name="spam_count_text">
+        <item quantity="one">%d ವ್ಯಕ್ತಿ ಇದನ್ನು ಸ್ಪಾಮ್ ಎಂದು ಗುರುತಿಸಿದ್ದಾರೆ</item>
+        <item quantity="other">%d ಜನರು ಇದನ್ನು ಸ್ಪಾಮ್ ಎಂದು ಗುರುತಿಸಿದ್ದಾರೆ</item>
+    </plurals>
 </resources>

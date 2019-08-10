@@ -16,29 +16,34 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="contacts_selected">
-    <item quantity="one">%d vybraný</item>
-    <item quantity="few">%d vybrané</item>
-    <item quantity="other">%d vybraných</item>
-  </plurals>
-  <plurals name="ContactMultiImportConfirmation">
-    <item quantity="one">Bude importován %d kontakt.</item>
-    <item quantity="few">Budou importovány %d kontakty.</item>
-    <item quantity="other">Bude importováno %d kontaktů.</item>
-  </plurals>
-  <plurals name="import_progress">
-    <item quantity="one">Importován %d kontakt</item>
-    <item quantity="few">Importovány %d kontakty</item>
-    <item quantity="other">Importováno %d kontaktů</item>
-  </plurals>
-  <plurals name="ContactMultiDeleteConfirmation">
-    <item quantity="one">Bude smazán %d kontakt</item>
-    <item quantity="few">Budou smazány %d kontakty.</item>
-    <item quantity="other">Bude smazáno %d kontaktů.</item>
-  </plurals>
-  <plurals name="spam_count_text">
-    <item quantity="one">%d osoba toto označila jako spam</item>
-    <item quantity="few">%d osoby toto označili jako spam</item>
-    <item quantity="other">%d osob toto označilo jako spam</item>
-  </plurals>
+    <plurals name="contacts_selected">
+        <item quantity="one">%d vybraný</item>
+        <item quantity="few">%d vybrané</item>
+        <item quantity="many">%d vybraných</item>
+        <item quantity="other">%d vybraných</item>
+    </plurals>
+    <plurals name="ContactMultiImportConfirmation">
+        <item quantity="one">Bude importován %d kontakt.</item>
+        <item quantity="few">Budou importovány %d kontakty.</item>
+        <item quantity="many">Bude importováno %d kontaktů.</item>
+        <item quantity="other">Bude importováno %d kontaktů.</item>
+    </plurals>
+    <plurals name="import_progress">
+        <item quantity="one">Importován %d kontakt</item>
+        <item quantity="few">Importovány %d kontakty</item>
+        <item quantity="many">Importováno %d kontaktů</item>
+        <item quantity="other">Importováno %d kontaktů</item>
+    </plurals>
+    <plurals name="ContactMultiDeleteConfirmation">
+        <item quantity="one">Bude smazán %d kontakt</item>
+        <item quantity="few">Budou smazány %d kontakty.</item>
+        <item quantity="many">Bude smazáno %d kontaktů.</item>
+        <item quantity="other">Bude smazáno %d kontaktů.</item>
+    </plurals>
+    <plurals name="spam_count_text">
+        <item quantity="one">%d osoba toto označila jako spam</item>
+        <item quantity="few">%d osoby toto označili jako spam</item>
+        <item quantity="many">%d osob toto označilo jako spam</item>
+        <item quantity="other">%d osob toto označilo jako spam</item>
+    </plurals>
 </resources>

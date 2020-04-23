@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2006 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="applicationLabel">Luchd-aithne</string>
+    <string name="contactsList">Luchd-aithne</string>
+    <string name="header_entry_contact_list_adapter_header_title">Cruthaich neach-aithne ùr</string>
+    <string name="searchHint">Lorg san luchd-aithne</string>
+    <string name="menu_addStar">Cuir ris na h-annsachdan</string>
+    <string name="description_action_menu_add_star">Air a chur ris na h-annsachdan</string>
+    <string name="menu_editContact">Deasaich</string>
+    <string name="menu_change_photo">Atharraich an dealbh</string>
+    <string name="menu_save">Sàbhail</string>
+    <string name="separatorJoinAggregateSuggestions">Luchd-aithne a mholamaid</string>
+    <string name="attach_photo_dialog_title">Dealbh an neach-aithne</string>
+    <string name="removePhoto">Thoir air falbh an dealbh</string>
+    <string name="menu_share">Co-roinn</string>
+    <string name="activity_title_settings">Roghainnean</string>
+    <string name="menu_settings" msgid="377929915873428211">Roghainnean</string>
+    <string name="non_phone_caption">Àireamh fòn</string>
+    <string name="non_phone_close">Dùin</string>
+    <string name="copy_text">Cuir lethbhreac dheth air an stòr-bhòrd</string>
+    <string name="set_default">Suidhich mar a’ bhun-roghainn</string>
+    <string name="cancel_confirmation_dialog_cancel_editing_button">Tilg air falbh</string>
+    <string name="enter_contact_name">Lorg san luchd-aithne</string>
+    <string name="contact_editor_title_new_contact">Cruthaich neach-aithne ùr</string>
+    <string name="add_new_account">Cuir cunntas ùr ris</string>
+    <string name="action_menu_add_new_contact_button">Cruthaich neach-aithne ùr</string>
+    <string name="expanding_entry_card_view_see_more">Seall barrachd dheth</string>
+    <string name="expanding_entry_card_view_see_less">Seall nas lugha dheth</string>
+    <string name="header_im_entry">Grad-theachdaireachd</string>
+    <string name="header_organization_entry">Buidheann</string>
+    <string name="header_nickname_entry">Far-ainm</string>
+    <string name="header_website_entry">Làrach-lìn</string>
+    <string name="header_event_entry">Tachartas</string>
+    <string name="header_name_entry">Ainm</string>
+    <string name="header_email_entry">Post-d</string>
+    <string name="editor_contact_photo_content_description">Dealbh an neach-aithne</string>
+    <string name="nameLabelsGroup">Ainm</string>
+    <string name="nicknameLabelsGroup">Far-ainm</string>
+    <string name="emailLabelsGroup">Post-d</string>
+    <string name="imLabelsGroup">Grad-theachdaireachd</string>
+    <string name="organizationLabelsGroup">Buidheann</string>
+    <string name="label_custom_field">Gnàthaichte</string>
+    <string name="websiteLabelsGroup">Làrach-lìn</string>
+    <string name="email_other">Post-d</string>
+    <string name="email">Post-d</string>
+    <string name="menu_custom_filter_save">Sàbhail</string>
+    <string name="hint_findContacts">Lorg san luchd-aithne</string>
+    <string name="yes_button">Tha</string>
+    <string name="no_button">Chan eil</string>
+</resources>

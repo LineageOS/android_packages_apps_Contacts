@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * SPDX-License-Identifier: Apache-2.0
+ * Copyright (C) 2020 The LineageOS Project
+-->
+<resources>
+    <!-- Background color of pinned header items. -->
+    <color name="list_item_pinned_header_color">#1f1f1f</color>
+
+    <!-- Color of contact name in list. -->
+    <color name="contact_list_name_text_color">#dadada</color>
+</resources>

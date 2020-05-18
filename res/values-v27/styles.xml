@@ -1,6 +1,7 @@
 <resources>
 
     <style name="PeopleTheme" parent="@android:style/Theme.Material.Light.DarkActionBar">
+        <item name="android:forceDarkAllowed">true</item>
         <item name="android:actionBarStyle">@style/ContactsActionBarStyle</item>
         <!-- Style for the overflow button in the actionbar. -->
         <item name="android:actionOverflowButtonStyle">@style/ContactsActionBarOverflowQP</item>
@@ -64,6 +65,7 @@
     </style>
 
     <style name="PeopleThemeAppCompat" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:forceDarkAllowed">true</item>
         <!-- Styles that require AppCompat compatibility, remember to update both sets -->
         <item name="android:actionBarStyle">@style/ContactsActionBarStyleAppCompat</item>
         <item name="actionBarStyle">@style/ContactsActionBarStyleAppCompat</item>

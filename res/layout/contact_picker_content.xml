@@ -31,7 +31,8 @@
         android:layout_marginEnd="?attr/contact_browser_list_padding_right"
         android:paddingTop="@dimen/contact_browser_list_item_padding_top_or_bottom"
         android:clipToPadding="false"
-        android:fastScrollEnabled="true"/>
+        android:fastScrollEnabled="true"
+        android:forceDarkAllowed="false"/>
 
     <TextView android:id="@android:id/empty"
               android:layout_width="wrap_content"

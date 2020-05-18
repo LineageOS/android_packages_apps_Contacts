@@ -89,6 +89,7 @@
                 android:paddingTop="?attr/list_item_padding_top"
                 android:clipToPadding="false"
                 android:fastScrollEnabled="true"
+                android:forceDarkAllowed="false"
 		android:visibility="gone"
                 android:fadingEdge="none" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

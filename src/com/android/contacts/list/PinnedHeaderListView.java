@@ -124,6 +124,7 @@ public class PinnedHeaderListView extends AutoScrollListView
         super(context, attrs, defStyle);
         super.setOnScrollListener(this);
         super.setOnItemSelectedListener(this);
+        super.setForceDarkAllowed(false);
     }
 
     @Override

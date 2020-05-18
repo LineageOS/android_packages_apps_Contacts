@@ -97,6 +97,7 @@
     </style>
 
     <style name="PeopleActivityTheme" parent="@style/PeopleThemeAppCompat">
+        <item name="android:forceDarkAllowed">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:listSelector">?android:attr/listChoiceBackgroundIndicator</item>

@@ -536,7 +536,7 @@
     <string name="dismiss_sync_alert">Diystyru</string>
     <string name="account_sync_off">Mae cysoni cyfrif i ffwrdd. Tapia i\'w droi ymlaen.</string>
     <string name="turn_auto_sync_on_dialog_title">Troi awto-cysoni ymlaen?</string>
-    <string name="turn_auto_sync_on_dialog_body">Caiff newidiadau rwyt yn eu gwneud i unrhyw ap a chyfrif, nid jyst Cysylltiadau Google, yn cael eu cadw yn gyfredol rhwng y we a dy ddyfeisiau.</string>
+    <string name="turn_auto_sync_on_dialog_body">Caiff newidiadau rwyt yn eu gwneud i unrhyw ap a chyfrif, nid jyst Cysylltiadau Google, eu cysoni rhwng y we a dy ddyfeisiau.</string>
     <string name="turn_auto_sync_on_dialog_confirm_btn">Troi ymlaen</string>
     <string name="connection_error_message">Dim cysylltiad</string>
     <string name="single_sim_display_label">SIM</string>

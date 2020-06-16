@@ -89,7 +89,7 @@
         <item name="android:popupMenuStyle">@style/PopupMenuStyle</item>
     </style>
 
-    <style name="LaunchScreenTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="LaunchScreenTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="android:windowBackground">@drawable/quantum_launchscreen_contacts</item>
         <!-- Ensure the status bar color matches the background (grey 500) -->
         <!-- TODO(yaolu): Switch to use quantum_grey if in Google3 -->

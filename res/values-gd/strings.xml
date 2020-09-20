@@ -22,20 +22,54 @@
     <string name="description_action_menu_add_star">Air a chur ris na h-annsachdan</string>
     <string name="menu_editContact">Deasaich</string>
     <string name="menu_change_photo">Atharraich an dealbh</string>
+    <string name="menu_splitAggregate">Dì-cheangail</string>
+    <string name="splitConfirmation">An doir thu an ceangal seo air falbh airson iomadh luchd-aithne?</string>
+    <string name="splitConfirmation_positive_button">Dì-cheangail</string>
+    <string name="splitConfirmationWithPendingChanges">An sàbhail thu na dh’atharraich thu mu thràth ’s an doir thu an ceangal seo air falbh airson iomadh luchd-aithne?</string>
+    <string name="splitConfirmationWithPendingChanges_positive_button">Sàbhail is dì-cheangal</string>
+    <string name="joinConfirmation">An sàbhail thu na dh’atharraich thu mu thràth ’s an dèan thu ceangal ris an neach-aithne a thagh thu?</string>
+    <string name="joinConfirmation_positive_button">Sàbhail is ceangail</string>
+    <string name="menu_joinAggregate">Ceangail</string>
     <string name="menu_save">Sàbhail</string>
+    <string name="titleJoinContactDataWith">Ceangail an luchd-aithne</string>
+    <string name="blurbJoinContactDataWith">Tagh an neach-aithne a bu toigh leat ceangal ri <xliff:g id="name">%s</xliff:g>:</string>
     <string name="separatorJoinAggregateSuggestions">Luchd-aithne a mholamaid</string>
+    <string name="contactsJoinedMessage">Chaidh an luchd-aithne a cheangal</string>
+    <plurals name="contacts_deleted_toast">
+        <item quantity="one">Chaidh an neach-aithne a sguabadh às</item>
+        <item quantity="two">Chaidh an luchd-aithne a sguabadh às</item>
+        <item quantity="few">Chaidh an luchd-aithne a sguabadh às</item>
+        <item quantity="other">Chaidh an luchd-aithne a sguabadh às</item>
+    </plurals>
+    <string name="single_delete_confirmation">A bheil thu airson an neach-aithne seo a sguabadh às?</string>
+    <string name="batch_delete_confirmation">A bheil thu airson an luchd-aithne a thagh thu a sguabadh às?</string>
+    <string name="batch_delete_read_only_contact_confirmation">Chan urrainn dhut luchd-aithne o na cunntasan ri an leughadh a-mhàin agad a sguabadh às ach ’s urrainn dhut am falach fhathast.</string>
+    <string name="batch_delete_multiple_accounts_confirmation">Tha fiosrachadh o iomadh chunntas aig an luchd-aithne a bu toigh leat sguabadh às. Cha dèid am fiosrachadh o chunntasan ri an leughadh a-mhàin a sguabadh as ach falach.</string>
+    <string name="multipleContactDeleteConfirmation">Ma sguabas tu às an neach-aithne seo, thèid fiosrachadh a thoirt air falbh o iomadh chunntas.</string>
+    <string name="deleteConfirmation">A bheil thu airson an neach-aithne seo a sguabadh às?</string>
+    <string name="createContactShortcutSuccessful_NoName">Chaidh an neach-aithne a chur ris an sgrìn dachaigh.</string>
+    <string name="createContactShortcutSuccessful">Chaidh <xliff:g id="name">%s</xliff:g> a chur ris an sgrìn dachaigh.</string>
     <string name="attach_photo_dialog_title">Dealbh an neach-aithne</string>
     <string name="removePhoto">Thoir air falbh an dealbh</string>
+    <string name="contactUnlinkedToast">Chaidh ceangal an luchd-aithne a briseadh</string>
     <string name="menu_share">Co-roinn</string>
     <string name="activity_title_settings">Roghainnean</string>
     <string name="menu_settings" msgid="377929915873428211">Roghainnean</string>
     <string name="non_phone_caption">Àireamh fòn</string>
     <string name="non_phone_close">Dùin</string>
+    <string name="date_year_toggle">Gabh a-steach am bliadhna</string>
+    <string name="toast_join_with_empty_contact">Sgrìobh ainm neach-aithne
+      mus ceangail thu ri fear eile e.
+    </string>
     <string name="copy_text">Cuir lethbhreac dheth air an stòr-bhòrd</string>
     <string name="set_default">Suidhich mar a’ bhun-roghainn</string>
     <string name="cancel_confirmation_dialog_cancel_editing_button">Tilg air falbh</string>
     <string name="enter_contact_name">Lorg san luchd-aithne</string>
+    <string name="contact_editor_prompt_one_account">Thèid luchd-aithne ùr a shàbhaladh gu <xliff:g id="account_name">%1$s</xliff:g>.</string>
+    <string name="contact_editor_prompt_multiple_accounts">Tagh cunntas tùsail dhan luchd-aithne ùr:</string>
     <string name="contact_editor_title_new_contact">Cruthaich neach-aithne ùr</string>
+    <string name="contact_editor_pick_linked_contact_dialog_title">Luchd-aithne ceangailte</string>
+    <string name="contact_editor_unlink_contacts">Dì-cheangail</string>
     <string name="add_new_account">Cuir cunntas ùr ris</string>
     <string name="action_menu_add_new_contact_button">Cruthaich neach-aithne ùr</string>
     <string name="expanding_entry_card_view_see_more">Seall barrachd dheth</string>
@@ -47,7 +81,16 @@
     <string name="header_event_entry">Tachartas</string>
     <string name="header_name_entry">Ainm</string>
     <string name="header_email_entry">Post-d</string>
+    <string name="editor_more_fields">Barrachd raointean</string>
     <string name="editor_contact_photo_content_description">Dealbh an neach-aithne</string>
+    <string name="editor_failed_to_load">Dh’fhàillig le fosgladh an deasaiche.</string>
+    <string name="editor_account_selector_title">Thèid a shàbhaladh an-seo:</string>
+    <string name="quickcontact_suggestion_link_button">CEANGAIL AN LUCHD-AITHNE</string>
+    <string name="quickcontact_suggestion_cancel_button">SGUIR DHETH</string>
+    <string name="suggestion_card_this_contact_title">An neach-aithne seo</string>
+    <string name="suggestion_card_duplicates_title">Feadhainn le coltas dùblachaidh orra</string>
+    <string name="suggestion_card_help_message">Dh’fhaoidte gur e an t-aon neach a tha san luchd-aithne seo. ’S urrainn dhut an ceangal ri chèile mar aon neach-aithne.</string>
+    <string name="editor_delete_view_description_short">Sguab às <xliff:g id="data_kind">%s</xliff:g></string>
     <string name="nameLabelsGroup">Ainm</string>
     <string name="nicknameLabelsGroup">Far-ainm</string>
     <string name="emailLabelsGroup">Post-d</string>
@@ -59,6 +102,7 @@
     <string name="email">Post-d</string>
     <string name="menu_custom_filter_save">Sàbhail</string>
     <string name="hint_findContacts">Lorg san luchd-aithne</string>
+    <string name="menu_blocked_numbers">Àireamhan bacte</string>
     <string name="yes_button">Tha</string>
     <string name="no_button">Chan eil</string>
 </resources>

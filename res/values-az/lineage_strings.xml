@@ -15,6 +15,6 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="menu_emergency_information_txt">Təcili vəziyyəti ismarışı</string>
+    <string name="menu_emergency_information_txt">Fövqəladə vəziyyət məlumatı</string>
     <string name="call_via_template"><xliff:g id="account">%1$s</xliff:g> ilə zəng et</string>
 </resources>

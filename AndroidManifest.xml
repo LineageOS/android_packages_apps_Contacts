@@ -468,6 +468,7 @@
         </activity>
 
         <activity android:name=".common.vcard.NfcImportVCardActivity"
+            android:permission="android.permission.DISPATCH_NFC_MESSAGE"
             android:label="@string/launcherActivityLabel"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:theme="@style/BackgroundOnlyTheme">

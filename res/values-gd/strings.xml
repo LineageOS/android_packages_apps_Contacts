@@ -499,7 +499,7 @@
     <string name="send_and_call_button">CUIR ⁊ CUIR FÒN</string>
     <string name="call_subject_limit"><xliff:g id="count" example="4">%1$s</xliff:g> / <xliff:g id="limit" example="64">%2$s</xliff:g></string>
     <string name="call_subject_type_and_number"><xliff:g id="type" example="Mobile">%1$s</xliff:g> • <xliff:g id="number" example="(650) 555-1212">%2$s</xliff:g></string>
-    <string name="about_build_version">Tionndadh an togail</string>
+    <string name="about_build_version">Tionndadh na togail</string>
     <string name="about_open_source_licenses">Ceadachasan Open Source</string>
     <string name="about_open_source_licenses_summary">Fiosrachadh mun cheadachas airson bathar-bog le còd fosgailte</string>
     <string name="about_privacy_policy">Poileasaidh prìobhaideachd</string>

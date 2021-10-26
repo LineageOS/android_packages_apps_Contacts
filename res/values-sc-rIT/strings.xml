@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2006 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="applicationLabel">Cuntatos</string>
+    <string name="contactsList">Cuntatos</string>
+    <string name="shortcutContact">Cuntata</string>
+    <string name="shortcutDialContact">Marcadura dereta</string>
+    <string name="shortcutMessageContact">Messàgiu deretu</string>
+    <string name="contactInsertOrEditActivityTitle">Agiùnghe a cuntatu</string>
+    <string name="contactPickerActivityTitle">Sèbera unu cuntatu</string>
+    <string name="header_entry_contact_list_adapter_header_title">Crea unu cuntatu nou</string>
+    <string name="menu_addStar">Agiunghe a is preferidos</string>
+    <string name="menu_editContact">Modìfica</string>
+    <string name="menu_deleteContact">Cantzella</string>
+    <string name="menu_change_photo">Muda sa fotografia</string>
+    <string name="deleteConfirmation_positive_button">Cantzella</string>
+    <string name="contacts_unavailable_add_account">Agiunghe contu</string>
+    <string name="local_profile_title">Profilu miu locale</string>
+    <string name="external_profile_title">Su profilu miu de <xliff:g id="external_source">%1$s</xliff:g></string>
+    <string name="contact_editor_title_new_contact">Crea unu cuntatu nou</string>
+    <string name="add_account">Agiunghe contu</string>
+    <string name="add_new_account">Agiunghe unu contu nou</string>
+    <string name="menu_export_database">Esporta archìvios de base de datos</string>
+    <string name="action_menu_add_new_contact_button">Crea unu cuntatu nou</string>
+    <string name="expanding_entry_card_view_see_more">Bide de prus</string>
+    <string name="expanding_entry_card_view_see_less">Bide prus pagu</string>
+    <string name="about_card_title">In contu de</string>
+    <string name="date_time_set">Imposta</string>
+    <string name="header_im_entry">Messagìstica istantànea</string>
+    <string name="header_organization_entry">Organizatzione</string>
+    <string name="header_nickname_entry">Nùmene</string>
+    <string name="header_note_entry">Nota</string>
+    <string name="header_website_entry">Situ ìnternet</string>
+    <string name="header_event_entry">Eventu</string>
+    <string name="header_relation_entry">Relatzione</string>
+    <string name="header_name_entry">Nùmene</string>
+    <string name="header_email_entry">Posta eletrònica</string>
+    <string name="header_phone_entry">Telèfonu</string>
+    <string name="content_description_directions">inditos a sa positzione</string>
+    <string name="nameLabelsGroup">Nùmene</string>
+    <string name="nicknameLabelsGroup">Nùmene</string>
+    <string name="phoneLabelsGroup">Telèfonu</string>
+    <string name="emailLabelsGroup">Posta eletrònica</string>
+    <string name="imLabelsGroup">Messagìstica istantànea</string>
+    <string name="websiteLabelsGroup">Situ ìnternet</string>
+    <string name="email_other">Posta eletrònica</string>
+    <string name="email">Posta eletrònica</string>
+    <string name="list_filter_single">Cuntata</string>
+    <string name="contactsFavoritesLabel">Preferidos</string>
+    <string name="select_account_dialog_title">Contu</string>
+    <string name="description_delete_contact">Cantzella</string>
+</resources>

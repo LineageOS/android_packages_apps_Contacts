@@ -14,532 +14,1138 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Application name used in Settings/Apps. Default label for activities
+         that don't specify a label. -->
     <string name="applicationLabel">Luchd-aithne</string>
+    <!-- Directory partition name -->
     <string name="contactsList">Luchd-aithne</string>
+    <!-- Name of the dynamic shortcut that creates a new contact [CHAR LIMIT=30] -->
     <string name="shortcut_add_contact">Cuir neach-aithne ris</string>
+    <!-- Name of activity that allows users to create shortcuts on the home screen to a contact.
+         This shows up in a list of things like bookmark, folder, music playlist, etc -->
     <string name="shortcutContact">Neach-aithne</string>
+    <!-- Name of activity that allows users to create shortcuts on the home screen to dial a contact.
+         This shows up in a list of things like bookmark, folder, music playlist, etc -->
     <string name="shortcutDialContact">Gairm dhìreach</string>
+    <!-- Name of activity that allows users to create shortcuts on the home screen to message (SMS) a contact.
+         This shows up in a list of things like bookmark, folder, music playlist, etc -->
     <string name="shortcutMessageContact">Teachdaireachd dhìreach</string>
+    <!-- Activity title when the user is selecting a contact for a shortcut. -->
     <string name="shortcutActivityTitle">Tagh neach-aithne</string>
+    <!-- Activity title when the user is inserting into an existing contact, or creating a new one.  [CHAR LIMIT=128] -->
     <string name="contactInsertOrEditActivityTitle">Cuir ri neach-aithne</string>
+    <!-- Activity title when the user is selecting a contact.  [CHAR LIMIT=128] -->
     <string name="contactPickerActivityTitle">Tagh neach-aithne</string>
+    <!-- Activity title when the user is selecting a new label member. [CHAR LIMIT=128] -->
     <string name="groupMemberPickerActivityTitle">Tagh</string>
+    <!-- Entry that prompts user to select a newly created contact.  [CHAR LIMIT=30] -->
     <string name="header_entry_contact_list_adapter_header_title">Cruthaich neach-aithne ùr</string>
+    <!-- Hint text in the search box when the user hits the Search key while in the contacts app -->
     <string name="searchHint">Lorg san luchd-aithne</string>
+    <!-- Menu item used to add a star to a contact, which makes that contact show up at the top of favorites -->
     <string name="menu_addStar">Cuir ris na h-annsachdan</string>
+    <!-- Menu item used to remove a star from a contact, making the contact no longer show up at the top of favorites -->
     <string name="menu_removeStar">Thoir air falbh o na h-annsachdan</string>
+    <!-- Description of what happens when you click on the unstar MenuItem. [CHAR LIMIT=NONE] -->
     <string name="description_action_menu_remove_star">Chaidh a thoirt air falbh o na h-annsachdan</string>
+    <!-- Description of what happens when you click on the star MenuItem. [CHAR LIMIT=NONE] -->
     <string name="description_action_menu_add_star">Chaidh a chur ris na h-annsachdan</string>
+    <!-- Menu item used to edit a specific contact -->
     <string name="menu_editContact">Deasaich</string>
+    <!-- Menu item used to delete a specific contact -->
     <string name="menu_deleteContact">Sguab às</string>
+    <!-- Menu item used to change the photo for a specific contact [CHAR LIMIT=30]-->
     <string name="menu_change_photo">Atharraich an dealbh</string>
+    <!-- Menu item used to create a contact shortcut when viewing contact details. [CHAR LIMIT=30] -->
     <string name="menu_create_contact_shortcut">Cruthaich ath-ghoirid</string>
+    <!-- Menu item that splits an item from the contact detail into a separate aggregate -->
     <string name="menu_splitAggregate">Dì-cheangail</string>
+    <!-- Menu item that edits the currently selected label [CHAR LIMIT=30] -->
     <string name="menu_editGroup">Thoir air falbh an luchd-aithne</string>
+    <!-- Menu item to rename the currently selected label [CHAR LIMIT=30] -->
     <string name="menu_renameGroup">Thoir ainm ùr air an leubail</string>
+    <!-- Menu item that deletes the currently selected label [CHAR LIMIT=30] -->
     <string name="menu_deleteGroup">Sguab às an leubail</string>
+    <!-- Menu item to search for contacts to add to the currently selected label. CHAR LIMIT=30] -->
     <string name="menu_addToGroup">Cuir neach-aithne ris</string>
+    <!-- Menu item to select multiple contacts to add to the currently selected label. CHAR LIMIT=30] -->
     <string name="menu_selectForGroup">Tagh luchd-aithne</string>
+    <!-- Menu item to add selected contacts to the currently selected label. CHAR LIMIT=30] -->
     <string name="menu_addContactsToGroup">Cuir luchd-aithne ris</string>
+    <!-- Menu item to remove the currently selected contacts from the currently selected label. [CHAR LIMIT=60] -->
     <string name="menu_removeFromGroup">Thoir air falbh on leubail</string>
+    <!-- Menu item (in the action bar) that creates a new label [CHAR LIMIT=30] -->
     <string name="menu_new_group_action_bar">Cruthaich leubail</string>
+    <!-- Confirmation dialog for unlinking contacts into multiple instances [CHAR LIMIT=NONE] -->
     <string name="splitConfirmation">Am bris thu ceanglaichean an neach-aithne seo ’na iomadh luchd-aithne?</string>
+    <!-- Positive button text from the confirmation dialog for unlinking contacts [CHAR LIMIT = 30] -->
     <string name="splitConfirmation_positive_button">Dì-cheangail</string>
+    <!-- Confirmation dialog for unlinking contacts into multiple instances when there are also unsaved changes for the current contact. [CHAR LIMIT=NONE] -->
     <string name="splitConfirmationWithPendingChanges">An sàbhail thu na dh’atharraich thu mu thràth ’s am bris thu ceanglaichean an neach-aithne seo ’na iomadh luchd-aithne?</string>
+    <!-- Positive button text from the confirmation dialog for unlinking contacts with pending changes [CHAR LIMIT = 60] -->
     <string name="splitConfirmationWithPendingChanges_positive_button">Sàbhail is dì-cheangail</string>
+    <!-- Confirmation dialog message for joining contacts when there are unsaved changes. [CHAR LIMIT=NONE] -->
     <string name="joinConfirmation">An sàbhail thu na dh’atharraich thu mu thràth ’s an dèan thu ceangal ris an neach-aithne a thagh thu?</string>
+    <!-- Positive button text from the confirmation dialog for joining contacts when there are unsaved changes. [CHAR LIMIT = 60] -->
     <string name="joinConfirmation_positive_button">Sàbhail is ceangail</string>
+    <!-- The text to show on on a ProgressDialog indicating we're currently linking
+         contacts [CHAR LIMIT=30]-->
     <string name="contacts_linking_progress_bar">A’ ceangladh</string>
+    <!-- The text to show on on a ProgressDialog indicating we're currently unlinking
+     contacts [CHAR LIMIT=30]-->
     <string name="contacts_unlinking_progress_bar">’Ga dhi-cheangal</string>
+    <!-- Menu item that links an aggregate with another aggregate -->
     <string name="menu_joinAggregate">Ceangail</string>
+    <!-- Menu item that opens a dialog that shows all linked contacts that make up this one. [CHAR LIMIT=35] -->
     <string name="menu_linkedContacts">Seall an luchd-aithne ceangailte</string>
+    <!-- Menu item (in the action bar) to indicate that changes should be saved [CHAR LIMIT=20] -->
     <string name="menu_save">Sàbhail</string>
+    <!-- Heading of the Link Contact screen -->
     <string name="titleJoinContactDataWith">Ceangail an luchd-aithne</string>
+    <!-- Info blurb on the Link Contact screen [CHAR LIMIT=NONE]-->
     <string name="blurbJoinContactDataWith">Tagh an neach-aithne a bu toigh leat ceangal ri <xliff:g id="name">%s</xliff:g>:</string>
+    <!-- List separator for the Join Contact list: Suggestions -->
     <string name="separatorJoinAggregateSuggestions">Luchd-aithne a mholamaid</string>
+    <!-- List separator for the Join Contact list: A-Z -->
     <string name="separatorJoinAggregateAll">A h-uile neach-aithne</string>
+    <!-- Toast shown after two contacts have been linked by a user action with a name. [CHAR LIMIT=NONE] -->
     <string name="contactsJoinedNamedMessage">Chaidh <xliff:g id="name">%s</xliff:g> a cheangal</string>
+    <!-- Toast shown after two contacts have been linked by a user action without a name. [CHAR LIMIT=NONE] -->
     <string name="contactsJoinedMessage">Chaidh an luchd-aithne a cheangal</string>
+    <!-- Toast shown with names after user selected contacts are deleted by user action. [CHAR LIMIT=50] -->
     <string name="contacts_deleted_one_named_toast">Chaidh <xliff:g id="name">%1$s</xliff:g> a sguabadh às</string>
+    <!-- Toast shown with names after user selected contacts are deleted by user action. [CHAR LIMIT=50] -->
     <string name="contacts_deleted_two_named_toast">Chaidh <xliff:g id="name">%1$s</xliff:g> ’s <xliff:g id="name">%2$s</xliff:g> a sguabadh às</string>
+    <!-- Toast shown with names after user selected contacts are deleted by user action. [CHAR LIMIT=50] -->
     <string name="contacts_deleted_many_named_toast">Chaidh <xliff:g id="name">%1$s</xliff:g>, <xliff:g id="name">%2$s</xliff:g>, <xliff:g id="name">%3$s</xliff:g>\u2026 a sguabadh às</string>
+    <!-- Toast shown after contacts that the user has selected are deleted by a user action. [CHAR LIMIT=30] -->
     <plurals name="contacts_deleted_toast">
         <item quantity="one">Chaidh an neach-aithne a sguabadh às</item>
         <item quantity="two">Chaidh an luchd-aithne a sguabadh às</item>
         <item quantity="few">Chaidh an luchd-aithne a sguabadh às</item>
         <item quantity="other">Chaidh an luchd-aithne a sguabadh às</item>
     </plurals>
+    <!-- List header indicating the number of contacts in the list [CHAR LIMIT=30] -->
     <plurals name="contacts_count">
         <item quantity="one"><xliff:g id="count">%d</xliff:g> neach-aithne</item>
         <item quantity="two"><xliff:g id="count">%d</xliff:g> luchd-aithne</item>
         <item quantity="few"><xliff:g id="count">%d</xliff:g> luchd-aithne</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> luchd-aithne</item>
     </plurals>
+    <!-- List header indicating the number of contacts and account name in the list [CHAR LIMIT=30] -->
     <plurals name="contacts_count_with_account">
         <item quantity="one"><xliff:g id="count">%1$d</xliff:g> neach-aithne · <xliff:g id="account">%2$s</xliff:g></item>
         <item quantity="two"><xliff:g id="count">%1$d</xliff:g> luchd-aithne · <xliff:g id="account">%2$s</xliff:g></item>
         <item quantity="few"><xliff:g id="count">%1$d</xliff:g> luchd-aithne · <xliff:g id="account">%2$s</xliff:g></item>
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g> luchd-aithne · <xliff:g id="account">%2$s</xliff:g></item>
     </plurals>
+    <!-- Activity title indicating contacts are from a Google account [CHAR LIMIT=30] -->
     <string name="title_from_google">O Google</string>
+    <!-- Activity title indicating contacts are from a specific account [CHAR LIMIT=15] -->
     <string name="title_from_other_accounts">O <xliff:g id="account">%s</xliff:g></string>
+    <!-- Menu item to set ring tone for a given contact [CHAR LIMIT=15] -->
     <string name="menu_set_ring_tone">Suidhich seirm</string>
+    <!-- Menu item to route all calls from a given contact to voice mail [CHAR LIMIT=30] -->
     <string name="menu_redirect_calls_to_vm">Rùtaich dhan phost gutha</string>
+    <!-- Menu item to unroute all calls from a given contact to voice mail [CHAR LIMIT=30] -->
     <string name="menu_unredirect_calls_to_vm">Dì-rùtaich dhan phost gutha</string>
+    <!-- Warning dialog contents after users select to delete a ReadOnly contact. [CHAR LIMIT=NONE] -->
     <string name="readOnlyContactWarning">Tha an neach-aithne seo ri leughadh a-mhàin. Cha ghabh a sguabadh às ach ’s urrainn dhut fhalach.</string>
+    <!-- Positive button text of the warning dialog contents after users select to delete a ReadOnly contact. [CHAR LIMIT=30]-->
     <string name="readOnlyContactWarning_positive_button">Falaich an neach-aithne</string>
+    <!-- Warning dialog contents after users selects to delete a contact with ReadOnly and Writable data sources.
+         Tells the user that data from the read-only accounts will be hidden and not deleted. [CHAR LIMIT=NONE]-->
     <string name="readOnlyContactDeleteConfirmation">Thèid cunntasan rin leughadh a-mhàin fhalach san neach-aithne seo seach sguabadh às.</string>
+    <!-- Confirmation dialog. Shown after user selects to delete one writable contact [CHAR LIMIT=NONE]  -->
     <string name="single_delete_confirmation">A bheil thu airson an neach-aithne seo a sguabadh às?</string>
+    <!-- Confirmation dialog. Shown after user selects to delete multimple writable contacts. [CHAR LIMIT=NONE]  -->
     <string name="batch_delete_confirmation">A bheil thu airson an luchd-aithne a thagh thu a sguabadh às?</string>
+    <!-- Confirmation dialog. Shown after user selects to delete readonly contacts. [CHAR LIMIT=NONE] -->
     <string name="batch_delete_read_only_contact_confirmation">Chan urrainn dhut luchd-aithne o na cunntasan ri an leughadh a-mhàin agad a sguabadh às ach ’s urrainn dhut am falach fhathast.</string>
+    <!-- Confirmation dialog. Shown after user selects to delete contacts from multiple accounts. [CHAR LIMIT=NONE]  -->
     <string name="batch_delete_multiple_accounts_confirmation">Tha fiosrachadh o iomadh cunntas aig an luchd-aithne a bu toigh leat sguabadh às. Cha dèid am fiosrachadh o chunntasan ri an leughadh a-mhàin a sguabadh as ach falach.</string>
+    <!-- Warning dialog contents after users selects to delete a contact with multiple Writable sources. -->
     <string name="multipleContactDeleteConfirmation">Ma sguabas tu às an neach-aithne seo, thèid fiosrachadh a thoirt air falbh o iomadh chunntas.</string>
+    <!-- Confirmation dialog contents after users selects to delete a Writable contact. -->
     <string name="deleteConfirmation">A bheil thu airson an neach-aithne seo a sguabadh às?</string>
+    <!-- Positive button text of confirmation dialog contents after users selects to delete a Writable contact. [CHAR LIMIT=30] -->
     <string name="deleteConfirmation_positive_button">Sguab às</string>
+    <!-- Message displayed in a toast when you try to view the details of a contact that
+         for some reason doesn't exist anymore. [CHAR LIMIT=NONE]-->
     <string name="invalidContactMessage">Chan eil an neach-aithne seo ann.</string>
+    <!-- Message without name displayed in a toast after you create a contact shortcut in the launcher [CHAR LIMIT=NONE]-->
     <string name="createContactShortcutSuccessful_NoName">Chaidh an neach-aithne a chur ris an sgrìn dachaigh.</string>
+    <!-- Message with name displayed in a toast after you create a contact shortcut in the launcher [CHAR LIMIT=NONE]-->
     <string name="createContactShortcutSuccessful">Chaidh <xliff:g id="name">%s</xliff:g> a chur ris an sgrìn dachaigh.</string>
+    <!-- The order of the items below is important, don't reorder without changing EditContactActivity.java -->
+    <!-- Description in the dialog that appears if there are no pictures from which to create an icon for a contact -->
     <string name="photoPickerNotFoundText">Chan eil dealbh sam bith air an uidheam.</string>
+    <!-- Description used in the attach photo Intent from third party apps [CHAR LIMIT=50] -->
     <string name="attach_photo_dialog_title">Dealbh an neach-aithne</string>
+    <!-- Title of the dialog used to set a custom label for a contact detail, like a phone number or email address.
+         For example, this may be used to set a phone number's label to "Vaction house" -->
     <string name="customLabelPickerTitle">Ainm leubail ghnàthaichte</string>
+    <!-- The menu item that allows you to remove a photo from a contact [CHAR LIMIT=50] -->
     <string name="removePhoto">Thoir air falbh an dealbh</string>
+    <!-- The text displayed when the contacts list is empty while displaying all contacts [CHAR LIMIT=NONE] -->
     <string name="noContacts">Tha liosta an luchd-aithne agad falamh</string>
+    <!-- The text displayed when there are no members that have this label while displaying the label detail page [CHAR LIMIT=70] -->
     <string name="emptyGroup">Chan eil neach-aithne leis an leubail ann</string>
+    <!-- The text displayed when there's no contacts in this account [CHAR LIMIT=70] -->
     <string name="emptyAccount">Chan eil neach-aithne sa chunntas seo</string>
+    <!-- The text displayed when there's no contacts in the main contacts list [CHAR LIMIT=70] -->
     <string name="emptyMainList">Tha liosta an luchd-aithne agad falamh</string>
+    <!-- Toast displayed when a contact is saved [CHAR LIMIT=30] -->
     <string name="contactSavedNamedToast">Chaidh <xliff:g id="display_name">%s</xliff:g> a shàbhaladh</string>
+    <!-- Toast displayed when a contact is saved [CHAR LIMIT=NONE] -->
     <string name="contactSavedToast">Chaidh an neach-aithne a shàbhaladh</string>
+    <!-- Toast displayed when linked contacts get unlinked [CHAR LIMIT=NONE] -->
     <string name="contactUnlinkedToast">Chaidh ceangal an luchd-aithne a briseadh</string>
+    <!-- Toast displayed when saving a contact failed. [CHAR LIMIT=NONE] -->
     <string name="contactSavedErrorToast">Cha b’ urrainn dhuinn na dh’atharraich thu air an neach-aithne a shàbhaladh</string>
+    <!-- Toast displayed when unlinking a contact failed. [CHAR LIMIT=NONE] -->
     <string name="contactUnlinkErrorToast">Cha b’ urrainn dhuinn ceangal an neach-aithne a briseadh</string>
+    <!-- Toast displayed when linking a contact failed. [CHAR LIMIT=NONE] -->
     <string name="contactJoinErrorToast">Cha b’ urrainn dhuinn an neach-aithne seo a cheangal</string>
+    <!-- Generic error default clause displayed when saving a contact failed. [CHAR LIMIT=NONE] -->
     <string name="contactGenericErrorToast">Mearachd a’ sàbhaladh an neach-aithne</string>
+    <!-- Toast displayed when saving a contact photo failed. [CHAR LIMIT=NONE] -->
     <string name="contactPhotoSavedErrorToast">Cha b’ urrainn dhuinn na dh’atharraich thu air dealbh an neach-aithne a shàbhaladh</string>
+    <!-- Toast displayed when something goes wrong while loading a label. [CHAR LIMIT=70] -->
     <string name="groupLoadErrorToast">Dh’fhàillig le luchdadh an leubail</string>
+    <!-- Toast or snackbar displayed when a label name is deleted. [CHAR LIMIT=50] -->
     <string name="groupDeletedToast">Chaidh an leubail a sguabadh às</string>
+    <!-- Toast displayed when a new label name is created. [CHAR LIMIT=50] -->
     <string name="groupCreatedToast">Chaidh an leubail a chruthachadh</string>
+    <!-- Toast displayed when a new label name cannot be created. [CHAR LIMIT=50] -->
     <string name="groupCreateFailedToast">Cha ghabh an leubail a chruthachadh</string>
+    <!-- Toast displayed when a new label is created. [CHAR LIMIT=50] -->
     <string name="groupUpdatedToast">Chaidh an leubail ùrachadh</string>
+    <!-- Toast displayed when contacts are removed from a label. [CHAR LIMIT=50] -->
     <string name="groupMembersRemovedToast">Chaidh a thoirt air falbh on leubail</string>
+    <!-- Toast displayed when one or more contacts is added to a label. [CHAR LIMIT=50] -->
     <string name="groupMembersAddedToast">Chaidh a chur ris an leubail</string>
+    <!-- Toast displayed when saving a label failed [CHAR LIMIT=70] -->
     <string name="groupSavedErrorToast">Cha b’ urrainn dhuinn na dh’atharraich thu air an leubail a shàbhaladh</string>
+    <!-- Message displayed when creating a group with the same name as an existing group -->
     <string name="groupExistsErrorMessage">Tha an leubail sin ann mu thràth</string>
+    <!-- Toast displayed when some group contacts do not have any emails (for group send) [CHAR LIMIT=50] -->
     <string name="groupSomeContactsNoEmailsToast">Tha luchd-aithne gun seòladh puist-d ann.</string>
+    <!-- Toast displayed when some group contacts do not have any phone numbers (for group send) [CHAR LIMIT=50] -->
     <string name="groupSomeContactsNoPhonesToast">Tha luchd-aithne gun àireamh fòn ann.</string>
+    <!-- Option name to send email to all members of a group/selection [CHAR LIMIT=30] -->
     <string name="menu_sendEmailOption">Cuir post-d</string>
+    <!-- Option name to send message to all members of a group/selection [CHAR LIMIT=30] -->
     <string name="menu_sendMessageOption">Cuir teachdaireachd</string>
+    <!-- Activity title when the user is selecting items [CHAR LIMIT=40] -->
     <string name="pickerSelectContactsActivityTitle">Tagh luchd-aithne</string>
+    <!-- The menu item to send the currently selected contacts to selected items [CHAR LIMIT=10] -->
     <string name="send_to_selection">Cuir</string>
+    <!-- Displayed at the top of the contacts showing the zero total number of contacts found when "Only contacts with phones" not selected. [CHAR LIMIT=30] -->
     <string name="listFoundAllContactsZero">Chan eil neach-aithne ann</string>
+    <!-- Dialog message when prompting before creating a contact. Includes
+         the email address, e.g. "Add xyz@foo.com to contacts?" -->
     <string name="add_contact_dlg_message_fmt">An cuir thu “<xliff:g id="email">%s</xliff:g>” ris an luchd-aithne?</string>
+    <!-- The string used to describe Contacts as a searchable item within system search settings. -->
     <string name="search_settings_description">Ainmean an luchd-aithne agad</string>
+    <!-- Content description for the transparent views around the visible section of QuickContacts.
+         Clicking this view causes Quick Contacts to close. [CHAR LIMIT=NONE] -->
     <string name="quickcontact_transparent_view_description">Briog a thilleadh dhan sgrìn roimhpe</string>
+    <!-- When a contact has no data, we prompt the user to add a phone number for the contact. [CHAR LIMIT=40] -->
     <string name="quickcontact_add_phone_number">Cuir àireamh fòn ris</string>
+    <!-- When a contact has no data, we prompt the user to add an email for the contact. [CHAR LIMIT=40] -->
     <string name="quickcontact_add_email">Cuir post-d ris</string>
+    <!-- Shown as a toast when the user attempts an action (add contact, edit
+         contact, etc) and no application was found that could perform that
+         action. [CHAR LIMIT=NONE] -->
     <string name="missing_app">Cha do lorg sinn aplacaid a làimhsicheas an gnìomh seo.</string>
+    <!-- The menu item to share the currently viewed contact [CHAR LIMIT=30] -->
     <string name="menu_share">Co-roinn</string>
+    <!-- The menu item to add the the currently viewed contact to your contacts [CHAR LIMIT=30] -->
     <string name="menu_add_contact">Cuir ris an luchd-aithne</string>
+    <!-- The menu item to add the the currently selected contacts to a label [CHAR LIMIT=10] -->
     <string name="menu_add_contacts">Cuir ris</string>
+    <!-- Dialog title when picking the application to share one or multiple contacts with. [CHAR LIMIT=40] -->
     <plurals name="title_share_via">
         <item quantity="one">Co-roinn an neach-aithne slighe</item>
         <item quantity="two">Co-roinn an luchd-aithne slighe</item>
         <item quantity="few">Co-roinn an luchd-aithne slighe</item>
         <item quantity="other">Co-roinn an luchd-aithne slighe</item>
     </plurals>
+    <!-- Title for the disambiguation dialog that requests the user choose an account for the new label to be created under [CHAR LIMIT=NONE] -->
     <string name="dialog_new_group_account">Tagh cunntas</string>
+    <!-- Title for the create new label dialog. CHAR LIMIT=40] -->
     <string name="group_name_dialog_insert_title">Cruthaich leubail</string>
+    <!-- Title for the update label dialog. CHAR LIMIT=40] -->
     <string name="group_name_dialog_update_title">Thoir ainm ùr air an leubail</string>
+    <!-- Hint for the label name input field on the insert and update label dialogs [CHAR LIMIT=15] -->
     <string name="group_name_dialog_hint">Ainm an leubail</string>
+    <!-- Hint for the custom label name input filed on dialogs [CHAR LIMIT=15] -->
     <string name="label_name_dialog_hint">Ainm an leubail</string>
+    <!-- Generic action string for starting an audio chat. Used by AccessibilityService to announce the purpose of the view. [CHAR LIMIT=NONE] -->
     <string name="audio_chat">Cabadaich gutha</string>
+    <!-- Generic action string for starting a video chat. Used by AccessibilityService to announce the purpose of the view. [CHAR LIMIT=NONE] -->
     <string name="video_chat">Cabadaich video</string>
+    <!-- String describing which account type a contact came from when editing it -->
     <string name="account_type_format">Neach-aithne <xliff:g id="source" example="Gmail">%1$s</xliff:g></string>
+    <!-- String describing that a contact came from the google account type when editing it.  -->
     <string name="google_account_type_format">Cunntas <xliff:g id="source" example="Google">%1$s</xliff:g></string>
+    <!-- An option in the 'Contact photo' dialog, if there is no photo yet [CHAR LIMIT=50] -->
     <string name="take_photo">Tog dealbh</string>
+    <!-- An option in the 'Contact photo' dialog, if there is already a photo [CHAR LIMIT=50] -->
     <string name="take_new_photo">Tog dealbh ùr</string>
+    <!-- An option in the 'Contact photo' dialog, if there is no photo yet [CHAR LIMIT=50] -->
     <string name="pick_photo">Tagh dealbh</string>
+    <!-- An option in the 'Contact photo' dialog, if there is already a photo [CHAR LIMIT=50] -->
     <string name="pick_new_photo">Tagh dealbh ùr</string>
+    <!-- Title shown in the search result activity of contacts app while searching.  [CHAR LIMIT=20] -->
     <string name="search_results_searching">’Ga lorg\u2026</string>
+    <!-- The button to add an organization field to a contact in the Raw Contact Editor [CHAR LIMIT=12] -->
     <string name="event_edit_field_hint_text">Ceann-là</string>
+    <!-- The button to add an label field to a contact in the Raw Contact Editor [CHAR LIMIT=15] -->
     <string name="group_edit_field_hint_text">Leubail</string>
+    <!-- Content description for a cancel button. [CHAR LIMIT=NONE] -->
     <string name="cancel_button_content_description">Sguir dheth</string>
+    <!-- Content description for a back button. [CHAR LIMIT=NONE] -->
     <string name="back_arrow_content_description">Air ais</string>
+    <!-- Content description for the fake action menu up button as used
+         inside edit or select. [CHAR LIMIT=NONE] -->
     <string name="action_menu_back_from_edit_select">air a dhùnadh</string>
+    <!-- The message in a confirmation dialog shown when the user selects a
+        contact aggregation suggestion in Contact editor. [CHAR LIMIT=512]-->
     <string name="aggregation_suggestion_edit_dialog_message">A bheil thu airson
         an neach-aithne a thagh thu a dheasachadh? Thèid gach fiosrachadh a chuir thu a-steach gu ruige seo a chumail.</string>
+    <!-- The description of the directory where the contact was found [CHAR LIMIT=100]-->
     <string name="contact_directory_description">Eòlaire <xliff:g id="type" example="Corporate Directory">%1$s</xliff:g></string>
+    <!-- Title of the settings activity [CHAR LIMIT=64] -->
     <string name="activity_title_settings">Roghainnean</string>
+    <!-- Menu item for the settings activity [CHAR LIMIT=64] -->
     <string name="menu_settings" msgid="377929915873428211">Roghainnean</string>
+    <!-- Menu item for invoking contextual Help & Feedback [CHAR LIMIT=64] -->
     <string name="menu_help">Taic ⁊ beachd thugainn</string>
+    <!-- Text used to show a organization that has both a company and title. This is used in the Detail-View
+    of a Contact. This is mostly about the formatting of the two elements, so it should be kept small [CHAR LIMIT=79] -->
     <string name="organization_company_and_title"><xliff:g id="company" example="Technical Program Manager">%2$s</xliff:g>, <xliff:g id="company" example="Google Inc.">%1$s</xliff:g></string>
+    <!-- Title shown for the phone number when the number tries to call on a device that it not a phone [CHAR LIMIT=30] -->
     <string name="non_phone_caption">Àireamh fòn</string>
+    <!-- Button to add a phone number to contacts [CHAR LIMIT=25] -->
     <string name="non_phone_add_to_contacts">Cuir ris an luchd-aithne</string>
+    <!-- Button to close without add a phone number to contacts [CHAR LIMIT=25] -->
     <string name="non_phone_close">Dùin</string>
+    <!-- Checkbox whether to include a year for a birthday [CHAR LIMIT=30] -->
     <string name="date_year_toggle">Gabh a-steach am bliadhna</string>
+    <!-- Button shown on the main contacts screen when there are no contacts on the device.
+    Navigates to account setup [CHAR LIMIT=128] -->
     <string name="contacts_unavailable_add_account">Cuir cunntas ris</string>
+    <!-- Button shown on the main contacts screen when there are no contacts on the device.
+    Initiates a contact import dialog [CHAR LIMIT=128] -->
     <string name="contacts_unavailable_import_contacts">Ion-phortaich</string>
-    <string name="create_group_item_label">Cruthaich fear ùr…</string>
+    <!-- An item in the popup list of labels that triggers creation of a contact label [CHAR LIMIT=128] -->
+    <string name="create_group_item_label">Cruthaich fear ùr&#8230;</string>
+    <!-- Confirmation message of the dialog that allows deletion of a contact label  [CHAR LIMIT=256] -->
     <string name="delete_group_dialog_message">An sguab thu às an leubail
       “<xliff:g id="group_label" example="Friends">%1$s</xliff:g>”?
       (Cha dèid an luchd-aithne fèin a sguabadh às.)
     </string>
+    <!-- Toast displayed when the user creates a new contact and attempts to link it
+      with another before entering any data  [CHAR LIMIT=256] -->
     <string name="toast_join_with_empty_contact">Sgrìobh ainm neach-aithne
       mus ceangail thu ri fear eile e.
     </string>
+    <!-- Option displayed in context menu to copy long pressed item to clipboard [CHAR LIMIT=64] -->
     <string name="copy_text">Cuir lethbhreac dheth air an stòr-bhòrd</string>
+    <!-- Option displayed in context menu to set long pressed item as default contact method [CHAR LIMIT=64] -->
     <string name="set_default">Suidhich mar a’ bhun-roghainn</string>
+    <!-- Option displayed in context menu to clear long pressed item as default contact method [CHAR LIMIT=64] -->
     <string name="clear_default">Falamhaich a’ bhun-roghainn</string>
+    <!-- Toast shown when text is copied to the clipboard [CHAR LIMIT=64] -->
     <string name="toast_text_copied">Chaidh lethbhreac dhen teacsa a dhèanamh</string>
+    <!-- Contents of the alert dialog when the user hits the Cancel button in the editor [CHAR LIMIT=128] -->
     <string name="cancel_confirmation_dialog_message">An tilg thu na h-atharraichean air falbh?</string>
+    <!-- Positive button text for the cancel editing confirmation dialog.
+      Pushing this button indicates that the user wishes to discard the changes they have already
+      made and close the editor. [CHAR LIMIT=20] -->
     <string name="cancel_confirmation_dialog_cancel_editing_button">Tilg air falbh</string>
+    <!-- Negative button text for the cancel editing confirmation dialog.
+      Pushing this button indicates that the user wishes to continue editing
+      and return to the editor [CHAR LIMIT=30] -->
     <string name="cancel_confirmation_dialog_keep_editing_button">Sguir dheth</string>
+    <!-- Contents of the alert dialog when the user hits the Cancel button in the customize screen [CHAR LIMIT=128] -->
     <string name="leave_customize_confirmation_dialog_message">An tilg thu na gnàthachaidhean air falbh?</string>
+    <!-- Label to instruct the user to type in a contact's name to add the contact as a member of the current group. [CHAR LIMIT=64] -->
     <string name="enter_contact_name">Lorg san luchd-aithne</string>
+    <!-- Title of the edit label view in selection mode when contacts are being selected for removal.[CHAR LIMIT=40] -->
     <string name="title_edit_group">Thoir air falbh an luchd-aithne</string>
+    <!-- Header label in the contact editor for a profile that is local to the device only (and not associated with any account) [CHAR LIMIT=25] -->
     <string name="local_profile_title">A’ phròifil ionadail agam</string>
+    <!-- Header label in the contact editor for a profile that comes from an external third-party app whose name is given by source [CHAR LIMIT=20] -->
     <string name="external_profile_title">A’ phròifil agam air <xliff:g id="external_source">%1$s</xliff:g></string>
+    <!-- Message in the contact editor prompt that notifies the user that the newly created contact will not be saved to any account, and prompts addition of an account [CHAR LIMIT=NONE] -->
     <string name="contact_editor_prompt_zero_accounts">Beachdaich air cunntas a chur ris a chuireas lethbhreac-glèidhidh dhen luchd-aithne agad gu Google.</string>
+    <!-- Message in the contact editor prompt that asks the user if it's okay to save the newly created contact to the account shown. [CHAR LIMIT=NONE] -->
     <string name="contact_editor_prompt_one_account">Thèid luchd-aithne ùr a shàbhaladh gu <xliff:g id="account_name">%1$s</xliff:g>.</string>
+    <!-- Message in the contact editor prompt that asks the user which account they want to save the newly created contact to. [CHAR LIMIT=NONE] -->
     <string name="contact_editor_prompt_multiple_accounts">Tagh cunntas bunaiteach dhan luchd-aithne ùr:</string>
+    <!-- Title of the editor activity when creating a new contact. The char
+         limit is short and cannot be increased, since this needs to be displayed in a single line
+         at a pre-determined text size. [CHAR LIMIT=20] -->
     <string name="contact_editor_title_new_contact">Cruthaich neach-aithne ùr</string>
+    <!-- Title of the editor activity when editing a contact that already exists. The char
+         limit is short and cannot be increased, since this needs to be displayed in a single line
+         at a pre-determined text size. [CHAR LIMIT=20] -->
     <string name="contact_editor_title_existing_contact">Deasaich an neach-aithne</string>
+    <!-- Title of the editor activity when viewing a read-only raw contact. The char
+         limit is short and cannot be increased, since this needs to be displayed in a single line
+         at a pre-determined text size. [CHAR LIMIT=20] -->
     <string name="contact_editor_title_read_only_contact">Sealltainn a-mhàin</string>
+    <!-- Dialog title when the user is selecting a raw contact to edit.  [CHAR LIMIT=128] -->
     <string name="contact_editor_pick_raw_contact_to_edit_dialog_title">Tagh an neach-aithne ri deasachadh</string>
+    <!-- Dialog title showing the user the list of contacts that are linked together to create the aggregate they are viewing.  [CHAR LIMIT=128] -->
     <string name="contact_editor_pick_linked_contact_dialog_title">Luchd-aithne ceangailte</string>
+    <!-- Dialog button label to prompt user to add more linked contacts to the one they're viewing. [CHAR LIMIT=15] -->
     <string name="contact_editor_add_linked_contact">Cuir ris</string>
+    <!-- Dialog button label to prompt user to unlinked the contact they're looking at to it's constituent parts. [CHAR LIMIT=15] -->
     <string name="contact_editor_unlink_contacts">Dì-cheangail</string>
+    <!-- Button label to prompt the user to add an account (when there are 0 existing accounts on the device) [CHAR LIMIT=30] -->
     <string name="add_account">Cuir cunntas ris</string>
+    <!-- Button label to prompt the user to add another account (when there are already existing accounts on the device) [CHAR LIMIT=30] -->
     <string name="add_new_account">Cuir cunntas ùr ris</string>
+    <!-- Menu item shown only when the special debug mode is enabled, which is used to send all contacts database files via email.  [CHAR LIMIT=NONE] -->
     <string name="menu_export_database">Às-phortaich faidhlichean an stòir-dhàta</string>
+    <!-- Content description for the button that adds a new contact
+         [CHAR LIMIT=NONE] -->
     <string name="action_menu_add_new_contact_button">Cruthaich neach-aithne ùr</string>
+    <!-- Button Label to see more on an ExpandingEntryCardView [CHAR LIMIT=40] -->
     <string name="expanding_entry_card_view_see_more">Seall barrachd</string>
+    <!-- Button Label to see less on an ExpandingEntryCardView [CHAR LIMIT=40] -->
     <string name="expanding_entry_card_view_see_less">Seall nas lugha</string>
+    <!-- Title of about card. [CHAR LIMIT=40] -->
     <string name="about_card_title">Mu dhèidhinn</string>
-    <string name="toast_making_personal_copy">A’ cruthachadh lethbhreac pearsanta…</string>
+    <!-- Toast that appears when you are copying a directory contact into your personal contacts -->
+    <string name="toast_making_personal_copy">A’ cruthachadh lethbhreac pearsanta&#8230;</string>
+    <!-- Name of the button in the date/time picker to accept the date/time change [CHAR LIMIT=15] -->
     <string name="date_time_set">Suidhich</string>
+    <!-- Header for the IM entry [CHAR LIMIT=40] -->
     <string name="header_im_entry">Grad-theachdaireachd</string>
+    <!-- Header for the Organization entry [CHAR LIMIT=40] -->
     <string name="header_organization_entry">Buidheann</string>
+    <!-- Header for the Nickname entry [CHAR LIMIT=40] -->
     <string name="header_nickname_entry">Far-ainm</string>
+    <!-- Header for the Note entry [CHAR LIMIT=40] -->
     <string name="header_note_entry">Nòta</string>
+    <!-- Header for the Website entry [CHAR LIMIT=40] -->
     <string name="header_website_entry">Làrach-lìn</string>
+    <!-- Header for the Event entry [CHAR LIMIT=40] -->
     <string name="header_event_entry">Tachartas</string>
+    <!-- Header for the Relation entry [CHAR LIMIT=40] -->
     <string name="header_relation_entry">Dàimh</string>
+    <!-- Content description for the name fields header entry [CHAR LIMIT=NONE] -->
     <string name="header_name_entry">Ainm</string>
+    <!-- Content description for the email fields header entry [CHAR LIMIT=NONE] -->
     <string name="header_email_entry">Post-d</string>
+    <!-- Content description for the phone fields header entry [CHAR LIMIT=NONE] -->
     <string name="header_phone_entry">Fòn</string>
+    <!-- Content description for directions secondary button [CHAR LIMIT=NONE] -->
     <string name="content_description_directions">stiùireadh dhan ionad</string>
+    <!-- Button to expand the contact editor to show all available input fields. [CHAR LIMIT=60] -->
     <string name="editor_more_fields">Barrachd raointean</string>
+    <!-- Content description for the contact editor photo overlay which, when clicked, shows a dialog with the options for changing the contact photo. [CHAR LIMIT=NONE] -->
     <string name="editor_change_photo_content_description">Atharraich an dealbh conaltraidh</string>
+    <!-- Content description for the contact editor photo overlay which, when clicked, shows a dialog with the options for adding a contact photo. [CHAR LIMIT=NONE] -->
     <string name="editor_add_photo_content_description">Cuir dealbh ris an neach-aithne</string>
+    <!-- Accessibility content description, describes the image as being the photo for the contact the user is viewing. [CHAR LIMIT=NONE] -->
     <string name="editor_contact_photo_content_description">Dealbh an neach-aithne</string>
+    <!-- Toast message displayed when the editor fails to load for a contacts. [CHAR LIMIT=NONE] -->
     <string name="editor_failed_to_load">Dh’fhàillig le fosgladh an deasaiche.</string>
+    <!-- Label for the account selector to indicate which account a contact will be saved to. [CHAR LIMIT=30] -->
     <string name="editor_account_selector_title">Thèid a shàbhaladh gu</string>
+    <!-- Label for the account selector to indicate the current information (name, phone number, email etc.) about the contact comes from a read-only account. [CHAR LIMIT=55] -->
     <string name="editor_account_selector_read_only_title">Cha ghabh fiosrachadh conaltraidh o <xliff:g id="account">%s</xliff:g> a dheasachadh</string>
+    <!-- Button used in quick contact suggestion card to link selected contacts. [CHAR LIMIT=30]-->
     <string name="quickcontact_suggestion_link_button">CEANGAIL AN LUCHD-AITHNE</string>
+    <!-- Button used in quick contact suggestion card to collapse suggestion card. [CHAR LIMIT=30]-->
     <string name="quickcontact_suggestion_cancel_button">SGUIR DHETH</string>
+    <!-- "This contact" title showing in suggestion card in Quick contact. [CHAR LIMIT=30]-->
     <string name="suggestion_card_this_contact_title">An neach-aithne seo</string>
+    <!-- "Duplicates" title showing in suggestion card in Quick contact. [CHAR LIMIT=30]-->
     <string name="suggestion_card_duplicates_title">Feadhainn le coltas dùblachaidh orra</string>
+    <!-- Help message showing in suggestion card in Quick contact. [CHAR LIMIT=NONE]-->
     <string name="suggestion_card_help_message">Dh’fhaoidte gur e an t-aon neach a tha san luchd-aithne seo. ’S urrainn dhut an ceangal ri chèile mar aon neach-aithne.</string>
+    <!-- Content description of delete button to the right of each section in editor, including
+    data type. For example: Delete Home Phone, Delete Work Email, etc [CHAR LIMIT=30]-->
     <string name="editor_delete_view_description">Suab às <xliff:g id="data_type">%1$s </xliff:g><xliff:g id="data_kind">%2$s</xliff:g></string>
+    <!-- Content description of delete button to the right of each section in editor, without data
+    type. For example: Delete Website, Delete SIP, etc [CHAR LIMIT=30]-->
     <string name="editor_delete_view_description_short">Sguab às <xliff:g id="data_kind">%s</xliff:g></string>
+    <!-- Left drawer menu item to open contacts assistant/suggestion cards. [CHAR LIMIT=20]-->
     <string name="menu_assistant">Molaidhean</string>
+    <!-- Badge shown next to Suggestions in left drawer menu when user has not visited it yet. [CHAR LIMIT=10] -->
     <string name="menu_assistant_new_badge">Ùr</string>
+    <!-- Open drawer content descriptions [CHAR LIMIT=40] -->
     <string name="navigation_drawer_open">Fosgail drathair na seòladaireachd</string>
+    <!-- Close drawer content descriptions [CHAR LIMIT=40] -->
     <string name="navigation_drawer_close">Dùin drathair na seòladaireachd</string>
+    <!-- Content description of label name in navigation drawer. For example: Coworker Label, Friends Label [CHAR LIMIT=30] -->
     <string name="navigation_drawer_label">Leubail <xliff:g id="label_name">%s</xliff:g></string>
+    <!-- Menu section title of "labels" [CHAR LIMIT=20] -->
     <string name="menu_title_groups">Leubailean</string>
+    <!-- Menu section title of "accounts" [CHAR LIMIT=20] -->
     <string name="menu_title_filters">Cunntasan</string>
+    <!-- The header text for hamburger promo [CHAR LIMIT=60]-->
     <string name="hamburger_feature_highlight_header">Molaidhean</string>
+    <!-- The body text for hamburger promo [CHAR LIMIT=200]-->
     <string name="hamburger_feature_highlight_body">Cùm rian ’s feum air an luchd-aithne agad</string>
+    <!-- The label for the action shown in a snackbar after an operation that modifies some data is performed.
+         The user can click on the action to rollback the modification-->
     <string name="undo">Neo-dhèan</string>
+    <!-- Action string for calling a custom phone number -->
     <string name="call_custom">Cuir fòn gu
         <xliff:g id="custom_label" example="business">%s</xliff:g>
     </string>
+    <!-- Action string for calling a home phone number -->
     <string name="call_home">Cuir fòn gun dachaigh</string>
+    <!-- Action string for calling a mobile phone number -->
     <string name="call_mobile">Cuir fòn gu àireamh mobile</string>
+    <!-- Action string for calling a work phone number -->
     <string name="call_work">Cuir fòn gun obair</string>
+    <!-- Action string for calling a work fax phone number -->
     <string name="call_fax_work">Cuir fòn gu facs na h-obrach</string>
+    <!-- Action string for calling a home fax phone number -->
     <string name="call_fax_home">Cuir fòn gu facs na dachaighe</string>
+    <!-- Action string for calling a pager phone number -->
     <string name="call_pager">Cuir fòn gu pèidsear</string>
+    <!-- Action string for calling an other phone number -->
     <string name="call_other">Cuir fòn</string>
+    <!-- Action string for calling a callback number -->
     <string name="call_callback">Cuir fòn gun àireamh fònaidh air ais</string>
+    <!-- Action string for calling a car phone number -->
     <string name="call_car">Cuir fòn gun chàr</string>
+    <!-- Action string for calling a company main phone number -->
     <string name="call_company_main">Cuir fòn gu prìomh-àireamh na companaidh</string>
+    <!-- Action string for calling a ISDN phone number -->
     <string name="call_isdn">Cuir fòn gu ISDN</string>
+    <!-- Action string for calling a main phone number -->
     <string name="call_main">Cuir fòn gun phrìomh-àireamh</string>
+    <!-- Action string for calling an other fax phone number -->
     <string name="call_other_fax">Cuir fòn gu facs</string>
+    <!-- Action string for calling a radio phone number -->
     <string name="call_radio">Cuir fòn gu rèidio</string>
+    <!-- Action string for calling a Telex phone number -->
     <string name="call_telex">Cuir fòn gu telex</string>
+    <!-- Action string for calling a TTY/TDD phone number -->
     <string name="call_tty_tdd">Cuir fòn gu TTY/TDD</string>
+    <!-- Action string for calling a work mobile phone number -->
     <string name="call_work_mobile">Cuir fòn gu àireamh mobile na h-obrach</string>
+    <!-- Action string for calling a work pager phone number -->
     <string name="call_work_pager">Cuir fòn gu pèidsear na h-obrach</string>
+    <!-- Action string for calling an assistant phone number -->
     <string name="call_assistant">Cuir fòn gu
         <xliff:g id="custom_label" example="assistant">%s</xliff:g>
     </string>
+    <!-- Action string for calling a MMS phone number -->
     <string name="call_mms">Cuir fòn gu àireamh MMS</string>
+    <!-- Action string for calling a contact by shortcut -->
     <string name="call_by_shortcut"><xliff:g id="contact_name">%s</xliff:g> (Gairm)</string>
+    <!-- Action string for sending an SMS to a custom phone number -->
     <string name="sms_custom">Cuir teacsa gu
         <xliff:g id="custom_label" example="business">%s</xliff:g>
     </string>
+    <!-- Action string for sending an SMS to a home phone number -->
     <string name="sms_home">Cuir teacsa dhachaigh</string>
+    <!-- Action string for sending an SMS to a mobile phone number -->
     <string name="sms_mobile">Cuir teacsa gu àireamh mobile</string>
+    <!-- Action string for sending an SMS to a work phone number -->
     <string name="sms_work">Cuir teacsa gun obair</string>
+    <!-- Action string for sending an SMS to a work fax phone number -->
     <string name="sms_fax_work">Cuir teacsa gu facs na h-obrach</string>
+    <!-- Action string for sending an SMS to a home fax phone number -->
     <string name="sms_fax_home">Cuir teacsa gu facs na dachaighe</string>
+    <!-- Action string for sending an SMS to a pager phone number -->
     <string name="sms_pager">Cuir teacsa gu pèidsear</string>
+    <!-- Action string for sending an SMS to an other phone number -->
     <string name="sms_other">Teacsa</string>
+    <!-- Action string for sending an SMS to a callback number -->
     <string name="sms_callback">Cuir teacsa gun àireamh fònaidh air ais</string>
+    <!-- Action string for sending an SMS to a car phone number -->
     <string name="sms_car">Cuir teacsa gun chàr</string>
+    <!-- Action string for sending an SMS to a company main phone number -->
     <string name="sms_company_main">Cuir teacsa gu prìomh-àireamh na companaidh</string>
+    <!-- Action string for sending an SMS to a ISDN phone number -->
     <string name="sms_isdn">Cuir teacsa gu ISDN</string>
+    <!-- Action string for sending an SMS to a main phone number -->
     <string name="sms_main">Cuir teacsa gun phrìomh-àireamh</string>
+    <!-- Action string for sending an SMS to an other fax phone number -->
     <string name="sms_other_fax">Cuir teacsa gu facs</string>
+    <!-- Action string for sending an SMS to a radio phone number -->
     <string name="sms_radio">Cuir teacsa gu rèidio</string>
+    <!-- Action string for sending an SMS to a Telex phone number -->
     <string name="sms_telex">Cuir teacsa gu telex</string>
+    <!-- Action string for sending an SMS to a TTY/TDD phone number -->
     <string name="sms_tty_tdd">Cuir teacsa gu TTY/TDD</string>
+    <!-- Action string for sending an SMS to a work mobile phone number -->
     <string name="sms_work_mobile">Cuir teacsa gu àireamh mobile na h-obrach</string>
+    <!-- Action string for sending an SMS to a work pager phone number -->
     <string name="sms_work_pager">Cuir teacsa gu pèidsear na h-obrach</string>
+    <!-- Action string for sending an SMS to an assistant phone number -->
     <string name="sms_assistant">Cuir teacsa gu
         <xliff:g id="assistant">%s</xliff:g>
     </string>
+    <!-- Action string for sending an SMS to a MMS phone number -->
     <string name="sms_mms">Cuir teacsa gu àireamh MMS</string>
+    <!-- Action string for sending an SMS to a contact by shortcut -->
     <string name="sms_by_shortcut"><xliff:g id="contact_name">%s</xliff:g> (Teachdaireachd)</string>
+    <!-- Description string for an action button to initiate a video call. -->
     <string name="description_video_call">Dèan gairm video</string>
+    <!-- Title of the confirmation dialog for clearing frequents. [CHAR LIMIT=60] -->
     <string name="clearFrequentsConfirmation_title">Am falamhaich thu an conaltradh tric?</string>
+    <!-- Confirmation dialog for clearing frequents. [CHAR LIMIT=NONE] -->
     <string name="clearFrequentsConfirmation">Falamhaichidh tu liosta a’ chonaltraidh thric
         an an aplacaidean an luchd-aithne ’s an fhòn agus feumaidh aplacaidean puist-d roghainnean nan seòlaidhean agad ionnsachadh
         a-rithist.
     </string>
+    <!-- Title of the "Clearing frequently contacted" progress-dialog [CHAR LIMIT=60] -->
     <string name="clearFrequentsProgress_title">A’ falamhachadh a’ chonaltraidh thric…</string>
+    <!--  Used to display as default status when the contact is available for chat [CHAR LIMIT=19] -->
     <string name="status_available">An làthair</string>
+    <!--  Used to display as default status when the contact is away or idle for chat [CHAR LIMIT=19] -->
     <string name="status_away">Air falbh</string>
+    <!--  Used to display as default status when the contact is busy or Do not disturb for chat [CHAR LIMIT=19] -->
     <string name="status_busy">Trang</string>
+    <!-- The name of the invisible local contact directory -->
     <string name="local_invisible_directory">Eile</string>
+    <!-- The label in section header in the contact list for a contact directory [CHAR LIMIT=128] -->
     <string name="directory_search_label">Pasgan</string>
+    <!-- The label in section header in the contact list for a work contact directory [CHAR LIMIT=128] -->
     <string name="directory_search_label_work">Eòlaire na h-obrach</string>
+    <!-- The label in section header in the contact list for a local contacts [CHAR LIMIT=128] -->
     <string name="local_search_label">A h-uile neach-aithne</string>
+    <!-- String describing the text for photo of a contact in a contacts list.
+
+        Note: AccessibilityServices use this attribute to announce what the view represents.
+              This is especially valuable for views without textual representation like ImageView.
+    -->
     <string name="description_quick_contact_for">Grad-chonaltradh airson <xliff:g id="name">%1$s</xliff:g></string>
+    <!-- Shown as the display name for a person when the name is missing or unknown. [CHAR LIMIT=18]-->
     <string name="missing_name">(Gun ainm)</string>
+    <!-- The text displayed on the divider for the Favorites tab in People app indicating that items below it are frequently contacted [CHAR LIMIT = 39] -->
     <string name="favoritesFrequentContacted">Conaltradh tric</string>
+    <!-- Contact list filter selection indicating that the list shows all contacts with phone numbers [CHAR LIMIT=64] -->
     <string name="list_filter_phones">A h-uile neach-aithne le àireamh fòn</string>
+    <!-- Contact list filter selection indicating that the list shows all work contacts with phone numbers [CHAR LIMIT=64] -->
     <string name="list_filter_phones_work">Luchd-aithne aig pròifil na h-obrach</string>
+    <!-- Button to view the updates from the current group on the group detail page [CHAR LIMIT=25] -->
     <string name="view_updates_from_group">Seall na h-ùrachaidhean</string>
+    <!-- Title for data source when creating or editing a contact that doesn't
+         belong to a specific account.  This contact will only exist on the phone
+         and will not be synced. [CHAR LIMIT=20]  -->
     <string name="account_phone">Uidheam</string>
+    <!-- Title for data source when creating or editing a contact that is stored on the
+         devices SIM card. This contact will only exist on the phone and will not be synced.
+         [CHAR LIMIT=20]  -->
     <string name="account_sim">SIM</string>
+    <!-- Header that expands to list all name types when editing a structured name of a contact
+         [CHAR LIMIT=20] -->
     <string name="nameLabelsGroup">Ainm</string>
+    <!-- Header that expands to list all nickname types when editing a nickname of a contact
+         [CHAR LIMIT=20] -->
     <string name="nicknameLabelsGroup">Far-ainm</string>
+    <!-- Field title for the given name of a contact -->
     <string name="name_given">Ainm</string>
+    <!-- Field title for the family name of a contact -->
     <string name="name_family">Sloinneadh</string>
+    <!-- Field title for the prefix name of a contact -->
     <string name="name_prefix">Ro-leasachan ainm</string>
+    <!-- Field title for the middle name of a contact -->
     <string name="name_middle">Ainm meadhanach</string>
+    <!-- Field title for the suffix name of a contact -->
     <string name="name_suffix">Iar-leasachan ainm</string>
+    <!-- Field title for the phonetic name of a contact [CHAR LIMIT=64]-->
     <string name="name_phonetic">Tar-litreachadh an ainm</string>
+    <!-- Field title for the phonetic given name of a contact -->
     <string name="name_phonetic_given">Tar-litreachadh an ainm</string>
+    <!-- Field title for the phonetic middle name of a contact -->
     <string name="name_phonetic_middle">Tar-litreachadh an ainm mheadhanaich</string>
+    <!-- Field title for the phonetic family name of a contact -->
     <string name="name_phonetic_family">Tar-litreachadh an t-sloinnidh</string>
+    <!-- Header that expands to list all of the types of phone numbers when editing or creating a
+         phone number for a contact [CHAR LIMIT=20] -->
     <string name="phoneLabelsGroup">Fòn</string>
+    <!-- Header that expands to list all of the types of email addresses when editing or creating
+         an email address for a contact [CHAR LIMIT=20] -->
     <string name="emailLabelsGroup">Post-d</string>
+    <!-- Header that expands to list all of the types of postal addresses when editing or creating
+         an postal address for a contact [CHAR LIMIT=20] -->
     <string name="postalLabelsGroup">Seòladh</string>
+    <!-- Header that expands to list all of the types of IM account when editing or creating an IM
+         account for a contact [CHAR LIMIT=20] -->
     <string name="imLabelsGroup">Grad-theachdaireachd</string>
+    <!-- Header that expands to list all organization types when editing an organization of a
+         contact [CHAR LIMIT=20] -->
     <string name="organizationLabelsGroup">Buidheann</string>
+    <!-- Header for the list of all relationships for a contact [CHAR LIMIT=20] -->
     <string name="relationLabelsGroup">dàimh</string>
+    <!-- Header that expands to list all event types when editing an event of a contact
+         [CHAR LIMIT=20] -->
     <string name="eventLabelsGroup">Ceann-latha sònraichte</string>
+    <!-- Generic action string for text messaging a contact. Used by AccessibilityService to
+         announce the purpose of the view. [CHAR LIMIT=NONE] -->
     <string name="sms">Teachdaireachd teacsa</string>
+    <!-- Field title for the full postal address of a contact [CHAR LIMIT=64]-->
     <string name="postal_address">Seòladh</string>
+    <!-- Hint text for the organization name when editing a business/work contact. [CHAR LIMIT=64] -->
     <string name="ghostData_company">Companaidh</string>
+    <!-- Hint text for the organization title when editing a business/work contact. [CHAR LIMIT=64] -->
     <string name="ghostData_title">Tiotal</string>
+    <!-- The label describing the Notes field of a contact. This field allows free form text entry
+         about a contact -->
     <string name="label_notes">Nòtaichean</string>
+    <!-- The label describing the custom field of a contact. [CHAR LIMIT=20] -->
     <string name="label_custom_field">Gnàthaichte</string>
+    <!-- The label describing the SIP address field of a contact. [CHAR LIMIT=20] -->
     <string name="label_sip_address">SIP</string>
+    <!-- Header that expands to list all website types when editing a website of a contact
+         [CHAR LIMIT=20] -->
     <string name="websiteLabelsGroup">Làrach-lìn</string>
+    <!-- Header for the list of all labels for a contact [CHAR LIMIT=20] -->
     <string name="groupsLabel">Leubailean</string>
+    <!-- Action string for sending an email to a home email address -->
     <string name="email_home">Cuir post-d dhachaigh</string>
+    <!-- Action string for sending an email to a mobile email address -->
     <string name="email_mobile">Cuir post-d gun t-seòladh mobile</string>
+    <!-- Action string for sending an email to a work email address -->
     <string name="email_work">Cuir post-d gu seòladh na h-obrach</string>
+    <!-- Action string for sending an email to an other email address -->
     <string name="email_other">Post-d</string>
+    <!-- Action string for sending an email to a custom email address -->
     <string name="email_custom">Cuir post-d gu <xliff:g id="custom_label" example="business">%s</xliff:g></string>
+    <!-- Generic action string for sending an email -->
     <string name="email">Post-d</string>
+    <!-- Field title for the street of a structured postal address of a contact -->
     <string name="postal_street">Sràid</string>
+    <!-- Field title for the city of a structured postal address of a contact -->
     <string name="postal_city">Baile</string>
+    <!-- Field title for the region, or state, of a structured postal address of a contact -->
     <string name="postal_region">Stàit</string>
+    <!-- Field title for the postal code of a structured postal address of a contact -->
     <string name="postal_postcode">Còd ZIP</string>
+    <!-- Field title for the country of a structured postal address of a contact -->
     <string name="postal_country">Dùthaich</string>
+    <!-- Action string for viewing a home postal address -->
     <string name="map_home">Seall seòladh na dachaighe</string>
+    <!-- Action string for viewing a work postal address -->
     <string name="map_work">Seall seòladh na h-obrach</string>
+    <!-- Action string for viewing an other postal address -->
     <string name="map_other">Seall an seòladh</string>
+    <!-- Action string for viewing a custom postal address -->
     <string name="map_custom">Seall seòladh <xliff:g id="custom_label" example="vacation">%s</xliff:g></string>
+    <!-- Action string for starting an IM chat with the AIM protocol -->
     <string name="chat_aim">Cabadaich le AIM</string>
+    <!-- Action string for starting an IM chat with the MSN or Windows Live protocol -->
     <string name="chat_msn">Cabadaich le Windows Live</string>
+    <!-- Action string for starting an IM chat with the Yahoo protocol -->
     <string name="chat_yahoo">Cabadaich le Yahoo</string>
+    <!-- Action string for starting an IM chat with the Skype protocol -->
     <string name="chat_skype">Cabadaich le Skype</string>
+    <!-- Action string for starting an IM chat with the QQ protocol -->
     <string name="chat_qq">Cabadaich le QQ</string>
+    <!-- Action string for starting an IM chat with the Google Talk protocol -->
     <string name="chat_gtalk">Cabadaich le Google Talk</string>
+    <!-- Action string for starting an IM chat with the ICQ protocol -->
     <string name="chat_icq">Cabadaich le ICQ</string>
+    <!-- Action string for starting an IM chat with the Jabber protocol -->
     <string name="chat_jabber">Cabadaich le Jabber</string>
+    <!-- Generic action string for starting an IM chat -->
     <string name="chat">Cabadaich</string>
+    <!-- String describing the Contact Editor Minus button
+
+         Used by AccessibilityService to announce the purpose of the button.
+
+         [CHAR LIMIT=NONE]
+    -->
     <string name="description_minus_button">sguab às</string>
+    <!-- Content description for the expand or collapse name fields button.
+         Clicking this button causes the name editor to toggle between showing
+         a single field where the entire name is edited at once, or multiple
+         fields corresponding to each part of the name (Name Prefix, First Name,
+         Middle Name, Last Name, Name Suffix).
+         [CHAR LIMIT=NONE] -->
     <string name="expand_name_fields_description">Seall barrachd raointean ainm</string>
+    <!-- Content description for the collapse name fields button. [CHAR LIMIT=NONE] -->
     <string name="collapse_name_fields_description">Co-theannaich raointean ainm</string>
+    <!-- Content description for the expand phonetic name fields button. [CHAR LIMIT=NONE] -->
     <string name="expand_phonetic_name_fields_description">Seall barrachd raointean tar-litreachadh ainm</string>
+    <!-- Content description for the collapse phonetic name fields button. [CHAR LIMIT=NONE] -->
     <string name="collapse_phonetic_name_fields_description">Co-theannaich raointean tar-litreachadh ainm</string>
+    <!-- Content description for a generic expand fields button. [CHAR LIMIT=NONE] -->
     <string name="expand_fields_description">Leudaich</string>
+    <!-- Content description for a generic collapse fields button. [CHAR LIMIT=NONE] -->
     <string name="collapse_fields_description">Co-theannaich</string>
+    <!-- A11y announcement text for when a expand fields button is actioned. [CHAR LIMIT=NONE] -->
     <string name="announce_expanded_fields">Leudaichte</string>
+    <!-- A11y announcement text for when a collapse fields button is actioned. [CHAR LIMIT=NONE] -->
     <string name="announce_collapsed_fields">Air a cho-theannachadh</string>
+    <!-- Contact list filter label indicating that the list is showing all available accounts [CHAR LIMIT=64] -->
     <string name="list_filter_all_accounts">A h-uile neach-aithne</string>
+    <!-- Contact list filter label indicating that the list is showing all starred contacts [CHAR LIMIT=64] -->
     <string name="list_filter_all_starred">Le rionnag ris</string>
+    <!-- Contact list filter selection indicating that the list shows groups chosen by the user [CHAR LIMIT=64] -->
     <string name="list_filter_customize">Gnàthaich</string>
+    <!-- Contact list filter selection indicating that the list shows only the selected contact [CHAR LIMIT=64] -->
     <string name="list_filter_single">Neach-aithne</string>
+    <!-- List title for a special contacts group that covers all contacts. [CHAR LIMIT=25] -->
     <string name="display_ungrouped">A h-uile neach-aithne eile</string>
+    <!-- List title for a special contacts group that covers all contacts that aren't members of any other group. [CHAR LIMIT=25] -->
     <string name="display_all_contacts">A h-uile neach-aithne</string>
+    <!-- Menu item to remove a contacts sync group. [CHAR LIMIT=40] -->
     <string name="menu_sync_remove">Thoir air falbh am buidheann sioncronachaidh</string>
+    <!-- Menu item to add a contacts sync group. [CHAR LIMIT=40] -->
     <string name="dialog_sync_add">Cuir buidheann sioncronachaidh ris</string>
+    <!-- Text displayed in the sync groups footer view for unknown sync groups. [CHAR LIMIT=40 -->
     <string name="display_more_groups">Barrachd bhuidhnean…</string>
+    <!-- Warning message given to users just before they remove a currently syncing
+         group that would also cause all ungrouped contacts to stop syncing.  [CHAR LIMIT=NONE] -->
     <string name="display_warn_remove_ungrouped">Ma bheir thu air falbh “<xliff:g id="group" example="Starred">%s</xliff:g>” on t-sioncronachadh, thèid gach neach-aithne gun bhuidhneachadh a thoirt air falbh on t-sioncronachadh cuideachd.</string>
+    <!-- Displayed in a spinner dialog as user changes to display options are saved -->
     <string name="savingDisplayGroups">A’ sàbhaladh nan roghainnean taisbeanaidh…</string>
+    <!-- Displayed at the top of the contacts showing single contact. [CHAR LIMIT=50] -->
     <string name="listCustomView">Sealladh gnàthaichte</string>
+    <!-- Message asking user to select an account to save contacts imported from vcard or SIM card [CHAR LIMIT=64] -->
     <string name="dialog_new_contact_account">Sàbhail an luchd-aithne a chaidh ion-phortadh gu:</string>
+    <!-- Action string for selecting SIM for importing contacts -->
     <string name="import_from_sim">Cairt SIM</string>
+    <!-- Action string for selecting a SIM subscription for importing contacts -->
     <string name="import_from_sim_summary_fmt">SIM <xliff:g id="sim_name">%1$s</xliff:g></string>
+    <!-- Secondary string showing the number of SIM contacts for the SIM card on the action for
+         importing from that SIM. Only shown if there is no phone number available for the SIM card
+         [CHAR LIMIT=25] -->
     <plurals name="import_from_sim_secondary_contact_count_fmt">
         <item quantity="one">%1$d neach-aithne</item>
         <item quantity="two">%1$d luchd-aithne</item>
         <item quantity="few">%1$d luchd-aithne</item>
         <item quantity="other">%1$d luchd-aithne</item>
     </plurals>
+    <!-- Secondary string showing the number of SIM contacts and phone number for the SIM card
+         on the action for importing that SIM. Note that the bullet character is purely a visual
+         separator between the contact count and phone number; it has no grammatical meaning in
+         this string [CHAR LIMIT=35]-->
     <plurals name="import_from_sim_secondary_template">
         <item quantity="one"><xliff:g id="count">^1</xliff:g> neach-aithne • <xliff:g id="phone_number">^2</xliff:g></item>
         <item quantity="two"><xliff:g id="count">^1</xliff:g> luchd-aithne • <xliff:g id="phone_number">^2</xliff:g></item>
         <item quantity="few"><xliff:g id="count">^1</xliff:g> luchd-aithne • <xliff:g id="phone_number">^2</xliff:g></item>
         <item quantity="other"><xliff:g id="count">^1</xliff:g> luchd-aithne • <xliff:g id="phone_number">^2</xliff:g></item>
     </plurals>
+    <!-- Action string for selecting a .vcf file to import contacts from [CHAR LIMIT=30] -->
     <string name="import_from_vcf_file">Faidhle .vcf</string>
+    <!-- Message shown on Import from dialog when there is nothing available to import (no .vcf option or SIM cards) [CHAR LIMIT=NONE] -->
     <string name="nothing_to_import_message">Chan eil dad ri ion-phortadh</string>
+    <!-- Dialog message asking the user for confirmation before starting to import contacts from a .vcf file. [CHAR LIMIT=NONE] -->
     <string name="import_from_vcf_file_confirmation_message">An ion-phortaich thu luchd-aithne on vCard?</string>
+    <!-- Message shown in a Dialog confirming a user's cancel request toward existing vCard import.
+         The argument is file name for the vCard import the user wants to cancel.
+         [CHAR LIMIT=128] -->
     <string name="cancel_import_confirmation_message">An sguir thu dhen ion-phortadh o <xliff:g id="filename" example="export.vcf">%s</xliff:g>?</string>
+    <!-- Message shown in a Dialog confirming a user's cancel request toward existing vCard export.
+         The argument is file name for the vCard export the user wants to cancel.
+         [CHAR LIMIT=128] -->
     <string name="cancel_export_confirmation_message">An sguir thu dhen às-phortadh gu <xliff:g id="filename" example="export.vcf">%s</xliff:g>?</string>
+    <!-- Title shown in a Dialog telling users cancel vCard import/export operation is failed. [CHAR LIMIT=80] -->
     <string name="cancel_vcard_import_or_export_failed">Cha b’ urrainn dhuinn sgur dhen ion-phortadh o/às-phortadh gu vCard</string>
+    <!-- The failed reason which should not be shown but it may in some buggy condition. [CHAR LIMIT=40] -->
     <string name="fail_reason_unknown">Mearachd nach aithne dhuinn.</string>
+    <!-- The failed reason shown when vCard importer/exporter could not open the file
+         specified by a user. The file name should be in the message. [CHAR LIMIT=NONE] -->
     <string name="fail_reason_could_not_open_file">Cha b’ urrainn duinn “<xliff:g id="file_name">%1$s</xliff:g>” fhosgladh: <xliff:g id="exact_reason">%2$s</xliff:g>.</string>
+    <!-- The failed reason shown when contacts exporter fails to be initialized.
+         Some exact reason must follow this. [CHAR LIMIT=NONE]-->
     <string name="fail_reason_could_not_initialize_exporter">Cha b’ urrainn dhuinn an t-às-phortadh a chur gu dol: “<xliff:g id="exact_reason">%s</xliff:g>”.</string>
+    <!-- The failed reason shown when there's no contact which is allowed to be exported.
+         Note that user may have contacts data but all of them are probably not allowed to be
+         exported because of security/permission reasons. [CHAR LIMIT=NONE] -->
     <string name="fail_reason_no_exportable_contact">Chan eil neach-aithne a ghabhadh às-phortadh ann.</string>
+    <!-- The user doesn't have all permissions required to use the current screen. So
+         close the current screen and show the user this message. -->
     <string name="missing_required_permission">Chuir thu à comas cead riatanach.</string>
+    <!-- The failed reason shown when some error happend during contacts export.
+         Some exact reason must follow this. [CHAR LIMIT=NONE] -->
     <string name="fail_reason_error_occurred_during_export">Thachair mearachd fhad ’s a bha sinn ’ga às-phortadh: “<xliff:g id="exact_reason">%s</xliff:g>”.</string>
+    <!-- The failed reason shown when Contacts app (especially vCard importer/exporter)
+         emitted some I/O error. Exact reason will be appended by the system. [CHAR LIMIT=NONE] -->
     <string name="fail_reason_io_error">Mearachd ion-/às-chuir</string>
+    <!-- Failure reason show when Contacts app (especially vCard importer) encountered
+         low memory problem and could not proceed its import procedure. [CHAR LIMIT=NONE] -->
     <string name="fail_reason_low_memory_during_import">Chan eil cuimhne gu leòr ann. Dh’fhaoidte gu bheil am faidhle ro mhòr.</string>
+    <!-- The failed reason shown when vCard importer doesn't support the format.
+         This may be shown when the vCard is corrupted [CHAR LIMIT=40] -->
     <string name="fail_reason_not_supported">Chan eil taic ris an fhòrmat.</string>
+    <!-- The title shown when exporting vCard is successfuly finished [CHAR LIMIT=40] -->
     <string name="exporting_vcard_finished_title">Chaidh <xliff:g id="filename" example="export.vcf">%s</xliff:g> às-phortadh.</string>
+    <!-- The title shown when exporting vCard has finished successfully but the destination filename could not be resolved. [CHAR LIMIT=NONE] -->
     <string name="exporting_vcard_finished_title_fallback">Chaidh an luchd-aithne às-phortadh.</string>
+    <!-- The toast message shown when exporting vCard has finished and vCards are ready to be shared [CHAR LIMIT=150]-->
     <string name="exporting_vcard_finished_toast">Tha às-phortadh an luchd-aithne deiseil, briog air a bhrath a cho-roinneadh luchd-aithne.</string>
+    <!-- The message on notification shown when exporting vCard has finished and vCards are ready to be shared [CHAR LIMIT=60]-->
     <string name="touch_to_share_contacts">Thoir gnogag a cho-roinneadh luchd-aithne.</string>
+    <!-- The title shown when exporting vCard is canceled (probably by a user)
+         The argument is file name the user canceled importing.
+         [CHAR LIMIT=40] -->
     <string name="exporting_vcard_canceled_title">Chaidh sgur de dh’às-phortadh <xliff:g id="filename" example="export.vcf">%s</xliff:g>.</string>
+    <!-- Dialog title shown when the application is exporting contact data outside. [CHAR LIMIT=NONE] -->
     <string name="exporting_contact_list_title">Ag às-phortadh dàta an luchd-aithne</string>
+    <!-- Message shown when the application is exporting contact data outside -->
     <string name="exporting_contact_list_message">Tha dàta an luchd-aithne ’ga às-phortadh.</string>
+    <!-- The error reason the vCard composer "may" emit when database is corrupted or
+         something is going wrong. Usually users should not see this text. [CHAR LIMIT=NONE] -->
     <string name="composer_failed_to_get_database_infomation">Cha b’ urrainn dhuinn fiosrachadh an stòir-dhàta fhaighinn.</string>
+    <!-- This error message shown when the user actually have no contact
+         (e.g. just after data-wiping), or, data providers of the contact list prohibits their
+         contacts from being exported to outside world via vcard exporter, etc. [CHAR LIMIT=NONE] -->
     <string name="composer_has_no_exportable_contact">Chan eil neach-aithne a ghabhas às-phortadh ann.</string>
+    <!-- The error reason the vCard composer may emit when vCard composer is not initialized
+         even when needed.
+         Users should not usually see this error message. [CHAR LIMIT=NONE] -->
     <string name="composer_not_initialized">Cha deach sgrìobhaiche nan vCard a chur gu dol mar bu chòir.</string>
+    <!-- Dialog title shown when exporting Contact data failed. [CHAR LIMIT=20] -->
     <string name="exporting_contact_failed_title">Cha b’ urrainn dhuinn às-phortadh</string>
+    <!-- Dialog message shown when exporting Contact data failed. [CHAR LIMIT=NONE] -->
     <string name="exporting_contact_failed_message">Cha deach dàta an luchd-aithne às-phortadh.\nAdhbhar: “<xliff:g id="fail_reason">%s</xliff:g>”</string>
+    <!-- Description shown when importing vCard data.
+         The argument is the name of a contact which is being read.
+         [CHAR LIMIT=20] -->
     <string name="importing_vcard_description">Ag ion-phortadh <xliff:g id="name" example="Joe Due">%s</xliff:g></string>
+    <!-- Dialog title shown when reading vCard data failed [CHAR LIMIT=40] -->
     <string name="reading_vcard_failed_title">Cha b\' urrainn dhuinn dàta a’ vCard a leughadh</string>
+    <!-- The title shown when reading vCard finished
+         The argument is file name the user imported.
+         [CHAR LIMIT=40] -->
     <string name="importing_vcard_finished_title">Chaidh a’ vCard <xliff:g id="filename" example="import.vcf">%s</xliff:g> ion-phortadh</string>
+    <!-- The title shown when importing vCard is canceled (probably by a user)
+         The argument is file name the user canceled importing.
+         [CHAR LIMIT=40] -->
     <string name="importing_vcard_canceled_title">Chaidh sgur de dh’ion-phortadh <xliff:g id="filename" example="import.vcf">%s</xliff:g></string>
+    <!-- The message shown when vCard import request is accepted. The system may start that work soon, or do it later
+         when there are already other import/export requests.
+         The argument is file name the user imported.
+         [CHAR LIMIT=40] -->
     <string name="vcard_import_will_start_message">Thèid <xliff:g id="filename" example="import.vcf">%s</xliff:g> ion-phortadh a dh’aithghearr.</string>
+    <!-- The message shown when vCard import request is accepted. The system may start that work soon, or do it later when there are already other import/export requests.
+         "The file" is what a user selected for importing.
+         [CHAR LIMIT=40] -->
     <string name="vcard_import_will_start_message_with_default_name">Thèid am faidhle ion-phortadh a dh’aithghearr.</string>
+    <!-- The message shown when a given vCard import request is rejected by the system. [CHAR LIMIT=NONE] -->
     <string name="vcard_import_request_rejected_message">Chaidh iarrtas ion-phortaidh vCard a dhiùltadh. Feuch ris a-rithist an ceann greis.</string>
+    <!-- The message shown when a vCard export request is accepted and contacts will be exported shortly. [CHAR LIMIT=70]-->
     <string name="contacts_export_will_start_message">Thèid an luchd-aithne às-phortadh a dh’aithghearr.</string>
+    <!-- The message shown when a given vCard export request is rejected by the system. [CHAR LIMIT=NONE] -->
     <string name="vcard_export_request_rejected_message">Chaidh iarrtas às-phortaidh vCard a dhiùltadh. Feuch ris a-rithist an ceann greis.</string>
+    <!-- Used when file name is unknown in vCard processing. It typically happens
+         when the file is given outside the Contacts app. [CHAR LIMIT=30] -->
     <string name="vcard_unknown_filename">neach-aithne</string>
+    <!-- The message shown when vCard importer is caching files to be imported into local temporary
+         data storage. [CHAR LIMIT=NONE] -->
     <string name="caching_vcard_message">A’ cur a’ vCard/nam vCards dhan tasgadan ionadail. Thèid an t-ion-phortadh fhèin a thòiseachadh a dh’aithghearr.</string>
+    <!-- Message used when vCard import has failed. [CHAR LIMIT=40] -->
     <string name="vcard_import_failed">Cha b’ urrainn dhuinn a’ vCard ion-phortadh.</string>
+    <!-- The "file name" displayed for vCards received directly via NFC [CHAR LIMIT=50] -->
     <string name="nfc_vcard_file_name">Fhuair thu neach-aithne thar NFC</string>
+    <!-- The title shown when vCard importer is caching files to be imported into local temporary
+         data storage.  [CHAR LIMIT=40] -->
     <string name="caching_vcard_title">’Ga chur dhan tasgadan</string>
+    <!-- The message shown while importing vCard(s).
+         First argument is current index of contacts to be imported.
+         Second argument is the total number of contacts.
+         Third argument is the name of a contact which is being read.
+         [CHAR LIMIT=20] -->
     <string name="progress_notifier_message">Ag ion-phortadh <xliff:g id="current_number">%1$s</xliff:g>/<xliff:g id="total_number">%2$s</xliff:g>: <xliff:g id="name" example="Joe Due">%3$s</xliff:g></string>
+    <!-- Action that exports all contacts to a user selected destination. [CHAR LIMIT=25] -->
     <string name="export_to_vcf_file">Às-phortaich gu faidhle .vcf</string>
+    <!-- Contact preferences related strings -->
+    <!-- Label of the "sort by" display option -->
     <string name="display_options_sort_list_by">Seòrsaich a-rèir</string>
+    <!-- Label of the "phonetic name fields" display option. [CHAR LIMIT=50] -->
     <string name="display_options_phonetic_name_fields">Tar-litreachadh an ainm</string>
+    <!-- Option to initially show the phonetic name input fields on the contact editor even if the
+    contact does not have a phonetic name. [CHAR LIMIT=25]  -->
     <string name="editor_options_always_show_phonetic_names">Seall an-còmhnaidh</string>
+    <!-- Option to initially hide the phonetic name input fields on the contact editor if the
+    contact being edited doesn't have a phonetic name. [CHAR LIMIT=25]  -->
     <string name="editor_options_hide_phonetic_names_if_empty">Falaich ma bhios e falamh</string>
+    <!-- An allowable value for the "sort list by" contact display option  -->
     <string name="display_options_sort_by_given_name">Ainm</string>
+    <!-- An allowable value for the "sort list by" contact display option  -->
     <string name="display_options_sort_by_family_name">Sloinneadh</string>
+    <!-- Label of the "name format" display option [CHAR LIMIT=64]-->
     <string name="display_options_view_names_as">Fòrmat an ainm</string>
+    <!-- An allowable value for the "view names as" contact display option  -->
     <string name="display_options_view_given_name_first">Ainm an toiseach</string>
+    <!-- An allowable value for the "view names as" contact display option  -->
     <string name="display_options_view_family_name_first">Sloinneadh an toiseach</string>
+    <!--Lable of the "Accounts" in settings [CHAR LIMIT=30]-->
     <string name="settings_accounts">Cunntasan</string>
+    <!--Label of the "default account" setting option to set default editor account. [CHAR LIMIT=80]-->
     <string name="default_editor_account">An cunntas bunaiteach dhan luchd-aithne ùr</string>
+    <!-- Title of my info preference, showing the name of user's personal profile [CHAR LIMIT=30]-->
     <string name="settings_my_info_title">Mo chuid fiosrachaidh</string>
+    <!-- Displayed below my info for user to set up the user's personal profile entry [CHAR LIMIT=64] -->
     <string name="set_up_profile">Suidhich a’ phròifil agad</string>
+    <!-- Label of the "About" setting -->
     <string name="setting_about">Mun luchd-aithne</string>
+    <!-- Action that shares favorite contacts [CHAR LIMIT=40]-->
     <string name="share_favorite_contacts">Co-roinn an luchd-aithne as annsa leat</string>
+    <!-- Action that shares contacts [CHAR LIMIT=30]-->
     <string name="share_contacts">Co-roinn a h-uile neach-aithne</string>
+    <!-- A framework exception can be thrown while attempting to share all contacts. If so, show this toast. [CHAR LIMIT=40]-->
     <string name="share_contacts_failure">Dh’fhàillig co-roinneadh an luchd-aithne.</string>
+    <!-- Dialog title when selecting the bulk operation to perform from a list. [CHAR LIMIT=36] -->
     <string name="dialog_export">Às-phortaich luchd-aithne</string>
+    <!-- Dialog title when importing contacts from an external source such as SIM card or a vcf file. [CHAR LIMIT=36] -->
     <string name="dialog_import">Ion-phortaich luchd-aithne o</string>
+    <!-- Toast indicating that sharing a contact has failed. [CHAR LIMIT=NONE]  -->
     <string name="share_error">Chan urrainn dhuinn an neach-aithne seo a cho-roinneadh.</string>
+    <!-- Toast indicating that no visible contact to share [CHAR LIMIT=NONE]  -->
     <string name="no_contact_to_share">Chan eil neach-aithne ri cho-roinneadh ann.</string>
+    <!-- The menu item to filter the list of contacts displayed -->
     <string name="menu_contacts_filter">An luchd-aithne ri shealltainn</string>
+    <!-- Title of the activity that allows the uesr to filter the list of contacts displayed according to account [CHAR LIMIT=25] -->
     <string name="activity_title_contacts_filter">An luchd-aithne ri shealltainn</string>
+    <!-- Title of the activity that allows the user to customize filtering of contact list [CHAR LIMIT=128] -->
     <string name="custom_list_filter">Gnàthaich an sealladh</string>
+    <!-- Menu item to save changes to custom filter. [CHAR LIMIT=15] -->
     <string name="menu_custom_filter_save">Sàbhail</string>
+    <!-- Query hint displayed inside the search field [CHAR LIMIT=64] -->
     <string name="hint_findContacts">Lorg san luchd-aithne</string>
+    <!-- The content description text for star icon in contacts list [CHAR LIMIT=30] -->
     <string name="contactsFavoritesLabel">Annsachdan</string>
+    <!-- The menu item to bulk import contacts from SIM card or SD card.  [CHAR LIMIT=30]-->
     <string name="menu_import">Ion-phortaich</string>
+    <!-- The menu item to bulk export contacts from SIM card or SD card.  [CHAR LIMIT=30]-->
     <string name="menu_export">Às-phortaich</string>
+    <!-- The menu item to open blocked numbers activity [CHAR LIMIT=60]-->
     <string name="menu_blocked_numbers">Àireamhan bacte</string>
+    <!-- Attribution of a contact status update, when the time of update is unknown -->
     <string name="contact_status_update_attribution">slighe <xliff:g id="source" example="Google Talk">%1$s</xliff:g></string>
+    <!-- Attribution of a contact status update, when the time of update is known -->
     <string name="contact_status_update_attribution_with_date"><xliff:g id="date" example="3 hours ago">%1$s</xliff:g> slighe <xliff:g id="source" example="Google Talk">%2$s</xliff:g></string>
+    <!-- Font family used when drawing letters for letter tile avatars.
+         Do not translate. -->
     <string name="letter_tile_letter_font_family">sans-serif-medium</string>
+    <!-- Content description for the fake action menu up button as used
+     inside search. [CHAR LIMIT=NONE] -->
     <string name="action_menu_back_from_search">sguir dhen lorg</string>
+    <!--  String describing the icon used to clear the search field -->
     <string name="description_clear_search">Falamhaich an lorg</string>
+    <!-- The font-family to use for the text inside the searchbox.
+         Do not translate. -->
     <string name="search_font_family">sans-serif</string>
+    <!-- Title for Select Account Dialog [CHAR LIMIT=30] -->
     <string name="select_account_dialog_title">Cunntas</string>
+    <!-- Label for the check box to toggle default sim card setting [CHAR LIMIT=35]-->
     <string name="set_default_account">Cleachd seo airson fòn a chur an-còmhnaidh</string>
+    <!-- String used for actions in the dialer call log and the quick contact card to initiate
+         a call to an individual.  The user is prompted to enter a note which is sent along with
+         the call (e.g. a call subject). [CHAR LIMIT=40] -->
     <string name="call_with_a_note">Cuir fòn le nòta</string>
-    <string name="call_subject_hint">Sgrìobh nòta a thèid a chur leis a’ ghairm…</string>
+    <!-- Hint text shown in the call subject dialog. [CHAR LIMIT=255] -->
+    <string name="call_subject_hint">Sgrìobh nòta a thèid a chur leis a’ ghairm&#8230;</string>
+    <!-- Button used to start a new call with the user entered subject. [CHAR LIMIT=32] -->
     <string name="send_and_call_button">CUIR ⁊ CUIR FÒN</string>
+    <!-- String used to represent the total number of characters entered for a call subject,
+         compared to the character limit.  Example: 2 / 64 -->
     <string name="call_subject_limit"><xliff:g id="count" example="4">%1$s</xliff:g> / <xliff:g id="limit" example="64">%2$s</xliff:g></string>
+    <!-- String used to build a phone number bype and phone number string.
+         Example: Mobile • 650-555-1212  -->
     <string name="call_subject_type_and_number"><xliff:g id="type" example="Mobile">%1$s</xliff:g> • <xliff:g id="number" example="(650) 555-1212">%2$s</xliff:g></string>
+    <!-- Build version title in About preference. [CHAR LIMIT=40]-->
     <string name="about_build_version">Tionndadh na togail</string>
+    <!-- Open source licenses title in About preference. [CHAR LIMIT=60] -->
     <string name="about_open_source_licenses">Ceadachasan Open Source</string>
+    <!-- Open source licenses summary in About preference. [CHAR LIMIT=NONE] -->
     <string name="about_open_source_licenses_summary">Fiosrachadh mun cheadachas airson bathar-bog le còd fosgailte</string>
+    <!-- Privacy policy title in About preference. [CHAR LIMIT=40]-->
     <string name="about_privacy_policy">Poileasaidh prìobhaideachd</string>
+    <!-- Terms of service title in about preference. [CHAR LIMIT=60]-->
     <string name="about_terms_of_service">Teirmichean na seirbheise</string>
+    <!-- Title for the activity that displays licenses for open source libraries. [CHAR LIMIT=100]-->
     <string name="activity_title_licenses">Ceadachasan Open Source</string>
+    <!-- Toast message showing when failed to open the url. [CHAR LIMIT=100]-->
     <string name="url_open_error_toast">Dh’fhàillig le fosgladh a’ cheangail-lìn.</string>
+    <!-- Content description of entries (including that radio button is checked) in contact
+         accounts list filter. For example: Google abc@gmail.com checked, etc [CHAR LIMIT=30]-->
     <string name="account_filter_view_checked"><xliff:g id="account_info">%s</xliff:g> le cromag</string>
+    <!-- Content description of entries (including that the radio button is not checked) in contact
+         accounts list filter. For example: Google abc@gmail.com not checked, etc [CHAR LIMIT=30]-->
     <string name="account_filter_view_not_checked"><xliff:g id="account_info">%s</xliff:g> gun chromag</string>
+    <!-- Description string for an action button to initiate a video call from search results.
+         Note: AccessibilityServices use this attribute to announce what the view represents.
+         This is especially valuable for views without textual representation like ImageView.
+
+         [CHAR LIMIT=NONE]-->
     <string name="description_search_video_call">Cuir gairm video</string>
+    <!-- Content description of delete contact button [CHAR LIMIT=30]-->
     <string name="description_delete_contact">Sguab às</string>
+    <!-- Content description for (...) in no name header [CHAR LIMIT=30]-->
     <string name="description_no_name_header">Trì-phuing</string>
+    <!-- Toast shown when a dynamic shortcut is tapped after being disabled because the experiment was turned off on the device -->
     <string name="dynamic_shortcut_disabled_message">Chaidh an ath-ghoirid seo a chur à comas</string>
+    <!-- Toast shown when a dynamic shortcut is tapped after being disabled because the contact was removed -->
     <string name="dynamic_shortcut_contact_removed_message">Chaidh an neach-aithne a thoirt air falbh</string>
+    <!-- Text for button shown in toolbar to start import of SIM contacts -->
     <string name="sim_import_button_text">Ion-phortaich</string>
+    <!-- Toolbar title shown when importing SIM contacts and none are selected -->
     <string name="sim_import_title_none_selected">Tagh luchd-aithne</string>
+    <!-- Message shown when the SIM import screen is displayed but there are no contacts on the
+         SIM card  -->
     <string name="sim_import_empty_message">Chan eil neach-aithne air a’ chairt SIM agad</string>
+    <!-- Snackbar message shown on the SIM import screen when the user taps on a contact that
+         is disabled because an exact duplicate already exists in their contacts [CHAR LIMIT=60] -->
     <string name="sim_import_contact_exists_toast">Tha an neach-aithne san liosta agad mu thràth</string>
+    <!-- Toast shown on settings screen when importing from SIM completes successfully -->
     <plurals name="sim_import_success_toast_fmt">
         <item quantity="one">Chaidh <xliff:g id="count">%d</xliff:g> neach-aithne ion-phortadh on t-SIM</item>
         <item quantity="two">Chaidh <xliff:g id="count">%d</xliff:g> luchd-aithne ion-phortadh on t-SIM</item>
         <item quantity="few">Chaidh <xliff:g id="count">%d</xliff:g> luchd-aithne ion-phortadh on t-SIM</item>
         <item quantity="other">Chaidh <xliff:g id="count">%d</xliff:g> luchd-aithne ion-phortadh on t-SIM</item>
     </plurals>
+    <!-- Toast shown on settings screen when importing from SIM completes with an error -->
     <string name="sim_import_failed_toast">Dh’fhàillig ion-phortadh an luchd-aithne on t-SIM</string>
+    <!-- Title of the SIM import activity; this isn't displayed but is announced by talkback
+         when the window is first opened [CHAR LIMIT=40] -->
     <string name="sim_import_title">Ion-phortaich on t-SIM</string>
+    <!-- Content description of the cancel navigation icon shown in SIM import screen toolbar [CHAR LIMIT=NONE]-->
     <string name="sim_import_cancel_content_description">Sguir dheth</string>
+    <!-- Alert for letting user know that their device auto-sync setting is turned off,
+         in case they are wondering why they are not seeing any contact. [CHAR LIMIT=150] -->
     <string name="auto_sync_off">Tha an sioncronachadh fèin-obrachail dheth. Thoir gnogag gus a chur air.</string>
+    <!-- Content description for the "X" image icon for dismissing an alert.[CHAR LIMIT=50] -->
     <string name="dismiss_sync_alert">Leig seachad</string>
+    <!-- Alert for letting user know that their account level sync setting is turned off,
+         in case they are wondering why they are not seeing any contact. [CHAR LIMIT=150] -->
     <string name="account_sync_off">Tha sioncronachadh a’ chunntais dheth. Thoir gnogag gus a chur air.</string>
+    <!-- Title of dialog to turn auto-sync on [CHAR LIMIT=100] -->
     <string name="turn_auto_sync_on_dialog_title">An cuir thu an sioncronachadh fèin-obrachail air?</string>
+    <!-- Text of dialog to turn auto-sync on [CHAR LIMIT=500] -->
     <string name="turn_auto_sync_on_dialog_body">Thèid atharrachadh sam bith a nì thu air aplacaid no cunntas sam bith, (chan ann luchd-aithne Google a-mhàin) a shioncronachadh eadar an lìon ’s na h-uidheaman agad.</string>
+    <!-- Confirm button text for dialog to turn auto-sync on [CHAR LIMIT=30] -->
     <string name="turn_auto_sync_on_dialog_confirm_btn">Cuir air</string>
+    <!-- No network connection error message [CHAR LIMIT=50] -->
     <string name="connection_error_message">Chan eil ceangal ann</string>
+    <!-- Generic label for the SIM card when there is only a single SIM in the device [CHAR LIMIT=10]-->
     <string name="single_sim_display_label">SIM</string>
+    <!-- Content description for dropdown arrow (https://material.io/icons/#ic_arrow_drop_down)
+         This is used to indicate that a list of options can be opened by tapping on it.
+         [CHAR LIMIT=NONE] -->
     <string name="show_more_content_description">Seall barrachd dhiubh</string>
+    <!-- The notification title shown when importing a SIM card finishes [CHAR LIMIT=40] -->
     <string name="importing_sim_finished_title">Deiseil le ion-phortadh na cairt SIM</string>
+    <!-- Notification title shown when importing SIM contacts failed [CHAR LIMIT=40] -->
     <string name="importing_sim_failed_title">Dh’fhàillig leis an ion-phortadh</string>
+    <!-- Notification message shown when importing SIM contacts failed [CHAR LIMIT=NONE] -->
     <string name="importing_sim_failed_message">Cha b’ urrainn dhuinn an luchd-aithne ion-phortadh on chairt SIM</string>
+    <!-- The notification title shown while SIM contacts are being imported [CHAR LIMIT=40] -->
     <string name="importing_sim_in_progress_title">Ag ion-phortadh o SIM</string>
+    <!-- Text shown when viewing channel settings for default Contacts notifications [CHAR LIMIT=50] -->
     <string name="contacts_default_notification_channel">Brathan</string>
+    <!-- Text of Positive Button in dialog -->
     <string name="yes_button">Tha</string>
+    <!-- Text of Negative Button in dialog -->
     <string name="no_button">Chan eil</string>
 </resources>

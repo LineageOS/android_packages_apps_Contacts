@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2006 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="applicationLabel">Luchd-aithne</string>
+    <string name="launcherActivityLabel">Luchd-aithne</string>
+    <string name="quickContactActivityLabel">Seall an neach-aithne</string>
+    <string name="editContactActivityLabel">Deasaich an neach-aithne</string>
+    <string name="contactsList">Luchd-aithne</string>
+    <string name="shortcutContact">Neach-aithne</string>
+    <string name="shortcutDialContact">Gairm dhìreach</string>
+    <string name="shortcutMessageContact">Teachdaireachd dhìreach</string>
+    <string name="shortcutActivityTitle">Tagh ath-ghoirid neach-aithne</string>
+    <string name="callShortcutActivityTitle">Tagh àireamh ri ghairm</string>
+    <string name="messageShortcutActivityTitle">Tagh àireamh airson teachdaireachdan</string>
+    <string name="contactInsertOrEditActivityTitle">Cuir ri neach-aithne</string>
+    <string name="contactPickerActivityTitle">Tagh neach-aithne</string>
+    <string name="header_entry_contact_list_adapter_header_title">Cruthaich neach-aithne ùr</string>
+    <string name="starredList">Le rionnag ris</string>
+    <string name="frequentList">An fheadhainn thric</string>
+    <string name="strequentList">Annsachdan</string>
+    <string name="viewContactTitle">Mion-fhiosrachadh an neach-aithne</string>
+    <string name="editContactDescription">Deasaich an neach-aithne</string>
+    <string name="insertContactDescription">Cruthaich neach-aithne</string>
+    <string name="editGroupDescription">Deasaich am buidheann</string>
+    <string name="insertGroupDescription">Cruthaich buidheann</string>
+    <string name="contactDetailAbout">Mu dhèidhinn</string>
+    <string name="contactDetailUpdates">Ùrachaidhean</string>
+    <string name="searchHint">Lorg san luchd-aithne</string>
+    <string name="menu_viewContact">Seall an neach-aithne</string>
+    <string name="menu_addStar">Cuir ris na h-annsachdan</string>
+    <string name="menu_removeStar">Thoir air falbh o na h-annsachdan</string>
+    <string name="description_action_menu_remove_star">Chaidh a thoirt air falbh o na h-annsachdan</string>
+    <string name="description_action_menu_add_star">Chaidh a chur ris na h-annsachdan</string>
+    <string name="menu_editContact">Deasaich</string>
+    <string name="menu_deleteContact">Sguab às</string>
+    <string name="menu_change_photo">Atharraich an dealbh</string>
+    <string name="menu_create_contact_shortcut">Cuir air an sgrìn dachaigh</string>
+    <string name="menu_call">Cuir fòn gun neach-aithne</string>
+    <string name="menu_sendSMS">Cuir teacsa gun neach-aithne</string>
+    <string name="menu_splitAggregate">Dì-cheangail</string>
+    <string name="menu_editGroup">Deasaich</string>
+    <string name="menu_deleteGroup">Sguab às</string>
+    <string name="menu_new_contact_action_bar">Cuir neach-aithne ris</string>
+    <string name="menu_new_group_action_bar">Cuir buidheann ris</string>
+    <string name="splitConfirmation">Am bris thu ceanglaichean an neach-aithne seo ’na iomadh luchd-aithne?</string>
+    <string name="splitConfirmation_positive_button">Dì-cheangail</string>
+    <string name="splitConfirmationWithPendingChanges">An sàbhail thu na dh’atharraich thu mu thràth ’s am bris thu ceanglaichean an neach-aithne seo ’na iomadh luchd-aithne?</string>
+    <string name="splitConfirmationWithPendingChanges_positive_button">Sàbhail is dì-cheangail</string>
+    <string name="joinConfirmation">An sàbhail thu na dh’atharraich thu mu thràth ’s an dèan thu ceangal ris an neach-aithne a thagh thu?</string>
+    <string name="joinConfirmation_positive_button">Sàbhail is ceangail</string>
+    <string name="menu_joinAggregate">Ceangail</string>
+    <string name="menu_save">Sàbhail</string>
+    <string name="titleJoinContactDataWith">Ceangail an luchd-aithne</string>
+    <string name="blurbJoinContactDataWith">Tagh an neach-aithne a bu toigh leat ceangal ri <xliff:g id="name">%s</xliff:g>:</string>
+    <string name="showAllContactsJoinItem">Seall an luchd-aithne gu lèir</string>
+    <string name="separatorJoinAggregateSuggestions">Luchd-aithne a mholamaid</string>
+    <string name="separatorJoinAggregateAll">A h-uile neach-aithne</string>
+    <string name="contactsJoinedMessage">Chaidh an luchd-aithne a cheangal</string>
+    <plurals name="contacts_deleted_toast">
+        <item quantity="one">Chaidh an neach-aithne a sguabadh às</item>
+        <item quantity="two">Chaidh an luchd-aithne a sguabadh às</item>
+        <item quantity="few">Chaidh an luchd-aithne a sguabadh às</item>
+        <item quantity="other">Chaidh an luchd-aithne a sguabadh às</item>
+    </plurals>
+    <string name="menu_set_ring_tone">Suidhich seirm</string>
+    <string name="menu_redirect_calls_to_vm">Gach gairm dhan phost-ghutha</string>
+    <string name="readOnlyContactWarning">Chan urrainn dhut luchd-aithne o na cunntasan ri an leughadh a-mhàin agad a sguabadh às ach ’s urrainn dhut am falach fhathast.</string>
+    <string name="readOnlyContactWarning_positive_button">Cuir am falach</string>
+    <string name="readOnlyContactDeleteConfirmation">Tha fiosrachadh o iomadh chunntas aig an neach-aithne a bu toigh leat sguabadh às. Cha dèid am fiosrachadh o chunntasan ri an leughadh a-mhàin a sguabadh as ach falach.</string>
+    <string name="batch_link_single_contact_warning">Feumaidh tu iomadh neach-aithne a thaghadh mus ceangail thu ri chèile iad.</string>
+    <string name="batch_link_confirmation">An ceangail thu an luchd-aithne a thagh thu ri chèile?</string>
+    <string name="batch_link_confirmation_positive_button">Ceanglaidh</string>
+    <string name="single_delete_confirmation">A bheil thu airson an neach-aithne seo a sguabadh às?</string>
+    <string name="batch_delete_confirmation">A bheil thu airson an luchd-aithne a thagh thu a sguabadh às?</string>
+    <string name="batch_delete_read_only_contact_confirmation">Chan urrainn dhut luchd-aithne o na cunntasan ri an leughadh a-mhàin agad a sguabadh às ach ’s urrainn dhut am falach fhathast.</string>
+    <string name="batch_delete_multiple_accounts_confirmation">Tha fiosrachadh o iomadh cunntas aig an luchd-aithne a bu toigh leat sguabadh às. Cha dèid am fiosrachadh o chunntasan ri an leughadh a-mhàin a sguabadh as ach falach.</string>
+    <string name="multipleContactDeleteConfirmation">Ma sguabas tu às an neach-aithne seo, thèid fiosrachadh a thoirt air falbh o iomadh chunntas.</string>
+    <string name="deleteConfirmation">A bheil thu airson an neach-aithne seo a sguabadh às?</string>
+    <string name="deleteConfirmation_positive_button">Sguab às</string>
+    <string name="menu_discard">Tilg air falbh na h-atharraichean</string>
+    <string name="invalidContactMessage">Chan eil an neach-aithne seo ann.</string>
+    <string name="createContactShortcutSuccessful_NoName">Chaidh an neach-aithne a chur ris an sgrìn dachaigh.</string>
+    <string name="createContactShortcutSuccessful">Chaidh <xliff:g id="name">%s</xliff:g> a chur ris an sgrìn dachaigh.</string>
+    <string name="pickerNewContactHeader">Cruthaich neach-aithne ùr</string>
+    <string name="pickerNewContactText">Cruthaich neach-aithne ùr</string>
+    <string-array name="otherLabels">
+        <item>Buidheann</item>
+        <item>An aire</item>
+    </string-array>
+    <string name="photoPickerNotFoundText" product="tablet">Chan eil dealbh sam bith air an tablaid.</string>
+    <string name="photoPickerNotFoundText" product="default">Chan eil dealbh sam bith air an fhòn.</string>
+    <string name="attach_photo_dialog_title">Dealbh an neach-aithne</string>
+    <string name="customLabelPickerTitle">Ainm leubail ghnàthaichte</string>
+    <string name="send_to_voicemail_checkbox">Cuir na gairmean dhan phost-ghutha sa bhad</string>
+    <string name="removePhoto">Thoir air falbh an dealbh</string>
+    <string name="noContacts">Chan eil neach-aithne ann</string>
+    <string name="noGroups">Chan eil buidheann ann.</string>
+    <string name="noAccounts">Feumaidh tu cunntas mus cruthaich thu buidheann.</string>
+    <string name="emptyGroup">Chan eil duine sam bith sa bhuidheann seo.</string>
+    <string name="addPeopleToGroup">Deasaich am buidheann airson neach no dhà a cur ris.</string>
+    <string name="savingContact">A’ sàbhaladh an neach-aithne\u2026</string>
+    <string name="contactUnlinkedToast">Chaidh ceangal an luchd-aithne a briseadh</string>
+    <string name="contactSavedToast">Chaidh an neach-aithne a shàbhaladh.</string>
+    <string name="contactSavedErrorToast">Cha b’ urrainn dhuinn na dh’atharraich thu air an neach-aithne a shàbhaladh.</string>
+    <string name="contactUnlinkErrorToast">Cha b’ urrainn dhuinn ceangal an neach-aithne a briseadh.</string>
+    <string name="contactJoinErrorToast">Cha b’ urrainn dhuinn an neach-aithne seo a cheangal.</string>
+    <string name="contactGenericErrorToast">Mearachd a’ sàbhaladh an neach-aithne.</string>
+    <string name="contactPhotoSavedErrorToast">Cha b’ urrainn dhuinn na dh’atharraich thu air dealbh an neach-aithne a shàbhaladh.</string>
+    <string name="groupSavedToast">Chaidh am buidheann a shàbhaladh.</string>
+    <string name="groupSavedErrorToast">Cha b’ urrainn dhuinn na dh’atharraich thu air a’ bhuidheann a shàbhaladh.</string>
+    <plurals name="listTotalPhoneContacts">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> neach-aithne le àireamh fòn</item>
+        <item quantity="two"><xliff:g id="count">%d</xliff:g> luchd-aithne le àireamh fòn</item>
+        <item quantity="few"><xliff:g id="count">%d</xliff:g> luchd-aithne le àireamh fòn</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> luchd-aithne le àireamh fòn</item>
+    </plurals>
+    <string name="listTotalPhoneContactsZero">Chan eil neach-aithne le àireamh fòn ann</string>
+    <plurals name="listFoundAllContacts">
+        <item quantity="one">Chaidh <xliff:g id="count">%d</xliff:g> a lorg</item>
+        <item quantity="two">Chaidh <xliff:g id="count">%d</xliff:g> a lorg</item>
+        <item quantity="few">Chaidh <xliff:g id="count">%d</xliff:g> a lorg</item>
+        <item quantity="other">Chaidh <xliff:g id="count">%d</xliff:g> a lorg</item>
+    </plurals>
+    <string name="listFoundAllContactsZero">Chan eil neach-aithne ann</string>
+    <plurals name="searchFoundContacts">
+        <item quantity="one">Chaidh <xliff:g id="count">%d</xliff:g> a lorg</item>
+        <item quantity="two">Chaidh <xliff:g id="count">%d</xliff:g> a lorg</item>
+        <item quantity="few">Chaidh <xliff:g id="count">%d</xliff:g> a lorg</item>
+        <item quantity="other">Chaidh <xliff:g id="count">%d</xliff:g> a lorg</item>
+    </plurals>
+    <string name="all_contacts_tab_label">Na h-uile</string>
+    <string name="favorites_tab_label">Annsachdan</string>
+    <string name="callBack">Fònaig air ais</string>
+    <string name="callAgain">Cuir fòn a-rithist</string>
+    <string name="returnCall">Cuir fòn air ais</string>
+    <string name="add_contact_dlg_message_fmt">An cuir thu “<xliff:g id="email">%s</xliff:g>” ris an luchd-aithne?</string>
+    <string name="description_contact_photo">dealbh an neach-aithne</string>
+    <string name="description_plus_button">plus</string>
+    <string name="exporting_contact_list_progress"><xliff:g id="current_number">%s</xliff:g> à <xliff:g id="total_number">%s</xliff:g> luchd-aithne</string>
+    <string name="search_settings_description">Ainmean an luchd-aithne agad</string>
+    <string name="quickcontact_missing_app">Cha do lorg sinn aplacaid a làimhsicheas an gnìomh seo.</string>
+    <string name="quickcontact_transparent_view_description">Briog a thilleadh dhan sgrìn roimhpe</string>
+    <string name="quickcontact_add_phone_number">Cuir àireamh fòn ris</string>
+    <string name="quickcontact_add_email">Cuir post-d ris</string>
+    <string name="missing_app">Cha do lorg sinn aplacaid a làimhsicheas an gnìomh seo.</string>
+    <string name="menu_share">Co-roinn</string>
+    <string name="menu_add_contact">Cuir ris an luchd-aithne</string>
+    <string name="share_via">Co-roinn an neach-aithne slighe</string>
+    <string name="dialog_new_group_account">Cruthaich buidheann fon cunntas</string>
+    <string name="audio_chat">Cabadaich gutha</string>
+    <string name="video_chat">Cabadaich video</string>
+    <string name="connections">Ceanglaichean</string>
+    <string name="add_connection_button">Cuir ceangal ris</string>
+    <string name="recent" msgid="2062236709538790412">O chionn goirid</string>
+    <string name="recent_updates" msgid="2018245636796411442">Ùrachaidhean o chionn goirid</string>
+    <string name="account_type_format">Neach-aithne <xliff:g id="source" example="Gmail">%1$s</xliff:g></string>
+    <string name="google_account_type_format">Cunntas <xliff:g id="source" example="Google">%1$s</xliff:g></string>
+    <string name="from_account_format"><xliff:g id="source" example="user@gmail.com">%1$s</xliff:g></string>
+    <string name="contact_read_only">Cha ghabh a dheasachadh leis an aplacaid seo.</string>
+    <string name="group_read_only">Cha ghabh a dheasachadh air an uidheam seo.</string>
+    <string name="take_photo">Tog dealbh</string>
+    <string name="take_new_photo">Tog dealbh ùr</string>
+    <string name="pick_photo">Tagh dealbh</string>
+    <string name="pick_new_photo">Tagh dealbh ùr</string>
+    <string name="upgrade_in_progress">Tha liosta an luchd-aithne ’ga h-ùrachadh.</string>
+    <string name="search_results_searching">’Ga lorg\u2026</string>
+    <string name="menu_display_selected">"Seall an taghadh"</string>
+    <string name="menu_display_all">"Seall na h-uile"</string>
+    <string name="menu_select_all">"Tagh na h-uile"</string>
+    <string name="menu_select_none">"Dì-thagh na h-uile"</string>
+    <string name="add_new_entry_for_section">Cuir rud ùr ris</string>
+    <string name="add_organization">Cuir buidheann ris</string>
+    <string name="event_edit_field_hint_text">Ceann-là</string>
+    <string name="group_edit_field_hint_text">Ainm a’ bhuidhinn</string>
+    <string name="change_photo">Atharraich</string>
+    <string name="primary_photo">Prìomh-dhealbh</string>
+    <string name="description_star">annsachd</string>
+    <string name="edit_contact">Deasaich an neach-aithne</string>
+    <string name="aggregation_suggestion_join_dialog_message">An ceangail thu
+        an neach-aithne làithreach ’s am fear a thagh thu ri chèile?</string>
+    <string name="aggregation_suggestion_edit_dialog_message">A bheil thu airson
+        an neach-aithne a thagh thu a dheasachadh? Thèid gach fiosrachadh a chuir thu a-steach gu ruige seo a chumail.</string>
+    <string name="menu_copyContact">Cuir lethbhreac dheth dhan luchd-aithne agam</string>
+    <string name="add_to_my_contacts">Cuir ris an luchd-aithne agam</string>
+    <string name="contact_directory_description">Eòlaire <xliff:g id="type" example="Corporate Directory">%1$s</xliff:g></string>
+    <string name="list_filter_custom">Gnàthaichte</string>
+    <string name="activity_title_settings">Roghainnean</string>
+    <string name="menu_settings" msgid="377929915873428211">Roghainnean</string>
+    <string name="menu_help">Taic ⁊ beachd thugainn</string>
+    <string name="preference_displayOptions">Roghainnean taisbeanaidh</string>
+    <string name="organization_company_and_title"><xliff:g id="company" example="Technical Program Manager">%2$s</xliff:g>, <xliff:g id="company" example="Google Inc.">%1$s</xliff:g></string>
+    <string name="non_phone_caption">Àireamh fòn</string>
+    <string name="non_phone_add_to_contacts">Cuir ris an luchd-aithne</string>
+    <string name="activity_title_confirm_add_detail">Cuir ris an neach-aithne</string>
+    <string name="non_phone_close">Dùin</string>
+    <string name="widget_name_and_phonetic"><xliff:g id="display_name" example="John Huber">%1$s</xliff:g> (<xliff:g id="phonetic_name">%2$s</xliff:g>)</string>
+    <string name="date_year_toggle">Gabh a-steach am bliadhna</string>
+    <string name="social_widget_label">Neach-aithne</string>
+    <string name="social_widget_loading">’Ga luchdadh\u2026</string>
+    <string name="contacts_unavailable_create_contact">Cruthaich neach-aithne ùr</string>
+    <string name="contacts_unavailable_add_account">Cuir cunntas ris</string>
+    <string name="contacts_unavailable_import_contacts">Ion-phortaich luchd-aithne</string>
+    <string name="create_group_dialog_title">Cruthaich buidheann ùr</string>
+    <string name="create_group_item_label">Cruthaich buidheann ùr</string>
+    <plurals name="num_groups_in_account">
+        <item quantity="one"><xliff:g id="count">%0$d</xliff:g> bhuidheann</item>
+        <item quantity="two"><xliff:g id="count">%0$d</xliff:g> bhuidheann</item>
+        <item quantity="few"><xliff:g id="count">%0$d</xliff:g> buidhnean</item>
+        <item quantity="other"><xliff:g id="count">%0$d</xliff:g> buidheann</item>
+    </plurals>
+    <string name="delete_group_dialog_message">An sguab thu às am bhuidheann
+      “<xliff:g id="group_label" example="Friends">%1$s</xliff:g>”?
+      (Cha dèid an luchd-aithne fèin a sguabadh às.)
+    </string>
+    <plurals name="num_contacts_in_group">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> neach o <xliff:g id="account_type">%2$s</xliff:g></item>
+        <item quantity="two"><xliff:g id="count">%1$d</xliff:g> daoine o <xliff:g id="account_type">%2$s</xliff:g></item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> daoine o <xliff:g id="account_type">%2$s</xliff:g></item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> daoine o <xliff:g id="account_type">%2$s</xliff:g></item>
+    </plurals>
+    <plurals name="group_list_num_contacts_in_group">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> neach</item>
+        <item quantity="two"><xliff:g id="count">%1$d</xliff:g> daoine</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> daoine</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> daoine</item>
+    </plurals>
+    <string name="toast_join_with_empty_contact">Sgrìobh ainm neach-aithne
+      mus ceangail thu ri fear eile e.
+    </string>
+    <string name="copy_text">Cuir lethbhreac dheth air an stòr-bhòrd</string>
+    <string name="set_default">Suidhich mar a’ bhun-roghainn</string>
+    <string name="clear_default">Falamhaich a’ bhun-roghainn</string>
+    <string name="toast_text_copied">Chaidh lethbhreac dhen teacsa a dhèanamh</string>
+    <string name="cancel_confirmation_dialog_message">An tilg thu air falbh na h-atharraichean agad a dh’fhàgail an deasachaidh?</string>
+    <string name="cancel_confirmation_dialog_cancel_editing_button">Tilg air falbh</string>
+    <string name="cancel_confirmation_dialog_keep_editing_button">Cùm ort ’ga dheasachadh</string>
+    <string name="call_type_and_date">        <xliff:g id="call_type" example="Friends">%1$s</xliff:g>  <xliff:g id="call_short_date" example="Friends">%2$s</xliff:g>
+    </string>
+    <string name="profile_display_name">Suidhich a’ phròifil agam</string>
+    <string name="enter_contact_name">Sgrìobh ainm an neach</string>
+    <string name="group_name_hint">Ainm a’ bhuidhinn</string>
+    <string name="local_profile_title">A’ phròifil ionadail agam</string>
+    <string name="external_profile_title">A’ phròifil agam air <xliff:g id="external_source">%1$s</xliff:g></string>
+    <string name="toast_displaying_all_contacts">A’ sealltainn an luchd-aithne gu lèir</string>
+    <string name="generic_no_account_prompt">Cùm an luchd-aithne agad sàbhailte fiù ’s ma chailleas tu am fòn agad: sioncronaich le seirbheis air loidhne iad.</string>
+    <string name="generic_no_account_prompt_title">Cuir cunntas ris</string>
+    <string name="contact_editor_prompt_zero_accounts">Cha dèid lethbhreac-glèidhidh a dhèanamh dhan neach-aithne ùr. An cruthaich thu cunntas a nì lethbhreac-glèidhidh dhen luchd-aithne agad air loidhne?</string>
+    <string name="contact_editor_prompt_one_account">Thèid luchd-aithne ùr a shàbhaladh gu <xliff:g id="account_name">%1$s</xliff:g>.</string>
+    <string name="contact_editor_prompt_multiple_accounts">Tagh cunntas bunaiteach dhan luchd-aithne ùr:</string>
+    <string name="contact_editor_title_new_contact">Cuir neach-aithne ùr ris</string>
+    <string name="contact_editor_title_existing_contact">Deasaich an neach-aithne</string>
+    <string name="keep_local">Cùm gu h-ionadail e</string>
+    <string name="add_account">Cuir cunntas ris</string>
+    <string name="add_new_account">Cuir cunntas ùr ris</string>
+    <string name="menu_export_database">Às-phortaich faidhlichean an stòir-dhàta</string>
+    <string name="action_menu_add_new_contact_button">cuir neach-aithne ùr ris</string>
+    <string name="expanding_entry_card_view_see_more">Seall barrachd</string>
+    <string name="expanding_entry_card_view_see_less">Seall nas lugha</string>
+    <string name="expanding_entry_card_view_see_all">Seall na h-uile</string>
+    <string name="recent_card_title">O chionn goirid</string>
+    <string name="about_card_title">Mu dhèidhinn</string>
+    <string name="send_message">Cuir teachdaireachd</string>
+    <string name="toast_making_personal_copy">A’ cruthachadh lethbhreac pearsanta dheth...</string>
+    <string name="yesterday">An-dè</string>
+    <string name="tomorrow">A-màireach</string>
+    <string name="today">An-diugh</string>
+    <string name="today_at_time_fmt">"An-diugh aig <xliff:g id="time_interval">%s</xliff:g>"</string>
+    <string name="tomorrow_at_time_fmt">"A-màireach aig <xliff:g id="time_interval">%s</xliff:g>"</string>
+    <string name="date_time_fmt">"<xliff:g id="date">%s</xliff:g> aig <xliff:g id="time_interval">%s</xliff:g>"</string>
+    <string name="untitled_event">(Tachartas gun tiotal)</string>
+    <string name="date_time_set">Suidhich</string>
+    <string name="header_im_entry">Grad-theachdaireachd</string>
+    <string name="header_organization_entry">Buidheann</string>
+    <string name="header_nickname_entry">Far-ainm</string>
+    <string name="header_note_entry">Nòta</string>
+    <string name="header_website_entry">Làrach-lìn</string>
+    <string name="header_event_entry">Tachartas</string>
+    <string name="header_relation_entry">Dàimh</string>
+    <string name="header_account_entry">Cunntas</string>
+    <string name="header_name_entry">Ainm</string>
+    <string name="header_email_entry">Post-d</string>
+    <string name="header_phone_entry">Fòn</string>
+    <string name="header_photo_entry">Dealbh</string>
+    <string name="content_description_expand_editor">Briog a leudachadh deasaiche an luchd-aithne.</string>
+    <string name="content_description_collapse_editor">Briog a cho-theannachadh deasaiche an luchd-aithne.</string>
+    <string name="content_description_directions">stiùireadh dhan ionad</string>
+    <string name="content_description_recent_sms">sms o chionn goirid. <xliff:g id="message_body">%s</xliff:g>. <xliff:g id="phone_number">%s</xliff:g>. <xliff:g id="date">%s</xliff:g>. briog airson freagairt</string>
+    <string name="content_description_recent_call_type_incoming">a-steach</string>
+    <string name="content_description_recent_call_type_outgoing">a-mach</string>
+    <string name="content_description_recent_call_type_missed">na dh’fhalbh ort</string>
+    <string name="content_description_recent_call">gairm o chionn goirid. <xliff:g id="call_type">%s</xliff:g>. <xliff:g id="phone_number">%s</xliff:g>. <xliff:g id="date">%s</xliff:g>. briog airson fòn a chur air ais</string>
+    <string name="message_from_you_prefix">Thusa: <xliff:g id="sms_body">%s</xliff:g></string>
+    <string name="contact_editor_hangouts_im_alert">Obraichidh Hangouts nas fheàrr ma chuireas tu aithnichear Hangouts an neach san raon puist-d no fòn. </string>
+    <string name="compact_editor_more_fields">Barrachd raointean</string>
+    <string name="compact_editor_change_photo_content_description">Atharraich an dealbh</string>
+    <string name="compact_editor_failed_to_load">Dh’fhàillig le fosgladh an deasaiche.</string>
+    <string name="compact_editor_account_selector_title">Thèid a shàbhaladh gu</string>
+    <string name="compact_editor_account_selector_description">Thèid a shàbhaladh gu <xliff:g id="account_name">%s</xliff:g>. Thoir gnogag dhùbailte airson cunntas eile a thaghadh.</string>
+    <plurals name="compact_editor_linked_contacts_selector_title">
+        <item quantity="one">Neach-aithne ceangailte</item>
+        <item quantity="two">Luchd-aithne ceangailte (<xliff:g id="count">%d</xliff:g>)</item>
+        <item quantity="few">Luchd-aithne ceangailte (<xliff:g id="count">%d</xliff:g>)</item>
+        <item quantity="other">Luchd-aithne ceangailte (<xliff:g id="count">%d</xliff:g>)</item>
+    </plurals>
+    <string name="quickcontact_contacts_number">Tha <xliff:g id="count">%d</xliff:g> luchd-aithne ceangailte ris</string>
+    <string name="quick_contact_display_name_with_phonetic"><xliff:g id="display_name">%s</xliff:g> (<xliff:g id="phonetic_name">%s</xliff:g>)</string>
+    <string name="quickcontact_suggestion_link_button">CEANGAIL AN LUCHD-AITHNE</string>
+    <string name="quickcontact_suggestion_cancel_button">SGUIR DHETH</string>
+    <plurals name="quickcontact_suggestion_card_title">
+        <item quantity="one">1 le coltas dùblachaidh air</item>
+        <item quantity="two"><xliff:g id="count">%d</xliff:g> le coltas dùblachaidh orra</item>
+        <item quantity="few"><xliff:g id="count">%d</xliff:g> le coltas dùblachaidh orra</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> le coltas dùblachaidh orra</item>
+    </plurals>
+    <plurals name="quickcontact_suggestions_number">
+        <item quantity="one">Tha 1 neach-aithne ceangailte ris</item>
+        <item quantity="two">Tha <xliff:g id="count">%d</xliff:g> luchd-aithne ceangailte ris</item>
+        <item quantity="few">Tha <xliff:g id="count">%d</xliff:g> luchd-aithne ceangailte ris</item>
+        <item quantity="other">Tha <xliff:g id="count">%d</xliff:g> luchd-aithne ceangailte ris</item>
+    </plurals>
+    <plurals name="quickcontact_suggestion_account_type_number">
+        <item quantity="one">(<xliff:g id="count">%d</xliff:g>)</item>
+        <item quantity="two">(<xliff:g id="count">%d</xliff:g>)</item>
+        <item quantity="few">(<xliff:g id="count">%d</xliff:g>)</item>
+        <item quantity="other">(<xliff:g id="count">%d</xliff:g>)</item>
+    </plurals>
+    <string name="quickcontact_suggestion_account_type"><xliff:g id="account_type">%s</xliff:g><xliff:g id="account_type_number">%s</xliff:g></string>
+    <string name="suggestion_card_this_contact_title">An neach-aithne seo</string>
+    <string name="suggestion_card_duplicates_title">Feadhainn le coltas dùblachaidh orra</string>
+    <string name="suggestion_card_help_message">Dh’fhaoidte gur e an t-aon neach a tha san luchd-aithne seo. ’S urrainn dhut an ceangal ri chèile mar aon neach-aithne.</string>
+    <string name="compact_editor_linked_contacts_title">Luchd-aithne ceangailte</string>
+    <string name="from_your_accounts">O na cunntasan agad</string>
+    <string name="take_a_photo_button">Tog dealbh</string>
+    <string name="all_photos_button">A h-uile dealbh</string>
+    <string name="photo_picker_title">Tagh dealbh</string>
+    <string name="contact_from_account_name">O <xliff:g id="account_name">%s</xliff:g></string>
+    <string name="editor_delete_view_description">Sguab às <xliff:g id="data_kind">%s</xliff:g> <xliff:g id="data_type">%s</xliff:g></string>
+    <string name="editor_delete_view_description_short">Sguab às <xliff:g id="data_kind">%s</xliff:g></string>
+    <string name="photo_view_description_not_checked">Cha deach an dealbh o <xliff:g id="user_name">%s</xliff:g> <xliff:g id="account_type">%s</xliff:g> a thaghadh</string>
+    <string name="photo_view_description_checked">Chaidh an dealbh o <xliff:g id="user_name">%s</xliff:g> <xliff:g id="account_type">%s</xliff:g> a thaghadh</string>
+    <string name="photo_view_description_not_checked_no_info">Cha deach an dealbh o chunntas nach aithne dhuinn a thaghadh</string>
+    <string name="photo_view_description_checked_no_info">Chaidh an dealbh o chunntas nach aithne dhuinn a thaghadh</string>
+    <string name="locale_change_in_progress">Tha liosta an luchd-aithne ’ga h-ùrachadh le atharrachadh do chànain.\n\nFuirich ort…</string>
+    <string name="menu_blocked_numbers">Àireamhan bacte</string>
+</resources>

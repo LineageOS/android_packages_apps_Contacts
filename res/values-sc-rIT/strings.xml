@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2006 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="applicationLabel">Cuntatos</string>
+    <string name="launcherActivityLabel">Cuntatos</string>
+    <string name="contactsList">Cuntatos</string>
+    <string name="shortcutContact">Cuntata</string>
+    <string name="shortcutDialContact">Marcadura dereta</string>
+    <string name="shortcutMessageContact">Messàgiu deretu</string>
+    <string name="shortcutActivityTitle">Sèbera unu curtziadòrgiu pro su cuntatu</string>
+    <string name="callShortcutActivityTitle">Sèbera unu nùmeru de mutire</string>
+    <string name="messageShortcutActivityTitle">Sèbera unu nùmeru pro su messàgiu</string>
+    <string name="contactInsertOrEditActivityTitle">Agiùnghe a cuntatu</string>
+    <string name="contactPickerActivityTitle">Sèbera unu cuntatu</string>
+    <string name="header_entry_contact_list_adapter_header_title">Crea unu cuntatu nou</string>
+    <string name="starredList">Preferidos</string>
+    <string name="frequentList">Fitianos</string>
+    <string name="strequentList">Preferidos</string>
+    <string name="viewContactTitle">Detàllios de su cuntatu</string>
+    <string name="editContactDescription">Modìfica cuntatu</string>
+    <string name="insertContactDescription">Crea cuntatu</string>
+    <string name="editGroupDescription">Modìfica grupu</string>
+    <string name="insertGroupDescription">Crea grupu</string>
+    <string name="contactDetailAbout">In contu de</string>
+    <string name="contactDetailUpdates">Agiornamentos</string>
+    <string name="searchHint">Chirca cuntatos</string>
+    <string name="menu_viewContact">Visualiza cuntatu</string>
+    <string name="menu_addStar">Agiunghe a is preferidos</string>
+    <string name="menu_removeStar">Boga·nche dae preferidos</string>
+    <string name="description_action_menu_remove_star">Bogadu dae is preferidos</string>
+    <string name="description_action_menu_add_star">Agiuntu a is preferidos</string>
+    <string name="menu_editContact">Modìfica</string>
+    <string name="menu_deleteContact">Cantzella</string>
+    <string name="menu_change_photo">Muda sa fotografia</string>
+    <string name="menu_create_contact_shortcut">Pone in sa pàgina printzipale</string>
+    <string name="menu_call">Muti cuntatu</string>
+    <string name="menu_sendSMS">Iscrie a su cuntatu</string>
+    <string name="menu_editGroup">Modìfica</string>
+    <string name="menu_deleteGroup">Cantzella</string>
+    <string name="menu_new_contact_action_bar">Agiunghe cuntatu</string>
+    <string name="menu_new_group_action_bar">Agiunghe grupu</string>
+    <string name="menu_save">Sarva</string>
+    <string name="showAllContactsJoinItem">Mustra totu is cuntatos</string>
+    <string name="separatorJoinAggregateSuggestions">Cuntatos cussigiados</string>
+    <string name="separatorJoinAggregateAll">Totu is cuntatos</string>
+    <string name="menu_set_ring_tone">Imposta tonu de mutida</string>
+    <string name="menu_redirect_calls_to_vm">Totu is mutidas a sa segreteria telefònica</string>
+    <string name="deleteConfirmation_positive_button">Cantzella</string>
+    <string name="menu_discard">Non sarves sas modìficas</string>
+    <string name="invalidContactMessage">Custu cuntatu no esistit.</string>
+    <string name="pickerNewContactHeader">Crea cuntatu nou</string>
+    <string name="pickerNewContactText">Crea unu cuntatu nou</string>
+    <string-array name="otherLabels">
+        <item>Organizatzione</item>
+        <item>Nota</item>
+    </string-array>
+    <string name="photoPickerNotFoundText" product="tablet">Peruna immàgine a disponimentu in sa tauledda.</string>
+    <string name="photoPickerNotFoundText" product="default">Peruna immàgine a disponimentu in su telèfonu.</string>
+    <string name="attach_photo_dialog_title">Fotografia de cuntatu</string>
+    <string name="customLabelPickerTitle">Nùmene de eticheta personalizadu</string>
+    <string name="send_to_voicemail_checkbox">Imbia is mutidas deretu a sa segreteria</string>
+    <string name="removePhoto">Boga fotografia</string>
+    <string name="noContacts">Perunu cuntatu</string>
+    <string name="noGroups">Perunu grupu.</string>
+    <string name="noAccounts">Pro creare grupos ti serbit unu contu.</string>
+    <string name="emptyGroup">Peruna persone in custu grupu.</string>
+    <string name="addPeopleToGroup">Pro agiùnghere gente, modìfica su grupu.</string>
+    <string name="savingContact">Sarvende cuntatu \u2026</string>
+    <string name="contactSavedToast">Cuntatu sarvadu.</string>
+    <string name="contactSavedErrorToast">No at fatu a sarvare is modìficas de su cuntatu.</string>
+    <string name="contactPhotoSavedErrorToast">No at fatu a sarvare is modìficas de sa fotografia de su cuntatu.</string>
+    <string name="groupSavedToast">Grupu sarvadu.</string>
+    <string name="groupSavedErrorToast">No at fatu a sarvare is modìficas de su grupu.</string>
+    <plurals name="listTotalPhoneContacts">
+        <item quantity="one">1 cuntatu cun nùmeru de telèfonu</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> cuntatos cun nùmeros de telèfonu</item>
+    </plurals>
+    <string name="listTotalPhoneContactsZero">Perunu cuntatu cun nùmeros de telèfonu</string>
+    <plurals name="listFoundAllContacts">
+        <item quantity="one">1 agatadu</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> agatados</item>
+    </plurals>
+    <string name="listFoundAllContactsZero">Perunu cuntatu</string>
+    <plurals name="searchFoundContacts">
+        <item quantity="one">1 agatadu</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> agatados</item>
+    </plurals>
+    <string name="favorites_tab_label">Preferidos</string>
+    <string name="callBack">Torra a mutire</string>
+    <string name="callAgain">Torra a mutire</string>
+    <string name="returnCall">Torra sa mutida</string>
+    <string name="add_contact_dlg_message_fmt">Boles agiùnghere <xliff:g id="email">%s</xliff:g> a is cuntatos?</string>
+    <string name="description_contact_photo">fotografia de su cuntatu</string>
+    <string name="description_plus_button">prus</string>
+    <string name="exporting_contact_list_progress"><xliff:g id="current_number">%s</xliff:g> de <xliff:g id="total_number">%s</xliff:g> cuntatos</string>
+    <string name="search_settings_description">Nùmenes de is cuntatos tuos</string>
+    <string name="quickcontact_missing_app">Peruna aplicatzione agatada pro gestire custa atzione.</string>
+    <string name="quickcontact_transparent_view_description">Incarca pro torrare a s\'ischermu pretzedente</string>
+    <string name="quickcontact_add_phone_number">Agiunghe nùmeru de telèfonu</string>
+    <string name="quickcontact_add_email">Agiunghe posta eletrònica</string>
+    <string name="missing_app">Peruna aplicatzione agatada pro gestire custa atzione.</string>
+    <string name="menu_share">Cumpartzidura</string>
+    <string name="menu_add_contact">Agiunghe a sos cuntatos</string>
+    <string name="share_via">Cumpartzi cuntatu tràmite</string>
+    <string name="dialog_new_group_account">Crea grupu suta su contu</string>
+    <string name="audio_chat">Tzarrada de boghe</string>
+    <string name="video_chat">Tzarrada de vìdeu</string>
+    <string name="connections">Collegamentos</string>
+    <string name="add_connection_button">Agiunghe connessione</string>
+    <string name="recent" msgid="2062236709538790412">Reghente</string>
+    <string name="recent_updates" msgid="2018245636796411442">Atualizatziones reghentes</string>
+    <string name="account_type_format">Cuntatu de &lt;xliff:g id="source" example="Gmail"&gt;%1$s%1$s</string>
+    <string name="google_account_type_format">Contu de <xliff:g id="source" example="Google">%1$s</xliff:g></string>
+    <string name="from_account_format"><xliff:g id="source" example="user@gmail.com">%1$s</xliff:g></string>
+    <string name="contact_read_only">Non faghet a editare dae custa aplicatzione.</string>
+    <string name="group_read_only">Non faghet a editare dae custu dispositivu.</string>
+    <string name="take_photo">Faghe una fotografia</string>
+    <string name="take_new_photo">Faghe una fotografia noa</string>
+    <string name="pick_photo">Sèbera una fotografia</string>
+    <string name="pick_new_photo">Seletziona una fotografia noa</string>
+    <string name="upgrade_in_progress">Sa lista de cuntatos s\'est agiornende.</string>
+    <string name="search_results_searching">Chirchende \u2026</string>
+    <string name="menu_display_selected">"Mustra seletzionados"</string>
+    <string name="menu_display_all">"Mustra totu"</string>
+    <string name="menu_select_all">"Seletziona totu"</string>
+    <string name="menu_select_none">"Annulla sa seletzione"</string>
+    <string name="add_new_entry_for_section">Agiunghe nou</string>
+    <string name="add_organization">Agiunghe organizatzione</string>
+    <string name="event_edit_field_hint_text">Data</string>
+    <string name="group_edit_field_hint_text">Nùmene de su grupu</string>
+    <string name="change_photo">Càmbia</string>
+    <string name="primary_photo">Fotografia primària</string>
+    <string name="description_star">preferidos</string>
+    <string name="edit_contact">Modìfica cuntatu</string>
+    <string name="aggregation_suggestion_edit_dialog_message">Passare a sa modìfica
+        de su cuntatu seletzionadu? Is informatziones insertadas finas a immoe s\'ant a copiare.</string>
+    <string name="menu_copyContact">Còpia in is cuntatos mios</string>
+    <string name="add_to_my_contacts">Agiunghe a is cuntatos mios</string>
+    <string name="contact_directory_description">Cartella <xliff:g id="type" example="Corporate Directory">%1$s</xliff:g></string>
+    <string name="list_filter_custom">Personaliza</string>
+    <string name="activity_title_settings">Impostatziones</string>
+    <string name="menu_settings" msgid="377929915873428211">Impostatziones</string>
+    <string name="menu_help">Agiudu e isceda</string>
+    <string name="preference_displayOptions">Sèberos de visualizatzione</string>
+    <string name="organization_company_and_title"><xliff:g id="company" example="Technical Program Manager">%2$s</xliff:g>, <xliff:g id="company" example="Google Inc.">%1$s</xliff:g></string>
+    <string name="non_phone_caption">Nùmeru de telèfonu</string>
+    <string name="non_phone_add_to_contacts">Agiunghe a sos cuntatos</string>
+    <string name="activity_title_confirm_add_detail">Agiunghe a cuntatu</string>
+    <string name="non_phone_close">Serra</string>
+    <string name="widget_name_and_phonetic"><xliff:g id="display_name" example="John Huber">%1$s</xliff:g> (<xliff:g id="phonetic_name">%2$s</xliff:g>)</string>
+    <string name="social_widget_label">Cuntata</string>
+    <string name="social_widget_loading">Carrighende\u2026</string>
+    <string name="contacts_unavailable_create_contact">Crea unu cuntatu nou</string>
+    <string name="contacts_unavailable_add_account">Agiunghe contu</string>
+    <string name="contacts_unavailable_import_contacts">Importa cuntatos</string>
+    <string name="create_group_dialog_title">Crea unu grupu nou</string>
+    <string name="create_group_item_label">Crea unu grupu nou</string>
+    <plurals name="num_groups_in_account">
+        <item quantity="one">1 grupu</item>
+        <item quantity="other"><xliff:g id="count">%0$d</xliff:g> grupos</item>
+    </plurals>
+    <string name="delete_group_dialog_message">Cantzellare su grupu
+      \"<xliff:g id="group_label" example="Friends">%1$s</xliff:g>\"?
+      (Is cuntatos non s\'ant a cantzellare.)
+    </string>
+    <plurals name="num_contacts_in_group">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> persone dae <xliff:g id="account_type">%2$s</xliff:g></item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> persones dae <xliff:g id="account_type">%2$s</xliff:g></item>
+    </plurals>
+    <plurals name="group_list_num_contacts_in_group">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> persone</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> persones</item>
+    </plurals>
+    <string name="copy_text">Còpia in punta de billete</string>
+    <string name="set_default">Imposta comente predefinidu</string>
+    <string name="clear_default">Non dd\'impostes comente predefinidu</string>
+    <string name="toast_text_copied">Testu copiadu</string>
+    <string name="call_type_and_date">        <xliff:g id="call_type" example="Friends">%1$s</xliff:g>  <xliff:g id="call_short_date" example="Friends">%2$s</xliff:g>
+    </string>
+    <string name="profile_display_name">Cunfigura su profilu miu</string>
+    <string name="enter_contact_name">Iscrie su nùmene de sa persone</string>
+    <string name="group_name_hint">Nùmene de su grupu</string>
+    <string name="local_profile_title">Profilu miu locale</string>
+    <string name="external_profile_title">Su profilu miu de <xliff:g id="external_source">%1$s</xliff:g></string>
+    <string name="toast_displaying_all_contacts">Mustrende totu is cuntatos</string>
+    <string name="generic_no_account_prompt">Mantene sarvos is cuntatos tuos fintzas si perdes su telèfonu: sincroniza cun unu servìtziu in lìnia.</string>
+    <string name="generic_no_account_prompt_title">Agiunghe unu contu</string>
+    <string name="contact_editor_prompt_zero_accounts">Non s\'at a fàghere sa còpia de seguresa de su cuntatu nou. Boles agiùnghere unu contu chi fatzat sa còpia de seguresa de is cuntatos in lìnia?</string>
+    <string name="contact_editor_title_new_contact">Agiunghe cuntatu nou</string>
+    <string name="contact_editor_title_existing_contact">Modìfica su cuntatu</string>
+    <string name="keep_local">Mantene in locale</string>
+    <string name="add_account">Agiunghe contu</string>
+    <string name="add_new_account">Agiunghe unu contu nou</string>
+    <string name="menu_export_database">Esporta archìvios de base de datos</string>
+    <string name="action_menu_add_new_contact_button">agiùnghere cuntatu nou</string>
+    <string name="expanding_entry_card_view_see_more">Bide de prus</string>
+    <string name="expanding_entry_card_view_see_less">Bide prus pagu</string>
+    <string name="expanding_entry_card_view_see_all">Bide totu</string>
+    <string name="recent_card_title">Reghente</string>
+    <string name="about_card_title">In contu de</string>
+    <string name="send_message">Imbia messàgiu</string>
+    <string name="toast_making_personal_copy">Creende una còpia personale...</string>
+    <string name="yesterday">Eris</string>
+    <string name="tomorrow">Cras</string>
+    <string name="today">Oe</string>
+    <string name="today_at_time_fmt">"Oe a is <xliff:g id="time_interval">%s</xliff:g>"</string>
+    <string name="tomorrow_at_time_fmt">"Cras a is <xliff:g id="time_interval">%s</xliff:g>"</string>
+    <string name="date_time_fmt">"<xliff:g id="date">%s</xliff:g>, <xliff:g id="time_interval">%s</xliff:g>"</string>
+    <string name="untitled_event">(Eventu chene tìtulu)</string>
+    <string name="date_time_set">Imposta</string>
+    <string name="header_im_entry">Messagìstica istantànea</string>
+    <string name="header_organization_entry">Organizatzione</string>
+    <string name="header_nickname_entry">Nùmene</string>
+    <string name="header_note_entry">Nota</string>
+    <string name="header_website_entry">Situ ìnternet</string>
+    <string name="header_event_entry">Eventu</string>
+    <string name="header_relation_entry">Relatzione</string>
+    <string name="header_account_entry">Contu</string>
+    <string name="header_name_entry">Nùmene</string>
+    <string name="header_email_entry">Posta eletrònica</string>
+    <string name="header_phone_entry">Telèfonu</string>
+    <string name="header_photo_entry">Fotografia</string>
+    <string name="content_description_expand_editor">Incarca pro ispaniare d\'editore de cuntatos.</string>
+    <string name="content_description_collapse_editor">Incarca pro minimare s\'editore de cuntatos.</string>
+    <string name="content_description_directions">inditos a sa positzione</string>
+    <string name="content_description_recent_sms">sms reghente. <xliff:g id="message_body">%s</xliff:g>. <xliff:g id="phone_number">%s</xliff:g>. <xliff:g id="date">%s</xliff:g> incarca pro rispòndere</string>
+    <string name="content_description_recent_call_type_incoming">in intrada</string>
+    <string name="content_description_recent_call_type_outgoing">in essida</string>
+    <string name="content_description_recent_call_type_missed">pèrdidas</string>
+    <string name="content_description_recent_call">mutida reghente. <xliff:g id="call_type">%s</xliff:g>. <xliff:g id="phone_number">%s</xliff:g>. <xliff:g id="date">%s</xliff:g>. incarca pro torrare a mutire</string>
+    <string name="message_from_you_prefix">Tue: <xliff:g id="sms_body">%s</xliff:g></string>
+    <string name="contact_editor_hangouts_im_alert">Hangouts funtzionat mègius cando insertas s\'identificadore Hangouts de sa persone in su campu de sa posta eletrònica o de su telèfonu.</string>
+    <string name="compact_editor_change_photo_content_description">Muda sa fotografia</string>
+    <string name="quick_contact_display_name_with_phonetic"><xliff:g id="display_name">%s</xliff:g> (<xliff:g id="phonetic_name">%s</xliff:g>)</string>
+    <string name="photo_picker_title">Sèbera una fotografia</string>
+</resources>

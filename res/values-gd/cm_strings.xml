@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (c) 2011-2013, The Linux Foundation. All rights reserved.
+     Copyright (C) 2014-2015 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="contactSavedToSimCardError">Cha b’ urrainn dhuinn an luchd-aithne a thagh thu a shàbhaladh air a’ chairt SIM</string>
+    <string name="airplane_mode_on">Chan fhaighear cothrom air a’ chairt SIM fhad ’s a tha am modh-itealain a’ dol</string>
+    <string name="number_anr_too_long">Tha an àireamh ro fhada</string>
+    <string name="email_address_too_long">Tha an seòladh puist-d ro fhada</string>
+    <string name="sim_card_full">Tha a’ chairt SIM làn</string>
+    <string name="tag_too_long">Tha ainm an neach-aithne ro fhada</string>
+    <string name="invalid_phone_number">Tha an àireamh fòn mì-dhligheach</string>
+    <string name="invalid_number_type">Tha seòrsa na h-àireimh mì-dhligheach</string>
+    <string name="no_phone_number_or_email">Cuir a-steach àireamh fòn no seòladh puist-d.</string>
+    <string name="memory_card_full">Cha b’ urrainn dhuinn an neach-aithne a shàbhaladh, tha cuimhne an fhòn làn</string>
+    <string name="contacts_groups_label">Buidhnean</string>
+    <string name="menu_moveGroupMembers">Gluais buill a’ bhuidhinn</string>
+    <string name="title_move_members">Gluais na buill</string>
+    <string name="message_move_members">A’ gluasad nam ball\u2026</string>
+    <string name="message_can_not_move_members">Chan urrainn dhuinn na buill a ghluasad</string>
+    <string name="edit_before_call">Deasaich an àireamh mus dèan thu gairm</string>
+    <string name="menu_sendViaSMS">Cuir an neach-aithne ann an SMS</string>
+    <string name="select_all">Na h-uile</string>
+    <string name="import_sim_contacts_title">Ion-phortaich luchd-aithne on t-SIM</string>
+    <string name="import_sim_contacts_message">Ag ion-phortadh luchd-aithne on t-SIM\u2026</string>
+    <string name="importConfirmation_title">A bheil thu airson an neach-aithne ion-phortadh?</string>
+    <string name="import_finish">Deiseil leis an ion-phortadh</string>
+    <string name="delete_contacts_title">Sguab an luchd-aithne às</string>
+    <string name="delete_contacts_message">A’ sguabadh an luchd-aithne às\u2026</string>
+    <string name="deleteConfirmation_title">A bheil thu airson an neach-aithne a sguabadh às?</string>
+    <string name="too_many_contacts_add_to_group">Chan urrainnear barrachd air <xliff:g id="count">%d</xliff:g> neach-aithne a chur ris</string>
+    <string name="menu_memory_status">Staid na cuimhne</string>
+    <string name="memory_size">Iomlan:</string>
+    <string name="memory_used">Air a chaitheamh:</string>
+    <string name="calculating_status_now">Ag àireamhachadh na staid\u2026</string>
+    <string name="menu_copyTo">Cuir lethbhreac gu <xliff:g id="destination">%s</xliff:g></string>
+    <string name="no_empty_email_in_usim">Chan eil raon puist-d ri làimh aig an neach-aithne USIM, cha ghabh lethbhreac nan teachdaireachdan a dhèanamh.</string>
+    <string name="voicemail">Post-gutha</string>
+    <string name="select_call_title">Tagh logaichean nan gairmean</string>
+    <string name="delete_call_title">Sguab logaichean nan gairmean às</string>
+    <string name="delete_call_message">A’ sguabadh logaichean nan gairmean às\u2026</string>
+    <string name="delete_call_alert">A bheil thu airson logaichean nan gairmean a thagh thu a sguabadh às?</string>
+    <string name="title_del_call">Sguab às</string>
+    <string name="powered_by_provider">Le cumhachd <xliff:g id="provider">%s</xliff:g></string>
+    <string name="sms_permission_rationale">Feumar cead SMS mus urrainnear eachdraidh SMS an neach-aithne a shealltainn.</string>
+    <string name="sms_rationale_view">SEALL</string>
+    <string name="incall_plugin_directory_search">Lorg sa phasgan %1$s</string>
+    <string name="incall_plugin_invite">THOIR CUIREADH</string>
+    <string name="incall_plugin_account_subheader">Ainm %1$s</string>
+    <string name="incall_plugin_call_error">Chan urrainn dha <xliff:g id="name">%s</xliff:g> a’ ghairm seo a dhèanamh</string>
+    <string name="incall_plugin_intent_error">Cha ghabh an gnìomh seo a choileanadh. Feuch ris a-rithist an ceann greis.</string>
+</resources>

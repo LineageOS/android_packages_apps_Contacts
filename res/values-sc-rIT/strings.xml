@@ -22,10 +22,15 @@
     <string name="contactInsertOrEditActivityTitle">Agiùnghe a cuntatu</string>
     <string name="contactPickerActivityTitle">Sèbera unu cuntatu</string>
     <string name="header_entry_contact_list_adapter_header_title">Crea unu cuntatu nou</string>
+    <string name="searchHint">Chirca cuntatos</string>
     <string name="menu_addStar">Agiunghe a is preferidos</string>
+    <string name="menu_removeStar">Boga·nche dae preferidos</string>
+    <string name="description_action_menu_remove_star">Bogadu dae is preferidos</string>
+    <string name="description_action_menu_add_star">Agiuntu a is preferidos</string>
     <string name="menu_editContact">Modìfica</string>
     <string name="menu_deleteContact">Cantzella</string>
     <string name="menu_change_photo">Muda sa fotografia</string>
+    <string name="menu_save">Sarva</string>
     <string name="separatorJoinAggregateSuggestions">Cuntatos cussigiados</string>
     <string name="separatorJoinAggregateAll">Totu is cuntatos</string>
     <string name="menu_set_ring_tone">Imposta tonu de mutida</string>
@@ -36,6 +41,26 @@
     <string name="removePhoto">Boga fotografia</string>
     <string name="menu_sendMessageOption">Imbia messàgiu</string>
     <string name="listFoundAllContactsZero">Perunu cuntatu</string>
+    <string name="add_contact_dlg_message_fmt">Boles agiùnghere <xliff:g id="email">%s</xliff:g> a is cuntatos?</string>
+    <string name="search_settings_description">Nùmenes de is cuntatos tuos</string>
+    <string name="quickcontact_transparent_view_description">Incarca pro torrare a s\'ischermu pretzedente</string>
+    <string name="quickcontact_add_phone_number">Agiunghe nùmeru de telèfonu</string>
+    <string name="quickcontact_add_email">Agiunghe posta eletrònica</string>
+    <string name="missing_app">Peruna aplicatzione agatada pro gestire custa atzione.</string>
+    <string name="menu_share">Cumpartzidura</string>
+    <string name="menu_add_contact">Agiunghe a sos cuntatos</string>
+    <string name="audio_chat">Tzarrada de boghe</string>
+    <string name="video_chat">Tzarrada de vìdeu</string>
+    <string name="account_type_format">Cuntatu de &lt;xliff:g id="source" example="Gmail"&gt;%1$s%1$s</string>
+    <string name="google_account_type_format">Contu de <xliff:g id="source" example="Google">%1$s</xliff:g></string>
+    <string name="take_photo">Faghe una fotografia</string>
+    <string name="take_new_photo">Faghe una fotografia noa</string>
+    <string name="pick_photo">Sèbera una fotografia</string>
+    <string name="pick_new_photo">Seletziona una fotografia noa</string>
+    <string name="search_results_searching">Chirchende \u2026</string>
+    <string name="event_edit_field_hint_text">Data</string>
+    <string name="aggregation_suggestion_edit_dialog_message">Passare a sa modìfica
+        de su cuntatu seletzionadu? Is informatziones insertadas finas a immoe s\'ant a copiare.</string>
     <string name="contact_directory_description">Cartella <xliff:g id="type" example="Corporate Directory">%1$s</xliff:g></string>
     <string name="activity_title_settings">Impostatziones</string>
     <string name="menu_settings" msgid="377929915873428211">Impostatziones</string>
@@ -49,6 +74,7 @@
     <string name="set_default">Imposta comente predefinidu</string>
     <string name="clear_default">Non dd\'impostes comente predefinidu</string>
     <string name="toast_text_copied">Testu copiadu</string>
+    <string name="enter_contact_name">Chirca cuntatos</string>
     <string name="local_profile_title">Profilu miu locale</string>
     <string name="external_profile_title">Su profilu miu de <xliff:g id="external_source">%1$s</xliff:g></string>
     <string name="contact_editor_title_new_contact">Crea unu cuntatu nou</string>
@@ -85,8 +111,11 @@
     <string name="email_other">Posta eletrònica</string>
     <string name="email">Posta eletrònica</string>
     <string name="list_filter_all_accounts">Totu is cuntatos</string>
+    <string name="list_filter_all_starred">Preferidos</string>
     <string name="list_filter_single">Cuntata</string>
     <string name="display_all_contacts">Totu is cuntatos</string>
+    <string name="menu_custom_filter_save">Sarva</string>
+    <string name="hint_findContacts">Chirca cuntatos</string>
     <string name="contactsFavoritesLabel">Preferidos</string>
     <string name="select_account_dialog_title">Contu</string>
     <string name="description_delete_contact">Cantzella</string>

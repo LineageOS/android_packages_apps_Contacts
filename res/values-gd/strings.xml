@@ -414,7 +414,7 @@
         <item quantity="other"><xliff:g id="count">^1</xliff:g> luchd-aithne • <xliff:g id="phone_number">^2</xliff:g></item>
     </plurals>
     <string name="import_from_vcf_file">Faidhle .vcf</string>
-    <string name="nothing_to_import_message">Chan eil dad ri ion-phortadh</string>
+    <string name="nothing_to_import_message">Gun dad ri ion-phortadh</string>
     <string name="import_from_vcf_file_confirmation_message">An ion-phortaich thu luchd-aithne on vCard?</string>
     <string name="cancel_import_confirmation_message">An sguir thu dhen ion-phortadh o <xliff:g id="filename" example="export.vcf">%s</xliff:g>?</string>
     <string name="cancel_export_confirmation_message">An sguir thu dhen às-phortadh gu <xliff:g id="filename" example="export.vcf">%s</xliff:g>?</string>

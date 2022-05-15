@@ -28,7 +28,7 @@
     <color name="quickcontact_entry_sub_header_text_color">#737373</color>
     <color name="quickcontact_entry_header_text_color">#202020</color>
 
-    <color name="action_bar_background">#2a56c6</color>
+    <color name="action_bar_background">@*android:color/system_accent1_600</color>
 
     <color name="nav_item_selected_background">#0f000000</color>
 
@@ -40,19 +40,19 @@
     <!-- Color of the status bar above the contextual selection bar. -->
     <color name="contextual_selection_bar_status_bar_color">#bababa</color>
 
-    <color name="primary_color_dark">#1c3aa9</color>
-    <color name="primary_color">#2a56c6</color>
+    <color name="primary_color_dark">@*android:color/system_accent1_700</color>
+    <color name="primary_color">@*android:color/system_accent1_600</color>
 
-    <color name="group_primary_color_dark">#546E7A</color>
-    <color name="group_primary_color">#607D8B</color>
+    <color name="group_primary_color_dark">@*android:color/system_neutral1_900</color>
+    <color name="group_primary_color">@*android:color/system_neutral1_800</color>
 
     <!-- Color of the selected tab underline -->
-    <color name="contacts_accent_color">#FFFFFF</color>
+    <color name="contacts_accent_color">@*android:color/system_neutral1_0</color>
 
     <color name="floating_action_button_icon_color">@color/contacts_accent_color</color>
 
     <!-- Horizontal separator line should be 12% dark in the light theme. -->
-    <color name="divider_line_color_light">#e0e0e0</color>
+    <color name="divider_line_color_light">@*android:color/transparent</color>
 
     <!-- Color of the text on an ExpandingEntryCard button -->
     <color name="expanding_entry_card_button_text_color">@android:color/black</color>
@@ -105,10 +105,10 @@
     <color name="section_header_text_color">@color/dialtacts_theme_color</color>
 
     <!-- Color of the theme of the People app -->
-    <color name="people_app_theme_color">#363636</color>
+    <color name="people_app_theme_color">@*android:color/system_neutral1_800</color>
 
     <!-- Color of the theme of the Dialer app -->
-    <color name="dialtacts_theme_color">#2a56c6</color>
+    <color name="dialtacts_theme_color">@*android:color/system_accent1_600</color>
 
     <!-- Color of image view placeholder. -->
     <color name="image_placeholder">#DDDDDD</color>
@@ -205,8 +205,8 @@
     <color name="search_shortcut_icon_color">@color/dialtacts_theme_color</color>
 
     <!-- Color of the background of the contact detail and editor pages -->
-    <color name="background_primary">#f9f9f9</color>
-    <color name="contact_all_list_background_color">#FFFFFF</color>
+    <color name="background_primary">@*android:color/system_neutral1_50</color>
+    <color name="contact_all_list_background_color">@*android:color/system_neutral1_0</color>
 
     <!-- Text color used for character counter when the max limit has been exceeded -->
     <color name="call_subject_limit_exceeded">#d1041c</color>

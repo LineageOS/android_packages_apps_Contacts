@@ -5,8 +5,12 @@
 -->
 <resources>
     <!-- Background color of pinned header items. -->
-    <color name="list_item_pinned_header_color">#1f1f1f</color>
+    <color name="list_item_pinned_header_color">@*android:color/system_neutral1_900</color>
 
     <!-- Color of contact name in list. -->
     <color name="contact_list_name_text_color">#dadada</color>
+
+    <!-- Color of the background of the contact detail and editor pages -->
+    <color name="background_primary">@*android:color/system_neutral1_900</color>
+    <color name="contact_all_list_background_color">@*android:color/system_neutral1_900</color>
 </resources>

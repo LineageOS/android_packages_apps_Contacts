@@ -20,12 +20,15 @@ import android.accounts.AuthenticatorDescription;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.android.contacts.R;
 import com.android.contacts.model.dataitem.DataKind;
 import com.android.contactsbind.FeedbackHelper;
+
+import com.google.common.collect.Lists;
 
 public class FallbackAccountType extends BaseAccountType {
     private static final String TAG = "FallbackAccountType";
@@ -106,5 +109,28 @@ public class FallbackAccountType extends BaseAccountType {
         return new AccountInfo(
                 new AccountDisplayInfo(account, account.name,
                         getDisplayLabel(context), getDisplayIcon(context), false), this);
+    }
+
+    @Override
+    protected DataKind addDataKindPhone(Context context) throws DefinitionException {
+        final DataKind kind = super.addDataKindPhone(context);
+
+        kind.typeColumn = Phone.TYPE;
+        kind.typeList = Lists.newArrayList();
+        kind.typeList.add(buildPhoneType(Phone.TYPE_MOBILE));
+        kind.typeList.add(buildPhoneType(Phone.TYPE_WORK));
+        kind.typeList.add(buildPhoneType(Phone.TYPE_HOME));
+        kind.typeList.add(buildPhoneType(Phone.TYPE_MAIN));
+        kind.typeList.add(buildPhoneType(Phone.TYPE_FAX_WORK).setSecondary(true));
+        kind.typeList.add(buildPhoneType(Phone.TYPE_FAX_HOME).setSecondary(true));
+        kind.typeList.add(buildPhoneType(Phone.TYPE_PAGER).setSecondary(true));
+        kind.typeList.add(buildPhoneType(Phone.TYPE_OTHER));
+        kind.typeList.add(buildPhoneType(Phone.TYPE_CUSTOM).setSecondary(true)
+                .setCustomColumn(Phone.LABEL));
+
+        kind.fieldList = Lists.newArrayList();
+        kind.fieldList.add(new EditField(Phone.NUMBER, R.string.phoneLabelsGroup, FLAGS_PHONE));
+
+        return kind;
     }
 }

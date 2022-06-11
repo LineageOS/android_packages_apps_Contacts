@@ -15,14 +15,32 @@
  */
 package com.android.contacts.model.account;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.provider.ContactsContract.CommonDataKinds.Event;
+
+import com.android.contacts.R;
+import com.android.contacts.model.dataitem.DataKind;
+import com.android.contacts.util.CommonDateUtils;
+import com.android.contactsbind.FeedbackHelper;
+
+import com.google.common.collect.Lists;
 
 public class DeviceLocalAccountType extends FallbackAccountType {
+
+    private static final String TAG = "DeviceLocalAccountType";
 
     private final boolean mGroupsEditable;
 
     public DeviceLocalAccountType(Context context, boolean groupsEditable) {
         super(context);
+
+        try {
+            addDataKindEvent(context);
+        } catch (DefinitionException e) {
+            FeedbackHelper.sendFeedback(context, TAG, "Failed to build fallback account type", e);
+        }
+
         mGroupsEditable = groupsEditable;
     }
 
@@ -42,5 +60,30 @@ public class DeviceLocalAccountType extends FallbackAccountType {
         return new AccountInfo(
                 new AccountDisplayInfo(account, getDisplayLabel(context), getDisplayLabel(context),
                         getDisplayIcon(context), true), this);
+    }
+
+    private DataKind addDataKindEvent(Context context) throws DefinitionException {
+        DataKind kind = addKind(new DataKind(Event.CONTENT_ITEM_TYPE,
+                    R.string.eventLabelsGroup, Weight.EVENT, true));
+        kind.actionHeader = new EventActionInflater();
+        kind.actionBody = new SimpleInflater(Event.START_DATE);
+
+        kind.typeColumn = Event.TYPE;
+        kind.typeList = Lists.newArrayList();
+        kind.dateFormatWithoutYear = CommonDateUtils.NO_YEAR_DATE_FORMAT;
+        kind.dateFormatWithYear = CommonDateUtils.FULL_DATE_FORMAT;
+        kind.typeList.add(buildEventType(Event.TYPE_BIRTHDAY, true).setSpecificMax(1));
+        kind.typeList.add(buildEventType(Event.TYPE_ANNIVERSARY, false));
+        kind.typeList.add(buildEventType(Event.TYPE_OTHER, false));
+        kind.typeList.add(buildEventType(Event.TYPE_CUSTOM, false).setSecondary(true)
+                .setCustomColumn(Event.LABEL));
+
+        kind.defaultValues = new ContentValues();
+        kind.defaultValues.put(Event.TYPE, Event.TYPE_BIRTHDAY);
+
+        kind.fieldList = Lists.newArrayList();
+        kind.fieldList.add(new EditField(Event.DATA, R.string.eventLabelsGroup, FLAGS_EVENT));
+
+        return kind;
     }
 }

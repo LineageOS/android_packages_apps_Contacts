@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7a3bec0_a7f612d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15734
+      },
+      "writtenOn": "2022-06-11T19:16:15Z",
+      "side": 1,
+      "message": "I\u0027m not sure if I like removing parts of the existing types, even if they are quite outdated. It really doesn\u0027t provide any benefit apart from making the list smaller, and who knows what happens to the entries that use those.\n\nSame for the E-Mail commit that does a similar thing (or rather, especially that one, since we are just removing a single type there).",
+      "revId": "679fdd0d731bd3347a185dbb2a52fba2b5c0809d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}

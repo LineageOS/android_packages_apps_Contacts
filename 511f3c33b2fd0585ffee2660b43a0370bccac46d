@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09b8aeb7_695d2e66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9760
+      },
+      "writtenOn": "2022-06-21T07:26:22Z",
+      "side": 1,
+      "message": "crash log: https://paste.crdroid.net/ZsBuaO\n\nReproduce:\n1) Open Contacts\n2) Click on the avatar of any\n3) Long press on the phone number\nProgram crashes",
+      "revId": "511f3c33b2fd0585ffee2660b43a0370bccac46d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}

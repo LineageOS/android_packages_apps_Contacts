@@ -205,10 +205,6 @@ public class LetterTileDrawable extends Drawable {
         }
     }
 
-    private static boolean isEnglishLetter(final char c) {
-        return ('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z');
-    }
-
     @Override
     public void setAlpha(final int alpha) {
         mPaint.setAlpha(alpha);
@@ -265,10 +261,10 @@ public class LetterTileDrawable extends Drawable {
 
     public LetterTileDrawable setLetterAndColorFromContactDetails(final String displayName,
             final String identifier) {
-        if (displayName != null && displayName.length() > 0
-                && isEnglishLetter(displayName.charAt(0))) {
+        if (displayName != null && !TextUtils.isEmpty(displayName)
+                && Character.isLetter(displayName.charAt(0))) {
             mLetter = Character.toUpperCase(displayName.charAt(0));
-        }else{
+        } else {
             mLetter = null;
         }
         mColor = pickColor(identifier);

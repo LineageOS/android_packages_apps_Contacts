@@ -30,6 +30,7 @@ import com.android.vcard.VCardInterpreter;
 import com.android.vcard.VCardParser;
 import com.android.vcard.VCardParser_V21;
 import com.android.vcard.VCardParser_V30;
+import com.android.vcard.VCardParser_V40;
 import com.android.vcard.exception.VCardException;
 import com.android.vcard.exception.VCardNotSupportedException;
 import com.android.vcard.exception.VCardVersionException;
@@ -135,7 +136,8 @@ public class ImportProcessor extends ProcessorBase implements VCardEntryHandler 
              */
             possibleVCardVersions = new int[] {
                     ImportVCardActivity.VCARD_VERSION_V21,
-                    ImportVCardActivity.VCARD_VERSION_V30
+                    ImportVCardActivity.VCARD_VERSION_V30,
+                    ImportVCardActivity.VCARD_VERSION_V40
             };
         } else {
             possibleVCardVersions = new int[] {
@@ -231,9 +233,12 @@ public class ImportProcessor extends ProcessorBase implements VCardEntryHandler 
                 // In the worst case, a user may call cancel() just before creating
                 // mVCardParser.
                 synchronized (this) {
-                    mVCardParser = (vcardVersion == ImportVCardActivity.VCARD_VERSION_V30 ?
+                    VCardParser mUseOldVcardParser = (vcardVersion == ImportVCardActivity.VCARD_VERSION_V30 ?
                             new VCardParser_V30(vcardType) :
                                 new VCardParser_V21(vcardType));
+                    mVCardParser = (vcardVersion == ImportVCardActivity.VCARD_VERSION_V40 ?
+                            new VCardParser_V40(vcardType) :
+                                mUseOldVcardParser);
                     if (isCancelled()) {
                         Log.i(LOG_TAG, "ImportProcessor already recieves cancel request, so " +
                                 "send cancel request to vCard parser too.");

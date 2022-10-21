@@ -49,6 +49,7 @@ import com.android.vcard.VCardEntryCounter;
 import com.android.vcard.VCardParser;
 import com.android.vcard.VCardParser_V21;
 import com.android.vcard.VCardParser_V30;
+import com.android.vcard.VCardParser_V40;
 import com.android.vcard.VCardSourceDetector;
 import com.android.vcard.exception.VCardException;
 import com.android.vcard.exception.VCardNestedException;
@@ -83,6 +84,7 @@ public class ImportVCardActivity extends Activity implements ImportVCardDialogFr
     /* package */ final static int VCARD_VERSION_AUTO_DETECT = 0;
     /* package */ final static int VCARD_VERSION_V21 = 1;
     /* package */ final static int VCARD_VERSION_V30 = 2;
+    /* package */ final static int VCARD_VERSION_V40 = 3;
 
     private static final int REQUEST_OPEN_DOCUMENT = 100;
 
@@ -321,6 +323,7 @@ public class ImportVCardActivity extends Activity implements ImportVCardDialogFr
             int vcardVersion = VCARD_VERSION_V21;
             try {
                 boolean shouldUseV30 = false;
+                boolean shouldUseV40 = false;
                 InputStream is;
                 if (data != null) {
                     is = new ByteArrayInputStream(data);
@@ -354,7 +357,28 @@ public class ImportVCardActivity extends Activity implements ImportVCardDialogFr
                         mVCardParser.addInterpreter(detector);
                         mVCardParser.parse(is);
                     } catch (VCardVersionException e2) {
-                        throw new VCardException("vCard with unspported version.");
+                        try {
+                            is.close();
+                        } catch (IOException e) {
+
+                        }
+
+                        shouldUseV40 = true;
+                        if (data != null) {
+                            is = new ByteArrayInputStream(data);
+                        } else {
+                            is = resolver.openInputStream(localDataUri);
+                        }
+                        mVCardParser = new VCardParser_V40();
+                        try {
+                            counter = new VCardEntryCounter();
+                            detector = new VCardSourceDetector();
+                            mVCardParser.addInterpreter(counter);
+                            mVCardParser.addInterpreter(detector);
+                            mVCardParser.parse(is);
+                        } catch (VCardVersionException e3) {
+                            throw new VCardException("vCard with unspported version.");
+                        }
                     }
                 } finally {
                     if (is != null) {
@@ -365,7 +389,13 @@ public class ImportVCardActivity extends Activity implements ImportVCardDialogFr
                     }
                 }
 
-                vcardVersion = shouldUseV30 ? VCARD_VERSION_V30 : VCARD_VERSION_V21;
+                if (shouldUseV40) {
+                    vcardVersion = VCARD_VERSION_V40;
+                } else if (shouldUseV30) {
+                    vcardVersion = VCARD_VERSION_V30;
+                } else {
+                    vcardVersion = VCARD_VERSION_V21;
+                }
             } catch (VCardNestedException e) {
                 Log.w(LOG_TAG, "Nested Exception is found (it may be false-positive).");
                 // Go through without throwing the Exception, as we may be able to detect the

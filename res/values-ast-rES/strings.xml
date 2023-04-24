@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-     Copyright (C) 2018 The LineageOS Project
+<!-- Copyright (C) 2006 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,6 +14,5 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="menu_emergency_information_txt">Данные для экстренных ситуаций</string>
-    <string name="call_via_template">Позвонить через <xliff:g id="account">%1$s</xliff:g></string>
+    <string name="contacts_default_notification_channel">Avisos</string>
 </resources>

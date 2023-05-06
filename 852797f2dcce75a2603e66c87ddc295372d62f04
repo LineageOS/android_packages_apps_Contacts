@@ -18,6 +18,24 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "233da34b_a1d0fc39",
+        "filename": "src/com/android/contacts/vcard/ImportProcessor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 18796
+      },
+      "writtenOn": "2023-05-06T08:44:41Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "cbdbd418_cacbf04a",
+      "revId": "852797f2dcce75a2603e66c87ddc295372d62f04",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55a0e5a7_51d8a7ae",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-04-26T18:37:21Z",
       "side": 1,
       "message": "That intermediate variable makes no sense. Just do a nested ternary or if-else.",
+      "revId": "852797f2dcce75a2603e66c87ddc295372d62f04",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc77c562_83eddff0",
+        "filename": "src/com/android/contacts/vcard/ImportVCardActivity.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 18796
+      },
+      "writtenOn": "2023-05-06T08:44:41Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "55a0e5a7_51d8a7ae",
       "revId": "852797f2dcce75a2603e66c87ddc295372d62f04",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }

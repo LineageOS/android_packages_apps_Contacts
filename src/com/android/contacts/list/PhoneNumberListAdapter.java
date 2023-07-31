@@ -19,6 +19,7 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.net.Uri;
 import android.net.Uri.Builder;
 import android.provider.ContactsContract;
@@ -28,6 +29,7 @@ import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Directory;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -653,5 +655,45 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
 
     public void setListener(Listener listener) {
         mListener = listener;
+    }
+
+    @Override
+    public void changeCursor(int partitionIndex, Cursor cursor) {
+        final ArrayList<Object[]> rows = new ArrayList<>(cursor.getCount());
+        String previousNumber = "";
+        long previousContactId = -1;
+        while (cursor.moveToNext()) {
+            long currentContactId = cursor.getLong(PhoneNumberListAdapter.PhoneQuery.CONTACT_ID);
+            String currentNumber = cursor.getString(
+                    PhoneNumberListAdapter.PhoneQuery.PHONE_NUMBER);
+            currentNumber = PhoneNumberUtils.normalizeNumber(currentNumber);
+            if (currentContactId == previousContactId && currentNumber.equals(previousNumber)) {
+                continue;
+            }
+            previousNumber = currentNumber;
+            previousContactId = currentContactId;
+            final Object[] row = new Object[PhoneQuery.PROJECTION_ALTERNATIVE.length];
+            row[PhoneQuery.PHONE_ID] = cursor.getLong(PhoneQuery.PHONE_ID);
+            row[PhoneQuery.PHONE_TYPE] = cursor.getInt(PhoneQuery.PHONE_TYPE);
+            row[PhoneQuery.PHONE_LABEL] = cursor.getString(PhoneQuery.PHONE_LABEL);
+            row[PhoneQuery.PHONE_NUMBER] = currentNumber;
+            row[PhoneQuery.CONTACT_ID] = cursor.getLong(PhoneQuery.CONTACT_ID);
+            row[PhoneQuery.LOOKUP_KEY] = cursor.getString(PhoneQuery.LOOKUP_KEY);
+            row[PhoneQuery.PHOTO_ID] = cursor.getLong(PhoneQuery.PHOTO_ID);
+            row[PhoneQuery.DISPLAY_NAME] = cursor.getString(PhoneQuery.DISPLAY_NAME);
+            row[PhoneQuery.PHOTO_URI] = cursor.getString(PhoneQuery.PHOTO_URI);
+            row[PhoneQuery.CARRIER_PRESENCE] =
+                    cursor.getColumnCount() >= PhoneQuery.CARRIER_PRESENCE
+                            ? cursor.getInt(PhoneQuery.CARRIER_PRESENCE)
+                            : 0;
+            rows.add(row);
+        }
+
+        final MatrixCursor retCursor = new MatrixCursor(PhoneQuery.PROJECTION_ALTERNATIVE);
+        for (final Object[] row : rows) {
+            retCursor.addRow(row);
+        }
+
+        super.changeCursor(partitionIndex, retCursor);
     }
 }

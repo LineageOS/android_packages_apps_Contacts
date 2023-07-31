@@ -19,6 +19,7 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.net.Uri;
 import android.net.Uri.Builder;
 import android.provider.ContactsContract;
@@ -28,6 +29,7 @@ import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Directory;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -47,6 +49,7 @@ import com.android.contacts.extensions.ExtensionsFactory;
 import com.android.contacts.preference.ContactsPreferences;
 import com.android.contacts.util.Constants;
 
+import com.android.contacts.util.CursorUtils;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
@@ -653,5 +656,28 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
 
     public void setListener(Listener listener) {
         mListener = listener;
+    }
+
+    @Override
+    public void changeCursor(int partitionIndex, Cursor cursor) {
+        String previousNumber = "";
+        long previousContactId = -1;
+        MatrixCursor matrixCursor = new MatrixCursor(cursor.getColumnNames());
+        try {
+            while (cursor.moveToNext()) {
+                long currentContactId = cursor.getLong(PhoneQuery.CONTACT_ID);
+                String currentNumber = cursor.getString(PhoneQuery.PHONE_NUMBER);
+                currentNumber = PhoneNumberUtils.normalizeNumber(currentNumber);
+                if (currentContactId == previousContactId && currentNumber.equals(previousNumber)) {
+                    continue;
+                }
+                previousNumber = currentNumber;
+                previousContactId = currentContactId;
+                matrixCursor.addRow(CursorUtils.getObjectFromCursor(cursor));
+            }
+        } finally {
+            cursor.close();
+        }
+        super.changeCursor(partitionIndex, matrixCursor);
     }
 }

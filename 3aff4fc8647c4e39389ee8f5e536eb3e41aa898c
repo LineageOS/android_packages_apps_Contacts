@@ -16,6 +16,115 @@
       "message": "Check: Open Dialer, first tab (Favorites?), press \"Add\" there - has lots of duplicates for various contacts due to spaces vs no spaces etc. Normalizing the numbers and not adding them to the cursor works well here",
       "revId": "3aff4fc8647c4e39389ee8f5e536eb3e41aa898c",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cec276d9_7788e986",
+        "filename": "src/com/android/contacts/list/PhoneNumberListAdapter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2023-07-31T18:46:46Z",
+      "side": 1,
+      "message": "final MatrixCursor result \u003d new MatrixCursor(PhoneQuery.PROJECTION_ALTERNATIVE);",
+      "revId": "3aff4fc8647c4e39389ee8f5e536eb3e41aa898c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afe1c4d8_3b58aeab",
+        "filename": "src/com/android/contacts/list/PhoneNumberListAdapter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2023-07-31T18:46:46Z",
+      "side": 1,
+      "message": "final MatrixCursor.RowBuilder row \u003d result.newRow();\n        row.add(PhoneQuery.PHONE_ID, cursor.getLong(PhoneQuery.PHONE_ID));\n        ...",
+      "range": {
+        "startLine": 674,
+        "startChar": 0,
+        "endLine": 674,
+        "endChar": 86
+      },
+      "revId": "3aff4fc8647c4e39389ee8f5e536eb3e41aa898c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31d9180e_10f1fa6e",
+        "filename": "src/com/android/contacts/list/PhoneNumberListAdapter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2023-07-31T18:46:46Z",
+      "side": 1,
+      "message": "can be removed",
+      "range": {
+        "startLine": 688,
+        "startChar": 0,
+        "endLine": 688,
+        "endChar": 26
+      },
+      "revId": "3aff4fc8647c4e39389ee8f5e536eb3e41aa898c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37f035a3_6c4bb58a",
+        "filename": "src/com/android/contacts/list/PhoneNumberListAdapter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2023-07-31T18:46:46Z",
+      "side": 1,
+      "message": "can be removed",
+      "range": {
+        "startLine": 691,
+        "startChar": 0,
+        "endLine": 694,
+        "endChar": 9
+      },
+      "revId": "3aff4fc8647c4e39389ee8f5e536eb3e41aa898c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59faa059_ad8b7daa",
+        "filename": "src/com/android/contacts/list/PhoneNumberListAdapter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2023-07-31T18:46:46Z",
+      "side": 1,
+      "message": "result",
+      "range": {
+        "startLine": 696,
+        "startChar": 43,
+        "endLine": 696,
+        "endChar": 52
+      },
+      "revId": "3aff4fc8647c4e39389ee8f5e536eb3e41aa898c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }

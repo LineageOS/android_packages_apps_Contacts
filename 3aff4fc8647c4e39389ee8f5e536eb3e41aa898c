@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "375726fb_c2394465",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2023-07-31T18:00:40Z",
+      "side": 1,
+      "message": "Check: Open Dialer, first tab (Favorites?), press \"Add\" there - has lots of duplicates for various contacts due to spaces vs no spaces etc. Normalizing the numbers and not adding them to the cursor works well here",
+      "revId": "3aff4fc8647c4e39389ee8f5e536eb3e41aa898c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}

@@ -35,6 +35,24 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55cba206_b181d34e",
+        "filename": "src/com/android/contacts/list/PhoneNumberListAdapter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2023-08-02T17:03:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cec276d9_7788e986",
+      "revId": "3aff4fc8647c4e39389ee8f5e536eb3e41aa898c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "afe1c4d8_3b58aeab",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-07-31T18:46:46Z",
       "side": 1,
       "message": "final MatrixCursor.RowBuilder row \u003d result.newRow();\n        row.add(PhoneQuery.PHONE_ID, cursor.getLong(PhoneQuery.PHONE_ID));\n        ...",
+      "range": {
+        "startLine": 674,
+        "startChar": 0,
+        "endLine": 674,
+        "endChar": 86
+      },
+      "revId": "3aff4fc8647c4e39389ee8f5e536eb3e41aa898c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6011b003_8d1c3e10",
+        "filename": "src/com/android/contacts/list/PhoneNumberListAdapter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2023-08-02T17:03:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "afe1c4d8_3b58aeab",
       "range": {
         "startLine": 674,
         "startChar": 0,
@@ -81,6 +123,30 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c128afb2_bca13be3",
+        "filename": "src/com/android/contacts/list/PhoneNumberListAdapter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2023-08-02T17:03:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31d9180e_10f1fa6e",
+      "range": {
+        "startLine": 688,
+        "startChar": 0,
+        "endLine": 688,
+        "endChar": 26
+      },
+      "revId": "3aff4fc8647c4e39389ee8f5e536eb3e41aa898c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37f035a3_6c4bb58a",
@@ -104,6 +170,30 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2325d9ef_9f6f184b",
+        "filename": "src/com/android/contacts/list/PhoneNumberListAdapter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2023-08-02T17:03:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37f035a3_6c4bb58a",
+      "range": {
+        "startLine": 691,
+        "startChar": 0,
+        "endLine": 694,
+        "endChar": 9
+      },
+      "revId": "3aff4fc8647c4e39389ee8f5e536eb3e41aa898c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59faa059_ad8b7daa",
@@ -117,6 +207,30 @@
       "writtenOn": "2023-07-31T18:46:46Z",
       "side": 1,
       "message": "result",
+      "range": {
+        "startLine": 696,
+        "startChar": 43,
+        "endLine": 696,
+        "endChar": 52
+      },
+      "revId": "3aff4fc8647c4e39389ee8f5e536eb3e41aa898c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7762fee_34f2a0df",
+        "filename": "src/com/android/contacts/list/PhoneNumberListAdapter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2023-08-02T17:03:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59faa059_ad8b7daa",
       "range": {
         "startLine": 696,
         "startChar": 43,

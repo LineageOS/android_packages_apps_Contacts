@@ -13,4 +13,6 @@
     <!-- Color of the background of the contact detail and editor pages -->
     <color name="background_primary">@*android:color/system_neutral1_900</color>
     <color name="contact_all_list_background_color">@*android:color/system_neutral1_900</color>
+
+    <color name="fab_color">@android:color/system_accent1_100</color>
 </resources>

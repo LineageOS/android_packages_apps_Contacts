@@ -62,6 +62,7 @@ public class AccountFilterActivity extends Activity implements AdapterView.OnIte
 
         mListView = (ListView) findViewById(android.R.id.list);
         mListView.setOnItemClickListener(this);
+        mListView.setDivider(null);
 
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {

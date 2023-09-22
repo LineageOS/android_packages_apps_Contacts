@@ -125,7 +125,7 @@
     <dimen name="first_card_marginTop">12dp</dimen>
 
     <!-- Elevation of an ExpandingEntryCard, for the sake of shadow casting -->
-    <dimen name="expanding_entry_card_elevation">2dp</dimen>
+    <dimen name="expanding_entry_card_elevation">0dp</dimen>
     <!-- Elevation of the QuickContact's Toolbar, for the sake of shadow casting -->
     <dimen name="quick_contact_toolbar_elevation">4.5dp</dimen>
 
@@ -160,7 +160,7 @@
     <dimen name="expanding_entry_card_item_icon_margin_right">12dp</dimen>
     <dimen name="expanding_entry_card_item_header_only_margin_top">6dp</dimen>
 
-    <dimen name="expanding_entry_card_card_corner_radius">2dp</dimen>
+    <dimen name="expanding_entry_card_card_corner_radius">28dp</dimen>
     <dimen name="expanding_entry_card_header_margin_bottom">2dp</dimen>
     <!-- The top margin when the sub header and text views are both gone -->
     <dimen name="expanding_entry_card_item_header_only_margin_bottom">2dp</dimen>

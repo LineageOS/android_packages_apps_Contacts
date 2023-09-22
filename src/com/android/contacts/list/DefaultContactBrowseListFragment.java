@@ -593,11 +593,7 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
                         .getInteger(Experiments.PULL_TO_REFRESH_CANCEL_REFRESH_MILLIS));
             }
         });
-        mSwipeRefreshLayout.setColorSchemeResources(
-                R.color.swipe_refresh_color1,
-                R.color.swipe_refresh_color2,
-                R.color.swipe_refresh_color3,
-                R.color.swipe_refresh_color4);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.primary_color);
         mSwipeRefreshLayout.setDistanceToTriggerSync(
                 (int) getResources().getDimension(R.dimen.pull_to_refresh_distance));
     }

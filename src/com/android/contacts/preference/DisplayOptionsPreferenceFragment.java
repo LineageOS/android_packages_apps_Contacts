@@ -51,6 +51,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ListView;
 
 import com.android.contacts.ContactsUtils;
 import com.android.contacts.R;
@@ -216,6 +217,11 @@ public class DisplayOptionsPreferenceFragment extends PreferenceFragment
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(
                 mSaveServiceListener,
                 new IntentFilter(SimImportService.BROADCAST_SIM_IMPORT_COMPLETE));
+
+        ListView lv = view.findViewById(android.R.id.list);
+        if (lv != null) {
+            lv.setDivider(null);
+        }
     }
 
     @Override

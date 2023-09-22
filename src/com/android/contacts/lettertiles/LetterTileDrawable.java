@@ -160,7 +160,6 @@ public class LetterTileDrawable extends Drawable {
             sPaint.getTextBounds(sFirstChar, 0, 1, sRect);
             sPaint.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
             sPaint.setColor(sTileFontColor);
-            sPaint.setAlpha(ALPHA);
 
             // Draw the letter in the canvas, vertically shifted up or down by the user-defined
             // offset

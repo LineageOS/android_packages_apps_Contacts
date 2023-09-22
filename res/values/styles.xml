@@ -338,11 +338,13 @@
         since the Alert dialog is private. They are identical anyway. -->
     <style name="ContactsAlertDialogTheme" parent="@android:style/Theme.Material.Light.Dialog">
         <item name="android:colorAccent">@color/primary_color</item>
+        <item name="android:windowBackground">@drawable/dialog_background</item>
     </style>
 
     <style name="ContactsAlertDialogThemeAppCompat" parent="Theme.AppCompat.Light.Dialog.MinWidth">
         <item name="android:colorAccent">@color/primary_color</item>
         <item name="colorAccent">@color/primary_color</item>
+        <item name="android:windowBackground">@drawable/dialog_background</item>
     </style>
 
     <style name="EditKindIconStyle">

@@ -13,4 +13,12 @@
     <!-- Color of the background of the contact detail and editor pages -->
     <color name="background_primary">@*android:color/system_neutral1_900</color>
     <color name="contact_all_list_background_color">@*android:color/system_neutral1_900</color>
+
+    <color name="fab_color">@android:color/system_accent1_100</color>
+
+    <!-- Colors of swipeRefreshLayout's spinning circle. -->
+    <color name="swipe_refresh_color1">#64dd91</color>
+    <color name="swipe_refresh_color2">#ffb4a7</color>
+    <color name="swipe_refresh_color3">#adc6ff</color>
+    <color name="swipe_refresh_color4">#fdbc13</color>
 </resources>

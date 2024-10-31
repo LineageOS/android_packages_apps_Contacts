@@ -52,7 +52,9 @@ android_app {
     required: ["privapp_whitelist_com.android.contacts"],
 
     optimize: {
+        optimize: true,
         proguard_flags_files: ["proguard.flags"],
+        shrink_resources: true,
     },
 
     sdk_version: "system_current",

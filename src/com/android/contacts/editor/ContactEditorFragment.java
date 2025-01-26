@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -337,7 +338,6 @@ public class ContactEditorFragment extends Fragment implements
     // Helpers
     //
     protected ContactEditorUtils mEditorUtils;
-    protected RawContactDeltaComparator mComparator;
     protected ViewIdGenerator mViewIdGenerator;
     private AggregationSuggestionEngine mAggregationSuggestionEngine;
 
@@ -362,7 +362,6 @@ public class ContactEditorFragment extends Fragment implements
     protected AccountWithDataSet mAccountWithDataSet;
     protected List<AccountInfo> mWritableAccounts = Collections.emptyList();
     protected boolean mNewContactDataReady;
-    protected boolean mNewContactAccountChanged;
 
     // Whether it's an edit of existing contact and if it's corresponding delta is ready.
     protected boolean mIsEdit;
@@ -469,7 +468,6 @@ public class ContactEditorFragment extends Fragment implements
         super.onAttach(activity);
         mContext = activity;
         mEditorUtils = ContactEditorUtils.create(mContext);
-        mComparator = new RawContactDeltaComparator(mContext);
     }
 
     @Override
@@ -1642,19 +1640,6 @@ public class ContactEditorFragment extends Fragment implements
         return getContent().getAggregationAnchorView();
     }
 
-    /**
-     * Joins the suggested contact (specified by the id's of constituent raw
-     * contacts), save all changes, and stay in the editor.
-     */
-    public void doJoinSuggestedContact(long[] rawContactIds) {
-        if (!hasValidState() || mStatus != Status.EDITING) {
-            return;
-        }
-
-        mState.setJoinWithRawContacts(rawContactIds);
-        save(SaveMode.RELOAD);
-    }
-
     @Override
     public void onEditAction(Uri contactLookupUri, long rawContactId) {
         SuggestionEditConfirmationDialogFragment.show(this, contactLookupUri, rawContactId);
@@ -1736,10 +1721,6 @@ public class ContactEditorFragment extends Fragment implements
         getContent().updatePhoto(uri);
     }
 
-    public void setPrimaryPhoto() {
-        getContent().setPrimaryPhoto();
-    }
-
     @Override
     public void onNameFieldChanged(long rawContactId, ValuesDelta valuesDelta) {
         final Activity activity = getActivity();
@@ -1752,7 +1733,6 @@ public class ContactEditorFragment extends Fragment implements
     @Override
     public void onRebindEditorsForNewContact(RawContactDelta oldState,
             AccountWithDataSet oldAccount, AccountWithDataSet newAccount) {
-        mNewContactAccountChanged = true;
         rebindEditorsForNewContact(oldState, oldAccount, newAccount);
     }
 

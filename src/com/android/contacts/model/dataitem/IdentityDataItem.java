@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +19,6 @@ package com.android.contacts.model.dataitem;
 
 import android.content.ContentValues;
 import android.provider.ContactsContract;
-import android.provider.ContactsContract.CommonDataKinds.Identity;
 
 /**
  * Represents an identity data item, wrapping the columns in
@@ -28,13 +28,5 @@ public class IdentityDataItem extends DataItem {
 
     /* package */ IdentityDataItem(ContentValues values) {
         super(values);
-    }
-
-    public String getIdentity() {
-        return getContentValues().getAsString(Identity.IDENTITY);
-    }
-
-    public String getNamespace() {
-        return getContentValues().getAsString(Identity.NAMESPACE);
     }
 }

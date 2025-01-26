@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -80,22 +81,8 @@ public class AccountInfo {
         return mDisplayInfo.hasGoogleAccountType();
     }
 
-    public boolean sameAccount(AccountInfo other) {
-        return sameAccount(other.getAccount());
-    }
-
     public boolean sameAccount(AccountWithDataSet other) {
         return Objects.equals(getAccount(), other);
-    }
-
-    /**
-     * Returns whether accounts contains an account that is the same as account
-     *
-     * <p>This does not use equality rather checks whether the source account ({@link #getAccount()}
-     * is the same</p>
-     */
-    public static boolean contains(List<AccountInfo> accounts, AccountInfo account) {
-        return contains(accounts, account.getAccount());
     }
 
     /**

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -80,7 +81,6 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
     private static final String KEY_QUERY_STRING = "queryString";
     private static final String KEY_DIRECTORY_SEARCH_MODE = "directorySearchMode";
     private static final String KEY_SELECTION_VISIBLE = "selectionVisible";
-    private static final String KEY_REQUEST = "request";
     private static final String KEY_DARK_THEME = "darkTheme";
     private static final String KEY_LEGACY_COMPATIBILITY = "legacyCompatibility";
     private static final String KEY_DIRECTORY_RESULT_LIMIT = "directoryResultLimit";
@@ -173,7 +173,6 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
             }
         }
     };
-    private int defaultVerticalScrollbarPosition;
 
     protected abstract View inflateView(LayoutInflater inflater, ViewGroup container);
     protected abstract T createListAdapter();
@@ -599,10 +598,6 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
         this.mQuickContactEnabled = flag;
     }
 
-    public void setAdjustSelectionBoundsEnabled(boolean flag) {
-        mAdjustSelectionBoundsEnabled = flag;
-    }
-
     public void setIncludeFavorites(boolean flag) {
         mIncludeFavorites = flag;
         if (mAdapter != null) {
@@ -690,14 +685,6 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
                 reloadData();
             }
         }
-    }
-
-    public void setShowEmptyListForNullQuery(boolean show) {
-        mShowEmptyListForEmptyQuery = show;
-    }
-
-    public int getDirectoryLoaderId() {
-        return DIRECTORY_LOADER_ID;
     }
 
     public int getDirectorySearchMode() {
@@ -938,11 +925,6 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
             mListView.onRestoreInstanceState(mListState);
             mListState = null;
         }
-    }
-
-    public void setDarkTheme(boolean value) {
-        mDarkTheme = value;
-        if (mAdapter != null) mAdapter.setDarkTheme(value);
     }
 
     /**

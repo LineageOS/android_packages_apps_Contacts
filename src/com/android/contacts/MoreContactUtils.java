@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +17,9 @@
 
 package com.android.contacts;
 
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Rect;
-import android.net.Uri;
 import android.provider.ContactsContract;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
-import android.view.View;
-import android.widget.TextView;
-
-import com.android.contacts.model.account.AccountType;
 
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
@@ -170,74 +163,5 @@ public class MoreContactUtils {
             }
         }
         return true;
-    }
-
-    /**
-     * Returns the {@link android.graphics.Rect} with left, top, right, and bottom coordinates
-     * that are equivalent to the given {@link android.view.View}'s bounds. This is equivalent to
-     * how the target {@link android.graphics.Rect} is calculated in
-     * {@link android.provider.ContactsContract.QuickContact#showQuickContact}.
-     */
-    public static Rect getTargetRectFromView(View view) {
-        final int[] pos = new int[2];
-        view.getLocationOnScreen(pos);
-
-        final Rect rect = new Rect();
-        rect.left = pos[0];
-        rect.top = pos[1];
-        rect.right = pos[0] + view.getWidth();
-        rect.bottom = pos[1] + view.getHeight();
-        return rect;
-    }
-
-    /**
-     * Returns a header view based on the R.layout.list_separator, where the
-     * containing {@link android.widget.TextView} is set using the given textResourceId.
-     */
-    public static TextView createHeaderView(Context context, int textResourceId) {
-        final TextView textView = (TextView) View.inflate(context, R.layout.list_separator, null);
-        textView.setText(context.getString(textResourceId));
-        return textView;
-    }
-
-    /**
-     * Set the top padding on the header view dynamically, based on whether the header is in
-     * the first row or not.
-     */
-    public static void setHeaderViewBottomPadding(Context context, TextView textView,
-            boolean isFirstRow) {
-        final int topPadding;
-        if (isFirstRow) {
-            topPadding = (int) context.getResources().getDimension(
-                    R.dimen.frequently_contacted_title_top_margin_when_first_row);
-        } else {
-            topPadding = (int) context.getResources().getDimension(
-                    R.dimen.frequently_contacted_title_top_margin);
-        }
-        textView.setPaddingRelative(textView.getPaddingStart(), topPadding,
-                textView.getPaddingEnd(), textView.getPaddingBottom());
-    }
-
-
-    /**
-     * Returns the intent to launch for the given invitable account type and contact lookup URI.
-     * This will return null if the account type is not invitable (i.e. there is no
-     * {@link AccountType#getInviteContactActivityClassName()} or
-     * {@link AccountType#syncAdapterPackageName}).
-     */
-    public static Intent getInvitableIntent(AccountType accountType, Uri lookupUri) {
-        String syncAdapterPackageName = accountType.syncAdapterPackageName;
-        String className = accountType.getInviteContactActivityClassName();
-        if (TextUtils.isEmpty(syncAdapterPackageName) || TextUtils.isEmpty(className)) {
-            return null;
-        }
-        Intent intent = new Intent();
-        intent.setClassName(syncAdapterPackageName, className);
-
-        intent.setAction(ContactsContract.Intents.INVITE_CONTACT);
-
-        // Data is the lookup URI.
-        intent.setData(lookupUri);
-        return intent;
     }
 }

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -88,7 +89,6 @@ public abstract class LabeledEditorView extends LinearLayout implements Editor, 
     private ViewIdGenerator mViewIdGenerator;
     private DialogManager mDialogManager = null;
     private EditorListener mListener;
-    protected int mMinLineItemHeight;
     private int mSelectedLabelIndex;
 
     /**
@@ -111,26 +111,14 @@ public abstract class LabeledEditorView extends LinearLayout implements Editor, 
 
     public LabeledEditorView(Context context) {
         super(context);
-        init(context);
     }
 
     public LabeledEditorView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context);
     }
 
     public LabeledEditorView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init(context);
-    }
-
-    public Long getRawContactId() {
-        return mState == null ? null : mState.getRawContactId();
-    }
-
-    private void init(Context context) {
-        mMinLineItemHeight = context.getResources().getDimensionPixelSize(
-                R.dimen.editor_min_line_item_height);
     }
 
     /** {@inheritDoc} */
@@ -205,13 +193,6 @@ public abstract class LabeledEditorView extends LinearLayout implements Editor, 
         return mReadOnly;
     }
 
-    public int getBaseline(int row) {
-        if (row == 0 && mLabel != null) {
-            return mLabel.getBaseline();
-        }
-        return -1;
-    }
-
     /**
      * Configures the visibility of the type label button and enables or disables it properly.
      */
@@ -268,14 +249,6 @@ public abstract class LabeledEditorView extends LinearLayout implements Editor, 
         super.setEnabled(enabled);
         mLabel.setEnabled(!mReadOnly && enabled && !mIsLegacyField);
         mDelete.setEnabled((!mReadOnly && enabled) || mIsLegacyField);
-    }
-
-    public Spinner getLabel() {
-        return mLabel;
-    }
-
-    public ImageView getDelete() {
-        return mDelete;
     }
 
     protected DataKind getKind() {

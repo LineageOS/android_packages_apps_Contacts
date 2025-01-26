@@ -67,18 +67,6 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
     private SelectPhoneAccountListener mListener;
 
     /**
-     * Create new fragment instance with default title and no option to set as default.
-     *
-     * @param accountHandles The {@code PhoneAccountHandle}s available to select from.
-     * @param listener The listener for the results of the account selection.
-     */
-    public static SelectPhoneAccountDialogFragment newInstance(
-            List<PhoneAccountHandle> accountHandles, SelectPhoneAccountListener listener) {
-        return newInstance(R.string.select_account_dialog_title, false,
-                accountHandles, listener);
-    }
-
-    /**
      * Create new fragment instance.
      * This method also allows specifying a custom title and "set default" checkbox.
      *

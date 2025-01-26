@@ -209,15 +209,10 @@ public class QuickContactActivity extends ContactsActivity {
     private static final int REQUEST_CODE_CONTACT_EDITOR_ACTIVITY = 1;
     private static final int SCRIM_COLOR = Color.argb(0xC8, 0, 0, 0);
     private static final int REQUEST_CODE_CONTACT_SELECTION_ACTIVITY = 2;
-    private static final String MIMETYPE_SMS = "vnd.android-dir/mms-sms";
     private static final int REQUEST_CODE_JOIN = 3;
     private static final int REQUEST_CODE_PICK_RINGTONE = 4;
     private static final int CARD_ENTRY_ID_EDIT_CONTACT = -2;
     private static final int MIN_NUM_CONTACT_ENTRIES_SHOWN = 3;
-
-    /** This is the Intent action to install a shortcut in the launcher. */
-    private static final String ACTION_INSTALL_SHORTCUT =
-            "com.android.launcher.action.INSTALL_SHORTCUT";
 
     public static final String ACTION_SPLIT_COMPLETED = "splitCompleted";
 
@@ -242,8 +237,6 @@ public class QuickContactActivity extends ContactsActivity {
     private static final String HANGOUTS_DATA_5_MESSAGE = "conversation";
     private static final String CALL_ORIGIN_QUICK_CONTACTS_ACTIVITY =
             "com.android.contacts.quickcontact.QuickContactActivity";
-    private static final String KEY_LOADER_EXTRA_EMAILS =
-        QuickContactActivity.class.getCanonicalName() + ".KEY_LOADER_EXTRA_EMAILS";
 
     // Set true in {@link #onCreate} after orientation change for later use in processIntent().
     private boolean mIsRecreatedInstance;
@@ -338,12 +331,6 @@ public class QuickContactActivity extends ContactsActivity {
     /** Id for the background contact loader */
     private static final int LOADER_CONTACT_ID = 0;
 
-    private static final String KEY_LOADER_EXTRA_PHONES =
-            QuickContactActivity.class.getCanonicalName() + ".KEY_LOADER_EXTRA_PHONES";
-    private static final String KEY_LOADER_EXTRA_SIP_NUMBERS =
-            QuickContactActivity.class.getCanonicalName() + ".KEY_LOADER_EXTRA_SIP_NUMBERS";
-
-    private static final String FRAGMENT_TAG_SELECT_ACCOUNT = "select_account_fragment";
 
     final OnClickListener mEntryClickHandler = new OnClickListener() {
         @Override
@@ -1119,7 +1106,6 @@ public class QuickContactActivity extends ContactsActivity {
                     /* alternateIntent = */ null,
                     /* alternateContentDescription = */ null,
                     /* shouldApplyColor = */ false,
-                    /* isEditable = */ false,
                     /* EntryContextMenuInfo = */ new EntryContextMenuInfo(phoneticName,
                             getResources().getString(R.string.name_phonetic),
                             /* mimeType = */ null, /* id = */ -1, /* isPrimary = */ false),
@@ -1128,8 +1114,7 @@ public class QuickContactActivity extends ContactsActivity {
                     /* thirdContentDescription = */ null,
                     /* thirdAction = */ Entry.ACTION_NONE,
                     /* thirdExtras = */ null,
-                    /* shouldApplyThirdIconColor = */ true,
-                    /* iconResourceId = */  0);
+                    /* shouldApplyThirdIconColor = */ true);
             List<Entry> phoneticList = new ArrayList<>();
             phoneticList.add(phoneticEntry);
             // Phonetic name comes after nickname. Check to see if the first entry type is nickname
@@ -1183,13 +1168,13 @@ public class QuickContactActivity extends ContactsActivity {
                 getEditContactIntent(),
                 /* alternateIcon = */ null, /* alternateIntent = */ null,
                 /* alternateContentDescription = */ null, /* shouldApplyColor = */ true,
-                /* isEditable = */ false, /* EntryContextMenuInfo = */ null,
+                /* EntryContextMenuInfo = */ null,
                 /* thirdIcon = */ null, /* thirdIntent = */ null,
                 /* thirdContentDescription = */ null,
                 /* thirdAction = */ Entry.ACTION_NONE,
                 /* thirdExtras = */ null,
-                /* shouldApplyThirdIconColor = */ true,
-                R.drawable.quantum_ic_phone_vd_theme_24);
+                /* shouldApplyThirdIconColor = */ true
+        );
 
         final List<List<Entry>> promptEntries = new ArrayList<>();
         promptEntries.add(new ArrayList<Entry>(1));
@@ -1204,12 +1189,12 @@ public class QuickContactActivity extends ContactsActivity {
                     /* text = */ null, /* textIcon = */ null, /* primaryContentDescription = */ null,
                     getEditContactIntent(), /* alternateIcon = */ null,
                     /* alternateIntent = */ null, /* alternateContentDescription = */ null,
-                    /* shouldApplyColor = */ true, /* isEditable = */ false,
+                    /* shouldApplyColor = */ true,
                     /* EntryContextMenuInfo = */ null, /* thirdIcon = */ null,
                     /* thirdIntent = */ null, /* thirdContentDescription = */ null,
                     /* thirdAction = */ Entry.ACTION_NONE, /* thirdExtras = */ null,
-                    /* shouldApplyThirdIconColor = */ true,
-                    R.drawable.quantum_ic_email_vd_theme_24);
+                    /* shouldApplyThirdIconColor = */ true
+            );
 
             promptEntries.add(new ArrayList<Entry>(1));
             promptEntries.get(1).add(emailPromptEntry);
@@ -1408,7 +1393,6 @@ public class QuickContactActivity extends ContactsActivity {
         Drawable alternateIcon = null;
         Intent alternateIntent = null;
         StringBuilder alternateContentDescription = new StringBuilder();
-        final boolean isEditable = false;
         EntryContextMenuInfo entryContextMenuInfo = null;
         Drawable thirdIcon = null;
         Intent thirdIntent = null;
@@ -1808,9 +1792,9 @@ public class QuickContactActivity extends ContactsActivity {
                 smsContentDescription == null
                         ? new SpannableString(alternateContentDescription.toString())
                         : smsContentDescription,
-                shouldApplyColor, isEditable,
+                shouldApplyColor,
                 entryContextMenuInfo, thirdIcon, thirdIntent, thirdContentDescription, thirdAction,
-                thirdExtras, shouldApplyThirdIconColor, iconResourceId);
+                thirdExtras, shouldApplyThirdIconColor);
     }
 
     private List<Entry> dataItemsToEntries(List<DataItem> dataItems,

@@ -65,15 +65,6 @@ public final class PhoneNumberFormatter {
     }
 
     /**
-     * Delay-set {@link PhoneNumberFormattingTextWatcher} to a {@link TextView}.
-     */
-    public static final void setPhoneNumberFormattingTextWatcher(Context context,
-            TextView textView) {
-        setPhoneNumberFormattingTextWatcher(context, textView,
-                /* formatAfterWatcherSet =*/ false);
-    }
-
-    /**
      * Delay-sets {@link PhoneNumberFormattingTextWatcher} to a {@link TextView}
      * and formats the number immediately if formatAfterWaterSet is true.
      * In some cases, formatting before user editing might cause unwanted results

@@ -74,7 +74,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -96,7 +95,6 @@ public class ContactSaveService extends IntentService {
     public static final String EXTRA_ACCOUNT_NAME = "accountName";
     public static final String EXTRA_ACCOUNT_TYPE = "accountType";
     public static final String EXTRA_DATA_SET = "dataSet";
-    public static final String EXTRA_ACCOUNT = "account";
     public static final String EXTRA_CONTENT_VALUES = "contentValues";
     public static final String EXTRA_CALLBACK_INTENT = "callbackIntent";
     public static final String EXTRA_RESULT_RECEIVER = "resultReceiver";
@@ -159,16 +157,10 @@ public class ContactSaveService extends IntentService {
 
     public static final String BROADCAST_SERVICE_STATE_CHANGED = "serviceStateChanged";
 
-    public static final String EXTRA_RESULT_CODE = "resultCode";
-    public static final String EXTRA_RESULT_COUNT = "count";
-
     public static final int CP2_ERROR = 0;
     public static final int CONTACTS_LINKED = 1;
     public static final int CONTACTS_SPLIT = 2;
     public static final int BAD_ARGUMENTS = 3;
-    public static final int RESULT_UNKNOWN = 0;
-    public static final int RESULT_SUCCESS = 1;
-    public static final int RESULT_FAILURE = 2;
 
     private static final HashSet<String> ALLOWED_DATA_COLUMNS = Sets.newHashSet(
         Data.MIMETYPE,
@@ -363,33 +355,6 @@ public class ContactSaveService extends IntentService {
 
         sState.onFinish(intent);
         notifyStateChanged();
-    }
-
-    /**
-     * Creates an intent that can be sent to this service to create a new raw contact
-     * using data presented as a set of ContentValues.
-     */
-    public static Intent createNewRawContactIntent(Context context,
-            ArrayList<ContentValues> values, AccountWithDataSet account,
-            Class<? extends Activity> callbackActivity, String callbackAction) {
-        Intent serviceIntent = new Intent(
-                context, ContactSaveService.class);
-        serviceIntent.setAction(ContactSaveService.ACTION_NEW_RAW_CONTACT);
-        if (account != null) {
-            serviceIntent.putExtra(ContactSaveService.EXTRA_ACCOUNT_NAME, account.name);
-            serviceIntent.putExtra(ContactSaveService.EXTRA_ACCOUNT_TYPE, account.type);
-            serviceIntent.putExtra(ContactSaveService.EXTRA_DATA_SET, account.dataSet);
-        }
-        serviceIntent.putParcelableArrayListExtra(
-                ContactSaveService.EXTRA_CONTENT_VALUES, values);
-
-        // Callback intent will be invoked by the service once the new contact is
-        // created.  The service will put the URI of the new contact as "data" on
-        // the callback intent.
-        Intent callbackIntent = new Intent(context, callbackActivity);
-        callbackIntent.setAction(callbackAction);
-        serviceIntent.putExtra(ContactSaveService.EXTRA_CALLBACK_INTENT, callbackIntent);
-        return serviceIntent;
     }
 
     private void createRawContact(Intent intent) {
@@ -1245,20 +1210,6 @@ public class ContactSaveService extends IntentService {
 
     /**
      * Creates an intent that can be sent to this service to split a contact into it's constituent
-     * pieces. This will set the raw contact ids to {@link AggregationExceptions#TYPE_AUTOMATIC} so
-     * they may be re-merged by the auto-aggregator.
-     */
-    public static Intent createSplitContactIntent(Context context, long[][] rawContactIds,
-            ResultReceiver receiver) {
-        final Intent serviceIntent = new Intent(context, ContactSaveService.class);
-        serviceIntent.setAction(ContactSaveService.ACTION_SPLIT_CONTACT);
-        serviceIntent.putExtra(ContactSaveService.EXTRA_RAW_CONTACT_IDS, rawContactIds);
-        serviceIntent.putExtra(ContactSaveService.EXTRA_RESULT_RECEIVER, receiver);
-        return serviceIntent;
-    }
-
-    /**
-     * Creates an intent that can be sent to this service to split a contact into it's constituent
      * pieces. This will explicitly set the raw contact ids to
      * {@link AggregationExceptions#TYPE_KEEP_SEPARATE}.
      */
@@ -1391,8 +1342,6 @@ public class ContactSaveService extends IntentService {
         };
 
         int _ID = 0;
-        int CONTACT_ID = 1;
-        int DISPLAY_NAME_SOURCE = 2;
     }
 
     private interface ContactEntityQuery {
@@ -1407,8 +1356,6 @@ public class ContactSaveService extends IntentService {
                 " AND " + StructuredName.DISPLAY_NAME + " != '' ";
 
         int DATA_ID = 0;
-        int CONTACT_ID = 1;
-        int IS_SUPER_PRIMARY = 2;
     }
 
     private void joinSeveralContacts(Intent intent) {
@@ -1749,18 +1696,6 @@ public class ContactSaveService extends IntentService {
         operations.add(builder.build());
     }
 
-    /**
-     * Returns an intent that can start this service and cause it to sleep for the specified time.
-     *
-     * This exists purely for debugging and manual testing. Since this service uses a single thread
-     * it is useful to have a way to test behavior when work is queued up and most of the other
-     * operations complete too quickly to simulate that under normal conditions.
-     */
-    public static Intent createSleepIntent(Context context, long millis) {
-        return new Intent(context, ContactSaveService.class).setAction(ACTION_SLEEP)
-                .putExtra(EXTRA_SLEEP_DURATION, millis);
-    }
-
     private void sleepForDebugging(Intent intent) {
         long duration = intent.getLongExtra(EXTRA_SLEEP_DURATION, 1000);
         if (Log.isLoggable(TAG, Log.DEBUG)) {
@@ -1840,15 +1775,13 @@ public class ContactSaveService extends IntentService {
         public static final String KEY_GROUP_MEMBERS = "groupMemberIds";
 
         private static final String TAG = "GroupsDao";
-        private final Context context;
         private final ContentResolver contentResolver;
 
         public GroupsDaoImpl(Context context) {
-            this(context, context.getContentResolver());
+            this(context.getContentResolver());
         }
 
-        public GroupsDaoImpl(Context context, ContentResolver contentResolver) {
-            this.context = context;
+        public GroupsDaoImpl(ContentResolver contentResolver) {
             this.contentResolver = contentResolver;
         }
 
@@ -1939,18 +1872,6 @@ public class ContactSaveService extends IntentService {
 
         public State() {
             mPending = new CopyOnWriteArrayList<>();
-        }
-
-        public State(Collection<Intent> pendingActions) {
-            mPending = new CopyOnWriteArrayList<>(pendingActions);
-        }
-
-        public boolean isIdle() {
-            return mPending.isEmpty();
-        }
-
-        public Intent getCurrentIntent() {
-            return mPending.isEmpty() ? null : mPending.get(0);
         }
 
         /**

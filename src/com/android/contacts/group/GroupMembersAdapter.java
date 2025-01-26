@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -100,10 +101,6 @@ public class GroupMembersAdapter extends MultiSelectEntryContactListAdapter {
         notifyDataSetChanged();
     }
 
-    public boolean getDisplayDeleteButtons() {
-        return mDisplayDeleteButtons;
-    }
-
     @Override
     public void configureLoader(CursorLoader loader, long directoryId) {
         loader.setUri(Data.CONTENT_URI.buildUpon()
@@ -127,11 +124,6 @@ public class GroupMembersAdapter extends MultiSelectEntryContactListAdapter {
         loader.setSortOrder(
                 getSortOrder() == ContactsPreferences.SORT_ORDER_PRIMARY
                         ? Contacts.SORT_KEY_PRIMARY : Contacts.SORT_KEY_ALTERNATIVE);
-    }
-
-    @Override
-    public String getContactDisplayName(int position) {
-        return ((Cursor) getItem(position)).getString(GroupMembersQuery.CONTACT_DISPLAY_NAME);
     }
 
     @Override

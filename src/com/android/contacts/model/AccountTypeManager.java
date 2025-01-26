@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -129,19 +130,6 @@ public abstract class AccountTypeManager {
         return mAccountTypeManager;
     }
 
-    /**
-     * Set the instance of account type manager.  This is only for and should only be used by unit
-     * tests.  While having this method is not ideal, it's simpler than the alternative of
-     * holding this as a service in the ContactsApplication context class.
-     *
-     * @param mockManager The mock AccountTypeManager.
-     */
-    public static void setInstanceForTest(AccountTypeManager mockManager) {
-        synchronized (mInitializationLock) {
-            mAccountTypeManager = mockManager;
-        }
-    }
-
     private static final AccountTypeManager EMPTY = new AccountTypeManager() {
 
         @Override
@@ -161,29 +149,10 @@ public abstract class AccountTypeManager {
         }
 
         @Override
-        public Account getDefaultGoogleAccount() {
-            return null;
-        }
-
-        @Override
         public AccountType getAccountType(AccountTypeWithDataSet accountTypeWithDataSet) {
             return null;
         }
     };
-
-    /**
-     * Returns the list of all accounts (if contactWritableOnly is false) or just the list of
-     * contact writable accounts (if contactWritableOnly is true).
-     *
-     * <p>TODO(mhagerott) delete this method. It's left in place to prevent build breakages when
-     * this change is automerged. Usages of this method in downstream branches should be
-     * replaced with an asynchronous account loading pattern</p>
-     */
-    public List<AccountWithDataSet> getAccounts(boolean contactWritableOnly) {
-        return contactWritableOnly
-                ? blockForWritableAccounts()
-                : AccountInfo.extractAccounts(Futures.getUnchecked(getAccountsAsync()));
-    }
 
     /**
      * Returns all contact writable accounts
@@ -210,11 +179,6 @@ public abstract class AccountTypeManager {
             Predicate<AccountInfo> filter);
 
     public abstract AccountInfo getAccountInfoForAccount(AccountWithDataSet account);
-
-    /**
-     * Returns the default google account.
-     */
-    public abstract Account getDefaultGoogleAccount();
 
     /**
      * Returns the Google Accounts.
@@ -249,34 +213,6 @@ public abstract class AccountTypeManager {
         return !allAccounts.get(0).isNullAccount();
     }
 
-    static Account getDefaultGoogleAccount(AccountManager accountManager,
-            SharedPreferences prefs, String defaultAccountKey) {
-        // Get all the google accounts on the device
-        final Account[] accounts = accountManager.getAccountsByType(
-                GoogleAccountType.ACCOUNT_TYPE);
-        if (accounts == null || accounts.length == 0) {
-            return null;
-        }
-
-        // Get the default account from preferences
-        final String defaultAccount = prefs.getString(defaultAccountKey, null);
-        final AccountWithDataSet accountWithDataSet = defaultAccount == null ? null :
-                AccountWithDataSet.unstringify(defaultAccount);
-
-        // Look for an account matching the one from preferences
-        if (accountWithDataSet != null) {
-            for (int i = 0; i < accounts.length; i++) {
-                if (TextUtils.equals(accountWithDataSet.name, accounts[i].name)
-                        && TextUtils.equals(accountWithDataSet.type, accounts[i].type)) {
-                    return accounts[i];
-                }
-            }
-        }
-
-        // Just return the first one
-        return accounts[0];
-    }
-
     public abstract AccountType getAccountType(AccountTypeWithDataSet accountTypeWithDataSet);
 
     public final AccountType getAccountType(String accountType, String dataSet) {
@@ -308,20 +244,6 @@ public abstract class AccountTypeManager {
         return accounts.contains(account);
     }
 
-    /**
-     * Returns whether the specified account is writable
-     *
-     * <p>This checks that the account still exists and that
-     * {@link AccountType#areContactsWritable()} is true</p>
-     */
-    public boolean isWritable(AccountWithDataSet account) {
-        return exists(account) && getAccountInfoForAccount(account).getType().areContactsWritable();
-    }
-
-    public boolean hasGoogleAccount() {
-        return getDefaultGoogleAccount() != null;
-    }
-
     private static boolean hasRequiredPermissions(Context context) {
         final boolean canGetAccounts = ContextCompat.checkSelfPermission(context,
                 android.Manifest.permission.GET_ACCOUNTS) == PackageManager.PERMISSION_GRANTED;
@@ -336,10 +258,6 @@ public abstract class AccountTypeManager {
 
     public static Predicate<AccountInfo> drawerDisplayableFilter() {
         return AccountFilter.DRAWER_DISPLAYABLE;
-    }
-
-    public static Predicate<AccountInfo> groupWritableFilter() {
-        return AccountFilter.GROUPS_WRITABLE;
     }
 }
 
@@ -646,19 +564,6 @@ class AccountTypeManagerImpl extends AccountTypeManager
             result.add(new AccountWithDataSet(
                     account.name, account.type, type.dataSet));
         }
-    }
-
-    /**
-     * Returns the default google account specified in preferences, the first google account
-     * if it is not specified in preferences or is no longer on the device, and null otherwise.
-     */
-    @Override
-    public Account getDefaultGoogleAccount() {
-        final SharedPreferences sharedPreferences =
-                mContext.getSharedPreferences(mContext.getPackageName(), Context.MODE_PRIVATE);
-        final String defaultAccountKey =
-                mContext.getResources().getString(R.string.contact_editor_default_account_key);
-        return getDefaultGoogleAccount(mAccountManager, sharedPreferences, defaultAccountKey);
     }
 
     @Override

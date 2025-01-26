@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,26 +53,6 @@ public class SimImportService extends Service {
 
     private static final String TAG = "SimImportService";
 
-    /**
-     * Wrapper around the service state for testability
-     */
-    public interface StatusProvider {
-
-        /**
-         * Returns whether there is any imports still pending
-         *
-         * <p>This should be called from the UI thread</p>
-         */
-        boolean isRunning();
-
-        /**
-         * Returns whether an import for sim has been requested
-         *
-         * <p>This should be called from the UI thread</p>
-         */
-        boolean isImporting(SimCard sim);
-    }
-
     public static final String EXTRA_ACCOUNT = "account";
     public static final String EXTRA_SIM_CONTACTS = "simContacts";
     public static final String EXTRA_SIM_SUBSCRIPTION_ID = "simSubscriptionId";
@@ -97,18 +78,6 @@ public class SimImportService extends Service {
     // Keeps track of current tasks. This is only modified from the UI thread.
     private static List<ImportTask> sPending = new ArrayList<>();
 
-    private static StatusProvider sStatusProvider = new StatusProvider() {
-        @Override
-        public boolean isRunning() {
-            return !sPending.isEmpty();
-        }
-
-        @Override
-        public boolean isImporting(SimCard sim) {
-            return SimImportService.isImporting(sim);
-        }
-    };
-
     /**
      * Returns whether an import for sim has been requested
      *
@@ -121,10 +90,6 @@ public class SimImportService extends Service {
             }
         }
         return false;
-    }
-
-    public static StatusProvider getStatusProvider() {
-        return sStatusProvider;
     }
 
     /**

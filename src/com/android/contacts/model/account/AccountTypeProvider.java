@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -102,21 +103,6 @@ public class AccountTypeProvider {
             mCache.put(accountType, types);
         }
         return types;
-    }
-
-    public boolean hasTypeForAccount(AccountWithDataSet account) {
-        return getTypeForAccount(account) != null;
-    }
-
-    public boolean hasTypeWithDataset(String type, String dataSet) {
-        // getAccountTypes() never returns null
-        final List<AccountType> accountTypes = getAccountTypes(type);
-        for (AccountType accountType : accountTypes) {
-            if (Objects.equal(accountType.dataSet, dataSet)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**

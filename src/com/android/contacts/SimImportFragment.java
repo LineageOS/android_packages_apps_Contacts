@@ -76,7 +76,6 @@ public class SimImportFragment extends Fragment
     private static final String ARG_SUBSCRIPTION_ID = "subscriptionId";
 
     private ContactsPreferences mPreferences;
-    private AccountTypeManager mAccountTypeManager;
     private SimContactAdapter mAdapter;
     private View mAccountHeaderContainer;
     private AccountHeaderPresenter mAccountHeaderPresenter;
@@ -98,7 +97,6 @@ public class SimImportFragment extends Fragment
 
         mSavedInstanceState = savedInstanceState;
         mPreferences = new ContactsPreferences(getContext());
-        mAccountTypeManager = AccountTypeManager.getInstance(getActivity());
         mAdapter = new SimContactAdapter(getActivity());
 
         final Bundle args = getArguments();
@@ -326,13 +324,6 @@ public class SimImportFragment extends Fragment
         } else {
             ViewCompat.setElevation(mAccountHeaderContainer, mAccountScrolledElevationPixels);
         }
-    }
-
-    /**
-     * Creates a fragment that will display contacts stored on the default SIM card
-     */
-    public static SimImportFragment newInstance() {
-        return new SimImportFragment();
     }
 
     /**

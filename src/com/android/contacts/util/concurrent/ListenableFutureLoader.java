@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,20 +49,6 @@ public abstract class ListenableFutureLoader<D> extends Loader<D> {
     private D mLoadedData;
 
     private BroadcastReceiver mReceiver;
-
-    /**
-     * Stores away the application context associated with context.
-     * Since Loaders can be used across multiple activities it's dangerous to
-     * store the context directly; always use {@link #getContext()} to retrieve
-     * the Loader's Context, don't use the constructor argument directly.
-     * The Context returned by {@link #getContext} is safe to use across
-     * Activity instances.
-     *
-     * @param context used to retrieve the application context.
-     */
-    public ListenableFutureLoader(Context context) {
-        this(context, null);
-    }
 
     public ListenableFutureLoader(Context context, IntentFilter reloadBroadcastFilter) {
         super(context);
@@ -141,10 +128,6 @@ public abstract class ListenableFutureLoader<D> extends Loader<D> {
      */
     protected boolean isSameData(D previousData, D newData) {
         return false;
-    }
-
-    public final D getLoadedData() {
-        return mLoadedData;
     }
 
     public class ForceLoadReceiver extends BroadcastReceiver {

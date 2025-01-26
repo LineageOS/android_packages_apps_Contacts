@@ -108,11 +108,6 @@ public class ActionBarAdapter implements OnCloseListener {
     private ValueAnimator mStatusBarAnimator;
 
     public ActionBarAdapter(Activity activity, Listener listener, ActionBar actionBar,
-            Toolbar toolbar) {
-        this(activity, listener, actionBar, toolbar, R.string.hint_findContacts);
-    }
-
-    public ActionBarAdapter(Activity activity, Listener listener, ActionBar actionBar,
             Toolbar toolbar, int searchHintResId) {
         mActivity = activity;
         mListener = listener;

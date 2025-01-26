@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -116,15 +117,10 @@ public final class DirectoryPartition extends CompositeCursorAdapter.Partition {
 
     /**
      * Max number of results for this directory. Defaults to {@link #RESULT_LIMIT_DEFAULT} which
-     * implies using the adapter's
-     * {@link com.android.contacts.list.ContactListAdapter#getDirectoryResultLimit()}
+     * implies using the adapter's getDirectoryResultLimit()
      */
     public int getResultLimit() {
         return mResultLimit;
-    }
-
-    public void setResultLimit(int resultLimit) {
-        mResultLimit = resultLimit;
     }
 
     /**
@@ -133,10 +129,6 @@ public final class DirectoryPartition extends CompositeCursorAdapter.Partition {
      */
     public String getContentUri() {
         return mContentUri;
-    }
-
-    public void setContentUri(String contentUri) {
-        mContentUri = contentUri;
     }
 
     /**
@@ -171,9 +163,5 @@ public final class DirectoryPartition extends CompositeCursorAdapter.Partition {
      */
     public boolean isDisplayNumber() {
         return mDisplayNumber;
-    }
-
-    public void setDisplayNumber(boolean displayNumber) {
-        mDisplayNumber = displayNumber;
     }
 }

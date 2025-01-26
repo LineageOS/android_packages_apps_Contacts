@@ -86,30 +86,6 @@ public class BitmapUtil {
     }
 
     /**
-     * Retrieves a copy of the specified drawable resource, rotated by a specified angle.
-     *
-     * @param resources The current resources.
-     * @param resourceId The resource ID of the drawable to rotate.
-     * @param angle The angle of rotation.
-     * @return Rotated drawable.
-     */
-    public static Drawable getRotatedDrawable(
-            android.content.res.Resources resources, int resourceId, float angle) {
-
-        // Get the original drawable and make a copy which will be rotated.
-        Bitmap original = BitmapFactory.decodeResource(resources, resourceId);
-        Bitmap rotated = Bitmap.createBitmap(
-                original.getWidth(), original.getHeight(), Bitmap.Config.ARGB_8888);
-
-        // Perform the rotation.
-        Canvas tempCanvas = new Canvas(rotated);
-        tempCanvas.rotate(angle, original.getWidth()/2, original.getHeight()/2);
-        tempCanvas.drawBitmap(original, 0, 0, null);
-
-        return new BitmapDrawable(resources,rotated);
-    }
-
-    /**
      * Converts a drawable to a bitmap.
      */
     public static Bitmap drawableToBitmap(Drawable drawable, int avatarSizePx) {

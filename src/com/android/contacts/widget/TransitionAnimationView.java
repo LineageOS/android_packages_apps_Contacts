@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +16,6 @@
  */
 package com.android.contacts.widget;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
@@ -28,7 +28,6 @@ import android.widget.FrameLayout;
  */
 public class TransitionAnimationView extends FrameLayout {
     private View mMaskingView;
-    private ObjectAnimator mAnimator;
 
     public TransitionAnimationView(Context context) {
         this(context, null, 0);
@@ -51,42 +50,5 @@ public class TransitionAnimationView extends FrameLayout {
                 LayoutParams.MATCH_PARENT));
         mMaskingView.setBackgroundColor(Color.WHITE);
         addView(mMaskingView);
-    }
-
-    public void setMaskVisibility(boolean flag) {
-        if (flag) {
-            mMaskingView.setAlpha(1.0f);
-            mMaskingView.setVisibility(View.VISIBLE);
-        } else {
-            mMaskingView.setVisibility(View.INVISIBLE);
-        }
-    }
-
-    /**
-     * Starts the transition of showing or hiding the mask. To the user, the view will appear to
-     * either fade in or out of view.
-     *
-     * @param showMask If true, the mask the mask will be set to be invisible then fade into hide
-     * the other views in this container. If false, the the mask will be set to be hide other
-     * views initially.  Then, the other views in this container will be revealed.
-     * @param duration The duration the animation should last for. If -1, the system default(300)
-     * is used.
-     */
-    public void startMaskTransition(boolean showMask, int duration) {
-        // Stop any animation that may still be running.
-        if (mAnimator != null && mAnimator.isRunning()) {
-            mAnimator.end();
-        }
-        mMaskingView.setVisibility(View.VISIBLE);
-        if (showMask) {
-            mAnimator = ObjectAnimator.ofFloat(mMaskingView, View.ALPHA, 0.0f, 1.0f);
-        } else {
-            // asked to hide the view
-            mAnimator = ObjectAnimator.ofFloat(mMaskingView, View.ALPHA, 1.0f, 0.0f);
-        }
-        if (duration != -1) {
-            mAnimator.setDuration(duration);
-        }
-        mAnimator.start();
     }
 }

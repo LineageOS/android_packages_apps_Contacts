@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -194,23 +195,11 @@ public class ResolveCache {
     }
 
     /**
-     * Check {@link PackageManager} to see if any apps offer to handle the
-     * given {@link Intent}.
-     */
-    public boolean hasResolve(String mimeType, Intent intent) {
-        return getEntry(mimeType, intent).bestResolve != null;
-    }
-
-    /**
-     * Return the best icon for the given {@link Action}, which is usually
+     * Return the best icon for the given Action, which is usually
      * based on the {@link ResolveInfo} found through a
      * {@link PackageManager} query.
      */
     public Drawable getIcon(String mimeType, Intent intent) {
         return getEntry(mimeType, intent).icon;
-    }
-
-    public void clear() {
-        mCache.clear();
     }
 }

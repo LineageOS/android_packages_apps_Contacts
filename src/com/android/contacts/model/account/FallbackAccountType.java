@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -76,15 +77,6 @@ public class FallbackAccountType extends BaseAccountType {
 
     public FallbackAccountType(Context context) {
         this(context, null);
-    }
-
-    /**
-     * Used to compare with an {@link ExternalAccountType} built from a test contacts.xml.
-     * In order to build {@link DataKind}s with the same resource package name,
-     * {@code resPackageName} is injectable.
-     */
-    static AccountType createWithPackageNameForTest(Context context, String resPackageName) {
-        return new FallbackAccountType(context, resPackageName);
     }
 
     @Override

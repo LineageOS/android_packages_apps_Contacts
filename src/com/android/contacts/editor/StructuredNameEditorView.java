@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -144,14 +145,6 @@ public class StructuredNameEditorView extends TextFieldsEditorView {
 
     public void setPhoneticView(TextFieldsEditorView phoneticNameEditor) {
         mPhoneticView = phoneticNameEditor;
-    }
-
-    /**
-     * Returns the display name currently displayed in the editor.
-     */
-    public String getDisplayName() {
-        return NameConverter.structuredNameToDisplayName(getContext(),
-                getValues().getCompleteValues());
     }
 
     @Override

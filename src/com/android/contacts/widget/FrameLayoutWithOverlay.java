@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,30 +44,5 @@ public class FrameLayoutWithOverlay extends FrameLayout {
     public void addView(View child, int index, ViewGroup.LayoutParams params) {
         super.addView(child, index, params);
         mOverlay.bringToFront();
-    }
-
-    /**
-     * Delegate to overlay:  set the View that it will use as its alpha-layer.
-     * If none is set, the overlay will use its own alpha layer.  Only
-     * necessary to set this if some child views need to appear above the
-     * alpha-layer.
-     */
-    protected void setAlphaLayer(View layer) {
-        mOverlay.setAlphaLayer(layer);
-    }
-
-    /** Delegate to overlay: set the alpha value on the alpha layer. */
-    public void setAlphaLayerValue(float alpha) {
-        mOverlay.setAlphaLayerValue(alpha);
-    }
-
-    /** Delegate to overlay. */
-    public void setOverlayOnClickListener(OnClickListener listener) {
-        mOverlay.setOverlayOnClickListener(listener);
-    }
-
-    /** Delegate to overlay. */
-    public void setOverlayClickable(boolean clickable) {
-        mOverlay.setOverlayClickable(clickable);
     }
 }

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -245,26 +246,6 @@ public class KindSectionView extends LinearLayout {
      */
     void setLegacyField(boolean isLegacyField) {
         this.mIsLegacyField = isLegacyField;
-    }
-
-    /**
-     * Whether this is a name kind section view and all name fields (structured, phonetic,
-     * and nicknames) are empty.
-     */
-    public boolean isEmptyName() {
-        if (!StructuredName.CONTENT_ITEM_TYPE.equals(mKindSectionData.getMimeType())) {
-            return false;
-        }
-        for (int i = 0; i < mEditors.getChildCount(); i++) {
-            final View view = mEditors.getChildAt(i);
-            if (view instanceof Editor) {
-                final Editor editor = (Editor) view;
-                if (!editor.isEmpty()) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
     public StructuredNameEditorView getNameEditorView() {

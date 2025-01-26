@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,7 +49,6 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
     private static final String KEY_FILTER = "filter";
 
     /** true if the loader has started at least once. */
-    private boolean mLoaderStarted;
 
     private boolean mUseCallableUri;
 
@@ -75,17 +75,8 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
         setHasOptionsMenu(true);
     }
 
-    public void setDirectorySearchEnabled(boolean flag) {
-        setDirectorySearchMode(flag ? DirectoryListLoader.SEARCH_MODE_DEFAULT
-                : DirectoryListLoader.SEARCH_MODE_NONE);
-    }
-
     public void setOnPhoneNumberPickerActionListener(OnPhoneNumberPickerActionListener listener) {
         this.mListener = listener;
-    }
-
-    public OnPhoneNumberPickerActionListener getOnPhoneNumberPickerListener() {
-        return mListener;
     }
 
     @Override
@@ -182,14 +173,8 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
         return adapter.getDataUri(position);
     }
 
-    protected String getLookupKey(int position) {
-        final PhoneNumberListAdapter adapter = (PhoneNumberListAdapter) getAdapter();
-        return adapter.getLookupKey(position);
-    }
-
     @Override
     protected void startLoading() {
-        mLoaderStarted = true;
         super.startLoading();
     }
 
@@ -201,19 +186,10 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
         setVisibleScrollbarEnabled(data != null && !data.isClosed() && data.getCount() > 0);
     }
 
-    public void setUseCallableUri(boolean useCallableUri) {
-        mUseCallableUri = useCallableUri;
-    }
-
-    public boolean usesCallableUri() {
-        return mUseCallableUri;
-    }
-
     @Override
     protected ContactEntryListAdapter createListAdapter() {
         PhoneNumberListAdapter adapter = new PhoneNumberListAdapter(getActivity());
         adapter.setDisplayPhotos(true);
-        adapter.setUseCallableUri(mUseCallableUri);
         return adapter;
     }
 
@@ -265,27 +241,6 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
     public void onPickerResult(Intent data) {
         mListener.onPickDataUri(data.getData(), false /* isVideoCall */,
                 getCallInitiationType(false /* isRemoteDirectory */));
-    }
-
-    public void setFilter(ContactListFilter filter) {
-        if ((mFilter == null && filter == null) ||
-                (mFilter != null && mFilter.equals(filter))) {
-            return;
-        }
-
-        mFilter = filter;
-        if (mLoaderStarted) {
-            reloadData();
-        }
-    }
-
-    public void setPhotoPosition(ContactListItemView.PhotoPosition photoPosition) {
-        mPhotoPosition = photoPosition;
-
-        final PhoneNumberListAdapter adapter = (PhoneNumberListAdapter) getAdapter();
-        if (adapter != null) {
-            adapter.setPhotoPosition(photoPosition);
-        }
     }
 
     /**

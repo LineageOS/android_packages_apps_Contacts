@@ -133,8 +133,6 @@ public class PeopleActivity extends AppCompatContactsActivity implements
     public static final String TAG_SECOND_LEVEL = "second-level";
     public static final String TAG_THIRD_LEVEL = "third-level";
     public static final String TAG_ASSISTANT_HELPER = "assistant-helper";
-    public static final String TAG_DUPLICATES = "DuplicatesFragment";
-    public static final String TAG_DUPLICATES_UTIL = "DuplicatesUtilFragment";
 
     private static final String KEY_GROUP_URI = "groupUri";
     private static final String KEY_CONTACTS_VIEW = "contactsView";

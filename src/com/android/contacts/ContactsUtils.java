@@ -114,26 +114,6 @@ public class ContactsUtils {
     }
 
     /**
-     * Returns true if two objects are considered equal.  Two null references are equal here.
-     */
-    public static boolean areObjectsEqual(Object a, Object b) {
-        return a == b || (a != null && a.equals(b));
-    }
-
-    /**
-     * Returns true if two {@link Intent}s are both null, or have the same action.
-     */
-    public static final boolean areIntentActionEqual(Intent a, Intent b) {
-        if (a == b) {
-            return true;
-        }
-        if (a == null || b == null) {
-            return false;
-        }
-        return TextUtils.equals(a.getAction(), b.getAction());
-    }
-
-    /**
      * Returns the size (width and height) of thumbnail pictures as configured in the provider. This
      * can safely be called from the UI thread, as the provider can serve this without performing
      * a database access

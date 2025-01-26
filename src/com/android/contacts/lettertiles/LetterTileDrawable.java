@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,8 +40,6 @@ import com.google.common.base.Preconditions;
  * represent a contact image.
  */
 public class LetterTileDrawable extends Drawable {
-
-    private final String TAG = LetterTileDrawable.class.getSimpleName();
 
     private final Paint mPaint;
 
@@ -246,16 +245,6 @@ public class LetterTileDrawable extends Drawable {
     public LetterTileDrawable setOffset(float offset) {
         Preconditions.checkArgument(offset >= -0.5f && offset <= 0.5f);
         mOffset = offset;
-        return this;
-    }
-
-    public LetterTileDrawable setLetter(Character letter){
-        mLetter = letter;
-        return this;
-    }
-
-    public LetterTileDrawable setColor(int color){
-        mColor = color;
         return this;
     }
 

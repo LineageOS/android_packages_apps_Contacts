@@ -29,7 +29,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Event;
 import android.provider.ContactsContract.CommonDataKinds.Im;
@@ -46,14 +45,10 @@ import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.android.contacts.ContactPhotoManager;
-import com.android.contacts.ContactPhotoManager.DefaultImageProvider;
-import com.android.contacts.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.ContactsUtils;
 import com.android.contacts.R;
 import com.android.contacts.model.ValuesDelta;
-import com.android.contacts.model.account.AccountDisplayInfo;
 import com.android.contacts.model.account.AccountInfo;
-import com.android.contacts.model.dataitem.DataKind;
 import com.android.contacts.util.ContactPhotoUtils;
 import com.android.contacts.util.MaterialColorMapUtils.MaterialPalette;
 import com.android.contacts.widget.QuickContactImageView;
@@ -125,23 +120,8 @@ public class EditorUiUtils {
         }
     }
 
-    public static String getAccountTypeHeaderLabel(Context context, AccountDisplayInfo
-            displayableAccount)  {
-        if (displayableAccount.isDeviceAccount()) {
-            // Do nothing. Type label should be "Device"
-            return displayableAccount.getTypeLabel().toString();
-        } else if (displayableAccount.isGoogleAccount()) {
-            return context.getString(R.string.google_account_type_format,
-                    displayableAccount.getTypeLabel());
-        } else {
-            return context.getString(R.string.account_type_format,
-                    displayableAccount.getTypeLabel());
-        }
-    }
-
     /**
      * Returns a content description String for the container of the account information
-     * returned by {@link #getAccountTypeHeaderLabel(Context, AccountDisplayInfo)}.
      */
     public static String getAccountInfoContentDescription(CharSequence accountName,
             CharSequence accountType) {
@@ -232,22 +212,6 @@ public class EditorUiUtils {
             return valuesDelta.getAsLong(Photo.PHOTO_FILE_ID);
         }
         return null;
-    }
-
-    /** Binds the full resolution image at the given Uri to the provided ImageView. */
-    static void loadPhoto(ContactPhotoManager contactPhotoManager, ImageView imageView,
-            Uri photoUri) {
-        final DefaultImageProvider fallbackToPreviousImage = new DefaultImageProvider() {
-            @Override
-            public void applyDefaultImage(ImageView view, int extent, boolean darkTheme,
-                    DefaultImageRequest defaultImageRequest) {
-                // Before we finish setting the full sized image, don't change the current
-                // image that is set in any way.
-            }
-        };
-        contactPhotoManager.loadPhoto(imageView, photoUri, imageView.getWidth(),
-                /* darkTheme =*/ false, /* isCircular =*/ false,
-                /* defaultImageRequest =*/ null, fallbackToPreviousImage);
     }
 
     /** Decodes the Bitmap from the photo bytes from the given ValuesDelta. */

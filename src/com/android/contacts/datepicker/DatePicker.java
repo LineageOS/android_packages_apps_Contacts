@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2007 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -223,17 +224,6 @@ public class DatePicker extends FrameLayout {
                 // but the rest of this class assumes that it will be present (but GONE).
                 mPickerContainer.addView(mYearPicker);
             }
-        }
-    }
-
-    public void updateDate(int year, int monthOfYear, int dayOfMonth) {
-        if (mYear != year || mMonth != monthOfYear || mDay != dayOfMonth) {
-            mYear = (mYearOptional && year == NO_YEAR) ? getCurrentYear() : year;
-            mMonth = monthOfYear;
-            mDay = dayOfMonth;
-            updateSpinners();
-            reorderPickers();
-            notifyDateChanged();
         }
     }
 

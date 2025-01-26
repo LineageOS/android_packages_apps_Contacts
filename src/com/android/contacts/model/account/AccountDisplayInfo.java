@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +16,7 @@
  */
 package com.android.contacts.model.account;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
-import androidx.annotation.StringRes;
 import android.text.TextUtils;
 
 /**
@@ -64,37 +63,11 @@ public class AccountDisplayInfo {
         return GoogleAccountType.ACCOUNT_TYPE.equals(mSource.type);
     }
 
-    public boolean isGoogleAccount() {
-        return GoogleAccountType.ACCOUNT_TYPE.equals(mSource.type) && mSource.dataSet == null;
-    }
-
     public boolean isDeviceAccount() {
         return mIsDeviceAccount;
     }
 
     public boolean hasDistinctName() {
         return !TextUtils.equals(mName, mType);
-    }
-
-    public AccountDisplayInfo withName(CharSequence name) {
-        return withNameAndType(name, mType);
-    }
-
-    public AccountDisplayInfo withType(CharSequence type) {
-        return withNameAndType(mName, type);
-    }
-
-    public AccountDisplayInfo withNameAndType(CharSequence name, CharSequence type) {
-        return new AccountDisplayInfo(mSource, name, type, mIcon, mIsDeviceAccount);
-    }
-
-    public AccountDisplayInfo formatted(Context context, @StringRes int nameFormat,
-            @StringRes int typeFormat) {
-        return new AccountDisplayInfo(mSource, context.getString(nameFormat, mName),
-                context.getString(typeFormat, mType), mIcon, mIsDeviceAccount);
-    }
-
-    public AccountDisplayInfo withFormattedName(Context context, @StringRes int nameFormat) {
-        return withName(context.getString(nameFormat, mName));
     }
 }

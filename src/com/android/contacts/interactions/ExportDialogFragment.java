@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +30,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract.Contacts;
-import android.telephony.SubscriptionManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,8 +59,6 @@ public class ExportDialogFragment extends DialogFragment {
     private final String[] LOOKUP_PROJECTION = new String[] {
             Contacts.LOOKUP_KEY
     };
-
-    private SubscriptionManager mSubscriptionManager;
 
     /** Preferred way to show this dialog */
     public static void show(FragmentManager fragmentManager, Class callingActivity,

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +28,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -103,10 +103,6 @@ public final class ContactsPreferenceActivity extends PreferenceActivity
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mCompatDelegate.onPostCreate(savedInstanceState);
-    }
-
-    public void setSupportActionBar(Toolbar toolbar) {
-        mCompatDelegate.setSupportActionBar(toolbar);
     }
 
     @NonNull

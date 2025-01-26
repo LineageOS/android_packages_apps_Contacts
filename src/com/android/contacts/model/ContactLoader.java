@@ -76,8 +76,6 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
 
     private static final String TAG = ContactLoader.class.getSimpleName();
 
-    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
-
     /** A short-lived cache that can be set by {@link #cacheResult()} */
     private static Contact sCachedResult = null;
 
@@ -328,21 +326,6 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
         } catch (Exception e) {
             Log.e(TAG, "Error loading the contact: " + mLookupUri, e);
             return Contact.forError(mRequestedUri, e);
-        }
-    }
-
-    /**
-     * Parses a {@link Contact} stored as a JSON string in a lookup URI.
-     *
-     * @param lookupUri The contact information to parse .
-     * @return The parsed {@code Contact} information.
-     * @throws JSONException
-     */
-    public static Contact parseEncodedContactEntity(Uri lookupUri)  {
-        try {
-            return loadEncodedContactEntity(lookupUri, lookupUri);
-        } catch (JSONException je) {
-            return null;
         }
     }
 

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -116,8 +117,6 @@ public class ContactsApplication extends Application {
         if (Log.isLoggable(Constants.PERFORMANCE_TAG, Log.DEBUG)) {
             Log.d(Constants.PERFORMANCE_TAG, "ContactsApplication.onCreate finish");
         }
-
-        AnalyticsUtil.initialize(this);
     }
 
     private class DelayedInitializer extends AsyncTask<Void, Void, Void> {

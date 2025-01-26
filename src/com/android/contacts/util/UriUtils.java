@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +18,6 @@
 package com.android.contacts.util;
 
 import android.net.Uri;
-import android.provider.ContactsContract;
 
 import java.util.List;
 
@@ -47,11 +47,6 @@ public class UriUtils {
         return Uri.parse(uriString);
     }
 
-    /** Converts a URI into a string, returns null if the given URI is null. */
-    public static String uriToString(Uri uri) {
-        return uri == null ? null : uri.toString();
-    }
-
     public static boolean isEncodedContactUri(Uri uri) {
         if (uri == null) {
             return false;
@@ -61,17 +56,6 @@ public class UriUtils {
             return false;
         }
         return lastPathSegment.equals(Constants.LOOKUP_URI_ENCODED);
-    }
-
-    /**
-     * @return {@code uri} as-is if the authority is of contacts provider.  Otherwise
-     * or {@code uri} is null, return null otherwise
-     */
-    public static Uri nullForNonContactsUri(Uri uri) {
-        if (uri == null) {
-            return null;
-        }
-        return ContactsContract.AUTHORITY.equals(uri.getAuthority()) ? uri : null;
     }
 
     /**

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +17,6 @@
 package com.android.contacts.model;
 
 import android.content.ContentProviderOperation;
-import android.database.MatrixCursor;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -33,7 +33,6 @@ import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Ordering;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -47,10 +46,6 @@ public class SimContact implements Parcelable {
     private final String mName;
     private final String mPhone;
     private final String[] mEmails;
-
-    public SimContact(int recordNumber, String name, String phone) {
-        this(recordNumber, name, phone, null);
-    }
 
     public SimContact(int recordNumber, String name, String phone, String[] emails) {
         mRecordNumber = recordNumber;
@@ -114,12 +109,6 @@ public class SimContact implements Parcelable {
                 .withValue(ContactsContract.Data.MIMETYPE, mimeType)
                 .withValue(column, value)
                 .build();
-    }
-
-    public void appendAsContactRow(MatrixCursor cursor) {
-        cursor.newRow().add(ContactsContract.Contacts._ID, mRecordNumber)
-                .add(ContactsContract.Contacts.DISPLAY_NAME_PRIMARY, mName)
-                .add(ContactsContract.Contacts.LOOKUP_KEY, getLookupKey());
     }
 
     public boolean hasName() {
@@ -205,22 +194,6 @@ public class SimContact implements Parcelable {
     };
 
     /**
-     * Convert a collection of SIM contacts to a Cursor matching a query from
-     * {@link android.provider.ContactsContract.Contacts#CONTENT_URI} with the provided projection.
-     *
-     * This allows a collection of SIM contacts to be displayed using the existing adapters for
-     * contacts.
-     */
-    public static final MatrixCursor convertToContactsCursor(Collection<SimContact> contacts,
-            String[] projection) {
-        final MatrixCursor result = new MatrixCursor(projection);
-        for (SimContact contact : contacts) {
-            contact.appendAsContactRow(result);
-        }
-        return result;
-    }
-
-    /**
      * Returns the index of a contact with a matching name and phone
      * @param contacts list to search. Should be sorted using
      * {@link SimContact#compareByPhoneThenName()}
@@ -240,16 +213,6 @@ public class SimContact implements Parcelable {
                         .compare(lhs.mPhone, rhs.mPhone)
                         .compare(lhs.mName, rhs.mName, Ordering.<String>natural().nullsFirst())
                         .result();
-            }
-        };
-    }
-
-    public static final Comparator<SimContact> compareById() {
-        return new Comparator<SimContact>() {
-            @Override
-            public int compare(SimContact lhs, SimContact rhs) {
-                // We assume ids are unique.
-                return Long.compare(lhs.mRecordNumber, rhs.mRecordNumber);
             }
         };
     }

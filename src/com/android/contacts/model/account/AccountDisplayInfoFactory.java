@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +20,6 @@ import android.content.Context;
 
 import com.android.contacts.list.ContactListFilter;
 import com.android.contacts.model.AccountTypeManager;
-import com.android.contacts.model.RawContactDelta;
 import com.android.contacts.util.DeviceLocalAccountTypeFactory;
 import com.android.contactsbind.ObjectFactory;
 
@@ -72,12 +72,6 @@ public class AccountDisplayInfoFactory {
 
     public AccountDisplayInfo getAccountDisplayInfoFor(ContactListFilter filter) {
         return getAccountDisplayInfo(filter.toAccountWithDataSet());
-    }
-
-    public AccountDisplayInfo getAccountDisplayInfoFor(RawContactDelta delta) {
-        final AccountWithDataSet account = new AccountWithDataSet(delta.getAccountName(),
-                delta.getAccountType(), delta.getDataSet());
-        return getAccountDisplayInfo(account);
     }
 
     public static AccountDisplayInfoFactory fromListFilters(Context context,

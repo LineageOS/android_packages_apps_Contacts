@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,11 +57,6 @@ public class LegacyContactListAdapter extends ContactEntryListAdapter {
         loader.setUri(People.CONTENT_URI);
         loader.setProjection(PEOPLE_PROJECTION);
         loader.setSortOrder(People.DISPLAY_NAME);
-    }
-
-    @Override
-    public String getContactDisplayName(int position) {
-        return ((Cursor)getItem(position)).getString(PERSON_DISPLAY_NAME_COLUMN_INDEX);
     }
 
     public Uri getPersonUri(int position) {

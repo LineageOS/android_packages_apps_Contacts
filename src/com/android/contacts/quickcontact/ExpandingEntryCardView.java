@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -109,12 +110,10 @@ public class ExpandingEntryCardView extends CardView {
         private final Intent mAlternateIntent;
         private Spannable mAlternateContentDescription;
         private final boolean mShouldApplyColor;
-        private final boolean mIsEditable;
         private final EntryContextMenuInfo mEntryContextMenuInfo;
         private final Drawable mThirdIcon;
         private final Intent mThirdIntent;
         private final String mThirdContentDescription;
-        private final int mIconResourceId;
         private final int mThirdAction;
         private final Bundle mThirdExtras;
         private final boolean mShouldApplyThirdIconColor;
@@ -123,10 +122,10 @@ public class ExpandingEntryCardView extends CardView {
                 Drawable subHeaderIcon, String text, Drawable textIcon,
                 Spannable primaryContentDescription, Intent intent,
                 Drawable alternateIcon, Intent alternateIntent,
-                Spannable alternateContentDescription, boolean shouldApplyColor, boolean isEditable,
+                Spannable alternateContentDescription, boolean shouldApplyColor,
                 EntryContextMenuInfo entryContextMenuInfo, Drawable thirdIcon, Intent thirdIntent,
                 String thirdContentDescription, int thirdAction, Bundle thirdExtras,
-                boolean shouldApplyThirdIconColor, int iconResourceId) {
+                boolean shouldApplyThirdIconColor) {
             mId = id;
             mIcon = mainIcon;
             mHeader = header;
@@ -140,7 +139,6 @@ public class ExpandingEntryCardView extends CardView {
             mAlternateIntent = alternateIntent;
             mAlternateContentDescription = alternateContentDescription;
             mShouldApplyColor = shouldApplyColor;
-            mIsEditable = isEditable;
             mEntryContextMenuInfo = entryContextMenuInfo;
             mThirdIcon = thirdIcon;
             mThirdIntent = thirdIntent;
@@ -148,7 +146,6 @@ public class ExpandingEntryCardView extends CardView {
             mThirdAction = thirdAction;
             mThirdExtras = thirdExtras;
             mShouldApplyThirdIconColor = shouldApplyThirdIconColor;
-            mIconResourceId = iconResourceId;
         }
 
         Drawable getIcon() {
@@ -199,10 +196,6 @@ public class ExpandingEntryCardView extends CardView {
             return mShouldApplyColor;
         }
 
-        boolean isEditable() {
-            return mIsEditable;
-        }
-
         int getId() {
             return mId;
         }
@@ -221,10 +214,6 @@ public class ExpandingEntryCardView extends CardView {
 
         String getThirdContentDescription() {
             return mThirdContentDescription;
-        }
-
-        int getIconResourceId() {
-            return mIconResourceId;
         }
 
         public int getThirdAction() {
@@ -562,19 +551,6 @@ public class ExpandingEntryCardView extends CardView {
                     TextView header = (TextView) entryView.findViewById(R.id.header);
                     if (header != null) {
                         header.setTextColor(color);
-                    }
-                }
-            }
-        }
-    }
-
-    public void setEntrySubHeaderColor(int color) {
-        if (mEntries != null) {
-            for (List<View> entryList : mEntryViews) {
-                for (View entryView : entryList) {
-                    final TextView subHeader = (TextView) entryView.findViewById(R.id.sub_header);
-                    if (subHeader != null) {
-                        subHeader.setTextColor(color);
                     }
                 }
             }
@@ -923,10 +899,6 @@ public class ExpandingEntryCardView extends CardView {
                     firstEntry.getPaddingRight(),
                     firstEntry.getPaddingBottom());
         }
-    }
-
-    public boolean shouldShow() {
-        return mEntries != null && mEntries.size() > 0;
     }
 
     public static final class EntryView extends RelativeLayout {

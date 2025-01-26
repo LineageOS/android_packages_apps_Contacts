@@ -23,12 +23,13 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.util.Log;
+
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.android.contacts.R;
 import com.android.contacts.model.dataitem.DataKind;
-import com.android.contactsbind.FeedbackHelper;
 
 import com.google.common.collect.Lists;
 
@@ -63,7 +64,7 @@ public class FallbackAccountType extends BaseAccountType {
 
             mIsInitialized = true;
         } catch (DefinitionException e) {
-            FeedbackHelper.sendFeedback(context, TAG, "Failed to build fallback account type", e);
+            Log.e(TAG, "Failed to build fallback account type", e);
         }
     }
 

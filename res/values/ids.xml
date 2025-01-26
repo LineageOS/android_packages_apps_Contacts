@@ -56,9 +56,6 @@
     <!-- Menu ID for Contacts menu -->
     <item type="id" name="nav_all_contacts" />
 
-    <!-- Menu ID for Suggestions menu -->
-    <item type="id" name="nav_assistant" />
-
     <!-- Menu ID for group header -->
     <item type="id" name="nav_groups" />
 
@@ -79,9 +76,6 @@
 
     <!-- Menu ID for Settings menu -->
     <item type="id" name="nav_settings" />
-
-    <!-- Menu ID for help & feedback  menu -->
-    <item type="id" name="nav_help" />
 
     <!-- For vcard.ImportVCardActivity -->
     <item type="id" name="dialog_cache_vcard"/>

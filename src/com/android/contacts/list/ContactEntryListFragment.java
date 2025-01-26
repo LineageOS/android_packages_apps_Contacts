@@ -49,8 +49,6 @@ import android.widget.ListView;
 
 import com.android.common.widget.CompositeCursorAdapter.Partition;
 import com.android.contacts.ContactPhotoManager;
-import com.android.contacts.logging.ListEvent.ActionType;
-import com.android.contacts.logging.Logger;
 import com.android.contacts.preference.ContactsPreferences;
 
 import java.util.Locale;
@@ -462,8 +460,6 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
 
     protected void maybeLogListEvent() {
         if (!mDataLoaded || mLogListEvents) {
-            Logger.logListEvent(ActionType.LOAD, getListType(), getAdapter().getCount(),
-                        /* clickedIndex */ -1, /* numSelected */ 0);
             mLogListEvents = false;
             mDataLoaded = true;
         }

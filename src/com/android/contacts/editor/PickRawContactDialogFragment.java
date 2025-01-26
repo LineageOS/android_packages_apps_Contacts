@@ -22,11 +22,7 @@ import com.android.contacts.activities.ContactSelectionActivity;
 import com.android.contacts.editor.PickRawContactLoader.RawContact;
 import com.android.contacts.editor.PickRawContactLoader.RawContactsMetadata;
 import com.android.contacts.list.UiIntentActions;
-import com.android.contacts.logging.EditorEvent;
-import com.android.contacts.logging.Logger;
 import com.android.contacts.model.AccountTypeManager;
-import com.android.contacts.model.account.AccountDisplayInfo;
-import com.android.contacts.model.account.AccountDisplayInfoFactory;
 import com.android.contacts.model.account.AccountInfo;
 import com.android.contacts.model.account.AccountType;
 import com.android.contacts.model.account.AccountWithDataSet;
@@ -218,10 +214,6 @@ public class PickRawContactDialogFragment extends DialogFragment {
             }
         });
         builder.setCancelable(true);
-        if (savedInstanceState == null) {
-            Logger.logEditorEvent(EditorEvent.EventType.SHOW_RAW_CONTACT_PICKER,
-                    /* numberRawContacts */ mAdapter.getCount());
-        }
         return builder.create();
     }
 

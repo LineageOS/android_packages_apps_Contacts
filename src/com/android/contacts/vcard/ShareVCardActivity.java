@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +23,6 @@ import androidx.core.content.FileProvider;
 import android.util.Log;
 
 import com.android.contacts.R;
-import com.android.contactsbind.FeedbackHelper;
 
 import java.io.File;
 import java.io.IOException;
@@ -51,7 +51,7 @@ public class ShareVCardActivity extends ExportVCardActivity {
         try {
             file.createNewFile();
         } catch (IOException e) {
-            FeedbackHelper.sendFeedback(this, LOG_TAG, "Failed to create .vcf file", e);
+            Log.e(LOG_TAG, "Failed to create .vcf file", e);
             finish();
             return;
         }

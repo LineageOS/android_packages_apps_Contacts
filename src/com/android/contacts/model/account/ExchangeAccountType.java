@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,11 +30,11 @@ import android.provider.ContactsContract.CommonDataKinds.Photo;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.CommonDataKinds.Website;
+import android.util.Log;
 
 import com.android.contacts.R;
 import com.android.contacts.model.dataitem.DataKind;
 import com.android.contacts.util.CommonDateUtils;
-import com.android.contactsbind.FeedbackHelper;
 
 import com.google.common.collect.Lists;
 
@@ -70,7 +71,7 @@ public class ExchangeAccountType extends BaseAccountType {
             mIsInitialized = true;
         } catch (DefinitionException e) {
             // TODO: Change this to fail fast if there are no feedback reports
-            FeedbackHelper.sendFeedback(context, TAG, "Failed to build exchange account type", e);
+            Log.e(TAG, "Failed to build exchange account type", e);
         }
     }
 

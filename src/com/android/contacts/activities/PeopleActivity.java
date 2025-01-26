@@ -81,7 +81,6 @@ import com.android.contacts.list.DefaultContactBrowseListFragment;
 import com.android.contacts.list.MultiSelectContactsListFragment;
 import com.android.contacts.list.ProviderStatusWatcher;
 import com.android.contacts.list.ProviderStatusWatcher.ProviderStatusListener;
-import com.android.contacts.logging.Logger;
 import com.android.contacts.logging.ScreenEvent.ScreenType;
 import com.android.contacts.model.AccountTypeManager;
 import com.android.contacts.model.account.AccountInfo;
@@ -96,9 +95,6 @@ import com.android.contacts.util.SharedPreferenceUtil;
 import com.android.contacts.util.SyncUtil;
 import com.android.contacts.util.ViewUtil;
 import com.android.contacts.widget.FloatingActionButtonController;
-import com.android.contactsbind.FeatureHighlightHelper;
-import com.android.contactsbind.HelpUtils;
-import com.android.contactsbind.ObjectFactory;
 
 import com.google.common.util.concurrent.Futures;
 
@@ -805,17 +801,6 @@ public class PeopleActivity extends AppCompatContactsActivity implements
             return;
         }
 
-        if (isAssistantView()) {
-            onBackPressedAssistantView();
-            return;
-        }
-
-        // If feature highlight is present, let it handle the back event before
-        // mContactsListFragment.
-        if (FeatureHighlightHelper.tryRemoveHighlight(this)) {
-            return;
-        }
-
         // Handle the back event in "first level" - mContactsListFragment.
         if (maybeHandleInListFragment()) {
             return;
@@ -857,9 +842,6 @@ public class PeopleActivity extends AppCompatContactsActivity implements
             mContactsListFragment.getActionBarAdapter().setSearchMode(false);
             if (mContactsListFragment.wasSearchResultClicked()) {
                 mContactsListFragment.resetSearchResultClicked();
-            } else {
-                Logger.logScreenView(this, ScreenType.SEARCH_EXIT);
-                Logger.logSearchEvent(mContactsListFragment.createSearchState());
             }
             return true;
         }
@@ -983,10 +965,6 @@ public class PeopleActivity extends AppCompatContactsActivity implements
         }
     }
 
-    protected void launchAssistant() {
-        switchView(ContactsView.ASSISTANT);
-    }
-
     private void switchView(ContactsView contactsView) {
         mCurrentView = contactsView;
 
@@ -997,17 +975,6 @@ public class PeopleActivity extends AppCompatContactsActivity implements
             mMembersFragment = GroupMembersFragment.newInstance(mGroupUri);
             transaction.replace(
                     R.id.contacts_list_container, mMembersFragment, TAG_GROUP_VIEW);
-        } else if (isAssistantView()) {
-            Fragment uiFragment = fragmentManager.findFragmentByTag(TAG_ASSISTANT);
-            Fragment unavailableFragment = fragmentManager.findFragmentByTag(TAG_UNAVAILABLE);
-            if (uiFragment == null) {
-                uiFragment = ObjectFactory.getAssistantFragment();
-            }
-            if (unavailableFragment != null) {
-                transaction.remove(unavailableFragment);
-            }
-            transaction.replace(R.id.contacts_list_container, uiFragment, TAG_ASSISTANT);
-            resetToolBarStatusBarColor();
         }
         transaction.addToBackStack(TAG_SECOND_LEVEL);
         transaction.commit();
@@ -1059,14 +1026,6 @@ public class PeopleActivity extends AppCompatContactsActivity implements
     }
 
     private void handleFilterChangeForActivity(ContactListFilter filter) {
-        // The filter was changed while this activity was in the background. If we're in the
-        // assistant view Switch to the main contacts list when we resume to prevent
-        // b/31838582 and b/31829161
-        // TODO: this is a hack; we need to do some cleanup of the contact list filter stuff
-        if (isAssistantView() && filter.isContactsFilterType()) {
-            mShouldSwitchToAllContacts = true;
-        }
-
         getWindow().getDecorView()
                 .sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
         invalidateOptionsMenu();
@@ -1170,8 +1129,6 @@ public class PeopleActivity extends AppCompatContactsActivity implements
     public void onContactsViewSelected(ContactsView mode) {
         if (mode == ContactsView.ALL_CONTACTS) {
             switchToAllContacts();
-        } else if (mode == ContactsView.ASSISTANT) {
-            launchAssistant();
         } else {
             throw new IllegalStateException("Unknown view " + mode);
         }
@@ -1190,11 +1147,6 @@ public class PeopleActivity extends AppCompatContactsActivity implements
                 startActivity(createPreferenceIntent());
             }
         }, DRAWER_CLOSE_DELAY);
-    }
-
-    @Override
-    public void onLaunchHelpFeedback() {
-        HelpUtils.launchHelpAndFeedbackForMainScreen(this);
     }
 
     @Override
@@ -1241,10 +1193,6 @@ public class PeopleActivity extends AppCompatContactsActivity implements
         return mCurrentView == ContactsView.GROUP_VIEW;
     }
 
-    protected boolean isAssistantView() {
-        return mCurrentView == ContactsView.ASSISTANT;
-    }
-
     protected boolean isAllContactsView() {
         return mCurrentView == ContactsView.ALL_CONTACTS;
     }
@@ -1254,7 +1202,7 @@ public class PeopleActivity extends AppCompatContactsActivity implements
     }
 
     public boolean isInSecondLevel() {
-        return isGroupView() || isAssistantView();
+        return isGroupView();
     }
 
     private boolean isInThirdLevel() {

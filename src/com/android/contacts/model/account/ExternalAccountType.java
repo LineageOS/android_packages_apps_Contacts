@@ -36,7 +36,6 @@ import android.util.Xml;
 
 import com.android.contacts.R;
 import com.android.contacts.model.dataitem.DataKind;
-import com.android.contactsbind.FeedbackHelper;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -157,8 +156,7 @@ public class ExternalAccountType extends BaseAccountType {
             // Only send feedback if not from tests. There are tests that expect failures so no need
             // to report those.
             if (injectedMetadata == null) {
-                FeedbackHelper.sendFeedback(context, TAG, "Failed to build external account type",
-                        e);
+                Log.e(TAG, "Failed to build external account type", e);
             }
             return;
         } finally {

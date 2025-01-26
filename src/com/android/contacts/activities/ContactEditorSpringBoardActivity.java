@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.RawContacts;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.contacts.AppCompatContactsActivity;
@@ -22,13 +23,10 @@ import com.android.contacts.editor.PickRawContactDialogFragment;
 import com.android.contacts.editor.PickRawContactLoader;
 import com.android.contacts.editor.PickRawContactLoader.RawContactsMetadata;
 import com.android.contacts.editor.SplitContactConfirmationDialogFragment;
-import com.android.contacts.logging.EditorEvent;
-import com.android.contacts.logging.Logger;
 import com.android.contacts.model.AccountTypeManager;
 import com.android.contacts.quickcontact.QuickContactActivity;
 import com.android.contacts.util.ImplicitIntentsUtil;
 import com.android.contacts.util.MaterialColorMapUtils.MaterialPalette;
-import com.android.contactsbind.FeedbackHelper;
 
 /**
  * Transparent springboard activity that hosts a dialog to select a raw contact to edit.
@@ -111,14 +109,11 @@ public class ContactEditorSpringBoardActivity extends AppCompatContactsActivity 
         // Go straight to editor if we're passed a raw contact Uri.
         if (ContactsContract.AUTHORITY.equals(authority) &&
                 RawContacts.CONTENT_ITEM_TYPE.equals(type)) {
-            Logger.logEditorEvent(
-                    EditorEvent.EventType.SHOW_RAW_CONTACT_PICKER, /* numberRawContacts */ 0);
             final long rawContactId = ContentUris.parseId(mUri);
             startEditorAndForwardExtras(getIntentForRawContact(rawContactId));
         } else if (android.provider.Contacts.AUTHORITY.equals(authority)) {
             // Fail if given a legacy URI.
-            FeedbackHelper.sendFeedback(this, TAG,
-                    "Legacy Uri was passed to editor.", new IllegalArgumentException());
+            Log.e(TAG, "Legacy Uri was passed to editor.", new IllegalArgumentException());
             toastErrorAndFinish();
         } else {
             getLoaderManager().initLoader(LOADER_RAW_CONTACTS, null, mRawContactLoaderListener);
@@ -188,8 +183,6 @@ public class ContactEditorSpringBoardActivity extends AppCompatContactsActivity 
      * the editor is started normally and handles creation of a new writable raw contact.
      */
     private void loadEditor() {
-        Logger.logEditorEvent(
-                EditorEvent.EventType.SHOW_RAW_CONTACT_PICKER, /* numberRawContacts */ 0);
         final Intent intent;
         if (mHasWritableAccount) {
             intent = getIntentForRawContact(mResult.rawContacts.get(mWritableAccountPosition).id);

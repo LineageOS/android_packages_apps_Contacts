@@ -45,7 +45,6 @@ import com.android.contacts.R;
 import com.android.contacts.activities.RequestImportVCardPermissionsActivity;
 import com.android.contacts.model.AccountTypeManager;
 import com.android.contacts.model.account.AccountWithDataSet;
-import com.android.contactsbind.FeedbackHelper;
 import com.android.vcard.VCardEntryCounter;
 import com.android.vcard.VCardParser;
 import com.android.vcard.VCardParser_V21;
@@ -235,8 +234,7 @@ public class ImportVCardActivity extends Activity implements ImportVCardDialogFr
                     try {
                         requests.add(constructImportRequest(mSource, null, mDisplayName));
                     } catch (VCardException e) {
-                        FeedbackHelper.sendFeedback(ImportVCardActivity.this, LOG_TAG,
-                                "Failed to cache vcard", e);
+                        Log.e(LOG_TAG, "Failed to cache vcard", e);
                         showFailureNotification(R.string.fail_reason_not_supported);
                         return;
                     }
@@ -254,13 +252,11 @@ public class ImportVCardActivity extends Activity implements ImportVCardDialogFr
                         try {
                             request = constructImportRequest(null, sourceUri, sourceDisplayName);
                         } catch (VCardException e) {
-                            FeedbackHelper.sendFeedback(ImportVCardActivity.this, LOG_TAG,
-                                    "Failed to cache vcard", e);
+                            Log.e(LOG_TAG, "Failed to cache vcard", e);
                             showFailureNotification(R.string.fail_reason_not_supported);
                             return;
                         } catch (IOException e) {
-                            FeedbackHelper.sendFeedback(ImportVCardActivity.this, LOG_TAG,
-                                    "Failed to cache vcard", e);
+                            Log.e(LOG_TAG, "Failed to cache vcard", e);
                             showFailureNotification(R.string.fail_reason_io_error);
                             return;
                         }
@@ -277,14 +273,12 @@ public class ImportVCardActivity extends Activity implements ImportVCardDialogFr
                     Log.w(LOG_TAG, "Empty import requests. Ignore it.");
                 }
             } catch (OutOfMemoryError e) {
-                FeedbackHelper.sendFeedback(ImportVCardActivity.this, LOG_TAG,
-                        "OutOfMemoryError occured during caching vCard", e);
+                Log.e(LOG_TAG, "OutOfMemoryError occured during caching vCard", e);
                 System.gc();
                 runOnUiThread(new DialogDisplayer(
                         getString(R.string.fail_reason_low_memory_during_import)));
             } catch (IOException e) {
-                FeedbackHelper.sendFeedback(ImportVCardActivity.this, LOG_TAG,
-                        "IOException during caching vCard", e);
+                Log.e(LOG_TAG, "IOException during caching vCard", e);
                 runOnUiThread(new DialogDisplayer(
                         getString(R.string.fail_reason_io_error)));
             } finally {
@@ -293,8 +287,7 @@ public class ImportVCardActivity extends Activity implements ImportVCardDialogFr
                 try {
                     unbindService(mConnection);
                 } catch (IllegalArgumentException e) {
-                    FeedbackHelper.sendFeedback(ImportVCardActivity.this, LOG_TAG,
-                            "Cannot unbind service connection", e);
+                    Log.e(LOG_TAG, "Cannot unbind service connection", e);
                 }
                 mProgressDialogForCachingVCard.dismiss();
                 mProgressDialogForCachingVCard = null;
@@ -543,7 +536,7 @@ public class ImportVCardActivity extends Activity implements ImportVCardDialogFr
         try {
             copyTo(sourceUri, localFilename);
         } catch (IOException|SecurityException e) {
-            FeedbackHelper.sendFeedback(this, LOG_TAG, "Failed to copy vcard to local file", e);
+            Log.e(LOG_TAG, "Failed to copy vcard to local file", e);
             showFailureNotification(R.string.fail_reason_io_error);
             return null;
         }

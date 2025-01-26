@@ -116,9 +116,7 @@ import com.android.contacts.interactions.ContactDeletionInteraction;
 import com.android.contacts.interactions.TouchPointManager;
 import com.android.contacts.lettertiles.LetterTileDrawable;
 import com.android.contacts.list.UiIntentActions;
-import com.android.contacts.logging.Logger;
 import com.android.contacts.logging.QuickContactEvent.ActionType;
-import com.android.contacts.logging.QuickContactEvent.CardType;
 import com.android.contacts.logging.QuickContactEvent.ContactType;
 import com.android.contacts.logging.ScreenEvent.ScreenType;
 import com.android.contacts.model.AccountTypeManager;
@@ -160,7 +158,6 @@ import com.android.contacts.util.ViewUtil;
 import com.android.contacts.widget.MultiShrinkScroller;
 import com.android.contacts.widget.MultiShrinkScroller.MultiShrinkScrollerListener;
 import com.android.contacts.widget.QuickContactImageView;
-import com.android.contactsbind.HelpUtils;
 import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -241,8 +238,6 @@ public class QuickContactActivity extends ContactsActivity {
     // Set true in {@link #onCreate} after orientation change for later use in processIntent().
     private boolean mIsRecreatedInstance;
     private boolean mShortcutUsageReported = false;
-
-    private boolean mShouldLog;
 
     // Used to store and log the referrer package name and the contact type.
     private String mReferrer;
@@ -364,8 +359,6 @@ public class QuickContactActivity extends ContactsActivity {
                 final int actionType = intent.getIntExtra(EXTRA_ACTION_TYPE,
                         ActionType.UNKNOWN_ACTION);
                 final String thirdPartyAction = intent.getStringExtra(EXTRA_THIRD_PARTY_ACTION);
-                Logger.logQuickContactEvent(mReferrer, mContactType,
-                        CardType.UNKNOWN_CARD, actionType, thirdPartyAction);
                 // For the tachyon call action, we need to use startActivityForResult and not
                 // add FLAG_ACTIVITY_NEW_TASK to the intent.
                 if (TACHYON_CALL_ACTION.equals(intent.getAction())) {
@@ -648,13 +641,6 @@ public class QuickContactActivity extends ContactsActivity {
         LocalBroadcastManager.getInstance(this).registerReceiver(mListener,
                 intentFilter);
 
-
-        mShouldLog = true;
-
-        final int previousScreenType = getIntent().getIntExtra
-                (EXTRA_PREVIOUS_SCREEN_TYPE, ScreenType.UNKNOWN);
-        Logger.logScreenView(this, ScreenType.QUICK_CONTACT, previousScreenType);
-
         mReferrer = getCallingPackage();
         if (mReferrer == null && getReferrer() != null) {
             mReferrer = getReferrer().getAuthority();
@@ -862,13 +848,9 @@ public class QuickContactActivity extends ContactsActivity {
         mLookupUri = lookupUri;
         mExcludeMimes = intent.getStringArrayExtra(QuickContact.EXTRA_EXCLUDE_MIMES);
         if (oldLookupUri == null) {
-            // Should not log if only orientation changes.
-            mShouldLog = !mIsRecreatedInstance;
             mContactLoader = (ContactLoader) getLoaderManager().initLoader(
                     LOADER_CONTACT_ID, null, mLoaderContactCallbacks);
         } else if (oldLookupUri != mLookupUri) {
-            // Should log when reload happens, regardless of orientation change.
-            mShouldLog = true;
             // After copying a directory contact, the contact URI changes. Therefore,
             // we need to reload the new contact.
             mContactLoader = (ContactLoader) (Loader<?>) getLoaderManager().getLoader(
@@ -941,10 +923,6 @@ public class QuickContactActivity extends ContactsActivity {
             newContactType = ContactType.EDITABLE;
         } else {
             newContactType = ContactType.UNKNOWN_TYPE;
-        }
-        if (mShouldLog && mContactType != newContactType) {
-            Logger.logQuickContactEvent(mReferrer, newContactType, CardType.UNKNOWN_CARD,
-                    actionType, /* thirdPartyAction */ null);
         }
         mContactType = newContactType;
 
@@ -1076,10 +1054,6 @@ public class QuickContactActivity extends ContactsActivity {
                     /* isAlwaysExpanded = */ true,
                     mExpandingEntryCardViewListener,
                     mScroller);
-            if (mContactCard.getVisibility() == View.GONE && mShouldLog) {
-                Logger.logQuickContactEvent(mReferrer, mContactType, CardType.CONTACT,
-                        ActionType.UNKNOWN_ACTION, /* thirdPartyAction */ null);
-            }
             mContactCard.setVisibility(View.VISIBLE);
         } else {
             mContactCard.setVisibility(View.GONE);
@@ -1145,10 +1119,6 @@ public class QuickContactActivity extends ContactsActivity {
 
         // Show the About card if it has entries
         if (aboutCardEntries.size() > 0) {
-            if (mAboutCard.getVisibility() == View.GONE && mShouldLog) {
-                Logger.logQuickContactEvent(mReferrer, mContactType, CardType.ABOUT,
-                        ActionType.UNKNOWN_ACTION, /* thirdPartyAction */ null);
-            }
             mAboutCard.setVisibility(View.VISIBLE);
         }
         Trace.endSection();
@@ -1206,10 +1176,6 @@ public class QuickContactActivity extends ContactsActivity {
                 new PorterDuffColorFilter(subHeaderTextColor, PorterDuff.Mode.SRC_ATOP);
         mNoContactDetailsCard.initialize(promptEntries, 2, /* isExpanded = */ true,
                 /* isAlwaysExpanded = */ true, mExpandingEntryCardViewListener, mScroller);
-        if (mNoContactDetailsCard.getVisibility() == View.GONE && mShouldLog) {
-            Logger.logQuickContactEvent(mReferrer, mContactType, CardType.NO_CONTACT,
-                    ActionType.UNKNOWN_ACTION, /* thirdPartyAction */ null);
-        }
         mNoContactDetailsCard.setVisibility(View.VISIBLE);
         mNoContactDetailsCard.setEntryHeaderColor(subHeaderTextColor);
         mNoContactDetailsCard.setColorAndFilter(subHeaderTextColor, greyColorFilter);
@@ -1227,7 +1193,6 @@ public class QuickContactActivity extends ContactsActivity {
         Trace.beginSection("Build data items map");
 
         final Map<String, List<DataItem>> dataItemsMap = new HashMap<>();
-        final boolean tachyonEnabled = CallUtil.isTachyonEnabled(this);
 
         for (RawContact rawContact : data.getRawContacts()) {
             for (DataItem dataItem : rawContact.getDataItems()) {
@@ -1249,7 +1214,7 @@ public class QuickContactActivity extends ContactsActivity {
                             dataKind));
 
                     if (isMimeExcluded(mimeType) || !hasData) continue;
-                } else if (!tachyonEnabled) {
+                } else {
                     // If tachyon isn't enabled, skip its mimetypes.
                     continue;
                 }
@@ -1601,15 +1566,6 @@ public class QuickContactActivity extends ContactsActivity {
                     thirdIntent.putExtra(EXTRA_ACTION_TYPE, ActionType.VIDEOCALL);
                     thirdContentDescription =
                             res.getString(R.string.description_video_call);
-                } else if (CallUtil.isTachyonEnabled(context)
-                        && ((PhoneDataItem) dataItem).isTachyonReachable()) {
-                    thirdIcon = context.getDrawable(R.drawable.quantum_ic_videocam_vd_theme_24);
-                    thirdAction = Entry.ACTION_INTENT;
-                    thirdIntent = new Intent(TACHYON_CALL_ACTION);
-                    thirdIntent.setData(
-                            Uri.fromParts(PhoneAccount.SCHEME_TEL, phone.getNumber(), null));
-                    thirdContentDescription = ((PhoneDataItem) dataItem).getReachableDataItem()
-                            .getContentValues().getAsString(Data.DATA2);
                 }
             }
         } else if (dataItem instanceof EmailDataItem) {
@@ -1696,10 +1652,6 @@ public class QuickContactActivity extends ContactsActivity {
                     aboutCardName.value = res.getString(R.string.about_card_title);
                 }
             }
-        } else if (CallUtil.isTachyonEnabled(context) && MIMETYPE_TACHYON.equals(
-                dataItem.getMimeType())) {
-            // Skip these actions. They will be placed by the phone number.
-            return null;
         } else {
             // Custom DataItem
             header = dataItem.buildDataStringForDisplay(context, kind);
@@ -2345,9 +2297,6 @@ public class QuickContactActivity extends ContactsActivity {
             sendToVoiceMailMenuItem.setTitle(mSendToVoicemailState
                     ? R.string.menu_unredirect_calls_to_vm : R.string.menu_redirect_calls_to_vm);
 
-            final MenuItem helpMenu = menu.findItem(R.id.menu_help);
-            helpMenu.setVisible(HelpUtils.isHelpAndFeedbackAvailable());
-
             return true;
         }
         return false;
@@ -2362,16 +2311,10 @@ public class QuickContactActivity extends ContactsActivity {
                 // loaded state. This allows rapid tapping without writing the same
                 // value several times
                 final boolean isStarred = item.isChecked();
-                Logger.logQuickContactEvent(mReferrer, mContactType, CardType.UNKNOWN_CARD,
-                        isStarred ? ActionType.UNSTAR : ActionType.STAR,
-                            /* thirdPartyAction */ null);
                 toggleStar(item, isStarred);
             }
         } else if (id == R.id.menu_edit) {
             if (DirectoryContactUtil.isDirectoryContact(mContactData)) {
-                Logger.logQuickContactEvent(mReferrer, mContactType, CardType.UNKNOWN_CARD,
-                        ActionType.ADD, /* thirdPartyAction */ null);
-
                 // This action is used to launch the contact selector, with the option of
                 // creating a new contact. Creating a new contact is an INSERT, while selecting
                 // an exisiting one is an edit. The fields in the edit screen will be
@@ -2420,12 +2363,8 @@ public class QuickContactActivity extends ContactsActivity {
                 intent.setPackage(getPackageName());
                 startActivityForResult(intent, REQUEST_CODE_CONTACT_SELECTION_ACTIVITY);
             } else if (InvisibleContactUtil.isInvisibleAndAddable(mContactData, this)) {
-                Logger.logQuickContactEvent(mReferrer, mContactType, CardType.UNKNOWN_CARD,
-                        ActionType.ADD, /* thirdPartyAction */ null);
                 InvisibleContactUtil.addToDefaultGroup(mContactData, this);
             } else if (isContactEditable()) {
-                Logger.logQuickContactEvent(mReferrer, mContactType, CardType.UNKNOWN_CARD,
-                        ActionType.EDIT, /* thirdPartyAction */ null);
                 editContact();
             }
         } else if (id == R.id.menu_join) {
@@ -2433,20 +2372,14 @@ public class QuickContactActivity extends ContactsActivity {
         } else if (id == R.id.menu_linked_contacts) {
             return showRawContactPickerDialog();
         } else if (id == R.id.menu_delete) {
-            Logger.logQuickContactEvent(mReferrer, mContactType, CardType.UNKNOWN_CARD,
-                    ActionType.REMOVE, /* thirdPartyAction */ null);
             if (isContactEditable()) {
                 deleteContact();
             }
         } else if (id == R.id.menu_share) {
-            Logger.logQuickContactEvent(mReferrer, mContactType, CardType.UNKNOWN_CARD,
-                    ActionType.SHARE, /* thirdPartyAction */ null);
             if (isContactShareable()) {
                 shareContact();
             }
         } else if (id == R.id.menu_create_contact_shortcut) {
-            Logger.logQuickContactEvent(mReferrer, mContactType, CardType.UNKNOWN_CARD,
-                    ActionType.SHORTCUT, /* thirdPartyAction */ null);
             if (isShortcutCreatable()) {
                 createLauncherShortcutWithContact();
             }
@@ -2460,13 +2393,7 @@ public class QuickContactActivity extends ContactsActivity {
             final Intent intent = ContactSaveService.createSetSendToVoicemail(
                     this, mLookupUri, mSendToVoicemailState);
             this.startService(intent);
-        } else if (id == R.id.menu_help) {
-            Logger.logQuickContactEvent(mReferrer, mContactType, CardType.UNKNOWN_CARD,
-                    ActionType.HELP, /* thirdPartyAction */ null);
-            HelpUtils.launchHelpAndFeedbackForContactScreen(this);
         } else {
-            Logger.logQuickContactEvent(mReferrer, mContactType, CardType.UNKNOWN_CARD,
-                    ActionType.UNKNOWN_ACTION, /* thirdPartyAction */ null);
             return super.onOptionsItemSelected(item);
         }
         return true;

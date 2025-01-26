@@ -21,7 +21,6 @@ import android.content.Context;
 import com.android.contacts.list.ContactListFilter;
 import com.android.contacts.model.AccountTypeManager;
 import com.android.contacts.util.DeviceLocalAccountTypeFactory;
-import com.android.contactsbind.ObjectFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +44,7 @@ public class AccountDisplayInfoFactory {
 
     public AccountDisplayInfoFactory(Context context, List<AccountWithDataSet> accounts) {
         this(context, AccountTypeManager.getInstance(context),
-                ObjectFactory.getDeviceLocalAccountTypeFactory(context), accounts);
+                new DeviceLocalAccountTypeFactory.Default(context), accounts);
     }
 
     public AccountDisplayInfoFactory(Context context, AccountTypeManager accountTypeManager,

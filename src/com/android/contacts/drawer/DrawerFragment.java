@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,11 +22,8 @@ import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
-import android.database.ContentObserver;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.ContactsContract.DisplayNameSources;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -51,7 +49,6 @@ import com.android.contacts.model.account.AccountsLoader.AccountsListener;
 import com.android.contacts.profile.ProfileLoader;
 import com.android.contacts.profile.ProfileLoader.ProfileQuery;
 import com.android.contacts.util.AccountFilterUtil;
-import com.android.contactsbind.ObjectFactory;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -68,7 +65,6 @@ public class DrawerFragment extends Fragment implements AccountsListener {
     private static final String KEY_SELECTED_GROUP = "selectedGroup";
     private static final String KEY_SELECTED_ACCOUNT = "selectedAccount";
 
-    private WelcomeContentObserver mObserver;
     private ListView mDrawerListView;
     private DrawerAdapter mDrawerAdapter;
     private ContactsView mCurrentContactsView;
@@ -80,17 +76,6 @@ public class DrawerFragment extends Fragment implements AccountsListener {
     private boolean mGroupsLoaded;
     private boolean mAccountsLoaded;
     private boolean mHasGroupWritableAccounts;
-
-    private final class WelcomeContentObserver extends ContentObserver {
-        private WelcomeContentObserver(Handler handler) {
-            super(handler);
-        }
-
-        @Override
-        public void onChange(boolean selfChange) {
-            mDrawerAdapter.notifyDataSetChanged();
-        }
-    }
 
     private final LoaderManager.LoaderCallbacks<List<ContactListFilter>> mFiltersLoaderListener =
             new LoaderManager.LoaderCallbacks<List<ContactListFilter>> () {
@@ -214,30 +199,11 @@ public class DrawerFragment extends Fragment implements AccountsListener {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        // todo double check on the new Handler() thing
-        final Uri uri = ObjectFactory.getWelcomeUri();
-        if (uri != null) {
-            mObserver = new WelcomeContentObserver(new Handler());
-            getActivity().getContentResolver().registerContentObserver(uri, false, mObserver);
-        }
-    }
-
-    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(KEY_CONTACTS_VIEW, mCurrentContactsView.ordinal());
         outState.putLong(KEY_SELECTED_GROUP, mDrawerAdapter.getSelectedGroupId());
         outState.putParcelable(KEY_SELECTED_ACCOUNT, mDrawerAdapter.getSelectedAccount());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (mObserver != null) {
-            getActivity().getContentResolver().unregisterContentObserver(mObserver);
-        }
     }
 
     private void loadGroupsAndFilters() {
@@ -267,9 +233,6 @@ public class DrawerFragment extends Fragment implements AccountsListener {
             } else if (viewId == R.id.nav_all_contacts) {
                 mListener.onContactsViewSelected(ContactsView.ALL_CONTACTS);
                 setNavigationItemChecked(ContactsView.ALL_CONTACTS);
-            } else if (viewId == R.id.nav_assistant) {
-                mListener.onContactsViewSelected(ContactsView.ASSISTANT);
-                setNavigationItemChecked(ContactsView.ASSISTANT);
             } else if (viewId == R.id.nav_group) {
                 final GroupListItem groupListItem = (GroupListItem) v.getTag();
                 mListener.onGroupViewSelected(groupListItem);
@@ -286,8 +249,6 @@ public class DrawerFragment extends Fragment implements AccountsListener {
                 mListener.onEmergencyViewSelected();
             } else if (viewId == R.id.nav_settings) {
                 mListener.onOpenSettings();
-            } else if (viewId == R.id.nav_help) {
-                mListener.onLaunchHelpFeedback();
             } else {
                 return;
             }
@@ -342,7 +303,6 @@ public class DrawerFragment extends Fragment implements AccountsListener {
         void onAccountViewSelected(ContactListFilter filter);
         void onCreateLabelButtonClicked();
         void onOpenSettings();
-        void onLaunchHelpFeedback();
         void onProfileViewSelected(long profileContactId);
         void onEmergencyViewSelected();
     }

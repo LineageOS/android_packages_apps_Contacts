@@ -452,9 +452,6 @@
     <!-- Menu item for the settings activity [CHAR LIMIT=64] -->
     <string name="menu_settings" msgid="377929915873428211">Settings</string>
 
-    <!-- Menu item for invoking contextual Help & Feedback [CHAR LIMIT=64] -->
-    <string name="menu_help">Help &amp; feedback</string>
-
     <!-- String used to build an organization entry containing any of the 2 fields <Company>,
          <Department> or <Job Title>, example: Google • Developer. [CHAR LIMIT=NONE] -->
     <string name="organization_entry_two_field">

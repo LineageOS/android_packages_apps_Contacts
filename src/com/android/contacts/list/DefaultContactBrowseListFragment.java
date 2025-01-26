@@ -59,7 +59,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.contacts.ContactSaveService;
-import com.android.contacts.Experiments;
 import com.android.contacts.R;
 import com.android.contacts.activities.ActionBarAdapter;
 import com.android.contacts.activities.PeopleActivity;
@@ -67,7 +66,6 @@ import com.android.contacts.interactions.ContactDeletionInteraction;
 import com.android.contacts.interactions.ContactMultiDeletionInteraction;
 import com.android.contacts.interactions.ContactMultiDeletionInteraction.MultiContactDeleteListener;
 import com.android.contacts.logging.ListEvent;
-import com.android.contacts.logging.Logger;
 import com.android.contacts.logging.ScreenEvent;
 import com.android.contacts.model.AccountTypeManager;
 import com.android.contacts.model.account.AccountInfo;
@@ -77,8 +75,6 @@ import com.android.contacts.util.AccountFilterUtil;
 import com.android.contacts.util.ImplicitIntentsUtil;
 import com.android.contacts.util.SharedPreferenceUtil;
 import com.android.contacts.util.SyncUtil;
-import com.android.contactsbind.FeatureHighlightHelper;
-import com.android.contactsbind.experiments.Flags;
 import com.google.common.util.concurrent.Futures;
 
 import java.util.HashMap;
@@ -171,21 +167,12 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
                     startSearchOrSelectionMode();
                     break;
                 case ActionBarAdapter.Listener.Action.START_SEARCH_MODE:
-                    if (!mIsRecreatedInstance) {
-                        Logger.logScreenView(mActivity, ScreenEvent.ScreenType.SEARCH);
-                    }
                     startSearchOrSelectionMode();
                     break;
                 case ActionBarAdapter.Listener.Action.BEGIN_STOPPING_SEARCH_AND_SELECTION_MODE:
                     mActivity.showFabWithAnimation(/* showFab */ true);
                     break;
                 case ActionBarAdapter.Listener.Action.STOP_SEARCH_AND_SELECTION_MODE:
-                    // If queryString is empty, fragment data will not be reloaded,
-                    // so hamburger promo should be checked now.
-                    // Otherwise, promo should be checked and displayed after reloading, b/30706521.
-                    if (TextUtils.isEmpty(getQueryString())) {
-                        maybeShowHamburgerFeatureHighlight();
-                    }
                     setQueryTextToFragment("");
                     maybeHideCheckBoxes();
                     mActivity.invalidateOptionsMenu();
@@ -283,21 +270,8 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
             bindListHeader(data == null ? 0 : data.getCount());
         }
         super.onLoadFinished(loader, data);
-        if (!isSearchMode()) {
-            maybeShowHamburgerFeatureHighlight();
-        }
         if (mActionBarAdapter != null) {
             mActionBarAdapter.updateOverflowButtonColor();
-        }
-    }
-
-    private void maybeShowHamburgerFeatureHighlight() {
-        if (mActionBarAdapter != null && !mActionBarAdapter.isSearchMode()
-                && !mActionBarAdapter.isSelectionMode()
-                && SharedPreferenceUtil.getShouldShowHamburgerPromo(getContext())) {
-            if (FeatureHighlightHelper.showHamburgerFeatureHighlight(mActivity)) {
-                SharedPreferenceUtil.setHamburgerPromoDisplayedBefore(getContext());
-            }
         }
     }
 
@@ -387,7 +361,6 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
         } else {
             if (isSearchMode()) {
                 mSearchResultClicked = true;
-                Logger.logSearchEvent(createSearchStateForSearchResultClick(position));
             }
         }
         viewContact(position, uri, getAdapter().isEnterpriseContact(position));
@@ -580,8 +553,7 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
                 }
 
                 syncContacts(getFilter());
-                mHandler.postDelayed(mCancelRefresh, Flags.getInstance()
-                        .getInteger(Experiments.PULL_TO_REFRESH_CANCEL_REFRESH_MILLIS));
+                mHandler.postDelayed(mCancelRefresh, 0);
             }
         });
         mSwipeRefreshLayout.setColorSchemeResources(R.color.primary_color);
@@ -750,7 +722,6 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
     public void onResume() {
         super.onResume();
         configureFragment();
-        maybeShowHamburgerFeatureHighlight();
         // Re-register the listener, which may have been cleared when onSaveInstanceState was
         // called. See also: onSaveInstanceState
         mActionBarAdapter.setListener(mActionBarListener);
@@ -927,11 +898,6 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
                     }
                 }
 
-                Logger.logListEvent(ListEvent.ActionType.CLICK,
-                        /* listType */ getListTypeIncludingSearch(),
-                        /* count */ getAdapter().getCount(),
-                        /* clickedIndex */ position, /* numSelected */ 0);
-
                 ImplicitIntentsUtil.startQuickContact(
                         getActivity(), contactLookupUri, previousScreen);
             }
@@ -1061,10 +1027,6 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
             shareSelectedContacts();
             return true;
         } else if (id == R.id.menu_join) {
-            Logger.logListEvent(ListEvent.ActionType.LINK,
-                        /* listType */ getListTypeIncludingSearch(),
-                        /* count */ getAdapter().getCount(), /* clickedIndex */ -1,
-                        /* numSelected */ getAdapter().getSelectedContactIds().size());
             joinSelectedContacts();
             return true;
         } else if (id == R.id.menu_delete) {
@@ -1144,11 +1106,6 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
     private final class MultiDeleteListener implements MultiContactDeleteListener {
         @Override
         public void onDeletionFinished() {
-            // The parameters count and numSelected are both the number of contacts before deletion.
-            Logger.logListEvent(ListEvent.ActionType.DELETE,
-                /* listType */ getListTypeIncludingSearch(),
-                /* count */ getAdapter().getCount(), /* clickedIndex */ -1,
-                /* numSelected */ getSelectedContactIds().size());
             mActionBarAdapter.setSelectionMode(false);
             mIsDeletionInProgress = false;
         }
@@ -1173,10 +1130,6 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
                     onPickerResult(data);
                 }
             case ACTIVITY_REQUEST_CODE_SHARE:
-                Logger.logListEvent(ListEvent.ActionType.SHARE,
-                    /* listType */ getListTypeIncludingSearch(),
-                    /* count */ getAdapter().getCount(), /* clickedIndex */ -1,
-                    /* numSelected */ getAdapter().getSelectedContactIds().size());
 
 // TODO fix or remove multipicker code: ag/54762
 //                else if (resultCode == RESULT_CANCELED && mMode == MODE_PICK_MULTIPLE_PHONES) {

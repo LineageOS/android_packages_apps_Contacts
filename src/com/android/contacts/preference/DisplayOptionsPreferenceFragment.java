@@ -66,7 +66,6 @@ import com.android.contacts.model.account.AccountWithDataSet;
 import com.android.contacts.model.account.AccountsLoader;
 import com.android.contacts.util.AccountFilterUtil;
 import com.android.contacts.util.ImplicitIntentsUtil;
-import com.android.contactsbind.HelpUtils;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -306,10 +305,6 @@ public class DisplayOptionsPreferenceFragment extends PreferenceFragment
 
         if (!resources.getBoolean(R.bool.config_phonetic_name_display_user_changeable)) {
             getPreferenceScreen().removePreference(findPreference(KEY_PHONETIC_NAME_DISPLAY));
-        }
-
-        if (HelpUtils.isHelpAndFeedbackAvailable()) {
-            getPreferenceScreen().removePreference(findPreference(KEY_ABOUT));
         }
 
         // Disable display order for CJK locales as well

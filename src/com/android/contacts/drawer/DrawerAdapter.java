@@ -38,8 +38,6 @@ import com.android.contacts.model.account.AccountDisplayInfoFactory;
 import com.android.contacts.profile.ProfileItem;
 import com.android.contacts.util.ImplicitIntentsUtil;
 import com.android.contacts.util.SharedPreferenceUtil;
-import com.android.contactsbind.HelpUtils;
-import com.android.contactsbind.ObjectFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -115,10 +113,6 @@ public class DrawerAdapter extends BaseAdapter {
         // Primary items
         mPrimaryItems.add(new PrimaryItem(R.id.nav_all_contacts, R.string.contactsList,
                 R.drawable.quantum_ic_account_circle_vd_theme_24, ContactsView.ALL_CONTACTS));
-        if (ObjectFactory.getAssistantFragment() != null) {
-            mPrimaryItems.add(new PrimaryItem(R.id.nav_assistant, R.string.menu_assistant,
-                    R.drawable.quantum_ic_assistant_vd_theme_24, ContactsView.ASSISTANT));
-        }
         // Group Header
         mGroupHeader = new HeaderItem(R.id.nav_groups, R.string.menu_title_groups);
         // Account Header
@@ -135,10 +129,6 @@ public class DrawerAdapter extends BaseAdapter {
         mMiscItems.add(new DividerItem());
         mMiscItems.add(new MiscItem(R.id.nav_settings, R.string.menu_settings,
                 R.drawable.quantum_ic_settings_vd_theme_24));
-        if (HelpUtils.isHelpAndFeedbackAvailable()) {
-            mMiscItems.add(new MiscItem(R.id.nav_help, R.string.menu_help,
-                    R.drawable.quantum_ic_help_vd_theme_24));
-        }
         rebuildItemsList();
     }
 

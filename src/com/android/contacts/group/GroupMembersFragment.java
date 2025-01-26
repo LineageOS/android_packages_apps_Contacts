@@ -61,13 +61,10 @@ import com.android.contacts.list.ContactsSectionIndexer;
 import com.android.contacts.list.MultiSelectContactsListFragment;
 import com.android.contacts.list.MultiSelectEntryContactListAdapter.DeleteContactListener;
 import com.android.contacts.list.UiIntentActions;
-import com.android.contacts.logging.ListEvent;
 import com.android.contacts.logging.ListEvent.ListType;
-import com.android.contacts.logging.Logger;
 import com.android.contacts.logging.ScreenEvent;
 import com.android.contacts.model.account.AccountWithDataSet;
 import com.android.contacts.util.ImplicitIntentsUtil;
-import com.android.contactsbind.FeedbackHelper;
 import com.google.common.primitives.Longs;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -484,7 +481,6 @@ public class GroupMembersFragment extends MultiSelectContactsListFragment<GroupM
             mActionBarAdapter.setSelectionMode(true);
             displayDeleteButtons(true);
         } else if (id == R.id.menu_remove_from_group) {
-            logListEvent();
             removeSelectedContacts();
         } else {
             return super.onOptionsItemSelected(item);
@@ -581,15 +577,6 @@ public class GroupMembersFragment extends MultiSelectContactsListFragment<GroupM
                     mActionBarAdapter.setSelectionMode(false);
                 }
             };
-
-    private void logListEvent() {
-        Logger.logListEvent(
-                ListEvent.ActionType.REMOVE_LABEL,
-                getListType(),
-                getAdapter().getCount(),
-                /* clickedIndex */ -1,
-                getAdapter().getSelectedContactIdsArray().length);
-    }
 
     private void deleteGroup() {
         if (getMemberCount() == 0) {
@@ -793,8 +780,6 @@ public class GroupMembersFragment extends MultiSelectContactsListFragment<GroupM
             return;
         }
         final int count = getAdapter().getCount();
-        Logger.logListEvent(ListEvent.ActionType.CLICK, ListEvent.ListType.GROUP, count,
-                /* clickedIndex */ position, /* numSelected */ 0);
         ImplicitIntentsUtil.startQuickContact(
                 getActivity(), uri, ScreenEvent.ScreenType.LIST_GROUP);
     }
@@ -871,8 +856,7 @@ public class GroupMembersFragment extends MultiSelectContactsListFragment<GroupM
                 // No toast associated with this action.
                 break;
             default:
-                FeedbackHelper.sendFeedback(getContext(), TAG,
-                        "toastForSaveAction passed unknown action: " + action,
+                Log.e(TAG, "toastForSaveAction passed unknown action: " + action,
                         new IllegalArgumentException("Unhandled contact save action " + action));
         }
         toast(id);

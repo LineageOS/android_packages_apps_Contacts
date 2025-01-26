@@ -21,7 +21,6 @@ import android.content.ContentResolver;
 import android.net.Uri;
 import android.util.Log;
 
-import com.android.contactsbind.FeedbackHelper;
 import com.android.vcard.VCardEntry;
 import com.android.vcard.VCardEntryCommitter;
 import com.android.vcard.VCardEntryConstructor;
@@ -113,7 +112,7 @@ public class ImportProcessor extends ProcessorBase implements VCardEntryHandler 
                 mListener.onImportCanceled(mImportRequest, mJobId);
             }
         } catch (OutOfMemoryError|RuntimeException e) {
-            FeedbackHelper.sendFeedback(mService, LOG_TAG, "Vcard import failed", e);
+            Log.e(LOG_TAG, "Vcard import failed", e);
         } finally {
             synchronized (this) {
                 mDone = true;
@@ -262,7 +261,7 @@ public class ImportProcessor extends ProcessorBase implements VCardEntryHandler 
                 // TODO: Handle this case appropriately, which should mean we have to have
                 // code trying to auto-detect the type of given vCard twice (both in
                 // ImportVCardActivity and ImportVCardService).
-                FeedbackHelper.sendFeedback(mService, LOG_TAG, "Failed to read vcard", e);
+                Log.e(LOG_TAG, "Failed to read vcard", e);
             } catch (VCardVersionException e) {
                 if (i == length - 1) {
                     Log.e(LOG_TAG, "Appropriate version for this vCard is not found.");

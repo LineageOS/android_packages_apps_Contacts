@@ -42,7 +42,6 @@ import com.android.contacts.model.account.AccountWithDataSet;
 import com.android.contacts.preference.ContactsPreferences;
 import com.android.contacts.util.concurrent.ContactsExecutors;
 import com.android.contacts.util.concurrent.ListenableFutureLoader;
-import com.android.contactsbind.ObjectFactory;
 
 import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;
@@ -108,7 +107,7 @@ public class AccountFilterUtil {
         public FilterLoader(Context context) {
             super(context, new IntentFilter(AccountTypeManager.BROADCAST_ACCOUNTS_CHANGED));
             mAccountTypeManager = AccountTypeManager.getInstance(context);
-            mDeviceLocalFactory = ObjectFactory.getDeviceLocalAccountTypeFactory(context);
+            mDeviceLocalFactory = new DeviceLocalAccountTypeFactory.Default(context);
         }
 
 

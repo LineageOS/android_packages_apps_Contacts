@@ -119,7 +119,6 @@ class SdnProvider : ContentProvider() {
   }
 
   private fun handleDirectories(projection: Array<out String>): Cursor {
-    // logger.atInfo().log("Creating directory cursor")
 
     return MatrixCursor(projection).apply {
       addRow(

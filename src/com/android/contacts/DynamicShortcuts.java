@@ -53,7 +53,6 @@ import com.android.contacts.lettertiles.LetterTileDrawable;
 import com.android.contacts.util.BitmapUtil;
 import com.android.contacts.util.ImplicitIntentsUtil;
 import com.android.contacts.util.PermissionsUtil;
-import com.android.contactsbind.experiments.Flags;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -122,10 +121,8 @@ public class DynamicShortcuts {
         mContentResolver = contentResolver;
         mShortcutManager = shortcutManager;
         mJobScheduler = jobScheduler;
-        mContentChangeMinUpdateDelay = Flags.getInstance()
-                .getInteger(Experiments.DYNAMIC_MIN_CONTENT_CHANGE_UPDATE_DELAY_MILLIS);
-        mContentChangeMaxUpdateDelay = Flags.getInstance()
-                .getInteger(Experiments.DYNAMIC_MAX_CONTENT_CHANGE_UPDATE_DELAY_MILLIS);
+        mContentChangeMinUpdateDelay = 0;
+        mContentChangeMaxUpdateDelay = 0;
         final ActivityManager am = (ActivityManager) context
                 .getSystemService(Context.ACTIVITY_SERVICE);
         mIconSize = context.getResources().getDimensionPixelSize(R.dimen.shortcut_icon_size);
@@ -458,14 +455,11 @@ public class DynamicShortcuts {
 
     public synchronized static void initialize(Context context) {
         if (Log.isLoggable(TAG, Log.DEBUG)) {
-            final Flags flags = Flags.getInstance();
             Log.d(TAG, "DyanmicShortcuts.initialize" +
                     "\nisJobScheduled? " +
                     isJobScheduled(context) +
-                    "\nminDelay=" +
-                    flags.getInteger(Experiments.DYNAMIC_MIN_CONTENT_CHANGE_UPDATE_DELAY_MILLIS) +
-                    "\nmaxDelay=" +
-                    flags.getInteger(Experiments.DYNAMIC_MAX_CONTENT_CHANGE_UPDATE_DELAY_MILLIS));
+                    "\nminDelay=0" +
+                    "\nmaxDelay=0");
         }
 
         final DynamicShortcuts shortcuts = new DynamicShortcuts(context);

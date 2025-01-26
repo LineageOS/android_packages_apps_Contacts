@@ -60,7 +60,6 @@ import com.android.contacts.util.BitmapUtil;
 import com.android.contacts.util.PermissionsUtil;
 import com.android.contacts.util.TrafficStatsTags;
 import com.android.contacts.util.UriUtils;
-import com.android.contactsbind.util.UserAgentGenerator;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
@@ -659,10 +658,7 @@ class ContactPhotoManagerImpl extends ContactPhotoManager implements Callback {
                 R.dimen.contact_browser_list_item_photo_size);
 
         // Get a user agent string to use for URI photo requests.
-        mUserAgent = UserAgentGenerator.getUserAgent(context);
-        if (mUserAgent == null) {
-            mUserAgent = "";
-        }
+        mUserAgent = "";
     }
 
     /** Converts bytes to K bytes, rounding up.  Used only for debug log. */

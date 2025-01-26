@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,11 +20,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.provider.ContactsContract.CommonDataKinds.Event;
 import android.provider.ContactsContract.CommonDataKinds.Relation;
+import android.util.Log;
 
 import com.android.contacts.R;
 import com.android.contacts.model.dataitem.DataKind;
 import com.android.contacts.util.CommonDateUtils;
-import com.android.contactsbind.FeedbackHelper;
 
 import com.google.common.collect.Lists;
 
@@ -40,7 +41,7 @@ public class DeviceLocalAccountType extends FallbackAccountType {
             addDataKindRelation(context);
             addDataKindEvent(context);
         } catch (DefinitionException e) {
-            FeedbackHelper.sendFeedback(context, TAG, "Failed to build fallback account type", e);
+            Log.e(TAG, "Failed to build fallback account type", e);
         }
 
         mGroupsEditable = groupsEditable;

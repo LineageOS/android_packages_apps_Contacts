@@ -31,6 +31,8 @@ import android.os.RemoteException;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+import android.util.Log;
 import android.util.TimingLogger;
 
 import com.android.contacts.activities.PeopleActivity;
@@ -39,7 +41,6 @@ import com.android.contacts.model.SimCard;
 import com.android.contacts.model.SimContact;
 import com.android.contacts.model.account.AccountWithDataSet;
 import com.android.contacts.util.ContactsNotificationChannelsUtil;
-import com.android.contactsbind.FeedbackHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -262,8 +263,7 @@ public class SimImportService extends Service {
                 timer.addSplit("done");
                 timer.dumpToLog();
             } catch (RemoteException|OperationApplicationException e) {
-                FeedbackHelper.sendFeedback(SimImportService.this, TAG,
-                        "Failed to import contacts from SIM card", e);
+                Log.e(TAG, "Failed to import contacts from SIM card", e);
                 return false;
             }
             return true;

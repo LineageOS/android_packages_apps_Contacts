@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +41,6 @@ import com.android.contacts.activities.RequestPermissionsActivity;
 import com.android.contacts.model.AccountTypeManager;
 import com.android.contacts.model.account.AccountWithDataSet;
 import com.android.contacts.util.ImplicitIntentsUtil;
-import com.android.contactsbind.FeedbackHelper;
 import com.android.vcard.VCardEntry;
 import com.android.vcard.VCardEntryCounter;
 import com.android.vcard.VCardParser;
@@ -126,7 +126,7 @@ public class NfcImportVCardActivity extends Activity implements ServiceConnectio
                     parser.addInterpreter(detector);
                     parser.parse(is);
                 } catch (VCardVersionException e2) {
-                    FeedbackHelper.sendFeedback(this, TAG, "vcard with unsupported version", e2);
+                    Log.e(TAG, "vcard with unsupported version", e2);
                     showFailureNotification(R.string.fail_reason_not_supported);
                     return null;
                 }
@@ -137,7 +137,7 @@ public class NfcImportVCardActivity extends Activity implements ServiceConnectio
                 }
             }
         } catch (IOException e) {
-            FeedbackHelper.sendFeedback(this, TAG, "Failed to read vcard data", e);
+            Log.e(TAG, "Failed to read vcard data", e);
             showFailureNotification(R.string.fail_reason_io_error);
             return null;
         } catch (VCardNestedException e) {
@@ -145,7 +145,7 @@ public class NfcImportVCardActivity extends Activity implements ServiceConnectio
             // Go through without throwing the Exception, as we may be able to detect the
             // version before it
         } catch (VCardException e) {
-            FeedbackHelper.sendFeedback(this, TAG, "Failed to parse vcard", e);
+            Log.e(TAG, "Failed to parse vcard", e);
             showFailureNotification(R.string.fail_reason_not_supported);
             return null;
         }

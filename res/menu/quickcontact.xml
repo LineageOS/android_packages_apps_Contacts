@@ -53,8 +53,4 @@
     <item
         android:id="@+id/menu_send_to_voicemail"
         android:title="@string/menu_redirect_calls_to_vm"/>
-
-    <item
-        android:id="@+id/menu_help"
-        android:title="@string/menu_help" />
 </menu>

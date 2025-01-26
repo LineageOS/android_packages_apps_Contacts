@@ -33,8 +33,6 @@ import android.util.Log;
 
 import com.android.contacts.util.PermissionsUtil;
 import com.android.contacts.util.PhoneNumberHelper;
-import com.android.contactsbind.FeedbackHelper;
-import com.android.contactsbind.experiments.Flags;
 import com.android.phone.common.PhoneConstants;
 
 import java.util.ArrayList;
@@ -176,8 +174,7 @@ public class CallUtil {
             }
             return VIDEO_CALLING_DISABLED;
         } catch (SecurityException e) {
-            FeedbackHelper.sendFeedback(context, TAG,
-                    "Security exception when getting call capable phone accounts", e);
+            Log.e(TAG, "Security exception when getting call capable phone accounts", e);
             return VIDEO_CALLING_DISABLED;
         }
     }
@@ -230,71 +227,10 @@ public class CallUtil {
             }
             return false;
         } catch (SecurityException e) {
-            FeedbackHelper.sendFeedback(context, TAG,
+            Log.e(TAG,
                     "Security exception when getting call capable phone accounts", e);
             return false;
         }
 
-    }
-
-    /**
-     * Determines if we're able to use Tachyon as a fallback for video calling.
-     *
-     * @param context The context.
-     * @return {@code true} if there exists a call capable phone account which supports using a
-     * fallback for video calling, the carrier configuration supports a fallback, and the
-     * experiment for using a fallback is enabled. Otherwise {@code false} is returned.
-     */
-    public static boolean isTachyonEnabled(Context context) {
-        // Need to be able to read phone state, and be on at least N to check PhoneAccount extras.
-        if (!PermissionsUtil.hasPermission(context, android.Manifest.permission.READ_PHONE_STATE)) {
-            return false;
-        }
-        TelecomManager telecommMgr = (TelecomManager)
-                context.getSystemService(Context.TELECOM_SERVICE);
-        if (telecommMgr == null) {
-            return false;
-        }
-        try {
-            List<PhoneAccountHandle> accountHandles = telecommMgr.getCallCapablePhoneAccounts();
-            for (PhoneAccountHandle accountHandle : accountHandles) {
-                PhoneAccount account = telecommMgr.getPhoneAccount(accountHandle);
-                if (account == null) {
-                    continue;
-                }
-                // Check availability for the device config.
-                final Bundle accountExtras = account.getExtras();
-                final boolean deviceEnabled = accountExtras != null && accountExtras.getBoolean(
-                        EXTRA_SUPPORTS_VIDEO_CALLING_FALLBACK);
-                if (Log.isLoggable(TAG, Log.DEBUG)) {
-                    Log.d(TAG, "Device video fallback config: " + deviceEnabled);
-                }
-
-                // Check availability from carrier config.
-                final PersistableBundle carrierConfig = context.getSystemService(
-                        CarrierConfigManager.class).getConfig();
-                final boolean carrierEnabled =
-                        carrierConfig != null && carrierConfig.getBoolean(
-                                CONFIG_ALLOW_VIDEO_CALLING_FALLBACK);
-                if (Log.isLoggable(TAG, Log.DEBUG)) {
-                    Log.d(TAG, "Carrier video fallback config: " + carrierEnabled);
-                }
-
-                // Check experiment value.
-                final boolean experimentEnabled = Flags.getInstance().getBoolean(
-                        Experiments.QUICK_CONTACT_VIDEO_CALL);
-                if (Log.isLoggable(TAG, Log.DEBUG)) {
-                    Log.d(TAG, "Experiment video fallback config: " + experimentEnabled);
-                }
-
-                // All three checks above must be true to enable Tachyon calling.
-                return deviceEnabled && carrierEnabled && experimentEnabled;
-            }
-            return false;
-        } catch (SecurityException e) {
-            FeedbackHelper.sendFeedback(context, TAG,
-                    "Security exception when getting call capable phone accounts", e);
-            return false;
-        }
     }
 }

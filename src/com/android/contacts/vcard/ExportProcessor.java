@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +32,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.android.contacts.R;
-import com.android.contactsbind.FeedbackHelper;
 import com.android.vcard.VCardComposer;
 import com.android.vcard.VCardConfig;
 
@@ -104,7 +104,7 @@ public class ExportProcessor extends ProcessorBase {
                 doCancelNotification();
             }
         } catch (OutOfMemoryError|RuntimeException e) {
-            FeedbackHelper.sendFeedback(mService, LOG_TAG, "Failed to process vcard export", e);
+            Log.e(LOG_TAG, "Failed to process vcard export", e);
             throw e;
         } finally {
             synchronized (this) {

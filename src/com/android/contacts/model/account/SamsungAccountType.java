@@ -60,7 +60,6 @@ public class SamsungAccountType extends BaseAccountType {
             addDataKindPhone(context);
             addDataKindEmail(context);
             addDataKindStructuredPostal(context);
-            addDataKindIm(context);
             addDataKindOrganization(context);
             addDataKindPhoto(context);
             addDataKindNote(context);

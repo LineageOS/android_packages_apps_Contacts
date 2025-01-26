@@ -335,15 +335,6 @@
     <string name="map_work" msgid="8296916987749726461">"مشاهده آدرس محل کار"</string>
     <string name="map_other" msgid="4009931029322619674">"مشاهده آدرس"</string>
     <string name="map_custom" msgid="7797812861927817335">"مشاهده آدرس <xliff:g id="CUSTOM_LABEL">%s</xliff:g>"</string>
-    <string name="chat_aim" msgid="2044861410748519265">"‏گپ با استفاده از AIM"</string>
-    <string name="chat_msn" msgid="4733206223124506247">"‏گپ با استفاده از Windows Live"</string>
-    <string name="chat_yahoo" msgid="3807571878191282528">"‏گپ با استفاده از Yahoo"</string>
-    <string name="chat_skype" msgid="5130564346825936093">"‏گپ با استفاده از Skype"</string>
-    <string name="chat_qq" msgid="2971335421266098608">"‏گپ با استفاده از QQ"</string>
-    <string name="chat_gtalk" msgid="2927882858741904064">"‏گپ با استفاده از Google Talk"</string>
-    <string name="chat_icq" msgid="4289041376069626281">"‏گپ با استفاده از ICQ"</string>
-    <string name="chat_jabber" msgid="1097960594943864847">"‏گپ با استفاده از Jabber"</string>
-    <string name="chat" msgid="8390862712584830532">"گپ"</string>
     <string name="description_minus_button" msgid="1305985971158054217">"حذف"</string>
     <string name="expand_name_fields_description" msgid="6059558159338959487">"نمایش فیلدهای نام بیشتر"</string>
     <string name="collapse_name_fields_description" msgid="7950435675716414477">"کوچک کردن فیلدهای نام"</string>

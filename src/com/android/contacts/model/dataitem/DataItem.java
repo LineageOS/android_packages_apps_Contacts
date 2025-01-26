@@ -22,14 +22,12 @@ import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Event;
 import android.provider.ContactsContract.CommonDataKinds.GroupMembership;
 import android.provider.ContactsContract.CommonDataKinds.Identity;
-import android.provider.ContactsContract.CommonDataKinds.Im;
 import android.provider.ContactsContract.CommonDataKinds.Nickname;
 import android.provider.ContactsContract.CommonDataKinds.Note;
 import android.provider.ContactsContract.CommonDataKinds.Organization;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.Photo;
 import android.provider.ContactsContract.CommonDataKinds.Relation;
-import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.CommonDataKinds.Website;
@@ -66,8 +64,6 @@ public class DataItem implements Collapser.Collapsible<DataItem> {
             return new EmailDataItem(values);
         } else if (StructuredPostal.CONTENT_ITEM_TYPE.equals(mimeType)) {
             return new StructuredPostalDataItem(values);
-        } else if (Im.CONTENT_ITEM_TYPE.equals(mimeType)) {
-            return new ImDataItem(values);
         } else if (Organization.CONTENT_ITEM_TYPE.equals(mimeType)) {
             return new OrganizationDataItem(values);
         } else if (Nickname.CONTENT_ITEM_TYPE.equals(mimeType)) {
@@ -76,8 +72,6 @@ public class DataItem implements Collapser.Collapsible<DataItem> {
             return new NoteDataItem(values);
         } else if (Website.CONTENT_ITEM_TYPE.equals(mimeType)) {
             return new WebsiteDataItem(values);
-        } else if (SipAddress.CONTENT_ITEM_TYPE.equals(mimeType)) {
-            return new SipAddressDataItem(values);
         } else if (Event.CONTENT_ITEM_TYPE.equals(mimeType)) {
             return new EventDataItem(values);
         } else if (Relation.CONTENT_ITEM_TYPE.equals(mimeType)) {

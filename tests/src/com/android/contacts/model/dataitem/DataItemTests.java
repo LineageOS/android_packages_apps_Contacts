@@ -18,13 +18,11 @@ package com.android.contacts.model.dataitem;
 import android.content.ContentValues;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Event;
-import android.provider.ContactsContract.CommonDataKinds.Im;
 import android.provider.ContactsContract.CommonDataKinds.Nickname;
 import android.provider.ContactsContract.CommonDataKinds.Note;
 import android.provider.ContactsContract.CommonDataKinds.Organization;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.Relation;
-import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.CommonDataKinds.Website;
@@ -163,46 +161,6 @@ public class DataItemTests extends AndroidTestCase {
         assertEquals(customLabel1, ((EventDataItem) dataList.get(0)).getLabel());
         assertEquals(customLabel2, ((EventDataItem) dataList.get(1)).getLabel());
         assertEquals(date2, ((EventDataItem) dataList.get(2)).getStartDate());
-    }
-
-    public void testDataItemCollapsing_im() {
-        final String address1 = "address 1";
-        final String address2 = "address 2";
-        final String customProtocol1 = "custom 1";
-        final String customProtocol2 = "custom 2";
-
-        mValues1.put(Data.MIMETYPE, Im.CONTENT_ITEM_TYPE);
-        mValues2.put(Data.MIMETYPE, Im.CONTENT_ITEM_TYPE);
-        mValues3.put(Data.MIMETYPE, Im.CONTENT_ITEM_TYPE);
-        mValues4.put(Data.MIMETYPE, Im.CONTENT_ITEM_TYPE);
-
-        mValues1.put(Im.DATA, address1);
-        mValues2.put(Im.DATA, address1);
-        mValues3.put(Im.DATA, address1);
-        mValues4.put(Im.DATA, address2);
-
-        mValues1.put(Im.PROTOCOL, Im.PROTOCOL_CUSTOM);
-        mValues2.put(Im.PROTOCOL, Im.PROTOCOL_CUSTOM);
-        mValues3.put(Im.PROTOCOL, Im.PROTOCOL_CUSTOM);
-        mValues4.put(Im.PROTOCOL, Im.PROTOCOL_AIM);
-
-        mValues1.put(Im.CUSTOM_PROTOCOL, customProtocol1);
-        mValues2.put(Im.CUSTOM_PROTOCOL, customProtocol1);
-        mValues3.put(Im.CUSTOM_PROTOCOL, customProtocol2);
-
-        final DataKind kind = mGoogleAccountType.getKindForMimetype(Im.CONTENT_ITEM_TYPE);
-
-        final List<DataItem> dataList =
-                createDataItemsAndCollapse(kind, mValues1, mValues2, mValues3, mValues4);
-
-        assertEquals(3, dataList.size());
-        assertEquals(address1, ((ImDataItem) dataList.get(0)).getData());
-        assertEquals(address1, ((ImDataItem) dataList.get(1)).getData());
-        assertEquals(address2, ((ImDataItem) dataList.get(2)).getData());
-
-        assertEquals(customProtocol1, ((ImDataItem) dataList.get(0)).getCustomProtocol());
-        assertEquals(customProtocol2, ((ImDataItem) dataList.get(1)).getCustomProtocol());
-        assertEquals(Im.PROTOCOL_AIM, (int) ((ImDataItem) dataList.get(2)).getProtocol());
     }
 
     public void testDataItemCollapsing_nickname() {
@@ -349,32 +307,6 @@ public class DataItemTests extends AndroidTestCase {
 
         assertEquals(customRelation1, ((RelationDataItem) dataList.get(0)).getLabel());
         assertEquals(customRelation2, ((RelationDataItem) dataList.get(1)).getLabel());
-    }
-
-    public void testDataItemCollapsing_sip() {
-        final String sip1 = "sip 1";
-        final String sip2 = "sip 2";
-
-        mValues1.put(Data.MIMETYPE, SipAddress.CONTENT_ITEM_TYPE);
-        mValues2.put(Data.MIMETYPE, SipAddress.CONTENT_ITEM_TYPE);
-        mValues3.put(Data.MIMETYPE, SipAddress.CONTENT_ITEM_TYPE);
-
-        mValues1.put(SipAddress.SIP_ADDRESS, sip1);
-        mValues2.put(SipAddress.SIP_ADDRESS, sip1);
-        mValues3.put(SipAddress.SIP_ADDRESS, sip2);
-
-        mValues1.put(SipAddress.TYPE, SipAddress.TYPE_WORK);
-        mValues2.put(SipAddress.TYPE, SipAddress.TYPE_HOME);
-        mValues3.put(SipAddress.TYPE, SipAddress.TYPE_WORK);
-
-        final DataKind kind = mGoogleAccountType.getKindForMimetype(SipAddress.CONTENT_ITEM_TYPE);
-
-        final List<DataItem> dataList =
-                createDataItemsAndCollapse(kind, mValues1, mValues2, mValues3);
-
-        assertEquals(2, dataList.size());
-        assertEquals(sip1, ((SipAddressDataItem) dataList.get(0)).getSipAddress());
-        assertEquals(sip2, ((SipAddressDataItem) dataList.get(1)).getSipAddress());
     }
 
     public void testDataItemCollapsing_structuredName() {

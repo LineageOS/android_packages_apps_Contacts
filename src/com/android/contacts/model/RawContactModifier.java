@@ -27,14 +27,12 @@ import android.provider.ContactsContract.CommonDataKinds.BaseTypes;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Event;
 import android.provider.ContactsContract.CommonDataKinds.GroupMembership;
-import android.provider.ContactsContract.CommonDataKinds.Im;
 import android.provider.ContactsContract.CommonDataKinds.Nickname;
 import android.provider.ContactsContract.CommonDataKinds.Note;
 import android.provider.ContactsContract.CommonDataKinds.Organization;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.Photo;
 import android.provider.ContactsContract.CommonDataKinds.Relation;
-import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.CommonDataKinds.Website;
@@ -518,13 +516,6 @@ public class RawContactModifier {
                     Email.DATA);
         }
 
-        {
-            // Im
-            final DataKind kind = accountType.getKindForMimetype(Im.CONTENT_ITEM_TYPE);
-            fixupLegacyImType(extras);
-            parseExtras(state, kind, extras, Insert.IM_PROTOCOL, Insert.IM_HANDLE, Im.DATA);
-        }
-
         // Organization
         final boolean hasOrg = extras.containsKey(Insert.COMPANY)
                 || extras.containsKey(Insert.JOB_TITLE);
@@ -839,28 +830,6 @@ public class RawContactModifier {
     }
 
     /**
-     * Attempt to parse legacy {@link Insert#IM_PROTOCOL} values, replacing them
-     * with updated values.
-     */
-    @SuppressWarnings("deprecation")
-    private static void fixupLegacyImType(Bundle bundle) {
-        final String encodedString = bundle.getString(Insert.IM_PROTOCOL);
-        if (encodedString == null) return;
-
-        try {
-            final Object protocol = android.provider.Contacts.ContactMethods
-                    .decodeImProtocol(encodedString);
-            if (protocol instanceof Integer) {
-                bundle.putInt(Insert.IM_PROTOCOL, (Integer)protocol);
-            } else {
-                bundle.putString(Insert.IM_PROTOCOL, (String)protocol);
-            }
-        } catch (IllegalArgumentException e) {
-            // Ignore exception when legacy parser fails
-        }
-    }
-
-    /**
      * Parse a specific entry from the given {@link Bundle} and insert into the
      * given {@link RawContactDelta}. Silently skips the insert when missing value
      * or no valid {@link EditType} found.
@@ -909,11 +878,9 @@ public class RawContactModifier {
     private static final Set<String> sGenericMimeTypesWithTypeSupport = new HashSet<String>(
             Arrays.asList(Phone.CONTENT_ITEM_TYPE,
                     Email.CONTENT_ITEM_TYPE,
-                    Im.CONTENT_ITEM_TYPE,
                     Nickname.CONTENT_ITEM_TYPE,
                     Website.CONTENT_ITEM_TYPE,
-                    Relation.CONTENT_ITEM_TYPE,
-                    SipAddress.CONTENT_ITEM_TYPE));
+                    Relation.CONTENT_ITEM_TYPE));
     private static final Set<String> sGenericMimeTypesWithoutTypeSupport = new HashSet<String>(
             Arrays.asList(Organization.CONTENT_ITEM_TYPE,
                     Note.CONTENT_ITEM_TYPE,
@@ -1265,8 +1232,7 @@ public class RawContactModifier {
         // Especially in IM, typeList contains available protocols (e.g. PROTOCOL_GOOGLE_TALK)
         // instead of "types" which we want to treate here (e.g. TYPE_HOME). So we don't add
         // anything other than defaultType into allowedTypes and typeSpecificMapMax.
-        if (!Im.CONTENT_ITEM_TYPE.equals(newDataKind.mimeType) &&
-                newDataKind.typeList != null && !newDataKind.typeList.isEmpty()) {
+        if (newDataKind.typeList != null && !newDataKind.typeList.isEmpty()) {
             for (EditType editType : newDataKind.typeList) {
                 allowedTypes.add(editType.rawValue);
                 typeSpecificMaxMap.put(editType.rawValue, editType.specificMax);

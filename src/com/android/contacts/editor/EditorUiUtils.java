@@ -31,13 +31,11 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Event;
-import android.provider.ContactsContract.CommonDataKinds.Im;
 import android.provider.ContactsContract.CommonDataKinds.Note;
 import android.provider.ContactsContract.CommonDataKinds.Organization;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.Photo;
 import android.provider.ContactsContract.CommonDataKinds.Relation;
-import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.CommonDataKinds.Website;
 import androidx.core.content.res.ResourcesCompat;
@@ -63,6 +61,8 @@ import java.util.HashMap;
  * Utility methods for creating contact editor.
  */
 public class EditorUiUtils {
+    private static final String IM_CONTENT_ITEM_TYPE = "vnd.android.cursor.item/im";
+    private static final String SIP_CONTENT_ITEM_TYPE = "vnd.android.cursor.item/sip_address";
 
     // Maps DataKind.mimeType to editor view layouts.
     private static final HashMap<String, Integer> mimetypeLayoutMap = Maps.newHashMap();
@@ -76,11 +76,9 @@ public class EditorUiUtils {
         // Nickname.CONTENT_ITEM_TYPE
         // Email.CONTENT_ITEM_TYPE
         // StructuredPostal.CONTENT_ITEM_TYPE
-        // Im.CONTENT_ITEM_TYPE
         // Note.CONTENT_ITEM_TYPE
         // Organization.CONTENT_ITEM_TYPE
         // Phone.CONTENT_ITEM_TYPE
-        // SipAddress.CONTENT_ITEM_TYPE
         // Website.CONTENT_ITEM_TYPE
         // Relation.CONTENT_ITEM_TYPE
         //
@@ -93,7 +91,7 @@ public class EditorUiUtils {
     }
 
     public static final ImmutableList<String> LEGACY_MIME_TYPE =
-        ImmutableList.of(Im.CONTENT_ITEM_TYPE, SipAddress.CONTENT_ITEM_TYPE);
+        ImmutableList.of(IM_CONTENT_ITEM_TYPE, SIP_CONTENT_ITEM_TYPE);
 
     /**
      * Fetches a layout for a given mimetype.
@@ -146,15 +144,9 @@ public class EditorUiUtils {
             case StructuredPostal.CONTENT_ITEM_TYPE:
                 return ResourcesCompat.getDrawable(context.getResources(),
                         R.drawable.quantum_ic_place_vd_theme_24, null);
-            case SipAddress.CONTENT_ITEM_TYPE:
-                return ResourcesCompat.getDrawable(context.getResources(),
-                        R.drawable.quantum_ic_dialer_sip_vd_theme_24, null);
             case Phone.CONTENT_ITEM_TYPE:
                 return ResourcesCompat.getDrawable(context.getResources(),
                         R.drawable.quantum_ic_phone_vd_theme_24, null);
-            case Im.CONTENT_ITEM_TYPE:
-                return ResourcesCompat.getDrawable(context.getResources(),
-                        R.drawable.quantum_ic_message_vd_theme_24, null);
             case Event.CONTENT_ITEM_TYPE:
                 return ResourcesCompat.getDrawable(context.getResources(),
                         R.drawable.quantum_ic_event_vd_theme_24, null);

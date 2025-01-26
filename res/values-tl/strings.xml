@@ -335,15 +335,6 @@
     <string name="map_work" msgid="8296916987749726461">"Tingnan ang address ng trabaho"</string>
     <string name="map_other" msgid="4009931029322619674">"Tingnan ang address"</string>
     <string name="map_custom" msgid="7797812861927817335">"Tingnan ang <xliff:g id="CUSTOM_LABEL">%s</xliff:g> address"</string>
-    <string name="chat_aim" msgid="2044861410748519265">"Makipag-chat gamit ang AIM"</string>
-    <string name="chat_msn" msgid="4733206223124506247">"Makipag-chat gamit ang Windows Live"</string>
-    <string name="chat_yahoo" msgid="3807571878191282528">"Makipag-chat gamit ang Yahoo"</string>
-    <string name="chat_skype" msgid="5130564346825936093">"Makipag-chat gamit ang Skype"</string>
-    <string name="chat_qq" msgid="2971335421266098608">"Makipag-chat gamit ang QQ"</string>
-    <string name="chat_gtalk" msgid="2927882858741904064">"Makipag-chat gamit ang Google Talk"</string>
-    <string name="chat_icq" msgid="4289041376069626281">"Makipag-chat gamit ang ICQ"</string>
-    <string name="chat_jabber" msgid="1097960594943864847">"Makipag-chat gamit ang Jabber"</string>
-    <string name="chat" msgid="8390862712584830532">"Makipag-chat"</string>
     <string name="description_minus_button" msgid="1305985971158054217">"tanggalin"</string>
     <string name="expand_name_fields_description" msgid="6059558159338959487">"Magpakita ng higit pang field ng pangalan"</string>
     <string name="collapse_name_fields_description" msgid="7950435675716414477">"I-collapse ang mga field ng pangalan"</string>

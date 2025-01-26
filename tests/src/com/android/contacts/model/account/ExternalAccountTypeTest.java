@@ -19,12 +19,10 @@ package com.android.contacts.model.account;
 import android.content.Context;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Event;
-import android.provider.ContactsContract.CommonDataKinds.Im;
 import android.provider.ContactsContract.CommonDataKinds.Note;
 import android.provider.ContactsContract.CommonDataKinds.Organization;
 import android.provider.ContactsContract.CommonDataKinds.Photo;
 import android.provider.ContactsContract.CommonDataKinds.Relation;
-import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.CommonDataKinds.Website;
@@ -110,12 +108,10 @@ public class ExternalAccountTypeTest extends InstrumentationTestCase {
         assertNotNull(type.getKindForMimetype(DataKind.PSEUDO_MIME_TYPE_PHONETIC_NAME));
         assertNotNull(type.getKindForMimetype(Email.CONTENT_ITEM_TYPE));
         assertNotNull(type.getKindForMimetype(StructuredPostal.CONTENT_ITEM_TYPE));
-        assertNotNull(type.getKindForMimetype(Im.CONTENT_ITEM_TYPE));
         assertNotNull(type.getKindForMimetype(Organization.CONTENT_ITEM_TYPE));
         assertNotNull(type.getKindForMimetype(Photo.CONTENT_ITEM_TYPE));
         assertNotNull(type.getKindForMimetype(Note.CONTENT_ITEM_TYPE));
         assertNotNull(type.getKindForMimetype(Website.CONTENT_ITEM_TYPE));
-        assertNotNull(type.getKindForMimetype(SipAddress.CONTENT_ITEM_TYPE));
         assertNotNull(type.getKindForMimetype(Event.CONTENT_ITEM_TYPE));
         assertNotNull(type.getKindForMimetype(Relation.CONTENT_ITEM_TYPE));
     }

@@ -335,15 +335,6 @@
     <string name="map_work" msgid="8296916987749726461">"Buka ikheli lasemsebenzini"</string>
     <string name="map_other" msgid="4009931029322619674">"Buka ikheli"</string>
     <string name="map_custom" msgid="7797812861927817335">"Buka ikheli lika-<xliff:g id="CUSTOM_LABEL">%s</xliff:g>"</string>
-    <string name="chat_aim" msgid="2044861410748519265">"Xoxa usebenzisa i-AIM"</string>
-    <string name="chat_msn" msgid="4733206223124506247">"Xoxa usebenzisa i-Windows Live"</string>
-    <string name="chat_yahoo" msgid="3807571878191282528">"Xoxa usebenzisa i-Yahoo"</string>
-    <string name="chat_skype" msgid="5130564346825936093">"Xoxa usebenzisa i-Skype"</string>
-    <string name="chat_qq" msgid="2971335421266098608">"Xoxa usebenzisa i-QQ"</string>
-    <string name="chat_gtalk" msgid="2927882858741904064">"Xoxa usebenzisa i-Google Talk"</string>
-    <string name="chat_icq" msgid="4289041376069626281">"Xoxa usebenzisa i-ICQ"</string>
-    <string name="chat_jabber" msgid="1097960594943864847">"Xoxa usebenzisa i-Jabber"</string>
-    <string name="chat" msgid="8390862712584830532">"Xoxa"</string>
     <string name="description_minus_button" msgid="1305985971158054217">"susa"</string>
     <string name="expand_name_fields_description" msgid="6059558159338959487">"Bonisa izinkambu eziningi zegama"</string>
     <string name="collapse_name_fields_description" msgid="7950435675716414477">"Goqa izinkambu zegama"</string>

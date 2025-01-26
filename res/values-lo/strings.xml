@@ -335,15 +335,6 @@
     <string name="map_work" msgid="8296916987749726461">"ເບິ່ງທີ່ຢູ່ບ່ອນເຮັດວຽກ"</string>
     <string name="map_other" msgid="4009931029322619674">"ເບິ່ງທີ່ຢູ່"</string>
     <string name="map_custom" msgid="7797812861927817335">"ເບິ່ງທີ່ຢູ່ <xliff:g id="CUSTOM_LABEL">%s</xliff:g>"</string>
-    <string name="chat_aim" msgid="2044861410748519265">"ສົນທະນາໂດຍໃຊ້ AIM"</string>
-    <string name="chat_msn" msgid="4733206223124506247">"ສົນທະນາໂດຍໃຊ້ Windows Live"</string>
-    <string name="chat_yahoo" msgid="3807571878191282528">"ສົນທະນາໂດຍໃຊ້ Yahoo"</string>
-    <string name="chat_skype" msgid="5130564346825936093">"ສົນທະນາໂດຍໃຊ້ Skype"</string>
-    <string name="chat_qq" msgid="2971335421266098608">"ສົນທະນາໂດຍໃຊ້ QQ"</string>
-    <string name="chat_gtalk" msgid="2927882858741904064">"ສົນທະນາໂດຍໃຊ້ Google Talk"</string>
-    <string name="chat_icq" msgid="4289041376069626281">"ສົນທະນາໂດຍໃຊ້ ICQ"</string>
-    <string name="chat_jabber" msgid="1097960594943864847">"ສົນທະນາໂດຍໃຊ້ Jabber"</string>
-    <string name="chat" msgid="8390862712584830532">"ສົນທະນາ"</string>
     <string name="description_minus_button" msgid="1305985971158054217">"ລຶບ"</string>
     <string name="expand_name_fields_description" msgid="6059558159338959487">"ສະແດງຊ່ອງຊື່ເພີ່ມເຕີມ"</string>
     <string name="collapse_name_fields_description" msgid="7950435675716414477">"ຫຍໍ້ຊ່ອງຂໍ້ມູນຊື່"</string>

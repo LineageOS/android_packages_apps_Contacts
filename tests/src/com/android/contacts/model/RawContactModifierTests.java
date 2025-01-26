@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +22,6 @@ import android.content.ContentValues;
 import android.os.Bundle;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Event;
-import android.provider.ContactsContract.CommonDataKinds.Im;
 import android.provider.ContactsContract.CommonDataKinds.Organization;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
@@ -114,13 +114,6 @@ public class RawContactModifierTests extends AndroidTestCase {
                 emailKind.fieldList = Lists.newArrayList();
                 emailKind.fieldList.add(new EditField(Email.DATA, -1, -1));
                 addKind(emailKind);
-
-                // IM is only one
-                final DataKind imKind = new DataKind(Im.CONTENT_ITEM_TYPE, -1, 10, true);
-                imKind.typeOverallMax = 1;
-                imKind.fieldList = Lists.newArrayList();
-                imKind.fieldList.add(new EditField(Im.DATA, -1, -1));
-                addKind(imKind);
 
                 // Organization is only one
                 final DataKind orgKind = new DataKind(Organization.CONTENT_ITEM_TYPE, -1, 10, true);
@@ -774,29 +767,6 @@ public class RawContactModifierTests extends AndroidTestCase {
         assertEquals("Unexpected names", 1, nameCount);
     }
 
-    public void testParseExtrasIgnoreLimit() {
-        final AccountType accountType = getAccountType();
-
-        // Build "before" IM
-        final ContentValues first = new ContentValues();
-        first.put(Data._ID, TEST_ID);
-        first.put(Data.MIMETYPE, Im.CONTENT_ITEM_TYPE);
-        first.put(Im.DATA, TEST_IM);
-
-        final RawContactDelta state = getRawContact(TEST_ID, first);
-        final int beforeCount = state.getMimeEntries(Im.CONTENT_ITEM_TYPE).size();
-
-        // We should ignore data that doesn't fit account type rules, since account type
-        // only allows single Im
-        final Bundle extras = new Bundle();
-        extras.putInt(Insert.IM_PROTOCOL, Im.PROTOCOL_GOOGLE_TALK);
-        extras.putString(Insert.IM_HANDLE, TEST_IM);
-        RawContactModifier.parseExtras(mContext, accountType, state, extras);
-
-        final int afterCount = state.getMimeEntries(Im.CONTENT_ITEM_TYPE).size();
-        assertEquals("Broke account type rules", beforeCount, afterCount);
-    }
-
     public void testParseExtrasIgnoreUnhandled() {
         final AccountType accountType = getAccountType();
         final RawContactDelta state = getRawContact(TEST_ID);
@@ -1028,73 +998,6 @@ public class RawContactModifierTests extends AndroidTestCase {
         outputValues = list.get(2).getAfter();
         assertEquals(Email.TYPE_WORK, outputValues.getAsInteger(Email.TYPE).intValue());
         assertEquals("address3", outputValues.getAsString(Email.ADDRESS));
-    }
-
-    public void testMigrateImFromGoogleToExchange() {
-        AccountType oldAccountType = new GoogleAccountType(getContext(), "");
-        AccountType newAccountType = new ExchangeAccountType(getContext(), "", EXCHANGE_ACCT_TYPE);
-        DataKind kind = newAccountType.getKindForMimetype(Im.CONTENT_ITEM_TYPE);
-
-        RawContactDelta oldState = new RawContactDelta();
-        ContentValues mockNameValues = new ContentValues();
-        mockNameValues.put(Data.MIMETYPE, Im.CONTENT_ITEM_TYPE);
-        // Exchange doesn't support TYPE_HOME
-        mockNameValues.put(Im.TYPE, Im.TYPE_HOME);
-        mockNameValues.put(Im.PROTOCOL, Im.PROTOCOL_JABBER);
-        mockNameValues.put(Im.DATA, "im1");
-        oldState.addEntry(ValuesDelta.fromAfter(mockNameValues));
-
-        mockNameValues = new ContentValues();
-        mockNameValues.put(Data.MIMETYPE, Im.CONTENT_ITEM_TYPE);
-        // Exchange doesn't support TYPE_WORK
-        mockNameValues.put(Im.TYPE, Im.TYPE_WORK);
-        mockNameValues.put(Im.PROTOCOL, Im.PROTOCOL_YAHOO);
-        mockNameValues.put(Im.DATA, "im2");
-        oldState.addEntry(ValuesDelta.fromAfter(mockNameValues));
-
-        mockNameValues = new ContentValues();
-        mockNameValues.put(Data.MIMETYPE, Im.CONTENT_ITEM_TYPE);
-        mockNameValues.put(Im.TYPE, Im.TYPE_OTHER);
-        mockNameValues.put(Im.PROTOCOL, Im.PROTOCOL_CUSTOM);
-        mockNameValues.put(Im.CUSTOM_PROTOCOL, "custom_protocol");
-        mockNameValues.put(Im.DATA, "im3");
-        oldState.addEntry(ValuesDelta.fromAfter(mockNameValues));
-
-        // Exchange can have up to 3 IM entries. This 4th entry should be dropped.
-        mockNameValues = new ContentValues();
-        mockNameValues.put(Data.MIMETYPE, Im.CONTENT_ITEM_TYPE);
-        mockNameValues.put(Im.TYPE, Im.TYPE_OTHER);
-        mockNameValues.put(Im.PROTOCOL, Im.PROTOCOL_GOOGLE_TALK);
-        mockNameValues.put(Im.DATA, "im4");
-        oldState.addEntry(ValuesDelta.fromAfter(mockNameValues));
-
-        RawContactDelta newState = new RawContactDelta();
-        RawContactModifier.migrateGenericWithTypeColumn(oldState, newState, kind);
-
-        List<ValuesDelta> list = newState.getMimeEntries(Im.CONTENT_ITEM_TYPE);
-        assertNotNull(list);
-        assertEquals(3, list.size());
-
-        assertNotNull(kind.defaultValues.getAsInteger(Im.TYPE));
-
-        int defaultType = kind.defaultValues.getAsInteger(Im.TYPE);
-
-        ContentValues outputValues = list.get(0).getAfter();
-        // HOME should become default type.
-        assertEquals(defaultType, outputValues.getAsInteger(Im.TYPE).intValue());
-        assertEquals(Im.PROTOCOL_JABBER, outputValues.getAsInteger(Im.PROTOCOL).intValue());
-        assertEquals("im1", outputValues.getAsString(Im.DATA));
-
-        outputValues = list.get(1).getAfter();
-        assertEquals(defaultType, outputValues.getAsInteger(Im.TYPE).intValue());
-        assertEquals(Im.PROTOCOL_YAHOO, outputValues.getAsInteger(Im.PROTOCOL).intValue());
-        assertEquals("im2", outputValues.getAsString(Im.DATA));
-
-        outputValues = list.get(2).getAfter();
-        assertEquals(defaultType, outputValues.getAsInteger(Im.TYPE).intValue());
-        assertEquals(Im.PROTOCOL_CUSTOM, outputValues.getAsInteger(Im.PROTOCOL).intValue());
-        assertEquals("custom_protocol", outputValues.getAsString(Im.CUSTOM_PROTOCOL));
-        assertEquals("im3", outputValues.getAsString(Im.DATA));
     }
 
     public void testMigratePhoneFromGoogleToExchange() {

@@ -24,14 +24,12 @@ import android.provider.ContactsContract.CommonDataKinds.BaseTypes;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Event;
 import android.provider.ContactsContract.CommonDataKinds.GroupMembership;
-import android.provider.ContactsContract.CommonDataKinds.Im;
 import android.provider.ContactsContract.CommonDataKinds.Nickname;
 import android.provider.ContactsContract.CommonDataKinds.Note;
 import android.provider.ContactsContract.CommonDataKinds.Organization;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.Photo;
 import android.provider.ContactsContract.CommonDataKinds.Relation;
-import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.CommonDataKinds.Website;
@@ -78,9 +76,6 @@ public abstract class BaseAccountType extends AccountType {
     protected static final int FLAGS_POSTAL = EditorInfo.TYPE_CLASS_TEXT
             | EditorInfo.TYPE_TEXT_VARIATION_POSTAL_ADDRESS | EditorInfo.TYPE_TEXT_FLAG_CAP_WORDS
             | EditorInfo.TYPE_TEXT_FLAG_MULTI_LINE;
-    protected static final int FLAGS_SIP_ADDRESS = EditorInfo.TYPE_CLASS_TEXT
-            | EditorInfo.TYPE_TEXT_VARIATION_EMAIL_ADDRESS;  // since SIP addresses have the same
-                                                             // basic format as email addresses
     protected static final int FLAGS_RELATION = EditorInfo.TYPE_CLASS_TEXT
             | EditorInfo.TYPE_TEXT_FLAG_CAP_WORDS | EditorInfo.TYPE_TEXT_VARIATION_PERSON_NAME;
 
@@ -112,8 +107,6 @@ public abstract class BaseAccountType extends AccountType {
         static final int EVENT = 120;
         static final int ORGANIZATION = 125;
         static final int NOTE = 130;
-        static final int IM = 140;
-        static final int SIP_ADDRESS = 145;
         static final int GROUP_MEMBERSHIP = 150;
         static final int WEBSITE = 160;
         static final int RELATIONSHIP = 999;
@@ -136,10 +129,6 @@ public abstract class BaseAccountType extends AccountType {
 
     protected static EditType buildPostalType(int type) {
         return new EditType(type, StructuredPostal.getTypeLabelResource(type));
-    }
-
-    protected static EditType buildImType(int type) {
-        return new EditType(type, Im.getProtocolLabelResource(type));
     }
 
     protected static EditType buildEventType(int type, boolean yearOptional) {
@@ -329,37 +318,6 @@ public abstract class BaseAccountType extends AccountType {
         return kind;
     }
 
-    protected DataKind addDataKindIm(Context context) throws DefinitionException {
-        DataKind kind = addKind(new DataKind(Im.CONTENT_ITEM_TYPE, R.string.imLabelsGroup,
-                Weight.IM, true));
-        kind.actionHeader = new ImActionInflater();
-        kind.actionBody = new SimpleInflater(Im.DATA);
-
-        // NOTE: even though a traditional "type" exists, for editing
-        // purposes we're using the protocol to pick labels
-
-        kind.defaultValues = new ContentValues();
-        kind.defaultValues.put(Im.TYPE, Im.TYPE_OTHER);
-
-        kind.typeColumn = Im.PROTOCOL;
-        kind.typeList = Lists.newArrayList();
-        kind.typeList.add(buildImType(Im.PROTOCOL_AIM));
-        kind.typeList.add(buildImType(Im.PROTOCOL_MSN));
-        kind.typeList.add(buildImType(Im.PROTOCOL_YAHOO));
-        kind.typeList.add(buildImType(Im.PROTOCOL_SKYPE));
-        kind.typeList.add(buildImType(Im.PROTOCOL_QQ));
-        kind.typeList.add(buildImType(Im.PROTOCOL_GOOGLE_TALK));
-        kind.typeList.add(buildImType(Im.PROTOCOL_ICQ));
-        kind.typeList.add(buildImType(Im.PROTOCOL_JABBER));
-        kind.typeList.add(buildImType(Im.PROTOCOL_CUSTOM).setSecondary(true).setCustomColumn(
-                Im.CUSTOM_PROTOCOL));
-
-        kind.fieldList = Lists.newArrayList();
-        kind.fieldList.add(new EditField(Im.DATA, R.string.imLabelsGroup, FLAGS_EMAIL));
-
-        return kind;
-    }
-
     protected DataKind addDataKindOrganization(Context context) throws DefinitionException {
         DataKind kind = addKind(new DataKind(Organization.CONTENT_ITEM_TYPE,
                     R.string.organizationLabelsGroup, Weight.ORGANIZATION, true));
@@ -410,20 +368,6 @@ public abstract class BaseAccountType extends AccountType {
 
         kind.fieldList = Lists.newArrayList();
         kind.fieldList.add(new EditField(Website.URL, R.string.websiteLabelsGroup, FLAGS_WEBSITE));
-
-        return kind;
-    }
-
-    protected DataKind addDataKindSipAddress(Context context) throws DefinitionException {
-        DataKind kind = addKind(new DataKind(SipAddress.CONTENT_ITEM_TYPE,
-                    R.string.label_sip_address, Weight.SIP_ADDRESS, true));
-
-        kind.actionHeader = new SimpleInflater(R.string.label_sip_address);
-        kind.actionBody = new SimpleInflater(SipAddress.SIP_ADDRESS);
-        kind.fieldList = Lists.newArrayList();
-        kind.fieldList.add(new EditField(SipAddress.SIP_ADDRESS,
-                                         R.string.label_sip_address, FLAGS_SIP_ADDRESS));
-        kind.typeOverallMax = 1;
 
         return kind;
     }
@@ -600,35 +544,6 @@ public abstract class BaseAccountType extends AccountType {
         }
     }
 
-    public static class ImActionInflater extends CommonInflater {
-        @Override
-        protected String getTypeColumn() {
-            return Im.PROTOCOL;
-        }
-
-        @Override
-        protected String getLabelColumn() {
-            return Im.CUSTOM_PROTOCOL;
-        }
-
-        @Override
-        protected int getTypeLabelResource(Integer type) {
-            if (type == null) return R.string.chat;
-            switch (type) {
-                case Im.PROTOCOL_AIM: return R.string.chat_aim;
-                case Im.PROTOCOL_MSN: return R.string.chat_msn;
-                case Im.PROTOCOL_YAHOO: return R.string.chat_yahoo;
-                case Im.PROTOCOL_SKYPE: return R.string.chat_skype;
-                case Im.PROTOCOL_QQ: return R.string.chat_qq;
-                case Im.PROTOCOL_GOOGLE_TALK: return R.string.chat_gtalk;
-                case Im.PROTOCOL_ICQ: return R.string.chat_icq;
-                case Im.PROTOCOL_JABBER: return R.string.chat_jabber;
-                case Im.PROTOCOL_NETMEETING: return R.string.chat;
-                default: return R.string.chat;
-            }
-        }
-    }
-
     public static final StringInflater ORGANIZATION_BODY_INFLATER =
       (context, values) -> {
         List<String> text = Lists.newArrayList();
@@ -706,12 +621,10 @@ public abstract class BaseAccountType extends AccountType {
             addBuilder(new PhoneKindBuilder());
             addBuilder(new EmailKindBuilder());
             addBuilder(new StructuredPostalKindBuilder());
-            addBuilder(new ImKindBuilder());
             addBuilder(new OrganizationKindBuilder());
             addBuilder(new PhotoKindBuilder());
             addBuilder(new NoteKindBuilder());
             addBuilder(new WebsiteKindBuilder());
-            addBuilder(new SipAddressKindBuilder());
             addBuilder(new GroupMembershipKindBuilder());
             addBuilder(new EventKindBuilder());
             addBuilder(new RelationshipKindBuilder());
@@ -1172,51 +1085,6 @@ public abstract class BaseAccountType extends AccountType {
         }
     }
 
-    private static class ImKindBuilder extends KindBuilder {
-        @Override
-        public String getTagName() {
-            return "im";
-        }
-
-        @Override
-        public List<DataKind> parseDataKind(Context context, XmlPullParser parser,
-                AttributeSet attrs) throws DefinitionException, XmlPullParserException,
-                IOException {
-
-            // IM is special:
-            // - It uses "protocol" as the custom label field
-            // - Its TYPE is fixed to TYPE_OTHER
-
-            final DataKind kind = newDataKind(context, parser, attrs, false,
-                    Im.CONTENT_ITEM_TYPE, Im.PROTOCOL, R.string.imLabelsGroup, Weight.IM,
-                    new ImActionInflater(), new SimpleInflater(Im.DATA) // header / action
-                    );
-            kind.fieldList.add(new EditField(Im.DATA, R.string.imLabelsGroup, FLAGS_EMAIL));
-
-            kind.defaultValues = new ContentValues();
-            kind.defaultValues.put(Im.TYPE, Im.TYPE_OTHER);
-
-            return Lists.newArrayList(kind);
-        }
-
-        @Override
-        protected EditType buildEditTypeForTypeTag(AttributeSet attrs, String type) {
-            if ("aim".equals(type)) return buildImType(Im.PROTOCOL_AIM);
-            if ("msn".equals(type)) return buildImType(Im.PROTOCOL_MSN);
-            if ("yahoo".equals(type)) return buildImType(Im.PROTOCOL_YAHOO);
-            if ("skype".equals(type)) return buildImType(Im.PROTOCOL_SKYPE);
-            if ("qq".equals(type)) return buildImType(Im.PROTOCOL_QQ);
-            if ("google_talk".equals(type)) return buildImType(Im.PROTOCOL_GOOGLE_TALK);
-            if ("icq".equals(type)) return buildImType(Im.PROTOCOL_ICQ);
-            if ("jabber".equals(type)) return buildImType(Im.PROTOCOL_JABBER);
-            if ("custom".equals(type)) {
-                return buildImType(Im.PROTOCOL_CUSTOM).setSecondary(true)
-                        .setCustomColumn(Im.CUSTOM_PROTOCOL);
-            }
-            return null;
-        }
-    }
-
     private static class OrganizationKindBuilder extends KindBuilder {
         @Override
         public String getTagName() {
@@ -1312,31 +1180,6 @@ public abstract class BaseAccountType extends AccountType {
 
             kind.defaultValues = new ContentValues();
             kind.defaultValues.put(Website.TYPE, Website.TYPE_OTHER);
-
-            return Lists.newArrayList(kind);
-        }
-    }
-
-    private static class SipAddressKindBuilder extends KindBuilder {
-        @Override
-        public String getTagName() {
-            return "sip_address";
-        }
-
-        @Override
-        public List<DataKind> parseDataKind(Context context, XmlPullParser parser,
-                AttributeSet attrs) throws DefinitionException, XmlPullParserException,
-                IOException {
-            final DataKind kind = newDataKind(context, parser, attrs, false,
-                    SipAddress.CONTENT_ITEM_TYPE, null, R.string.label_sip_address,
-                    Weight.SIP_ADDRESS,
-                    new SimpleInflater(R.string.label_sip_address),
-                    new SimpleInflater(SipAddress.SIP_ADDRESS));
-
-            kind.fieldList.add(new EditField(SipAddress.SIP_ADDRESS,
-                    R.string.label_sip_address, FLAGS_SIP_ADDRESS));
-
-            throwIfList(kind);
 
             return Lists.newArrayList(kind);
         }

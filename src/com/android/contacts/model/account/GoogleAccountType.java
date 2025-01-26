@@ -64,12 +64,10 @@ public class GoogleAccountType extends BaseAccountType {
             addDataKindPhone(context);
             addDataKindEmail(context);
             addDataKindStructuredPostal(context);
-            addDataKindIm(context);
             addDataKindOrganization(context);
             addDataKindPhoto(context);
             addDataKindNote(context);
             addDataKindWebsite(context);
-            addDataKindSipAddress(context);
             addDataKindGroupMembership(context);
             addDataKindRelation(context);
             addDataKindEvent(context);

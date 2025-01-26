@@ -995,26 +995,6 @@
     <!-- Action string for viewing a custom postal address -->
     <string name="map_custom">View <xliff:g id="custom_label" example="vacation">%s</xliff:g> address</string>
 
-    <!-- Action string for starting an IM chat with the AIM protocol -->
-    <string name="chat_aim">Chat using AIM</string>
-    <!-- Action string for starting an IM chat with the MSN or Windows Live protocol -->
-    <string name="chat_msn">Chat using Windows Live</string>
-    <!-- Action string for starting an IM chat with the Yahoo protocol -->
-    <string name="chat_yahoo">Chat using Yahoo</string>
-    <!-- Action string for starting an IM chat with the Skype protocol -->
-    <string name="chat_skype">Chat using Skype</string>
-    <!-- Action string for starting an IM chat with the QQ protocol -->
-    <string name="chat_qq">Chat using QQ</string>
-    <!-- Action string for starting an IM chat with the Google Talk protocol -->
-    <string name="chat_gtalk">Chat using Google Talk</string>
-    <!-- Action string for starting an IM chat with the ICQ protocol -->
-    <string name="chat_icq">Chat using ICQ</string>
-    <!-- Action string for starting an IM chat with the Jabber protocol -->
-    <string name="chat_jabber">Chat using Jabber</string>
-
-    <!-- Generic action string for starting an IM chat -->
-    <string name="chat">Chat</string>
-
     <!-- String describing the Contact Editor Minus button
 
          Used by AccessibilityService to announce the purpose of the button.

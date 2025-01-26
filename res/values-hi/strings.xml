@@ -335,15 +335,6 @@
     <string name="map_work" msgid="8296916987749726461">"दफ़्तर का पता देखें"</string>
     <string name="map_other" msgid="4009931029322619674">"पता देखें"</string>
     <string name="map_custom" msgid="7797812861927817335">"<xliff:g id="CUSTOM_LABEL">%s</xliff:g> पता देखें"</string>
-    <string name="chat_aim" msgid="2044861410748519265">"AIM का उपयोग करके बातचीत करें"</string>
-    <string name="chat_msn" msgid="4733206223124506247">"Windows Live का उपयोग करके बातचीत करें"</string>
-    <string name="chat_yahoo" msgid="3807571878191282528">"Yahoo का उपयोग करके बातचीत करें"</string>
-    <string name="chat_skype" msgid="5130564346825936093">"Skype का उपयोग करके बातचीत करें"</string>
-    <string name="chat_qq" msgid="2971335421266098608">"QQ का उपयोग करके बातचीत करें"</string>
-    <string name="chat_gtalk" msgid="2927882858741904064">"Google टॉक का उपयोग करके बातचीत करें"</string>
-    <string name="chat_icq" msgid="4289041376069626281">"ICQ का उपयोग करके बातचीत करें"</string>
-    <string name="chat_jabber" msgid="1097960594943864847">"Jabber का उपयोग करके बातचीत करें"</string>
-    <string name="chat" msgid="8390862712584830532">"चैट करें"</string>
     <string name="description_minus_button" msgid="1305985971158054217">"मिटाएं"</string>
     <string name="expand_name_fields_description" msgid="6059558159338959487">"ज़्यादा नाम फ़ील्ड दिखाएं"</string>
     <string name="collapse_name_fields_description" msgid="7950435675716414477">"नाम फ़ील्ड संक्षिप्त करें"</string>

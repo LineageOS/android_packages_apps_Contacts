@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.net.sip.SipManager;
 import android.provider.MediaStore;
 import android.provider.Telephony;
 import android.telephony.TelephonyManager;
@@ -39,7 +38,6 @@ import java.util.List;
 public final class PhoneCapabilityTester {
     private static boolean sIsInitialized;
     private static boolean sIsPhone;
-    private static boolean sIsSipPhone;
 
     /**
      * Tests whether the Intent has a receiver registered. This can be used to show/hide
@@ -64,16 +62,7 @@ public final class PhoneCapabilityTester {
     private static void initialize(Context context) {
         final TelephonyManager tm = context.getSystemService(TelephonyManager.class);
         sIsPhone = tm.isVoiceCapable();
-        sIsSipPhone = sIsPhone && SipManager.isVoipSupported(context);
         sIsInitialized = true;
-    }
-
-    /**
-     * Returns true if this device can be used to make sip calls
-     */
-    public static boolean isSipPhone(Context context) {
-        if (!sIsInitialized) initialize(context);
-        return sIsSipPhone;
     }
 
     /**

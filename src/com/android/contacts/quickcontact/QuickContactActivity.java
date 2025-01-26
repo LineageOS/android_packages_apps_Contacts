@@ -56,13 +56,11 @@ import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Event;
 import android.provider.ContactsContract.CommonDataKinds.GroupMembership;
 import android.provider.ContactsContract.CommonDataKinds.Identity;
-import android.provider.ContactsContract.CommonDataKinds.Im;
 import android.provider.ContactsContract.CommonDataKinds.Nickname;
 import android.provider.ContactsContract.CommonDataKinds.Note;
 import android.provider.ContactsContract.CommonDataKinds.Organization;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.Relation;
-import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.CommonDataKinds.Website;
 import android.provider.ContactsContract.Contacts;
@@ -129,13 +127,11 @@ import com.android.contacts.model.dataitem.DataItem;
 import com.android.contacts.model.dataitem.DataKind;
 import com.android.contacts.model.dataitem.EmailDataItem;
 import com.android.contacts.model.dataitem.EventDataItem;
-import com.android.contacts.model.dataitem.ImDataItem;
 import com.android.contacts.model.dataitem.NicknameDataItem;
 import com.android.contacts.model.dataitem.NoteDataItem;
 import com.android.contacts.model.dataitem.OrganizationDataItem;
 import com.android.contacts.model.dataitem.PhoneDataItem;
 import com.android.contacts.model.dataitem.RelationDataItem;
-import com.android.contacts.model.dataitem.SipAddressDataItem;
 import com.android.contacts.model.dataitem.StructuredNameDataItem;
 import com.android.contacts.model.dataitem.StructuredPostalDataItem;
 import com.android.contacts.model.dataitem.WebsiteDataItem;
@@ -304,8 +300,7 @@ public class QuickContactActivity extends ContactsActivity {
      * in the order specified here.</p>
      */
     private static final List<String> LEADING_MIMETYPES = Lists.newArrayList(
-            Phone.CONTENT_ITEM_TYPE, SipAddress.CONTENT_ITEM_TYPE, Email.CONTENT_ITEM_TYPE,
-            StructuredPostal.CONTENT_ITEM_TYPE);
+            Phone.CONTENT_ITEM_TYPE, Email.CONTENT_ITEM_TYPE, StructuredPostal.CONTENT_ITEM_TYPE);
 
     private static final List<String> SORTED_ABOUT_CARD_MIMETYPES = Lists.newArrayList(
             Nickname.CONTENT_ITEM_TYPE,
@@ -315,7 +310,6 @@ public class QuickContactActivity extends ContactsActivity {
             Organization.CONTENT_ITEM_TYPE,
             Event.CONTENT_ITEM_TYPE,
             Relation.CONTENT_ITEM_TYPE,
-            Im.CONTENT_ITEM_TYPE,
             GroupMembership.CONTENT_ITEM_TYPE,
             Identity.CONTENT_ITEM_TYPE,
             CustomDataItem.MIMETYPE_CUSTOM_FIELD,
@@ -1370,31 +1364,7 @@ public class QuickContactActivity extends ContactsActivity {
         final Resources res = context.getResources();
         DataKind kind = dataItem.getDataKind();
 
-        if (dataItem instanceof ImDataItem) {
-            final ImDataItem im = (ImDataItem) dataItem;
-            intent = ContactsUtils.buildImIntent(context, im).first;
-            final boolean isEmail = im.isCreatedFromEmail();
-            final int protocol;
-            if (!im.isProtocolValid()) {
-                protocol = Im.PROTOCOL_CUSTOM;
-            } else {
-                protocol = isEmail ? Im.PROTOCOL_GOOGLE_TALK : im.getProtocol();
-            }
-            if (protocol == Im.PROTOCOL_CUSTOM) {
-                // If the protocol is custom, display the "IM" entry header as well to distinguish
-                // this entry from other ones
-                header = res.getString(R.string.header_im_entry);
-                subHeader = Im.getProtocolLabel(res, protocol,
-                        im.getCustomProtocol()).toString();
-                text = im.getData();
-            } else {
-                header = Im.getProtocolLabel(res, protocol,
-                        im.getCustomProtocol()).toString();
-                subHeader = im.getData();
-            }
-            entryContextMenuInfo = new EntryContextMenuInfo(im.getData(), header,
-                    dataItem.getMimeType(), dataItem.getId(), dataItem.isSuperPrimary());
-        } else if (dataItem instanceof OrganizationDataItem) {
+        if (dataItem instanceof OrganizationDataItem) {
             final OrganizationDataItem organization = (OrganizationDataItem) dataItem;
             header = res.getString(R.string.header_organization_entry);
             entryContextMenuInfo = new EntryContextMenuInfo(subHeader, header,
@@ -1613,30 +1583,6 @@ public class QuickContactActivity extends ContactsActivity {
                 alternateContentDescription.append(res.getString(
                         R.string.content_description_directions)).append(" ").append(header);
                 iconResourceId = R.drawable.quantum_ic_place_vd_theme_24;
-                icon = context.getDrawable(iconResourceId);
-            }
-        } else if (dataItem instanceof SipAddressDataItem) {
-            final SipAddressDataItem sip = (SipAddressDataItem) dataItem;
-            final String address = sip.getSipAddress();
-            if (!TextUtils.isEmpty(address)) {
-                primaryContentDescription.append(res.getString(R.string.call_other)).append(
-                        " ");
-                if (PhoneCapabilityTester.isSipPhone(context)) {
-                    final Uri callUri = Uri.fromParts(PhoneAccount.SCHEME_SIP, address, null);
-                    intent = CallUtil.getCallIntent(callUri);
-                    intent.putExtra(EXTRA_ACTION_TYPE, ActionType.SIPCALL);
-                }
-                header = address;
-                entryContextMenuInfo = new EntryContextMenuInfo(header,
-                        res.getString(R.string.phoneLabelsGroup), dataItem.getMimeType(),
-                        dataItem.getId(), dataItem.isSuperPrimary());
-                if (sip.hasKindTypeColumn(kind)) {
-                    text = SipAddress.getTypeLabel(res,
-                            sip.getKindTypeColumn(kind), sip.getLabel()).toString();
-                    primaryContentDescription.append(text).append(" ");
-                }
-                primaryContentDescription.append(header);
-                iconResourceId = R.drawable.quantum_ic_dialer_sip_vd_theme_24;
                 icon = context.getDrawable(iconResourceId);
             }
         } else if (dataItem instanceof StructuredNameDataItem) {

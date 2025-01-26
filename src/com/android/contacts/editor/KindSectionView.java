@@ -49,13 +49,6 @@ import java.util.List;
  */
 public class KindSectionView extends LinearLayout {
 
-    /** Callbacks for hosts of {@link KindSectionView}s. */
-    public interface Listener {
-
-        /** Invoked when all fields in a legacy {@link KindSectionView} are removed. */
-        void onEmptyLegacyKindSectionView();
-    }
-
     /**
      * Marks a name as super primary when it is changed.
      *
@@ -127,11 +120,6 @@ public class KindSectionView extends LinearLayout {
 
         @Override
         public void onDeleteRequested(Editor editor) {
-            if (mIsLegacyField && mEditors.getChildCount() == 1) {
-                editor.deleteEditor();
-                mListener.onEmptyLegacyKindSectionView();
-                return;
-            }
             if (mShowOneEmptyEditor && mEditors.getChildCount() == 1) {
                 // If there is only 1 editor in the section, then don't allow the user to
                 // delete it.  Just clear the fields in the editor.
@@ -166,7 +154,6 @@ public class KindSectionView extends LinearLayout {
     private KindSectionData mKindSectionData;
     private ViewIdGenerator mViewIdGenerator;
     private RawContactEditorView.Listener mEditorViewListener;
-    private Listener mListener;
 
     private boolean mIsUserProfile;
     private boolean mShowOneEmptyEditor = false;
@@ -241,13 +228,6 @@ public class KindSectionView extends LinearLayout {
         }
     }
 
-    /**
-     * When {@code isLegacyField} is true, prevent users from editing the field.
-     */
-    void setLegacyField(boolean isLegacyField) {
-        this.mIsLegacyField = isLegacyField;
-    }
-
     public StructuredNameEditorView getNameEditorView() {
         if (!StructuredName.CONTENT_ITEM_TYPE.equals(mKindSectionData.getMimeType())
             || mEditors.getChildCount() == 0) {
@@ -282,12 +262,10 @@ public class KindSectionView extends LinearLayout {
     public void setState(
         KindSectionData kindSectionData,
         ViewIdGenerator viewIdGenerator,
-        RawContactEditorView.Listener editorViewListener,
-        Listener listener) {
+        RawContactEditorView.Listener editorViewListener) {
         mKindSectionData = kindSectionData;
         mViewIdGenerator = viewIdGenerator;
         mEditorViewListener = editorViewListener;
-        mListener = listener;
 
         // Set the icon using the DataKind
         final DataKind dataKind = mKindSectionData.getDataKind();

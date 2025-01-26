@@ -335,15 +335,6 @@
     <string name="map_work" msgid="8296916987749726461">"Դիտել աշխատավայրի հասցեն"</string>
     <string name="map_other" msgid="4009931029322619674">"Դիտել հասցեն"</string>
     <string name="map_custom" msgid="7797812861927817335">"Դիտել <xliff:g id="CUSTOM_LABEL">%s</xliff:g>-ի հասցեն"</string>
-    <string name="chat_aim" msgid="2044861410748519265">"Զրուցել AIM-ով"</string>
-    <string name="chat_msn" msgid="4733206223124506247">"Զրույց Windows Live-ով"</string>
-    <string name="chat_yahoo" msgid="3807571878191282528">"Զրուցել Yahoo-ով"</string>
-    <string name="chat_skype" msgid="5130564346825936093">"Զրուցել Skype-ով"</string>
-    <string name="chat_qq" msgid="2971335421266098608">"Զրուցել QQ-ով"</string>
-    <string name="chat_gtalk" msgid="2927882858741904064">"Զրուցել Google Talk-ով"</string>
-    <string name="chat_icq" msgid="4289041376069626281">"Զրուցել ICQ-ով"</string>
-    <string name="chat_jabber" msgid="1097960594943864847">"Զրուցել Jabber-ով"</string>
-    <string name="chat" msgid="8390862712584830532">"Զրուցել"</string>
     <string name="description_minus_button" msgid="1305985971158054217">"ջնջել"</string>
     <string name="expand_name_fields_description" msgid="6059558159338959487">"Ցույց տալ անվան այլ դաշտեր"</string>
     <string name="collapse_name_fields_description" msgid="7950435675716414477">"Կոծկել անվան դաշտերը"</string>

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,6 +39,7 @@ import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.CommonDataKinds.Website;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -50,10 +52,8 @@ import android.widget.LinearLayout;
 import android.widget.ListPopupWindow;
 import android.widget.TextView;
 
-import com.android.contacts.editor.KindSectionView;
 import com.android.contacts.GeoUtil;
 import com.android.contacts.R;
-import com.android.contacts.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.model.AccountTypeManager;
 import com.android.contacts.model.RawContactDelta;
 import com.android.contacts.model.RawContactDeltaList;
@@ -690,7 +690,7 @@ public class RawContactEditorView extends LinearLayout implements View.OnClickLi
                 if (TextUtils.isEmpty(phoneNumber)) {
                     continue;
                 }
-                final String formattedNumber = PhoneNumberUtilsCompat.formatNumber(
+                final String formattedNumber = PhoneNumberUtils.formatNumber(
                         phoneNumber, phone.getPhoneNormalizedNumber(),
                         GeoUtil.getCurrentCountryIso(getContext()));
                 CharSequence phoneType = null;

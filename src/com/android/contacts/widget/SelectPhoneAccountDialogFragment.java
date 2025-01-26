@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +28,7 @@ import android.os.ResultReceiver;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +43,6 @@ import android.widget.TextView;
 
 import com.android.contacts.R;
 import com.android.contacts.compat.PhoneAccountCompat;
-import com.android.contacts.compat.PhoneNumberUtilsCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -255,7 +256,7 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
             } else {
                 holder.numberTextView.setVisibility(View.VISIBLE);
                 holder.numberTextView.setText(
-                        PhoneNumberUtilsCompat.createTtsSpannable(
+                        PhoneNumberUtils.createTtsSpannable(
                                 account.getAddress().getSchemeSpecificPart()));
             }
             holder.imageView.setImageDrawable(PhoneAccountCompat.createIconDrawable(account,

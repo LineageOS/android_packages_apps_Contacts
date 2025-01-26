@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,15 +21,11 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import androidx.annotation.Nullable;
 import android.telecom.PhoneAccount;
-import android.util.Log;
 
 /**
  * Compatiblity class for {@link android.telecom.PhoneAccount}
  */
 public class PhoneAccountCompat {
-
-    private static final String TAG = PhoneAccountCompat.class.getSimpleName();
-
     /**
      * Gets the {@link Icon} associated with the given {@link PhoneAccount}
      *
@@ -41,11 +38,8 @@ public class PhoneAccountCompat {
             return null;
         }
 
-        if (CompatUtils.isMarshmallowCompatible()) {
-            return phoneAccount.getIcon();
-        }
+        return phoneAccount.getIcon();
 
-        return null;
     }
 
     /**
@@ -64,14 +58,8 @@ public class PhoneAccountCompat {
             return null;
         }
 
-        if (CompatUtils.isMarshmallowCompatible()) {
-            return createIconDrawableMarshmallow(phoneAccount, context);
-        }
+        return createIconDrawableMarshmallow(phoneAccount, context);
 
-        if (CompatUtils.isLollipopMr1Compatible()) {
-            return createIconDrawableLollipopMr1(phoneAccount, context);
-        }
-        return null;
     }
 
     @Nullable
@@ -82,20 +70,5 @@ public class PhoneAccountCompat {
             return null;
         }
         return accountIcon.loadDrawable(context);
-    }
-
-    @Nullable
-    private static Drawable createIconDrawableLollipopMr1(PhoneAccount phoneAccount,
-            Context context) {
-        try {
-            return (Drawable) PhoneAccount.class.getMethod("createIconDrawable", Context.class)
-                    .invoke(phoneAccount, context);
-        } catch (ReflectiveOperationException e) {
-            return null;
-        } catch (Throwable t) {
-            Log.e(TAG, "Unexpected exception when attempting to call "
-                    + "android.telecom.PhoneAccount#createIconDrawable", t);
-            return null;
-        }
     }
 }

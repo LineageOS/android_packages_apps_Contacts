@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,15 +21,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
+import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Im;
 import android.provider.ContactsContract.DisplayPhoto;
 import androidx.annotation.IntDef;
 import android.text.TextUtils;
 import android.util.Pair;
 
-import com.android.contacts.compat.ContactsCompat;
-import com.android.contacts.compat.DirectoryCompat;
 import com.android.contacts.model.dataitem.ImDataItem;
 
 import java.lang.annotation.Retention;
@@ -45,8 +44,6 @@ public class ContactsUtils {
     private static final int DEFAULT_THUMBNAIL_SIZE = 96;
 
     private static int sThumbnailSize = -1;
-
-    public static final boolean FLAG_N_FEATURE = Build.VERSION.SDK_INT >= 24;
 
     // TODO find a proper place for the canonical version of these
     public interface ProviderNames {
@@ -255,12 +252,12 @@ public class ContactsUtils {
     public static @UserType long determineUserType(Long directoryId, Long contactId) {
         // First check directory id
         if (directoryId != null) {
-            return DirectoryCompat.isEnterpriseDirectoryId(directoryId) ? USER_TYPE_WORK
+            return ContactsContract.Directory.isEnterpriseDirectoryId(directoryId) ? USER_TYPE_WORK
                     : USER_TYPE_CURRENT;
         }
         // Only check contact id if directory id is null
         if (contactId != null && contactId != 0L
-                && ContactsCompat.isEnterpriseContactId(contactId)) {
+                && ContactsContract.Contacts.isEnterpriseContactId(contactId)) {
             return USER_TYPE_WORK;
         } else {
             return USER_TYPE_CURRENT;

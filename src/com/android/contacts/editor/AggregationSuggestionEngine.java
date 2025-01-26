@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,13 +33,11 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.Photo;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.Contacts;
-import android.provider.ContactsContract.Contacts.AggregationSuggestions;
 import android.provider.ContactsContract.Contacts.AggregationSuggestions.Builder;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.RawContacts;
 import android.text.TextUtils;
 
-import com.android.contacts.compat.AggregationSuggestionsCompat;
 import com.android.contacts.model.ValuesDelta;
 import com.android.contacts.model.account.AccountWithDataSet;
 
@@ -214,23 +213,7 @@ public class AggregationSuggestionEngine extends HandlerThread {
             return null;
         }
 
-        // AggregationSuggestions.Builder() became visible in API level 23, so use it if applicable.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            final Builder uriBuilder = new AggregationSuggestions.Builder()
-                    .setLimit(SUGGESTIONS_LIMIT)
-                    .setContactId(mContactId);
-            if (nameSb.length() != 0) {
-                uriBuilder.addNameParameter(nameSb.toString());
-            }
-            if (phoneticNameSb.length() != 0) {
-                uriBuilder.addNameParameter(phoneticNameSb.toString());
-            }
-            return uriBuilder.build();
-        }
-
-        // For previous SDKs, use the backup plan.
-        final AggregationSuggestionsCompat.Builder uriBuilder =
-                new AggregationSuggestionsCompat.Builder()
+        final Builder uriBuilder = new Builder()
                 .setLimit(SUGGESTIONS_LIMIT)
                 .setContactId(mContactId);
         if (nameSb.length() != 0) {

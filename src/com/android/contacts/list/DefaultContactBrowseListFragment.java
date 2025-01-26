@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,7 +63,6 @@ import com.android.contacts.Experiments;
 import com.android.contacts.R;
 import com.android.contacts.activities.ActionBarAdapter;
 import com.android.contacts.activities.PeopleActivity;
-import com.android.contacts.compat.CompatUtils;
 import com.android.contacts.interactions.ContactDeletionInteraction;
 import com.android.contacts.interactions.ContactMultiDeletionInteraction;
 import com.android.contacts.interactions.ContactMultiDeletionInteraction.MultiContactDeleteListener;
@@ -292,22 +292,13 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
     }
 
     private void maybeShowHamburgerFeatureHighlight() {
-        if (mActionBarAdapter!= null && !mActionBarAdapter.isSearchMode()
+        if (mActionBarAdapter != null && !mActionBarAdapter.isSearchMode()
                 && !mActionBarAdapter.isSelectionMode()
-                && !isTalkbackOnAndOnPreLollipopMr1()
                 && SharedPreferenceUtil.getShouldShowHamburgerPromo(getContext())) {
             if (FeatureHighlightHelper.showHamburgerFeatureHighlight(mActivity)) {
                 SharedPreferenceUtil.setHamburgerPromoDisplayedBefore(getContext());
             }
         }
-    }
-
-    // There's a crash if we show feature highlight when Talkback is on, on API 21 and below.
-    // See b/31180524.
-    private boolean isTalkbackOnAndOnPreLollipopMr1(){
-        return ((AccessibilityManager) getContext().getSystemService(Context.ACCESSIBILITY_SERVICE))
-                .isTouchExplorationEnabled()
-                    && !CompatUtils.isLollipopMr1Compatible();
     }
 
     private void bindListHeader(int numberOfContacts) {

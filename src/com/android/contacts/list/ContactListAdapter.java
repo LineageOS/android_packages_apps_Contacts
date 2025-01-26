@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +30,6 @@ import android.widget.ListView;
 
 import com.android.contacts.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.R;
-import com.android.contacts.compat.ContactsCompat;
 import com.android.contacts.preference.ContactsPreferences;
 
 import java.util.HashSet;
@@ -190,7 +190,7 @@ public abstract class ContactListAdapter extends MultiSelectEntryContactListAdap
         final Cursor cursor = (Cursor) getItem(position);
         if (cursor != null) {
             final long contactId = cursor.getLong(ContactQuery.CONTACT_ID);
-            return ContactsCompat.isEnterpriseContactId(contactId);
+            return Contacts.isEnterpriseContactId(contactId);
         }
         return false;
     }

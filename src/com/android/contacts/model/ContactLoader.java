@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +41,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import com.android.contacts.GeoUtil;
 import com.android.contacts.GroupMetaDataLoader;
-import com.android.contacts.compat.CompatUtils;
 import com.android.contacts.group.GroupMetaData;
 import com.android.contacts.model.account.AccountType;
 import com.android.contacts.model.account.GoogleAccountType;
@@ -114,7 +114,7 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
      * social stream items).
      */
     private static class ContactQuery {
-        static final String[] COLUMNS_INTERNAL = new String[] {
+        static final String[] COLUMNS = new String[] {
                 Contacts.NAME_RAW_CONTACT_ID,
                 Contacts.DISPLAY_NAME_SOURCE,
                 Contacts.LOOKUP_KEY,
@@ -182,17 +182,9 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
                 Contacts.SEND_TO_VOICEMAIL,
                 Contacts.CUSTOM_RINGTONE,
                 Contacts.IS_USER_PROFILE,
+
+                Data.CARRIER_PRESENCE,
         };
-
-        static final String[] COLUMNS;
-
-        static {
-            List<String> projectionList = Lists.newArrayList(COLUMNS_INTERNAL);
-            if (CompatUtils.isMarshmallowCompatible()) {
-                projectionList.add(Data.CARRIER_PRESENCE);
-            }
-            COLUMNS = projectionList.toArray(new String[projectionList.size()]);
-        }
 
         public static final int NAME_RAW_CONTACT_ID = 0;
         public static final int DISPLAY_NAME_SOURCE = 1;
@@ -671,9 +663,7 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
         cursorColumnToContentValues(cursor, cv, ContactQuery.MIMETYPE);
         cursorColumnToContentValues(cursor, cv, ContactQuery.GROUP_SOURCE_ID);
         cursorColumnToContentValues(cursor, cv, ContactQuery.CHAT_CAPABILITY);
-        if (CompatUtils.isMarshmallowCompatible()) {
-            cursorColumnToContentValues(cursor, cv, ContactQuery.CARRIER_PRESENCE);
-        }
+        cursorColumnToContentValues(cursor, cv, ContactQuery.CARRIER_PRESENCE);
 
         return cv;
     }

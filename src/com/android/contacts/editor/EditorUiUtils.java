@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -206,11 +207,9 @@ public class EditorUiUtils {
     /**
      * Returns a ringtone string based on the ringtone URI and version #.
      */
-    public static String getRingtoneStringFromUri(Uri pickedUri, int currentVersion) {
-        if (isNewerThanM(currentVersion)) {
-            if (pickedUri == null) return ""; // silent ringtone
-            if (RingtoneManager.isDefault(pickedUri)) return null; // default ringtone
-        }
+    public static String getRingtoneStringFromUri(Uri pickedUri) {
+        if (pickedUri == null) return ""; // silent ringtone
+        if (RingtoneManager.isDefault(pickedUri)) return null; // default ringtone
         if (pickedUri == null || RingtoneManager.isDefault(pickedUri)) return null;
         return pickedUri.toString();
     }
@@ -218,16 +217,12 @@ public class EditorUiUtils {
     /**
      * Returns a ringtone URI, based on the string and version #.
      */
-    public static Uri getRingtoneUriFromString(String str, int currentVersion) {
+    public static Uri getRingtoneUriFromString(String str) {
         if (str != null) {
-            if (isNewerThanM(currentVersion) && TextUtils.isEmpty(str)) return null;
+            if (TextUtils.isEmpty(str)) return null;
             return Uri.parse(str);
         }
         return RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
-    }
-
-    private static boolean isNewerThanM(int currentVersion) {
-        return currentVersion > Build.VERSION_CODES.M;
     }
 
     /** Returns the {@link Photo#PHOTO_FILE_ID} from the given ValuesDelta. */

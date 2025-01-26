@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +29,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.contacts.R;
-import com.android.contacts.compat.DirectoryCompat;
 
 /**
  * A specialized loader for the list of directories, see {@link Directory}.
@@ -63,7 +63,7 @@ public class DirectoryListLoader extends AsyncTaskLoader<Cursor> {
             if (mode == SEARCH_MODE_DATA_SHORTCUT || mode == SEARCH_MODE_CONTACT_SHORTCUT) {
                 return Directory.CONTENT_URI;
             } else {
-                return DirectoryCompat.getContentUri();
+                return Directory.ENTERPRISE_CONTENT_URI;
             }
         }
     }
@@ -161,7 +161,8 @@ public class DirectoryListLoader extends AsyncTaskLoader<Cursor> {
             while(cursor.moveToNext()) {
                 long directoryId = cursor.getLong(DirectoryQuery.ID);
                 if (!mLocalInvisibleDirectoryEnabled
-                        && DirectoryCompat.isInvisibleDirectory(directoryId)) {
+                        && (directoryId == Directory.LOCAL_INVISIBLE
+                        || directoryId == Directory.ENTERPRISE_LOCAL_INVISIBLE)) {
                     continue;
                 }
                 String directoryType = null;

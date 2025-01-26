@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +25,6 @@ import android.os.Handler;
 import android.provider.ContactsContract.ProviderStatus;
 import android.util.Log;
 
-import com.android.contacts.compat.ProviderStatusCompat;
 import com.android.contactsbind.FeedbackHelper;
 
 import com.google.common.collect.Lists;
@@ -169,16 +169,16 @@ public class ProviderStatusWatcher extends ContentObserver {
      * provider?) this may still cause ANRs.
      *
      * In order to avoid that, if we can't load the status within {@link #LOAD_WAIT_TIMEOUT_MS},
-     * we'll give up and just returns {@link ProviderStatusCompat#STATUS_BUSY} in order to unblock
+     * we'll give up and just returns {@link ProviderStatus#STATUS_BUSY} in order to unblock
      * the UI thread.  The actual result will be delivered later via {@link ProviderStatusListener}.
-     * (If {@link ProviderStatusCompat#STATUS_BUSY} is returned, the app (should) shows an according
+     * (If {@link ProviderStatus#STATUS_BUSY} is returned, the app (should) shows an according
      * message, like "contacts are being updated".)
      */
     public int getProviderStatus() {
         waitForLoaded();
 
         if (mProviderStatus == null) {
-            return ProviderStatusCompat.STATUS_BUSY;
+            return ProviderStatus.STATUS_BUSY;
         }
 
         return mProviderStatus;

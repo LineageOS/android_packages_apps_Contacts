@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,7 +62,6 @@ import android.widget.Toast;
 import com.android.contacts.AppCompatContactsActivity;
 import com.android.contacts.ContactSaveService;
 import com.android.contacts.R;
-import com.android.contacts.compat.CompatUtils;
 import com.android.contacts.drawer.DrawerFragment;
 import com.android.contacts.drawer.DrawerFragment.DrawerFragmentListener;
 import com.android.contacts.editor.ContactEditorFragment;
@@ -645,7 +645,6 @@ public class PeopleActivity extends AppCompatContactsActivity implements
     }
 
     public void updateStatusBarBackground(int color) {
-        if (!CompatUtils.isLollipopCompatible()) return;
         if (color == -1) {
             mDrawerLayout.setStatusBarBackgroundColor(
                     MaterialColorMapUtils.getStatusBarColor(this));
@@ -1070,10 +1069,8 @@ public class PeopleActivity extends AppCompatContactsActivity implements
             mShouldSwitchToAllContacts = true;
         }
 
-        if (CompatUtils.isNCompatible()) {
-            getWindow().getDecorView()
-                    .sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
-        }
+        getWindow().getDecorView()
+                .sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
         invalidateOptionsMenu();
     }
 

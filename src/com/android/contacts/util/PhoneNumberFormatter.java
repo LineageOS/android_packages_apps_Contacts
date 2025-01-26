@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +23,6 @@ import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.widget.TextView;
 
 import com.android.contacts.GeoUtil;
-import com.android.contacts.compat.PhoneNumberFormattingTextWatcherCompat;
 
 public final class PhoneNumberFormatter {
     private PhoneNumberFormatter() {}
@@ -45,7 +45,7 @@ public final class PhoneNumberFormatter {
 
         @Override
         protected PhoneNumberFormattingTextWatcher doInBackground(Void... params) {
-            return PhoneNumberFormattingTextWatcherCompat.newInstance(mCountryCode);
+            return new PhoneNumberFormattingTextWatcher(mCountryCode);
         }
 
         @Override

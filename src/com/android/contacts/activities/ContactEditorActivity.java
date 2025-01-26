@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -68,8 +69,6 @@ public class ContactEditorActivity extends AppCompatContactsActivity implements
      */
     public static final String EXTRA_ACCOUNT_WITH_DATA_SET =
             "com.android.contacts.ACCOUNT_WITH_DATA_SET";
-
-    private static final String TAG_EDITOR_FRAGMENT = "editor_fragment";
 
     private static final String STATE_PHOTO_MODE = "photo_mode";
     private static final String STATE_ACTION_BAR_TITLE = "action_bar_title";

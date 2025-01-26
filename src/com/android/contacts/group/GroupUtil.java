@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,7 +54,6 @@ public final class GroupUtil {
 
     public static final String ACTION_ADD_TO_GROUP = "addToGroup";
     public static final String ACTION_CREATE_GROUP = "createGroup";
-    public static final String ACTION_DELETE_GROUP = "deleteGroup";
     public static final String ACTION_REMOVE_FROM_GROUP = "removeFromGroup";
     public static final String ACTION_SWITCH_GROUP = "switchGroup";
     public static final String ACTION_UPDATE_GROUP = "updateGroup";
@@ -73,34 +73,13 @@ public final class GroupUtil {
         if (cursor == null || cursor.isClosed() || !cursor.moveToPosition(position)) {
             return null;
         }
-        String accountName = cursor.getString(GroupListLoader.ACCOUNT_NAME);
-        String accountType = cursor.getString(GroupListLoader.ACCOUNT_TYPE);
-        String dataSet = cursor.getString(GroupListLoader.DATA_SET);
         long groupId = cursor.getLong(GroupListLoader.GROUP_ID);
         String title = cursor.getString(GroupListLoader.TITLE);
         int memberCount = cursor.getInt(GroupListLoader.MEMBER_COUNT);
         boolean isReadOnly = cursor.getInt(GroupListLoader.IS_READ_ONLY) == 1;
         String systemId = cursor.getString(GroupListLoader.SYSTEM_ID);
 
-        // Figure out if this is the first group for this account name / account type pair by
-        // checking the previous entry. This is to determine whether or not we need to display an
-        // account header in this item.
-        int previousIndex = position - 1;
-        boolean isFirstGroupInAccount = true;
-        if (previousIndex >= 0 && cursor.moveToPosition(previousIndex)) {
-            String previousGroupAccountName = cursor.getString(GroupListLoader.ACCOUNT_NAME);
-            String previousGroupAccountType = cursor.getString(GroupListLoader.ACCOUNT_TYPE);
-            String previousGroupDataSet = cursor.getString(GroupListLoader.DATA_SET);
-
-            if (TextUtils.equals(accountName, previousGroupAccountName)
-                    && TextUtils.equals(accountType, previousGroupAccountType)
-                    && TextUtils.equals(dataSet, previousGroupDataSet)) {
-                isFirstGroupInAccount = false;
-            }
-        }
-
-        return new GroupListItem(accountName, accountType, dataSet, groupId, title,
-                isFirstGroupInAccount, memberCount, isReadOnly, systemId);
+        return new GroupListItem(groupId, title, memberCount, isReadOnly, systemId);
     }
 
     public static List<String> getSendToDataForIds(Context context, long[] ids, String scheme) {

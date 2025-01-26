@@ -19,7 +19,6 @@ package com.android.contacts.util;
 
 import static android.provider.ContactsContract.CommonDataKinds.Phone;
 
-import android.content.res.Resources;
 import android.telephony.PhoneNumberUtils;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -186,21 +185,6 @@ public class ContactDisplayUtils {
     }
 
     /**
-     * Retrieves a string from a string template that takes 1 phone number as argument,
-     * span the number with a telephone {@link TtsSpan}, and return the spanned string.
-     *
-     * @param resources to retrieve the string from
-     * @param stringId ID of the string
-     * @param number to pass in the template
-     * @return CharSequence with the phone number wrapped in a TtsSpan
-     */
-    public static CharSequence getTtsSpannedPhoneNumber(Resources resources,
-            int stringId, String number){
-        String msg = resources.getString(stringId, number);
-        return ContactDisplayUtils.getTelephoneTtsSpannable(msg, number);
-    }
-
-    /**
      * Returns either namePrimary or nameAlternative based on the {@link ContactsPreferences}.
      * Defaults to the name that is non-null.
      *
@@ -221,34 +205,6 @@ public class ContactDisplayUtils {
 
         if (contactsPreferences.getDisplayOrder() == ContactsPreferences.DISPLAY_ORDER_ALTERNATIVE
                 && !TextUtils.isEmpty(nameAlternative)) {
-            return nameAlternative;
-        }
-
-        return namePrimary;
-    }
-
-    /**
-     * Returns either namePrimary or nameAlternative based on the {@link ContactsPreferences}.
-     * Defaults to the name that is non-null.
-     *
-     * @param namePrimary the primary name.
-     * @param nameAlternative the alternative name.
-     * @param contactsPreferences the ContactsPreferences used to determine the preferred sort
-     * order.
-     * @return namePrimary or nameAlternative depending on the value of displayOrderPreference.
-     */
-    public static String getPreferredSortName(String namePrimary, String nameAlternative,
-            @Nullable ContactsPreferences contactsPreferences) {
-        if (contactsPreferences == null) {
-            return namePrimary != null ? namePrimary : nameAlternative;
-        }
-
-        if (contactsPreferences.getSortOrder() == ContactsPreferences.SORT_ORDER_PRIMARY) {
-            return namePrimary;
-        }
-
-        if (contactsPreferences.getSortOrder() == ContactsPreferences.SORT_ORDER_ALTERNATIVE &&
-                !TextUtils.isEmpty(nameAlternative)) {
             return nameAlternative;
         }
 

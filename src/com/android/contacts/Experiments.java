@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,12 +20,6 @@ package com.android.contacts;
  * Experiment flag names.
  */
 public final class Experiments {
-
-    /**
-     * Experiment to enable device account detection using CP2 queries
-     */
-    public static final String CP2_DEVICE_ACCOUNT_DETECTION_ENABLED =
-            "Account__cp2_device_account_detection_enabled";
 
     /**
      * Flags for maximum content update time

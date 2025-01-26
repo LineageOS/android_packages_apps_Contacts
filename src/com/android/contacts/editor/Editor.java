@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -105,14 +106,6 @@ public interface Editor {
      * Clears all fields in this {@link Editor}.
      */
     public void clearAllFields();
-
-    /**
-     * Called internally when the user has added a new field.  This
-     * allows the appropriate editor UI to be presented immediately.
-     * For example, if a new "event" is added, a date-picker will
-     * immediately pop up.
-     */
-    public void editNewlyAddedField();
 
     /**
      * Marks the Editor field as a legacy field. Legacy fields are deprecated MIME types

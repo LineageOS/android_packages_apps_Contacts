@@ -202,7 +202,6 @@ public abstract class ContactEntryListAdapter extends IndexerListAdapter {
         return null;
     }
 
-    public abstract String getContactDisplayName(int position);
     public abstract void configureLoader(CursorLoader loader, long directoryId);
 
     /**
@@ -273,10 +272,6 @@ public abstract class ContactEntryListAdapter extends IndexerListAdapter {
         mDirectorySearchMode = mode;
     }
 
-    public int getDirectoryResultLimit() {
-        return mDirectoryResultLimit;
-    }
-
     public int getDirectoryResultLimit(DirectoryPartition directoryPartition) {
         final int limit = directoryPartition.getResultLimit();
         return limit == DirectoryPartition.RESULT_LIMIT_DEFAULT ? mDirectoryResultLimit : limit;
@@ -320,18 +315,6 @@ public abstract class ContactEntryListAdapter extends IndexerListAdapter {
 
     public boolean getCircularPhotos() {
         return mCircularPhotos;
-    }
-
-    public void setCircularPhotos(boolean circularPhotos) {
-        mCircularPhotos = circularPhotos;
-    }
-
-    public boolean isEmptyListEnabled() {
-        return mEmptyListEnabled;
-    }
-
-    public void setEmptyListEnabled(boolean flag) {
-        mEmptyListEnabled = flag;
     }
 
     public boolean isSelectionVisible() {
@@ -478,10 +461,6 @@ public abstract class ContactEntryListAdapter extends IndexerListAdapter {
 
         // When the cursor changes, cancel any pending asynchronous photo loads.
         mPhotoLoader.cancelPendingRequests(mFragmentRootView);
-    }
-
-    public void changeCursor(Cursor cursor) {
-        changeCursor(0, cursor);
     }
 
     /**
@@ -653,24 +632,6 @@ public abstract class ContactEntryListAdapter extends IndexerListAdapter {
         // There should be no extra padding at the top of the first directory header
         view.setPaddingRelative(view.getPaddingStart(), headerPaddingTop, view.getPaddingEnd(),
                 view.getPaddingBottom());
-    }
-
-    // Default implementation simply returns number of rows in the cursor.
-    // Broken out into its own routine so can be overridden by child classes
-    // for eg number of unique contacts for a phone list.
-    protected int getResultCount(Cursor cursor) {
-        return cursor == null ? 0 : cursor.getCount();
-    }
-
-    // TODO: fix PluralRules to handle zero correctly and use Resources.getQuantityText directly
-    public String getQuantityText(int count, int zeroResourceId, int pluralResourceId) {
-        if (count == 0) {
-            return getContext().getString(zeroResourceId);
-        } else {
-            String format = getContext().getResources()
-                    .getQuantityText(pluralResourceId, count).toString();
-            return String.format(format, count);
-        }
     }
 
     public boolean isPhotoSupported(int partitionIndex) {

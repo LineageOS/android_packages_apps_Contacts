@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,9 +27,6 @@ import android.util.Log;
  */
 public class PhoneNumberHelper {
 
-    private static final String LOG_TAG = PhoneNumberHelper.class.getSimpleName();
-
-    private static final String KOREA_ISO_COUNTRY_CODE = "KR";
     /**
      * Determines if the specified number is actually a URI (i.e. a SIP address) rather than a
      * regular PSTN phone number, based on whether or not the number contains an "@" character.
@@ -43,58 +41,6 @@ public class PhoneNumberHelper {
         // the passed-in string is URI-escaped.  (Neither "@" nor "%40"
         // will ever be found in a legal PSTN number.)
         return number != null && (number.contains("@") || number.contains("%40"));
-    }
-
-    /**
-     * Normalize a phone number by removing the characters other than digits. If
-     * the given number has keypad letters, the letters will be converted to
-     * digits first.
-     *
-     * @param phoneNumber The number to be normalized.
-     * @return The normalized number.
-     *
-     * TODO: Remove if PhoneNumberUtils.normalizeNumber(String phoneNumber) is made public.
-     */
-    public static String normalizeNumber(String phoneNumber) {
-        StringBuilder sb = new StringBuilder();
-        int len = phoneNumber.length();
-        for (int i = 0; i < len; i++) {
-            char c = phoneNumber.charAt(i);
-            // Character.digit() supports ASCII and Unicode digits (fullwidth, Arabic-Indic, etc.)
-            int digit = Character.digit(c, 10);
-            if (digit != -1) {
-                sb.append(digit);
-            } else if (i == 0 && c == '+') {
-                sb.append(c);
-            } else if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
-                return normalizeNumber(PhoneNumberUtils.convertKeypadLettersToDigits(phoneNumber));
-            }
-        }
-        return sb.toString();
-    }
-
-    /**
-     * @return the "username" part of the specified SIP address, i.e. the part before the "@"
-     * character (or "%40").
-     *
-     * @param number SIP address of the form "username@domainname" (or the URI-escaped equivalent
-     * "username%40domainname")
-     *
-     * TODO: Remove if PhoneNumberUtils.getUsernameFromUriNumber(String number) is made public.
-     */
-    public static String getUsernameFromUriNumber(String number) {
-        // The delimiter between username and domain name can be
-        // either "@" or "%40" (the URI-escaped equivalent.)
-        int delimiterIndex = number.indexOf('@');
-        if (delimiterIndex < 0) {
-            delimiterIndex = number.indexOf("%40");
-        }
-        if (delimiterIndex < 0) {
-            Log.w(LOG_TAG,
-                    "getUsernameFromUriNumber: no delimiter found in SIP addr '" + number + "'");
-            return number;
-        }
-        return number.substring(0, delimiterIndex);
     }
 
     /** Returns true if the given string is dialable by the user from Phone/Dialer app. */

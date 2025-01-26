@@ -26,7 +26,6 @@ public class CountryDetector {
 
     private static CountryDetector sInstance;
 
-    private final Context mContext;
     private final LocaleProvider mLocaleProvider;
     private final TelephonyManager mTelephonyManager;
 
@@ -45,23 +44,13 @@ public class CountryDetector {
     }
 
     private CountryDetector(Context context) {
-        this (context, (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE),
+        this ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE),
                 new LocaleProvider());
     }
 
-    private CountryDetector(Context context, TelephonyManager telephonyManager,
-            LocaleProvider localeProvider) {
+    private CountryDetector(TelephonyManager telephonyManager, LocaleProvider localeProvider) {
         mTelephonyManager = telephonyManager;
         mLocaleProvider = localeProvider;
-        mContext = context;
-    }
-
-    /**
-     * Factory method for {@link CountryDetector} that allows the caller to provide mock objects.
-     */
-    public CountryDetector getInstanceForTest(Context context, TelephonyManager telephonyManager,
-            LocaleProvider localeProvider) {
-        return new CountryDetector(context, telephonyManager, localeProvider);
     }
 
     /**

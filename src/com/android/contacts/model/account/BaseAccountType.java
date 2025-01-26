@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -192,18 +193,18 @@ public abstract class BaseAccountType extends AccountType {
                 FLAGS_PERSON_NAME).setOptional(true));
         if (!displayOrderPrimary) {
             kind.fieldList.add(new EditField(StructuredName.FAMILY_NAME, R.string.name_family,
-                    FLAGS_PERSON_NAME).setPhoneticsColumn(StructuredName.PHONETIC_FAMILY_NAME));
+                    FLAGS_PERSON_NAME));
             kind.fieldList.add(new EditField(StructuredName.MIDDLE_NAME, R.string.name_middle,
-                    FLAGS_PERSON_NAME).setOptional(true).setPhoneticsColumn(StructuredName.PHONETIC_MIDDLE_NAME));
+                    FLAGS_PERSON_NAME).setOptional(true));
             kind.fieldList.add(new EditField(StructuredName.GIVEN_NAME, R.string.name_given,
-                    FLAGS_PERSON_NAME).setPhoneticsColumn(StructuredName.PHONETIC_GIVEN_NAME));
+                    FLAGS_PERSON_NAME));
         } else {
             kind.fieldList.add(new EditField(StructuredName.GIVEN_NAME, R.string.name_given,
-                    FLAGS_PERSON_NAME).setPhoneticsColumn(StructuredName.PHONETIC_GIVEN_NAME));
+                    FLAGS_PERSON_NAME));
             kind.fieldList.add(new EditField(StructuredName.MIDDLE_NAME, R.string.name_middle,
-                    FLAGS_PERSON_NAME).setOptional(true).setPhoneticsColumn(StructuredName.PHONETIC_MIDDLE_NAME));
+                    FLAGS_PERSON_NAME).setOptional(true));
             kind.fieldList.add(new EditField(StructuredName.FAMILY_NAME, R.string.name_family,
-                    FLAGS_PERSON_NAME).setPhoneticsColumn(StructuredName.PHONETIC_FAMILY_NAME));
+                    FLAGS_PERSON_NAME));
         }
         kind.fieldList.add(new EditField(StructuredName.SUFFIX, R.string.name_suffix,
                 FLAGS_PERSON_NAME).setOptional(true));
@@ -492,10 +493,6 @@ public abstract class BaseAccountType extends AccountType {
             return this.getClass().getSimpleName()
                     + " mStringRes=" + mStringRes
                     + " mColumnName" + mColumnName;
-        }
-
-        public String getColumnNameForTest() {
-            return mColumnName;
         }
     }
 

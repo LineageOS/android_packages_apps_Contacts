@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -126,21 +127,5 @@ public class ProportionalLayout extends ViewGroup {
 
         final View child = getChildAt(0);
         child.layout(0, 0, right-left, bottom-top);
-    }
-
-    public Direction getDirection() {
-        return mDirection;
-    }
-
-    public void setDirection(Direction direction) {
-        mDirection = direction;
-    }
-
-    public float getRatio() {
-        return mRatio;
-    }
-
-    public void setRatio(float ratio) {
-        mRatio = ratio;
     }
 }

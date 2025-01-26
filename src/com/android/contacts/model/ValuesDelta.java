@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -136,21 +137,6 @@ public class ValuesDelta implements Parcelable {
         }
     }
 
-    public boolean isChanged(String key) {
-        if (mAfter == null || !mAfter.containsKey(key)) {
-            return false;
-        }
-
-        Object newValue = mAfter.get(key);
-        Object oldValue = mBefore.get(key);
-
-        if (oldValue == null) {
-            return newValue != null;
-        }
-
-        return !oldValue.equals(newValue);
-    }
-
     public String getMimetype() {
         return getAsString(ContactsContract.Data.MIMETYPE);
     }
@@ -225,13 +211,6 @@ public class ValuesDelta implements Parcelable {
             }
         }
         return false;
-    }
-
-    /**
-     * When "after" has no changes, action is no-op
-     */
-    public boolean isNoop() {
-        return beforeExists() && (mAfter != null && mAfter.size() == 0);
     }
 
     /**
@@ -408,15 +387,6 @@ public class ValuesDelta implements Parcelable {
     }
 
     /**
-     * Build a {@link android.content.ContentProviderOperation} that will transform our
-     * "before" state into our "after" state, using insert, update, or
-     * delete as needed.
-     */
-    public ContentProviderOperation.Builder buildDiff(Uri targetUri) {
-        return buildDiffHelper(targetUri);
-    }
-
-    /**
      * For compatibility purpose.
      */
     public BuilderWrapper buildDiffWrapper(Uri targetUri) {
@@ -496,10 +466,6 @@ public class ValuesDelta implements Parcelable {
         put(ContactsContract.CommonDataKinds.Photo.PHOTO, value);
     }
 
-    public byte[] getPhoto() {
-        return getAsByteArray(ContactsContract.CommonDataKinds.Photo.PHOTO);
-    }
-
     public void setSuperPrimary(boolean val) {
         if (val) {
             put(ContactsContract.Data.IS_SUPER_PRIMARY, 1);
@@ -508,40 +474,8 @@ public class ValuesDelta implements Parcelable {
         }
     }
 
-    public void setPhoneticFamilyName(String value) {
-        put(ContactsContract.CommonDataKinds.StructuredName.PHONETIC_FAMILY_NAME, value);
-    }
-
-    public void setPhoneticMiddleName(String value) {
-        put(ContactsContract.CommonDataKinds.StructuredName.PHONETIC_MIDDLE_NAME, value);
-    }
-
-    public void setPhoneticGivenName(String value) {
-        put(ContactsContract.CommonDataKinds.StructuredName.PHONETIC_GIVEN_NAME, value);
-    }
-
-    public String getPhoneticFamilyName() {
-        return getAsString(ContactsContract.CommonDataKinds.StructuredName.PHONETIC_FAMILY_NAME);
-    }
-
-    public String getPhoneticMiddleName() {
-        return getAsString(ContactsContract.CommonDataKinds.StructuredName.PHONETIC_MIDDLE_NAME);
-    }
-
-    public String getPhoneticGivenName() {
-        return getAsString(ContactsContract.CommonDataKinds.StructuredName.PHONETIC_GIVEN_NAME);
-    }
-
     public String getDisplayName() {
         return getAsString(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME);
-    }
-
-    public void setDisplayName(String name) {
-        if (name == null) {
-            putNull(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME);
-        } else {
-            put(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, name);
-        }
     }
 
     public void copyStructuredNameFieldsFrom(ValuesDelta name) {

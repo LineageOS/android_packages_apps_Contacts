@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,33 +37,5 @@ public class StructuredPostalDataItem extends DataItem {
 
     public String getLabel() {
         return getContentValues().getAsString(StructuredPostal.LABEL);
-    }
-
-    public String getStreet() {
-        return getContentValues().getAsString(StructuredPostal.STREET);
-    }
-
-    public String getPOBox() {
-        return getContentValues().getAsString(StructuredPostal.POBOX);
-    }
-
-    public String getNeighborhood() {
-        return getContentValues().getAsString(StructuredPostal.NEIGHBORHOOD);
-    }
-
-    public String getCity() {
-        return getContentValues().getAsString(StructuredPostal.CITY);
-    }
-
-    public String getRegion() {
-        return getContentValues().getAsString(StructuredPostal.REGION);
-    }
-
-    public String getPostcode() {
-        return getContentValues().getAsString(StructuredPostal.POSTCODE);
-    }
-
-    public String getCountry() {
-        return getContentValues().getAsString(StructuredPostal.COUNTRY);
     }
 }

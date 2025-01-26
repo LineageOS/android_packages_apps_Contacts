@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -104,7 +105,6 @@ public class ContactsRequest {
     private CharSequence mTitle;
     private boolean mSearchMode;
     private String mQueryString;
-    private boolean mIncludeFavorites;
     private boolean mLegacyCompatibilityMode;
     private boolean mDirectorySearchEnabled = true;
     private Uri mContactUri;
@@ -118,7 +118,6 @@ public class ContactsRequest {
                 + " mTitle=" + mTitle
                 + " mSearchMode=" + mSearchMode
                 + " mQueryString=" + mQueryString
-                + " mIncludeFavorites=" + mIncludeFavorites
                 + " mLegacyCompatibilityMode=" + mLegacyCompatibilityMode
                 + " mDirectorySearchEnabled=" + mDirectorySearchEnabled
                 + " mContactUri=" + mContactUri
@@ -129,10 +128,6 @@ public class ContactsRequest {
 
     public boolean isValid() {
         return mValid;
-    }
-
-    public void setValid(boolean flag) {
-        mValid = flag;
     }
 
     public void setActivityTitle(CharSequence title) {
@@ -167,14 +162,6 @@ public class ContactsRequest {
         mQueryString = string;
     }
 
-    public boolean shouldIncludeFavorites() {
-        return mIncludeFavorites;
-    }
-
-    public void setIncludeFavorites(boolean includeFavorites) {
-        mIncludeFavorites = includeFavorites;
-    }
-
     public boolean isLegacyCompatibilityMode() {
         return mLegacyCompatibilityMode;
     }
@@ -191,10 +178,6 @@ public class ContactsRequest {
         return mDirectorySearchEnabled;
     }
 
-    public void setDirectorySearchEnabled(boolean flag) {
-        mDirectorySearchEnabled = flag;
-    }
-
     public Uri getContactUri() {
         return mContactUri;
     }
@@ -203,16 +186,8 @@ public class ContactsRequest {
         this.mContactUri = contactUri;
     }
 
-    public AccountWithDataSet getAccountWithDataSet() {
-        return mAccountWithDataSet;
-    }
-
     public void setAccountWithDataSet(AccountWithDataSet accountWithDataSet) {
         mAccountWithDataSet = accountWithDataSet;
-    }
-
-    public ArrayList<String> getRawContactIds() {
-        return mRawContactIds;
     }
 
     public void setRawContactIds(ArrayList<String> rawContactIds) {

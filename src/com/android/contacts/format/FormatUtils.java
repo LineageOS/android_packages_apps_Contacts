@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,19 +29,6 @@ import java.util.Arrays;
  * Assorted utility methods related to text formatting in Contacts.
  */
 public class FormatUtils {
-
-    /**
-     * Finds the earliest point in buffer1 at which the first part of buffer2 matches.  For example,
-     * overlapPoint("abcd", "cdef") == 2.
-     */
-    public static int overlapPoint(CharArrayBuffer buffer1, CharArrayBuffer buffer2) {
-        if (buffer1 == null || buffer2 == null) {
-            return -1;
-        }
-        return overlapPoint(Arrays.copyOfRange(buffer1.data, 0, buffer1.sizeCopied),
-                Arrays.copyOfRange(buffer2.data, 0, buffer2.sizeCopied));
-    }
-
     /**
      * Finds the earliest point in string1 at which the first part of string2 matches.  For example,
      * overlapPoint("abcd", "cdef") == 2.
@@ -87,26 +75,6 @@ public class FormatUtils {
         }
 
         return -1;
-    }
-
-    /**
-     * Applies the given style to a range of the input CharSequence.
-     * @param style The style to apply (see the style constants in {@link Typeface}).
-     * @param input The CharSequence to style.
-     * @param start Starting index of the range to style (will be clamped to be a minimum of 0).
-     * @param end Ending index of the range to style (will be clamped to a maximum of the input
-     *     length).
-     * @param flags Bitmask for configuring behavior of the span.  See {@link android.text.Spanned}.
-     * @return The styled CharSequence.
-     */
-    public static CharSequence applyStyleToSpan(int style, CharSequence input, int start, int end,
-            int flags) {
-        // Enforce bounds of the char sequence.
-        start = Math.max(0, start);
-        end = Math.min(input.length(), end);
-        SpannableString text = new SpannableString(input);
-        text.setSpan(new StyleSpan(style), start, end, flags);
-        return text;
     }
 
     @VisibleForTesting

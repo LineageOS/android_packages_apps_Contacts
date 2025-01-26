@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,27 +44,14 @@ public class ImageViewDrawableSetter {
     private Drawable mPreviousDrawable;
     private int mDurationInMillis = 0;
     private Contact mContact;
-    private static final String TAG = "ImageViewDrawableSetter";
 
     public ImageViewDrawableSetter() {
-    }
-
-    public ImageViewDrawableSetter(ImageView target) {
-        mTarget = target;
     }
 
     public Bitmap setupContactPhoto(Contact contactData, ImageView photoView) {
         mContact = contactData;
         setTarget(photoView);
         return setCompressedImage(contactData.getPhotoBinaryData());
-    }
-
-    public void setTransitionDuration(int durationInMillis) {
-        mDurationInMillis = durationInMillis;
-    }
-
-    public ImageView getTarget() {
-        return mTarget;
     }
 
     /**
@@ -77,10 +65,6 @@ public class ImageViewDrawableSetter {
             mCompressed = null;
             mPreviousDrawable = null;
         }
-    }
-
-    protected byte[] getCompressedImage() {
-        return mCompressed;
     }
 
     protected Bitmap setCompressedImage(byte[] compressed) {

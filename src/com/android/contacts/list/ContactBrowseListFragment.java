@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -213,9 +214,7 @@ public abstract class ContactBrowseListFragment extends
         reloadData();
     }
 
-    public ContactListFilter getFilter() {
-        return mFilter;
-    }
+    abstract ContactListFilter getFilter();
 
     @Override
     public void restoreSavedState(Bundle savedState) {
@@ -273,10 +272,6 @@ public abstract class ContactBrowseListFragment extends
         checkSelection();
     }
 
-    public Uri getSelectedContactUri() {
-        return mSelectedContactUri;
-    }
-
     /**
      * Sets the new selection for the list.
      */
@@ -288,19 +283,6 @@ public abstract class ContactBrowseListFragment extends
     public void setQueryString(String queryString, boolean delaySelection) {
         mDelaySelection = delaySelection;
         super.setQueryString(queryString, delaySelection);
-    }
-
-    /**
-     * Sets whether or not a contact selection must be made.
-     * @param required if true, we need to check if the selection is present in
-     *            the list and if not notify the listener so that it can load a
-     *            different list.
-     * TODO: Figure out how to reconcile this with {@link #setSelectedContactUri},
-     * without causing unnecessary loading of the list if the selected contact URI is
-     * the same as before.
-     */
-    public void setSelectionRequired(boolean required) {
-        mSelectionRequired = required;
     }
 
     /**
@@ -580,11 +562,6 @@ public abstract class ContactBrowseListFragment extends
         super.startLoading();
     }
 
-    public void reloadDataAndSetSelectedUri(Uri uri) {
-        setSelectedContactUri(uri, true, true, true, true);
-        reloadData();
-    }
-
     @Override
     public void reloadData() {
         if (mStartedLoading) {
@@ -602,10 +579,6 @@ public abstract class ContactBrowseListFragment extends
         setSelectedContactUri(contactUri, false, false, true, false);
         if (mListener != null) mListener.onViewContactAction(position, contactUri,
                 isEnterpriseContact);
-    }
-
-    public void deleteContact(Uri contactUri) {
-        if (mListener != null) mListener.onDeleteContactAction(contactUri);
     }
 
     private void notifyInvalidSelection() {
@@ -647,10 +620,6 @@ public abstract class ContactBrowseListFragment extends
         } else {
             setSelectedContactUri(Uri.parse(selectedUri), false, false, false, willReloadData);
         }
-    }
-
-    private void saveFilter() {
-        ContactListFilter.storeToPreferences(mPrefs, mFilter);
     }
 
     private void restoreFilter() {

@@ -64,8 +64,6 @@ public class CallSubjectDialog extends Activity {
     private static final int CALL_SUBJECT_LIMIT = 16;
     private static final int CALL_SUBJECT_HISTORY_SIZE = 5;
 
-    private static final int REQUEST_SUBJECT = 1001;
-
     public static final String PREF_KEY_SUBJECT_HISTORY_COUNT = "subject_history_count";
     public static final String PREF_KEY_SUBJECT_HISTORY_ITEM = "subject_history_item";
 
@@ -196,25 +194,6 @@ public class CallSubjectDialog extends Activity {
                     showCallHistory(false);
                 }
             };
-
-    /**
-     * Show the call subject dialog given a phone number to dial (e.g. from the dialpad).
-     *
-     * @param activity The activity.
-     * @param number The number to dial.
-     */
-    public static void start(Activity activity, String number) {
-        start(activity,
-                -1 /* photoId */,
-                null /* photoUri */,
-                null /* contactUri */,
-                number /* nameOrNumber */,
-                false /* isBusiness */,
-                number /* number */,
-                null /* displayNumber */,
-                null /* numberLabel */,
-                null /* phoneAccountHandle */);
-    }
 
     /**
      * Creates a call subject dialog.

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,8 +37,6 @@ import java.util.List;
  * Utility methods for the "account changed" notification in the new contact creation flow.
  */
 public class ContactEditorUtils {
-    private static final String TAG = "ContactEditorUtils";
-
     private final Context mContext;
     private final ContactsPreferences mContactsPrefs;
 
@@ -72,14 +71,6 @@ public class ContactEditorUtils {
         }
         // Otherwise pass back a lookup-style Uri
         return contactLookupUri;
-    }
-
-    void cleanupForTest() {
-        mContactsPrefs.clearDefaultAccount();
-    }
-
-    void removeDefaultAccountForTest() {
-        mContactsPrefs.clearDefaultAccount();
     }
 
     /**

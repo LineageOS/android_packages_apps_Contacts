@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -116,19 +117,6 @@ public class MultiSelectEmailAddressesListAdapter extends MultiSelectEntryContac
         } else {
             loader.setSortOrder(Email.SORT_KEY_ALTERNATIVE);
         }
-    }
-
-    @Override
-    public String getContactDisplayName(int position) {
-        return ((Cursor) getItem(position)).getString(EmailQuery.DISPLAY_NAME);
-    }
-
-    /**
-     * Builds a {@link Data#CONTENT_URI} for the current cursor position.
-     */
-    public Uri getDataUri(int position) {
-        final long id = ((Cursor) getItem(position)).getLong(EmailQuery.EMAIL_ID);
-        return ContentUris.withAppendedId(ContactsContract.Data.CONTENT_URI, id);
     }
 
     @Override

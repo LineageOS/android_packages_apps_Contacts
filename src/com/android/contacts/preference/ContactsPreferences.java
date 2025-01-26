@@ -280,10 +280,6 @@ public class ContactsPreferences implements OnSharedPreferenceChangeListener {
         }
     }
 
-    public boolean isDefaultAccountSet() {
-        return mDefaultAccount != null;
-    }
-
     /**
      * @return false if there is only one writable account or no requirement to return true is met.
      *         true if the contact editor should show the "accounts changed" notification, that is:

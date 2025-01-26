@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2006 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,7 +67,7 @@ import java.util.List;
  * image that is handed to it through the cropper to make the image the proper
  * size and give the user a chance to use the face detector.
  */
-public class AttachPhotoActivity extends ContactsActivity {
+public class AttachPhotoActivity extends Activity {
     private static final String TAG = AttachPhotoActivity.class.getSimpleName();
 
     private static final int REQUEST_PICK_CONTACT = 1;

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -74,30 +75,6 @@ public final class KindSectionData {
             }
         }
         return valuesDeltas;
-    }
-
-    /** Returns the super primary ValuesDelta for the data kind this section represents. */
-    public ValuesDelta getSuperPrimaryValuesDelta() {
-        for (ValuesDelta valuesDelta : getValuesDeltas()) {
-            if (valuesDelta.isSuperPrimary()) return valuesDelta;
-        }
-        return null;
-    }
-
-    /** Returns the ValuesDelta with the given ID. */
-    public ValuesDelta getValuesDeltaById(Long id) {
-        for (ValuesDelta valuesDelta : getValuesDeltas()) {
-            if (valuesDelta.getId().equals(id)) return valuesDelta;
-        }
-        return null;
-    }
-
-    /** Returns the first non empty ValuesDelta for the data kind this section represents. */
-    public ValuesDelta getFirstNonEmptyValuesDelta() {
-        for (ValuesDelta valuesDelta : getValuesDeltas()) {
-            if (!isEmpty(valuesDelta)) return valuesDelta;
-        }
-        return null;
     }
 
     private boolean isEmpty(ValuesDelta valuesDelta) {

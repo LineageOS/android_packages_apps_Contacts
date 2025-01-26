@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +23,6 @@ import android.content.Entity;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.RawContacts;
 
@@ -219,42 +219,6 @@ final public class RawContact implements Parcelable {
      */
     public String getDataSet() {
         return getValues().getAsString(RawContacts.DATA_SET);
-    }
-
-    public boolean isDirty() {
-        return getValues().getAsBoolean(RawContacts.DIRTY);
-    }
-
-    public String getSourceId() {
-        return getValues().getAsString(RawContacts.SOURCE_ID);
-    }
-
-    public String getSync1() {
-        return getValues().getAsString(RawContacts.SYNC1);
-    }
-
-    public String getSync2() {
-        return getValues().getAsString(RawContacts.SYNC2);
-    }
-
-    public String getSync3() {
-        return getValues().getAsString(RawContacts.SYNC3);
-    }
-
-    public String getSync4() {
-        return getValues().getAsString(RawContacts.SYNC4);
-    }
-
-    public boolean isDeleted() {
-        return getValues().getAsBoolean(RawContacts.DELETED);
-    }
-
-    public long getContactId() {
-        return getValues().getAsLong(Contacts.Entity.CONTACT_ID);
-    }
-
-    public boolean isStarred() {
-        return getValues().getAsBoolean(Contacts.STARRED);
     }
 
     public AccountType getAccountType(Context context) {

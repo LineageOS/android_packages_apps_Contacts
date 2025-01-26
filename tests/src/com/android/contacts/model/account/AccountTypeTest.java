@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,38 +54,6 @@ public class AccountTypeTest extends InstrumentationTestCase {
         final int internalResId = com.android.contacts.R.string.contactsList;
         assertEquals(c.getString(internalResId),
                 AccountType.getResourceText(c, null, internalResId, DEFAULT));
-    }
-
-    /**
-     * Verify if {@link AccountType#getInviteContactActionLabel} correctly gets the resource ID
-     * from {@link AccountType#getInviteContactActionResId}
-     */
-    public void testGetInviteContactActionLabel() {
-        final String packageName = getInstrumentation().getContext().getPackageName();
-        final Context c = getInstrumentation().getTargetContext();
-
-        final int externalResID = R.string.test_string;
-
-        AccountType accountType = new AccountType() {
-            {
-                resourcePackageName = packageName;
-                syncAdapterPackageName = packageName;
-            }
-            @Override protected int getInviteContactActionResId() {
-                return externalResID;
-            }
-
-            @Override public boolean isGroupMembershipEditable() {
-                return false;
-            }
-
-            @Override public boolean areContactsWritable() {
-                return false;
-            }
-        };
-
-        assertEquals(getInstrumentation().getContext().getString(externalResID),
-                accountType.getInviteContactActionLabel(c));
     }
 
     public void testDisplayLabelComparator() {

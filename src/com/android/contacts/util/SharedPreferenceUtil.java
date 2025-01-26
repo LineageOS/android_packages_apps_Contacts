@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,12 +52,6 @@ public class SharedPreferenceUtil {
 
     private static final String PREFERENCE_KEY_DISMISSED_SIM_CARDS =
             "dismissedSimCards";
-
-    private static final String PREFERENCE_KEY_RESTORED_DEVICES =
-            "restoredDevices";
-
-    private static final String PREFERENCE_KEY_DISMISSED_DEVICES =
-            "dismissedDevices";
 
     public static final String PREFERENCE_WELCOME_CARD_DISMISSED =
             "welcome-reminder-card-dismissed";
@@ -211,53 +206,8 @@ public class SharedPreferenceUtil {
                 .getStringSet(PREFERENCE_KEY_DISMISSED_SIM_CARDS, Collections.<String>emptySet());
     }
 
-    public static Set<String> getRestoredDevices(Context context) {
-        return getSharedPreferences(context)
-                .getStringSet(PREFERENCE_KEY_RESTORED_DEVICES, Collections.<String>emptySet());
-    }
-
-    public static Set<String> getDismissedDevices(Context context) {
-        return getSharedPreferences(context)
-                .getStringSet(PREFERENCE_KEY_DISMISSED_DEVICES, Collections.<String>emptySet());
-    }
-
-    public static void addRestoredDevice(Context context, String deviceId) {
-        final Set<String> restoredDevices = new HashSet<>(getRestoredDevices(context));
-        restoredDevices.add(deviceId);
-        getSharedPreferences(context).edit()
-                .putStringSet(PREFERENCE_KEY_RESTORED_DEVICES, restoredDevices)
-                .apply();
-    }
-
-    public static void addDismissedDevice(Context context, String deviceId) {
-        final Set<String> dismissedDevices = new HashSet<>(getDismissedDevices(context));
-        dismissedDevices.add(deviceId);
-        getSharedPreferences(context).edit()
-                .putStringSet(PREFERENCE_KEY_DISMISSED_DEVICES, dismissedDevices)
-                .commit();
-    }
-
-    public static void removeDismissedDevice(Context context, String deviceId) {
-        final Set<String> dismissedDevices = new HashSet<>(getDismissedDevices(context));
-        dismissedDevices.remove(deviceId);
-        getSharedPreferences(context).edit()
-                .putStringSet(PREFERENCE_KEY_DISMISSED_DEVICES, dismissedDevices)
-                .commit();
-    }
-
     public static boolean isWelcomeCardDismissed(Context context) {
         return getSharedPreferences(context).getBoolean(PREFERENCE_WELCOME_CARD_DISMISSED,
                 false);
-    }
-
-    public static void setWelcomeCardDismissed(Context context, boolean isDismissed) {
-        getSharedPreferences(context).edit().putBoolean(PREFERENCE_WELCOME_CARD_DISMISSED,
-                isDismissed).apply();
-        new BackupManager(context).dataChanged();
-    }
-
-    public static void clear(Context context) {
-        getSharedPreferences(context).edit().clear().commit();
-        new BackupManager(context).dataChanged();
     }
 }

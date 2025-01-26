@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +26,6 @@ import android.widget.TextView;
  * Highlights the text in a text field.
  */
 public class TextHighlighter {
-    private final String TAG = TextHighlighter.class.getSimpleName();
-    private final static boolean DEBUG = false;
-
     private int mTextStyle;
 
     private CharacterStyle mTextStyleSpan;

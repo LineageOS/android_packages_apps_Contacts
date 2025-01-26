@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,27 +39,12 @@ public class ImDataItem extends DataItem {
         mCreatedFromEmail = false;
     }
 
-    private ImDataItem(ContentValues values, boolean createdFromEmail) {
-        super(values);
-        mCreatedFromEmail = createdFromEmail;
-    }
-
-    public static ImDataItem createFromEmail(EmailDataItem item) {
-        final ImDataItem im = new ImDataItem(new ContentValues(item.getContentValues()), true);
-        im.setMimeType(Im.CONTENT_ITEM_TYPE);
-        return im;
-    }
-
     public String getData() {
         if (mCreatedFromEmail) {
             return getContentValues().getAsString(Email.DATA);
         } else {
             return getContentValues().getAsString(Im.DATA);
         }
-    }
-
-    public String getLabel() {
-        return getContentValues().getAsString(Im.LABEL);
     }
 
     /**

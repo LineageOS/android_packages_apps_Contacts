@@ -41,8 +41,6 @@ import com.android.contacts.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.ContactsUtils;
 import com.android.contacts.GeoUtil;
 import com.android.contacts.R;
-import com.android.contacts.extensions.ExtendedPhoneDirectoriesManager;
-import com.android.contacts.extensions.ExtensionsFactory;
 import com.android.contacts.preference.ContactsPreferences;
 import com.android.contacts.util.Constants;
 
@@ -76,24 +74,6 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
     private long mFirstExtendedDirectoryId = Long.MAX_VALUE;
 
     public static class PhoneQuery {
-
-        /**
-         * Optional key used as part of a JSON lookup key to specify an analytics category
-         * associated with the row.
-         */
-        public static final String ANALYTICS_CATEGORY = "analytics_category";
-
-        /**
-         * Optional key used as part of a JSON lookup key to specify an analytics action associated
-         * with the row.
-         */
-        public static final String ANALYTICS_ACTION = "analytics_action";
-
-        /**
-         * Optional key used as part of a JSON lookup key to specify an analytics value associated
-         * with the row.
-         */
-        public static final String ANALYTICS_VALUE = "analytics_value";
 
         public static final String[] PROJECTION_PRIMARY = new String[] {
             Phone._ID,                          // 0
@@ -154,22 +134,12 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
         mUnknownNameText = context.getText(android.R.string.unknownName);
         mCountryIso = GeoUtil.getCurrentCountryIso(context);
 
-        final ExtendedPhoneDirectoriesManager manager
-                = ExtensionsFactory.getExtendedPhoneDirectoriesManager();
-        if (manager != null) {
-            mExtendedDirectories = manager.getExtendedDirectories(mContext);
-        } else {
-            // Empty list to avoid sticky NPE's
-            mExtendedDirectories = new ArrayList<DirectoryPartition>();
-        }
+        // Empty list to avoid sticky NPE's
+        mExtendedDirectories = new ArrayList<DirectoryPartition>();
 
         int videoCapabilities = CallUtil.getVideoCallingAvailability(context);
         mIsVideoEnabled = (videoCapabilities & CallUtil.VIDEO_CALLING_ENABLED) != 0;
         mIsPresenceEnabled = (videoCapabilities & CallUtil.VIDEO_CALLING_PRESENCE) != 0;
-    }
-
-    protected CharSequence getUnknownNameText() {
-        return mUnknownNameText;
     }
 
     @Override
@@ -299,11 +269,6 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
         loader.setSelectionArgs(selectionArgs.toArray(new String[0]));
     }
 
-    @Override
-    public String getContactDisplayName(int position) {
-        return ((Cursor) getItem(position)).getString(PhoneQuery.DISPLAY_NAME);
-    }
-
     public String getPhoneNumber(int position) {
         final Cursor item = (Cursor)getItem(position);
         return item != null ? item.getString(PhoneQuery.PHONE_NUMBER) : null;
@@ -362,26 +327,6 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
 
     protected void setHighlight(ContactListItemView view, Cursor cursor) {
         view.setHighlightedPrefix(isSearchMode() ? getUpperCaseQueryString() : null);
-    }
-
-    // Override default, which would return number of phone numbers, so we
-    // instead return number of contacts.
-    @Override
-    protected int getResultCount(Cursor cursor) {
-        if (cursor == null) {
-            return 0;
-        }
-        cursor.moveToPosition(-1);
-        long curContactId = -1;
-        int numContacts = 0;
-        while(cursor.moveToNext()) {
-            final long contactId = cursor.getLong(PhoneQuery.CONTACT_ID);
-            if (contactId != curContactId) {
-                curContactId = contactId;
-                ++numContacts;
-            }
-        }
-        return numContacts;
     }
 
     @Override
@@ -541,16 +486,8 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
         mPhotoPosition = photoPosition;
     }
 
-    public ContactListItemView.PhotoPosition getPhotoPosition() {
-        return mPhotoPosition;
-    }
-
     public void setUseCallableUri(boolean useCallableUri) {
         mUseCallableUri = useCallableUri;
-    }
-
-    public boolean usesCallableUri() {
-        return mUseCallableUri;
     }
 
     /**
@@ -623,14 +560,6 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
                         String.valueOf(directoryId))
                 .encodedFragment(cursor.getString(lookUpKeyColumn))
                 .build();
-    }
-
-    public Listener getListener() {
-        return mListener;
-    }
-
-    public void setListener(Listener listener) {
-        mListener = listener;
     }
 
     @Override

@@ -18,7 +18,6 @@
 package com.android.contacts.model.account;
 
 import android.accounts.Account;
-import android.content.ContentProviderOperation;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -30,10 +29,7 @@ import android.provider.ContactsContract.RawContacts;
 import android.text.TextUtils;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Lists;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -45,8 +41,6 @@ public class AccountWithDataSet implements Parcelable {
 
     private static final Pattern STRINGIFY_SEPARATOR_PAT =
             Pattern.compile(Pattern.quote(STRINGIFY_SEPARATOR));
-    private static final Pattern ARRAY_STRINGIFY_SEPARATOR_PAT =
-            Pattern.compile(Pattern.quote(ARRAY_STRINGIFY_SEPARATOR));
 
     public final String name;
     public final String type;
@@ -198,20 +192,6 @@ public class AccountWithDataSet implements Parcelable {
     }
 
     /**
-     * Returns a {@link ContentProviderOperation} that will create a RawContact in this account
-     */
-    public ContentProviderOperation newRawContactOperation() {
-        final ContentProviderOperation.Builder builder =
-                ContentProviderOperation.newInsert(RawContacts.CONTENT_URI)
-                        .withValue(RawContacts.ACCOUNT_NAME, name)
-                        .withValue(RawContacts.ACCOUNT_TYPE, type);
-        if (dataSet != null) {
-            builder.withValue(RawContacts.DATA_SET, dataSet);
-        }
-        return builder.build();
-    }
-
-    /**
      * Unpack a string created by {@link #stringify}.
      *
      * @throws IllegalArgumentException if it's an invalid string.
@@ -223,41 +203,5 @@ public class AccountWithDataSet implements Parcelable {
         }
         return new AccountWithDataSet(array[0], array[1],
                 TextUtils.isEmpty(array[2]) ? null : array[2]);
-    }
-
-    /**
-     * Pack a list of {@link AccountWithDataSet} into a string.
-     */
-    public static String stringifyList(List<AccountWithDataSet> accounts) {
-        final StringBuilder sb = new StringBuilder();
-
-        for (AccountWithDataSet account : accounts) {
-            if (sb.length() > 0) {
-                sb.append(ARRAY_STRINGIFY_SEPARATOR);
-            }
-            addStringified(sb, account);
-        }
-
-        return sb.toString();
-    }
-
-    /**
-     * Unpack a list of {@link AccountWithDataSet} into a string.
-     *
-     * @throws IllegalArgumentException if it's an invalid string.
-     */
-    public static List<AccountWithDataSet> unstringifyList(String s) {
-        final ArrayList<AccountWithDataSet> ret = Lists.newArrayList();
-        if (TextUtils.isEmpty(s)) {
-            return ret;
-        }
-
-        final String[] array = ARRAY_STRINGIFY_SEPARATOR_PAT.split(s);
-
-        for (int i = 0; i < array.length; i++) {
-            ret.add(unstringify(array[i]));
-        }
-
-        return ret;
     }
 }

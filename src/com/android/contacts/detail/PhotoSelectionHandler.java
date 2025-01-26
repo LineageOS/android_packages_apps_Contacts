@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,16 +19,13 @@ package com.android.contacts.detail;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.ContactsContract.CommonDataKinds.Photo;
 import android.provider.ContactsContract.DisplayPhoto;
-import android.provider.ContactsContract.RawContacts;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -38,14 +36,8 @@ import android.widget.Toast;
 
 import com.android.contacts.R;
 import com.android.contacts.editor.PhotoActionPopup;
-import com.android.contacts.model.AccountTypeManager;
-import com.android.contacts.model.RawContactDelta;
 import com.android.contacts.model.RawContactDeltaList;
-import com.android.contacts.model.RawContactModifier;
-import com.android.contacts.model.ValuesDelta;
-import com.android.contacts.model.account.AccountType;
 import com.android.contacts.util.ContactPhotoUtils;
-import com.android.contacts.util.UiClosables;
 
 import java.io.FileNotFoundException;
 import java.util.List;
@@ -87,10 +79,6 @@ public abstract class PhotoSelectionHandler implements OnClickListener {
         mIsDirectoryContact = isDirectoryContact;
         mState = state;
         mPhotoPickSize = getPhotoPickSize();
-    }
-
-    public void destroy() {
-        UiClosables.closeQuietly(mPopup);
     }
 
     public abstract PhotoActionListener getListener();
@@ -190,48 +178,6 @@ public abstract class PhotoSelectionHandler implements OnClickListener {
         // Directory entries are non-writable.
         if (mIsDirectoryContact) return -1;
         return mState.indexOfFirstWritableRawContact(mContext);
-    }
-
-    /**
-     * Return the raw-contact id of the first entity in the contact data that belongs to a
-     * contact-writable account, or -1 if no such entity exists.
-     */
-    protected long getWritableEntityId() {
-        int index = getWritableEntityIndex();
-        if (index == -1) return -1;
-        return mState.get(index).getValues().getId();
-    }
-
-    /**
-     * Utility method to retrieve the entity delta for attaching the given bitmap to the contact.
-     * This will attach the photo to the first contact-writable account that provided data to the
-     * contact.  It is the caller's responsibility to apply the delta.
-     * @return An entity delta list that can be applied to associate the bitmap with the contact,
-     *     or null if the photo could not be parsed or none of the accounts associated with the
-     *     contact are writable.
-     */
-    public RawContactDeltaList getDeltaForAttachingPhotoToContact() {
-        // Find the first writable entity.
-        int writableEntityIndex = getWritableEntityIndex();
-        if (writableEntityIndex != -1) {
-            // We are guaranteed to have contact data if we have a writable entity index.
-            final RawContactDelta delta = mState.get(writableEntityIndex);
-
-            // Need to find the right account so that EntityModifier knows which fields to add
-            final ContentValues entityValues = delta.getValues().getCompleteValues();
-            final String type = entityValues.getAsString(RawContacts.ACCOUNT_TYPE);
-            final String dataSet = entityValues.getAsString(RawContacts.DATA_SET);
-            final AccountType accountType = AccountTypeManager.getInstance(mContext).getAccountType(
-                        type, dataSet);
-
-            final ValuesDelta child = RawContactModifier.ensureKindExists(
-                    delta, accountType, Photo.CONTENT_ITEM_TYPE);
-            child.setFromTemplate(false);
-            child.setSuperPrimary(true);
-
-            return mState;
-        }
-        return null;
     }
 
     /** Used by subclasses to delegate to their enclosing Activity or Fragment. */

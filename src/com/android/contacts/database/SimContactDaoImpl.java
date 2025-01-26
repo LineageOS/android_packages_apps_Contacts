@@ -62,7 +62,6 @@ import java.util.Set;
  * SIM contacts to a CP2 account.
  */
 public class SimContactDaoImpl extends SimContactDao {
-    private static final String TAG = "SimContactDao";
 
     // Maximum number of SIM contacts to import in a single ContentResolver.applyBatch call.
     // This is necessary to avoid TransactionTooLargeException when there are a large number of
@@ -243,11 +242,6 @@ public class SimContactDaoImpl extends SimContactDao {
             result.add(SimCard.create(subscriptionInfo));
         }
         return result;
-    }
-
-    private List<SimContact> getContactsForSim(SimCard sim) {
-        final List<SimContact> contacts = sim.getContacts();
-        return contacts != null ? contacts : loadContactsForSim(sim);
     }
 
     // See b/32831092

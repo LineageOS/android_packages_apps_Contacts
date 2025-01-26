@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +17,6 @@
 
 package com.android.contacts;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -93,20 +91,6 @@ public abstract class AppCompatContactsActivity extends AppCompatTransactionSafe
     }
 
     /**
-     * Convenient version of {@link FragmentManager#findFragmentById(int)}, which throws
-     * an exception if the fragment doesn't exist.
-     */
-    @SuppressWarnings("unchecked")
-    public <T extends Fragment> T getFragment(int id) {
-        T result = (T)getFragmentManager().findFragmentById(id);
-        if (result == null) {
-            throw new IllegalArgumentException("fragment 0x" + Integer.toHexString(id)
-                    + " doesn't exist");
-        }
-        return result;
-    }
-
-    /**
      * Convenient version of {@link #findViewById(int)}, which throws
      * an exception if the view doesn't exist.
      */
@@ -118,13 +102,5 @@ public abstract class AppCompatContactsActivity extends AppCompatTransactionSafe
                     + " doesn't exist");
         }
         return result;
-    }
-
-    protected static void showFragment(FragmentTransaction ft, Fragment f) {
-        if ((f != null) && f.isHidden()) ft.show(f);
-    }
-
-    protected static void hideFragment(FragmentTransaction ft, Fragment f) {
-        if ((f != null) && !f.isHidden()) ft.hide(f);
     }
 }

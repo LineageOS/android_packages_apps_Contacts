@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +28,6 @@ import com.android.contacts.model.AccountTypeManager;
 import com.android.contacts.util.concurrent.ListenableFutureLoader;
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.util.List;
@@ -38,10 +38,6 @@ import java.util.List;
 public class AccountsLoader extends ListenableFutureLoader<List<AccountInfo>> {
     private final AccountTypeManager mAccountTypeManager;
     private final Predicate<AccountInfo> mFilter;
-
-    public AccountsLoader(Context context) {
-        this(context, Predicates.<AccountInfo>alwaysTrue());
-    }
 
     public AccountsLoader(Context context, Predicate<AccountInfo> filter) {
         super(context, new IntentFilter(AccountTypeManager.BROADCAST_ACCOUNTS_CHANGED));

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -144,14 +145,6 @@ public final class ContactListFilter implements Comparable<ContactListFilter>, P
                 return ListEvent.ListType.DEVICE;
         }
         return ListEvent.ListType.UNKNOWN_LIST;
-    }
-
-
-    /**
-     * Returns true if this filter is based on data and may become invalid over time.
-     */
-    public boolean isValidationRequired() {
-        return filterType == FILTER_TYPE_ACCOUNT;
     }
 
     @Override
@@ -363,18 +356,6 @@ public final class ContactListFilter implements Comparable<ContactListFilter>, P
         }
     }
 
-    public String toDebugString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("[filter type: " + filterType + " (" + filterTypeToString(filterType) + ")");
-        if (filterType == FILTER_TYPE_ACCOUNT) {
-            builder.append(", accountType: " + accountType)
-                    .append(", accountName: " + accountName)
-                    .append(", dataSet: " + dataSet);
-        }
-        builder.append(", icon: " + icon + "]");
-        return builder.toString();
-    }
-
     public static final String filterTypeToString(int filterType) {
         switch (filterType) {
             case FILTER_TYPE_DEFAULT:
@@ -402,34 +383,6 @@ public final class ContactListFilter implements Comparable<ContactListFilter>, P
 
     public boolean isSyncable() {
         return isGoogleAccountType() && filterType == FILTER_TYPE_ACCOUNT;
-    }
-
-    /**
-     * Returns true if this ContactListFilter contains at least one Google account.
-     * (see {@link #isGoogleAccountType)
-     */
-    public boolean isSyncable(List<AccountWithDataSet> accounts) {
-        if (isSyncable()) {
-            return true;
-        }
-        // Since we don't know which group is selected until the actual contacts loading, we
-        // consider a custom filter syncable as long as there is a Google account on the device,
-        // and don't check if there is any group that belongs to a Google account is selected.
-        if (filterType == ContactListFilter.FILTER_TYPE_ALL_ACCOUNTS
-                || filterType == ContactListFilter.FILTER_TYPE_CUSTOM
-                || filterType == ContactListFilter.FILTER_TYPE_DEFAULT) {
-            if (accounts != null && accounts.size() > 0) {
-                // If we're showing all contacts and there is any Google account on the device then
-                // we're syncable.
-                for (AccountWithDataSet account : accounts) {
-                    if (GoogleAccountType.ACCOUNT_TYPE.equals(account.type)
-                            && account.dataSet == null) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
     }
 
     public boolean shouldShowSyncState() {

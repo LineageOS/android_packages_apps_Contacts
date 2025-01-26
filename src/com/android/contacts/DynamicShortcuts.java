@@ -456,10 +456,6 @@ public class DynamicShortcuts {
         mJobScheduler.schedule(job);
     }
 
-    void updateInBackground() {
-        new ShortcutUpdateTask(this).execute();
-    }
-
     public synchronized static void initialize(Context context) {
         if (Log.isLoggable(TAG, Log.DEBUG)) {
             final Flags flags = Flags.getInstance();

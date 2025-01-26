@@ -84,23 +84,6 @@ public class ImportDialogFragment extends DialogFragment {
         fragment.show(fragmentManager, TAG);
     }
 
-    public static void show(FragmentManager fragmentManager, List<SimCard> sims,
-            boolean includeVcf) {
-        final ImportDialogFragment fragment = new ImportDialogFragment();
-        final Bundle args = new Bundle();
-        args.putBoolean(EXTRA_SIM_ONLY, !includeVcf);
-        for (SimCard sim : sims) {
-            final List<SimContact> contacts = sim.getContacts();
-            if (contacts == null) {
-                continue;
-            }
-            args.putInt(EXTRA_SIM_CONTACT_COUNT_PREFIX + sim.getSimId(), contacts.size());
-        }
-
-        fragment.setArguments(args);
-        fragment.show(fragmentManager, TAG);
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

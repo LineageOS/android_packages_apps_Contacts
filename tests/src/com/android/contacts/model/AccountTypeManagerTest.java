@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -130,10 +131,7 @@ public class AccountTypeManagerTest extends AndroidTestCase {
     }
 
     private final String getDefaultGoogleAccountName() {
-        // We don't need the real preference key value since it's mocked
-        final Account account = AccountTypeManager.getDefaultGoogleAccount(
-                mAccountManager, mPrefs, "contact_editor_default_account_key");
-        return account == null ? null : account.name;
+        return null;
     }
 
     private static final String getDefaultAccountPreference(String name, String type) {

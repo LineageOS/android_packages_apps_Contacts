@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,10 +19,11 @@ package com.android.contacts.activities;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 /**
  * A common superclass that keeps track of whether an {@link AppCompatActivity} has saved its state
- * yet or not, copied from {@link TransactionSafeActivity},
+ * yet or not, copied from TransactionSafeActivity,
  * which will be deprecated after Kitkat backporting is done.
  */
 public abstract class AppCompatTransactionSafeActivity extends AppCompatActivity {

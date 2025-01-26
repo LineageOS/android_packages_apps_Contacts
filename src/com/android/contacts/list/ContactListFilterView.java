@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,7 +43,6 @@ public class ContactListFilterView extends LinearLayout {
     private TextView mAccountUserName;
     private RadioButton mRadioButton;
     private ContactListFilter mFilter;
-    private boolean mSingleAccount;
 
     public ContactListFilterView(Context context) {
         super(context);
@@ -54,14 +54,6 @@ public class ContactListFilterView extends LinearLayout {
 
     public void setContactListFilter(ContactListFilter filter) {
         mFilter = filter;
-    }
-
-    public ContactListFilter getContactListFilter() {
-        return mFilter;
-    }
-
-    public void setSingleAccount(boolean flag) {
-        this.mSingleAccount = flag;
     }
 
     @Override

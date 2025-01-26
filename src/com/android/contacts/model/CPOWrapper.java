@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,26 +25,12 @@ import android.content.ContentProviderOperation;
  */
 public class CPOWrapper {
     private ContentProviderOperation mOperation;
-    private int mType;
 
     public CPOWrapper(ContentProviderOperation builder, int type) {
         mOperation = builder;
-        mType = type;
-    }
-
-    public int getType() {
-        return mType;
-    }
-
-    public void setType(int type) {
-        this.mType = type;
     }
 
     public ContentProviderOperation getOperation() {
         return mOperation;
-    }
-
-    public void setOperation(ContentProviderOperation operation) {
-        this.mOperation = operation;
     }
 }

@@ -51,7 +51,6 @@ import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 import com.android.contacts.ContactPresenceIconUtil;
 import com.android.contacts.ContactStatusUtil;
 import com.android.contacts.R;
@@ -83,8 +82,6 @@ import java.util.regex.Pattern;
 
 public class ContactListItemView extends ViewGroup
         implements SelectionBoundsAdjuster {
-
-    private static final String TAG = "ContactListItemView";
 
     // Style values for layout and appearance
     // The initialized values are defaults if none is provided through xml.
@@ -408,18 +405,6 @@ public class ContactListItemView extends ViewGroup
                 mVideoCallIcon.setVisibility(View.GONE);
             }
         }
-    }
-
-    /**
-     * Sets whether the view supports a video calling icon.  This is independent of whether the view
-     * is actually showing an icon.  Support for the video calling icon ensures that the layout
-     * leaves space for the video icon, should it be shown.
-     *
-     * @param supportVideoCallIcon {@code true} if the video call icon is supported, {@code false}
-     *      otherwise.
-     */
-    public void setSupportVideoCallIcon(boolean supportVideoCallIcon) {
-        mSupportVideoCallIcon = supportVideoCallIcon;
     }
 
     @Override
@@ -1138,15 +1123,6 @@ public class ContactListItemView extends ViewGroup
     }
 
     /**
-     * Adds a highlight sequence to the number highlighter.
-     * @param start The start position of the highlight sequence.
-     * @param end The end position of the highlight sequence.
-     */
-    public void addNumberHighlightSequence(int start, int end) {
-        mNumberHighlightSequence.add(new HighlightSequence(start, end));
-    }
-
-    /**
      * Returns the text view for the contact name, creating it if necessary.
      */
     public TextView getNameTextView() {
@@ -1497,14 +1473,6 @@ public class ContactListItemView extends ViewGroup
         }
     }
 
-    public void setDisplayName(CharSequence name, boolean highlight) {
-        if (!TextUtils.isEmpty(name) && highlight) {
-            clearHighlightSequences();
-            addNameHighlightSequence(0, name.length());
-        }
-        setDisplayName(name);
-    }
-
     public void setDisplayName(CharSequence name) {
         if (!TextUtils.isEmpty(name)) {
             // Chooses the available highlighting method for highlighting.
@@ -1566,13 +1534,6 @@ public class ContactListItemView extends ViewGroup
         }
     }
 
-    public void hidePhoneticName() {
-        if (mPhoneticNameTextView != null) {
-            removeView(mPhoneticNameTextView);
-            mPhoneticNameTextView = null;
-        }
-    }
-
     /**
      * Sets the proper icon (star or presence or nothing) and/or status message.
      */
@@ -1596,31 +1557,6 @@ public class ContactListItemView extends ViewGroup
             statusMessage = ContactStatusUtil.getStatusString(getContext(), presence);
         }
         setStatus(statusMessage);
-    }
-
-    /**
-     * Shows search snippet for email and phone number matches.
-     */
-    public void showSnippet(Cursor cursor, String query, int snippetColumn) {
-        // TODO: this does not properly handle phone numbers with control characters
-        // For example if the phone number is 444-5555, the search query 4445 will match the
-        // number since we normalize it before querying CP2 but the snippet will fail since
-        // the portion to be highlighted is 444-5 not 4445.
-        final String snippet = cursor.getString(snippetColumn);
-        if (snippet == null) {
-            setSnippet(null);
-            return;
-        }
-        final String displayName = cursor.getColumnIndex(Contacts.DISPLAY_NAME) >= 0
-                ? cursor.getString(cursor.getColumnIndex(Contacts.DISPLAY_NAME)) : null;
-        if (snippet.equals(displayName)) {
-            // If the snippet exactly matches the display name (i.e. the phone number or email
-            // address is being used as the display name) then no snippet is necessary
-            setSnippet(null);
-            return;
-        }
-        // Show the snippet with the part of the query that matched it
-        setSnippet(updateSnippet(snippet, query, displayName));
     }
 
     /**
@@ -1838,10 +1774,6 @@ public class ContactListItemView extends ViewGroup
 
     public void setPhotoPosition(PhotoPosition photoPosition) {
         mPhotoPosition = photoPosition;
-    }
-
-    public PhotoPosition getPhotoPosition() {
-        return mPhotoPosition;
     }
 
     /**

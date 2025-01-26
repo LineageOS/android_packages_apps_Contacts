@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,32 +37,8 @@ public class StructuredNameDataItem extends DataItem {
         super(values);
     }
 
-    public String getDisplayName() {
-        return getContentValues().getAsString(StructuredName.DISPLAY_NAME);
-    }
-
-    public void setDisplayName(String name) {
-        getContentValues().put(StructuredName.DISPLAY_NAME, name);
-    }
-
     public String getGivenName() {
         return getContentValues().getAsString(StructuredName.GIVEN_NAME);
-    }
-
-    public String getFamilyName() {
-        return getContentValues().getAsString(StructuredName.FAMILY_NAME);
-    }
-
-    public String getPrefix() {
-        return getContentValues().getAsString(StructuredName.PREFIX);
-    }
-
-    public String getMiddleName() {
-        return getContentValues().getAsString(StructuredName.MIDDLE_NAME);
-    }
-
-    public String getSuffix() {
-        return getContentValues().getAsString(StructuredName.SUFFIX);
     }
 
     public String getPhoneticGivenName() {
@@ -74,10 +51,6 @@ public class StructuredNameDataItem extends DataItem {
 
     public String getPhoneticFamilyName() {
         return getContentValues().getAsString(StructuredName.PHONETIC_FAMILY_NAME);
-    }
-
-    public String getFullNameStyle() {
-        return getContentValues().getAsString(StructuredName.FULL_NAME_STYLE);
     }
 
     public void setPhoneticFamilyName(String name) {

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,7 +59,6 @@ import com.android.contacts.util.NotifyingAsyncQueryHandler;
 public final class ShowOrCreateActivity extends ContactsActivity
         implements NotifyingAsyncQueryHandler.AsyncQueryListener {
     static final String TAG = "ShowOrCreateActivity";
-    static final boolean LOGD = false;
 
     static final String[] PHONES_PROJECTION = new String[] {
         PhoneLookup._ID,

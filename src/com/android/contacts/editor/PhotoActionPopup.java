@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,15 +58,8 @@ public class PhotoActionPopup {
     public static final class Modes {
         public static final int NO_PHOTO =
                 Flags.TAKE_OR_PICK_PHOTO;
-        public static final int READ_ONLY_PHOTO = 0;
         public static final int WRITE_ABLE_PHOTO =
                 Flags.REMOVE_PHOTO |
-                Flags.TAKE_OR_PICK_PHOTO |
-                Flags.TAKE_OR_PICK_PHOTO_REPLACE_WORDING;
-        // When the popup represents multiple photos, the REMOVE_PHOTO option doesn't make sense.
-        // The REMOVE_PHOTO option would have to remove all photos. And sometimes some of the
-        // photos are readonly.
-        public static final int MULTIPLE_WRITE_ABLE_PHOTOS =
                 Flags.TAKE_OR_PICK_PHOTO |
                 Flags.TAKE_OR_PICK_PHOTO_REPLACE_WORDING;
     }

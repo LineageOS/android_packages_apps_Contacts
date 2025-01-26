@@ -20,7 +20,6 @@ import android.telephony.PhoneNumberUtils;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,8 +31,6 @@ import java.util.Objects;
  * Holds data for a SIM card in the device.
  */
 public class SimCard {
-
-    private static final String TAG = "SimCard";
 
     public static final int NO_SUBSCRIPTION_ID = -1;
 
@@ -105,21 +102,6 @@ public class SimCard {
         return PhoneNumberUtils.formatNumber(mPhoneNumber, mCountryCode);
     }
 
-    public boolean hasPhone() {
-        return mPhoneNumber != null;
-    }
-
-    public String getCountryCode() {
-        return mCountryCode;
-    }
-
-    /**
-     * Returns whether the contacts for this SIM card have been initialized.
-     */
-    public boolean areContactsAvailable() {
-        return mContacts != null;
-    }
-
     /**
      * Returns whether this SIM card has any SIM contacts.
      *
@@ -132,32 +114,12 @@ public class SimCard {
         return !mContacts.isEmpty();
     }
 
-    /**
-     * Returns the number of contacts stored on this SIM card.
-     *
-     * A precondition of this method is that the contacts have been initialized.
-     */
-    public int getContactCount() {
-        if (mContacts == null) {
-            throw new IllegalStateException("Contacts not loaded.");
-        }
-        return mContacts.size();
-    }
-
     public boolean isDismissed() {
         return mDismissed;
     }
 
     public boolean isImported() {
         return mImported;
-    }
-
-    public boolean isImportable() {
-        if (Log.isLoggable(TAG, Log.DEBUG)) {
-            Log.d(TAG, "isImportable: isDismissed? " + isDismissed() +
-                    " isImported? " + isImported() + " contacts=" + mContacts);
-        }
-        return !isDismissed() && !isImported() && hasContacts();
     }
 
     /**
@@ -176,16 +138,6 @@ public class SimCard {
 
     public SimCard withImportedState(boolean imported) {
         return withImportAndDismissStates(imported, mDismissed);
-    }
-
-    public SimCard withDismissedState(boolean dismissed) {
-        return withImportAndDismissStates(mImported, dismissed);
-    }
-
-    public SimCard withContacts(List<SimContact> contacts) {
-        final SimCard copy = new SimCard(this);
-        copy.mContacts = contacts;
-        return copy;
     }
 
     public SimCard withContacts(SimContact... contacts) {

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -226,7 +227,6 @@ public class Contact {
     /**
      * Returns the URI for the contact that contains both the lookup key and the ID. This is
      * the best URI to reference a contact.
-     * For directory contacts, this is the same a the URI as returned by {@link #getUri()}
      */
     public Uri getLookupUri() {
         return mLookupUri;
@@ -234,23 +234,6 @@ public class Contact {
 
     public String getLookupKey() {
         return mLookupKey;
-    }
-
-    /**
-     * Returns the contact Uri that was passed to the provider to make the query. This is
-     * the same as the requested Uri, unless the requested Uri doesn't specify a Contact:
-     * If it either references a Raw-Contact or a Person (a pre-Eclair style Uri), this Uri will
-     * always reference the full aggregate contact.
-     */
-    public Uri getUri() {
-        return mUri;
-    }
-
-    /**
-     * Returns the URI for which this {@link ContactLoader) was initially requested.
-     */
-    public Uri getRequestedUri() {
-        return mRequestedUri;
     }
 
     /**
@@ -270,17 +253,13 @@ public class Contact {
 
     /**
      * @return true when an exception happened during loading, in which case
-     *     {@link #getException} returns the actual exception object.
+     *     mException returns the actual exception object.
      *     Note {@link #isNotFound()} and {@link #isError()} are mutually exclusive; If
      *     {@link #isError()} is {@code true}, {@link #isNotFound()} is always {@code false},
      *     and vice versa.
      */
     public boolean isError() {
         return mStatus == Status.ERROR;
-    }
-
-    public Exception getException() {
-        return mException;
     }
 
     /**
@@ -341,16 +320,8 @@ public class Contact {
         return mStarred;
     }
 
-    public Integer getPresence() {
-        return mPresence;
-    }
-
     public ImmutableList<RawContact> getRawContacts() {
         return mRawContacts;
-    }
-
-    public ImmutableMap<Long, DataStatus> getStatuses() {
-        return mStatuses;
     }
 
     public long getDirectoryId() {

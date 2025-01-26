@@ -120,14 +120,6 @@ public abstract class ContactListAdapter extends MultiSelectEntryContactListAdap
         mPhotoPosition = photoPosition;
     }
 
-    public ContactListItemView.PhotoPosition getPhotoPosition() {
-        return mPhotoPosition;
-    }
-
-    public CharSequence getUnknownNameText() {
-        return mUnknownNameText;
-    }
-
     public long getSelectedContactDirectoryId() {
         return mSelectedContactDirectoryId;
     }
@@ -149,11 +141,6 @@ public abstract class ContactListAdapter extends MultiSelectEntryContactListAdap
     protected static Uri buildSectionIndexerUri(Uri uri) {
         return uri.buildUpon()
                 .appendQueryParameter(Contacts.EXTRA_ADDRESS_BOOK_INDEX, "true").build();
-    }
-
-    @Override
-    public String getContactDisplayName(int position) {
-        return ((Cursor) getItem(position)).getString(ContactQuery.CONTACT_DISPLAY_NAME);
     }
 
     /**
@@ -339,10 +326,6 @@ public abstract class ContactListAdapter extends MultiSelectEntryContactListAdap
             position++;
         }
         return position;
-    }
-
-    public boolean hasValidSelection() {
-        return getSelectedContactPosition() != -1;
     }
 
     public Uri getFirstContactUri() {

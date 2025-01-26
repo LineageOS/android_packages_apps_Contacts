@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -116,9 +117,6 @@ public class ImportVCardActivity extends Activity implements ImportVCardDialogFr
     // Runs on the UI thread.
     private class DialogDisplayer implements Runnable {
         private final int mResId;
-        public DialogDisplayer(int resId) {
-            mResId = resId;
-        }
         public DialogDisplayer(String errorMessage) {
             mResId = R.id.dialog_error_with_message;
             mErrorMessage = errorMessage;

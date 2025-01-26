@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -131,28 +132,5 @@ public class NameConverter {
         item.setPhoneticMiddleName(middle);
         item.setPhoneticGivenName(given);
         return item;
-    }
-
-    /**
-     * Constructs and returns a phonetic full name from given parts.
-     */
-    public static String buildPhoneticName(String family, String middle, String given) {
-        if (!TextUtils.isEmpty(family) || !TextUtils.isEmpty(middle)
-                || !TextUtils.isEmpty(given)) {
-            StringBuilder sb = new StringBuilder();
-            if (!TextUtils.isEmpty(family)) {
-                sb.append(family.trim()).append(' ');
-            }
-            if (!TextUtils.isEmpty(middle)) {
-                sb.append(middle.trim()).append(' ');
-            }
-            if (!TextUtils.isEmpty(given)) {
-                sb.append(given.trim()).append(' ');
-            }
-            sb.setLength(sb.length() - 1); // Yank the last space
-            return sb.toString();
-        } else {
-            return null;
-        }
     }
 }

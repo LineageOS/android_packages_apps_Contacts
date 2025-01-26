@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -230,29 +231,6 @@ public class RawContactModifier {
     }
 
     /**
-     * Find the {@link EditType} that describes the given {@link ContentValues} row,
-     * assuming the given {@link DataKind} dictates the possible types.
-     */
-    public static EditType getCurrentType(ContentValues entry, DataKind kind) {
-        if (kind.typeColumn == null) return null;
-        final Integer rawValue = entry.getAsInteger(kind.typeColumn);
-        if (rawValue == null) return null;
-        return getType(kind, rawValue);
-    }
-
-    /**
-     * Find the {@link EditType} that describes the given {@link Cursor} row,
-     * assuming the given {@link DataKind} dictates the possible types.
-     */
-    public static EditType getCurrentType(Cursor cursor, DataKind kind) {
-        if (kind.typeColumn == null) return null;
-        final int index = cursor.getColumnIndex(kind.typeColumn);
-        if (index == -1) return null;
-        final int rawValue = cursor.getInt(index);
-        return getType(kind, rawValue);
-    }
-
-    /**
      * Find the {@link EditType} with the given {@link EditType#rawValue}.
      */
     public static EditType getType(DataKind kind, int rawValue) {
@@ -380,10 +358,6 @@ public class RawContactModifier {
             final AccountType type = accountTypes.getAccountType(accountType, dataSet);
             trimEmpty(state, type);
         }
-    }
-
-    public static boolean hasChanges(RawContactDeltaList set, AccountTypeManager accountTypes) {
-        return hasChanges(set, accountTypes, /* excludedMimeTypes =*/ null);
     }
 
     public static boolean hasChanges(RawContactDeltaList set, AccountTypeManager accountTypes,

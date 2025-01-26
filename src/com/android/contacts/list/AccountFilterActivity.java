@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -173,7 +174,6 @@ public class AccountFilterActivity extends Activity implements AdapterView.OnIte
                 view = (ContactListFilterView) mLayoutInflater.inflate(
                         R.layout.contact_list_filter_item, parent, false);
             }
-            view.setSingleAccount(mFilters.size() == 1);
             final ContactListFilter filter = mFilters.get(position);
             view.setContactListFilter(filter);
             view.bindView(mAccountTypes);

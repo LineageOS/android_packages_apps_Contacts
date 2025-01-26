@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -261,28 +262,8 @@ public class ExternalAccountType extends BaseAccountType {
     }
 
     @Override
-    public String getInviteContactActivityClassName() {
-        return mInviteContactActivity;
-    }
-
-    @Override
-    protected int getInviteContactActionResId() {
-        return mInviteActionLabelResId;
-    }
-
-    @Override
     public String getViewContactNotifyServiceClassName() {
         return mViewContactNotifyService;
-    }
-
-    @Override
-    public String getViewGroupActivity() {
-        return mViewGroupActivity;
-    }
-
-    @Override
-    protected int getViewGroupLabelResId() {
-        return mViewGroupLabelResId;
     }
 
     @Override

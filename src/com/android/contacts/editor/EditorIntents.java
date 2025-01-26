@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,12 +21,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.ContactsContract;
-import android.provider.ContactsContract.Contacts;
-import android.text.TextUtils;
 
 import com.android.contacts.activities.ContactEditorActivity;
 import com.android.contacts.activities.ContactEditorSpringBoardActivity;
-import com.android.contacts.model.RawContactDeltaList;
 import com.android.contacts.util.MaterialColorMapUtils.MaterialPalette;
 
 import java.util.ArrayList;
@@ -74,21 +72,6 @@ public class EditorIntents {
     }
 
     /**
-     * Returns an Intent to start the {@link ContactEditorActivity} for a new contact with
-     * the field values specified by rawContactDeltaList pre-populate in the form.
-     */
-    public static Intent createInsertContactIntent(Context context,
-            RawContactDeltaList rawContactDeltaList, String displayName, String phoneticName,
-            /* Bundle updatedPhotos, */ boolean isNewLocalProfile) {
-        final Intent intent = new Intent(Intent.ACTION_INSERT, Contacts.CONTENT_URI,
-                context, ContactEditorActivity.class);
-        intent.putExtra(
-                ContactEditorFragment.INTENT_EXTRA_NEW_LOCAL_PROFILE, isNewLocalProfile);
-        putRawContactDeltaValues(intent, rawContactDeltaList, displayName, phoneticName);
-        return intent;
-    }
-
-    /**
      * Returns an Intent to edit a different raw contact in the editor with whatever
      * values were already entered on the current editor.
      */
@@ -122,25 +105,6 @@ public class EditorIntents {
     private static void putPhotoId(Intent intent, long photoId) {
         if (photoId >= 0) {
             intent.putExtra(ContactEditorFragment.INTENT_EXTRA_PHOTO_ID, photoId);
-        }
-    }
-
-    private static void putRawContactDeltaValues(Intent intent,
-            RawContactDeltaList rawContactDeltaList, String displayName, String phoneticName) {
-        // Pass on all the data that has been entered so far
-        if (rawContactDeltaList != null && !rawContactDeltaList.isEmpty()) {
-            ArrayList<ContentValues> contentValues = rawContactDeltaList.get(0).getContentValues();
-            if (contentValues != null && contentValues.size() != 0) {
-                intent.putParcelableArrayListExtra(
-                        ContactsContract.Intents.Insert.DATA, contentValues);
-            }
-        }
-        // Names must be passed separately since they are skipped in RawContactModifier.parseValues
-        if (!TextUtils.isEmpty(displayName)) {
-            intent.putExtra(ContactsContract.Intents.Insert.NAME, displayName);
-        }
-        if (!TextUtils.isEmpty(phoneticName)) {
-            intent.putExtra(ContactsContract.Intents.Insert.PHONETIC_NAME, phoneticName);
         }
     }
 }

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,11 +62,6 @@ public class LegacyPostalAddressListAdapter extends ContactEntryListAdapter {
         loader.setProjection(POSTALS_PROJECTION);
         loader.setSortOrder(People.DISPLAY_NAME);
         loader.setSelection(ContactMethods.KIND + "=" + android.provider.Contacts.KIND_POSTAL);
-    }
-
-    @Override
-    public String getContactDisplayName(int position) {
-        return ((Cursor)getItem(position)).getString(POSTAL_DISPLAY_NAME_COLUMN_INDEX);
     }
 
     public Uri getContactMethodUri(int position) {

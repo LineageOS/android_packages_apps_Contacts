@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -86,11 +87,6 @@ public class EventFieldEditorView extends LabeledEditorView {
                 showDialog(R.id.dialog_event_date_picker);
             }
         });
-    }
-
-    @Override
-    public void editNewlyAddedField() {
-        showDialog(R.id.dialog_event_date_picker);
     }
 
     @Override

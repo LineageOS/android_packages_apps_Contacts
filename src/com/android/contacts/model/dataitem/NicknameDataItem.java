@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2012 The Android Open Source Project              
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,9 +33,5 @@ public class NicknameDataItem extends DataItem {
 
     public String getName() {
         return getContentValues().getAsString(Nickname.NAME);
-    }
-
-    public String getLabel() {
-        return getContentValues().getAsString(Nickname.LABEL);
     }
 }

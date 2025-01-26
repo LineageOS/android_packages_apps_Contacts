@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,10 +26,8 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.RawContacts;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 
-import com.android.contacts.R;
 import com.android.contacts.model.dataitem.DataKind;
 
 import com.google.common.base.Preconditions;
@@ -37,7 +36,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -52,7 +50,6 @@ import java.util.List;
  * In the future this may be inflated from XML defined by a data source.
  */
 public abstract class AccountType {
-    private static final String TAG = "AccountType";
 
     /**
      * The {@link RawContacts#ACCOUNT_TYPE} these constraints apply to.
@@ -142,17 +139,6 @@ public abstract class AccountType {
     public abstract boolean areContactsWritable();
 
     /**
-     * Returns an optional custom invite contact activity.
-     *
-     * Only makes sense for non-embedded account types.
-     * The activity class should reside in the sync adapter package as determined by
-     * {@link #syncAdapterPackageName}.
-     */
-    public String getInviteContactActivityClassName() {
-        return null;
-    }
-
-    /**
      * Returns an optional service that can be launched whenever a contact is being looked at.
      * This allows the sync adapter to provide more up-to-date information.
      *
@@ -172,11 +158,6 @@ public abstract class AccountType {
      */
     public String getViewContactNotifyServicePackageName() {
         return syncAdapterPackageName;
-    }
-
-    /** Returns an optional Activity string that can be used to view the group. */
-    public String getViewGroupActivity() {
-        return null;
     }
 
     public CharSequence getDisplayLabel(Context context) {
@@ -200,20 +181,6 @@ public abstract class AccountType {
     }
 
     /**
-     * @return resource ID for the "invite contact" action label, or -1 if not defined.
-     */
-    protected int getInviteContactActionResId() {
-        return -1;
-    }
-
-    /**
-     * @return resource ID for the "view group" label, or -1 if not defined.
-     */
-    protected int getViewGroupLabelResId() {
-        return -1;
-    }
-
-    /**
      * Returns {@link AccountTypeWithDataSet} for this type.
      */
     public AccountTypeWithDataSet getAccountTypeAndDataSet() {
@@ -228,29 +195,6 @@ public abstract class AccountType {
      */
     public List<String> getExtensionPackageNames() {
         return new ArrayList<String>();
-    }
-
-    /**
-     * Returns an optional custom label for the "invite contact" action, which will be shown on
-     * the contact card.  (If not defined, returns null.)
-     */
-    public CharSequence getInviteContactActionLabel(Context context) {
-        // Note this resource is defined in the sync adapter package, not resourcePackageName.
-        return getResourceText(context, syncAdapterPackageName, getInviteContactActionResId(), "");
-    }
-
-    /**
-     * Returns a label for the "view group" action. If not defined, this falls back to our
-     * own "View Updates" string
-     */
-    public CharSequence getViewGroupLabel(Context context) {
-        // Note this resource is defined in the sync adapter package, not resourcePackageName.
-        final CharSequence customTitle =
-                getResourceText(context, syncAdapterPackageName, getViewGroupLabelResId(), null);
-
-        return customTitle == null
-                ? context.getText(R.string.view_updates_from_group)
-                : customTitle;
     }
 
     /**
@@ -442,9 +386,7 @@ public abstract class AccountType {
         public int inputType;
         public int minLines;
         public boolean optional;
-        public boolean shortForm;
         public boolean longForm;
-        public String phoneticsColumn;
 
         public EditField(String column, int titleRes) {
             this.column = column;
@@ -461,30 +403,10 @@ public abstract class AccountType {
             return this;
         }
 
-        public EditField setShortForm(boolean shortForm) {
-            this.shortForm = shortForm;
-            return this;
-        }
-
         public EditField setLongForm(boolean longForm) {
             this.longForm = longForm;
             return this;
         }
-
-        public EditField setPhoneticsColumn(String phoneticsColumn) {
-            this.phoneticsColumn = phoneticsColumn;
-            return this;
-        }
-
-        public EditField setMinLines(int minLines) {
-            this.minLines = minLines;
-            return this;
-        }
-
-        public boolean isMultiLine() {
-            return (inputType & EditorInfo.TYPE_TEXT_FLAG_MULTI_LINE) != 0;
-        }
-
 
         @Override
         public String toString() {
@@ -494,7 +416,6 @@ public abstract class AccountType {
                     + " inputType=" + inputType
                     + " minLines=" + minLines
                     + " optional=" + optional
-                    + " shortForm=" + shortForm
                     + " longForm=" + longForm;
         }
     }
@@ -507,29 +428,5 @@ public abstract class AccountType {
      */
     public interface StringInflater {
         public CharSequence inflateUsing(Context context, ContentValues values);
-    }
-
-    /**
-     * Compare two {@link AccountType} by their {@link AccountType#getDisplayLabel} with the
-     * current locale.
-     */
-    public static class DisplayLabelComparator implements Comparator<AccountType> {
-        private final Context mContext;
-        /** {@link Comparator} for the current locale. */
-        private final Collator mCollator = Collator.getInstance();
-
-        public DisplayLabelComparator(Context context) {
-            mContext = context;
-        }
-
-        private String getDisplayLabel(AccountType type) {
-            CharSequence label = type.getDisplayLabel(mContext);
-            return (label == null) ? "" : label.toString();
-        }
-
-        @Override
-        public int compare(AccountType lhs, AccountType rhs) {
-            return mCollator.compare(getDisplayLabel(lhs), getDisplayLabel(rhs));
-        }
     }
 }

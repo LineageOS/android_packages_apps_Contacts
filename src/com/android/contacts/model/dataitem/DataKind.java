@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2011 The Android Open Source Project             
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -95,10 +96,6 @@ public final class DataKind {
         this.editable = editable;
         this.typeOverallMax = -1;
         maxLinesForDisplay = 1;
-    }
-
-    public String getKindString(Context context) {
-        return (titleRes == -1 || titleRes == 0) ? "" : context.getString(titleRes);
     }
 
     @Override

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -557,8 +558,6 @@ public class CustomContactListFilterActivity extends Activity implements
         private AccountTypeManager mAccountTypes;
         private AccountSet mAccounts;
 
-        private boolean mChildWithPhones = false;
-
         public DisplayAdapter(Context context) {
             mContext = context;
             mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -568,14 +567,6 @@ public class CustomContactListFilterActivity extends Activity implements
         public void setAccounts(AccountSet accounts) {
             mAccounts = accounts;
             notifyDataSetChanged();
-        }
-
-        /**
-         * In group descriptions, show the number of contacts with phone
-         * numbers, in addition to the total contacts.
-         */
-        public void setChildDescripWithPhones(boolean withPhones) {
-            mChildWithPhones = withPhones;
         }
 
         @Override
@@ -895,7 +886,6 @@ public class CustomContactListFilterActivity extends Activity implements
         protected Void doInBackground(
                 Activity target, ArrayList<ContentProviderOperation>... params) {
             final Context context = target;
-            final ContentValues values = new ContentValues();
             final ContentResolver resolver = context.getContentResolver();
 
             try {

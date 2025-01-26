@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -103,7 +104,6 @@ public class PinnedHeaderListView extends AutoScrollListView
     private OnItemSelectedListener mOnItemSelectedListener;
     private int mScrollState;
 
-    private boolean mScrollToSectionOnHeaderTouch = false;
     private boolean mHeaderTouched = false;
 
     private int mAnimationDuration = DEFAULT_ANIMATION_DURATION;
@@ -149,10 +149,6 @@ public class PinnedHeaderListView extends AutoScrollListView
     public void setOnItemSelectedListener(OnItemSelectedListener listener) {
         mOnItemSelectedListener = listener;
         super.setOnItemSelectedListener(this);
-    }
-
-    public void setScrollToSectionOnHeaderTouch(boolean value) {
-        mScrollToSectionOnHeaderTouch = value;
     }
 
     @Override
@@ -431,12 +427,7 @@ public class PinnedHeaderListView extends AutoScrollListView
                 if (header.visible && header.y <= y && header.y + header.height > y &&
                         x >= padding && padding + header.view.getWidth() >= x) {
                     mHeaderTouched = true;
-                    if (mScrollToSectionOnHeaderTouch &&
-                            ev.getAction() == MotionEvent.ACTION_DOWN) {
-                        return smoothScrollToPartition(i);
-                    } else {
-                        return true;
-                    }
+                    return true;
                 }
             }
         }

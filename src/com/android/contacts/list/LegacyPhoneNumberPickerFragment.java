@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,12 +39,6 @@ public class LegacyPhoneNumberPickerFragment extends PhoneNumberPickerFragment {
     }
 
     @Override
-    protected String getLookupKey(int position) {
-        // There is no lookup key for the legacy adapter.
-        return null;
-    }
-
-    @Override
     protected ContactEntryListAdapter createListAdapter() {
         LegacyPhoneNumberListAdapter adapter = new LegacyPhoneNumberListAdapter(getActivity());
         adapter.setDisplayPhotos(true);
@@ -58,10 +53,5 @@ public class LegacyPhoneNumberPickerFragment extends PhoneNumberPickerFragment {
     @Override
     protected void startPhoneNumberShortcutIntent(Uri uri, boolean isVideoCall) {
         throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void setPhotoPosition(ContactListItemView.PhotoPosition photoPosition) {
-        Log.w(TAG, "setPhotoPosition() is ignored in legacy compatibility mode.");
     }
 }

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +21,6 @@ import android.content.Context;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.android.contacts.detail.ContactDisplayUtils;
 import com.android.contacts.util.ThemeUtils;
 
 /**
@@ -42,8 +42,6 @@ import com.android.contacts.util.ThemeUtils;
 public class AlphaTouchInterceptorOverlay extends FrameLayout {
 
     private View mInterceptorLayer;
-    private View mAlphaLayer;
-    private float mAlpha = 0.0f;
 
     public AlphaTouchInterceptorOverlay(Context context) {
         super(context);
@@ -52,41 +50,5 @@ public class AlphaTouchInterceptorOverlay extends FrameLayout {
         final int resId = ThemeUtils.getSelectableItemBackground(context.getTheme());
         mInterceptorLayer.setBackgroundResource(resId);
         addView(mInterceptorLayer);
-
-        mAlphaLayer = this;
-    }
-
-    /**
-     * Set the View that the overlay will use as its alpha-layer.  If
-     * none is set it will use itself.  Only necessary to set this if
-     * some child views need to appear above the alpha-layer but below
-     * the touch-interceptor.
-     */
-    public void setAlphaLayer(View alphaLayer) {
-        if (mAlphaLayer == alphaLayer) return;
-
-        // We're no longer the alpha-layer, so make ourself invisible.
-        if (mAlphaLayer == this) ContactDisplayUtils.setAlphaOnViewBackground(this, 0.0f);
-
-        mAlphaLayer = (alphaLayer == null) ? this : alphaLayer;
-        setAlphaLayerValue(mAlpha);
-    }
-
-    /** Sets the alpha value on the alpha layer. */
-    public void setAlphaLayerValue(float alpha) {
-        mAlpha = alpha;
-        if (mAlphaLayer != null) {
-            ContactDisplayUtils.setAlphaOnViewBackground(mAlphaLayer, mAlpha);
-        }
-    }
-
-    /** Delegate to interceptor-layer. */
-    public void setOverlayOnClickListener(OnClickListener listener) {
-        mInterceptorLayer.setOnClickListener(listener);
-    }
-
-    /** Delegate to interceptor-layer. */
-    public void setOverlayClickable(boolean clickable) {
-        mInterceptorLayer.setClickable(clickable);
     }
 }

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,16 +44,5 @@ public class DirectoryContactUtil {
 
         // No export support? Too bad
         return contactData.getDirectoryExportSupport() != Directory.EXPORT_SUPPORT_NONE;
-    }
-
-    public static void createCopy(
-            ArrayList<ContentValues> values, AccountWithDataSet account,
-            Context context) {
-        Toast.makeText(context, R.string.toast_making_personal_copy,
-                Toast.LENGTH_LONG).show();
-        Intent serviceIntent = ContactSaveService.createNewRawContactIntent(
-                context, values, account,
-                QuickContactActivity.class, Intent.ACTION_VIEW);
-        context.startService(serviceIntent);
     }
 }

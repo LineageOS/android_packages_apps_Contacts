@@ -335,15 +335,6 @@
     <string name="map_work" msgid="8296916987749726461">"勤務先の住所を表示"</string>
     <string name="map_other" msgid="4009931029322619674">"住所を表示"</string>
     <string name="map_custom" msgid="7797812861927817335">"<xliff:g id="CUSTOM_LABEL">%s</xliff:g>の住所を表示"</string>
-    <string name="chat_aim" msgid="2044861410748519265">"AIMでチャット"</string>
-    <string name="chat_msn" msgid="4733206223124506247">"Windows Liveでチャット"</string>
-    <string name="chat_yahoo" msgid="3807571878191282528">"Yahooでチャット"</string>
-    <string name="chat_skype" msgid="5130564346825936093">"Skypeでチャット"</string>
-    <string name="chat_qq" msgid="2971335421266098608">"QQでチャット"</string>
-    <string name="chat_gtalk" msgid="2927882858741904064">"Googleトークでチャット"</string>
-    <string name="chat_icq" msgid="4289041376069626281">"ICQでチャット"</string>
-    <string name="chat_jabber" msgid="1097960594943864847">"Jabberでチャット"</string>
-    <string name="chat" msgid="8390862712584830532">"チャット"</string>
     <string name="description_minus_button" msgid="1305985971158054217">"削除"</string>
     <string name="expand_name_fields_description" msgid="6059558159338959487">"名前欄を展開"</string>
     <string name="collapse_name_fields_description" msgid="7950435675716414477">"名前欄を折りたたむ"</string>

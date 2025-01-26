@@ -21,7 +21,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Event;
-import android.provider.ContactsContract.CommonDataKinds.Im;
 import android.provider.ContactsContract.CommonDataKinds.Nickname;
 import android.provider.ContactsContract.CommonDataKinds.Note;
 import android.provider.ContactsContract.CommonDataKinds.Organization;
@@ -60,7 +59,6 @@ public class ExchangeAccountType extends BaseAccountType {
             addDataKindPhone(context);
             addDataKindEmail(context);
             addDataKindStructuredPostal(context);
-            addDataKindIm(context);
             addDataKindOrganization(context);
             addDataKindPhoto(context);
             addDataKindNote(context);
@@ -218,22 +216,6 @@ public class ExchangeAccountType extends BaseAccountType {
             kind.fieldList.add(new EditField(StructuredPostal.COUNTRY,
                     R.string.postal_country, FLAGS_POSTAL).setOptional(true));
         }
-
-        return kind;
-    }
-
-    @Override
-    protected DataKind addDataKindIm(Context context) throws DefinitionException {
-        final DataKind kind = super.addDataKindIm(context);
-
-        // Types are not supported for IM. There can be 3 IMs, but OWA only shows only the first
-        kind.typeOverallMax = 3;
-
-        kind.defaultValues = new ContentValues();
-        kind.defaultValues.put(Im.TYPE, Im.TYPE_OTHER);
-
-        kind.fieldList = Lists.newArrayList();
-        kind.fieldList.add(new EditField(Im.DATA, R.string.imLabelsGroup, FLAGS_EMAIL));
 
         return kind;
     }

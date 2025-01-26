@@ -335,15 +335,6 @@
     <string name="map_work" msgid="8296916987749726461">"Ажлын хаяг харах"</string>
     <string name="map_other" msgid="4009931029322619674">"Хаяг харах"</string>
     <string name="map_custom" msgid="7797812861927817335">"<xliff:g id="CUSTOM_LABEL">%s</xliff:g> хаяг харах"</string>
-    <string name="chat_aim" msgid="2044861410748519265">"AIM ашиглан чатлах"</string>
-    <string name="chat_msn" msgid="4733206223124506247">"Windows Live ашиглан чатлах"</string>
-    <string name="chat_yahoo" msgid="3807571878191282528">"Yahoo ашиглан чатлах"</string>
-    <string name="chat_skype" msgid="5130564346825936093">"Skype ашиглан чатлах"</string>
-    <string name="chat_qq" msgid="2971335421266098608">"QQ ашиглан чатлах"</string>
-    <string name="chat_gtalk" msgid="2927882858741904064">"Google Talk ашиглан чатлах"</string>
-    <string name="chat_icq" msgid="4289041376069626281">"ICQ ашиглан чатлах"</string>
-    <string name="chat_jabber" msgid="1097960594943864847">"Jabber ашиглан чатлах"</string>
-    <string name="chat" msgid="8390862712584830532">"Чат"</string>
     <string name="description_minus_button" msgid="1305985971158054217">"устгах"</string>
     <string name="expand_name_fields_description" msgid="6059558159338959487">"Бусад нэрийн талбаруудыг харуулах"</string>
     <string name="collapse_name_fields_description" msgid="7950435675716414477">"Нэрийн талбарыг хумих"</string>

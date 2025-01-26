@@ -25,9 +25,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
-import android.provider.ContactsContract.CommonDataKinds.SipAddress;
-
-import com.android.contacts.util.PhoneCapabilityTester;
 
 import com.google.common.collect.Sets;
 
@@ -126,11 +123,6 @@ public class ResolveCache {
         Entry entry = mCache.get(mimeType);
         if (entry != null) return entry;
         entry = new Entry();
-
-        if (SipAddress.CONTENT_ITEM_TYPE.equals(mimeType)
-                && !PhoneCapabilityTester.isSipPhone(mContext)) {
-            intent = null;
-        }
 
         if (intent != null) {
             final List<ResolveInfo> matches = mPackageManager.queryIntentActivities(intent,

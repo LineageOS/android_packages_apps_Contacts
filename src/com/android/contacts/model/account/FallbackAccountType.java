@@ -54,12 +54,10 @@ public class FallbackAccountType extends BaseAccountType {
             addDataKindPhone(context);
             addDataKindEmail(context);
             addDataKindStructuredPostal(context);
-            addDataKindIm(context);
             addDataKindOrganization(context);
             addDataKindPhoto(context);
             addDataKindNote(context);
             addDataKindWebsite(context);
-            addDataKindSipAddress(context);
             addDataKindGroupMembership(context);
 
             mIsInitialized = true;

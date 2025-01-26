@@ -335,15 +335,6 @@
     <string name="map_work" msgid="8296916987749726461">"Преглед на служебен адрес"</string>
     <string name="map_other" msgid="4009931029322619674">"Преглед на адрес"</string>
     <string name="map_custom" msgid="7797812861927817335">"Преглед на адреса на <xliff:g id="CUSTOM_LABEL">%s</xliff:g>"</string>
-    <string name="chat_aim" msgid="2044861410748519265">"Чат по AIM"</string>
-    <string name="chat_msn" msgid="4733206223124506247">"Чат по Windows Live"</string>
-    <string name="chat_yahoo" msgid="3807571878191282528">"Чат по Yahoo"</string>
-    <string name="chat_skype" msgid="5130564346825936093">"Чат по Skype"</string>
-    <string name="chat_qq" msgid="2971335421266098608">"Чат по QQ"</string>
-    <string name="chat_gtalk" msgid="2927882858741904064">"Чат по Google Talk"</string>
-    <string name="chat_icq" msgid="4289041376069626281">"Чат по ICQ"</string>
-    <string name="chat_jabber" msgid="1097960594943864847">"Чат по Jabber"</string>
-    <string name="chat" msgid="8390862712584830532">"Чат"</string>
     <string name="description_minus_button" msgid="1305985971158054217">"изтриване"</string>
     <string name="expand_name_fields_description" msgid="6059558159338959487">"Показване на още полета за името"</string>
     <string name="collapse_name_fields_description" msgid="7950435675716414477">"Свиване на полетата за имена"</string>

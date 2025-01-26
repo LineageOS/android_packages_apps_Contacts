@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,8 +39,6 @@ import com.android.contacts.ContactPhotoManager;
 import com.android.contacts.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.ContactsUtils;
 import com.android.contacts.R;
-import com.android.contacts.compat.CompatUtils;
-import com.android.contacts.compat.DirectoryCompat;
 import com.android.contacts.util.SearchUtil;
 
 import java.util.HashSet;
@@ -417,14 +416,14 @@ public abstract class ContactEntryListAdapter extends IndexerListAdapter {
             if (getPartitionByDirectoryId(id) == -1) {
                 DirectoryPartition partition = new DirectoryPartition(false, true);
                 partition.setDirectoryId(id);
-                if (DirectoryCompat.isRemoteDirectoryId(id)) {
-                    if (DirectoryCompat.isEnterpriseDirectoryId(id)) {
+                if (Directory.isRemoteDirectoryId(id)) {
+                    if (Directory.isEnterpriseDirectoryId(id)) {
                         partition.setLabel(mContext.getString(R.string.directory_search_label_work));
                     } else {
                         partition.setLabel(mContext.getString(R.string.directory_search_label));
                     }
                 } else {
-                    if (DirectoryCompat.isEnterpriseDirectoryId(id)) {
+                    if (Directory.isEnterpriseDirectoryId(id)) {
                         partition.setLabel(mContext.getString(R.string.list_filter_phones_work));
                     } else {
                         partition.setLabel(mDefaultFilterHeaderText.toString());
@@ -638,7 +637,7 @@ public abstract class ContactEntryListAdapter extends IndexerListAdapter {
         TextView labelTextView = (TextView)view.findViewById(R.id.label);
         TextView displayNameTextView = (TextView)view.findViewById(R.id.display_name);
         labelTextView.setText(directoryPartition.getLabel());
-        if (!DirectoryCompat.isRemoteDirectoryId(directoryId)) {
+        if (!Directory.isRemoteDirectoryId(directoryId)) {
             displayNameTextView.setText(null);
         } else {
             String directoryName = directoryPartition.getDisplayName();
@@ -714,12 +713,10 @@ public abstract class ContactEntryListAdapter extends IndexerListAdapter {
         QuickContactBadge quickContact = view.getQuickContact();
         quickContact.assignContactUri(
                 getContactUri(partitionIndex, cursor, contactIdColumn, lookUpKeyColumn));
-        if (CompatUtils.hasPrioritizedMimeType()) {
-            // The Contacts app never uses the QuickContactBadge. Therefore, it is safe to assume
-            // that only Dialer will use this QuickContact badge. This means prioritizing the phone
-            // mimetype here is reasonable.
-            quickContact.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
-        }
+        // The Contacts app never uses the QuickContactBadge. Therefore, it is safe to assume
+        // that only Dialer will use this QuickContact badge. This means prioritizing the phone
+        // mimetype here is reasonable.
+        quickContact.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
 
         if (photoId != 0 || photoUriColumn == -1) {
             getPhotoLoader().loadThumbnail(quickContact, photoId, mDarkTheme, mCircularPhotos,

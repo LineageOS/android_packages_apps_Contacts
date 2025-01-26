@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2010 The Android Open Source Project       
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +30,8 @@ import android.icu.text.MessageFormat;
 import android.os.Bundle;
 import androidx.core.text.BidiFormatter;
 import androidx.core.text.TextDirectionHeuristicsCompat;
+
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,8 +42,6 @@ import android.widget.TextView;
 
 import com.android.contacts.R;
 import com.android.contacts.activities.SimImportActivity;
-import com.android.contacts.compat.CompatUtils;
-import com.android.contacts.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.database.SimContactDao;
 import com.android.contacts.editor.SelectAccountDialogFragment;
 import com.android.contacts.model.AccountTypeManager;
@@ -169,7 +170,7 @@ public class ImportDialogFragment extends DialogFragment {
                 }
                 if (phone != null) {
                     phone = sBidiFormatter.unicodeWrap(
-                            PhoneNumberUtilsCompat.createTtsSpannable(phone),
+                            PhoneNumberUtils.createTtsSpannable(phone),
                             TextDirectionHeuristicsCompat.LTR);
                 }
 
@@ -290,7 +291,7 @@ public class ImportDialogFragment extends DialogFragment {
         } else {
             AccountSelectionUtil.doImport(getActivity(), resId,
                     (size == 1 ? accountList.get(0) : null),
-                    (CompatUtils.isMSIMCompatible() ? subscriptionId : -1));
+                    subscriptionId);
         }
     }
 

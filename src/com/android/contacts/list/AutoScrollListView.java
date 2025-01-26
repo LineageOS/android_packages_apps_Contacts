@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +18,6 @@
 package com.android.contacts.list;
 
 import android.content.Context;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.ListView;
 
@@ -113,17 +113,6 @@ public class AutoScrollListView extends ListView {
 
 
             smoothScrollToPositionFromTop(position, offset);
-        }
-    }
-
-    @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        super.onLayout(changed, l, t, r, b);
-
-        // Workaround for b/31160338.
-        if (android.os.Build.VERSION.SDK_INT == Build.VERSION_CODES.N
-            || android.os.Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1) {
-            layoutChildren();
         }
     }
 }

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,8 +56,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.android.contacts.activities.ContactEditorActivity;
-import com.android.contacts.compat.CompatUtils;
-import com.android.contacts.compat.PinnedPositionsCompat;
 import com.android.contacts.database.ContactUpdateUtils;
 import com.android.contacts.database.SimContactDao;
 import com.android.contacts.model.AccountTypeManager;
@@ -736,7 +735,7 @@ public class ContactSaveService extends IntentService {
         final int numResults = results.length;
         for (int i = 0; i < diffSize && i < numResults; i++) {
             final CPOWrapper cpoWrapper = diffWrapper.get(i);
-            final boolean isInsert = CompatUtils.isInsertCompat(cpoWrapper);
+            final boolean isInsert = cpoWrapper.getOperation().isInsert();
             if (isInsert && cpoWrapper.getOperation().getUri().getEncodedPath().contains(
                     RawContacts.CONTENT_URI.getEncodedPath())) {
                 return ContentUris.parseId(results[i].uri);
@@ -1065,7 +1064,7 @@ public class ContactSaveService extends IntentService {
 
                 // Don't bother undemoting if this contact is the user's profile.
                 if (id < Profile.MIN_ID) {
-                    PinnedPositionsCompat.undemote(getContentResolver(), id);
+                    ContactsContract.PinnedPositions.undemote(getContentResolver(), id);
                 }
             }
         } finally {

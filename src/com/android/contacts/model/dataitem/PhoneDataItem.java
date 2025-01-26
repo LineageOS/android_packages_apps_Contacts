@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +21,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-
-import com.android.contacts.compat.PhoneNumberUtilsCompat;
+import android.telephony.PhoneNumberUtils;
 
 /**
  * Represents a phone data item, wrapping the columns in
@@ -78,7 +78,7 @@ public class PhoneDataItem extends DataItem {
     public void computeFormattedPhoneNumber(String defaultCountryIso) {
         final String phoneNumber = getNumber();
         if (phoneNumber != null) {
-            final String formattedPhoneNumber = PhoneNumberUtilsCompat.formatNumber(phoneNumber,
+            final String formattedPhoneNumber = PhoneNumberUtils.formatNumber(phoneNumber,
                     getNormalizedNumber(), defaultCountryIso);
             getContentValues().put(KEY_FORMATTED_PHONE_NUMBER, formattedPhoneNumber);
         }

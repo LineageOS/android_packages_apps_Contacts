@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,7 +48,6 @@ import android.widget.TextView;
 import com.android.contacts.R;
 import com.android.contacts.activities.ActionBarAdapter.Listener.Action;
 import com.android.contacts.activities.PeopleActivity;
-import com.android.contacts.compat.CompatUtils;
 import com.android.contacts.list.ContactsRequest;
 import com.android.contacts.util.MaterialColorMapUtils;
 
@@ -495,10 +495,6 @@ public class ActionBarAdapter implements OnCloseListener {
     }
 
     private void updateStatusBarColor(boolean shouldAnimate) {
-        if (!CompatUtils.isLollipopCompatible()) {
-            return; // we can't change the status bar color prior to Lollipop
-        }
-
         if (mSelectionMode) {
             final int cabStatusBarColor = ContextCompat.getColor(
                     mActivity, R.color.contextual_selection_bar_status_bar_color);

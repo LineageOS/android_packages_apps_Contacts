@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,25 +17,18 @@
 
 package com.android.contacts.util;
 
-import android.annotation.TargetApi;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.os.Build;
-import androidx.core.os.BuildCompat;
 
 import com.android.contacts.R;
 
-@TargetApi(Build.VERSION_CODES.O)
 public class ContactsNotificationChannelsUtil {
     public static String DEFAULT_CHANNEL = "DEFAULT_CHANNEL";
 
     private ContactsNotificationChannelsUtil() {}
 
     public static void createDefaultChannel(Context context) {
-        if (!BuildCompat.isAtLeastO()) {
-            return;
-        }
         final NotificationManager nm = context.getSystemService(NotificationManager.class);
         final NotificationChannel channel = new NotificationChannel(DEFAULT_CHANNEL,
                 context.getString(R.string.contacts_default_notification_channel),

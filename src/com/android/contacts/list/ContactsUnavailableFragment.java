@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +23,8 @@ import android.content.res.Configuration;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import androidx.core.content.ContextCompat;
+
+import android.provider.ContactsContract.ProviderStatus;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +37,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.contacts.R;
-import com.android.contacts.compat.ProviderStatusCompat;
 import com.android.contacts.interactions.ImportDialogFragment;
 import com.android.contacts.util.ImplicitIntentsUtil;
 
@@ -100,10 +102,9 @@ public class ContactsUnavailableFragment extends Fragment implements OnClickList
             // The view hasn't been inflated yet.
             return;
         }
-        if (providerStatus == ProviderStatusCompat.STATUS_EMPTY) {
+        if (providerStatus == ProviderStatus.STATUS_EMPTY) {
             updateViewsForEmptyStatus();
-        } else if (providerStatus == ProviderStatusCompat.STATUS_BUSY
-                || providerStatus == ProviderStatusCompat.STATUS_CHANGING_LOCALE) {
+        } else if (providerStatus == ProviderStatus.STATUS_BUSY) {
             updateViewsForBusyStatus();
         }
     }

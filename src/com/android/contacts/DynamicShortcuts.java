@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +16,6 @@
  */
 package com.android.contacts;
 
-import android.annotation.TargetApi;
 import android.app.ActivityManager;
 import android.app.job.JobInfo;
 import android.app.job.JobParameters;
@@ -36,22 +36,19 @@ import android.graphics.BitmapFactory;
 import android.graphics.BitmapRegionDecoder;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.graphics.drawable.AdaptiveIconDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.PersistableBundle;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
-import androidx.annotation.VisibleForTesting;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.core.os.BuildCompat;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import com.android.contacts.activities.RequestPermissionsActivity;
-import com.android.contacts.compat.CompatUtils;
 import com.android.contacts.lettertiles.LetterTileDrawable;
 import com.android.contacts.util.BitmapUtil;
 import com.android.contacts.util.ImplicitIntentsUtil;
@@ -73,7 +70,6 @@ import java.util.List;
  * Usage: DynamicShortcuts.initialize should be called during Application creation. This will
  * schedule a Job to keep the shortcuts up-to-date so no further interactions should be necessary.
  */
-@TargetApi(Build.VERSION_CODES.N_MR1)
 public class DynamicShortcuts {
     private static final String TAG = "DynamicShortcuts";
 
@@ -340,12 +336,7 @@ public class DynamicShortcuts {
         if (bitmap == null) {
             bitmap = getFallbackAvatar(displayName, lookupKey);
         }
-        final Icon icon;
-        if (BuildCompat.isAtLeastO()) {
-            icon = Icon.createWithAdaptiveBitmap(bitmap);
-        } else {
-            icon = Icon.createWithBitmap(bitmap);
-        }
+        final Icon icon = Icon.createWithAdaptiveBitmap(bitmap);
 
         builder.setIcon(icon);
     }
@@ -407,23 +398,16 @@ public class DynamicShortcuts {
         ), opts);
         bitmapDecoder.recycle();
 
-        if (!BuildCompat.isAtLeastO()) {
-            return BitmapUtil.getRoundedBitmap(bitmap, targetSize, targetSize);
-        }
-
         return bitmap;
     }
 
     private Bitmap getFallbackAvatar(String displayName, String lookupKey) {
         // Use a circular icon if we're not on O or higher.
-        final boolean circularIcon = !BuildCompat.isAtLeastO();
+        final boolean circularIcon = false;
 
         final ContactPhotoManager.DefaultImageRequest request =
                 new ContactPhotoManager.DefaultImageRequest(displayName, lookupKey, circularIcon);
-        if (BuildCompat.isAtLeastO()) {
-            // On O, scale the image down to add the padding needed by AdaptiveIcons.
-            request.scale = LetterTileDrawable.getAdaptiveIconScale();
-        }
+        request.scale = LetterTileDrawable.getAdaptiveIconScale();
         final Drawable avatar = ContactPhotoManager.getDefaultAvatarDrawableForContact(
                 mContext.getResources(), true, request);
         final Bitmap result = Bitmap.createBitmap(mIconSize, mIconSize, Bitmap.Config.ARGB_8888);
@@ -479,17 +463,14 @@ public class DynamicShortcuts {
     public synchronized static void initialize(Context context) {
         if (Log.isLoggable(TAG, Log.DEBUG)) {
             final Flags flags = Flags.getInstance();
-            Log.d(TAG, "DyanmicShortcuts.initialize\nVERSION >= N_MR1? " +
-                    (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) +
+            Log.d(TAG, "DyanmicShortcuts.initialize" +
                     "\nisJobScheduled? " +
-                    (CompatUtils.isLauncherShortcutCompatible() && isJobScheduled(context)) +
+                    isJobScheduled(context) +
                     "\nminDelay=" +
                     flags.getInteger(Experiments.DYNAMIC_MIN_CONTENT_CHANGE_UPDATE_DELAY_MILLIS) +
                     "\nmaxDelay=" +
                     flags.getInteger(Experiments.DYNAMIC_MAX_CONTENT_CHANGE_UPDATE_DELAY_MILLIS));
         }
-
-        if (!CompatUtils.isLauncherShortcutCompatible()) return;
 
         final DynamicShortcuts shortcuts = new DynamicShortcuts(context);
 
@@ -515,9 +496,6 @@ public class DynamicShortcuts {
                 (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
         jobScheduler.cancel(ContactsJobService.DYNAMIC_SHORTCUTS_JOB_ID);
 
-        if (!CompatUtils.isLauncherShortcutCompatible()) {
-            return;
-        }
         new DynamicShortcuts(context).removeAllShortcuts();
     }
 
@@ -545,14 +523,14 @@ public class DynamicShortcuts {
     }
 
     public static void reportShortcutUsed(Context context, String lookupKey) {
-        if (!CompatUtils.isLauncherShortcutCompatible() || lookupKey == null) return;
+        if (lookupKey == null) return;
         final ShortcutManager shortcutManager = (ShortcutManager) context
                 .getSystemService(Context.SHORTCUT_SERVICE);
         shortcutManager.reportShortcutUsed(lookupKey);
     }
 
     private static class ShortcutUpdateTask extends AsyncTask<Void, Void, Void> {
-        private DynamicShortcuts mDynamicShortcuts;
+        private final DynamicShortcuts mDynamicShortcuts;
 
         public ShortcutUpdateTask(DynamicShortcuts shortcuts) {
             mDynamicShortcuts = shortcuts;

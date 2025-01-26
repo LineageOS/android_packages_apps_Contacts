@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +17,6 @@
 
 package com.android.contacts.preference;
 
-import android.accounts.Account;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.BroadcastReceiver;
@@ -33,7 +33,6 @@ import android.database.Cursor;
 import android.icu.text.MessageFormat;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.provider.BlockedNumberContract;
@@ -56,8 +55,6 @@ import android.widget.ListView;
 import com.android.contacts.ContactsUtils;
 import com.android.contacts.R;
 import com.android.contacts.SimImportService;
-import com.android.contacts.compat.TelecomManagerUtil;
-import com.android.contacts.compat.TelephonyManagerCompat;
 import com.android.contacts.interactions.ExportDialogFragment;
 import com.android.contacts.interactions.ImportDialogFragment;
 import com.android.contacts.list.ContactListFilter;
@@ -320,10 +317,10 @@ public class DisplayOptionsPreferenceFragment extends PreferenceFragment
             getPreferenceScreen().removePreference(findPreference(KEY_DISPLAY_ORDER));
         }
 
-        final boolean isPhone = TelephonyManagerCompat.isVoiceCapable(
-                (TelephonyManager) getContext().getSystemService(Context.TELEPHONY_SERVICE));
-        final boolean showBlockedNumbers = isPhone && ContactsUtils.FLAG_N_FEATURE
-                && BlockedNumberContract.canCurrentUserBlockNumbers(getContext());
+        final TelephonyManager tm = getContext().getSystemService(TelephonyManager.class);
+        final boolean isPhone = tm.isVoiceCapable();
+        final boolean showBlockedNumbers = isPhone &&
+                BlockedNumberContract.canCurrentUserBlockNumbers(getContext());
         if (!showBlockedNumbers) {
             getPreferenceScreen().removePreference(findPreference(KEY_BLOCKED_NUMBERS));
         }
@@ -398,8 +395,9 @@ public class DisplayOptionsPreferenceFragment extends PreferenceFragment
                     ImplicitIntentsUtil.getIntentForAddingAccount());
             return true;
         } else if (KEY_BLOCKED_NUMBERS.equals(prefKey)) {
-            final Intent intent = TelecomManagerUtil.createManageBlockedNumbersIntent(
-                    (TelecomManager) getContext().getSystemService(Context.TELECOM_SERVICE));
+            TelecomManager tm =
+                    (TelecomManager) getContext().getSystemService(Context.TELECOM_SERVICE);
+            final Intent intent = tm.createManageBlockedNumbersIntent();
             startActivity(intent);
             return true;
         } else if (KEY_CUSTOM_CONTACTS_FILTER.equals(prefKey)) {

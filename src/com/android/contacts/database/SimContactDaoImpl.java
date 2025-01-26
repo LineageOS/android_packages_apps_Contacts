@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +16,6 @@
  */
 package com.android.contacts.database;
 
-import android.annotation.TargetApi;
 import android.content.ContentProviderOperation;
 import android.content.ContentProviderResult;
 import android.content.ContentResolver;
@@ -24,7 +24,6 @@ import android.content.OperationApplicationException;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.RemoteException;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -41,7 +40,6 @@ import android.util.SparseArray;
 import androidx.collection.ArrayMap;
 
 import com.android.contacts.R;
-import com.android.contacts.compat.CompatUtils;
 import com.android.contacts.model.SimCard;
 import com.android.contacts.model.SimContact;
 import com.android.contacts.model.account.AccountWithDataSet;
@@ -109,10 +107,7 @@ public class SimContactDaoImpl extends SimContactDao {
         if (!canReadSimContacts()) {
             return Collections.emptyList();
         }
-        final List<SimCard> sims = CompatUtils.isMSIMCompatible() ?
-                getSimCardsFromSubscriptions() :
-                Collections.singletonList(SimCard.create(mTelephonyManager,
-                        mContext.getString(R.string.single_sim_display_label)));
+        final List<SimCard> sims = getSimCardsFromSubscriptions();
         return SharedPreferenceUtil.restoreSimStates(mContext, sims);
     }
 
@@ -238,7 +233,6 @@ public class SimContactDaoImpl extends SimContactDao {
         return mResolver.applyBatch(ContactsContract.AUTHORITY, ops);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP_MR1)
     private List<SimCard> getSimCardsFromSubscriptions() {
         final SubscriptionManager subscriptionManager = (SubscriptionManager)
                 mContext.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE);

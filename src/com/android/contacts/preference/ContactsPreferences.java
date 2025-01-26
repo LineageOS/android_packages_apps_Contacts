@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,9 +37,7 @@ import android.provider.Settings.SettingNotFoundException;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.annotation.VisibleForTesting;
-import androidx.core.os.BuildCompat;
 
 import com.android.contacts.R;
 import com.android.contacts.model.account.AccountWithDataSet;
@@ -224,11 +223,7 @@ public class ContactsPreferences implements OnSharedPreferenceChangeListener {
             return mDefaultAccount;
         }
         if (mDefaultAccount == null) {
-            Account cp2DefaultAccount = null;
-            if (BuildCompat.isAtLeastT()) {
-                cp2DefaultAccount = getDefaultAccountFromCp2();
-            }
-
+            Account cp2DefaultAccount = getDefaultAccountFromCp2();
             mDefaultAccount = cp2DefaultAccount == null
                     ? AccountWithDataSet.getNullAccount()
                     : new AccountWithDataSet(cp2DefaultAccount.name, cp2DefaultAccount.type, null);
@@ -236,7 +231,6 @@ public class ContactsPreferences implements OnSharedPreferenceChangeListener {
         return mDefaultAccount;
     }
 
-    @RequiresApi(33)
     private Account getDefaultAccountFromCp2() {
         StrictMode.ThreadPolicy oldPolicy = StrictMode.getThreadPolicy();
         StrictMode.setThreadPolicy(

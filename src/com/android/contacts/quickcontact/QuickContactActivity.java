@@ -1,6 +1,6 @@
 /*
-
  * Copyright (C) 2009 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,7 +49,6 @@ import android.icu.text.MessageFormat;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Trace;
 import android.provider.CalendarContract;
@@ -75,6 +74,7 @@ import android.provider.ContactsContract.QuickContact;
 import android.provider.ContactsContract.RawContacts;
 import android.telecom.PhoneAccount;
 import android.telecom.TelecomManager;
+import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -94,7 +94,6 @@ import android.view.WindowManager;
 import android.widget.Toast;
 import android.widget.Toolbar;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.core.os.BuildCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.palette.graphics.Palette;
 import com.android.contacts.CallUtil;
@@ -105,15 +104,9 @@ import com.android.contacts.ContactsActivity;
 import com.android.contacts.ContactsUtils;
 import com.android.contacts.DynamicShortcuts;
 import com.android.contacts.R;
-import com.android.contacts.ShortcutIntentBuilder;
-import com.android.contacts.ShortcutIntentBuilder.OnShortcutIntentCreatedListener;
 import com.android.contacts.activities.ContactEditorActivity;
 import com.android.contacts.activities.ContactSelectionActivity;
 import com.android.contacts.activities.RequestPermissionsActivity;
-import com.android.contacts.compat.CompatUtils;
-import com.android.contacts.compat.EventCompat;
-import com.android.contacts.compat.MultiWindowCompat;
-import com.android.contacts.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.detail.ContactDisplayUtils;
 import com.android.contacts.dialog.CallSubjectDialog;
 import com.android.contacts.editor.ContactEditorFragment;
@@ -221,8 +214,6 @@ public class QuickContactActivity extends ContactsActivity {
     private static final int REQUEST_CODE_PICK_RINGTONE = 4;
     private static final int CARD_ENTRY_ID_EDIT_CONTACT = -2;
     private static final int MIN_NUM_CONTACT_ENTRIES_SHOWN = 3;
-
-    private static final int CURRENT_API_VERSION = android.os.Build.VERSION.SDK_INT;
 
     /** This is the Intent action to install a shortcut in the launcher. */
     private static final String ACTION_INSTALL_SHORTCUT =
@@ -479,7 +470,7 @@ public class QuickContactActivity extends ContactsActivity {
 
         private void addPhoneAccountsToMenu(Context context,
                 Menu menu, EntryContextMenuInfo info) {
-            final String number = PhoneNumberUtilsCompat.normalizeNumber(info.getCopyText());
+            final String number = PhoneNumberUtils.normalizeNumber(info.getCopyText());
             final List<PhoneAccount> accounts = CallUtil.getCallCapablePhoneAccounts(context,
                     PhoneAccount.SCHEME_TEL);
             if (accounts == null || accounts.size() <= 1) {
@@ -678,14 +669,12 @@ public class QuickContactActivity extends ContactsActivity {
         Logger.logScreenView(this, ScreenType.QUICK_CONTACT, previousScreenType);
 
         mReferrer = getCallingPackage();
-        if (mReferrer == null && CompatUtils.isLollipopMr1Compatible() && getReferrer() != null) {
+        if (mReferrer == null && getReferrer() != null) {
             mReferrer = getReferrer().getAuthority();
         }
         mContactType = ContactType.UNKNOWN_TYPE;
 
-        if (CompatUtils.isLollipopCompatible()) {
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-        }
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
 
         processIntent(getIntent());
 
@@ -819,7 +808,7 @@ public class QuickContactActivity extends ContactsActivity {
     }
 
     private void onRingtonePicked(Uri pickedUri) {
-        mCustomRingtone = EditorUiUtils.getRingtoneStringFromUri(pickedUri, CURRENT_API_VERSION);
+        mCustomRingtone = EditorUiUtils.getRingtoneStringFromUri(pickedUri);
         Intent intent = ContactSaveService.createSetRingtone(
                 this, mLookupUri, mCustomRingtone);
         this.startService(intent);
@@ -913,7 +902,7 @@ public class QuickContactActivity extends ContactsActivity {
     }
 
     private boolean isMultiWindowOnPhone() {
-        return MultiWindowCompat.isInMultiWindowMode(this) && PhoneCapabilityTester.isPhone(this);
+        return isInMultiWindowMode() && PhoneCapabilityTester.isPhone(this);
     }
 
     /** Assign this string to the view if it is not empty. */
@@ -1526,7 +1515,7 @@ public class QuickContactActivity extends ContactsActivity {
             }
             header = res.getString(R.string.header_event_entry);
             if (event.hasKindTypeColumn(kind)) {
-                subHeader = EventCompat.getTypeLabel(res, event.getKindTypeColumn(kind),
+                subHeader = Event.getTypeLabel(res, event.getKindTypeColumn(kind),
                         event.getLabel()).toString();
             }
             text = DateUtils.formatDate(context, dataString);
@@ -2067,7 +2056,7 @@ public class QuickContactActivity extends ContactsActivity {
     }
 
     private void updateStatusBarColor() {
-        if (mScroller == null || !CompatUtils.isLollipopCompatible()) {
+        if (mScroller == null) {
             return;
         }
         final int desiredStatusBarColor;
@@ -2276,43 +2265,18 @@ public class QuickContactActivity extends ContactsActivity {
      * Creates a launcher shortcut with the current contact.
      */
     private void createLauncherShortcutWithContact() {
-        if (BuildCompat.isAtLeastO()) {
-            final ShortcutManager shortcutManager = (ShortcutManager)
-                    getSystemService(SHORTCUT_SERVICE);
-            final DynamicShortcuts shortcuts =
-                    new DynamicShortcuts(QuickContactActivity.this);
-            String displayName = mContactData.getDisplayName();
-            if (displayName == null) {
-                displayName = getString(R.string.missing_name);
-            }
-            final ShortcutInfo shortcutInfo = shortcuts.getQuickContactShortcutInfo(
-                    mContactData.getId(), mContactData.getLookupKey(), displayName);
-            if (shortcutInfo != null) {
-                shortcutManager.requestPinShortcut(shortcutInfo, null);
-            }
-        } else {
-            final ShortcutIntentBuilder builder = new ShortcutIntentBuilder(this,
-                    new OnShortcutIntentCreatedListener() {
-
-                        @Override
-                        public void onShortcutIntentCreated(Uri uri, Intent shortcutIntent) {
-                            // Broadcast the shortcutIntent to the launcher to create a
-                            // shortcut to this contact
-                            shortcutIntent.setAction(ACTION_INSTALL_SHORTCUT);
-                            QuickContactActivity.this.sendBroadcast(shortcutIntent);
-                            // Send a toast to give feedback to the user that a shortcut to this
-                            // contact was added to the launcher.
-                            final String displayName = shortcutIntent
-                                    .getStringExtra(Intent.EXTRA_SHORTCUT_NAME);
-                            final String toastMessage = TextUtils.isEmpty(displayName)
-                                    ? getString(R.string.createContactShortcutSuccessful_NoName)
-                                    : getString(R.string.createContactShortcutSuccessful,
-                                            displayName);
-                            Toast.makeText(QuickContactActivity.this, toastMessage,
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    });
-            builder.createContactShortcutIntent(mContactData.getLookupUri());
+        final ShortcutManager shortcutManager = (ShortcutManager)
+                getSystemService(SHORTCUT_SERVICE);
+        final DynamicShortcuts shortcuts =
+                new DynamicShortcuts(QuickContactActivity.this);
+        String displayName = mContactData.getDisplayName();
+        if (displayName == null) {
+            displayName = getString(R.string.missing_name);
+        }
+        final ShortcutInfo shortcutInfo = shortcuts.getQuickContactShortcutInfo(
+                mContactData.getId(), mContactData.getLookupKey(), displayName);
+        if (shortcutInfo != null) {
+            shortcutManager.requestPinShortcut(shortcutInfo, null);
         }
     }
 
@@ -2322,17 +2286,10 @@ public class QuickContactActivity extends ContactsActivity {
             return false;
         }
 
-        if (BuildCompat.isAtLeastO()) {
-            final ShortcutManager manager = (ShortcutManager)
-                    getSystemService(Context.SHORTCUT_SERVICE);
-            return manager.isRequestPinShortcutSupported();
-        }
+        final ShortcutManager manager = (ShortcutManager)
+                getSystemService(Context.SHORTCUT_SERVICE);
+        return manager.isRequestPinShortcutSupported();
 
-        final Intent createShortcutIntent = new Intent();
-        createShortcutIntent.setAction(ACTION_INSTALL_SHORTCUT);
-        final List<ResolveInfo> receivers = getPackageManager()
-                .queryBroadcastReceivers(createShortcutIntent, 0);
-        return receivers != null && receivers.size() > 0;
     }
 
     private void setStateForPhoneMenuItems(Contact contact) {
@@ -2400,10 +2357,7 @@ public class QuickContactActivity extends ContactsActivity {
             ringToneMenuItem.setVisible(!mContactData.isUserProfile() && mArePhoneOptionsChangable);
 
             final MenuItem sendToVoiceMailMenuItem = menu.findItem(R.id.menu_send_to_voicemail);
-            sendToVoiceMailMenuItem.setVisible(
-                    Build.VERSION.SDK_INT < Build.VERSION_CODES.M
-                            && !mContactData.isUserProfile()
-                            && mArePhoneOptionsChangable);
+            sendToVoiceMailMenuItem.setVisible(false);
             sendToVoiceMailMenuItem.setTitle(mSendToVoicemailState
                     ? R.string.menu_unredirect_calls_to_vm : R.string.menu_redirect_calls_to_vm);
 
@@ -2578,8 +2532,7 @@ public class QuickContactActivity extends ContactsActivity {
         // Allow the user to pick a silent ringtone
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, true);
 
-        final Uri ringtoneUri = EditorUiUtils.getRingtoneUriFromString(mCustomRingtone,
-                CURRENT_API_VERSION);
+        final Uri ringtoneUri = EditorUiUtils.getRingtoneUriFromString(mCustomRingtone);
 
         // Put checkmark next to the current ringtone for this contact
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, ringtoneUri);

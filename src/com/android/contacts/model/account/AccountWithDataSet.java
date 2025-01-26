@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +22,6 @@ import android.content.ContentProviderOperation;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.BaseColumns;
@@ -88,12 +88,10 @@ public class AccountWithDataSet implements Parcelable {
     }
 
     public static AccountWithDataSet getLocalAccount(Context context) {
-        return android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.R
-                ? getNullAccount()
-                : new AccountWithDataSet(
-                      RawContacts.getLocalAccountName(context),
-                      RawContacts.getLocalAccountType(context),
-                      null);
+        return new AccountWithDataSet(
+              RawContacts.getLocalAccountName(context),
+              RawContacts.getLocalAccountType(context),
+              null);
     }
 
     public Account getAccountOrNull() {

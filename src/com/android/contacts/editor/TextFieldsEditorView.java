@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +23,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.ContactsContract;
-import android.provider.ContactsContract.CommonDataKinds.Im;
-import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
+import android.telephony.PhoneNumberUtils;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.Spannable;
@@ -45,7 +45,6 @@ import android.widget.LinearLayout;
 
 import com.android.contacts.ContactsUtils;
 import com.android.contacts.R;
-import com.android.contacts.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.model.RawContactDelta;
 import com.android.contacts.model.ValuesDelta;
 import com.android.contacts.model.account.AccountType.EditField;
@@ -340,7 +339,7 @@ public class TextFieldsEditorView extends LabeledEditorView {
             final String column = field.column;
             final String value = entry.getAsString(column);
             if (ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE.equals(kind.mimeType)) {
-                fieldView.setText(PhoneNumberUtilsCompat.createTtsSpannable(value));
+                fieldView.setText(PhoneNumberUtils.createTtsSpannable(value));
             } else {
                 fieldView.setText(value);
             }
@@ -398,7 +397,7 @@ public class TextFieldsEditorView extends LabeledEditorView {
                     for (int i = 0; i < spans.length; i++) {
                         spannable.removeSpan(spans[i]);
                     }
-                    PhoneNumberUtilsCompat.addTtsSpan(spannable, 0, s.length());
+                    PhoneNumberUtils.addTtsSpan(spannable, 0, s.length());
                 }
             });
 

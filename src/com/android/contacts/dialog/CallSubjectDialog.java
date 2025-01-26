@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,9 +48,6 @@ import android.widget.TextView;
 import com.android.contacts.CallUtil;
 import com.android.contacts.ContactPhotoManager;
 import com.android.contacts.R;
-import com.android.contacts.compat.CompatUtils;
-import com.android.contacts.compat.PhoneAccountSdkCompat;
-import com.android.contacts.compat.telecom.TelecomManagerCompat;
 import com.android.contacts.util.UriUtils;
 import com.android.phone.common.animation.AnimUtils;
 
@@ -163,10 +161,8 @@ public class CallSubjectDialog extends Activity {
             Intent intent = CallUtil.getCallWithSubjectIntent(mNumber, mPhoneAccountHandle,
                     subject);
 
-            TelecomManagerCompat.placeCall(
-                    CallSubjectDialog.this,
-                    (TelecomManager) getSystemService(Context.TELECOM_SERVICE),
-                    intent);
+            TelecomManager tm = (TelecomManager) getSystemService(Context.TELECOM_SERVICE);
+            tm.placeCall(intent.getData(), intent.getExtras());
 
             mSubjectHistory.add(subject);
             saveSubjectHistory(mSubjectHistory);
@@ -391,9 +387,7 @@ public class CallSubjectDialog extends Activity {
     private void setPhoto(long photoId, Uri photoUri, Uri contactUri, String displayName,
             boolean isBusiness) {
         mContactPhoto.assignContactUri(contactUri);
-        if (CompatUtils.isLollipopCompatible()) {
-            mContactPhoto.setOverlay(null);
-        }
+        mContactPhoto.setOverlay(null);
 
         int contactType;
         if (isBusiness) {
@@ -580,13 +574,6 @@ public class CallSubjectDialog extends Activity {
      * current phone account.
      */
     private void loadConfiguration() {
-        // Only attempt to load configuration from the phone account extras if the SDK is N or
-        // later.  If we've got a prior SDK the default encoding and message length will suffice.
-        int sdk = android.os.Build.VERSION.SDK_INT;
-        if(sdk <= android.os.Build.VERSION_CODES.M) {
-            return;
-        }
-
         if (mPhoneAccountHandle == null) {
             return;
         }
@@ -595,18 +582,18 @@ public class CallSubjectDialog extends Activity {
                 (TelecomManager) getSystemService(Context.TELECOM_SERVICE);
         final PhoneAccount account = telecomManager.getPhoneAccount(mPhoneAccountHandle);
 
-        Bundle phoneAccountExtras = PhoneAccountSdkCompat.getExtras(account);
+        Bundle phoneAccountExtras = account.getExtras();
         if (phoneAccountExtras == null) {
             return;
         }
 
         // Get limit, if provided; otherwise default to existing value.
         mLimit = phoneAccountExtras
-                .getInt(PhoneAccountSdkCompat.EXTRA_CALL_SUBJECT_MAX_LENGTH, mLimit);
+                .getInt(PhoneAccount.EXTRA_CALL_SUBJECT_MAX_LENGTH, mLimit);
 
         // Get charset; default to none (e.g. count characters 1:1).
         String charsetName = phoneAccountExtras.getString(
-                PhoneAccountSdkCompat.EXTRA_CALL_SUBJECT_CHARACTER_ENCODING);
+                PhoneAccount.EXTRA_CALL_SUBJECT_CHARACTER_ENCODING);
 
         if (!TextUtils.isEmpty(charsetName)) {
             try {

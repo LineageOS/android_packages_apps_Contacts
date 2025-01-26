@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +29,6 @@ import android.provider.Telephony;
 import android.telephony.TelephonyManager;
 
 import com.android.contacts.ContactsUtils;
-import com.android.contacts.compat.TelephonyManagerCompat;
 
 import java.util.List;
 
@@ -62,8 +62,8 @@ public final class PhoneCapabilityTester {
     }
 
     private static void initialize(Context context) {
-        sIsPhone = TelephonyManagerCompat.isVoiceCapable(
-                (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE));
+        final TelephonyManager tm = context.getSystemService(TelephonyManager.class);
+        sIsPhone = tm.isVoiceCapable();
         sIsSipPhone = sIsPhone && SipManager.isVoipSupported(context);
         sIsInitialized = true;
     }

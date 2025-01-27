@@ -16,12 +16,13 @@
 package com.android.contacts.list;
 
 import android.content.Context;
-import android.content.CursorLoader;
 import android.database.Cursor;
 import android.database.MergeCursor;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.provider.ContactsContract.Contacts;
+
+import androidx.loader.content.CursorLoader;
 
 import com.google.common.collect.Lists;
 

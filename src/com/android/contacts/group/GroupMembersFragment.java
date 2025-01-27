@@ -17,12 +17,9 @@
 package com.android.contacts.group;
 
 import android.app.Activity;
-import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.Intent;
-import android.content.Loader;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 import android.graphics.PorterDuff;
@@ -47,7 +44,14 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.app.LoaderManager.LoaderCallbacks;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
+
 import com.android.contacts.ContactSaveService;
 import com.android.contacts.ContactsUtils;
 import com.android.contacts.GroupMetaDataLoader;
@@ -191,13 +195,14 @@ public class GroupMembersFragment extends MultiSelectContactsListFragment<GroupM
 
     private final LoaderCallbacks<Cursor> mGroupMetaDataCallbacks = new LoaderCallbacks<Cursor>() {
 
+        @NonNull
         @Override
         public CursorLoader onCreateLoader(int id, Bundle args) {
             return new GroupMetaDataLoader(mActivity, mGroupUri);
         }
 
         @Override
-        public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor cursor) {
             if (cursor == null || cursor.isClosed() || !cursor.moveToNext()) {
                 Log.e(TAG, "Failed to load group metadata for " + mGroupUri);
                 Toast.makeText(getContext(), R.string.groupLoadErrorToast, Toast.LENGTH_SHORT)
@@ -210,7 +215,7 @@ public class GroupMembersFragment extends MultiSelectContactsListFragment<GroupM
         }
 
         @Override
-        public void onLoaderReset(Loader<Cursor> loader) {}
+        public void onLoaderReset(@NonNull Loader<Cursor> loader) {}
     };
 
     private ActionBarAdapter mActionBarAdapter;
@@ -472,7 +477,7 @@ public class GroupMembersFragment extends MultiSelectContactsListFragment<GroupM
                     new AccountWithDataSet(mGroupMetaData.accountName,
                             mGroupMetaData.accountType, mGroupMetaData.dataSet),
                     GroupUtil.ACTION_UPDATE_GROUP, mGroupMetaData.groupId,
-                    mGroupMetaData.groupName).show(getFragmentManager(),
+                    mGroupMetaData.groupName).show(getChildFragmentManager(),
                     TAG_GROUP_NAME_EDIT_DIALOG);
         } else if (id == R.id.menu_delete_group) {
             deleteGroup();
@@ -585,7 +590,7 @@ public class GroupMembersFragment extends MultiSelectContactsListFragment<GroupM
             getContext().startService(intent);
             mActivity.switchToAllContacts();
         } else {
-            GroupDeletionDialogFragment.show(getFragmentManager(), mGroupMetaData.groupId,
+            GroupDeletionDialogFragment.show(getParentFragmentManager(), mGroupMetaData.groupId,
                     mGroupMetaData.groupName);
         }
     }
@@ -654,7 +659,8 @@ public class GroupMembersFragment extends MultiSelectContactsListFragment<GroupM
     @Override
     protected void startLoading() {
         if (mGroupMetaData == null || !mGroupMetaData.isValid()) {
-            getLoaderManager().restartLoader(LOADER_GROUP_METADATA, null, mGroupMetaDataCallbacks);
+            LoaderManager.getInstance(this).
+                    restartLoader(LOADER_GROUP_METADATA, null, mGroupMetaDataCallbacks);
         } else {
             onGroupMetadataLoaded();
         }

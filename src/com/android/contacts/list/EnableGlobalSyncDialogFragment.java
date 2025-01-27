@@ -16,18 +16,19 @@
 
 package com.android.contacts.list;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 
 import com.android.contacts.R;
 
 /**
  * Confirmation dialog for turning global auto-sync setting on.
  */
-public class EnableGlobalSyncDialogFragment extends DialogFragment{
+public class EnableGlobalSyncDialogFragment extends DialogFragment {
 
     private static final String ARG_FILTER = "filter";
     private ContactListFilter mFilter;
@@ -53,7 +54,7 @@ public class EnableGlobalSyncDialogFragment extends DialogFragment{
                 EnableGlobalSyncDialogFragment();
         dialog.setTargetFragment(fragment, 0);
         dialog.setArguments(args);
-        dialog.show(fragment.getFragmentManager(), "globalSync");
+        dialog.show(fragment.getChildFragmentManager(), "globalSync");
     }
 
     @Override

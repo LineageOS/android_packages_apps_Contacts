@@ -18,7 +18,6 @@ package com.android.contacts.util;
 
 import android.accounts.Account;
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +28,8 @@ import android.provider.ContactsContract.Intents;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import com.android.contacts.R;
 import com.android.contacts.activities.ContactEditorActivity;

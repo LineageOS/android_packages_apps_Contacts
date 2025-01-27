@@ -17,14 +17,8 @@
 
 package com.android.contacts.list;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.LoaderManager;
-import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.Intent;
-import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
@@ -46,6 +40,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.app.LoaderManager.LoaderCallbacks;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
 
 import com.android.common.widget.CompositeCursorAdapter.Partition;
 import com.android.contacts.ContactPhotoManager;
@@ -192,10 +193,10 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        setContext(activity);
-        setLoaderManager(super.getLoaderManager());
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        setContext(context);
+        setLoaderManager(LoaderManager.getInstance(super.getActivity()));
     }
 
     /**
@@ -228,11 +229,6 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
      */
     public void setLoaderManager(LoaderManager loaderManager) {
         mLoaderManager = loaderManager;
-    }
-
-    @Override
-    public LoaderManager getLoaderManager() {
-        return mLoaderManager;
     }
 
     public T getAdapter() {
@@ -337,7 +333,7 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
                     }
                 }
             } else {
-                getLoaderManager().initLoader(i, null, this);
+                LoaderManager.getInstance(this).initLoader(i, null, this);
             }
         }
 
@@ -345,6 +341,7 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
         mLoadPriorityDirectoriesOnly = false;
     }
 
+    @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         if (id == DIRECTORY_LOADER_ID) {
@@ -392,7 +389,7 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
         } else {
             Bundle args = new Bundle();
             args.putLong(DIRECTORY_ID_ARG_KEY, directoryId);
-            getLoaderManager().initLoader(partitionIndex, args, this);
+            LoaderManager.getInstance(this).initLoader(partitionIndex, args, this);
         }
     }
 
@@ -414,7 +411,7 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
     protected void loadDirectoryPartition(int partitionIndex, DirectoryPartition partition) {
         Bundle args = new Bundle();
         args.putLong(DIRECTORY_ID_ARG_KEY, partition.getDirectoryId());
-        getLoaderManager().restartLoader(partitionIndex, args, this);
+        LoaderManager.getInstance(this).restartLoader(partitionIndex, args, this);
     }
 
     /**
@@ -425,7 +422,7 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
         if (!mEnabled) {
             return;
         }
@@ -445,7 +442,7 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
                 if (directorySearchMode != DirectoryListLoader.SEARCH_MODE_NONE) {
                     if (mDirectoryListStatus == STATUS_NOT_LOADED) {
                         mDirectoryListStatus = STATUS_LOADING;
-                        getLoaderManager().initLoader(DIRECTORY_LOADER_ID, null, this);
+                        LoaderManager.getInstance(this).initLoader(DIRECTORY_LOADER_ID, null, this);
                     } else {
                         startLoading();
                     }
@@ -453,7 +450,7 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
             } else {
                 maybeLogListEvent();
                 mDirectoryListStatus = STATUS_NOT_LOADED;
-                getLoaderManager().destroyLoader(DIRECTORY_LOADER_ID);
+                LoaderManager.getInstance(this).destroyLoader(DIRECTORY_LOADER_ID);
             }
         }
     }
@@ -465,7 +462,7 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
         }
     }
 
-    public void onLoaderReset(Loader<Cursor> loader) {
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
     }
 
     protected void onPartitionLoaded(int partitionIndex, Cursor data) {
@@ -618,7 +615,7 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
 
             if (!flag) {
                 mDirectoryListStatus = STATUS_NOT_LOADED;
-                getLoaderManager().destroyLoader(DIRECTORY_LOADER_ID);
+                LoaderManager.getInstance(this).destroyLoader(DIRECTORY_LOADER_ID);
             }
 
             if (mAdapter != null) {

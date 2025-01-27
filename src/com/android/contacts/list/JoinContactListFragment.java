@@ -16,11 +16,8 @@
 package com.android.contacts.list;
 
 import android.app.Activity;
-import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentUris;
-import android.content.CursorLoader;
 import android.content.Intent;
-import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,6 +27,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.app.LoaderManager.LoaderCallbacks;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
 
 import com.android.contacts.R;
 import com.android.contacts.list.JoinContactLoader.JoinContactLoaderResult;
@@ -49,6 +52,7 @@ public class JoinContactListFragment extends ContactEntryListFragment<JoinContac
 
     private final LoaderCallbacks<Cursor> mLoaderCallbacks = new LoaderCallbacks<Cursor>() {
 
+        @NonNull
         @Override
         public Loader<Cursor> onCreateLoader(int id, Bundle args) {
             switch (id) {
@@ -113,11 +117,12 @@ public class JoinContactListFragment extends ContactEntryListFragment<JoinContac
     protected void startLoading() {
         configureAdapter();
 
-        getLoaderManager().initLoader(DISPLAY_NAME_LOADER, null, mLoaderCallbacks);
+        LoaderManager loaderManager = LoaderManager.getInstance(this);
+        loaderManager.initLoader(DISPLAY_NAME_LOADER, null, mLoaderCallbacks);
 
         // When this method is called, Uri to be used may be changed. We should use restartLoader()
         // to load the parameter again.
-        getLoaderManager().restartLoader(JoinContactListAdapter.PARTITION_ALL_CONTACTS,
+        loaderManager.restartLoader(JoinContactListAdapter.PARTITION_ALL_CONTACTS,
                 null, mLoaderCallbacks);
     }
 

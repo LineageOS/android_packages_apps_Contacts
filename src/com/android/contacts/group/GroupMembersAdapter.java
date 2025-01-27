@@ -17,7 +17,6 @@
 package com.android.contacts.group;
 
 import android.content.Context;
-import android.content.CursorLoader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
@@ -27,6 +26,8 @@ import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Directory;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.loader.content.CursorLoader;
 
 import com.android.contacts.R;
 import com.android.contacts.list.ContactListItemView;

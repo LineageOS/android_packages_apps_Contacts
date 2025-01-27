@@ -18,14 +18,11 @@
 package com.android.contacts.preference;
 
 import android.app.Activity;
-import android.app.LoaderManager;
 import android.content.BroadcastReceiver;
 import android.content.ContentUris;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
@@ -33,15 +30,11 @@ import android.database.Cursor;
 import android.icu.text.MessageFormat;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
 import android.provider.BlockedNumberContract;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.DisplayNameSources;
 import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.Settings;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
@@ -52,7 +45,15 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
-import com.android.contacts.ContactsUtils;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+
 import com.android.contacts.R;
 import com.android.contacts.SimImportService;
 import com.android.contacts.interactions.ExportDialogFragment;
@@ -66,6 +67,7 @@ import com.android.contacts.model.account.AccountWithDataSet;
 import com.android.contacts.model.account.AccountsLoader;
 import com.android.contacts.util.AccountFilterUtil;
 import com.android.contacts.util.ImplicitIntentsUtil;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -76,7 +78,7 @@ import java.util.Map;
 /**
  * This fragment shows the preferences for "display options"
  */
-public class DisplayOptionsPreferenceFragment extends PreferenceFragment
+public class DisplayOptionsPreferenceFragment extends PreferenceFragmentCompat
         implements Preference.OnPreferenceClickListener, AccountsLoader.AccountsListener {
 
     private static final int REQUEST_CODE_CUSTOM_CONTACTS_FILTER = 0;
@@ -157,6 +159,7 @@ public class DisplayOptionsPreferenceFragment extends PreferenceFragment
     private final LoaderManager.LoaderCallbacks<Cursor> mProfileLoaderListener =
             new LoaderManager.LoaderCallbacks<Cursor>() {
 
+        @NonNull
         @Override
         public CursorLoader onCreateLoader(int id, Bundle args) {
             final CursorLoader loader = createCursorLoader(getContext());
@@ -166,13 +169,13 @@ public class DisplayOptionsPreferenceFragment extends PreferenceFragment
         }
 
         @Override
-        public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
             if (mListener != null) {
                 mListener.onProfileLoaded(data);
             }
         }
 
-        public void onLoaderReset(Loader<Cursor> loader) {
+        public void onLoaderReset(@NonNull Loader<Cursor> loader) {
         }
     };
 
@@ -187,17 +190,19 @@ public class DisplayOptionsPreferenceFragment extends PreferenceFragment
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
         try {
-            mListener = (ProfileListener) activity;
+            mListener = (ProfileListener) context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement ProfileListener");
+            throw new ClassCastException(context.toString() + " must implement ProfileListener");
         }
     }
 
+    @NonNull
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         // Wrap the preference view in a FrameLayout so we can show a snackbar
         mRootView = new FrameLayout(getActivity());
         final View list = super.onCreateView(inflater, mRootView, savedInstanceState);
@@ -208,6 +213,9 @@ public class DisplayOptionsPreferenceFragment extends PreferenceFragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        LoaderManager.getInstance(this).initLoader(LOADER_PROFILE, null, mProfileLoaderListener);
+        AccountsLoader.loadAccounts(this, LOADER_ACCOUNTS, AccountTypeManager.writableFilter());
 
         mSaveServiceListener = new SaveServiceResultListener();
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(
@@ -223,7 +231,10 @@ public class DisplayOptionsPreferenceFragment extends PreferenceFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
 
+    @Override
+    public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preference_display_options);
 
@@ -267,13 +278,6 @@ public class DisplayOptionsPreferenceFragment extends PreferenceFragment
             defaultAccountPreference.setOnPreferenceClickListener(this);
             defaultAccountPreference.setSummary(getDefaultAccountSummary());
         }
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        getLoaderManager().initLoader(LOADER_PROFILE, null, mProfileLoaderListener);
-        AccountsLoader.loadAccounts(this, LOADER_ACCOUNTS, AccountTypeManager.writableFilter());
     }
 
     @Override
@@ -369,10 +373,10 @@ public class DisplayOptionsPreferenceFragment extends PreferenceFragment
             ((ContactsPreferenceActivity) getActivity()).showAboutFragment();
             return true;
         } else if (KEY_IMPORT.equals(prefKey)) {
-            ImportDialogFragment.show(getFragmentManager());
+            ImportDialogFragment.show(getChildFragmentManager());
             return true;
         } else if (KEY_EXPORT.equals(prefKey)) {
-            ExportDialogFragment.show(getFragmentManager(), ContactsPreferenceActivity.class,
+            ExportDialogFragment.show(getChildFragmentManager(), ContactsPreferenceActivity.class,
                     ExportDialogFragment.EXPORT_MODE_ALL_CONTACTS);
             return true;
         } else if (KEY_MY_INFO.equals(prefKey)) {

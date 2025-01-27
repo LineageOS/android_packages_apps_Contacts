@@ -21,7 +21,6 @@ import android.accounts.Account;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
-import android.app.LoaderManager.LoaderCallbacks;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.ActivityNotFoundException;
@@ -31,7 +30,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ShortcutInfo;
@@ -91,9 +89,16 @@ import android.view.View.OnCreateContextMenuListener;
 import android.view.WindowManager;
 import android.widget.Toast;
 import android.widget.Toolbar;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.app.LoaderManager.LoaderCallbacks;
+import androidx.loader.content.Loader;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.palette.graphics.Palette;
+
 import com.android.contacts.CallUtil;
 import com.android.contacts.ClipboardUtils;
 import com.android.contacts.Collapser;
@@ -155,6 +160,7 @@ import com.android.contacts.widget.MultiShrinkScroller;
 import com.android.contacts.widget.MultiShrinkScroller.MultiShrinkScrollerListener;
 import com.android.contacts.widget.QuickContactImageView;
 import com.google.common.collect.Lists;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -841,14 +847,15 @@ public class QuickContactActivity extends ContactsActivity {
         }
         mLookupUri = lookupUri;
         mExcludeMimes = intent.getStringArrayExtra(QuickContact.EXTRA_EXCLUDE_MIMES);
+        LoaderManager lm = LoaderManager.getInstance(this);
         if (oldLookupUri == null) {
-            mContactLoader = (ContactLoader) getLoaderManager().initLoader(
+            mContactLoader = (ContactLoader) lm.initLoader(
                     LOADER_CONTACT_ID, null, mLoaderContactCallbacks);
         } else if (oldLookupUri != mLookupUri) {
             // After copying a directory contact, the contact URI changes. Therefore,
             // we need to reload the new contact.
-            mContactLoader = (ContactLoader) (Loader<?>) getLoaderManager().getLoader(
-                    LOADER_CONTACT_ID);
+            mContactLoader = (ContactLoader) lm.initLoader(
+                    LOADER_CONTACT_ID, null, mEmptyCallbacks);
             mContactLoader.setNewLookup(mLookupUri);
             mCachedCp2DataCardModel = null;
         }
@@ -2020,6 +2027,24 @@ public class QuickContactActivity extends ContactsActivity {
             return new ContactLoader(getApplicationContext(), mLookupUri,
                     true /*loadGroupMetaData*/, true /*postViewNotification*/,
                     true /*computeFormattedPhoneNumber*/);
+        }
+    };
+
+    private final LoaderCallbacks<Contact> mEmptyCallbacks = new LoaderCallbacks<Contact>() {
+        @NonNull
+        @Override
+        public Loader<Contact> onCreateLoader(int id, @Nullable Bundle args) {
+            return null;
+        }
+
+        @Override
+        public void onLoadFinished(@NonNull Loader<Contact> loader, Contact data) {
+
+        }
+
+        @Override
+        public void onLoaderReset(@NonNull Loader<Contact> loader) {
+
         }
     };
 

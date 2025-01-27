@@ -16,14 +16,11 @@
  */
 package com.android.contacts.list;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import androidx.core.content.ContextCompat;
-
 import android.provider.ContactsContract.ProviderStatus;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -35,6 +32,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import com.android.contacts.R;
 import com.android.contacts.interactions.ImportDialogFragment;
@@ -136,7 +136,7 @@ public class ContactsUnavailableFragment extends Fragment implements OnClickList
             ImplicitIntentsUtil.startActivityOutsideApp(getActivity(), intent);
 
         } else if (id == R.id.import_contacts_button) {
-            ImportDialogFragment.show(getFragmentManager());
+            ImportDialogFragment.show(getChildFragmentManager());
 
         }
     }

@@ -16,20 +16,22 @@
 
 package com.android.contacts.test;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 /**
  * Empty fragment used for testing.
  */
 public class EmptyFragment extends Fragment {
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         // Must return a ViewGroup, FrameLayout will do.
         return new FrameLayout(getActivity());
     }

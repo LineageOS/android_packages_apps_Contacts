@@ -16,7 +16,6 @@
 package com.android.contacts.list;
 
 import android.app.Activity;
-import android.content.Loader;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 import android.os.Bundle;
@@ -28,6 +27,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.loader.content.Loader;
 
 import com.android.contacts.R;
 import com.android.contacts.activities.ContactSelectionActivity;

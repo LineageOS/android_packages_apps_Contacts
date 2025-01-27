@@ -2,7 +2,6 @@ package com.android.contacts.editor;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +14,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+
+import androidx.fragment.app.DialogFragment;
 
 import com.android.contacts.ContactPhotoManager;
 import com.android.contacts.R;
@@ -198,7 +199,7 @@ public class PickRawContactDialogFragment extends DialogFragment {
                                 mShouldFinishActivity = false;
                                 final SplitContactConfirmationDialogFragment splitDialog = new
                                         SplitContactConfirmationDialogFragment();
-                                splitDialog.show(getActivity().getFragmentManager(),
+                                splitDialog.show(getActivity().getSupportFragmentManager(),
                                         SplitContactConfirmationDialogFragment.TAG);
                             }
                         });

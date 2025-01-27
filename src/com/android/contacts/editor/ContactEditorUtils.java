@@ -19,7 +19,6 @@ package com.android.contacts.editor;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +26,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.android.contacts.model.account.AccountWithDataSet;
 import com.android.contacts.preference.ContactsPreferences;
@@ -128,7 +130,7 @@ public class ContactEditorUtils {
      * the user has canceled the wizard.
      *
      * <p>Pass the {@code resultCode} and {@code data} parameters passed to
-     * {@link Activity#onActivityResult} or {@link android.app.Fragment#onActivityResult}.
+     * {@link AppCompatActivity#onActivityResult} or {@link Fragment#onActivityResult}.
      * </p>
      *
      * <p>

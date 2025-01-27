@@ -17,10 +17,6 @@
 package com.android.contacts.drawer;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.LoaderManager;
-import android.content.CursorLoader;
-import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract.DisplayNameSources;
@@ -34,6 +30,12 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
 
 import com.android.contacts.GroupListLoader;
 import com.android.contacts.R;
@@ -78,6 +80,7 @@ public class DrawerFragment extends Fragment implements AccountsListener {
 
     private final LoaderManager.LoaderCallbacks<List<ContactListFilter>> mFiltersLoaderListener =
             new LoaderManager.LoaderCallbacks<List<ContactListFilter>> () {
+                @NonNull
                 @Override
                 public Loader<List<ContactListFilter>> onCreateLoader(int id, Bundle args) {
                     return new AccountFilterUtil.FilterLoader(getActivity());
@@ -101,13 +104,14 @@ public class DrawerFragment extends Fragment implements AccountsListener {
 
     private final LoaderManager.LoaderCallbacks<Cursor> mGroupListLoaderListener =
             new LoaderManager.LoaderCallbacks<Cursor>() {
+                @NonNull
                 @Override
                 public CursorLoader onCreateLoader(int id, Bundle args) {
                     return new GroupListLoader(getActivity());
                 }
 
                 @Override
-                public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+                public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
                     if (data == null) {
                         return;
                     }
@@ -127,12 +131,13 @@ public class DrawerFragment extends Fragment implements AccountsListener {
                     notifyIfReady();
                 }
 
-                public void onLoaderReset(Loader<Cursor> loader) {
+                public void onLoaderReset(@NonNull Loader<Cursor> loader) {
                 }
             };
 
     private final LoaderManager.LoaderCallbacks<Cursor> mProfileLoaderListener =
             new LoaderManager.LoaderCallbacks<Cursor>() {
+                @NonNull
                 @Override
                 public CursorLoader onCreateLoader(int id, Bundle args) {
                     return new ProfileLoader(getActivity(),
@@ -140,13 +145,13 @@ public class DrawerFragment extends Fragment implements AccountsListener {
                 }
 
                 @Override
-                public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+                public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
                     // Sending MyInfo information to DrawerAdapter
                     // when MyInfo exists(User registered MyInfo) or not.
                     mDrawerAdapter.setProfile(ProfileLoader.getProfileItem(getActivity(), data));
                 }
 
-                public void onLoaderReset(Loader<Cursor> loader) {
+                public void onLoaderReset(@NonNull Loader<Cursor> loader) {
                 }
             };
 
@@ -206,11 +211,12 @@ public class DrawerFragment extends Fragment implements AccountsListener {
     }
 
     private void loadGroupsAndFilters() {
-        getLoaderManager().initLoader(LOADER_FILTERS, null, mFiltersLoaderListener);
+        LoaderManager loaderManager = LoaderManager.getInstance(this);
+        loaderManager.initLoader(LOADER_FILTERS, null, mFiltersLoaderListener);
         AccountsLoader.loadAccounts(this, LOADER_ACCOUNTS,
                 AccountTypeManager.AccountFilter.GROUPS_WRITABLE);
-        getLoaderManager().initLoader(LOADER_GROUPS, null, mGroupListLoaderListener);
-        getLoaderManager().initLoader(LOADER_PROFILE, null, mProfileLoaderListener);
+        loaderManager.initLoader(LOADER_GROUPS, null, mGroupListLoaderListener);
+        loaderManager.initLoader(LOADER_PROFILE, null, mProfileLoaderListener);
     }
 
     @Override

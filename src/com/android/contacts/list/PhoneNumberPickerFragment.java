@@ -17,7 +17,6 @@
 package com.android.contacts.list;
 
 import android.content.Intent;
-import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,6 +26,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.loader.content.Loader;
 
 import com.android.contacts.R;
 import com.android.contacts.ShortcutIntentBuilder;

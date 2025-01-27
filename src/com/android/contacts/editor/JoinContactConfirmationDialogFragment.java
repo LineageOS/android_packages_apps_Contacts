@@ -18,9 +18,10 @@ package com.android.contacts.editor;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+
+import androidx.fragment.app.DialogFragment;
 
 import com.android.contacts.R;
 
@@ -56,7 +57,7 @@ public class JoinContactConfirmationDialogFragment extends DialogFragment {
                 JoinContactConfirmationDialogFragment();
         dialog.setTargetFragment(fragment, 0);
         dialog.setArguments(args);
-        dialog.show(fragment.getFragmentManager(), "joinContactConfirmationDialog");
+        dialog.show(fragment.getChildFragmentManager(), "joinContactConfirmationDialog");
     }
 
     private long mContactId;

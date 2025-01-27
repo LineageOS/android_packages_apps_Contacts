@@ -17,7 +17,6 @@
 
 package com.android.contacts.model;
 
-import android.content.AsyncTaskLoader;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -39,6 +38,9 @@ import android.provider.ContactsContract.Groups;
 import android.provider.ContactsContract.RawContacts;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.loader.content.AsyncTaskLoader;
+
 import com.android.contacts.GeoUtil;
 import com.android.contacts.GroupMetaDataLoader;
 import com.android.contacts.group.GroupMetaData;

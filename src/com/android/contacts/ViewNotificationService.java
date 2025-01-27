@@ -18,10 +18,11 @@ package com.android.contacts;
 
 import android.app.Service;
 import android.content.Intent;
-import android.content.Loader;
-import android.content.Loader.OnLoadCompleteListener;
 import android.os.IBinder;
 import android.util.Log;
+
+import androidx.loader.content.Loader;
+import androidx.loader.content.Loader.OnLoadCompleteListener;
 
 import com.android.contacts.model.Contact;
 import com.android.contacts.model.ContactLoader;

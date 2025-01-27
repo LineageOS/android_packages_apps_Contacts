@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +17,10 @@
 package com.android.contacts.group;
 
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.LoaderManager;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract.Groups;
@@ -37,7 +34,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
 
 import com.android.contacts.ContactSaveService;
 import com.android.contacts.R;
@@ -69,15 +71,9 @@ public final class GroupNameEditDialogFragment extends DialogFragment implements
 
     /** Callbacks for hosts of the {@link GroupNameEditDialogFragment}. */
     public interface Listener {
-        void onGroupNameEditCancelled();
-
         void onGroupNameEditCompleted(String name);
 
         public static final Listener None = new Listener() {
-            @Override
-            public void onGroupNameEditCancelled() {
-            }
-
             @Override
             public void onGroupNameEditCompleted(String name) {
             }
@@ -137,9 +133,10 @@ public final class GroupNameEditDialogFragment extends DialogFragment implements
         mAccount = getArguments().getParcelable(ARG_ACCOUNT);
 
         // There is only one loader so the id arg doesn't matter.
-        getLoaderManager().initLoader(0, null, this);
+        LoaderManager.getInstance(this).initLoader(0, null, this);
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Build a dialog with two buttons and a view of a single EditText input field
@@ -154,7 +151,6 @@ public final class GroupNameEditDialogFragment extends DialogFragment implements
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         hideInputMethod();
-                        getListener().onGroupNameEditCancelled();
                         dismiss();
                     }
                 })
@@ -268,17 +264,12 @@ public final class GroupNameEditDialogFragment extends DialogFragment implements
     }
 
     @Override
-    public void onCancel(DialogInterface dialog) {
-        super.onCancel(dialog);
-        getListener().onGroupNameEditCancelled();
-    }
-
-    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(KEY_GROUP_NAME, getGroupName());
     }
 
+    @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         // Only a single loader so id is ignored.
@@ -289,7 +280,7 @@ public final class GroupNameEditDialogFragment extends DialogFragment implements
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
         mExistingGroups = new HashSet<>();
         final GroupUtil.GroupsProjection projection = new GroupUtil.GroupsProjection(data);
         // Initialize cursor's position. If Activity relaunched by orientation change,
@@ -318,7 +309,7 @@ public final class GroupNameEditDialogFragment extends DialogFragment implements
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
     }
 
     private void showInputMethod(View view) {

@@ -18,12 +18,13 @@ package com.android.contacts.list;
 
 import android.content.ContentUris;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.Contacts.People;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.loader.content.CursorLoader;
 
 /**
  * A cursor adapter for the People.CONTENT_TYPE content type.

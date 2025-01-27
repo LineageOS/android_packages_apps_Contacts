@@ -19,15 +19,11 @@ package com.android.contacts.editor;
 
 import android.accounts.Account;
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.LoaderManager;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.Intent;
-import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -43,7 +39,14 @@ import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.Intents;
 import android.provider.ContactsContract.RawContacts;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
+
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -390,6 +393,7 @@ public class ContactEditorFragment extends Fragment implements
 
                 protected long mLoaderStartTime;
 
+                @NonNull
                 @Override
                 public Loader<Contact> onCreateLoader(int id, Bundle args) {
                     mLoaderStartTime = SystemClock.elapsedRealtime();
@@ -425,7 +429,7 @@ public class ContactEditorFragment extends Fragment implements
                 }
 
                 @Override
-                public void onLoaderReset(Loader<Contact> loader) {
+                public void onLoaderReset(@NonNull Loader<Contact> loader) {
                 }
             };
 
@@ -554,8 +558,9 @@ public class ContactEditorFragment extends Fragment implements
                 // Either
                 // 1) orientation change but load never finished.
                 // 2) not an orientation change so data needs to be loaded for first time.
-                getLoaderManager().initLoader(LOADER_CONTACT, null, mContactLoaderListener);
-                getLoaderManager().initLoader(LOADER_GROUPS, null, mGroupsLoaderListener);
+                LoaderManager loaderManager = LoaderManager.getInstance(this);
+                loaderManager.initLoader(LOADER_CONTACT, null, mContactLoaderListener);
+                loaderManager.initLoader(LOADER_GROUPS, null, mGroupsLoaderListener);
             }
         } else {
             // Orientation change, we already have mState, it was loaded by onCreate
@@ -901,7 +906,7 @@ public class ContactEditorFragment extends Fragment implements
         // If we are about to close the editor - there is no need to refresh the data
         if (saveMode == SaveMode.CLOSE || saveMode == SaveMode.EDITOR
                 || saveMode == SaveMode.SPLIT) {
-            getLoaderManager().destroyLoader(LOADER_CONTACT);
+            LoaderManager.getInstance(this).destroyLoader(LOADER_CONTACT);
         }
 
         mStatus = Status.SAVING;
@@ -1518,7 +1523,8 @@ public class ContactEditorFragment extends Fragment implements
                     mState = new RawContactDeltaList();
                     load(Intent.ACTION_EDIT, contactLookupUri, null);
                     mStatus = Status.LOADING;
-                    getLoaderManager().restartLoader(LOADER_CONTACT, null, mContactLoaderListener);
+                    LoaderManager.getInstance(this).restartLoader(LOADER_CONTACT, null,
+                            mContactLoaderListener);
                 }
                 break;
 
@@ -1746,7 +1752,7 @@ public class ContactEditorFragment extends Fragment implements
         if (activity == null || activity.isFinishing()) {
             return;
         }
-        getLoaderManager().initLoader(LOADER_GROUPS, null, mGroupsLoaderListener);
+        LoaderManager.getInstance(this).initLoader(LOADER_GROUPS, null, mGroupsLoaderListener);
     }
 
     @Override

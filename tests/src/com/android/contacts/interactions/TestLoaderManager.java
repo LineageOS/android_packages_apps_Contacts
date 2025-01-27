@@ -17,10 +17,11 @@
 package com.android.contacts.interactions;
 
 import android.app.LoaderManager;
-import android.content.AsyncTaskLoader;
-import android.content.Loader;
 import android.os.Bundle;
 import android.util.Log;
+
+import androidx.loader.content.AsyncTaskLoader;
+import androidx.loader.content.Loader;
 
 import com.google.common.annotations.VisibleForTesting;
 

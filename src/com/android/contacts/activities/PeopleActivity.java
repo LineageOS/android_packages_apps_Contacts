@@ -19,9 +19,6 @@ package com.android.contacts.activities;
 
 import android.Manifest;
 import android.accounts.Account;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -41,6 +38,9 @@ import androidx.annotation.LayoutRes;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -370,7 +370,8 @@ public class PeopleActivity extends AppCompatContactsActivity implements
 
         // Set up hamburger button.
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerFragment = (DrawerFragment) getFragmentManager().findFragmentById(R.id.drawer);
+        mDrawerFragment = (DrawerFragment) getSupportFragmentManager().
+                findFragmentById(R.id.drawer);
         mToggle = new ContactsActionBarDrawerToggle(this, mDrawerLayout, mToolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawerLayout.setDrawerListener(mToggle);
@@ -527,7 +528,7 @@ public class PeopleActivity extends AppCompatContactsActivity implements
     private void createViewsAndFragments() {
         setContentView(R.layout.people_activity);
 
-        final FragmentManager fragmentManager = getFragmentManager();
+        final FragmentManager fragmentManager = getSupportFragmentManager();
 
         setUpListFragment(fragmentManager);
 
@@ -706,7 +707,7 @@ public class PeopleActivity extends AppCompatContactsActivity implements
                 && (mProviderStatus.equals(providerStatus))) return;
         mProviderStatus = providerStatus;
 
-        final FragmentManager fragmentManager= getFragmentManager();
+        final FragmentManager fragmentManager= getSupportFragmentManager();
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
 
         // Change in CP2's provider status may not take effect immediately, see b/30566908.
@@ -968,7 +969,7 @@ public class PeopleActivity extends AppCompatContactsActivity implements
     private void switchView(ContactsView contactsView) {
         mCurrentView = contactsView;
 
-        final FragmentManager fragmentManager =  getFragmentManager();
+        final FragmentManager fragmentManager =  getSupportFragmentManager();
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
         popSecondLevel();
         if (isGroupView()) {
@@ -1101,7 +1102,7 @@ public class PeopleActivity extends AppCompatContactsActivity implements
             onAccountChosen(accounts.get(0).getAccount(), /* extraArgs */ null);
             return;
         }
-        SelectAccountDialogFragment.show(getFragmentManager(), R.string.dialog_new_group_account,
+        SelectAccountDialogFragment.show(getSupportFragmentManager(), R.string.dialog_new_group_account,
                 AccountTypeManager.AccountFilter.GROUPS_WRITABLE, /* extraArgs */ null,
                 TAG_SELECT_ACCOUNT_DIALOG);
     }
@@ -1112,7 +1113,7 @@ public class PeopleActivity extends AppCompatContactsActivity implements
         mNewGroupAccount = account;
         GroupNameEditDialogFragment.newInstanceForCreation(
                 mNewGroupAccount, GroupUtil.ACTION_CREATE_GROUP)
-                .show(getFragmentManager(), TAG_GROUP_NAME_EDIT_DIALOG);
+                .show(getSupportFragmentManager(), TAG_GROUP_NAME_EDIT_DIALOG);
     }
 
     @Override
@@ -1210,10 +1211,10 @@ public class PeopleActivity extends AppCompatContactsActivity implements
     }
 
     private boolean isLastBackStackTag(String tag) {
-        final int count = getFragmentManager().getBackStackEntryCount();
+        final int count = getSupportFragmentManager().getBackStackEntryCount();
         if (count > 0) {
             final FragmentManager.BackStackEntry last =
-                    getFragmentManager().getBackStackEntryAt(count - 1);
+                    getSupportFragmentManager().getBackStackEntryAt(count - 1);
             if (tag == null) {
                 return last.getName() == null;
             }
@@ -1223,9 +1224,9 @@ public class PeopleActivity extends AppCompatContactsActivity implements
     }
 
     private void popSecondLevel() {
-        getFragmentManager().popBackStackImmediate(
+        getSupportFragmentManager().popBackStackImmediate(
                 TAG_ASSISTANT_HELPER, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        getFragmentManager().popBackStackImmediate(
+        getSupportFragmentManager().popBackStackImmediate(
                 TAG_SECOND_LEVEL, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         mMembersFragment = null;
         resetToolBarStatusBarColor();

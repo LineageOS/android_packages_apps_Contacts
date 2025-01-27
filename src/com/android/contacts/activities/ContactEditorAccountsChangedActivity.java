@@ -16,7 +16,6 @@
 
 package com.android.contacts.activities;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -29,6 +28,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.contacts.R;
 import com.android.contacts.editor.ContactEditorUtils;
@@ -49,7 +50,7 @@ import java.util.List;
  * the new contact in. If the activity result doesn't contain intent data, then there is no
  * account for this contact.
  */
-public class ContactEditorAccountsChangedActivity extends Activity
+public class ContactEditorAccountsChangedActivity extends AppCompatActivity
         implements AccountsLoader.AccountsListener {
     private static final int SUBACTIVITY_ADD_NEW_ACCOUNT = 1;
 

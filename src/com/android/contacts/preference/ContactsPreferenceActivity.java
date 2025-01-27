@@ -17,22 +17,16 @@
 
 package com.android.contacts.preference;
 
-import android.content.res.Configuration;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.provider.ContactsContract.DisplayNameSources;
 import android.provider.ContactsContract.ProviderStatus;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
+import android.text.TextUtils;
+import android.view.MenuItem;
+
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatDelegate;
-import android.text.TextUtils;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.contacts.R;
 import com.android.contacts.editor.SelectAccountDialogFragment;
@@ -46,7 +40,7 @@ import com.android.contacts.util.AccountSelectionUtil;
 /**
  * Contacts settings.
  */
-public final class ContactsPreferenceActivity extends PreferenceActivity
+public final class ContactsPreferenceActivity extends AppCompatActivity
         implements ProfileListener, SelectAccountDialogFragment.Listener {
 
     private static final String TAG_ABOUT = "about_contacts";
@@ -57,19 +51,13 @@ public final class ContactsPreferenceActivity extends PreferenceActivity
 
     private ProviderStatusWatcher mProviderStatusWatcher;
 
-    private AppCompatDelegate mCompatDelegate;
-
     public static final String EXTRA_NEW_LOCAL_PROFILE = "newLocalProfile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mCompatDelegate = AppCompatDelegate.create(this, null);
-
         super.onCreate(savedInstanceState);
-        mCompatDelegate.onCreate(savedInstanceState);
 
-
-        final ActionBar actionBar = mCompatDelegate.getSupportActionBar();
+        final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP, ActionBar.DISPLAY_HOME_AS_UP);
         }
@@ -83,13 +71,13 @@ public final class ContactsPreferenceActivity extends PreferenceActivity
         if (savedInstanceState == null) {
             final DisplayOptionsPreferenceFragment fragment = DisplayOptionsPreferenceFragment
                     .newInstance(mNewLocalProfileExtra, mAreContactsAvailable);
-            getFragmentManager().beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .replace(android.R.id.content, fragment, TAG_DISPLAY_OPTIONS)
                     .commit();
             setActivityTitle(R.string.activity_title_settings);
         } else {
             final AboutPreferenceFragment aboutFragment = (AboutPreferenceFragment)
-                    getFragmentManager().findFragmentByTag(TAG_ABOUT);
+                    getSupportFragmentManager().findFragmentByTag(TAG_ABOUT);
 
             if (aboutFragment != null) {
                 setActivityTitle(R.string.setting_about);
@@ -102,66 +90,10 @@ public final class ContactsPreferenceActivity extends PreferenceActivity
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        mCompatDelegate.onPostCreate(savedInstanceState);
-    }
-
-    @NonNull
-    @Override
-    public MenuInflater getMenuInflater() {
-        return mCompatDelegate.getMenuInflater();
-    }
-
-    @Override
-    public void setContentView(@LayoutRes int layoutRes) {
-        mCompatDelegate.setContentView(layoutRes);
-    }
-
-    @Override
-    public void setContentView(View view) {
-        mCompatDelegate.setContentView(view);
-    }
-
-    @Override
-    public void setContentView(View view, ViewGroup.LayoutParams params) {
-        mCompatDelegate.setContentView(view, params);
-    }
-
-    @Override
-    public void addContentView(View view, ViewGroup.LayoutParams params) {
-        mCompatDelegate.addContentView(view, params);
-    }
-
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        mCompatDelegate.onPostResume();
-    }
-
-    @Override
-    protected void onTitleChanged(CharSequence title, int color) {
-        super.onTitleChanged(title, color);
-        mCompatDelegate.setTitle(title);
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        mCompatDelegate.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mCompatDelegate.onDestroy();
-    }
-
-    @Override
-    public void invalidateOptionsMenu() {
-        mCompatDelegate.invalidateOptionsMenu();
     }
 
     protected void showAboutFragment() {
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content, AboutPreferenceFragment.newInstance(), TAG_ABOUT)
                 .addToBackStack(null)
                 .commit();
@@ -179,16 +111,16 @@ public final class ContactsPreferenceActivity extends PreferenceActivity
 
     @Override
     public void onBackPressed() {
-        if (getFragmentManager().getBackStackEntryCount() > 0) {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             setActivityTitle(R.string.activity_title_settings);
-            getFragmentManager().popBackStack();
+            getSupportFragmentManager().popBackStack();
         } else {
             super.onBackPressed();
         }
     }
 
     private void setActivityTitle(@StringRes int res) {
-        final ActionBar actionBar = mCompatDelegate.getSupportActionBar();
+        final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(res);
         }
@@ -210,7 +142,7 @@ public final class ContactsPreferenceActivity extends PreferenceActivity
             displayName = getString(R.string.missing_name);
         }
         final DisplayOptionsPreferenceFragment fragment = (DisplayOptionsPreferenceFragment)
-                getFragmentManager().findFragmentByTag(TAG_DISPLAY_OPTIONS);
+                getSupportFragmentManager().findFragmentByTag(TAG_DISPLAY_OPTIONS);
         fragment.updateMyInfoPreference(hasProfile, displayName, contactId, displayNameSource);
     }
 

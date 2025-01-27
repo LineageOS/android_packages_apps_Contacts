@@ -18,7 +18,6 @@ package com.android.contacts.list;
 
 import android.content.ContentUris;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
@@ -34,6 +33,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.loader.content.CursorLoader;
 
 import com.android.contacts.CallUtil;
 import com.android.contacts.ContactPhotoManager.DefaultImageRequest;

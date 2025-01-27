@@ -15,13 +15,14 @@
  */
 package com.android.contacts.vcard;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import com.android.contacts.R;
 
@@ -44,8 +45,8 @@ public class ImportVCardDialogFragment extends DialogFragment {
     }
 
     /** Displays the dialog asking for confirmation before importing contacts. */
-    public static void show(Activity activity, Uri sourceUri,
-            String sourceDisplayName) {
+    public static void show(AppCompatActivity activity, Uri sourceUri,
+                            String sourceDisplayName) {
         if (!(activity instanceof Listener)) {
             throw new IllegalArgumentException(
                     "Activity must implement " + Listener.class.getName());
@@ -57,7 +58,7 @@ public class ImportVCardDialogFragment extends DialogFragment {
 
         final ImportVCardDialogFragment dialog = new ImportVCardDialogFragment();
         dialog.setArguments(args);
-        dialog.show(activity.getFragmentManager(), TAG);
+        dialog.show(activity.getSupportFragmentManager(), TAG);
     }
 
     @Override

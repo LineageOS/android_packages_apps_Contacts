@@ -16,10 +16,11 @@
 package com.android.contacts.list;
 
 import android.content.Context;
-import android.content.CursorLoader;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 import android.net.Uri;
+
+import androidx.loader.content.CursorLoader;
 
 /**
  * A specialized loader for the Join Contacts UI.  It executes two queries:

@@ -15,9 +15,10 @@
  */
 package com.android.contacts.activities;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.android.contacts.AppCompatContactsActivity;
 import com.android.contacts.R;
@@ -38,7 +39,7 @@ public class SimImportActivity extends AppCompatContactsActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sim_import_activity);
-        final FragmentManager fragmentManager = getFragmentManager();
+        final FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentByTag("SimImport");
         if (fragment == null) {
             fragment = SimImportFragment.newInstance(getIntent().getIntExtra(EXTRA_SUBSCRIPTION_ID,

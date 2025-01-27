@@ -16,7 +16,6 @@
  */
 package com.android.contacts.list;
 
-import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.ContentObserver;
@@ -27,6 +26,8 @@ import android.os.Handler;
 import android.provider.ContactsContract.Directory;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.loader.content.AsyncTaskLoader;
 
 import com.android.contacts.R;
 

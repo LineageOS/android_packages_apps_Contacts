@@ -23,9 +23,11 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 import com.android.contacts.R;
 import com.android.contacts.activities.LicenseActivity;
@@ -33,7 +35,7 @@ import com.android.contacts.activities.LicenseActivity;
 /**
  * This fragment shows the preferences for "about".
  */
-public class AboutPreferenceFragment extends PreferenceFragment {
+public class AboutPreferenceFragment extends PreferenceFragmentCompat {
 
     public static final String PRIVACY_POLICY_URL = "http://www.google.com/policies/privacy";
     public static final String TERMS_OF_SERVICE_URL = "http://www.google.com/policies/terms";
@@ -41,11 +43,8 @@ public class AboutPreferenceFragment extends PreferenceFragment {
     public static AboutPreferenceFragment newInstance() {
         return new AboutPreferenceFragment();
     }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+    public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preference_about);
 
@@ -69,21 +68,21 @@ public class AboutPreferenceFragment extends PreferenceFragment {
 
         final Preference.OnPreferenceClickListener listener =
                 new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                try {
-                    if (preference == privacyPolicyPreference) {
-                        startActivityForUrl(PRIVACY_POLICY_URL);
-                    } else if (preference == termsOfServicePreference) {
-                        startActivityForUrl(TERMS_OF_SERVICE_URL);
+                    @Override
+                    public boolean onPreferenceClick(Preference preference) {
+                        try {
+                            if (preference == privacyPolicyPreference) {
+                                startActivityForUrl(PRIVACY_POLICY_URL);
+                            } else if (preference == termsOfServicePreference) {
+                                startActivityForUrl(TERMS_OF_SERVICE_URL);
+                            }
+                        } catch (ActivityNotFoundException ex) {
+                            Toast.makeText(getContext(), getString(R.string.url_open_error_toast),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        return true;
                     }
-                } catch (ActivityNotFoundException ex) {
-                    Toast.makeText(getContext(), getString(R.string.url_open_error_toast),
-                            Toast.LENGTH_SHORT).show();
-                }
-                return true;
-            }
-        };
+                };
 
         privacyPolicyPreference.setOnPreferenceClickListener(listener);
         termsOfServicePreference.setOnPreferenceClickListener(listener);

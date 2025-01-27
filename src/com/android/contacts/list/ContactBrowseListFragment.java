@@ -19,7 +19,6 @@ package com.android.contacts.list;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentUris;
-import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
@@ -34,6 +33,9 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Directory;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.loader.content.Loader;
 
 import com.android.common.widget.CompositeCursorAdapter.Partition;
 import com.android.contacts.util.ContactLoaderUtils;
@@ -386,7 +388,7 @@ public abstract class ContactBrowseListFragment extends
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
         super.onLoadFinished(loader, data);
         mSelectionVerified = false;
 
@@ -395,7 +397,8 @@ public abstract class ContactBrowseListFragment extends
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+        super.onLoaderReset(loader);
     }
 
     private void checkSelection() {

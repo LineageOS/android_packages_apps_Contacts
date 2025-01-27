@@ -18,19 +18,22 @@ package com.android.contacts.interactions;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
-import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract.RawContacts;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.app.LoaderManager.LoaderCallbacks;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
 
 import com.android.contacts.ContactSaveService;
 import com.android.contacts.R;
@@ -97,7 +100,7 @@ public class ContactMultiDeletionInteraction extends Fragment
             return null;
         }
 
-        final FragmentManager fragmentManager = hostFragment.getFragmentManager();
+        final FragmentManager fragmentManager = hostFragment.getParentFragmentManager();
         ContactMultiDeletionInteraction fragment =
                 (ContactMultiDeletionInteraction) fragmentManager.findFragmentByTag(FRAGMENT_TAG);
         if (fragment == null) {
@@ -133,8 +136,8 @@ public class ContactMultiDeletionInteraction extends Fragment
         if (isStarted()) {
             Bundle args = new Bundle();
             args.putSerializable(ARG_CONTACT_IDS, mContactIds);
-            getLoaderManager().restartLoader(R.id.dialog_delete_multiple_contact_loader_id,
-                    args, this);
+            LoaderManager.getInstance(this).
+                    restartLoader(R.id.dialog_delete_multiple_contact_loader_id, args, this);
         }
     }
 
@@ -147,7 +150,7 @@ public class ContactMultiDeletionInteraction extends Fragment
         if (mIsLoaderActive) {
             Bundle args = new Bundle();
             args.putSerializable(ARG_CONTACT_IDS, mContactIds);
-            getLoaderManager().initLoader(
+            LoaderManager.getInstance(this).initLoader(
                     R.id.dialog_delete_multiple_contact_loader_id, args, this);
         }
         super.onStart();
@@ -161,6 +164,7 @@ public class ContactMultiDeletionInteraction extends Fragment
         }
     }
 
+    @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         final TreeSet<Long> contactIds = (TreeSet<Long>) args.getSerializable(ARG_CONTACT_IDS);
@@ -181,7 +185,7 @@ public class ContactMultiDeletionInteraction extends Fragment
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor cursor) {
         if (mDialog != null) {
             mDialog.dismiss();
             mDialog = null;
@@ -261,11 +265,12 @@ public class ContactMultiDeletionInteraction extends Fragment
 
         // We don't want onLoadFinished() calls any more, which may come when the database is
         // updating.
-        getLoaderManager().destroyLoader(R.id.dialog_delete_multiple_contact_loader_id);
+        LoaderManager.getInstance(this).destroyLoader(
+                R.id.dialog_delete_multiple_contact_loader_id);
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
     }
 
     private void showDialog(int messageId, int positiveButtonId, final long[] contactIds,

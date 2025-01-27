@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +17,6 @@
 
 package com.android.contacts.editor;
 
-import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -36,6 +35,9 @@ import android.widget.LinearLayout;
 import android.widget.ListPopupWindow;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.android.contacts.GroupMetaDataLoader;
 import com.android.contacts.R;
@@ -167,10 +169,6 @@ public class GroupMembershipView extends LinearLayout
     private GroupNameEditDialogFragment.Listener mListener =
             new GroupNameEditDialogFragment.Listener() {
                 @Override
-                public void onGroupNameEditCancelled() {
-                }
-
-                @Override
                 public void onGroupNameEditCompleted(String name) {
                     mCreatedNewGroup = true;
                 }
@@ -200,7 +198,8 @@ public class GroupMembershipView extends LinearLayout
     }
 
     private void setGroupNameEditDialogFragment() {
-        final FragmentManager fragmentManager = ((Activity) getContext()).getFragmentManager();
+        final FragmentManager fragmentManager =
+                ((AppCompatActivity) getContext()).getSupportFragmentManager();
         mGroupNameEditDialogFragment = (GroupNameEditDialogFragment)
                 fragmentManager.findFragmentByTag(TAG_CREATE_GROUP_FRAGMENT);
         if (mGroupNameEditDialogFragment != null) {
@@ -483,7 +482,7 @@ public class GroupMembershipView extends LinearLayout
                             new AccountWithDataSet(mAccountName, mAccountType, mDataSet), null);
         mGroupNameEditDialogFragment.setListener(mListener);
         mGroupNameEditDialogFragment.show(
-                ((Activity) getContext()).getFragmentManager(),
+                ((AppCompatActivity) getContext()).getSupportFragmentManager(),
                 TAG_CREATE_GROUP_FRAGMENT);
     }
 }

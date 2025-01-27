@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +17,6 @@
 package com.android.contacts.list;
 
 import android.app.Activity;
-import android.content.Loader;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 import android.os.Bundle;
@@ -28,6 +28,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.loader.content.Loader;
 
 import com.android.contacts.R;
 import com.android.contacts.activities.ContactSelectionActivity;

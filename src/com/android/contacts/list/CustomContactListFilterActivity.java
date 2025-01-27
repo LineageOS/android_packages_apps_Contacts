@@ -19,10 +19,7 @@ package com.android.contacts.list;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.LoaderManager.LoaderCallbacks;
 import android.app.ProgressDialog;
 import android.content.ContentProviderOperation;
 import android.content.ContentResolver;
@@ -31,7 +28,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.Loader;
 import android.content.OperationApplicationException;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -56,6 +52,13 @@ import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 
 import com.android.contacts.R;
 import com.android.contacts.model.AccountTypeManager;
@@ -85,9 +88,9 @@ import javax.annotation.Nullable;
  * Shows a list of all available {@link Groups} available, letting the user
  * select which ones they want to be visible.
  */
-public class CustomContactListFilterActivity extends Activity implements
+public class CustomContactListFilterActivity extends AppCompatActivity implements
         ExpandableListView.OnChildClickListener,
-        LoaderCallbacks<CustomContactListFilterActivity.AccountSet> {
+        LoaderManager.LoaderCallbacks<CustomContactListFilterActivity.AccountSet> {
     private static final String TAG = "CustomContactListFilter";
 
     public static final String EXTRA_CURRENT_LIST_FILTER_TYPE = "currentListFilterType";
@@ -213,17 +216,18 @@ public class CustomContactListFilterActivity extends Activity implements
 
     @Override
     protected void onStart() {
-        getLoaderManager().initLoader(ACCOUNT_SET_LOADER_ID, null, this);
+        LoaderManager.getInstance(this).initLoader(ACCOUNT_SET_LOADER_ID, null, this);
         super.onStart();
     }
 
+    @NonNull
     @Override
     public Loader<AccountSet> onCreateLoader(int id, Bundle args) {
         return new CustomFilterConfigurationLoader(this);
     }
 
     @Override
-    public void onLoadFinished(Loader<AccountSet> loader, AccountSet data) {
+    public void onLoadFinished(@NonNull Loader<AccountSet> loader, AccountSet data) {
         mAdapter.setAccounts(data);
     }
 
@@ -952,7 +956,7 @@ public class CustomContactListFilterActivity extends Activity implements
         // Prompt the user whether they want to discard there customizations unless
         // nothing will be changed.
         if (hasUnsavedChanges()) {
-            new ConfirmNavigationDialogFragment().show(getFragmentManager(),
+            new ConfirmNavigationDialogFragment().show(getSupportFragmentManager(),
                     "ConfirmNavigationDialog");
         } else {
             setResult(RESULT_CANCELED);

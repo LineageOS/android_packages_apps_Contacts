@@ -19,7 +19,6 @@ package com.android.contacts.activities;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
 
 /**
  * A common superclass that keeps track of whether an {@link AppCompatActivity} has saved its state
@@ -56,7 +55,7 @@ public abstract class AppCompatTransactionSafeActivity extends AppCompatActivity
 
     /**
      * Returns true if it is safe to commit {@link FragmentTransaction}s at this time, based on
-     * whether {@link FragmentActivity#onSaveInstanceState} has been called or not.
+     * whether {@link AppCompatActivity#onSaveInstanceState} has been called or not.
      *
      * Make sure that the current activity calls into
      * {@link super.onSaveInstanceState(Bundle outState)} (if that method is overridden),

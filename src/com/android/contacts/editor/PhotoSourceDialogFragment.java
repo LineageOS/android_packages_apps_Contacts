@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +17,14 @@
 
 package com.android.contacts.editor;
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+
 import android.view.View;
 import android.widget.TextView;
 
@@ -47,7 +49,7 @@ public class PhotoSourceDialogFragment extends DialogFragment {
         void onPickFromGalleryChosen();
     }
 
-    public static void show(Activity activity, int photoMode) {
+    public static void show(AppCompatActivity activity, int photoMode) {
         if (!(activity instanceof Listener)) {
             throw new IllegalArgumentException(
                     "Activity must implement " + Listener.class.getName());
@@ -57,7 +59,7 @@ public class PhotoSourceDialogFragment extends DialogFragment {
 
         PhotoSourceDialogFragment dialog = new PhotoSourceDialogFragment();
         dialog.setArguments(args);
-        dialog.show(activity.getFragmentManager(), "photoSource");
+        dialog.show(activity.getSupportFragmentManager(), "photoSource");
     }
 
     @Override

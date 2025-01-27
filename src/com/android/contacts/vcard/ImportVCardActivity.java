@@ -41,6 +41,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.contacts.R;
 import com.android.contacts.activities.RequestImportVCardPermissionsActivity;
 import com.android.contacts.model.AccountTypeManager;
@@ -76,7 +78,7 @@ import java.util.List;
  * any Dialog in the instance. So this code is careless about the management around managed
  * dialogs stuffs (like how onCreateDialog() is used).
  */
-public class ImportVCardActivity extends Activity implements ImportVCardDialogFragment.Listener {
+public class ImportVCardActivity extends AppCompatActivity implements ImportVCardDialogFragment.Listener {
     private static final String LOG_TAG = "VCardImport";
 
     private static final int SELECT_ACCOUNT = 0;

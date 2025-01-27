@@ -336,7 +336,7 @@
 
     <!-- Inherit from Theme.Material.Light.Dialog instead of Theme.Material.Light.Dialog.Alert
         since the Alert dialog is private. They are identical anyway. -->
-    <style name="ContactsAlertDialogTheme" parent="@android:style/Theme.Material.Light.Dialog">
+    <style name="ContactsAlertDialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:colorAccent">@color/primary_color</item>
         <item name="android:windowBackground">@drawable/dialog_background</item>
     </style>
@@ -469,7 +469,7 @@ background and text color. See also android:style/Widget.Holo.TextView.ListSepar
         <item name="android:layout_height">match_parent</item>
     </style>
 
-    <style name="BackgroundOnlyTheme" parent="@android:style/Theme.Material.Light">
+    <style name="BackgroundOnlyTheme" parent="Theme.AppCompat.Light">
         <item name="android:windowBackground">@null</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowAnimationStyle">@null</item>
@@ -480,7 +480,7 @@ background and text color. See also android:style/Widget.Holo.TextView.ListSepar
         <item name="android:windowIsFloating">true</item>
     </style>
 
-    <style name="Theme.CallSubjectDialogTheme" parent="@android:style/Theme.Material.Light.Dialog">
+    <style name="Theme.CallSubjectDialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
 

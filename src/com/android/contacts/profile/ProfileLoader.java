@@ -1,12 +1,14 @@
 package com.android.contacts.profile;
 
 import android.content.Context;
-import android.content.CursorLoader;
 import android.database.Cursor;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.DisplayNameSources;
 import android.provider.ContactsContract.Profile;
 import android.text.TextUtils;
+
+import androidx.loader.content.CursorLoader;
+
 import com.android.contacts.R;
 import com.android.contacts.preference.ContactsPreferences;
 

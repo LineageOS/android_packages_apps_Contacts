@@ -18,7 +18,6 @@ package com.android.contacts.list;
 
 import android.content.ContentUris;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.Contacts.ContactMethods;
@@ -26,6 +25,8 @@ import android.provider.Contacts.People;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.loader.content.CursorLoader;
 
 /**
  * A cursor adapter for the ContactMethods.CONTENT_TYPE content type.

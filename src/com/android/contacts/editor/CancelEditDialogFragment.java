@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +18,12 @@
 package com.android.contacts.editor;
 
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 
 import com.android.contacts.R;
 
@@ -38,9 +41,10 @@ public class CancelEditDialogFragment extends DialogFragment {
     public static void show(ContactEditorFragment fragment) {
         final CancelEditDialogFragment dialog = new CancelEditDialogFragment();
         dialog.setTargetFragment(fragment, 0);
-        dialog.show(fragment.getFragmentManager(), TAG);
+        dialog.show(fragment.getChildFragmentManager(), TAG);
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return new AlertDialog.Builder(getActivity())

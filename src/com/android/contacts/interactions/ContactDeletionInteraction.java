@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +18,9 @@
 package com.android.contacts.interactions;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.LoaderManager;
-import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
-import android.content.Loader;
 import android.database.Cursor;
 import android.icu.text.MessageFormat;
 import android.net.Uri;
@@ -36,6 +30,14 @@ import android.provider.ContactsContract.Contacts.Entity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
 
 import com.android.contacts.ContactSaveService;
 import com.android.contacts.R;
@@ -56,7 +58,7 @@ import java.util.Map;
  * An interaction invoked to delete a contact.
  */
 public class ContactDeletionInteraction extends Fragment
-        implements LoaderCallbacks<Cursor>, OnDismissListener {
+        implements LoaderManager.LoaderCallbacks<Cursor>, OnDismissListener {
 
     private static final String TAG = "ContactDeletion";
     private static final String FRAGMENT_TAG = "deleteContact";
@@ -109,7 +111,7 @@ public class ContactDeletionInteraction extends Fragment
      * @return the newly created interaction
      */
     public static ContactDeletionInteraction start(
-            Activity activity, Uri contactUri, boolean finishActivityWhenDone) {
+            AppCompatActivity activity, Uri contactUri, boolean finishActivityWhenDone) {
         return startWithTestLoaderManager(activity, contactUri, finishActivityWhenDone, null);
     }
 
@@ -126,13 +128,13 @@ public class ContactDeletionInteraction extends Fragment
      */
     @VisibleForTesting
     static ContactDeletionInteraction startWithTestLoaderManager(
-            Activity activity, Uri contactUri, boolean finishActivityWhenDone,
+            AppCompatActivity activity, Uri contactUri, boolean finishActivityWhenDone,
             TestLoaderManagerBase testLoaderManager) {
         if (contactUri == null || activity.isDestroyed()) {
             return null;
         }
 
-        FragmentManager fragmentManager = activity.getFragmentManager();
+        FragmentManager fragmentManager = activity.getSupportFragmentManager();
         ContactDeletionInteraction fragment =
                 (ContactDeletionInteraction) fragmentManager.findFragmentByTag(FRAGMENT_TAG);
         if (fragment == null) {
@@ -148,19 +150,6 @@ public class ContactDeletionInteraction extends Fragment
             fragment.setFinishActivityWhenDone(finishActivityWhenDone);
         }
         return fragment;
-    }
-
-    @Override
-    public LoaderManager getLoaderManager() {
-        // Return the TestLoaderManager if one is set up.
-        LoaderManager loaderManager = super.getLoaderManager();
-        if (mTestLoaderManager != null) {
-            // Set the delegate: this operation is idempotent, so let's just do it every time.
-            mTestLoaderManager.setDelegate(loaderManager);
-            return mTestLoaderManager;
-        } else {
-            return loaderManager;
-        }
     }
 
     /** Sets the TestLoaderManager that is used to wrap the actual LoaderManager in tests. */
@@ -190,7 +179,8 @@ public class ContactDeletionInteraction extends Fragment
         if (isStarted()) {
             Bundle args = new Bundle();
             args.putParcelable(ARG_CONTACT_URI, mContactUri);
-            getLoaderManager().restartLoader(R.id.dialog_delete_contact_loader_id, args, this);
+            LoaderManager.getInstance(this).restartLoader(R.id.dialog_delete_contact_loader_id,
+                    args, this);
         }
     }
 
@@ -209,7 +199,7 @@ public class ContactDeletionInteraction extends Fragment
         if (mActive) {
             Bundle args = new Bundle();
             args.putParcelable(ARG_CONTACT_URI, mContactUri);
-            getLoaderManager().initLoader(R.id.dialog_delete_contact_loader_id, args, this);
+            LoaderManager.getInstance(this).initLoader(R.id.dialog_delete_contact_loader_id, args, this);
         }
         super.onStart();
     }
@@ -298,7 +288,7 @@ public class ContactDeletionInteraction extends Fragment
 
         // We don't want onLoadFinished() calls any more, which may come when the database is
         // updating.
-        getLoaderManager().destroyLoader(R.id.dialog_delete_contact_loader_id);
+        LoaderManager.getInstance(this).destroyLoader(R.id.dialog_delete_contact_loader_id);
     }
 
     @Override

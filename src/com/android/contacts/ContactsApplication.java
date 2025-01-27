@@ -18,8 +18,6 @@
 package com.android.contacts;
 
 import android.app.Application;
-import android.app.FragmentManager;
-import android.app.LoaderManager;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
@@ -29,6 +27,9 @@ import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract.Contacts;
 import android.util.Log;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.loader.app.LoaderManager;
 
 import com.android.contacts.testing.InjectedServices;
 import com.android.contacts.util.Constants;

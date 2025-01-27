@@ -22,8 +22,6 @@ import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.Loader;
-import android.content.Loader.OnLoadCompleteListener;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
@@ -37,6 +35,9 @@ import android.provider.ContactsContract.Intents;
 import android.provider.ContactsContract.RawContacts;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.loader.content.Loader;
+import androidx.loader.content.Loader.OnLoadCompleteListener;
 
 import com.android.contacts.ContactSaveService;
 import com.android.contacts.ContactsActivity;

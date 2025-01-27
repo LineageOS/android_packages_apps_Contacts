@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,10 +19,12 @@ package com.android.contacts.editor;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 
 import com.android.contacts.R;
 
@@ -63,7 +66,7 @@ public class SplitContactConfirmationDialogFragment extends DialogFragment {
                 SplitContactConfirmationDialogFragment();
         dialog.setTargetFragment(fragment, 0);
         dialog.setArguments(args);
-        dialog.show(fragment.getFragmentManager(), "splitContact");
+        dialog.show(fragment.getChildFragmentManager(), "splitContact");
     }
 
     private boolean mHasPendingChanges;
@@ -75,6 +78,7 @@ public class SplitContactConfirmationDialogFragment extends DialogFragment {
                 && getArguments().getBoolean(ARG_HAS_PENDING_CHANGES);
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -107,7 +111,7 @@ public class SplitContactConfirmationDialogFragment extends DialogFragment {
     }
 
     @Override
-    public void onCancel(DialogInterface dialog) {
+    public void onCancel(@NonNull DialogInterface dialog) {
         super.onCancel(dialog);
         getListener().onSplitContactCanceled();
     }

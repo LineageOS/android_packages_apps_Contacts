@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +18,7 @@
 package com.android.contacts;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -29,6 +28,9 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents.Insert;
 import android.telecom.PhoneAccount;
 import android.text.TextUtils;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 
 import com.android.contacts.activities.RequestPermissionsActivity;
 import com.android.contacts.util.ImplicitIntentsUtil;
@@ -56,7 +58,7 @@ public class NonPhoneActivity extends ContactsActivity {
         Bundle bundle = new Bundle();
         bundle.putString(PHONE_NUMBER_KEY, phoneNumber);
         fragment.setArguments(bundle);
-        getFragmentManager().beginTransaction().add(fragment, "Fragment").commitAllowingStateLoss();
+        getSupportFragmentManager().beginTransaction().add(fragment, "Fragment").commitAllowingStateLoss();
     }
 
     private String getPhoneNumber() {

@@ -17,7 +17,6 @@
 
 package com.android.contacts.group;
 
-import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +27,8 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Groups;
 import android.text.TextUtils;
+
+import androidx.fragment.app.Fragment;
 
 import com.android.contacts.ContactsUtils;
 import com.android.contacts.GroupListLoader;

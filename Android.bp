@@ -33,11 +33,12 @@ android_app {
 
         "com.google.android.material_material",
         "androidx.transition_transition",
-        "androidx.legacy_legacy-support-v13",
         "androidx.appcompat_appcompat",
         "androidx.cardview_cardview",
         "androidx.recyclerview_recyclerview",
         "androidx.palette_palette",
+        "androidx.preference_preference",
+        "androidx.swiperefreshlayout_swiperefreshlayout",
         "androidx.legacy_legacy-support-v4",
         "android-common",
         "com.android.vcard",

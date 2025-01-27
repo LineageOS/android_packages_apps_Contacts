@@ -20,8 +20,6 @@ package com.android.contacts.interactions;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -37,6 +35,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.android.contacts.R;
 import com.android.contacts.util.ImplicitIntentsUtil;
@@ -62,7 +63,7 @@ public class ExportDialogFragment extends DialogFragment {
 
     /** Preferred way to show this dialog */
     public static void show(FragmentManager fragmentManager, Class callingActivity,
-            int exportMode) {
+                            int exportMode) {
         final ExportDialogFragment fragment = new ExportDialogFragment();
         Bundle args = new Bundle();
         args.putString(VCardCommonArguments.ARG_CALLING_ACTIVITY, callingActivity.getName());

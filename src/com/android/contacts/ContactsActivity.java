@@ -17,18 +17,19 @@
 
 package com.android.contacts;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.contacts.testing.InjectedServices;
 
 /**
  * A common superclass for Contacts activities that handles application-wide services.
  */
-public abstract class ContactsActivity extends Activity
+public abstract class ContactsActivity extends AppCompatActivity
     implements ContactSaveService.Listener
 {
 

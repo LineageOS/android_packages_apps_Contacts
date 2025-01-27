@@ -18,7 +18,6 @@
 package com.android.contacts.activities;
 
 import android.app.Dialog;
-import android.app.FragmentTransaction;
 import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -356,8 +355,8 @@ public class ContactEditorActivity extends AppCompatContactsActivity implements
         // Set activity title for Talkback
         setTitle(mActionBarTitleResId);
 
-        mFragment =
-            (ContactEditor) getFragmentManager().findFragmentById(R.id.contact_editor_fragment);
+        mFragment = (ContactEditor) getSupportFragmentManager().findFragmentById(
+                R.id.contact_editor_fragment);
 
         if (savedState != null) {
             // Restore state

@@ -17,7 +17,6 @@
 package com.android.contacts.list;
 
 import android.content.Context;
-import android.content.CursorLoader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.net.Uri.Builder;
@@ -30,6 +29,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.loader.content.CursorLoader;
 
 import com.android.contacts.R;
 import com.android.contacts.preference.ContactsPreferences;

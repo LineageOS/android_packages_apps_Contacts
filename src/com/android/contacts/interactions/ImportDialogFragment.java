@@ -18,19 +18,13 @@
 package com.android.contacts.interactions;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.icu.text.MessageFormat;
 import android.os.Bundle;
-import androidx.core.text.BidiFormatter;
-import androidx.core.text.TextDirectionHeuristicsCompat;
-
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
@@ -40,13 +34,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.text.BidiFormatter;
+import androidx.core.text.TextDirectionHeuristicsCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.android.contacts.R;
 import com.android.contacts.activities.SimImportActivity;
 import com.android.contacts.database.SimContactDao;
 import com.android.contacts.editor.SelectAccountDialogFragment;
 import com.android.contacts.model.AccountTypeManager;
 import com.android.contacts.model.SimCard;
-import com.android.contacts.model.SimContact;
 import com.android.contacts.model.account.AccountInfo;
 import com.android.contacts.model.account.AccountWithDataSet;
 import com.android.contacts.util.AccountSelectionUtil;
@@ -269,7 +268,7 @@ public class ImportDialogFragment extends DialogFragment {
             args.putInt(KEY_RES_ID, resId);
             args.putInt(KEY_SUBSCRIPTION_ID, subscriptionId);
             SelectAccountDialogFragment.show(
-                    getFragmentManager(), R.string.dialog_new_contact_account,
+                    getChildFragmentManager(), R.string.dialog_new_contact_account,
                     AccountTypeManager.AccountFilter.CONTACTS_WRITABLE, args);
         } else {
             AccountSelectionUtil.doImport(getActivity(), resId,

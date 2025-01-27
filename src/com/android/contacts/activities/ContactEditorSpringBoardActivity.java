@@ -1,18 +1,20 @@
 package com.android.contacts.activities;
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.app.LoaderManager;
 import android.content.ContentUris;
 import android.content.Intent;
-import android.content.Loader;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.RawContacts;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 
 import com.android.contacts.AppCompatContactsActivity;
 import com.android.contacts.ContactSaveService;
@@ -56,14 +58,15 @@ public class ContactEditorSpringBoardActivity extends AppCompatContactsActivity 
     protected final LoaderManager.LoaderCallbacks<RawContactsMetadata> mRawContactLoaderListener =
             new LoaderManager.LoaderCallbacks<RawContactsMetadata>() {
 
+                @NonNull
                 @Override
                 public Loader<RawContactsMetadata> onCreateLoader(int id, Bundle args) {
                     return new PickRawContactLoader(ContactEditorSpringBoardActivity.this, mUri);
                 }
 
                 @Override
-                public void onLoadFinished(Loader<RawContactsMetadata> loader,
-                        RawContactsMetadata result) {
+                public void onLoadFinished(@NonNull Loader<RawContactsMetadata> loader,
+                                           RawContactsMetadata result) {
                     if (result == null) {
                         toastErrorAndFinish();
                         return;
@@ -73,7 +76,7 @@ public class ContactEditorSpringBoardActivity extends AppCompatContactsActivity 
                 }
 
                 @Override
-                public void onLoaderReset(Loader<RawContactsMetadata> loader) {
+                public void onLoaderReset(@NonNull Loader<RawContactsMetadata> loader) {
                 }
             };
 
@@ -116,7 +119,8 @@ public class ContactEditorSpringBoardActivity extends AppCompatContactsActivity 
             Log.e(TAG, "Legacy Uri was passed to editor.", new IllegalArgumentException());
             toastErrorAndFinish();
         } else {
-            getLoaderManager().initLoader(LOADER_RAW_CONTACTS, null, mRawContactLoaderListener);
+            LoaderManager.getInstance(this).initLoader(LOADER_RAW_CONTACTS, null,
+                    mRawContactLoaderListener);
         }
     }
 
@@ -154,7 +158,7 @@ public class ContactEditorSpringBoardActivity extends AppCompatContactsActivity 
      * Start the dialog to pick the raw contact to edit.
      */
     private void showDialog() {
-        final FragmentManager fm = getFragmentManager();
+        final FragmentManager fm = getSupportFragmentManager();
         final SplitContactConfirmationDialogFragment split =
                 (SplitContactConfirmationDialogFragment) fm
                         .findFragmentByTag(SplitContactConfirmationDialogFragment.TAG);

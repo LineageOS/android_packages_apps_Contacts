@@ -17,7 +17,6 @@
 package com.android.contacts.list;
 
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
@@ -34,6 +33,8 @@ import android.view.ViewGroup;
 import android.widget.QuickContactBadge;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
+
+import androidx.loader.content.CursorLoader;
 
 import com.android.contacts.ContactPhotoManager;
 import com.android.contacts.ContactPhotoManager.DefaultImageRequest;

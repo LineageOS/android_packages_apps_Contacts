@@ -18,7 +18,6 @@ package com.android.contacts.list;
 
 import android.content.ContentUris;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.Contacts.People;
@@ -26,6 +25,8 @@ import android.provider.Contacts.Phones;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.loader.content.CursorLoader;
 
 /**
  * A cursor adapter for the Phones.CONTENT_TYPE content type.

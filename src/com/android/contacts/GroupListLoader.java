@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +17,10 @@
 package com.android.contacts;
 
 import android.content.Context;
-import android.content.CursorLoader;
 import android.net.Uri;
 import android.provider.ContactsContract.Groups;
+
+import androidx.loader.content.CursorLoader;
 
 import com.android.contacts.group.GroupUtil;
 

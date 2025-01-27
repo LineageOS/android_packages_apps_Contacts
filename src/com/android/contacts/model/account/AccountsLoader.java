@@ -16,13 +16,15 @@
  */
 package com.android.contacts.model.account;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.LoaderManager;
 import android.content.Context;
 import android.content.IntentFilter;
-import android.content.Loader;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 
 import com.android.contacts.model.AccountTypeManager;
 import com.android.contacts.util.concurrent.ListenableFutureLoader;
@@ -72,35 +74,36 @@ public class AccountsLoader extends ListenableFutureLoader<List<AccountInfo>> {
      */
     public static <FragmentType extends Fragment & AccountsListener> void loadAccounts(
             final FragmentType fragment, int loaderId, final Predicate<AccountInfo> filter) {
-        loadAccounts(
-                fragment.getActivity(), fragment.getLoaderManager(), loaderId, filter, fragment);
+        loadAccounts(fragment.getActivity(), LoaderManager.getInstance(fragment), loaderId, filter,
+                fragment);
     }
 
     /**
      * Same as {@link #loadAccounts(Fragment, int, Predicate)} for an Activity
      */
-    public static <ActivityType extends Activity & AccountsListener> void loadAccounts(
+    public static <ActivityType extends AppCompatActivity & AccountsListener> void loadAccounts(
             final ActivityType activity, int id, final Predicate<AccountInfo> filter) {
-        loadAccounts(activity, activity.getLoaderManager(), id, filter, activity);
+        loadAccounts(activity, LoaderManager.getInstance(activity), id, filter, activity);
     }
 
     private static void loadAccounts(final Context context, LoaderManager loaderManager, int id,
             final Predicate<AccountInfo> filter, final AccountsListener listener) {
         loaderManager.initLoader(id, null,
                 new LoaderManager.LoaderCallbacks<List<AccountInfo>>() {
+                    @NonNull
                     @Override
                     public Loader<List<AccountInfo>> onCreateLoader(int id, Bundle args) {
                         return new AccountsLoader(context, filter);
                     }
 
                     @Override
-                    public void onLoadFinished(
-                            Loader<List<AccountInfo>> loader, List<AccountInfo> data) {
+                    public void onLoadFinished(@NonNull Loader<List<AccountInfo>> loader,
+                                               List<AccountInfo> data) {
                         listener.onAccountsLoaded(data);
                     }
 
                     @Override
-                    public void onLoaderReset(Loader<List<AccountInfo>> loader) {
+                    public void onLoaderReset(@NonNull Loader<List<AccountInfo>> loader) {
                     }
                 });
     }

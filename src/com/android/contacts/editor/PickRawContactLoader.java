@@ -1,6 +1,5 @@
 package com.android.contacts.editor;
 
-import android.content.AsyncTaskLoader;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
@@ -12,6 +11,8 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
+
+import androidx.loader.content.AsyncTaskLoader;
 
 import com.android.contacts.model.AccountTypeManager;
 import com.android.contacts.model.account.AccountType;

@@ -3,19 +3,21 @@ package com.android.contacts.preference;
 import android.app.Activity;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.contacts.R;
 import com.android.contacts.editor.SelectAccountDialogFragment;
 import com.android.contacts.model.AccountTypeManager.AccountFilter;
 import com.android.contacts.model.account.AccountWithDataSet;
 
 /** Activity to open a dialog for default account selection. */
-public final class SetDefaultAccountActivity extends Activity
+public final class SetDefaultAccountActivity extends AppCompatActivity
         implements SelectAccountDialogFragment.Listener {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
-      SelectAccountDialogFragment.show(getFragmentManager(),
+      SelectAccountDialogFragment.show(getSupportFragmentManager(),
               R.string.default_editor_account, AccountFilter.CONTACTS_WRITABLE, null);
   }
 

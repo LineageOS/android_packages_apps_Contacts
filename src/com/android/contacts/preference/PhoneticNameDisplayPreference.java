@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +17,10 @@
 
 package com.android.contacts.preference;
 
-import android.app.AlertDialog.Builder;
 import android.content.Context;
-import android.preference.ListPreference;
 import android.util.AttributeSet;
+
+import androidx.preference.ListPreference;
 
 import com.android.contacts.R;
 
@@ -82,12 +83,5 @@ public final class PhoneticNameDisplayPreference extends ListPreference {
             notifyChanged();
         }
         return true;
-    }
-
-    // UX recommendation is not to show cancel button on such lists.
-    @Override
-    protected void onPrepareDialogBuilder(Builder builder) {
-        super.onPrepareDialogBuilder(builder);
-        builder.setNegativeButton(null, null);
     }
 }

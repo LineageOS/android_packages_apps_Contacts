@@ -17,11 +17,8 @@
 package com.android.contacts;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.LoaderManager;
 import android.content.Context;
 import android.content.IntentFilter;
-import android.content.Loader;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +28,10 @@ import androidx.collection.ArrayMap;
 import androidx.core.view.ViewCompat;
 import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -105,9 +106,9 @@ public class SimImportFragment extends Fragment
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        getLoaderManager().initLoader(0, null, this);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        LoaderManager.getInstance(this).initLoader(0, null, this);
     }
 
     @Nullable
@@ -220,7 +221,7 @@ public class SimImportFragment extends Fragment
     @Override
     public void onStart() {
         super.onStart();
-        if (mAdapter.isEmpty() && getLoaderManager().getLoader(0).isStarted()) {
+        if (mAdapter.isEmpty() && LoaderManager.getInstance(this).getLoader(0).isStarted()) {
             mLoadingIndicator.show();
         }
     }
@@ -235,14 +236,14 @@ public class SimImportFragment extends Fragment
         saveAdapterSelectedStates(outState);
     }
 
+    @NonNull
     @Override
     public Loader<LoaderResult> onCreateLoader(int id, Bundle args) {
         return new SimContactLoader(getContext(), mSubscriptionId);
     }
 
     @Override
-    public void onLoadFinished(Loader<LoaderResult> loader,
-            LoaderResult data) {
+    public void onLoadFinished(@NonNull Loader<LoaderResult> loader, LoaderResult data) {
         mLoadingIndicator.hide();
         if (data == null) {
             return;

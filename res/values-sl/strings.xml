@@ -19,8 +19,8 @@
     <string name="applicationLabel" msgid="8908212014470937609">"Stiki"</string>
     <string name="contactsList" msgid="4456188358262700898">"Stiki"</string>
     <string name="shortcut_add_contact" msgid="7949342235528657981">"Dodaj stik"</string>
-    <string name="shortcutContact" msgid="8009736387364461511">"Vizitka"</string>
-    <string name="shortcutDialContact" msgid="155367248069127153">"Bližnjice za klicanje"</string>
+    <string name="shortcutContact" msgid="8009736387364461511">"Stik"</string>
+    <string name="shortcutDialContact" msgid="155367248069127153">"Neposredni klic"</string>
     <string name="shortcutMessageContact" msgid="9123517151981679277">"Neposredno sporočilo"</string>
     <string name="shortcutActivityTitle" msgid="5407832911005090417">"Izbira stika"</string>
     <string name="contactInsertOrEditActivityTitle" msgid="1788154962629911262">"Dodajanje v stik"</string>

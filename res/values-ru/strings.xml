@@ -20,8 +20,8 @@
     <string name="contactsList" msgid="4456188358262700898">"Контакты"</string>
     <string name="shortcut_add_contact" msgid="7949342235528657981">"Добавить контакт"</string>
     <string name="shortcutContact" msgid="8009736387364461511">"Контакт"</string>
-    <string name="shortcutDialContact" msgid="155367248069127153">"Быстрый звонок"</string>
-    <string name="shortcutMessageContact" msgid="9123517151981679277">"Быстрое SMS"</string>
+    <string name="shortcutDialContact" msgid="155367248069127153">"Позвонить"</string>
+    <string name="shortcutMessageContact" msgid="9123517151981679277">"Написать"</string>
     <string name="shortcutActivityTitle" msgid="5407832911005090417">"Выбрать контакт"</string>
     <string name="contactInsertOrEditActivityTitle" msgid="1788154962629911262">"Добавление данных"</string>
     <string name="contactPickerActivityTitle" msgid="1842634991247618890">"Выберите контакт"</string>

@@ -20,7 +20,7 @@
     <string name="contactsList" msgid="4456188358262700898">"સંપર્કો"</string>
     <string name="shortcut_add_contact" msgid="7949342235528657981">"સંપર્ક ઉમેરો"</string>
     <string name="shortcutContact" msgid="8009736387364461511">"સંપર્ક"</string>
-    <string name="shortcutDialContact" msgid="155367248069127153">"સીધું જ ડાયલ"</string>
+    <string name="shortcutDialContact" msgid="155367248069127153">"ડિરેક્ટ ડાયલ"</string>
     <string name="shortcutMessageContact" msgid="9123517151981679277">"ડિરેક્ટ મેસેજ"</string>
     <string name="shortcutActivityTitle" msgid="5407832911005090417">"સંપર્ક પસંદ કરો"</string>
     <string name="contactInsertOrEditActivityTitle" msgid="1788154962629911262">"સંપર્કમાં ઉમેરો"</string>
@@ -165,8 +165,8 @@
     <string name="delete_group_dialog_message" msgid="754082019928025404">"\"<xliff:g id="GROUP_LABEL">%1$s</xliff:g>\" લેબલ કાઢી નાખીએ? (સંપર્કો સ્વયં કાઢી નાખવામાં આવશે નહીં.)"</string>
     <string name="toast_join_with_empty_contact" msgid="3886468280665325350">"બીજા સાથે લિંક કરતાં પહેલાં સંપર્કનું નામ લખો."</string>
     <string name="copy_text" msgid="6835250673373028909">"ક્લિપબોર્ડ પર કૉપિ કરો"</string>
-    <string name="set_default" msgid="3704074175618702225">"ડિફોલ્ટ સેટ કરો"</string>
-    <string name="clear_default" msgid="2055883863621491533">"ડિફોલ્ટ સાફ કરો"</string>
+    <string name="set_default" msgid="3704074175618702225">"ડિફૉલ્ટ સેટ કરો"</string>
+    <string name="clear_default" msgid="2055883863621491533">"ડિફૉલ્ટ સાફ કરો"</string>
     <string name="toast_text_copied" msgid="845906090076228771">"ટેક્સ્ટ કૉપિ કર્યો"</string>
     <string name="cancel_confirmation_dialog_message" msgid="7486892574762212762">"ફેરફારો નિકાળીએ?"</string>
     <string name="cancel_confirmation_dialog_cancel_editing_button" msgid="8280294641821133477">"નિકાળો"</string>
@@ -424,7 +424,7 @@
     <string name="display_options_view_given_name_first" msgid="383885125505521383">"પ્રથમ નામ પહેલા"</string>
     <string name="display_options_view_family_name_first" msgid="6597077054231296007">"છેલ્લું નામ પહેલા"</string>
     <string name="settings_accounts" msgid="119582613811929994">"એકાઉન્ટ્સ"</string>
-    <string name="default_editor_account" msgid="4810392921888877149">"નવા સંપર્કો માટે ડિફોલ્ટ એકાઉન્ટ"</string>
+    <string name="default_editor_account" msgid="4810392921888877149">"નવા સંપર્કો માટે ડિફૉલ્ટ એકાઉન્ટ"</string>
     <string name="settings_my_info_title" msgid="6236848378653551341">"મારી માહિતી"</string>
     <string name="set_up_profile" msgid="3554999219868611431">"તમારી પ્રોફાઇલ સેટ કરો"</string>
     <string name="setting_about" msgid="2941859292287597555">"સંપર્કો વિશે"</string>

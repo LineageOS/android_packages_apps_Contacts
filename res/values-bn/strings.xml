@@ -41,7 +41,7 @@
     <string name="menu_renameGroup" msgid="2685886609399776475">"লেবেলের পুনঃনামকরণ করুন"</string>
     <string name="menu_deleteGroup" msgid="1180215594530228294">"লেবেল মুছুন"</string>
     <string name="menu_addToGroup" msgid="5034813446697655310">"পরিচিতি যোগ করুন"</string>
-    <string name="menu_selectForGroup" msgid="6386553337569514850">"পরিচিতিগুলিকে বেছে নিন"</string>
+    <string name="menu_selectForGroup" msgid="6386553337569514850">"পরিচিতি বেছে নিন"</string>
     <string name="menu_addContactsToGroup" msgid="4549318978482280577">"পরিচিতিগুলি যোগ করুন"</string>
     <string name="menu_removeFromGroup" msgid="8753799091967887958">"লেবেল থেকে সরান"</string>
     <string name="menu_new_group_action_bar" msgid="1670312283925872483">"লেবেল তৈরি করুন"</string>

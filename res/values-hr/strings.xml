@@ -41,7 +41,7 @@
     <string name="menu_renameGroup" msgid="2685886609399776475">"Promjena naziva oznake"</string>
     <string name="menu_deleteGroup" msgid="1180215594530228294">"Brisanje oznake"</string>
     <string name="menu_addToGroup" msgid="5034813446697655310">"Dodavanje kontakta"</string>
-    <string name="menu_selectForGroup" msgid="6386553337569514850">"Odabir kontakata"</string>
+    <string name="menu_selectForGroup" msgid="6386553337569514850">"Odaberite kontakte"</string>
     <string name="menu_addContactsToGroup" msgid="4549318978482280577">"Dodavanje kontakata"</string>
     <string name="menu_removeFromGroup" msgid="8753799091967887958">"Uklanjanje iz oznake"</string>
     <string name="menu_new_group_action_bar" msgid="1670312283925872483">"Izrada oznake"</string>
@@ -115,7 +115,7 @@
     <string name="groupSomeContactsNoPhonesToast" msgid="2454029254458875746">"Neki kontakti nemaju telefonske brojeve."</string>
     <string name="menu_sendEmailOption" msgid="8600335923636486825">"Slanje e-poruke"</string>
     <string name="menu_sendMessageOption" msgid="8051852013078110910">"Slanje poruke"</string>
-    <string name="pickerSelectContactsActivityTitle" msgid="8265907544009447967">"Odabir kontakata"</string>
+    <string name="pickerSelectContactsActivityTitle" msgid="8265907544009447967">"Odaberite kontakte"</string>
     <string name="send_to_selection" msgid="3655197947726443720">"Slanje"</string>
     <string name="listFoundAllContactsZero" msgid="1933842282916988563">"Nema kontakata"</string>
     <string name="add_contact_dlg_message_fmt" msgid="7498024710169591375">"Dodati \"<xliff:g id="EMAIL">%s</xliff:g>\" kontaktima?"</string>
@@ -470,7 +470,7 @@
     <string name="dynamic_shortcut_disabled_message" msgid="8770462908102469878">"Ovaj je prečac onemogućen"</string>
     <string name="dynamic_shortcut_contact_removed_message" msgid="8331735243566193974">"Kontakt je uklonjen"</string>
     <string name="sim_import_button_text" msgid="2845608246304396009">"Uvezi"</string>
-    <string name="sim_import_title_none_selected" msgid="3527680774575468781">"Odabir kontakata"</string>
+    <string name="sim_import_title_none_selected" msgid="3527680774575468781">"Odaberite kontakte"</string>
     <string name="sim_import_empty_message" msgid="7238368542566545854">"Nema kontakata na vašoj SIM kartici"</string>
     <string name="sim_import_contact_exists_toast" msgid="8423212007841229749">"Kontakt već postoji na vašem popisu"</string>
     <string name="sim_import_success_toast_fmt" msgid="7645974841482481503">"{count,plural, =1{Uvezen je # SIM kontakt}one{Uvezen je # SIM kontakt}few{Uvezena su # SIM kontakta}other{Uvezeno je # SIM kontakata}}"</string>

@@ -115,7 +115,7 @@
     <string name="groupSomeContactsNoPhonesToast" msgid="2454029254458875746">"بعض جهات الاتصال ليست لديها أرقام هواتف."</string>
     <string name="menu_sendEmailOption" msgid="8600335923636486825">"إرسال رسالة إلكترونية"</string>
     <string name="menu_sendMessageOption" msgid="8051852013078110910">"إرسال رسالة"</string>
-    <string name="pickerSelectContactsActivityTitle" msgid="8265907544009447967">"اختيار جهات الاتصال"</string>
+    <string name="pickerSelectContactsActivityTitle" msgid="8265907544009447967">"يُرجى اختيار جهات الاتصال"</string>
     <string name="send_to_selection" msgid="3655197947726443720">"إرسال"</string>
     <string name="listFoundAllContactsZero" msgid="1933842282916988563">"ليست هناك جهات اتصال"</string>
     <string name="add_contact_dlg_message_fmt" msgid="7498024710169591375">"هل ترغب في إضافة \"<xliff:g id="EMAIL">%s</xliff:g>\" إلى جهات الاتصال؟"</string>

@@ -16,10 +16,10 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="8908212014470937609">"ଯୋଗାଯୋଗ"</string>
+    <string name="applicationLabel" msgid="8908212014470937609">"କଣ୍ଟାକ୍ଟ"</string>
     <string name="contactsList" msgid="4456188358262700898">"ଯୋଗାଯୋଗ"</string>
     <string name="shortcut_add_contact" msgid="7949342235528657981">"ଯୋଗାଯୋଗକୁ ଯୋଗ କରନ୍ତୁ"</string>
-    <string name="shortcutContact" msgid="8009736387364461511">"ଯୋଗାଯୋଗ"</string>
+    <string name="shortcutContact" msgid="8009736387364461511">"କଣ୍ଟାକ୍ଟ"</string>
     <string name="shortcutDialContact" msgid="155367248069127153">"ଡାଇରେକ୍ଟ କଲ୍ କରନ୍ତୁ"</string>
     <string name="shortcutMessageContact" msgid="9123517151981679277">"ଡାଇରେକ୍ଟ ମେସେଜ୍‍ ପଠାନ୍ତୁ"</string>
     <string name="shortcutActivityTitle" msgid="5407832911005090417">"ଯୋଗାଯୋଗ ଚୟନ କରନ୍ତୁ"</string>
@@ -41,7 +41,7 @@
     <string name="menu_renameGroup" msgid="2685886609399776475">"ଲେବଲ୍‌ର ନାମ ବଦଳାନ୍ତୁ"</string>
     <string name="menu_deleteGroup" msgid="1180215594530228294">"ଲେବଲ୍ ଡିଲିଟ୍ କରନ୍ତୁ"</string>
     <string name="menu_addToGroup" msgid="5034813446697655310">"ଯୋଗାଯୋଗଙ୍କୁ ଯୋଡ଼ନ୍ତୁ"</string>
-    <string name="menu_selectForGroup" msgid="6386553337569514850">"ଯୋଗାଯୋଗ ଚୟନ କରନ୍ତୁ"</string>
+    <string name="menu_selectForGroup" msgid="6386553337569514850">"କଣ୍ଟାକ୍ଟଗୁଡ଼ିକୁ ଚୟନ କରନ୍ତୁ"</string>
     <string name="menu_addContactsToGroup" msgid="4549318978482280577">"ଯୋଗାଯୋଗଙ୍କୁ ଯୋଡ଼ନ୍ତୁ"</string>
     <string name="menu_removeFromGroup" msgid="8753799091967887958">"ଲେବଲ୍‌ରୁ କାଢ଼ିଦିଅନ୍ତୁ"</string>
     <string name="menu_new_group_action_bar" msgid="1670312283925872483">"ଲେବଲ୍ ତିଆରି କରନ୍ତୁ"</string>
@@ -229,7 +229,7 @@
     <string name="menu_title_filters" msgid="349866121417914494">"ଆକାଉଣ୍ଟ"</string>
     <string name="hamburger_feature_highlight_header" msgid="1786641424099282909">"ପରାମର୍ଶ"</string>
     <string name="hamburger_feature_highlight_body" msgid="782935036630531528">"ନିଜ ଯୋଗାଯୋଗଙ୍କୁ ବ୍ୟବସ୍ଥିତ ଓ ଉପଯୋଗୀ କରି ରଖନ୍ତୁ"</string>
-    <string name="undo" msgid="2446931036220975026">"ଅନ୍-ଡୁ କରନ୍ତୁ"</string>
+    <string name="undo" msgid="2446931036220975026">"ଅନଡୁ କରନ୍ତୁ"</string>
     <string name="call_custom" msgid="2844900154492073207">"<xliff:g id="CUSTOM_LABEL">%s</xliff:g>ରେ କଲ୍ କରନ୍ତୁ"</string>
     <string name="call_home" msgid="2443904771140750492">"ଘର ନମ୍ବର୍‌କୁ କଲ୍ କରନ୍ତୁ"</string>
     <string name="call_mobile" msgid="6504312789160309832">"ମୋବାଇଲ୍‍କୁ କଲ୍‍ କରନ୍ତୁ"</string>

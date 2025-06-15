@@ -17,11 +17,11 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8908212014470937609">"कन्ट्याक्टहरू"</string>
-    <string name="contactsList" msgid="4456188358262700898">"सम्पर्क"</string>
+    <string name="contactsList" msgid="4456188358262700898">"कन्ट्याक्टहरू"</string>
     <string name="shortcut_add_contact" msgid="7949342235528657981">"सम्पर्क थप्नुहोस्"</string>
-    <string name="shortcutContact" msgid="8009736387364461511">"ठेगाना"</string>
+    <string name="shortcutContact" msgid="8009736387364461511">"कन्ट्याक्ट"</string>
     <string name="shortcutDialContact" msgid="155367248069127153">"सीधा डायल गर्नुहोस्"</string>
-    <string name="shortcutMessageContact" msgid="9123517151981679277">"सीधा सन्देश"</string>
+    <string name="shortcutMessageContact" msgid="9123517151981679277">"डाइरेक्ट म्यासेज"</string>
     <string name="shortcutActivityTitle" msgid="5407832911005090417">"सम्पर्क छनौट गर्नुहोस्"</string>
     <string name="contactInsertOrEditActivityTitle" msgid="1788154962629911262">"सम्पर्कमा थप्नुहोस्"</string>
     <string name="contactPickerActivityTitle" msgid="1842634991247618890">"एउटा सम्पर्क छान्नुहोस्"</string>
@@ -291,7 +291,7 @@
     <string name="list_filter_phones" msgid="6839133198968393843">"फोन नम्बर भएका सबै कन्ट्याक्टहरू"</string>
     <string name="list_filter_phones_work" msgid="5583425697781385616">"कार्य प्रोफाइलका कन्ट्याक्टहरू"</string>
     <string name="view_updates_from_group" msgid="6233444629074835594">"अपडेटहरू हेर्नुहोस्"</string>
-    <string name="account_phone" msgid="8044426231251817556">"यन्त्र"</string>
+    <string name="account_phone" msgid="8044426231251817556">"डिभाइस"</string>
     <string name="account_sim" msgid="3200457113308694663">"SIM"</string>
     <string name="nameLabelsGroup" msgid="513809148312046843">"नाम"</string>
     <string name="nicknameLabelsGroup" msgid="794390116782033956">"उपनाम"</string>
@@ -357,7 +357,7 @@
     <string name="list_filter_all_accounts" msgid="6173785387972096770">"सबै कन्ट्याक्टहरू"</string>
     <string name="list_filter_all_starred" msgid="2582865760150432568">"ताराङ्कित"</string>
     <string name="list_filter_customize" msgid="2368900508906139537">" कस्टम बनाउनुहोस्"</string>
-    <string name="list_filter_single" msgid="6003845379327432129">"ठेगाना"</string>
+    <string name="list_filter_single" msgid="6003845379327432129">"कन्ट्याक्ट"</string>
     <string name="display_ungrouped" msgid="4823012484407759332">"अन्य सबै कन्ट्याक्टहरू"</string>
     <string name="display_all_contacts" msgid="1281067776483704512">"सबै कन्ट्याक्टहरू"</string>
     <string name="menu_sync_remove" msgid="7523335046562082188">"सिंक समूह हटाउनुहोस्"</string>
@@ -407,7 +407,7 @@
     <string name="vcard_import_request_rejected_message" msgid="4754292694777189540">"vCard निर्यात अनुरोध अस्वीकार गरिएको छ । कृपया पछि पर्यास गर्नुहोस्"</string>
     <string name="contacts_export_will_start_message" msgid="6428126265599715944">"सम्पर्कहरूलाई चॉंडै निर्यात गरिने छ।"</string>
     <string name="vcard_export_request_rejected_message" msgid="6455336845734884740">"vCard निर्यात अनुरोध अस्वीकार गरियो। पछि पुनःप्रयास गर्नुहोस्।"</string>
-    <string name="vcard_unknown_filename" msgid="8320954544777782497">"सम्पर्क"</string>
+    <string name="vcard_unknown_filename" msgid="8320954544777782497">"कन्ट्याक्ट"</string>
     <string name="caching_vcard_message" msgid="1879339732783666517">"vCard(s) लाई स्थानीय अस्थायी भण्डारणमा क्यास गर्दै। वास्तविक आयात छिट्टै सुरु हुन्छ।"</string>
     <string name="vcard_import_failed" msgid="37313715326741013">"VCard इम्पोर्ट गर्न सकेन।"</string>
     <string name="nfc_vcard_file_name" msgid="2113518216329123152">"NFCमा सम्पर्क प्राप्त गरियो"</string>
@@ -490,7 +490,7 @@
     <string name="importing_sim_failed_title" msgid="1046154274170241788">"इम्पोर्ट गर्न सकिएन"</string>
     <string name="importing_sim_failed_message" msgid="55568522164349044">"SIM कार्डबाट कन्ट्याक्टहरू इम्पोर्ट गर्न सकिएन"</string>
     <string name="importing_sim_in_progress_title" msgid="7647907413920018595">"SIM आयात गरिँदै"</string>
-    <string name="contacts_default_notification_channel" msgid="5116916969874075866">"सूचनाहरू"</string>
+    <string name="contacts_default_notification_channel" msgid="5116916969874075866">"नोटिफिकेसनहरू"</string>
     <string name="yes_button" msgid="1120514817091581293">"हुन्छ"</string>
     <string name="no_button" msgid="8965841385742548947">"हुँदैन"</string>
     <string name="sdn_contacts_directory_search_label" msgid="9146122809408008443">"मोबाइल सेवा प्रदायकका सर्भिस नम्बरहरू"</string>

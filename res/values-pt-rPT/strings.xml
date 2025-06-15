@@ -20,7 +20,7 @@
     <string name="contactsList" msgid="4456188358262700898">"Contactos"</string>
     <string name="shortcut_add_contact" msgid="7949342235528657981">"Adicionar contacto"</string>
     <string name="shortcutContact" msgid="8009736387364461511">"Contacto"</string>
-    <string name="shortcutDialContact" msgid="155367248069127153">"Reserva direta"</string>
+    <string name="shortcutDialContact" msgid="155367248069127153">"Marcação direta"</string>
     <string name="shortcutMessageContact" msgid="9123517151981679277">"Mensagem direta"</string>
     <string name="shortcutActivityTitle" msgid="5407832911005090417">"Escolher contacto"</string>
     <string name="contactInsertOrEditActivityTitle" msgid="1788154962629911262">"Adicionar ao contacto"</string>
@@ -41,7 +41,7 @@
     <string name="menu_renameGroup" msgid="2685886609399776475">"Mudar o nome da etiqueta"</string>
     <string name="menu_deleteGroup" msgid="1180215594530228294">"Eliminar etiqueta"</string>
     <string name="menu_addToGroup" msgid="5034813446697655310">"Adicionar contacto"</string>
-    <string name="menu_selectForGroup" msgid="6386553337569514850">"Selecionar contactos"</string>
+    <string name="menu_selectForGroup" msgid="6386553337569514850">"Selecione os contactos"</string>
     <string name="menu_addContactsToGroup" msgid="4549318978482280577">"Adicionar contactos"</string>
     <string name="menu_removeFromGroup" msgid="8753799091967887958">"Remover da etiqueta"</string>
     <string name="menu_new_group_action_bar" msgid="1670312283925872483">"Criar etiqueta"</string>

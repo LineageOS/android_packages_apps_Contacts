@@ -19,7 +19,7 @@
     <string name="applicationLabel" msgid="8908212014470937609">"รายชื่อติดต่อ"</string>
     <string name="contactsList" msgid="4456188358262700898">"รายชื่อติดต่อ"</string>
     <string name="shortcut_add_contact" msgid="7949342235528657981">"เพิ่มรายชื่อติดต่อ"</string>
-    <string name="shortcutContact" msgid="8009736387364461511">"สมุดโทรศัพท์"</string>
+    <string name="shortcutContact" msgid="8009736387364461511">"รายชื่อติดต่อ"</string>
     <string name="shortcutDialContact" msgid="155367248069127153">"สายตรง"</string>
     <string name="shortcutMessageContact" msgid="9123517151981679277">"ข้อความส่วนตัว"</string>
     <string name="shortcutActivityTitle" msgid="5407832911005090417">"เลือกรายชื่อติดต่อ"</string>

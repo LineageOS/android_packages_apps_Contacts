@@ -16,6 +16,24 @@
       "message": "but I\u0027d prefer we either do it to all our apps or not to any?\n\n```\n/CertInstaller/CleanSpec.mk\n./StorageManager/CleanSpec.mk\n./Music/CleanSpec.mk\n./BasicSmsReceiver/CleanSpec.mk\n./Stk/CleanSpec.mk\n./SettingsIntelligence/CleanSpec.mk\n./Launcher3/CleanSpec.mk\n./Car/SystemUI/CleanSpec.mk\n./Car/Provision/CleanSpec.mk\n./Contacts/CleanSpec.mk\n./HTMLViewer/CleanSpec.mk\n./DeskClock/CleanSpec.mk\n./SecureElement/CleanSpec.mk\n./EmergencyInfo/CleanSpec.mk\n./CarrierConfig/CleanSpec.mk\n./QuickSearchBox/CleanSpec.mk\n./Camera2/CleanSpec.mk\n./Settings/CleanSpec.mk\n./Browser2/CleanSpec.mk\n./Gallery2/CleanSpec.mk\n./Dialer/CleanSpec.mk\n./Messaging/CleanSpec.mk\n./ThemePicker/CleanSpec.mk\n./Provision/CleanSpec.mk\n./CellBroadcastReceiver/CleanSpec.mk\n```\n\nnot all are ours, but we ought to do it to all that are ours\n\nthoughts?",
       "revId": "c0d630aa2e24aac8c369422f2f185b731e806a4f",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "871a8d02_0663b5c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34693
+      },
+      "writtenOn": "2025-10-23T00:26:55Z",
+      "side": 1,
+      "message": "We could just remove all the files with CleanSpec.mk from the apps/modules that we maintain and leave the ones upstream alone.",
+      "parentUuid": "0b9801a0_a2068a32",
+      "revId": "c0d630aa2e24aac8c369422f2f185b731e806a4f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }

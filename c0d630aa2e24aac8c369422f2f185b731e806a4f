@@ -52,6 +52,24 @@
       "parentUuid": "871a8d02_0663b5c6",
       "revId": "c0d630aa2e24aac8c369422f2f185b731e806a4f",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bf7f8c3_7ac5aa1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34693
+      },
+      "writtenOn": "2025-10-23T11:17:05Z",
+      "side": 1,
+      "message": "Okay, should I abaonden this change since its upstreamed to the AOSP contacts one?",
+      "parentUuid": "212bdd64_c1bc8166",
+      "revId": "c0d630aa2e24aac8c369422f2f185b731e806a4f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }

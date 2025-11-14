@@ -26,7 +26,6 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.content.BroadcastReceiver;
@@ -49,7 +48,6 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.test.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
-import androidx.test.filters.SdkSuppress;
 import androidx.test.uiautomator.By;
 import androidx.test.uiautomator.UiDevice;
 import androidx.test.uiautomator.Until;
@@ -84,14 +82,12 @@ import java.util.concurrent.TimeUnit;
 /**
  * UI Tests for {@link SimImportActivity}
  *
- * These should probably be converted to espresso tests because espresso does a better job of
+ * <p>These should probably be converted to espresso tests because espresso does a better job of
  * waiting for the app to be idle once espresso library is added
  */
-//@Suppress
+// @Suppress
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-@SdkSuppress(minSdkVersion = Build.VERSION_CODES.M)
-@TargetApi(Build.VERSION_CODES.M)
 public class SimImportActivityTest {
 
     public static final int TIMEOUT = 100000;
@@ -135,13 +131,15 @@ public class SimImportActivityTest {
 
     @Test
     public void shouldDisplaySimContacts() {
-        mDao.addSim(someSimCard(),
-                        new SimContact(1, "Sim One", "5550101"),
-                        new SimContact(2, "Sim Two", null),
-                        new SimContact(3, null, "5550103")
-                );
-        mActivity = mInstrumentation.startActivitySync(new Intent(mContext, SimImportActivity.class)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        mDao.addSim(
+                someSimCard(),
+                new SimContact(1, "Sim One", "5550101"),
+                new SimContact(2, "Sim Two", null),
+                new SimContact(3, null, "5550103"));
+        mActivity =
+                mInstrumentation.startActivitySync(
+                        new Intent(mContext, SimImportActivity.class)
+                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
         mDevice.waitForIdle();
 
@@ -156,8 +154,9 @@ public class SimImportActivityTest {
     public void shouldHaveEmptyState() {
         mDao.addSim(someSimCard());
 
-        mInstrumentation.startActivitySync(new Intent(mContext, SimImportActivity.class)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        mInstrumentation.startActivitySync(
+                new Intent(mContext, SimImportActivity.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
         mDevice.waitForIdle();
 
@@ -168,9 +167,10 @@ public class SimImportActivityTest {
     public void smokeRotateInEmptyState() {
         mDao.addSim(someSimCard());
 
-        mActivity = mInstrumentation.startActivitySync(
-                new Intent(mContext, SimImportActivity.class)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        mActivity =
+                mInstrumentation.startActivitySync(
+                        new Intent(mContext, SimImportActivity.class)
+                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
         assertTrue(mDevice.wait(Until.hasObject(By.textStartsWith("No contacts")), TIMEOUT));
 
@@ -183,12 +183,15 @@ public class SimImportActivityTest {
 
     @Test
     public void smokeRotateInNonEmptyState() throws Exception {
-        mDao.addSim(someSimCard(), new SimContact(1, "Name One", "5550101"),
+        mDao.addSim(
+                someSimCard(),
+                new SimContact(1, "Name One", "5550101"),
                 new SimContact(2, "Name Two", "5550102"));
 
-        mActivity = mInstrumentation.startActivitySync(
-                new Intent(mContext, SimImportActivity.class)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        mActivity =
+                mInstrumentation.startActivitySync(
+                        new Intent(mContext, SimImportActivity.class)
+                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
         assertTrue(mDevice.wait(Until.hasObject(By.textStartsWith("Name One")), TIMEOUT));
 
@@ -202,34 +205,35 @@ public class SimImportActivityTest {
     /**
      * Tests a complete import flow
      *
-     * <p>Test case outline:</p>
+     * <p>Test case outline:
+     *
      * <ul>
-     * <li>Load SIM contacts
-     * <li>Change to a specific target account
-     * <li>Deselect 3 specific SIM contacts
-     * <li>Rotate the screen to landscape
-     * <li>Rotate the screen back to portrait
-     * <li>Press the import button
-     * <li>Wait for import to complete
-     * <li>Query contacts in target account and verify that they match selected contacts
-     * <li>Start import activity again
-     * <li>Switch to target account
-     * <li>Verify that previously imported contacts are disabled and not checked
+     *   <li>Load SIM contacts
+     *   <li>Change to a specific target account
+     *   <li>Deselect 3 specific SIM contacts
+     *   <li>Rotate the screen to landscape
+     *   <li>Rotate the screen back to portrait
+     *   <li>Press the import button
+     *   <li>Wait for import to complete
+     *   <li>Query contacts in target account and verify that they match selected contacts
+     *   <li>Start import activity again
+     *   <li>Switch to target account
+     *   <li>Verify that previously imported contacts are disabled and not checked
      * </ul>
      *
      * <p>This mocks out the IccProvider and stubs the canReadSimContacts method to make it work on
      * an emulator but otherwise uses real dependency.
-     * </p>
      */
     @Test
     public void selectionsAreImportedAndDisabledOnSubsequentImports() throws Exception {
-        final AccountWithDataSet targetAccount = mAccountHelper.addTestAccount(
-                mAccountHelper.generateAccountName("SimImportActivity0_targetAccount_"));
+        final AccountWithDataSet targetAccount =
+                mAccountHelper.addTestAccount(
+                        mAccountHelper.generateAccountName("SimImportActivity0_targetAccount_"));
 
         final MockContentProvider simPhonebookProvider = new MockContentProvider();
-        simPhonebookProvider.expect(MockContentProvider.Query.forAnyUri())
-                .withProjection(
-                        SimRecords.RECORD_NUMBER, SimRecords.NAME, SimRecords.PHONE_NUMBER)
+        simPhonebookProvider
+                .expect(MockContentProvider.Query.forAnyUri())
+                .withProjection(SimRecords.RECORD_NUMBER, SimRecords.NAME, SimRecords.PHONE_NUMBER)
                 .anyNumberOfTimes()
                 .returnRow(toCursorRow(new SimContact(1, "Import One", "5550101")))
                 .returnRow(toCursorRow(new SimContact(2, "Skip Two", "5550102")))
@@ -239,29 +243,37 @@ public class SimImportActivityTest {
                 .returnRow(toCursorRow(new SimContact(6, "Import Six", "5550106")));
         final MockContentResolver mockResolver = new MockContentResolver();
         mockResolver.addProvider(SimPhonebookContract.AUTHORITY, simPhonebookProvider);
-        final ContentProviderClient contactsProviderClient = mContext.getContentResolver()
-                .acquireContentProviderClient(ContactsContract.AUTHORITY);
-        mockResolver.addProvider(ContactsContract.AUTHORITY, new ForwardingContentProvider(
-                contactsProviderClient));
+        final ContentProviderClient contactsProviderClient =
+                mContext.getContentResolver()
+                        .acquireContentProviderClient(ContactsContract.AUTHORITY);
+        mockResolver.addProvider(
+                ContactsContract.AUTHORITY, new ForwardingContentProvider(contactsProviderClient));
 
-        SimContactDao.setFactoryForTest(new Function<Context, SimContactDao>() {
-            @Override
-            public SimContactDao apply(Context input) {
-                final SimContactDaoImpl spy = spy(new SimContactDaoImpl(
-                        mContext, mockResolver,
-                        (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE)));
-                final SimCard sim = someSimCard();
-                doReturn(true).when(spy).canReadSimContacts();
-                doReturn(Collections.singletonList(sim)).when(spy).getSimCards();
-                doReturn(sim).when(spy).getSimBySubscriptionId(anyInt());
-                return spy;
-            }
-        });
+        SimContactDao.setFactoryForTest(
+                new Function<Context, SimContactDao>() {
+                    @Override
+                    public SimContactDao apply(Context input) {
+                        final SimContactDaoImpl spy =
+                                spy(
+                                        new SimContactDaoImpl(
+                                                mContext,
+                                                mockResolver,
+                                                (TelephonyManager)
+                                                        mContext.getSystemService(
+                                                                Context.TELEPHONY_SERVICE)));
+                        final SimCard sim = someSimCard();
+                        doReturn(true).when(spy).canReadSimContacts();
+                        doReturn(Collections.singletonList(sim)).when(spy).getSimCards();
+                        doReturn(sim).when(spy).getSimBySubscriptionId(anyInt());
+                        return spy;
+                    }
+                });
 
-        mActivity = mInstrumentation.startActivitySync(
-                new Intent(mContext, SimImportActivity.class)
-                        .putExtra(SimImportActivity.EXTRA_SUBSCRIPTION_ID, 1)
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        mActivity =
+                mInstrumentation.startActivitySync(
+                        new Intent(mContext, SimImportActivity.class)
+                                .putExtra(SimImportActivity.EXTRA_SUBSCRIPTION_ID, 1)
+                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
         assertTrue(mDevice.wait(Until.hasObject(By.desc("Show more")), TIMEOUT));
 
@@ -290,40 +302,50 @@ public class SimImportActivityTest {
         // Block until import completes
         nextImportFuture.get(TIMEOUT, TimeUnit.MILLISECONDS);
 
-        final Cursor cursor = new StringableCursor(
-                mContext.getContentResolver().query(Data.CONTENT_URI, null,
-                        ContactsContract.RawContacts.ACCOUNT_NAME + "=? AND " +
-                                ContactsContract.RawContacts.ACCOUNT_TYPE+ "=?",
-                        new String[] {
-                                targetAccount.name,
-                                targetAccount.type
-                        }, null));
+        final Cursor cursor =
+                new StringableCursor(
+                        mContext.getContentResolver()
+                                .query(
+                                        Data.CONTENT_URI,
+                                        null,
+                                        ContactsContract.RawContacts.ACCOUNT_NAME
+                                                + "=? AND "
+                                                + ContactsContract.RawContacts.ACCOUNT_TYPE
+                                                + "=?",
+                                        new String[] {targetAccount.name, targetAccount.type},
+                                        null));
         // 3 contacts imported with one row for name and one for phone
         assertThat(cursor, ContactsMatchers.hasCount(3 * 2));
 
-        assertThat(cursor, hasRowMatching(allOf(
-                hasMimeType(Phone.CONTENT_ITEM_TYPE),
-                hasValueForColumn(Phone.DISPLAY_NAME, "Import One"),
-                hasValueForColumn(Phone.NUMBER, "5550101")
-        )));
-        assertThat(cursor, hasRowMatching(allOf(
-                hasMimeType(Phone.CONTENT_ITEM_TYPE),
-                hasValueForColumn(Phone.DISPLAY_NAME, "Import Three"),
-                hasValueForColumn(Phone.NUMBER, "5550103")
-        )));
-        assertThat(cursor, hasRowMatching(allOf(
-                hasMimeType(Phone.CONTENT_ITEM_TYPE),
-                hasValueForColumn(Phone.DISPLAY_NAME, "Import Six"),
-                hasValueForColumn(Phone.NUMBER, "5550106")
-        )));
+        assertThat(
+                cursor,
+                hasRowMatching(
+                        allOf(
+                                hasMimeType(Phone.CONTENT_ITEM_TYPE),
+                                hasValueForColumn(Phone.DISPLAY_NAME, "Import One"),
+                                hasValueForColumn(Phone.NUMBER, "5550101"))));
+        assertThat(
+                cursor,
+                hasRowMatching(
+                        allOf(
+                                hasMimeType(Phone.CONTENT_ITEM_TYPE),
+                                hasValueForColumn(Phone.DISPLAY_NAME, "Import Three"),
+                                hasValueForColumn(Phone.NUMBER, "5550103"))));
+        assertThat(
+                cursor,
+                hasRowMatching(
+                        allOf(
+                                hasMimeType(Phone.CONTENT_ITEM_TYPE),
+                                hasValueForColumn(Phone.DISPLAY_NAME, "Import Six"),
+                                hasValueForColumn(Phone.NUMBER, "5550106"))));
 
         cursor.close();
 
-
-        mActivity = mInstrumentation.startActivitySync(
-                new Intent(mContext, SimImportActivity.class)
-                        .putExtra(SimImportActivity.EXTRA_SUBSCRIPTION_ID, 1)
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        mActivity =
+                mInstrumentation.startActivitySync(
+                        new Intent(mContext, SimImportActivity.class)
+                                .putExtra(SimImportActivity.EXTRA_SUBSCRIPTION_ID, 1)
+                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
         assertTrue(mDevice.wait(Until.hasObject(By.text("Import One")), TIMEOUT));
 
@@ -342,20 +364,22 @@ public class SimImportActivityTest {
 
     private ListenableFuture<Intent> nextImportCompleteBroadcast() {
         final SettableFuture<Intent> result = SettableFuture.create();
-        final BroadcastReceiver receiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                result.set(intent);
-                LocalBroadcastManager.getInstance(mContext).unregisterReceiver(this);
-            }
-        };
-        LocalBroadcastManager.getInstance(mContext).registerReceiver(receiver, new IntentFilter(
-                SimImportService.BROADCAST_SIM_IMPORT_COMPLETE));
+        final BroadcastReceiver receiver =
+                new BroadcastReceiver() {
+                    @Override
+                    public void onReceive(Context context, Intent intent) {
+                        result.set(intent);
+                        LocalBroadcastManager.getInstance(mContext).unregisterReceiver(this);
+                    }
+                };
+        LocalBroadcastManager.getInstance(mContext)
+                .registerReceiver(
+                        receiver, new IntentFilter(SimImportService.BROADCAST_SIM_IMPORT_COMPLETE));
         return result;
     }
 
     private Object[] toCursorRow(SimContact contact) {
-        return new Object[]{contact.getRecordNumber(), contact.getName(), contact.getPhone()};
+        return new Object[] {contact.getRecordNumber(), contact.getName(), contact.getPhone()};
     }
 
     private SimCard someSimCard() {

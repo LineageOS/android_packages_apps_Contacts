@@ -289,14 +289,6 @@
         <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
 
-    <style name="ContactEditorAccountsChangedActivityTheme" parent="@android:style/Theme.Material.Light.Dialog.NoActionBar.MinWidth">
-        <item name="android:windowCloseOnTouchOutside">true</item>
-        <item name="android:textColorPrimary">@color/primary_text_color</item>
-        <item name="android:textColorSecondary">@color/secondary_text_color</item>
-        <item name="android:listViewStyle">@style/ListViewStyle</item>
-        <item name="android:colorAccent">@color/primary_color</item>
-    </style>
-
     <style name="SelectableItem" parent="@android:style/Theme.Material.Light">
         <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>

@@ -50,7 +50,6 @@ import android.provider.SimPhonebookContract.SimRecords;
 import android.test.mock.MockContentResolver;
 import android.test.mock.MockContext;
 
-import androidx.annotation.RequiresApi;
 import androidx.test.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
@@ -92,21 +91,13 @@ public class SimContactDaoTests {
 
     // Some random area codes for generating realistic US phones when
     // generating fake data for the SIM contacts or CP2
-    private static final String[] AREA_CODES = 
-            {"360", "509", "416", "831", "212", "208"};
+    private static final String[] AREA_CODES = {"360", "509", "416", "831", "212", "208"};
     private static final Random sRandom = new Random();
 
     // Approximate maximum number of contacts that can be stored on a SIM card for testing
     // boundary cases
     public static final int MAX_SIM_CONTACTS = 600;
 
-    // On pre-M addAccountExplicitly (which we call via AccountsTestHelper) causes a
-    // SecurityException to be thrown unless we add AUTHENTICATE_ACCOUNTS permission to the app
-    // manifest. Instead of adding the extra permission just for tests we'll just only run them
-    // on M or newer
-    @SdkSuppress(minSdkVersion = VERSION_CODES.M)
-    // Lollipop MR1 is required for removeAccountExplicitly
-    @RequiresApi(api = VERSION_CODES.LOLLIPOP_MR1)
     @LargeTest
     @RunWith(AndroidJUnit4.class)
     public static class ImportIntegrationTest {
@@ -130,13 +121,16 @@ public class SimContactDaoTests {
         public void importFromSim() throws Exception {
             final SimContactDao sut = SimContactDao.create(getContext());
 
-            sut.importContacts(Arrays.asList(
-                    new SimContact(1, "Test One", "15095550101"),
-                    new SimContact(2, "Test Two", "15095550102"),
-                    new SimContact(3, "Test Three", "15095550103", new String[] {
-                            "user@example.com", "user2@example.com"
-                    })
-            ), mAccount);
+            sut.importContacts(
+                    Arrays.asList(
+                            new SimContact(1, "Test One", "15095550101"),
+                            new SimContact(2, "Test Two", "15095550102"),
+                            new SimContact(
+                                    3,
+                                    "Test Three",
+                                    "15095550103",
+                                    new String[] {"user@example.com", "user2@example.com"})),
+                    mAccount);
 
             Cursor cursor = queryContactWithName("Test One");
             assertThat(cursor, ContactsMatchers.hasCount(2));
@@ -162,9 +156,8 @@ public class SimContactDaoTests {
         public void importContactWhichOnlyHasName() throws Exception {
             final SimContactDao sut = SimContactDao.create(getContext());
 
-            sut.importContacts(Arrays.asList(
-                    new SimContact(1, "Test importJustName", null, null)
-            ), mAccount);
+            sut.importContacts(
+                    Arrays.asList(new SimContact(1, "Test importJustName", null, null)), mAccount);
 
             Cursor cursor = queryAllDataInAccount();
 
@@ -177,9 +170,8 @@ public class SimContactDaoTests {
         public void importContactWhichOnlyHasPhone() throws Exception {
             final SimContactDao sut = SimContactDao.create(getContext());
 
-            sut.importContacts(Arrays.asList(
-                    new SimContact(1, null, "15095550111", null)
-            ), mAccount);
+            sut.importContacts(
+                    Arrays.asList(new SimContact(1, null, "15095550111", null)), mAccount);
 
             Cursor cursor = queryAllDataInAccount();
 
@@ -194,12 +186,13 @@ public class SimContactDaoTests {
 
             // This probably isn't possible but we'll test it to demonstrate expected behavior and
             // just in case it does occur
-            sut.importContacts(Arrays.asList(
-                    new SimContact(1, null, null, null),
-                    new SimContact(2, null, null, null),
-                    new SimContact(3, null, null, null),
-                    new SimContact(4, "Not null", null, null)
-            ), mAccount);
+            sut.importContacts(
+                    Arrays.asList(
+                            new SimContact(1, null, null, null),
+                            new SimContact(2, null, null, null),
+                            new SimContact(3, null, null, null),
+                            new SimContact(4, "Not null", null, null)),
+                    mAccount);
 
             final Cursor contactsCursor = queryAllRawContactsInAccount();
             assertThat(contactsCursor, ContactsMatchers.hasCount(1));
@@ -214,7 +207,7 @@ public class SimContactDaoTests {
         /**
          * Tests importing a large number of contacts
          *
-         * Make sure that {@link android.os.TransactionTooLargeException} is not thrown
+         * <p>Make sure that {@link android.os.TransactionTooLargeException} is not thrown
          */
         @Test
         public void largeImport() throws Exception {
@@ -223,8 +216,12 @@ public class SimContactDaoTests {
             final List<SimContact> contacts = new ArrayList<>();
 
             for (int i = 0; i < MAX_SIM_CONTACTS; i++) {
-                contacts.add(new SimContact(i + 1, "Contact " + (i + 1), randomPhone(),
-                        new String[] { randomEmail("contact" + (i + 1) + "_")}));
+                contacts.add(
+                        new SimContact(
+                                i + 1,
+                                "Contact " + (i + 1),
+                                randomPhone(),
+                                new String[] {randomEmail("contact" + (i + 1) + "_")}));
             }
 
             sut.importContacts(contacts, mAccount);
@@ -241,47 +238,53 @@ public class SimContactDaoTests {
         }
 
         private Cursor queryAllRawContactsInAccount() {
-            return new StringableCursor(mResolver.query(ContactsContract.RawContacts.CONTENT_URI,
-                    null, ContactsContract.RawContacts.ACCOUNT_NAME + "=? AND " +
-                            ContactsContract.RawContacts.ACCOUNT_TYPE+ "=?",
-                    new String[] {
-                            mAccount.name,
-                            mAccount.type
-                    }, null));
+            return new StringableCursor(
+                    mResolver.query(
+                            ContactsContract.RawContacts.CONTENT_URI,
+                            null,
+                            ContactsContract.RawContacts.ACCOUNT_NAME
+                                    + "=? AND "
+                                    + ContactsContract.RawContacts.ACCOUNT_TYPE
+                                    + "=?",
+                            new String[] {mAccount.name, mAccount.type},
+                            null));
         }
 
         private Cursor queryAllDataInAccount() {
-            return new StringableCursor(mResolver.query(Data.CONTENT_URI, null,
-                    ContactsContract.RawContacts.ACCOUNT_NAME + "=? AND " +
-                            ContactsContract.RawContacts.ACCOUNT_TYPE+ "=?",
-                    new String[] {
-                            mAccount.name,
-                            mAccount.type
-                    }, null));
+            return new StringableCursor(
+                    mResolver.query(
+                            Data.CONTENT_URI,
+                            null,
+                            ContactsContract.RawContacts.ACCOUNT_NAME
+                                    + "=? AND "
+                                    + ContactsContract.RawContacts.ACCOUNT_TYPE
+                                    + "=?",
+                            new String[] {mAccount.name, mAccount.type},
+                            null));
         }
 
         private Cursor queryContactWithName(String name) {
-            return new StringableCursor(mResolver.query(Data.CONTENT_URI, null,
-                    ContactsContract.RawContacts.ACCOUNT_NAME + "=? AND " +
-                            ContactsContract.RawContacts.ACCOUNT_TYPE+ "=? AND " +
-                            Data.DISPLAY_NAME + "=?",
-                    new String[] {
-                            mAccount.name,
-                            mAccount.type,
-                            name
-                    }, null));
+            return new StringableCursor(
+                    mResolver.query(
+                            Data.CONTENT_URI,
+                            null,
+                            ContactsContract.RawContacts.ACCOUNT_NAME
+                                    + "=? AND "
+                                    + ContactsContract.RawContacts.ACCOUNT_TYPE
+                                    + "=? AND "
+                                    + Data.DISPLAY_NAME
+                                    + "=?",
+                            new String[] {mAccount.name, mAccount.type, name},
+                            null));
         }
     }
 
     /**
      * Tests for {@link SimContactDao#findAccountsOfExistingSimContacts(List)}
      *
-     * These are integration tests that query CP2 so that the SQL will be validated in addition
+     * <p>These are integration tests that query CP2 so that the SQL will be validated in addition
      * to the detection algorithm
      */
-    @SdkSuppress(minSdkVersion = VERSION_CODES.M)
-    // Lollipop MR1 is required for removeAccountExplicitly
-    @RequiresApi(api = VERSION_CODES.LOLLIPOP_MR1)
     @LargeTest
     @RunWith(AndroidJUnit4.class)
     public static class FindAccountsIntegrationTests {
@@ -297,8 +300,8 @@ public class SimContactDaoTests {
 
         @BeforeClass
         public static void setUpClass() throws Exception {
-            final AccountsTestHelper helper = new AccountsTestHelper(
-                    InstrumentationRegistry.getContext());
+            final AccountsTestHelper helper =
+                    new AccountsTestHelper(InstrumentationRegistry.getContext());
             sSeedAccount = helper.addTestAccount(helper.generateAccountName("seedAccount"));
 
             seedCp2();
@@ -306,8 +309,8 @@ public class SimContactDaoTests {
 
         @AfterClass
         public static void tearDownClass() {
-            final AccountsTestHelper helper = new AccountsTestHelper(
-                    InstrumentationRegistry.getContext());
+            final AccountsTestHelper helper =
+                    new AccountsTestHelper(InstrumentationRegistry.getContext());
             helper.removeTestAccount(sSeedAccount);
             sSeedAccount = null;
         }
@@ -335,14 +338,15 @@ public class SimContactDaoTests {
 
             final SimContactDao sut = createDao();
 
-            final List<SimContact> contacts = Arrays.asList(
-                    new SimContact(1, "Name 1 " + mNameSuffix, "5550101"),
-                    new SimContact(2, "Name 2 " + mNameSuffix, "5550102"),
-                    new SimContact(3, "Name 3 " + mNameSuffix, "5550103"),
-                    new SimContact(4, "Name 4 " + mNameSuffix, "5550104"));
+            final List<SimContact> contacts =
+                    Arrays.asList(
+                            new SimContact(1, "Name 1 " + mNameSuffix, "5550101"),
+                            new SimContact(2, "Name 2 " + mNameSuffix, "5550102"),
+                            new SimContact(3, "Name 3 " + mNameSuffix, "5550103"),
+                            new SimContact(4, "Name 4 " + mNameSuffix, "5550104"));
 
-            final Map<AccountWithDataSet, Set<SimContact>> existing = sut
-                    .findAccountsOfExistingSimContacts(contacts);
+            final Map<AccountWithDataSet, Set<SimContact>> existing =
+                    sut.findAccountsOfExistingSimContacts(contacts);
 
             assertTrue(existing.isEmpty());
         }
@@ -352,32 +356,29 @@ public class SimContactDaoTests {
                 throws Exception {
             final SimContactDao sut = createDao();
 
-            final AccountWithDataSet account = mAccountHelper.addTestAccount(
-                    mAccountHelper.generateAccountName("primary_"));
+            final AccountWithDataSet account =
+                    mAccountHelper.addTestAccount(mAccountHelper.generateAccountName("primary_"));
             mAccounts.add(account);
 
-            final SimContact existing1 =
-                    new SimContact(2, "Exists 2 " + mNameSuffix, "5550102");
-            final SimContact existing2 =
-                    new SimContact(4, "Exists 4 " + mNameSuffix, "5550104");
+            final SimContact existing1 = new SimContact(2, "Exists 2 " + mNameSuffix, "5550102");
+            final SimContact existing2 = new SimContact(4, "Exists 4 " + mNameSuffix, "5550104");
 
-            final List<SimContact> contacts = Arrays.asList(
-                    new SimContact(1, "Missing 1 " + mNameSuffix, "5550101"),
-                    new SimContact(existing1),
-                    new SimContact(3, "Missing 3 " + mNameSuffix, "5550103"),
-                    new SimContact(existing2));
+            final List<SimContact> contacts =
+                    Arrays.asList(
+                            new SimContact(1, "Missing 1 " + mNameSuffix, "5550101"),
+                            new SimContact(existing1),
+                            new SimContact(3, "Missing 3 " + mNameSuffix, "5550103"),
+                            new SimContact(existing2));
 
-            sut.importContacts(Arrays.asList(
-                    new SimContact(existing1),
-                    new SimContact(existing2)
-            ), account);
+            sut.importContacts(
+                    Arrays.asList(new SimContact(existing1), new SimContact(existing2)), account);
 
-
-            final Map<AccountWithDataSet, Set<SimContact>> existing = sut
-                    .findAccountsOfExistingSimContacts(contacts);
+            final Map<AccountWithDataSet, Set<SimContact>> existing =
+                    sut.findAccountsOfExistingSimContacts(contacts);
 
             assertThat(existing.size(), equalTo(1));
-            assertThat(existing.get(account),
+            assertThat(
+                    existing.get(account),
                     Matchers.<Set<SimContact>>equalTo(ImmutableSet.of(existing1, existing2)));
         }
 
@@ -385,11 +386,11 @@ public class SimContactDaoTests {
         public void hasMultipleAccountsWhenMultipleMatchingContactsExist() throws Exception {
             final SimContactDao sut = createDao();
 
-            final AccountWithDataSet account1 = mAccountHelper.addTestAccount(
-                    mAccountHelper.generateAccountName("account1_"));
+            final AccountWithDataSet account1 =
+                    mAccountHelper.addTestAccount(mAccountHelper.generateAccountName("account1_"));
             mAccounts.add(account1);
-            final AccountWithDataSet account2 = mAccountHelper.addTestAccount(
-                    mAccountHelper.generateAccountName("account2_"));
+            final AccountWithDataSet account2 =
+                    mAccountHelper.addTestAccount(mAccountHelper.generateAccountName("account2_"));
             mAccounts.add(account2);
 
             final SimContact existsInBoth =
@@ -399,64 +400,64 @@ public class SimContactDaoTests {
             final SimContact existsInAccount2 =
                     new SimContact(5, "Exists 2 " + mNameSuffix, "5550105");
 
-            final List<SimContact> contacts = Arrays.asList(
-                    new SimContact(1, "Missing 1 " + mNameSuffix, "5550101"),
-                    new SimContact(existsInBoth),
-                    new SimContact(3, "Missing 3 " + mNameSuffix, "5550103"),
-                    new SimContact(existsInAccount1),
-                    new SimContact(existsInAccount2));
+            final List<SimContact> contacts =
+                    Arrays.asList(
+                            new SimContact(1, "Missing 1 " + mNameSuffix, "5550101"),
+                            new SimContact(existsInBoth),
+                            new SimContact(3, "Missing 3 " + mNameSuffix, "5550103"),
+                            new SimContact(existsInAccount1),
+                            new SimContact(existsInAccount2));
 
-            sut.importContacts(Arrays.asList(
-                    new SimContact(existsInBoth),
-                    new SimContact(existsInAccount1)
-            ), account1);
+            sut.importContacts(
+                    Arrays.asList(new SimContact(existsInBoth), new SimContact(existsInAccount1)),
+                    account1);
 
-            sut.importContacts(Arrays.asList(
-                    new SimContact(existsInBoth),
-                    new SimContact(existsInAccount2)
-            ), account2);
+            sut.importContacts(
+                    Arrays.asList(new SimContact(existsInBoth), new SimContact(existsInAccount2)),
+                    account2);
 
-
-            final Map<AccountWithDataSet, Set<SimContact>> existing = sut
-                    .findAccountsOfExistingSimContacts(contacts);
+            final Map<AccountWithDataSet, Set<SimContact>> existing =
+                    sut.findAccountsOfExistingSimContacts(contacts);
 
             assertThat(existing.size(), equalTo(2));
-            assertThat(existing, Matchers.<Map<AccountWithDataSet, Set<SimContact>>>equalTo(
-                    ImmutableMap.<AccountWithDataSet, Set<SimContact>>of(
-                            account1, ImmutableSet.of(existsInBoth, existsInAccount1),
-                            account2, ImmutableSet.of(existsInBoth, existsInAccount2))));
+            assertThat(
+                    existing,
+                    Matchers.<Map<AccountWithDataSet, Set<SimContact>>>equalTo(
+                            ImmutableMap.<AccountWithDataSet, Set<SimContact>>of(
+                                    account1, ImmutableSet.of(existsInBoth, existsInAccount1),
+                                    account2, ImmutableSet.of(existsInBoth, existsInAccount2))));
         }
 
         @Test
         public void matchesByNameIfSimContactHasNoPhone() throws Exception {
             final SimContactDao sut = createDao();
 
-            final AccountWithDataSet account = mAccountHelper.addTestAccount(
-                    mAccountHelper.generateAccountName("account_"));
+            final AccountWithDataSet account =
+                    mAccountHelper.addTestAccount(mAccountHelper.generateAccountName("account_"));
             mAccounts.add(account);
 
             final SimContact noPhone = new SimContact(1, "Nophone " + mNameSuffix, null);
-            final SimContact otherExisting = new SimContact(
-                    5, "Exists 1 " + mNameSuffix, "5550105");
+            final SimContact otherExisting =
+                    new SimContact(5, "Exists 1 " + mNameSuffix, "5550105");
 
-            final List<SimContact> contacts = Arrays.asList(
-                    new SimContact(noPhone),
-                    new SimContact(2, "Name 2 " + mNameSuffix, "5550102"),
-                    new SimContact(3, "Name 3 " + mNameSuffix, "5550103"),
-                    new SimContact(4, "Name 4 " + mNameSuffix, "5550104"),
-                    new SimContact(otherExisting));
+            final List<SimContact> contacts =
+                    Arrays.asList(
+                            new SimContact(noPhone),
+                            new SimContact(2, "Name 2 " + mNameSuffix, "5550102"),
+                            new SimContact(3, "Name 3 " + mNameSuffix, "5550103"),
+                            new SimContact(4, "Name 4 " + mNameSuffix, "5550104"),
+                            new SimContact(otherExisting));
 
-            sut.importContacts(Arrays.asList(
-                    new SimContact(noPhone),
-                    new SimContact(otherExisting)
-            ), account);
+            sut.importContacts(
+                    Arrays.asList(new SimContact(noPhone), new SimContact(otherExisting)), account);
 
-            final Map<AccountWithDataSet, Set<SimContact>> existing = sut
-                    .findAccountsOfExistingSimContacts(contacts);
+            final Map<AccountWithDataSet, Set<SimContact>> existing =
+                    sut.findAccountsOfExistingSimContacts(contacts);
 
             assertThat(existing.size(), equalTo(1));
-            assertThat(existing.get(account), Matchers.<Set<SimContact>>equalTo(
-                    ImmutableSet.of(noPhone, otherExisting)));
+            assertThat(
+                    existing.get(account),
+                    Matchers.<Set<SimContact>>equalTo(ImmutableSet.of(noPhone, otherExisting)));
         }
 
         @Test
@@ -465,8 +466,9 @@ public class SimContactDaoTests {
 
             final List<SimContact> contacts = new ArrayList<>();
             for (int i = 0; i < MAX_SIM_CONTACTS; i++) {
-                contacts.add(new SimContact(
-                        i + 1, "Contact " + (i + 1) + " " + mNameSuffix, randomPhone()));
+                contacts.add(
+                        new SimContact(
+                                i + 1, "Contact " + (i + 1) + " " + mNameSuffix, randomPhone()));
             }
             // The work has to be split into batches to avoid hitting SQL query parameter limits
             // so test contacts that will be at boundary points
@@ -476,22 +478,24 @@ public class SimContactDaoTests {
             final SimContact imported4 = contacts.get(101);
             final SimContact imported5 = contacts.get(MAX_SIM_CONTACTS - 1);
 
-            final AccountWithDataSet account = mAccountHelper.addTestAccount(
-                    mAccountHelper.generateAccountName("account_"));
+            final AccountWithDataSet account =
+                    mAccountHelper.addTestAccount(mAccountHelper.generateAccountName("account_"));
             mAccounts.add(account);
 
-            sut.importContacts(Arrays.asList(imported1, imported2, imported3, imported4, imported5),
-                    account);
+            sut.importContacts(
+                    Arrays.asList(imported1, imported2, imported3, imported4, imported5), account);
 
             mAccounts.add(account);
 
-            final Map<AccountWithDataSet, Set<SimContact>> existing = sut
-                    .findAccountsOfExistingSimContacts(contacts);
+            final Map<AccountWithDataSet, Set<SimContact>> existing =
+                    sut.findAccountsOfExistingSimContacts(contacts);
 
             assertThat(existing.size(), equalTo(1));
-            assertThat(existing.get(account), Matchers.<Set<SimContact>>equalTo(
-                    ImmutableSet.of(imported1, imported2, imported3, imported4, imported5)));
-
+            assertThat(
+                    existing.get(account),
+                    Matchers.<Set<SimContact>>equalTo(
+                            ImmutableSet.of(
+                                    imported1, imported2, imported3, imported4, imported5)));
         }
 
         private SimContactDao createDao() {
@@ -518,11 +522,12 @@ public class SimContactDaoTests {
             appendCreateContact("Alex Seed", sSeedAccount, ops);
 
             InstrumentationRegistry.getTargetContext()
-                    .getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops);
+                    .getContentResolver()
+                    .applyBatch(ContactsContract.AUTHORITY, ops);
         }
 
-        private static void appendCreateContact(String name, AccountWithDataSet account,
-                ArrayList<ContentProviderOperation> ops) {
+        private static void appendCreateContact(
+                String name, AccountWithDataSet account, ArrayList<ContentProviderOperation> ops) {
             final int emailCount = sRandom.nextInt(10);
             final int phoneCount = sRandom.nextInt(5);
 
@@ -537,9 +542,12 @@ public class SimContactDaoTests {
             appendCreateContact(name, phones, emails, account, ops);
         }
 
-
-        private static void appendCreateContact(String name, List<String> phoneNumbers,
-                List<String> emails, AccountWithDataSet account, List<ContentProviderOperation> ops) {
+        private static void appendCreateContact(
+                String name,
+                List<String> phoneNumbers,
+                List<String> emails,
+                AccountWithDataSet account,
+                List<ContentProviderOperation> ops) {
             int index = ops.size();
 
             ops.add(account.newRawContactOperation());
@@ -552,29 +560,31 @@ public class SimContactDaoTests {
             }
         }
 
-        private static ContentProviderOperation insertIntoData(String value, String mimeType,
-                int idBackReference) {
+        private static ContentProviderOperation insertIntoData(
+                String value, String mimeType, int idBackReference) {
             return ContentProviderOperation.newInsert(Data.CONTENT_URI)
                     .withValue(Data.DATA1, value)
                     .withValue(Data.MIMETYPE, mimeType)
-                    .withValueBackReference(Data.RAW_CONTACT_ID, idBackReference).build();
+                    .withValueBackReference(Data.RAW_CONTACT_ID, idBackReference)
+                    .build();
         }
 
-        private static ContentProviderOperation insertIntoData(String value, String mimeType,
-                int type, int idBackReference) {
+        private static ContentProviderOperation insertIntoData(
+                String value, String mimeType, int type, int idBackReference) {
             return ContentProviderOperation.newInsert(Data.CONTENT_URI)
                     .withValue(Data.DATA1, value)
                     .withValue(ContactsContract.Data.DATA2, type)
                     .withValue(Data.MIMETYPE, mimeType)
-                    .withValueBackReference(Data.RAW_CONTACT_ID, idBackReference).build();
+                    .withValueBackReference(Data.RAW_CONTACT_ID, idBackReference)
+                    .build();
         }
     }
 
     /**
      * Tests for {@link SimContactDao#loadContactsForSim(SimCard)}
      *
-     * These are unit tests that verify that {@link SimContact}s are created correctly from
-     * the cursors that are returned by queries to the IccProvider
+     * <p>These are unit tests that verify that {@link SimContact}s are created correctly from the
+     * cursors that are returned by queries to the IccProvider
      */
     @SmallTest
     @RunWith(AndroidJUnit4.class)
@@ -592,10 +602,10 @@ public class SimContactDaoTests {
             when(mContext.getContentResolver()).thenReturn(mockResolver);
         }
 
-
         @Test
         public void createsContactsFromCursor() {
-            mMockSimPhonebookProvider.expect(MockContentProvider.Query.forAnyUri())
+            mMockSimPhonebookProvider
+                    .expect(MockContentProvider.Query.forAnyUri())
                     .withDefaultProjection(
                             SimRecords.RECORD_NUMBER, SimRecords.NAME, SimRecords.PHONE_NUMBER)
                     .withAnyProjection()
@@ -607,21 +617,23 @@ public class SimContactDaoTests {
                     .returnRow(4, null, "5550104");
 
             final SimContactDao sut = SimContactDao.create(mContext);
-            final List<SimContact> contacts = sut
-                    .loadContactsForSim(new SimCard("123", 1, "carrier", "sim", null, "us"));
+            final List<SimContact> contacts =
+                    sut.loadContactsForSim(new SimCard("123", 1, "carrier", "sim", null, "us"));
 
-            assertThat(contacts, equalTo(
-                    Arrays.asList(
-                            new SimContact(1, "Name One", "5550101", null),
-                            new SimContact(2, "Name Two", "5550102", null),
-                            new SimContact(3, "Name Three", null, null),
-                            new SimContact(4, null, "5550104", null)
-                    )));
+            assertThat(
+                    contacts,
+                    equalTo(
+                            Arrays.asList(
+                                    new SimContact(1, "Name One", "5550101", null),
+                                    new SimContact(2, "Name Two", "5550102", null),
+                                    new SimContact(3, "Name Three", null, null),
+                                    new SimContact(4, null, "5550104", null))));
         }
 
         @Test
         public void excludesEmptyContactsFromResult() {
-            mMockSimPhonebookProvider.expect(MockContentProvider.Query.forAnyUri())
+            mMockSimPhonebookProvider
+                    .expect(MockContentProvider.Query.forAnyUri())
                     .withDefaultProjection(
                             SimRecords.RECORD_NUMBER, SimRecords.NAME, SimRecords.PHONE_NUMBER)
                     .withAnyProjection()
@@ -635,21 +647,24 @@ public class SimContactDaoTests {
                     .returnRow(6, null, "5550102");
 
             final SimContactDao sut = SimContactDao.create(mContext);
-            final List<SimContact> contacts = sut
-                    .loadContactsForSim(new SimCard("123", 1, "carrier", "sim", null, "us"));
+            final List<SimContact> contacts =
+                    sut.loadContactsForSim(new SimCard("123", 1, "carrier", "sim", null, "us"));
 
-            assertThat(contacts, equalTo(
-                    Arrays.asList(
-                            new SimContact(1, "Non Empty1", "5550101", null),
-                            new SimContact(3, "Non Empty2", null, null),
-                            new SimContact(6, null, "5550102", null)
-                    )));
+            assertThat(
+                    contacts,
+                    equalTo(
+                            Arrays.asList(
+                                    new SimContact(1, "Non Empty1", "5550101", null),
+                                    new SimContact(3, "Non Empty2", null, null),
+                                    new SimContact(6, null, "5550102", null))));
         }
 
         @Test
         public void usesSimCardSubscriptionIdIfAvailable() {
-            mMockSimPhonebookProvider.expectQuery(SimRecords.getContentUri(2,
-                    SimPhonebookContract.ElementaryFiles.EF_ADN))
+            mMockSimPhonebookProvider
+                    .expectQuery(
+                            SimRecords.getContentUri(
+                                    2, SimPhonebookContract.ElementaryFiles.EF_ADN))
                     .withDefaultProjection(
                             SimRecords.RECORD_NUMBER, SimRecords.NAME, SimRecords.PHONE_NUMBER)
                     .withAnyProjection()
@@ -664,7 +679,8 @@ public class SimContactDaoTests {
 
         @Test
         public void returnsEmptyListForEmptyCursor() {
-            mMockSimPhonebookProvider.expect(MockContentProvider.Query.forAnyUri())
+            mMockSimPhonebookProvider
+                    .expect(MockContentProvider.Query.forAnyUri())
                     .withDefaultProjection(
                             SimRecords.RECORD_NUMBER, SimRecords.NAME, SimRecords.PHONE_NUMBER)
                     .withAnyProjection()
@@ -673,8 +689,8 @@ public class SimContactDaoTests {
                     .returnEmptyCursor();
 
             final SimContactDao sut = SimContactDao.create(mContext);
-            List<SimContact> result = sut
-                    .loadContactsForSim(new SimCard("123", 1, "carrier", "sim", null, "us"));
+            List<SimContact> result =
+                    sut.loadContactsForSim(new SimCard("123", 1, "carrier", "sim", null, "us"));
             assertTrue(result.isEmpty());
         }
 
@@ -683,19 +699,28 @@ public class SimContactDaoTests {
             mContext = mock(MockContext.class);
             final MockContentResolver mockResolver = new MockContentResolver();
             final ContentProvider mockProvider = mock(android.test.mock.MockContentProvider.class);
-            when(mockProvider.query(any(Uri.class), any(String[].class), anyString(),
-                    any(String[].class), anyString()))
+            when(mockProvider.query(
+                            any(Uri.class),
+                            any(String[].class),
+                            anyString(),
+                            any(String[].class),
+                            anyString()))
                     .thenReturn(null);
-            when(mockProvider.query(any(Uri.class), any(String[].class), anyString(),
-                    any(String[].class), anyString(), any(CancellationSignal.class)))
+            when(mockProvider.query(
+                            any(Uri.class),
+                            any(String[].class),
+                            anyString(),
+                            any(String[].class),
+                            anyString(),
+                            any(CancellationSignal.class)))
                     .thenReturn(null);
 
             mockResolver.addProvider("icc", mockProvider);
             when(mContext.getContentResolver()).thenReturn(mockResolver);
 
             final SimContactDao sut = SimContactDao.create(mContext);
-            final List<SimContact> result = sut
-                    .loadContactsForSim(new SimCard("123", 1, "carrier", "sim", null, "us"));
+            final List<SimContact> result =
+                    sut.loadContactsForSim(new SimCard("123", 1, "carrier", "sim", null, "us"));
             assertTrue(result.isEmpty());
         }
     }
@@ -736,24 +761,26 @@ public class SimContactDaoTests {
 
             assertThat(contacts.get(0), isSimContactWithNameAndPhone("Test Simone", "15095550101"));
             assertThat(contacts.get(1), isSimContactWithNameAndPhone("Test Simtwo", "15095550102"));
-            assertThat(contacts.get(2),
-                    isSimContactWithNameAndPhone("Test Simthree", "15095550103"));
+            assertThat(
+                    contacts.get(2), isSimContactWithNameAndPhone("Test Simthree", "15095550103"));
         }
     }
 
     private static String randomPhone() {
-        return String.format(Locale.US, "1%s55501%02d",
+        return String.format(
+                Locale.US,
+                "1%s55501%02d",
                 AREA_CODES[sRandom.nextInt(AREA_CODES.length)],
                 sRandom.nextInt(100));
     }
 
     private static String randomEmail(String name) {
-        return String.format("%s%d@example.com", name.replace(" ", ".").toLowerCase(Locale.US),
-                1000 + sRandom.nextInt(1000));
+        return String.format(
+                "%s%d@example.com",
+                name.replace(" ", ".").toLowerCase(Locale.US), 1000 + sRandom.nextInt(1000));
     }
-
 
     static Context getContext() {
         return InstrumentationRegistry.getTargetContext();
-   }
+    }
 }

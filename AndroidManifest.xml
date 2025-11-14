@@ -20,8 +20,8 @@
           android:versionName="1.7.34">
 
     <uses-sdk
-        android:minSdkVersion="34"
-        android:targetSdkVersion="34"/>
+        android:minSdkVersion="36"
+        android:targetSdkVersion="36"/>
 
     <original-package android:name="com.android.contacts"/>
 
@@ -392,13 +392,6 @@
             </intent-filter>
 
         </activity-alias>
-
-        <!-- Accounts changed prompt that can appear when creating a new contact. -->
-        <activity
-            android:name=".activities.ContactEditorAccountsChangedActivity"
-            android:exported="false"
-            android:theme="@style/ContactEditorAccountsChangedActivityTheme"
-            android:windowSoftInputMode="adjustResize"/>
 
         <!-- Edit or create a contact with only the most important fields displayed initially. -->
         <activity

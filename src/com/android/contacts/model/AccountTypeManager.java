@@ -43,10 +43,12 @@ import com.android.contacts.model.account.AccountType;
 import com.android.contacts.model.account.AccountTypeProvider;
 import com.android.contacts.model.account.AccountTypeWithDataSet;
 import com.android.contacts.model.account.AccountWithDataSet;
+import com.android.contacts.model.account.DeviceLocalAccountType;
 import com.android.contacts.model.account.FallbackAccountType;
 import com.android.contacts.model.account.GoogleAccountType;
 import com.android.contacts.model.account.SimAccountType;
 import com.android.contacts.model.dataitem.DataKind;
+import com.android.contacts.preference.ContactsPreferences;
 import com.android.contacts.util.concurrent.ContactsExecutors;
 
 import com.google.common.base.Function;
@@ -69,8 +71,8 @@ import java.util.concurrent.Executor;
 import javax.annotation.Nullable;
 
 /**
- * Singleton holder for all parsed {@link AccountType} available on the
- * system, typically filled through {@link PackageManager} queries.
+ * Singleton holder for all parsed {@link AccountType} available on the system, typically filled
+ * through {@link PackageManager} queries.
  */
 public abstract class AccountTypeManager {
     static final String TAG = "AccountTypeManager";
@@ -78,8 +80,8 @@ public abstract class AccountTypeManager {
     private static final Object mInitializationLock = new Object();
     private static AccountTypeManager mAccountTypeManager;
 
-    public static final String BROADCAST_ACCOUNTS_CHANGED = AccountTypeManager.class.getName() +
-            ".AccountsChanged";
+    public static final String BROADCAST_ACCOUNTS_CHANGED =
+            AccountTypeManager.class.getName() + ".AccountsChanged";
     public static final String DEVICE_ACCOUNT_NAME = "DEVICE";
 
     public enum AccountFilter implements Predicate<AccountInfo> {
@@ -95,11 +97,22 @@ public abstract class AccountTypeManager {
                 return input != null && input.getType().areContactsWritable();
             }
         },
+        // This should never be used directly because the insertable filter is not
+        // implementable by this enum. Rather it is just a dummy to pass around.
+        // Anything that is passed this should grab the actual implementation from the
+        // insertableFilter function.
+        CONTACTS_INSERTABLE {
+            @Override
+            public boolean apply(@Nullable AccountInfo input) {
+                return false;
+            }
+        },
         DRAWER_DISPLAYABLE {
             @Override
             public boolean apply(@Nullable AccountInfo input) {
-                return input != null && ((input.getType() instanceof SimAccountType)
-                        || input.getType().areContactsWritable());
+                return input != null
+                        && ((input.getType() instanceof SimAccountType)
+                                || input.getType().areContactsWritable());
             }
         },
         GROUPS_WRITABLE {
@@ -111,8 +124,8 @@ public abstract class AccountTypeManager {
     }
 
     /**
-     * Requests the singleton instance of {@link AccountTypeManager} with data bound from
-     * the available authenticators. This method can safely be called from the UI thread.
+     * Requests the singleton instance of {@link AccountTypeManager} with data bound from the
+     * available authenticators. This method can safely be called from the UI thread.
      */
     public static AccountTypeManager getInstance(Context context) {
         if (!hasRequiredPermissions(context)) {
@@ -130,9 +143,9 @@ public abstract class AccountTypeManager {
     }
 
     /**
-     * Set the instance of account type manager.  This is only for and should only be used by unit
-     * tests.  While having this method is not ideal, it's simpler than the alternative of
-     * holding this as a service in the ContactsApplication context class.
+     * Set the instance of account type manager. This is only for and should only be used by unit
+     * tests. While having this method is not ideal, it's simpler than the alternative of holding
+     * this as a service in the ContactsApplication context class.
      *
      * @param mockManager The mock AccountTypeManager.
      */
@@ -142,42 +155,43 @@ public abstract class AccountTypeManager {
         }
     }
 
-    private static final AccountTypeManager EMPTY = new AccountTypeManager() {
+    private static final AccountTypeManager EMPTY =
+            new AccountTypeManager() {
 
-        @Override
-        public ListenableFuture<List<AccountInfo>> getAccountsAsync() {
-            return Futures.immediateFuture(Collections.<AccountInfo>emptyList());
-        }
+                @Override
+                public ListenableFuture<List<AccountInfo>> getAccountsAsync() {
+                    return Futures.immediateFuture(Collections.<AccountInfo>emptyList());
+                }
 
-        @Override
-        public ListenableFuture<List<AccountInfo>> filterAccountsAsync(
-                Predicate<AccountInfo> filter) {
-            return Futures.immediateFuture(Collections.<AccountInfo>emptyList());
-        }
+                @Override
+                public ListenableFuture<List<AccountInfo>> filterAccountsAsync(
+                        Predicate<AccountInfo> filter) {
+                    return Futures.immediateFuture(Collections.<AccountInfo>emptyList());
+                }
 
-        @Override
-        public AccountInfo getAccountInfoForAccount(AccountWithDataSet account) {
-            return null;
-        }
+                @Override
+                public AccountInfo getAccountInfoForAccount(AccountWithDataSet account) {
+                    return null;
+                }
 
-        @Override
-        public Account getDefaultGoogleAccount() {
-            return null;
-        }
+                @Override
+                public Account getDefaultGoogleAccount() {
+                    return null;
+                }
 
-        @Override
-        public AccountType getAccountType(AccountTypeWithDataSet accountTypeWithDataSet) {
-            return null;
-        }
-    };
+                @Override
+                public AccountType getAccountType(AccountTypeWithDataSet accountTypeWithDataSet) {
+                    return null;
+                }
+            };
 
     /**
      * Returns the list of all accounts (if contactWritableOnly is false) or just the list of
      * contact writable accounts (if contactWritableOnly is true).
      *
      * <p>TODO(mhagerott) delete this method. It's left in place to prevent build breakages when
-     * this change is automerged. Usages of this method in downstream branches should be
-     * replaced with an asynchronous account loading pattern</p>
+     * this change is automerged. Usages of this method in downstream branches should be replaced
+     * with an asynchronous account loading pattern
      */
     public List<AccountWithDataSet> getAccounts(boolean contactWritableOnly) {
         return contactWritableOnly
@@ -189,9 +203,9 @@ public abstract class AccountTypeManager {
      * Returns all contact writable accounts
      *
      * <p>In general this method should be avoided. It exists to support some legacy usages of
-     * accounts in infrequently used features where refactoring to asynchronous loading is
-     * not justified. The chance that this will actually block is pretty low if the app has been
-     * launched previously</p>
+     * accounts in infrequently used features where refactoring to asynchronous loading is not
+     * justified. The chance that this will actually block is pretty low if the app has been
+     * launched previously
      */
     public List<AccountWithDataSet> blockForWritableAccounts() {
         return AccountInfo.extractAccounts(
@@ -203,40 +217,36 @@ public abstract class AccountTypeManager {
      */
     public abstract ListenableFuture<List<AccountInfo>> getAccountsAsync();
 
-    /**
-     * Loads accounts and applies the fitler returning only for which the predicate is true
-     */
+    /** Loads accounts and applies the filter returning only for which the predicate is true */
     public abstract ListenableFuture<List<AccountInfo>> filterAccountsAsync(
             Predicate<AccountInfo> filter);
 
     public abstract AccountInfo getAccountInfoForAccount(AccountWithDataSet account);
 
-    /**
-     * Returns the default google account.
-     */
+    /** Returns the default google account. */
     public abstract Account getDefaultGoogleAccount();
 
     /**
      * Returns the Google Accounts.
      *
-     * <p>This method exists in addition to filterAccountsByTypeAsync because it should be safe
-     * to call synchronously.
-     * </p>
+     * <p>This method exists in addition to filterAccountsByTypeAsync because it should be safe to
+     * call synchronously.
      */
     public List<AccountInfo> getWritableGoogleAccounts() {
         // This implementation may block and should be overridden by the Impl class
-        return Futures.getUnchecked(filterAccountsAsync(new Predicate<AccountInfo>() {
-            @Override
-            public boolean apply(@Nullable AccountInfo input) {
-                return  input.getType().areContactsWritable() &&
-                        GoogleAccountType.ACCOUNT_TYPE.equals(input.getType().accountType);
-            }
-        }));
+        return Futures.getUnchecked(
+                filterAccountsAsync(
+                        new Predicate<AccountInfo>() {
+                            @Override
+                            public boolean apply(@Nullable AccountInfo input) {
+                                return input.getType().areContactsWritable()
+                                        && GoogleAccountType.ACCOUNT_TYPE.equals(
+                                                input.getType().accountType);
+                            }
+                        }));
     }
 
-    /**
-     * Returns true if there are real accounts (not "local" account) in the list of accounts.
-     */
+    /** Returns true if there are real accounts (not "local" account) in the list of accounts. */
     public boolean hasNonLocalAccount() {
         final List<AccountWithDataSet> allAccounts =
                 AccountInfo.extractAccounts(Futures.getUnchecked(getAccountsAsync()));
@@ -249,19 +259,18 @@ public abstract class AccountTypeManager {
         return !allAccounts.get(0).isNullAccount();
     }
 
-    static Account getDefaultGoogleAccount(AccountManager accountManager,
-            SharedPreferences prefs, String defaultAccountKey) {
+    static Account getDefaultGoogleAccount(
+            AccountManager accountManager, SharedPreferences prefs, String defaultAccountKey) {
         // Get all the google accounts on the device
-        final Account[] accounts = accountManager.getAccountsByType(
-                GoogleAccountType.ACCOUNT_TYPE);
+        final Account[] accounts = accountManager.getAccountsByType(GoogleAccountType.ACCOUNT_TYPE);
         if (accounts == null || accounts.length == 0) {
             return null;
         }
 
         // Get the default account from preferences
         final String defaultAccount = prefs.getString(defaultAccountKey, null);
-        final AccountWithDataSet accountWithDataSet = defaultAccount == null ? null :
-                AccountWithDataSet.unstringify(defaultAccount);
+        final AccountWithDataSet accountWithDataSet =
+                defaultAccount == null ? null : AccountWithDataSet.unstringify(defaultAccount);
 
         // Look for an account matching the one from preferences
         if (accountWithDataSet != null) {
@@ -291,17 +300,15 @@ public abstract class AccountTypeManager {
     }
 
     /**
-     * Find the best {@link DataKind} matching the requested
-     * {@link AccountType#accountType}, {@link AccountType#dataSet}, and {@link DataKind#mimeType}.
-     * If no direct match found, we try searching {@link FallbackAccountType}.
+     * Find the best {@link DataKind} matching the requested {@link AccountType#accountType}, {@link
+     * AccountType#dataSet}, and {@link DataKind#mimeType}. If no direct match found, we try
+     * searching {@link FallbackAccountType}.
      */
     public DataKind getKindOrFallback(AccountType type, String mimeType) {
         return type == null ? null : type.getKindForMimetype(mimeType);
     }
 
-    /**
-     * Returns whether the specified account still exists
-     */
+    /** Returns whether the specified account still exists */
     public boolean exists(AccountWithDataSet account) {
         final List<AccountWithDataSet> accounts =
                 AccountInfo.extractAccounts(Futures.getUnchecked(getAccountsAsync()));
@@ -311,8 +318,8 @@ public abstract class AccountTypeManager {
     /**
      * Returns whether the specified account is writable
      *
-     * <p>This checks that the account still exists and that
-     * {@link AccountType#areContactsWritable()} is true</p>
+     * <p>This checks that the account still exists and that {@link
+     * AccountType#areContactsWritable()} is true
      */
     public boolean isWritable(AccountWithDataSet account) {
         return exists(account) && getAccountInfoForAccount(account).getType().areContactsWritable();
@@ -323,15 +330,40 @@ public abstract class AccountTypeManager {
     }
 
     private static boolean hasRequiredPermissions(Context context) {
-        final boolean canGetAccounts = ContextCompat.checkSelfPermission(context,
-                android.Manifest.permission.GET_ACCOUNTS) == PackageManager.PERMISSION_GRANTED;
-        final boolean canReadContacts = ContextCompat.checkSelfPermission(context,
-                android.Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED;
+        final boolean canGetAccounts =
+                ContextCompat.checkSelfPermission(context, android.Manifest.permission.GET_ACCOUNTS)
+                        == PackageManager.PERMISSION_GRANTED;
+        final boolean canReadContacts =
+                ContextCompat.checkSelfPermission(
+                                context, android.Manifest.permission.READ_CONTACTS)
+                        == PackageManager.PERMISSION_GRANTED;
         return canGetAccounts && canReadContacts;
     }
 
     public static Predicate<AccountInfo> writableFilter() {
         return AccountFilter.CONTACTS_WRITABLE;
+    }
+
+    public static Predicate<AccountInfo> insertableFilter(Context context) {
+        boolean canInsertIntoLocalAccounts =
+                new ContactsPreferences(context).canInsertIntoLocalAccounts();
+        return new Predicate<AccountInfo>() {
+            @Override
+            public boolean apply(@Nullable AccountInfo input) {
+                return input != null
+                        && input.getType().areContactsWritable()
+                        && isContactInsertable(input);
+            }
+
+            private boolean isContactInsertable(AccountInfo input) {
+                return !isLocalAccountType(input) || canInsertIntoLocalAccounts;
+            }
+
+            private boolean isLocalAccountType(AccountInfo input) {
+                return input.getType() instanceof DeviceLocalAccountType
+                        || input.getType() instanceof SimAccountType;
+            }
+        };
     }
 
     public static Predicate<AccountInfo> drawerDisplayableFilter() {
@@ -374,29 +406,29 @@ class AccountTypeManagerImpl extends AccountTypeManager
                 }
             };
 
+    private final BroadcastReceiver mBroadcastReceiver =
+            new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    // Don't use reloadAccountTypesIfNeeded when packages change in case a
+                    // contacts.xml
+                    // was updated.
+                    reloadAccountTypes();
+                }
+            };
 
-    private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            // Don't use reloadAccountTypesIfNeeded when packages change in case a contacts.xml
-            // was updated.
-            reloadAccountTypes();
-        }
-    };
+    private final BroadcastReceiver mSimBroadcastReceiver =
+            new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    if (ContactsContract.SimContacts.ACTION_SIM_ACCOUNTS_CHANGED.equals(
+                            intent.getAction())) {
+                        reloadSimAccounts();
+                    }
+                }
+            };
 
-    private final BroadcastReceiver mSimBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (ContactsContract.SimContacts.ACTION_SIM_ACCOUNTS_CHANGED.equals(
-                    intent.getAction())) {
-                reloadSimAccounts();
-            }
-        }
-    };
-
-    /**
-     * Internal constructor that only performs initial parsing.
-     */
+    /** Internal constructor that only performs initial parsing. */
     public AccountTypeManagerImpl(Context context) {
         mContext = context;
         mLocalAccountLocator = new DeviceLocalAccountLocator(context);
@@ -424,8 +456,8 @@ class AccountTypeManagerImpl extends AccountTypeManager
         filter = new IntentFilter(Intent.ACTION_LOCALE_CHANGED);
         mContext.registerReceiver(mBroadcastReceiver, filter);
 
-        IntentFilter simFilter = new IntentFilter(
-                ContactsContract.SimContacts.ACTION_SIM_ACCOUNTS_CHANGED);
+        IntentFilter simFilter =
+                new IntentFilter(ContactsContract.SimContacts.ACTION_SIM_ACCOUNTS_CHANGED);
         mContext.registerReceiver(mSimBroadcastReceiver, simFilter, Context.RECEIVER_EXPORTED);
 
         mAccountManager.addOnAccountsUpdatedListener(this, mMainThreadHandler, false);
@@ -443,12 +475,12 @@ class AccountTypeManagerImpl extends AccountTypeManager
     /* This notification will arrive on the UI thread */
     public void onAccountsUpdated(Account[] accounts) {
         reloadLocalAccounts();
-        maybeNotifyAccountsUpdated(mAccountManagerAccounts,
-                getAccountsWithDataSets(accounts, mTypeProvider));
+        maybeNotifyAccountsUpdated(
+                mAccountManagerAccounts, getAccountsWithDataSets(accounts, mTypeProvider));
     }
 
-    private void maybeNotifyAccountsUpdated(List<AccountWithDataSet> current,
-            List<AccountWithDataSet> update) {
+    private void maybeNotifyAccountsUpdated(
+            List<AccountWithDataSet> current, List<AccountWithDataSet> update) {
         if (Objects.equal(current, update)) {
             return;
         }
@@ -459,8 +491,8 @@ class AccountTypeManagerImpl extends AccountTypeManager
 
     private void notifyAccountsChanged() {
         ContactListFilterController.getInstance(mContext).checkFilterValidity(true);
-        LocalBroadcastManager.getInstance(mContext).sendBroadcast(
-                new Intent(BROADCAST_ACCOUNTS_CHANGED));
+        LocalBroadcastManager.getInstance(mContext)
+                .sendBroadcast(new Intent(BROADCAST_ACCOUNTS_CHANGED));
     }
 
     private synchronized void startLoadingIfNeeded() {
@@ -478,14 +510,18 @@ class AccountTypeManagerImpl extends AccountTypeManager
     private synchronized void loadAccountTypes() {
         mTypeProvider = new AccountTypeProvider(mContext);
 
-        mAccountTypesFuture = mExecutor.submit(new Callable<AccountTypeProvider>() {
-            @Override
-            public AccountTypeProvider call() throws Exception {
-                // This will request the AccountType for each Account forcing them to be loaded
-                getAccountsWithDataSets(mAccountManager.getAccounts(), mTypeProvider);
-                return mTypeProvider;
-            }
-        });
+        mAccountTypesFuture =
+                mExecutor.submit(
+                        new Callable<AccountTypeProvider>() {
+                            @Override
+                            public AccountTypeProvider call() throws Exception {
+                                // This will request the AccountType for each Account forcing them
+                                // to be loaded
+                                getAccountsWithDataSets(
+                                        mAccountManager.getAccounts(), mTypeProvider);
+                                return mTypeProvider;
+                            }
+                        });
     }
 
     private FutureCallback<List<AccountWithDataSet>> newAccountsUpdatedCallback(
@@ -497,14 +533,15 @@ class AccountTypeManagerImpl extends AccountTypeManager
             }
 
             @Override
-            public void onFailure(Throwable t) {
-            }
+            public void onFailure(Throwable t) {}
         };
     }
 
     private synchronized void reloadAccountTypesIfNeeded() {
-        if (mTypeProvider == null || mTypeProvider.shouldUpdate(
-                mAccountManager.getAuthenticatorTypes(), ContentResolver.getSyncAdapterTypes())) {
+        if (mTypeProvider == null
+                || mTypeProvider.shouldUpdate(
+                        mAccountManager.getAuthenticatorTypes(),
+                        ContentResolver.getSyncAdapterTypes())) {
             reloadAccountTypes();
         }
     }
@@ -512,47 +549,57 @@ class AccountTypeManagerImpl extends AccountTypeManager
     private synchronized void reloadAccountTypes() {
         loadAccountTypes();
         Futures.addCallback(
-                Futures.transform(mAccountTypesFuture, mAccountsExtractor,
-                        MoreExecutors.directExecutor()),
+                Futures.transform(
+                        mAccountTypesFuture, mAccountsExtractor, MoreExecutors.directExecutor()),
                 newAccountsUpdatedCallback(mAccountManagerAccounts),
                 mMainThreadExecutor);
     }
 
     private synchronized void loadLocalAccounts() {
-        mLocalAccountsFuture = mExecutor.submit(new Callable<List<AccountWithDataSet>>() {
-            @Override
-            public List<AccountWithDataSet> call() throws Exception {
-                return mLocalAccountLocator.getDeviceLocalAccounts();
-            }
-        });
+        mLocalAccountsFuture =
+                mExecutor.submit(
+                        new Callable<List<AccountWithDataSet>>() {
+                            @Override
+                            public List<AccountWithDataSet> call() throws Exception {
+                                return mLocalAccountLocator.getDeviceLocalAccounts();
+                            }
+                        });
     }
 
     private synchronized void reloadLocalAccounts() {
         loadLocalAccounts();
-        Futures.addCallback(mLocalAccountsFuture, newAccountsUpdatedCallback(mLocalAccounts),
+        Futures.addCallback(
+                mLocalAccountsFuture,
+                newAccountsUpdatedCallback(mLocalAccounts),
                 mMainThreadExecutor);
     }
 
     private synchronized void loadSimAccounts() {
-        mSimAccountsFuture = mExecutor.submit(new Callable<List<AccountWithDataSet>>() {
-            @Override
-            public List<AccountWithDataSet> call() throws Exception {
-                List<AccountWithDataSet> simAccountWithDataSets = new ArrayList<>();
-                List<ContactsContract.SimAccount> simAccounts =
-                        ContactsContract.SimContacts.getSimAccounts(mContext.getContentResolver());
-                for (ContactsContract.SimAccount simAccount : simAccounts) {
-                    simAccountWithDataSets.add(new AccountWithDataSet(simAccount.getAccountName(),
-                            simAccount.getAccountType(), null));
-                }
-                return simAccountWithDataSets;
-            }
-        });
+        mSimAccountsFuture =
+                mExecutor.submit(
+                        new Callable<List<AccountWithDataSet>>() {
+                            @Override
+                            public List<AccountWithDataSet> call() throws Exception {
+                                List<AccountWithDataSet> simAccountWithDataSets = new ArrayList<>();
+                                List<ContactsContract.SimAccount> simAccounts =
+                                        ContactsContract.SimContacts.getSimAccounts(
+                                                mContext.getContentResolver());
+                                for (ContactsContract.SimAccount simAccount : simAccounts) {
+                                    simAccountWithDataSets.add(
+                                            new AccountWithDataSet(
+                                                    simAccount.getAccountName(),
+                                                    simAccount.getAccountType(),
+                                                    null));
+                                }
+                                return simAccountWithDataSets;
+                            }
+                        });
     }
 
     private synchronized void reloadSimAccounts() {
         loadSimAccounts();
-        Futures.addCallback(mSimAccountsFuture, newAccountsUpdatedCallback(mSimAccounts),
-                mMainThreadExecutor);
+        Futures.addCallback(
+                mSimAccountsFuture, newAccountsUpdatedCallback(mSimAccounts), mMainThreadExecutor);
     }
 
     @Override
@@ -566,53 +613,65 @@ class AccountTypeManagerImpl extends AccountTypeManager
         final ListenableFuture<List<List<AccountWithDataSet>>> all =
                 Futures.nonCancellationPropagating(
                         Futures.successfulAsList(
-                                Futures.transform(mAccountTypesFuture, mAccountsExtractor,
+                                Futures.transform(
+                                        mAccountTypesFuture,
+                                        mAccountsExtractor,
                                         MoreExecutors.directExecutor()),
                                 mLocalAccountsFuture,
                                 mSimAccountsFuture));
 
-        return Futures.transform(all, new Function<List<List<AccountWithDataSet>>,
-                List<AccountInfo>>() {
-            @Nullable
-            @Override
-            public List<AccountInfo> apply(@Nullable List<List<AccountWithDataSet>> input) {
-                // input.get(0) contains accounts from AccountManager
-                // input.get(1) contains device local accounts
-                // input.get(2) contains SIM accounts
-                Preconditions.checkArgument(input.size() == 3,
-                        "List should have exactly 3 elements");
+        return Futures.transform(
+                all,
+                new Function<List<List<AccountWithDataSet>>, List<AccountInfo>>() {
+                    @Nullable
+                    @Override
+                    public List<AccountInfo> apply(@Nullable List<List<AccountWithDataSet>> input) {
+                        // input.get(0) contains accounts from AccountManager
+                        // input.get(1) contains device local accounts
+                        // input.get(2) contains SIM accounts
+                        Preconditions.checkArgument(
+                                input.size() == 3, "List should have exactly 3 elements");
 
-                final List<AccountInfo> result = new ArrayList<>();
-                for (AccountWithDataSet account : input.get(0)) {
-                    result.add(
-                            typeProvider.getTypeForAccount(account).wrapAccount(mContext, account));
-                }
+                        final List<AccountInfo> result = new ArrayList<>();
+                        for (AccountWithDataSet account : input.get(0)) {
+                            result.add(
+                                    typeProvider
+                                            .getTypeForAccount(account)
+                                            .wrapAccount(mContext, account));
+                        }
 
-                for (AccountWithDataSet account : input.get(1)) {
-                    result.add(
-                            typeProvider.getTypeForAccount(account).wrapAccount(mContext, account));
-                }
+                        for (AccountWithDataSet account : input.get(1)) {
+                            result.add(
+                                    typeProvider
+                                            .getTypeForAccount(account)
+                                            .wrapAccount(mContext, account));
+                        }
 
-                for (AccountWithDataSet account : input.get(2)) {
-                    result.add(
-                            typeProvider.getTypeForAccount(account).wrapAccount(mContext, account));
-                }
-                AccountInfo.sortAccounts(null, result);
-                return result;
-            }
-        }, MoreExecutors.directExecutor());
+                        for (AccountWithDataSet account : input.get(2)) {
+                            result.add(
+                                    typeProvider
+                                            .getTypeForAccount(account)
+                                            .wrapAccount(mContext, account));
+                        }
+                        AccountInfo.sortAccounts(null, result);
+                        return result;
+                    }
+                },
+                MoreExecutors.directExecutor());
     }
 
     @Override
     public ListenableFuture<List<AccountInfo>> filterAccountsAsync(
             final Predicate<AccountInfo> filter) {
-        return Futures.transform(getAllAccountsAsyncInternal(), new Function<List<AccountInfo>,
-                List<AccountInfo>>() {
-            @Override
-            public List<AccountInfo> apply(List<AccountInfo> input) {
-                return new ArrayList<>(Collections2.filter(input, filter));
-            }
-        }, mExecutor);
+        return Futures.transform(
+                getAllAccountsAsyncInternal(),
+                new Function<List<AccountInfo>, List<AccountInfo>>() {
+                    @Override
+                    public List<AccountInfo> apply(List<AccountInfo> input) {
+                        return new ArrayList<>(Collections2.filter(input, filter));
+                    }
+                },
+                mExecutor);
     }
 
     @Override
@@ -627,8 +686,8 @@ class AccountTypeManagerImpl extends AccountTypeManager
         return type.wrapAccount(mContext, account);
     }
 
-    private List<AccountWithDataSet> getAccountsWithDataSets(Account[] accounts,
-            AccountTypeProvider typeProvider) {
+    private List<AccountWithDataSet> getAccountsWithDataSets(
+            Account[] accounts, AccountTypeProvider typeProvider) {
         List<AccountWithDataSet> result = new ArrayList<>();
         // add local device account
         populateAccountsDataSet(typeProvider, new Account(DEVICE_ACCOUNT_NAME,
@@ -643,14 +702,13 @@ class AccountTypeManagerImpl extends AccountTypeManager
             List<AccountWithDataSet> result) {
         final List<AccountType> types = typeProvider.getAccountTypes(account.type);
         for (AccountType type : types) {
-            result.add(new AccountWithDataSet(
-                    account.name, account.type, type.dataSet));
+            result.add(new AccountWithDataSet(account.name, account.type, type.dataSet));
         }
     }
 
     /**
-     * Returns the default google account specified in preferences, the first google account
-     * if it is not specified in preferences or is no longer on the device, and null otherwise.
+     * Returns the default google account specified in preferences, the first google account if it
+     * is not specified in preferences or is no longer on the device, and null otherwise.
      */
     @Override
     public Account getDefaultGoogleAccount() {
@@ -667,8 +725,8 @@ class AccountTypeManagerImpl extends AccountTypeManager
                 mAccountManager.getAccountsByType(GoogleAccountType.ACCOUNT_TYPE);
         final List<AccountInfo> result = new ArrayList<>();
         for (Account account : googleAccounts) {
-            final AccountWithDataSet accountWithDataSet = new AccountWithDataSet(
-                    account.name, account.type, null);
+            final AccountWithDataSet accountWithDataSet =
+                    new AccountWithDataSet(account.name, account.type, null);
             final AccountType type = mTypeProvider.getTypeForAccount(accountWithDataSet);
             if (type != null) {
                 // Accounts with a dataSet (e.g. Google plus accounts) are not writable.
@@ -683,7 +741,6 @@ class AccountTypeManagerImpl extends AccountTypeManager
      *
      * <p>This is overriden for performance since the default implementation blocks until all
      * accounts are loaded
-     * </p>
      */
     @Override
     public boolean hasNonLocalAccount() {
@@ -700,9 +757,9 @@ class AccountTypeManagerImpl extends AccountTypeManager
     }
 
     /**
-     * Find the best {@link DataKind} matching the requested
-     * {@link AccountType#accountType}, {@link AccountType#dataSet}, and {@link DataKind#mimeType}.
-     * If no direct match found, we try searching {@link FallbackAccountType}.
+     * Find the best {@link DataKind} matching the requested {@link AccountType#accountType}, {@link
+     * AccountType#dataSet}, and {@link DataKind#mimeType}. If no direct match found, we try
+     * searching {@link FallbackAccountType}.
      */
     @Override
     public DataKind getKindOrFallback(AccountType type, String mimeType) {
@@ -732,9 +789,8 @@ class AccountTypeManagerImpl extends AccountTypeManager
      *
      * <p>This is overridden for performance. The default implementation loads all accounts then
      * searches through them for specified. This implementation will only load the types for the
-     * specified AccountType (it may still require blocking on IO in some cases but it shouldn't
-     * be as bad as blocking for all accounts).
-     * </p>
+     * specified AccountType (it may still require blocking on IO in some cases but it shouldn't be
+     * as bad as blocking for all accounts).
      */
     @Override
     public boolean exists(AccountWithDataSet account) {
@@ -747,13 +803,12 @@ class AccountTypeManagerImpl extends AccountTypeManager
         return false;
     }
 
-    /**
-     * Return {@link AccountType} for the given account type and data set.
-     */
+    /** Return {@link AccountType} for the given account type and data set. */
     @Override
     public AccountType getAccountType(AccountTypeWithDataSet accountTypeWithDataSet) {
-        final AccountType type = mTypeProvider.getType(
-                accountTypeWithDataSet.accountType, accountTypeWithDataSet.dataSet);
+        final AccountType type =
+                mTypeProvider.getType(
+                        accountTypeWithDataSet.accountType, accountTypeWithDataSet.dataSet);
         return type != null ? type : mFallbackAccountType;
     }
 }

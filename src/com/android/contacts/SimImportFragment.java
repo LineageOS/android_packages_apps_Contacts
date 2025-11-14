@@ -22,14 +22,6 @@ import android.content.Context;
 import android.content.IntentFilter;
 import android.content.Loader;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.collection.ArrayMap;
-import androidx.core.view.ViewCompat;
-import androidx.core.widget.ContentLoadingProgressBar;
-import androidx.appcompat.widget.Toolbar;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +32,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.collection.ArrayMap;
+import androidx.core.view.ViewCompat;
+import androidx.core.widget.ContentLoadingProgressBar;
+
+import com.android.contacts.MoreContactUtils;
+import com.android.contacts.MoreContactUtils.EdgeToEdgeInsetHandler;
 import com.android.contacts.compat.CompatUtils;
 import com.android.contacts.database.SimContactDao;
 import com.android.contacts.editor.AccountHeaderPresenter;
@@ -51,6 +52,8 @@ import com.android.contacts.model.account.AccountWithDataSet;
 import com.android.contacts.preference.ContactsPreferences;
 import com.android.contacts.util.concurrent.ContactsExecutors;
 import com.android.contacts.util.concurrent.ListenableFutureLoader;
+
+import com.google.android.material.snackbar.Snackbar;
 import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -70,7 +73,8 @@ import java.util.concurrent.Callable;
  */
 public class SimImportFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<SimImportFragment.LoaderResult>,
-        AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
+                AdapterView.OnItemClickListener,
+                AbsListView.OnScrollListener {
 
     private static final String KEY_SUFFIX_SELECTED_IDS = "_selectedIds";
     private static final String ARG_SUBSCRIPTION_ID = "subscriptionId";
@@ -102,8 +106,10 @@ public class SimImportFragment extends Fragment
         mAdapter = new SimContactAdapter(getActivity());
 
         final Bundle args = getArguments();
-        mSubscriptionId = args == null ? SimCard.NO_SUBSCRIPTION_ID :
-                args.getInt(ARG_SUBSCRIPTION_ID, SimCard.NO_SUBSCRIPTION_ID);
+        mSubscriptionId =
+                args == null
+                        ? SimCard.NO_SUBSCRIPTION_ID
+                        : args.getInt(ARG_SUBSCRIPTION_ID, SimCard.NO_SUBSCRIPTION_ID);
     }
 
     @Override
@@ -114,15 +120,14 @@ public class SimImportFragment extends Fragment
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_sim_import, container, false);
 
         mAccountHeaderContainer = view.findViewById(R.id.account_header_container);
-        mAccountScrolledElevationPixels = getResources()
-                .getDimension(R.dimen.contact_list_header_elevation);
-        mAccountHeaderPresenter = new AccountHeaderPresenter(
-                mAccountHeaderContainer);
+        mAccountScrolledElevationPixels =
+                getResources().getDimension(R.dimen.contact_list_header_elevation);
+        mAccountHeaderPresenter = new AccountHeaderPresenter(mAccountHeaderContainer);
         if (savedInstanceState != null) {
             mAccountHeaderPresenter.onRestoreInstanceState(savedInstanceState);
         } else {
@@ -130,15 +135,16 @@ public class SimImportFragment extends Fragment
             // after they are loaded.
             mAccountHeaderPresenter.setCurrentAccount(mPreferences.getDefaultAccount());
         }
-        mAccountHeaderPresenter.setObserver(new AccountHeaderPresenter.Observer() {
-            @Override
-            public void onChange(AccountHeaderPresenter sender) {
-                rememberSelectionsForCurrentAccount();
-                mAdapter.setAccount(sender.getCurrentAccount());
-                showSelectionsForCurrentAccount();
-                updateToolbarWithCurrentSelections();
-            }
-        });
+        mAccountHeaderPresenter.setObserver(
+                new AccountHeaderPresenter.Observer() {
+                    @Override
+                    public void onChange(AccountHeaderPresenter sender) {
+                        rememberSelectionsForCurrentAccount();
+                        mAdapter.setAccount(sender.getCurrentAccount());
+                        showSelectionsForCurrentAccount();
+                        updateToolbarWithCurrentSelections();
+                    }
+                });
         mAdapter.setAccount(mAccountHeaderPresenter.getCurrentAccount());
 
         mListView = (ListView) view.findViewById(R.id.list);
@@ -147,24 +153,27 @@ public class SimImportFragment extends Fragment
         mListView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
         mListView.setOnItemClickListener(this);
         mImportButton = view.findViewById(R.id.import_button);
-        mImportButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                importCurrentSelections();
-                // Do we wait for import to finish?
-                getActivity().setResult(Activity.RESULT_OK);
-                getActivity().finish();
-            }
-        });
+        mImportButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        importCurrentSelections();
+                        // Do we wait for import to finish?
+                        getActivity().setResult(Activity.RESULT_OK);
+                        getActivity().finish();
+                    }
+                });
 
         mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().setResult(Activity.RESULT_CANCELED);
-                getActivity().finish();
-            }
-        });
+        MoreContactUtils.setupEdgeToEdge(getActivity(), new EdgeToEdgeInsetHandler(mToolbar));
+        mToolbar.setNavigationOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getActivity().setResult(Activity.RESULT_CANCELED);
+                        getActivity().finish();
+                    }
+                });
 
         mLoadingIndicator = (ContentLoadingProgressBar) view.findViewById(R.id.loading_progress);
 
@@ -188,8 +197,8 @@ public class SimImportFragment extends Fragment
             return;
         }
         for (int i = 0, len = mListView.getCount(); i < len; i++) {
-            mListView.setItemChecked(i,
-                    Arrays.binarySearch(ids, mListView.getItemIdAtPosition(i)) >= 0);
+            mListView.setItemChecked(
+                    i, Arrays.binarySearch(ids, mListView.getItemIdAtPosition(i)) >= 0);
         }
     }
 
@@ -243,8 +252,7 @@ public class SimImportFragment extends Fragment
     }
 
     @Override
-    public void onLoadFinished(Loader<LoaderResult> loader,
-            LoaderResult data) {
+    public void onLoadFinished(Loader<LoaderResult> loader, LoaderResult data) {
         mLoadingIndicator.hide();
         if (data == null) {
             return;
@@ -259,8 +267,7 @@ public class SimImportFragment extends Fragment
     }
 
     @Override
-    public void onLoaderReset(Loader<LoaderResult> loader) {
-    }
+    public void onLoaderReset(Loader<LoaderResult> loader) {}
 
     private void restoreAdapterSelectedStates(List<AccountInfo> accounts) {
         if (mSavedInstanceState == null) {
@@ -268,8 +275,9 @@ public class SimImportFragment extends Fragment
         }
 
         for (AccountInfo account : accounts) {
-            final long[] selections = mSavedInstanceState.getLongArray(
-                    account.getAccount().stringify() + KEY_SUFFIX_SELECTED_IDS);
+            final long[] selections =
+                    mSavedInstanceState.getLongArray(
+                            account.getAccount().stringify() + KEY_SUFFIX_SELECTED_IDS);
             mPerAccountCheckedIds.put(account.getAccount(), selections);
         }
         mSavedInstanceState = null;
@@ -282,8 +290,8 @@ public class SimImportFragment extends Fragment
 
         // Make sure the selections are up-to-date
         for (Map.Entry<AccountWithDataSet, long[]> entry : mPerAccountCheckedIds.entrySet()) {
-            outState.putLongArray(entry.getKey().stringify() + KEY_SUFFIX_SELECTED_IDS,
-                    entry.getValue());
+            outState.putLongArray(
+                    entry.getKey().stringify() + KEY_SUFFIX_SELECTED_IDS, entry.getValue());
         }
     }
 
@@ -297,14 +305,17 @@ public class SimImportFragment extends Fragment
                 importableContacts.add(mAdapter.getItem(checked.keyAt(i)));
             }
         }
-        SimImportService.startImport(getContext(), mSubscriptionId, importableContacts,
+        SimImportService.startImport(
+                getContext(),
+                mSubscriptionId,
+                importableContacts,
                 mAccountHeaderPresenter.getCurrentAccount());
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (mAdapter.existsInCurrentAccount(position)) {
-            Snackbar.make(getView(), R.string.sim_import_contact_exists_toast,
-                    Snackbar.LENGTH_LONG).show();
+            Snackbar.make(getView(), R.string.sim_import_contact_exists_toast, Snackbar.LENGTH_LONG)
+                    .show();
         } else {
             updateToolbarWithCurrentSelections();
         }
@@ -318,11 +329,11 @@ public class SimImportFragment extends Fragment
     }
 
     @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) { }
+    public void onScrollStateChanged(AbsListView view, int scrollState) {}
 
     @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
-            int totalItemCount) {
+    public void onScroll(
+            AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         int firstCompletelyVisibleItem = firstVisibleItem;
         if (view != null && view.getChildAt(0) != null && view.getChildAt(0).getTop() < 0) {
             firstCompletelyVisibleItem++;
@@ -335,9 +346,7 @@ public class SimImportFragment extends Fragment
         }
     }
 
-    /**
-     * Creates a fragment that will display contacts stored on the default SIM card
-     */
+    /** Creates a fragment that will display contacts stored on the default SIM card */
     public static SimImportFragment newInstance() {
         return new SimImportFragment();
     }
@@ -394,9 +403,10 @@ public class SimImportFragment extends Fragment
         public View getView(int position, View convertView, ViewGroup parent) {
             TextView text = (TextView) convertView;
             if (text == null) {
-                final int layoutRes = existsInCurrentAccount(position) ?
-                        R.layout.sim_import_list_item_disabled :
-                        R.layout.sim_import_list_item;
+                final int layoutRes =
+                        existsInCurrentAccount(position)
+                                ? R.layout.sim_import_list_item_disabled
+                                : R.layout.sim_import_list_item;
                 text = (TextView) mInflater.inflate(layoutRes, parent, false);
             }
             text.setText(getItemLabel(getItem(position)));
@@ -444,7 +454,6 @@ public class SimImportFragment extends Fragment
         }
     }
 
-
     private static class SimContactLoader extends ListenableFutureLoader<LoaderResult> {
         private SimContactDao mDao;
         private AccountTypeManager mAccountTypeManager;
@@ -459,25 +468,30 @@ public class SimImportFragment extends Fragment
 
         @Override
         protected ListenableFuture<LoaderResult> loadData() {
-            final ListenableFuture<List<Object>> future = Futures.<Object>allAsList(
-                    mAccountTypeManager
-                            .filterAccountsAsync(AccountTypeManager.writableFilter()),
-                    ContactsExecutors.getSimReadExecutor().<Object>submit(
-                            new Callable<Object>() {
+            final ListenableFuture<List<Object>> future =
+                    Futures.<Object>allAsList(
+                            mAccountTypeManager.filterAccountsAsync(
+                                    AccountTypeManager.insertableFilter(getContext())),
+                            ContactsExecutors.getSimReadExecutor()
+                                    .<Object>submit(
+                                            new Callable<Object>() {
+                                                @Override
+                                                public LoaderResult call() throws Exception {
+                                                    return loadFromSim();
+                                                }
+                                            }));
+            return Futures.transform(
+                    future,
+                    new Function<List<Object>, LoaderResult>() {
                         @Override
-                        public LoaderResult call() throws Exception {
-                            return loadFromSim();
+                        public LoaderResult apply(List<Object> input) {
+                            final List<AccountInfo> accounts = (List<AccountInfo>) input.get(0);
+                            final LoaderResult simLoadResult = (LoaderResult) input.get(1);
+                            simLoadResult.accounts = accounts;
+                            return simLoadResult;
                         }
-                    }));
-            return Futures.transform(future, new Function<List<Object>, LoaderResult>() {
-                @Override
-                public LoaderResult apply(List<Object> input) {
-                    final List<AccountInfo> accounts = (List<AccountInfo>) input.get(0);
-                    final LoaderResult simLoadResult = (LoaderResult) input.get(1);
-                    simLoadResult.accounts = accounts;
-                    return simLoadResult;
-                }
-            }, MoreExecutors.directExecutor());
+                    },
+                    MoreExecutors.directExecutor());
         }
 
         private LoaderResult loadFromSim() {

@@ -22,18 +22,20 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.provider.ContactsContract.DisplayNameSources;
 import android.provider.ContactsContract.ProviderStatus;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
+
+import com.android.contacts.MoreContactUtils;
 import com.android.contacts.R;
 import com.android.contacts.editor.SelectAccountDialogFragment;
 import com.android.contacts.interactions.ImportDialogFragment;
@@ -43,9 +45,7 @@ import com.android.contacts.preference.DisplayOptionsPreferenceFragment.ProfileL
 import com.android.contacts.preference.DisplayOptionsPreferenceFragment.ProfileQuery;
 import com.android.contacts.util.AccountSelectionUtil;
 
-/**
- * Contacts settings.
- */
+/** Contacts settings. */
 public final class ContactsPreferenceActivity extends PreferenceActivity
         implements ProfileListener, SelectAccountDialogFragment.Listener {
 
@@ -68,6 +68,7 @@ public final class ContactsPreferenceActivity extends PreferenceActivity
         super.onCreate(savedInstanceState);
         mCompatDelegate.onCreate(savedInstanceState);
 
+        MoreContactUtils.setupEdgeToEdge(this, null);
 
         final ActionBar actionBar = mCompatDelegate.getSupportActionBar();
         if (actionBar != null) {
@@ -81,15 +82,17 @@ public final class ContactsPreferenceActivity extends PreferenceActivity
         mAreContactsAvailable = providerStatus == ProviderStatus.STATUS_NORMAL;
 
         if (savedInstanceState == null) {
-            final DisplayOptionsPreferenceFragment fragment = DisplayOptionsPreferenceFragment
-                    .newInstance(mNewLocalProfileExtra, mAreContactsAvailable);
-            getFragmentManager().beginTransaction()
+            final DisplayOptionsPreferenceFragment fragment =
+                    DisplayOptionsPreferenceFragment.newInstance(
+                            mNewLocalProfileExtra, mAreContactsAvailable);
+            getFragmentManager()
+                    .beginTransaction()
                     .replace(android.R.id.content, fragment, TAG_DISPLAY_OPTIONS)
                     .commit();
             setActivityTitle(R.string.activity_title_settings);
         } else {
-            final AboutPreferenceFragment aboutFragment = (AboutPreferenceFragment)
-                    getFragmentManager().findFragmentByTag(TAG_ABOUT);
+            final AboutPreferenceFragment aboutFragment =
+                    (AboutPreferenceFragment) getFragmentManager().findFragmentByTag(TAG_ABOUT);
 
             if (aboutFragment != null) {
                 setActivityTitle(R.string.setting_about);
@@ -165,7 +168,8 @@ public final class ContactsPreferenceActivity extends PreferenceActivity
     }
 
     protected void showAboutFragment() {
-        getFragmentManager().beginTransaction()
+        getFragmentManager()
+                .beginTransaction()
                 .replace(android.R.id.content, AboutPreferenceFragment.newInstance(), TAG_ABOUT)
                 .addToBackStack(null)
                 .commit();
@@ -213,18 +217,21 @@ public final class ContactsPreferenceActivity extends PreferenceActivity
         if (hasProfile && TextUtils.isEmpty(displayName)) {
             displayName = getString(R.string.missing_name);
         }
-        final DisplayOptionsPreferenceFragment fragment = (DisplayOptionsPreferenceFragment)
-                getFragmentManager().findFragmentByTag(TAG_DISPLAY_OPTIONS);
+        final DisplayOptionsPreferenceFragment fragment =
+                (DisplayOptionsPreferenceFragment)
+                        getFragmentManager().findFragmentByTag(TAG_DISPLAY_OPTIONS);
         fragment.updateMyInfoPreference(hasProfile, displayName, contactId, displayNameSource);
     }
 
     @Override
     public void onAccountChosen(AccountWithDataSet account, Bundle extraArgs) {
-        AccountSelectionUtil.doImport(this, extraArgs.getInt(ImportDialogFragment
-                .KEY_RES_ID), account, extraArgs.getInt(ImportDialogFragment.KEY_SUBSCRIPTION_ID));
+        AccountSelectionUtil.doImport(
+                this,
+                extraArgs.getInt(ImportDialogFragment.KEY_RES_ID),
+                account,
+                extraArgs.getInt(ImportDialogFragment.KEY_SUBSCRIPTION_ID));
     }
 
     @Override
-    public void onAccountSelectorCancelled() {
-    }
+    public void onAccountSelectorCancelled() {}
 }

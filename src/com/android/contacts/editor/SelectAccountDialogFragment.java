@@ -33,6 +33,7 @@ import com.android.contacts.model.account.AccountWithDataSet;
 import com.android.contacts.model.account.AccountsLoader;
 import com.android.contacts.util.AccountsListAdapter;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Predicate;
 
 import java.util.List;
 
@@ -50,7 +51,7 @@ public final class SelectAccountDialogFragment extends DialogFragment
     private static final String KEY_EXTRA_ARGS = "extra_args";
 
     private AccountsListAdapter mAccountsAdapter;
-    private AccountTypeManager.AccountFilter mFilter;
+    private Predicate<AccountInfo> mFilter;
 
     /**
      * Show the dialog.
@@ -82,9 +83,14 @@ public final class SelectAccountDialogFragment extends DialogFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final Bundle args = getArguments();
-        mFilter = (AccountTypeManager.AccountFilter) args.getSerializable(KEY_LIST_FILTER);
-        if (mFilter == null) {
+        AccountTypeManager.AccountFilter filter =
+            (AccountTypeManager.AccountFilter) args.getSerializable(KEY_LIST_FILTER);
+        if (filter == null) {
             mFilter = AccountTypeManager.AccountFilter.ALL;
+        } else if (filter == AccountTypeManager.AccountFilter.CONTACTS_INSERTABLE) {
+            mFilter = AccountTypeManager.insertableFilter(getActivity());
+        } else {
+            mFilter = filter;
         }
     }
 

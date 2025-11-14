@@ -20,7 +20,7 @@
     <string name="contactsList" msgid="4456188358262700898">"कन्ट्याक्टहरू"</string>
     <string name="shortcut_add_contact" msgid="7949342235528657981">"सम्पर्क थप्नुहोस्"</string>
     <string name="shortcutContact" msgid="8009736387364461511">"कन्ट्याक्ट"</string>
-    <string name="shortcutDialContact" msgid="155367248069127153">"सीधा डायल गर्नुहोस्"</string>
+    <string name="shortcutDialContact" msgid="155367248069127153">"डाइरेक्ट डायल"</string>
     <string name="shortcutMessageContact" msgid="9123517151981679277">"डाइरेक्ट म्यासेज"</string>
     <string name="shortcutActivityTitle" msgid="5407832911005090417">"सम्पर्क छनौट गर्नुहोस्"</string>
     <string name="contactInsertOrEditActivityTitle" msgid="1788154962629911262">"सम्पर्कमा थप्नुहोस्"</string>
@@ -316,7 +316,7 @@
     <string name="ghostData_company" msgid="3873500610390675876">"कम्पनी"</string>
     <string name="ghostData_department" msgid="8610642449404163799">"विभाग"</string>
     <string name="ghostData_title" msgid="8584897460662904533">"शीर्षक"</string>
-    <string name="label_notes" msgid="7134226125644463585">"टिप्पणीहरू"</string>
+    <string name="label_notes" msgid="7134226125644463585">"नोटहरू"</string>
     <string name="label_custom_field" msgid="4160584225306364924">" कस्टम"</string>
     <string name="label_sip_address" msgid="8876347942587537552">"SIP"</string>
     <string name="websiteLabelsGroup" msgid="114754928100220315">"वेबसाइट"</string>

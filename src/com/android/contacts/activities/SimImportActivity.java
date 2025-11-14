@@ -27,8 +27,8 @@ import com.android.contacts.model.SimCard;
 /**
  * Host activity for SimImportFragment
  *
- * Initially SimImportFragment was a DialogFragment but there were accessibility issues with
- * that so it was changed to an activity
+ * <p>Initially SimImportFragment was a DialogFragment but there were accessibility issues with that
+ * so it was changed to an activity
  */
 public class SimImportActivity extends AppCompatContactsActivity {
 
@@ -41,8 +41,11 @@ public class SimImportActivity extends AppCompatContactsActivity {
         final FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment = fragmentManager.findFragmentByTag("SimImport");
         if (fragment == null) {
-            fragment = SimImportFragment.newInstance(getIntent().getIntExtra(EXTRA_SUBSCRIPTION_ID,
-                    SimCard.NO_SUBSCRIPTION_ID));
+            fragment =
+                    SimImportFragment.newInstance(
+                            getIntent()
+                                    .getIntExtra(
+                                            EXTRA_SUBSCRIPTION_ID, SimCard.NO_SUBSCRIPTION_ID));
             fragmentManager.beginTransaction().add(R.id.root, fragment, "SimImport").commit();
         }
     }

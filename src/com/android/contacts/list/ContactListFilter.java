@@ -32,9 +32,7 @@ import com.android.contacts.model.account.GoogleAccountType;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Contact list filter parameters.
- */
+/** Contact list filter parameters. */
 public final class ContactListFilter implements Comparable<ContactListFilter>, Parcelable {
 
     public static final int FILTER_TYPE_DEFAULT = -1;
@@ -50,10 +48,10 @@ public final class ContactListFilter implements Comparable<ContactListFilter>, P
     public static final int FILTER_TYPE_ACCOUNT = 0;
 
     /**
-     * Obsolete filter which had been used in Honeycomb. This may be stored in
-     * {@link SharedPreferences}, but should be replaced with ALL filter when it is found.
+     * Obsolete filter which had been used in Honeycomb. This may be stored in {@link
+     * SharedPreferences}, but should be replaced with ALL filter when it is found.
      *
-     * TODO: "group" filter and relevant variables are all obsolete. Remove them.
+     * <p>TODO: "group" filter and relevant variables are all obsolete. Remove them.
      */
     private static final int FILTER_TYPE_GROUP = 1;
 
@@ -69,8 +67,8 @@ public final class ContactListFilter implements Comparable<ContactListFilter>, P
     public final Drawable icon;
     private String mId;
 
-    public ContactListFilter(int filterType, String accountType, String accountName, String dataSet,
-            Drawable icon) {
+    public ContactListFilter(
+            int filterType, String accountType, String accountName, String dataSet, Drawable icon) {
         this.filterType = filterType;
         this.accountType = accountType;
         this.accountName = accountName;
@@ -82,38 +80,54 @@ public final class ContactListFilter implements Comparable<ContactListFilter>, P
         return new ContactListFilter(filterType, null, null, null, null);
     }
 
-    public static ContactListFilter createAccountFilter(String accountType, String accountName,
-            String dataSet, Drawable icon) {
-        return new ContactListFilter(ContactListFilter.FILTER_TYPE_ACCOUNT, accountType,
-                accountName, dataSet, icon);
+    public static ContactListFilter createAccountFilter(
+            String accountType, String accountName, String dataSet, Drawable icon) {
+        return new ContactListFilter(
+                ContactListFilter.FILTER_TYPE_ACCOUNT, accountType, accountName, dataSet, icon);
     }
 
-    public static ContactListFilter createGroupMembersFilter(String accountType, String accountName,
-            String dataSet) {
-        return new ContactListFilter(ContactListFilter.FILTER_TYPE_GROUP_MEMBERS, accountType,
-                accountName, dataSet, /* icon */ null);
+    public static ContactListFilter createGroupMembersFilter(
+            String accountType, String accountName, String dataSet) {
+        return new ContactListFilter(
+                ContactListFilter.FILTER_TYPE_GROUP_MEMBERS,
+                accountType,
+                accountName,
+                dataSet, /* icon */
+                null);
     }
 
     public static ContactListFilter createDeviceContactsFilter(Drawable icon) {
-        return new ContactListFilter(ContactListFilter.FILTER_TYPE_DEVICE_CONTACTS,
-                /* accountType= */ null, /* accountName= */ null, /* dataSet= */ null, icon);
+        return new ContactListFilter(
+                ContactListFilter.FILTER_TYPE_DEVICE_CONTACTS,
+                /* accountType= */ null,
+                /* accountName= */ null,
+                /* dataSet= */ null,
+                icon);
     }
 
-    public static ContactListFilter createDeviceContactsFilter(Drawable icon,
-            AccountWithDataSet account) {
-        return new ContactListFilter(ContactListFilter.FILTER_TYPE_DEVICE_CONTACTS,
-                account.type, account.name, account.dataSet, icon);
+    public static ContactListFilter createDeviceContactsFilter(
+            Drawable icon, AccountWithDataSet account) {
+        return new ContactListFilter(
+                ContactListFilter.FILTER_TYPE_DEVICE_CONTACTS,
+                account.type,
+                account.name,
+                account.dataSet,
+                icon);
     }
 
-    public static ContactListFilter createSimContactsFilter(Drawable icon,
-            AccountWithDataSet account) {
-        return new ContactListFilter(ContactListFilter.FILTER_TYPE_SIM_CONTACTS,
-                account.type, account.name, account.dataSet, icon);
+    public static ContactListFilter createSimContactsFilter(
+            Drawable icon, AccountWithDataSet account) {
+        return new ContactListFilter(
+                ContactListFilter.FILTER_TYPE_SIM_CONTACTS,
+                account.type,
+                account.name,
+                account.dataSet,
+                icon);
     }
 
     /**
-     * Whether the given {@link ContactListFilter} has a filter type that should be displayed as
-     * the default contacts list view.
+     * Whether the given {@link ContactListFilter} has a filter type that should be displayed as the
+     * default contacts list view.
      */
     public boolean isContactsFilterType() {
         return filterType == ContactListFilter.FILTER_TYPE_DEFAULT
@@ -121,11 +135,20 @@ public final class ContactListFilter implements Comparable<ContactListFilter>, P
                 || filterType == ContactListFilter.FILTER_TYPE_CUSTOM;
     }
 
+    /**
+     * Whether the given {@link ContactListFilter} has a filter type for contacts that are stored
+     * only locally, such as on the SIM card or device only account.
+     */
+    public boolean isLocalAccountTypeFilter() {
+        return filterType == ContactListFilter.FILTER_TYPE_DEVICE_CONTACTS
+                || filterType == ContactListFilter.FILTER_TYPE_SIM_CONTACTS;
+    }
+
     /** Returns the {@link ListEvent.ListType} for the type of this filter. */
     public int toListType() {
         switch (filterType) {
             case FILTER_TYPE_DEFAULT:
-                // Fall through
+            // Fall through
             case FILTER_TYPE_ALL_ACCOUNTS:
                 return ListEvent.ListType.ALL_CONTACTS;
             case FILTER_TYPE_CUSTOM:
@@ -146,10 +169,7 @@ public final class ContactListFilter implements Comparable<ContactListFilter>, P
         return ListEvent.ListType.UNKNOWN_LIST;
     }
 
-
-    /**
-     * Returns true if this filter is based on data and may become invalid over time.
-     */
+    /** Returns true if this filter is based on data and may become invalid over time. */
     public boolean isValidationRequired() {
         return filterType == FILTER_TYPE_ACCOUNT;
     }
@@ -170,8 +190,11 @@ public final class ContactListFilter implements Comparable<ContactListFilter>, P
             case FILTER_TYPE_SINGLE_CONTACT:
                 return "single";
             case FILTER_TYPE_ACCOUNT:
-                return "account: " + accountType + (dataSet != null ? "/" + dataSet : "")
-                        + " " + accountName;
+                return "account: "
+                        + accountType
+                        + (dataSet != null ? "/" + dataSet : "")
+                        + " "
+                        + accountName;
             case FILTER_TYPE_GROUP_MEMBERS:
                 return "group_members";
             case FILTER_TYPE_DEVICE_CONTACTS:
@@ -232,25 +255,25 @@ public final class ContactListFilter implements Comparable<ContactListFilter>, P
     }
 
     /**
-     * Store the given {@link ContactListFilter} to preferences. If the requested filter is
-     * of type {@link #FILTER_TYPE_SINGLE_CONTACT} then do not save it to preferences because
-     * it is a temporary state.
+     * Store the given {@link ContactListFilter} to preferences. If the requested filter is of type
+     * {@link #FILTER_TYPE_SINGLE_CONTACT} then do not save it to preferences because it is a
+     * temporary state.
      */
     public static void storeToPreferences(SharedPreferences prefs, ContactListFilter filter) {
         if (filter != null && filter.filterType == FILTER_TYPE_SINGLE_CONTACT) {
             return;
         }
         prefs.edit()
-            .putInt(KEY_FILTER_TYPE, filter == null ? FILTER_TYPE_DEFAULT : filter.filterType)
-            .putString(KEY_ACCOUNT_NAME, filter == null ? null : filter.accountName)
-            .putString(KEY_ACCOUNT_TYPE, filter == null ? null : filter.accountType)
-            .putString(KEY_DATA_SET, filter == null ? null : filter.dataSet)
-            .apply();
+                .putInt(KEY_FILTER_TYPE, filter == null ? FILTER_TYPE_DEFAULT : filter.filterType)
+                .putString(KEY_ACCOUNT_NAME, filter == null ? null : filter.accountName)
+                .putString(KEY_ACCOUNT_TYPE, filter == null ? null : filter.accountType)
+                .putString(KEY_DATA_SET, filter == null ? null : filter.dataSet)
+                .apply();
     }
 
     /**
-     * Try to obtain ContactListFilter object saved in SharedPreference.
-     * If there's no info there, return ALL filter instead.
+     * Try to obtain ContactListFilter object saved in SharedPreference. If there's no info there,
+     * return ALL filter instead.
      */
     public static ContactListFilter restoreDefaultPreferences(SharedPreferences prefs) {
         ContactListFilter filter = restoreFromPreferences(prefs);
@@ -259,8 +282,8 @@ public final class ContactListFilter implements Comparable<ContactListFilter>, P
         }
         // "Group" filter is obsolete and thus is not exposed anymore. The "single contact mode"
         // should also not be stored in preferences anymore since it is a temporary state.
-        if (filter.filterType == FILTER_TYPE_GROUP ||
-                filter.filterType == FILTER_TYPE_SINGLE_CONTACT) {
+        if (filter.filterType == FILTER_TYPE_GROUP
+                || filter.filterType == FILTER_TYPE_SINGLE_CONTACT) {
             filter = ContactListFilter.createFilterWithType(FILTER_TYPE_ALL_ACCOUNTS);
         }
         return filter;
@@ -278,7 +301,6 @@ public final class ContactListFilter implements Comparable<ContactListFilter>, P
         return new ContactListFilter(filterType, accountType, accountName, dataSet, null);
     }
 
-
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(filterType);
@@ -289,29 +311,28 @@ public final class ContactListFilter implements Comparable<ContactListFilter>, P
 
     public static final Parcelable.Creator<ContactListFilter> CREATOR =
             new Parcelable.Creator<ContactListFilter>() {
-        @Override
-        public ContactListFilter createFromParcel(Parcel source) {
-            int filterType = source.readInt();
-            String accountName = source.readString();
-            String accountType = source.readString();
-            String dataSet = source.readString();
-            return new ContactListFilter(filterType, accountType, accountName, dataSet, null);
-        }
+                @Override
+                public ContactListFilter createFromParcel(Parcel source) {
+                    int filterType = source.readInt();
+                    String accountName = source.readString();
+                    String accountType = source.readString();
+                    String dataSet = source.readString();
+                    return new ContactListFilter(
+                            filterType, accountType, accountName, dataSet, null);
+                }
 
-        @Override
-        public ContactListFilter[] newArray(int size) {
-            return new ContactListFilter[size];
-        }
-    };
+                @Override
+                public ContactListFilter[] newArray(int size) {
+                    return new ContactListFilter[size];
+                }
+            };
 
     @Override
     public int describeContents() {
         return 0;
     }
 
-    /**
-     * Returns a string that can be used as a stable persistent identifier for this filter.
-     */
+    /** Returns a string that can be used as a stable persistent identifier for this filter. */
     public String getId() {
         if (mId == null) {
             StringBuilder sb = new StringBuilder();
@@ -334,11 +355,10 @@ public final class ContactListFilter implements Comparable<ContactListFilter>, P
      * Adds the account query parameters to the given {@code uriBuilder}.
      *
      * @throws IllegalStateException if the filter type is not {@link #FILTER_TYPE_ACCOUNT} or
-     * {@link #FILTER_TYPE_GROUP_MEMBERS}.
+     *     {@link #FILTER_TYPE_GROUP_MEMBERS}.
      */
     public Uri.Builder addAccountQueryParameterToUrl(Uri.Builder uriBuilder) {
-        if (filterType != FILTER_TYPE_ACCOUNT
-                && filterType != FILTER_TYPE_GROUP_MEMBERS) {
+        if (filterType != FILTER_TYPE_ACCOUNT && filterType != FILTER_TYPE_GROUP_MEMBERS) {
             throw new IllegalStateException(
                     "filterType must be FILTER_TYPE_ACCOUNT or FILER_TYPE_GROUP_MEMBERS");
         }
@@ -354,12 +374,13 @@ public final class ContactListFilter implements Comparable<ContactListFilter>, P
     }
 
     public AccountWithDataSet toAccountWithDataSet() {
-        if (filterType == FILTER_TYPE_ACCOUNT || filterType == FILTER_TYPE_DEVICE_CONTACTS
+        if (filterType == FILTER_TYPE_ACCOUNT
+                || filterType == FILTER_TYPE_DEVICE_CONTACTS
                 || filterType == FILTER_TYPE_SIM_CONTACTS) {
             return new AccountWithDataSet(accountName, accountType, dataSet);
         } else {
-            throw new IllegalStateException("Cannot create Account from filter type " +
-                    filterTypeToString(filterType));
+            throw new IllegalStateException(
+                    "Cannot create Account from filter type " + filterTypeToString(filterType));
         }
     }
 
@@ -463,8 +484,8 @@ public final class ContactListFilter implements Comparable<ContactListFilter>, P
     }
 
     /**
-     * Returns true if this ContactListFilter is Google account type. (i.e. where
-     * accountType = "com.google" and dataSet = null)
+     * Returns true if this ContactListFilter is Google account type. (i.e. where accountType =
+     * "com.google" and dataSet = null)
      */
     public boolean isGoogleAccountType() {
         return GoogleAccountType.ACCOUNT_TYPE.equals(accountType) && dataSet == null;

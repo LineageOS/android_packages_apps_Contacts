@@ -24,8 +24,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract.Contacts;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -37,7 +35,12 @@ import android.view.View.OnFocusChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+
 import com.android.contacts.AppCompatContactsActivity;
+import com.android.contacts.MoreContactUtils;
+import com.android.contacts.MoreContactUtils.EdgeToEdgeInsetHandler;
 import com.android.contacts.R;
 import com.android.contacts.editor.EditorIntents;
 import com.android.contacts.list.ContactEntryListFragment;
@@ -67,12 +70,15 @@ import com.android.contacts.util.ViewUtil;
 import java.util.ArrayList;
 
 /**
- * Displays a list of contacts (or phone numbers or postal addresses) for the
- * purposes of selecting one.
+ * Displays a list of contacts (or phone numbers or postal addresses) for the purposes of selecting
+ * one.
  */
-public class ContactSelectionActivity extends AppCompatContactsActivity implements
-        View.OnCreateContextMenuListener, ActionBarAdapter.Listener, OnClickListener,
-        OnFocusChangeListener, OnCheckBoxListActionListener {
+public class ContactSelectionActivity extends AppCompatContactsActivity
+        implements View.OnCreateContextMenuListener,
+                ActionBarAdapter.Listener,
+                OnClickListener,
+                OnFocusChangeListener,
+                OnCheckBoxListActionListener {
     private static final String TAG = "ContactSelection";
 
     private static final String KEY_ACTION_CODE = "actionCode";
@@ -145,23 +151,27 @@ public class ContactSelectionActivity extends AppCompatContactsActivity implemen
 
     private void prepareSearchViewAndActionBar(Bundle savedState) {
         mToolbar = getView(R.id.toolbar);
+        MoreContactUtils.setupEdgeToEdge(
+                this, new EdgeToEdgeInsetHandler(findViewById(R.id.toolbar_frame)));
         setSupportActionBar(mToolbar);
 
         // Add a shadow under the toolbar.
         ViewUtil.addRectangularOutlineProvider(findViewById(R.id.toolbar_parent), getResources());
 
-        mActionBarAdapter = new ActionBarAdapter(this, this, getSupportActionBar(), mToolbar,
-                R.string.enter_contact_name);
+        mActionBarAdapter =
+                new ActionBarAdapter(
+                        this, this, getSupportActionBar(), mToolbar, R.string.enter_contact_name);
         mActionBarAdapter.setShowHomeIcon(true);
         mActionBarAdapter.setShowHomeAsUp(true);
         mActionBarAdapter.initialize(savedState, mRequest);
 
         // Postal address pickers (and legacy pickers) don't support search, so just show
         // "HomeAsUp" button and title.
-        mIsSearchSupported = mRequest.getActionCode() != ContactsRequest.ACTION_PICK_POSTAL
-                && mRequest.getActionCode() != ContactsRequest.ACTION_PICK_EMAILS
-                && mRequest.getActionCode() != ContactsRequest.ACTION_PICK_PHONES
-                && !mRequest.isLegacyCompatibilityMode();
+        mIsSearchSupported =
+                mRequest.getActionCode() != ContactsRequest.ACTION_PICK_POSTAL
+                        && mRequest.getActionCode() != ContactsRequest.ACTION_PICK_EMAILS
+                        && mRequest.getActionCode() != ContactsRequest.ACTION_PICK_PHONES
+                        && !mRequest.isLegacyCompatibilityMode();
         configureSearchMode();
     }
 
@@ -173,7 +183,7 @@ public class ContactSelectionActivity extends AppCompatContactsActivity implemen
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         final int id = item.getItemId();
-        if (id == android.R.id.home) {// Go back to previous screen, intending "cancel"
+        if (id == android.R.id.home) { // Go back to previous screen, intending "cancel"
             setResult(RESULT_CANCELED);
             onBackPressed();
         } else if (id == R.id.menu_search) {
@@ -203,173 +213,198 @@ public class ContactSelectionActivity extends AppCompatContactsActivity implemen
         int titleResId = -1;
         int actionCode = mRequest.getActionCode();
         switch (actionCode) {
-            case ContactsRequest.ACTION_INSERT_OR_EDIT_CONTACT: {
-                titleResId = R.string.contactInsertOrEditActivityTitle;
-                break;
-            }
-            case ContactsRequest.ACTION_PICK_CONTACT: {
-                titleResId = R.string.contactPickerActivityTitle;
-                break;
-            }
-            case ContactsRequest.ACTION_PICK_OR_CREATE_CONTACT: {
-                titleResId = R.string.contactPickerActivityTitle;
-                break;
-            }
-            case ContactsRequest.ACTION_CREATE_SHORTCUT_CONTACT: {
-                titleResId = R.string.shortcutActivityTitle;
-                break;
-            }
-            case ContactsRequest.ACTION_PICK_PHONE: {
-                titleResId = R.string.contactPickerActivityTitle;
-                break;
-            }
-            case ContactsRequest.ACTION_PICK_EMAIL: {
-                titleResId = R.string.contactPickerActivityTitle;
-                break;
-            }
-            case ContactsRequest.ACTION_PICK_PHONES: {
-                titleResId = R.string.pickerSelectContactsActivityTitle;
-                break;
-            }
-            case ContactsRequest.ACTION_PICK_EMAILS: {
-                titleResId = R.string.pickerSelectContactsActivityTitle;
-                break;
-            }
-            case ContactsRequest.ACTION_CREATE_SHORTCUT_CALL: {
-                titleResId = R.string.shortcutActivityTitle;
-                break;
-            }
-            case ContactsRequest.ACTION_CREATE_SHORTCUT_SMS: {
-                titleResId = R.string.shortcutActivityTitle;
-                break;
-            }
-            case ContactsRequest.ACTION_PICK_POSTAL: {
-                titleResId = R.string.contactPickerActivityTitle;
-                break;
-            }
-            case ContactsRequest.ACTION_PICK_JOIN: {
-                titleResId = R.string.titleJoinContactDataWith;
-                break;
-            }
-            case ContactsRequest.ACTION_PICK_GROUP_MEMBERS: {
-                titleResId = R.string.groupMemberPickerActivityTitle;
-                break;
-            }
+            case ContactsRequest.ACTION_INSERT_OR_EDIT_CONTACT:
+                {
+                    titleResId = R.string.contactInsertOrEditActivityTitle;
+                    break;
+                }
+            case ContactsRequest.ACTION_PICK_CONTACT:
+                {
+                    titleResId = R.string.contactPickerActivityTitle;
+                    break;
+                }
+            case ContactsRequest.ACTION_PICK_OR_CREATE_CONTACT:
+                {
+                    titleResId = R.string.contactPickerActivityTitle;
+                    break;
+                }
+            case ContactsRequest.ACTION_CREATE_SHORTCUT_CONTACT:
+                {
+                    titleResId = R.string.shortcutActivityTitle;
+                    break;
+                }
+            case ContactsRequest.ACTION_PICK_PHONE:
+                {
+                    titleResId = R.string.contactPickerActivityTitle;
+                    break;
+                }
+            case ContactsRequest.ACTION_PICK_EMAIL:
+                {
+                    titleResId = R.string.contactPickerActivityTitle;
+                    break;
+                }
+            case ContactsRequest.ACTION_PICK_PHONES:
+                {
+                    titleResId = R.string.pickerSelectContactsActivityTitle;
+                    break;
+                }
+            case ContactsRequest.ACTION_PICK_EMAILS:
+                {
+                    titleResId = R.string.pickerSelectContactsActivityTitle;
+                    break;
+                }
+            case ContactsRequest.ACTION_CREATE_SHORTCUT_CALL:
+                {
+                    titleResId = R.string.shortcutActivityTitle;
+                    break;
+                }
+            case ContactsRequest.ACTION_CREATE_SHORTCUT_SMS:
+                {
+                    titleResId = R.string.shortcutActivityTitle;
+                    break;
+                }
+            case ContactsRequest.ACTION_PICK_POSTAL:
+                {
+                    titleResId = R.string.contactPickerActivityTitle;
+                    break;
+                }
+            case ContactsRequest.ACTION_PICK_JOIN:
+                {
+                    titleResId = R.string.titleJoinContactDataWith;
+                    break;
+                }
+            case ContactsRequest.ACTION_PICK_GROUP_MEMBERS:
+                {
+                    titleResId = R.string.groupMemberPickerActivityTitle;
+                    break;
+                }
         }
         if (titleResId > 0) {
             getSupportActionBar().setTitle(titleResId);
         }
     }
 
-    /**
-     * Creates the fragment based on the current request.
-     */
+    /** Creates the fragment based on the current request. */
     public void configureListFragment() {
         switch (mActionCode) {
-            case ContactsRequest.ACTION_INSERT_OR_EDIT_CONTACT: {
-                ContactPickerFragment fragment = new ContactPickerFragment();
-                fragment.setEditMode(true);
-                fragment.setDirectorySearchMode(DirectoryListLoader.SEARCH_MODE_NONE);
-                fragment.setCreateContactEnabled(!mRequest.isSearchMode());
-                fragment.setListType(ListEvent.ListType.PICK_CONTACT);
-                mListFragment = fragment;
-                break;
-            }
+            case ContactsRequest.ACTION_INSERT_OR_EDIT_CONTACT:
+                {
+                    ContactPickerFragment fragment = new ContactPickerFragment();
+                    fragment.setEditMode(true);
+                    fragment.setDirectorySearchMode(DirectoryListLoader.SEARCH_MODE_NONE);
+                    fragment.setCreateContactEnabled(!mRequest.isSearchMode());
+                    fragment.setListType(ListEvent.ListType.PICK_CONTACT);
+                    mListFragment = fragment;
+                    break;
+                }
 
             case ContactsRequest.ACTION_DEFAULT:
-            case ContactsRequest.ACTION_PICK_CONTACT: {
-                ContactPickerFragment fragment = new ContactPickerFragment();
-                fragment.setIncludeFavorites(mRequest.shouldIncludeFavorites());
-                fragment.setListType(ListEvent.ListType.PICK_CONTACT);
-                mListFragment = fragment;
-                break;
-            }
+            case ContactsRequest.ACTION_PICK_CONTACT:
+                {
+                    ContactPickerFragment fragment = new ContactPickerFragment();
+                    fragment.setIncludeFavorites(mRequest.shouldIncludeFavorites());
+                    fragment.setListType(ListEvent.ListType.PICK_CONTACT);
+                    mListFragment = fragment;
+                    break;
+                }
 
-            case ContactsRequest.ACTION_PICK_OR_CREATE_CONTACT: {
-                ContactPickerFragment fragment = new ContactPickerFragment();
-                fragment.setCreateContactEnabled(!mRequest.isSearchMode());
-                fragment.setListType(ListEvent.ListType.PICK_CONTACT);
-                mListFragment = fragment;
-                break;
-            }
+            case ContactsRequest.ACTION_PICK_OR_CREATE_CONTACT:
+                {
+                    ContactPickerFragment fragment = new ContactPickerFragment();
+                    fragment.setCreateContactEnabled(!mRequest.isSearchMode());
+                    fragment.setListType(ListEvent.ListType.PICK_CONTACT);
+                    mListFragment = fragment;
+                    break;
+                }
 
-            case ContactsRequest.ACTION_CREATE_SHORTCUT_CONTACT: {
-                ContactPickerFragment fragment = new ContactPickerFragment();
-                fragment.setShortcutRequested(true);
-                fragment.setListType(ListEvent.ListType.PICK_CONTACT_FOR_SHORTCUT);
-                mListFragment = fragment;
-                break;
-            }
+            case ContactsRequest.ACTION_CREATE_SHORTCUT_CONTACT:
+                {
+                    ContactPickerFragment fragment = new ContactPickerFragment();
+                    fragment.setShortcutRequested(true);
+                    fragment.setListType(ListEvent.ListType.PICK_CONTACT_FOR_SHORTCUT);
+                    mListFragment = fragment;
+                    break;
+                }
 
-            case ContactsRequest.ACTION_PICK_PHONE: {
-                PhoneNumberPickerFragment fragment = getPhoneNumberPickerFragment(mRequest);
-                fragment.setListType(ListEvent.ListType.PICK_PHONE);
-                mListFragment = fragment;
-                break;
-            }
+            case ContactsRequest.ACTION_PICK_PHONE:
+                {
+                    PhoneNumberPickerFragment fragment = getPhoneNumberPickerFragment(mRequest);
+                    fragment.setListType(ListEvent.ListType.PICK_PHONE);
+                    mListFragment = fragment;
+                    break;
+                }
 
-            case ContactsRequest.ACTION_PICK_EMAIL: {
-                mListFragment = new EmailAddressPickerFragment();
-                mListFragment.setListType(ListEvent.ListType.PICK_EMAIL);
-                break;
-            }
+            case ContactsRequest.ACTION_PICK_EMAIL:
+                {
+                    mListFragment = new EmailAddressPickerFragment();
+                    mListFragment.setListType(ListEvent.ListType.PICK_EMAIL);
+                    break;
+                }
 
-            case ContactsRequest.ACTION_PICK_PHONES: {
-                mListFragment = new MultiSelectPhoneNumbersListFragment();
-                mListFragment.setArguments(getIntent().getExtras());
-                break;
-            }
+            case ContactsRequest.ACTION_PICK_PHONES:
+                {
+                    mListFragment = new MultiSelectPhoneNumbersListFragment();
+                    mListFragment.setArguments(getIntent().getExtras());
+                    break;
+                }
 
-            case ContactsRequest.ACTION_PICK_EMAILS: {
-                mListFragment = new MultiSelectEmailAddressesListFragment();
-                mListFragment.setArguments(getIntent().getExtras());
-                break;
-            }
-            case ContactsRequest.ACTION_CREATE_SHORTCUT_CALL: {
-                PhoneNumberPickerFragment fragment = getPhoneNumberPickerFragment(mRequest);
-                fragment.setShortcutAction(Intent.ACTION_CALL);
-                fragment.setListType(ListEvent.ListType.PICK_CONTACT_FOR_SHORTCUT);
-                mListFragment = fragment;
-                break;
-            }
+            case ContactsRequest.ACTION_PICK_EMAILS:
+                {
+                    mListFragment = new MultiSelectEmailAddressesListFragment();
+                    mListFragment.setArguments(getIntent().getExtras());
+                    break;
+                }
+            case ContactsRequest.ACTION_CREATE_SHORTCUT_CALL:
+                {
+                    PhoneNumberPickerFragment fragment = getPhoneNumberPickerFragment(mRequest);
+                    fragment.setShortcutAction(Intent.ACTION_CALL);
+                    fragment.setListType(ListEvent.ListType.PICK_CONTACT_FOR_SHORTCUT);
+                    mListFragment = fragment;
+                    break;
+                }
 
-            case ContactsRequest.ACTION_CREATE_SHORTCUT_SMS: {
-                PhoneNumberPickerFragment fragment = getPhoneNumberPickerFragment(mRequest);
-                fragment.setShortcutAction(Intent.ACTION_SENDTO);
-                fragment.setListType(ListEvent.ListType.PICK_CONTACT_FOR_SHORTCUT);
-                mListFragment = fragment;
-                break;
-            }
+            case ContactsRequest.ACTION_CREATE_SHORTCUT_SMS:
+                {
+                    PhoneNumberPickerFragment fragment = getPhoneNumberPickerFragment(mRequest);
+                    fragment.setShortcutAction(Intent.ACTION_SENDTO);
+                    fragment.setListType(ListEvent.ListType.PICK_CONTACT_FOR_SHORTCUT);
+                    mListFragment = fragment;
+                    break;
+                }
 
-            case ContactsRequest.ACTION_PICK_POSTAL: {
-                PostalAddressPickerFragment fragment = new PostalAddressPickerFragment();
-                fragment.setListType(ListEvent.ListType.PICK_POSTAL);
-                mListFragment = fragment;
-                break;
-            }
+            case ContactsRequest.ACTION_PICK_POSTAL:
+                {
+                    PostalAddressPickerFragment fragment = new PostalAddressPickerFragment();
+                    fragment.setListType(ListEvent.ListType.PICK_POSTAL);
+                    mListFragment = fragment;
+                    break;
+                }
 
-            case ContactsRequest.ACTION_PICK_JOIN: {
-                JoinContactListFragment joinFragment = new JoinContactListFragment();
-                joinFragment.setTargetContactId(getTargetContactId());
-                joinFragment.setListType(ListEvent.ListType.PICK_JOIN);
-                mListFragment = joinFragment;
-                break;
-            }
+            case ContactsRequest.ACTION_PICK_JOIN:
+                {
+                    JoinContactListFragment joinFragment = new JoinContactListFragment();
+                    joinFragment.setTargetContactId(getTargetContactId());
+                    joinFragment.setListType(ListEvent.ListType.PICK_JOIN);
+                    mListFragment = joinFragment;
+                    break;
+                }
 
-            case ContactsRequest.ACTION_PICK_GROUP_MEMBERS: {
-                final String accountName = getIntent().getStringExtra(
-                        UiIntentActions.GROUP_ACCOUNT_NAME);
-                final String accountType = getIntent().getStringExtra(
-                        UiIntentActions.GROUP_ACCOUNT_TYPE);
-                final String accountDataSet = getIntent().getStringExtra(
-                        UiIntentActions.GROUP_ACCOUNT_DATA_SET);
-                final ArrayList<String> contactIds = getIntent().getStringArrayListExtra(
-                        UiIntentActions.GROUP_CONTACT_IDS);
-                mListFragment = GroupMemberPickerFragment.newInstance(
-                        accountName, accountType, accountDataSet, contactIds);
-                mListFragment.setListType(ListEvent.ListType.PICK_GROUP_MEMBERS);
-                break;
-            }
+            case ContactsRequest.ACTION_PICK_GROUP_MEMBERS:
+                {
+                    final String accountName =
+                            getIntent().getStringExtra(UiIntentActions.GROUP_ACCOUNT_NAME);
+                    final String accountType =
+                            getIntent().getStringExtra(UiIntentActions.GROUP_ACCOUNT_TYPE);
+                    final String accountDataSet =
+                            getIntent().getStringExtra(UiIntentActions.GROUP_ACCOUNT_DATA_SET);
+                    final ArrayList<String> contactIds =
+                            getIntent().getStringArrayListExtra(UiIntentActions.GROUP_CONTACT_IDS);
+                    mListFragment =
+                            GroupMemberPickerFragment.newInstance(
+                                    accountName, accountType, accountDataSet, contactIds);
+                    mListFragment.setListType(ListEvent.ListType.PICK_GROUP_MEMBERS);
+                    break;
+                }
 
             default:
                 throw new IllegalStateException("Invalid action code: " + mActionCode);
@@ -381,7 +416,8 @@ public class ContactSelectionActivity extends AppCompatContactsActivity implemen
         mListFragment.setLegacyCompatibilityMode(mRequest.isLegacyCompatibilityMode());
         mListFragment.setDirectoryResultLimit(DEFAULT_DIRECTORY_RESULT_LIMIT);
 
-        getFragmentManager().beginTransaction()
+        getFragmentManager()
+                .beginTransaction()
                 .replace(R.id.list_container, mListFragment)
                 .commitAllowingStateLoss();
     }
@@ -396,27 +432,28 @@ public class ContactSelectionActivity extends AppCompatContactsActivity implemen
 
     public void setupActionListener() {
         if (mListFragment instanceof ContactPickerFragment) {
-            ((ContactPickerFragment) mListFragment).setOnContactPickerActionListener(
-                    new ContactPickerActionListener());
+            ((ContactPickerFragment) mListFragment)
+                    .setOnContactPickerActionListener(new ContactPickerActionListener());
         } else if (mListFragment instanceof PhoneNumberPickerFragment) {
-            ((PhoneNumberPickerFragment) mListFragment).setOnPhoneNumberPickerActionListener(
-                    new PhoneNumberPickerActionListener());
+            ((PhoneNumberPickerFragment) mListFragment)
+                    .setOnPhoneNumberPickerActionListener(new PhoneNumberPickerActionListener());
         } else if (mListFragment instanceof PostalAddressPickerFragment) {
-            ((PostalAddressPickerFragment) mListFragment).setOnPostalAddressPickerActionListener(
-                    new PostalAddressPickerActionListener());
+            ((PostalAddressPickerFragment) mListFragment)
+                    .setOnPostalAddressPickerActionListener(
+                            new PostalAddressPickerActionListener());
         } else if (mListFragment instanceof EmailAddressPickerFragment) {
-            ((EmailAddressPickerFragment) mListFragment).setOnEmailAddressPickerActionListener(
-                    new EmailAddressPickerActionListener());
+            ((EmailAddressPickerFragment) mListFragment)
+                    .setOnEmailAddressPickerActionListener(new EmailAddressPickerActionListener());
         } else if (mListFragment instanceof MultiSelectEmailAddressesListFragment) {
             ((MultiSelectEmailAddressesListFragment) mListFragment).setCheckBoxListListener(this);
         } else if (mListFragment instanceof MultiSelectPhoneNumbersListFragment) {
             ((MultiSelectPhoneNumbersListFragment) mListFragment).setCheckBoxListListener(this);
         } else if (mListFragment instanceof JoinContactListFragment) {
-            ((JoinContactListFragment) mListFragment).setOnContactPickerActionListener(
-                    new JoinContactActionListener());
+            ((JoinContactListFragment) mListFragment)
+                    .setOnContactPickerActionListener(new JoinContactActionListener());
         } else if (mListFragment instanceof GroupMemberPickerFragment) {
-            ((GroupMemberPickerFragment) mListFragment).setListener(
-                    new GroupMemberPickerListener());
+            ((GroupMemberPickerFragment) mListFragment)
+                    .setListener(new GroupMemberPickerListener());
             getMultiSelectListFragment().setCheckBoxListListener(this);
         } else {
             throw new IllegalStateException("Unsupported list fragment type: " + mListFragment);
@@ -481,19 +518,21 @@ public class ContactSelectionActivity extends AppCompatContactsActivity implemen
     }
 
     private void updateAddContactsButton(int count) {
-        final TextView textView = (TextView) mActionBarAdapter.getSelectionContainer()
-                .findViewById(R.id.add_contacts);
+        final TextView textView =
+                (TextView)
+                        mActionBarAdapter.getSelectionContainer().findViewById(R.id.add_contacts);
         if (count > 0) {
             textView.setVisibility(View.VISIBLE);
             textView.setAllCaps(true);
-            textView.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    final long[] contactIds =
-                            getMultiSelectListFragment().getSelectedContactIdsArray();
-                    returnSelectedContacts(contactIds);
-                }
-            });
+            textView.setOnClickListener(
+                    new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            final long[] contactIds =
+                                    getMultiSelectListFragment().getSelectedContactIdsArray();
+                            returnSelectedContacts(contactIds);
+                        }
+                    });
         } else {
             textView.setVisibility(View.GONE);
         }
@@ -512,9 +551,12 @@ public class ContactSelectionActivity extends AppCompatContactsActivity implemen
 
         @Override
         public void onEditContactAction(Uri contactLookupUri) {
-            startActivityAndForwardResult(EditorIntents.createEditContactIntent(
-                    ContactSelectionActivity.this, contactLookupUri, /* materialPalette =*/ null,
-                    /* photoId =*/ -1));
+            startActivityAndForwardResult(
+                    EditorIntents.createEditContactIntent(
+                            ContactSelectionActivity.this,
+                            contactLookupUri,
+                            /* materialPalette= */ null,
+                            /* photoId= */ -1));
         }
 
         @Override
@@ -528,16 +570,16 @@ public class ContactSelectionActivity extends AppCompatContactsActivity implemen
         }
     }
 
-    private final class PhoneNumberPickerActionListener implements
-            OnPhoneNumberPickerActionListener {
+    private final class PhoneNumberPickerActionListener
+            implements OnPhoneNumberPickerActionListener {
         @Override
         public void onPickDataUri(Uri dataUri, boolean isVideoCall, int callInitiationType) {
             returnPickerResult(dataUri);
         }
 
         @Override
-        public void onPickPhoneNumber(String phoneNumber, boolean isVideoCall,
-                                      int callInitiationType) {
+        public void onPickPhoneNumber(
+                String phoneNumber, boolean isVideoCall, int callInitiationType) {
             Log.w(TAG, "Unsupported call.");
         }
 
@@ -561,16 +603,13 @@ public class ContactSelectionActivity extends AppCompatContactsActivity implemen
         }
 
         @Override
-        public void onShortcutIntentCreated(Intent intent) {
-        }
+        public void onShortcutIntentCreated(Intent intent) {}
 
         @Override
-        public void onCreateNewContactAction() {
-        }
+        public void onCreateNewContactAction() {}
 
         @Override
-        public void onEditContactAction(Uri contactLookupUri) {
-        }
+        public void onEditContactAction(Uri contactLookupUri) {}
     }
 
     private final class GroupMemberPickerListener implements GroupMemberPickerFragment.Listener {
@@ -594,16 +633,16 @@ public class ContactSelectionActivity extends AppCompatContactsActivity implemen
         returnPickerResult(intent);
     }
 
-    private final class PostalAddressPickerActionListener implements
-            OnPostalAddressPickerActionListener {
+    private final class PostalAddressPickerActionListener
+            implements OnPostalAddressPickerActionListener {
         @Override
         public void onPickPostalAddressAction(Uri dataUri) {
             returnPickerResult(dataUri);
         }
     }
 
-    private final class EmailAddressPickerActionListener implements
-            OnEmailAddressPickerActionListener {
+    private final class EmailAddressPickerActionListener
+            implements OnEmailAddressPickerActionListener {
         @Override
         public void onPickEmailAddressAction(Uri dataUri) {
             returnPickerResult(dataUri);
@@ -622,8 +661,8 @@ public class ContactSelectionActivity extends AppCompatContactsActivity implemen
             ImplicitIntentsUtil.startActivityInApp(ContactSelectionActivity.this, intent);
         } catch (ActivityNotFoundException e) {
             Log.e(TAG, "startActivity() failed: " + e);
-            Toast.makeText(ContactSelectionActivity.this, R.string.missing_app,
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(ContactSelectionActivity.this, R.string.missing_app, Toast.LENGTH_SHORT)
+                    .show();
         }
         finish();
     }
@@ -658,11 +697,15 @@ public class ContactSelectionActivity extends AppCompatContactsActivity implemen
 
     private long getTargetContactId() {
         Intent intent = getIntent();
-        final long targetContactId = intent.getLongExtra(
-                UiIntentActions.TARGET_CONTACT_ID_EXTRA_KEY, -1);
+        final long targetContactId =
+                intent.getLongExtra(UiIntentActions.TARGET_CONTACT_ID_EXTRA_KEY, -1);
         if (targetContactId == -1) {
-            Log.e(TAG, "Intent " + intent.getAction() + " is missing required extra: "
-                    + UiIntentActions.TARGET_CONTACT_ID_EXTRA_KEY);
+            Log.e(
+                    TAG,
+                    "Intent "
+                            + intent.getAction()
+                            + " is missing required extra: "
+                            + UiIntentActions.TARGET_CONTACT_ID_EXTRA_KEY);
             setResult(RESULT_CANCELED);
             finish();
             return -1;
@@ -672,8 +715,7 @@ public class ContactSelectionActivity extends AppCompatContactsActivity implemen
 
     private void startCreateNewContactActivity() {
         Intent intent = new Intent(Intent.ACTION_INSERT, Contacts.CONTENT_URI);
-        intent.putExtra(ContactEditorActivity.
-                INTENT_KEY_FINISH_ACTIVITY_ON_SAVE_COMPLETED, true);
+        intent.putExtra(ContactEditorActivity.INTENT_KEY_FINISH_ACTIVITY_ON_SAVE_COMPLETED, true);
         startActivityAndForwardResult(intent);
     }
 
@@ -689,8 +731,11 @@ public class ContactSelectionActivity extends AppCompatContactsActivity implemen
 
         final Drawable searchIcon = searchItem.getIcon();
         if (searchIcon != null) {
-            searchIcon.mutate().setColorFilter(ContextCompat.getColor(this,
-                    R.color.actionbar_icon_color), PorterDuff.Mode.SRC_ATOP);
+            searchIcon
+                    .mutate()
+                    .setColorFilter(
+                            ContextCompat.getColor(this, R.color.actionbar_icon_color),
+                            PorterDuff.Mode.SRC_ATOP);
         }
         return true;
     }

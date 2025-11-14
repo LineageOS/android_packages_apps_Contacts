@@ -164,10 +164,10 @@
     <string name="create_group_item_label" msgid="921929508079162463">"ಹೊಸದನ್ನು ರಚಿಸಿ…"</string>
     <string name="delete_group_dialog_message" msgid="754082019928025404">"\"<xliff:g id="GROUP_LABEL">%1$s</xliff:g>\" ಲೇಬಲ್ ಅಳಿಸಬೇಕೆ? (ಸಂಪರ್ಕಗಳು ತಾವಾಗಿ ಅಳಿಸಿ ಹೋಗುವುದಿಲ್ಲ.)"</string>
     <string name="toast_join_with_empty_contact" msgid="3886468280665325350">"ಮತ್ತೊಬ್ಬರೊಂದಿಗೆ ಲಿಂಕ್ ಮಾಡುವ ಮೊದಲು ಸಂಪರ್ಕದ ಹೆಸರನ್ನು ಟೈಪ್‌ ಮಾಡಿ."</string>
-    <string name="copy_text" msgid="6835250673373028909">"ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗೆ ನಕಲಿಸಿ"</string>
+    <string name="copy_text" msgid="6835250673373028909">"ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗೆ ಕಾಪಿ ಮಾಡಿ"</string>
     <string name="set_default" msgid="3704074175618702225">"ಡೀಫಾಲ್ಟ್ ಸೆಟ್ ಮಾಡಿ"</string>
     <string name="clear_default" msgid="2055883863621491533">"ಡಿಫಾಲ್ಟ್‌ ತೆರವುಗೊಳಿಸಿ"</string>
-    <string name="toast_text_copied" msgid="845906090076228771">"ಪಠ್ಯವನ್ನು ನಕಲಿಸಲಾಗಿದೆ"</string>
+    <string name="toast_text_copied" msgid="845906090076228771">"ಪಠ್ಯವನ್ನು ಕಾಪಿ ಮಾಡಲಾಗಿದೆ"</string>
     <string name="cancel_confirmation_dialog_message" msgid="7486892574762212762">"ಬದಲಾವಣೆಗಳನ್ನು ತ್ಯಜಿಸುವುದೇ?"</string>
     <string name="cancel_confirmation_dialog_cancel_editing_button" msgid="8280294641821133477">"ತ್ಯಜಿಸು"</string>
     <string name="cancel_confirmation_dialog_keep_editing_button" msgid="7117943783437253341">"ರದ್ದುಮಾಡಿ"</string>

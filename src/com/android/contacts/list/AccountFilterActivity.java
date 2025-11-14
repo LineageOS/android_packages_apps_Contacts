@@ -29,6 +29,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
+import com.android.contacts.MoreContactUtils;
 import com.android.contacts.R;
 import com.android.contacts.model.AccountTypeManager;
 
@@ -59,6 +60,7 @@ public class AccountFilterActivity extends Activity implements AdapterView.OnIte
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.contact_list_filter);
+        MoreContactUtils.setupEdgeToEdge(this, null);
 
         mListView = (ListView) findViewById(android.R.id.list);
         mListView.setOnItemClickListener(this);
@@ -69,17 +71,17 @@ public class AccountFilterActivity extends Activity implements AdapterView.OnIte
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        mCurrentFilterType = ContactListFilterController.getInstance(this).isCustomFilterPersisted()
-                ? ContactListFilter.FILTER_TYPE_CUSTOM
-                : ContactListFilter.FILTER_TYPE_ALL_ACCOUNTS;
+        mCurrentFilterType =
+                ContactListFilterController.getInstance(this).isCustomFilterPersisted()
+                        ? ContactListFilter.FILTER_TYPE_CUSTOM
+                        : ContactListFilter.FILTER_TYPE_ALL_ACCOUNTS;
 
         // We don't need to use AccountFilterUtil.FilterLoader since we only want to show
         // the "All contacts" and "Customize" options.
         final List<ContactListFilter> filters = new ArrayList<>();
-        filters.add(ContactListFilter.createFilterWithType(
-                ContactListFilter.FILTER_TYPE_ALL_ACCOUNTS));
-        filters.add(ContactListFilter.createFilterWithType(
-                ContactListFilter.FILTER_TYPE_CUSTOM));
+        filters.add(
+                ContactListFilter.createFilterWithType(ContactListFilter.FILTER_TYPE_ALL_ACCOUNTS));
+        filters.add(ContactListFilter.createFilterWithType(ContactListFilter.FILTER_TYPE_CUSTOM));
         mListView.setAdapter(new FilterListAdapter(this, filters, mCurrentFilterType));
     }
 
@@ -91,9 +93,11 @@ public class AccountFilterActivity extends Activity implements AdapterView.OnIte
         if (filter.filterType == ContactListFilter.FILTER_TYPE_CUSTOM) {
             mCustomFilterView = listFilterView;
             mIsCustomFilterViewSelected = listFilterView.isChecked();
-            final Intent intent = new Intent(this, CustomContactListFilterActivity.class)
-                    .putExtra(CustomContactListFilterActivity.EXTRA_CURRENT_LIST_FILTER_TYPE,
-                            mCurrentFilterType);
+            final Intent intent =
+                    new Intent(this, CustomContactListFilterActivity.class)
+                            .putExtra(
+                                    CustomContactListFilterActivity.EXTRA_CURRENT_LIST_FILTER_TYPE,
+                                    mCurrentFilterType);
             listFilterView.setActivated(true);
             // Switching activity has the highest priority. So when we open another activity, the
             // announcement that indicates an account is checked will be interrupted. This is the
@@ -112,8 +116,9 @@ public class AccountFilterActivity extends Activity implements AdapterView.OnIte
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_CANCELED && mCustomFilterView != null &&
-                !mIsCustomFilterViewSelected) {
+        if (resultCode == Activity.RESULT_CANCELED
+                && mCustomFilterView != null
+                && !mIsCustomFilterViewSelected) {
             mCustomFilterView.setActivated(false);
             return;
         }
@@ -123,15 +128,17 @@ public class AccountFilterActivity extends Activity implements AdapterView.OnIte
         }
 
         switch (requestCode) {
-            case SUBACTIVITY_CUSTOMIZE_FILTER: {
-                final Intent intent = new Intent();
-                ContactListFilter filter = ContactListFilter.createFilterWithType(
-                        ContactListFilter.FILTER_TYPE_CUSTOM);
-                intent.putExtra(EXTRA_CONTACT_LIST_FILTER, filter);
-                setResult(Activity.RESULT_OK, intent);
-                finish();
-                break;
-            }
+            case SUBACTIVITY_CUSTOMIZE_FILTER:
+                {
+                    final Intent intent = new Intent();
+                    ContactListFilter filter =
+                            ContactListFilter.createFilterWithType(
+                                    ContactListFilter.FILTER_TYPE_CUSTOM);
+                    intent.putExtra(EXTRA_CONTACT_LIST_FILTER, filter);
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
+                    break;
+                }
         }
     }
 
@@ -141,10 +148,9 @@ public class AccountFilterActivity extends Activity implements AdapterView.OnIte
         private final AccountTypeManager mAccountTypes;
         private final int mCurrentFilter;
 
-        public FilterListAdapter(
-                Context context, List<ContactListFilter> filters, int current) {
-            mLayoutInflater = (LayoutInflater) context.getSystemService
-                    (Context.LAYOUT_INFLATER_SERVICE);
+        public FilterListAdapter(Context context, List<ContactListFilter> filters, int current) {
+            mLayoutInflater =
+                    (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             mFilters = filters;
             mCurrentFilter = current;
             mAccountTypes = AccountTypeManager.getInstance(context);
@@ -170,8 +176,10 @@ public class AccountFilterActivity extends Activity implements AdapterView.OnIte
             if (convertView != null) {
                 view = (ContactListFilterView) convertView;
             } else {
-                view = (ContactListFilterView) mLayoutInflater.inflate(
-                        R.layout.contact_list_filter_item, parent, false);
+                view =
+                        (ContactListFilterView)
+                                mLayoutInflater.inflate(
+                                        R.layout.contact_list_filter_item, parent, false);
             }
             view.setSingleAccount(mFilters.size() == 1);
             final ContactListFilter filter = mFilters.get(position);

@@ -37,8 +37,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Directory;
-import androidx.core.content.ContextCompat;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -57,6 +55,9 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.android.contacts.ContactSaveService;
 import com.android.contacts.Experiments;
 import com.android.contacts.R;
@@ -66,12 +67,14 @@ import com.android.contacts.compat.CompatUtils;
 import com.android.contacts.interactions.ContactDeletionInteraction;
 import com.android.contacts.interactions.ContactMultiDeletionInteraction;
 import com.android.contacts.interactions.ContactMultiDeletionInteraction.MultiContactDeleteListener;
+import com.android.contacts.list.ContactListFilterController.ContactListFilterListener;
 import com.android.contacts.logging.ListEvent;
 import com.android.contacts.logging.Logger;
 import com.android.contacts.logging.ScreenEvent;
 import com.android.contacts.model.AccountTypeManager;
 import com.android.contacts.model.account.AccountInfo;
 import com.android.contacts.model.account.AccountWithDataSet;
+import com.android.contacts.preference.ContactsPreferences;
 import com.android.contacts.quickcontact.QuickContactActivity;
 import com.android.contacts.util.AccountFilterUtil;
 import com.android.contacts.util.ImplicitIntentsUtil;
@@ -79,6 +82,7 @@ import com.android.contacts.util.SharedPreferenceUtil;
 import com.android.contacts.util.SyncUtil;
 import com.android.contactsbind.FeatureHighlightHelper;
 import com.android.contactsbind.experiments.Flags;
+
 import com.google.common.util.concurrent.Futures;
 
 import java.util.HashMap;
@@ -88,11 +92,11 @@ import java.util.Map;
 import java.util.concurrent.Future;
 
 /**
- * Fragment containing a contact list used for browsing (as compared to
- * picking a contact with one of the PICK intents).
+ * Fragment containing a contact list used for browsing (as compared to picking a contact with one
+ * of the PICK intents).
  */
 public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
-        implements EnableGlobalSyncDialogFragment.Listener {
+        implements EnableGlobalSyncDialogFragment.Listener, ContactListFilterListener {
 
     private static final String TAG = "DefaultListFragment";
     private static final String ENABLE_DEBUG_OPTIONS_HIDDEN_CODE = "debug debug!";
@@ -110,14 +114,15 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private final Handler mHandler = new Handler();
-    private final Runnable mCancelRefresh = new Runnable() {
-        @Override
-        public void run() {
-            if (mSwipeRefreshLayout.isRefreshing()) {
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        }
-    };
+    private final Runnable mCancelRefresh =
+            new Runnable() {
+                @Override
+                public void run() {
+                    if (mSwipeRefreshLayout.isRefreshing()) {
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+                }
+            };
 
     private View mAlertContainer;
     private TextView mAlertText;
@@ -132,10 +137,9 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
     private boolean mCanSetActionBar = false;
 
     /**
-     * If {@link #configureFragment()} is already called. Used to avoid calling it twice
-     * in {@link #onResume()}.
-     * (This initialization only needs to be done once in onResume() when the Activity was just
-     * created from scratch -- i.e. onCreate() was just called)
+     * If {@link #configureFragment()} is already called. Used to avoid calling it twice in {@link
+     * #onResume()}. (This initialization only needs to be done once in onResume() when the Activity
+     * was just created from scratch -- i.e. onCreate() was just called)
      */
     private boolean mFragmentInitialized;
 
@@ -162,88 +166,99 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
 
     private Future<List<AccountInfo>> mWritableAccountsFuture;
 
-    private final ActionBarAdapter.Listener mActionBarListener = new ActionBarAdapter.Listener() {
-        @Override
-        public void onAction(int action) {
-            switch (action) {
-                case ActionBarAdapter.Listener.Action.START_SELECTION_MODE:
-                    displayCheckBoxes(true);
-                    startSearchOrSelectionMode();
-                    break;
-                case ActionBarAdapter.Listener.Action.START_SEARCH_MODE:
-                    if (!mIsRecreatedInstance) {
-                        Logger.logScreenView(mActivity, ScreenEvent.ScreenType.SEARCH);
+    private boolean mCanInsertIntoLocalAccounts;
+
+    private final ActionBarAdapter.Listener mActionBarListener =
+            new ActionBarAdapter.Listener() {
+                @Override
+                public void onAction(int action) {
+                    switch (action) {
+                        case ActionBarAdapter.Listener.Action.START_SELECTION_MODE:
+                            displayCheckBoxes(true);
+                            startSearchOrSelectionMode();
+                            break;
+                        case ActionBarAdapter.Listener.Action.START_SEARCH_MODE:
+                            if (!mIsRecreatedInstance) {
+                                Logger.logScreenView(mActivity, ScreenEvent.ScreenType.SEARCH);
+                            }
+                            startSearchOrSelectionMode();
+                            break;
+                        case ActionBarAdapter.Listener.Action
+                                .BEGIN_STOPPING_SEARCH_AND_SELECTION_MODE:
+                            mActivity.showFabWithAnimation(
+                                    /* showFab */ canInsertIntoCurrentFilter());
+                            break;
+                        case ActionBarAdapter.Listener.Action.STOP_SEARCH_AND_SELECTION_MODE:
+                            // If queryString is empty, fragment data will not be reloaded,
+                            // so hamburger promo should be checked now.
+                            // Otherwise, promo should be checked and displayed after reloading,
+                            // b/30706521.
+                            if (TextUtils.isEmpty(getQueryString())) {
+                                maybeShowHamburgerFeatureHighlight();
+                            }
+                            setQueryTextToFragment("");
+                            maybeHideCheckBoxes();
+                            mActivity.invalidateOptionsMenu();
+                            mActivity.showFabWithAnimation(
+                                    /* showFab */ canInsertIntoCurrentFilter());
+
+                            // Alert user if sync is off and not dismissed before
+                            setSyncOffAlert();
+
+                            // Determine whether the account has pullToRefresh feature
+                            setSwipeRefreshLayoutEnabledOrNot(getFilter());
+                            break;
+                        case ActionBarAdapter.Listener.Action.CHANGE_SEARCH_QUERY:
+                            final String queryString = mActionBarAdapter.getQueryString();
+                            setQueryTextToFragment(queryString);
+                            updateDebugOptionsVisibility(
+                                    ENABLE_DEBUG_OPTIONS_HIDDEN_CODE.equals(queryString));
+                            break;
+                        default:
+                            throw new IllegalStateException(
+                                    "Unknown ActionBarAdapter action: " + action);
                     }
-                    startSearchOrSelectionMode();
-                    break;
-                case ActionBarAdapter.Listener.Action.BEGIN_STOPPING_SEARCH_AND_SELECTION_MODE:
-                    mActivity.showFabWithAnimation(/* showFab */ true);
-                    break;
-                case ActionBarAdapter.Listener.Action.STOP_SEARCH_AND_SELECTION_MODE:
-                    // If queryString is empty, fragment data will not be reloaded,
-                    // so hamburger promo should be checked now.
-                    // Otherwise, promo should be checked and displayed after reloading, b/30706521.
-                    if (TextUtils.isEmpty(getQueryString())) {
-                        maybeShowHamburgerFeatureHighlight();
-                    }
-                    setQueryTextToFragment("");
+                }
+
+                private void startSearchOrSelectionMode() {
+                    configureContactListFragment();
                     maybeHideCheckBoxes();
                     mActivity.invalidateOptionsMenu();
-                    mActivity.showFabWithAnimation(/* showFab */ true);
+                    mActivity.showFabWithAnimation(/* showFab */ false);
 
-                    // Alert user if sync is off and not dismissed before
-                    setSyncOffAlert();
+                    final Context context = getContext();
+                    if (!SharedPreferenceUtil.getHamburgerPromoTriggerActionHappenedBefore(
+                            context)) {
+                        SharedPreferenceUtil.setHamburgerPromoTriggerActionHappenedBefore(context);
+                    }
+                }
 
-                    // Determine whether the account has pullToRefresh feature
-                    setSwipeRefreshLayoutEnabledOrNot(getFilter());
-                    break;
-                case ActionBarAdapter.Listener.Action.CHANGE_SEARCH_QUERY:
-                    final String queryString = mActionBarAdapter.getQueryString();
-                    setQueryTextToFragment(queryString);
-                    updateDebugOptionsVisibility(
-                            ENABLE_DEBUG_OPTIONS_HIDDEN_CODE.equals(queryString));
-                    break;
-                default:
-                    throw new IllegalStateException("Unknown ActionBarAdapter action: " + action);
-            }
-        }
+                private void updateDebugOptionsVisibility(boolean visible) {
+                    if (mEnableDebugMenuOptions != visible) {
+                        mEnableDebugMenuOptions = visible;
+                        mActivity.invalidateOptionsMenu();
+                    }
+                }
 
-        private void startSearchOrSelectionMode() {
-            configureContactListFragment();
-            maybeHideCheckBoxes();
-            mActivity.invalidateOptionsMenu();
-            mActivity.showFabWithAnimation(/* showFab */ false);
+                private void setQueryTextToFragment(String query) {
+                    setQueryString(query, true);
+                    setVisibleScrollbarEnabled(!isSearchMode());
+                }
 
-            final Context context = getContext();
-            if (!SharedPreferenceUtil.getHamburgerPromoTriggerActionHappenedBefore(context)) {
-                SharedPreferenceUtil.setHamburgerPromoTriggerActionHappenedBefore(context);
-            }
-        }
+                @Override
+                public void onUpButtonPressed() {
+                    mActivity.onBackPressed();
+                }
+            };
 
-        private void updateDebugOptionsVisibility(boolean visible) {
-            if (mEnableDebugMenuOptions != visible) {
-                mEnableDebugMenuOptions = visible;
-                mActivity.invalidateOptionsMenu();
-            }
-        }
-
-        private void setQueryTextToFragment(String query) {
-            setQueryString(query, true);
-            setVisibleScrollbarEnabled(!isSearchMode());
-        }
-
-        @Override
-        public void onUpButtonPressed() {
-            mActivity.onBackPressed();
-        }
-    };
-
-    private final View.OnClickListener mAddContactListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            AccountFilterUtil.startEditorIntent(getContext(), mActivity.getIntent(), getFilter());
-        }
-    };
+    private final View.OnClickListener mAddContactListener =
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AccountFilterUtil.startEditorIntent(
+                            getContext(), mActivity.getIntent(), getFilter());
+                }
+            };
 
     public DefaultContactBrowseListFragment() {
         setPhotoLoaderEnabled(true);
@@ -257,17 +272,15 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
     }
 
     /**
-     * Whether a search result was clicked by the user. Tracked so that we can distinguish
-     * between exiting the search mode after a result was clicked from exiting w/o clicking
-     * any search result.
+     * Whether a search result was clicked by the user. Tracked so that we can distinguish between
+     * exiting the search mode after a result was clicked from exiting w/o clicking any search
+     * result.
      */
     public boolean wasSearchResultClicked() {
         return mSearchResultClicked;
     }
 
-    /**
-     * Resets whether a search result was clicked by the user to false.
-     */
+    /** Resets whether a search result was clicked by the user to false. */
     public void resetSearchResultClicked() {
         mSearchResultClicked = false;
     }
@@ -292,7 +305,8 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
     }
 
     private void maybeShowHamburgerFeatureHighlight() {
-        if (mActionBarAdapter!= null && !mActionBarAdapter.isSearchMode()
+        if (mActionBarAdapter != null
+                && !mActionBarAdapter.isSearchMode()
                 && !mActionBarAdapter.isSelectionMode()
                 && !isTalkbackOnAndOnPreLollipopMr1()
                 && SharedPreferenceUtil.getShouldShowHamburgerPromo(getContext())) {
@@ -304,10 +318,10 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
 
     // There's a crash if we show feature highlight when Talkback is on, on API 21 and below.
     // See b/31180524.
-    private boolean isTalkbackOnAndOnPreLollipopMr1(){
+    private boolean isTalkbackOnAndOnPreLollipopMr1() {
         return ((AccessibilityManager) getContext().getSystemService(Context.ACCESSIBILITY_SERVICE))
-                .isTouchExplorationEnabled()
-                    && !CompatUtils.isLollipopMr1Compatible();
+                        .isTouchExplorationEnabled()
+                && !CompatUtils.isLollipopMr1Compatible();
     }
 
     private void bindListHeader(int numberOfContacts) {
@@ -328,10 +342,14 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
         } else if (filter.filterType == ContactListFilter.FILTER_TYPE_CUSTOM) {
             bindListHeaderCustom(getListView(), mAccountFilterContainer);
         } else if (filter.filterType != ContactListFilter.FILTER_TYPE_ALL_ACCOUNTS) {
-            final AccountWithDataSet accountWithDataSet = new AccountWithDataSet(
-                    filter.accountName, filter.accountType, filter.dataSet);
-            bindListHeader(getContext(), getListView(), mAccountFilterContainer,
-                    accountWithDataSet, numberOfContacts);
+            final AccountWithDataSet accountWithDataSet =
+                    new AccountWithDataSet(filter.accountName, filter.accountType, filter.dataSet);
+            bindListHeader(
+                    getContext(),
+                    getListView(),
+                    mAccountFilterContainer,
+                    accountWithDataSet,
+                    numberOfContacts);
         } else {
             hideHeaderAndAddPadding(getContext(), getListView(), mAccountFilterContainer);
         }
@@ -408,7 +426,7 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
         adapter.setSectionHeaderDisplayEnabled(isSectionHeaderDisplayEnabled());
         adapter.setDisplayPhotos(true);
         adapter.setPhotoPosition(
-                ContactListItemView.getDefaultPhotoPosition(/* opposite = */ false));
+                ContactListItemView.getDefaultPhotoPosition(/* opposite= */ false));
         return adapter;
     }
 
@@ -439,8 +457,10 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
         final ImageView image = (ImageView) emptyHomeView.findViewById(R.id.empty_home_image);
         final LayoutParams params = (LayoutParams) image.getLayoutParams();
         final int screenHeight = getResources().getDisplayMetrics().heightPixels;
-        final int marginTop = screenHeight / 2 -
-                getResources().getDimensionPixelSize(R.dimen.empty_home_view_image_offset) ;
+        final int marginTop =
+                screenHeight / 2
+                        - getResources()
+                                .getDimensionPixelSize(R.dimen.empty_home_view_image_offset);
         params.setMargins(0, marginTop, 0, 0);
         params.gravity = Gravity.CENTER_HORIZONTAL;
         image.setLayoutParams(params);
@@ -478,13 +498,15 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
         super.onCreate(savedState);
         mIsRecreatedInstance = (savedState != null);
         mContactListFilterController = ContactListFilterController.getInstance(getContext());
+        mContactListFilterController.addListener(this);
         mContactListFilterController.checkFilterValidity(false);
         // Use FILTER_TYPE_ALL_ACCOUNTS filter if the instance is not a re-created one.
         // This is useful when user upgrades app while an account filter was
         // stored in sharedPreference in a previous version of Contacts app.
-        final ContactListFilter filter = mIsRecreatedInstance
-                ? getFilter()
-                : AccountFilterUtil.createContactsFilter(getContext());
+        final ContactListFilter filter =
+                mIsRecreatedInstance
+                        ? getFilter()
+                        : AccountFilterUtil.createContactsFilter(getContext());
         setContactListFilter(filter);
     }
 
@@ -508,18 +530,20 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
         mAlertContainer = getView().findViewById(R.id.alert_container);
         mAlertText = (TextView) mAlertContainer.findViewById(R.id.alert_text);
         mAlertDismissIcon = (ImageView) mAlertContainer.findViewById(R.id.alert_dismiss_icon);
-        mAlertText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                turnSyncOn();
-            }
-        });
-        mAlertDismissIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
+        mAlertText.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        turnSyncOn();
+                    }
+                });
+        mAlertDismissIcon.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dismiss();
+                    }
+                });
 
         mAlertContainer.setVisibility(View.GONE);
     }
@@ -530,11 +554,11 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
                 && mReasonSyncOff == SyncUtil.SYNC_SETTING_ACCOUNT_SYNC_OFF) {
             ContentResolver.setSyncAutomatically(
                     new Account(filter.accountName, filter.accountType),
-                    ContactsContract.AUTHORITY, true);
+                    ContactsContract.AUTHORITY,
+                    true);
             mAlertContainer.setVisibility(View.GONE);
         } else {
-            final EnableGlobalSyncDialogFragment dialog = new
-                    EnableGlobalSyncDialogFragment();
+            final EnableGlobalSyncDialogFragment dialog = new EnableGlobalSyncDialogFragment();
             dialog.show(this, filter);
         }
     }
@@ -551,8 +575,8 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
         final List<Account> syncableAccounts = filter.getSyncableAccounts(accounts);
         if (syncableAccounts != null && syncableAccounts.size() > 0) {
             for (Account account : syncableAccounts) {
-                ContentResolver.setSyncAutomatically(new Account(account.name, account.type),
-                        ContactsContract.AUTHORITY, true);
+                ContentResolver.setSyncAutomatically(
+                        new Account(account.name, account.type), ContactsContract.AUTHORITY, true);
             }
         }
         mAlertContainer.setVisibility(View.GONE);
@@ -576,23 +600,28 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
 
         mSwipeRefreshLayout.setEnabled(true);
         // Request sync contacts
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mHandler.removeCallbacks(mCancelRefresh);
+        mSwipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        mHandler.removeCallbacks(mCancelRefresh);
 
-                final boolean isNetworkConnected = SyncUtil.isNetworkConnected(getContext());
-                if (!isNetworkConnected) {
-                    mSwipeRefreshLayout.setRefreshing(false);
-                    ((PeopleActivity)getActivity()).showConnectionErrorMsg();
-                    return;
-                }
+                        final boolean isNetworkConnected =
+                                SyncUtil.isNetworkConnected(getContext());
+                        if (!isNetworkConnected) {
+                            mSwipeRefreshLayout.setRefreshing(false);
+                            ((PeopleActivity) getActivity()).showConnectionErrorMsg();
+                            return;
+                        }
 
-                syncContacts(getFilter());
-                mHandler.postDelayed(mCancelRefresh, Flags.getInstance()
-                        .getInteger(Experiments.PULL_TO_REFRESH_CANCEL_REFRESH_MILLIS));
-            }
-        });
+                        syncContacts(getFilter());
+                        mHandler.postDelayed(
+                                mCancelRefresh,
+                                Flags.getInstance()
+                                        .getInteger(
+                                                Experiments.PULL_TO_REFRESH_CANCEL_REFRESH_MILLIS));
+                    }
+                });
         mSwipeRefreshLayout.setColorSchemeResources(R.color.primary_color);
         mSwipeRefreshLayout.setDistanceToTriggerSync(
                 (int) getResources().getDimension(R.dimen.pull_to_refresh_distance));
@@ -611,8 +640,8 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
         bundle.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
         bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
 
-        final List<AccountWithDataSet> accounts = AccountInfo.extractAccounts(
-                Futures.getUnchecked(mWritableAccountsFuture));
+        final List<AccountWithDataSet> accounts =
+                AccountInfo.extractAccounts(Futures.getUnchecked(mWritableAccountsFuture));
         final List<Account> syncableAccounts = filter.getSyncableAccounts(accounts);
         if (syncableAccounts != null && syncableAccounts.size() > 0) {
             for (Account account : syncableAccounts) {
@@ -627,9 +656,11 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
 
     private void setSyncOffAlert() {
         final ContactListFilter filter = getFilter();
-        final Account account =  filter.filterType == ContactListFilter.FILTER_TYPE_ACCOUNT
-                && filter.isGoogleAccountType()
-                ? new Account(filter.accountName, filter.accountType) : null;
+        final Account account =
+                filter.filterType == ContactListFilter.FILTER_TYPE_ACCOUNT
+                                && filter.isGoogleAccountType()
+                        ? new Account(filter.accountName, filter.accountType)
+                        : null;
 
         if (account == null && !filter.isContactsFilterType()) {
             mAlertContainer.setVisibility(View.GONE);
@@ -660,9 +691,13 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
         super.onActivityCreated(savedInstanceState);
 
         mActivity = (PeopleActivity) getActivity();
-        mActionBarAdapter = new ActionBarAdapter(mActivity, mActionBarListener,
-                mActivity.getSupportActionBar(), mActivity.getToolbar(),
-                R.string.enter_contact_name);
+        mActionBarAdapter =
+                new ActionBarAdapter(
+                        mActivity,
+                        mActionBarListener,
+                        mActivity.getSupportActionBar(),
+                        mActivity.getToolbar(),
+                        R.string.enter_contact_name);
         mActionBarAdapter.setShowHomeIcon(true);
         initializeActionBarAdapter(savedInstanceState);
         if (isSearchMode()) {
@@ -712,8 +747,9 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
                 filter = AccountFilterUtil.createContactsFilter(getContext());
                 break;
             case ContactsRequest.ACTION_CONTACTS_WITH_PHONES:
-                filter = ContactListFilter.createFilterWithType(
-                        ContactListFilter.FILTER_TYPE_WITH_PHONE_NUMBERS_ONLY);
+                filter =
+                        ContactListFilter.createFilterWithType(
+                                ContactListFilter.FILTER_TYPE_WITH_PHONE_NUMBERS_ONLY);
                 break;
 
             case ContactsRequest.ACTION_FREQUENT:
@@ -766,8 +802,31 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
         mDisableOptionItemSelected = false;
         maybeHideCheckBoxes();
 
-        mWritableAccountsFuture = AccountTypeManager.getInstance(getContext()).filterAccountsAsync(
-                AccountTypeManager.writableFilter());
+        mWritableAccountsFuture =
+                AccountTypeManager.getInstance(getContext())
+                        .filterAccountsAsync(AccountTypeManager.writableFilter());
+
+        mCanInsertIntoLocalAccounts =
+                new ContactsPreferences(getActivity()).canInsertIntoLocalAccounts();
+        onFabDependencyChanged();
+    }
+
+    @Override
+    public void onContactListFilterChanged() {
+        onFabDependencyChanged();
+    }
+
+    private void onFabDependencyChanged() {
+        if (mActivity != null
+                && mActionBarAdapter != null
+                && !mActionBarAdapter.isSelectionMode()
+                && !isSearchMode()) {
+            mActivity.showFabWithAnimation(canInsertIntoCurrentFilter());
+        }
+    }
+
+    private boolean canInsertIntoCurrentFilter() {
+        return mCanInsertIntoLocalAccounts || !getFilter().isLocalAccountTypeFilter();
     }
 
     private void maybeHideCheckBoxes() {
@@ -776,7 +835,7 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
         }
     }
 
-    public ActionBarAdapter getActionBarAdapter(){
+    public ActionBarAdapter getActionBarAdapter() {
         return mActionBarAdapter;
     }
 
@@ -822,8 +881,7 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
                 showSearchProgress(true);
             } else {
                 mSearchProgressText.setText(R.string.listFoundAllContactsZero);
-                mSearchProgressText.sendAccessibilityEvent(
-                        AccessibilityEvent.TYPE_VIEW_SELECTED);
+                mSearchProgressText.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED);
                 showSearchProgress(false);
             }
         }
@@ -881,11 +939,13 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
         swipeRefreshLayout.setRefreshing(false);
         swipeRefreshLayout.setEnabled(false);
 
-        if (filter != null && !mActionBarAdapter.isSearchMode()
+        if (filter != null
+                && !mActionBarAdapter.isSearchMode()
                 && !mActionBarAdapter.isSelectionMode()) {
             if (filter.isSyncable()
                     || (filter.shouldShowSyncState()
-                    && SyncUtil.hasSyncableAccount(AccountTypeManager.getInstance(getContext())))) {
+                            && SyncUtil.hasSyncableAccount(
+                                    AccountTypeManager.getInstance(getContext())))) {
                 swipeRefreshLayout.setEnabled(true);
             }
         }
@@ -910,16 +970,19 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
         ContactBrowserActionListener() {}
 
         @Override
-        public void onSelectionChange() {
-        }
+        public void onSelectionChange() {}
 
         @Override
-        public void onViewContactAction(int position, Uri contactLookupUri,
-                boolean isEnterpriseContact) {
+        public void onViewContactAction(
+                int position, Uri contactLookupUri, boolean isEnterpriseContact) {
             if (isEnterpriseContact) {
                 // No implicit intent as user may have a different contacts app in work profile.
-                ContactsContract.QuickContact.showQuickContact(getContext(), new Rect(),
-                        contactLookupUri, QuickContactActivity.MODE_FULLY_EXPANDED, null);
+                ContactsContract.QuickContact.showQuickContact(
+                        getContext(),
+                        new Rect(),
+                        contactLookupUri,
+                        QuickContactActivity.MODE_FULLY_EXPANDED,
+                        null);
             } else {
                 final int previousScreen;
                 if (isSearchMode()) {
@@ -936,10 +999,12 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
                     }
                 }
 
-                Logger.logListEvent(ListEvent.ActionType.CLICK,
+                Logger.logListEvent(
+                        ListEvent.ActionType.CLICK,
                         /* listType */ getListTypeIncludingSearch(),
                         /* count */ getAdapter().getCount(),
-                        /* clickedIndex */ position, /* numSelected */ 0);
+                        /* clickedIndex */ position, /* numSelected */
+                        0);
 
                 ImplicitIntentsUtil.startQuickContact(
                         getActivity(), contactLookupUri, previousScreen);
@@ -965,8 +1030,9 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
                 filter = AccountFilterUtil.createContactsFilter(getContext());
                 setFilterAndUpdateTitle(filter);
             } else {
-                filter = ContactListFilter.createFilterWithType(
-                        ContactListFilter.FILTER_TYPE_SINGLE_CONTACT);
+                filter =
+                        ContactListFilter.createFilterWithType(
+                                ContactListFilter.FILTER_TYPE_SINGLE_CONTACT);
                 setFilterAndUpdateTitle(filter, /* restoreSelectedUri */ false);
             }
             setContactListFilter(filter);
@@ -981,12 +1047,10 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
         mContactsAvailable = contactsAvailable;
     }
 
-    /**
-     * Set filter via ContactListFilterController
-     */
+    /** Set filter via ContactListFilterController */
     private void setContactListFilter(ContactListFilter filter) {
-        mContactListFilterController.setContactListFilter(filter,
-                /* persistent */ isAllContactsFilter(filter));
+        mContactListFilterController.setContactListFilter(
+                filter, /* persistent */ isAllContactsFilter(filter));
     }
 
     @Override
@@ -1006,28 +1070,30 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
             return;
         }
 
-        final boolean isSearchOrSelectionMode = mActionBarAdapter.isSearchMode()
-                || mActionBarAdapter.isSelectionMode();
+        final boolean isSearchOrSelectionMode =
+                mActionBarAdapter.isSearchMode() || mActionBarAdapter.isSelectionMode();
         makeMenuItemVisible(menu, R.id.menu_search, !isSearchOrSelectionMode);
 
-        final boolean showSelectedContactOptions = mActionBarAdapter.isSelectionMode()
-                && getSelectedContactIds().size() != 0;
+        final boolean showSelectedContactOptions =
+                mActionBarAdapter.isSelectionMode() && getSelectedContactIds().size() != 0;
         makeMenuItemVisible(menu, R.id.menu_share, showSelectedContactOptions);
         makeMenuItemVisible(menu, R.id.menu_delete, showSelectedContactOptions);
-        final boolean showLinkContactsOptions = mActionBarAdapter.isSelectionMode()
-                && getSelectedContactIds().size() > 1;
+        final boolean showLinkContactsOptions =
+                mActionBarAdapter.isSelectionMode() && getSelectedContactIds().size() > 1;
         makeMenuItemVisible(menu, R.id.menu_join, showLinkContactsOptions);
 
         // Debug options need to be visible even in search mode.
-        makeMenuItemVisible(menu, R.id.export_database, mEnableDebugMenuOptions &&
-                hasExportIntentHandler());
+        makeMenuItemVisible(
+                menu, R.id.export_database, mEnableDebugMenuOptions && hasExportIntentHandler());
 
         // Light tint the icons for normal mode, dark tint for search or selection mode.
         for (int i = 0; i < menu.size(); ++i) {
             final Drawable icon = menu.getItem(i).getIcon();
             if (icon != null && !isSearchOrSelectionMode) {
-                icon.mutate().setColorFilter(ContextCompat.getColor(getContext(),
-                        R.color.actionbar_icon_color), PorterDuff.Mode.SRC_ATOP);
+                icon.mutate()
+                        .setColorFilter(
+                                ContextCompat.getColor(getContext(), R.color.actionbar_icon_color),
+                                PorterDuff.Mode.SRC_ATOP);
             }
         }
     }
@@ -1043,8 +1109,9 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
         final Intent intent = new Intent();
         intent.setAction("com.android.providers.contacts.DUMP_DATABASE");
         final List<ResolveInfo> receivers =
-                getContext().getPackageManager().queryIntentActivities(intent,
-                PackageManager.MATCH_DEFAULT_ONLY);
+                getContext()
+                        .getPackageManager()
+                        .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
         return receivers != null && receivers.size() > 0;
     }
 
@@ -1070,10 +1137,12 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
             shareSelectedContacts();
             return true;
         } else if (id == R.id.menu_join) {
-            Logger.logListEvent(ListEvent.ActionType.LINK,
-                        /* listType */ getListTypeIncludingSearch(),
-                        /* count */ getAdapter().getCount(), /* clickedIndex */ -1,
-                        /* numSelected */ getAdapter().getSelectedContactIds().size());
+            Logger.logListEvent(
+                    ListEvent.ActionType.LINK,
+                    /* listType */ getListTypeIncludingSearch(),
+                    /* count */ getAdapter().getCount(), /* clickedIndex */
+                    -1,
+                    /* numSelected */ getAdapter().getSelectedContactIds().size());
             joinSelectedContacts();
             return true;
         } else if (id == R.id.menu_delete) {
@@ -1095,10 +1164,11 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
     private void shareSelectedContacts() {
         final StringBuilder uriListBuilder = new StringBuilder();
         for (Long contactId : getSelectedContactIds()) {
-            final Uri contactUri = ContentUris.withAppendedId(
-                    ContactsContract.Contacts.CONTENT_URI, contactId);
-            final Uri lookupUri = ContactsContract.Contacts.getLookupUri(
-                    getContext().getContentResolver(), contactUri);
+            final Uri contactUri =
+                    ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId);
+            final Uri lookupUri =
+                    ContactsContract.Contacts.getLookupUri(
+                            getContext().getContentResolver(), contactUri);
             if (lookupUri == null) {
                 continue;
             }
@@ -1115,20 +1185,23 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
         if (uriListBuilder.length() == 0) {
             return;
         }
-        final Uri uri = Uri.withAppendedPath(
-                ContactsContract.Contacts.CONTENT_MULTI_VCARD_URI,
-                Uri.encode(uriListBuilder.toString()));
+        final Uri uri =
+                Uri.withAppendedPath(
+                        ContactsContract.Contacts.CONTENT_MULTI_VCARD_URI,
+                        Uri.encode(uriListBuilder.toString()));
         final Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType(ContactsContract.Contacts.CONTENT_VCARD_TYPE);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
         try {
-            MessageFormat msgFormat = new MessageFormat(
-                getResources().getString(R.string.title_share_via),
-                Locale.getDefault());
+            MessageFormat msgFormat =
+                    new MessageFormat(
+                            getResources().getString(R.string.title_share_via),
+                            Locale.getDefault());
             Map<String, Object> arguments = new HashMap<>();
             arguments.put("count", getSelectedContactIds().size());
-            startActivityForResult(Intent.createChooser(intent, msgFormat.format(arguments))
-                    , ACTIVITY_REQUEST_CODE_SHARE);
+            startActivityForResult(
+                    Intent.createChooser(intent, msgFormat.format(arguments)),
+                    ACTIVITY_REQUEST_CODE_SHARE);
         } catch (final ActivityNotFoundException ex) {
             Toast.makeText(getContext(), R.string.share_error, Toast.LENGTH_SHORT).show();
         }
@@ -1136,8 +1209,9 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
 
     private void joinSelectedContacts() {
         final Context context = getContext();
-        final Intent intent = ContactSaveService.createJoinSeveralContactsIntent(
-                context, getSelectedContactIdsArray());
+        final Intent intent =
+                ContactSaveService.createJoinSeveralContactsIntent(
+                        context, getSelectedContactIdsArray());
         context.startService(intent);
 
         mActionBarAdapter.setSelectionMode(false);
@@ -1154,10 +1228,12 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
         @Override
         public void onDeletionFinished() {
             // The parameters count and numSelected are both the number of contacts before deletion.
-            Logger.logListEvent(ListEvent.ActionType.DELETE,
-                /* listType */ getListTypeIncludingSearch(),
-                /* count */ getAdapter().getCount(), /* clickedIndex */ -1,
-                /* numSelected */ getSelectedContactIds().size());
+            Logger.logListEvent(
+                    ListEvent.ActionType.DELETE,
+                    /* listType */ getListTypeIncludingSearch(),
+                    /* count */ getAdapter().getCount(), /* clickedIndex */
+                    -1,
+                    /* numSelected */ getSelectedContactIds().size());
             mActionBarAdapter.setSelectionMode(false);
             mIsDeletionInProgress = false;
         }
@@ -1182,18 +1258,22 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
                     onPickerResult(data);
                 }
             case ACTIVITY_REQUEST_CODE_SHARE:
-                Logger.logListEvent(ListEvent.ActionType.SHARE,
-                    /* listType */ getListTypeIncludingSearch(),
-                    /* count */ getAdapter().getCount(), /* clickedIndex */ -1,
-                    /* numSelected */ getAdapter().getSelectedContactIds().size());
+                Logger.logListEvent(
+                        ListEvent.ActionType.SHARE,
+                        /* listType */ getListTypeIncludingSearch(),
+                        /* count */ getAdapter().getCount(), /* clickedIndex */
+                        -1,
+                        /* numSelected */ getAdapter().getSelectedContactIds().size());
 
-// TODO fix or remove multipicker code: ag/54762
-//                else if (resultCode == RESULT_CANCELED && mMode == MODE_PICK_MULTIPLE_PHONES) {
-//                    // Finish the activity if the sub activity was canceled as back key is used
-//                    // to confirm user selection in MODE_PICK_MULTIPLE_PHONES.
-//                    finish();
-//                }
-//                break;
+                // TODO fix or remove multipicker code: ag/54762
+                //                else if (resultCode == RESULT_CANCELED && mMode ==
+                // MODE_PICK_MULTIPLE_PHONES) {
+                //                    // Finish the activity if the sub activity was canceled as
+                // back key is used
+                //                    // to confirm user selection in MODE_PICK_MULTIPLE_PHONES.
+                //                    finish();
+                //                }
+                //                break;
         }
     }
 
@@ -1227,6 +1307,8 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
         if (mActionBarAdapter != null) {
             mActionBarAdapter.setListener(null);
         }
+
+        mContactListFilterController.removeListener(this);
         super.onDestroy();
     }
 
@@ -1237,7 +1319,7 @@ public class DefaultContactBrowseListFragment extends ContactBrowseListFragment
         }
 
         if (mActionBarAdapter != null && !mActionBarAdapter.isSearchMode()) {
-            final String query = new String(new int[]{unicodeChar}, 0, 1);
+            final String query = new String(new int[] {unicodeChar}, 0, 1);
             mActionBarAdapter.setSearchMode(true);
             mActionBarAdapter.setQueryString(query);
             return true;

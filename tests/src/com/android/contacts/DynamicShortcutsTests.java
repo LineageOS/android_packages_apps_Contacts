@@ -39,7 +39,6 @@ import android.provider.ContactsContract.Contacts;
 import android.test.AndroidTestCase;
 import android.test.mock.MockContentResolver;
 
-import androidx.test.filters.SdkSuppress;
 import androidx.test.filters.SmallTest;
 
 import com.android.contacts.test.mocks.MockContentProvider;
@@ -56,18 +55,16 @@ import java.util.Collections;
 import java.util.List;
 
 @TargetApi(Build.VERSION_CODES.N_MR1)
-@SdkSuppress(minSdkVersion = Build.VERSION_CODES.N_MR1)
 @SmallTest
 public class DynamicShortcutsTests extends AndroidTestCase {
-
 
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
 
         // Clean up the job if it was scheduled by these tests.
-        final JobScheduler scheduler = (JobScheduler) getContext()
-                .getSystemService(Context.JOB_SCHEDULER_SERVICE);
+        final JobScheduler scheduler =
+                (JobScheduler) getContext().getSystemService(Context.JOB_SCHEDULER_SERVICE);
         scheduler.cancel(ContactsJobService.DYNAMIC_SHORTCUTS_JOB_ID);
     }
 
@@ -83,17 +80,18 @@ public class DynamicShortcutsTests extends AndroidTestCase {
     public void test_createShortcutFromRow_hasCorrectResult() {
         final DynamicShortcuts sut = createDynamicShortcuts();
 
-        final Cursor row = queryResult(
-                // ID, LOOKUP_KEY, DISPLAY_NAME_PRIMARY
-                1l, "lookup_key", "John Smith"
-        );
+        final Cursor row =
+                queryResult(
+                        // ID, LOOKUP_KEY, DISPLAY_NAME_PRIMARY
+                        1l, "lookup_key", "John Smith");
 
         row.moveToFirst();
         final ShortcutInfo shortcut = sut.builderForContactShortcut(row).build();
 
         assertEquals("lookup_key", shortcut.getId());
         assertEquals(Contacts.getLookupUri(1, "lookup_key"), shortcut.getIntent().getData());
-        assertEquals(ContactsContract.QuickContact.ACTION_QUICK_CONTACT,
+        assertEquals(
+                ContactsContract.QuickContact.ACTION_QUICK_CONTACT,
                 shortcut.getIntent().getAction());
         assertEquals("John Smith", shortcut.getShortLabel());
         assertEquals("John Smith", shortcut.getLongLabel());
@@ -113,8 +111,8 @@ public class DynamicShortcutsTests extends AndroidTestCase {
         sut.setShortLabelMaxLength(5);
         sut.setLongLabelMaxLength(10);
 
-        final ShortcutInfo shortcut = sut.builderForContactShortcut(1l, "lookup_key",
-                "123456789 1011").build();
+        final ShortcutInfo shortcut =
+                sut.builderForContactShortcut(1l, "lookup_key", "123456789 1011").build();
 
         assertEquals("1234…", shortcut.getShortLabel());
         assertEquals("123456789…", shortcut.getLongLabel());
@@ -122,60 +120,76 @@ public class DynamicShortcutsTests extends AndroidTestCase {
 
     public void test_updatePinned_disablesShortcutsForRemovedContacts() throws Exception {
         final ShortcutManager mockShortcutManager = mock(ShortcutManager.class);
-        when(mockShortcutManager.getPinnedShortcuts()).thenReturn(
-                Collections.singletonList(makeDynamic(shortcutFor(1l, "key1", "name1"))));
+        when(mockShortcutManager.getPinnedShortcuts())
+                .thenReturn(
+                        Collections.singletonList(makeDynamic(shortcutFor(1l, "key1", "name1"))));
 
         final DynamicShortcuts sut = createDynamicShortcuts(emptyResolver(), mockShortcutManager);
 
         sut.updatePinned();
 
-        verify(mockShortcutManager).disableShortcuts(
-                eq(Collections.singletonList("key1")), anyString());
+        verify(mockShortcutManager)
+                .disableShortcuts(eq(Collections.singletonList("key1")), anyString());
     }
 
     public void test_updatePinned_updatesExistingShortcutsWithMatchingKeys() throws Exception {
         final ShortcutManager mockShortcutManager = mock(ShortcutManager.class);
-        when(mockShortcutManager.getPinnedShortcuts()).thenReturn(
-                Arrays.asList(
-                        makeDynamic(shortcutFor(1l, "key1", "name1")),
-                        makeDynamic(shortcutFor(2l, "key2", "name2")),
-                        makeDynamic(shortcutFor(3l, "key3", "name3"))
-                ));
+        when(mockShortcutManager.getPinnedShortcuts())
+                .thenReturn(
+                        Arrays.asList(
+                                makeDynamic(shortcutFor(1l, "key1", "name1")),
+                                makeDynamic(shortcutFor(2l, "key2", "name2")),
+                                makeDynamic(shortcutFor(3l, "key3", "name3"))));
 
-        final DynamicShortcuts sut = createDynamicShortcuts(resolverWithExpectedQueries(
-                queryForSingleRow(Contacts.getLookupUri(1l, "key1"), 11l, "key1", "New Name1"),
-                queryForSingleRow(Contacts.getLookupUri(2l, "key2"), 2l, "key2", "name2"),
-                queryForSingleRow(Contacts.getLookupUri(3l, "key3"), 33l, "key3", "name3")
-        ), mockShortcutManager);
+        final DynamicShortcuts sut =
+                createDynamicShortcuts(
+                        resolverWithExpectedQueries(
+                                queryForSingleRow(
+                                        Contacts.getLookupUri(1l, "key1"),
+                                        11l,
+                                        "key1",
+                                        "New Name1"),
+                                queryForSingleRow(
+                                        Contacts.getLookupUri(2l, "key2"), 2l, "key2", "name2"),
+                                queryForSingleRow(
+                                        Contacts.getLookupUri(3l, "key3"), 33l, "key3", "name3")),
+                        mockShortcutManager);
 
         sut.updatePinned();
 
         final ArgumentCaptor<List<ShortcutInfo>> updateArgs =
                 ArgumentCaptor.forClass((Class) List.class);
 
-        verify(mockShortcutManager).disableShortcuts(
-                eq(Collections.<String>emptyList()), anyString());
+        verify(mockShortcutManager)
+                .disableShortcuts(eq(Collections.<String>emptyList()), anyString());
         verify(mockShortcutManager).updateShortcuts(updateArgs.capture());
 
         final List<ShortcutInfo> arg = updateArgs.getValue();
         assertThat(arg.size(), equalTo(3));
-        assertThat(arg.get(0),
-                isShortcutForContact(11l, "key1", "New Name1"));
-        assertThat(arg.get(1),
-                isShortcutForContact(2l, "key2", "name2"));
-        assertThat(arg.get(2),
-                isShortcutForContact(33l, "key3", "name3"));
+        assertThat(arg.get(0), isShortcutForContact(11l, "key1", "New Name1"));
+        assertThat(arg.get(1), isShortcutForContact(2l, "key2", "name2"));
+        assertThat(arg.get(2), isShortcutForContact(33l, "key3", "name3"));
     }
 
     public void test_refresh_setsDynamicShortcutsToStrequentContacts() {
         final ShortcutManager mockShortcutManager = mock(ShortcutManager.class);
-        when(mockShortcutManager.getPinnedShortcuts()).thenReturn(
-                Collections.<ShortcutInfo>emptyList());
-        final DynamicShortcuts sut = createDynamicShortcuts(resolverWithExpectedQueries(
-                queryFor(Contacts.CONTENT_STREQUENT_URI,
-                        1l, "starred_key", "starred name",
-                        2l, "freq_key", "freq name",
-                        3l, "starred_2", "Starred Two")), mockShortcutManager);
+        when(mockShortcutManager.getPinnedShortcuts())
+                .thenReturn(Collections.<ShortcutInfo>emptyList());
+        final DynamicShortcuts sut =
+                createDynamicShortcuts(
+                        resolverWithExpectedQueries(
+                                queryFor(
+                                        Contacts.CONTENT_STREQUENT_URI,
+                                        1l,
+                                        "starred_key",
+                                        "starred name",
+                                        2l,
+                                        "freq_key",
+                                        "freq name",
+                                        3l,
+                                        "starred_2",
+                                        "Starred Two")),
+                        mockShortcutManager);
 
         sut.refresh();
 
@@ -193,16 +207,32 @@ public class DynamicShortcutsTests extends AndroidTestCase {
 
     public void test_refresh_skipsContactsWithNullName() {
         final ShortcutManager mockShortcutManager = mock(ShortcutManager.class);
-        when(mockShortcutManager.getPinnedShortcuts()).thenReturn(
-                Collections.<ShortcutInfo>emptyList());
-        final DynamicShortcuts sut = createDynamicShortcuts(resolverWithExpectedQueries(
-                queryFor(Contacts.CONTENT_STREQUENT_URI,
-                        1l, "key1", "first",
-                        2l, "key2", "second",
-                        3l, "key3", null,
-                        4l, null, null,
-                        5l, "key5", "fifth",
-                        6l, "key6", "sixth")), mockShortcutManager);
+        when(mockShortcutManager.getPinnedShortcuts())
+                .thenReturn(Collections.<ShortcutInfo>emptyList());
+        final DynamicShortcuts sut =
+                createDynamicShortcuts(
+                        resolverWithExpectedQueries(
+                                queryFor(
+                                        Contacts.CONTENT_STREQUENT_URI,
+                                        1l,
+                                        "key1",
+                                        "first",
+                                        2l,
+                                        "key2",
+                                        "second",
+                                        3l,
+                                        "key3",
+                                        null,
+                                        4l,
+                                        null,
+                                        null,
+                                        5l,
+                                        "key5",
+                                        "fifth",
+                                        6l,
+                                        "key6",
+                                        "sixth")),
+                        mockShortcutManager);
 
         sut.refresh();
 
@@ -217,28 +247,37 @@ public class DynamicShortcutsTests extends AndroidTestCase {
         assertThat(arg.get(1), isShortcutForContact(2l, "key2", "second"));
         assertThat(arg.get(2), isShortcutForContact(5l, "key5", "fifth"));
 
-
         // Also verify that it doesn't crash if there are fewer than 3 valid strequent contacts
-        createDynamicShortcuts(resolverWithExpectedQueries(
-                queryFor(Contacts.CONTENT_STREQUENT_URI,
-                        1l, "key1", "first",
-                        2l, "key2", "second",
-                        3l, "key3", null,
-                        4l, null, null)), mock(ShortcutManager.class)).refresh();
+        createDynamicShortcuts(
+                        resolverWithExpectedQueries(
+                                queryFor(
+                                        Contacts.CONTENT_STREQUENT_URI,
+                                        1l,
+                                        "key1",
+                                        "first",
+                                        2l,
+                                        "key2",
+                                        "second",
+                                        3l,
+                                        "key3",
+                                        null,
+                                        4l,
+                                        null,
+                                        null)),
+                        mock(ShortcutManager.class))
+                .refresh();
     }
-
 
     public void test_handleFlagDisabled_stopsJob() {
         final ShortcutManager mockShortcutManager = mock(ShortcutManager.class);
         final JobScheduler mockJobScheduler = mock(JobScheduler.class);
-        final DynamicShortcuts sut = createDynamicShortcuts(emptyResolver(), mockShortcutManager,
-                mockJobScheduler);
+        final DynamicShortcuts sut =
+                createDynamicShortcuts(emptyResolver(), mockShortcutManager, mockJobScheduler);
 
         sut.handleFlagDisabled();
 
         verify(mockJobScheduler).cancel(eq(ContactsJobService.DYNAMIC_SHORTCUTS_JOB_ID));
     }
-
 
     public void test_scheduleUpdateJob_schedulesJob() {
         final DynamicShortcuts sut = new DynamicShortcuts(getContext());
@@ -246,13 +285,13 @@ public class DynamicShortcutsTests extends AndroidTestCase {
         assertThat(DynamicShortcuts.isJobScheduled(getContext()), Matchers.is(true));
     }
 
-    private Matcher<ShortcutInfo> isShortcutForContact(final long id,
-            final String lookupKey, final String name) {
+    private Matcher<ShortcutInfo> isShortcutForContact(
+            final long id, final String lookupKey, final String name) {
         return new BaseMatcher<ShortcutInfo>() {
             @Override
             public boolean matches(Object o) {
-                if (!(o instanceof  ShortcutInfo)) return false;
-                final ShortcutInfo other = (ShortcutInfo)o;
+                if (!(o instanceof ShortcutInfo)) return false;
+                final ShortcutInfo other = (ShortcutInfo) o;
                 return id == other.getExtras().getLong(Contacts._ID)
                         && lookupKey.equals(other.getId())
                         && name.equals(other.getLongLabel())
@@ -261,15 +300,21 @@ public class DynamicShortcutsTests extends AndroidTestCase {
 
             @Override
             public void describeTo(Description description) {
-                description.appendText("Should be a shortcut for contact with _ID=" + id +
-                        " lookup=" + lookupKey + " and display_name=" + name);
+                description.appendText(
+                        "Should be a shortcut for contact with _ID="
+                                + id
+                                + " lookup="
+                                + lookupKey
+                                + " and display_name="
+                                + name);
             }
         };
     }
 
     private ShortcutInfo shortcutFor(long contactId, String lookupKey, String name) {
         return new DynamicShortcuts(getContext())
-                .builderForContactShortcut(contactId, lookupKey, name).build();
+                .builderForContactShortcut(contactId, lookupKey, name)
+                .build();
     }
 
     private ContentResolver emptyResolver() {
@@ -283,11 +328,11 @@ public class DynamicShortcutsTests extends AndroidTestCase {
     }
 
     private MockContentProvider.Query queryFor(Uri uri, Object... rows) {
-        final MockContentProvider.Query query = MockContentProvider.Query
-                .forUrisMatching(uri.getAuthority(), uri.getPath())
-                .withProjection(DynamicShortcuts.PROJECTION)
-                .withAnySelection()
-                .withAnySortOrder();
+        final MockContentProvider.Query query =
+                MockContentProvider.Query.forUrisMatching(uri.getAuthority(), uri.getPath())
+                        .withProjection(DynamicShortcuts.PROJECTION)
+                        .withAnySelection()
+                        .withAnySortOrder();
 
         populateQueryRows(query, DynamicShortcuts.PROJECTION.length, rows);
         return query;
@@ -319,24 +364,23 @@ public class DynamicShortcutsTests extends AndroidTestCase {
         return createDynamicShortcuts(emptyResolver(), mock(ShortcutManager.class));
     }
 
-
-    private DynamicShortcuts createDynamicShortcuts(ContentResolver resolver,
-            ShortcutManager shortcutManager) {
+    private DynamicShortcuts createDynamicShortcuts(
+            ContentResolver resolver, ShortcutManager shortcutManager) {
         return createDynamicShortcuts(resolver, shortcutManager, mock(JobScheduler.class));
     }
 
-    private DynamicShortcuts createDynamicShortcuts(ContentResolver resolver,
-            ShortcutManager shortcutManager, JobScheduler jobScheduler) {
-        final DynamicShortcuts result = new DynamicShortcuts(getContext(), resolver,
-                shortcutManager, jobScheduler);
+    private DynamicShortcuts createDynamicShortcuts(
+            ContentResolver resolver, ShortcutManager shortcutManager, JobScheduler jobScheduler) {
+        final DynamicShortcuts result =
+                new DynamicShortcuts(getContext(), resolver, shortcutManager, jobScheduler);
         // Use very long label limits to make checking shortcuts easier to understand
         result.setShortLabelMaxLength(100);
         result.setLongLabelMaxLength(100);
         return result;
     }
 
-    private void populateQueryRows(MockContentProvider.Query query, int numColumns,
-            Object... rows) {
+    private void populateQueryRows(
+            MockContentProvider.Query query, int numColumns, Object... rows) {
         for (int i = 0; i < rows.length; i += numColumns) {
             Object[] row = new Object[numColumns];
             for (int j = 0; j < numColumns; j++) {
@@ -360,10 +404,11 @@ public class DynamicShortcutsTests extends AndroidTestCase {
     }
 
     private Cursor queryResult(String[] columns, Object... values) {
-        MatrixCursor result = new MatrixCursor(new String[] {
-                Contacts._ID, Contacts.LOOKUP_KEY,
-                Contacts.DISPLAY_NAME_PRIMARY
-        });
+        MatrixCursor result =
+                new MatrixCursor(
+                        new String[] {
+                            Contacts._ID, Contacts.LOOKUP_KEY, Contacts.DISPLAY_NAME_PRIMARY
+                        });
         for (int i = 0; i < values.length; i += columns.length) {
             MatrixCursor.RowBuilder builder = result.newRow();
             for (int j = 0; j < columns.length; j++) {

@@ -34,13 +34,12 @@ import android.test.InstrumentationTestCase;
 import androidx.test.filters.MediumTest;
 
 import com.android.contacts.model.account.AccountWithDataSet;
+import com.android.contacts.preference.ContactsPreferences;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Tests of GroupsDaoImpl that perform DB operations directly against CP2
- */
+/** Tests of GroupsDaoImpl that perform DB operations directly against CP2 */
 @MediumTest
 public class GroupsDaoIntegrationTests extends InstrumentationTestCase {
 
@@ -53,6 +52,7 @@ public class GroupsDaoIntegrationTests extends InstrumentationTestCase {
 
         mTestRecords = new ArrayList<>();
         mResolver = getContext().getContentResolver();
+        new ContactsPreferences(getContext()).clearDefaultAccount();
     }
 
     @Override
@@ -81,8 +81,9 @@ public class GroupsDaoIntegrationTests extends InstrumentationTestCase {
         final Cursor cursor = mResolver.query(uri, null, null, null, null, null);
         try {
             cursor.moveToFirst();
-            assertEquals(1, cursor.getInt(cursor.getColumnIndexOrThrow(
-                    ContactsContract.Groups.DELETED)));
+            assertEquals(
+                    1,
+                    cursor.getInt(cursor.getColumnIndexOrThrow(ContactsContract.Groups.DELETED)));
         } finally {
             cursor.close();
         }
@@ -111,10 +112,14 @@ public class GroupsDaoIntegrationTests extends InstrumentationTestCase {
 
         assertEquals(1, sut.delete(groupUri));
 
-        final Cursor cursor = mResolver.query(Data.CONTENT_URI, null,
-                Data.MIMETYPE + "=? AND " + GroupMembership.GROUP_ROW_ID + "=?",
-                new String[] { GroupMembership.CONTENT_ITEM_TYPE, String.valueOf(groupId) },
-                null, null);
+        final Cursor cursor =
+                mResolver.query(
+                        Data.CONTENT_URI,
+                        null,
+                        Data.MIMETYPE + "=? AND " + GroupMembership.GROUP_ROW_ID + "=?",
+                        new String[] {GroupMembership.CONTENT_ITEM_TYPE, String.valueOf(groupId)},
+                        null,
+                        null);
 
         try {
             cursor.moveToFirst();
@@ -143,10 +148,16 @@ public class GroupsDaoIntegrationTests extends InstrumentationTestCase {
 
         final long newGroupId = ContentUris.parseId(recreatedGroup);
 
-        final Cursor cursor = mResolver.query(Data.CONTENT_URI, null,
-                Data.MIMETYPE + "=? AND " + GroupMembership.GROUP_ROW_ID + "=?",
-                new String[] { GroupMembership.CONTENT_ITEM_TYPE, String.valueOf(newGroupId) },
-                null, null);
+        final Cursor cursor =
+                mResolver.query(
+                        Data.CONTENT_URI,
+                        null,
+                        Data.MIMETYPE + "=? AND " + GroupMembership.GROUP_ROW_ID + "=?",
+                        new String[] {
+                            GroupMembership.CONTENT_ITEM_TYPE, String.valueOf(newGroupId)
+                        },
+                        null,
+                        null);
 
         try {
             assertEquals(2, cursor.getCount());
@@ -174,8 +185,10 @@ public class GroupsDaoIntegrationTests extends InstrumentationTestCase {
         // or nearby values  to cover some special case or boundary condition.
         final long nonExistentId = Integer.MAX_VALUE - 10;
 
-        final Bundle undoData = sut.captureDeletionUndoData(ContentUris
-                .withAppendedId(ContactsContract.Groups.CONTENT_URI, nonExistentId));
+        final Bundle undoData =
+                sut.captureDeletionUndoData(
+                        ContentUris.withAppendedId(
+                                ContactsContract.Groups.CONTENT_URI, nonExistentId));
 
         assertTrue(undoData.isEmpty());
     }
@@ -202,24 +215,37 @@ public class GroupsDaoIntegrationTests extends InstrumentationTestCase {
     }
 
     private void assertGroupHasTitle(Uri groupUri, String title) {
-        final Cursor cursor = mResolver.query(groupUri,
-                new String[] { ContactsContract.Groups.TITLE },
-                ContactsContract.Groups.DELETED + "=?",
-                new String[] { "0" }, null, null);
+        final Cursor cursor =
+                mResolver.query(
+                        groupUri,
+                        new String[] {ContactsContract.Groups.TITLE},
+                        ContactsContract.Groups.DELETED + "=?",
+                        new String[] {"0"},
+                        null,
+                        null);
         try {
-            assertTrue("Group does not have title \"" + title + "\"",
-                    cursor.getCount() == 1 && cursor.moveToFirst() &&
-                            title.equals(cursor.getString(0)));
+            assertTrue(
+                    "Group does not have title \"" + title + "\"",
+                    cursor.getCount() == 1
+                            && cursor.moveToFirst()
+                            && title.equals(cursor.getString(0)));
         } finally {
             cursor.close();
         }
     }
 
     private void assertGroupWithTitleExists(String title) {
-        final Cursor cursor = mResolver.query(ContactsContract.Groups.CONTENT_URI, null,
-                ContactsContract.Groups.TITLE + "=? AND " +
-                        ContactsContract.Groups.DELETED + "=?",
-                new String[] { title, "0" }, null, null);
+        final Cursor cursor =
+                mResolver.query(
+                        ContactsContract.Groups.CONTENT_URI,
+                        null,
+                        ContactsContract.Groups.TITLE
+                                + "=? AND "
+                                + ContactsContract.Groups.DELETED
+                                + "=?",
+                        new String[] {title, "0"},
+                        null,
+                        null);
         try {
             assertTrue("No group exists with title \"" + title + "\"", cursor.getCount() > 0);
         } finally {
@@ -243,8 +269,7 @@ public class GroupsDaoIntegrationTests extends InstrumentationTestCase {
     private Uri addMemberToGroup(long rawContactId, long groupId) {
         final ContentValues values = new ContentValues();
         values.put(Data.RAW_CONTACT_ID, rawContactId);
-        values.put(Data.MIMETYPE,
-                GroupMembership.CONTENT_ITEM_TYPE);
+        values.put(Data.MIMETYPE, GroupMembership.CONTENT_ITEM_TYPE);
         values.put(GroupMembership.GROUP_ROW_ID, groupId);
 
         // Dont' need to add to testRecords because it will be cleaned up when parent raw_contact
@@ -264,11 +289,13 @@ public class GroupsDaoIntegrationTests extends InstrumentationTestCase {
         final ArrayList<ContentProviderOperation> ops = new ArrayList<>();
         for (Uri uri : mTestRecords) {
             if (uri == null) continue;
-            ops.add(ContentProviderOperation
-                    .newDelete(uri.buildUpon()
-                            .appendQueryParameter(ContactsContract.CALLER_IS_SYNCADAPTER, "true")
-                            .build())
-                    .build());
+            ops.add(
+                    ContentProviderOperation.newDelete(
+                                    uri.buildUpon()
+                                            .appendQueryParameter(
+                                                    ContactsContract.CALLER_IS_SYNCADAPTER, "true")
+                                            .build())
+                            .build());
         }
         mResolver.applyBatch(ContactsContract.AUTHORITY, ops);
     }

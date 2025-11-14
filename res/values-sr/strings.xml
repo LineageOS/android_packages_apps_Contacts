@@ -133,8 +133,8 @@
     <string name="group_name_dialog_update_title" msgid="3955919589366745101">"Преименујте ознаку"</string>
     <string name="group_name_dialog_hint" msgid="6023999218213062973">"Име ознаке"</string>
     <string name="label_name_dialog_hint" msgid="7027635439255596191">"Име ознаке"</string>
-    <string name="audio_chat" msgid="5921525823973697372">"Аудио ћаскање"</string>
-    <string name="video_chat" msgid="2477295971622477433">"Видео ћаскање"</string>
+    <string name="audio_chat" msgid="5921525823973697372">"Аудио чет"</string>
+    <string name="video_chat" msgid="2477295971622477433">"Видео чет"</string>
     <string name="account_type_format" msgid="4926968760755013450">"<xliff:g id="SOURCE">%1$s</xliff:g>"</string>
     <string name="google_account_type_format" msgid="4046692740262396811">"<xliff:g id="SOURCE">%1$s</xliff:g> налог"</string>
     <string name="take_photo" msgid="820071555236547516">"Сликај"</string>
@@ -336,15 +336,15 @@
     <string name="map_work" msgid="8296916987749726461">"Прикажи пословну адресу"</string>
     <string name="map_other" msgid="4009931029322619674">"Прикажи адресу"</string>
     <string name="map_custom" msgid="7797812861927817335">"Прикажи адресу <xliff:g id="CUSTOM_LABEL">%s</xliff:g>"</string>
-    <string name="chat_aim" msgid="2044861410748519265">"Започни ћаскање преко AIM-а"</string>
-    <string name="chat_msn" msgid="4733206223124506247">"Започни ћаскање преко Windows Live-а"</string>
-    <string name="chat_yahoo" msgid="3807571878191282528">"Започни ћаскање преко Yahoo-а"</string>
-    <string name="chat_skype" msgid="5130564346825936093">"Започни ћаскање преко Skype-а"</string>
-    <string name="chat_qq" msgid="2971335421266098608">"Започни ћаскање преко QQ-а"</string>
-    <string name="chat_gtalk" msgid="2927882858741904064">"Ћаскај преко Google Talk-а"</string>
-    <string name="chat_icq" msgid="4289041376069626281">"Започни ћаскање преко ICQ-а"</string>
-    <string name="chat_jabber" msgid="1097960594943864847">"Започни ћаскање преко Jabber-а"</string>
-    <string name="chat" msgid="8390862712584830532">"Ћаскање"</string>
+    <string name="chat_aim" msgid="2044861410748519265">"Започни чет преко AIM-а"</string>
+    <string name="chat_msn" msgid="4733206223124506247">"Започни чет преко Windows Live-а"</string>
+    <string name="chat_yahoo" msgid="3807571878191282528">"Започни чет преко Yahoo-а"</string>
+    <string name="chat_skype" msgid="5130564346825936093">"Започни чет преко Skype-а"</string>
+    <string name="chat_qq" msgid="2971335421266098608">"Започни чет преко QQ-а"</string>
+    <string name="chat_gtalk" msgid="2927882858741904064">"Четуј преко Google Talk-а"</string>
+    <string name="chat_icq" msgid="4289041376069626281">"Започни чет преко ICQ-а"</string>
+    <string name="chat_jabber" msgid="1097960594943864847">"Започни чет преко Jabber-а"</string>
+    <string name="chat" msgid="8390862712584830532">"Чет"</string>
     <string name="description_minus_button" msgid="1305985971158054217">"избриши"</string>
     <string name="expand_name_fields_description" msgid="6059558159338959487">"Прикажите још поља за име"</string>
     <string name="collapse_name_fields_description" msgid="7950435675716414477">"Скупите поља за име"</string>

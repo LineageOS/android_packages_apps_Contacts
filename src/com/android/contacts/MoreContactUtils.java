@@ -16,6 +16,7 @@
 
 package com.android.contacts;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
@@ -24,28 +25,34 @@ import android.provider.ContactsContract;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.android.contacts.model.account.AccountType;
 
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 
-/**
- * Shared static contact utility methods.
- */
+/** Shared static contact utility methods. */
 public class MoreContactUtils {
 
     private static final String WAIT_SYMBOL_AS_STRING = String.valueOf(PhoneNumberUtils.WAIT);
 
     /**
      * Returns true if two data with mimetypes which represent values in contact entries are
-     * considered equal for collapsing in the GUI. For caller-id, use
-     * {@link android.telephony.PhoneNumberUtils#compare(android.content.Context, String, String)}
-     * instead
+     * considered equal for collapsing in the GUI. For caller-id, use {@link
+     * android.telephony.PhoneNumberUtils#compare(android.content.Context, String, String)} instead
      */
-    public static boolean shouldCollapse(CharSequence mimetype1, CharSequence data1,
-              CharSequence mimetype2, CharSequence data2) {
+    public static boolean shouldCollapse(
+            CharSequence mimetype1,
+            CharSequence data1,
+            CharSequence mimetype2,
+            CharSequence data2) {
         // different mimetypes? don't collapse
         if (!TextUtils.equals(mimetype1, mimetype2)) return false;
 
@@ -57,8 +64,8 @@ public class MoreContactUtils {
 
         // if this is not about phone numbers, we know this is not a match (of course, some
         // mimetypes could have more sophisticated matching is the future, e.g. addresses)
-        if (!TextUtils.equals(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE,
-                mimetype1)) {
+        if (!TextUtils.equals(
+                ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE, mimetype1)) {
             return false;
         }
 
@@ -165,18 +172,18 @@ public class MoreContactUtils {
                 case SHORT_NSN_MATCH:
                     return false;
                 default:
-                    throw new IllegalStateException("Unknown result value from phone number " +
-                            "library");
+                    throw new IllegalStateException(
+                            "Unknown result value from phone number " + "library");
             }
         }
         return true;
     }
 
     /**
-     * Returns the {@link android.graphics.Rect} with left, top, right, and bottom coordinates
-     * that are equivalent to the given {@link android.view.View}'s bounds. This is equivalent to
-     * how the target {@link android.graphics.Rect} is calculated in
-     * {@link android.provider.ContactsContract.QuickContact#showQuickContact}.
+     * Returns the {@link android.graphics.Rect} with left, top, right, and bottom coordinates that
+     * are equivalent to the given {@link android.view.View}'s bounds. This is equivalent to how the
+     * target {@link android.graphics.Rect} is calculated in {@link
+     * android.provider.ContactsContract.QuickContact#showQuickContact}.
      */
     public static Rect getTargetRectFromView(View view) {
         final int[] pos = new int[2];
@@ -191,8 +198,8 @@ public class MoreContactUtils {
     }
 
     /**
-     * Returns a header view based on the R.layout.list_separator, where the
-     * containing {@link android.widget.TextView} is set using the given textResourceId.
+     * Returns a header view based on the R.layout.list_separator, where the containing {@link
+     * android.widget.TextView} is set using the given textResourceId.
      */
     public static TextView createHeaderView(Context context, int textResourceId) {
         final TextView textView = (TextView) View.inflate(context, R.layout.list_separator, null);
@@ -201,29 +208,37 @@ public class MoreContactUtils {
     }
 
     /**
-     * Set the top padding on the header view dynamically, based on whether the header is in
-     * the first row or not.
+     * Set the top padding on the header view dynamically, based on whether the header is in the
+     * first row or not.
      */
-    public static void setHeaderViewBottomPadding(Context context, TextView textView,
-            boolean isFirstRow) {
+    public static void setHeaderViewBottomPadding(
+            Context context, TextView textView, boolean isFirstRow) {
         final int topPadding;
         if (isFirstRow) {
-            topPadding = (int) context.getResources().getDimension(
-                    R.dimen.frequently_contacted_title_top_margin_when_first_row);
+            topPadding =
+                    (int)
+                            context.getResources()
+                                    .getDimension(
+                                            R.dimen
+                                                    .frequently_contacted_title_top_margin_when_first_row);
         } else {
-            topPadding = (int) context.getResources().getDimension(
-                    R.dimen.frequently_contacted_title_top_margin);
+            topPadding =
+                    (int)
+                            context.getResources()
+                                    .getDimension(R.dimen.frequently_contacted_title_top_margin);
         }
-        textView.setPaddingRelative(textView.getPaddingStart(), topPadding,
-                textView.getPaddingEnd(), textView.getPaddingBottom());
+        textView.setPaddingRelative(
+                textView.getPaddingStart(),
+                topPadding,
+                textView.getPaddingEnd(),
+                textView.getPaddingBottom());
     }
-
 
     /**
      * Returns the intent to launch for the given invitable account type and contact lookup URI.
-     * This will return null if the account type is not invitable (i.e. there is no
-     * {@link AccountType#getInviteContactActivityClassName()} or
-     * {@link AccountType#syncAdapterPackageName}).
+     * This will return null if the account type is not invitable (i.e. there is no {@link
+     * AccountType#getInviteContactActivityClassName()} or {@link
+     * AccountType#syncAdapterPackageName}).
      */
     public static Intent getInvitableIntent(AccountType accountType, Uri lookupUri) {
         String syncAdapterPackageName = accountType.syncAdapterPackageName;
@@ -239,5 +254,67 @@ public class MoreContactUtils {
         // Data is the lookup URI.
         intent.setData(lookupUri);
         return intent;
+    }
+
+    /**
+     * Enable new edge to edge feature.
+     *
+     * @param activity the Activity need to setup the edge to edge feature.
+     */
+    public static void setupEdgeToEdge(@NonNull Activity activity, EdgeToEdgeInsetHandler handler) {
+        ViewCompat.setOnApplyWindowInsetsListener(
+                activity.findViewById(android.R.id.content),
+                (v, windowInsets) -> {
+                    final Insets insets =
+                            windowInsets.getInsets(
+                                    WindowInsetsCompat.Type.systemBars()
+                                            | WindowInsetsCompat.Type.ime()
+                                            | WindowInsetsCompat.Type.displayCutout());
+
+                    // Apply the insets paddings to the view.
+                    v.setPadding(
+                            insets.left,
+                            handler == null ? insets.top : v.getPaddingTop(),
+                            insets.right,
+                            insets.bottom);
+
+                    if (handler != null) {
+                        handler.applyTopInset(insets.top);
+                    }
+
+                    // Return CONSUMED if you don't want the window insets to keep being
+                    // passed down to descendant views.
+                    return WindowInsetsCompat.CONSUMED;
+                });
+    }
+
+    /** Handles setting the insets on a {@link View}. */
+    public static class EdgeToEdgeInsetHandler {
+
+        private final View mView;
+
+        private int mOriginalHeight = -1;
+        private int mOriginalPaddingTop = -1;
+
+        public EdgeToEdgeInsetHandler(View view) {
+            mView = view;
+        }
+
+        public void applyTopInset(int top) {
+            ViewGroup.LayoutParams layoutParams = mView.getLayoutParams();
+            if (mOriginalHeight == -1) {
+                mOriginalHeight = layoutParams.height;
+            }
+            if (mOriginalPaddingTop == -1) {
+                mOriginalPaddingTop = mView.getPaddingTop();
+            }
+            layoutParams.height = mOriginalHeight + top;
+            mView.setLayoutParams(layoutParams);
+            mView.setPadding(
+                    mView.getPaddingLeft(),
+                    mOriginalPaddingTop + top,
+                    mView.getPaddingRight(),
+                    mView.getPaddingBottom());
+        }
     }
 }

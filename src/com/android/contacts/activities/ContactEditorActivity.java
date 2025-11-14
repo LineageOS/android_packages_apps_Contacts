@@ -17,21 +17,20 @@
 package com.android.contacts.activities;
 
 import android.app.Dialog;
-import android.app.FragmentTransaction;
 import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract.QuickContact;
-import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
+
+import androidx.appcompat.widget.Toolbar;
 
 import com.android.contacts.AppCompatContactsActivity;
 import com.android.contacts.ContactSaveService;
 import com.android.contacts.DynamicShortcuts;
+import com.android.contacts.MoreContactUtils;
+import com.android.contacts.MoreContactUtils.EdgeToEdgeInsetHandler;
 import com.android.contacts.R;
 import com.android.contacts.detail.PhotoSelectionHandler;
 import com.android.contacts.editor.ContactEditorFragment;
@@ -45,12 +44,9 @@ import com.android.contacts.util.ImplicitIntentsUtil;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-/**
- * Contact editor with only the most important fields displayed initially.
- */
-public class ContactEditorActivity extends AppCompatContactsActivity implements
-        PhotoSourceDialogFragment.Listener,
-        DialogManager.DialogShowingViewActivity {
+/** Contact editor with only the most important fields displayed initially. */
+public class ContactEditorActivity extends AppCompatContactsActivity
+        implements PhotoSourceDialogFragment.Listener, DialogManager.DialogShowingViewActivity {
     private static final String TAG = "ContactEditorActivity";
 
     public static final String ACTION_JOIN_COMPLETED = "joinCompleted";
@@ -61,10 +57,10 @@ public class ContactEditorActivity extends AppCompatContactsActivity implements
     public static final int RESULT_CODE_EDITED = 4;
 
     /**
-     * The contact will be saved to this account when this is set for an insert. This
-     * is necessary because {@link android.accounts.Account} cannot be created with null values
-     * for the name and type and an Account is needed for
-     * {@link android.provider.ContactsContract.Intents.Insert#EXTRA_ACCOUNT}
+     * The contact will be saved to this account when this is set for an insert. This is necessary
+     * because {@link android.accounts.Account} cannot be created with null values for the name and
+     * type and an Account is needed for {@link
+     * android.provider.ContactsContract.Intents.Insert#EXTRA_ACCOUNT}
      */
     public static final String EXTRA_ACCOUNT_WITH_DATA_SET =
             "com.android.contacts.ACCOUNT_WITH_DATA_SET";
@@ -76,101 +72,69 @@ public class ContactEditorActivity extends AppCompatContactsActivity implements
     private static final String STATE_PHOTO_URI = "photo_uri";
 
     /**
-     * Boolean intent key that specifies that this activity should finish itself
-     * (instead of launching a new view intent) after the editor changes have been
-     * saved.
+     * Boolean intent key that specifies that this activity should finish itself (instead of
+     * launching a new view intent) after the editor changes have been saved.
      */
     public static final String INTENT_KEY_FINISH_ACTIVITY_ON_SAVE_COMPLETED =
             "finishActivityOnSaveCompleted";
 
-    /**
-     * Contract for contact editors Fragments that are managed by this Activity.
-     */
+    /** Contract for contact editors Fragments that are managed by this Activity. */
     public interface ContactEditor {
 
-        /**
-         * Modes that specify what the AsyncTask has to perform after saving
-         */
+        /** Modes that specify what the AsyncTask has to perform after saving */
         interface SaveMode {
-            /**
-             * Close the editor after saving
-             */
+            /** Close the editor after saving */
             int CLOSE = 0;
 
-            /**
-             * Reload the data so that the user can continue editing
-             */
+            /** Reload the data so that the user can continue editing */
             int RELOAD = 1;
 
-            /**
-             * Split the contact after saving
-             */
+            /** Split the contact after saving */
             int SPLIT = 2;
 
-            /**
-             * Join another contact after saving
-             */
+            /** Join another contact after saving */
             int JOIN = 3;
 
-            /**
-             * Navigate to the editor view after saving.
-             */
+            /** Navigate to the editor view after saving. */
             int EDITOR = 4;
         }
 
-        /**
-         * The status of the contact editor.
-         */
+        /** The status of the contact editor. */
         interface Status {
-            /**
-             * The loader is fetching data
-             */
+            /** The loader is fetching data */
             int LOADING = 0;
 
-            /**
-             * Not currently busy. We are waiting for the user to enter data
-             */
+            /** Not currently busy. We are waiting for the user to enter data */
             int EDITING = 1;
 
             /**
-             * The data is currently being saved. This is used to prevent more
-             * auto-saves (they shouldn't overlap)
+             * The data is currently being saved. This is used to prevent more auto-saves (they
+             * shouldn't overlap)
              */
             int SAVING = 2;
 
             /**
-             * Prevents any more saves. This is used if in the following cases:
-             * - After Save/Close
-             * - After Revert
-             * - After the user has accepted an edit suggestion
-             * - After the user chooses to expand the editor
+             * Prevents any more saves. This is used if in the following cases: - After Save/Close -
+             * After Revert - After the user has accepted an edit suggestion - After the user
+             * chooses to expand the editor
              */
             int CLOSING = 3;
 
-            /**
-             * Prevents saving while running a child activity.
-             */
+            /** Prevents saving while running a child activity. */
             int SUB_ACTIVITY = 4;
         }
 
-        /**
-         * Sets the hosting Activity that will receive callbacks from the contact editor.
-         */
+        /** Sets the hosting Activity that will receive callbacks from the contact editor. */
         void setListener(ContactEditorFragment.Listener listener);
 
-        /**
-         * Initialize the contact editor.
-         */
+        /** Initialize the contact editor. */
         void load(String action, Uri lookupUri, Bundle intentExtras);
 
-        /**
-         * Applies extras from the hosting Activity to the writable raw contact.
-         */
+        /** Applies extras from the hosting Activity to the writable raw contact. */
         void setIntentExtras(Bundle extras);
 
         /**
-         * Saves or creates the contact based on the mode, and if successful
-         * finishes the activity.
+         * Saves or creates the contact based on the mode, and if successful finishes the activity.
          */
         boolean save(int saveMode);
 
@@ -180,26 +144,22 @@ public class ContactEditorActivity extends AppCompatContactsActivity implements
          */
         boolean revert();
 
-        /**
-         * Invoked after the contact is saved.
-         */
-        void onSaveCompleted(boolean hadChanges, int saveMode, boolean saveSucceeded,
-                Uri contactLookupUri, Long joinContactId);
+        /** Invoked after the contact is saved. */
+        void onSaveCompleted(
+                boolean hadChanges,
+                int saveMode,
+                boolean saveSucceeded,
+                Uri contactLookupUri,
+                Long joinContactId);
 
-        /**
-         * Invoked after the contact is joined.
-         */
+        /** Invoked after the contact is joined. */
         void onJoinCompleted(Uri uri);
     }
 
-    /**
-     * Displays a PopupWindow with photo edit options.
-     */
+    /** Displays a PopupWindow with photo edit options. */
     private final class EditorPhotoSelectionHandler extends PhotoSelectionHandler {
 
-        /**
-         * Receiver of photo edit option callbacks.
-         */
+        /** Receiver of photo edit option callbacks. */
         private final class EditorPhotoActionListener extends PhotoActionListener {
 
             @Override
@@ -224,8 +184,7 @@ public class ContactEditorActivity extends AppCompatContactsActivity implements
             }
 
             @Override
-            public void onPhotoSelectionDismissed() {
-            }
+            public void onPhotoSelectionDismissed() {}
         }
 
         private final EditorPhotoActionListener mPhotoActionListener;
@@ -236,8 +195,12 @@ public class ContactEditorActivity extends AppCompatContactsActivity implements
             // be anchored at changeAnchorView).
 
             // TODO: empty raw contact delta list
-            super(ContactEditorActivity.this, /* changeAnchorView =*/ null, photoMode,
-                    /* isDirectoryContact =*/ false, new RawContactDeltaList());
+            super(
+                    ContactEditorActivity.this,
+                    /* changeAnchorView= */ null,
+                    photoMode,
+                    /* isDirectoryContact= */ false,
+                    new RawContactDeltaList());
             mPhotoActionListener = new EditorPhotoActionListener();
         }
 
@@ -263,13 +226,12 @@ public class ContactEditorActivity extends AppCompatContactsActivity implements
     private Uri mPhotoUri;
     private int mPhotoMode;
 
-    private final ContactEditorFragment.Listener  mFragmentListener =
+    private final ContactEditorFragment.Listener mFragmentListener =
             new ContactEditorFragment.Listener() {
 
                 @Override
                 public void onDeleteRequested(Uri contactUri) {
-                    ContactDeletionInteraction.start(
-                            ContactEditorActivity.this, contactUri, true);
+                    ContactDeletionInteraction.start(ContactEditorActivity.this, contactUri, true);
                 }
 
                 @Override
@@ -302,10 +264,13 @@ public class ContactEditorActivity extends AppCompatContactsActivity implements
                 @Override
                 public void onEditOtherRawContactRequested(
                         Uri contactLookupUri, long rawContactId, ArrayList<ContentValues> values) {
-                    final Intent intent = EditorIntents.createEditOtherRawContactIntent(
-                            ContactEditorActivity.this, contactLookupUri, rawContactId, values);
-                    ImplicitIntentsUtil.startActivityInApp(
-                            ContactEditorActivity.this, intent);
+                    final Intent intent =
+                            EditorIntents.createEditOtherRawContactIntent(
+                                    ContactEditorActivity.this,
+                                    contactLookupUri,
+                                    rawContactId,
+                                    values);
+                    ImplicitIntentsUtil.startActivityInApp(ContactEditorActivity.this, intent);
                     finish();
                 }
             };
@@ -329,8 +294,8 @@ public class ContactEditorActivity extends AppCompatContactsActivity implements
         // Determine whether or not this activity should be finished after the user is done
         // editing the contact or if this activity should launch another activity to view the
         // contact's details.
-        mFinishActivityOnSaveCompleted = intent.getBooleanExtra(
-                INTENT_KEY_FINISH_ACTIVITY_ON_SAVE_COMPLETED, false);
+        mFinishActivityOnSaveCompleted =
+                intent.getBooleanExtra(INTENT_KEY_FINISH_ACTIVITY_ON_SAVE_COMPLETED, false);
 
         // The only situation where action could be ACTION_JOIN_COMPLETED is if the
         // user joined the contact with another and closed the activity before
@@ -347,6 +312,7 @@ public class ContactEditorActivity extends AppCompatContactsActivity implements
 
         setContentView(R.layout.contact_editor_activity);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        MoreContactUtils.setupEdgeToEdge(this, new EdgeToEdgeInsetHandler(mToolbar));
         setSupportActionBar(mToolbar);
         if (Intent.ACTION_EDIT.equals(action)) {
             mActionBarTitleResId = R.string.contact_editor_title_existing_contact;
@@ -358,7 +324,7 @@ public class ContactEditorActivity extends AppCompatContactsActivity implements
         setTitle(mActionBarTitleResId);
 
         mFragment =
-            (ContactEditor) getFragmentManager().findFragmentById(R.id.contact_editor_fragment);
+                (ContactEditor) getFragmentManager().findFragmentById(R.id.contact_editor_fragment);
 
         if (savedState != null) {
             // Restore state
@@ -393,8 +359,10 @@ public class ContactEditorActivity extends AppCompatContactsActivity implements
         if (Intent.ACTION_EDIT.equals(action)) {
             mFragment.setIntentExtras(intent.getExtras());
         } else if (ACTION_SAVE_COMPLETED.equals(action)) {
-            mFragment.onSaveCompleted(true,
-                    intent.getIntExtra(ContactEditorFragment.SAVE_MODE_EXTRA_KEY,
+            mFragment.onSaveCompleted(
+                    true,
+                    intent.getIntExtra(
+                            ContactEditorFragment.SAVE_MODE_EXTRA_KEY,
                             ContactEditor.SaveMode.CLOSE),
                     intent.getBooleanExtra(ContactSaveService.EXTRA_SAVE_SUCCEEDED, false),
                     intent.getData(),
@@ -423,8 +391,8 @@ public class ContactEditorActivity extends AppCompatContactsActivity implements
         super.onSaveInstanceState(outState);
         outState.putInt(STATE_PHOTO_MODE, mPhotoMode);
         outState.putInt(STATE_ACTION_BAR_TITLE, mActionBarTitleResId);
-        outState.putString(STATE_PHOTO_URI,
-                mPhotoUri != null ? mPhotoUri.toString() : Uri.EMPTY.toString());
+        outState.putString(
+                STATE_PHOTO_URI, mPhotoUri != null ? mPhotoUri.toString() : Uri.EMPTY.toString());
     }
 
     @Override

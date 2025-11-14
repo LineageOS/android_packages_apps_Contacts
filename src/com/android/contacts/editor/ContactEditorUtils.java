@@ -30,11 +30,11 @@ import android.text.TextUtils;
 import com.android.contacts.model.account.AccountWithDataSet;
 import com.android.contacts.preference.ContactsPreferences;
 
+import com.google.common.annotations.VisibleForTesting;
+
 import java.util.List;
 
-/**
- * Utility methods for the "account changed" notification in the new contact creation flow.
- */
+/** Utility methods for the "account changed" notification in the new contact creation flow. */
 public class ContactEditorUtils {
     private static final String TAG = "ContactEditorUtils";
 
@@ -51,22 +51,24 @@ public class ContactEditorUtils {
     }
 
     /**
-     * Returns a legacy version of the given contactLookupUri if a legacy Uri was originally
-     * passed to the contact editor.
+     * Returns a legacy version of the given contactLookupUri if a legacy Uri was originally passed
+     * to the contact editor.
      *
      * @param contactLookupUri The Uri to possibly convert to legacy format.
-     * @param requestLookupUri The lookup Uri originally passed to the contact editor
-     *                         (via Intent data), may be null.
+     * @param requestLookupUri The lookup Uri originally passed to the contact editor (via Intent
+     *     data), may be null.
      */
-    static Uri maybeConvertToLegacyLookupUri(Context context, Uri contactLookupUri,
-            Uri requestLookupUri) {
+    static Uri maybeConvertToLegacyLookupUri(
+            Context context, Uri contactLookupUri, Uri requestLookupUri) {
         final String legacyAuthority = "contacts";
-        final String requestAuthority = requestLookupUri == null
-                ? null : requestLookupUri.getAuthority();
+        final String requestAuthority =
+                requestLookupUri == null ? null : requestLookupUri.getAuthority();
         if (legacyAuthority.equals(requestAuthority)) {
             // Build a legacy Uri if that is what was requested by caller
-            final long contactId = ContentUris.parseId(ContactsContract.Contacts.lookupContact(
-                    context.getContentResolver(), contactLookupUri));
+            final long contactId =
+                    ContentUris.parseId(
+                            ContactsContract.Contacts.lookupContact(
+                                    context.getContentResolver(), contactLookupUri));
             final Uri legacyContentUri = Uri.parse("content://contacts/people");
             return ContentUris.withAppendedId(legacyContentUri, contactId);
         }
@@ -74,36 +76,26 @@ public class ContactEditorUtils {
         return contactLookupUri;
     }
 
+    @VisibleForTesting
     void cleanupForTest() {
         mContactsPrefs.clearDefaultAccount();
     }
 
+    @VisibleForTesting
     void removeDefaultAccountForTest() {
         mContactsPrefs.clearDefaultAccount();
     }
 
-    /**
-     * Saves the default account, which can later be obtained with {@link #getOnlyOrDefaultAccount}.
-     *
-     * This should be called when saving a newly created contact.
-     *
-     * @param defaultAccount the account used to save a newly created contact.
-     */
-    public void saveDefaultAccount(AccountWithDataSet defaultAccount) {
-        if (defaultAccount == null) {
-            mContactsPrefs.clearDefaultAccount();
-        } else {
-            mContactsPrefs.setDefaultAccount(defaultAccount);
-        }
+    @VisibleForTesting
+    void setDefaultAccountForTest(AccountWithDataSet account) {
+        mContactsPrefs.setDefaultAccountForTest(account);
     }
 
     /**
-     * @return the first account if there is only a single account or the default account saved
-     * with {@link #saveDefaultAccount}.
-     *
-     * A null return value indicates that there is multiple accounts and a default hasn't been set
-     *
-     * Also note that the returned account may have been removed already.
+     * @return the first account if there is only a single account or the default account.
+     *     <p>A null return value indicates that there is multiple accounts and a default hasn't
+     *     been set
+     *     <p>Also note that the returned account may have been removed already.
      */
     public AccountWithDataSet getOnlyOrDefaultAccount(
             List<AccountWithDataSet> currentWritableAccounts) {
@@ -119,32 +111,16 @@ public class ContactEditorUtils {
     }
 
     /**
-     * Sets the only non-device account to be default if it is not already.
-     */
-    public void maybeUpdateDefaultAccount(List<AccountWithDataSet> currentWritableAccounts) {
-        if (currentWritableAccounts.size() == 1) {
-            final AccountWithDataSet onlyAccount = currentWritableAccounts.get(0);
-            if (!onlyAccount.equals(AccountWithDataSet.getLocalAccount(mContext))
-                    && !onlyAccount.equals(mContactsPrefs.getDefaultAccount())) {
-                mContactsPrefs.setDefaultAccount(onlyAccount);
-            }
-        }
-    }
-
-    /**
      * Parses a result from {@link AccountManager#newChooseAccountIntent(Account, List, String[],
-     *     String, String, String[], Bundle)} and returns the created {@link Account}, or null if
-     * the user has canceled the wizard.
+     * String, String, String[], Bundle)} and returns the created {@link Account}, or null if the
+     * user has canceled the wizard.
      *
-     * <p>Pass the {@code resultCode} and {@code data} parameters passed to
-     * {@link Activity#onActivityResult} or {@link android.app.Fragment#onActivityResult}.
-     * </p>
+     * <p>Pass the {@code resultCode} and {@code data} parameters passed to {@link
+     * Activity#onActivityResult} or {@link android.app.Fragment#onActivityResult}.
      *
-     * <p>
-     * Note although the return type is {@link AccountWithDataSet}, return values from this method
-     * will never have {@link AccountWithDataSet#dataSet} set, as there's no way to create an
+     * <p>Note although the return type is {@link AccountWithDataSet}, return values from this
+     * method will never have {@link AccountWithDataSet#dataSet} set, as there's no way to create an
      * extension package account from setup wizard.
-     * </p>
      */
     public AccountWithDataSet getCreatedAccount(int resultCode, Intent resultData) {
         // Javadoc doesn't say anything about resultCode but that the data intent will be non null

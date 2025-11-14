@@ -20,8 +20,8 @@
     <string name="contactsList" msgid="4456188358262700898">"Kontaktuak"</string>
     <string name="shortcut_add_contact" msgid="7949342235528657981">"Gehitu kontaktua"</string>
     <string name="shortcutContact" msgid="8009736387364461511">"Kontaktua"</string>
-    <string name="shortcutDialContact" msgid="155367248069127153">"Markatze zuzena"</string>
-    <string name="shortcutMessageContact" msgid="9123517151981679277">"Mezu zuzena"</string>
+    <string name="shortcutDialContact" msgid="155367248069127153">"Zuzeneko markatzea"</string>
+    <string name="shortcutMessageContact" msgid="9123517151981679277">"Zuzeneko mezua"</string>
     <string name="shortcutActivityTitle" msgid="5407832911005090417">"Aukeratu kontaktua"</string>
     <string name="contactInsertOrEditActivityTitle" msgid="1788154962629911262">"Gehitu kontaktu batean"</string>
     <string name="contactPickerActivityTitle" msgid="1842634991247618890">"Aukeratu kontaktu bat"</string>

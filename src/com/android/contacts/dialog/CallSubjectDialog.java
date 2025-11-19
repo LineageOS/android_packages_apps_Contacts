@@ -51,7 +51,7 @@ import com.android.contacts.compat.CompatUtils;
 import com.android.contacts.compat.PhoneAccountSdkCompat;
 import com.android.contacts.compat.telecom.TelecomManagerCompat;
 import com.android.contacts.util.UriUtils;
-import com.android.phone.common.animation.AnimUtils;
+import com.android.contacts.animation.AnimUtils;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;

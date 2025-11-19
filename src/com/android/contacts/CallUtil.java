@@ -36,7 +36,6 @@ import com.android.contacts.util.PermissionsUtil;
 import com.android.contacts.util.PhoneNumberHelper;
 import com.android.contactsbind.FeedbackHelper;
 import com.android.contactsbind.experiments.Flags;
-import com.android.phone.common.PhoneConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -124,7 +123,7 @@ public class CallUtil {
         intent.putExtra(TelecomManager.EXTRA_START_CALL_WITH_VIDEO_STATE,
                 VideoProfile.STATE_BIDIRECTIONAL);
         if (!TextUtils.isEmpty(callOrigin)) {
-            intent.putExtra(PhoneConstants.EXTRA_CALL_ORIGIN, callOrigin);
+            intent.putExtra("com.android.phone.CALL_ORIGIN", callOrigin);
         }
         return intent;
     }

@@ -34,8 +34,8 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
-import javax.annotation.concurrent.GuardedBy;
-import javax.annotation.concurrent.ThreadSafe;
+import jakarta.annotation.concurrent.GuardedBy;
+import jakarta.annotation.concurrent.ThreadSafe;
 
 /** Some utility methods for making integration testing smoother. */
 @ThreadSafe

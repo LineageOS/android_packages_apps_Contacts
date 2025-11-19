@@ -106,7 +106,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 /**
  * Contact editor with only the most important fields displayed initially.

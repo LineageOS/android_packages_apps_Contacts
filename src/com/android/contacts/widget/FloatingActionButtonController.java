@@ -25,8 +25,8 @@ import android.view.animation.Interpolator;
 import android.widget.ImageButton;
 
 import com.android.contacts.R;
+import com.android.contacts.animation.AnimUtils;
 import com.android.contacts.util.ViewUtil;
-import com.android.phone.common.animation.AnimUtils;
 
 /**
  * Controls the movement and appearance of the FAB (Floating Action Button).

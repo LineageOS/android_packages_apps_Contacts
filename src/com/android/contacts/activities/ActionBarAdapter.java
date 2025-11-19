@@ -441,7 +441,7 @@ public class ActionBarAdapter implements OnCloseListener {
      */
     public void updateOverflowButtonColor() {
         final String overflowDescription = mActivity.getResources().getString(
-                R.string.abc_action_menu_overflow_description);
+                androidx.appcompat.R.string.abc_action_menu_overflow_description);
         final ViewGroup decorView = (ViewGroup) mActivity.getWindow().getDecorView();
         final ViewTreeObserver viewTreeObserver = decorView.getViewTreeObserver();
         viewTreeObserver.addOnGlobalLayoutListener(

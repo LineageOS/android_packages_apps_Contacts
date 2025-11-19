@@ -78,7 +78,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 /**
  * Shows a list of all available {@link Groups} available, letting the user

@@ -16,6 +16,23 @@
       "message": "This is my first commit on gerrit. I don\u0027t know if I indicated it correctly, but someone should review my changes thoroughly to make sure they don\u0027t break anything and make it easier to develop the contacts app.",
       "revId": "56b6155bac4f92bd6cb5537992a93ff2ca2a8804",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55a49f40_e2db5e1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2025-11-19T23:53:11Z",
+      "side": 1,
+      "message": "The title says \"add gradle\", the change does way more than that and doesnt explain why, as well.",
+      "revId": "56b6155bac4f92bd6cb5537992a93ff2ca2a8804",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }

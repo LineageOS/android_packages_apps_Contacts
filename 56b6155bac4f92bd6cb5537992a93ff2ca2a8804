@@ -33,6 +33,23 @@
       "message": "The title says \"add gradle\", the change does way more than that and doesnt explain why, as well.",
       "revId": "56b6155bac4f92bd6cb5537992a93ff2ca2a8804",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bcf54f1_e47347c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5911
+      },
+      "writtenOn": "2025-11-20T10:51:25Z",
+      "side": 1,
+      "message": "please split up all the changes into logical units, i.e.: one commit for adding gradle - and ONLY that ;), etc ... and add a comment as to why you think this is needed. as it is now, we can\u0027t review this",
+      "revId": "56b6155bac4f92bd6cb5537992a93ff2ca2a8804",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }

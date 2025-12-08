@@ -128,7 +128,7 @@
     <string name="menu_add_contact" msgid="5822356185421997656">"Añadir a contactos"</string>
     <string name="menu_add_contacts" msgid="7114262784903366463">"Añadir"</string>
     <string name="title_share_via" msgid="3300082736229182956">"{count,plural, =1{Compartir contacto a través de}other{Compartir contactos a través de}}"</string>
-    <string name="dialog_new_group_account" msgid="4326402875327788728">"Seleccionar una cuenta"</string>
+    <string name="dialog_new_group_account" msgid="4326402875327788728">"Elegir cuenta"</string>
     <string name="group_name_dialog_insert_title" msgid="5495572488613178283">"Crear etiqueta"</string>
     <string name="group_name_dialog_update_title" msgid="3955919589366745101">"Cambiar nombre de etiqueta"</string>
     <string name="group_name_dialog_hint" msgid="6023999218213062973">"Nombre de etiqueta"</string>

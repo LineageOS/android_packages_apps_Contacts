@@ -276,7 +276,7 @@
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g>（发送短信）"</string>
     <string name="description_video_call" msgid="4956825008907720371">"发起视频通话"</string>
     <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"是否清除常用联系人？"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"此操作会清除“通讯录”和“电话”应用中的常用联系人列表，并强制电子邮件应用重新获取您最常使用的联系地址。"</string>
+    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"此操作会清除“通讯录”和“电话”应用中的常用联系人列表，并强制邮件应用重新获取您最常使用的联系地址。"</string>
     <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"正在清除常用联系人…"</string>
     <string name="status_available" msgid="8081626460682959098">"在线"</string>
     <string name="status_away" msgid="2677693194455091315">"离开"</string>
@@ -456,11 +456,11 @@
     <string name="call_subject_limit" msgid="5679166729627777474">"<xliff:g id="COUNT">%1$s</xliff:g> / <xliff:g id="LIMIT">%2$s</xliff:g>"</string>
     <string name="call_subject_type_and_number" msgid="134754147019287616">"<xliff:g id="TYPE">%1$s</xliff:g> • <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
     <string name="about_build_version" msgid="5870642814752351712">"版本号"</string>
-    <string name="about_open_source_licenses" msgid="1617836621315557445">"开放源代码许可"</string>
+    <string name="about_open_source_licenses" msgid="1617836621315557445">"开源许可"</string>
     <string name="about_open_source_licenses_summary" msgid="4843627659117423491">"开放源代码软件的许可详情"</string>
     <string name="about_privacy_policy" msgid="4581488375200402678">"隐私权政策"</string>
     <string name="about_terms_of_service" msgid="7419670771785057738">"服务条款"</string>
-    <string name="activity_title_licenses" msgid="6434398894019119709">"开放源代码许可"</string>
+    <string name="activity_title_licenses" msgid="6434398894019119709">"开源许可"</string>
     <string name="url_open_error_toast" msgid="4885855620824048385">"无法打开网址。"</string>
     <string name="account_filter_view_checked" msgid="4740544238806346376">"已选中 <xliff:g id="ACCOUNT_INFO">%s</xliff:g>"</string>
     <string name="account_filter_view_not_checked" msgid="5782705545786455847">"未选中 <xliff:g id="ACCOUNT_INFO">%s</xliff:g>"</string>

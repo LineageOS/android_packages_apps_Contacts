@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.icu.text.MessageFormat;
 import android.os.Bundle;
+import android.os.UserManager;
 import androidx.core.text.BidiFormatter;
 import androidx.core.text.TextDirectionHeuristicsCompat;
 import android.text.TextUtils;
@@ -66,11 +67,8 @@ public class ImportDialogFragment extends DialogFragment {
     public static final String KEY_RES_ID = "resourceId";
     public static final String KEY_SUBSCRIPTION_ID = "subscriptionId";
 
-    public static final String EXTRA_SIM_ONLY = "extraSimOnly";
-
     public static final String EXTRA_SIM_CONTACT_COUNT_PREFIX = "simContactCount_";
 
-    private boolean mSimOnly = false;
     private SimContactDao mSimDao;
 
     private Future<List<AccountInfo>> mAccountsFuture;
@@ -83,23 +81,6 @@ public class ImportDialogFragment extends DialogFragment {
         fragment.show(fragmentManager, TAG);
     }
 
-    public static void show(FragmentManager fragmentManager, List<SimCard> sims,
-            boolean includeVcf) {
-        final ImportDialogFragment fragment = new ImportDialogFragment();
-        final Bundle args = new Bundle();
-        args.putBoolean(EXTRA_SIM_ONLY, !includeVcf);
-        for (SimCard sim : sims) {
-            final List<SimContact> contacts = sim.getContacts();
-            if (contacts == null) {
-                continue;
-            }
-            args.putInt(EXTRA_SIM_CONTACT_COUNT_PREFIX + sim.getSimId(), contacts.size());
-        }
-
-        fragment.setArguments(args);
-        fragment.show(fragmentManager, TAG);
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,7 +88,6 @@ public class ImportDialogFragment extends DialogFragment {
         setStyle(STYLE_NORMAL, R.style.ContactsAlertDialogTheme);
 
         final Bundle args = getArguments();
-        mSimOnly = args != null && args.getBoolean(EXTRA_SIM_ONLY, false);
         mSimDao = SimContactDao.create(getContext());
     }
 
@@ -242,9 +222,12 @@ public class ImportDialogFragment extends DialogFragment {
 
     private void addItems(ArrayAdapter<AdapterEntry> adapter) {
         final Resources res = getActivity().getResources();
-        if (res.getBoolean(R.bool.config_allow_import_from_vcf_file) && !mSimOnly) {
+        if (res.getBoolean(R.bool.config_allow_import_from_vcf_file)) {
             adapter.add(new AdapterEntry(getString(R.string.import_from_vcf_file),
                     R.string.import_from_vcf_file));
+        }
+        if (!isSimImportAllowedForCurrentUser()) {
+            return;
         }
         final List<SimCard> sims = mSimDao.getSimCards();
 
@@ -257,6 +240,13 @@ public class ImportDialogFragment extends DialogFragment {
             final SimCard sim = sims.get(i);
             adapter.add(new AdapterEntry(getSimDescription(sim, i), R.string.import_from_sim, sim));
         }
+    }
+
+    private boolean isSimImportAllowedForCurrentUser() {
+        // Only allow SIM import for admin and system users. This prevents leaking SIM contacts to
+        // guest users see b/334288515..
+        final UserManager userManager = getContext().getSystemService(UserManager.class);
+        return userManager.isAdminUser() || userManager.isSystemUser();
     }
 
     private void handleSimImportRequest(SimCard sim) {

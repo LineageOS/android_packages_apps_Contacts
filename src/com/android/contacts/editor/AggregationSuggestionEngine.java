@@ -216,7 +216,7 @@ public class AggregationSuggestionEngine extends HandlerThread {
 
         // AggregationSuggestions.Builder() became visible in API level 23, so use it if applicable.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            final Builder uriBuilder = new AggregationSuggestions.Builder()
+            final AggregationSuggestions.Builder uriBuilder = new AggregationSuggestions.Builder()
                     .setLimit(SUGGESTIONS_LIMIT)
                     .setContactId(mContactId);
             if (nameSb.length() != 0) {

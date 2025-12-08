@@ -478,7 +478,7 @@
     <string name="sim_import_title" msgid="8202961146093040684">"وارد کردن از سیم کارت"</string>
     <string name="sim_import_cancel_content_description" msgid="4746065462808862682">"لغو"</string>
     <string name="auto_sync_off" msgid="7039314601316227882">"همگام‌سازی خودکار غیرفعال است. برای فعال کردن تک‌ضرب بزنید."</string>
-    <string name="dismiss_sync_alert" msgid="4057176963960104786">"نپذیرفتن"</string>
+    <string name="dismiss_sync_alert" msgid="4057176963960104786">"بستن"</string>
     <string name="account_sync_off" msgid="6187683798342006021">"همگام‌سازی خودکار غیرفعال است. برای فعال کردن تک‌ضرب بزنید."</string>
     <string name="turn_auto_sync_on_dialog_title" msgid="3812155064863594938">"همگام‌سازی خودکار را فعال می‌کنید؟"</string>
     <string name="turn_auto_sync_on_dialog_body" msgid="5386810641905184682">"‏تغییراتی که در همه برنامه‌ها و حساب‌ها، نه فقط در «مخاطبین Google»، ایجاد می‌کنید، بین وب و دستگاه‌هایتان به‌روز نگه داشته می‌شوند."</string>

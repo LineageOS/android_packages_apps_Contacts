@@ -34,7 +34,7 @@
     <string name="description_action_menu_add_star" msgid="7316521132809388851">"Dodano favoritima"</string>
     <string name="menu_editContact" msgid="5039663761025630208">"Uredi"</string>
     <string name="menu_deleteContact" msgid="15161764025276217">"Izbriši"</string>
-    <string name="menu_change_photo" msgid="4911246106907208055">"Promijeni fotografiju"</string>
+    <string name="menu_change_photo" msgid="4911246106907208055">"Promijenite fotografiju"</string>
     <string name="menu_create_contact_shortcut" msgid="8983436328557825860">"Izradi prečac"</string>
     <string name="menu_splitAggregate" msgid="2062290275288905833">"Prekini vezu"</string>
     <string name="menu_editGroup" msgid="8706562583754054622">"Uklanjanje kontakata"</string>

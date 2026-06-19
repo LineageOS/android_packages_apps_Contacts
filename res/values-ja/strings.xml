@@ -128,7 +128,7 @@
     <string name="menu_add_contact" msgid="5822356185421997656">"連絡先に追加"</string>
     <string name="menu_add_contacts" msgid="7114262784903366463">"追加"</string>
     <string name="title_share_via" msgid="3300082736229182956">"{count,plural, =1{連絡先を共有するアプリ}other{連絡先を共有するアプリ}}"</string>
-    <string name="dialog_new_group_account" msgid="4326402875327788728">"アカウントの選択"</string>
+    <string name="dialog_new_group_account" msgid="4326402875327788728">"アカウントを選択"</string>
     <string name="group_name_dialog_insert_title" msgid="5495572488613178283">"ラベルの作成"</string>
     <string name="group_name_dialog_update_title" msgid="3955919589366745101">"ラベル名の変更"</string>
     <string name="group_name_dialog_hint" msgid="6023999218213062973">"ラベルの名前"</string>

@@ -481,7 +481,7 @@
     <string name="dismiss_sync_alert" msgid="4057176963960104786">"ပယ်ရန်"</string>
     <string name="account_sync_off" msgid="6187683798342006021">"အကောင့်စင့်ခ်လုပ်ခြင်းကို ပိတ်ထားသည်။ ဖွင့်ရန်အတွက် တို့ပါ။"</string>
     <string name="turn_auto_sync_on_dialog_title" msgid="3812155064863594938">"အလိုအလျောက်စင့်ခ်လုပ်ခြင်းကို ဖွင့်မလား။"</string>
-    <string name="turn_auto_sync_on_dialog_body" msgid="5386810641905184682">"Google အဆက်အသွယ်များသာမက အက်ပ်နှင့် အကောင့်အားလုံးတွင် သင်ပြုလုပ်သော အပြောင်းအလဲများကို ဝဘ်နှင့် သင့်ကိရိယာများအကြား အချိန်နှင့်တပြေးညီ မွမ်းမံပေးသွားပါမည်။"</string>
+    <string name="turn_auto_sync_on_dialog_body" msgid="5386810641905184682">"Google အဆက်အသွယ်များသာမက အက်ပ်နှင့် အကောင့်အားလုံးတွင် သင်ပြုလုပ်သော အပြောင်းအလဲများကို ဝဘ်နှင့် သင့်ကိရိယာများအကြား အချိန်နှင့်တစ်ပြေးညီ မွမ်းမံပေးသွားပါမည်။"</string>
     <string name="turn_auto_sync_on_dialog_confirm_btn" msgid="5575717918836806519">"ဖွင့်ရန်"</string>
     <string name="connection_error_message" msgid="7446131881946138093">"ချိတ်ဆက်မှုမရှိပါ"</string>
     <string name="single_sim_display_label" msgid="264062966309455515">"ဆင်းမ်ကတ်"</string>

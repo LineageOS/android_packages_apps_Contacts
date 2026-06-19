@@ -94,8 +94,8 @@
     <string name="emptyGroup" msgid="8598261660865081152">"ఈ లేబుల్‌తో కాంటాక్ట్‌లు ఏవీ లేవు"</string>
     <string name="emptyAccount" msgid="7450843210977018582">"ఈ ఖాతాలో కాంటాక్ట్‌లు ఏవీ లేవు"</string>
     <string name="emptyMainList" msgid="3266182207039677163">"మీ కాంటాక్ట్‌ల లిస్ట్‌ ఖాళీగా ఉంది"</string>
-    <string name="contactSavedNamedToast" msgid="3067050290584834386">"<xliff:g id="DISPLAY_NAME">%s</xliff:g> సేవ్ చేయబడింది"</string>
-    <string name="contactSavedToast" msgid="4370392215196995301">"కాంటాక్ట్ సేవ్ చేయబడింది"</string>
+    <string name="contactSavedNamedToast" msgid="3067050290584834386">"<xliff:g id="DISPLAY_NAME">%s</xliff:g> సేవ్ అయింది"</string>
+    <string name="contactSavedToast" msgid="4370392215196995301">"కాంటాక్ట్ సేవ్ అయింది"</string>
     <string name="contactUnlinkedToast" msgid="6791720274141804377">"కాంటాక్ట్‌లు అన్‌లింక్ చేయబడ్డాయి"</string>
     <string name="contactSavedErrorToast" msgid="3213619905154956918">"కాంటాక్ట్ మార్పులను సేవ్ చేయలేకపోయింది"</string>
     <string name="contactUnlinkErrorToast" msgid="7289356996668886841">"కాంటాక్ట్‌ను అన్‌లింక్ చేయలేకపోయింది"</string>
@@ -316,7 +316,7 @@
     <string name="ghostData_company" msgid="3873500610390675876">"కంపెనీ"</string>
     <string name="ghostData_department" msgid="8610642449404163799">"విభాగం"</string>
     <string name="ghostData_title" msgid="8584897460662904533">"శీర్షిక"</string>
-    <string name="label_notes" msgid="7134226125644463585">"గమనికలు"</string>
+    <string name="label_notes" msgid="7134226125644463585">"నోట్స్"</string>
     <string name="label_custom_field" msgid="4160584225306364924">"అనుకూలం"</string>
     <string name="label_sip_address" msgid="8876347942587537552">"SIP"</string>
     <string name="websiteLabelsGroup" msgid="114754928100220315">"వెబ్‌సైట్"</string>

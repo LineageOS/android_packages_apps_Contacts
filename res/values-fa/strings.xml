@@ -34,7 +34,7 @@
     <string name="description_action_menu_add_star" msgid="7316521132809388851">"به موارد دلخواه افزوده می‌شود"</string>
     <string name="menu_editContact" msgid="5039663761025630208">"ویرایش"</string>
     <string name="menu_deleteContact" msgid="15161764025276217">"حذف"</string>
-    <string name="menu_change_photo" msgid="4911246106907208055">"تغییر عکس"</string>
+    <string name="menu_change_photo" msgid="4911246106907208055">"تغییر دادن عکس"</string>
     <string name="menu_create_contact_shortcut" msgid="8983436328557825860">"ایجاد میان‌بر"</string>
     <string name="menu_splitAggregate" msgid="2062290275288905833">"لغو ارتباط"</string>
     <string name="menu_editGroup" msgid="8706562583754054622">"حذف مخاطبین"</string>
@@ -55,7 +55,7 @@
     <string name="contacts_unlinking_progress_bar" msgid="5696679068872394167">"درحال لغو پیوند"</string>
     <string name="menu_joinAggregate" msgid="3116395302755287038">"پیوند"</string>
     <string name="menu_linkedContacts" msgid="6363718333551613063">"مشاهده مخاطبین پیوندداده‌شده"</string>
-    <string name="menu_save" msgid="7204524700499687371">"ذخیره‌"</string>
+    <string name="menu_save" msgid="7204524700499687371">"ذخیر"</string>
     <string name="titleJoinContactDataWith" msgid="7342386037654890242">"پیوند دادن مخاطبین"</string>
     <string name="blurbJoinContactDataWith" msgid="132105056919797709">"مخاطبی را که می‌خواهید با <xliff:g id="NAME">%s</xliff:g> پیوند دهید، انتخاب کنید:"</string>
     <string name="separatorJoinAggregateSuggestions" msgid="8347769365870796983">"مخاطبین پیشنهادی"</string>
@@ -124,7 +124,7 @@
     <string name="quickcontact_add_phone_number" msgid="1683577288080727862">"افزودن شماره تلفن"</string>
     <string name="quickcontact_add_email" msgid="1442894568471116797">"افزودن ایمیل"</string>
     <string name="missing_app" msgid="5674389915738964148">"برنامه‌ای برای انجام این عملکرد یافت نشد."</string>
-    <string name="menu_share" msgid="6343022811796001773">"اشتراک‌گذاری"</string>
+    <string name="menu_share" msgid="6343022811796001773">"هم‌رسانی"</string>
     <string name="menu_add_contact" msgid="5822356185421997656">"افزودن به مخاطبین"</string>
     <string name="menu_add_contacts" msgid="7114262784903366463">"افزودن"</string>
     <string name="title_share_via" msgid="3300082736229182956">"{count,plural, =1{هم‌رسانی مخاطب ازطریق}one{هم‌رسانی مخاطب ازطریق}other{هم‌رسانی مخاطبین ازطریق}}"</string>
@@ -146,7 +146,7 @@
     <string name="group_edit_field_hint_text" msgid="1159504474053684478">"برچسب"</string>
     <string name="editor_uneditable_section_title" msgid="4022820593578859556">"این اطلاعات به‌روز نمی‌شود"</string>
     <string name="cancel_button_content_description" msgid="7407595608883650004">"لغو"</string>
-    <string name="back_arrow_content_description" msgid="6727142616775523605">"برگشت"</string>
+    <string name="back_arrow_content_description" msgid="6727142616775523605">"برگشتن"</string>
     <string name="action_menu_back_from_edit_select" msgid="7911226757462657242">"بستن"</string>
     <string name="aggregation_suggestion_edit_dialog_message" msgid="4339333746086996062">"به ویرایش مخاطب انتخابی می‌روید؟ اطلاعاتی که تا حال وارد کرده‌اید کپی خواهد شد."</string>
     <string name="contact_directory_description" msgid="1773630547110881835">"دایرکتوری <xliff:g id="TYPE">%1$s</xliff:g>"</string>
@@ -190,8 +190,8 @@
     <string name="add_new_account" msgid="573368229646104110">"افزودن حساب جدید"</string>
     <string name="menu_export_database" msgid="1658249125751926885">"صدور فایل‌های پایگاه داده"</string>
     <string name="action_menu_add_new_contact_button" msgid="1201339383074001291">"ایجاد مخاطب جدید"</string>
-    <string name="expanding_entry_card_view_see_more" msgid="6636033205952561590">"مشاهده موارد بیشتر"</string>
-    <string name="expanding_entry_card_view_see_less" msgid="6399603072579278030">"مشاهده موارد کمتر"</string>
+    <string name="expanding_entry_card_view_see_more" msgid="6636033205952561590">"بیشتر دیدن"</string>
+    <string name="expanding_entry_card_view_see_less" msgid="6399603072579278030">"کمتر دیدن"</string>
     <string name="about_card_title" msgid="6635849009952435700">"درباره"</string>
     <string name="toast_making_personal_copy" msgid="9053129410039312386">"ایجاد یک کپی شخصی..."</string>
     <string name="date_time_set" msgid="8526160894146496334">"تنظیم"</string>
@@ -281,7 +281,7 @@
     <string name="status_available" msgid="8081626460682959098">"در دسترس"</string>
     <string name="status_away" msgid="2677693194455091315">"غایب"</string>
     <string name="status_busy" msgid="2759339190187696727">"مشغول"</string>
-    <string name="local_invisible_directory" msgid="5936234374879813300">"سایر موارد"</string>
+    <string name="local_invisible_directory" msgid="5936234374879813300">"غیره"</string>
     <string name="directory_search_label" msgid="2602118204885565153">"دایرکتوری"</string>
     <string name="directory_search_label_work" msgid="2392128956332931231">"فهرست کار"</string>
     <string name="local_search_label" msgid="6692495405531144805">"همه مخاطبین"</string>
@@ -377,7 +377,7 @@
     <string name="cancel_import_confirmation_message" msgid="1007412828398265611">"وارد کردن <xliff:g id="FILENAME">%s</xliff:g> لغو شود؟"</string>
     <string name="cancel_export_confirmation_message" msgid="370693160959236239">"صادر کردن <xliff:g id="FILENAME">%s</xliff:g> لغو شود؟"</string>
     <string name="cancel_vcard_import_or_export_failed" msgid="3041814872516288484">"نمی‌توان وارد کردن/ صادر کردن کارت ویزیت را لغو کرد"</string>
-    <string name="fail_reason_unknown" msgid="3721044979355043778">"خطای ناشناس."</string>
+    <string name="fail_reason_unknown" msgid="3721044979355043778">"خطای ناشناخته."</string>
     <string name="fail_reason_could_not_open_file" msgid="6015509564074145162">"\"<xliff:g id="FILE_NAME">%1$s</xliff:g>\" باز نشد: <xliff:g id="EXACT_REASON">%2$s</xliff:g>."</string>
     <string name="fail_reason_could_not_initialize_exporter" msgid="4145819808407973981">"صادر کننده راه‌اندازی نشد: \"<xliff:g id="EXACT_REASON">%s</xliff:g>\"."</string>
     <string name="fail_reason_no_exportable_contact" msgid="487925011719622851">"هیچ مخاطب قابل صدوری موجود نیست."</string>
@@ -485,7 +485,7 @@
     <string name="turn_auto_sync_on_dialog_confirm_btn" msgid="5575717918836806519">"فعال کردن"</string>
     <string name="connection_error_message" msgid="7446131881946138093">"اتصال اینترنت موجود نیست"</string>
     <string name="single_sim_display_label" msgid="264062966309455515">"سیم کارت"</string>
-    <string name="show_more_content_description" msgid="6298277298495491712">"بیشتر ببینید"</string>
+    <string name="show_more_content_description" msgid="6298277298495491712">"بیشتر نشان دادن"</string>
     <string name="importing_sim_finished_title" msgid="6436721150882268416">"وارد کردن سیم کارت تمام شد"</string>
     <string name="importing_sim_failed_title" msgid="1046154274170241788">"وارد نشد"</string>
     <string name="importing_sim_failed_message" msgid="55568522164349044">"مخاطبین از سیم کارت وارد نشدند"</string>

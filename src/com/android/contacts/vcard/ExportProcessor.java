@@ -127,7 +127,16 @@ public class ExportProcessor extends ProcessorBase {
             final Uri uri = request.destUri;
             final OutputStream outputStream;
             try {
-                outputStream = mResolver.openOutputStream(uri);
+                outputStream = mResolver.openOutputStream(uri, "wt");
+            } catch (IllegalArgumentException e) {
+                Log.w(LOG_TAG, "Failed to open with 'wt'", e);
+                // Need concise title.
+
+                final String errorReason =
+                    mService.getString(R.string.fail_reason_could_not_open_file,
+                            uri, e.getMessage());
+                doFinishNotification(errorReason, null);
+                return;
             } catch (FileNotFoundException e) {
                 Log.w(LOG_TAG, "FileNotFoundException thrown", e);
                 // Need concise title.

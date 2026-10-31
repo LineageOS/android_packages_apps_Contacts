@@ -59,6 +59,12 @@ public class ContactsPreferences implements OnSharedPreferenceChangeListener {
     /** The value for the SORT_ORDER key corresponding to sort by family name first. */
     public static final int SORT_ORDER_ALTERNATIVE = 2;
 
+    /** The value for the PHONETIC_NAME_DISPLAY key to always show the phonetic name fields. */
+    public static final int PHONETIC_NAME_DISPLAY_SHOW_ALWAYS = 0;
+
+    /** The value for the PHONETIC_NAME_DISPLAY key to hide the phonetic name fields if empty. */
+    public static final int PHONETIC_NAME_DISPLAY_HIDE_IF_EMPTY = 1;
+
     public static final String PREF_DISPLAY_ONLY_PHONES = "only_phones";
 
     public static final boolean PREF_DISPLAY_ONLY_PHONES_DEFAULT = false;
@@ -171,9 +177,9 @@ public class ContactsPreferences implements OnSharedPreferenceChangeListener {
 
     public int getDefaultPhoneticNameDisplayPreference() {
         if (mContext.getResources().getBoolean(R.bool.config_default_hide_phonetic_name_if_empty)) {
-            return PhoneticNameDisplayPreference.HIDE_IF_EMPTY;
+            return PHONETIC_NAME_DISPLAY_HIDE_IF_EMPTY;
         } else {
-            return PhoneticNameDisplayPreference.SHOW_ALWAYS;
+            return PHONETIC_NAME_DISPLAY_SHOW_ALWAYS;
         }
     }
 
@@ -203,7 +209,7 @@ public class ContactsPreferences implements OnSharedPreferenceChangeListener {
     }
 
     public boolean shouldHidePhoneticNamesIfEmpty() {
-        return getPhoneticNameDisplayPreference() == PhoneticNameDisplayPreference.HIDE_IF_EMPTY;
+        return getPhoneticNameDisplayPreference() == PHONETIC_NAME_DISPLAY_HIDE_IF_EMPTY;
     }
 
     public boolean isDefaultAccountUserChangeable() {

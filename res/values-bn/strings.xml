@@ -358,8 +358,6 @@
     <string name="display_ungrouped" msgid="4823012484407759332">"অন্যান্য সকল পরিচিতি"</string>
     <string name="display_all_contacts" msgid="1281067776483704512">"সকল পরিচিতি"</string>
     <string name="menu_sync_remove" msgid="7523335046562082188">"সমন্বয় গ্রুপ সরান"</string>
-    <string name="dialog_sync_add" msgid="8012361965908515959">"সমন্বয় গ্রুপ যোগ করুন"</string>
-    <string name="display_more_groups" msgid="8398232980355188133">"আরও গ্রুপ…"</string>
     <string name="display_warn_remove_ungrouped" msgid="522866344738506017">"সমন্বয় থেকে \"<xliff:g id="GROUP">%s</xliff:g>\" সরানো হলে তা সমন্বয় থেকে যেকোনো অগোষ্ঠীবদ্ধ পরিচিতিগুলিকেও সরাবে৷"</string>
     <string name="savingDisplayGroups" msgid="6779839417901711381">"প্রদর্শনের বিকল্পগুলি সংরক্ষণ করা হচ্ছে..."</string>
     <string name="listCustomView" msgid="5782275477737032610">"কাস্টমাইজ করা দৃশ্য"</string>

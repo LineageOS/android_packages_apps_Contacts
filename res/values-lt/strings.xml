@@ -358,8 +358,6 @@
     <string name="display_ungrouped" msgid="4823012484407759332">"Visi kiti kontaktai"</string>
     <string name="display_all_contacts" msgid="1281067776483704512">"Visi kontaktai"</string>
     <string name="menu_sync_remove" msgid="7523335046562082188">"Pašalinti sinchronizuojamą grupę"</string>
-    <string name="dialog_sync_add" msgid="8012361965908515959">"Pridėti sinchronizuotą grupę"</string>
-    <string name="display_more_groups" msgid="8398232980355188133">"Daugiau grupių..."</string>
     <string name="display_warn_remove_ungrouped" msgid="522866344738506017">"Iš sinchronizavimo pašalinus „<xliff:g id="GROUP">%s</xliff:g>“, bus pašalinti ir nesugrupuoti kontaktai."</string>
     <string name="savingDisplayGroups" msgid="6779839417901711381">"Išsaugomos pateikties parinktys..."</string>
     <string name="listCustomView" msgid="5782275477737032610">"Tinkintas rodinys"</string>

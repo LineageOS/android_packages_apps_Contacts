@@ -274,6 +274,12 @@
         <item name="android:listViewStyle">@style/ListViewStyle</item>
     </style>
 
+    <!-- Window theme for the screens drawn with Jetpack Compose -->
+    <style name="ContactsComposeTheme" parent="Theme.Material3Expressive.DayNight.NoActionBar">
+        <!-- Used by the framework dialogs still shown from these screens, like import/export -->
+        <item name="android:alertDialogTheme">@style/ContactsAlertDialogThemeAppCompat</item>
+    </style>
+
     <style name="ContactListFilterTheme" parent="@style/PeopleTheme">
         <item name="android:listViewStyle">@style/ListViewStyle</item>
         <item name="android:actionButtonStyle">@style/FilterActionButtonStyle</item>

@@ -134,7 +134,7 @@ public class ContactsPreferencesTest extends InstrumentationTestCase {
                         true // R.bool.config_default_hide_phonetic_name_if_empty
                         );
         Assert.assertEquals(
-                PhoneticNameDisplayPreference.HIDE_IF_EMPTY,
+                ContactsPreferences.PHONETIC_NAME_DISPLAY_HIDE_IF_EMPTY,
                 mContactsPreferences.getPhoneticNameDisplayPreference());
     }
 
@@ -147,9 +147,9 @@ public class ContactsPreferencesTest extends InstrumentationTestCase {
                         mSharedPreferences.getInt(
                                 Mockito.eq(ContactsPreferences.PHONETIC_NAME_DISPLAY_KEY),
                                 Mockito.anyInt()))
-                .thenReturn(PhoneticNameDisplayPreference.HIDE_IF_EMPTY);
+                .thenReturn(ContactsPreferences.PHONETIC_NAME_DISPLAY_HIDE_IF_EMPTY);
         Assert.assertEquals(
-                PhoneticNameDisplayPreference.HIDE_IF_EMPTY,
+                ContactsPreferences.PHONETIC_NAME_DISPLAY_HIDE_IF_EMPTY,
                 mContactsPreferences.getPhoneticNameDisplayPreference());
     }
 
@@ -163,16 +163,16 @@ public class ContactsPreferencesTest extends InstrumentationTestCase {
                                 Mockito.eq(ContactsPreferences.PHONETIC_NAME_DISPLAY_KEY),
                                 Mockito.anyInt()))
                 .thenReturn(
-                        PhoneticNameDisplayPreference.HIDE_IF_EMPTY,
-                        PhoneticNameDisplayPreference.SHOW_ALWAYS);
+                        ContactsPreferences.PHONETIC_NAME_DISPLAY_HIDE_IF_EMPTY,
+                        ContactsPreferences.PHONETIC_NAME_DISPLAY_SHOW_ALWAYS);
 
         Assert.assertEquals(
-                PhoneticNameDisplayPreference.HIDE_IF_EMPTY,
+                ContactsPreferences.PHONETIC_NAME_DISPLAY_HIDE_IF_EMPTY,
                 mContactsPreferences.getPhoneticNameDisplayPreference());
         mContactsPreferences.refreshValue(ContactsPreferences.PHONETIC_NAME_DISPLAY_KEY);
 
         Assert.assertEquals(
-                PhoneticNameDisplayPreference.SHOW_ALWAYS,
+                ContactsPreferences.PHONETIC_NAME_DISPLAY_SHOW_ALWAYS,
                 mContactsPreferences.getPhoneticNameDisplayPreference());
     }
 

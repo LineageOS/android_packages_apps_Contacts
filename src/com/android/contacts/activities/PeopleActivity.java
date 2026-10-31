@@ -1217,7 +1217,7 @@ public class PeopleActivity extends AppCompatContactsActivity implements
     /*
      * Behavior when select MyInfo on Navigation drawer.
      * Launch in the same way as from Settings->MyInfo.
-     * Refer to DisplayOptionsPreferenceFragment's onPreferenceClick.
+     * Refer to ContactsPreferenceActivity's openMyInfo.
      */
     @Override
     public void onProfileViewSelected(long profileContactId) {

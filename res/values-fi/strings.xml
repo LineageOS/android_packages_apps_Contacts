@@ -358,8 +358,6 @@
     <string name="display_ungrouped" msgid="4823012484407759332">"Kaikki muut yhteystiedot"</string>
     <string name="display_all_contacts" msgid="1281067776483704512">"Kaikki yhteystiedot"</string>
     <string name="menu_sync_remove" msgid="7523335046562082188">"Poista synkronointiryhmä"</string>
-    <string name="dialog_sync_add" msgid="8012361965908515959">"Lisää synkronointiryhmä"</string>
-    <string name="display_more_groups" msgid="8398232980355188133">"Lisää ryhmiä…"</string>
     <string name="display_warn_remove_ungrouped" msgid="522866344738506017">"Ryhmän <xliff:g id="GROUP">%s</xliff:g> poistaminen synkronoinnista lopettaa myös ryhmittelemättömien yhteystietojen synkronoinnin."</string>
     <string name="savingDisplayGroups" msgid="6779839417901711381">"Tallennetaan näyttövalintoja…"</string>
     <string name="listCustomView" msgid="5782275477737032610">"Muokattu näkymä"</string>

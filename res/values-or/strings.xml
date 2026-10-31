@@ -358,8 +358,6 @@
     <string name="display_ungrouped" msgid="4823012484407759332">"ଅନ୍ୟ ସମସ୍ତ ଯୋଗାଯୋଗ"</string>
     <string name="display_all_contacts" msgid="1281067776483704512">"ସମସ୍ତ ଯୋଗାଯୋଗ"</string>
     <string name="menu_sync_remove" msgid="7523335046562082188">"ସିଙ୍କ ଗ୍ରୁପ୍‌କୁ କାଢ଼ନ୍ତୁ"</string>
-    <string name="dialog_sync_add" msgid="8012361965908515959">"ସିଙ୍କ ହୋଇଥିବା ଗୋଷ୍ଠୀକୁ ଯୋଡ଼ନ୍ତୁ"</string>
-    <string name="display_more_groups" msgid="8398232980355188133">"ଅଧିକ ଗୋଷ୍ଠୀ…"</string>
     <string name="display_warn_remove_ungrouped" msgid="522866344738506017">"\"<xliff:g id="GROUP">%s</xliff:g>\" କୁ ସିଙ୍କରୁ ବାହାର କଲେ, ସିଙ୍କରେ ଥିବା ଅନ୍‍ଗ୍ରୁପ୍ ଯୋଗାଯୋଗଗୁଡ଼ିକ ମଧ୍ୟ ବାହାରିଯିବ।"</string>
     <string name="savingDisplayGroups" msgid="6779839417901711381">"ଡିସ୍‌ପ୍ଲେ ବିକଳ୍ପଗୁଡ଼ିକୁ ସେଭ୍‍ କରାଯାଉଛି…"</string>
     <string name="listCustomView" msgid="5782275477737032610">"କଷ୍ଟମାଇଜ୍‍ କରାଯାଇଥିବା ଦୃଶ୍ୟ"</string>

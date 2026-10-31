@@ -358,8 +358,6 @@
     <string name="display_ungrouped" msgid="4823012484407759332">"အခြားအဆက်အသွယ်အားလုံး"</string>
     <string name="display_all_contacts" msgid="1281067776483704512">"အဆက်အသွယ်အားလုံး"</string>
     <string name="menu_sync_remove" msgid="7523335046562082188">"ပြိုင်တူညှိခြင်းအဖွဲ့ကို ဖယ်ရှားရန်"</string>
-    <string name="dialog_sync_add" msgid="8012361965908515959">"ပြိုင်တူညှိခြင်းအဖွဲ့ထည့်ရန်"</string>
-    <string name="display_more_groups" msgid="8398232980355188133">"နောက်ထပ်အဖွဲ့များ…"</string>
     <string name="display_warn_remove_ungrouped" msgid="522866344738506017">"ပြိုင်တူညှိခြင်းမှ \"<xliff:g id="GROUP">%s</xliff:g>\" ကို ဖယ်ခြင်းက အဖွဲ့ဖွဲ့မထားသောအဆက်အသွယ်များကိုပါ ပြိုင်တူညှိခြင်းမှ ဖယ်ရှားပါလိမ့်မည်။"</string>
     <string name="savingDisplayGroups" msgid="6779839417901711381">"ပြသရေးရွေးစရာများကို သိမ်းနေသည်…"</string>
     <string name="listCustomView" msgid="5782275477737032610">"စိတ်ကြိုက်ကြည့်ရှုမှု"</string>

@@ -1064,12 +1064,6 @@
     <!-- Menu item to remove a contacts sync group. [CHAR LIMIT=40] -->
     <string name="menu_sync_remove">Remove sync group</string>
 
-    <!-- Menu item to add a contacts sync group. [CHAR LIMIT=40] -->
-    <string name="dialog_sync_add">Add sync group</string>
-
-    <!-- Text displayed in the sync groups footer view for unknown sync groups. [CHAR LIMIT=40 -->
-    <string name="display_more_groups">More groups\u2026</string>
-
     <!-- Warning message given to users just before they remove a currently syncing
          group that would also cause all ungrouped contacts to stop syncing.  [CHAR LIMIT=NONE] -->
     <string name="display_warn_remove_ungrouped">Removing \"<xliff:g id="group" example="Starred">%s</xliff:g>\" from sync will also remove any ungrouped contacts from sync.</string>

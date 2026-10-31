@@ -40,11 +40,11 @@ import android.graphics.drawable.AdaptiveIconDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.PersistableBundle;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.core.os.BuildCompat;
@@ -63,6 +63,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 /**
  * This class creates and updates the dynamic shortcuts displayed on the Nexus launcher for the
@@ -101,6 +103,9 @@ public class DynamicShortcuts {
     static final String[] PROJECTION = new String[] {
             Contacts._ID, Contacts.LOOKUP_KEY, Contacts.DISPLAY_NAME_PRIMARY
     };
+
+    // Single thread so that updates never run concurrently
+    private static final Executor sUpdateExecutor = Executors.newSingleThreadExecutor();
 
     private final Context mContext;
 
@@ -473,7 +478,24 @@ public class DynamicShortcuts {
     }
 
     void updateInBackground() {
-        new ShortcutUpdateTask(this).execute();
+        updateInBackground(null);
+    }
+
+    private void updateInBackground(@Nullable Runnable onFinished) {
+        sUpdateExecutor.execute(() -> {
+            refresh();
+            mContext.getMainExecutor().execute(() -> {
+                if (Log.isLoggable(TAG, Log.DEBUG)) {
+                    Log.d(TAG, "Shortcut update finished");
+                }
+                // The shortcuts may have changed so update the job so that we are observing the
+                // correct Uris
+                scheduleUpdateJob();
+                if (onFinished != null) {
+                    onFinished.run();
+                }
+            });
+        });
     }
 
     public synchronized static void initialize(Context context) {
@@ -504,8 +526,8 @@ public class DynamicShortcuts {
             // it has been launched for some other reason and the data we care about for shortcuts
             // hasn't changed. Because the job reschedules itself after completion this check
             // essentially means that this will run on each app launch that happens after a reboot.
-            // Note: the task schedules the job after completing.
-            new ShortcutUpdateTask(shortcuts).execute();
+            // Note: the update schedules the job after completing.
+            shortcuts.updateInBackground();
         }
     }
 
@@ -527,14 +549,9 @@ public class DynamicShortcuts {
     }
 
     public static void updateFromJob(final JobService service, final JobParameters jobParams) {
-        new ShortcutUpdateTask(new DynamicShortcuts(service)) {
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                // Must call super first which will reschedule the job before we call jobFinished
-                super.onPostExecute(aVoid);
-                service.jobFinished(jobParams, false);
-            }
-        }.execute();
+        // The job is rescheduled before jobFinished is called
+        new DynamicShortcuts(service).updateInBackground(
+                () -> service.jobFinished(jobParams, false));
     }
 
     @VisibleForTesting
@@ -549,30 +566,6 @@ public class DynamicShortcuts {
         final ShortcutManager shortcutManager = (ShortcutManager) context
                 .getSystemService(Context.SHORTCUT_SERVICE);
         shortcutManager.reportShortcutUsed(lookupKey);
-    }
-
-    private static class ShortcutUpdateTask extends AsyncTask<Void, Void, Void> {
-        private DynamicShortcuts mDynamicShortcuts;
-
-        public ShortcutUpdateTask(DynamicShortcuts shortcuts) {
-            mDynamicShortcuts = shortcuts;
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            mDynamicShortcuts.refresh();
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            if (Log.isLoggable(TAG, Log.DEBUG)) {
-                Log.d(TAG, "ShorcutUpdateTask.onPostExecute");
-            }
-            // The shortcuts may have changed so update the job so that we are observing the
-            // correct Uris
-            mDynamicShortcuts.scheduleUpdateJob();
-        }
     }
 
     private static class PermissionsGrantedReceiver extends BroadcastReceiver {

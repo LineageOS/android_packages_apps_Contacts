@@ -270,10 +270,6 @@
     <style name="ContactPickerTheme" parent="PeopleActivityTheme">
     </style>
 
-    <style name="ContactsPreferencesTheme" parent="@style/PeopleThemeAppCompat">
-        <item name="android:listViewStyle">@style/ListViewStyle</item>
-    </style>
-
     <!-- Window theme for the screens drawn with Jetpack Compose -->
     <style name="ContactsComposeTheme" parent="Theme.Material3Expressive.DayNight.NoActionBar" />
 

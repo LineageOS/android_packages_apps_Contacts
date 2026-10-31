@@ -358,8 +358,6 @@
     <string name="display_ungrouped" msgid="4823012484407759332">"മറ്റെല്ലാ കോൺടാക്റ്റുകളും"</string>
     <string name="display_all_contacts" msgid="1281067776483704512">"എല്ലാ കോൺടാക്റ്റുകളും"</string>
     <string name="menu_sync_remove" msgid="7523335046562082188">"സമന്വയ ഗ്രൂപ്പ് നീക്കംചെയ്യുക"</string>
-    <string name="dialog_sync_add" msgid="8012361965908515959">"സമന്വയ ഗ്രൂപ്പ് ചേർക്കുക"</string>
-    <string name="display_more_groups" msgid="8398232980355188133">"കൂടുതൽ ഗ്രൂപ്പുകൾ…"</string>
     <string name="display_warn_remove_ungrouped" msgid="522866344738506017">"സമന്വയത്തിൽ നിന്നും \"<xliff:g id="GROUP">%s</xliff:g>\" നീക്കംചെയ്യുന്നത്, സമന്വയത്തിൽ നിന്നും ഗ്രൂപ്പുചെയ്യാത്ത എല്ലാ കോൺടാക്റ്റുകളേയും നീക്കംചെയ്യുന്നതിനിടയാക്കും."</string>
     <string name="savingDisplayGroups" msgid="6779839417901711381">"ഡിസ്‌പ്ലേ ഓപ്‌ഷനുകൾ സംരക്ഷിക്കുന്നു…"</string>
     <string name="listCustomView" msgid="5782275477737032610">"ഇഷ്‌ടാനുസൃത കാഴ്‌ച"</string>

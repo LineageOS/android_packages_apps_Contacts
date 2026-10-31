@@ -358,8 +358,6 @@
     <string name="display_ungrouped" msgid="4823012484407759332">"Всички други контакти"</string>
     <string name="display_all_contacts" msgid="1281067776483704512">"Всички контакти"</string>
     <string name="menu_sync_remove" msgid="7523335046562082188">"Премахване на група за синхронизиране"</string>
-    <string name="dialog_sync_add" msgid="8012361965908515959">"Добавяне на група за синхронизиране"</string>
-    <string name="display_more_groups" msgid="8398232980355188133">"Още групи..."</string>
     <string name="display_warn_remove_ungrouped" msgid="522866344738506017">"Ако синхронизирането на „<xliff:g id="GROUP">%s</xliff:g>“ спре, то ще спре и за негрупираните контакти."</string>
     <string name="savingDisplayGroups" msgid="6779839417901711381">"Опциите за показване се запазват..."</string>
     <string name="listCustomView" msgid="5782275477737032610">"Персонализиран изглед"</string>

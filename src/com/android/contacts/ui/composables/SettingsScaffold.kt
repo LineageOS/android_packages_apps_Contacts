@@ -7,6 +7,7 @@ package com.android.contacts.ui.composables
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -34,6 +35,7 @@ fun SettingsScaffold(
     title: String,
     onNavigateUp: () -> Unit,
     modifier: Modifier = Modifier,
+    actions: @Composable RowScope.() -> Unit = {},
     snackbarHostState: SnackbarHostState? = null,
     content: LazyListScope.() -> Unit,
 ) {
@@ -47,6 +49,7 @@ fun SettingsScaffold(
             LargeFlexibleTopAppBar(
                 title = { Text(title) },
                 navigationIcon = { NavigateUpButton(onClick = onNavigateUp) },
+                actions = actions,
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = containerColor,
                     scrolledContainerColor = containerColor,

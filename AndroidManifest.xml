@@ -274,7 +274,7 @@
         <activity
             android:name=".list.AccountFilterActivity"
             android:label="@string/activity_title_contacts_filter"
-            android:theme="@style/ContactListFilterTheme"/>
+            android:theme="@style/ContactsComposeTheme"/>
 
         <!-- Used to select display and sync groups -->
         <activity

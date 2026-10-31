@@ -13,6 +13,7 @@ import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.SegmentedListItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,12 +28,16 @@ internal val SettingsGroupSpacing = 16.dp
 
 /**
  * A single entry of a settings screen.
+ *
+ * If [selected] isn't null, the entry is one of the options of a single choice group, shown with
+ * a radio button instead of [icon].
  */
 class SettingsEntry(
     val key: String,
-    val icon: ImageVector,
     val title: String,
+    val icon: ImageVector? = null,
     val summary: CharSequence? = null,
+    val selected: Boolean? = null,
     val onClick: () -> Unit,
 )
 
@@ -56,21 +61,44 @@ fun LazyListScope.settingsGroup(entries: List<SettingsEntry>) {
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 private fun SettingsItem(entry: SettingsEntry, index: Int, count: Int) {
+    val icon = entry.icon
     val summary = entry.summary
+    val selected = entry.selected
 
-    SegmentedListItem(
-        onClick = entry.onClick,
-        shapes = ListItemDefaults.segmentedShapes(index = index, count = count),
-        colors = ListItemDefaults.segmentedColors(
-            containerColor = MaterialTheme.colorScheme.surfaceBright,
-        ),
-        leadingContent = { Icon(entry.icon, contentDescription = null) },
-        supportingContent = if (summary != null) {
-            { Text(summary.toString()) }
-        } else {
-            null
-        },
-    ) {
-        Text(entry.title)
+    val shapes = ListItemDefaults.segmentedShapes(index = index, count = count)
+    val colors = ListItemDefaults.segmentedColors(
+        containerColor = MaterialTheme.colorScheme.surfaceBright,
+    )
+    val supportingContent: (@Composable () -> Unit)? = if (summary != null) {
+        { Text(summary.toString()) }
+    } else {
+        null
+    }
+
+    if (selected != null) {
+        SegmentedListItem(
+            selected = selected,
+            onClick = entry.onClick,
+            shapes = shapes,
+            colors = colors,
+            leadingContent = { RadioButton(selected = selected, onClick = null) },
+            supportingContent = supportingContent,
+        ) {
+            Text(entry.title)
+        }
+    } else {
+        SegmentedListItem(
+            onClick = entry.onClick,
+            shapes = shapes,
+            colors = colors,
+            leadingContent = if (icon != null) {
+                { Icon(icon, contentDescription = null) }
+            } else {
+                null
+            },
+            supportingContent = supportingContent,
+        ) {
+            Text(entry.title)
+        }
     }
 }

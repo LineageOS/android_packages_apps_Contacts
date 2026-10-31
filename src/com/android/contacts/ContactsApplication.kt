@@ -35,7 +35,7 @@ import kotlinx.coroutines.launch
 class ContactsApplication : Application() {
 
     /** Scope for work that is tied to the process rather than to a single component. */
-    private val applicationScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    val applicationScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     override fun getContentResolver(): ContentResolver =
         injectedServices?.contentResolver ?: super.getContentResolver()

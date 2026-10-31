@@ -1,7 +1,6 @@
 // Copyright 2016 Google Inc. All Rights Reserved.
 package com.android.contacts.util.concurrent;
 
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import androidx.annotation.NonNull;
@@ -16,8 +15,6 @@ import java.util.List;
 import java.util.concurrent.AbstractExecutorService;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Delayed;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RunnableScheduledFuture;
@@ -36,15 +33,10 @@ public class ContactsExecutors {
 
     private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
     private static final int CORE_POOL_SIZE = CPU_COUNT + 1;
+    private static final int KEEP_ALIVE_SECONDS = 30;
 
-    // AsyncTask.THREAD_POOL_EXECUTOR is a ThreadPoolExecutor so we should end up always using that
-    // but we have a fallback in case the platform implementation changes in some future release.
     private static final ListeningExecutorService DEFAULT_THREAD_POOL_EXECUTOR =
-            (AsyncTask.THREAD_POOL_EXECUTOR instanceof ExecutorService) ?
-                    MoreExecutors.listeningDecorator(
-                            (ExecutorService) AsyncTask.THREAD_POOL_EXECUTOR) :
-                    MoreExecutors.listeningDecorator(
-                            Executors.newFixedThreadPool(CORE_POOL_SIZE));
+            MoreExecutors.listeningDecorator(createDefaultThreadPool());
 
     // We initialize this lazily since in some cases we may never even read from the SIM card
     private static ListeningExecutorService sSimExecutor;
@@ -88,6 +80,13 @@ public class ContactsExecutors {
             sSimExecutor = MoreExecutors.listeningDecorator(executor);
         }
         return sSimExecutor;
+    }
+
+    private static ThreadPoolExecutor createDefaultThreadPool() {
+        final ThreadPoolExecutor executor = new ThreadPoolExecutor(CORE_POOL_SIZE, CORE_POOL_SIZE,
+                KEEP_ALIVE_SECONDS, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
+        executor.allowCoreThreadTimeOut(true);
+        return executor;
     }
 
     /**

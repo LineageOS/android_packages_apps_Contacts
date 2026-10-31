@@ -522,7 +522,7 @@
         <activity
             android:name=".activities.SimImportActivity"
             android:label="@string/sim_import_title"
-            android:theme="@style/PeopleThemeAppCompat.FullScreenDialog.SimImportActivity"/>
+            android:theme="@style/ContactsComposeTheme.FullScreenDialog"/>
 
 
         <service

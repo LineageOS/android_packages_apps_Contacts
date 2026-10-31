@@ -9,12 +9,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.LargeFlexibleTopAppBar
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
@@ -26,9 +22,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.android.contacts.R
 
 /**
  * Scaffold of a settings screen: a large flexible top app bar that collapses on scroll, above a
@@ -52,15 +46,7 @@ fun SettingsScaffold(
         topBar = {
             LargeFlexibleTopAppBar(
                 title = { Text(title) },
-                navigationIcon = {
-                    IconButton(onClick = onNavigateUp) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription =
-                                stringResource(R.string.back_arrow_content_description),
-                        )
-                    }
-                },
+                navigationIcon = { NavigateUpButton(onClick = onNavigateUp) },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = containerColor,
                     scrolledContainerColor = containerColor,

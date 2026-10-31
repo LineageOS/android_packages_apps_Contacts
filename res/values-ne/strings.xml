@@ -358,8 +358,6 @@
     <string name="display_ungrouped" msgid="4823012484407759332">"अन्य सबै कन्ट्याक्टहरू"</string>
     <string name="display_all_contacts" msgid="1281067776483704512">"सबै कन्ट्याक्टहरू"</string>
     <string name="menu_sync_remove" msgid="7523335046562082188">"सिंक समूह हटाउनुहोस्"</string>
-    <string name="dialog_sync_add" msgid="8012361965908515959">"सिंक समूह थप्नुहोस्"</string>
-    <string name="display_more_groups" msgid="8398232980355188133">"अधिक समूहहरू"</string>
     <string name="display_warn_remove_ungrouped" msgid="522866344738506017">"\" <xliff:g id="GROUP">%s</xliff:g> \" लाई सिङ्कबाट हटाउनाले समूहमा नरहेका सम्पर्कहरूलाई पनि हटाउने छ।"</string>
     <string name="savingDisplayGroups" msgid="6779839417901711381">"प्रदर्शन विकल्पहरू बचत‍ गर्दै ..."</string>
     <string name="listCustomView" msgid="5782275477737032610">" कस्टम पारिएको दृश्य"</string>

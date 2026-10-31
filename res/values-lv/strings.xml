@@ -358,8 +358,6 @@
     <string name="display_ungrouped" msgid="4823012484407759332">"Citas kontaktpersonas"</string>
     <string name="display_all_contacts" msgid="1281067776483704512">"Visas kontaktpersonas"</string>
     <string name="menu_sync_remove" msgid="7523335046562082188">"Noņemt sinhronizējamo grupu"</string>
-    <string name="dialog_sync_add" msgid="8012361965908515959">"Pievienot sinhronizējamu grupu"</string>
-    <string name="display_more_groups" msgid="8398232980355188133">"Vairāk grupu..."</string>
     <string name="display_warn_remove_ungrouped" msgid="522866344738506017">"Pārtraucot grupas <xliff:g id="GROUP">%s</xliff:g> sinhronizāciju, tiks pārtraukta arī visu negrupēto kontaktpersonu sinhronizācija."</string>
     <string name="savingDisplayGroups" msgid="6779839417901711381">"Notiek attēlojuma opciju saglabāšana..."</string>
     <string name="listCustomView" msgid="5782275477737032610">"Pielāgots skatījums"</string>

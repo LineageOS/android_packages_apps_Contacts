@@ -358,8 +358,6 @@
     <string name="display_ungrouped" msgid="4823012484407759332">"Toate celelalte contacte"</string>
     <string name="display_all_contacts" msgid="1281067776483704512">"Toată Agenda"</string>
     <string name="menu_sync_remove" msgid="7523335046562082188">"Eliminați grup de sincronizare"</string>
-    <string name="dialog_sync_add" msgid="8012361965908515959">"Adăugați grup de sincronizare"</string>
-    <string name="display_more_groups" msgid="8398232980355188133">"Mai multe grupuri..."</string>
     <string name="display_warn_remove_ungrouped" msgid="522866344738506017">"Eliminarea grupului „<xliff:g id="GROUP">%s</xliff:g>” din sincronizare va elimina, de asemenea, orice persoană din agendă care nu face parte dintr-un grup."</string>
     <string name="savingDisplayGroups" msgid="6779839417901711381">"Se salvează opțiunile de afișare..."</string>
     <string name="listCustomView" msgid="5782275477737032610">"Afișare personalizată"</string>

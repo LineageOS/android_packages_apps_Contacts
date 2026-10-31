@@ -358,8 +358,6 @@
     <string name="display_ungrouped" msgid="4823012484407759332">"සියලු වෙනත් සම්බන්ධතා"</string>
     <string name="display_all_contacts" msgid="1281067776483704512">"සියලුම සම්බන්ධතා"</string>
     <string name="menu_sync_remove" msgid="7523335046562082188">"සමමුහුර්ත කණ්ඩායම ඉවත් කරන්න"</string>
-    <string name="dialog_sync_add" msgid="8012361965908515959">"සමමුහුර්ත කණ්ඩායම එක් කරන්න"</string>
-    <string name="display_more_groups" msgid="8398232980355188133">"තවත් කණ්ඩායම්…"</string>
     <string name="display_warn_remove_ungrouped" msgid="522866344738506017">"\"<xliff:g id="GROUP">%s</xliff:g>\" සමමුහුර්ත කිරීමෙන් ඉවත් කිරීමෙන් ඕනෑම කණ්ඩායම් නොකළ සම්බන්ධතා සමමුහුර්තයෙන් ඉවත් කරනු ඇත."</string>
     <string name="savingDisplayGroups" msgid="6779839417901711381">"පෙන්වීම් විකල්ප සුරකමින්…"</string>
     <string name="listCustomView" msgid="5782275477737032610">"අභිරුචිකරණය කළ දසුන"</string>

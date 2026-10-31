@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"MMS ପଠାନ୍ତୁ"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (ମେସେଜ୍ ପଠାନ୍ତୁ)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"ଭିଡିଓ କଲ୍‍ କରନ୍ତୁ"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"ପ୍ରାୟତଃ ସମ୍ପର୍କ କରାଯାଉଥିବାକୁ ଖାଲି କରିବେ?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"ଆପଣଙ୍କୁ ଯୋଗାଯୋଗ ଏବଂ ଫୋନ୍ ଆପ୍‌ରୁ ପ୍ରାୟତଃ ସମ୍ପର୍କ କରାଯାଉଥିବା ସୂଚୀକୁ ଡିଲିଟ୍ କରିବା ସହ ନିଜ ଇମେଲ୍ ଆପ୍‌କୁ ନିଜର ଠିକଣା ପସନ୍ଦକୁ ମୂଳରୁ ଜାଣିବା ପାଇଁ ବାଧ୍ୟ କରିବାକୁ ହେବ।"</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"ପ୍ରାୟତଃ ସମ୍ପର୍କ କରାଯାଉଥିବାକୁ ଖାଲି କରାଯାଉଛି…"</string>
     <string name="status_available" msgid="8081626460682959098">"ଉପଲବ୍ଧ"</string>
     <string name="status_away" msgid="2677693194455091315">"ନାହାନ୍ତି"</string>
     <string name="status_busy" msgid="2759339190187696727">"ବ୍ୟସ୍ତ ଅଛନ୍ତି"</string>

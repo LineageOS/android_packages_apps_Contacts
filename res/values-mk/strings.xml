@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"Испратете SMS на MMS"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (Порака)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"Оствари видеоповик"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"Да се исчистат често контактираните?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"Ќе го исчистите списокот на често контактирани лица во апликациите „Контакти“ и „Телефон“ и ќе ги принудите апликациите за е-пошта одново да ги дознаат вашите претпочитани поставки за обраќање."</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"Се чистат често контактираните…"</string>
     <string name="status_available" msgid="8081626460682959098">"Достапен"</string>
     <string name="status_away" msgid="2677693194455091315">"Отсутен"</string>
     <string name="status_busy" msgid="2759339190187696727">"Зафатен"</string>

@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"Паведамленне MMS"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (Паведамленне)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"Зрабіць відэавыклік"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"Выдалiць частыя кантакты?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"Спіс найчасцей ужываных кантактаў праграм \"Кантакты\" i \"Тэлефон\" ачысціцца, а параметры адрасацыі паштовых праграм абнуляцца."</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"Выдаленне частых кантактаў..."</string>
     <string name="status_available" msgid="8081626460682959098">"Даступны"</string>
     <string name="status_away" msgid="2677693194455091315">"Адсутнічае"</string>
     <string name="status_busy" msgid="2759339190187696727">"Заняты(-ая)"</string>

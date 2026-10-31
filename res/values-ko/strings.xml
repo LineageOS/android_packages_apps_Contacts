@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"MMS로 문자 보내기"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g>(메시지)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"화상 통화하기"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"자주 연락하는 사람들 목록을 삭제하시겠습니까?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"주소록 및 휴대전화 앱에서 자주 연락하는 사람의 목록을 삭제하고 이메일 앱이 주소록 환경설정을 처음부터 다시 반영하도록 합니다."</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"자주 연락하는 사람들 목록을 삭제하는 중…"</string>
     <string name="status_available" msgid="8081626460682959098">"대화 가능"</string>
     <string name="status_away" msgid="2677693194455091315">"자리 비움"</string>
     <string name="status_busy" msgid="2759339190187696727">"다른 용무 중"</string>

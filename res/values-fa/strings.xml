@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"ارسال متن به فراپیام"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (پیام)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"برقراری تماس تصویری"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"فهرست مخاطبین مکرر پاک شود؟"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"با این کار فهرست مخاطبین مکرر در برنامه‌های «مخاطبین» و «تلفن» پاک می‌کنید و برنامه‌های ایمیل را وادار می‌کنید اولویت‌های مخاطبینتان را از اول یاد بگیرند."</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"درحال پاک کردن فهرست مخاطبین مکرر…"</string>
     <string name="status_available" msgid="8081626460682959098">"در دسترس"</string>
     <string name="status_away" msgid="2677693194455091315">"غایب"</string>
     <string name="status_busy" msgid="2759339190187696727">"مشغول"</string>

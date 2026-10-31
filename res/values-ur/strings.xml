@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"‏MMS نمبر پر متن بھیجیں"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (پیغام بھیجیں)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"ویڈیو کال کریں"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"اکثر رابطہ کردہ کو صاف کریں؟"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"آپ رابطے اور فون ایپس میں اکثر رابطہ کردہ فہرست کو صاف کر دیں گے اور ای میل ایپس کو از سر نو اپنے پتے کی ترجیحات جاننے پر مجبور کریں گے۔"</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"اکثر رابطہ کردہ کو صاف کر رہا ہے…"</string>
     <string name="status_available" msgid="8081626460682959098">"دستیاب"</string>
     <string name="status_away" msgid="2677693194455091315">"دور"</string>
     <string name="status_busy" msgid="2759339190187696727">"مصروف"</string>

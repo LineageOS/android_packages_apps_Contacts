@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"向多媒體訊息電話號碼傳送文字簡訊"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (傳送簡訊)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"進行視訊通話"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"清除常用聯絡人？"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"你即將清除「聯絡人」應用程式和「電話」應用程式中的常用聯絡人清單，並設定讓電子郵件應用程式重新熟悉你的寄件偏好設定。"</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"正在清除常用聯絡人…"</string>
     <string name="status_available" msgid="8081626460682959098">"線上"</string>
     <string name="status_away" msgid="2677693194455091315">"離開"</string>
     <string name="status_busy" msgid="2759339190187696727">"忙碌"</string>

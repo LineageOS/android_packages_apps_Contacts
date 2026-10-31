@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"SMS на ном. MMS"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (надіслати повідомлення)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"Здійснити відеодзвінок"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"Очистити список частих контактів?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"Буде видалено список користувачів, з якими ви часто спілкуєтеся, з додатків Контакти та Телефон і скинуто налаштування адрес у додатках для електронної пошти."</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"Очищення списку частих контактів…"</string>
     <string name="status_available" msgid="8081626460682959098">"Доступний"</string>
     <string name="status_away" msgid="2677693194455091315">"Не на місці"</string>
     <string name="status_busy" msgid="2759339190187696727">"Зайнятий"</string>

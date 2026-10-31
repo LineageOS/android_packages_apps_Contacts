@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"Bidali testu-mezua MMS zenbakira"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (bidali SMS mezua)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"Egin bideodeia"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"Sarri erabilitako kontaktuak garbitu?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"Kontaktuak eta Telefonoa aplikazioetako maiz erabilitako kontaktuen zerrenda garbituko duzu. Beraz, berriro ikasi beharko dituzte helbideen hobespenak posta elektronikoaren aplikazioek."</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"Sarri erabilitako kontaktuak garbitzen…"</string>
     <string name="status_available" msgid="8081626460682959098">"Libre"</string>
     <string name="status_away" msgid="2677693194455091315">"Kanpoan"</string>
     <string name="status_busy" msgid="2759339190187696727">"Okupatuta"</string>

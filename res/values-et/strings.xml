@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"Saada MMS"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (sõnum)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"Videokõne tegemine"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"Kas kustutada sagedased kontaktid?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"Kustutate rakendustes Kontaktid ja Telefon sagedaste kontaktide loendi, mistõttu meilirakendused peavad teie adresseerimiseelistused uuesti omandama."</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"Saged. kontaktide kustutamine ..."</string>
     <string name="status_available" msgid="8081626460682959098">"Saadaval"</string>
     <string name="status_away" msgid="2677693194455091315">"Eemal"</string>
     <string name="status_busy" msgid="2759339190187696727">"Hõivatud"</string>

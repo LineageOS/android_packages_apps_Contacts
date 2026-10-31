@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"Sūtīt multiziņu"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (sūtīt īsziņu)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"Veikt videozvanu"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"Vai dzēst bieži lietotos kontaktus?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"Tiks dzēsts bieži lietoto kontaktpersonu saraksts lietotnēs Kontaktpersonas un Tālrunis, un e-pasta lietotnēs no jauna tiks sākta adrešu preferenču saglabāšana."</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"Bieži lietoto kontaktu dzēšana..."</string>
     <string name="status_available" msgid="8081626460682959098">"Pieejama"</string>
     <string name="status_away" msgid="2677693194455091315">"Prombūtnē"</string>
     <string name="status_busy" msgid="2759339190187696727">"Aizņemts"</string>

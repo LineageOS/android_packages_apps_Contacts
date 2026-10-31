@@ -809,18 +809,6 @@
     <!-- Description string for an action button to initiate a video call. -->
     <string name="description_video_call">Make video call</string>
 
-    <!-- Title of the confirmation dialog for clearing frequents. [CHAR LIMIT=60] -->
-    <string name="clearFrequentsConfirmation_title">Clear frequently contacted?</string>
-
-    <!-- Confirmation dialog for clearing frequents. [CHAR LIMIT=NONE] -->
-    <string name="clearFrequentsConfirmation">You\'ll clear the frequently contacted list in the
-        Contacts and Phone apps, and force email apps to learn your addressing preferences from
-        scratch.
-    </string>
-
-    <!-- Title of the "Clearing frequently contacted" progress-dialog [CHAR LIMIT=60] -->
-    <string name="clearFrequentsProgress_title">Clearing frequently contacted\u2026</string>
-
     <!--  Used to display as default status when the contact is available for chat [CHAR LIMIT=19] -->
     <string name="status_available">Available</string>
 

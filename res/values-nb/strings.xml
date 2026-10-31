@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"Send MMS"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (send en melding)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"Start en videosamtale"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"Fjerne ofte kontaktede personer?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"Du fjerner listen over ofte kontaktede personer i Kontakter- og Telefon-appene, og tvinger e-postappene til å lære seg adresseinnstillingene dine på nytt."</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"Fjerner ofte kontaktede personer"</string>
     <string name="status_available" msgid="8081626460682959098">"Tilgjengelig"</string>
     <string name="status_away" msgid="2677693194455091315">"Borte"</string>
     <string name="status_busy" msgid="2759339190187696727">"Opptatt"</string>

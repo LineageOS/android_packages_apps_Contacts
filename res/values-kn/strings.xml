@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"MMS ಸಂದೇಶ ಕಳುಹಿಸಿ"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (ಸಂದೇಶ ಕಳುಹಿಸಿ)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"ವೀಡಿಯೊ ಕರೆ ಮಾಡು"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"ಪದೇಪದೇ ಸಂಪರ್ಕಿಸಿರುವವರನ್ನು ತೆರವುಗೊ.?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"ಸಂಪರ್ಕಗಳು ಮತ್ತು ಫೋನ್‌ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಲ್ಲಿ ಪದೇ ಪದೇ ಸಂಪರ್ಕಪಡಿಸಿರುವ ಪಟ್ಟಿಯನ್ನು ನೀವು ತೆರವುಗೊಳಿಸುತ್ತೀರಿ ಮತ್ತು ಮೊದಲಿನಿಂದ ನಿಮ್ಮ ವಿಳಾಸ ಪ್ರಾಶಸ್ತ್ಯಗಳನ್ನು ತಿಳಿಯಲು ಇಮೇಲ್‌ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ಒತ್ತಾಯಿಸಿ."</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"ಪದೇ ಪದೇ ಸಂಪರ್ಕಿಸಿರುವವರನ್ನು ತೆರವು…"</string>
     <string name="status_available" msgid="8081626460682959098">"ಲಭ್ಯ"</string>
     <string name="status_away" msgid="2677693194455091315">"ದೂರ"</string>
     <string name="status_busy" msgid="2759339190187696727">"ಕಾರ್ಯನಿರತ"</string>

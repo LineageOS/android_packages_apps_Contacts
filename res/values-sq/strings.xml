@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"Dërgo mesazh te numri i MMS-së"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (Mesazh)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"Bëj një telefonatë me video"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"Të pastrohen kontaktet e shpeshta?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"Do ta pastrosh listën e kontakteve të shpeshta në aplikacionet \"Kontaktet\" dhe \"Telefoni\" dhe do t\'i detyrosh aplikacionet e email-it të mësojnë preferencat e tua të adresimit nga e para."</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"Po pastron kontaktet e shpeshta…"</string>
     <string name="status_available" msgid="8081626460682959098">"I gatshëm"</string>
     <string name="status_away" msgid="2677693194455091315">"I larguar"</string>
     <string name="status_busy" msgid="2759339190187696727">"I zënë"</string>

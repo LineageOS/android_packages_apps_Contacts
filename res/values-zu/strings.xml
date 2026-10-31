@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"Bhala i-MMS"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (Umlayezo)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"Yenza ikholi yevidiyo"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"Sula oxhumana nabo njalo?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"Uzosula uhlu loxhumana nabo kakhulu kuzinhelo zokusebenza zokuxhumana noma zefoni, futhi uphoqelele izinhlelo zokusebenza ze-imeyili ukufunda izintandokazi zakho zekheli kusuka ekuqaleni."</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"Isula oxhumana nabo njalo…"</string>
     <string name="status_available" msgid="8081626460682959098">"Yatholakala"</string>
     <string name="status_away" msgid="2677693194455091315">"Akekho"</string>
     <string name="status_busy" msgid="2759339190187696727">"Matasa"</string>

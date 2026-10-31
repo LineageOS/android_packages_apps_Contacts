@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"এমএমএছ নম্বৰত বাৰ্তা পঠাওক"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (বাৰ্তা)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"ভিডিঅ\' কল কৰক"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"সঘনাই যোগাযোগ কৰা সূচী মচিবনে?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"আপুনি কন্টেক্ট আৰু ফ\'ন এপৰ সঘনাই যোগাযোগ কৰা সূচীটো মচিব আৰু ইমেইল এপসমূহক আপোনাৰ ঠিকনাৰ অগ্ৰাধিকাৰসমূহ আৰম্ভণিৰে পৰা শিকিবলৈ বাধ্য কৰাব।"</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"সঘনাই যোগাযোগ কৰা সম্পৰ্কবোৰ মচি থকা হৈছে…"</string>
     <string name="status_available" msgid="8081626460682959098">"উপলব্ধ"</string>
     <string name="status_away" msgid="2677693194455091315">"কাষত নাই"</string>
     <string name="status_busy" msgid="2759339190187696727">"ব্যস্ত"</string>

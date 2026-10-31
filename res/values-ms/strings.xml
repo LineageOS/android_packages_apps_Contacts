@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"SMS kepada MMS"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (Hantar mesej)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"Buat panggilan video"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"Padam bersih senarai kerap dihubungi?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"Anda akan mengosongkan senarai yang kerap dihubungi dalam apl Kenalan dan Telefon serta memaksa apl e-mel untuk mempelajari pilihan alamat anda dari awal."</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"Memadam bersih senarai kerap dihubungi..."</string>
     <string name="status_available" msgid="8081626460682959098">"Ada"</string>
     <string name="status_away" msgid="2677693194455091315">"Tiada"</string>
     <string name="status_busy" msgid="2759339190187696727">"Sibuk"</string>

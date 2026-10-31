@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"MMS నంబర్‌కు వచనం పంపండి"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (మెసేజ్‌)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"వీడియో కాల్ చేస్తుంది"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"తరచుగా సంప్రదించినవాటిని క్లియర్ చేయాలా?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"మీరు కాంటాక్ట్‌లు మరియు ఫోన్ యాప్‌లలో తరచుగా సంప్రదించిన కాంటాక్ట్‌ల లిస్ట్‌ను తీసివేస్తారు మరియు స్క్రాచ్ నుండి మీ అడ్రస్‌ ప్రాధాన్యతలను తెలుసుకునేలా ఈమెయిల్ యాప్‌లను నిర్బంధిస్తారు."</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"తరచుగా సంప్రదించినవాటిని క్లియర్ చేస్తోంది…"</string>
     <string name="status_available" msgid="8081626460682959098">"అందుబాటులో ఉన్నారు"</string>
     <string name="status_away" msgid="2677693194455091315">"దూరంగా ఉన్నారు"</string>
     <string name="status_busy" msgid="2759339190187696727">"బిజీగా ఉన్నారు"</string>

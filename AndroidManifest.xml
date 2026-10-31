@@ -262,7 +262,7 @@
             android:exported="false"
             android:label="@string/activity_title_settings"
             android:launchMode="singleTop"
-            android:theme="@style/ContactsPreferencesTheme"/>
+            android:theme="@style/ContactsComposeTheme"/>
 
         <activity
             android:name=".activities.LicenseActivity"

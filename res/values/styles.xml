@@ -273,6 +273,14 @@
     <!-- Window theme for the screens drawn with Jetpack Compose -->
     <style name="ContactsComposeTheme" parent="Theme.Material3Expressive.DayNight.NoActionBar" />
 
+    <!-- Window theme for the full screen dialogs drawn with Jetpack Compose -->
+    <style name="ContactsComposeTheme.FullScreenDialog">
+        <!-- This is necessary because the window is partially transparent during the enter
+             and exit animations -->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/FullScreenDialogAnimationStyle</item>
+    </style>
+
     <style name="NonPhoneActivityTheme" parent="@android:Theme.Translucent.NoTitleBar">
     </style>
 
@@ -482,22 +490,6 @@ background and text color. See also android:style/Widget.Holo.TextView.ListSepar
     <style name="FullScreenDialogAnimationStyle">
         <item name="android:windowEnterAnimation">@anim/slide_and_fade_in</item>
         <item name="android:windowExitAnimation">@anim/slide_and_fade_out</item>
-    </style>
-
-    <style name="PeopleThemeAppCompat.FullScreenDialog">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
-        <item name="android:listSelector">?android:attr/listChoiceBackgroundIndicator</item>
-        <item name="android:windowAnimationStyle">@style/FullScreenDialogAnimationStyle</item>
-    </style>
-
-    <style name="PeopleThemeAppCompat.FullScreenDialog.SimImportActivity">
-        <!-- This is necessary because the window is partially transparent during the enter
-             and exit animations -->
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:statusBarColor">@color/contextual_selection_bar_status_bar_color</item>
     </style>
 
     <!-- Style for item in navigation drawer -->

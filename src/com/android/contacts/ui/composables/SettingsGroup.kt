@@ -21,6 +21,8 @@ import androidx.compose.material3.SegmentedListItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 
@@ -34,12 +36,13 @@ internal val SettingsGroupSpacing = 16.dp
  *
  * If [selected] isn't null, the entry is one of the options of a single choice group, shown with
  * a radio button instead of [icon]. If [checked] isn't null, the entry is toggled on click, shown
- * with a checkbox.
+ * with a checkbox. [iconPainter] is shown untinted, for colored icons such as account types.
  */
 class SettingsEntry(
     val key: String,
     val title: String,
     val icon: ImageVector? = null,
+    val iconPainter: Painter? = null,
     val summary: CharSequence? = null,
     val selected: Boolean? = null,
     val checked: Boolean? = null,
@@ -96,6 +99,7 @@ private fun SettingsGroupHeader(title: String, subtitle: String?) {
 @Composable
 private fun SettingsItem(entry: SettingsEntry, index: Int, count: Int) {
     val icon = entry.icon
+    val iconPainter = entry.iconPainter
     val summary = entry.summary
     val selected = entry.selected
     val checked = entry.checked
@@ -141,10 +145,16 @@ private fun SettingsItem(entry: SettingsEntry, index: Int, count: Int) {
             onClick = entry.onClick,
             shapes = shapes,
             colors = ListItemDefaults.segmentedColors(containerColor = containerColor),
-            leadingContent = if (icon != null) {
-                { Icon(icon, contentDescription = null) }
-            } else {
-                null
+            leadingContent = when {
+                icon != null -> {
+                    { Icon(icon, contentDescription = null) }
+                }
+
+                iconPainter != null -> {
+                    { Icon(iconPainter, contentDescription = null, tint = Color.Unspecified) }
+                }
+
+                else -> null
             },
             supportingContent = supportingContent,
             onLongClick = entry.onLongClick,

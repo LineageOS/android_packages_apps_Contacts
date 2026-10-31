@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"ສົ່ງຂໍ້ຄວາມ MMS"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (ສົ່ງຂໍ້ຄວາມ)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"ໂທອອກດ້ວຍວິດີໂອ"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"ລຶບລາຍຊື່ທີ່ຕິດຕໍ່ຫາເລື້ອຍໆ?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"ທ່ານຈະລຶບຂໍ້ມູນລາຍຊື່ທີ່ຕິດຕໍ່ຫາເລື້ອຍໆຢູ່ໃນແອັບລາຍຊື່ ແລະ ໂທລະສັບ ພ້ອມທັງບັງຄັບໃຫ້ແອັບອີເມວເລີ່ມຮຽນຮູ້ຄ່າກຳນົດທີ່ຢູ່ຂອງທ່ານໃໝ່ຕັ້ງແຕ່ຕົ້ນ."</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"ກຳລັງລຶບລາຍຊື່ທີ່ຕິດຕໍ່ຫາເລື້ອຍໆ"</string>
     <string name="status_available" msgid="8081626460682959098">"ສາມາດໃຊ້ໄດ້"</string>
     <string name="status_away" msgid="2677693194455091315">"ບໍ່ຢູ່"</string>
     <string name="status_busy" msgid="2759339190187696727">"ບໍ່ຫວ່າງ"</string>

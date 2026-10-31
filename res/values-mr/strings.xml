@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"MMS वर मजकूर पाठवा"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (संदेश)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"व्‍हिडिओ कॉल करा"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"वारंवार सपर्क साधलेले साफ करायचे?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"तुम्ही संपर्क आणि फोन अ‍ॅप्‍स मधील वारंवार संपर्क साधलेली सूची साफ कराल आणि ईमेल अ‍ॅप्‍सना सुरवातीपासून तुमची पत्ता प्राधान्‍ये जाणून घेण्‍याची सक्ती कराल."</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"वारंवार सपर्क साधलेले साफ करत आहे..."</string>
     <string name="status_available" msgid="8081626460682959098">"उपलब्ध"</string>
     <string name="status_away" msgid="2677693194455091315">"दूर आहे"</string>
     <string name="status_busy" msgid="2759339190187696727">"व्यस्त"</string>

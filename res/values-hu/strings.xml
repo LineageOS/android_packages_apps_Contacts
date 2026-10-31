@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"SMS küldése MMS-ben szereplő számra"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (üzenet)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"Videohívás kezdeményezése"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"Törli a gyakran keresetteket?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"Törölni fogja a gyakran keresett személyek listáját a Névjegyek és a Telefon alkalmazásban, és arra kényszeríti az e-mail alkalmazásokat, hogy elölről kezdjék az Ön címzési szokásainak megtanulását."</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"Gyakran keresettek törlése..."</string>
     <string name="status_available" msgid="8081626460682959098">"Elérhető"</string>
     <string name="status_away" msgid="2677693194455091315">"Nincs a gépnél"</string>
     <string name="status_busy" msgid="2759339190187696727">"Elfoglalt"</string>

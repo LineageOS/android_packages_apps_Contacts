@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"Text MMS"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (Message)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"Make video call"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"Clear frequently contacted?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"You\'ll clear the frequently contacted list in the Contacts and Phone apps, and force email apps to learn your addressing preferences from scratch."</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"Clearing frequently contacted…"</string>
     <string name="status_available" msgid="8081626460682959098">"Available"</string>
     <string name="status_away" msgid="2677693194455091315">"Away"</string>
     <string name="status_busy" msgid="2759339190187696727">"Busy"</string>

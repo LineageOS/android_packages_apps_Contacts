@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"MMS руу мессеж илгээх"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (Мессеж)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"Видео дуудлага хийх"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"Байнга холбоо барьдаг харилцагчдын жагсаалтыг устгах уу?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"Та Харилцагч болон Утас апп-ууд дахь байнга холбоо барьсан харилцагчдын жагсаалтыг устгаж, ингэснээрээ имэйл апп-уудыг таны имэйл хаяглах хандлагыг бүр эхнээс нь суралцахад хүргэнэ."</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"Байнга холбоо барьдаг харилцагчдын жагсаалтыг устгаж байна…"</string>
     <string name="status_available" msgid="8081626460682959098">"Холбогдсон"</string>
     <string name="status_away" msgid="2677693194455091315">"Эзгүй"</string>
     <string name="status_busy" msgid="2759339190187696727">"Завгүй"</string>

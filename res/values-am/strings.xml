@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"የMMS ጽሁፍ"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (መልዕክት)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"የቪዲዮ ጥሪ ያድርጉ"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"በተደጋጋሚ ያገኝዋቸው ይጽዱ?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"በእውቂያዎች እና በስልክ መተግበሪያዎች ውስጥ በተደጋጋሚ ያገኟቸውን እውቂያዎች ዝርዝር አጽድተው የኢሜይል መተግበሪያዎች የአድራሻ አያያዝ ምርጫዎችዎን ከባዶ ተነስተው እንዲያውቁ ያስገድዱዋቸዋል።"</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"በተደጋጋሚ ያገኘሃቸውን በመጥረግ ላይ…"</string>
     <string name="status_available" msgid="8081626460682959098">"የሚገኝ"</string>
     <string name="status_away" msgid="2677693194455091315">"ወጣ ብሏል"</string>
     <string name="status_busy" msgid="2759339190187696727">"ተይዟ ል"</string>

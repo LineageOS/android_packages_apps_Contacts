@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"Lähetä tekstiviesti MMS-numeroon"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (lähetä viesti)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"Soita videopuhelu"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"Tyhjennetäänkö usein käytetyt?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"Toiminto tyhjentää Yhteystiedot- ja Puhelin-sovellusten usein käytettyjen yhteystietojen luettelon. Lisäksi sähköpostisovellukset pakotetaan opettelemaan osoiteasetuksesi uudestaan."</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"Tyhjennetään usein käytetyt..."</string>
     <string name="status_available" msgid="8081626460682959098">"Tavoitettavissa"</string>
     <string name="status_away" msgid="2677693194455091315">"Poissa"</string>
     <string name="status_busy" msgid="2759339190187696727">"Varattu"</string>

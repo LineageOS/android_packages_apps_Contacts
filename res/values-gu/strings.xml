@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"MMS પર ટેક્સ્ટ કરો"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (મેસેજ મોકલો)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"વિડિઓ કૉલ કરો"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"વારંવાર સંપર્ક કરેલા સાફ કરીએ?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"તમે સંપર્કો અને ફોન ઍપ્લિકેશનોમાં વારંવાર સંપર્ક કરેલ સૂચિને સાફ કરશો અને ઇમેઇલ ઍપ્લિકેશનોને તમારી સંબોધન પસંદગીઓને શરૂઆતથી જાણવા માટે ફરજ પાડશો."</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"વારંવાર સંપર્ક કરેલા સાફ કરે છે…"</string>
     <string name="status_available" msgid="8081626460682959098">"ઉપલબ્ધ"</string>
     <string name="status_away" msgid="2677693194455091315">"દૂર"</string>
     <string name="status_busy" msgid="2759339190187696727">"વ્યસ્ત"</string>

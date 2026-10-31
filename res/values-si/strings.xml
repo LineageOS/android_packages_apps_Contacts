@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"MMS වෙත කෙටි පණිවිඩයක් යවන්න"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (පණිවිඩය)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"වීඩියෝ ඇමතුමක් ලබා ගන්න"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"නිතරම සම්බන්ධ වන අය හිස් කරන්නද?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"ඔබ නිතරම සම්බන්ධතා සහ දුරකථන යෙදුම් තුළ සම්බන්ධ වුණු අයගේ ලැයිස්තුව හිස් කර, මුල සිටම ඔබේ ලිපින මනාප ඉගෙනීමට ඊ-තැපැල් යෙදුම්වලට බල කරනු ඇත."</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"නිතරම සම්බන්ධ වන අය හිස් කරමින්…"</string>
     <string name="status_available" msgid="8081626460682959098">"සිටියි"</string>
     <string name="status_away" msgid="2677693194455091315">"ළඟ නැත"</string>
     <string name="status_busy" msgid="2759339190187696727">"කාර්යබහුල"</string>

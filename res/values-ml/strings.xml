@@ -275,9 +275,6 @@
     <string name="sms_mms" msgid="7395133080765833725">"MMS നമ്പറിലേക്ക് വാചകസന്ദേശമയയ്‌ക്കുക"</string>
     <string name="sms_by_shortcut" msgid="4682340916268521006">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (സന്ദേശം)"</string>
     <string name="description_video_call" msgid="4956825008907720371">"വീഡിയോ കോൾ ചെയ്യുക"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="9194415661170740437">"പതിവായി കോൺടാക്റ്റുചെയ്യുന്നവരെ മായ്‌ക്കണോ?"</string>
-    <string name="clearFrequentsConfirmation" msgid="2120741757522063938">"നിങ്ങൾ കോൺടാക്‌റ്റുകളുടെയും ഫോണിന്റെയും അപ്ലിക്കേഷനുകളിലെ പതിവായി കോൺടാക്റ്റുചെയ്യുന്നവരുടെ ലിസ്റ്റ് മായ്‌ക്കുകയും സ്‌ക്രാച്ചിൽ നിന്നും ബന്ധപ്പെടൽ മുൻഗണനകൾ അറിയാൻ ഇമെയിൽ അപ്ലിക്കേഷനുകളെ പ്രേരിപ്പിക്കുകയും ചെയ്യും."</string>
-    <string name="clearFrequentsProgress_title" msgid="8271935295080659743">"പതിവായി കോൺടാക്റ്റുചെയ്യുന്നവരെ മായ്‌ക്കുന്നു…"</string>
     <string name="status_available" msgid="8081626460682959098">"ലഭ്യം"</string>
     <string name="status_away" msgid="2677693194455091315">"ലഭ്യമല്ല"</string>
     <string name="status_busy" msgid="2759339190187696727">"തിരക്കിൽ"</string>

@@ -65,7 +65,6 @@ public class DrawerFragment extends Fragment implements AccountsListener {
     private static final int LOADER_PROFILE = 4;
 
     private static final String KEY_CONTACTS_VIEW = "contactsView";
-    private static final String KEY_SELECTED_GROUP = "selectedGroup";
     private static final String KEY_SELECTED_ACCOUNT = "selectedAccount";
 
     private WelcomeContentObserver mObserver;
@@ -194,8 +193,6 @@ public class DrawerFragment extends Fragment implements AccountsListener {
             final ContactsView contactsView =
                     ContactsView.values()[savedInstanceState.getInt(KEY_CONTACTS_VIEW)];
             setNavigationItemChecked(contactsView);
-            final long groupId = savedInstanceState.getLong(KEY_SELECTED_GROUP);
-            mDrawerAdapter.setSelectedGroupId(groupId);
             final ContactListFilter filter = savedInstanceState.getParcelable(KEY_SELECTED_ACCOUNT);
             mDrawerAdapter.setSelectedAccount(filter);
         } else {
@@ -228,7 +225,6 @@ public class DrawerFragment extends Fragment implements AccountsListener {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(KEY_CONTACTS_VIEW, mCurrentContactsView.ordinal());
-        outState.putLong(KEY_SELECTED_GROUP, mDrawerAdapter.getSelectedGroupId());
         outState.putParcelable(KEY_SELECTED_ACCOUNT, mDrawerAdapter.getSelectedAccount());
     }
 
@@ -272,9 +268,8 @@ public class DrawerFragment extends Fragment implements AccountsListener {
                 setNavigationItemChecked(ContactsView.ASSISTANT);
             } else if (viewId == R.id.nav_group) {
                 final GroupListItem groupListItem = (GroupListItem) v.getTag();
+                // Groups are shown by another activity, the current view stays checked.
                 mListener.onGroupViewSelected(groupListItem);
-                mDrawerAdapter.setSelectedGroupId(groupListItem.getGroupId());
-                setNavigationItemChecked(ContactsView.GROUP_VIEW);
             } else if (viewId == R.id.nav_filter) {
                 final ContactListFilter filter = (ContactListFilter) v.getTag();
                 mListener.onAccountViewSelected(filter);
@@ -300,11 +295,6 @@ public class DrawerFragment extends Fragment implements AccountsListener {
         if (mDrawerAdapter != null) {
             mDrawerAdapter.setSelectedContactsView(contactsView);
         }
-    }
-
-    public void updateGroupMenu(long groupId) {
-        mDrawerAdapter.setSelectedGroupId(groupId);
-        setNavigationItemChecked(ContactsView.GROUP_VIEW);
     }
 
     @Override

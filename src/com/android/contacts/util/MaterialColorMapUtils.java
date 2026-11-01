@@ -25,7 +25,6 @@ import android.os.Trace;
 import androidx.core.content.ContextCompat;
 
 import com.android.contacts.R;
-import com.android.contacts.activities.PeopleActivity;
 
 public class MaterialColorMapUtils {
     private final TypedArray sPrimaryColors;
@@ -182,24 +181,16 @@ public class MaterialColorMapUtils {
     }
 
     /**
-     * Returns status bar color for group view and non-group views.
+     * Returns status bar color.
      */
     public static int getStatusBarColor(Activity activity) {
-        final boolean isGroupView = activity instanceof PeopleActivity
-                && ((PeopleActivity) activity).isGroupView();
-        return isGroupView
-                ? ContextCompat.getColor(activity, R.color.group_primary_color_dark)
-                : ContextCompat.getColor(activity, R.color.primary_color_dark);
+        return ContextCompat.getColor(activity, R.color.primary_color_dark);
     }
 
     /**
-     * Returns toolbar color for group view and non-group views.
+     * Returns toolbar color.
      */
     public static int getToolBarColor(Activity activity) {
-        final boolean isGroupView = activity instanceof PeopleActivity
-                && ((PeopleActivity) activity).isGroupView();
-        return isGroupView
-                ? ContextCompat.getColor(activity, R.color.group_primary_color)
-                : ContextCompat.getColor(activity, R.color.primary_color);
+        return ContextCompat.getColor(activity, R.color.primary_color);
     }
 }

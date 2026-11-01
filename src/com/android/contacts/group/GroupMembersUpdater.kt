@@ -21,7 +21,7 @@ import android.widget.Toast
 import com.android.contacts.ContactSaveService
 import com.android.contacts.ContactsApplication
 import com.android.contacts.R
-import com.android.contacts.activities.PeopleActivity
+import com.android.contacts.activities.GroupActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -54,7 +54,7 @@ object GroupMembersUpdater {
             /* newLabel */ null,
             if (add) rawContactIds else null,
             if (add) null else rawContactIds,
-            PeopleActivity::class.java,
+            GroupActivity::class.java,
             if (add) GroupUtil.ACTION_ADD_TO_GROUP else GroupUtil.ACTION_REMOVE_FROM_GROUP,
           )
         )

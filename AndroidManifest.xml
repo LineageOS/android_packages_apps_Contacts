@@ -520,6 +520,11 @@
             android:theme="@style/BackgroundOnlyTheme"/>
 
         <activity
+            android:name=".activities.GroupActivity"
+            android:exported="false"
+            android:theme="@style/ContactsComposeTheme"/>
+
+        <activity
             android:name=".activities.SimImportActivity"
             android:label="@string/sim_import_title"
             android:theme="@style/ContactsComposeTheme.FullScreenDialog"/>

@@ -43,9 +43,6 @@
     <color name="primary_color_dark">@*android:color/system_accent1_700</color>
     <color name="primary_color">@*android:color/system_accent1_600</color>
 
-    <color name="group_primary_color_dark">@*android:color/system_neutral1_900</color>
-    <color name="group_primary_color">@*android:color/system_neutral1_800</color>
-
     <!-- Color of the selected tab underline -->
     <color name="contacts_accent_color">@*android:color/system_neutral1_0</color>
 

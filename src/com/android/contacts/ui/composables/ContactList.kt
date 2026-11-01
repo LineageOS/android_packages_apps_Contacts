@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.Work
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
@@ -64,7 +65,7 @@ fun LazyListScope.contactCount(count: Int, accountName: String?) {
  *
  * The list is in selection mode when [selectedContactIds] isn't empty: every contact then shows
  * a checkbox instead of [trailingContent]. [onClick] gets the position of the contact in
- * [contacts].
+ * [contacts]. [keyPrefix] tells apart the keys of the lists of a single lazy list.
  */
 fun LazyListScope.contactList(
     contacts: List<ContactListEntry>,
@@ -72,11 +73,13 @@ fun LazyListScope.contactList(
     onClick: (ContactListEntry, Int) -> Unit,
     onLongClick: ((ContactListEntry) -> Unit)? = null,
     trailingContent: (@Composable (ContactListEntry) -> Unit)? = null,
+    keyPrefix: String = "",
 ) {
     var position = 0
     contacts.groupBy { if (it.favorite) FAVORITES_KEY else it.section }
         .forEach { (sectionKey, sectionContacts) ->
             contactSection(
+                keyPrefix = keyPrefix,
                 sectionKey = sectionKey,
                 contacts = sectionContacts,
                 firstPosition = position,
@@ -91,6 +94,7 @@ fun LazyListScope.contactList(
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 private fun LazyListScope.contactSection(
+    keyPrefix: String,
     sectionKey: String,
     contacts: List<ContactListEntry>,
     firstPosition: Int,
@@ -101,18 +105,18 @@ private fun LazyListScope.contactSection(
 ) {
     val selectionMode = selectedContactIds.isNotEmpty()
 
-    item(key = "spacer_$sectionKey") {
+    item(key = "${keyPrefix}spacer_$sectionKey") {
         Spacer(Modifier.height(SettingsGroupSpacing - ListItemDefaults.SegmentedGap))
     }
     if (sectionKey.isNotEmpty()) {
-        item(key = "section_$sectionKey") {
+        item(key = "${keyPrefix}section_$sectionKey") {
             SectionHeader(sectionKey)
         }
     }
     // Favorites are also shown in their own section, the keys include the section.
     itemsIndexed(
         contacts,
-        key = { _, contact -> "${sectionKey}_${contact.contactId}" },
+        key = { _, contact -> "${keyPrefix}${sectionKey}_${contact.contactId}" },
     ) { index, contact ->
         val name = contact.displayName?.takeIf { it.isNotEmpty() }
             ?: stringResource(R.string.missing_name)
@@ -126,6 +130,7 @@ private fun LazyListScope.contactSection(
             leadingContent = {
                 ContactAvatar(name = contact.displayName, photoUri = contact.photoThumbnailUri)
             },
+            supportingContent = contact.snippet?.let { snippet -> { Text(snippet) } },
             trailingContent = when {
                 selectionMode -> {
                     {
@@ -138,6 +143,12 @@ private fun LazyListScope.contactSection(
 
                 trailingContent != null -> {
                     { trailingContent(contact) }
+                }
+
+                contact.workProfile -> {
+                    {
+                        Icon(imageVector = Icons.Outlined.Work, contentDescription = null)
+                    }
                 }
 
                 else -> null

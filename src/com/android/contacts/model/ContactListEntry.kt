@@ -23,4 +23,12 @@ data class ContactListEntry(
      * Whether the contact is shown in the favorites section, above the other sections.
      */
     val favorite: Boolean = false,
+    /**
+     * The part of the contact matching the search query, if not its name.
+     */
+    val snippet: String? = null,
+    /**
+     * Whether the contact is from the work profile.
+     */
+    val workProfile: Boolean = false,
 )

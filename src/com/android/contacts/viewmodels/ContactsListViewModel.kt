@@ -13,36 +13,58 @@ import android.net.Uri
 import android.provider.ContactsContract
 import android.provider.ContactsContract.Contacts
 import android.provider.ContactsContract.Data
+import android.provider.ContactsContract.Directory
 import android.provider.ContactsContract.RawContacts
+import android.provider.ContactsContract.SearchSnippets
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
+import com.android.contacts.R
+import com.android.contacts.compat.ContactsCompat
+import com.android.contacts.compat.DirectoryCompat
 import com.android.contacts.list.AddressBookIndex
 import com.android.contacts.list.ContactListFilter
 import com.android.contacts.list.ContactListFilterController
+import com.android.contacts.list.ContactSnippets
 import com.android.contacts.model.ContactListEntry
 import com.android.contacts.model.ContactsListEmptyState
 import com.android.contacts.model.ContactsListHeader
 import com.android.contacts.model.ContactsListState
+import com.android.contacts.model.ContactsSearchState
+import com.android.contacts.model.DirectorySearchResults
+import com.android.contacts.model.SearchDirectory
 import com.android.contacts.model.account.AccountWithDataSet
 import com.android.contacts.model.account.GoogleAccountType
 import com.android.contacts.preference.ContactsPreferences
 import com.android.contacts.util.AccountFilterUtil
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.conflate
+import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.transformLatest
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 
 /**
  * View model of the main contact list, showing the contacts of the current
- * [ContactListFilter].
+ * [ContactListFilter], or the contacts matching a search query in every directory.
  */
-class ContactsListViewModel(application: Application) : AndroidViewModel(application) {
+@OptIn(ExperimentalCoroutinesApi::class)
+class ContactsListViewModel(
+    application: Application,
+    private val savedStateHandle: SavedStateHandle,
+) : AndroidViewModel(application) {
     private val contentResolver = application.contentResolver
 
     /**
@@ -91,6 +113,11 @@ class ContactsListViewModel(application: Application) : AndroidViewModel(applica
     }.conflate()
 
     /**
+     * The search query, null outside of search mode.
+     */
+    val searchQuery = savedStateHandle.getStateFlow<String?>(KEY_SEARCH_QUERY, null)
+
+    /**
      * The contacts of the current filter. Null while loading.
      */
     val state: StateFlow<ContactsListState?> = combine(
@@ -104,6 +131,43 @@ class ContactsListViewModel(application: Application) : AndroidViewModel(applica
             started = SharingStarted.WhileSubscribed(5_000),
             initialValue = null,
         )
+
+    /**
+     * The contacts matching [searchQuery], published as each directory returns them. Null
+     * outside of search mode.
+     */
+    val searchState: StateFlow<ContactsSearchState?> = combine(
+        searchQuery, contactsChanges, preferencesChanges
+    ) { query, _, _ ->
+        query
+    }
+        .transformLatest { query ->
+            when {
+                query == null -> emit(null)
+                query.isBlank() -> emit(ContactsSearchState(query, emptyList()))
+                else -> emitAll(search(query))
+            }
+        }
+        .flowOn(Dispatchers.IO)
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = null,
+        )
+
+    /**
+     * Enters search mode, or updates the search query.
+     */
+    fun setSearchQuery(query: String) {
+        savedStateHandle[KEY_SEARCH_QUERY] = query
+    }
+
+    /**
+     * Leaves search mode.
+     */
+    fun stopSearch() {
+        savedStateHandle[KEY_SEARCH_QUERY] = null
+    }
 
     private fun load(filter: ContactListFilter): ContactsListState {
         val favorites = if (filter.isContactsFilterType) loadFavorites(filter) else emptyList()
@@ -241,6 +305,156 @@ class ContactsListViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
+    /**
+     * Searches [query] in every directory at once, emitting the results as they come.
+     */
+    private fun search(query: String) = channelFlow {
+        val directories = loadDirectories()
+        val results = directories.associateWith<SearchDirectory, List<ContactListEntry>?> {
+            null
+        }.toMutableMap()
+        send(ContactsSearchState(query, results.toResults()))
+
+        // The directories are searched in parallel, their results are published in order.
+        val mutex = Mutex()
+        directories.forEach { directory ->
+            launch {
+                val contacts = searchDirectory(directory.id, query.trim())
+                mutex.withLock {
+                    results[directory] = contacts
+                    send(ContactsSearchState(query, results.toResults()))
+                }
+            }
+        }
+    }
+
+    private fun Map<SearchDirectory, List<ContactListEntry>?>.toResults() =
+        map { (directory, contacts) -> DirectorySearchResults(directory, contacts) }
+
+    /**
+     * Loads the directories to search, the contacts of the device first.
+     */
+    private fun loadDirectories(): List<SearchDirectory> {
+        val packageManager = getApplication<Application>().packageManager
+        return try {
+            contentResolver.query(
+                DirectoryCompat.getContentUri(),
+                arrayOf(
+                    Directory._ID,
+                    Directory.PACKAGE_NAME,
+                    Directory.TYPE_RESOURCE_ID,
+                    Directory.DISPLAY_NAME,
+                ),
+                null,
+                null,
+                Directory._ID,
+            )?.use { cursor ->
+                buildList {
+                    while (cursor.moveToNext()) {
+                        val id = cursor.getLong(0)
+                        if (DirectoryCompat.isInvisibleDirectory(id)) {
+                            continue
+                        }
+                        val type = cursor.getString(1)?.takeIf { cursor.getInt(2) != 0 }
+                            ?.let { packageName ->
+                                try {
+                                    packageManager.getResourcesForApplication(packageName)
+                                        .getString(cursor.getInt(2))
+                                } catch (e: Exception) {
+                                    Log.e(TAG, "Cannot get the directory type of $packageName")
+                                    null
+                                }
+                            }
+                        add(createSearchDirectory(id, cursor.getString(3), type))
+                    }
+                }
+            }
+        } catch (e: RuntimeException) {
+            Log.w(TAG, "Failed to load the directories", e)
+            null
+        } ?: listOf(createSearchDirectory(Directory.DEFAULT, null, null))
+    }
+
+    private fun createSearchDirectory(id: Long, name: String?, type: String?): SearchDirectory {
+        val application = getApplication<Application>()
+        val remote = DirectoryCompat.isRemoteDirectoryId(id)
+        val work = DirectoryCompat.isEnterpriseDirectoryId(id)
+        return SearchDirectory(
+            id = id,
+            label = when {
+                remote && work -> application.getString(R.string.directory_search_label_work)
+                remote -> application.getString(R.string.directory_search_label)
+                work -> application.getString(R.string.list_filter_phones_work)
+                else -> null
+            },
+            name = if (remote) name?.takeIf { it.isNotEmpty() } ?: type else null,
+        )
+    }
+
+    /**
+     * Searches [query] in the directory [directoryId], limiting the results of remote ones.
+     */
+    private fun searchDirectory(directoryId: Long, query: String): List<ContactListEntry> {
+        val uri = ContactsCompat.getContentUri().buildUpon()
+            .appendPath(query)
+            .appendQueryParameter(ContactsContract.DIRECTORY_PARAM_KEY, directoryId.toString())
+            .apply {
+                if (directoryId != Directory.DEFAULT && directoryId != Directory.LOCAL_INVISIBLE) {
+                    appendQueryParameter(
+                        ContactsContract.LIMIT_PARAM_KEY, DIRECTORY_RESULT_LIMIT.toString()
+                    )
+                }
+            }
+            .appendQueryParameter(SearchSnippets.DEFERRED_SNIPPETING_KEY, "1")
+            .build()
+        val snippetMaxLength = getApplication<Application>().resources
+            .getInteger(R.integer.snippet_length_before_tokenize)
+
+        return try {
+            contentResolver.query(
+                uri,
+                projection(Contacts._ID) + SearchSnippets.SNIPPET,
+                null,
+                null,
+                "${Contacts.SORT_KEY_PRIMARY}, ${sortOrder()}",
+            )?.use { cursor ->
+                buildList {
+                    while (cursor.moveToNext()) {
+                        val contactId = cursor.getLong(COLUMN_CONTACT_ID)
+                        val lookupUri = Contacts.getLookupUri(
+                            contactId, cursor.getString(COLUMN_LOOKUP_KEY)
+                        )
+                        add(
+                            ContactListEntry(
+                                contactId = contactId,
+                                lookupUri = if (directoryId == Directory.DEFAULT) {
+                                    lookupUri
+                                } else {
+                                    lookupUri.buildUpon().appendQueryParameter(
+                                        ContactsContract.DIRECTORY_PARAM_KEY,
+                                        directoryId.toString(),
+                                    ).build()
+                                },
+                                displayName = cursor.getString(COLUMN_DISPLAY_NAME),
+                                photoThumbnailUri = cursor.getString(COLUMN_PHOTO_THUMBNAIL_URI)
+                                    ?.let(Uri::parse),
+                                section = "",
+                                snippet = ContactSnippets.fromCursor(
+                                    cursor, COLUMN_SNIPPET, snippetMaxLength
+                                ),
+                                workProfile = ContactsCompat.isEnterpriseContactId(contactId),
+                            )
+                        )
+                    }
+                }
+            }.orEmpty()
+        } catch (e: RuntimeException) {
+            // Directories are provided by other apps, which may fail.
+            Log.w(TAG, "Failed to search the directory $directoryId", e)
+            emptyList()
+        }
+    }
+
     private fun projection(contactIdColumn: String) = arrayOf(
         contactIdColumn,
         Contacts.LOOKUP_KEY,
@@ -267,9 +481,19 @@ class ContactsListViewModel(application: Application) : AndroidViewModel(applica
         )
 
     companion object {
+        private const val TAG = "ContactsListViewModel"
+
+        private const val KEY_SEARCH_QUERY = "searchQuery"
+
+        /**
+         * The maximum number of results of a remote directory.
+         */
+        private const val DIRECTORY_RESULT_LIMIT = 20
+
         private const val COLUMN_CONTACT_ID = 0
         private const val COLUMN_LOOKUP_KEY = 1
         private const val COLUMN_PHOTO_THUMBNAIL_URI = 2
         private const val COLUMN_DISPLAY_NAME = 3
+        private const val COLUMN_SNIPPET = 4
     }
 }

@@ -61,3 +61,38 @@ data class ContactsListState(
      */
     val emptyState: ContactsListEmptyState?,
 )
+
+/**
+ * A directory searched for contacts: the contacts of the device, of the work profile, or a
+ * remote directory such as the address book of a company.
+ */
+data class SearchDirectory(
+    val id: Long,
+    /**
+     * The label of the directory, null for the contacts of the device.
+     */
+    val label: String?,
+    /**
+     * The name of a remote directory, or its type if it has no name.
+     */
+    val name: String?,
+)
+
+/**
+ * The contacts of a [directory] matching the search query, null while searching.
+ */
+data class DirectorySearchResults(
+    val directory: SearchDirectory,
+    val contacts: List<ContactListEntry>?,
+)
+
+/**
+ * The contacts matching a search [query], for each directory.
+ */
+data class ContactsSearchState(
+    val query: String,
+    val results: List<DirectorySearchResults>,
+) {
+    val searching get() = results.any { it.contacts == null }
+    val empty get() = results.all { it.contacts?.isEmpty() == true }
+}

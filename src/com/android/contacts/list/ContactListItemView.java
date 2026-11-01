@@ -26,10 +26,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
-import android.provider.ContactsContract.SearchSnippets;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -56,14 +53,9 @@ import com.android.contacts.compat.CompatUtils;
 import com.android.contacts.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.format.TextHighlighter;
 import com.android.contacts.util.ContactDisplayUtils;
-import com.android.contacts.util.SearchUtil;
 import com.android.contacts.util.ViewUtil;
-import com.google.common.collect.Lists;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * A custom view for an item in the contact list.
@@ -1553,196 +1545,19 @@ public class ContactListItemView extends ViewGroup
             return;
         }
         // Show the snippet with the part of the query that matched it
-        setSnippet(updateSnippet(snippet, query, displayName));
+        setSnippet(ContactSnippets.forQuery(snippet, query, displayName, getSnippetMaxLength()));
     }
 
     /**
      * Shows search snippet.
      */
     public void showSnippet(Cursor cursor, int summarySnippetColumnIndex) {
-        if (cursor.getColumnCount() <= summarySnippetColumnIndex
-            || !SearchSnippets.SNIPPET.equals(cursor.getColumnName(summarySnippetColumnIndex))) {
-            setSnippet(null);
-            return;
-        }
-
-        String snippet = cursor.getString(summarySnippetColumnIndex);
-
-        // Do client side snippeting if provider didn't do it
-        final Bundle extras = cursor.getExtras();
-        if (extras.getBoolean(ContactsContract.DEFERRED_SNIPPETING)) {
-
-            final String query = extras.getString(ContactsContract.DEFERRED_SNIPPETING_QUERY);
-
-            String displayName = null;
-            int displayNameIndex = cursor.getColumnIndex(Contacts.DISPLAY_NAME);
-            if (displayNameIndex >= 0) {
-                displayName = cursor.getString(displayNameIndex);
-            }
-
-            snippet = updateSnippet(snippet, query, displayName);
-
-        } else {
-            if (snippet != null) {
-                int from = 0;
-                int to = snippet.length();
-                int start = snippet.indexOf(DefaultContactListAdapter.SNIPPET_START_MATCH);
-                if (start == -1) {
-                    snippet = null;
-                } else {
-                    int firstNl = snippet.lastIndexOf('\n', start);
-                    if (firstNl != -1) {
-                        from = firstNl + 1;
-                    }
-                    int end = snippet.lastIndexOf(DefaultContactListAdapter.SNIPPET_END_MATCH);
-                    if (end != -1) {
-                        int lastNl = snippet.indexOf('\n', end);
-                        if (lastNl != -1) {
-                            to = lastNl;
-                        }
-                    }
-
-                    StringBuilder sb = new StringBuilder();
-                    for (int i = from; i < to; i++) {
-                        char c = snippet.charAt(i);
-                        if (c != DefaultContactListAdapter.SNIPPET_START_MATCH &&
-                                c != DefaultContactListAdapter.SNIPPET_END_MATCH) {
-                            sb.append(c);
-                        }
-                    }
-                    snippet = sb.toString();
-                }
-            }
-        }
-
-        setSnippet(snippet);
+        setSnippet(ContactSnippets.fromCursor(
+                cursor, summarySnippetColumnIndex, getSnippetMaxLength()));
     }
 
-    /**
-     * Used for deferred snippets from the database. The contents come back as large strings which
-     * need to be extracted for display.
-     *
-     * @param snippet The snippet from the database.
-     * @param query The search query substring.
-     * @param displayName The contact display name.
-     * @return The proper snippet to display.
-     */
-    private String updateSnippet(String snippet, String query, String displayName) {
-
-        if (TextUtils.isEmpty(snippet) || TextUtils.isEmpty(query)) {
-            return null;
-        }
-        query = SearchUtil.cleanStartAndEndOfSearchQuery(query.toLowerCase());
-
-        // If the display name already contains the query term, return empty - snippets should
-        // not be needed in that case.
-        if (!TextUtils.isEmpty(displayName)) {
-            final String lowerDisplayName = displayName.toLowerCase();
-            final List<String> nameTokens = split(lowerDisplayName);
-            for (String nameToken : nameTokens) {
-                if (nameToken.startsWith(query)) {
-                    return null;
-                }
-            }
-        }
-
-        // The snippet may contain multiple data lines.
-        // Show the first line that matches the query.
-        final SearchUtil.MatchedLine matched = SearchUtil.findMatchingLine(snippet, query);
-
-        if (matched != null && matched.line != null) {
-            // Tokenize for long strings since the match may be at the end of it.
-            // Skip this part for short strings since the whole string will be displayed.
-            // Most contact strings are short so the snippetize method will be called infrequently.
-            final int lengthThreshold = getResources().getInteger(
-                    R.integer.snippet_length_before_tokenize);
-            if (matched.line.length() > lengthThreshold) {
-                return snippetize(matched.line, matched.startIndex, lengthThreshold);
-            } else {
-                return matched.line;
-            }
-        }
-
-        // No match found.
-        return null;
-    }
-
-    private String snippetize(String line, int matchIndex, int maxLength) {
-        // Show up to maxLength characters. But we only show full tokens so show the last full token
-        // up to maxLength characters. So as many starting tokens as possible before trying ending
-        // tokens.
-        int remainingLength = maxLength;
-        int tempRemainingLength = remainingLength;
-
-        // Start the end token after the matched query.
-        int index = matchIndex;
-        int endTokenIndex = index;
-
-        // Find the match token first.
-        while (index < line.length()) {
-            if (!Character.isLetterOrDigit(line.charAt(index))) {
-                endTokenIndex = index;
-                remainingLength = tempRemainingLength;
-                break;
-            }
-            tempRemainingLength--;
-            index++;
-        }
-
-        // Find as much content before the match.
-        index = matchIndex - 1;
-        tempRemainingLength = remainingLength;
-        int startTokenIndex = matchIndex;
-        while (index > -1 && tempRemainingLength > 0) {
-            if (!Character.isLetterOrDigit(line.charAt(index))) {
-                startTokenIndex = index;
-                remainingLength = tempRemainingLength;
-            }
-            tempRemainingLength--;
-            index--;
-        }
-
-        index = endTokenIndex;
-        tempRemainingLength = remainingLength;
-        // Find remaining content at after match.
-        while (index < line.length() && tempRemainingLength > 0) {
-            if (!Character.isLetterOrDigit(line.charAt(index))) {
-                endTokenIndex = index;
-            }
-            tempRemainingLength--;
-            index++;
-        }
-        // Append ellipse if there is content before or after.
-        final StringBuilder sb = new StringBuilder();
-        if (startTokenIndex > 0) {
-            sb.append("...");
-        }
-        sb.append(line.substring(startTokenIndex, endTokenIndex));
-        if (endTokenIndex < line.length()) {
-            sb.append("...");
-        }
-        return sb.toString();
-    }
-
-    private static final Pattern SPLIT_PATTERN = Pattern.compile(
-            "([\\w-\\.]+)@((?:[\\w]+\\.)+)([a-zA-Z]{2,4})|[\\w]+");
-
-    /**
-     * Helper method for splitting a string into tokens.  The lists passed in are populated with
-     * the
-     * tokens and offsets into the content of each token.  The tokenization function parses e-mail
-     * addresses as a single token; otherwise it splits on any non-alphanumeric character.
-     *
-     * @param content Content to split.
-     * @return List of token strings.
-     */
-    private static List<String> split(String content) {
-        final Matcher matcher = SPLIT_PATTERN.matcher(content);
-        final ArrayList<String> tokens = Lists.newArrayList();
-        while (matcher.find()) {
-            tokens.add(matcher.group());
-        }
-        return tokens;
+    private int getSnippetMaxLength() {
+        return getResources().getInteger(R.integer.snippet_length_before_tokenize);
     }
 
     /**

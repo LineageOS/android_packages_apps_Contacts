@@ -6,30 +6,15 @@
 package com.android.contacts.model
 
 import android.content.Intent
-import android.net.Uri
 import androidx.annotation.StringRes
 import com.android.contacts.group.GroupMetaData
-
-/**
- * A contact member of a group.
- */
-data class GroupMember(
-    val contactId: Long,
-    val lookupUri: Uri,
-    val displayName: String?,
-    val photoThumbnailUri: Uri?,
-    /**
-     * The address book index section of the contact, e.g. its initial.
-     */
-    val section: String,
-)
 
 /**
  * A group and its members.
  */
 data class GroupState(
     val metaData: GroupMetaData,
-    val members: List<GroupMember>,
+    val members: List<ContactListEntry>,
     /**
      * The names of the other groups of the account, trimmed, to prevent duplicates on rename.
      */

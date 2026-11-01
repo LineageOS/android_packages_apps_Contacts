@@ -5,7 +5,6 @@
 
 package com.android.contacts.ui.screens
 
-import android.icu.text.MessageFormat
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -13,11 +12,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.MoreVert
@@ -26,17 +22,14 @@ import androidx.compose.material.icons.filled.PersonRemove
 import androidx.compose.material.icons.outlined.RemoveCircleOutline
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.LoadingIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SegmentedListItem
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -53,14 +46,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.android.contacts.R
-import com.android.contacts.model.GroupMember
+import com.android.contacts.model.ContactListEntry
 import com.android.contacts.model.GroupState
-import com.android.contacts.ui.composables.ContactAvatar
 import com.android.contacts.ui.composables.GroupNameDialog
 import com.android.contacts.ui.composables.NavigateUpButton
-import com.android.contacts.ui.composables.SettingsGroupSpacing
 import com.android.contacts.ui.composables.SettingsScaffold
-import java.util.Locale
+import com.android.contacts.ui.composables.contactCount
+import com.android.contacts.ui.composables.contactList
 
 /**
  * Shows the members of a group.
@@ -74,12 +66,12 @@ fun GroupScreen(
     state: GroupState?,
     snackbarHostState: SnackbarHostState,
     onNavigateUp: () -> Unit,
-    onMemberClick: (GroupMember, Int) -> Unit,
-    onToggleSelected: (GroupMember) -> Unit,
+    onMemberClick: (ContactListEntry, Int) -> Unit,
+    onToggleSelected: (ContactListEntry) -> Unit,
     onClearSelection: () -> Unit,
     onSetEditMode: (Boolean) -> Unit,
     onAddMembers: () -> Unit,
-    onRemoveMember: (GroupMember) -> Unit,
+    onRemoveMember: (ContactListEntry) -> Unit,
     onRemoveSelected: () -> Unit,
     onSendEmail: () -> Unit,
     onSendMessage: () -> Unit,
@@ -151,12 +143,39 @@ fun GroupScreen(
                 EmptyGroup(editable = state.metaData.editable, onAddMembers = onAddMembers)
             }
 
-            else -> groupMembers(
-                state = state,
-                onMemberClick = onMemberClick,
-                onToggleSelected = onToggleSelected,
-                onRemoveMember = onRemoveMember,
-            )
+            else -> {
+                contactCount(
+                    count = state.members.size,
+                    accountName = state.metaData.accountName.takeIf { state.showAccountName },
+                )
+                contactList(
+                    contacts = state.members,
+                    selectedContactIds = state.selectedContactIds,
+                    onClick = { member, position ->
+                        if (selectionMode) {
+                            onToggleSelected(member)
+                        } else {
+                            onMemberClick(member, position)
+                        }
+                    },
+                    // Only the members of editable groups can be selected, to be removed.
+                    onLongClick = onToggleSelected.takeIf {
+                        state.metaData.editable && !editMode
+                    },
+                    trailingContent = if (editMode) {
+                        { member ->
+                            IconButton(onClick = { onRemoveMember(member) }) {
+                                Icon(
+                                    Icons.Outlined.RemoveCircleOutline,
+                                    stringResource(R.string.description_delete_contact),
+                                )
+                            }
+                        }
+                    } else {
+                        null
+                    },
+                )
+            }
         }
     }
 
@@ -263,128 +282,6 @@ private fun GroupActions(
                 )
             }
         }
-    }
-}
-
-/**
- * Adds the member count, then the members, in a segmented block for each section.
- */
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
-private fun LazyListScope.groupMembers(
-    state: GroupState,
-    onMemberClick: (GroupMember, Int) -> Unit,
-    onToggleSelected: (GroupMember) -> Unit,
-    onRemoveMember: (GroupMember) -> Unit,
-) {
-    item(key = "count") {
-        MemberCount(state)
-    }
-
-    var position = 0
-    state.members.groupBy { it.section }.forEach { (section, members) ->
-        val firstPosition = position
-        position += members.size
-
-        item(key = "spacer_$section") {
-            Spacer(Modifier.height(SettingsGroupSpacing - ListItemDefaults.SegmentedGap))
-        }
-        if (section.isNotEmpty()) {
-            item(key = "section_$section") {
-                Text(
-                    text = section,
-                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
-                    color = MaterialTheme.colorScheme.primary,
-                    style = MaterialTheme.typography.titleSmall,
-                )
-            }
-        }
-        itemsIndexed(members, key = { _, member -> member.contactId }) { index, member ->
-            MemberItem(
-                member = member,
-                index = index,
-                count = members.size,
-                state = state,
-                onClick = {
-                    if (state.selectionMode) {
-                        onToggleSelected(member)
-                    } else {
-                        onMemberClick(member, firstPosition + index)
-                    }
-                },
-                onToggleSelected = { onToggleSelected(member) },
-                onRemove = { onRemoveMember(member) },
-            )
-        }
-    }
-}
-
-@Composable
-private fun MemberCount(state: GroupState) {
-    val pattern = stringResource(
-        if (state.showAccountName) R.string.contacts_count_with_account else R.string.contacts_count
-    )
-    val text = remember(pattern, state.members.size, state.metaData.accountName) {
-        MessageFormat(pattern, Locale.getDefault()).format(
-            mapOf(
-                "count" to state.members.size,
-                "account" to state.metaData.accountName.orEmpty(),
-            )
-        ).trim()
-    }
-    Text(
-        text = text,
-        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-        color = MaterialTheme.colorScheme.onSurfaceVariant,
-        style = MaterialTheme.typography.bodyMedium,
-    )
-}
-
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
-@Composable
-private fun MemberItem(
-    member: GroupMember,
-    index: Int,
-    count: Int,
-    state: GroupState,
-    onClick: () -> Unit,
-    onToggleSelected: () -> Unit,
-    onRemove: () -> Unit,
-) {
-    val name = member.displayName?.takeIf { it.isNotEmpty() }
-        ?: stringResource(R.string.missing_name)
-    val selected = member.contactId in state.selectedContactIds
-
-    SegmentedListItem(
-        onClick = onClick,
-        shapes = ListItemDefaults.segmentedShapes(index = index, count = count),
-        colors = ListItemDefaults.segmentedColors(
-            containerColor = MaterialTheme.colorScheme.surfaceBright
-        ),
-        leadingContent = {
-            ContactAvatar(name = member.displayName, photoUri = member.photoThumbnailUri)
-        },
-        trailingContent = when {
-            state.selectionMode -> {
-                { Checkbox(checked = selected, onCheckedChange = null) }
-            }
-
-            state.editMode -> {
-                {
-                    IconButton(onClick = onRemove) {
-                        Icon(
-                            Icons.Outlined.RemoveCircleOutline,
-                            stringResource(R.string.description_delete_contact),
-                        )
-                    }
-                }
-            }
-
-            else -> null
-        },
-        // Only the members of editable groups can be selected, to be removed.
-        onLongClick = onToggleSelected.takeIf { state.metaData.editable && !state.editMode },
-    ) {
-        Text(name)
     }
 }
 

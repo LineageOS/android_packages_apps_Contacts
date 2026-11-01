@@ -28,9 +28,10 @@ import com.android.contacts.activities.GroupActivity
 import com.android.contacts.group.GroupMembersUpdater
 import com.android.contacts.group.GroupMetaData
 import com.android.contacts.group.GroupUtil
+import com.android.contacts.list.AddressBookIndex
 import com.android.contacts.logging.ListEvent
 import com.android.contacts.logging.Logger
-import com.android.contacts.model.GroupMember
+import com.android.contacts.model.ContactListEntry
 import com.android.contacts.model.GroupState
 import com.android.contacts.model.GroupStatus
 import com.android.contacts.model.account.GoogleAccountType
@@ -122,7 +123,7 @@ class GroupViewModel(
 
     private val metaData get() = state.value?.metaData
 
-    fun toggleSelected(member: GroupMember) {
+    fun toggleSelected(member: ContactListEntry) {
         if (metaData?.editable != true) {
             return
         }
@@ -251,7 +252,7 @@ class GroupViewModel(
         )
     }
 
-    private fun loadMembers(groupId: Long): List<GroupMember> {
+    private fun loadMembers(groupId: Long): List<ContactListEntry> {
         val displayNameColumn =
             if (preferences.displayOrder == ContactsPreferences.DISPLAY_ORDER_PRIMARY) {
                 Data.DISPLAY_NAME_PRIMARY
@@ -282,42 +283,30 @@ class GroupViewModel(
     /**
      * Reads the members, once each: a contact has a row for each of its raw contacts in the group.
      */
-    private fun readMembers(cursor: Cursor): List<GroupMember> {
-        val sections = cursor.extras.getStringArray(Contacts.EXTRA_ADDRESS_BOOK_INDEX_TITLES)
-        val counts = cursor.extras.getIntArray(Contacts.EXTRA_ADDRESS_BOOK_INDEX_COUNTS)
-        val hasIndex = sections != null && counts != null && sections.size == counts.size
-
+    private fun readMembers(cursor: Cursor): List<ContactListEntry> {
+        val index = AddressBookIndex(cursor)
         val contactIds = mutableSetOf<Long>()
-        val members = mutableListOf<GroupMember>()
-        var sectionIndex = 0
-        var sectionEnd = if (hasIndex && counts!!.isNotEmpty()) counts[0] else Int.MAX_VALUE
-
-        while (cursor.moveToNext()) {
-            // The index counts the rows of the cursor, before removing the duplicates.
-            if (hasIndex) {
-                while (cursor.position >= sectionEnd && sectionIndex < counts!!.size - 1) {
-                    sectionIndex++
-                    sectionEnd += counts[sectionIndex]
+        return buildList {
+            while (cursor.moveToNext()) {
+                val contactId = cursor.getLong(MEMBER_CONTACT_ID)
+                if (!contactIds.add(contactId)) {
+                    continue
                 }
-            }
-            val contactId = cursor.getLong(MEMBER_CONTACT_ID)
-            if (!contactIds.add(contactId)) {
-                continue
-            }
-            members.add(
-                GroupMember(
-                    contactId = contactId,
-                    lookupUri = Contacts.getLookupUri(
-                        contactId, cursor.getString(MEMBER_LOOKUP_KEY)
-                    ),
-                    displayName = cursor.getString(MEMBER_DISPLAY_NAME),
-                    photoThumbnailUri = cursor.getString(MEMBER_PHOTO_THUMBNAIL_URI)
-                        ?.let(Uri::parse),
-                    section = if (hasIndex) sections!!.getOrNull(sectionIndex).orEmpty() else "",
+                add(
+                    ContactListEntry(
+                        contactId = contactId,
+                        lookupUri = Contacts.getLookupUri(
+                            contactId, cursor.getString(MEMBER_LOOKUP_KEY)
+                        ),
+                        displayName = cursor.getString(MEMBER_DISPLAY_NAME),
+                        photoThumbnailUri = cursor.getString(MEMBER_PHOTO_THUMBNAIL_URI)
+                            ?.let(Uri::parse),
+                        // The index counts the rows of the cursor, duplicates included.
+                        section = index.sectionAt(cursor.position),
+                    )
                 )
-            )
+            }
         }
-        return members
     }
 
     /**

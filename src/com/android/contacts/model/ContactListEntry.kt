@@ -19,4 +19,8 @@ data class ContactListEntry(
      * The address book index section of the contact, e.g. its initial.
      */
     val section: String,
+    /**
+     * Whether the contact is shown in the favorites section, above the other sections.
+     */
+    val favorite: Boolean = false,
 )

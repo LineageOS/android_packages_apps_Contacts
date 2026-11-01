@@ -125,35 +125,45 @@ public class AccountFilterUtil {
         }
 
         private List<ContactListFilter> getFiltersForAccounts(List<AccountInfo> accounts) {
-            final ArrayList<ContactListFilter> accountFilters = new ArrayList<>();
-            AccountInfo.sortAccounts(getDefaultAccount(getContext()), accounts);
-
-            for (AccountInfo accountInfo : accounts) {
-                final AccountType accountType = accountInfo.getType();
-                final AccountWithDataSet account = accountInfo.getAccount();
-                if ((accountType.isExtension() ||
-                        DeviceLocalAccountTypeFactory.Util.isLocalAccountType(
-                                mDeviceLocalFactory, account.type)) &&
-                        !account.hasData(getContext())) {
-                    // Hide extensions and device accounts with no raw_contacts.
-                    continue;
-                }
-                final Drawable icon = accountType != null ?
-                        accountType.getDisplayIcon(getContext()) : null;
-                if (mDeviceLocalFactory.classifyAccount(account.type)
-                        == DeviceLocalAccountTypeFactory.TYPE_DEVICE) {
-                    accountFilters.add(ContactListFilter.createDeviceContactsFilter(icon, account));
-                } else if (mDeviceLocalFactory.classifyAccount(account.type)
-                        == DeviceLocalAccountTypeFactory.TYPE_SIM) {
-                    accountFilters.add(ContactListFilter.createSimContactsFilter(icon, account));
-                } else {
-                    accountFilters.add(ContactListFilter.createAccountFilter(
-                            account.type, account.name, account.dataSet, icon));
-                }
-            }
-
-            return accountFilters;
+            return AccountFilterUtil.getFiltersForAccounts(
+                    getContext(), mDeviceLocalFactory, accounts);
         }
+    }
+
+    /**
+     * Returns the filters of the drawer for the given accounts, sorted with the default account
+     * first. Extensions and device accounts without contacts are left out.
+     */
+    public static List<ContactListFilter> getFiltersForAccounts(Context context,
+            DeviceLocalAccountTypeFactory deviceLocalFactory, List<AccountInfo> accounts) {
+        final ArrayList<ContactListFilter> accountFilters = new ArrayList<>();
+        AccountInfo.sortAccounts(getDefaultAccount(context), accounts);
+
+        for (AccountInfo accountInfo : accounts) {
+            final AccountType accountType = accountInfo.getType();
+            final AccountWithDataSet account = accountInfo.getAccount();
+            if ((accountType.isExtension() ||
+                    DeviceLocalAccountTypeFactory.Util.isLocalAccountType(
+                            deviceLocalFactory, account.type)) &&
+                    !account.hasData(context)) {
+                // Hide extensions and device accounts with no raw_contacts.
+                continue;
+            }
+            final Drawable icon = accountType != null ?
+                    accountType.getDisplayIcon(context) : null;
+            if (deviceLocalFactory.classifyAccount(account.type)
+                    == DeviceLocalAccountTypeFactory.TYPE_DEVICE) {
+                accountFilters.add(ContactListFilter.createDeviceContactsFilter(icon, account));
+            } else if (deviceLocalFactory.classifyAccount(account.type)
+                    == DeviceLocalAccountTypeFactory.TYPE_SIM) {
+                accountFilters.add(ContactListFilter.createSimContactsFilter(icon, account));
+            } else {
+                accountFilters.add(ContactListFilter.createAccountFilter(
+                        account.type, account.name, account.dataSet, icon));
+            }
+        }
+
+        return accountFilters;
     }
 
     private static AccountWithDataSet getDefaultAccount(Context context) {

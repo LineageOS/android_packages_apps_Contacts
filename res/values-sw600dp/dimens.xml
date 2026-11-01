@@ -37,9 +37,6 @@
     <!-- End margin of edit group title -->
     <dimen name="edit_group_end_margin">80dp</dimen>
 
-    <!-- Top padding for the image for empty group view -->
-    <dimen name="empty_group_view_image_padding_top">0dp</dimen>
-
     <!-- Top and bottom padding for the text for empty account view -->
     <dimen name="empty_account_view_text_padding_top">32dp</dimen>
 

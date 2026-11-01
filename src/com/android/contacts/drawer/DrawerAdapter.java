@@ -69,7 +69,6 @@ public class DrawerAdapter extends BaseAdapter {
     private boolean mAreGroupWritableAccountsAvailable;
 
     // The group/account that was last clicked.
-    private long mSelectedGroupId;
     private ContactListFilter mSelectedAccount;
 
     // Adapter elements, ordered in this way mItemsList. The ordering is based on:
@@ -337,10 +336,8 @@ public class DrawerAdapter extends BaseAdapter {
         title.setText(groupListItem.getTitle());
         final ImageView icon = (ImageView) result.findViewById(R.id.icon);
         icon.setImageResource(R.drawable.quantum_ic_label_vd_theme_24);
-        final boolean activated = groupListItem.getGroupId() == mSelectedGroupId &&
-                mSelectedView == ContactsView.GROUP_VIEW;
-        updateSelectedStatus(title, icon, activated);
-        result.setActivated(activated);
+        updateSelectedStatus(title, icon, /* activated */ false);
+        result.setActivated(false);
 
         result.setTag(groupListItem);
         result.setContentDescription(
@@ -418,18 +415,6 @@ public class DrawerAdapter extends BaseAdapter {
         notifyChangeAndRebuildList();
     }
 
-
-    public void setSelectedGroupId(long groupId) {
-        if (mSelectedGroupId == groupId) {
-            return;
-        }
-        mSelectedGroupId = groupId;
-        notifyChangeAndRebuildList();
-    }
-
-    public long getSelectedGroupId() {
-        return mSelectedGroupId;
-    }
 
     public void setSelectedAccount(ContactListFilter filter) {
         if (mSelectedAccount == filter) {

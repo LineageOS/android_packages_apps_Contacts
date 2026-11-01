@@ -46,7 +46,6 @@ import android.widget.ImageView.ScaleType;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import androidx.appcompat.widget.AppCompatCheckBox;
-import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -188,7 +187,6 @@ public class ContactListItemView extends ViewGroup
     private TextView mStatusView;
     private ImageView mPresenceIcon;
     private AppCompatCheckBox mCheckBox;
-    private AppCompatImageButton mDeleteImageButton;
     private ImageView mVideoCallIcon;
     private ImageView mWorkProfileIcon;
 
@@ -231,8 +229,6 @@ public class ContactListItemView extends ViewGroup
     private int mStatusTextViewHeight;
     private int mCheckBoxHeight;
     private int mCheckBoxWidth;
-    private int mDeleteImageButtonHeight;
-    private int mDeleteImageButtonWidth;
 
     // Holds Math.max(mLabelTextViewHeight, mDataViewHeight), assuming Label and Data share the
     // same row.
@@ -438,8 +434,6 @@ public class ContactListItemView extends ViewGroup
         mStatusTextViewHeight = 0;
         mCheckBoxWidth = 0;
         mCheckBoxHeight = 0;
-        mDeleteImageButtonWidth = 0;
-        mDeleteImageButtonHeight = 0;
 
         ensurePhotoViewSize();
 
@@ -471,15 +465,6 @@ public class ContactListItemView extends ViewGroup
             mCheckBoxWidth = mCheckBox.getMeasuredWidth();
             mCheckBoxHeight = mCheckBox.getMeasuredHeight();
             effectiveWidth -= mCheckBoxWidth + mGapBetweenImageAndText;
-        }
-
-        if (isVisible(mDeleteImageButton)) {
-            mDeleteImageButton.measure(
-                    MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
-                    MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
-            mDeleteImageButtonWidth = mDeleteImageButton.getMeasuredWidth();
-            mDeleteImageButtonHeight = mDeleteImageButton.getMeasuredHeight();
-            effectiveWidth -= mDeleteImageButtonWidth + mGapBetweenImageAndText;
         }
 
         if (isVisible(mNameTextView)) {
@@ -661,25 +646,6 @@ public class ContactListItemView extends ViewGroup
                         photoTop,
                         leftBound + mGapFromScrollBar + mCheckBoxWidth,
                         photoTop + mCheckBoxHeight);
-            }
-        }
-
-        if (isVisible(mDeleteImageButton)) {
-            final int photoTop = topBound + (bottomBound - topBound - mDeleteImageButtonHeight) / 2;
-            final int mDeleteImageButtonSize = mDeleteImageButtonHeight > mDeleteImageButtonWidth
-                    ? mDeleteImageButtonHeight : mDeleteImageButtonWidth;
-            if (mPhotoPosition == PhotoPosition.LEFT) {
-                mDeleteImageButton.layout(rightBound - mDeleteImageButtonSize,
-                        photoTop,
-                        rightBound,
-                        photoTop + mDeleteImageButtonSize);
-                rightBound -= mDeleteImageButtonSize;
-            } else {
-                mDeleteImageButton.layout(leftBound,
-                        photoTop,
-                        leftBound + mDeleteImageButtonSize,
-                        photoTop + mDeleteImageButtonSize);
-                leftBound += mDeleteImageButtonSize;
             }
         }
 
@@ -1330,40 +1296,6 @@ public class ContactListItemView extends ViewGroup
     }
 
     /**
-     * Returns the {@link AppCompatImageButton} delete button, creating it if necessary.
-     */
-    public AppCompatImageButton getDeleteImageButton(
-            final MultiSelectEntryContactListAdapter.DeleteContactListener listener,
-            final int position) {
-        if (mDeleteImageButton == null) {
-            mDeleteImageButton = new AppCompatImageButton(getContext());
-            mDeleteImageButton.setImageResource(R.drawable.quantum_ic_cancel_vd_theme_24);
-            mDeleteImageButton.setScaleType(ScaleType.CENTER);
-            mDeleteImageButton.setBackgroundColor(Color.TRANSPARENT);
-            mDeleteImageButton.setContentDescription(
-                    getResources().getString(R.string.description_delete_contact));
-            if (CompatUtils. isLollipopCompatible()) {
-                final TypedValue typedValue = new TypedValue();
-                getContext().getTheme().resolveAttribute(
-                        android.R.attr.selectableItemBackgroundBorderless, typedValue, true);
-                mDeleteImageButton.setBackgroundResource(typedValue.resourceId);
-            }
-            addView(mDeleteImageButton);
-        }
-        // Reset onClickListener because after reloading the view, position might be changed.
-        mDeleteImageButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Inform the adapter that delete icon was clicked.
-                if (listener != null) {
-                    listener.onContactDeleteClicked(position);
-                }
-            }
-        });
-        return mDeleteImageButton;
-    }
-
-    /**
      * Returns the text view for the data text, creating it if necessary.
      */
     public TextView getDataView() {
@@ -1547,13 +1479,6 @@ public class ContactListItemView extends ViewGroup
         if (mCheckBox != null) {
             removeView(mCheckBox);
             mCheckBox = null;
-        }
-    }
-
-    public void hideDeleteImageButton() {
-        if (mDeleteImageButton != null) {
-            removeView(mDeleteImageButton);
-            mDeleteImageButton = null;
         }
     }
 

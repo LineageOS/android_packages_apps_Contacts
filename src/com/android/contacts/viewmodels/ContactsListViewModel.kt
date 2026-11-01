@@ -7,8 +7,11 @@
 package com.android.contacts.viewmodels
 
 import android.app.Application
+import android.content.ContentUris
+import android.content.Intent
 import android.database.ContentObserver
 import android.database.Cursor
+import android.icu.text.MessageFormat
 import android.net.Uri
 import android.provider.ContactsContract
 import android.provider.ContactsContract.Contacts
@@ -21,6 +24,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
+import com.android.contacts.ContactSaveService
 import com.android.contacts.R
 import com.android.contacts.compat.ContactsCompat
 import com.android.contacts.compat.DirectoryCompat
@@ -28,10 +32,15 @@ import com.android.contacts.list.AddressBookIndex
 import com.android.contacts.list.ContactListFilter
 import com.android.contacts.list.ContactListFilterController
 import com.android.contacts.list.ContactSnippets
+import com.android.contacts.logging.ListEvent
+import com.android.contacts.logging.Logger
+import com.android.contacts.model.AccountTypeManager
 import com.android.contacts.model.ContactListEntry
+import com.android.contacts.model.ContactsDeletion
 import com.android.contacts.model.ContactsListEmptyState
 import com.android.contacts.model.ContactsListHeader
 import com.android.contacts.model.ContactsListState
+import com.android.contacts.model.ContactsListStatus
 import com.android.contacts.model.ContactsSearchState
 import com.android.contacts.model.DirectorySearchResults
 import com.android.contacts.model.SearchDirectory
@@ -39,22 +48,28 @@ import com.android.contacts.model.account.AccountWithDataSet
 import com.android.contacts.model.account.GoogleAccountType
 import com.android.contacts.preference.ContactsPreferences
 import com.android.contacts.util.AccountFilterUtil
+import com.android.contacts.util.ContactDisplayUtils
+import java.util.Locale
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.transformLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.withContext
 
 /**
  * View model of the main contact list, showing the contacts of the current
@@ -118,6 +133,30 @@ class ContactsListViewModel(
     val searchQuery = savedStateHandle.getStateFlow<String?>(KEY_SEARCH_QUERY, null)
 
     /**
+     * The selected contacts, the list is in selection mode if it isn't empty.
+     */
+    val selectedContactIds: StateFlow<Set<Long>> =
+        savedStateHandle.getStateFlow(KEY_SELECTED, LongArray(0))
+            .map { it.toSet() }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.Eagerly,
+                initialValue = emptySet(),
+            )
+
+    /**
+     * The deletion of the selected contacts to confirm, if any.
+     */
+    private val _deletion = MutableStateFlow<ContactsDeletion?>(null)
+    val deletion = _deletion.asStateFlow()
+
+    /**
+     * What the activity has to do once, see [onStatusHandled].
+     */
+    private val _status = MutableStateFlow<ContactsListStatus>(ContactsListStatus.Idle)
+    val status = _status.asStateFlow()
+
+    /**
      * The contacts of the current filter. Null while loading.
      */
     val state: StateFlow<ContactsListState?> = combine(
@@ -167,6 +206,82 @@ class ContactsListViewModel(
      */
     fun stopSearch() {
         savedStateHandle[KEY_SEARCH_QUERY] = null
+    }
+
+    fun toggleSelected(contact: ContactListEntry) {
+        val selected = selectedContactIds.value.toMutableSet()
+        if (!selected.remove(contact.contactId)) {
+            selected.add(contact.contactId)
+        }
+        savedStateHandle[KEY_SELECTED] = selected.toLongArray()
+    }
+
+    fun clearSelection() {
+        savedStateHandle[KEY_SELECTED] = LongArray(0)
+    }
+
+    /**
+     * Shares the selected contacts as a single vCard.
+     */
+    fun shareSelected() {
+        val contactIds = selectedContactIds.value
+        viewModelScope.launch {
+            val intent = withContext(Dispatchers.IO) { createShareIntent(contactIds) }
+                ?: return@launch
+            logSelectionEvent(ListEvent.ActionType.SHARE)
+            _status.value = ContactsListStatus.Share(intent)
+        }
+    }
+
+    /**
+     * Links the selected contacts into a single one.
+     */
+    fun joinSelected() {
+        logSelectionEvent(ListEvent.ActionType.LINK)
+        val application = getApplication<Application>()
+        application.startService(
+            ContactSaveService.createJoinSeveralContactsIntent(
+                application, selectedContactIds.value.toLongArray()
+            )
+        )
+        clearSelection()
+    }
+
+    /**
+     * Asks to confirm the deletion of the selected contacts, see [deletion].
+     */
+    fun requestDeleteSelected() {
+        val contactIds = selectedContactIds.value
+        viewModelScope.launch {
+            _deletion.value = withContext(Dispatchers.IO) { createDeletion(contactIds) }
+        }
+    }
+
+    /**
+     * Deletes the contacts of [deletion] once confirmed.
+     */
+    fun confirmDeletion() {
+        val deletion = _deletion.value ?: return
+        _deletion.value = null
+        logSelectionEvent(ListEvent.ActionType.DELETE)
+        val application = getApplication<Application>()
+        application.startService(
+            ContactSaveService.createDeleteMultipleContactsIntent(
+                application, deletion.contactIds.toLongArray(), deletion.names.toTypedArray()
+            )
+        )
+        clearSelection()
+    }
+
+    fun cancelDeletion() {
+        _deletion.value = null
+    }
+
+    /**
+     * Called once the activity handled [status].
+     */
+    fun onStatusHandled() {
+        _status.value = ContactsListStatus.Idle
     }
 
     private fun load(filter: ContactListFilter): ContactsListState {
@@ -303,6 +418,115 @@ class ContactsListViewModel(
                 )
             }
         }
+    }
+
+    private fun logSelectionEvent(actionType: Int) {
+        val search = searchState.value
+        Logger.logListEvent(
+            actionType,
+            if (search != null) {
+                ListEvent.ListType.SEARCH_RESULT
+            } else {
+                state.value?.filter?.toListType() ?: ListEvent.ListType.UNKNOWN_LIST
+            },
+            search?.results?.sumOf { it.contacts?.size ?: 0 } ?: state.value?.contacts?.size ?: 0,
+            /* clickedIndex */ -1,
+            selectedContactIds.value.size,
+        )
+    }
+
+    /**
+     * Returns a chooser intent sharing [contactIds] as a single vCard, or null if none of them
+     * still exists.
+     */
+    private fun createShareIntent(contactIds: Set<Long>): Intent? {
+        val lookupKeys = contactIds.mapNotNull { contactId ->
+            val contactUri = ContentUris.withAppendedId(Contacts.CONTENT_URI, contactId)
+            Contacts.getLookupUri(contentResolver, contactUri)
+                ?.pathSegments
+                ?.takeIf { it.size >= 2 }
+                ?.let { it[it.size - 2] }
+        }
+        if (lookupKeys.isEmpty()) {
+            return null
+        }
+        val uri = Uri.withAppendedPath(
+            Contacts.CONTENT_MULTI_VCARD_URI,
+            Uri.encode(lookupKeys.joinToString(":") { Uri.encode(it) }),
+        )
+        val intent = Intent(Intent.ACTION_SEND)
+            .setType(Contacts.CONTENT_VCARD_TYPE)
+            .putExtra(Intent.EXTRA_STREAM, uri)
+        val title = MessageFormat(
+            getApplication<Application>().getString(R.string.title_share_via),
+            Locale.getDefault(),
+        ).format(mapOf("count" to contactIds.size))
+        return Intent.createChooser(intent, title)
+    }
+
+    /**
+     * Loads the raw contacts of [contactIds], to ask to confirm their deletion depending on
+     * whether their accounts are writable.
+     */
+    private fun createDeletion(contactIds: Set<Long>): ContactsDeletion? {
+        if (contactIds.isEmpty()) {
+            return null
+        }
+        val accountTypeManager = AccountTypeManager.getInstance(getApplication<Application>())
+        val readOnlyRawContacts = mutableSetOf<Long>()
+        val writableRawContacts = mutableSetOf<Long>()
+        val existingContactIds = mutableSetOf<Long>()
+        val names = mutableSetOf<String>()
+
+        contentResolver.query(
+            RawContacts.CONTENT_URI,
+            arrayOf(
+                RawContacts._ID,
+                RawContacts.ACCOUNT_TYPE,
+                RawContacts.DATA_SET,
+                RawContacts.CONTACT_ID,
+                RawContacts.DISPLAY_NAME_PRIMARY,
+                RawContacts.DISPLAY_NAME_ALTERNATIVE,
+            ),
+            "${RawContacts.CONTACT_ID} IN (${contactIds.joinToString(",") { "?" }})",
+            contactIds.map { it.toString() }.toTypedArray(),
+            null,
+        )?.use { cursor ->
+            while (cursor.moveToNext()) {
+                ContactDisplayUtils.getPreferredDisplayName(
+                    cursor.getString(4), cursor.getString(5), preferences
+                )?.takeIf { it.isNotEmpty() }?.let(names::add)
+                existingContactIds.add(cursor.getLong(3))
+
+                val accountType = accountTypeManager.getAccountType(
+                    cursor.getString(1), cursor.getString(2)
+                )
+                if (accountType == null || accountType.areContactsWritable()) {
+                    writableRawContacts.add(cursor.getLong(0))
+                } else {
+                    readOnlyRawContacts.add(cursor.getLong(0))
+                }
+            }
+        } ?: return null
+
+        val readOnlyCount = readOnlyRawContacts.size
+        val writableCount = writableRawContacts.size
+        val (message, confirmButton) = when {
+            readOnlyCount > 0 && writableCount > 0 ->
+                R.string.batch_delete_multiple_accounts_confirmation to android.R.string.ok
+
+            readOnlyCount > 0 ->
+                R.string.batch_delete_read_only_contact_confirmation to
+                        R.string.readOnlyContactWarning_positive_button
+
+            writableCount == 1 ->
+                R.string.single_delete_confirmation to
+                        R.string.deleteConfirmation_positive_button
+
+            else ->
+                R.string.batch_delete_confirmation to R.string.deleteConfirmation_positive_button
+        }
+        return ContactsDeletion(message, confirmButton, existingContactIds.toList(), names.toList())
     }
 
     /**
@@ -484,6 +708,7 @@ class ContactsListViewModel(
         private const val TAG = "ContactsListViewModel"
 
         private const val KEY_SEARCH_QUERY = "searchQuery"
+        private const val KEY_SELECTED = "selectedContactIds"
 
         /**
          * The maximum number of results of a remote directory.

@@ -5,6 +5,8 @@
 
 package com.android.contacts.model
 
+import android.content.Intent
+import androidx.annotation.StringRes
 import com.android.contacts.list.ContactListFilter
 
 /**
@@ -95,4 +97,33 @@ data class ContactsSearchState(
 ) {
     val searching get() = results.any { it.contacts == null }
     val empty get() = results.all { it.contacts?.isEmpty() == true }
+}
+
+/**
+ * Asks to confirm the deletion of the selected contacts, with a [message] depending on the
+ * accounts of their raw contacts.
+ */
+data class ContactsDeletion(
+    @StringRes val message: Int,
+    @StringRes val confirmButton: Int,
+    val contactIds: List<Long>,
+    /**
+     * The names of the contacts, shown in the notification of the deletion.
+     */
+    val names: List<String>,
+)
+
+/**
+ * The status of the main contact list, for what the activity has to do once.
+ */
+sealed interface ContactsListStatus {
+    /**
+     * Nothing to do.
+     */
+    data object Idle : ContactsListStatus
+
+    /**
+     * Shares the selected contacts through the chooser [intent].
+     */
+    data class Share(val intent: Intent) : ContactsListStatus
 }

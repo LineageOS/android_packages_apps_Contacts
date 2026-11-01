@@ -416,9 +416,6 @@
     <!-- An option in the 'Contact photo' dialog, if there is already a photo [CHAR LIMIT=50] -->
     <string name="pick_new_photo">Select new photo</string>
 
-    <!-- Title shown in the search result activity of contacts app while searching.  [CHAR LIMIT=20] -->
-    <string name="search_results_searching">Searching\u2026</string>
-
     <!-- The button to add an organization field to a contact in the Raw Contact Editor [CHAR LIMIT=12] -->
     <string name="event_edit_field_hint_text">Date</string>
 
@@ -590,9 +587,6 @@
     <!-- Button label to prompt the user to add another account (when there are already existing accounts on the device) [CHAR LIMIT=30] -->
     <string name="add_new_account">Add new account</string>
 
-    <!-- Menu item shown only when the special debug mode is enabled, which is used to send all contacts database files via email.  [CHAR LIMIT=NONE] -->
-    <string name="menu_export_database">Export database files</string>
-
     <!-- Content description for the button that adds a new contact
          [CHAR LIMIT=NONE] -->
     <string name="action_menu_add_new_contact_button">Create new contact</string>
@@ -678,17 +672,8 @@
     type. For example: Delete Website, Delete SIP, etc [CHAR LIMIT=30]-->
     <string name="editor_delete_view_description_short">Delete <xliff:g id="data_kind">%s</xliff:g></string>
 
-    <!-- Left drawer menu item to open contacts assistant/suggestion cards. [CHAR LIMIT=20]-->
-    <string name="menu_assistant">Suggestions</string>
-
-    <!-- Badge shown next to Suggestions in left drawer menu when user has not visited it yet. [CHAR LIMIT=10] -->
-    <string name="menu_assistant_new_badge">New</string>
-
     <!-- Open drawer content descriptions [CHAR LIMIT=40] -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
-
-    <!-- Close drawer content descriptions [CHAR LIMIT=40] -->
-    <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <!-- Content description of label name in navigation drawer. For example: Coworker Label, Friends Label [CHAR LIMIT=30] -->
     <string name="navigation_drawer_label"><xliff:g id="label_name">%s</xliff:g> label</string>

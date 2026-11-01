@@ -46,7 +46,6 @@ import android.widget.TextView;
 
 import com.android.contacts.R;
 import com.android.contacts.activities.ActionBarAdapter.Listener.Action;
-import com.android.contacts.activities.PeopleActivity;
 import com.android.contacts.compat.CompatUtils;
 import com.android.contacts.list.ContactsRequest;
 import com.android.contacts.util.MaterialColorMapUtils;
@@ -507,8 +506,6 @@ public class ActionBarAdapter implements OnCloseListener {
             if (shouldAnimate) {
                 runStatusBarAnimation(/* colorTo */
                         MaterialColorMapUtils.getStatusBarColor(mActivity));
-            } else if (mActivity instanceof PeopleActivity) {
-                ((PeopleActivity) mActivity).updateStatusBarBackground();
             }
         }
     }

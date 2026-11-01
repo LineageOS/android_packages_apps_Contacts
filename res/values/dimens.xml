@@ -115,8 +115,6 @@
     <dimen name="join_header_top_margin">12dip</dimen>
     <dimen name="join_header_bottom_margin">12dip</dimen>
 
-    <dimen name="contact_filter_header_min_height">24dip</dimen>
-
     <!-- Margins for ExpandingEntryCardView -->
     <dimen name="expanding_entry_card_marginStartEnd">8dp</dimen>
     <dimen name="expanding_entry_card_marginBottom">12dp</dimen>
@@ -192,52 +190,14 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="nav_new_badge_corners">3dp</dimen>
-    <dimen name="nav_new_badge_vertical_pad">2dp</dimen>
-    <dimen name="nav_new_badge_horizontal_pad">5dp</dimen>
-    <dimen name="nav_new_badge_font_size">11sp</dimen>
-
-    <!-- Height for the image for empty group and main view-->
-    <dimen name="empty_view_image_height">150dp</dimen>
-
-    <!-- Top padding for the text for empty account view -->
-    <dimen name="empty_account_view_text_padding_top">24dp</dimen>
-
     <!-- End margin of edit group title -->
     <dimen name="edit_group_end_margin">72dp</dimen>
 
     <!-- Minimum height for group name EditText -->
     <dimen name="dialog_edit_text_min_height">48dp</dimen>
 
-    <!-- Distance to pull down before causing a refresh. -->
-    <dimen name="pull_to_refresh_distance">40dp</dimen>
-
     <!-- Elevation of contact list header -->
     <dimen name="contact_list_header_elevation">2dp</dimen>
-
-    <!-- Gap b/w image view and top of the screen in empty main view -->
-    <dimen name="empty_home_view_image_offset">210dp</dimen>
-
-    <!-- Top padding for the text for empty main view -->
-    <dimen name="empty_home_view_text_padding_top">32dp</dimen>
-
-    <!-- Extra margin above image in empty account view -->
-    <dimen name="empty_account_view_image_offset">30dp</dimen>
-
-    <!-- Margin offset b/w the image top and app bar bottom for no account empty view -->
-    <dimen name="contacts_no_account_empty_image_offset">230dp</dimen>
-
-    <!-- Width for the image for contacts no account empty view -->
-    <dimen name="contacts_no_account_empty_image_width">180dp</dimen>
-
-    <!-- Top padding for the text for no account empty view -->
-    <dimen name="contacts_no_account_empty_text_padding_top">32dp</dimen>
-
-    <!-- Top padding for add account button for no account empty view -->
-    <dimen name="contacts_no_account_empty_button_padding_top">16dp</dimen>
-
-    <!-- Margin b/w add account button and import contacts button for no account empty view -->
-    <dimen name="contacts_no_account_buttons_margin">8dp</dimen>
 
     <!-- Padding between the action bar's bottom edge and the first header
          in contacts/group lists. -->
@@ -290,19 +250,11 @@
     <!-- Dimensions for contact letter tiles -->
     <item name="letter_to_tile_ratio" type="dimen">67%</item>
 
-    <!-- Height of the floating action button -->
-    <dimen name="floating_action_button_height">56dp</dimen>
-    <!-- Width of the floating action button -->
-    <dimen name="floating_action_button_width">56dp</dimen>
     <!-- Z translation of the floating action button -->
     <dimen name="floating_action_button_translation_z">8dp</dimen>
     <!-- Padding to be applied to the bottom of lists to make space for the floating action
          button -->
     <dimen name="floating_action_button_list_bottom_padding">88dp</dimen>
-    <!-- Right margin of the floating action button -->
-    <dimen name="floating_action_button_margin_right">16dp</dimen>
-    <!-- Bottom margin of the floating action button -->
-    <dimen name="floating_action_button_margin_bottom">16dp</dimen>
 
     <!-- Size of text in tabs. -->
     <dimen name="tab_elevation">2dp</dimen>
@@ -346,20 +298,5 @@
     <dimen name="call_subject_dialog_secondary_text_size">14sp</dimen>
     <!-- Row padding for call subject history items. -->
     <dimen name="call_subject_history_item_padding">15dp</dimen>
-
-    <!-- The width of the drawer -->
-    <dimen name="drawer_width">320dp</dimen>
-    <!-- Minimum height of items in navigation drawer -->
-    <dimen name="drawer_item_fixed_height">48dp</dimen>
-    <!-- Side padding within the navigation drawer -->
-    <dimen name="drawer_side_padding">16dp</dimen>
-    <!-- Size of the icon in navigation drawer -->
-    <dimen name="drawer_item_icon_size">32dp</dimen>
-    <!-- The side margin of the item text in navigation drawer -->
-    <dimen name="drawer_item_text_margin">32dp</dimen>
-    <!-- The height of the spacer in navigation drawer -->
-    <dimen name="nav_drawer_spacer_height">8dp</dimen>
-    <!-- Side padding within the navigation drawer -->
-    <dimen name="drawer_label_header_end_padding">24dp</dimen>
 
 </resources>

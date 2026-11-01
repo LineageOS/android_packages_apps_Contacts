@@ -382,30 +382,6 @@
         <item name="android:ellipsize">end</item>
     </style>
 
-    <!-- Text style for empty states (no account view, empty label). -->
-    <style name="EmptyStateTextStyle">
-        <item name="android:textSize">18sp</item>
-        <item name="android:textColor">#000000</item>
-        <item name="android:alpha">0.54</item>
-        <item name="android:fontFamily">sans-serif</item>
-    </style>
-
-    <!-- Button style for main contacts no account empty view. -->
-    <style name="NoAccountViewButtonStyle" parent="@style/Widget.AppCompat.Button.Borderless">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/primary_color</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-
-    <!-- Add contacts button style for empty states. -->
-    <style name="AddContactsButtonStyle" parent="@style/Widget.AppCompat.Button.Borderless">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/primary_color</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-
     <style name="SectionHeaderStyle" parent="@android:style/TextAppearance.Large">
         <item name="android:textSize">16sp</item>
         <item name="android:textAllCaps">true</item>
@@ -495,82 +471,4 @@ background and text color. See also android:style/Widget.Holo.TextView.ListSepar
         <item name="android:windowExitAnimation">@anim/slide_and_fade_out</item>
     </style>
 
-    <!-- Style for item in navigation drawer -->
-    <style name="DrawerItemStyle">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/drawer_item_fixed_height</item>
-        <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:background">@drawable/drawer_item_background</item>
-        <item name="android:orientation">horizontal</item>
-        <item name="android:paddingStart">@dimen/drawer_side_padding</item>
-    </style>
-
-    <style name="DrawerPrimaryItemStyle" parent="DrawerItemStyle">
-        <item name="android:paddingEnd">@dimen/drawer_item_text_margin</item>
-    </style>
-
-    <!-- Style for item icon in navigation drawer -->
-    <style name="DrawerItemIconStyle">
-        <item name="android:layout_width">@dimen/drawer_item_icon_size</item>
-        <item name="android:layout_height">@dimen/drawer_item_icon_size</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:gravity">center</item>
-        <item name="android:scaleType">center</item>
-    </style>
-
-    <!-- Style for primary item text in navigation drawer -->
-    <style name="DrawerItemTextStyle" parent="DrawerTextStyle">
-        <item name="android:textColor">@color/primary_text_color</item>
-        <item name="android:layout_width">0dip</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:textAlignment">viewStart</item>
-        <item name="android:layout_marginStart">@dimen/drawer_item_text_margin</item>
-        <item name="android:layout_marginEnd">@dimen/drawer_item_text_margin</item>
-    </style>
-
-    <style name="DrawerTextStyle">
-        <item name="android:fontFamily" tools:ignore="NewApi">sans-serif-medium</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:ellipsize">end</item>
-    </style>
-
-    <style name="DrawerItemTextActiveStyle">
-        <item name="android:textColor">@color/primary_color</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="DrawerItemTextInactiveStyle">
-        <item name="android:textColor">@color/quantum_black_text</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="DrawerHeaderTextStyle" parent="DrawerTextStyle">
-        <item name="android:layout_gravity">center_vertical|start</item>
-        <item name="android:paddingTop">12dp</item>
-        <item name="android:paddingBottom">12dp</item>
-        <item name="android:textColor">@color/quantum_black_secondary_text</item>
-        <item name="android:textSize">14sp</item>
-    </style>
-
-    <style name="DrawerBadgeStyle" parent="DrawerHeaderTextStyle">
-        <item name="android:layout_gravity">center_vertical|end</item>
-    </style>
-
-    <style name="DrawerHeaderItemStyle">
-        <item name="android:paddingStart">@dimen/drawer_side_padding</item>
-        <item name="android:paddingEnd">@dimen/drawer_label_header_end_padding</item>
-    </style>
-
-    <style name="DrawerSecondLineTitleTextStyle" parent="DrawerItemTextStyle">
-        <item name="android:layout_width">match_parent</item>
-    </style>
-
-    <style name="DrawerSecondLineSummaryTextStyle" parent="DrawerItemTextStyle">
-        <item name="android:textColor">@color/quantum_black_secondary_text</item>
-        <item name="android:layout_width">match_parent</item>
-    </style>
 </resources>

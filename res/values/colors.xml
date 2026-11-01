@@ -43,12 +43,6 @@
     <color name="primary_color_dark">@*android:color/system_accent1_700</color>
     <color name="primary_color">@*android:color/system_accent1_600</color>
 
-    <!-- Color of the selected tab underline -->
-    <color name="contacts_accent_color">@*android:color/system_neutral1_0</color>
-
-    <color name="floating_action_button_icon_color">@color/contacts_accent_color</color>
-    <color name="fab_color">@android:color/system_accent1_600</color>
-
     <!-- Horizontal separator line should be 12% dark in the light theme. -->
     <color name="divider_line_color_light">@*android:color/transparent</color>
 
@@ -81,9 +75,6 @@
 
     <!-- Color of text of people names in contact list when item is disabled. 30% black -->
     <color name="disabled_contact_list_name_text">#4D000000</color>
-
-    <!-- Color of background of all empty states. -->
-    <color name="empty_state_background">#efefef</color>
 
     <!-- Color of ripples used for views with dark backgrounds -->
     <color name="ripple_material_dark">#a0ffffff</color>
@@ -157,7 +148,6 @@
             this is Blue Grey 700 -->
     <color name="quickcontact_default_photo_tint_color_dark">#455A64</color>
 
-
     <color name="letter_tile_default_color">#cccccc</color>
 
     <color name="letter_tile_font_color">#ffffff</color>
@@ -207,11 +197,8 @@
     <color name="call_subject_history_background">#ffffff</color>
     <color name="search_video_call_icon_tint">@color/searchbox_hint_text_color</color>
 
-    <!-- Text color for an action in a snackbar. -->
-    <color name="snackbar_action_text">#ffffff</color>
     <!-- Background color for a snackbar. -->
     <color name="snackbar_background">#333333</color>
-
 
     <color name="material_star_pink">@color/primary_color</color>
 
@@ -223,12 +210,6 @@
 
     <!-- Background color for sync-off alert. -->
     <color name="alert_background">#e0e0e0</color>
-
-    <!-- Divider color in navigation drawer -->
-    <color name="drawer_divider_color">#E5E5E5</color>
-
-    <!-- Background color for the navigation drawer -->
-    <color name="navigation_drawer_background_color">#FAFAFA</color>
 
     <!-- Background color for the current selected item in the navigation drawer -->
     <color name="drawer_selected_color">#E8E8E8</color>

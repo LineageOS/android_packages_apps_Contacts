@@ -22,7 +22,6 @@ import android.app.Fragment;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents;
@@ -40,13 +39,7 @@ import com.android.contacts.model.account.AccountInfo;
 import com.android.contacts.model.account.AccountType;
 import com.android.contacts.model.account.AccountWithDataSet;
 import com.android.contacts.preference.ContactsPreferences;
-import com.android.contacts.util.concurrent.ContactsExecutors;
-import com.android.contacts.util.concurrent.ListenableFutureLoader;
-import com.android.contactsbind.ObjectFactory;
 
-import com.google.common.base.Function;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,35 +94,6 @@ public class AccountFilterUtil {
     /**
      * Loads a list of contact list filters
      */
-    public static class FilterLoader extends ListenableFutureLoader<List<ContactListFilter>> {
-        private AccountTypeManager mAccountTypeManager;
-        private DeviceLocalAccountTypeFactory mDeviceLocalFactory;
-
-        public FilterLoader(Context context) {
-            super(context, new IntentFilter(AccountTypeManager.BROADCAST_ACCOUNTS_CHANGED));
-            mAccountTypeManager = AccountTypeManager.getInstance(context);
-            mDeviceLocalFactory = ObjectFactory.getDeviceLocalAccountTypeFactory(context);
-        }
-
-
-        @Override
-        protected ListenableFuture<List<ContactListFilter>> loadData() {
-            return Futures.transform(mAccountTypeManager.filterAccountsAsync(
-                    AccountTypeManager.drawerDisplayableFilter()),
-                    new Function<List<AccountInfo>, List<ContactListFilter>>() {
-                        @Override
-                        public List<ContactListFilter> apply(List<AccountInfo> input) {
-                            return getFiltersForAccounts(input);
-                        }
-                    }, ContactsExecutors.getDefaultThreadPoolExecutor());
-        }
-
-        private List<ContactListFilter> getFiltersForAccounts(List<AccountInfo> accounts) {
-            return AccountFilterUtil.getFiltersForAccounts(
-                    getContext(), mDeviceLocalFactory, accounts);
-        }
-    }
-
     /**
      * Returns the filters of the drawer for the given accounts, sorted with the default account
      * first. Extensions and device accounts without contacts are left out.

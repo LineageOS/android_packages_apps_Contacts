@@ -21,9 +21,6 @@
     <!-- For ContactDeletionInteraction -->
     <item type="id" name="dialog_delete_contact_loader_id" />
 
-    <!-- For ContactMultiDeletionInteraction -->
-    <item type="id" name="dialog_delete_multiple_contact_loader_id" />
-
     <!-- For PhoneNumberInteraction -->
     <item type="id" name="dialog_phone_number_call_disambiguation"/>
 
@@ -45,42 +42,6 @@
 
     <!-- An ID to be used for tagging text for copy in legacy fields. -->
     <item name="text_to_copy" type="id"/>
-
-    <!-- Menu ID for profile item -->
-    <item type="id" name="nav_myprofile" />
-
-    <!-- Menu group ID for settings and help & feedback  -->
-    <item type="id" name="nav_misc" />
-
-    <!-- Menu ID for Contacts menu -->
-    <item type="id" name="nav_all_contacts" />
-
-    <!-- Menu ID for Suggestions menu -->
-    <item type="id" name="nav_assistant" />
-
-    <!-- Menu ID for group header -->
-    <item type="id" name="nav_groups" />
-
-    <!-- Menu ID for each group menu item -->
-    <item type="id" name="nav_group" />
-
-    <!-- Menu ID for create label menu item -->
-    <item type="id" name="nav_create_label" />
-
-    <!-- Menu ID for filter header -->
-    <item type="id" name="nav_filters" />
-
-    <!-- Menu ID for each filter menu item -->
-    <item type="id" name="nav_filter" />
-
-    <!-- Menu ID for ice item -->
-    <item type="id" name="nav_emergency" />
-
-    <!-- Menu ID for Settings menu -->
-    <item type="id" name="nav_settings" />
-
-    <!-- Menu ID for help & feedback  menu -->
-    <item type="id" name="nav_help" />
 
     <!-- For vcard.ImportVCardActivity -->
     <item type="id" name="dialog_cache_vcard"/>

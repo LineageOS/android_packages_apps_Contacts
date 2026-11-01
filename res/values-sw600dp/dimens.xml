@@ -37,15 +37,6 @@
     <!-- End margin of edit group title -->
     <dimen name="edit_group_end_margin">80dp</dimen>
 
-    <!-- Top and bottom padding for the text for empty account view -->
-    <dimen name="empty_account_view_text_padding_top">32dp</dimen>
-
-    <!-- Gap b/w image view and top of the screen in empty main view -->
-    <dimen name="empty_home_view_image_offset">218dp</dimen>
-
-    <!-- Margin offset b/w the image top and app bar bottom for no account empty view -->
-    <dimen name="contacts_no_account_empty_image_offset">238dp</dimen>
-
     <dimen name="contact_browser_list_header_left_margin">@dimen/list_visible_scrollbar_padding</dimen>
     <dimen name="contact_browser_list_header_right_margin">24dip</dimen>
 
@@ -55,11 +46,4 @@
 
     <dimen name="contact_filter_left_margin">16dp</dimen>
 
-    <!-- Right margin of the floating action button -->
-    <dimen name="floating_action_button_margin_right">32dp</dimen>
-    <!-- Bottom margin of the floating action button -->
-    <dimen name="floating_action_button_margin_bottom">32dp</dimen>
-
-    <!-- Side padding within the navigation drawer -->
-    <dimen name="drawer_side_padding">24dp</dimen>
 </resources>

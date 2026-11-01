@@ -126,4 +126,42 @@ sealed interface ContactsListStatus {
      * Shares the selected contacts through the chooser [intent].
      */
     data class Share(val intent: Intent) : ContactsListStatus
+
+    /**
+     * The contacts couldn't be synced without a network connection.
+     */
+    data object ConnectionError : ContactsListStatus
 }
+
+/**
+ * Why the contacts can't be shown.
+ */
+enum class ContactsUnavailable {
+    /**
+     * There are no accounts and no contacts, the user can add an account or import contacts.
+     */
+    NO_ACCOUNT,
+
+    /**
+     * The contacts provider is being upgraded, or is changing the locale of the contacts.
+     */
+    BUSY,
+}
+
+/**
+ * The sync of the contacts of the current filter.
+ */
+data class ContactsSyncState(
+    /**
+     * Whether the contacts can be synced by pulling the list.
+     */
+    val canRefresh: Boolean,
+    /**
+     * Whether the contacts of the filter are being synced.
+     */
+    val refreshing: Boolean,
+    /**
+     * Why the sync is off, see SyncUtil, null if no alert should be shown.
+     */
+    val syncOffReason: Int?,
+)

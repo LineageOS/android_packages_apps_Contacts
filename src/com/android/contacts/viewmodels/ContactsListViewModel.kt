@@ -6,13 +6,16 @@
 
 package com.android.contacts.viewmodels
 
+import android.accounts.Account
 import android.app.Application
+import android.content.ContentResolver
 import android.content.ContentUris
 import android.content.Intent
 import android.database.ContentObserver
 import android.database.Cursor
 import android.icu.text.MessageFormat
 import android.net.Uri
+import android.os.Bundle
 import android.provider.ContactsContract
 import android.provider.ContactsContract.Contacts
 import android.provider.ContactsContract.Data
@@ -28,10 +31,12 @@ import com.android.contacts.ContactSaveService
 import com.android.contacts.R
 import com.android.contacts.compat.ContactsCompat
 import com.android.contacts.compat.DirectoryCompat
+import com.android.contacts.compat.ProviderStatusCompat
 import com.android.contacts.list.AddressBookIndex
 import com.android.contacts.list.ContactListFilter
 import com.android.contacts.list.ContactListFilterController
 import com.android.contacts.list.ContactSnippets
+import com.android.contacts.list.ProviderStatusWatcher
 import com.android.contacts.logging.ListEvent
 import com.android.contacts.logging.Logger
 import com.android.contacts.model.AccountTypeManager
@@ -42,13 +47,18 @@ import com.android.contacts.model.ContactsListHeader
 import com.android.contacts.model.ContactsListState
 import com.android.contacts.model.ContactsListStatus
 import com.android.contacts.model.ContactsSearchState
+import com.android.contacts.model.ContactsSyncState
+import com.android.contacts.model.ContactsUnavailable
 import com.android.contacts.model.DirectorySearchResults
 import com.android.contacts.model.SearchDirectory
+import com.android.contacts.model.account.AccountInfo
 import com.android.contacts.model.account.AccountWithDataSet
 import com.android.contacts.model.account.GoogleAccountType
 import com.android.contacts.preference.ContactsPreferences
 import com.android.contacts.util.AccountFilterUtil
 import com.android.contacts.util.ContactDisplayUtils
+import com.android.contacts.util.SharedPreferenceUtil
+import com.android.contacts.util.SyncUtil
 import java.util.Locale
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -128,6 +138,72 @@ class ContactsListViewModel(
     }.conflate()
 
     /**
+     * Account type manager, used to get the accounts to sync.
+     */
+    private val accountTypeManager = AccountTypeManager.getInstance(application)
+
+    /**
+     * Emits when the sync status of the accounts changes.
+     */
+    private val syncStatusChanges = callbackFlow {
+        val handle = ContentResolver.addStatusChangeListener(
+            ContentResolver.SYNC_OBSERVER_TYPE_ACTIVE
+                    or ContentResolver.SYNC_OBSERVER_TYPE_PENDING
+                    or ContentResolver.SYNC_OBSERVER_TYPE_SETTINGS
+        ) { trySend(Unit) }
+        trySend(Unit)
+        awaitClose { ContentResolver.removeStatusChangeListener(handle) }
+    }.conflate()
+
+    /**
+     * Incremented when the sync off alert is dismissed, to update it.
+     */
+    private val syncAlertChanges = MutableStateFlow(0)
+
+    /**
+     * Whether to ask to confirm turning on the global auto-sync.
+     */
+    private val _enableAutoSyncConfirmation = MutableStateFlow(false)
+    val enableAutoSyncConfirmation = _enableAutoSyncConfirmation.asStateFlow()
+
+    /**
+     * Why the contacts can't be shown, null if they can.
+     */
+    val unavailable: StateFlow<ContactsUnavailable?> = callbackFlow {
+        val watcher = ProviderStatusWatcher.getInstance(getApplication<Application>())
+        val listener = ProviderStatusWatcher.ProviderStatusListener {
+            trySend(watcher.providerStatus)
+        }
+        watcher.addListener(listener)
+        watcher.start()
+        trySend(withContext(Dispatchers.IO) { watcher.providerStatus })
+        awaitClose {
+            watcher.removeListener(listener)
+            watcher.stop()
+        }
+    }
+        // The watcher works on the main thread.
+        .flowOn(Dispatchers.Main)
+        .map { providerStatus ->
+            when (providerStatus) {
+                ProviderStatusCompat.STATUS_NORMAL -> null
+                // The provider may still be empty while there is a non local account, see
+                // b/30566908.
+                ProviderStatusCompat.STATUS_EMPTY -> ContactsUnavailable.NO_ACCOUNT.takeUnless {
+                    accountTypeManager.hasNonLocalAccount()
+                }
+
+                else -> ContactsUnavailable.BUSY
+            }
+        }
+        .flowOn(Dispatchers.IO)
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = null,
+        )
+
+    /**
      * The search query, null outside of search mode.
      */
     val searchQuery = savedStateHandle.getStateFlow<String?>(KEY_SEARCH_QUERY, null)
@@ -163,6 +239,21 @@ class ContactsListViewModel(
         filter, contactsChanges, preferencesChanges
     ) { filter, _, _ ->
         load(filter)
+    }
+        .flowOn(Dispatchers.IO)
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = null,
+        )
+
+    /**
+     * The sync of the contacts of the current filter.
+     */
+    val syncState: StateFlow<ContactsSyncState?> = combine(
+        filter, syncStatusChanges, syncAlertChanges
+    ) { filter, _, _ ->
+        loadSyncState(filter)
     }
         .flowOn(Dispatchers.IO)
         .stateIn(
@@ -278,6 +369,84 @@ class ContactsListViewModel(
     }
 
     /**
+     * Requests a sync of the accounts of the current filter.
+     */
+    fun refresh() {
+        val filter = state.value?.filter ?: return
+        val application = getApplication<Application>()
+        if (!SyncUtil.isNetworkConnected(application)) {
+            _status.value = ContactsListStatus.ConnectionError
+            return
+        }
+        viewModelScope.launch(Dispatchers.IO) {
+            val extras = Bundle().apply {
+                putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true)
+                putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true)
+            }
+            syncableAccounts(filter).forEach { account ->
+                // Prioritize the sync of the contacts if it isn't initialized yet.
+                if (!SyncUtil.isSyncStatusPendingOrActive(account)
+                    || SyncUtil.isUnsyncableGoogleAccount(account)
+                ) {
+                    ContentResolver.requestSync(account, ContactsContract.AUTHORITY, extras)
+                }
+            }
+        }
+    }
+
+    /**
+     * Turns on the sync of the account of the current filter, or asks to confirm turning on
+     * the global auto-sync, see [enableAutoSyncConfirmation].
+     */
+    fun turnSyncOn() {
+        val filter = state.value?.filter ?: return
+        if (filter.filterType == ContactListFilter.FILTER_TYPE_ACCOUNT
+            && syncState.value?.syncOffReason == SyncUtil.SYNC_SETTING_ACCOUNT_SYNC_OFF
+        ) {
+            ContentResolver.setSyncAutomatically(
+                Account(filter.accountName, filter.accountType), ContactsContract.AUTHORITY, true
+            )
+        } else {
+            _enableAutoSyncConfirmation.value = true
+        }
+    }
+
+    /**
+     * Turns on the global auto-sync, and the sync of the accounts of the current filter.
+     */
+    fun confirmEnableAutoSync() {
+        _enableAutoSyncConfirmation.value = false
+        val filter = state.value?.filter ?: return
+        viewModelScope.launch(Dispatchers.IO) {
+            ContentResolver.setMasterSyncAutomatically(true)
+            syncableAccounts(filter).forEach { account ->
+                ContentResolver.setSyncAutomatically(account, ContactsContract.AUTHORITY, true)
+            }
+        }
+    }
+
+    fun cancelEnableAutoSync() {
+        _enableAutoSyncConfirmation.value = false
+    }
+
+    /**
+     * Hides the sync off alert, which is shown again a limited number of times.
+     */
+    fun dismissSyncOffAlert() {
+        val application = getApplication<Application>()
+        when (syncState.value?.syncOffReason) {
+            SyncUtil.SYNC_SETTING_GLOBAL_SYNC_OFF ->
+                SharedPreferenceUtil.incNumOfDismissesForAutoSyncOff(application)
+
+            SyncUtil.SYNC_SETTING_ACCOUNT_SYNC_OFF ->
+                SharedPreferenceUtil.incNumOfDismissesForAccountSyncOff(
+                    application, state.value?.filter?.accountName
+                )
+        }
+        syncAlertChanges.value++
+    }
+
+    /**
      * Called once the activity handled [status].
      */
     fun onStatusHandled() {
@@ -308,7 +477,7 @@ class ContactsListViewModel(
                 )
             },
             emptyState = when {
-                contacts.isNotEmpty() -> null
+                contacts.isNotEmpty() || !shouldShowEmptyView(filter) -> null
                 filter.isContactsFilterType -> ContactsListEmptyState.NO_CONTACTS
                 else -> ContactsListEmptyState.EMPTY_ACCOUNT
             },
@@ -418,6 +587,73 @@ class ContactsListViewModel(
                 )
             }
         }
+    }
+
+    private fun loadSyncState(filter: ContactListFilter): ContactsSyncState {
+        val application = getApplication<Application>()
+
+        // Only Google accounts are synced with the list.
+        val accounts = when {
+            filter.filterType == ContactListFilter.FILTER_TYPE_ACCOUNT
+                    && filter.isGoogleAccountType -> listOf(
+                AccountWithDataSet(filter.accountName, filter.accountType, null)
+            )
+
+            filter.shouldShowSyncState() ->
+                AccountInfo.extractAccounts(accountTypeManager.writableGoogleAccounts)
+
+            else -> emptyList()
+        }
+
+        val alertAccount = Account(filter.accountName, filter.accountType).takeIf {
+            filter.filterType == ContactListFilter.FILTER_TYPE_ACCOUNT
+                    && filter.isGoogleAccountType
+        }
+        val syncOffReason = if (alertAccount != null || filter.isContactsFilterType) {
+            SyncUtil.calculateReasonSyncOff(application, alertAccount).takeIf {
+                SyncUtil.isAlertVisible(application, alertAccount, it)
+            }
+        } else {
+            null
+        }
+
+        return ContactsSyncState(
+            canRefresh = filter.isSyncable
+                    || (filter.shouldShowSyncState()
+                    && SyncUtil.hasSyncableAccount(accountTypeManager)),
+            refreshing = SyncUtil.isAnySyncing(accounts),
+            syncOffReason = syncOffReason,
+        )
+    }
+
+    /**
+     * Returns the writable accounts of [filter] which can be synced.
+     */
+    private fun syncableAccounts(filter: ContactListFilter): List<Account> =
+        filter.getSyncableAccounts(
+            AccountInfo.extractAccounts(
+                accountTypeManager.filterAccountsAsync(AccountTypeManager.writableFilter()).get()
+            )
+        ).orEmpty()
+
+    /**
+     * Whether the empty view can be shown for [filter]: while the Google accounts are being
+     * synced, the list is shown empty with the sync status instead.
+     */
+    private fun shouldShowEmptyView(filter: ContactListFilter): Boolean = when (filter.filterType) {
+        ContactListFilter.FILTER_TYPE_DEFAULT,
+        ContactListFilter.FILTER_TYPE_ALL_ACCOUNTS -> accountTypeManager.writableGoogleAccounts
+            .mapNotNull { it.account.accountOrNull }
+            .none {
+                SyncUtil.isSyncStatusPendingOrActive(it) || SyncUtil.isUnsyncableGoogleAccount(it)
+            }
+
+        ContactListFilter.FILTER_TYPE_ACCOUNT -> Account(filter.accountName, filter.accountType)
+            .let {
+                !SyncUtil.isSyncStatusPendingOrActive(it) && !SyncUtil.isUnsyncableGoogleAccount(it)
+            }
+
+        else -> true
     }
 
     private fun logSelectionEvent(actionType: Int) {

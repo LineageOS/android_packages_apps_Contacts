@@ -21,4 +21,7 @@
 
     <string name="call_via_template">Call via <xliff:g id="account">%1$s</xliff:g></string>
 
+    <!-- Content description of the button showing the overflow menu of a top app bar -->
+    <string name="more_options">More options</string>
+
 </resources>

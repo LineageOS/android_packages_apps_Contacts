@@ -36,7 +36,6 @@ import android.widget.TextView;
 
 import com.android.contacts.R;
 import com.android.contacts.activities.ActionBarAdapter;
-import com.android.contacts.group.GroupMembersFragment;
 import com.android.contacts.list.MultiSelectEntryContactListAdapter.SelectedContactsListener;
 import com.android.contacts.logging.ListEvent.ActionType;
 import com.android.contacts.logging.Logger;
@@ -405,8 +404,7 @@ public abstract class MultiSelectContactsListFragment<T extends MultiSelectEntry
     }
 
     private boolean shouldShowAccountName(AccountType accountType) {
-        return (accountType.isGroupMembershipEditable() && this instanceof GroupMembersFragment)
-                || GoogleAccountType.ACCOUNT_TYPE.equals(accountType.accountType);
+        return GoogleAccountType.ACCOUNT_TYPE.equals(accountType.accountType);
     }
 
     private void setMargins(View v, int l, int r) {

@@ -55,10 +55,40 @@ public final class GroupUtil {
     public static final String ACTION_CREATE_GROUP = "createGroup";
     public static final String ACTION_DELETE_GROUP = "deleteGroup";
     public static final String ACTION_REMOVE_FROM_GROUP = "removeFromGroup";
-    public static final String ACTION_SWITCH_GROUP = "switchGroup";
     public static final String ACTION_UPDATE_GROUP = "updateGroup";
 
-    public static final int RESULT_GROUP_ADD_MEMBER = 100;
+    /**
+     * Helper class for cp2 query used to look up all contact's emails and phone numbers.
+     */
+    public static abstract class Query {
+        public static final String EMAIL_SELECTION =
+                ContactsContract.Data.MIMETYPE + "='"
+                        + ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE + "'";
+
+        public static final String PHONE_SELECTION =
+                ContactsContract.Data.MIMETYPE + "='"
+                        + ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE + "'";
+
+        public static final String[] EMAIL_PROJECTION = {
+                ContactsContract.Data.CONTACT_ID,
+                ContactsContract.CommonDataKinds.Email._ID,
+                ContactsContract.Data.IS_SUPER_PRIMARY,
+                ContactsContract.Data.DATA1
+        };
+
+        public static final String[] PHONE_PROJECTION = {
+                ContactsContract.Data.CONTACT_ID,
+                ContactsContract.CommonDataKinds.Phone._ID,
+                ContactsContract.Data.IS_SUPER_PRIMARY,
+                ContactsContract.Data.DATA1
+        };
+
+        public static final int CONTACT_ID = 0;
+        public static final int ITEM_ID = 1;
+        public static final int PRIMARY = 2;
+        public static final int DATA1 = 3;
+    }
+
     public static final int RESULT_SEND_TO_SELECTION = 200;
 
     // System IDs of FFC groups in Google accounts
@@ -107,15 +137,15 @@ public final class GroupUtil {
         final List<String> items = new ArrayList<>();
         final String sIds = GroupUtil.convertArrayToString(ids);
         final String select = (ContactsUtils.SCHEME_MAILTO.equals(scheme)
-                ? GroupMembersFragment.Query.EMAIL_SELECTION
+                ? Query.EMAIL_SELECTION
                 + " AND " + ContactsContract.CommonDataKinds.Email._ID + " IN (" + sIds + ")"
-                : GroupMembersFragment.Query.PHONE_SELECTION
+                : Query.PHONE_SELECTION
                 + " AND " + ContactsContract.CommonDataKinds.Phone._ID + " IN (" + sIds + ")");
         final ContentResolver contentResolver = context.getContentResolver();
         final Cursor cursor = contentResolver.query(ContactsContract.Data.CONTENT_URI,
                 ContactsUtils.SCHEME_MAILTO.equals(scheme)
-                        ? GroupMembersFragment.Query.EMAIL_PROJECTION
-                        : GroupMembersFragment.Query.PHONE_PROJECTION,
+                        ? Query.EMAIL_PROJECTION
+                        : Query.PHONE_PROJECTION,
                 select, null, null);
 
         if (cursor == null) {
@@ -125,7 +155,7 @@ public final class GroupUtil {
         try {
             cursor.moveToPosition(-1);
             while (cursor.moveToNext()) {
-                final String data = cursor.getString(GroupMembersFragment.Query.DATA1);
+                final String data = cursor.getString(Query.DATA1);
 
                 if (!TextUtils.isEmpty(data)) {
                     items.add(data);
@@ -186,19 +216,6 @@ public final class GroupUtil {
         final long[] result = new long[contactIds.length];
         for (int i = 0; i < contactIds.length; i++) {
             result[i] = contactIds[i];
-        }
-        return result;
-    }
-
-    public static long[] convertStringSetToLongArray(Set<String> set) {
-        final String[] contactIds = set.toArray(new String[set.size()]);
-        final long[] result = new long[contactIds.length];
-        for (int i = 0; i < contactIds.length; i++) {
-            try {
-                result[i] = Long.parseLong(contactIds[i]);
-            } catch (NumberFormatException e) {
-                result[i] = -1;
-            }
         }
         return result;
     }

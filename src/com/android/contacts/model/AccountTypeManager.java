@@ -64,7 +64,9 @@ import com.google.common.util.concurrent.MoreExecutors;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 
@@ -632,26 +634,18 @@ class AccountTypeManagerImpl extends AccountTypeManager
                         Preconditions.checkArgument(
                                 input.size() == 3, "List should have exactly 3 elements");
 
+                        final Set<AccountWithDataSet> seenAccounts = new HashSet<>();
                         final List<AccountInfo> result = new ArrayList<>();
-                        for (AccountWithDataSet account : input.get(0)) {
-                            result.add(
-                                    typeProvider
-                                            .getTypeForAccount(account)
-                                            .wrapAccount(mContext, account));
-                        }
 
-                        for (AccountWithDataSet account : input.get(1)) {
-                            result.add(
-                                    typeProvider
-                                            .getTypeForAccount(account)
-                                            .wrapAccount(mContext, account));
-                        }
-
-                        for (AccountWithDataSet account : input.get(2)) {
-                            result.add(
-                                    typeProvider
-                                            .getTypeForAccount(account)
-                                            .wrapAccount(mContext, account));
+                        for (List<AccountWithDataSet> accountList : input) {
+                            for (AccountWithDataSet account : accountList) {
+                                if (seenAccounts.add(account)) {
+                                    result.add(
+                                            typeProvider
+                                                    .getTypeForAccount(account)
+                                                    .wrapAccount(mContext, account));
+                                }
+                            }
                         }
                         AccountInfo.sortAccounts(null, result);
                         return result;

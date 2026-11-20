@@ -36,6 +36,6 @@ public class StructuredPostalUtils {
     }
 
     public static Uri getPostalAddressDirectionsUri(String postalAddress) {
-        return Uri.parse("https://maps.google.com/maps?daddr=" + Uri.encode(postalAddress));
+        return getPostalAddressUri(postalAddress);
     }
 }
